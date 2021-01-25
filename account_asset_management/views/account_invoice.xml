@@ -19,7 +19,7 @@
     <field name="inherit_id" ref="account.invoice_form"/>
     <field name="arch" type="xml">
       <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
-        <field name="asset_id" groups="account.group_account_manager"/>
+        <field name="asset_id" groups="account.group_account_manager" domain="[('product_id', '=', product_id)]"/>
       </xpath>
     </field>
   </record>

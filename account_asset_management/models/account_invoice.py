@@ -73,7 +73,7 @@ class AccountInvoice(models.Model):
                                                'init_entry': True,
                                                'line_date': self.refund_invoice_id.date_invoice,
                                                'depreciation_base': new_line[2]['debit'] - new_line[2]['credit']})]})
-                            _logger.info("ASSETS %s" % new_line[2])
+                            #_logger.info("ASSETS %s" % new_line[2])
                             new_lines.append(new_line)
                         # Compute rounding difference and apply it on the first
                         # line
@@ -106,7 +106,7 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_move_create(self):
-        res = super().action_move_create()
+        res = super(AccountInvoice, self).action_move_create()
         for inv in self:
             assets = False
             # check for refund to cancel new assets
@@ -171,6 +171,26 @@ class AccountInvoice(models.Model):
             data['asset_profile_id'] = line.asset_profile_id.id
         return data
 
+    def _action_invoice_rebuild_pre(self):
+        result = super()._action_invoice_rebuild_pre()
+        assets = self.env['account.asset']
+        # Remove all assets from move_id
+        move = self.move_id
+        assets |= move.line_ids.filtered(lambda r: r.invoice_id.id == self.id).mapped('asset_id')
+        depreciation_restatement_line = self.env['account.asset.restatement.value'].search(
+            [('move_id', '=', move.id)])
+        if depreciation_restatement_line:
+            depreciation_restatement_line.unlink()
+        if assets:
+            assets.unlink()
+        #_logger.info("ASSET %s" % self.type)
+        if self.type in ('in_invoice', 'in_refund'):
+            for line in self.invoice_line_ids:
+                line._onchange_account_id()
+                #_logger.info("LINE ASSET %s" % line)
+        # add check for sallied assets
+        return result
+
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
@@ -178,6 +198,9 @@ class AccountInvoiceLine(models.Model):
     asset_profile_id = fields.Many2one(
         comodel_name='account.asset.profile',
         string='Asset Profile')
+    tax_profile_id = fields.Many2one(
+        comodel_name='account.bg.asset.profile',
+        string='Tax Asset Profile')
     asset_id = fields.Many2one(
         comodel_name='account.asset',
         string='Asset',
@@ -192,5 +215,38 @@ class AccountInvoiceLine(models.Model):
 
     @api.onchange('account_id')
     def _onchange_account_id(self):
-        self.asset_profile_id = self.account_id.asset_profile_id.id
+        price_subtotal_signed = self.price_unit
+        if self.invoice_id.currency_id and self.invoice_id.currency_id != self.invoice_id.company_id.currency_id:
+            price_subtotal_signed = self.invoice_id.currency_id.with_context(
+                date=self.invoice_id._get_currency_rate_date()).compute(price_subtotal_signed,
+                                                                        self.invoice_id.company_id.currency_id)
+        # Check in product valuations
+        product_tmpl = self.product_id.product_tmpl_id.categ_id
+        if product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
+            self.asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id
+            if product_tmpl.property_stock_valuation_account_id.asset_profile_id.threshold >= price_subtotal_signed:
+                self.asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id.threshold_profile_id
+
+        if product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.tax_profile_id:
+            self.tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id
+            if product_tmpl.property_stock_valuation_account_id.tax_profile_id.threshold >= price_subtotal_signed:
+                self.tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id.threshold_tax_profile_id
+
+        # override with account from line
+        if self.account_id.asset_profile_id:
+            self.asset_profile_id = self.account_id.asset_profile_id
+            if self.account_id.asset_profile_id.threshold >= price_subtotal_signed:
+                self.asset_profile_id = self.account_id.asset_profile_id.threshold_profile_id
+
+        if self.account_id.tax_profile_id:
+            self.tax_profile_id = self.account_id.tax_profile_id
+            if self.account_id.tax_profile_id.threshold >= price_subtotal_signed:
+                self.tax_profile_id = self.account_id.tax_profile_id.threshold_tax_profile_id
+        #_logger.info("ACCOUNT ONCHANGE %s:%s:%s:%s:%s:%s" % (self, price_subtotal_signed, product_tmpl, product_tmpl.property_stock_valuation_account_id, product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.tax_profile_id, self.account_id.asset_profile_id))
         return super()._onchange_account_id()
+
+    @api.onchange('product_id')
+    def _onchange_product_id(self):
+        ret = super(AccountInvoiceLine, self)._onchange_product_id()
+        self._onchange_account_id()
+        return ret

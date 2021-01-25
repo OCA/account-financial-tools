@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_document_form" model="ir.ui.view">
+        <field name="name">account.documents.form</field>
+        <field name="model">account.documents</field>
+        <field name="inherit_id" ref="account_documents.view_document_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(account_documents_scanners.action_scanning_document_wizard)d"
+                        string="Scan Document" type="action" icon="fa-camera"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

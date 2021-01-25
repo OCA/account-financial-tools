@@ -7,12 +7,9 @@
                 <form string="Move Template" >
                     <field name="state" invisible="1"/>
                     <group>
-                        <group>
+                        <group colspan="4">
                             <field name="template_id" widget="selection"
                                    attrs="{'invisible':[('state','=','template_selected')]}"/>
-                        </group>
-                        <group>
-                            <field name="partner_id" attrs="{'invisible':[('state','=','template_selected')]}"/>
                         </group>
                     </group>
                     <group name="filters">
@@ -21,11 +18,17 @@
                             <field name="date_from"/>
                             <field name="date_to"/>
                         </group>
+                        <group>
+                            <field name="partner_id" attrs="{'invisible':[('state','=','template_selected')]}"/>
+                            <field name="amount_input" invisible="1"/>
+                            <field name="date_due"/>
+                            <field name="accounting_date"/>
+                        </group>
                     </group>
                     <separator
                             string="Modify the lines before create them or edit them after creation."
                             attrs="{'invisible':[('state','!=','template_selected')]}"/>
-                    <field name="line_ids" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}"/>
+                    <field name="line_ids" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}" context="{'default_amount': amount_input}"/>
                     <footer>
                         <button name="load_template" class="btn-primary" string="Load" type="object" colspan="1" attrs="{'invisible':[('state','!=','template_selected')]}" />
                         <button name="load_lines" class="btn-primary" string="Next" type="object" attrs="{'invisible':[('state','=','template_selected')]}" />

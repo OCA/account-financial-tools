@@ -57,8 +57,19 @@ class AccountAssetRestatementValue(models.Model):
 
     def get_restatement_value(self, type, line_date, operator='<=', field=False):
         res = 0.0
-        values = self.search([('type', 'in', type), ('line_date', operator, line_date)])
-        _logger.info("VALUES %s:%s" % (values, field))
+        if operator == '<=':
+            values = self.filtered(lambda r: r.type in type and r.line_date <= line_date)
+        elif operator == '=':
+            values = self.filtered(lambda r: r.type in type and r.line_date == line_date)
+        elif operator == '>=':
+            values = self.filtered(lambda r: r.type in type and r.line_date >= line_date)
+        elif operator == '<':
+            values = self.filtered(lambda r: r.type in type and r.line_date < line_date)
+        elif operator == '>':
+            values = self.filtered(lambda r: r.type in type and r.line_date > line_date)
+        elif operator == '!=':
+            values = self.filtered(lambda r: r.type in type and r.line_date != line_date)
+        #_logger.info("VALUES %s:%s" % (values, field))
         if field and values:
             for value in values:
                 res += getattr(value, field)

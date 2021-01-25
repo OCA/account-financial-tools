@@ -13,6 +13,11 @@ class AccountAccount(models.Model):
         string='Asset Profile',
         help="Default Asset Profile when creating invoice lines "
              "with this account.")
+    tax_profile_id = fields.Many2one(
+        comodel_name='account.bg.asset.profile',
+        string='Tax Asset Profile',
+        help="Default Tax Asset profile when creating by invoice lines "
+             "with this account")
 
     @api.multi
     @api.constrains('asset_profile_id')

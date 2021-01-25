@@ -121,6 +121,12 @@ class AccountAssetProfile(models.Model):
              "With this setting, an accounting entry will be created by "
              "product item. So, there will be an asset by product item.")
     get_posting_regime = fields.Char("Posting regime", compute="_compute_get_posting_regime")
+
+    threshold = fields.Float('Materiality threshold')
+    threshold_profile_id = fields.Many2one(
+        comodel_name='account.asset.profile',
+        string='Asset Profile')
+
     active = fields.Boolean(default=True)
 
     @api.multi
@@ -179,6 +185,11 @@ class AccountAssetProfile(models.Model):
     def _onchange_method_time(self):
         if self.method_time != 'year':
             self.prorata = True
+
+    @api.onchange('threshold')
+    def _onchange_threshold(self):
+        if self.threshold <= 0:
+            self.threshold_profile_id = False
 
     @api.model
     def create(self, vals):

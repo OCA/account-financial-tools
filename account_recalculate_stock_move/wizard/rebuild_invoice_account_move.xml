@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_rebuild_move_invoices" model="ir.ui.view">
+        <field name="name">Rebuild acc. move on stock inventory</field>
+        <field name="model">wizard.rebuild.move.account.invoice</field>
+        <field name="arch" type="xml">
+            <form string="Invoices" >
+                <group>
+                    <group>
+                        <field name="company_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="rebuild_account_invoice" class="btn-primary" string="Re-booking" type="object"/>
+                    <button name="server_rebuild_action" class="btn-primary" string="Execute on Server" type="object"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+   <act_window name="Rebuild acc. move on Invoices"
+        res_model="wizard.rebuild.move.account.invoice"
+        src_model="account.invoice"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="action_wizard_rebuild_move_invoices"
+        view_id="wizard_rebuild_move_invoices"/>
+</odoo>

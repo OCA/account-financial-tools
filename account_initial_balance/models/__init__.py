@@ -7,3 +7,4 @@ from . import sale
 from . import purchase
 from . import stock_picking
 from . import stock_inventory
+from . import account_move

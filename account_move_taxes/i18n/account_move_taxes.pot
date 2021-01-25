@@ -1,0 +1,53 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_move_taxes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20190711\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-01 07:03+0000\n"
+"PO-Revision-Date: 2019-08-01 07:03+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_taxes
+#: model:ir.model,name:account_move_taxes.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_move_taxes
+#: model:ir.ui.view,arch_db:account_move_taxes.view_move_form
+msgid "Get taxes"
+msgstr ""
+
+#. module: account_move_taxes
+#: model:ir.model.fields,field_description:account_move_taxes.field_account_move_line_tax_included
+msgid "Included taxes"
+msgstr ""
+
+#. module: account_move_taxes
+#: model:ir.model,name:account_move_taxes.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_move_taxes
+#: model:ir.model.fields,field_description:account_move_taxes.field_account_move_line_manual
+msgid "Manual"
+msgstr ""
+
+#. module: account_move_taxes
+#: model:ir.ui.view,arch_db:account_move_taxes.view_move_form
+msgid "Use taxes"
+msgstr ""
+
+#. module: account_move_taxes
+#: model:ir.model.fields,field_description:account_move_taxes.field_account_move_line_work_with_taxes
+#: model:ir.model.fields,field_description:account_move_taxes.field_account_move_work_with_taxes
+msgid "Work with taxes"
+msgstr ""
+

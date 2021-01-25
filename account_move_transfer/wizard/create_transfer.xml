@@ -14,13 +14,19 @@
                         <group>
                             <field name="date"/>
                             <field name="move_line_type" widget="radio" options="{'horizontal': true}"/>
-                            <field name="account_id"/>
+                            <field name="next_wizard" widget="radio" options="{'horizontal': true}"/>
+                            <field name="account_id" attrs="{'invisible': [('next_wizard', '=', 'landed')]}"/>
+                            <field name="product_id" attrs="{'invisible': [('next_wizard', '=', 'move')]}" domain="[('landed_cost_ok', '=', True)]"
+                                context="{'default_landed_cost_ok': True, 'form_view_ref':'stock_landed_costs.view_stock_landed_cost_type_form'}"/>
+                            <field name="cost_price" invisible="1"/>
                         </group>
                     </group>
                     <separator string="Modify the lines before create them or edit them after creation."/>
-                    <field name="account_move_line_ids" nolabel="1"/>
+                    <field name="account_move_line_ids" nolabel="1" attrs="{'invisible': [('next_wizard', '=', 'landed')]}"/>
+                    <field name="landed_cost_ids" nolabel="1" attrs="{'invisible': [('next_wizard', '=', 'move')]}" context="{'default_product_id': product_id, 'default_price_unit': cost_price}"/>
                     <footer>
-                        <button name="load_template" class="btn-primary" string="Next" type="object"/>
+                        <button name="load_template" class="btn-primary" string="Next" type="object" attrs="{'invisible': [('next_wizard', '=', 'landed')]}"/>
+                        <button name="load_landed_cost" class="btn-primary" string="Next" type="object" attrs="{'invisible': [('next_wizard', '=', 'move')]}"/>
                         <button special="cancel" string="Cancel" class="btn-default"/>
                     </footer>
                 </form>
@@ -78,6 +84,45 @@
                     <field name="credit" sum="Total Credit"/>
                     <field name="currency_id" readonly="True" invisible="1" />
                     <field name="company_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="wizard_create_landed_cost_transfer_form" model="ir.ui.view">
+            <field name="name">Select Landed Cost Line</field>
+            <field name="model">wizard.create.landed.cost.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Cost Lines">
+                    <group>
+                        <group>
+                            <field name="product_id"
+                                domain="[('landed_cost_ok', '=', True)]"
+                                context="{'default_landed_cost_ok': True, 'form_view_ref':'stock_landed_costs.view_stock_landed_cost_type_form'}"/>
+                            <field name="price_unit"/>
+                        </group>
+                        <group>
+                            <field name="split_method"/>
+                            <field name="account_id"/>
+                        </group>
+                    </group>
+                    <label for="name"/>
+                    <field name="name"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_create_landed_cost_transfer_tree" model="ir.ui.view">
+            <field name="name">Select Landed Cost Line</field>
+            <field name="model">wizard.create.landed.cost.transfer</field>
+            <field name="arch" type="xml">
+                <tree string="Cost Lines" editable="bottom">
+                    <field name="product_id"
+                        domain="[('landed_cost_ok', '=', True)]"
+                        context="{'default_landed_cost_ok': True, 'form_view_ref':'stock_landed_costs.view_stock_landed_cost_type_form'}"/>
+                    <field name="name"/>
+                    <field name="account_id"/>
+                    <field name="split_method"/>
+                    <field name="price_unit"/>
                 </tree>
             </field>
         </record>

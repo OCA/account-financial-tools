@@ -13,10 +13,13 @@ class ResCompany(models.Model):
     @api.multi
     def _check_last_lock_date(self):
         if not self.period_lock_date:
-            return fields.Date.today()
-        lock_to_date = min(
-            self.period_lock_date,
-            self.fiscalyear_lock_date) or False
+            lock_to_date = fields.Date.today()
+        elif not self.fiscalyear_lock_date:
+            lock_to_date = fields.Date.today()
+        else:
+            lock_to_date = min(
+                self.period_lock_date,
+                self.fiscalyear_lock_date) or False
         next_month = datetime.strptime(
             lock_to_date,
             DEFAULT_SERVER_DATE_FORMAT) + relativedelta(months=+1)

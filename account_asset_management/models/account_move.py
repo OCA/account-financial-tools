@@ -69,6 +69,9 @@ class AccountMoveLine(models.Model):
                   "\nYou should generate such entries from the asset."))
         if vals.get('asset_profile_id'):
             # check for additional values added now
+            #account = False
+            #if vals.get('account_id'):
+            #    account = self.env['account.account'].browse(vals['account_id'])
             correction = False
             if vals.get('save_asset_id'):
                 correction = True
@@ -81,7 +84,8 @@ class AccountMoveLine(models.Model):
                 depreciation_base = vals['debit'] or -vals['credit']
                 temp_vals = {
                     'name': vals['name'],
-                    'profile_id': vals['asset_profile_id'],
+                    'profile_id': vals.get('asset_profile_id', False),
+                    'tax_profile_id': vals.get('tax_profile_id', False),
                     'purchase_value': depreciation_base,
                     'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'],
                     'partner_id': vals['partner_id'],
@@ -89,16 +93,29 @@ class AccountMoveLine(models.Model):
                     'date_buy': self.invoice_id and self.invoice_id.date_invoice or move.date,
                     'product_id': vals['product_id'],
                 }
+                if vals.get('move_line_id'):
+                    temp_vals.update({
+                        'move_line_id': vals['move_line_id'],
+                    })
+                if vals.get('lot_id'):
+                    temp_vals.update({
+                        'lot_id': vals['lot_id'],
+                    })
                 if self.env.context.get('company_id'):
                     temp_vals['company_id'] = self.env.context['company_id']
                 temp_asset = asset_obj.new(temp_vals)
                 temp_asset._onchange_profile_id()
+                temp_asset._onchange_tax_profile_id()
                 asset_vals = temp_asset._convert_to_write(temp_asset._cache)
                 self._get_asset_analytic_values(vals, asset_vals)
                 asset = asset_obj.with_context(
                     create_asset_from_move_line=True,
                     move_id=vals['move_id']).create(asset_vals)
                 vals['asset_id'] = asset.id
+                if vals.get('move_line_id') and 'move_line_id' not in self._fields:
+                    del vals['move_line_id']
+                if vals.get('lot_id') and 'lot_id' not in self._fields:
+                    del vals['lot_id']
         return super().create(vals)
 
     @api.multi
@@ -114,7 +131,8 @@ class AccountMoveLine(models.Model):
                      vals.get('date', False) or self.date
         return {
             'name': vals.get('name') or self.name,
-            'profile_id': vals['asset_profile_id'],
+            'profile_id': vals.get('asset_profile_id', False),
+            'tax_profile_id': vals.get('tax_profile_id', False),
             'purchase_value': depreciation_base,
             'partner_id': partner_id,
             'date_start': date_start,

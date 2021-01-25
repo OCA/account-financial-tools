@@ -7,24 +7,34 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_open_quants"
+                            class="oe_stat_button"
+                            icon="fa-building-o"
+                            string="Quants"
+                            type="object"/>
                     <button name="action_get_account_moves"
-                            icon="fa-usd" class="oe_stat_button"
+                            icon="fa-usd"
+                            class="oe_stat_button"
                             string="Accounting Entries"
                             type="object"/>
                     <button name="rebuild_account_move"
-                                    icon="fa fa-book"
-                                    class="oe_stat_button"
-                                    string="Rebuild Acc. Entries"
-                                    states="done"
-                                    type="object"/>
+                            icon="fa fa-book"
+                            class="oe_stat_button"
+                            string="Rebuild Acc. Entries"
+                            states="done"
+                            type="object"
+                            groups="base.group_no_one"/>
                     <button name="rebuild_picking_move"
-                                    icon="fa fa-free-code-camp"
-                                    class="oe_stat_button"
-                                    string="Re-booking Picking Entries"
-                                    type="object"
-                                    states="done"
-                                    groups="base.group_no_one"/>
+                            icon="fa fa-free-code-camp"
+                            class="oe_stat_button"
+                            string="Re-booking Picking Entries"
+                            type="object"
+                            states="done"
+                            groups="base.group_no_one"/>
                 </xpath>
+                <field name="scheduled_date" position="after">
+                    <field name="accounting_date"/>
+                </field>
             </field>
         </record>
 
@@ -44,6 +54,7 @@
                                     string="Rebuild Acc. Entries"
                                     type="object"/>
                 </xpath>
+                <!--
                 <xpath expr="//field[@name='date']" position="after">
                     <div attrs="{'invisible': [('state', '!=', 'done')]}">
                         <label class="o_td_label" for="is_force_accounting_date">
@@ -51,6 +62,80 @@
                         </label>
                         <field name="is_force_accounting_date" widget="boolean_toggle"/>
                     </div>
+                </xpath>
+                -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Account Journal Items" groups="account.group_account_invoice">
+                        <field name="account_move_line_ids" string="Account Move Details" mode="tree,kanban">
+                            <tree editable="bottom" string="Journal Items">
+                                <field name="account_id" domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False)]"/>
+                                <field name="partner_id"
+                                    domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                <field name="name"/>
+                                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_accounting"/>
+                                <field name="amount_currency" groups="base.group_multi_currency"/>
+                                <field name="company_currency_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                                <field name="debit" sum="Total Debit"/>
+                                <field name="credit" sum="Total Credit"/>
+                                <field name="date_maturity" required="0" invisible="context.get('view_no_maturity', False)"/>
+                            </tree>
+                            <kanban class="o_kanban_mobile">
+                                <field name="account_id" domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False)]"/>
+                                <field name="partner_id"
+                                    domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                <field name="name"/>
+                                <field name="product_id"/>
+                                <field name="quantity"/>
+                                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_accounting"/>
+                                <field name="amount_currency" groups="base.group_multi_currency"/>
+                                <field name="company_currency_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                                <field name="debit" sum="Total Debit"/>
+                                <field name="credit" sum="Total Credit"/>
+                                <field name="date_maturity" required="0" invisible="context.get('view_no_maturity', False)"/>
+
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_global_click_edit">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <strong>
+                                                        <field name="product_id"/>
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 text-muted">
+                                                    <t t-if="record.debit > 0">
+                                                        <span>Dt: </span>
+                                                    </t>
+                                                    <t t-if="record.credit > 0">
+                                                        <span>Ct: </span>
+                                                    </t>
+                                                    <span><t t-esc="record.account_id.string"/>: <t t-esc="record.account_id.value"/></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 text-muted">
+                                                    <t t-if="record.debit > 0">
+                                                        <span>Dt: </span><span><t t-esc="record.debit.string"/>: <t t-esc="record.debit.value"/></span>
+                                                    </t>
+                                                    <t t-if="record.credit > 0">
+                                                        <span>Ct: </span><span><t t-esc="record.credit.string"/>: <t t-esc="record.credit.value"/></span>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </page>
                 </xpath>
             </field>
         </record>
@@ -87,7 +172,9 @@
                     <field name="has_account_move" invisible="1"/>
                     <button name="rebuild_account_move"
                             icon="fa fa-book"
-                            type="object"/>
+                            type="object"
+                            attrs="{'invisible': [('has_account_move', '=', True)]}"
+                            />
                 </field>
                 <xpath expr="//tree" position="attributes">
                     <attribute name="decoration-danger">has_account_move == False</attribute>
@@ -104,7 +191,9 @@
                     <field name="has_account_move" invisible="1"/>
                     <button name="rebuild_account_move"
                             icon="fa fa-book"
-                            type="object"/>
+                            type="object"
+                            attrs="{'invisible': [('has_account_move', '=', True)]}"
+                            />
                 </field>
                 <xpath expr="//tree" position="attributes">
                     <attribute name="decoration-danger">has_account_move == False</attribute>
@@ -116,9 +205,50 @@
             <field name="model">stock.move.line</field>
             <field name="inherit_id" ref="stock.view_move_line_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='in_entire_package']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <field name="has_account_move" invisible="1"/>
+                        <button name="rebuild_account_move"
+                            icon="fa fa-book"
+                            class="oe_stat_button"
+                            string="Rebuild Acc. Entries"
+                            type="object"
+                            attrs="{'invisible': [('has_account_move', '=', True)]}"/>
+                        <button name="rebuild_moves"
+                            icon="fa fa-book"
+                            class="oe_stat_button"
+                            string="Rebuild Acc. Entries"
+                            type="object"
+                            attrs="{'invisible': [('has_account_move', '=', False)]}"/>
+                    </div>
+                </xpath>
                 <field name="reference" position="after">
                     <field name="move_id"/>
                 </field>
+                <!--
+                <xpath expr="//group" position="inside">
+                    <label for="quant_ids"/>
+                    <field name="quant_ids" nolabel="1" widget="one2many_list"/>
+                </xpath>
+                -->
+            </field>
+        </record>
+        <record id="view_move_line_tree" model="ir.ui.view">
+            <field name="name">stock.move.line.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="has_account_move" invisible="1"/>
+                    <button name="rebuild_account_move"
+                            icon="fa fa-book"
+                            type="object"
+                            attrs="{'invisible': [('has_account_move', '=', True)]}"
+                            />
+                </field>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-warning">has_account_move == False</attribute>
+                </xpath>
             </field>
         </record>
         <record id="view_inventory_form" model="ir.ui.view">
@@ -135,8 +265,12 @@
                 <xpath expr="//field[@name='move_ids']/tree" position="attributes">
                     <attribute name="decoration-danger">has_account_move == False</attribute>
                 </xpath>
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='state']" position="before">
+                    <field name="only_quantity" string="No Bookkeep Entries"/>
+                </xpath>
             </field>
         </record>
+        <!--
         <record id="view_stock_quant_tree" model="ir.ui.view">
             <field name="name">stock.quant.tree</field>
             <field name="model">stock.quant</field>
@@ -160,5 +294,6 @@
                 </xpath>
             </field>
         </record>
+        -->
     </data>
 </odoo>

@@ -19,7 +19,7 @@ class AccountBgAssetLine(models.Model):
         comodel_name='account.asset', string='Asset',
         required=True, ondelete='cascade')
     previous_id = fields.Many2one(
-        comodel_name='account.asset.line',
+        comodel_name='account.bg.asset.line',
         string='Previous Depreciation Line',
         readonly=True)
     parent_state = fields.Selection(
@@ -115,7 +115,7 @@ class AccountBgAssetLine(models.Model):
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
                             "prior to already posted entries."))
-        _logger.info("Write vals= %s" % (vals))
+        #_logger.info("Write vals= %s" % (vals))
         return super().write(vals)
 
     @api.multi
@@ -125,10 +125,6 @@ class AccountBgAssetLine(models.Model):
                 raise UserError(_(
                     "You cannot remove an asset line "
                     "of type 'Depreciation Base'."))
-            elif dl.move_id:
-                raise UserError(_(
-                    "You cannot delete a depreciation line with "
-                    "an associated accounting entry."))
             previous = dl.previous_id
             next_line = dl.asset_id.depreciation_line_ids.filtered(
                 lambda l: l.previous_id == dl and l not in self)

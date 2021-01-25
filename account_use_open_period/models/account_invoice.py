@@ -10,6 +10,6 @@ class AccountInvoice(models.Model):
         @api.multi
         def action_move_create(self):
                 for inv in self:
-                        if inv.type in ['in_invoice', 'in_refund'] and inv.company_id.period_lock_date and (inv.date_invoice != False and inv.date_invoice <= inv.company_id.period_lock_date):
+                        if inv.type in ['in_invoice', 'in_refund'] and inv.company_id.fiscalyear_lock_date and (inv.date_invoice != False and inv.date_invoice <= inv.company_id.fiscalyear_lock_date):
                                 inv.date, last_day_date = inv.company_id._check_last_lock_date()
                 return super(AccountInvoice, self).action_move_create()

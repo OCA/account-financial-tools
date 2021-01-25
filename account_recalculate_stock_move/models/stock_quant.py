@@ -85,6 +85,8 @@ SELECT SUM(ROUND(((ml.qty_done/pu.factor)*ppu.factor)::numeric, length((string_t
                     quant.write(res)
                     # cleanup empty quants
                     if float_is_zero(quant.quantity, precision_rounding=rounding) and float_is_zero(quant.reserved_quantity, precision_rounding=rounding):
+                        quant_id = quant.id
+                        quant.unlink()
                         query = "DELETE FROM %s WHERE quant_id = %%s" % 'rel_quant_move_line'
                         self._cr.execute(query, (quant.id,))
                         quant.unlink()

@@ -21,6 +21,10 @@
                 <field name="category_id" required="1"/>
                 <field name="company_id" widget="selection" groups="base.group_multi_company"/>
               </group>
+              <group>
+                <field name="threshold"/>
+                <field name="threshold_tax_profile_id" attrs="{'invisible': [('threshold', '&lt;&#61;', 0)]}"/>
+              </group>
             </group>
             <group>
               <group string="Depreciation Method">

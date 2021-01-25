@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_rebuild_move_inventories" model="ir.ui.view">
+        <field name="name">Rebuild acc. move on stock inventory</field>
+        <field name="model">wizard.rebuild.move.stock.inventory</field>
+        <field name="arch" type="xml">
+            <form string="Productions" >
+                <group>
+                    <group>
+                        <field name="company_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="rebuild_stock_inventory" class="btn-primary" string="Re-booking" type="object"/>
+                    <button name="server_rebuild_action" class="btn-primary" string="Execute on Server" type="object"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+   <act_window name="Rebuild acc. move on Inventory"
+        res_model="wizard.rebuild.move.stock.inventory"
+        src_model="stock.inventory"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="action_wizard_rebuild_move_inventory"
+        view_id="wizard_rebuild_move_inventories"/>
+</odoo>

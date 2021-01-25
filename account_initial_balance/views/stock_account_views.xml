@@ -6,16 +6,36 @@
             <field name="model">stock.inventory</field>
             <field name="inherit_id" ref="stock.view_inventory_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='exhausted']" position="after">
-                    <div groups="account_initial_balance.group_initial_balance_user">
-                        <label for="is_initial_balance">
-                        This is initial balance
-                        </label>
-                        <field name="is_initial_balance" widget="boolean_toggle"/>
-                    </div>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                  <button name="toggle_is_initial_balance"
+                          type="object"
+                          widget="boolean_toggle"
+                          groups="account_initial_balance.group_initial_balance_user"
+                          icon="fa-hourglass-start">
+                          <field name="is_initial_balance" widget="boolean_button" groups="account_initial_balance.group_initial_balance_user"
+                                options='{"terminology": {"string_true": "Inital balance", "hover_true": "Use for inital balance", "string_false": "Normal", "hover_false": "Standart movement"}}'/>
+                  </button>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="stop_account_move" groups="base.group_no_one" attrs="{'readonly':[('state','!=', 'confirm')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='only_quantity']" position="attributes">
+                    <attribute name="attrs">{'column_invisible': [('parent.stop_account_move', '=', True)]}</attribute>
                 </xpath>
             </field>
         </record>
+        <!--
+        <record id="view_inventory_form" model="ir.ui.view">
+            <field name="name">stock.inventory.form</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="account_recalculate_stock_move.view_inventory_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='only_quantity']" position="attributes">
+                    <attribute name="attrs">{'column_invisible': [('parent.stop_account_move', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+        -->
         <record id="view_move_form" model="ir.ui.view">
             <field name="name">stock.move.form</field>
             <field name="model">stock.move</field>

@@ -6,8 +6,10 @@ import datetime
 from odoo import api, fields, models, _
 import odoo.addons.decimal_precision as dp
 from odoo.exceptions import UserError
+
 import logging
 _logger = logging.getLogger(__name__)
+
 
 class AccountAssetLine(models.Model):
     _name = 'account.asset.line'
@@ -151,11 +153,6 @@ class AccountAssetLine(models.Model):
                         "\nYou should remove such entries from the asset."))
             elif list(vals.keys()) == ['asset_id']:
                 continue
-            elif dl.move_id and not self.env.context.get(
-                    'allow_asset_line_update'):
-                raise UserError(_(
-                    "You cannot change a depreciation line "
-                    "with an associated accounting entry."))
             elif vals.get('init_entry'):
                 check = asset_lines.filtered(
                     lambda l: l.move_check and l.type == 'depreciate' and
@@ -183,7 +180,13 @@ class AccountAssetLine(models.Model):
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
                             "prior to already posted entries."))
-        _logger.info("Write vals= %s" % (vals))
+            elif dl.move_id and not self.env.context.get(
+                    'allow_asset_line_update'):
+                _logger.info("VALS %s" % vals)
+                raise UserError(_(
+                    "You cannot change a depreciation line "
+                    "with an associated accounting entry."))
+        #_logger.info("Write vals= %s" % (vals))
         return super().write(vals)
 
     @api.multi

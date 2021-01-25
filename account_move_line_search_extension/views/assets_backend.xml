@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="assets_backend" name="amlse assets" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+      <script type="text/javascript" src="/account_move_line_search_extension/static/src/js/amlse.js"></script>
+      <link rel="stylesheet" href="/account_move_line_search_extension/static/src/less/amlse.less"/>
+    </xpath>
+  </template>
+
+</odoo>

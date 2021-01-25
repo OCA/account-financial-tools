@@ -38,6 +38,11 @@ class AccountMoveLine(models.Model):
             del line_values['tax_ids']
         return line_values
 
+    def _get_taxes_values(self, tax, tax_type_deal):
+        if tax.tax_type_deal and tax.tax_type_deal != tax_type_deal:
+            return True
+        return False
+
     def _apply_taxes(self, vals, amount):
         tax_lines_vals = []
         # Get ids from triplets : https://www.odoo.com/documentation/10.0/reference/orm.html#odoo.models.Model.write
@@ -60,6 +65,8 @@ class AccountMoveLine(models.Model):
         for tax_vals in res['taxes']:
             if tax_vals['amount']:
                 tax = self.env['account.tax'].browse([tax_vals['id']])
+                if 'tax_type_deal' in tax._fields and 'tax_type_deal' in self._fields and self._get_taxes_values(tax, self.tax_type_deal):
+                    continue
                 sale = tax.type_tax_use == 'sale'
                 purchase = tax.type_tax_use == 'purchase'
                 account_id = (amount > 0 and tax_vals['account_id'] or tax_vals['refund_account_id'])
@@ -78,7 +85,7 @@ class AccountMoveLine(models.Model):
                     'analytic_account_id': vals.get('analytic_account_id') if tax.analytic else False,
                 }
                 bank = self.env["account.bank.statement.line"].browse(vals.get('statement_line_id')).statement_id
-                if bank.currency_id != bank.company_id.currency_id:
+                if bank and bank.currency_id != bank.company_id.currency_id:
                     ctx = {}
                     if 'date' in vals:
                         ctx['date'] = vals['date']
@@ -90,6 +97,19 @@ class AccountMoveLine(models.Model):
                     temp['tax_exigible'] = True
                     temp['account_id'] = tax.cash_basis_account.id or account_id
                 tax_lines_vals.append(temp)
+                if tax and \
+                        tax.tax_credit_payable in ['taxadvpay', 'eutaxpay', 'eutaxcredit'] and \
+                        tax.separate and \
+                        tax.contrapart_account_id:
+                    tax_lines_vals[-1]['separate'] = -1
+                    contrapart_line = tax_lines_vals[-1].copy()
+
+                    contrapart_line['debit'] = tax_vals['amount'] < 0 and tax_vals['amount'] or 0.0
+                    contrapart_line['credit'] = tax_vals['amount'] > 0 and -tax_vals['amount'] or 0.0
+                    contrapart_line['account_id'] = tax.contrapart_account_id.id
+                    contrapart_line['name'] = _("Contrapart for %s" % contrapart_line['name'])
+                    contrapart_line['separate'] = 1
+                    tax_lines_vals.append(contrapart_line)
         return tax_lines_vals
 
 AccountMove.AccountMoveLine._apply_taxes = AccountMoveLine._apply_taxes

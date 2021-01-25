@@ -2,6 +2,8 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _
+#from odoo.addons.stock.models.stock_inventory import Inventory as inventory
+from odoo.exceptions import UserError, Warning
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -10,8 +12,9 @@ _logger = logging.getLogger(__name__)
 class Inventory(models.Model):
     _inherit = "stock.inventory"
 
-    is_force_accounting_date = fields.Boolean('Forced Accounting Date')
+    #is_force_accounting_date = fields.Boolean('Forced Accounting Date')
     account_move_ids = fields.One2many('account.move', compute="_compute_account_move_ids")
+    account_move_line_ids = fields.One2many('account.move.line', compute="_compute_account_move_line_ids")
 
     def _compute_account_move_ids(self):
         for inventory in self:
@@ -22,6 +25,16 @@ class Inventory(models.Model):
                         inventory.account_move_ids = line.account_move_ids
                     else:
                         inventory.account_move_ids = inventory.account_move_ids | line.account_move_ids
+
+    def _compute_account_move_line_ids(self):
+        for inventory in self:
+            if inventory.move_ids.mapped("account_move_line_ids"):
+                inventory.account_move_line_ids = False
+                for line in inventory.move_ids:
+                    if not inventory.account_move_line_ids:
+                        inventory.account_move_line_ids = line.account_move_line_ids
+                    else:
+                        inventory.account_move_line_ids |= line.account_move_line_ids
 
     @api.multi
     def action_get_account_moves(self):
@@ -36,22 +49,30 @@ class Inventory(models.Model):
 
     @api.multi
     def _rebuild_account_move(self):
-        for move in self.move_ids:
-            if (not move.account_move_ids or self.is_force_accounting_date) and move.state == 'done' and self.env.context.get("rebuld_try"):
-                try:
+        for record in self:
+            for move in record.move_ids:
+                if not move.account_move_ids and move.state == 'done' and self.env.context.get("rebuld_try"):
+                    try:
+                        for line in move.move_line_ids:
+                            line.with_context(dict(self.env.context, force_valuation=True))._rebuild_account_move()
+                    except UserError:
+                        _logger.info("STOCK MOVE %s unposted" % move.name)
+                        pass
+                elif not move.account_move_ids and move.state == 'done' and not self.env.context.get("rebuld_try"):
                     for line in move.move_line_ids:
                         line.with_context(dict(self.env.context, force_valuation=True))._rebuild_account_move()
-                except:
-                    pass
-            elif (not move.account_move_ids or self.is_force_accounting_date) and move.state == 'done' and not self.env.context.get("rebuld_try"):
-                for line in move.move_line_ids:
-                    line.with_context(dict(self.env.context, force_valuation=True))._rebuild_account_move()
 
     def rebuild_account_move(self):
-        if len(self.move_ids.ids) > 0:
-            if self.is_force_accounting_date:
+        for record in self:
+            date = record.accounting_date or record.date
+
+            if len(record.move_ids.ids) > 0:
+                #if self.is_force_accounting_date:
+                #date = record.date
+                #if record.is_force_accounting_date:
+
                 moves = False
-                for move in self.account_move_ids:
+                for move in record.account_move_ids:
                     if move.state == 'posted':
                         if not moves:
                             moves = move
@@ -62,13 +83,13 @@ class Inventory(models.Model):
                         ret = move.button_cancel()
                         if ret:
                             move.unlink()
-                for line in self.move_ids:
-                    date = self.accounting_date or self.date
-                    line.write({"date": date})
-                    line.move_line_ids.write({"date": date})
-            self._rebuild_account_move()
-        else:
-            raise Warning(_("On this inventory is not have movement."))
+                record.with_context(dict(self._context, force_accounting_date=date, force_valuation=True))._rebuild_account_move()
+            else:
+                try:
+                    for inventory in self.filtered(lambda x: x.state in ('done')):
+                        inventory.line_ids._generate_moves()
+                except:
+                    raise Warning(_("On this inventory is not have movement."))
 
     @api.multi
     def action_cancel(self):
@@ -100,3 +121,18 @@ class Inventory(models.Model):
         if remove_after:
             for record in self:
                 record.unlink()
+
+    def post_inventory(self):
+        self.mapped('move_ids').filtered(lambda move: move.state != 'done' and move.only_quantity).write({'price_unit': 0.0})
+        return super(Inventory, self).post_inventory()
+
+
+class InventoryLine(models.Model):
+    _inherit = "stock.inventory.line"
+
+    only_quantity = fields.Boolean('No amount', help='Do not use amount for accounting entries')
+
+    def _get_move_values(self, qty, location_id, location_dest_id, out):
+        res = super()._get_move_values(qty, location_id, location_dest_id, out)
+        res['only_quantity'] = self.only_quantity
+        return res

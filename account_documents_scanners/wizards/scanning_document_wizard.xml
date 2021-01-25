@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="scanning_document_wizard" model="ir.ui.view">
+        <field name="name">scanning.document.wizard.form</field>
+        <field name="model">scanning.document.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Scanning document by network">
+                <label string="This process will scan document in your scanner please put it before start." colspan="2"/>
+                <group string="Scanning data configuration">
+                    <group>
+                        <field name="scanning_scanner_id"/>
+                    </group>
+                    <group>
+                        <field name="scanner_color_mode"/>
+                        <field name="scanner_depth"/>
+                        <field name="scanner_source_mode"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_ok" string="Ok" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_scanning_document_wizard" model="ir.actions.act_window">
+        <field name="name">Scanning document by network</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">scanning.document.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

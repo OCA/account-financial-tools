@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_rebooking_inventory" model="ir.ui.view">
+        <field name="name">Force move to initial balance</field>
+        <field name="model">wizard.rebooking.inventory</field>
+        <field name="arch" type="xml">
+            <form string="Force move to initial balance" >
+                <group>
+                    <group>
+                        <field name="future_initial_balance"/>
+                        <field name="company_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="rebooking_inventory" class="btn-primary" string="Apply" type="object"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+   <act_window name="Force move to initial balance"
+        res_model="wizard.rebooking.inventory"
+        src_model="stock.inventory"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="action_wizard_rebooking_inventory"
+        view_id="wizard_rebooking_inventory"/>
+</odoo>

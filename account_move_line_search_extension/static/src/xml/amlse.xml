@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template">
+
+  <t t-name="AccountMoveLineSearchExtension">
+    <table class="amlse" width="100%">
+      <thead>
+        <tr>
+          <th name="account">Account :</th>
+          <t t-if="analytic_group_analytic_accounting">
+            <th name="analytic_account">Analytic Account :</th>
+          </t>
+          <th name="partner">Partner :</th>
+          <th name="journal">Journal :</th>
+          <th name="date_range">Date Range :</th>
+          <th name="date_range">Date Before :</th>
+          <th name="date_range">Date After :</th>
+          <th name="reconcile">Reconcile :</th>
+          <th name="amount">Amount :</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td name="account">
+            <input type="text" class="oe_account_select_account"/>
+          </td>
+          <t t-if="analytic_group_analytic_accounting">
+            <td name="analytic_account">
+              <input type="text" class="oe_account_select_analytic_account"/>
+            </td>
+          </t>
+          <td name="partner">
+            <input type="text" class="oe_account_select_partner"/>
+          </td>
+          <td name="journal">
+            <select class="oe_account_select_journal"/>
+          </td>
+          <td name="date_range">
+            <select class="oe_account_select_date_range"/>
+          </td>
+          <td name="date_before">
+            <input type="text" class="o_datepicker_input oe_account_select_date_before"/>
+            <span class="o_datepicker_button"/>
+          </td>
+          <td name="date_after">
+            <input type="text" class="o_datepicker_input oe_account_select_date_after"/>
+            <span class="o_datepicker_button"/>
+          </td>
+          <td name="reconcile">
+            <input type="text" class="oe_account_select_reconcile"/>
+          </td>
+          <td name="amount">
+            <input type="text" class="oe_account_select_amount"/>
+          </td>
+          <td name="empty"></td>
+        </tr>
+      </tbody>
+    </table>
+  </t>
+
+</templates>

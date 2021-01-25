@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.server" id="action_recalculate_production">
+        <field name="name">Re-booking all account move on production</field>
+        <field name="model_id" ref="account_recalculate_mrp_production.model_wizard_rebuild_move_mrp_production"/>
+        <field name="state">code</field>
+        <field name="code">
+            model.server_rebuild()
+        </field>
+    </record>
+</odoo>

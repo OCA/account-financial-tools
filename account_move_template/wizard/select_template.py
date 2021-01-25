@@ -18,13 +18,26 @@ class WizardSelectMoveTemplate(models.TransientModel):
     date_range_id = fields.Many2one(comodel_name='date.range', string='Date range')
     date_from = fields.Date('Date from')
     date_to = fields.Date('Date to', default=fields.Date.today())
-
+    amount_input = fields.Float("Holder for default amount")
+    date_due = fields.Date('Due Date', default=fields.Date.today())
+    accounting_date = fields.Date('Accounting Date', default=fields.Date.today())
 
     @api.onchange('date_range_id')
     def onchange_date_range_id(self):
         """Handle date range change."""
         self.date_from = self.date_range_id.date_start
         self.date_to = self.date_range_id.date_end
+
+    @api.model
+    def default_get(self, fields):
+        res = super(WizardSelectMoveTemplate, self).default_get(fields)
+        if not res:
+            res = {}
+        res.update({
+            'amount_input': self._context.get('default_amount_input', 0.0),
+            'partner_id': self._context.get('default_partner_id'),
+        })
+        return res
 
     @api.multi
     def load_lines(self):
@@ -35,7 +48,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                 'template_id': self.id,
                 'sequence': line.sequence,
                 'name': line.name,
-                'amount': 0.0,
+                'amount': self.amount_input,
                 'account_id': line.account_id.id,
                 'move_line_type': line.move_line_type,
             })
@@ -63,6 +76,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
         if not self.date_to:
             self.date_to = fields.Date.today()
         date_to = fields.Datetime.from_string(self.date_to)
+        date_from = fields.Datetime.from_string(self.date_to)
         if self.date_from:
             date_from = fields.Datetime.from_string(self.date_from)
         amounts = self.template_id.compute_lines(input_lines, date_from, date_to, partner_id=self.partner_id.id)
@@ -86,6 +100,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'res_model': 'account.move',
             'type': 'ir.actions.act_window',
             'target': 'current',
+            'context': dict(self._context, default_amount_input=self.amount_input),
         }
 
     @api.model
@@ -94,6 +109,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'ref': ref,
             'journal_id': journal_id,
             'partner_id': partner_id,
+            'date': self.accounting_date,
         })
 
     @api.model
@@ -105,7 +121,8 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'analytic_account_id': line.analytic_account_id.id,
             'analytic_tag_ids': line.analytic_tag_ids,
             'account_id': line.account_id.id,
-            'date': time.strftime('%Y-%m-%d'),
+            'date': self.accounting_date or time.strftime('%Y-%m-%d'),
+            'date_maturity': self.date_due,
             'credit': not debit and amounts[line.sequence] or 0.0,
             'debit': debit and amounts[line.sequence] or 0.0,
             'partner_id': partner_id,

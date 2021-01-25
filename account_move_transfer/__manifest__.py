@@ -10,7 +10,7 @@
               "dXFactory Ltd.",
     'website': 'https://github.com/rosenvladimirov/account-financial-tools',
     'license': 'AGPL-3',
-    'depends': ['account', 'analytic'],
+    'depends': ['account', 'stock_landed_costs'],
     'data': [
         'wizard/create_transfer.xml',
         'views/account_view.xml',

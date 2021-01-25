@@ -8,6 +8,7 @@
     <field name="arch" type="xml">
       <field name="user_type_id" position="before">
         <field name="asset_profile_id"/>
+        <field name="tax_profile_id"/>
       </field>
     </field>
   </record>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_supplier_form" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account_documents.invoice_supplier_documents_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_account_move_lines"
+                            type="object"
+                            icon="fa-usd"
+                            class="oe_stat_button"
+                            string="Accounting Entries"/>
+                    <button name="action_invoice_rebuild"
+                            icon="fa fa-book"
+                            class="oe_stat_button"
+                            string="Rebuild Acc. Entries"
+                            states="open"
+                            type="object"
+                            groups="base.group_no_one"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="invoice_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_account_moves"
+                            type="object"
+                            icon="fa-usd"
+                            class="oe_stat_button"
+                            string="Accounting Entries"/>
+                    <button name="action_invoice_rebuild"
+                            icon="fa fa-book"
+                            class="oe_stat_button"
+                            string="Rebuild Acc. Entries"
+                            states="open"
+                            type="object"
+                            groups="base.group_no_one"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_invoice_filter" model="ir.ui.view">
+            <field name="name">account.invoice.select</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="product_id"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

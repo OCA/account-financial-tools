@@ -9,6 +9,9 @@
         'account_fiscal_year',
         'sale',
         'purchase',
+        'account_recalculate_stock_move',
+        'stock_picking_invoice_link',
+        'stock_inventory_cost_info',
     ],
     'excludes': ['account_asset'],
     'author': "Rosen Vladimirov (Bioprint Ltd.), Noviat,Odoo Community Association (OCA)",
@@ -35,6 +38,7 @@
         'views/account_move.xml',
         'views/account_move_line.xml',
         'views/account_asset_actions.xml',
+        'views/stock_inventory_views.xml',
         'views/menuitem.xml',
     ],
 }

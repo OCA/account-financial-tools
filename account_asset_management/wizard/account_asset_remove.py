@@ -30,6 +30,10 @@ class AccountAssetRemove(models.TransientModel):
         string='Asset Sale Account',
         domain=[('deprecated', '=', False)],
         default=lambda self: self._default_account_sale_id())
+    invoice_id = fields.Many2one(
+        comodel_name='account.invoice',
+        string='Invoice',
+        default=lambda self: self._context.get('invoice_id'))
     account_plus_value_id = fields.Many2one(
         comodel_name='account.account',
         string='Plus-Value Account',
@@ -137,7 +141,8 @@ class AccountAssetRemove(models.TransientModel):
             % (asset.name, asset.code) or asset.name
 
         if self.env.context.get('early_removal'):
-            residual_value = self._prepare_early_removal(asset)
+            residual_value = asset._prepare_early_removal(self.date_remove)
+            residual_value = residual_value.get(asset, asset.value_residual)
         else:
             residual_value = asset.value_residual
 
@@ -189,6 +194,12 @@ class AccountAssetRemove(models.TransientModel):
         move_lines = self._get_removal_data(asset, residual_value)
         move.with_context(allow_asset=True).write({'line_ids': move_lines})
 
+        # force rebuild linked stock move
+        move.post()
+        inv = self.invoice_id
+        if inv:
+            for move in inv.stock_move_ids:
+                move.rebuild_moves()
         return {
             'name': _("Asset '%s' Removal Journal Entry") % asset_ref,
             'view_type': 'form',
@@ -199,65 +210,6 @@ class AccountAssetRemove(models.TransientModel):
             'context': self.env.context,
             'domain': [('id', '=', move.id)],
         }
-
-    def _prepare_early_removal(self, asset):
-        """
-        Generate last depreciation entry on the day before the removal date.
-        """
-        date_remove = self.date_remove
-        asset_line_obj = self.env['account.asset.line']
-
-        digits = self.env['decimal.precision'].precision_get('Account')
-
-        def _dlines(asset):
-            lines = asset.depreciation_line_ids
-            dlines = lines.filtered(
-                lambda l: l.type == 'depreciate' and not
-                l.init_entry and not l.move_check)
-            dlines = dlines.sorted(key=lambda l: l.line_date)
-            return dlines
-
-        dlines = _dlines(asset)
-        if not dlines:
-            asset.compute_depreciation_board()
-            dlines = _dlines(asset)
-        first_to_depreciate_dl = dlines[0]
-
-        first_date = first_to_depreciate_dl.line_date
-        if date_remove > first_date:
-            raise UserError(
-                _("You can't make an early removal if all the depreciation "
-                  "lines for previous periods are not posted."))
-
-        if first_to_depreciate_dl.previous_id:
-            last_depr_date = first_to_depreciate_dl.previous_id.line_date
-        else:
-            create_dl = asset_line_obj.search(
-                [('asset_id', '=', asset.id), ('type', '=', 'create')])
-            last_depr_date = create_dl.line_date
-
-        period_number_days = (
-            datetime.strptime(first_date, '%Y-%m-%d') -
-            datetime.strptime(last_depr_date, '%Y-%m-%d')).days
-        date_remove = datetime.strptime(date_remove, '%Y-%m-%d')
-        new_line_date = date_remove + relativedelta(days=-1)
-        to_depreciate_days = (
-            new_line_date -
-            datetime.strptime(last_depr_date, '%Y-%m-%d')).days
-        to_depreciate_amount = round(
-            float(to_depreciate_days) / float(period_number_days) *
-            first_to_depreciate_dl.amount, digits)
-        residual_value = asset.value_residual - to_depreciate_amount
-        if to_depreciate_amount:
-            update_vals = {
-                'amount': to_depreciate_amount,
-                'line_date': new_line_date
-            }
-            first_to_depreciate_dl.write(update_vals)
-            dlines[0].create_move()
-            dlines -= dlines[0]
-        dlines.unlink()
-        return residual_value
 
     def _get_removal_data(self, asset, residual_value):
         move_lines = []
@@ -285,6 +237,7 @@ class AccountAssetRemove(models.TransientModel):
             'credit': (asset.depreciation_base > 0 and asset
                        .depreciation_base or 0.0),
             'partner_id': partner_id,
+            'product_id': asset.product_id.id,
             'asset_id': asset.id
         }
         move_lines.append((0, 0, move_line_vals))

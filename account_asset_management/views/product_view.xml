@@ -13,7 +13,30 @@
                 </button>
             </xpath>
             <field name="barcode" position="after">
-                <field name="account_asset_ids" widget="many2many_tags"/>
+                <field name="account_asset_ids" widget="many2many_tags" options="{'open_view': True}"/>
+            </field>
+        </field>
+    </record>
+    <record id="product_search_form_view" model="ir.ui.view">
+        <field name="name">product.product.search</field>
+        <field name="model">product.product</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="account_asset_ids" filter_domain="[('account_asset_ids', 'child_of', raw_value)]"/>
+            </field>
+        </field>
+    </record>
+    <record id="product_product_tree_view" model="ir.ui.view">
+        <field name="name">product.product.tree</field>
+        <field name="model">product.product</field>
+        <field eval="7" name="priority"/>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="account_asset_ids" widget="many2many_tags" options="{'open_view': True}"/>
+                <field name="value_depreciated"/>
             </field>
         </field>
     </record>

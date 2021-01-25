@@ -19,6 +19,11 @@
         </header>
         <sheet>
           <div class="oe_button_box">
+            <button name="toggle_active" type="object"
+                    class="oe_stat_button" icon="fa-archive">
+                    <field name="active" widget="boolean_button"
+                           options='{"terminology": "archive"}'/>
+            </button>
             <button name="open_entries" string="Journal Entries" type="object" class="oe_stat_button" icon="fa-bars"
                     attrs="{'invisible': [('type', '=', 'view')]}"/>
           </div>
@@ -31,33 +36,56 @@
             <h2>
               <field name="product_id" class="oe_inline"/>
             </h2>
+            <label for="categ_id" class="oe_edit_only"/>
+            <h2>
+              <field name="categ_id" readonly="1"  class="oe_inline"/>
+            </h2>
           </div>
-          <group>
-            <group>
+          <group name="info">
+            <group name="base">
               <field name="code"/>
               <field name="parent_id"/>
+              <field name="move_line_check" invisible="1"/>
             </group>
-            <group>
+            <group name="company">
               <field name="type"/>
               <field name="company_id" widget="selection" groups="base.group_multi_company"/>
               <field name="company_currency_id" groups="base.group_multi_currency" invisible="1"/>
-              <field name="move_line_check" invisible="1"/>
             </group>
-            <group>
+            <group name="pickings">
+              <field name="purchase_line_ids" widget="many2many_tags" options="{'open_view': True}"/>
+              <field name="move_line_id" domain="[('product_id', '=', product_id), ('move_id.purchase_line_id', 'in', purchase_line_ids)]"/>
+            </group>
+            <group name="product">
+              <field name="lot_id" domain="[('product_id', '=', product_id)]" groups="stock.group_production_lot" context="{'default_product_id': product_id}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="product_asset_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'view')]}"/>
+            </group>
+          </group>
+          <group name="depreciation">
+            <group string="Accounted">
               <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
               <field name="value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="fy_value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
               <field name="value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
             </group>
-            <group>
-              <field name="lot_id" domain="[('product_id', '=', product_id)]" groups="stock.group_production_lot" context="{'default_product_id': product_id}"
+            <group string="Taxed">
+              <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
-              <!-- <filed name="lot_name" groups="stock.group_production_lot"/> -->
-              <field name="product_asset_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="tax_value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="tax_fy_value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="tax_value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
             </group>
           </group>
+          <separator string="Other Information" colspan="4" attrs="{'invisible': [('type', '=', 'normal')]}"/>
+          <field name="child_ids" nolabel="1" colspan="4" attrs="{'invisible': [('type', '=', 'normal')]}" context="{'default_parent_id': active_id}"/>
           <notebook colspan="4" attrs="{'invisible': [('type', '=', 'view')]}">
             <page string="General">
               <group colspan="4" col="4">
@@ -74,6 +102,8 @@
                 <group>
                   <field name="salvage_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                          attrs="{'readonly': ['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
+                  <field name="fiscal_correction_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                         attrs="{'readonly': ['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
                   <field name="date_remove"/>
                 </group>
               </group>
@@ -88,6 +118,8 @@
               <group colspan="4">
                 <group>
                   <separator string="Depreciation Dates" colspan="2"/>
+                  <field name="method_tax_time" invisible="1"/>
+                  <field name="fiscal_method_percentage" invisible="1"/>
                   <field name="method_time"/>
                   <field name="method_number"
                          attrs="{'invisible': [('method_time', '=', 'end')], 'required': [('method_time', 'in', ['number', 'month', 'year'])]}"/>
@@ -109,6 +141,9 @@
               <div>
                 <button type="object" name="compute_depreciation_board"
                         string=" Compute" icon="fa-gears"
+                        attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
+                <button type="object" name="unlink_move"
+                        string="Delete Moves" icon="fa-times" confirm="Are you sure ?" groups="account.group_account_manager"
                         attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
               </div>
               <field name="depreciation_line_ids" mode="tree" options="{'reload_on_button': true}">
@@ -153,6 +188,14 @@
               </field>
             </page>
             <page string="TAX Depreciation Board">
+              <div>
+                <button type="object" name="compute_depreciation_board"
+                        string=" Compute" icon="fa-gears"
+                        attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}" context="{'bg_asset_line': True}"/>
+                <button type="object" name="unlink_move"
+                        string="Delete Moves" icon="fa-times" confirm="Are you sure ?" groups="account.group_account_manager"
+                        attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}" context="{'bg_asset_line': True}"/>
+              </div>
               <field name="depreciation_bg_line_ids" mode="tree" options="{'reload_on_button': true}">
                 <tree string="Asset Lines" decoration-info="(init_entry == False)" create="false">
                   <field name="type"/>
@@ -246,6 +289,25 @@
                   <field name="debit" sum="Total Debit"/>
                   <field name="credit" sum="Total Credit"/>
                 </form>
+              </field>
+            </page>
+            <page string="Stock move Detailed Operations">
+              <field name="move_line_ids">
+                  <tree editable="bottom" decoration-muted="(state == 'done' and is_locked == True)" decoration-danger="qty_done&gt;product_uom_qty and state!='done'" decoration-success="qty_done==product_uom_qty and state!='done'">
+                      <field name="product_id" required="1" attrs="{'readonly': ['|', ('state', '=', 'done'), ('move_id', '!=', False)]}"/>
+                      <field name="move_id" invisible="1"/>
+                      <field name="in_entire_package" invisible="1"/>
+                      <field name="product_uom_id" force_save="1" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="product.group_uom"/>
+                      <field name="lots_visible" invisible="1"/>
+                      <field name="owner_id" groups="stock.group_tracking_owner"/>
+                      <field name="state" invisible="1"/>
+                      <field name="lot_id" groups="stock.group_production_lot" readonly="1" domain="[('product_id', '=', product_id)]"/>
+                      <field name="lot_name" groups="stock.group_production_lot" readonly="1"/>
+                      <field name="is_initial_demand_editable" invisible="1"/>
+                      <field name="is_locked" invisible="1"/>
+                      <field name="product_uom_qty" invisible="1"/>
+                      <field name="qty_done" readonly="1"/>
+                  </tree>
               </field>
             </page>
             <page string="Notes">

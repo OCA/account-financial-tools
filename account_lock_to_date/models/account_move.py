@@ -11,9 +11,16 @@ class AccountMove(models.Model):
     def _check_lock_date(self):
         res = super()._check_lock_date()
         for move in self:
-            lock_to_date = min(
-                move.company_id.period_lock_to_date,
-                move.company_id.fiscalyear_lock_to_date) or False
+            if move.company_id.period_lock_to_date and move.company_id.fiscalyear_lock_to_date:
+                lock_to_date = min(
+                    move.company_id.period_lock_to_date,
+                    move.company_id.fiscalyear_lock_to_date) or False
+            elif move.company_id.period_lock_to_date and not move.company_id.fiscalyear_lock_to_date:
+                lock_to_date = move.company_id.period_lock_to_date
+            elif not move.company_id.period_lock_to_date and move.company_id.fiscalyear_lock_to_date:
+                lock_to_date = move.company_id.fiscalyear_lock_to_date
+            else:
+                lock_to_date = False
             if self.user_has_groups('account.group_account_manager'):
                 lock_to_date = move.company_id.fiscalyear_lock_to_date or False
             if lock_to_date and move.date >= lock_to_date:

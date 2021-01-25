@@ -36,6 +36,12 @@ class AccountBgAssetProfile(models.Model):
         string='Percentage per Year',
         help="The Percentage per year needed to depreciate your asset",
         default=15.0)
+
+    threshold = fields.Float('Materiality threshold')
+    threshold_tax_profile_id = fields.Many2one(
+        comodel_name='account.bg.asset.profile',
+        string='Tax Asset Profile')
+
     active = fields.Boolean(default=True)
 
     @api.model
@@ -46,5 +52,10 @@ class AccountBgAssetProfile(models.Model):
     def _selection_method(self):
         return[
             ('percentage', _('Percentage per Year')),
+            ('year', _('Year')),
         ]
 
+    @api.onchange('threshold')
+    def _onchange_threshold(self):
+        if self.threshold <= 0:
+            self.threshold_tax_profile_id = False

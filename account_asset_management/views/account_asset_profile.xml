@@ -32,6 +32,8 @@
                 <field name="account_plus_value_id" domain="[('company_id', '=', company_id)]" attrs="{'invisible': [('get_posting_regime', '!=', 'gain_loss_on_sale')]}"/>
                 <field name="account_min_value_id" domain="[('company_id', '=', company_id)]" attrs="{'invisible': [('get_posting_regime', '!=', 'gain_loss_on_sale')]}"/>
                 <field name="account_residual_value_id" domain="[('company_id', '=', company_id)]" attrs="{'invisible': [('get_posting_regime', '!=', 'residual_value')]}"/>
+                <field name="threshold"/>
+                <field name="threshold_profile_id" attrs="{'invisible': [('threshold', '&lt;&#61;', 0)]}"/>
               </group>
               <group>
                 <field name="account_revaluation_reserve_id" domain="[('company_id', '=', company_id)]"/>

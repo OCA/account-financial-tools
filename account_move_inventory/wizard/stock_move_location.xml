@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_wiz_stock_move_location_form_stock_move_location" model="ir.ui.view">
+        <field name="name">wiz.stock.move.location.form.stock_move_location</field>
+        <field name="model">wiz.stock.move.location</field>
+        <field name="inherit_id" ref="stock_move_location.view_wiz_stock_move_location_form_stock_move_location"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main']" position="inside">
+                <field name="edit_accounts"/>
+                <field name="property_stock_account_input" attrs="{'invisible': [('edit_accounts', '=', False)]}" domain="[('company_id', '=', company_id)]"/>
+                <field name="property_stock_account_output" attrs="{'invisible': [('edit_accounts', '=', False)]}" domain="[('company_id', '=', company_id)]"/>
+                <field name="property_stock_valuation_account_id" attrs="{'invisible': [('edit_accounts', '=', False)]}" domain="[('company_id', '=', company_id)]"/>
+                <field name="company_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

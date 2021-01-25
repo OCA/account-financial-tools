@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="account_move_line_view_amlse" model="ir.ui.view">
+    <field name="name">account.move.line.amlse</field>
+    <field name="model">account.move.line</field>
+    <field name="arch" type="xml">
+      <amlse string="Journal Items" create="false" delete="false" edit="false">
+        <field name="date"/>
+        <field name="move_id"/>
+        <field name="journal_id"/>
+        <field name="name"/>
+        <field name="ref"/>
+        <field name="statement_id" invisible="1"/>
+        <field name="partner_id"/>
+        <field name="account_id"/>
+        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+        <field name="reconciled" invisible="1"/>
+        <field name="full_reconcile_id"/>
+        <field name="debit" sum="Total Debit"/>
+        <field name="credit" sum="Total Credit"/>
+        <field name="amount_currency" groups="base.group_multi_currency"/>
+        <field name="currency_id" invisible="1" />
+        <field name="date_maturity"/>
+        <field name="company_currency_id" invisible="1"/>
+        <field name="company_id" invisible="1"/>
+      </amlse>
+    </field>
+  </record>
+    
+  <record id="account_move_line_action_search_extension" model="ir.actions.act_window">
+    <field name="context">{'account_move_line_search_extension': 1, 'analytic_journal_id': 1}</field>
+    <field name="name">Journal Items Search All</field>
+    <field name="res_model">account.move.line</field>
+    <field name="view_id" ref="account_move_line_view_amlse"/>
+    <field name="view_mode">amlse,form</field>
+  </record>
+
+  <menuitem id="account_move_line_menu_search_extension"
+            action="account_move_line_action_search_extension"
+            parent="account.menu_finance_entries_accounting_entries"
+            sequence="1"
+            groups="account.group_account_user"/>
+
+</odoo>

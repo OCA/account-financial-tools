@@ -4,7 +4,11 @@
 
 from odoo import models, fields, api
 from odoo.addons import decimal_precision as dp
+from odoo.addons.stock_landed_costs.models import product
 import time
+
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class WizardCreateMoveTransfer(models.TransientModel):
@@ -12,21 +16,46 @@ class WizardCreateMoveTransfer(models.TransientModel):
 
     account_move_id = fields.Many2one(comodel_name="account.move", string="Account move")
     account_move_line_ids = fields.One2many(comodel_name="wizard.create.move.line.transfer", inverse_name="account_move_id")
+    landed_cost_ids = fields.One2many(comodel_name="wizard.create.landed.cost.transfer", inverse_name="account_move_id")
     partner_id = fields.Many2one('res.partner', 'Partner')
     journal_id = fields.Many2one('account.journal', string='Journal')
     date = fields.Date(required=True, default=fields.Date.context_today)
 
     move_line_type = fields.Selection(
-        [('cr', 'Credit'), ('dr', 'Debit')], required=True, default='dr')
-    account_id = fields.Many2one('account.account', string="Contra Account", required=True)
+        [('cr', 'Credit'), ('dr', 'Debit'), ('clear', 'Clear balance')], required=True, default='dr')
+    next_wizard = fields.Selection(
+        [('move', 'Create move'), ('landed', 'Create landed cost')], required=True, default='move')
+    account_id = fields.Many2one('account.account', string="Contra Account")
+    product_id = fields.Many2one('product.product', 'Product')
+    cost_price = fields.Float("Clear balance price")
 
-    @api.onchange('move_line_type', 'account_id')
+    @api.onchange('next_wizard')
+    def onchange_next_wizard(self):
+        if self.next_wizard == 'landed':
+            self.account_move_line_ids = False
+            self.account_id = False
+        elif self.next_wizard == 'move':
+            self.product_id = False
+            self.landed_cost_ids = False
+
+    @api.onchange('move_line_type', 'account_id', 'product_id')
     def onchange_move_line_type(self):
-        if self.account_id:
+        self.account_move_line_ids = False
+        self.landed_cost_ids = False
+        if self.account_id and self.next_wizard == 'move':
             self.account_move_line_ids = False
             amount = 0.0
             move_line_vals = []
-            for line in self.account_move_id.line_ids.filtered(lambda r: (r.credit != 0.0 and self.move_line_type == "cr") or (r.debit != 0.0 and self.move_line_type == 'dr')):
+            if self.move_line_type == 'clear':
+                clear_cost = sum([x.debit - x.credit for x in self.account_move_id.line_ids if x.account_id and x.account_id.clear_balance])
+                move_line_type = clear_cost > 0 and 'dr' or 'cr'
+                lines = self.account_move_id.line_ids.filtered(lambda r: r.account_id and r.account_id.clear_balance)
+            else:
+                move_line_type = self.move_line_type
+                lines = self.account_move_id.line_ids.filtered(
+                    lambda r: (r.credit != 0.0 and move_line_type == "cr") or (
+                                r.debit != 0.0 and move_line_type == 'dr'))
+            for line in lines:
                 amount += line.debit + line.credit
                 self.account_move_line_ids.new({
                             'account_move_id': self.id,
@@ -46,15 +75,44 @@ class WizardCreateMoveTransfer(models.TransientModel):
             self.account_move_line_ids.new({
                 'account_move_id': self.id,
                 'account_id': self.account_id and self.account_id.id,
-                'debit': self.move_line_type == "dr" and amount or 0.0,
-                'credit': self.move_line_type == "cr" and amount or 0.0,
+                'debit': move_line_type == "dr" and amount or 0.0,
+                'credit': move_line_type == "cr" and amount or 0.0,
                 'date': self.date,
             })
-            for line in self.account_move_line_ids:
-                move_line_val = line._convert_to_write(line._cache)
-                move_line_vals.append((0, False, move_line_val))
-            self.account_move_line_ids = move_line_vals
+            #for line in self.account_move_line_ids:
+            #    move_line_val = line._convert_to_write(line._cache)
+            #    move_line_vals.append((0, False, move_line_val))
+            #self.account_move_line_ids = move_line_vals
             #self.write({"account_move_line_ids": []})
+
+        if self.product_id and self.next_wizard == 'landed':
+            self.journal_id = self.product_id.categ_id.property_stock_journal
+            cost_price = 0.0
+            if self.move_line_type == 'clear':
+                cost_price = sum([x.debit - x.credit for x in self.account_move_id.line_ids if x.account_id and x.account_id.clear_balance])
+                self.cost_price = cost_price
+            else:
+                move_line_type = self.move_line_type
+                for line in self.account_move_id.line_ids.filtered(
+                        lambda r: (r.credit != 0.0 and move_line_type == "cr") or (
+                                r.debit != 0.0 and move_line_type == 'dr')):
+                    cost_price += line.debit + line.credit
+                self.cost_price = cost_price
+
+            landed_cost_vals = []
+
+            self.landed_cost_ids.new({
+                'account_move_id': self.id,
+                'product_id': self.product_id.id,
+                'price_unit': cost_price,
+                'split_method': self.product_id.split_method or 'equal',
+                'account_id': self.product_id.property_account_expense_id.id or self.product_id.categ_id.property_account_expense_categ_id.id,
+            })
+            #for line in self.landed_cost_ids:
+            #    landed_cost_lines = line._convert_to_write(line._cache)
+            #    landed_cost_vals.append((0, False, landed_cost_lines))
+            #self.landed_cost_ids = landed_cost_vals
+            #_logger.info("LINES %s" % landed_cost_vals)
 
     @api.multi
     def load_template(self):
@@ -103,6 +161,36 @@ class WizardCreateMoveTransfer(models.TransientModel):
         }
         return values
 
+    @api.multi
+    def load_landed_cost(self):
+        landed_cost = self.env['stock.landed.cost']
+        name = self.account_move_id.name
+        landed = landed_cost.create({
+            'date': self.date,
+            'account_journal_id': self.journal_id.id,
+        })
+        landed_cost_lines = []
+        for line in self.landed_cost_ids:
+            landed_cost_lines.append((0,0, {
+                'product_id': line.product_id.id,
+                'name': line.name,
+                'cost_id': landed.id,
+                'price_unit': line.price_unit,
+                'split_method': line.split_method,
+                'account_id': line.account_id.id,
+            }))
+        landed.write({'cost_lines': landed_cost_lines,})
+
+        return {
+            'name': 'Entries from landed cost: %s' % name,
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'stock.landed.cost',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+            'domain': [('id', 'in', [landed.id])],
+        }
+
 
 class WizardCreateMoveLineTransfer(models.TransientModel):
     _description = 'Transfers Lines'
@@ -116,7 +204,7 @@ class WizardCreateMoveLineTransfer(models.TransientModel):
             currency = self.env['account.journal'].browse(context['default_journal_id']).currency_id
         return currency
 
-    account_move_id = fields.Many2one(comodel_name="wizard.create.move.transfer", string="Account move")
+    account_move_id = fields.Many2one(comodel_name="wizard.create.move.transfer", string="Account move", required=True, ondelete='cascade')
     account_id = fields.Many2one('account.account', required=True)
     name = fields.Char(string="Label")
     quantity = fields.Float(digits=dp.get_precision('Product Unit of Measure'),
@@ -134,3 +222,26 @@ class WizardCreateMoveLineTransfer(models.TransientModel):
     company_currency_id = fields.Many2one('res.currency', related='company_id.currency_id', string="Company Currency", readonly=True,
         help='Utility field to express amount currency', store=True)
     journal_id = fields.Many2one('account.journal', related='account_move_id.journal_id', string='Journal', store=True, copy=False)  # related is required
+
+
+class WizardCreateLandedCostTransfer(models.TransientModel):
+    _description = 'Landed cost lines'
+    _name = "wizard.create.landed.cost.transfer"
+
+    account_move_id = fields.Many2one(comodel_name="wizard.create.move.transfer", string="Account move",
+                                      required=True, ondelete='cascade')
+
+    name = fields.Char('Description')
+    product_id = fields.Many2one('product.product', 'Product', required=True)
+    price_unit = fields.Float('Cost', digits=dp.get_precision('Product Price'), required=True)
+    split_method = fields.Selection(product.SPLIT_METHOD, string='Split Method', required=True)
+    account_id = fields.Many2one('account.account', 'Account', domain=[('deprecated', '=', False)])
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        if not self.product_id:
+            self.quantity = 0.0
+        self.name = self.product_id.name or ''
+        self.split_method = self.product_id.split_method or 'equal'
+        self.price_unit = self.product_id.standard_price or self._context.get('default_price_unit', 0.0)
+        self.account_id = self.product_id.property_account_expense_id.id or self.product_id.categ_id.property_account_expense_categ_id.id

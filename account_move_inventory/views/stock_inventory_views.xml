@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field name="name">stock.inventory.form.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="edit_accounts"/>
+                <field name="property_stock_account_input" attrs="{'invisible': [('edit_accounts', '=', False)]}" domain="[('company_id', '=', company_id)]"/>
+                <field name="property_stock_account_output" attrs="{'invisible': [('edit_accounts', '=', False)]}" domain="[('company_id', '=', company_id)]"/>
+                <field name="property_stock_valuation_account_id" attrs="{'invisible': [('edit_accounts', '=', False)]}" domain="[('company_id', '=', company_id)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

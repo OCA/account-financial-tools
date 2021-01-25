@@ -30,4 +30,7 @@ class ProductProduct(models.Model):
     @api.multi
     def _compute_value_depreciated(self):
         for product in self:
-            product.value_depreciated = mean([x.value_depreciated for x in product.account_asset_ids])
+            if len(product.account_asset_ids.ids) > 0:
+                product.value_depreciated = mean([x.value_depreciated for x in product.account_asset_ids if x.type == 'normal'])
+            else:
+                product.value_depreciated = 0.0

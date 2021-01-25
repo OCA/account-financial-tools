@@ -6,3 +6,4 @@ from . import account_invoice
 from . import sale
 from . import purchase
 from . import stock_picking
+from . import account_bank_statement

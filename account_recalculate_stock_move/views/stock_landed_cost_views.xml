@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id='view_stock_landed_cost_form' model='ir.ui.view'>
+            <field name="name">stock.landed.cost.form</field>
+            <field name="model">stock.landed.cost</field>
+            <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_title')]" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="rebuild_account_move"
+                                icon="fa fa-book"
+                                class="oe_stat_button"
+                                string="Rebuild Acc. Entries"
+                                states="done"
+                                type="object"
+                                groups="base.group_no_one"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

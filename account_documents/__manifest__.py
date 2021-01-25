@@ -20,6 +20,7 @@
             'views/purchase_views.xml',
             'views/sale_views.xml',
             'views/stock_picking_views.xml',
+            'views/account_view.xml',
             'views/ir_attachment_view.xml',
             'views/account_documents_type_views.xml',
             ],
