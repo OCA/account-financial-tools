@@ -1,15 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <!-- Accounts -->
     <record id="demo_account_vatc" model="account.account">
         <field name="name">VAT Colected</field>
         <field name="code">vatc</field>
-        <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+        <field
+            name="user_type_id"
+            ref="account.data_account_type_non_current_liabilities"
+        />
     </record>
     <record id="demo_account_vatccb" model="account.account">
         <field name="name">VAT Colected Cash-Basis</field>
         <field name="code">vatccb</field>
-        <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+        <field
+            name="user_type_id"
+            ref="account.data_account_type_non_current_liabilities"
+        />
     </record>
     <!-- VAT -->
     <record id="demo_vatc_05" model="account.tax">
@@ -19,9 +25,12 @@
         <field name="amount">5</field>
         <field name="amount_type">percent</field>
         <field name="type_tax_use">sale</field>
-        <field name="account_id" ref="demo_account_vatc"/>
-        <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatc'), ref('demo_tax_tag_vatc_5')])]"/>
+        <field name="account_id" ref="demo_account_vatc" />
+        <field name="refund_account_id" ref="demo_account_vatc" />
+        <field
+            name="tag_ids"
+            eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatc'), ref('demo_tax_tag_vatc_5')])]"
+        />
     </record>
     <record id="demo_vatc_09" model="account.tax">
         <field name="sequence">12</field>
@@ -30,9 +39,12 @@
         <field name="amount">9</field>
         <field name="amount_type">percent</field>
         <field name="type_tax_use">sale</field>
-        <field name="account_id" ref="demo_account_vatc"/>
-        <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatc'), ref('demo_tax_tag_vatc_9')])]"/>
+        <field name="account_id" ref="demo_account_vatc" />
+        <field name="refund_account_id" ref="demo_account_vatc" />
+        <field
+            name="tag_ids"
+            eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatc'), ref('demo_tax_tag_vatc_9')])]"
+        />
     </record>
     <record id="demo_vatc_19" model="account.tax">
         <field name="sequence">13</field>
@@ -41,9 +53,12 @@
         <field name="amount">19</field>
         <field name="amount_type">percent</field>
         <field name="type_tax_use">sale</field>
-        <field name="account_id" ref="demo_account_vatc"/>
-        <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatc'), ref('demo_tax_tag_vatc_19')])]"/>
+        <field name="account_id" ref="demo_account_vatc" />
+        <field name="refund_account_id" ref="demo_account_vatc" />
+        <field
+            name="tag_ids"
+            eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatc'), ref('demo_tax_tag_vatc_19')])]"
+        />
     </record>
     <!-- Cash Basis VAT-->
     <record id="demo_vatccb_05" model="account.tax">
@@ -54,10 +69,13 @@
         <field name="amount_type">percent</field>
         <field name="type_tax_use">sale</field>
         <field name="tax_exigibility">on_payment</field>
-        <field name="account_id" ref="demo_account_vatccb"/>
-        <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="cash_basis_account_id" ref="demo_account_vatc"/>
-        <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_5')])]"/>
+        <field name="account_id" ref="demo_account_vatccb" />
+        <field name="refund_account_id" ref="demo_account_vatc" />
+        <field name="cash_basis_account_id" ref="demo_account_vatc" />
+        <field
+            name="tag_ids"
+            eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_5')])]"
+        />
     </record>
     <record id="demo_vatccb_09" model="account.tax">
         <field name="sequence">22</field>
@@ -67,10 +85,13 @@
         <field name="amount_type">percent</field>
         <field name="type_tax_use">sale</field>
         <field name="tax_exigibility">on_payment</field>
-        <field name="account_id" ref="demo_account_vatccb"/>
-        <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="cash_basis_account_id" ref="demo_account_vatc"/>
-        <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_9')])]"/>
+        <field name="account_id" ref="demo_account_vatccb" />
+        <field name="refund_account_id" ref="demo_account_vatc" />
+        <field name="cash_basis_account_id" ref="demo_account_vatc" />
+        <field
+            name="tag_ids"
+            eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_9')])]"
+        />
     </record>
     <record id="demo_vatccb_19" model="account.tax">
         <field name="sequence">23</field>
@@ -80,9 +101,12 @@
         <field name="amount_type">percent</field>
         <field name="type_tax_use">sale</field>
         <field name="tax_exigibility">on_payment</field>
-        <field name="account_id" ref="demo_account_vatccb"/>
-        <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="cash_basis_account_id" ref="demo_account_vatc"/>
-        <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_19')])]"/>
+        <field name="account_id" ref="demo_account_vatccb" />
+        <field name="refund_account_id" ref="demo_account_vatc" />
+        <field name="cash_basis_account_id" ref="demo_account_vatc" />
+        <field
+            name="tag_ids"
+            eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_19')])]"
+        />
     </record>
 </odoo>

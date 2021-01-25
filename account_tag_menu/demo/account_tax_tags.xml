@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <record id="demo_tax_tag_vat" model="account.account.tag">
         <field name="name">VAT</field>
@@ -36,5 +36,4 @@
         <field name="name">VAT Colected Cash-Basis 19%</field>
         <field name="applicability">taxes</field>
     </record>
-
 </odoo>
