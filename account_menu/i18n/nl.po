@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2021-01-25 17:44+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
 "Language-Team: none\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_group
@@ -64,17 +66,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_menu.field_account_group__account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "Rekeningen"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_bank
 msgid "Bank Statements"
-msgstr ""
+msgstr "Bankafschriften"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_bank_and_cash
 msgid "Bank and Cash"
-msgstr ""
+msgstr "Bank en Cash"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_cash
@@ -91,44 +93,44 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_menu.field_account_group__display_name
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_menu.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
-msgstr ""
+msgstr "Fiscale positie sjabloon"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__id
 #: model:ir.model.fields,field_description:account_menu.field_account_group__id
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag____last_update
 #: model:ir.model.fields,field_description:account_menu.field_account_group____last_update
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_tax_group
 msgid "Tax Group"
-msgstr ""
+msgstr "Belastingsgroep"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_tax_template
 msgid "Tax Templates"
-msgstr ""
+msgstr "Belastingssjablonen"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "Belastingen"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_coa_settings
 msgid "Templates"
-msgstr ""
+msgstr "Sjablonen"
