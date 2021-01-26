@@ -100,7 +100,7 @@ class AccountMove(models.Model):
 
     def _reverse_move_vals(self, default_values, cancel=True):
         move_vals = super()._reverse_move_vals(default_values, cancel)
-        if move_vals["type"] not in ("out_invoice", "out_refund"):
+        if move_vals["move_type"] not in ("out_invoice", "out_refund"):
             for line_command in move_vals.get("line_ids", []):
                 line_vals = line_command[2]  # (0, 0, {...})
                 asset = self.env["account.asset"].browse(line_vals["asset_id"])
