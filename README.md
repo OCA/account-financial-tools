@@ -19,7 +19,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[account_asset_management](account_asset_management/) | 14.0.1.0.0 | Assets Management
+[account_asset_management](account_asset_management/) | 14.0.1.0.1 | Assets Management
 [account_balance_line](account_balance_line/) | 14.0.1.0.0 | Display balance totals in move line view
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.0.0 | Check VAT on invoice validation
 [account_menu](account_menu/) | 14.0.1.0.0 | Adds missing menu entries for Account module
