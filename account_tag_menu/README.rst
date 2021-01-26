@@ -26,7 +26,7 @@ Account Tag Menu
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module adds a menu entry **Account Tags** under *Invoicing > Configuration > Accounting*,
-because this menu entry doesn't exists in the official *account* module of Odoo 12.
+because this menu entry doesn't exists in the official *account* module of Odoo 13.
 
 **Table of contents**
 
