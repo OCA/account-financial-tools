@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-01 19:42+0000\n"
+"PO-Revision-Date: 2021-02-01 20:46+0100\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_move_line_residual
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_account_move_line_filter
+msgid "Full reconciled"
+msgstr "Conciliado completamente"
+
+#. module: account_move_line_residual
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_account_move_line_filter
+msgid "Not Full Reconciled"
+msgstr "No conciliado completamente"
+
+#. module: account_move_line_residual
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_account_move_line_filter
+msgid "Partial reconciled"
+msgstr "Conciliado parcialmente"
+
+#. module: account_move_line_residual
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_account_move_line_filter
+msgid "Reconciled"
+msgstr "Conciliado"
+
+#. module: account_move_line_residual
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_move_line_tree_grouped
+msgid "Residual Amount in Currency"
+msgstr "Importe residual en divisa"
+
+#. module: account_move_line_residual
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_move_line_tree
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_move_line_tree_grouped
+msgid "Total Residual Amount"
+msgstr "Total importe residual"
+
+#. module: account_move_line_residual
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_move_line_tree
+msgid "Total Residual Amount in Currency"
+msgstr "Total importe residual en divisa"
+
+#. module: account_move_line_residual
+#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_account_move_line_filter
+msgid "Unreconciled"
+msgstr "No conciliado"
