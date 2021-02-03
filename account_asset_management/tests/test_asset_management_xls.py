@@ -22,6 +22,9 @@ class TestAssetManagementXls(SavepointCase):
         cls._load('account', 'test', 'account_minimal_test.xml')
         cls._load('account_asset_management', 'tests',
                   'account_asset_test_data.xml')
+        # Ensure we have something to report on
+        cls.env.ref('account_asset_management.'
+                    'account_asset_asset_ict0').validate()
         module = __name__.split('addons.')[1].split('.')[0]
         cls.xls_report_name = '{}.asset_report_xls'.format(module)
         cls.wiz_model = cls.env['wiz.account.asset.report']
@@ -39,9 +42,15 @@ class TestAssetManagementXls(SavepointCase):
         cls.report_action = cls.xls_report.xls_export()
 
     def test_01_action_xls(self):
-        """ Check report XLS action """
+        """ Check report XLS action and generate report """
         self.assertDictContainsSubset(
             {'type': 'ir.actions.report',
              'report_type': 'xlsx',
              'report_name': self.xls_report_name},
             self.report_action)
+        model = self.env[
+            'report.%s' % self.report_action['report_name']].with_context(
+                active_model=self.xls_report._name,
+                **self.report_action['context'])
+        model.create_xlsx_report(
+            self.xls_report.ids, data=self.report_action['data'])
