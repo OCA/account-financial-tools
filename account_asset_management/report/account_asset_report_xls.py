@@ -7,6 +7,11 @@ from odoo import _, models
 from odoo.exceptions import UserError
 from odoo.tools.translate import translate
 
+from odoo.addons.report_xlsx_helper.report.report_xlsx_format import (
+    FORMATS,
+    XLS_HEADERS,
+)
+
 _logger = logging.getLogger(__name__)
 
 
@@ -24,7 +29,7 @@ class AssetReportXlsx(models.AbstractModel):
         return val
 
     def _get_ws_params(self, wb, data, wiz):
-        self._grouped_assets = self._get_assets(wiz)
+        self._get_assets(wiz, data)
         s1 = self._get_acquisition_ws_params(wb, data, wiz)
         s2 = self._get_active_ws_params(wb, data, wiz)
         s3 = self._get_removal_ws_params(wb, data, wiz)
@@ -64,7 +69,7 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {"type": "string", "value": self._("Asset Start Date")},
                 "asset": {
                     "value": self._render("asset.date_start"),
-                    "format": self.format_tcell_date_left,
+                    "format": FORMATS["format_tcell_date_left"],
                 },
                 "width": 20,
             },
@@ -72,7 +77,7 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {"type": "string", "value": self._("Asset Removal Date")},
                 "asset": {
                     "value": self._render("asset.date_remove"),
-                    "format": self.format_tcell_date_left,
+                    "format": FORMATS["format_tcell_date_left"],
                 },
                 "width": 20,
             },
@@ -80,22 +85,22 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Depreciation Base"),
-                    "format": self.format_theader_yellow_right,
+                    "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
                     "type": "number",
-                    "value": self._render("group._depreciation_base"),
-                    "format": self.format_theader_blue_amount_right,
+                    "value": self._render('group_entry["_depreciation_base"]'),
+                    "format": FORMATS["format_theader_blue_amount_right"],
                 },
                 "asset": {
                     "type": "number",
                     "value": self._render("asset.depreciation_base"),
-                    "format": self.format_tcell_amount_right,
+                    "format": FORMATS["format_tcell_amount_right"],
                 },
                 "totals": {
                     "type": "formula",
                     "value": self._render("asset_total_formula"),
-                    "format": self.format_theader_yellow_amount_right,
+                    "format": FORMATS["format_theader_yellow_amount_right"],
                 },
                 "width": 18,
             },
@@ -103,22 +108,22 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Salvage Value"),
-                    "format": self.format_theader_yellow_right,
+                    "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
                     "type": "number",
-                    "value": self._render("group._salvage_value"),
-                    "format": self.format_theader_blue_amount_right,
+                    "value": self._render('group_entry["_salvage_value"]'),
+                    "format": FORMATS["format_theader_blue_amount_right"],
                 },
                 "asset": {
                     "type": "number",
                     "value": self._render("asset.salvage_value"),
-                    "format": self.format_tcell_amount_right,
+                    "format": FORMATS["format_tcell_amount_right"],
                 },
                 "totals": {
                     "type": "formula",
                     "value": self._render("salvage_total_formula"),
-                    "format": self.format_theader_yellow_amount_right,
+                    "format": FORMATS["format_theader_yellow_amount_right"],
                 },
                 "width": 18,
             },
@@ -126,22 +131,22 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Period Start Value"),
-                    "format": self.format_theader_yellow_right,
+                    "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
                     "type": "number",
-                    "value": self._render("group._period_start_value"),
-                    "format": self.format_theader_blue_amount_right,
+                    "value": self._render('group_entry["_period_start_value"]'),
+                    "format": FORMATS["format_theader_blue_amount_right"],
                 },
                 "asset": {
                     "type": "number",
-                    "value": self._render("asset._period_start_value"),
-                    "format": self.format_tcell_amount_right,
+                    "value": self._render('asset_entry["_period_start_value"]'),
+                    "format": FORMATS["format_tcell_amount_right"],
                 },
                 "totals": {
                     "type": "formula",
                     "value": self._render("period_start_total_formula"),
-                    "format": self.format_theader_yellow_amount_right,
+                    "format": FORMATS["format_theader_yellow_amount_right"],
                 },
                 "width": 18,
             },
@@ -149,22 +154,22 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Period Depreciation"),
-                    "format": self.format_theader_yellow_right,
+                    "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
                     "type": "formula",
                     "value": self._render("period_diff_formula"),
-                    "format": self.format_theader_blue_amount_right,
+                    "format": FORMATS["format_theader_blue_amount_right"],
                 },
                 "asset": {
                     "type": "formula",
                     "value": self._render("period_diff_formula"),
-                    "format": self.format_tcell_amount_right,
+                    "format": FORMATS["format_tcell_amount_right"],
                 },
                 "totals": {
                     "type": "formula",
                     "value": self._render("period_diff_formula"),
-                    "format": self.format_theader_yellow_amount_right,
+                    "format": FORMATS["format_theader_yellow_amount_right"],
                 },
                 "width": 18,
             },
@@ -172,22 +177,22 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Period End Value"),
-                    "format": self.format_theader_yellow_right,
+                    "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
                     "type": "number",
-                    "value": self._render("group._period_end_value"),
-                    "format": self.format_theader_blue_amount_right,
+                    "value": self._render('group_entry["_period_end_value"]'),
+                    "format": FORMATS["format_theader_blue_amount_right"],
                 },
                 "asset": {
                     "type": "number",
-                    "value": self._render("asset._period_end_value"),
-                    "format": self.format_tcell_amount_right,
+                    "value": self._render('asset_entry["_period_end_value"]'),
+                    "format": FORMATS["format_tcell_amount_right"],
                 },
                 "totals": {
                     "type": "formula",
                     "value": self._render("period_end_total_formula"),
-                    "format": self.format_theader_yellow_amount_right,
+                    "format": FORMATS["format_theader_yellow_amount_right"],
                 },
                 "width": 18,
             },
@@ -195,22 +200,22 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Tot. Depreciation"),
-                    "format": self.format_theader_yellow_right,
+                    "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
                     "type": "formula",
                     "value": self._render("total_depr_formula"),
-                    "format": self.format_theader_blue_amount_right,
+                    "format": FORMATS["format_theader_blue_amount_right"],
                 },
                 "asset": {
                     "type": "formula",
                     "value": self._render("total_depr_formula"),
-                    "format": self.format_tcell_amount_right,
+                    "format": FORMATS["format_tcell_amount_right"],
                 },
                 "totals": {
                     "type": "formula",
                     "value": self._render("total_depr_formula"),
-                    "format": self.format_theader_yellow_amount_right,
+                    "format": FORMATS["format_theader_yellow_amount_right"],
                 },
                 "width": 18,
             },
@@ -218,12 +223,12 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Comput. Method"),
-                    "format": self.format_theader_yellow_center,
+                    "format": FORMATS["format_theader_yellow_center"],
                 },
                 "asset": {
                     "type": "string",
                     "value": self._render("asset.method or ''"),
-                    "format": self.format_tcell_center,
+                    "format": FORMATS["format_tcell_center"],
                 },
                 "width": 20,
             },
@@ -231,12 +236,12 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Number of Years"),
-                    "format": self.format_theader_yellow_center,
+                    "format": FORMATS["format_theader_yellow_center"],
                 },
                 "asset": {
                     "type": "number",
                     "value": self._render("asset.method_number"),
-                    "format": self.format_tcell_integer_center,
+                    "format": FORMATS["format_tcell_integer_center"],
                 },
                 "width": 20,
             },
@@ -244,12 +249,12 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Prorata Temporis"),
-                    "format": self.format_theader_yellow_center,
+                    "format": FORMATS["format_theader_yellow_center"],
                 },
                 "asset": {
                     "type": "boolean",
                     "value": self._render("asset.prorata"),
-                    "format": self.format_tcell_center,
+                    "format": FORMATS["format_tcell_center"],
                 },
                 "width": 20,
             },
@@ -257,12 +262,12 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {
                     "type": "string",
                     "value": self._("Status"),
-                    "format": self.format_theader_yellow_center,
+                    "format": FORMATS["format_theader_yellow_center"],
                 },
                 "asset": {
                     "type": "string",
                     "value": self._render("asset.state"),
-                    "format": self.format_tcell_center,
+                    "format": FORMATS["format_tcell_center"],
                 },
                 "width": 8,
             },
@@ -359,10 +364,10 @@ class AssetReportXlsx(models.AbstractModel):
         else:
             suffix = _("Removed Assets")
         no_entries = _("No") + " " + suffix
-        ws.write_string(row_pos, 0, no_entries, self.format_left_bold)
+        ws.write_string(row_pos, 0, no_entries, FORMATS["format_left_bold"])
 
-    def _get_assets(self, wiz):
-
+    def _get_assets(self, wiz, data):
+        """ Add the selected assets, both grouped and ungrouped, to `data` """
         dom = [
             ("date_start", "<=", wiz.date_to),
             "|",
@@ -394,10 +399,15 @@ class AssetReportXlsx(models.AbstractModel):
 
         if not wiz.draft:
             dom.append(("state", "!=", "draft"))
-        self._assets = self.env["account.asset"].search(dom)
+        assets = self.env["account.asset"].search(dom)
         grouped_assets = {}
-        self._group_assets(self._assets, parent_group, grouped_assets)
-        return grouped_assets
+        self._group_assets(assets, parent_group, grouped_assets)
+        data.update(
+            {
+                "assets": assets,
+                "grouped_assets": grouped_assets,
+            }
+        )
 
     @staticmethod
     def acquisition_filter(wiz, asset):
@@ -452,13 +462,17 @@ class AssetReportXlsx(models.AbstractModel):
             return
 
         asset_entries = []
-        group._depreciation_base = 0.0
-        group._salvage_value = 0.0
-        group._period_start_value = 0.0
-        group._period_end_value = 0.0
+        group_entry = {
+            "_depreciation_base": 0.0,
+            "_salvage_value": 0.0,
+            "_period_start_value": 0.0,
+            "_period_end_value": 0.0,
+            "group": group,
+        }
         for asset in assets:
-            group._depreciation_base += asset.depreciation_base
-            group._salvage_value += asset.salvage_value
+            asset_entry = {"asset": asset}
+            group_entry["_depreciation_base"] += asset.depreciation_base
+            group_entry["_salvage_value"] += asset.salvage_value
             dls_all = asset.depreciation_line_ids.filtered(
                 lambda r: r.type == "depreciate"
             )
@@ -471,25 +485,29 @@ class AssetReportXlsx(models.AbstractModel):
                 value_depreciated = dls[-1].depreciated_value + dls[-1].amount
             else:
                 value_depreciated = 0.0
-            asset._period_start_value = asset.depreciation_base - value_depreciated
-            group._period_start_value += asset._period_start_value
+            asset_entry["_period_start_value"] = (
+                asset.depreciation_base - value_depreciated
+            )
+            group_entry["_period_start_value"] += asset_entry["_period_start_value"]
             # period_end_value
             dls = dls_all.filtered(lambda r: r.line_date <= wiz.date_to)
             if dls:
                 value_depreciated = dls[-1].depreciated_value + dls[-1].amount
             else:
                 value_depreciated = 0.0
-            asset._period_end_value = asset.depreciation_base - value_depreciated
-            group._period_end_value += asset._period_end_value
+            asset_entry["_period_end_value"] = (
+                asset.depreciation_base - value_depreciated
+            )
+            group_entry["_period_end_value"] += asset_entry["_period_end_value"]
 
-            asset_entries.append({"asset": asset})
+            asset_entries.append(asset_entry)
 
         todos = []
         for g in group.child_ids:
             if _has_assets(g, group_val[g]):
                 todos.append(g)
 
-        entries.append({"group": group})
+        entries.append(group_entry)
         entries.extend(asset_entries)
         for todo in todos:
             self._create_report_entries(
@@ -501,8 +519,8 @@ class AssetReportXlsx(models.AbstractModel):
 
         ws.set_portrait()
         ws.fit_to_pages(1, 0)
-        ws.set_header(self.xls_headers["standard"])
-        ws.set_footer(self.xls_footers["standard"])
+        ws.set_header(XLS_HEADERS["xls_headers"]["standard"])
+        ws.set_footer(XLS_HEADERS["xls_footers"]["standard"])
 
         wl = ws_params["wanted_list"]
         if "account" not in wl:
@@ -523,7 +541,7 @@ class AssetReportXlsx(models.AbstractModel):
             filter = getattr(self, "{}_filter".format(report))
             return filter(wiz, asset)
 
-        assets = self._assets.filtered(asset_filter)
+        assets = data["assets"].filtered(asset_filter)
 
         if not assets:
             return self._empty_report(ws, row_pos, ws_params, data, wiz)
@@ -533,7 +551,7 @@ class AssetReportXlsx(models.AbstractModel):
             row_pos,
             ws_params,
             col_specs_section="header",
-            default_format=self.format_theader_yellow_left,
+            default_format=FORMATS["format_theader_yellow_left"],
         )
 
         ws.freeze_panes(row_pos, 0)
@@ -550,7 +568,7 @@ class AssetReportXlsx(models.AbstractModel):
 
         entries = []
         root = wiz.asset_group_id
-        root_val = self._grouped_assets[root]
+        root_val = data["grouped_assets"][root]
         error_dict = {
             "no_table": self.env["account.asset"],
             "dups": self.env["account.asset"],
@@ -560,16 +578,18 @@ class AssetReportXlsx(models.AbstractModel):
 
         # traverse entries in reverse order to calc totals
         for i, entry in enumerate(reversed(entries)):
-            group = entry.get("group")
             if "group" in entry:
-                parent = group.parent_id
-                for e in reversed(entries[: -i - 1]):
-                    g = e.get("group")
-                    if g == parent:
-                        g._depreciation_base += group._depreciation_base
-                        g._salvage_value += group._salvage_value
-                        g._period_start_value += group._period_start_value
-                        g._period_end_value += group._period_end_value
+                parent = entry["group"].parent_id
+                for parent_entry in reversed(entries[: -i - 1]):
+                    if "group" in parent_entry and parent_entry["group"] == parent:
+                        parent_entry["_depreciation_base"] += entry[
+                            "_depreciation_base"
+                        ]
+                        parent_entry["_salvage_value"] += entry["_salvage_value"]
+                        parent_entry["_period_start_value"] += entry[
+                            "_period_start_value"
+                        ]
+                        parent_entry["_period_end_value"] += entry["_period_end_value"]
                         continue
 
         processed = []
@@ -599,10 +619,11 @@ class AssetReportXlsx(models.AbstractModel):
                     col_specs_section="asset_group",
                     render_space={
                         "group": entry["group"],
+                        "group_entry": entry,
                         "period_diff_formula": period_diff_formula,
                         "total_depr_formula": total_depr_formula,
                     },
-                    default_format=self.format_theader_blue_left,
+                    default_format=FORMATS["format_theader_blue_left"],
                 )
 
             else:
@@ -618,11 +639,12 @@ class AssetReportXlsx(models.AbstractModel):
                     ws_params,
                     col_specs_section="asset",
                     render_space={
-                        "asset": asset,
+                        "asset": entry["asset"],
+                        "asset_entry": entry,
                         "period_diff_formula": period_diff_formula,
                         "total_depr_formula": total_depr_formula,
                     },
-                    default_format=self.format_tcell_left,
+                    default_format=FORMATS["format_tcell_left"],
                 )
 
         asset_total_formula = depreciation_base_pos and self._rowcol_to_cell(
@@ -666,7 +688,7 @@ class AssetReportXlsx(models.AbstractModel):
                 "period_diff_formula": period_diff_formula,
                 "total_depr_formula": total_depr_formula,
             },
-            default_format=self.format_theader_yellow_left,
+            default_format=FORMATS["format_theader_yellow_left"],
         )
 
         for k in error_dict:
@@ -681,4 +703,4 @@ class AssetReportXlsx(models.AbstractModel):
                 err_msg = _("Assets to be corrected") + ": "
                 err_msg += "%s" % [x[1] for x in error_dict[k].name_get()]
                 err_msg += " - " + _("Reason") + ": " + reason
-                ws.write_string(row_pos, 0, err_msg, self.format_left_bold)
+                ws.write_string(row_pos, 0, err_msg, FORMATS["format_left_bold"])
