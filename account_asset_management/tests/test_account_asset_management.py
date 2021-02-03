@@ -623,3 +623,46 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         # In the last month of the fiscal year we compensate for the small
         # deviations if that is necessary.
         self.assertAlmostEqual(asset.depreciation_line_ids[12].amount, 166.63, places=2)
+
+    def test_15_account_asset_group(self):
+        """Group's name_get behaves differently depending on code and context"""
+        group_fa = self.env["account.asset.group"].create(
+            {
+                "name": "Fixed Assets",
+                "code": "FA",
+            }
+        )
+        group_tfa = self.env["account.asset.group"].create(
+            {
+                "name": "Tangible Fixed Assets",
+                "code": "TFA",
+            }
+        )
+        # Groups are displayed by code (if any) plus name
+        self.assertEqual(
+            self.env["account.asset.group"]._name_search("FA"),
+            [(group_fa.id, "FA Fixed Assets")],
+        )
+        # Groups with code are shown by code in list views
+        self.assertEqual(
+            self.env["account.asset.group"]
+            .with_context(params={"view_type": "list"})
+            ._name_search("FA"),
+            [(group_fa.id, "FA")],
+        )
+        self.assertEqual(
+            self.env["account.asset.group"]._name_search("TFA"),
+            [(group_tfa.id, "TFA Tangible Fixed Assets")],
+        )
+        group_tfa.code = False
+        group_fa.code = False
+        self.assertEqual(group_fa.name_get(), [(group_fa.id, "Fixed Assets")])
+        # Groups without code are shown by truncated name in lists
+        self.assertEqual(
+            group_tfa.name_get(), [(group_tfa.id, "Tangible Fixed Assets")]
+        )
+        self.assertEqual(
+            group_tfa.with_context(params={"view_type": "list"}).name_get(),
+            [(group_tfa.id, "Tangible Fixed A...")],
+        )
+        self.assertFalse(self.env["account.asset.group"]._name_search("stessA dexiF"))
