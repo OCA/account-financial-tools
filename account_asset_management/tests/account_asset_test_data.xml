@@ -16,6 +16,19 @@
       <field name="company_id" ref="base.main_company"/>
     </record>
 
+    <!-- Asset groups -->
+
+    <record id="account_asset_group_fa" model="account.asset.group">
+      <field name="name">Fixed Assets</field>
+      <field name="code">FA</field>
+    </record>
+
+    <record id="account_asset_group_tfa" model="account.asset.group">
+      <field name="name">Tangible Fixed Assets</field>
+      <field name="code">TFA</field>
+      <field name="parent_id" ref="account_asset_group_fa"/>
+    </record>
+
     <!-- Asset profiles -->
 
     <record id="account_asset_profile_ict_3Y" model="account.asset.profile">
@@ -52,6 +65,7 @@
       <field name="code">PI00101</field>
       <field name="purchase_value" eval="1500.0"/>
       <field name="profile_id" ref="account_asset_profile_ict_3Y"/>
+      <field name="group_ids" eval="[(4, ref('account_asset_group_tfa'))]"/>
     </record>
 
     <record id="account_asset_asset_vehicle0" model="account.asset">
