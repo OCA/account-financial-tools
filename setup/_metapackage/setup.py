@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo12-addon-account_asset_batch_compute',
         'odoo12-addon-account_asset_management',
         'odoo12-addon-account_balance_line',
+        'odoo12-addon-account_bank_statement_chatter',
         'odoo12-addon-account_cash_basis_group_base_line',
         'odoo12-addon-account_chart_update',
         'odoo12-addon-account_check_deposit',
