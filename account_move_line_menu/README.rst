@@ -35,6 +35,8 @@ The Journal items menu is visible only with the developer enabled. This feature 
 Usage
 =====
 
+Menu option available at Invoicing > Accounting > Miscellaneous > Journal items.
+OR
 Menu option available at Accounting > Accounting > Miscellaneous > Journal items.
 
 Bug Tracker
