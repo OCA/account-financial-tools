@@ -6,7 +6,10 @@
         <field name="inherit_id" ref="account.view_move_line_form" />
         <field name="arch" type="xml">
             <field name="statement_id" position="after">
-                <field name="asset_profile_id" />
+                <field
+                    name="asset_profile_id"
+                    domain="[('company_id','=', parent.company_id)]"
+                />
                 <field name="asset_id" />
             </field>
         </field>
