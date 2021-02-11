@@ -3,7 +3,7 @@
     <menuitem
         id="menu_finance_assets"
         name="Assets"
-        parent="account.menu_finance"
+        parent="account.menu_finance_entries"
         sequence="9"
     />
     <menuitem

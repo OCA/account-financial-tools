@@ -6,7 +6,7 @@
     "name": "Assets Management",
     "version": "13.0.2.0.0",
     "license": "AGPL-3",
-    "depends": ["account", "report_xlsx_helper"],
+    "depends": ["account", "report_xlsx_helper", "account_menu"],
     "excludes": ["account_asset"],
     "external_dependencies": {"python": ["python-dateutil"]},
     "author": "Noviat, Odoo Community Association (OCA)",
