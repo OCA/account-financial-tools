@@ -34,6 +34,7 @@ class AccountAsset(models.Model):
     _name = "account.asset"
     _description = "Asset"
     _order = "date_start desc, code, name"
+    _check_company_auto = True
 
     account_move_line_ids = fields.One2many(
         comodel_name="account.move.line",
@@ -41,6 +42,7 @@ class AccountAsset(models.Model):
         string="Entries",
         readonly=True,
         copy=False,
+        check_company=True,
     )
     move_line_check = fields.Boolean(
         compute="_compute_move_line_check", string="Has accounting entries"
@@ -90,6 +92,7 @@ class AccountAsset(models.Model):
         change_default=True,
         required=True,
         states=READONLY_STATES,
+        check_company=True,
     )
     group_ids = fields.Many2many(
         comodel_name="account.asset.group",
@@ -240,6 +243,7 @@ class AccountAsset(models.Model):
         string="Depreciation Lines",
         copy=False,
         states=READONLY_STATES,
+        check_company=True,
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
