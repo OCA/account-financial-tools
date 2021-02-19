@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo13-addon-account_asset_management',
+        'odoo13-addon-account_asset_management_menu',
         'odoo13-addon-account_balance_line',
         'odoo13-addon-account_cash_basis_group_base_line',
         'odoo13-addon-account_chart_update',
