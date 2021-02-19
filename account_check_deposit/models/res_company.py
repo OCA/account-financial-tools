@@ -26,4 +26,3 @@ class ResCompany(models.Model):
         copy=False,
         domain=[("reconcile", "=", True), ("deprecated", "=", False)],
     )
-    check_deposit_post_move = fields.Boolean(string="Post Move for Check Deposits")
