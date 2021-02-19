@@ -44,17 +44,6 @@
                             />
                         </div>
                     </div>
-                    <div
-                        class="col-xs-12 col-md-6 o_setting_box"
-                        id="account_check_deposit_post_move"
-                    >
-                        <div class="o_setting_left_pane">
-                            <field name="check_deposit_post_move" />
-                        </div>
-                        <div class="o_setting_right_pane">
-                            <label for="check_deposit_post_move" />
-                        </div>
-                    </div>
                 </div>
             </xpath>
         </field>

@@ -280,8 +280,7 @@ class AccountCheckDeposit(models.Model):
             )
             counter_vals["move_id"] = move.id
             move_line_obj.create(counter_vals)
-            if deposit.company_id.check_deposit_post_move:
-                move.action_post()
+            move.action_post()
 
             deposit.write({"state": "done", "move_id": move.id})
             for reconcile_lines in to_reconcile_lines:
