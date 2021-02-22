@@ -5,10 +5,10 @@
     "name": "Account Asset Batch Compute",
     "summary": """
         Add the possibility to compute assets in batch""",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "license": "AGPL-3",
-    "author": "ACSONE SA/NV," "Eficent," "Odoo Community Association (OCA)",
+    "author": "ACSONE SA/NV,ForgeFlow,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
-    "depends": ["account_asset_management", "queue_job",],
-    "data": ["wizards/account_asset_compute_views.xml",],
+    "depends": ["account_asset_management", "queue_job"],
+    "data": ["wizards/account_asset_compute_views.xml", "data/queue_data.xml"],
 }
