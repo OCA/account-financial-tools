@@ -1,5 +1,5 @@
 # Copyright 2016-19 ACSONE SA/NV
-# Copyright 2019 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import time
 from datetime import date
@@ -19,7 +19,7 @@ class TestAccountAssetBatchCompute(TransactionCase):
         self.asset_profile_model = self.env["account.asset.profile"]
         self.account_account_type_model = self.env["account.account.type"]
         self.account_type_regular = self.account_account_type_model.create(
-            {"name": "Test Regular", "type": "other",}
+            {"name": "Test Regular", "type": "other", "internal_group": "liability"}
         )
         self.account = self.env["account.account"].create(
             {
@@ -29,7 +29,7 @@ class TestAccountAssetBatchCompute(TransactionCase):
             }
         )
         self.journal = self.env["account.journal"].create(
-            {"name": "Test Journal", "code": "TJ", "type": "general",}
+            {"name": "Test Journal", "code": "TJ", "type": "general"}
         )
         self.profile = self.asset_profile_model.create(
             {
@@ -65,7 +65,7 @@ class TestAccountAssetBatchCompute(TransactionCase):
         self.nextmonth = first_day_of_month + relativedelta.relativedelta(months=1)
         self.asset01.date_start = first_day_of_month
 
-    def test_1(self):
+    def test_no_batch_processing(self):
         wiz = self.wiz_obj.create(
             {"batch_processing": False, "date_end": self.nextmonth}
         )
@@ -87,7 +87,7 @@ class TestAccountAssetBatchCompute(TransactionCase):
         )
         self.assertTrue(len(depreciation_line) == 1)
 
-    def test_2(self):
+    def test_batch_processing(self):
         wiz = self.wiz_obj.create(
             {"batch_processing": True, "date_end": self.nextmonth}
         )
@@ -112,6 +112,13 @@ class TestAccountAssetBatchCompute(TransactionCase):
         jobs = self.env["queue.job"].search(
             [("name", "=", job_name)], order="date_created desc", limit=1
         )
+        self.assertEqual(
+            jobs.job_function_id,
+            self.env.ref(
+                "account_asset_batch_compute."
+                "job_function_account_asset_compute_asset_compute"
+            ),
+        )
         self.assertTrue(len(jobs) == 1)
         job = Job.load(self.env, jobs.uuid)
         # perform job
@@ -127,6 +134,12 @@ class TestAccountAssetBatchCompute(TransactionCase):
             [("name", "=", job_name)], order="date_created desc", limit=1
         )
         self.assertTrue(len(jobs) == 1)
+        self.assertEqual(
+            jobs.job_function_id,
+            self.env.ref(
+                "account_asset_batch_compute.job_function_account_asset_compute_entries"
+            ),
+        )
         job = Job.load(self.env, jobs.uuid)
         job.perform()
         depreciation_line = self.asset01.depreciation_line_ids.filtered(
