@@ -1,16 +1,7 @@
 # Copyright 2016-2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import logging
-
-from odoo import _, api, fields, models
-
-_logger = logging.getLogger(__name__)
-
-try:
-    from odoo.addons.queue_job.job import job
-except ImportError:
-    _logger.debug("Can not `import queue_job`.")
+from odoo import _, fields, models
 
 
 class AccountAssetCompute(models.TransientModel):
@@ -19,8 +10,6 @@ class AccountAssetCompute(models.TransientModel):
 
     batch_processing = fields.Boolean()
 
-    @api.multi
-    @job(default_channel="root.account_asset_batch_compute")
     def asset_compute(self):
         self.ensure_one()
         if not self.batch_processing:
