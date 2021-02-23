@@ -13,7 +13,10 @@ class AccountAssetLine(models.Model):
 
     name = fields.Char(string="Depreciation Name", size=64, readonly=True)
     asset_id = fields.Many2one(
-        comodel_name="account.asset", string="Asset", required=True, ondelete="cascade",
+        comodel_name="account.asset",
+        string="Asset",
+        required=True,
+        ondelete="cascade",
         check_company=True,
     )
     previous_id = fields.Many2one(
@@ -43,7 +46,9 @@ class AccountAssetLine(models.Model):
     line_date = fields.Date(string="Date", required=True)
     line_days = fields.Integer(string="Days", readonly=True)
     move_id = fields.Many2one(
-        comodel_name="account.move", string="Depreciation Entry", readonly=True,
+        comodel_name="account.move",
+        string="Depreciation Entry",
+        readonly=True,
         check_company=True,
     )
     move_check = fields.Boolean(
@@ -64,10 +69,7 @@ class AccountAssetLine(models.Model):
         "for which Odoo has not generated accounting entries.",
     )
     company_id = fields.Many2one(
-        'res.company',
-        store=True,
-        readonly=True,
-        related='asset_id.company_id',
+        "res.company", store=True, readonly=True, related="asset_id.company_id",
     )
 
     @api.depends("amount", "previous_id", "type")

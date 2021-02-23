@@ -79,7 +79,7 @@ class AccountAssetRemove(models.TransientModel):
     @api.model
     def _default_company_id(self):
         asset_id = self.env.context.get("active_id")
-        asset = self.env['account.asset'].browse(asset_id)
+        asset = self.env["account.asset"].browse(asset_id)
         return asset.company_id
 
     @api.model
