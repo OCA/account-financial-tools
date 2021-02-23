@@ -24,9 +24,9 @@ class AccountLoan(models.TransientModel):
     def _onchange_cancel_loan(self):
         if self.cancel_loan:
             self.amount = max(
-                self.loan_id.line_ids.filtered(
-                    lambda r: not r.move_ids and not r.invoice_ids
-                ).mapped("pending_principal_amount")
+                self.loan_id.line_ids.filtered(lambda r: not r.move_ids).mapped(
+                    "pending_principal_amount"
+                )
             )
 
     def new_line_vals(self, sequence):
@@ -39,16 +39,15 @@ class AccountLoan(models.TransientModel):
             "date": self.date,
         }
 
-    @api.multi
     def run(self):
         self.ensure_one()
         if self.loan_id.is_leasing:
             if self.loan_id.line_ids.filtered(
-                lambda r: r.date < self.date and not r.invoice_ids
+                lambda r: r.date <= self.date and not r.move_ids
             ):
                 raise UserError(_("Some invoices are not created"))
             if self.loan_id.line_ids.filtered(
-                lambda r: r.date > self.date and r.invoice_ids
+                lambda r: r.date > self.date and r.move_ids
             ):
                 raise UserError(_("Some future invoices already exists"))
         if self.loan_id.line_ids.filtered(
@@ -63,6 +62,7 @@ class AccountLoan(models.TransientModel):
         sequence = min(lines.mapped("sequence"))
         for line in lines:
             line.sequence += 1
+            line.flush()
         old_line = lines.filtered(lambda r: r.sequence == sequence + 1)
         pending = old_line.pending_principal_amount
         if self.loan_id.currency_id.compare_amounts(self.amount, pending) == 1:
