@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <form string="Remove Asset">
                 <group colspan="4" col="4">
+                    <field name="company_id" groups="base.group_multi_company" />
                     <field name="date_remove" />
                     <field name="force_date" />
                     <field name="sale_value" />

@@ -373,6 +373,7 @@
     <record id="account_asset_action" model="ir.actions.act_window">
         <field name="name">Assets</field>
         <field name="res_model">account.asset</field>
+        <field name="view_mode">tree,form</field>
         <field name="view_id" ref="account_asset_view_tree" />
         <field name="search_view_id" ref="account_asset_view_search" />
     </record>

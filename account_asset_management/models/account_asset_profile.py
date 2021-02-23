@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 
 class AccountAssetProfile(models.Model):
     _name = "account.asset.profile"
+    _check_company_auto = True
     _description = "Asset profile"
     _order = "name"
 
@@ -17,41 +18,48 @@ class AccountAssetProfile(models.Model):
     )
     account_asset_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
         string="Asset Account",
+        check_company=True,
         required=True,
     )
     account_depreciation_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
         string="Depreciation Account",
+        check_company=True,
         required=True,
     )
     account_expense_depreciation_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
         string="Depr. Expense Account",
+        check_company=True,
         required=True,
     )
     account_plus_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        check_company=True,
         string="Plus-Value Account",
     )
     account_min_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        check_company=True,
         string="Min-Value Account",
     )
     account_residual_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        check_company=True,
         string="Residual Value Account",
     )
     journal_id = fields.Many2one(
         comodel_name="account.journal",
-        domain=[("type", "=", "general")],
+        domain="[('type', '=', 'general'), ('company_id', '=', company_id)]",
         string="Journal",
+        check_company=True,
         required=True,
     )
     company_id = fields.Many2one(
@@ -65,6 +73,7 @@ class AccountAssetProfile(models.Model):
         relation="account_asset_profile_group_rel",
         column1="profile_id",
         column2="group_id",
+        check_company=True,
         string="Asset Groups",
     )
     method = fields.Selection(

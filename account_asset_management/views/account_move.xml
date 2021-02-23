@@ -5,12 +5,29 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button
+                    name="action_view_assets"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-cube"
+                    attrs="{'invisible': [('asset_count', '=', 0)]}"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="asset_count" />
+                        </span>
+                        <span class="o_stat_text"> Asset(s)</span>
+                    </div>
+                </button>
+            </xpath>
             <xpath
                 expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']"
                 position="before"
             >
                 <field
                     name="asset_profile_id"
+                    domain="[('company_id','=', parent.company_id)]"
                     attrs="{'invisible': [('parent.type', 'not in', ('in_invoice', 'in_refund'))]}"
                 />
                 <field
@@ -23,7 +40,10 @@
                 expr="//notebook//field[@name='line_ids']/tree/field[@name='date_maturity']"
                 position="after"
             >
-                <field name="asset_profile_id" />
+                <field
+                    name="asset_profile_id"
+                    domain="[('company_id','=', parent.company_id)]"
+                />
                 <field name="asset_id" groups="account.group_account_manager" />
             </xpath>
         </field>

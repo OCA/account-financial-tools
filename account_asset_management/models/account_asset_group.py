@@ -11,6 +11,7 @@ class AccountAssetGroup(models.Model):
     _description = "Asset Group"
     _order = "code, name"
     _parent_store = True
+    _check_company_auto = True
 
     name = fields.Char(string="Name", size=64, required=True, index=True)
     code = fields.Char(index=True)
@@ -25,11 +26,13 @@ class AccountAssetGroup(models.Model):
         comodel_name="account.asset.group",
         string="Parent Asset Group",
         ondelete="restrict",
+        check_company=True,
     )
     child_ids = fields.One2many(
         comodel_name="account.asset.group",
         inverse_name="parent_id",
         string="Child Asset Groups",
+        check_company=True,
     )
 
     @api.model
