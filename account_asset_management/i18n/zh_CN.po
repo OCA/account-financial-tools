@@ -43,6 +43,11 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
+msgid "<span class=\"o_stat_text\"> Asset(s)</span>"
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model,name:account_asset_management.model_account_account
 #, python-format
@@ -121,6 +126,11 @@ msgstr "资产 '%s' 清理凭证"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
 msgid "Asset Account"
 msgstr "固定资产科目"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move__asset_count
+msgid "Asset Count"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_group
@@ -332,8 +342,10 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__company_id
 msgid "Company"
 msgstr "核算组织"
