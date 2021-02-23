@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class AccountLoanGenerateWizard(models.TransientModel):
@@ -15,12 +15,12 @@ class AccountLoanGenerateWizard(models.TransientModel):
         default=fields.Date.context_today,
     )
     loan_type = fields.Selection(
-        [("leasing", "Leasings"), ("loan", "Loans"),], required=True, default="loan"
+        [("leasing", "Leasings"), ("loan", "Loans")], required=True, default="loan"
     )
 
     def run_leasing(self):
         created_ids = self.env["account.loan"].generate_leasing_entries(self.date)
-        action = self.env.ref("account.action_invoice_tree2")
+        action = self.env.ref("account.action_move_out_invoice_type")
         result = action.read()[0]
         if len(created_ids) == 0:
             return
@@ -36,7 +36,6 @@ class AccountLoanGenerateWizard(models.TransientModel):
         result["domain"] = [("id", "in", created_ids)]
         return result
 
-    @api.multi
     def run(self):
         self.ensure_one()
         if self.loan_type == "leasing":
