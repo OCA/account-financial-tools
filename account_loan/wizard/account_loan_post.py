@@ -10,13 +10,13 @@ class AccountLoanPost(models.TransientModel):
 
     @api.model
     def _default_journal_id(self):
-        loan_id = self._context.get("default_loan_id")
+        loan_id = self.env.context.get("default_loan_id")
         if loan_id:
             return self.env["account.loan"].browse(loan_id).journal_id.id
 
     @api.model
     def _default_account_id(self):
-        loan_id = self._context.get("default_loan_id")
+        loan_id = self.env.context.get("default_loan_id")
         if loan_id:
             loan = self.env["account.loan"].browse(loan_id)
             if loan.is_leasing:
@@ -28,10 +28,10 @@ class AccountLoanPost(models.TransientModel):
 
     loan_id = fields.Many2one("account.loan", required=True, readonly=True,)
     journal_id = fields.Many2one(
-        "account.journal", required=True, default=_default_journal_id
+        "account.journal", required=True, default=lambda r: r._default_journal_id()
     )
     account_id = fields.Many2one(
-        "account.account", required=True, default=_default_account_id
+        "account.account", required=True, default=lambda r: r._default_account_id()
     )
 
     def move_line_vals(self):
@@ -82,7 +82,6 @@ class AccountLoanPost(models.TransientModel):
             "line_ids": [(0, 0, vals) for vals in self.move_line_vals()],
         }
 
-    @api.multi
     def run(self):
         self.ensure_one()
         if self.loan_id.state != "draft":

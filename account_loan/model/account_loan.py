@@ -11,7 +11,7 @@ from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 try:
-    import numpy
+    import numpy_financial
 except (ImportError, IOError) as err:
     _logger.debug(err)
 
@@ -96,7 +96,7 @@ class AccountLoan(models.Model):
         help="Real rate that will be applied on each period",
     )
     rate_type = fields.Selection(
-        [("napr", "Nominal APR"), ("ear", "EAR"), ("real", "Real rate"),],
+        [("napr", "Nominal APR"), ("ear", "EAR"), ("real", "Real rate")],
         required=True,
         help="Method of computation of the applied rate",
         default="napr",
@@ -253,7 +253,7 @@ class AccountLoan(models.Model):
         for record in self:
             if record.loan_type == "fixed-annuity":
                 record.fixed_amount = -record.currency_id.round(
-                    numpy.pmt(
+                    numpy_financial.pmt(
                         record.loan_rate() / 100,
                         record.fixed_periods,
                         record.fixed_loan_amount,
@@ -262,7 +262,7 @@ class AccountLoan(models.Model):
                 )
             elif record.loan_type == "fixed-annuity-begin":
                 record.fixed_amount = -record.currency_id.round(
-                    numpy.pmt(
+                    numpy_financial.pmt(
                         record.loan_rate() / 100,
                         record.fixed_periods,
                         record.fixed_loan_amount,
@@ -341,7 +341,6 @@ class AccountLoan(models.Model):
             vals["name"] = self.get_default_name(vals)
         return super().create(vals)
 
-    @api.multi
     def post(self):
         self.ensure_one()
         if not self.start_date:
@@ -349,11 +348,9 @@ class AccountLoan(models.Model):
         self.compute_draft_lines()
         self.write({"state": "posted"})
 
-    @api.multi
     def close(self):
         self.write({"state": "closed"})
 
-    @api.multi
     def compute_lines(self):
         self.ensure_one()
         if self.state == "draft":
@@ -407,7 +404,6 @@ class AccountLoan(models.Model):
             "rate": self.rate_period,
         }
 
-    @api.multi
     def compute_draft_lines(self):
         self.ensure_one()
         self.fixed_periods = self.periods
@@ -431,7 +427,6 @@ class AccountLoan(models.Model):
         if self.long_term_loan_account_id:
             self.check_long_term_principal_amount()
 
-    @api.multi
     def view_account_moves(self):
         self.ensure_one()
         action = self.env.ref("account.action_move_line_form")
@@ -439,10 +434,9 @@ class AccountLoan(models.Model):
         result["domain"] = [("loan_id", "=", self.id)]
         return result
 
-    @api.multi
     def view_account_invoices(self):
         self.ensure_one()
-        action = self.env.ref("account.action_invoice_tree2")
+        action = self.env.ref("account.action_move_out_invoice_type")
         result = action.read()[0]
         result["domain"] = [("loan_id", "=", self.id), ("type", "=", "in_invoice")]
         return result
@@ -471,6 +465,6 @@ class AccountLoan(models.Model):
             [("state", "=", "posted"), ("is_leasing", "=", True)]
         ):
             res += record.line_ids.filtered(
-                lambda r: r.date <= date and not r.invoice_ids
+                lambda r: r.date <= date and not r.move_ids
             ).generate_invoice()
         return res

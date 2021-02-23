@@ -7,15 +7,16 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import fields
 from odoo.exceptions import UserError
-from odoo.tests import TransactionCase
+from odoo.tests import TransactionCase, tagged
 
 _logger = logging.getLogger(__name__)
 try:
-    import numpy
+    import numpy_financial
 except (ImportError, IOError) as err:
     _logger.error(err)
 
 
+@tagged("post_install", "-at_install")
 class TestLoan(TransactionCase):
     def setUp(self):
         super().setUp()
@@ -108,7 +109,7 @@ class TestLoan(TransactionCase):
         self.assertEqual(len(loan.line_ids), periods)
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         self.assertAlmostEqual(
-            -numpy.pmt(1 / 100 / 12, 24, 10000), line.payment_amount, 2
+            -numpy_financial.pmt(1 / 100 / 12, 24, 10000), line.payment_amount, 2
         )
         self.assertEqual(line.long_term_principal_amount, 0)
         loan.long_term_loan_account_id = self.lt_loan_account
@@ -120,14 +121,14 @@ class TestLoan(TransactionCase):
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         self.assertTrue(line)
         self.assertFalse(line.move_ids)
-        self.assertFalse(line.invoice_ids)
         wzd = self.env["account.loan.generate.wizard"].create({})
         action = wzd.run()
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
         self.assertIn(line.move_ids.id, action["domain"][0][2])
-        line.move_ids.post()
+        self.assertTrue(line.move_ids)
+        self.assertEqual(line.move_ids.state, "posted")
         with self.assertRaises(UserError):
             self.env["account.loan.pay.amount"].create(
                 {
@@ -139,15 +140,15 @@ class TestLoan(TransactionCase):
             ).run()
         with self.assertRaises(UserError):
             self.env["account.loan.pay.amount"].create(
-                {"loan_id": loan.id, "amount": amount, "fees": 100, "date": line.date,}
+                {"loan_id": loan.id, "amount": amount, "fees": 100, "date": line.date}
             ).run()
         with self.assertRaises(UserError):
             self.env["account.loan.pay.amount"].create(
-                {"loan_id": loan.id, "amount": 0, "fees": 100, "date": line.date,}
+                {"loan_id": loan.id, "amount": 0, "fees": 100, "date": line.date}
             ).run()
         with self.assertRaises(UserError):
             self.env["account.loan.pay.amount"].create(
-                {"loan_id": loan.id, "amount": -100, "fees": 100, "date": line.date,}
+                {"loan_id": loan.id, "amount": -100, "fees": 100, "date": line.date}
             ).run()
 
     def test_fixed_annuity_begin_loan(self):
@@ -158,7 +159,9 @@ class TestLoan(TransactionCase):
         self.assertEqual(len(loan.line_ids), periods)
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         self.assertAlmostEqual(
-            -numpy.pmt(1 / 100 / 12, 24, 10000, when="begin"), line.payment_amount, 2
+            -numpy_financial.pmt(1 / 100 / 12, 24, 10000, when="begin"),
+            line.payment_amount,
+            2,
         )
         self.assertEqual(line.long_term_principal_amount, 0)
         loan.long_term_loan_account_id = self.lt_loan_account
@@ -170,25 +173,25 @@ class TestLoan(TransactionCase):
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         self.assertTrue(line)
         self.assertFalse(line.move_ids)
-        self.assertFalse(line.invoice_ids)
         wzd = self.env["account.loan.generate.wizard"].create({})
         action = wzd.run()
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
         self.assertIn(line.move_ids.id, action["domain"][0][2])
-        line.move_ids.post()
+        self.assertTrue(line.move_ids)
+        self.assertEqual(line.move_ids.state, "posted")
         loan.rate = 2
         loan.compute_lines()
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         self.assertAlmostEqual(
-            -numpy.pmt(1 / 100 / 12, periods, amount, when="begin"),
+            -numpy_financial.pmt(1 / 100 / 12, periods, amount, when="begin"),
             line.payment_amount,
             2,
         )
         line = loan.line_ids.filtered(lambda r: r.sequence == 2)
         self.assertAlmostEqual(
-            -numpy.pmt(
+            -numpy_financial.pmt(
                 2 / 100 / 12, periods - 1, line.pending_principal_amount, when="begin"
             ),
             line.payment_amount,
@@ -206,7 +209,7 @@ class TestLoan(TransactionCase):
         self.assertEqual(len(loan.line_ids), periods)
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         self.assertAlmostEqual(
-            -numpy.pmt(1 / 100 / 12, 24, 10000), line.payment_amount, 2
+            -numpy_financial.pmt(1 / 100 / 12, 24, 10000), line.payment_amount, 2
         )
         self.assertEqual(line.long_term_principal_amount, 0)
         loan.long_term_loan_account_id = self.lt_loan_account
@@ -218,23 +221,25 @@ class TestLoan(TransactionCase):
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         self.assertTrue(line)
         self.assertFalse(line.move_ids)
-        self.assertFalse(line.invoice_ids)
         wzd = self.env["account.loan.generate.wizard"].create({})
         action = wzd.run()
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
         self.assertIn(line.move_ids.id, action["domain"][0][2])
-        line.move_ids.post()
+        self.assertTrue(line.move_ids)
+        self.assertEqual(line.move_ids.state, "posted")
         loan.rate = 2
         loan.compute_lines()
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         self.assertAlmostEqual(
-            -numpy.pmt(1 / 100 / 12, periods, amount), line.payment_amount, 2
+            -numpy_financial.pmt(1 / 100 / 12, periods, amount), line.payment_amount, 2
         )
         line = loan.line_ids.filtered(lambda r: r.sequence == 2)
         self.assertAlmostEqual(
-            -numpy.pmt(2 / 100 / 12, periods - 1, line.pending_principal_amount),
+            -numpy_financial.pmt(
+                2 / 100 / 12, periods - 1, line.pending_principal_amount
+            ),
             line.payment_amount,
             2,
         )
@@ -242,7 +247,7 @@ class TestLoan(TransactionCase):
         with self.assertRaises(UserError):
             line.view_process_values()
 
-    def test_fixed_principal_loan(self):
+    def test_fixed_principal_loan_leasing(self):
         amount = 24000
         periods = 24
         loan = self.create_loan("fixed-principal", amount, 1, periods)
@@ -266,12 +271,18 @@ class TestLoan(TransactionCase):
         self.assertFalse(line.has_moves)
         action = (
             self.env["account.loan.generate.wizard"]
-            .create({"date": fields.date.today(), "loan_type": "leasing",})
+            .create(
+                {
+                    "date": fields.date.today() + relativedelta(days=1),
+                    "loan_type": "leasing",
+                }
+            )
             .run()
         )
         self.assertTrue(line.has_invoices)
-        self.assertFalse(line.has_moves)
-        self.assertIn(line.invoice_ids.id, action["domain"][0][2])
+        self.assertTrue(line.has_moves)
+        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        loan.refresh()
         with self.assertRaises(UserError):
             self.env["account.loan.pay.amount"].create(
                 {
@@ -291,17 +302,18 @@ class TestLoan(TransactionCase):
                     + relativedelta(months=-1),
                 }
             ).run()
-        line.invoice_ids.action_invoice_open()
+        self.assertTrue(line.move_ids)
+        self.assertEqual(line.move_ids.state, "draft")
         self.assertTrue(line.has_moves)
+        line.move_ids.post()
+        self.assertEqual(line.move_ids.state, "posted")
         self.assertIn(
             line.move_ids.id,
             self.env["account.move"].search(loan.view_account_moves()["domain"]).ids,
         )
         self.assertEqual(
-            line.invoice_ids.id,
-            self.env["account.invoice"]
-            .search(loan.view_account_invoices()["domain"])
-            .id,
+            line.move_ids.id,
+            self.env["account.move"].search(loan.view_account_invoices()["domain"]).id,
         )
         with self.assertRaises(UserError):
             self.env["account.loan.pay.amount"].create(
@@ -333,7 +345,7 @@ class TestLoan(TransactionCase):
         with self.assertRaises(UserError):
             line.view_process_values()
 
-    def test_fixed_principal_loan_auto_post(self):
+    def test_fixed_principal_loan_auto_post_leasing(self):
         amount = 24000
         periods = 24
         loan = self.create_loan("fixed-principal", amount, 1, periods)
@@ -355,7 +367,7 @@ class TestLoan(TransactionCase):
         self.assertFalse(line.has_invoices)
         self.assertFalse(line.has_moves)
         self.env["account.loan.generate.wizard"].create(
-            {"date": fields.date.today(), "loan_type": "leasing",}
+            {"date": fields.date.today(), "loan_type": "leasing"}
         ).run()
         self.assertTrue(line.has_invoices)
         self.assertTrue(line.has_moves)
@@ -383,9 +395,10 @@ class TestLoan(TransactionCase):
         for line in loan.line_ids:
             self.assertEqual(loan.state, "posted")
             line.view_process_values()
-            line.move_ids.post()
+            self.assertTrue(line.move_ids)
+            self.assertEqual(line.move_ids.state, "posted")
         self.assertEqual(loan.state, "closed")
-
+        loan.refresh()
         self.assertEqual(loan.payment_amount - loan.interests_amount, amount)
         self.assertEqual(loan.pending_principal_amount, 0)
 
@@ -396,7 +409,8 @@ class TestLoan(TransactionCase):
         self.post(loan)
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         line.view_process_values()
-        line.move_ids.post()
+        self.assertTrue(line.move_ids)
+        self.assertEqual(line.move_ids.state, "posted")
         pay = self.env["account.loan.pay.amount"].create(
             {"loan_id": loan.id, "amount": 0, "fees": 100, "date": line.date}
         )
