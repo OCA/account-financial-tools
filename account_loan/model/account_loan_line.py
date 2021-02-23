@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 try:
-    import numpy
+    import numpy_financial
 except (ImportError, IOError) as err:
     _logger.error(err)
 
@@ -90,7 +90,6 @@ class AccountLoanLine(models.Model):
     )
     move_ids = fields.One2many("account.move", inverse_name="loan_line_id",)
     has_moves = fields.Boolean(compute="_compute_has_moves")
-    invoice_ids = fields.One2many("account.invoice", inverse_name="loan_line_id",)
     has_invoices = fields.Boolean(compute="_compute_has_invoices")
     _sql_constraints = [
         (
@@ -105,10 +104,10 @@ class AccountLoanLine(models.Model):
         for record in self:
             record.has_moves = bool(record.move_ids)
 
-    @api.depends("invoice_ids")
+    @api.depends("move_ids")
     def _compute_has_invoices(self):
         for record in self:
-            record.has_invoices = bool(record.invoice_ids)
+            record.has_invoices = bool(record.move_ids)
 
     @api.depends("loan_id.name", "sequence")
     def _compute_name(self):
@@ -146,7 +145,7 @@ class AccountLoanLine(models.Model):
             return self.loan_id.fixed_amount
         if self.loan_type == "fixed-annuity":
             return self.currency_id.round(
-                -numpy.pmt(
+                -numpy_financial.pmt(
                     self.loan_id.loan_rate() / 100,
                     self.loan_id.periods - self.sequence + 1,
                     self.pending_principal_amount,
@@ -157,7 +156,7 @@ class AccountLoanLine(models.Model):
             return self.loan_id.fixed_amount
         if self.loan_type == "fixed-annuity-begin":
             return self.currency_id.round(
-                -numpy.pmt(
+                -numpy_financial.pmt(
                     self.loan_id.loan_rate() / 100,
                     self.loan_id.periods - self.sequence + 1,
                     self.pending_principal_amount,
@@ -168,7 +167,7 @@ class AccountLoanLine(models.Model):
 
     def check_amount(self):
         """Recompute amounts if the annuity has not been processed"""
-        if self.move_ids or self.invoice_ids:
+        if self.move_ids:
             raise UserError(
                 _("Amount cannot be recomputed if moves or invoices exists " "already")
             )
@@ -192,7 +191,7 @@ class AccountLoanLine(models.Model):
 
     def compute_interest(self):
         if self.loan_type == "fixed-annuity-begin":
-            return -numpy.ipmt(
+            return -numpy_financial.ipmt(
                 self.loan_id.loan_rate() / 100,
                 2,
                 self.loan_id.periods - self.sequence + 1,
@@ -202,7 +201,6 @@ class AccountLoanLine(models.Model):
             )
         return self.pending_principal_amount * self.loan_id.loan_rate() / 100
 
-    @api.multi
     def check_move_amount(self):
         """
         Changes the amounts of the annuity once the move is posted
@@ -286,16 +284,12 @@ class AccountLoanLine(models.Model):
         return vals
 
     def invoice_vals(self):
-        partner = self.loan_id.partner_id.with_context(
-            force_company=self.loan_id.company_id.id
-        )
         return {
             "loan_line_id": self.id,
             "loan_id": self.loan_id.id,
             "type": "in_invoice",
             "partner_id": self.loan_id.partner_id.id,
-            "date_invoice": self.date,
-            "account_id": partner.property_account_payable_id.id,
+            "invoice_date": self.date,
             "journal_id": self.loan_id.journal_id.id,
             "company_id": self.loan_id.company_id.id,
             "invoice_line_ids": [(0, 0, vals) for vals in self.invoice_line_vals()],
@@ -323,7 +317,6 @@ class AccountLoanLine(models.Model):
         )
         return vals
 
-    @api.multi
     def generate_move(self):
         """
         Computes and post the moves of loans
@@ -341,29 +334,59 @@ class AccountLoanLine(models.Model):
                 res.append(move.id)
         return res
 
-    @api.multi
     def generate_invoice(self):
         """
         Computes invoices of leases
-        :return: list of account.invoice generated
+        :return: list of account.move generated
         """
         res = []
         for record in self:
-            if not record.invoice_ids:
+            if not record.move_ids:
                 if record.loan_id.line_ids.filtered(
-                    lambda r: r.date < record.date and not r.invoice_ids
+                    lambda r: r.date < record.date and not r.move_ids
                 ):
                     raise UserError(_("Some invoices must be created first"))
-                invoice = self.env["account.invoice"].create(record.invoice_vals())
+                invoice = self.env["account.move"].create(record.invoice_vals())
                 res.append(invoice.id)
                 for line in invoice.invoice_line_ids:
-                    line._set_taxes()
-                invoice.compute_taxes()
+                    line.tax_ids = line._get_computed_taxes()
+                invoice.with_context(
+                    check_move_validity=False
+                )._recompute_dynamic_lines(recompute_all_taxes=True)
+                invoice._check_balanced()
+                if (
+                    record.long_term_loan_account_id
+                    and record.long_term_principal_amount != 0
+                ):
+                    invoice.write({"line_ids": record._get_long_term_move_line_vals()})
                 if record.loan_id.post_invoice:
-                    invoice.action_invoice_open()
+                    invoice.post()
         return res
 
-    @api.multi
+    def _get_long_term_move_line_vals(self):
+        return [
+            (
+                0,
+                0,
+                {
+                    "account_id": self.loan_id.short_term_loan_account_id.id,
+                    "credit": self.long_term_principal_amount,
+                    "debit": 0,
+                    "exclude_from_invoice_tab": True,
+                },
+            ),
+            (
+                0,
+                0,
+                {
+                    "account_id": self.long_term_loan_account_id.id,
+                    "credit": 0,
+                    "debit": self.long_term_principal_amount,
+                    "exclude_from_invoice_tab": True,
+                },
+            ),
+        ]
+
     def view_account_values(self):
         """Shows the invoice if it is a leasing or the move if it is a loan"""
         self.ensure_one()
@@ -371,7 +394,6 @@ class AccountLoanLine(models.Model):
             return self.view_account_invoices()
         return self.view_account_moves()
 
-    @api.multi
     def view_process_values(self):
         """Computes the annuity and returns the result"""
         self.ensure_one()
@@ -381,7 +403,6 @@ class AccountLoanLine(models.Model):
             self.generate_move()
         return self.view_account_values()
 
-    @api.multi
     def view_account_moves(self):
         self.ensure_one()
         action = self.env.ref("account.action_move_line_form")
@@ -397,18 +418,17 @@ class AccountLoanLine(models.Model):
             result["res_id"] = self.move_ids.id
         return result
 
-    @api.multi
     def view_account_invoices(self):
         self.ensure_one()
-        action = self.env.ref("account.action_invoice_tree2")
+        action = self.env.ref("account.action_move_out_invoice_type")
         result = action.read()[0]
         result["context"] = {
             "default_loan_line_id": self.id,
             "default_loan_id": self.loan_id.id,
         }
         result["domain"] = [("loan_line_id", "=", self.id), ("type", "=", "in_invoice")]
-        if len(self.invoice_ids) == 1:
-            res = self.env.ref("account.invoice.supplier.form", False)
+        if len(self.move_ids) == 1:
+            res = self.env.ref("account.view_move_form", False)
             result["views"] = [(res and res.id or False, "form")]
-            result["res_id"] = self.invoice_ids.id
+            result["res_id"] = self.move_ids.id
         return result
