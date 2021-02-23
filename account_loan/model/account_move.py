@@ -5,27 +5,20 @@ from odoo import api, fields, models
 
 
 class AccountMove(models.Model):
-    _inherit = 'account.move'
+    _inherit = "account.move"
 
     loan_line_id = fields.Many2one(
-        'account.loan.line',
-        readonly=True,
-        ondelete='restrict',
+        "account.loan.line", readonly=True, ondelete="restrict",
     )
     loan_id = fields.Many2one(
-        'account.loan',
-        readonly=True,
-        store=True,
-        ondelete='restrict',
+        "account.loan", readonly=True, store=True, ondelete="restrict",
     )
 
     @api.multi
     def post(self, invoice=False):
         res = super().post(invoice=invoice)
         for record in self:
-            loan_line_id = record.loan_line_id or (
-                invoice and invoice.loan_line_id
-            )
+            loan_line_id = record.loan_line_id or (invoice and invoice.loan_line_id)
             if loan_line_id:
                 if not record.loan_line_id:
                     record.loan_line_id = loan_line_id
