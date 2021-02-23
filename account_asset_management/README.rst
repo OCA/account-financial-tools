@@ -58,6 +58,12 @@ The module in NOT compatible with the standard account_asset module.
 Changelog
 =========
 
+13.0.2.0.0 (2021-02-19)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Add support for multi-company
+
+
 13.0.1.0.0 (2019-10-21)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
