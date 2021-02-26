@@ -86,6 +86,12 @@ class AccountMove(models.Model):
         return True
 
     @api.multi
+    def _check_lock_date(self):
+        if self.env.context.get('novalidate'):
+            return
+        return super(AccountMove, self)._check_lock_date()
+
+    @api.multi
     def create_reversals(self, date=False, journal=False, move_prefix=False,
                          line_prefix=False, reconcile=False):
         """
@@ -110,7 +116,7 @@ class AccountMove(models.Model):
                 data, date=date, journal=journal, line_prefix=line_prefix)
             reversal_move = self.create(data)
             moves |= reversal_move
-            orig.write({
+            orig.with_context(novalidate=True).write({
                 'reversal_id': reversal_move.id,
                 'to_be_reversed': False,
             })
