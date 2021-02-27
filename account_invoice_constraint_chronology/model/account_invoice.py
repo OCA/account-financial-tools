@@ -13,7 +13,7 @@ class AccountInvoice(models.Model):
 
     @api.model
     def _prepare_previous_invoices_domain(self, invoice):
-        return [
+        domain = [
             ('state', 'not in', ['open',
                                  'paid',
                                  'cancel',
@@ -24,14 +24,26 @@ class AccountInvoice(models.Model):
             ('date_invoice', '<', invoice.date_invoice),
             ('journal_id', '=', invoice.journal_id.id),
         ]
+        if (
+            invoice.journal_id.refund_sequence
+            and invoice.journal_id.sequence_id != invoice.journal_id.refund_sequence_id
+        ):
+            domain.append(('type', '=', invoice.type))
+        return domain
 
     @api.model
     def _prepare_later_invoices_domain(self, invoice):
-        return [
+        domain = [
             ('state', 'in', ['open', 'in_payment', 'paid']),
             ('date_invoice', '>', invoice.date_invoice),
             ('journal_id', '=', invoice.journal_id.id),
         ]
+        if (
+            invoice.journal_id.refund_sequence
+            and invoice.journal_id.sequence_id != invoice.journal_id.refund_sequence_id
+        ):
+            domain.append(('type', '=', invoice.type))
+        return domain
 
     @api.multi
     def action_move_create(self):
