@@ -133,3 +133,31 @@ class TestAccountConstraintChronology(common.SavepointCase):
         self.account_journal_sale.type = 'bank'
         self.account_journal_sale._onchange_type()
         self.assertFalse(self.account_journal_sale.check_chronology)
+
+    def test_invoice_refund(self):
+        journal = self.get_journal_check(True)
+        today = datetime.now()
+        tomorrow = today + timedelta(days=1)
+        date_tomorrow = tomorrow.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        invoice_1 = self.create_simple_invoice(journal.id, date_tomorrow)
+        self.assertTrue(
+            (invoice_1.state == "draft"), "Initial invoice state is not Draft"
+        )
+        invoice_1.action_invoice_open()
+        date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        refund_invoice_wiz = (
+            self.env["account.invoice.refund"]
+            .with_context(active_ids=[invoice_1.id])
+            .create(
+                {
+                    "description": "test_invoice_refund",
+                    "filter_refund": "cancel",
+                    "date": date,
+                    "date_invoice": date,
+                }
+            )
+        )
+        with self.assertRaises(UserError):
+            refund_invoice_wiz.invoice_refund()
+        invoice_1.journal_id.refund_sequence = True
+        refund_invoice_wiz.invoice_refund()
