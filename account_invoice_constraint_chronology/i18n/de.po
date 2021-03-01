@@ -26,7 +26,6 @@ msgid "Check Chronology"
 msgstr "Prüfe Chronologie"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:54
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
 #, fuzzy, python-format
 msgid ""
@@ -37,7 +36,6 @@ msgstr ""
 "erneut."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:70
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:82
 #, fuzzy, python-format
 msgid ""
