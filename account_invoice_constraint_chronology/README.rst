@@ -62,6 +62,7 @@ Contributors
 * Gilles Gilles <meyomesse.gilles@gmail.com>
 * Francesco Apruzzese <f.apruzzese@apuliasoftware.it>
 * Thomas Binsfeld <thomas.binsfeld@acsone.eu>
+* Souheil Bejaoui <souheil.bejaoui@acsone.eu>
 
 Maintainers
 ~~~~~~~~~~~
