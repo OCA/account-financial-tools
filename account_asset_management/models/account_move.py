@@ -31,13 +31,8 @@ class AccountMove(models.Model):
     asset_count = fields.Integer(compute="_compute_asset_count")
 
     def _compute_asset_count(self):
-        for rec in self:
-            assets = (
-                self.env["account.asset.line"]
-                .search([("move_id", "=", rec.id)])
-                .mapped("asset_id")
-            )
-            rec.asset_count = len(assets)
+        for move in self:
+            move.asset_count = len(move.line_ids.filtered("asset_id"))
 
     def unlink(self):
         # for move in self:
@@ -124,18 +119,17 @@ class AccountMove(models.Model):
     def _reverse_move_vals(self, default_values, cancel=True):
         move_vals = super()._reverse_move_vals(default_values, cancel)
         if move_vals["type"] not in ("out_invoice", "out_refund"):
+            assets_to_unlink_ids = []
             for line_command in move_vals.get("line_ids", []):
                 line_vals = line_command[2]  # (0, 0, {...})
-                asset = self.env["account.asset"].browse(line_vals["asset_id"])
+                asset_id = line_vals.get("asset_id")
                 # We remove the asset if we recognize that we are reversing
                 # the asset creation
-                if asset:
-                    asset_line = self.env["account.asset.line"].search(
-                        [("asset_id", "=", asset.id), ("type", "=", "create")], limit=1
-                    )
-                    if asset_line and asset_line.move_id == self:
-                        asset.unlink()
-                        line_vals.update(asset_profile_id=False, asset_id=False)
+                if asset_id:
+                    assets_to_unlink_ids.append(asset_id)
+                    line_vals.update(asset_profile_id=False, asset_id=False)
+            if assets_to_unlink_ids:
+                self.env["account.asset"].browse(assets_to_unlink_ids).unlink()
         return move_vals
 
     def action_view_assets(self):
@@ -171,7 +165,7 @@ class AccountMoveLine(models.Model):
         copy=True,
     )
     asset_id = fields.Many2one(
-        comodel_name="account.asset", string="Asset", ondelete="restrict",
+        comodel_name="account.asset", string="Asset", ondelete="restrict", copy=False
     )
 
     @api.depends("account_id", "asset_id")
