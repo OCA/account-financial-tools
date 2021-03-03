@@ -86,8 +86,8 @@ msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
 "this date. Use it for fiscal year locking for example."
 msgstr ""
-"Aucun utilisateur, y compris les conseillers, ne peuvent modifier les "
-"comptes comptables avant cette date inclusivement. Utilisez cela pour "
+"Aucun utilisateur, y compris les conseillers, ne peuvent modifier la "
+"comptabilité avant cette date inclusivement. Utilisez cela pour "
 "verrouiller l'exercice fiscal par exemple."
 
 #. module: account_lock_date_update
@@ -97,8 +97,8 @@ msgid ""
 "of this date. Use it for period locking inside an open fiscal year, for "
 "example."
 msgstr ""
-"Seuls les utilisateurs avec le rôle 'Conseiller' peuvent modifier les "
-"comptes comptables avant cette date inclusivement. Utilisez cela pour "
+"Seuls les utilisateurs avec le rôle 'Conseiller' peuvent modifier la "
+"comptabilité avant cette date inclusivement. Utilisez cela pour "
 "verrouiller des périodes pendant l'exercice fiscal par exemple."
 
 #. module: account_lock_date_update
