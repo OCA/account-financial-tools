@@ -41,6 +41,7 @@ setuptools.setup(
         'odoo12-addon-account_netting',
         'odoo12-addon-account_partner_required',
         'odoo12-addon-account_payment_netting',
+        'odoo12-addon-account_permanent_lock_move',
         'odoo12-addon-account_renumber',
         'odoo12-addon-account_spread_cost_revenue',
         'odoo12-addon-account_tag_menu',
