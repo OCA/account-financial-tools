@@ -5,7 +5,8 @@ from odoo.exceptions import UserError
 
 
 class PermanentLockDateWizard(models.TransientModel):
-    _name = 'permanent.lock.date.wizard'
+    _name = "permanent.lock.date.wizard"
+    _description = "Permanent Lock Date Wizard"
 
     lock_date = fields.Date(string="Lock Date")
     company_id = fields.Many2one(comodel_name='res.company',
