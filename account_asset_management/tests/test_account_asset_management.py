@@ -415,7 +415,7 @@ class TestAssetManagement(SavepointCase):
                                    'account_asset_profile_car_5Y'),
             'purchase_value': 5000,
             'salvage_value': 0,
-            'date_start': '2019-01-01',
+            'date_start': time.strftime('%Y-01-01'),
             'method_time': 'year',
             'method_number': 5,
             'method_period': 'quarter',
@@ -428,7 +428,7 @@ class TestAssetManagement(SavepointCase):
             'early_removal': True,
         }
         wiz = self.remove_model.with_context(wiz_ctx).create({
-            'date_remove': '2019-01-31',
+            'date_remove': time.strftime('%Y-01-31'),
             'sale_value': 0.0,
             'posting_regime': 'gain_loss_on_sale',
             'account_plus_value_id': self.ref('account.a_sale'),
@@ -437,10 +437,16 @@ class TestAssetManagement(SavepointCase):
         wiz.remove()
         asset.refresh()
         self.assertEqual(len(asset.depreciation_line_ids), 3)
-        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
-                               81.46, places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
-                               4918.54, places=2)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[1].amount, 80.56, places=2)
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[2].amount, 4919.44, places=2)
+        else:
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[1].amount, 81.46, places=2)
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[2].amount, 4918.54, places=2)
 
     def test_09_asset_from_invoice(self):
         all_asset = self.env['account.asset'].search([])
