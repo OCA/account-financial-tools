@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -166,6 +166,7 @@ msgid "Differences in these fields: %s."
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__display_name
@@ -273,6 +274,7 @@ msgid "Here you can set the matching order."
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__id
@@ -310,6 +312,7 @@ msgid "Language"
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching____last_update
@@ -470,6 +473,9 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__recreate_xml_ids
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__recreate_xml_ids
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__recreate_xml_ids
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__recreate_xml_ids
 msgid "Recreate missing XML-IDs"
 msgstr ""
 
@@ -513,7 +519,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
-msgid "Tax Scope"
+msgid "Tax Type"
 msgstr ""
 
 #. module: account_chart_update
