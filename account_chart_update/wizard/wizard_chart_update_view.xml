@@ -211,6 +211,27 @@
                                     <field name="notes" />
                                     <field name="type" />
                                 </tree>
+                                <form>
+                                    <group col="2">
+                                        <group>
+                                            <field
+                                                name="recreate_xml_ids"
+                                                invisible="1"
+                                            />
+                                            <field name="tax_id" />
+                                            <field
+                                                name="type"
+                                                attrs="{'readonly': [('recreate_xml_ids','=', False)]}"
+                                            />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field name="type_tax_use" />
+                                            <field name="update_tax_id" />
+                                        </group>
+                                    </group>
+                                </form>
                             </field>
                         </page>
                         <page
@@ -224,6 +245,26 @@
                                     <field name="notes" />
                                     <field name="type" />
                                 </tree>
+                                <form>
+                                    <group col="2">
+                                        <group>
+                                            <field
+                                                name="recreate_xml_ids"
+                                                invisible="1"
+                                            />
+                                            <field name="account_id" />
+                                            <field
+                                                name="type"
+                                                attrs="{'readonly': [('recreate_xml_ids','=', False)]}"
+                                            />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field name="update_account_id" />
+                                        </group>
+                                    </group>
+                                </form>
                             </field>
                         </page>
                         <page
@@ -240,6 +281,26 @@
                                     <field name="notes" />
                                     <field name="type" />
                                 </tree>
+                                <form>
+                                    <group col="2">
+                                        <group>
+                                            <field
+                                                name="recreate_xml_ids"
+                                                invisible="1"
+                                            />
+                                            <field name="fiscal_position_id" />
+                                            <field
+                                                name="type"
+                                                attrs="{'readonly': [('recreate_xml_ids','=', False)]}"
+                                            />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field name="update_fiscal_position_id" />
+                                        </group>
+                                    </group>
+                                </form>
                             </field>
                         </page>
                     </notebook>

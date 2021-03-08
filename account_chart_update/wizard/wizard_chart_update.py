@@ -55,7 +55,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     lang = fields.Selection(
         lambda self: self._get_lang_selection_options(),
         "Language",
-        size=5,
         required=True,
         help="For records searched by name (taxes, fiscal "
         "positions), the template name will be matched against the "
@@ -87,7 +86,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     recreate_xml_ids = fields.Boolean(string="Recreate missing XML-IDs")
     tax_ids = fields.One2many(
         comodel_name="wizard.update.charts.accounts.tax",
-        ondelete="cascade",
         inverse_name="update_chart_wizard_id",
         string="Taxes",
     )
@@ -95,13 +93,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         comodel_name="wizard.update.charts.accounts.account",
         inverse_name="update_chart_wizard_id",
         string="Accounts",
-        ondelete="cascade",
     )
     fiscal_position_ids = fields.One2many(
         comodel_name="wizard.update.charts.accounts.fiscal.position",
         inverse_name="update_chart_wizard_id",
         string="Fiscal positions",
-        ondelete="cascade",
     )
     new_taxes = fields.Integer(string="New taxes", compute="_compute_new_taxes_count")
     new_accounts = fields.Integer(
@@ -1101,7 +1097,7 @@ class WizardUpdateChartsAccountsTax(models.TransientModel):
             ("deleted", "Tax to deactivate"),
         ],
         string="Type",
-        readonly=True,
+        readonly=False,
     )
     type_tax_use = fields.Selection(related="tax_id.type_tax_use", readonly=True)
     update_tax_id = fields.Many2one(
@@ -1111,6 +1107,10 @@ class WizardUpdateChartsAccountsTax(models.TransientModel):
         ondelete="set null",
     )
     notes = fields.Text("Notes", readonly=True)
+    recreate_xml_ids = fields.Boolean(
+        string="Recreate missing XML-IDs",
+        related="update_chart_wizard_id.recreate_xml_ids",
+    )
 
 
 class WizardUpdateChartsAccountsAccount(models.TransientModel):
@@ -1133,7 +1133,7 @@ class WizardUpdateChartsAccountsAccount(models.TransientModel):
     type = fields.Selection(
         selection=[("new", "New template"), ("updated", "Updated template")],
         string="Type",
-        readonly=True,
+        readonly=False,
     )
     update_account_id = fields.Many2one(
         comodel_name="account.account",
@@ -1142,6 +1142,10 @@ class WizardUpdateChartsAccountsAccount(models.TransientModel):
         ondelete="set null",
     )
     notes = fields.Text("Notes", readonly=True)
+    recreate_xml_ids = fields.Boolean(
+        string="Recreate missing XML-IDs",
+        related="update_chart_wizard_id.recreate_xml_ids",
+    )
 
 
 class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
@@ -1164,8 +1168,7 @@ class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
     type = fields.Selection(
         selection=[("new", "New template"), ("updated", "Updated template")],
         string="Type",
-        readonly=True,
-        required=True,
+        readonly=False,
     )
     update_fiscal_position_id = fields.Many2one(
         comodel_name="account.fiscal.position",
@@ -1174,6 +1177,10 @@ class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
         ondelete="set null",
     )
     notes = fields.Text("Notes", readonly=True)
+    recreate_xml_ids = fields.Boolean(
+        string="Recreate missing XML-IDs",
+        related="update_chart_wizard_id.recreate_xml_ids",
+    )
 
 
 class WizardMatching(models.TransientModel):
