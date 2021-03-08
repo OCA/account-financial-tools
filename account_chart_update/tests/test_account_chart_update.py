@@ -126,7 +126,7 @@ class TestAccountChartUpdate(common.HttpCase):
         )
         company_user = self.env.user.copy({"company_id": self.company.id})
         chart_by_company_user = self.chart_template.with_user(company_user)
-        chart_by_company_user.try_loading_for_current_company()
+        chart_by_company_user.try_loading()
 
         self.tax = self.env["account.tax"].search(
             [
@@ -324,7 +324,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.env["account.move"].create(
             {
                 "name": "Test move",
-                "type": "entry",
+                "move_type": "entry",
                 "journal_id": self.env["account.journal"]
                 .search([("company_id", "=", self.company.id)], limit=1)
                 .id,
