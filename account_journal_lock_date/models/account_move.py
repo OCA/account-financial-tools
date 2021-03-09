@@ -4,9 +4,8 @@
 from datetime import date
 
 from odoo import _, models
+from odoo.exceptions import UserError
 from odoo.tools.misc import format_date
-
-from ..exceptions import JournalLockDateError
 
 
 class AccountMove(models.Model):
@@ -44,5 +43,5 @@ class AccountMove(models.Model):
                         "Check the Journal settings or ask someone "
                         "with the 'Adviser' role"
                     ) % (move.journal_id.display_name, lock_date)
-                raise JournalLockDateError(message)
+                raise UserError(message)
         return res
