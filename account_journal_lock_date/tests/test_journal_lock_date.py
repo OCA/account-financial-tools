@@ -3,42 +3,25 @@
 
 from datetime import date, timedelta
 
-from odoo import tools
-from odoo.modules import get_module_resource
-from odoo.tests import common
+from odoo.exceptions import UserError
 
-from ..exceptions import JournalLockDateError
+from odoo.addons.account.tests import common
 
 
-class TestJournalLockDate(common.TransactionCase):
+class TestJournalLockDate(common.AccountTestInvoicingCommon):
     def setUp(self):
         super(TestJournalLockDate, self).setUp()
-        tools.convert_file(
-            self.cr,
-            "account",
-            get_module_resource("account", "test", "account_minimal_test.xml"),
-            {},
-            "init",
-            False,
-            "test",
-        )
         self.account_move_obj = self.env["account.move"]
         self.account_move_line_obj = self.env["account.move.line"]
         self.company_id = self.ref("base.main_company")
         self.partner = self.browse_ref("base.res_partner_12")
-        self.account = self.browse_ref("account.a_recv")
-        self.account2 = self.browse_ref("account.a_expense")
-        self.journal = self.browse_ref("account.bank_journal")
 
-    def test_journal_lock_date(self):
-        self.env.user.write({"groups_id": [(3, self.ref("base.group_system"))]})
-        self.env.user.write(
-            {"groups_id": [(3, self.ref("account.group_account_manager"))]}
-        )
-        self.assertFalse(self.env.user.has_group("account.group_account_manager"))
+        self.account = self.company_data["default_account_revenue"]
+        self.account2 = self.company_data["default_account_expense"]
+        self.journal = self.company_data["default_journal_bank"]
 
         # create a move and post it
-        move = self.account_move_obj.create(
+        self.move = self.account_move_obj.create(
             {
                 "date": date.today(),
                 "journal_id": self.journal.id,
@@ -64,11 +47,19 @@ class TestJournalLockDate(common.TransactionCase):
                 ],
             }
         )
-        move.post()
+        self.move.action_post()
         # lock journal, set 'Lock Date for Non-Advisers'
         self.journal.period_lock_date = date.today() + timedelta(days=2)
+
+    def test_journal_lock_date(self):
+        self.env.user.write({"groups_id": [(3, self.ref("base.group_system"))]})
+        self.env.user.write(
+            {"groups_id": [(3, self.ref("account.group_account_manager"))]}
+        )
+        self.assertFalse(self.env.user.has_group("account.group_account_manager"))
+
         # Test that the move cannot be created, written, or cancelled
-        with self.assertRaises(JournalLockDateError):
+        with self.assertRaises(UserError):
             self.account_move_obj.create(
                 {
                     "date": date.today(),
@@ -96,16 +87,14 @@ class TestJournalLockDate(common.TransactionCase):
                 }
             )
 
-        with self.assertRaises(JournalLockDateError):
-            move.write({"name": "TEST"})
+        with self.assertRaises(UserError):
+            self.move.write({"name": "TEST"})
 
-        # allow cancel posted move
-        self.journal.update_posted = True
-        with self.assertRaises(JournalLockDateError):
-            move.button_cancel()
+        with self.assertRaises(UserError):
+            self.move.button_cancel()
 
         # create a move after the 'Lock Date for Non-Advisers' and post it
-        move3 = self.account_move_obj.create(
+        move2 = self.account_move_obj.create(
             {
                 "date": self.journal.period_lock_date + timedelta(days=3),
                 "journal_id": self.journal.id,
@@ -131,18 +120,14 @@ class TestJournalLockDate(common.TransactionCase):
                 ],
             }
         )
-        move3.post()
+        move2.action_post()
 
-    def test_journal_lock_date_adviser(self):
-        """ The journal lock date is ignored for Advisers """
-        self.env.user.write(
-            {"groups_id": [(4, self.ref("account.group_account_manager"))]}
-        )
-        self.assertTrue(self.env.user.has_group("account.group_account_manager"))
-        # create a move and post it
-        move = self.account_move_obj.create(
+        # force create move in a lock date
+        move3 = self.account_move_obj.with_context(
+            bypass_journal_lock_date=True
+        ).create(
             {
-                "date": date.today(),
+                "date": self.journal.period_lock_date,
                 "journal_id": self.journal.id,
                 "line_ids": [
                     (
@@ -166,13 +151,27 @@ class TestJournalLockDate(common.TransactionCase):
                 ],
             }
         )
-        move.post()
-        # lock journal. Set 'Lock Date'
-        self.journal.fiscalyear_lock_date = date.today() + timedelta(days=2)
-        # lock journal. Set 'Lock Date for Non-Advisers'
-        self.journal.period_lock_date = date.today() + timedelta(days=4)
+        move3.action_post()
+
+    def test_journal_lock_date_adviser(self):
+        """ The journal lock date is ignored for Advisers """
+        self.env.user.write(
+            {"groups_id": [(4, self.env.ref("account.group_account_manager").id)]}
+        )
+        self.assertTrue(self.env.user.has_group("account.group_account_manager"))
+        wizard = (
+            self.env["update.journal.lock.dates.wizard"]
+            .with_context(active_model="account.journal", active_ids=self.journal.id)
+            .create(
+                {
+                    "fiscalyear_lock_date": date.today() + timedelta(days=2),
+                    "period_lock_date": date.today() + timedelta(days=4),
+                }
+            )
+        )
+        wizard.action_update_lock_dates()
         # Advisers cannot create, write, or cancel moves before 'Lock Date'
-        with self.assertRaises(JournalLockDateError):
+        with self.assertRaises(UserError):
             self.account_move_obj.create(
                 {
                     "date": date.today(),
@@ -199,16 +198,15 @@ class TestJournalLockDate(common.TransactionCase):
                     ],
                 }
             )
-        with self.assertRaises(JournalLockDateError):
-            move.write({"name": "TEST"})
-        # allow cancel posted move
-        self.journal.update_posted = True
-        with self.assertRaises(JournalLockDateError):
-            move.button_cancel()
+        with self.assertRaises(UserError):
+            self.move.write({"name": "TEST"})
+
+        with self.assertRaises(UserError):
+            self.move.button_cancel()
         # Advisers can create movements on a date after the 'Lock Date'
         # even if that date is before and inclusive of
         # the 'Lock Date for Non-Advisers' (self.journal.period_lock_date)
-        move3 = self.account_move_obj.create(
+        move2 = self.account_move_obj.create(
             {
                 "date": self.journal.period_lock_date,
                 "journal_id": self.journal.id,
@@ -234,4 +232,4 @@ class TestJournalLockDate(common.TransactionCase):
                 ],
             }
         )
-        move3.post()
+        move2.action_post()

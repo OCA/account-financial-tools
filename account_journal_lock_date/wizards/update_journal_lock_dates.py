@@ -21,9 +21,11 @@ class UpdateJournalLockDatesWizard(models.TransientModel):
     def action_update_lock_dates(self):
         self.ensure_one()
         self._check_execute_allowed()
-        self.env["account.journal"].browse(self.env.context.get("active_ids")).write(
-            {
-                "period_lock_date": self.period_lock_date,
-                "fiscalyear_lock_date": self.fiscalyear_lock_date,
-            }
-        )
+        active_ids = self.env.context.get("active_ids", False)
+        if active_ids:
+            self.env["account.journal"].browse(active_ids).write(
+                {
+                    "period_lock_date": self.period_lock_date,
+                    "fiscalyear_lock_date": self.fiscalyear_lock_date,
+                }
+            )
