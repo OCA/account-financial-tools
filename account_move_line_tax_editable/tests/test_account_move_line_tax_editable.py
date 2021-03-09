@@ -63,5 +63,5 @@ class TestAccountMoveLineTaxEditable(common.SavepointCase):
 
     def test_compute_is_tax_editable(self):
         self.assertEqual(self.move.line_ids.mapped("is_tax_editable"), [True, True])
-        self.move.post()
+        self.move.action_post()
         self.assertEqual(self.move.line_ids.mapped("is_tax_editable"), [False, False])
