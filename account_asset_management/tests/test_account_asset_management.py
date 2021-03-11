@@ -90,6 +90,30 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
 
+    def test_invoice_line_without_product(self):
+        tax = self.env["account.tax"].create(
+            {
+                "name": "TAX 15%",
+                "amount_type": "percent",
+                "type_tax_use": "purchase",
+                "amount": 15.0,
+            }
+        )
+        move_form = Form(
+            self.env["account.move"].with_context(
+                default_move_type="in_invoice", check_move_validity=False
+            )
+        )
+        move_form.partner_id = self.partner
+        with move_form.invoice_line_ids.new() as line_form:
+            line_form.name = "Line 1"
+            line_form.price_unit = 200.0
+            line_form.quantity = 1
+            line_form.tax_ids.clear()
+            line_form.tax_ids.add(tax)
+        invoice = move_form.save()
+        self.assertEqual(invoice.partner_id, self.partner)
+
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
         # First create demo assets and do some sanity checks
