@@ -1,5 +1,6 @@
 # Copyright 2009-2018 Noviat
 # Copyright 2021 Tecnativa - João Marques
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -121,8 +122,14 @@ class AccountMoveLine(models.Model):
 
     @api.onchange("account_id")
     def _onchange_account_id(self):
-        self.asset_profile_id = self.account_id.asset_profile_id
+        if self.account_id.asset_profile_id:
+            self.asset_profile_id = self.account_id.asset_profile_id
         super()._onchange_account_id()
+
+    @api.onchange("asset_profile_id")
+    def _onchange_asset_profile_id(self):
+        if self.asset_profile_id.account_asset_id:
+            self.account_id = self.asset_profile_id.account_asset_id
 
     @api.model_create_multi
     def create(self, vals_list):
