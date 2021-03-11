@@ -128,6 +128,7 @@ Contributors
 
   * Ernesto Tejeda
   * Pedro M. Baeza
+  * Víctor Martínez
 
 Maintainers
 ~~~~~~~~~~~
