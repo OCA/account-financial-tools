@@ -110,6 +110,40 @@ class TestAssetManagement(SavepointCase):
             'invoice_line_ids': [(4, cls.invoice_line_2.id),
                                  (4, cls.invoice_line_3.id)]})
 
+    def test_00_fiscalyear_lock_date_month(self):
+        asset = self.asset_model.create({
+            'name': 'test asset',
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
+            'purchase_value': 1500,
+            'date_start': '1901-02-01',
+            'method_time': 'year',
+            'method_number': 3,
+            'method_period': 'month',
+        })
+        asset.compute_depreciation_board()
+        asset.refresh()
+        self.assertTrue(asset.depreciation_line_ids[0].init_entry)
+        for i in range(1, 36):
+            self.assertFalse(asset.depreciation_line_ids[i].init_entry)
+
+    def test_00_fiscalyear_lock_date_year(self):
+        asset = self.asset_model.create({
+            'name': 'test asset',
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
+            'purchase_value': 1500,
+            'date_start': '1901-02-01',
+            'method_time': 'year',
+            'method_number': 3,
+            'method_period': 'year',
+        })
+        asset.compute_depreciation_board()
+        asset.refresh()
+        self.assertTrue(asset.depreciation_line_ids[0].init_entry)
+        for i in range(1, 4):
+            self.assertFalse(asset.depreciation_line_ids[i].init_entry)
+
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
         #
