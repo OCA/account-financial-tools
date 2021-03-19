@@ -29,6 +29,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1047
+#: code:addons/account_asset_management/models/account_asset.py:1052
 #, python-format
 msgid ""
 "\n"
@@ -682,6 +683,7 @@ msgstr "Assentaments"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1050
+#: code:addons/account_asset_management/models/account_asset.py:1055
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -800,6 +802,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:766
+#: code:addons/account_asset_management/models/account_asset.py:770
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr ""
@@ -1271,6 +1274,7 @@ msgstr "Estat"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:739
+#: code:addons/account_asset_management/models/account_asset.py:743
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1305,6 +1309,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:527
+#: code:addons/account_asset_management/models/account_asset.py:531
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
