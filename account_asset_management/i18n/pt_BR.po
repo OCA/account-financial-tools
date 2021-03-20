@@ -40,7 +40,6 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1047
 #: code:addons/account_asset_management/models/account_asset.py:1052
 #, python-format
 msgid ""
@@ -729,7 +728,6 @@ msgid "Entries"
 msgstr "Lançamentos"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1050
 #: code:addons/account_asset_management/models/account_asset.py:1055
 #, python-format
 msgid ""
@@ -857,7 +855,6 @@ msgstr ""
 "término da depreciação - data de início + 1) * dias no ano atual."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:766
 #: code:addons/account_asset_management/models/account_asset.py:770
 #, python-format
 msgid "Illegal value %s in asset.method."
@@ -1342,7 +1339,6 @@ msgid "Status"
 msgstr "Situação"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:739
 #: code:addons/account_asset_management/models/account_asset.py:743
 #, python-format
 msgid ""
@@ -1379,7 +1375,6 @@ msgid "The Start Date must precede the Ending Date."
 msgstr "A Data Inicial deve preceder a Data Final."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:527
 #: code:addons/account_asset_management/models/account_asset.py:531
 #, python-format
 msgid ""

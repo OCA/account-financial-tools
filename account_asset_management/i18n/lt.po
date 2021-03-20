@@ -29,7 +29,6 @@ msgstr ""
 "%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1047
 #: code:addons/account_asset_management/models/account_asset.py:1052
 #, python-format
 msgid ""
@@ -693,7 +692,6 @@ msgid "Entries"
 msgstr "Įrašai"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1050
 #: code:addons/account_asset_management/models/account_asset.py:1055
 #, python-format
 msgid ""
@@ -812,7 +810,6 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:766
 #: code:addons/account_asset_management/models/account_asset.py:770
 #, python-format
 msgid "Illegal value %s in asset.method."
@@ -1286,7 +1283,6 @@ msgid "Status"
 msgstr "Būsena"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:739
 #: code:addons/account_asset_management/models/account_asset.py:743
 #, python-format
 msgid ""
@@ -1321,7 +1317,6 @@ msgid "The Start Date must precede the Ending Date."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:527
 #: code:addons/account_asset_management/models/account_asset.py:531
 #, python-format
 msgid ""
