@@ -14,7 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1047
 #: code:addons/account_asset_management/models/account_asset.py:1052
 #, python-format
 msgid "\n"
@@ -647,7 +646,6 @@ msgid "Entries"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1050
 #: code:addons/account_asset_management/models/account_asset.py:1055
 #, python-format
 msgid "Error while processing asset '%s': \n"
@@ -758,7 +756,6 @@ msgid "If not set, the system will distribute evenly the amount to amortize acro
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:766
 #: code:addons/account_asset_management/models/account_asset.py:770
 #, python-format
 msgid "Illegal value %s in asset.method."
@@ -1219,7 +1216,6 @@ msgid "Status"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:739
 #: code:addons/account_asset_management/models/account_asset.py:743
 #, python-format
 msgid "The '_compute_year_amount' method is only intended for Time Method 'Number of Years."
@@ -1251,7 +1247,6 @@ msgid "The Start Date must precede the Ending Date."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:527
 #: code:addons/account_asset_management/models/account_asset.py:531
 #, python-format
 msgid "The duration of the asset conflicts with the posted depreciation table entry dates."
