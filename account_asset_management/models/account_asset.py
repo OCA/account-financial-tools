@@ -576,6 +576,10 @@ class AccountAsset(models.Model):
         posted_lines,
     ):
         digits = self.env["decimal.precision"].precision_get("Account")
+        company = self.company_id
+        fiscalyear_lock_date = company.fiscalyear_lock_date or fields.Date.to_date(
+            "1901-01-01"
+        )
 
         seq = len(posted_lines)
         depr_line = last_line
@@ -600,7 +604,7 @@ class AccountAsset(models.Model):
                         "name": name,
                         "line_date": line["date"],
                         "line_days": line["days"],
-                        "init_entry": entry["init"],
+                        "init_entry": fiscalyear_lock_date >= line["date"],
                     }
                     depreciated_value += round(amount, digits)
                     depr_line = self.env["account.asset.line"].create(vals)
@@ -992,6 +996,10 @@ class AccountAsset(models.Model):
         i_max = len(table) - 1
         remaining_value = self.depreciation_base
         depreciated_value = 0.0
+        company = self.company_id
+        fiscalyear_lock_date = company.fiscalyear_lock_date or fields.Date.to_date(
+            "1901-01-01"
+        )
 
         for i, entry in enumerate(table):
 
@@ -1047,6 +1055,7 @@ class AccountAsset(models.Model):
                     "amount": amount,
                     "depreciated_value": depreciated_value,
                     "remaining_value": remaining_value,
+                    "init": fiscalyear_lock_date >= line_date,
                 }
                 lines.append(line)
                 depreciated_value += amount
@@ -1096,11 +1105,7 @@ class AccountAsset(models.Model):
             and not self.method_end
         ):
             return table
-        company = self.company_id
         asset_date_start = self.date_start
-        fiscalyear_lock_date = company.fiscalyear_lock_date or fields.Date.to_date(
-            "1901-01-01"
-        )
         depreciation_start_date = self._get_depreciation_start_date(
             self._get_fy_info(asset_date_start)["record"]
         )
@@ -1115,7 +1120,6 @@ class AccountAsset(models.Model):
                     "fy": fy_info["record"],
                     "date_start": fy_info["date_from"],
                     "date_stop": fy_info["date_to"],
-                    "init": fiscalyear_lock_date >= fy_info["date_from"],
                 }
             )
             fy_date_start = fy_info["date_to"] + relativedelta(days=1)
