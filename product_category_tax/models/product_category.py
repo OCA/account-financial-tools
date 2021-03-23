@@ -1,5 +1,5 @@
 # Copyright 2020 ForgeFlow S.L. (https://www.forgeflow.com)
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields, models
 
@@ -26,9 +26,6 @@ class ProductCategory(models.Model):
         help="Default taxes used when buying the product.",
         domain=[("type_tax_use", "=", "purchase")],
         default=lambda self: self.env.company.account_purchase_tax_id,
-    )
-    product_template_ids = fields.One2many(
-        "product.template", "categ_id", string="Products Templates"
     )
 
     def update_product_taxes(self):
