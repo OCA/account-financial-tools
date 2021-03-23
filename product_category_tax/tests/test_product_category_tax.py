@@ -1,5 +1,5 @@
 # Copyright 2020 ForgeFlow S.L. (https://www.forgeflow.com)
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import odoo.tests.common as common
 
@@ -7,7 +7,7 @@ import odoo.tests.common as common
 class ProductCategoryTax(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(ProductCategoryTax, cls).setUpClass()
+        super().setUpClass()
         cls.categ_obj = cls.env["product.category"]
         cls.product_obj = cls.env["product.product"]
         cls.tax_model = cls.env["account.tax"]
@@ -53,7 +53,7 @@ class ProductCategoryTax(common.SavepointCase):
             {"name": "TEST 01", "categ_id": test_categ.id, "list_price": 155.0}
         )
         self.product_test.product_tmpl_id.onchange_categ_id()
-        self.assertEquals(self.product_test.supplier_taxes_id, self.tax_purchase)
+        self.assertEqual(self.product_test.supplier_taxes_id, self.tax_purchase)
 
     def test_02_update_taxes(self):
         """ Default update """
@@ -72,10 +72,10 @@ class ProductCategoryTax(common.SavepointCase):
                 "supplier_taxes_id": [(6, 0, self.tax_purchase.ids)],
             }
         )
-        self.assertEquals(self.product_test.supplier_taxes_id, self.tax_purchase2)
+        self.assertEqual(self.product_test.supplier_taxes_id, self.tax_purchase2)
         self.product_test.categ_id = test_categ.id
         test_categ.update_product_taxes()
-        self.assertEquals(self.product_test.supplier_taxes_id, self.tax_purchase)
+        self.assertEqual(self.product_test.supplier_taxes_id, self.tax_purchase)
 
     def test_03_taxes_not_updeatable(self):
         """ Avoid update specific products"""
@@ -106,5 +106,5 @@ class ProductCategoryTax(common.SavepointCase):
         self.product_test3.categ_id = test_categ.id
         self.product_test4.categ_id = test_categ.id
         test_categ.update_product_taxes()
-        self.assertEquals(self.product_test3.supplier_taxes_id, self.tax_purchase)
-        self.assertNotEquals(self.product_test4.supplier_taxes_id, self.tax_purchase)
+        self.assertEqual(self.product_test3.supplier_taxes_id, self.tax_purchase)
+        self.assertNotEqual(self.product_test4.supplier_taxes_id, self.tax_purchase)
