@@ -91,10 +91,7 @@ class AccountAssetRemove(models.TransientModel):
             inv = line.move_id
             comp_curr = inv.company_currency_id
             inv_curr = inv.currency_id
-            if (
-                line.move_id.invoice_payment_state == "paid"
-                or line.parent_state == "draft"
-            ):
+            if line.move_id.payment_state == "paid" or line.parent_state == "draft":
                 account_sale_id = line.account_id.id
                 amount = line.price_subtotal
                 if inv_curr != comp_curr:
