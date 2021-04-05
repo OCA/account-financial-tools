@@ -186,7 +186,20 @@ class TestAssetManagement(SavepointCase):
         self.assertEqual(ict0.value_depreciated, 500)
         self.assertEqual(ict0.value_residual, 1000)
         vehicle0.validate()
-        vehicle0.depreciation_line_ids[1].create_move()
+        created_move_ids = vehicle0.depreciation_line_ids[1].create_move()
+        for move_id in created_move_ids:
+            move = self.env["account.move"].browse(move_id)
+            expense_line = move.line_ids.filtered(
+                lambda line: line.account_id == self.env.ref("account.a_expense")
+            )
+            self.assertEqual(
+                expense_line.analytic_account_id,
+                self.env.ref("analytic.analytic_administratif"),
+            )
+            self.assertEqual(
+                expense_line.analytic_tag_ids,
+                self.env.ref("analytic.tag_contract")
+            )
         vehicle0.refresh()
         self.assertEqual(vehicle0.state, 'open')
         self.assertEqual(vehicle0.value_depreciated, 2000)

@@ -202,6 +202,9 @@ class AccountAsset(models.Model):
     account_analytic_id = fields.Many2one(
         comodel_name='account.analytic.account',
         string='Analytic account')
+    analytic_tag_ids = fields.Many2many(
+        comodel_name='account.analytic.tag',
+        string='Analytic tags')
 
     @api.model
     def _default_company_id(self):
@@ -298,6 +301,7 @@ class AccountAsset(models.Model):
                 'method_progress_factor': profile.method_progress_factor,
                 'prorata': profile.prorata,
                 'account_analytic_id': profile.account_analytic_id,
+                'analytic_tag_ids': profile.analytic_tag_ids,
                 'group_ids': profile.group_ids,
             })
 

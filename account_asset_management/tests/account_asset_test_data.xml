@@ -78,6 +78,8 @@
       <field name="purchase_value" eval="12000.0"/>
       <field name="salvage_value" eval="2000.0"/>
       <field name="profile_id" ref="account_asset_profile_car_5Y"/>
+      <field name="account_analytic_id" ref="analytic.analytic_administratif" />
+      <field name="analytic_tag_ids" eval="[(4, ref('analytic.tag_contract'))]" />
     </record>
 
   </data>

@@ -161,6 +161,8 @@ class AccountMoveLine(models.Model):
     def _get_asset_analytic_values(self, vals, asset_vals):
         asset_vals['account_analytic_id'] = vals.get(
             'analytic_account_id', False)
+        asset_vals['analytic_tag_ids'] = vals.get(
+            'analytic_tag_ids', False)
 
     @api.model
     def _play_onchange_profile_id(self, vals):
