@@ -56,6 +56,7 @@
                 <field name="group_ids" widget="many2many_tags"/>
                 <field name="partner_id"/>
                 <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+                <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" widget="many2many_tags" />
               </group>
               <group colspan="4">
                 <group>
