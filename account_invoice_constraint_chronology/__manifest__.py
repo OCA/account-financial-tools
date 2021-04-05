@@ -6,7 +6,7 @@
     "author": "Odoo Community Association (OCA), ACSONE SA/NV",
     "maintainer": "ACSONE SA/NV",
     "website": "https://github.com/OCA/account-financial-tools/tree/12.0/"
-               "account_invoice_constraint_chronology",
+    "account_invoice_constraint_chronology",
     "license": "AGPL-3",
     "category": "Accounting",
     "depends": ["account"],
