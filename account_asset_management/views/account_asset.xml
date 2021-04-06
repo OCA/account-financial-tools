@@ -114,6 +114,11 @@
                                     name="account_analytic_id"
                                     groups="analytic.group_analytic_accounting"
                                 />
+                                <field
+                                    name="analytic_tag_ids"
+                                    groups="analytic.group_analytic_accounting"
+                                    widget="many2many_tags"
+                                />
                             </group>
                             <group colspan="4">
                                 <group>
