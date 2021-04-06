@@ -20,23 +20,12 @@ class TestAccountInvoiceConstraintChronology(common.SavepointCase):
         cls.yesterday = cls.today - timedelta(days=1)
         cls.tomorrow = cls.today + timedelta(days=1)
 
-        cls.IrSequence = cls.env["ir.sequence"]
-        cls.sale_journal_sequence = cls.IrSequence.create(
-            {
-                "name": "Sale journal sequence",
-                "prefix": "SALE",
-                "padding": 6,
-                "company_id": cls.company.id,
-            }
-        )
-
         cls.AccountJournal = cls.env["account.journal"]
         cls.sale_journal = cls.AccountJournal.create(
             {
                 "name": "Sale journal",
                 "code": "SALE",
                 "type": "sale",
-                "sequence_id": cls.sale_journal_sequence.id,
                 "check_chronology": True,
             }
         )
@@ -46,7 +35,7 @@ class TestAccountInvoiceConstraintChronology(common.SavepointCase):
 
         cls.AccountMove = cls.env["account.move"]
         with common.Form(
-            cls.AccountMove.with_context(default_type="out_invoice")
+            cls.AccountMove.with_context(default_move_type="out_invoice")
         ) as invoice_form:
             invoice_form.invoice_date = cls.today
             invoice_form.partner_id = cls.partner_2
