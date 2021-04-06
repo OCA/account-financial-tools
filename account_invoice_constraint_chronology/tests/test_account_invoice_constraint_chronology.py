@@ -103,7 +103,8 @@ class TestAccountInvoiceConstraintChronology(common.SavepointCase):
         self.invoice_1.action_post()
         refund = (
             self.AccountMoveReversal.with_context(
-                active_model="account.move", active_ids=self.invoice_1.ids,
+                active_model="account.move",
+                active_ids=self.invoice_1.ids,
             )
             .create(
                 {"date": self.today, "reason": "no reason", "refund_method": "refund"}
@@ -119,7 +120,8 @@ class TestAccountInvoiceConstraintChronology(common.SavepointCase):
         self.invoice_1.action_post()
         refund = (
             self.AccountMoveReversal.with_context(
-                active_model="account.move", active_ids=self.invoice_1.ids,
+                active_model="account.move",
+                active_ids=self.invoice_1.ids,
             )
             .create(
                 {"date": self.today, "reason": "no reason", "refund_method": "refund"}
