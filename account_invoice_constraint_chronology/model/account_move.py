@@ -15,13 +15,10 @@ class AccountMove(models.Model):
         self.ensure_one()
         domain = [
             ("journal_id", "=", self.journal_id.id),
-            ("type", "!=", "entry"),
+            ("move_type", "!=", "entry"),
         ]
-        if (
-            self.journal_id.refund_sequence
-            and self.journal_id.sequence_id != self.journal_id.refund_sequence_id
-        ):
-            domain.append(("type", "=", self.type))
+        if self.journal_id.refund_sequence:
+            domain.append(("move_type", "=", self.move_type))
         return domain
 
     def _get_older_conflicting_invoices_domain(self):
