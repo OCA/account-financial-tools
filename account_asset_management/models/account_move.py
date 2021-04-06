@@ -82,6 +82,7 @@ class AccountMove(models.Model):
                     "partner_id": aml.partner_id.id,
                     "date_start": move.date,
                     "account_analytic_id": aml.analytic_account_id.id,
+                    "analytic_tag_ids": aml.analytic_tag_ids.id,
                 }
                 if self.env.context.get("company_id"):
                     vals["company_id"] = self.env.context["company_id"]

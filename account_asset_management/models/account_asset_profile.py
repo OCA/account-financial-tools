@@ -16,6 +16,9 @@ class AccountAssetProfile(models.Model):
     account_analytic_id = fields.Many2one(
         comodel_name="account.analytic.account", string="Analytic account"
     )
+    analytic_tag_ids = fields.Many2many(
+        comodel_name="account.analytic.tag", string="Analytic tags"
+    )
     account_asset_id = fields.Many2one(
         comodel_name="account.account",
         domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
