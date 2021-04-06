@@ -57,6 +57,7 @@
                             string="Analytic Information"
                         >
                             <field name="account_analytic_id" />
+                            <field name="analytic_tag_ids" widget="many2many_tags" />
                         </group>
                     </group>
                     <separator string="Notes" />
