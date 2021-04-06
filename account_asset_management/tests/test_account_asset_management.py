@@ -58,6 +58,23 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             line_form.price_unit = 20000.00
             line_form.quantity = 1
         cls.invoice_2 = move_form.save()
+
+        # analytic configuration
+        cls.env.user.write(
+            {
+                "groups_id": [
+                    (4, cls.env.ref("analytic.group_analytic_accounting").id),
+                    (4, cls.env.ref("analytic.group_analytic_tags").id),
+                ],
+            }
+        )
+        cls.analytic_account = cls.env["account.analytic.account"].create(
+            {"name": "test_analytic_account"}
+        )
+        cls.analytic_tag = cls.env["account.analytic.tag"].create(
+            {"name": "test_analytic_tag"}
+        )
+
         # Asset Profile 1
         cls.ict3Y = cls.asset_profile_model.create(
             {
@@ -90,6 +107,8 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "method_time": "year",
                 "method_number": 5,
                 "method_period": "year",
+                "account_analytic_id": cls.analytic_account.id,
+                "analytic_tag_ids": [(4, cls.analytic_tag.id)],
             }
         )
 
@@ -214,7 +233,17 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertEqual(ict0.value_depreciated, 500)
         self.assertEqual(ict0.value_residual, 1000)
         vehicle0.validate()
-        vehicle0.depreciation_line_ids[1].create_move()
+        created_move_ids = vehicle0.depreciation_line_ids[1].create_move()
+        for move_id in created_move_ids:
+            move = self.env["account.move"].browse(move_id)
+            expense_line = move.line_ids.filtered(
+                lambda line: line.account_id.internal_group == "expense"
+            )
+            self.assertEqual(
+                expense_line.analytic_account_id.id,
+                self.analytic_account.id,
+            )
+            self.assertEqual(expense_line.analytic_tag_ids.id, self.analytic_tag.id)
         vehicle0.refresh()
         self.assertEqual(vehicle0.state, "open")
         self.assertEqual(vehicle0.value_depreciated, 2000)
