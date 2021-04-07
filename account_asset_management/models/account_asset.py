@@ -266,6 +266,13 @@ class AccountAsset(models.Model):
         readonly=False,
         store=True,
     )
+    analytic_tag_ids = fields.Many2many(
+        comodel_name="account.analytic.tag",
+        string="Analytic tags",
+        compute="_compute_analytic_tag_ids",
+        readonly=False,
+        store=True,
+    )
 
     @api.model
     def _default_company_id(self):
@@ -366,6 +373,11 @@ class AccountAsset(models.Model):
     def _compute_account_analytic_id(self):
         for asset in self:
             asset.account_analytic_id = asset.profile_id.account_analytic_id
+
+    @api.depends("profile_id")
+    def _compute_analytic_tag_ids(self):
+        for asset in self:
+            asset.analytic_tag_ids = asset.profile_id.analytic_tag_ids
 
     @api.constrains("method", "method_time")
     def _check_method(self):
