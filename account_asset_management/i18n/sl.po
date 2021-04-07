@@ -98,6 +98,12 @@ msgid "Analytic account"
 msgstr "Analitični konto"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
+msgid "Analytic tags"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Are you sure ?"
 msgstr "Ste prepričani?"
