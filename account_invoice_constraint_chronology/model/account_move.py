@@ -61,6 +61,36 @@ class AccountMove(models.Model):
             ).format(date_invoice=format_date(self.env, self.invoice_date))
         )
 
+    def _get_sequence_order_conflicting_invoices_domain(self):
+        self.ensure_one()
+
+        if not self.name or self.name == "/":
+            return expression.FALSE_DOMAIN
+
+        last_sequence = self._get_last_sequence()
+        if not last_sequence or self.name > last_sequence:
+            return expression.FALSE_DOMAIN
+
+        return expression.AND(
+            [
+                [("name", "=", last_sequence)],
+                self._get_conflicting_invoices_domain(),
+                [("state", "=", "posted"), ("invoice_date", "<", self.invoice_date)],
+            ]
+        )
+
+    def _raise_sequence_ordering_conflict(self):
+        self.ensure_one()
+        raise UserError(
+            _(
+                "Chronology conflict: An invoice with a higher number {highest_name}"
+                " dated before {date_invoice} exists."
+            ).format(
+                highest_name=self._get_last_sequence(),
+                date_invoice=format_date(self.env, self.invoice_date),
+            )
+        )
+
     def write(self, vals):
         if vals.get("state") != "posted":
             return super().write(vals)
@@ -68,6 +98,10 @@ class AccountMove(models.Model):
         newly_posted = self.filtered(lambda move: move.state != "posted")
         res = super().write(vals)
         for move in newly_posted & self.filtered("journal_id.check_chronology"):
+            if self.search(
+                move._get_sequence_order_conflicting_invoices_domain(), limit=1
+            ):
+                move._raise_sequence_ordering_conflict()
             if self.search(move._get_older_conflicting_invoices_domain(), limit=1):
                 move._raise_older_conflicting_invoices()
             if self.search(move._get_newer_conflicting_invoices_domain(), limit=1):
