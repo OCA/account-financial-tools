@@ -120,3 +120,16 @@ class TestAccountInvoiceConstraintChronology(common.SavepointCase):
         refund = self.AccountMove.browse(refund["res_id"])
         with self.assertRaises(UserError):
             refund.action_post()
+
+    def test_invoice_higher_number(self):
+        self.invoice_1.invoice_date = self.yesterday
+        self.invoice_1.action_post()
+        self.invoice_1.button_draft()
+        self.invoice_1.invoice_date = False
+
+        self.invoice_2.invoice_date = self.today
+        self.invoice_2.action_post()
+
+        self.invoice_1.invoice_date = self.tomorrow
+        with self.assertRaisesRegex(UserError, "higher number"):
+            self.invoice_1.action_post()
