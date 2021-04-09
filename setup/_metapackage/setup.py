@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo13-addon-account_check_deposit',
         'odoo13-addon-account_fiscal_position_allowed_journal',
         'odoo13-addon-account_fiscal_year',
+        'odoo13-addon-account_invoice_constraint_chronology',
         'odoo13-addon-account_journal_lock_date',
         'odoo13-addon-account_lock_date_update',
         'odoo13-addon-account_lock_to_date',
