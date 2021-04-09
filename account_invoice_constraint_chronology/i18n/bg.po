@@ -25,27 +25,30 @@ msgid "Check Chronology"
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
-"Chronology Error. Please confirm older draft invoices before {date_invoice} "
-"and try again."
+"Chronology conflict: A conflicting draft invoice dated before {date_invoice} "
+"exists, please validate it first."
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:82
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
-"Chronology Error. There exist at least one invoice with a later date to "
-"{date_invoice}."
+"Chronology conflict: A conflicting validated invoice dated after "
+"{date_invoice} exists."
 msgstr ""
-
-#. module: account_invoice_constraint_chronology
-#: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
-msgid "Invoice"
-msgstr "Фактура"
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
 msgstr ""
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#~ msgid "Invoice"
+#~ msgstr "Фактура"

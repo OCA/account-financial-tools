@@ -26,29 +26,44 @@ msgid "Check Chronology"
 msgstr "Prüfe Chronologie"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
-#, fuzzy, python-format
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
+#, python-format
 msgid ""
-"Chronology Error. Please confirm older draft invoices before {date_invoice} "
-"and try again."
+"Chronology conflict: A conflicting draft invoice dated before {date_invoice} "
+"exists, please validate it first."
 msgstr ""
-"Chronolgiefehler. Geben Sie Rechnungsentwürfe vor %s frei und versuchen es "
-"erneut."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:82
-#, fuzzy, python-format
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
+#, python-format
 msgid ""
-"Chronology Error. There exist at least one invoice with a later date to "
-"{date_invoice}."
-msgstr "Chronologiefehler. Es gibt mind. eine Rechnung mit Datum nach %s."
-
-#. module: account_invoice_constraint_chronology
-#: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
-msgid "Invoice"
-msgstr "Rechnung"
+"Chronology conflict: A conflicting validated invoice dated after "
+"{date_invoice} exists."
+msgstr ""
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
 msgstr "Journal"
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "Chronology Error. Please confirm older draft invoices before "
+#~ "{date_invoice} and try again."
+#~ msgstr ""
+#~ "Chronolgiefehler. Geben Sie Rechnungsentwürfe vor %s frei und versuchen "
+#~ "es erneut."
+
+#, fuzzy
+#~ msgid ""
+#~ "Chronology Error. There exist at least one invoice with a later date to "
+#~ "{date_invoice}."
+#~ msgstr "Chronologiefehler. Es gibt mind. eine Rechnung mit Datum nach %s."
+
+#~ msgid "Invoice"
+#~ msgstr "Rechnung"
