@@ -6,18 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2021-04-10 15:46+0000\n"
+"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
 "Language-Team: none\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_account_move__display_name
@@ -34,19 +36,19 @@ msgstr ""
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Ecriture"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_account_move____last_update
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/partner.py:0
 #, python-format
 msgid "Missing VAT number:"
-msgstr ""
+msgstr "Numéro de TVA manquant :"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
@@ -57,6 +59,10 @@ msgid ""
 "Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
 "of this Customer in Odoo and try to validate again."
 msgstr ""
+"Vous essayez de valider une facture/remboursement client avec la position "
+"fiscale '%s' qui exige que le client ait un numéro de TVA. Mais le client "
+"'%s' n'a pas de numéro de TVA dans Odoo. Veuillez ajouter le numéro de TVA "
+"de ce client dans Odoo et essayer de valider à nouveau."
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/partner.py:0
@@ -66,3 +72,6 @@ msgid ""
 "number. If you plan to use this partner as a customer, you should add its "
 "VAT number."
 msgstr ""
+"Vous avez défini la position fiscale '%s' qui exige que les clients aient un "
+"numéro de TVA. Si vous prévoyez d'utiliser ce partenaire comme client, vous "
+"devez ajouter son numéro de TVA."
