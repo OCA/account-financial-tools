@@ -6,85 +6,87 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2021-04-10 15:46+0000\n"
+"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
 "Language-Team: none\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_group
 msgid "Account Group"
-msgstr ""
+msgstr "Groupe de compte"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_group_action
 #: model:ir.ui.menu,name:account_menu.account_group_menu
 msgid "Account Groups"
-msgstr ""
+msgstr "Groupes de compte"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "Étiquette de compte"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_account_tag_action
 #: model:ir.ui.menu,name:account_menu.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "Étiquettes de compte"
 
 #. module: account_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_form
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Group"
-msgstr ""
+msgstr "Compte du groupe de taxe"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.action_account_tax_group
 #: model:ir.ui.menu,name:account_menu.account_tax_group_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Groups"
-msgstr ""
+msgstr "Comptes des groupes de taxes"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_account_template_action
 #: model:ir.ui.menu,name:account_menu.menu_account_account_template
 msgid "Account Templates"
-msgstr ""
+msgstr "Modèles de compte"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.account_type_menu
 msgid "Account Types"
-msgstr ""
+msgstr "Types de compte"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_menu.field_account_group__account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "Comptes"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_bank
 msgid "Bank Statements"
-msgstr ""
+msgstr "Relevés bancaires"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_bank_and_cash
 msgid "Bank and Cash"
-msgstr ""
+msgstr "Banque et caisse"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_cash
 msgid "Cash Registers"
-msgstr ""
+msgstr "Registres de caisse"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_chart_template
 msgid "Chart of Accounts Templates"
-msgstr ""
+msgstr "Modèle de plan comptable"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__display_name
@@ -97,7 +99,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_menu.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_menu.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
-msgstr ""
+msgstr "Modèle de position fiscale"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__id
@@ -111,24 +113,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_menu.field_account_group____last_update
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_tax_group
 msgid "Tax Group"
-msgstr ""
+msgstr "Groupe de taxe"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_tax_template
 msgid "Tax Templates"
-msgstr ""
+msgstr "Modèle de taxe"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "Taxes"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_coa_settings
 msgid "Templates"
-msgstr ""
+msgstr "Modèle"
