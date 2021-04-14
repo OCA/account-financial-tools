@@ -441,7 +441,8 @@ class AssetReportXlsx(models.AbstractModel):
         else:
             group_assets = assets
         group_assets = group_assets.sorted(
-            lambda r: (r.date_start or '', r.code))
+            lambda r: (r.date_start or "", r.code or "", r.name)
+        )
         grouped_assets[group] = {'assets': group_assets}
         for child in group.child_ids:
             self._group_assets(assets, child, grouped_assets[group])
