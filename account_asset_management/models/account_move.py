@@ -65,6 +65,10 @@ class AccountMove(models.Model):
         for move in self:
             for aml in move.line_ids.filtered("asset_profile_id"):
                 depreciation_base = aml.price_subtotal
+                if not aml.name:
+                    raise UserError(
+                        _("Asset name must be set in the label of the line.")
+                    )
                 vals = {
                     "name": aml.name,
                     "code": move.name,
