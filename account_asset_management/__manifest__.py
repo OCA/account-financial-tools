@@ -4,7 +4,7 @@
 
 {
     "name": "Assets Management",
-    "version": "13.0.2.0.4",
+    "version": "13.0.2.0.5",
     "license": "AGPL-3",
     "depends": ["account", "report_xlsx_helper"],
     "excludes": ["account_asset"],
