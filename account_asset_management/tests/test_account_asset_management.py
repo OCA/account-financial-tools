@@ -721,3 +721,34 @@ class TestAssetManagement(SavepointCase):
             [(group_tfa.id, "Tangible Fixed A...")],
         )
         self.assertFalse(self.env["account.asset.group"]._name_search("stessA dexiF"))
+
+    def test_16_no_auto_post_depreciation(self):
+        """Asset profile without auto-post depreciation."""
+        asset_profile = self.env.ref(
+            "account_asset_management.account_asset_profile_car_5Y"
+        )
+        asset_profile.auto_post_depreciation = False
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": asset_profile.id,
+                "purchase_value": 5000,
+                "salvage_value": 0,
+                "date_start": time.strftime("2021-01-01"),
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "year",
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.refresh()
+        asset.depreciation_line_ids[1].create_move()
+        # Depreciation entry created in draft
+        self.assertTrue(asset.depreciation_line_ids[1].move_id)
+        self.assertEqual(asset.depreciation_line_ids[1].move_state, "draft")
+        # The value is not considered in the total depreciated value yet
+        self.assertEqual(asset.value_depreciated, 0.0)
+        # Post the draft entry
+        asset.depreciation_line_ids[1].post_move()
+        self.assertEqual(asset.depreciation_line_ids[1].move_state, "posted")
+        self.assertEqual(asset.value_depreciated, 1000.0)

@@ -161,6 +161,12 @@ class AccountAssetProfile(models.Model):
         "product item. So, there will be an asset by product item.",
     )
     active = fields.Boolean(default=True)
+    auto_post_depreciation = fields.Boolean(
+        string="Auto-Post Depreciation Entries",
+        help="If checked, the accounting entries generated for the asset "
+        "depreciation lines will be automatically posted.",
+        default=True,
+    )
 
     @api.model
     def _default_company_id(self):

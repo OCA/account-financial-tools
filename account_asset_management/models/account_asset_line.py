@@ -51,8 +51,8 @@ class AccountAssetLine(models.Model):
         readonly=True,
         check_company=True,
     )
-    move_check = fields.Boolean(
-        compute="_compute_move_check", string="Posted", store=True
+    move_state = fields.Selection(
+        related="move_id.state", string="State", readonly=True
     )
     type = fields.Selection(
         selection=[
@@ -106,11 +106,6 @@ class AccountAssetLine(models.Model):
                 dl.depreciated_value = depreciated_value
                 dl.remaining_value = remaining_value
 
-    @api.depends("move_id")
-    def _compute_move_check(self):
-        for line in self:
-            line.move_check = bool(line.move_id)
-
     @api.onchange("amount")
     def _onchange_amount(self):
         if self.type == "depreciate":
@@ -148,7 +143,7 @@ class AccountAssetLine(models.Model):
                 )
             elif vals.get("init_entry"):
                 check = asset_lines.filtered(
-                    lambda l: l.move_check
+                    lambda l: l.move_id
                     and l.type == "depreciate"
                     and l.line_date <= line_date
                 )
@@ -157,34 +152,34 @@ class AccountAssetLine(models.Model):
                         _(
                             "You cannot set the 'Initial Balance Entry' flag "
                             "on a depreciation line "
-                            "with prior posted entries."
+                            "with prior created entries."
                         )
                     )
             elif vals.get("line_date"):
                 if dl.type == "create":
                     check = asset_lines.filtered(
                         lambda l: l.type != "create"
-                        and (l.init_entry or l.move_check)
+                        and (l.init_entry or l.move_id)
                         and l.line_date < fields.Date.to_date(vals["line_date"])
                     )
                     if check:
                         raise UserError(
                             _(
                                 "You cannot set the Asset Start Date "
-                                "after already posted entries."
+                                "after already created entries."
                             )
                         )
                 else:
                     check = asset_lines.filtered(
                         lambda al: al != dl
-                        and (al.init_entry or al.move_check)
+                        and (al.init_entry or al.move_id)
                         and al.line_date > fields.Date.to_date(vals["line_date"])
                     )
                     if check:
                         raise UserError(
                             _(
                                 "You cannot set the date on a depreciation line "
-                                "prior to already posted entries."
+                                "prior to already created entries."
                             )
                         )
         return super().write(vals)
@@ -251,6 +246,14 @@ class AccountAssetLine(models.Model):
         }
         return move_line_data
 
+    def _update_asset_state(self, asset_ids):
+        """Re-evaluate assets to determine if they can be closed"""
+        if asset_ids:
+            for asset in self.env["account.asset"].browse(list(asset_ids)):
+                if asset.company_currency_id.is_zero(asset.value_residual):
+                    asset.state = "close"
+        return True
+
     def create_move(self):
         created_move_ids = []
         asset_ids = set()
@@ -270,14 +273,12 @@ class AccountAssetLine(models.Model):
                 depreciation_date, exp_acc, "expense", move
             )
             self.env["account.move.line"].with_context(ctx).create(aml_e_vals)
-            move.post()
+            if asset.profile_id.auto_post_depreciation:
+                move.post()
+                asset_ids.add(asset.id)
             line.with_context(allow_asset_line_update=True).write({"move_id": move.id})
             created_move_ids.append(move.id)
-            asset_ids.add(asset.id)
-        # we re-evaluate the assets to determine if we can close them
-        for asset in self.env["account.asset"].browse(list(asset_ids)):
-            if asset.company_currency_id.is_zero(asset.value_residual):
-                asset.state = "close"
+        self._update_asset_state(asset_ids)
         return created_move_ids
 
     def open_move(self):
@@ -291,6 +292,16 @@ class AccountAssetLine(models.Model):
             "context": self.env.context,
             "domain": [("id", "=", self.move_id.id)],
         }
+
+    def post_move(self):
+        asset_ids = set()
+        for line in self:
+            asset = line.asset_id
+            move = line.move_id
+            move.post()
+            asset_ids.add(asset.id)
+        self._update_asset_state(asset_ids)
+        return True
 
     def unlink_move(self):
         for line in self:

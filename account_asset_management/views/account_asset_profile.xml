@@ -51,6 +51,7 @@
                                 attrs="{'readonly':[('method_time','!=','year')]}"
                             />
                             <field name="open_asset" />
+                            <field name="auto_post_depreciation" />
                         </group>
                         <group
                             groups="analytic.group_analytic_accounting"

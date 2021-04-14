@@ -176,7 +176,8 @@
                             >
                                 <tree
                                     string="Asset Lines"
-                                    decoration-info="(move_check == False) and (init_entry == False)"
+                                    decoration-info="(move_state == False) and (init_entry == False)"
+                                    decoration-warning="(move_state == 'draft')"
                                     create="false"
                                 >
                                     <field name="type" />
@@ -186,21 +187,21 @@
                                     <field name="amount" />
                                     <field name="remaining_value" readonly="1" />
                                     <field name="init_entry" string="Init" />
-                                    <field name="move_check" />
+                                    <field name="move_state" />
                                     <field name="parent_state" invisible="1" />
                                     <button
                                         name="create_move"
                                         icon="fa-cog"
                                         string="Create Move"
                                         type="object"
-                                        attrs="{'invisible': ['|', '|', ('init_entry', '=', True), ('move_check', '!=', False), ('parent_state', '!=', 'open')]}"
+                                        attrs="{'invisible': ['|', '|', ('init_entry', '=', True), ('move_state', '!=', False), ('parent_state', '!=', 'open')]}"
                                     />
                                     <button
                                         name="open_move"
                                         icon="fa-folder-open-o"
                                         string="View Move"
                                         type="object"
-                                        attrs="{'invisible': [('move_check', '!=', True)]}"
+                                        attrs="{'invisible': [('move_state', 'not in', ('draft', 'posted'))]}"
                                     />
                                     <button
                                         name="unlink_move"
@@ -209,7 +210,16 @@
                                         type="object"
                                         confirm="Are you sure ?"
                                         groups="account.group_account_manager"
-                                        attrs="{'invisible': [('move_check', '!=', True)]}"
+                                        attrs="{'invisible': [('move_state', '!=', 'posted')]}"
+                                    />
+                                    <button
+                                        name="post_move"
+                                        icon="fa-check"
+                                        string="Post Move"
+                                        type="object"
+                                        confirm="Are you sure ?"
+                                        groups="account.group_account_manager"
+                                        attrs="{'invisible': [('move_state', '!=', 'draft')]}"
                                     />
                                 </tree>
                                 <form string="Asset Line">
@@ -224,19 +234,19 @@
                                             <field name="name" />
                                             <field
                                                 name="amount"
-                                                attrs="{'readonly': [('move_check', '=', True)]}"
+                                                attrs="{'readonly': [('move_state', '!=', False)]}"
                                             />
                                             <field
                                                 name="init_entry"
-                                                attrs="{'readonly': ['|', ('move_check', '=', True), ('type', '=', 'create')]}"
+                                                attrs="{'readonly': ['|', ('move_state', '!=', False), ('type', '=', 'create')]}"
                                             />
                                             <field name="move_id" />
-                                            <field name="move_check" />
+                                            <field name="move_state" />
                                         </group>
                                         <group>
                                             <field
                                                 name="line_date"
-                                                attrs="{'readonly': [('move_check', '=', True)]}"
+                                                attrs="{'readonly': [('move_state', '!=', False)]}"
                                             />
                                             <field
                                                 name="depreciated_value"

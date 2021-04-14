@@ -299,13 +299,13 @@ class AccountAsset(models.Model):
         "depreciation_line_ids.amount",
         "depreciation_line_ids.previous_id",
         "depreciation_line_ids.init_entry",
-        "depreciation_line_ids.move_check",
+        "depreciation_line_ids.move_state",
     )
     def _compute_depreciation(self):
         for asset in self:
             lines = asset.depreciation_line_ids.filtered(
                 lambda l: l.type in ("depreciate", "remove")
-                and (l.init_entry or l.move_check)
+                and (l.init_entry or l.move_state == "posted")
             )
             value_depreciated = sum([line.amount for line in lines])
             residual = asset.depreciation_base - value_depreciated
@@ -466,12 +466,12 @@ class AccountAsset(models.Model):
             if asset.state != "draft":
                 raise UserError(_("You can only delete assets in draft state."))
             if asset.depreciation_line_ids.filtered(
-                lambda r: r.type == "depreciate" and r.move_check
+                lambda r: r.type == "depreciate" and r.move_id
             ):
                 raise UserError(
                     _(
                         "You cannot delete an asset that contains "
-                        "posted depreciation lines."
+                        "created depreciation lines."
                     )
                 )
         # update accounting entries linked to lines of type 'create'
@@ -636,7 +636,7 @@ class AccountAsset(models.Model):
                 ("asset_id", "=", asset.id),
                 ("type", "=", "depreciate"),
                 "|",
-                ("move_check", "=", True),
+                ("move_id", "!=", False),
                 ("init_entry", "=", True),
             ]
             posted_lines = line_obj.search(domain, order="line_date desc")
@@ -1177,7 +1177,7 @@ class AccountAsset(models.Model):
                 ("type", "=", "depreciate"),
                 ("init_entry", "=", False),
                 ("line_date", "<=", date_end),
-                ("move_check", "=", False),
+                ("move_id", "=", False),
             ],
             order="line_date",
         )

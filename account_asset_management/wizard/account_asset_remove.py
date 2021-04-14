@@ -240,9 +240,7 @@ class AccountAssetRemove(models.TransientModel):
         def _dlines(asset):
             lines = asset.depreciation_line_ids
             dlines = lines.filtered(
-                lambda l: l.type == "depreciate"
-                and not l.init_entry
-                and not l.move_check
+                lambda l: l.type == "depreciate" and not l.init_entry and not l.move_id
             )
             dlines = dlines.sorted(key=lambda l: l.line_date)
             return dlines
