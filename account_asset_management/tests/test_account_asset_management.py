@@ -7,6 +7,7 @@ import calendar
 import time
 from datetime import date, datetime
 
+from odoo import fields
 from odoo.tests.common import Form
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -31,6 +32,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 default_move_type="in_invoice", check_move_validity=False
             )
         )
+        move_form.invoice_date = fields.Date.context_today(cls.env.user)
         move_form.partner_id = cls.partner
         with move_form.invoice_line_ids.new() as line_form:
             line_form.name = "test"
@@ -43,6 +45,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 default_move_type="in_invoice", check_move_validity=False
             )
         )
+        move_form.invoice_date = fields.Date.context_today(cls.env.user)
         move_form.partner_id = cls.partner
         with move_form.invoice_line_ids.new() as line_form:
             line_form.name = "test 2"
@@ -104,6 +107,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 default_move_type="in_invoice", check_move_validity=False
             )
         )
+        move_form.invoice_date = fields.Date.context_today(self.env.user)
         move_form.partner_id = self.partner
         with move_form.invoice_line_ids.new() as line_form:
             line_form.name = "Line 1"
