@@ -221,6 +221,12 @@ msgid "Asset depreciation table line"
 msgstr "Užregistruoti nusidėvėjimo DK įrašai"
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/models/account_move.py:0
+#, python-format
+msgid "Asset name must be set in the label of the line."
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
