@@ -192,6 +192,12 @@ msgid "Asset depreciation table line"
 msgstr "Asset depreciation line"
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/models/account_move.py:0
+#, python-format
+msgid "Asset name must be set in the label of the line."
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
@@ -523,6 +529,7 @@ msgid "Depreciation Name"
 msgstr "Depreciation Name"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__display_name
@@ -530,6 +537,8 @@ msgstr "Depreciation Name"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__display_name
 msgid "Display Name"
 msgstr "Display Name"
 
@@ -566,11 +575,6 @@ msgid ""
 "Error while processing asset '%s': \n"
 "\n"
 "%s"
-msgstr ""
-
-#. module: account_asset_management
-#: model:ir.model,name:account_asset_management.model_account_fiscal_year
-msgid "Fiscal Year"
 msgstr ""
 
 #. module: account_asset_management
@@ -616,6 +620,7 @@ msgid "History"
 msgstr "History"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__id
@@ -623,6 +628,8 @@ msgstr "History"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__id
 msgid "ID"
 msgstr "ID"
 
@@ -669,7 +676,6 @@ msgstr "Journal"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
-#: model:ir.model,name:account_asset_management.model_account_move
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
 msgid "Journal Entries"
@@ -677,6 +683,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
+#: model:ir.model,name:account_asset_management.model_account_move
 #, python-format
 msgid "Journal Entry"
 msgstr ""
@@ -694,6 +701,7 @@ msgid "Journal Items"
 msgstr "Journal Items"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
@@ -701,6 +709,8 @@ msgstr "Journal Items"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line____last_update
 msgid "Last Modified on"
 msgstr "Last Modified on"
 
