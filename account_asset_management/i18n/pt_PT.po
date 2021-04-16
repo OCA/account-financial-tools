@@ -193,6 +193,12 @@ msgid "Asset depreciation table line"
 msgstr "Linha de depreciação de ativos"
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/models/account_move.py:0
+#, python-format
+msgid "Asset name must be set in the label of the line."
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
@@ -539,6 +545,7 @@ msgid "Depreciation Name"
 msgstr "Nome da Depreciação"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__display_name
@@ -546,6 +553,8 @@ msgstr "Nome da Depreciação"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__display_name
 msgid "Display Name"
 msgstr "Nome a exibir"
 
@@ -583,12 +592,6 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-
-#. module: account_asset_management
-#: model:ir.model,name:account_asset_management.model_account_fiscal_year
-#, fuzzy
-msgid "Fiscal Year"
-msgstr "Ano Fiscal"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
@@ -634,6 +637,7 @@ msgid "History"
 msgstr "Histórico"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__id
@@ -641,6 +645,8 @@ msgstr "Histórico"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__id
 msgid "ID"
 msgstr "ID"
 
@@ -690,7 +696,6 @@ msgstr "Diário"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
-#: model:ir.model,name:account_asset_management.model_account_move
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
 msgid "Journal Entries"
@@ -698,6 +703,7 @@ msgstr "Movs. de Diário"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
+#: model:ir.model,name:account_asset_management.model_account_move
 #, python-format
 msgid "Journal Entry"
 msgstr "Mov. de Diário"
@@ -715,6 +721,7 @@ msgid "Journal Items"
 msgstr "Item do Diário"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
@@ -722,6 +729,8 @@ msgstr "Item do Diário"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line____last_update
 msgid "Last Modified on"
 msgstr "Modificado pela última vez em"
 
@@ -1321,6 +1330,10 @@ msgstr ""
 "Deve adicionar manualmente linhas de depreciação com as depreciações de anos "
 "fiscais anteriores se a Data de Início de Depreciação é diferente da data "
 "para a qual é necessário gerar movs. contabilísticos."
+
+#, fuzzy
+#~ msgid "Fiscal Year"
+#~ msgstr "Ano Fiscal"
 
 #~ msgid ""
 #~ "Choose the method to use to compute the amount of depreciation lines.\n"
