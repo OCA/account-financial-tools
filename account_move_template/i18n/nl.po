@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: Frank Schellenberg <opensource@schellenberg.nl>, 2018\n"
+"PO-Revision-Date: 2021-04-18 10:46+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
 "Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
@@ -33,51 +34,52 @@ msgstr ""
 #: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (Kopie)"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "1250"
-msgstr ""
+msgstr "1250"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
 msgid "Account"
-msgstr ""
+msgstr "Rekening"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
+#, fuzzy
 msgid "Account Opt."
-msgstr ""
+msgstr "Rekening"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Add an internal note here..."
-msgstr ""
+msgstr "Voeg interne notitie toe..."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Amount"
-msgstr ""
+msgstr "Bedrag"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Analytic"
-msgstr ""
+msgstr "kostenplaats"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_account_id
 msgid "Analytic Account"
-msgstr ""
+msgstr "Kostenplaats"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
-msgstr ""
+msgstr "Kostenplaatslabels"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -90,35 +92,35 @@ msgstr "Annuleren"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__company_id
 msgid "Company"
-msgstr ""
+msgstr "Bedrijf"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_currency_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Bedrijfsvaluta"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Compute Formula"
-msgstr ""
+msgstr "Bereken formule"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__computed
 msgid "Computed"
-msgstr ""
+msgstr "berekende"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_run_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_run_menu
 msgid "Create Entry from Template"
-msgstr ""
+msgstr "Maak een mutatie vanaf sjabloon"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 #, fuzzy
 msgid "Create Journal Entry"
-msgstr "Aangemaakt op"
+msgstr "Maak boekings mutatie"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_uid
@@ -140,30 +142,30 @@ msgstr "Aangemaakt op"
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__cr
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__cr
 msgid "Credit"
-msgstr ""
+msgstr "Credit"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__date
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__dr
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__dr
 msgid "Debit"
-msgstr ""
+msgstr "Debet"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Debit and credit of all lines are null."
-msgstr ""
+msgstr "Debet en credit van alle regels zijn nul."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__move_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__move_line_type
 msgid "Direction"
-msgstr ""
+msgstr "Richting"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__display_name
@@ -177,12 +179,12 @@ msgstr "Te tonen naam"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Entry from template %s"
-msgstr ""
+msgstr "Mutatie vanuit sjabloon %s"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Generate Journal Entry"
-msgstr ""
+msgstr "Genereer boeking"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__id
@@ -221,14 +223,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__is_refund
 msgid "Is a refund?"
-msgstr ""
+msgstr "is een credit?"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__journal_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__journal_id
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal"
-msgstr ""
+msgstr "Dagboek"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
@@ -236,23 +238,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal Entry Template"
-msgstr ""
+msgstr "Boekkingssjabloon"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Journal Entry Template Line"
-msgstr ""
+msgstr "Boekingssjabloon regel"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_menu
+#, fuzzy
 msgid "Journal Entry Templates"
-msgstr ""
+msgstr "Boekingssjabloon"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "Journal Item Template"
-msgstr ""
+msgstr "boeking sjabloon"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -263,22 +266,22 @@ msgstr ""
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L1 * 0.2"
-msgstr ""
+msgstr "L1 * 0.2"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L1 + L2 + L3"
-msgstr ""
+msgstr "L1 + L2 + L3"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L2 - L1"
-msgstr ""
+msgstr "L2 - L1"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__name
 msgid "Label"
-msgstr ""
+msgstr "Naam"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
@@ -308,12 +311,12 @@ msgstr "Laatst bijgewerkt op"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__line_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__line_ids
 msgid "Lines"
-msgstr ""
+msgstr "Regels"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__template_id
 msgid "Move Template"
-msgstr ""
+msgstr "Mutatie sjabloon"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__name
@@ -324,19 +327,19 @@ msgstr "Naam"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__note
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__note
 msgid "Note"
-msgstr ""
+msgstr "Notitie"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_line_id
 msgid "Originator Tax"
-msgstr ""
+msgstr "Herkomst van de BTW"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
@@ -347,7 +350,7 @@ msgstr "Relatie"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__overwrite
 msgid "Overwrite"
-msgstr ""
+msgstr "Overschrijven"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -365,40 +368,40 @@ msgstr "Relatie"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__payment_term_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__payment_term_id
 msgid "Payment Terms"
-msgstr ""
+msgstr "Betalingsconditie"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__python_code
 msgid "Python Code"
-msgstr ""
+msgstr "Python Code"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Python Code must be set for computed line with sequence %d."
-msgstr ""
+msgstr "Python Code moet zijn opgegeven voor berekende regel met volgorde %d."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
 msgid "Reference"
-msgstr ""
+msgstr "Referentie"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
 msgid "Select Template"
-msgstr ""
+msgstr "Selecteer sjabloon"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__sequence
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Volgorde"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__set_lines
 msgid "Set Lines"
-msgstr ""
+msgstr "zet regels"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
@@ -409,19 +412,19 @@ msgstr "Status"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_repartition_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_repartition_line_id
 msgid "Tax Repartition Line"
-msgstr ""
+msgstr "Belastingscorrectie regel"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Taxes"
-msgstr ""
+msgstr "Belastingen"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__template_id
 msgid "Template"
-msgstr ""
+msgstr "Sjabloon"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -430,16 +433,18 @@ msgid ""
 "The selected template (%s) is not in the same company (%s) as the current "
 "user (%s)."
 msgstr ""
+"Het geselecteerde sjabloon (%s) bevind zich niet binnen hetzelfde bedrijf "
+"(%s) als de huidige gebruiker (%s)."
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_line_sequence_template_uniq
 msgid "The sequence of the line must be unique per template!"
-msgstr ""
+msgstr "De volgorde van de regel moet uniek zijn binnen het sjabloon!"
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_name_company_unique
 msgid "This name is already used by another template!"
-msgstr ""
+msgstr "Deze naam is reeds in gebruik door een ander sjabloon!"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__type
@@ -454,7 +459,7 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
 msgid "User input"
-msgstr ""
+msgstr "Gebruikersinvoer"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -465,12 +470,12 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
 msgid "When amount is negative, use this account in stead"
-msgstr ""
+msgstr "Wanneer een bedrag negatief is, gebruik dit inplaats"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
 msgid "Wizard"
-msgstr ""
+msgstr "Gids"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line_run
