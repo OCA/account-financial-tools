@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-04-14 21:46+0000\n"
+"PO-Revision-Date: 2021-04-18 10:46+0000\n"
 "Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
 "Language-Team: none\n"
 "Language: nl\n"
@@ -19,43 +19,43 @@ msgstr ""
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_group
 msgid "Account Group"
-msgstr ""
+msgstr "Rekeningsgroep"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_group_action
 #: model:ir.ui.menu,name:account_menu.account_group_menu
 msgid "Account Groups"
-msgstr ""
+msgstr "Rubrieken"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "Rekening label"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_account_tag_action
 #: model:ir.ui.menu,name:account_menu.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "Boekhoudingslabels"
 
 #. module: account_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_form
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Group"
-msgstr ""
+msgstr "BTW-groep"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.action_account_tax_group
 #: model:ir.ui.menu,name:account_menu.account_tax_group_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Groups"
-msgstr ""
+msgstr "Belastingsgroepen"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_account_template_action
 #: model:ir.ui.menu,name:account_menu.menu_account_account_template
 msgid "Account Templates"
-msgstr ""
+msgstr "Rekeningsjabloon"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.account_type_menu
@@ -81,7 +81,7 @@ msgstr "Bank en Cash"
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_cash
 msgid "Cash Registers"
-msgstr ""
+msgstr "Kassysteem"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_chart_template
