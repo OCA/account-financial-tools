@@ -721,3 +721,32 @@ class TestAssetManagement(SavepointCase):
             [(group_tfa.id, "Tangible Fixed A...")],
         )
         self.assertFalse(self.env["account.asset.group"]._name_search("stessA dexiF"))
+
+    def test_16_use_number_of_depreciations(self):
+        # When you run a depreciation with method = 'number'
+        profile = self.env.ref("account_asset_management.account_asset_profile_car_5Y")
+        profile.method_time = "number"
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": profile.id,
+                "purchase_value": 10000,
+                "salvage_value": 0,
+                "date_start": time.strftime("2019-01-01"),
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.refresh()
+        for _i in range(1, 11):
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[1].amount, 166.67, places=2
+            )
+        # In the last month of the fiscal year we compensate for the small
+        # deviations if that is necessary.
+        self.assertAlmostEqual(asset.depreciation_line_ids[12].amount, 166.63, places=2)
