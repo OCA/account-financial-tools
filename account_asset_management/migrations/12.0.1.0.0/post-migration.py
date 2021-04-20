@@ -18,20 +18,44 @@ def adjust_asset_values(env):
         FROm account_asset_profile aap
         WHERE aa.profile_id = aap.id""",
     )
-    # Adjust method_time, method_number and method_period
-    number = sql.Identifier(openupgrade.get_legacy_name('method_number'))
-    period = sql.Identifier(openupgrade.get_legacy_name('method_period'))
+    # Adjust method_time, method_end, method_number and method_period
+    method_number = sql.Identifier(openupgrade.get_legacy_name('method_number'))
+    method_period = sql.Identifier(openupgrade.get_legacy_name('method_period'))
+    method_time = sql.Identifier(openupgrade.get_legacy_name('method_time'))
     for table in ['account_asset_profile', 'account_asset']:
         table = sql.Identifier(table)
         openupgrade.logged_query(
             env.cr, sql.SQL("""
             UPDATE {table}
             SET method_time = 'year',
+                method_end = NULL,
                 method_number = ({number} * {period}) / 12
-            WHERE MOD({number} * {period}, 12) = 0
+            WHERE MOD({number} * {period}, 12) = 0 AND {time} != 'end'
             """).format(
-                number=number,
-                period=period,
+                number=method_number,
+                period=method_period,
+                time=method_time,
+                table=table,
+            ),
+        )
+        openupgrade.logged_query(
+            env.cr, sql.SQL("""
+            UPDATE {table}
+            SET method_time = 'year',
+                method_number = 0
+            WHERE {time} = 'end'
+            """).format(
+                time=method_time,
+                table=table,
+            ),
+        )
+        openupgrade.logged_query(
+            env.cr, sql.SQL("""
+            UPDATE {table}
+            SET method_end = NULL
+            WHERE {time} = 'number'
+            """).format(
+                time=method_time,
                 table=table,
             ),
         )
@@ -45,7 +69,7 @@ def adjust_asset_values(env):
                 END)
             WHERE {period} IN (1, 3, 12)
             """).format(
-                period=period,
+                period=method_period,
                 table=table,
             ),
         )

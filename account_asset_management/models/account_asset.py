@@ -157,10 +157,8 @@ class AccountAsset(models.Model):
              "number of depreciation lines.\n"
              "  * Number of Years: Specify the number of years "
              "for the depreciation.\n"
-             # "  * Number of Depreciations: Fix the number of "
-             # "depreciation lines and the time between 2 depreciations.\n"
-             # "  * Ending Date: Choose the time between 2 depreciations "
-             # "and the date the depreciations won't go beyond."
+             "  * Number of Depreciations: Fix the number of "
+             "depreciation lines and the time between 2 depreciations.\n"
     )
     days_calc = fields.Boolean(
         string='Calculate by days',
@@ -258,10 +256,10 @@ class AccountAsset(models.Model):
                       "Year."))
 
     @api.multi
-    @api.constrains('date_start', 'method_end', 'method_time')
+    @api.constrains('date_start', 'method_end', 'method_number', 'method_time')
     def _check_dates(self):
         for asset in self:
-            if asset.method_time == 'end':
+            if asset.method_time == 'year' and not asset.method_number:
                 if asset.method_end <= asset.date_start:
                     raise UserError(
                         _("The Start Date must precede the Ending Date."))
