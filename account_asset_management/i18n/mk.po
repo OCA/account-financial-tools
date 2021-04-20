@@ -38,7 +38,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1054
-#: code:addons/account_asset_management/models/account_asset.py:1056
 #, python-format
 msgid ""
 "\n"
@@ -550,14 +549,12 @@ msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:146
 #: code:addons/account_asset_management/models/account_asset_profile.py:149
 #, python-format
 msgid "Degressive"
 msgstr "Дегресивна"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:148
 #: code:addons/account_asset_management/models/account_asset_profile.py:151
 #, python-format
 msgid "Degressive  up to Salvage Value"
@@ -570,7 +567,6 @@ msgid "Degressive Factor"
 msgstr "Фактор на дегресија"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:147
 #: code:addons/account_asset_management/models/account_asset_profile.py:150
 #, python-format
 msgid "Degressive-Linear"
@@ -578,8 +574,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:255
-#: code:addons/account_asset_management/models/account_asset.py:257
-#: code:addons/account_asset_management/models/account_asset_profile.py:176
 #: code:addons/account_asset_management/models/account_asset_profile.py:180
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
@@ -715,7 +709,6 @@ msgstr "Записи"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1057
-#: code:addons/account_asset_management/models/account_asset.py:1059
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -767,7 +760,6 @@ msgstr "Општо"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:436
-#: code:addons/account_asset_management/models/account_asset.py:438
 #, python-format
 msgid "Generate Asset Removal entries"
 msgstr ""
@@ -835,7 +827,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:772
-#: code:addons/account_asset_management/models/account_asset.py:774
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr ""
@@ -894,7 +885,6 @@ msgstr "Дневник"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:456
-#: code:addons/account_asset_management/models/account_asset.py:458
 #: model:ir.model,name:account_asset_management.model_account_move
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
@@ -958,14 +948,12 @@ msgid "Last Updated on"
 msgstr "Последно ажурирање на"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:144
 #: code:addons/account_asset_management/models/account_asset_profile.py:147
 #, python-format
 msgid "Linear"
 msgstr "Линеарно"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:145
 #: code:addons/account_asset_management/models/account_asset_profile.py:148
 #, python-format
 msgid "Linear up to Salvage Value"
@@ -984,7 +972,6 @@ msgid "Missing depreciation table"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:154
 #: code:addons/account_asset_management/models/account_asset_profile.py:157
 #, python-format
 msgid "Month"
@@ -1051,7 +1038,6 @@ msgid "Number of Years"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:166
 #: code:addons/account_asset_management/models/account_asset_profile.py:169
 #, python-format
 msgid "Number of Years or end date"
@@ -1167,7 +1153,6 @@ msgid "Purchase Value"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:155
 #: code:addons/account_asset_management/models/account_asset_profile.py:158
 #, python-format
 msgid "Quarter"
@@ -1323,7 +1308,6 @@ msgstr "Статус"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:745
-#: code:addons/account_asset_management/models/account_asset.py:747
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1351,7 +1335,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:265
-#: code:addons/account_asset_management/models/account_asset.py:267
 #: code:addons/account_asset_management/wizard/wiz_account_asset_report.py:52
 #, python-format
 msgid "The Start Date must precede the Ending Date."
@@ -1359,7 +1342,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:533
-#: code:addons/account_asset_management/models/account_asset.py:535
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
@@ -1503,7 +1485,6 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:156
 #: code:addons/account_asset_management/models/account_asset_profile.py:159
 #, python-format
 msgid "Year"
@@ -1529,7 +1510,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:371
-#: code:addons/account_asset_management/models/account_asset.py:373
 #, python-format
 msgid "You can only delete assets in draft state."
 msgstr ""
@@ -1565,7 +1545,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:288
-#: code:addons/account_asset_management/models/account_asset.py:290
 #, fuzzy, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
@@ -1580,7 +1559,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:375
-#: code:addons/account_asset_management/models/account_asset.py:377
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr ""
