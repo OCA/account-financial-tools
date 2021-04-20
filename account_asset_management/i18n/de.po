@@ -314,11 +314,9 @@ msgid ""
 "Choose the method to use to compute the dates and number of depreciation "
 "lines.\n"
 "  * Number of Years: Specify the number of years for the depreciation.\n"
+"  * Number of Depreciations: Fix the number of depreciation lines and the "
+"time between 2 depreciations.\n"
 msgstr ""
-"Wählen Sie das zu verwendende Verfahren zur Bestimmung von Daten und Anzahl "
-"der Abschreibungen.\n"
-"* Anzahl der Jahre: Bestimmen Sie die Anzahl der Jahre über die "
-"abgeschrieben wird.\n"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
@@ -924,6 +922,12 @@ msgid "Notes"
 msgstr "Bemerkungen"
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+#, python-format
+msgid "Number of Depreciations"
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_number
@@ -1520,6 +1524,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "oder"
+
+#~ msgid ""
+#~ "Choose the method to use to compute the dates and number of depreciation "
+#~ "lines.\n"
+#~ "  * Number of Years: Specify the number of years for the depreciation.\n"
+#~ msgstr ""
+#~ "Wählen Sie das zu verwendende Verfahren zur Bestimmung von Daten und "
+#~ "Anzahl der Abschreibungen.\n"
+#~ "* Anzahl der Jahre: Bestimmen Sie die Anzahl der Jahre über die "
+#~ "abgeschrieben wird.\n"
 
 #~ msgid ""
 #~ "Choose the method to use to compute the amount of depreciation lines.\n"
