@@ -204,7 +204,9 @@ class AccountAsset(models.Model):
         help="Choose the method to use to compute the dates and "
         "number of depreciation lines.\n"
         "  * Number of Years: Specify the number of years "
-        "for the depreciation.\n",
+        "for the depreciation.\n"
+        "  * Number of Depreciations: Fix the number of "
+        "depreciation lines and the time between 2 depreciations.\n",
     )
     days_calc = fields.Boolean(
         string="Calculate by days",
@@ -388,10 +390,12 @@ class AccountAsset(models.Model):
                 _("Degressive-Linear is only supported for Time Method = Year.")
             )
 
-    @api.constrains("date_start", "method_end", "method_time")
+    @api.constrains("date_start", "method_end", "method_number", "method_time")
     def _check_dates(self):
         if self.filtered(
-            lambda a: a.method_time == "end" and a.method_end <= a.date_start
+            lambda a: a.method_time == "year"
+            and not a.method_number
+            and a.method_end <= a.date_start
         ):
             raise UserError(_("The Start Date must precede the Ending Date."))
 
