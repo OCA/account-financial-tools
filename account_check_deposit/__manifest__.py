@@ -21,7 +21,6 @@
         "data/sequence.xml",
         "views/account_check_deposit_view.xml",
         "views/account_move_line_view.xml",
-        "views/res_config_settings_views.xml",
         "report/report.xml",
         "report/report_checkdeposit.xml",
     ],
