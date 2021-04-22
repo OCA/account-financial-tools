@@ -72,7 +72,8 @@ class AccountCheckDeposit(models.Model):
     journal_id = fields.Many2one(
         comodel_name="account.journal",
         string="Journal",
-        domain=[("type", "=", "bank"), ("bank_account_id", "=", False)],
+        domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
+        "('bank_account_id', '=', False)]",
         required=True,
         check_company=True,
         states={"done": [("readonly", "=", True)]},
@@ -136,6 +137,21 @@ class AccountCheckDeposit(models.Model):
         compute="_compute_check_deposit", store=True, string="Reconcile"
     )
 
+    @api.model
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        ajo = self.env["account.journal"]
+        company_id = res.get("company_id")
+        # pre-set journal_id and bank_journal_id is there is only one
+        domain = [("company_id", "=", company_id), ("type", "=", "bank")]
+        journals = ajo.search(domain + [("bank_account_id", "=", False)])
+        if len(journals) == 1:
+            res["journal_id"] = journals.id
+        bank_journals = ajo.search(domain + [("bank_account_id", "!=", False)])
+        if len(bank_journals) == 1:
+            res["bank_journal_id"] = bank_journals.id
+        return res
+
     @api.constrains("currency_id", "check_payment_ids", "company_id")
     def _check_deposit(self):
         for deposit in self:
@@ -198,6 +214,7 @@ class AccountCheckDeposit(models.Model):
             "journal_id": self.journal_id.id,
             "date": self.deposit_date,
             "ref": _("Check Deposit %s") % self.name,
+            "company_id": self.company_id.id,
         }
         return move_vals
 
@@ -205,7 +222,7 @@ class AccountCheckDeposit(models.Model):
     def _prepare_move_line_vals(self, line):
         assert line.debit > 0, "Debit must have a value"
         return {
-            "name": _("Check Ref. %s") % line.ref,
+            "name": line.ref and _("Check Ref. %s") % line.ref or False,
             "credit": line.debit,
             "debit": 0.0,
             "account_id": line.account_id.id,
@@ -289,3 +306,29 @@ class AccountCheckDeposit(models.Model):
         report = self.env.ref("account_check_deposit.report_account_check_deposit")
         action = report.report_action(self)
         return action
+
+    def get_all_checks(self):
+        self.ensure_one()
+        all_pending_checks = self.env["account.move.line"].search(
+            [
+                ("company_id", "=", self.company_id.id),
+                ("reconciled", "=", False),
+                ("account_id", "=", self.journal_id.payment_debit_account_id.id),
+                ("debit", ">", 0),
+                ("check_deposit_id", "=", False),
+                ("currency_id", "=", self.currency_id.id),
+            ]
+        )
+        if all_pending_checks:
+            all_pending_checks.write({"check_deposit_id": self.id})
+        else:
+            raise UserError(
+                _(
+                    "There are no received checks in account '%s' in currency '%s' "
+                    "that are not already in this check deposit."
+                )
+                % (
+                    self.journal_id.payment_debit_account_id.display_name,
+                    self.currency_id.display_name,
+                )
+            )
