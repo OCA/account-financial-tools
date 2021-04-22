@@ -11,7 +11,14 @@
         <field name="model">account.check.deposit</field>
         <field name="arch" type="xml">
             <form>
-                <header>
+                    <header>
+                    <button
+                        name="get_all_checks"
+                        states="draft"
+                        type="object"
+                        class="btn-primary"
+                        string="Get All Received Checks"
+                    />
                     <button
                         name="validate_deposit"
                         states="draft"
@@ -69,28 +76,30 @@
                                         ('debit', '>', 0),
                                         ('check_deposit_id', '=', False),
                                         ('currency_id', '=', currency_id),
-                                        ('account_id', '=', journal_default_account_id)]"
+                                ('account_id', '=', journal_default_account_id),
+                                ('company_id', '=', company_id),
+                                ]"
                             context="{'currency': currency_id,
                                         'journal_id': journal_id}"
                         >
                             <tree>
                                 <field name="date" />
-                                <field name="date_maturity" />
-                                <field name="journal_id" />
+                                <field name="date_maturity" optional="hide" />
+                                <field name="journal_id" optional="hide" />
                                 <field name="move_id" />
-                                <field name="ref" />
+                                <field name="ref" optional="show" />
                                 <field name="partner_id" />
-                                <field name="name" />
-                                <field name="debit" sum="1" />
-                                <field name="credit" sum="1" />
+                                <field name="name" optional="show" />
+                                <field name="balance" sum="1" optional="show" />
                                 <field
                                     name="amount_currency"
                                     groups="base.group_multi_currency"
                                     sum="1"
+                                    optional="hide"
                                 />
                                 <field name="currency_id" invisible="1" />
                                 <field name="company_currency_id" invisible="1" />
-                                <field name="full_reconcile_id" />
+                                <field name="full_reconcile_id" optional="show" />
                             </tree>
                         </field>
                     </group>
@@ -102,17 +111,26 @@
         <field name="name">account.check.deposit.tree</field>
         <field name="model">account.check.deposit</field>
         <field name="arch" type="xml">
-            <tree decoration-info="state == 'draft'">
-                <field name="name" />
+            <tree>
+                <field name="name" decoration-bf="1" />
                 <field name="deposit_date" />
                 <field name="journal_id" />
                 <field name="bank_journal_id" />
                 <field name="check_count" />
-                <field name="total_amount" />
-                <field name="currency_id" groups="base.group_multi_currency" />
-                <field name="is_reconcile" />
+                <field name="total_amount" decoration-bf="1" />
+                <field
+                    name="currency_id"
+                    groups="base.group_multi_currency"
+                    optional="show"
+                />
+                <field name="is_reconcile" optional="show" />
                 <field name="company_id" groups="base.group_multi_company" />
-                <field name="state" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'done'"
+                />
             </tree>
         </field>
     </record>
@@ -122,6 +140,10 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name" string="Checks Deposit" />
+                <field
+                    name="bank_journal_id"
+                    domain="[('type', '=', 'bank'), ('bank_account_id', '!=', False)]"
+                />
                 <filter
                     name="draft"
                     string="Draft"
@@ -140,23 +162,33 @@
                         context="{'group_by': 'journal_id'}"
                     />
                     <filter
-                        name="currency_groupby"
-                        string="Currency"
-                        context="{'group_by': 'currency_id'}"
-                    />
-                    <filter
                         name="bank_journal_id_groupby"
                         string="Bank Account"
                         context="{'group_by': 'bank_journal_id'}"
                     />
+                    <filter
+                        name="currency_groupby"
+                        string="Currency"
+                        context="{'group_by': 'currency_id'}"
+                    />
                 </group>
             </search>
         </field>
-    </record>
+</record>
+<record id="check_deposit_pivot" model="ir.ui.view">
+        <field name="model">account.check.deposit</field>
+        <field name="arch" type="xml">
+                <pivot>
+                        <field name="deposit_date" interval="month" type="row" />
+                        <field name="bank_journal_id" type="col" />
+                        <field name="check_count" type="measure" />
+                </pivot>
+        </field>
+</record>
     <record id="action_check_deposit_tree" model="ir.actions.act_window">
         <field name="name">Checks Deposits</field>
         <field name="res_model">account.check.deposit</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,pivot</field>
     </record>
     <menuitem
         action="action_check_deposit_tree"
