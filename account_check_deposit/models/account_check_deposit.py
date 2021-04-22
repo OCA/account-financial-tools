@@ -13,6 +13,7 @@ from odoo.exceptions import UserError, ValidationError
 class AccountCheckDeposit(models.Model):
     _name = "account.check.deposit"
     _description = "Account Check Deposit"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "deposit_date desc"
     _check_company_auto = True
 
@@ -56,7 +57,7 @@ class AccountCheckDeposit(models.Model):
             deposit.is_reconcile = reconcile
             deposit.check_count = count
 
-    name = fields.Char(string="Name", size=64, readonly=True, default="/")
+    name = fields.Char(string="Name", size=64, readonly=True, default="/", copy=False)
     check_payment_ids = fields.One2many(
         comodel_name="account.move.line",
         inverse_name="check_deposit_id",
@@ -68,6 +69,8 @@ class AccountCheckDeposit(models.Model):
         required=True,
         states={"done": [("readonly", "=", True)]},
         default=fields.Date.context_today,
+        tracking=True,
+        copy=False,
     )
     journal_id = fields.Many2one(
         comodel_name="account.journal",
@@ -77,6 +80,7 @@ class AccountCheckDeposit(models.Model):
         required=True,
         check_company=True,
         states={"done": [("readonly", "=", True)]},
+        tracking=True,
     )
     journal_default_account_id = fields.Many2one(
         comodel_name="account.account",
@@ -88,12 +92,14 @@ class AccountCheckDeposit(models.Model):
         string="Currency",
         required=True,
         states={"done": [("readonly", "=", True)]},
+        tracking=True,
     )
     state = fields.Selection(
         selection=[("draft", "Draft"), ("done", "Done")],
         string="Status",
         default="draft",
         readonly=True,
+        tracking=True,
     )
     move_id = fields.Many2one(
         comodel_name="account.move",
@@ -109,6 +115,7 @@ class AccountCheckDeposit(models.Model):
         "('bank_account_id', '!=', False)]",
         check_company=True,
         states={"done": [("readonly", "=", True)]},
+        tracking=True,
     )
     line_ids = fields.One2many(
         comodel_name="account.move.line",
@@ -121,21 +128,32 @@ class AccountCheckDeposit(models.Model):
         required=True,
         states={"done": [("readonly", "=", True)]},
         default=lambda self: self.env.company,
+        tracking=True,
     )
     total_amount = fields.Monetary(
         compute="_compute_check_deposit",
         string="Total Amount",
         store=True,
         currency_field="currency_id",
+        tracking=True,
     )
     check_count = fields.Integer(
         compute="_compute_check_deposit",
         store=True,
         string="Number of Checks",
+        tracking=True,
     )
     is_reconcile = fields.Boolean(
         compute="_compute_check_deposit", store=True, string="Reconcile"
     )
+
+    _sql_constraints = [
+        (
+            "name_company_unique",
+            "unique(company_id, name)",
+            "A check deposit with this reference already exists in this company.",
+        )
+    ]
 
     @api.model
     def default_get(self, fields_list):
@@ -320,6 +338,7 @@ class AccountCheckDeposit(models.Model):
             ]
         )
         if all_pending_checks:
+            self.message_post(body=_("Get All Received Checks"))
             all_pending_checks.write({"check_deposit_id": self.id})
         else:
             raise UserError(
