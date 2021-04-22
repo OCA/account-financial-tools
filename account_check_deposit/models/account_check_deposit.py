@@ -194,12 +194,8 @@ class AccountCheckDeposit(models.Model):
 
     def _prepare_account_move_vals(self):
         self.ensure_one()
-        if self.company_id.check_deposit_offsetting_account == "bank_account":
-            journal_id = self.bank_journal_id.id
-        else:
-            journal_id = self.journal_id.id
         move_vals = {
-            "journal_id": journal_id,
+            "journal_id": self.journal_id.id,
             "date": self.deposit_date,
             "ref": _("Check Deposit %s") % self.name,
         }
@@ -209,7 +205,7 @@ class AccountCheckDeposit(models.Model):
     def _prepare_move_line_vals(self, line):
         assert line.debit > 0, "Debit must have a value"
         return {
-            "name": _("Check Deposit - Ref. Check %s") % line.ref,
+            "name": _("Check Ref. %s") % line.ref,
             "credit": line.debit,
             "debit": 0.0,
             "account_id": line.account_id.id,
@@ -220,36 +216,15 @@ class AccountCheckDeposit(models.Model):
 
     def _prepare_counterpart_move_lines_vals(self, total_debit, total_amount_currency):
         self.ensure_one()
-        company = self.company_id
-        if not company.check_deposit_offsetting_account:
+        if not self.bank_journal_id.payment_debit_account_id:
             raise UserError(
-                _(
-                    "You must configure the 'Check Deposit Offsetting Account' "
-                    "on the Accounting Settings page"
-                )
+                _("Missing 'Outstanding Receipts Account' on the bank journal '%s'.")
+                % self.bank_journal_id.display_name
             )
-        if company.check_deposit_offsetting_account == "bank_account":
-            if not self.bank_journal_id.default_account_id:
-                raise UserError(
-                    _("Missing 'Default Debit Account' on bank journal '%s'")
-                    % self.bank_journal_id.name
-                )
-            account_id = self.bank_journal_id.default_account_id.id
-        elif company.check_deposit_offsetting_account == "transfer_account":
-            if not company.check_deposit_transfer_account_id:
-                raise UserError(
-                    _(
-                        "Missing 'Check Deposit Offsetting Account' on the "
-                        "company '%s'."
-                    )
-                    % company.name
-                )
-            account_id = company.check_deposit_transfer_account_id.id
         return {
-            "name": _("Check Deposit %s") % self.name,
             "debit": total_debit,
             "credit": 0.0,
-            "account_id": account_id,
+            "account_id": self.bank_journal_id.payment_debit_account_id.id,
             "partner_id": False,
             "currency_id": self.currency_id.id or False,
             "amount_currency": total_amount_currency,
