@@ -283,7 +283,6 @@ msgid "Assets management (OCA)"
 msgstr "Gestão de Ativos (OCA)"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/report/account_asset_report_xls.py:670
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:671
 #, python-format
 msgid "Assets to be corrected"
@@ -703,7 +702,6 @@ msgid "Draft Assets"
 msgstr "Rascunhos de Ativos"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/report/account_asset_report_xls.py:666
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:667
 #, python-format
 msgid "Duplicate reporting entries"
@@ -998,7 +996,6 @@ msgid "Min-Value Account"
 msgstr "Conta de Menos-Valias"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/report/account_asset_report_xls.py:664
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:665
 #, python-format
 msgid "Missing depreciation table"
@@ -1190,7 +1187,6 @@ msgid "Quarter"
 msgstr "Trimestre"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/report/account_asset_report_xls.py:672
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:673
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__reason
 #, python-format
@@ -1356,7 +1352,6 @@ msgstr ""
 "'Número de Anos'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/report/account_asset_report_xls.py:529
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:530
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
@@ -1495,7 +1490,6 @@ msgid "Type"
 msgstr "Tipo"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/report/account_asset_report_xls.py:668
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:669
 #, python-format
 msgid "Undetermined error"
