@@ -24,6 +24,11 @@ class TestMove(SavepointCase):
         cls.product = cls.env["product.product"].create(
             {"name": "Test product", "type": "service"}
         )
+        account_type = cls.env.ref("account.data_account_type_other_income")
+        cls.income_account = cls.env["account.account"].search(
+            [("user_type_id", "=", account_type.id)], limit=1
+        )
+
         invoice = Form(
             cls.env["account.move"].with_context(
                 default_type="out_invoice", default_company_id=cls.env.company.id
@@ -36,6 +41,7 @@ class TestMove(SavepointCase):
             line_form.product_id = cls.product
             line_form.quantity = 1.0
             line_form.price_unit = 10
+            line_form.account_id = cls.income_account
         invoice = invoice.save()
         invoice.action_post()
         cls.invoice = invoice
