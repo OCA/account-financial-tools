@@ -2,3 +2,4 @@
 
   * Víctor Martínez
   * Pedro M. Baeza
+* Alex Comba <alex.comba@agilebg.com>
