@@ -1,34 +1,31 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_cost_center
+# 	* account_cost_center
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017
-# Zwygart <zwygart@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2017-01-12 03:43+0000\n"
-"Last-Translator: Zwygart <zwygart@gmail.com>, 2017\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
-"Language: fr\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: Pascal GOUHIER <p.gouhier@khetys.fr>\n"
+"Language: fr_FR\n"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_cost_center
 msgid "Account Cost Center"
-msgstr ""
+msgstr "Compte du Centre de coûts"
 
 #. module: account_cost_center
 #: model_terms:ir.actions.act_window,help:account_cost_center.account_cost_center_action
 msgid "Click to add a new cost center."
-msgstr ""
+msgstr "Cliquez pour ajouter un nouveau centre de coûts."
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__code
@@ -47,18 +44,18 @@ msgstr "Société"
 #: model:ir.model.fields,field_description:account_cost_center.field_account_move_line__cost_center_id
 #: model_terms:ir.ui.view,arch_db:account_cost_center.view_account_invoice_report_search
 msgid "Cost Center"
-msgstr ""
+msgstr "Centre de coût"
 
 #. module: account_cost_center
 #: model:ir.actions.act_window,name:account_cost_center.account_cost_center_action
 #: model:ir.ui.menu,name:account_cost_center.cost_center_menu
 msgid "Cost Centers"
-msgstr ""
+msgstr "Centres de coûts"
 
 #. module: account_cost_center
 #: model_terms:ir.actions.act_window,help:account_cost_center.account_cost_center_action
 msgid "Cost centers provide an extra analytic dimension"
-msgstr ""
+msgstr "Les centres de coûts fournissent une dimension analytique supplémentaire"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_uid
@@ -73,12 +70,12 @@ msgstr "Créé le"
 #. module: account_cost_center
 #: model:ir.model.fields,help:account_cost_center.field_account_invoice__cost_center_id
 msgid "Default Cost Center"
-msgstr ""
+msgstr "Centre de coûts par défaut"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__display_name
 msgid "Display Name"
-msgstr "Nom à afficher"
+msgstr "Nom affiché"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__id
@@ -93,18 +90,17 @@ msgstr "Facture"
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_line
 msgid "Invoice Line"
-msgstr "Ligne de facuration"
+msgstr "Ligne de facture"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_report
 msgid "Invoices Statistics"
-msgstr ""
+msgstr "Statistiques des factures"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move_line
-#, fuzzy
 msgid "Journal Item"
-msgstr "Écritures du journal"
+msgstr "Ecriture du journal"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center____last_update
@@ -114,7 +110,7 @@ msgstr "Dernière modification le"
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Dernière modification par"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__write_date
@@ -124,12 +120,9 @@ msgstr "Dernière mise à jour le"
 #. module: account_cost_center
 #: model_terms:ir.ui.view,arch_db:account_cost_center.account_cost_center_view_search
 msgid "Name/Code"
-msgstr ""
+msgstr "Nom/Code"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__name
 msgid "Title"
-msgstr "Intitulé"
-
-#~ msgid "Analytic Account"
-#~ msgstr "Compte analytique"
+msgstr "Titre"
