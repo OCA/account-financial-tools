@@ -39,7 +39,7 @@ msgid "Is fiscal month?"
 msgstr ""
 
 #. module: account_fiscal_month
-#: code:addons/account_fiscal_month/models/date_range_type.py:18
+#: code:addons/account_fiscal_month/models/date_range_type.py:0
 #, python-format
 msgid "You can't delete date range type: Fiscal month"
 msgstr ""
