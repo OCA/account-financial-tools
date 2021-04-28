@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo13-addon-account_cash_basis_group_base_line',
         'odoo13-addon-account_chart_update',
         'odoo13-addon-account_check_deposit',
+        'odoo13-addon-account_fiscal_month',
         'odoo13-addon-account_fiscal_position_allowed_journal',
         'odoo13-addon-account_fiscal_year',
         'odoo13-addon-account_invoice_constraint_chronology',
