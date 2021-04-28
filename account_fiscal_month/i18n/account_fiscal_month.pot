@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_fiscal_month
+# 	* account_fiscal_month
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,8 +34,7 @@ msgid "Is fiscal month?"
 msgstr ""
 
 #. module: account_fiscal_month
-#: code:addons/account_fiscal_month/models/date_range_type.py:18
+#: code:addons/account_fiscal_month/models/date_range_type.py:0
 #, python-format
 msgid "You can't delete date range type: Fiscal month"
 msgstr ""
-
