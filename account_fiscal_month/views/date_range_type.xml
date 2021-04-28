@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="date_range_type_form_view">
+        <field name="name">date.range.type.form (in account_fiscal_month)</field>
+        <field name="model">date.range.type</field>
+        <field name="inherit_id" ref="date_range.view_date_range_type_form_view" />
+        <field name="arch" type="xml">
+            <field name="allow_overlap" position="after">
+                <field name="fiscal_month" />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="date_range_type_tree_view">
+        <field name="name">date.range.type.tree (in account_fiscal_month)</field>
+        <field name="model">date.range.type</field>
+        <field name="inherit_id" ref="date_range.view_date_range_type_tree" />
+        <field name="arch" type="xml">
+            <field name="allow_overlap" position="after">
+                <field name="fiscal_month" />
+            </field>
+        </field>
+    </record>
+</odoo>
