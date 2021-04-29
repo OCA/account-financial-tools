@@ -316,8 +316,12 @@ class AccountAsset(models.Model):
 
     @api.depends("profile_id")
     def _compute_group_ids(self):
-        for asset in self.filtered("profile_id"):
-            asset.group_ids = asset.profile_id.group_ids
+        for asset in self:
+            if asset.profile_id:
+                asset.group_ids = asset.profile_id.group_ids
+            else:
+                # HACK: Not needed in v14 due to odoo/odoo#64359
+                asset.group_ids = asset.group_ids
 
     @api.depends("profile_id")
     def _compute_method(self):
