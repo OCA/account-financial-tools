@@ -640,18 +640,18 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         # Groups are displayed by code (if any) plus name
         self.assertEqual(
-            self.env["account.asset.group"]._name_search("FA"),
+            self.env["account.asset.group"].name_search("FA"),
             [(group_fa.id, "FA Fixed Assets")],
         )
         # Groups with code are shown by code in list views
         self.assertEqual(
             self.env["account.asset.group"]
             .with_context(params={"view_type": "list"})
-            ._name_search("FA"),
+            .name_search("FA"),
             [(group_fa.id, "FA")],
         )
         self.assertEqual(
-            self.env["account.asset.group"]._name_search("TFA"),
+            self.env["account.asset.group"].name_search("TFA"),
             [(group_tfa.id, "TFA Tangible Fixed Assets")],
         )
         group_tfa.code = False
@@ -665,4 +665,4 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             group_tfa.with_context(params={"view_type": "list"}).name_get(),
             [(group_tfa.id, "Tangible Fixed A...")],
         )
-        self.assertFalse(self.env["account.asset.group"]._name_search("stessA dexiF"))
+        self.assertFalse(self.env["account.asset.group"].name_search("stessA dexiF"))
