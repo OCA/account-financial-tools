@@ -1,5 +1,6 @@
 # Copyright 2009-2020 Noviat
 # Copyright 2019 Tecnativa - Pedro M. Baeza
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -72,7 +73,6 @@ class AccountAssetGroup(models.Model):
             ]
             if operator in expression.NEGATIVE_TERM_OPERATORS:
                 domain = ["&", "!"] + domain[1:]
-        rec_ids = self._search(
+        return self._search(
             expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid
         )
-        return self.browse(rec_ids).name_get()
