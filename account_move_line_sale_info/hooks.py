@@ -1,8 +1,5 @@
 # Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-import ast
-
-from odoo import SUPERUSER_ID, api
 
 
 def post_init_hook(cr, registry):
@@ -11,7 +8,7 @@ def post_init_hook(cr, registry):
     # FOR stock moves
     cr.execute(
         """
-        update account_move_line aml set sale_line_id = sm.sale_line_id
+        UPDATE account_move_line aml SET sale_line_id = sm.sale_line_id
         FROM account_move_line aml2
         INNER JOIN stock_move sm ON
         aml2.stock_move_id = sm.id
@@ -21,14 +18,12 @@ def post_init_hook(cr, registry):
     # FOR invoices
     cr.execute(
         """
-        update account_move_line aml set sale_line_id = sol.id
+        UPDATE account_move_line aml SET sale_line_id = sol.id
         FROM account_move_line aml2
-        INNER JOIN account_invoice ai ON
-        ai.id = aml2.invoice_id
-        INNER JOIN account_invoice_line ail ON
-        ail.invoice_id = ai.id
+        INNER JOIN account_move am ON
+        am.id = aml2.move_id
         INNER JOIN sale_order_line_invoice_rel rel ON
-        rel.invoice_line_id = ail.id
+        rel.invoice_line_id = aml2.id
         INNER JOIN sale_order_line sol ON
         rel.order_line_id = sol.id
         AND sol.product_id = aml2.product_id
@@ -40,7 +35,7 @@ def post_init_hook(cr, registry):
     cr.execute(
         """
         UPDATE account_move_line aml
-        SET sale_id = sol.order_id
+        SET sale_order_id = sol.order_id
         FROM sale_order_line AS sol
         WHERE aml.sale_line_id = sol.id
         RETURNING aml.move_id
@@ -53,10 +48,10 @@ def post_init_hook(cr, registry):
     cr.execute(
         """
         UPDATE account_move_line aml
-        SET sale_id = so.id
-        FROM sale_order_line so
+        SET sale_order_id = so.id
+        FROM sale_order so
         LEFT JOIN account_move_line aml2
-        ON aml2.sale_id = so.id
+        ON aml2.sale_order_id = so.id
         WHERE aml2.move_id = aml.move_id
     """
     )
@@ -66,7 +61,7 @@ def post_init_hook(cr, registry):
         update account_move_line aml set sale_line_id = sol.id
         FROM account_move_line aml2
         INNER JOIN sale_order so ON
-        so.id = aml2.sale_id
+        so.id = aml2.sale_order_id
         INNER JOIN sale_order_line sol ON
         so.id = sol.order_id
         AND sol.product_id = aml2.product_id
