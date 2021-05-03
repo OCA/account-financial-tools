@@ -24,6 +24,7 @@ addon | version | summary
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 14.0.1.1.0 | Create Account Fiscal Year
 [account_menu](account_menu/) | 14.0.1.0.0 | Adds missing menu entries for Account module
+[account_move_force_removal](account_move_force_removal/) | 14.0.1.0.0 | Allow force removal account moves
 [account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 | Adds a Journal Items menu
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.1.1.0 | Allows to edit taxes on non-posted account move lines
 [account_move_template](account_move_template/) | 14.0.1.0.0 | Templates for recurring Journal Entries
