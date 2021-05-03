@@ -1,6 +1,5 @@
 # Copyright 2020 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import fields
 from odoo.tests import common
 
 
@@ -9,8 +8,6 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         super(TestAccountMoveLineSaleInfo, self).setUp()
         self.sale_model = self.env["sale.order"]
         self.sale_line_model = self.env["sale.order.line"]
-        self.invoice_model = self.env["account.invoice"]
-        self.invoice_line_model = self.env["account.invoice.line"]
         self.product_model = self.env["product.product"]
         self.product_ctg_model = self.env["product.category"]
         self.acc_type_model = self.env["account.account.type"]
@@ -58,6 +55,15 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         self.account_manager = self._create_user(
             "account_manager", [self.group_account_manager], self.company
         )
+        self.JournalObj = self.env["account.journal"]
+        self.journal_sale = self.JournalObj.create(
+            {
+                "name": "Test journal sale",
+                "code": "TST-JRNL-S",
+                "type": "sale",
+                "company_id": self.company.id,
+            }
+        )
 
     def _create_user(self, login, groups, company):
         """ Create a user."""
@@ -75,8 +81,10 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         )
         return user.id
 
-    def _create_account_type(self, name, type):
-        acc_type = self.acc_type_model.create({"name": name, "type": type})
+    def _create_account_type(self, name, atype):
+        acc_type = self.acc_type_model.create(
+            {"name": name, "type": atype, "internal_group": name}
+        )
         return acc_type
 
     def _create_account(self, acc_type, name, code, company):
@@ -124,10 +132,9 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             line_values = {
                 "name": product.name,
                 "product_id": product.id,
-                "product_qty": qty,
+                "product_uom_qty": qty,
                 "product_uom": product.uom_id.id,
                 "price_unit": 500,
-                "date_planned": fields.datetime.now(),
             }
             lines.append((0, 0, line_values))
         return self.sale_model.create(
@@ -168,55 +175,70 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         account move line and to the invoice line.
         """
         sale = self._create_sale([(self.product, 1)])
-        po_line = False
+        so_line = False
         for line in sale.order_line:
-            po_line = line
+            so_line = line
             break
-        sale.button_confirm()
+        sale.action_confirm()
         picking = sale.picking_ids[0]
-        picking.force_assign()
         picking.move_lines.write({"quantity_done": 1.0})
         picking.button_validate()
 
-        expected_balance = 1.0
+        expected_balance = -1.0
         self._check_account_balance(
             self.account_inventory.id,
-            sale_line=po_line,
+            sale_line=so_line,
             expected_balance=expected_balance,
         )
-
-        invoice = self.invoice_model.create(
-            {
-                "partner_id": self.partner1.id,
-                "sale_id": sale.id,
-                "account_id": sale.partner_id.property_account_payable_id.id,
-            }
+        self.context = {
+            "active_model": "sale.order",
+            "active_ids": [sale.id],
+            "active_id": sale.id,
+            "default_journal_id": self.journal_sale.id,
+        }
+        payment = (
+            self.env["sale.advance.payment.inv"]
+            .with_context(self.context)
+            .create({"advance_payment_method": "delivered"})
         )
-        invoice.sale_order_change()
-        invoice.action_invoice_open()
+        payment.create_invoices()
+        invoice = sale.invoice_ids[0]
+        invoice.post()
 
-        for aml in invoice.move_id.line_ids:
-            if aml.product_id == po_line.product_id and aml.invoice_id:
+        for aml in invoice.line_ids:
+            if aml.product_id == so_line.product_id and aml.move_id:
                 self.assertEqual(
                     aml.sale_line_id,
-                    po_line,
+                    so_line,
                     "sale Order line has not been copied "
                     "from the invoice to the account move line.",
                 )
 
     def test_name_get(self):
         sale = self._create_sale([(self.product, 1)])
-        po_line = sale.order_line[0]
-        name_get = po_line.with_context({"po_line_info": True}).name_get()
+        so_line = sale.order_line[0]
+        name_get = so_line.with_context({"so_line_info": True}).name_get()
         self.assertEqual(
             name_get,
             [
                 (
-                    po_line.id,
-                    "[%s] %s (%s)"
-                    % (po_line.order_id.name, po_line.name, po_line.order_id.state,),
+                    so_line.id,
+                    "[%s] %s - (%s)"
+                    % (
+                        so_line.order_id.name,
+                        so_line.product_id.name,
+                        so_line.order_id.state,
+                    ),
                 )
             ],
         )
-        name_get_no_ctx = po_line.name_get()
-        self.assertEqual(name_get_no_ctx, [(po_line.id, po_line.name)])
+        name_get_no_ctx = so_line.with_context({}).name_get()
+        self.assertEqual(
+            name_get_no_ctx,
+            [
+                (
+                    so_line.id,
+                    "{} - {}".format(so_line.order_id.name, so_line.product_id.name),
+                )
+            ],
+        )
