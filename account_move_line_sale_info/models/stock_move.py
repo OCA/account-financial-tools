@@ -8,10 +8,10 @@ class StockMove(models.Model):
 
     @api.model
     def _prepare_account_move_line(
-        self, qty, cost, credit_account_id, debit_account_id
+        self, qty, cost, credit_account_id, debit_account_id, description
     ):
         res = super(StockMove, self)._prepare_account_move_line(
-            qty, cost, credit_account_id, debit_account_id
+            qty, cost, credit_account_id, debit_account_id, description
         )
         for line in res:
             line[2]["sale_line_id"] = self.sale_line_id.id
