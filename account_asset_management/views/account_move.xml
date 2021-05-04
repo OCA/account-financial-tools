@@ -11,12 +11,14 @@
             >
                 <field
                     name="asset_profile_id"
-                    attrs="{'invisible': [('parent.move_type', 'not in', ('in_invoice', 'in_refund'))]}"
+                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('in_invoice', 'in_refund'))]}"
+                    optional="show"
                 />
                 <field
                     name="asset_id"
-                    attrs="{'invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund'))]}"
                     groups="account.group_account_manager"
+                    optional="show"
                 />
             </xpath>
             <xpath
