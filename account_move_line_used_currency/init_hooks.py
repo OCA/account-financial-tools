@@ -11,10 +11,8 @@ _logger = logging.getLogger(__name__)
 
 
 def pre_init_hook(cr):
-    _logger.info(
-        "Pre-creating column amount_used_currency for table " "account_move_line"
-    )
-    if not openupgrade.column_exists(cr, "account_move_ine", "amount_used_currency"):
+    _logger.info("Pre-creating column amount_used_currency for table account_move_line")
+    if not openupgrade.column_exists(cr, "account_move_line", "amount_used_currency"):
         cr.execute(
             """
             ALTER TABLE account_move_line
@@ -24,7 +22,7 @@ def pre_init_hook(cr):
             """
         )
     _logger.info("Pre-creating column used_currency_id for table account_move_line")
-    if not openupgrade.column_exists(cr, "account_move_ine", "used_currency_id"):
+    if not openupgrade.column_exists(cr, "account_move_line", "used_currency_id"):
         cr.execute(
             """
             ALTER TABLE account_move_line
