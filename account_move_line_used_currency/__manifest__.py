@@ -7,7 +7,7 @@
     "category": "Accounts",
     "license": "LGPL-3",
     "depends": ["account"],
-    "data": ["views/account_move_line_view.xml"],
+    "data": ["views/account_move_line_view.xml", "views/account_move_view.xml"],
     "pre_init_hook": "pre_init_hook",
     "installable": True,
 }
