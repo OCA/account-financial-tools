@@ -34,8 +34,6 @@ The full asset life-cycle is managed (from asset creation to asset removal).
 Assets can be created manually as well as automatically
 (via the creation of an accounting entry on the asset account).
 
-Excel based reporting is available via the 'account_asset_management_xls' module.
-
 The module contains a large number of functional enhancements compared to
 the standard account_asset module from Odoo.
 
@@ -101,6 +99,12 @@ Contributors
 - Maxence Groine <mgroine@fiefmanage.ch>
 - Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
 - Saran Lim. <saranl@ecosoft.co.th>
+
+
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+    * Víctor Martínez
+    * João Marques
 
 Maintainers
 ~~~~~~~~~~~

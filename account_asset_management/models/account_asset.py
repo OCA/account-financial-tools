@@ -157,10 +157,8 @@ class AccountAsset(models.Model):
              "number of depreciation lines.\n"
              "  * Number of Years: Specify the number of years "
              "for the depreciation.\n"
-             # "  * Number of Depreciations: Fix the number of "
-             # "depreciation lines and the time between 2 depreciations.\n"
-             # "  * Ending Date: Choose the time between 2 depreciations "
-             # "and the date the depreciations won't go beyond."
+             "  * Number of Depreciations: Fix the number of "
+             "depreciation lines and the time between 2 depreciations.\n"
     )
     days_calc = fields.Boolean(
         string='Calculate by days',
@@ -202,6 +200,9 @@ class AccountAsset(models.Model):
     account_analytic_id = fields.Many2one(
         comodel_name='account.analytic.account',
         string='Analytic account')
+    analytic_tag_ids = fields.Many2many(
+        comodel_name='account.analytic.tag',
+        string='Analytic tags')
 
     @api.model
     def _default_company_id(self):
@@ -255,10 +256,10 @@ class AccountAsset(models.Model):
                       "Year."))
 
     @api.multi
-    @api.constrains('date_start', 'method_end', 'method_time')
+    @api.constrains('date_start', 'method_end', 'method_number', 'method_time')
     def _check_dates(self):
         for asset in self:
-            if asset.method_time == 'end':
+            if asset.method_time == 'year' and not asset.method_number:
                 if asset.method_end <= asset.date_start:
                     raise UserError(
                         _("The Start Date must precede the Ending Date."))
@@ -298,6 +299,7 @@ class AccountAsset(models.Model):
                 'method_progress_factor': profile.method_progress_factor,
                 'prorata': profile.prorata,
                 'account_analytic_id': profile.account_analytic_id,
+                'analytic_tag_ids': profile.analytic_tag_ids,
                 'group_ids': profile.group_ids,
             })
 
@@ -471,6 +473,10 @@ class AccountAsset(models.Model):
 
         line_obj = self.env['account.asset.line']
         digits = self.env['decimal.precision'].precision_get('Account')
+        company = self.company_id
+        fiscalyear_lock_date = (
+            company.fiscalyear_lock_date or fields.Date.to_date('1901-01-01')
+        )
 
         for asset in self:
             if asset.value_residual == 0.0:
@@ -593,7 +599,7 @@ class AccountAsset(models.Model):
                             'name': name,
                             'line_date': line['date'],
                             'line_days': line['days'],
-                            'init_entry': entry['init'],
+                            'init_entry': fiscalyear_lock_date >= line['date'],
                         }
                         depreciated_value += round(amount, digits)
                         depr_line = line_obj.create(vals)
@@ -871,6 +877,10 @@ class AccountAsset(models.Model):
         i_max = len(table) - 1
         remaining_value = self.depreciation_base
         depreciated_value = 0.0
+        company = self.company_id
+        fiscalyear_lock_date = (
+            company.fiscalyear_lock_date or fields.Date.to_date('1901-01-01')
+        )
 
         for i, entry in enumerate(table):
 
@@ -923,6 +933,7 @@ class AccountAsset(models.Model):
                     'amount': amount,
                     'depreciated_value': depreciated_value,
                     'remaining_value': remaining_value,
+                    'init': fiscalyear_lock_date >= line_date,
                 }
                 lines.append(line)
                 depreciated_value += amount
@@ -972,10 +983,7 @@ class AccountAsset(models.Model):
         if self.method_time in ['year', 'number'] \
                 and not self.method_number and not self.method_end:
             return table
-        company = self.company_id
         asset_date_start = self.date_start
-        fiscalyear_lock_date = (
-            company.fiscalyear_lock_date or fields.Date.to_date('1901-01-01'))
         depreciation_start_date = self._get_depreciation_start_date(
             self._get_fy_info(asset_date_start)['record'])
         depreciation_stop_date = self._get_depreciation_stop_date(
@@ -987,7 +995,6 @@ class AccountAsset(models.Model):
                 'fy': fy_info['record'],
                 'date_start': fy_info['date_from'],
                 'date_stop': fy_info['date_to'],
-                'init': fiscalyear_lock_date >= fy_info['date_from'],
             })
             fy_date_start = fy_info['date_to'] + relativedelta(days=1)
         # Step 1:
@@ -1064,3 +1071,68 @@ class AccountAsset(models.Model):
                 triggers.sudo().write(recompute_vals)
 
         return (result, error_log)
+
+    @api.model
+    def _xls_acquisition_fields(self):
+        """
+        Update list in custom module to add/drop columns or change order
+        """
+        return [
+            'account', 'name', 'code', 'date_start', 'depreciation_base',
+            'salvage_value',
+        ]
+
+    @api.model
+    def _xls_active_fields(self):
+        """
+        Update list in custom module to add/drop columns or change order
+        """
+        return [
+            'account', 'name', 'code', 'date_start',
+            'depreciation_base', 'salvage_value',
+            'period_start_value', 'period_depr', 'period_end_value',
+            'period_end_depr',
+            'method', 'method_number', 'prorata', 'state',
+        ]
+
+    @api.model
+    def _xls_removal_fields(self):
+        """
+        Update list in custom module to add/drop columns or change order
+        """
+        return [
+            'account', 'name', 'code', 'date_remove', 'depreciation_base',
+            'salvage_value',
+        ]
+
+    @api.model
+    def _xls_asset_template(self):
+        """
+        Template updates
+
+        """
+        return {}
+
+    @api.model
+    def _xls_acquisition_template(self):
+        """
+        Template updates
+
+        """
+        return {}
+
+    @api.model
+    def _xls_active_template(self):
+        """
+        Template updates
+
+        """
+        return {}
+
+    @api.model
+    def _xls_removal_template(self):
+        """
+        Template updates
+
+        """
+        return {}

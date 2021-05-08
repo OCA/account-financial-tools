@@ -3,7 +3,7 @@
 
 {
     'name': 'Account Payment Netting',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'summary': 'Net Payment on AR/AP invoice from the same partner',
     'category': 'Accounting & Finance',
     'author': 'Ecosoft, '
@@ -18,6 +18,6 @@
         'views/account_payment_view.xml',
     ],
     'installable': True,
-    'development_status': 'beta',
+    'development_status': 'Beta',
     'maintainers': ['kittiu'],
 }

@@ -110,6 +110,40 @@ class TestAssetManagement(SavepointCase):
             'invoice_line_ids': [(4, cls.invoice_line_2.id),
                                  (4, cls.invoice_line_3.id)]})
 
+    def test_00_fiscalyear_lock_date_month(self):
+        asset = self.asset_model.create({
+            'name': 'test asset',
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
+            'purchase_value': 1500,
+            'date_start': '1901-02-01',
+            'method_time': 'year',
+            'method_number': 3,
+            'method_period': 'month',
+        })
+        asset.compute_depreciation_board()
+        asset.refresh()
+        self.assertTrue(asset.depreciation_line_ids[0].init_entry)
+        for i in range(1, 36):
+            self.assertFalse(asset.depreciation_line_ids[i].init_entry)
+
+    def test_00_fiscalyear_lock_date_year(self):
+        asset = self.asset_model.create({
+            'name': 'test asset',
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
+            'purchase_value': 1500,
+            'date_start': '1901-02-01',
+            'method_time': 'year',
+            'method_number': 3,
+            'method_period': 'year',
+        })
+        asset.compute_depreciation_board()
+        asset.refresh()
+        self.assertTrue(asset.depreciation_line_ids[0].init_entry)
+        for i in range(1, 4):
+            self.assertFalse(asset.depreciation_line_ids[i].init_entry)
+
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
         #
@@ -152,7 +186,20 @@ class TestAssetManagement(SavepointCase):
         self.assertEqual(ict0.value_depreciated, 500)
         self.assertEqual(ict0.value_residual, 1000)
         vehicle0.validate()
-        vehicle0.depreciation_line_ids[1].create_move()
+        created_move_ids = vehicle0.depreciation_line_ids[1].create_move()
+        for move_id in created_move_ids:
+            move = self.env["account.move"].browse(move_id)
+            expense_line = move.line_ids.filtered(
+                lambda line: line.account_id == self.env.ref("account.a_expense")
+            )
+            self.assertEqual(
+                expense_line.analytic_account_id,
+                self.env.ref("analytic.analytic_administratif"),
+            )
+            self.assertEqual(
+                expense_line.analytic_tag_ids,
+                self.env.ref("analytic.tag_contract")
+            )
         vehicle0.refresh()
         self.assertEqual(vehicle0.state, 'open')
         self.assertEqual(vehicle0.value_depreciated, 2000)
@@ -598,3 +645,66 @@ class TestAssetManagement(SavepointCase):
         # deviations if that is necessary.
         self.assertAlmostEqual(
             asset.depreciation_line_ids[12].amount, 166.63, places=2)
+
+    def test_15_account_asset_group(self):
+        """ Group's name_get behaves differently depending on code and context
+        """
+        group_fa = self.env.ref(
+            'account_asset_management.account_asset_group_fa')
+        group_tfa = self.env.ref(
+            'account_asset_management.account_asset_group_tfa')
+        # Groups are displayed by code (if any) plus name
+        self.assertEqual(
+            self.env['account.asset.group']._name_search('FA'),
+            [(group_fa.id, 'FA Fixed Assets')])
+        # Groups with code are shown by code in list views
+        self.assertEqual(
+            self.env['account.asset.group'].with_context(
+                params={'view_type': 'list'})._name_search('FA'),
+            [(group_fa.id, 'FA')])
+        self.assertEqual(
+            self.env['account.asset.group']._name_search('TFA'),
+            [(group_tfa.id, 'TFA Tangible Fixed Assets')])
+        group_tfa.code = False
+        group_fa.code = False
+        self.assertEqual(
+            group_fa.name_get(),
+            [(group_fa.id, 'Fixed Assets')])
+        # Groups without code are shown by truncated name in lists
+        self.assertEqual(
+            group_tfa.name_get(),
+            [(group_tfa.id, 'Tangible Fixed Assets')])
+        self.assertEqual(
+            group_tfa.with_context(params={'view_type': 'list'}).name_get(),
+            [(group_tfa.id, 'Tangible Fixed A...')])
+        self.assertFalse(
+            self.env['account.asset.group']._name_search('stessA dexiF'))
+
+    def test_16_use_number_of_depreciations(self):
+        # When you run a depreciation with method = 'number'
+        profile = self.env.ref("account_asset_management.account_asset_profile_car_5Y")
+        profile.method_time = "number"
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": profile.id,
+                "purchase_value": 10000,
+                "salvage_value": 0,
+                "date_start": time.strftime("2019-01-01"),
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.refresh()
+        for _i in range(1, 11):
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[1].amount, 166.67, places=2
+            )
+        # In the last month of the fiscal year we compensate for the small
+        # deviations if that is necessary.
+        self.assertAlmostEqual(asset.depreciation_line_ids[12].amount, 166.63, places=2)

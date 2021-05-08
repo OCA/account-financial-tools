@@ -52,7 +52,6 @@ msgstr "Journal"
 #. module: account_journal_lock_date
 #: model:ir.model,name:account_journal_lock_date.model_account_move
 #, fuzzy
-#| msgid "Journal"
 msgid "Journal Entries"
 msgstr "Journal"
 
