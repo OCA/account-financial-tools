@@ -1,5 +1,6 @@
 # Copyright (c) 2014 ACSONE SA/NV (acsone.eu).
 # Copyright 2009-2018 Noviat
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -708,3 +709,47 @@ class TestAssetManagement(SavepointCase):
         # In the last month of the fiscal year we compensate for the small
         # deviations if that is necessary.
         self.assertAlmostEqual(asset.depreciation_line_ids[12].amount, 166.63, places=2)
+
+    def test_17_value_residual_negative_and_remove(self):
+        profile = self.env.ref("account_asset_management.account_asset_profile_car_5Y")
+        profile.method_time = "number"
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": profile.id,
+                "purchase_value": 10000,
+                "salvage_value": 0,
+                "date_start": time.strftime("2019-01-01"),
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.refresh()
+        asset.validate()
+        last_line = asset.depreciation_line_ids[-1]
+        last_line.amount += 1
+        for line_id in asset.depreciation_line_ids.filtered(
+            lambda x: not x.init_entry
+        ):
+            line_id.create_move()
+        self.assertEqual(asset.value_residual, -1)
+        self.assertEqual(asset.state, "open")
+        wiz_ctx = {
+            'active_id': asset.id,
+            'early_removal': True,
+        }
+        wiz = self.remove_model.with_context(wiz_ctx).create({
+            'date_remove': '2024-01-01',
+            'sale_value': 0.0,
+            'posting_regime': 'gain_loss_on_sale',
+            'account_plus_value_id': self.ref('account.a_sale'),
+            'account_min_value_id': self.ref('account.a_expense'),
+        })
+        wiz.remove()
+        self.assertEqual(asset.value_residual, 0)
+        self.assertEqual(asset.state, "removed")

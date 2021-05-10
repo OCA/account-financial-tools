@@ -1,5 +1,6 @@
 # Copyright 2009-2018 Noviat
 # Copyright 2019 Tecnativa - Pedro M. Baeza
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -528,7 +529,13 @@ class AccountAsset(models.Model):
             if posted_lines:
                 last_depreciation_date = last_line.line_date
                 last_date_in_table = table[-1]['lines'][-1]['date']
-                if last_date_in_table <= last_depreciation_date:
+                pending_line_ids = asset.depreciation_line_ids.filtered(
+                    lambda x: not x.init_entry and not x.move_check
+                )
+                if (
+                    last_date_in_table <= last_depreciation_date
+                    and len(pending_line_ids) > 0
+                ):
                     raise UserError(
                         _("The duration of the asset conflicts with the "
                           "posted depreciation table entry dates."))

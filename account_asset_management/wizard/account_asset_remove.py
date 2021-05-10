@@ -1,4 +1,5 @@
 # Copyright 2009-2018 Noviat
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from dateutil.relativedelta import relativedelta
@@ -135,7 +136,11 @@ class AccountAssetRemove(models.TransientModel):
         asset_ref = asset.code and '%s (ref: %s)' \
             % (asset.name, asset.code) or asset.name
 
-        if self.env.context.get('early_removal'):
+        pending_line_ids = asset.depreciation_line_ids.filtered(
+            lambda x: not x.init_entry and not x.move_check
+        )
+
+        if self.env.context.get('early_removal') and len(pending_line_ids) > 0:
             residual_value = self._prepare_early_removal(asset)
         else:
             residual_value = asset.value_residual
@@ -150,7 +155,7 @@ class AccountAssetRemove(models.TransientModel):
                 [('asset_id', '=', asset.id), ('type', '=', 'create')])[0]
             last_date = create_dl.line_date
 
-        if self.date_remove < last_date:
+        if self.date_remove < last_date and len(pending_line_ids) > 0:
             raise UserError(
                 _("The removal date must be after "
                   "the last depreciation date."))
