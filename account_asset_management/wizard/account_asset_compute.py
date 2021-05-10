@@ -17,8 +17,12 @@ class AccountAssetCompute(models.TransientModel):
     )
     note = fields.Text()
 
+    def _get_domain_asset_to_compute(self):
+        self.ensure_one()
+        return [("state", "=", "open")]
+
     def asset_compute(self):
-        assets = self.env["account.asset"].search([("state", "=", "open")])
+        assets = self.env["account.asset"].search(self._get_domain_asset_to_compute())
         created_move_ids, error_log = assets._compute_entries(
             self.date_end, check_triggers=True
         )
