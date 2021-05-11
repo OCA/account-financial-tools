@@ -49,18 +49,11 @@ class TestAccountInvoice(TransactionCase):
         policy.write({
             'account_ids': [(6, 0, [account.id])]
         })
-
-        # There is a bug with Odoo ...
-        # The field "credit_policy_id" is considered as an "old field" and
-        # the field property_account_receivable_id like a "new field"
-        # The ORM will create the record with old field
-        # and update the record with new fields.
-        # However constrains are applied after the first creation.
         partner = self.env['res.partner'].create({
             'name': 'Partner',
             'property_account_receivable_id': account.id,
+            'credit_policy_id': policy.id,
         })
-        partner.credit_policy_id = policy.id
 
         date_invoice = datetime.today() - relativedelta.relativedelta(years=1)
         invoice = self.env['account.invoice'].create({

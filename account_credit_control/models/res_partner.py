@@ -2,7 +2,7 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -52,7 +52,6 @@ class ResPartner(models.Model):
         string='Manual Followup',
     )
 
-    @api.constrains('credit_policy_id', 'property_account_receivable_id')
     def _check_credit_policy(self):
         """ Ensure that policy on partner are limited to the account policy """
         # sudo needed for those w/o permission that duplicate records
@@ -67,3 +66,15 @@ class ResPartner(models.Model):
             except UserError as err:
                 # constrains should raise ValidationError exceptions
                 raise ValidationError(err)
+
+    def write(self, vals):
+        # There is a bug with Odoo ...
+        # The field "credit_policy_id" is considered as an "old field" and
+        # the field property_account_receivable_id like a "new field"
+        # the default check with constrain are not possible as fields are
+        # updated not in the same time on ORM write
+        # so we call check when all fields written to the record
+        res = super(ResPartner, self).write(vals)
+        if vals.get("credit_policy_id") or vals.get("property_account_receivable_id"):
+            self._check_credit_policy()
+        return res
