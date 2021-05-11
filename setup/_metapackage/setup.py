@@ -27,6 +27,7 @@ setuptools.setup(
         'odoo13-addon-account_move_force_removal',
         'odoo13-addon-account_move_line_purchase_info',
         'odoo13-addon-account_move_line_tax_editable',
+        'odoo13-addon-account_move_line_used_currency',
         'odoo13-addon-account_move_template',
         'odoo13-addon-account_netting',
         'odoo13-addon-account_tax_repartition_line_tax_group_account',
