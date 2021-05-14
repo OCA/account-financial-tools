@@ -17,7 +17,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # ENVIRONEMENTS
+        # ENVIRONMENTS
         cls.asset_model = cls.env["account.asset"]
         cls.asset_profile_model = cls.env["account.asset.profile"]
         cls.dl_model = cls.env["account.asset.line"]
@@ -58,6 +58,23 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             line_form.price_unit = 20000.00
             line_form.quantity = 1
         cls.invoice_2 = move_form.save()
+
+        # analytic configuration
+        cls.env.user.write(
+            {
+                "groups_id": [
+                    (4, cls.env.ref("analytic.group_analytic_accounting").id),
+                    (4, cls.env.ref("analytic.group_analytic_tags").id),
+                ],
+            }
+        )
+        cls.analytic_account = cls.env["account.analytic.account"].create(
+            {"name": "test_analytic_account"}
+        )
+        cls.analytic_tag = cls.env["account.analytic.tag"].create(
+            {"name": "test_analytic_tag"}
+        )
+
         # Asset Profile 1
         cls.ict3Y = cls.asset_profile_model.create(
             {
@@ -90,6 +107,8 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "method_time": "year",
                 "method_number": 5,
                 "method_period": "year",
+                "account_analytic_id": cls.analytic_account.id,
+                "analytic_tag_ids": [(4, cls.analytic_tag.id)],
             }
         )
 
@@ -117,6 +136,42 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             line_form.tax_ids.add(tax)
         invoice = move_form.save()
         self.assertEqual(invoice.partner_id, self.partner)
+
+    def test_00_fiscalyear_lock_date_month(self):
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": 1500,
+                "date_start": "1901-02-01",
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "month",
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.refresh()
+        self.assertTrue(asset.depreciation_line_ids[0].init_entry)
+        for i in range(1, 36):
+            self.assertFalse(asset.depreciation_line_ids[i].init_entry)
+
+    def test_00_fiscalyear_lock_date_year(self):
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": 1500,
+                "date_start": "1901-02-01",
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "year",
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.refresh()
+        self.assertTrue(asset.depreciation_line_ids[0].init_entry)
+        for i in range(1, 4):
+            self.assertFalse(asset.depreciation_line_ids[i].init_entry)
 
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
@@ -178,7 +233,17 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertEqual(ict0.value_depreciated, 500)
         self.assertEqual(ict0.value_residual, 1000)
         vehicle0.validate()
-        vehicle0.depreciation_line_ids[1].create_move()
+        created_move_ids = vehicle0.depreciation_line_ids[1].create_move()
+        for move_id in created_move_ids:
+            move = self.env["account.move"].browse(move_id)
+            expense_line = move.line_ids.filtered(
+                lambda line: line.account_id.internal_group == "expense"
+            )
+            self.assertEqual(
+                expense_line.analytic_account_id.id,
+                self.analytic_account.id,
+            )
+            self.assertEqual(expense_line.analytic_tag_ids.id, self.analytic_tag.id)
         vehicle0.refresh()
         self.assertEqual(vehicle0.state, "open")
         self.assertEqual(vehicle0.value_depreciated, 2000)
@@ -666,3 +731,32 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             [(group_tfa.id, "Tangible Fixed A...")],
         )
         self.assertFalse(self.env["account.asset.group"].name_search("stessA dexiF"))
+
+    def test_16_use_number_of_depreciations(self):
+        # When you run a depreciation with method = 'number'
+        profile = self.car5y
+        profile.method_time = "number"
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": profile.id,
+                "purchase_value": 10000,
+                "salvage_value": 0,
+                "date_start": time.strftime("2019-01-01"),
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.refresh()
+        for _i in range(1, 11):
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[1].amount, 166.67, places=2
+            )
+        # In the last month of the fiscal year we compensate for the small
+        # deviations if that is necessary.
+        self.assertAlmostEqual(asset.depreciation_line_ids[12].amount, 166.63, places=2)

@@ -7,6 +7,7 @@ import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tests.common import Form
 
 _logger = logging.getLogger(__name__)
 
@@ -72,19 +73,25 @@ class AccountMove(models.Model):
                 vals = {
                     "name": aml.name,
                     "code": move.name,
-                    "profile_id": aml.asset_profile_id.id,
+                    "profile_id": aml.asset_profile_id,
                     "purchase_value": depreciation_base,
-                    "partner_id": aml.partner_id.id,
+                    "partner_id": aml.partner_id,
                     "date_start": move.date,
-                    "account_analytic_id": aml.analytic_account_id.id,
+                    "account_analytic_id": aml.analytic_account_id,
                 }
                 if self.env.context.get("company_id"):
-                    vals["company_id"] = self.env.context["company_id"]
-                asset = (
-                    self.env["account.asset"]
-                    .with_context(create_asset_from_move_line=True, move_id=move.id)
-                    .create(vals)
+                    vals["company_id"] = self.env["res.company"].browse(
+                        self.env.context["company_id"]
+                    )
+                asset_form = Form(
+                    self.env["account.asset"].with_context(
+                        create_asset_from_move_line=True, move_id=move.id
+                    )
                 )
+                for key, val in vals.items():
+                    setattr(asset_form, key, val)
+                asset = asset_form.save()
+                asset.analytic_tag_ids = aml.analytic_tag_ids
                 aml.with_context(allow_asset=True).asset_id = asset.id
             refs = [
                 "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"
