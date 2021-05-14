@@ -93,6 +93,12 @@ msgid "Analytic account"
 msgstr "Conta analítica"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
+msgid "Analytic tags"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Are you sure ?"
 msgstr "Tem a certeza?"
@@ -304,10 +310,9 @@ msgid ""
 "Choose the method to use to compute the dates and number of depreciation "
 "lines.\n"
 "  * Number of Years: Specify the number of years for the depreciation.\n"
+"  * Number of Depreciations: Fix the number of depreciation lines and the "
+"time between 2 depreciations.\n"
 msgstr ""
-"Escolha o método a usar para calcular o nº de linhas de depreciação e "
-"respetivas datas:\n"
-"* Nº de anos: Especifique o nº de anos para a depreciação.\n"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
@@ -917,6 +922,12 @@ msgid "Notes"
 msgstr "Notas"
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+#, python-format
+msgid "Number of Depreciations"
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_number
@@ -1511,6 +1522,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "ou"
+
+#~ msgid ""
+#~ "Choose the method to use to compute the dates and number of depreciation "
+#~ "lines.\n"
+#~ "  * Number of Years: Specify the number of years for the depreciation.\n"
+#~ msgstr ""
+#~ "Escolha o método a usar para calcular o nº de linhas de depreciação e "
+#~ "respetivas datas:\n"
+#~ "* Nº de anos: Especifique o nº de anos para a depreciação.\n"
 
 #, fuzzy
 #~ msgid "Fiscal Year"
