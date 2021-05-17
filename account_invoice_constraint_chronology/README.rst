@@ -37,6 +37,11 @@ It prevents the validation of invoices when:
 .. contents::
    :local:
 
+Configuration
+=============
+
+To configure this module, go to the menu *Accounting/Invoicing > Configuration > Accounting > Journals* and activate the option *Check Chronology* on the relevant journals. After the installation of the module, this option will be active on *sale* and *sale refund* journals.
+
 Bug Tracker
 ===========
 
@@ -76,6 +81,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/12.0/account_invoice_constraint_chronology>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/11.0/account_invoice_constraint_chronology>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

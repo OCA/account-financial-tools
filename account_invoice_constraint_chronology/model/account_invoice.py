@@ -1,8 +1,6 @@
 # Copyright 2015-2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import datetime
-
 from odoo import models, api, fields, _
 from odoo.exceptions import UserError
 from odoo.tools.misc import format_date
@@ -55,11 +53,7 @@ class AccountInvoice(models.Model):
             invoices = self.search(
                 self._prepare_previous_invoices_domain(inv), limit=1)
             if invoices:
-                date_invoice_format = datetime.datetime(
-                    year=inv.date_invoice.year,
-                    month=inv.date_invoice.month,
-                    day=inv.date_invoice.day,
-                )
+                date_invoice_format = fields.Date.from_string(inv.date_invoice)
                 date_invoice_tz = format_date(
                     self.env, fields.Date.context_today(
                         self, date_invoice_format))
@@ -71,11 +65,8 @@ class AccountInvoice(models.Model):
                 invoices = self.search(
                     self._prepare_later_invoices_domain(inv), limit=1)
                 if invoices:
-                    date_invoice_format = datetime.datetime(
-                        year=inv.date_invoice.year,
-                        month=inv.date_invoice.month,
-                        day=inv.date_invoice.day,
-                    )
+                    date_invoice_format = fields.Date.from_string(
+                        inv.date_invoice)
                     date_invoice_tz = format_date(
                         self.env, fields.Date.context_today(
                             self, date_invoice_format))
