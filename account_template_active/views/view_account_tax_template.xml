@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 Copyright (C) 2020 - Today: GRAP (http://www.grap.coop)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -8,13 +8,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="view_account_tax_template_tree" model="ir.ui.view">
         <field name="model">account.tax.template</field>
-        <field name="inherit_id" ref="account.view_account_tax_template_tree"/>
+        <field name="inherit_id" ref="account.view_account_tax_template_tree" />
         <field name="arch" type="xml">
             <xpath expr="//tree" position="attributes">
                 <attribute name="decoration-muted">not active</attribute>
             </xpath>
             <field name="description" position="after">
-                <field name="active" widget="boolean_toggle"/>
+                <field name="active" widget="boolean_toggle" />
             </field>
         </field>
     </record>

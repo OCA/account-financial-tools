@@ -13,10 +13,12 @@ class AccountTaxTemplate(models.Model):
         if "active" in vals and not vals.get("active"):
             # Disable account.tax.template should disable
             # account.fiscal.position.tax.template associated
-            fptTemplates = FptTemplate.search([
-                "|",
-                ("tax_src_id", "in", self.ids),
-                ("tax_dest_id", "in", self.ids),
-            ])
+            fptTemplates = FptTemplate.search(
+                [
+                    "|",
+                    ("tax_src_id", "in", self.ids),
+                    ("tax_dest_id", "in", self.ids),
+                ]
+            )
             fptTemplates.write({"active": False})
         return super().write(vals)

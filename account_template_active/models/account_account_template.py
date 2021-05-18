@@ -15,10 +15,12 @@ class AccountAccountTemplate(models.Model):
         if "active" in vals and not vals.get("active"):
             # Disable account.account.template should disable
             # account.fiscal.position.account.template associated
-            fpaTemplates = FpaTemplate.search([
-                "|",
-                ("account_src_id", "in", self.ids),
-                ("account_dest_id", "in", self.ids),
-            ])
+            fpaTemplates = FpaTemplate.search(
+                [
+                    "|",
+                    ("account_src_id", "in", self.ids),
+                    ("account_dest_id", "in", self.ids),
+                ]
+            )
             fpaTemplates.write({"active": False})
         return super().write(vals)
