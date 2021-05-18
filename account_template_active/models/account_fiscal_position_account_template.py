@@ -16,8 +16,7 @@ class AccountFiscalPositionAccountTemplate(models.Model):
             # enable account.fiscal.position.account.template should enable
             # related account.account.template
             account_ids = set(
-                self.mapped("account_src_id").ids
-                + self.mapped("account_dest_id").ids
+                self.mapped("account_src_id").ids + self.mapped("account_dest_id").ids
             )
             accountTemplates = AccountTemplate.browse(account_ids)
             accountTemplates.write({"active": True})

@@ -16,8 +16,7 @@ class AccountFiscalPositionTaxTemplate(models.Model):
             # enable account.fiscal.position.tax.template should enable
             # related account.tax.template
             tax_ids = set(
-                self.mapped("tax_src_id").ids
-                + self.mapped("tax_dest_id").ids
+                self.mapped("tax_src_id").ids + self.mapped("tax_dest_id").ids
             )
             taxTemplates = TaxTemplate.browse(tax_ids)
             taxTemplates.write({"active": True})
