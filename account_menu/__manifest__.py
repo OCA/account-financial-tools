@@ -13,6 +13,7 @@
     "depends": ["account"],
     "data": [
         "views/menu.xml",
+        "views/res_config_settings_views.xml",
         "views/view_account_account_template.xml",
         "views/view_account_bank_statement.xml",
         "views/view_account_chart_template.xml",

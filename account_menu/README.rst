@@ -38,6 +38,10 @@ This module adds all missing menu entries for the **Account** module.
 * Tax Templates
 * Fiscal Position Templates
 
+Additionally, this module also enables the option to enable or disable
+Anglo-Saxon accounting in the Chart of Account Template form view and
+in the Invoicing Settings.
+
 **Table of contents**
 
 .. contents::
@@ -52,6 +56,12 @@ To see all the menus, make sure:
   "Technical Settings / Show Full Accounting Features"
 
 * The page is running in debug mode
+
+Known issues / Roadmap
+======================
+
+* Suggest to rename to something like `account_usability` in 15.0, given that
+  there are now non-menu usability improvements in this module.
 
 Bug Tracker
 ===========
