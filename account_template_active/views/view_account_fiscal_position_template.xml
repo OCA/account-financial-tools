@@ -58,7 +58,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <record
-        id="account.action_account_fiscal_position_template_form"
+        id="account_menu.account_fiscal_position_template_action"
         model="ir.actions.act_window"
     >
         <field name="context">{"active_test": False}</field>

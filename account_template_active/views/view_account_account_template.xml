@@ -15,12 +15,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <attribute name="decoration-muted">not active</attribute>
             </xpath>
             <field name="user_type_id" position="after">
-                <field name="active" widget="boolean_toggle" />
+                <field name="active" />
             </field>
         </field>
     </record>
 
-    <record id="view_account_account_template_form" model="ir.ui.view">
+    <record id="view_account_template_form" model="ir.ui.view">
         <field name="model">account.account.template</field>
         <field name="inherit_id" ref="account.view_account_template_form" />
         <field name="arch" type="xml">
@@ -30,7 +30,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-    <record id="account.action_account_template_form" model="ir.actions.act_window">
+    <record
+        id="account_menu.account_account_template_action"
+        model="ir.actions.act_window"
+    >
         <field name="context">{"active_test": False}</field>
     </record>
 
