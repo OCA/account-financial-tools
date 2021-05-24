@@ -4,7 +4,7 @@
 
 {
     "name": "Disable Account Template Items",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Allow to disable / enable account template items"
@@ -13,7 +13,7 @@
     "maintainers": ["legalsylvain"],
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": [
-        "account",
+        "account_menu",
     ],
     "data": [
         "views/view_account_account_template.xml",
