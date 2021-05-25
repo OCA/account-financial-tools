@@ -28,6 +28,7 @@ class TestCreditControlPolicyLevel(TransactionCase):
         with self.assertRaises(ValidationError):
             partner.write({
                 'credit_policy_id': policy.id,
+                'property_account_receivable_id': partner.property_account_receivable_id.id
             })
 
         policy.write({
