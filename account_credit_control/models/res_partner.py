@@ -75,6 +75,9 @@ class ResPartner(models.Model):
         # updated not in the same time on ORM write
         # so we call check when all fields written to the record
         res = super(ResPartner, self).write(vals)
-        if vals.get("credit_policy_id") or vals.get("property_account_receivable_id"):
+        # onchange method in credit policy provides cleaning of credit_policy if account
+        # was changed and checking for both fields in vals provides check will be executed
+        # only on parent company and skip child partners
+        if vals.get("credit_policy_id") and vals.get("property_account_receivable_id"):
             self._check_credit_policy()
         return res
