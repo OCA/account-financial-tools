@@ -2,15 +2,14 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import _, models
 from odoo.exceptions import UserError
 
 
-class AccountInvoice(models.Model):
-    _inherit = "account.invoice"
+class AccountMove(models.Model):
+    _inherit = "account.move"
 
-    @api.multi
-    def action_move_create(self):
+    def post(self):
         """Check that the customer has VAT set if required by the
         fiscal position"""
         for invoice in self:
@@ -29,4 +28,4 @@ class AccountInvoice(models.Model):
                     )
                     % (invoice.fiscal_position_id.name, invoice.partner_id.display_name)
                 )
-        return super(AccountInvoice, self).action_move_create()
+        return super().post()

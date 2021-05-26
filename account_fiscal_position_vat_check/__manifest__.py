@@ -4,13 +4,13 @@
 
 {
     "name": "Account Fiscal Position VAT Check",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Invoices & Payments",
     "license": "AGPL-3",
     "summary": "Check VAT on invoice validation",
     "author": "Akretion,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account", "base_vat"],
-    "data": ["views/account_fiscal_position.xml",],
+    "data": ["views/account_fiscal_position.xml"],
     "installable": True,
 }
