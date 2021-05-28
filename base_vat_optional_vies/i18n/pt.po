@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* base_vat_optional_vies
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2020-02-28 00:14+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
+"Language-Team: none\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
+
+#. module: base_vat_optional_vies
+#: model:ir.model,name:base_vat_optional_vies.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: base_vat_optional_vies
+#: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__vies_passed
+#: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_users__vies_passed
+msgid "VIES validation"
+msgstr "Validação do VIES"
