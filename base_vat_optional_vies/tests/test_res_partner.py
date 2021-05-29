@@ -15,7 +15,6 @@ class TestResPartner(common.TransactionCase):
         self.partner = self.env["res.partner"].create({"name": "Test partner"})
         self.vatnumber_path = "odoo.addons.base_vat.models.res_partner.check_vies"
 
-
     def test_validate_vat_vies(self):
         with mock.patch(self.vatnumber_path) as mock_vatnumber:
             mock_vatnumber.check_vies.return_value = True

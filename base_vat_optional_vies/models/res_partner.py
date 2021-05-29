@@ -12,7 +12,10 @@ class ResPartner(models.Model):
 
     @api.model
     def simple_vat_check(self, country_code, vat_number):
-        res = super(ResPartner, self).simple_vat_check(country_code, vat_number,)
+        res = super(ResPartner, self).simple_vat_check(
+            country_code,
+            vat_number,
+        )
         partner = self.env.context.get("vat_partner")
         if partner and self.vies_passed:
             # Can not be sure that this VAT is signed up in VIES
