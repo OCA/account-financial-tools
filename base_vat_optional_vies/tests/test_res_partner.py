@@ -19,6 +19,7 @@ class TestResPartner(common.TransactionCase):
         with mock.patch(self.vatnumber_path) as mock_vatnumber:
             mock_vatnumber.check_vies.return_value = True
             self.partner.vat = "ESB87530432"
+            self.partner.country_id = 20
             self.assertEqual(self.partner.vies_passed, True)
 
     def test_exception_vat_vies(self):
