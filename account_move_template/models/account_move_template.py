@@ -21,6 +21,7 @@ class AccountMoveTemplate(models.Model):
     line_ids = fields.One2many(
         'account.move.template.line', inverse_name='template_id',
         string='Lines')
+    active = fields.Boolean(default=True)
 
     _sql_constraints = [(
         'name_company_unique',
