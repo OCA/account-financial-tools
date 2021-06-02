@@ -52,7 +52,6 @@ class WizardRenumber(models.TransientModel):
         """Today by default."""
         return fields.Date.from_string(fields.Date.context_today(self))
 
-    @api.multi
     def renumber(self):
         """Renumber all the posted moves on the given journal and periods.
 
@@ -76,6 +75,8 @@ class WizardRenumber(models.TransientModel):
             raise exceptions.MissingError(_("No records found for your selection!"))
 
         _logger.debug("Renumbering %d account moves.", len(move_ids))
+        [move.update({"name": "{}_AUX".format(move.name)}) for move in move_ids]
+
         for move in move_ids:
             sequence = move.journal_id.sequence_id
             if sequence not in reset_sequences:

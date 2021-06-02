@@ -42,16 +42,15 @@ class AccountRenumberCase(TransactionCase):
         )
 
         self.journal = self.env["account.journal"].create(
-            {"name": "Test Jöurnal", "type": "cash", "sequence_id": self.sequence.id,}
+            {"name": "Test Jöurnal", "type": "cash", "sequence_id": self.sequence.id}
         )
 
         # Create some dummy accounting entries
         moves = self.env["account.move"]
         for n in range(9):
-            move = moves.create(
+            move = moves.with_context(default_journal_id=self.journal.id).create(
                 {
                     "ref": "Test %s" % n,
-                    "journal_id": self.journal.id,
                     "date": date(self.today.year, 12 - n, 1),
                     "line_ids": [
                         (
@@ -88,7 +87,7 @@ class AccountRenumberCase(TransactionCase):
     def test_renumber_all(self):
         """All moves are renumbered."""
         wizard = self.env["wizard.renumber"].create(
-            {"date_to": date(self.today.year, 12, 31),}
+            {"date_to": date(self.today.year, 12, 31)}
         )
         wizard.journal_ids = self.journal
         wizard.renumber()
@@ -98,24 +97,52 @@ class AccountRenumberCase(TransactionCase):
 
     def test_renumber_only_one_journal(self):
         """Only moves from one journal are renumbered."""
-        new_journal = self.journal.copy()
-        self.moves[:4].write({"journal_id": new_journal.id})
+        new_journal = self.journal.copy({"sequence": self.sequence})
+        new_move = (
+            self.env["account.move"]
+            .with_context(default_journal_id=new_journal.id)
+            .create(
+                {
+                    "ref": "Test 10",
+                    "date": date(self.today.year, 12 - 10, 1),
+                    "line_ids": [
+                        (
+                            0,
+                            False,
+                            {
+                                "account_id": self.accounts[0].id,
+                                "name": "Line 10.1",
+                                "debit": 100,
+                            },
+                        ),
+                        (
+                            0,
+                            False,
+                            {
+                                "account_id": self.accounts[1].id,
+                                "name": "Line 10.2",
+                                "credit": 100,
+                            },
+                        ),
+                    ],
+                }
+            )
+        )
         wizard = self.env["wizard.renumber"].create(
-            {"date_to": date(self.today.year, 12, 31),}
+            {"date_to": date(self.today.year, 12, 31)}
         )
         wizard.journal_ids = self.journal
         renumbered_ids = wizard.renumber()["domain"][0][2]
 
-        for move in self.moves[:4]:
-            self.assertNotIn(move.id, renumbered_ids)
-        for move in self.moves[4:]:
+        for move in self.moves:
             self.assertIn(move.id, renumbered_ids)
+        self.assertNotIn(new_move.id, renumbered_ids)
 
     def test_renumber_half_year(self):
         """Only moves from the second half of the year are renumbered."""
         date_from = fields.Date.to_string(date(self.today.year, 7, 1))
         wizard = self.env["wizard.renumber"].create(
-            {"date_from": date_from, "date_to": date(self.today.year, 12, 31),}
+            {"date_from": date_from, "date_to": date(self.today.year, 12, 31)}
         )
         wizard.journal_ids = self.journal
         wizard.renumber()
@@ -135,7 +162,6 @@ class AccountRenumberCase(TransactionCase):
 
     def test_failure_when_no_results(self):
         """Ensure an exception is raised when no results are found."""
-        new_journal = self.journal.copy()
-        self.moves.write({"journal_id": new_journal.id})
+        self.journal = self.journal.copy()
         with self.assertRaises(exceptions.MissingError):
             self.test_renumber_all()
