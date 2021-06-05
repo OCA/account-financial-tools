@@ -22,6 +22,7 @@ addon | version | summary
 [account_asset_management](account_asset_management/) | 14.0.2.0.0 | Assets Management
 [account_balance_line](account_balance_line/) | 14.0.1.0.0 | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 14.0.1.0.0 | Wizard to update a company's account chart from a template
+[account_check_deposit](account_check_deposit/) | 14.0.1.0.0 | Manage deposit of checks to the bank
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 14.0.1.1.0 | Create Account Fiscal Year
 [account_lock_date_update](account_lock_date_update/) | 14.0.1.0.0 | Allow an Account adviser to update locking date without having access to all technical settings
