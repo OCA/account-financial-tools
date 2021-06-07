@@ -54,6 +54,11 @@ msgid "Account Opt."
 msgstr ""
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
+msgid "Active"
+msgstr ""
+
+#. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Add an internal note here..."
 msgstr ""
@@ -80,6 +85,17 @@ msgstr "Analitički konto"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
 msgstr "Oznake analitike"
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Archive"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
+msgid "Archived"
+msgstr ""
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -383,6 +399,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
 msgid "Reference"
 msgstr "Referenca"
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Restore"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template

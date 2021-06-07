@@ -52,6 +52,11 @@ msgid "Account Opt."
 msgstr ""
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
+msgid "Active"
+msgstr ""
+
+#. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Add an internal note here..."
 msgstr ""
@@ -77,6 +82,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Archive"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
+msgid "Archived"
 msgstr ""
 
 #. module: account_move_template
@@ -383,6 +399,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
 msgid "Reference"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Restore"
 msgstr ""
 
 #. module: account_move_template
