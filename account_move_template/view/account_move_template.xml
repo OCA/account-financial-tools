@@ -128,11 +128,30 @@
                         class="btn-primary"
                         type="object"
                     />
+                    <button
+                        type="object"
+                        name="toggle_active"
+                        string="Archive"
+                        attrs="{'invisible': [('active', '=', False)]}"
+                    />
+                    <button
+                        type="object"
+                        name="toggle_active"
+                        string="Restore"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
                 </header>
                 <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
                         <h1>
+                            <field name="active" invisible="1" />
                             <field name="name" />
                         </h1>
                     </div>
@@ -179,6 +198,11 @@
         <field name="model">account.move.template</field>
         <field name="arch" type="xml">
             <search string="Journal Entry Template">
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
+                />
                 <field name="name" />
                 <group name="groupby">
                     <filter
