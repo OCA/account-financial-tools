@@ -124,6 +124,7 @@ Module Contributors
 
   * Harald Panten <harald.panten@sygel.es>
   * Valentin Vinagre <valentin.vinagre@sygel.es>
+  * Manuel Regidor <manuel.regidor@sygel.es>
 
 * `Ecosoft <http://ecosoft.co.th>`_:
 
