@@ -58,9 +58,9 @@ msgid "Account Opt."
 msgstr "Compte opt."
 
 #. module: account_move_template
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
-msgid "Add an internal note here..."
-msgstr "Ajouter une note interne ici…"
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
+msgid "Active"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
@@ -84,6 +84,17 @@ msgstr "Compte analytique"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
 msgstr "Etiquettes analytiques"
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Archive"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
+msgid "Archived"
+msgstr ""
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -205,9 +216,9 @@ msgid ""
 "Check that the lines used in the formula really exists and have a lower "
 "sequence than the current line."
 msgstr ""
-"Impossible de calculer la formule de ligne avec la séquence %s (formule: %s)"
-". Vérifiez que les lignes utilisées dans la formule existent réellement et "
-"qu'elles ont une séquence inférieure à la ligne courante."
+"Impossible de calculer la formule de ligne avec la séquence %s (formule: "
+"%s). Vérifiez que les lignes utilisées dans la formule existent réellement "
+"et qu'elles ont une séquence inférieure à la ligne courante."
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -216,8 +227,8 @@ msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s): "
 "the syntax of the formula is wrong."
 msgstr ""
-"Impossible de calculer la formule de ligne avec la séquence %s (formule: %s):"
-" la syntaxe de la formule est erronée."
+"Impossible de calculer la formule de ligne avec la séquence %s (formule: "
+"%s): la syntaxe de la formule est erronée."
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -394,6 +405,11 @@ msgid "Reference"
 msgstr ""
 
 #. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Restore"
+msgstr ""
+
+#. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
 msgid "Select Template"
 msgstr "Sélectionner un modèle"
@@ -475,8 +491,8 @@ msgstr "Les champs valides à écraser sont %s"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
-msgid "When amount is negative, use this account in stead"
-msgstr "Lorsque le montant est négatif, utilisez ce compte à la place"
+msgid "When amount is negative, use this account instead"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
@@ -512,8 +528,8 @@ msgid ""
 "line with sequence = 1. Examples:"
 msgstr ""
 "Vous pouvez faire référence à d'autres lignes en utilisant leur numéro de "
-"séquence, par exemple <i>L1</i> pour la ligne avec la séquence = 1. Exemples "
-":"
+"séquence, par exemple <i>L1</i> pour la ligne avec la séquence = 1. "
+"Exemples :"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -526,3 +542,9 @@ msgstr ""
 "Vous avez supprimé une ligne dans l'assistant. Ceci n'est pas autorisé : "
 "vous devez soit mettre à jour le modèle, soit modifier l'écriture de journal "
 "qui sera générée par cet assistant."
+
+#~ msgid "Add an internal note here..."
+#~ msgstr "Ajouter une note interne ici…"
+
+#~ msgid "When amount is negative, use this account in stead"
+#~ msgstr "Lorsque le montant est négatif, utilisez ce compte à la place"

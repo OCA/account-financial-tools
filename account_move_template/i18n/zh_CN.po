@@ -53,8 +53,8 @@ msgid "Account Opt."
 msgstr ""
 
 #. module: account_move_template
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
-msgid "Add an internal note here..."
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
+msgid "Active"
 msgstr ""
 
 #. module: account_move_template
@@ -79,6 +79,17 @@ msgstr "辅助核算项"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
 msgstr "辅助核算标签"
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Archive"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
+msgid "Archived"
+msgstr ""
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -384,6 +395,11 @@ msgid "Reference"
 msgstr "单据编号"
 
 #. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Restore"
+msgstr ""
+
+#. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
 msgid "Select Template"
 msgstr "选择模式凭证"
@@ -463,7 +479,7 @@ msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
-msgid "When amount is negative, use this account in stead"
+msgid "When amount is negative, use this account instead"
 msgstr ""
 
 #. module: account_move_template
