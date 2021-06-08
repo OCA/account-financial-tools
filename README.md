@@ -30,7 +30,7 @@ addon | version | summary
 [account_move_force_removal](account_move_force_removal/) | 14.0.1.0.0 | Allow force removal account moves
 [account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 | Adds a Journal Items menu
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.1.1.0 | Allows to edit taxes on non-posted account move lines
-[account_move_template](account_move_template/) | 14.0.1.0.0 | Templates for recurring Journal Entries
+[account_move_template](account_move_template/) | 14.0.1.1.0 | Templates for recurring Journal Entries
 [account_no_default](account_no_default/) | 14.0.1.0.0 | Remove default expense account for vendor bills journal
 
 [//]: # (end addons)
