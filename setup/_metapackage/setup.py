@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo13-addon-account_move_budget',
         'odoo13-addon-account_move_force_removal',
         'odoo13-addon-account_move_line_purchase_info',
+        'odoo13-addon-account_move_line_sale_info',
         'odoo13-addon-account_move_line_tax_editable',
         'odoo13-addon-account_move_line_used_currency',
         'odoo13-addon-account_move_template',
@@ -33,6 +34,7 @@ setuptools.setup(
         'odoo13-addon-account_tax_repartition_line_tax_group_account',
         'odoo13-addon-base_vat_optional_vies',
         'odoo13-addon-product_category_tax',
+        'odoo13-addon-stock_account_prepare_anglo_saxon_out_lines_hook',
     ],
     classifiers=[
         'Programming Language :: Python',
