@@ -6,7 +6,7 @@
     "summary": "Modify when and how anglo saxon journal items are created",
     "version": "13.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
-    "website": "http://www.github.com/OCA/account-financial-tools",
+    "website": "https://github.com/OCA/account-financial-tools",
     "category": "Generic",
     "depends": ["stock_account"],
     "post_load": "post_load_hook",
