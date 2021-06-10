@@ -154,6 +154,7 @@
                                         name="prorata"
                                         attrs="{'readonly': [('method_time', '!=', 'year')]}"
                                     />
+                                    <field name="carry_forward_missed_depreciations" />
                                 </group>
                             </group>
                         </page>
