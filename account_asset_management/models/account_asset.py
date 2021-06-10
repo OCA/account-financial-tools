@@ -275,6 +275,13 @@ class AccountAsset(models.Model):
         readonly=False,
         store=True,
     )
+    carry_forward_missed_depreciations = fields.Boolean(
+        string="Accumulate missed depreciations",
+        help="""If create an asset in a fiscal period that is now closed
+        the accumulated amount of depreciations that cannot be posted will be
+        carried forward to the first depreciation line of the current open
+        period.""",
+    )
 
     @api.model
     def _default_company_id(self):
@@ -605,18 +612,26 @@ class AccountAsset(models.Model):
         depr_line = last_line
         last_date = table[-1]["lines"][-1]["date"]
         depreciated_value = depreciated_value_posted
+        amount_to_allocate = 0.0
         for entry in table[table_i_start:]:
             for line in entry["lines"][line_i_start:]:
                 seq += 1
                 name = self._get_depreciation_entry_name(seq)
                 amount = line["amount"]
+                if self.carry_forward_missed_depreciations:
+                    if line["init"]:
+                        amount_to_allocate += amount
+                        amount = 0
+                    else:
+                        amount += amount_to_allocate
+                        amount_to_allocate = 0.0
                 if line["date"] == last_date:
                     # ensure that the last entry of the table always
                     # depreciates the remaining value
                     amount = self.depreciation_base - depreciated_value
                     if self.method in ["linear-limit", "degr-limit"]:
                         amount -= self.salvage_value
-                if amount:
+                if amount or self.carry_forward_missed_depreciations:
                     vals = {
                         "previous_id": depr_line.id,
                         "amount": round(amount, digits),
