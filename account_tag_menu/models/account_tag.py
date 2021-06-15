@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
 
 
 class AccountAccountTag(models.Model):
@@ -36,6 +37,43 @@ class AccountAccountTag(models.Model):
     parent_right = fields.Integer('Right Parent', index=1)
     company_id = fields.Many2one('res.company', string='Company', required=True,
         default=lambda self: self.env['res.company']._company_default_get('account.account.tag'))
+    
+    type_taxes = fields.Selection([
+                            ('0', _('Tax base')),
+                            ('2', _('Tax base (debit)')),
+                            ('3', _('Tax base (credit)')),
+                            ('1', _('Coupled tax')),
+                            ('98', _('Boot Tax base and tax EU deals')),
+                            ('99', _('Boot Tax base and tax')),
+                            ])
+    type_info = fields.Selection([
+                            ('period', 'Fiscal period'),
+                            ('vat', 'Get partner VAT'),
+                            ('name', 'Get partner name'),
+                            ('vatcompany', 'Get company VAT'),
+                            ('namecompany', 'Get company name'),
+                            ('addresscompany', 'Get company address'),
+                            ('movenumber', 'Get account move number'),
+                            ('date', 'Get account move date'),
+                            ('narration', 'Get account move narration'),
+                            ('ref', 'Get account move ref'),
+                          ])
+
+    display_name = fields.Char(compute='_compute_display_name')
+
+    @api.depends('name', 'code')
+    def _compute_display_name(self):
+        for tag in self:
+            if self._context.get('only_code'):
+                tag.display_name = "%s" % tag.code
+            if tag.code and tag.name:
+                tag.display_name = "[%s] %s" % (tag.code, tag.name)
+            elif tag.code and not tag.name:
+                tag.display_name = "%s" % tag.code
+            elif tag.name and not tag.code:
+                tag.display_name = "%s" % tag.code
+            else:
+                tag.display_name = "%s" % tag.code
 
     @api.depends('color_picker')
     def _compute_color_index(self):

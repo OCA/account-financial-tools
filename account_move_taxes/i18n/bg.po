@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0+e-20190711\n"
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-01 07:03+0000\n"
-"PO-Revision-Date: 2019-08-01 07:03+0000\n"
+"POT-Creation-Date: 2021-04-21 13:59+0000\n"
+"PO-Revision-Date: 2021-04-21 13:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,39 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/js/account_move_taxes_reconciliation.js:66
+#: code:addons/account_move_taxes/static/src/js/account_move_taxes_reconciliation.js:70
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:21
+#, python-format
+msgid "Account"
+msgstr "Account"
+
+#. module: account_move_taxes
 #: model:ir.model,name:account_move_taxes.model_account_move
 msgid "Account Entry"
 msgstr "Запис от сметка"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:52
+#, python-format
+msgid "Amount"
+msgstr "Amount"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:33
+#, python-format
+msgid "Analytic Acc."
+msgstr "Analytic Acc."
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:14
+#, python-format
+msgid "Create model"
+msgstr "Create model"
 
 #. module: account_move_taxes
 #: model:ir.ui.view,arch_db:account_move_taxes.view_move_form
@@ -31,14 +61,64 @@ msgid "Included taxes"
 msgstr "Included taxes"
 
 #. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:40
+#, python-format
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_move_taxes
 #: model:ir.model,name:account_move_taxes.model_account_move_line
 msgid "Journal Item"
 msgstr "Счетоводна операция"
 
 #. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/js/account_move_taxes_reconciliation.js:69
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:44
+#, python-format
+msgid "Label"
+msgstr "Label"
+
+#. module: account_move_taxes
 #: model:ir.model.fields,field_description:account_move_taxes.field_account_move_line_manual
 msgid "Manual"
 msgstr "Ръчно"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:15
+#, python-format
+msgid "Modify models"
+msgstr "Modify models"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:58
+#, python-format
+msgid "Save and New"
+msgstr "Save and New"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:25
+#, python-format
+msgid "Tax"
+msgstr "Tax"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:29
+#, python-format
+msgid "Tax included"
+msgstr "Tax included"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:48
+#, python-format
+msgid "Taxes"
+msgstr "Taxes"
 
 #. module: account_move_taxes
 #: model:ir.ui.view,arch_db:account_move_taxes.view_move_form
@@ -50,4 +130,18 @@ msgstr "Use taxes"
 #: model:ir.model.fields,field_description:account_move_taxes.field_account_move_work_with_taxes
 msgid "Work with taxes"
 msgstr "Work with taxes"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:9
+#, python-format
+msgid "You did not configure any reconcile model yet, you can do it"
+msgstr "You did not configure any reconcile model yet, you can do it"
+
+#. module: account_move_taxes
+#. openerp-web
+#: code:addons/account_move_taxes/static/src/xml/account_reconciliation.xml:9
+#, python-format
+msgid "there"
+msgstr "there"
 

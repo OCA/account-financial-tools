@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-17 08:28+0000\n"
+"PO-Revision-Date: 2021-02-17 08:28+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +18,17 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_account_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_account_id
-msgid "Account id"
+msgid "Account"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_accounting_date
+msgid "Accounting Date"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,help:account_move_template.field_wizard_select_move_template_post
+msgid "After generate account move post and close without open it."
 msgstr ""
 
 #. module: account_move_template
@@ -26,7 +38,13 @@ msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_analytic_account_id
-msgid "Analytic account id"
+msgid "Analytic Account"
+msgstr ""
+
+#. module: account_move_template
+#: selection:account.move.template.line,move_line_type:0
+#: selection:wizard.select.move.template.line,move_line_type:0
+msgid "Auto"
 msgstr ""
 
 #. module: account_move_template
@@ -35,14 +53,15 @@ msgid "Cancel"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_document_template.py:57
+#: code:addons/account_move_template/models/account_document_template.py:102
 #, python-format
 msgid "Code \"%s\" refers to non existing line"
 msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_company_id
-msgid "Company id"
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_company_id
+msgid "Company"
 msgstr ""
 
 #. module: account_move_template
@@ -84,9 +103,29 @@ msgid "Credit"
 msgstr ""
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_date_from
+msgid "Date from"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_date_range_id
+msgid "Date range"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_date_to
+msgid "Date to"
+msgstr ""
+
+#. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_analytic_tag_ids
+msgid "Default Analytic tags"
 msgstr ""
 
 #. module: account_move_template
@@ -100,6 +139,26 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_date_due
+msgid "Due Date"
+msgstr ""
+
+#. module: account_move_template
+#: selection:wizard.select.move.template,choice_period_type:0
+msgid "Fiscal month"
+msgstr ""
+
+#. module: account_move_template
+#: selection:wizard.select.move.template,choice_period_type:0
+msgid "Fiscal year"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_amount_input
+msgid "Holder for default amount"
+msgstr ""
+
+#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_id
@@ -107,6 +166,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_id
 msgid "ID"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_journal_id
+msgid "Journal"
 msgstr ""
 
 #. module: account_move_template
@@ -120,11 +184,6 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_tree
 msgid "Journal Entry Template Line"
-msgstr ""
-
-#. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_journal_id
-msgid "Journal id"
 msgstr ""
 
 #. module: account_move_template
@@ -158,14 +217,14 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_document_template.py:47
-#, python-format
-msgid "Line %s can't refer to itself"
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_ids
+msgid "Line"
 msgstr ""
 
 #. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_ids
-msgid "Line ids"
+#: code:addons/account_move_template/models/account_document_template.py:55
+#, python-format
+msgid "Line %s can't refer to itself"
 msgstr ""
 
 #. module: account_move_template
@@ -176,6 +235,12 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Modify the lines before create them or edit them after creation."
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_move_line_type
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_move_line_type
+msgid "Move Line Type"
 msgstr ""
 
 #. module: account_move_template
@@ -193,12 +258,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_move_template.action_move_template_form
 #: model:ir.ui.menu,name:account_move_template.menu_action_move_template_form
 msgid "Move Templates"
-msgstr ""
-
-#. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_move_line_type
-#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_move_line_type
-msgid "Move line type"
 msgstr ""
 
 #. module: account_move_template
@@ -221,14 +280,15 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_move_template
-#: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
-msgid "Python Code"
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_post
+msgid "Post after generate"
 msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_python_code
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_python_code
-msgid "Python code"
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
+msgid "Python Code"
 msgstr ""
 
 #. module: account_move_template
@@ -249,20 +309,20 @@ msgid "State"
 msgstr ""
 
 #. module: account_move_template
-#: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
-msgid "Template Lines"
-msgstr ""
-
-#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_template_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_template_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_template_id
-msgid "Template id"
+msgid "Template"
 msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_template_line_ids
-msgid "Template line ids"
+msgid "Template Line"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
+msgid "Template Lines"
 msgstr ""
 
 #. module: account_move_template
@@ -287,13 +347,23 @@ msgid "Type"
 msgstr ""
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_choice_period_type
+msgid "Type period"
+msgstr ""
+
+#. module: account_move_template
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "User input"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_document_template.py:64
+#: model:ir.actions.act_window,name:account_move_template.wizard_create_move_sale_order
+msgid "Wizard for creating Move from Sale Order"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_document_template.py:109
 #, python-format
 msgid "You can not add a different number of lines in this wizard you should try to create the move normally and then edit the created move. Inconsistent between input lines and  filled lines for template %s"
 msgstr ""
@@ -303,7 +373,12 @@ msgstr ""
 msgid "You can refer to other lines using their\n"
 "                        sequence number (e.g. 'L(1)' for first line).\n"
 "                        Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1)\n"
-"                            + L(2) + L(3)'; '1250'"
+"                            + L(2) + L(3)'; '1250'\n"
+"                        DBTFY: Debit movement for This Fiscal year\n"
+"                        CRTFY: Credit movement for This Fiscal year\n"
+"                        SALFY: End balance for This Fiscal year\n"
+"                        SALDBTFY: End Debit balance for This Fiscal year\n"
+"                        SALCRTFY: End Credit balance for This Fiscal year"
 msgstr ""
 
 #. module: account_move_template

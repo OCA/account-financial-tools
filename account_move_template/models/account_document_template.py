@@ -58,13 +58,13 @@ class AccountDocumentTemplate(models.Model):
             fy = {'date_from': date_from, 'date_to': date_to}
         else:
             fy = line.template_id.company_id.compute_fiscalyear_dates(date_to)
-        domain = [('account_id', '=', line.account_id.id)]
+        domain = [('move_id.state', '=', 'posted'), ('account_id', '=', line.account_id.id)]
         if line.analytic_account_id:
             domain += [('analytic_account_id', '=', line.analytic_account_id.id)]
         if partner_id:
             domain += [('partner_id', '=', partner_id)]
         move = self.env['account.move.line'].search(domain)
-        domain += [('date_maturity', '>=', fields.Date.to_string(fy['date_from'])), ('date_maturity', '<=', fields.Date.to_string(fy['date_to']))]
+        domain += [('move_id.date', '>=', fields.Date.to_string(fy['date_from'])), ('move_id.date', '<=', fields.Date.to_string(fy['date_to']))]
         move_fy = self.env['account.move.line'].search(domain)
         #recurse_lines = partial(self.lines, computed_lines=computed_lines)
         account_debit = sum([x.debit for x in move])
@@ -76,22 +76,26 @@ class AccountDocumentTemplate(models.Model):
             recurse_lines = partial(self.lines, date_from=date_from, date_to=date_to, computed_lines=computed_lines, partner_id=partner_id)
             local_dict = {
                         'recurse_lines': recurse_lines,
-                        'account_debit': account_debit,
-                        'account_credit': account_credit,
-                        'account_debit_fy': account_debit_fy,
-                        'account_credit_fy': account_credit_fy,
-                        'account_saldo_fy': account_debit_fy-account_credit_fy,
-                    }
+                        'account_deb': account_debit,
+                        'account_crd': account_credit,
+                        'account_deb_fy': account_debit_fy,
+                        'account_crd_fy': account_credit_fy,
+                        'account_s_d_fy': account_debit_fy-account_credit_fy,
+                        'account_deb_s_d_fy': account_debit_fy - account_credit_fy > 0.0 and abs(account_debit_fy - account_credit_fy) or 0.0,
+                        'account_crd_s_d_fy': account_debit_fy - account_credit_fy < 0.0 and abs(account_debit_fy - account_credit_fy) or 0.0,
+            }
             python_code = replace_all(line.python_code, {
-                                                    'DBTFY': 'account_debit_fy',
-                                                    'CRTFY': 'account_credit_fy',
-                                                    'SALFY': 'account_saldo_fy',
-                                                    'DBT': 'account_debit',
-                                                    'CRT': 'account_credit',
-                                                    'SAL': '(account_debit - account_credit)',
+                                                    'SALDBTFY': 'account_deb_s_d_fy',
+                                                    'SALCRTFY': 'account_crd_s_d_fy',
+                                                    'DBTFY': 'account_deb_fy',
+                                                    'CRTFY': 'account_crd_fy',
+                                                    'SALFY': 'account_s_d_fy',
+                                                    'DBT': 'account_deb',
+                                                    'CRT': 'account_crd',
+                                                    'SLD': '(account_deb - account_crd)',
                                                     'L': 'recurse_lines',
                                                     }).rstrip()
-            #_logger.info("code: %s:%s:%s" % (python_code,local_dict,recurse_lines))
+            # _logger.info("code: (%s:%s):%s" % (python_code, line.python_code, local_dict))
             computed_lines[line_number] = safe_eval(python_code, locals_dict=local_dict)
         except KeyError:
             raise exceptions.Warning(

@@ -43,7 +43,7 @@ class AccountAssetLine(models.Model):
         string='Amount', digits=dp.get_precision('Account'),
         required=True)
     remaining_value = fields.Float(
-        compute='_compcomputeute_values',
+        compute='_compute_values',
         digits=dp.get_precision('Account'),
         string='Next Period Depreciation',
         store=True)
@@ -75,6 +75,10 @@ class AccountAssetLine(models.Model):
         string='Initial Balance Entry',
         help="Set this flag for entries of previous fiscal years "
              "for which Odoo has not generated accounting entries.")
+    sleep_period = fields.Boolean(
+        string='Sleep period',
+        help='This is period not have depreciation if this line available in sleeping periods',
+    )
 
     @api.depends('amount', 'previous_id', 'type')
     @api.multi

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-        <!-- Files -->
+    <!-- Files -->
+    <record id="view_account_documents_tree" model="ir.ui.view">
+        <field name="name">account.documents.tree</field>
+        <field name="model">account.documents</field>
+        <field name="arch" type="xml">
+            <tree string="Accounts Documents">
+                <field name="document_type_id"/>
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
     <record model="ir.ui.view" id="view_documents_file_kanban_account">
         <field name="name">account.documents.kanban</field>
         <field name="model">account.documents</field>
@@ -18,14 +29,12 @@
                             <div class="oe_kanban_vignette">
                                 <div class="oe_attachment">
                                     <div class="row">
-                                        <div class="col-xs-4 o_kanban_primary_left" t-if="record.type.raw_value == 'binary'">
-                                            <a t-attf-href="/web/content/#{record.ir_attachment_id.raw_value}?download=1">
-                                                <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)"/>
-                                                <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value"/>
-                                                <div t-if="webimage" class="o_attachment_image">
-                                                    <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1"/>
-                                                </div>
-                                            </a>
+                                        <div class="col-xs-4 o_kanban_primary_left">
+                                            <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)"/>
+                                            <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value" t-att-data-id="record.ir_attachment_id.raw_value"/>
+                                            <div t-if="webimage" class="o_attachment_image">
+                                                <img class="o_image" t-att-data-mimetype="record.mimetype.value" t-att-data-id="record.ir_attachment_id.raw_value" t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1"/>
+                                            </div>
                                         </div>
                                         <div class="col-xs-8">
                                             <strong><field name="name"/></strong><br/>
@@ -57,7 +66,8 @@
                     </h1>
                     <group>
                         <group>
-                            <field name="res_id" invisible="1"/>
+<!--                            <field name="res_id" invisible="1"/>-->
+<!--                            <field name="res_model" invisible="1"/>-->
                             <field name="type"/>
                             <field name="datas" filename="datas_fname" attrs="{'invisible':[('type','=','url')]}"/>
                             <field name="datas_fname" invisible="1" attrs="{'invisible':[('type','=','url')]}" class="oe_inline oe_right"/>
@@ -66,6 +76,14 @@
                         </group>
                         <group>
                             <field name="document_type_id"/>
+                        </group>
+                        <group string="Attached To" groups="base.group_no_one">
+                            <field name="res_model"/>
+                            <field name="res_field"/>
+                            <field name="res_id"/>
+                            <field name="res_name"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            <field name="public"/>
                         </group>
                     </group>
                     <group name="description_group" string="Description" groups="base.group_no_one" colspan="4">

@@ -3,11 +3,12 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import Warning
-#from odoo.addons.stock.models.stock_move_line import StockMoveLine as stockmoveline
+# from odoo.addons.stock.models.stock_move_line import StockMoveLine as stockmoveline
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_round, float_compare, float_is_zero
 
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -27,7 +28,7 @@ class StockLocation(models.Model):
 class StockMoveLine(models.Model):
     _inherit = 'stock.move.line'
 
-    #quant_ids = fields.Many2many("stock.quant", relation="rel_quant_move_line", column1="move_line_id", column2="quant_id", string="Ref quant")
+    # quant_ids = fields.Many2many("stock.quant", relation="rel_quant_move_line", column1="move_line_id", column2="quant_id", string="Ref quant")
     has_account_move = fields.Boolean(compute="_compute_has_account_move")
 
     @api.depends('account_move_line_ids')
@@ -39,6 +40,7 @@ class StockMoveLine(models.Model):
         move = self.move_id
         if not move.price_unit or not move.remaining_value:
             move.product_price_update_before_done()
+
         if move.state == 'done':
             if self._context.get("force_valuation"):
                 move._run_valuation(self.qty_done)
@@ -46,9 +48,19 @@ class StockMoveLine(models.Model):
                 date = self._context['force_accounting_date']
             else:
                 date = move.accounting_date or move.date or fields.Date.context_today(self)
-            if move.product_id.valuation == 'real_time' and (move._is_in() or move._is_out() or move._is_in_inventory() or move._is_out_inventory()):
-                amount = self.qty_done * abs(move.price_unit)
-                #if amount == 0.0 and self.product_id.standard_price == 0.0:
+            if move.product_id.valuation == 'real_time' and (
+                    move._is_in() or move._is_out() or move._is_in_inventory() or move._is_out_inventory()):
+                if self._context.get("force_accounting_date"):
+                    product = move.product_id.with_context(dict(self._context, to_date=self._context['force_accounting_date']))
+                    _logger.info("FORCE ACCOUNT DATE %s=%s/%s" % (self._context['force_accounting_date'], product.stock_value, product.qty_at_date))
+                    if product.qty_at_date != 0:
+                        coef = (move._is_out() or move._is_out_inventory()) and -1 or 1
+                        move.price_unit = coef*(product.stock_value/product.qty_at_date)
+                price_unit = move.price_unit
+                if move.purchase_line_id:
+                    price_unit = move._get_price_unit()
+                amount = self.qty_done * abs(price_unit)
+                # if amount == 0.0 and self.product_id.standard_price == 0.0:
                 #    # first try to get PO
                 #    if move.purchase_line_id:
                 #        price_unit = move.purchase_line_id.price_unit
@@ -61,14 +73,15 @@ class StockMoveLine(models.Model):
                 #                price_unit = self.product_id.currency_id.compute(seller.price, seller.currency_id)
                 #                break
                 #        move.write({"price_unit": price_unit})
-                #elif amount == 0.0 and self.product_id.standard_price != 0.0:
+                # elif amount == 0.0 and self.product_id.standard_price != 0.0:
                 #    move.write({"price_unit": self.product_id.standard_price})
                 #    amount = self.qty_done * abs(move.price_unit)
 
-                #if (move._is_in() and not move.inventory_id) or (move._is_in_inventory() and move.inventory_id):
-                #amount = -amount
-                #_logger.info("TEST %s=%s:%s:%s:%s::%s*%s" % (move.inventory_id, move._is_in(), move._is_out(), move._is_in_inventory(), move._is_out_inventory(), self.qty_done, amount))
-                move.with_context(dict(self._context, forced_quantity=self.qty_done, force_valuation_amount=amount, force_period_date=date))._account_entry_move()
+                # if (move._is_in() and not move.inventory_id) or (move._is_in_inventory() and move.inventory_id):
+                # amount = -amount
+                # _logger.info("TEST %s=%s:%s:%s:%s::%s*%s" % (move.inventory_id, move._is_in(), move._is_out(), move._is_in_inventory(), move._is_out_inventory(), self.qty_done, amount))
+                move.with_context(dict(self._context, forced_quantity=self.qty_done, force_valuation_amount=amount,
+                                       force_period_date=date))._account_entry_move()
 
     @api.multi
     def rebuild_account_move(self):
@@ -78,7 +91,8 @@ class StockMoveLine(models.Model):
     @api.multi
     def rebuild_moves(self, only_remove=True):
         for record in self:
-            record.move_id.with_context(dict(self._context, force_accounting_date=record.date)).rebuild_moves(only_remove=False)
+            record.move_id.with_context(dict(self._context, force_accounting_date=record.date)).rebuild_moves(
+                only_remove=False)
 
     def name_get(self):
         res = []
@@ -127,7 +141,8 @@ class StockMove(models.Model):
         elif not self.env.context.get("rebuld_try"):
             state = (self.state == 'done') and " " or "*"
             real_time = (self.product_id.valuation == 'real_time') and " " or "*"
-            in_out = (self._is_in() or self._is_out() or self._is_in_inventory() or self._is_out_inventory()) and " " or "*"
+            in_out = (
+                                 self._is_in() or self._is_out() or self._is_in_inventory() or self._is_out_inventory()) and " " or "*"
             raise Warning(_(
                 "The operation will not be performed because one of the following conditions may not have been met: \n\n %s1. Status not in \"Done\" \n%s2. The spelling in the product or its category is not in real time.\n%s3. This is not a movement at the entrance or exit of the company.") % (
                               state, real_time, in_out))
@@ -142,7 +157,7 @@ class StockMove(models.Model):
                         moves = acc_move
                     else:
                         moves |= acc_move
-            #_logger.info("CANCEL MOVES %s:%s" % (moves, picking))
+            # _logger.info("CANCEL MOVES %s:%s" % (moves, picking))
             if moves:
                 for acc_move in moves:
                     if acc_move.state == 'draft':
@@ -165,7 +180,7 @@ class StockMove(models.Model):
                         moves = acc_move
                     else:
                         moves |= acc_move
-            #_logger.info("CANCEL MOVES %s:%s" % (moves, picking))
+            # _logger.info("CANCEL MOVES %s:%s" % (moves, picking))
             if moves:
                 for acc_move in moves:
                     if acc_move.state == 'draft':
@@ -177,7 +192,6 @@ class StockMove(models.Model):
             if not only_remove:
                 date = move.accounting_date or move.date
                 move.with_context(dict(self._context, force_date=date))._action_done()
-
 
     def write(self, vals):
         if (vals.get('state', '') == 'done' and vals.get('date')):
@@ -216,7 +230,9 @@ class StockMove(models.Model):
             if inv_line:
                 self.accounting_date = inv_line[0].invoice_id.date_invoice
             if line.taxes_id:
-                price_unit = line.taxes_id.with_context(round=False).compute_all(price_unit, currency=line.order_id.currency_id, quantity=1.0)['total_excluded']
+                price_unit = \
+                line.taxes_id.with_context(round=False).compute_all(price_unit, currency=line.order_id.currency_id,
+                                                                    quantity=1.0)['total_excluded']
             if line.product_uom.id != line.product_id.uom_id.id:
                 price_unit *= line.product_uom.factor / line.product_id.uom_id.factor
             if order.currency_id != order.company_id.currency_id:
@@ -227,8 +243,16 @@ class StockMove(models.Model):
                 # https://github.com/odoo/odoo/blob/2f789b6863407e63f90b3a2d4cc3be09815f7002/addons/stock/models/stock_move.py#L36
                 # This is problem when receive goods need be possible to choice date for currency rate
                 date = self.accounting_date or fields.Date.context_today(self)
-                price_unit = order.currency_id.with_context(date=date).compute(price_unit, order.company_id.currency_id, round=False)
+                price_unit = order.currency_id.with_context(date=date).compute(price_unit, order.company_id.currency_id,
+                                                                               round=False)
             return price_unit
         return super(StockMove, self)._get_price_unit()
 
-#stockmoveline._action_done = StockMoveLine._action_done
+    @api.model
+    def _get_in_base_domain(self, company_id=False):
+        domain = super(StockMove, self)._get_in_base_domain(company_id=company_id)
+        if self._context.get('force_valuation_date'):
+            domain += [('date', '<=', self._context['force_valuation_date'])]
+        return domain
+
+# stockmoveline._action_done = StockMoveLine._action_done

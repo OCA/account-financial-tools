@@ -23,3 +23,5 @@ access_account_bg_asset_line_user,account.bg.asset.line,model_account_bg_asset_l
 access_account_bg_asset_line_manager,account.bg.asset.line,model_account_bg_asset_line,account.group_account_manager,1,1,1,1
 access_account_asset_recompute_trigger_user,account.asset.recompute.trigger,model_account_asset_recompute_trigger,account.group_account_user,1,1,1,1
 access_account_asset_recompute_trigger_manager,account.asset.recompute.trigger,model_account_asset_recompute_trigger,account.group_account_manager,1,1,1,1
+access_account_asset_sleep_periods_user,account.asset.sleep.periods,model_account_asset_sleep_periods,account.group_account_user,1,1,1,1
+access_account_asset_sleep_periods_manager,account.asset.sleep.periods,model_account_asset_sleep_periods,account.group_account_manager,1,1,1,1

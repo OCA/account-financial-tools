@@ -3,6 +3,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo import models, fields, api, _
+from odoo.addons.queue_job.job import job
 
 
 class WizardRebuildMoveAccountInvoice(models.TransientModel):
@@ -11,6 +12,11 @@ class WizardRebuildMoveAccountInvoice(models.TransientModel):
     company_id = fields.Many2one(comodel_name='res.company', string="Company",
                                  default=lambda self: self.env.user.company_id.id)
 
+    @job
+    def _rebuild_account_invoice(self, invoice):
+        invoice.with_context(self._context, rebuld_try=True).action_invoice_rebuild()
+        return True
+
     @api.multi
     def rebuild_account_invoice(self):
         context = dict(self._context or {})
@@ -18,11 +24,16 @@ class WizardRebuildMoveAccountInvoice(models.TransientModel):
         if context.get('active_ids'):
             invoices = self.env['account.invoice'].browse(context["active_ids"])
         if not invoices:
+            domain = []
             if self.company_id:
                 domain = [('company_id', '=', self.company_id.id)]
             invoices = self.env['account.invoice'].search(domain)
+        if not invoices:
+            return {'type': 'ir.actions.act_window_close'}
+        batch = self.env['queue.job.batch'].get_new_batch('invoices %s' % len(invoices.ids))
         for invoice in invoices:
-            invoice.with_context(self._context, rebuld_try=True).action_invoice_rebuild()
+            self.with_context(job_batch=batch).with_delay()._rebuild_account_invoice(invoice)
+        batch.enqueue()
         return {'type': 'ir.actions.act_window_close'}
 
     @api.multi

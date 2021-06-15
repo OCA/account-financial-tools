@@ -50,3 +50,29 @@ class Picking(models.Model):
                 'context': picking._get_documents_context()
             }
         return False
+
+
+class AccountDocuments(models.Model):
+    _inherit = "account.documents"
+
+    stock_picking_id = fields.Many2one('stock.picking', 'Stock picking')
+
+    def _get_domain_type(self):
+        model_id = self.env['ir.model'].search([('name', '=', 'stock.picking')])
+        return super(AccountDocuments, self)._get_domain_type() + [('model_id', '=', model_id.id)]
+
+
+class IrActionsReport(models.Model):
+    _inherit = 'ir.actions.report'
+
+    @api.multi
+    def postprocess_pdf_report(self, record, buffer):
+        attachment = super(IrActionsReport, self).postprocess_pdf_report(record, buffer)
+        if attachment:
+            picking = self.env[attachment.res_model].browse(attachment.res_id)
+            docs = self.env['account.documents'].search([('ir_attachment_id', '=', attachment.id)])
+            if docs and attachment.res_model == 'stock.picking':
+                docs.stock_picking_id = picking
+                domain = self.env['account.documents.type']._get_domain('stock.picking', picking.picking_type_code, picking.state)
+                docs.document_type_id = self.env['account.documents.type'].search(domain)
+        return attachment

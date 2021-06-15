@@ -6,6 +6,7 @@ from odoo import api, fields, models, tools, _
 import logging
 _logger = logging.getLogger(__name__)
 
+
 class AccountBankStatement(models.Model):
     _inherit = "account.bank.statement"
 
@@ -52,3 +53,29 @@ class AccountBankStatement(models.Model):
                 'context': bank._get_documents_context()
             }
         return False
+
+
+class AccountDocuments(models.Model):
+    _inherit = "account.documents"
+
+    statement_id = fields.Many2one('account.bank.statement', 'Bank Statement')
+
+    def _get_domain_type(self):
+        model_id = self.env['ir.model'].search([('name', '=', 'stock.picking')])
+        return super(AccountDocuments, self)._get_domain_type() + [('model_id', '=', model_id.id)]
+
+
+class IrActionsReport(models.Model):
+    _inherit = 'ir.actions.report'
+
+    @api.multi
+    def postprocess_pdf_report(self, record, buffer):
+        attachment = super(IrActionsReport, self).postprocess_pdf_report(record, buffer)
+        if attachment:
+            statement = self.env[attachment.res_model].browse(attachment.res_id)
+            docs = self.env['account.documents'].search([('ir_attachment_id', '=', attachment.id)])
+            if docs and attachment.res_model == 'account.bank.statement':
+                docs.statement_id = statement
+                domain = self.env['account.documents.type']._get_domain('stock.picking', '', statement.state)
+                docs.document_type_id = self.env['account.documents.type'].search(domain)
+        return attachment

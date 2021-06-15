@@ -29,8 +29,9 @@ class AccountMove(models.Model):
                     }
         return False
 
-
-class AccountMoveLine(models.Model):
-    _inherit = "account.move.line"
-
-    stock_move_id = fields.Many2one('stock.move', string='Stock Move')
+# get from account_move_line_stock_info
+# removed
+# class AccountMoveLine(models.Model):
+#     _inherit = "account.move.line"
+# 
+#     stock_move_id = fields.Many2one('stock.move', string='Stock Move')

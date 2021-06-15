@@ -20,7 +20,8 @@ class AccountMove(models.Model):
         for rec in self:
             date = rec.date
             company = rec.company_id or self.env['res.company']._company_default_get('account.move')
-            rec.date_range_fm_id = company.find_daterange_fm(date)
+            if company and date:
+                rec.date_range_fm_id = company.find_daterange_fm(date)
 
     @api.model
     def _search_date_range_fm(self, operator, value):

@@ -12,7 +12,7 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     is_initial_balance = fields.Boolean('This is initial balance')
-    account_move_line_ids = fields.One2many('account.move.line', 'stock_move_id')
+    # account_move_line_ids = fields.One2many('account.move.line', 'stock_move_id') get from account_move_line_stock_info
 
     def _get_accounting_data_for_valuation(self):
         journal_id, acc_src, acc_dest, acc_valuation = super(StockMove, self)._get_accounting_data_for_valuation()

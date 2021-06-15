@@ -8,6 +8,12 @@
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_account_move_lines"
+                            icon="fa-usd"
+                            class="oe_stat_button"
+                            string="Accounting Entries"
+                            type="object"
+                            groups="account.group_account_user"/>
                     <button string="Re-booking Picking Entries"
                             type="object"
                             name= "rebuild_moves"
@@ -24,6 +30,12 @@
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_account_move_lines"
+                            icon="fa-usd"
+                            class="oe_stat_button"
+                            string="Accounting Entries"
+                            type="object"
+                            groups="account.group_account_user"/>
                     <button string="Re-booking Picking Entries"
                             type="object"
                             name= "rebuild_moves"

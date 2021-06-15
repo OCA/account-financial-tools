@@ -4,16 +4,30 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0+e-20190711\n"
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-01 07:02+0000\n"
-"PO-Revision-Date: 2019-08-01 07:02+0000\n"
+"POT-Creation-Date: 2021-04-21 13:59+0000\n"
+"PO-Revision-Date: 2021-04-21 13:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: account_documents
+#: code:addons/account_documents/models/account_bank_statement.py:47
+#, python-format
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                                Click to upload document to your Picking.\n"
+"                            </p><p>\n"
+"                                Use this feature to store any files, like original invoices.\n"
+"                            </p>"
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"                                Click to upload document to your Picking.\n"
+"                            </p><p>\n"
+"                                Use this feature to store any files, like original invoices.\n"
+"                            </p>"
 
 #. module: account_documents
 #: code:addons/account_documents/models/stock_picking.py:44
@@ -58,7 +72,7 @@ msgstr "<p class=\"oe_view_nocontent_create\">\n"
 "                        </p>"
 
 #. module: account_documents
-#: code:addons/account_documents/models/account_invoice.py:93
+#: code:addons/account_documents/models/account_invoice.py:95
 #, python-format
 msgid "<p class=\"oe_view_nocontent_create\">\n"
 "                            Click to upload document to your invoice.\n"
@@ -82,7 +96,7 @@ msgstr "Διακριτικό Πρόσβασης"
 #: model:ir.ui.view,arch_db:account_documents.account_documents_type_form_view
 #: model:ir.ui.view,arch_db:account_documents.account_documents_type_tree_view
 msgid "Account document type"
-msgstr "Account document type"
+msgstr "Είδος Λογιστικού Εγγράφου"
 
 #. module: account_documents
 #: model:ir.model.fields,field_description:account_documents.field_account_documents_type_active
@@ -99,6 +113,11 @@ msgstr "Όνομα Συνημμένου"
 #: model:ir.model.fields,field_description:account_documents.field_account_documents_website_url
 msgid "Attachment URL"
 msgstr "URL συνημμένου"
+
+#. module: account_documents
+#: model:ir.ui.view,arch_db:account_documents.view_document_form
+msgid "Attachments"
+msgstr "Συνημμένα"
 
 #. module: account_documents
 #: model:ir.model.fields,field_description:account_documents.field_account_documents_checksum
@@ -128,6 +147,11 @@ msgid "Created on"
 msgstr "Δημιουργήθηκε στις"
 
 #. module: account_documents
+#: model:ir.ui.view,arch_db:account_documents.view_document_form
+msgid "Creation"
+msgstr "ΔΗΜΙΟΥΡΓΙΑ"
+
+#. module: account_documents
 #: model:ir.model.fields,field_description:account_documents.field_account_documents_store_lobject
 msgid "Data"
 msgstr "Δεδομένα"
@@ -139,6 +163,7 @@ msgstr "Δεδομένα Βάσης"
 
 #. module: account_documents
 #: model:ir.model.fields,field_description:account_documents.field_account_documents_description
+#: model:ir.ui.view,arch_db:account_documents.view_document_form
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -154,28 +179,15 @@ msgid "Display Name"
 msgstr "Εμφάνιση Ονόματος"
 
 #. module: account_documents
-#: model:ir.model.fields,field_description:account_documents.field_account_documents_is_document
-msgid "Document"
-msgstr "Έγγραφο"
-
-#. module: account_documents
-#: model:ir.model.fields,field_description:account_documents.field_account_documents_store_directory
-msgid "Document Directory"
-msgstr "Document Directory"
-
-#. module: account_documents
-#: model:ir.model.fields,field_description:account_documents.field_account_documents_store_document
-msgid "Document File"
-msgstr "Document File"
-
-#. module: account_documents
-#: code:addons/account_documents/models/account_invoice.py:85
+#: code:addons/account_documents/models/account_bank_statement.py:39
+#: code:addons/account_documents/models/account_invoice.py:87
 #: code:addons/account_documents/models/purchase.py:48
 #: code:addons/account_documents/models/sale.py:48
 #: code:addons/account_documents/models/stock_picking.py:36
 #: model:ir.ui.view,arch_db:account_documents.invoice_form_documents_number
 #: model:ir.ui.view,arch_db:account_documents.invoice_supplier_documents_form
 #: model:ir.ui.view,arch_db:account_documents.purchase_order_documents_form
+#: model:ir.ui.view,arch_db:account_documents.view_bank_statement_form
 #: model:ir.ui.view,arch_db:account_documents.view_order_documents_form
 #: model:ir.ui.view,arch_db:account_documents.view_picking_form
 #: model:ir.ui.view,arch_db:account_documents.vpicktree
@@ -184,6 +196,7 @@ msgid "Documents"
 msgstr "Έγγραφα"
 
 #. module: account_documents
+#: model:ir.model.fields,field_description:account_documents.field_account_bank_statement_documents_count
 #: model:ir.model.fields,field_description:account_documents.field_account_invoice_documents_count
 #: model:ir.model.fields,field_description:account_documents.field_purchase_order_documents_count
 #: model:ir.model.fields,field_description:account_documents.field_sale_order_documents_count
@@ -213,8 +226,13 @@ msgstr "Μέγεθος Αρχείου"
 
 #. module: account_documents
 #: model:ir.model,name:account_documents.model_account_documents_type
-msgid "Global nomeclature for parce documents."
-msgstr "Global nomeclature for parce documents."
+msgid "Global nomenclature for parce documents."
+msgstr "Global nomenclature for parce documents."
+
+#. module: account_documents
+#: model:ir.ui.view,arch_db:account_documents.view_document_form
+msgid "History"
+msgstr "Ιστορικό"
 
 #. module: account_documents
 #: model:ir.model.fields,field_description:account_documents.field_account_documents_id
@@ -321,11 +339,6 @@ msgid "State"
 msgstr "Νομός/Πολιτεία"
 
 #. module: account_documents
-#: model:ir.model.fields,field_description:account_documents.field_account_documents_storage_type
-msgid "Storage Type"
-msgstr "Storage Type"
-
-#. module: account_documents
 #: model:ir.model.fields,field_description:account_documents.field_account_documents_store_fname
 msgid "Stored Filename"
 msgstr "Αποθηκευμένο Όνομα Αρχείου"
@@ -367,7 +380,7 @@ msgid "You can either upload a file from your computer or copy/paste an internet
 msgstr "You can either upload a file from your computer or copy/paste an internet link to your file."
 
 #. module: account_documents
-#: code:addons/account_documents/models/account_invoice.py:22
+#: code:addons/account_documents/models/account_invoice.py:24
 #: code:addons/account_documents/models/purchase.py:22
 #: code:addons/account_documents/models/sale.py:22
 #, python-format
@@ -378,4 +391,9 @@ msgstr "an unknown name"
 #: model:ir.model,name:account_documents.model_ir_actions_report
 msgid "ir.actions.report"
 msgstr "ir.actions.report"
+
+#. module: account_documents
+#: model:ir.ui.view,arch_db:account_documents.view_document_form
+msgid "on"
+msgstr "στις"
 

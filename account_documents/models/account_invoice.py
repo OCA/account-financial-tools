@@ -102,9 +102,28 @@ class AccountInvoice(models.Model):
                 }
         return False
 
+
 class AccountDocuments(models.Model):
     _inherit = "account.documents"
 
+    invoice_id = fields.Many2one('account.invoice', 'Invoice')
+    
     def _get_domain_type(self):
         model_id = self.env['ir.model'].search([('name', '=', 'account.invoice')])
         return super(AccountDocuments, self)._get_domain_type() + [('model_id', '=', model_id.id)]
+
+
+class IrActionsReport(models.Model):
+    _inherit = 'ir.actions.report'
+
+    @api.multi
+    def postprocess_pdf_report(self, record, buffer):
+        attachment = super(IrActionsReport, self).postprocess_pdf_report(record, buffer)
+        if attachment:
+            inv = self.env[attachment.res_model].browse(attachment.res_id)
+            docs = self.env['account.documents'].search([('ir_attachment_id', '=', attachment.id)])
+            if docs and attachment.res_model == 'account.invoice':
+                docs.invoice_id = inv
+                domain = self.env['account.documents.type']._get_domain('account.invoice', inv.type, inv.state)
+                docs.document_type_id = self.env['account.documents.type'].search(domain)
+        return attachment

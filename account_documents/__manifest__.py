@@ -3,9 +3,10 @@
 
 {
     'name': "Account documents",
-    'version': '11.0.3.0.0',
+    'version': '11.0.4.0.0',
     'category': 'Accounting',
     "author": "Rosen Vladimirov <vladimirov.rosen@gmail.com>, "
+              "BioPrint Ltd., "
               "dXFactory Ltd. <http://www.dxfactory.eu>",
     'website': 'https://github.com/rosenvladimirov/account-financial-tools',
     'license': 'AGPL-3',

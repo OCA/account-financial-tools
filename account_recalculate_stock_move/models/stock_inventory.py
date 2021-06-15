@@ -48,10 +48,23 @@ class Inventory(models.Model):
         return action_data
 
     @api.multi
+    def action_get_account_move_lines(self):
+        self.ensure_one()
+        action_ref = self.env.ref('account.action_account_moves_all_a')
+        if not action_ref:
+            return False
+        action_data = action_ref.read()[0]
+        action_data['domain'] = [('id', 'in', self.account_move_line_ids.ids)]
+        action_data['context'] = {'search_default_movegroup': 1}
+        return action_data
+
+    @api.multi
     def _rebuild_account_move(self):
         for record in self:
             for move in record.move_ids:
                 if not move.account_move_ids and move.state == 'done' and self.env.context.get("rebuld_try"):
+                    if self.env.context.get('force_accounting_date'):
+                        move.write({'date': self.env.context['force_accounting_date'], 'accounting_date': self.env.context['force_accounting_date']})
                     try:
                         for line in move.move_line_ids:
                             line.with_context(dict(self.env.context, force_valuation=True))._rebuild_account_move()
@@ -59,9 +72,12 @@ class Inventory(models.Model):
                         _logger.info("STOCK MOVE %s unposted" % move.name)
                         pass
                 elif not move.account_move_ids and move.state == 'done' and not self.env.context.get("rebuld_try"):
+                    if self.env.context.get('force_accounting_date'):
+                        move.write({'date': self.env.context['force_accounting_date'], 'accounting_date': self.env.context['force_accounting_date']})
                     for line in move.move_line_ids:
                         line.with_context(dict(self.env.context, force_valuation=True))._rebuild_account_move()
 
+    @api.multi
     def rebuild_account_move(self):
         for record in self:
             date = record.accounting_date or record.date

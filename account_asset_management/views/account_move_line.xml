@@ -8,6 +8,7 @@
     <field name="arch" type="xml">
       <field name="statement_id" position="after">
         <field name="asset_profile_id"/>
+        <field name="tax_profile_id" invisible="1" force_save="1"/>
         <field name="asset_id"/>
         <field name="asset_salvage_value"/>
       </field>

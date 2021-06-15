@@ -25,8 +25,9 @@ class AccountMove(models.Model):
         for rec in self:
             date = fields.Date.from_string(rec.date)
             company = rec.company_id or self.env['res.company']._company_default_get('account.move')
-            rec.date_range_fy_id =\
-                company and company.find_daterange_fy(date) or False
+            if company and date:
+                rec.date_range_fy_id =\
+                    company and company.find_daterange_fy(date) or False
 
     @api.model
     def _search_date_range_fy(self, operator, value):

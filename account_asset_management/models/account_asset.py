@@ -16,6 +16,8 @@ from odoo.exceptions import UserError
 from odoo.osv import expression
 from functools import reduce
 
+from odoo.tools import float_compare
+
 _logger = logging.getLogger(__name__)
 
 
@@ -63,8 +65,12 @@ class AccountAsset(models.Model):
     lot_name = fields.Char('Lot/Serial Number')
     quant_ids = fields.One2many('stock.quant', string='Quants', related="lot_id.quant_ids", readonly=True)
     location_ids = fields.One2many('stock.location', string="Locatons", compute="_compute_locations_ids")
-
-    product_asset_ids = fields.Many2many("product.template", relation="asset_product_tmpl_rel", column1="asset_id", column2="product_tmpl_id", string="Linked to asset")
+    lot_qty = fields.Float('Quantity', related='lot_id.product_qty')
+    product_asset_ids = fields.Many2many("product.template", relation="asset_product_tmpl_rel", column1="asset_id",
+                                         column2="product_tmpl_id", string="Linked to asset")
+    maintenance_asset_ids = fields.Many2many("product.template", relation="maintenance_product_tmpl_rel",
+                                             column1="asset_id",
+                                             column2="product_tmpl_id", string="Maintenance to asset")
     diff_purchase_value = fields.Float('Cost difference', compute="_compute_diff_purchase_value")
     purchase_value = fields.Float(
         string='Purchase Value', required=True, readonly=True,
@@ -79,6 +85,41 @@ class AccountAsset(models.Model):
         help="The estimated value that an asset will realize upon "
              "its sale at the end of its useful life.\n"
              "This value is used to determine the depreciation amounts.")
+    froze_depreciation = fields.Float(
+        string="Froze Depreciation", digits=dp.get_precision('Account'),
+        states={'draft': [('readonly', False)]}, readonly=True,
+        help="This amount represent the initial value of the asset depreciation."
+             "\nThe Depreciation Base is calculated as follows:"
+             "\nPurchase Value - Salvage Value - Froze Depreciation.")
+    froze_period = fields.Integer(
+        string="Froze Periods",
+        states={'draft': [('readonly', False)]}, readonly=True,
+        compute="_compute_froze_period",
+        store=True,
+        help="This is amount for froze depreciation periods."
+             "\nThe frozen depreciation will separate on this periods"
+             "\nby choice type period bellow."
+    )
+    froze_date = fields.Date(
+        string="Froze before date",
+        states={'draft': [('readonly', False)]}, readonly=True,
+        help="Before this date the system use Froze Depreciation."
+             "\nThe Depreciation Base is calculate on base"
+             "\nPurchase Value - Froze Depreciation.",
+    )
+    tax_froze_depreciation = fields.Float(
+        string="Tax Froze Depreciation", digits=dp.get_precision('Account'),
+        states={'draft': [('readonly', False)]}, readonly=True,
+        help="This amount represent the initial value of the asset depreciation."
+             "\nThe Depreciation Base is calculated as follows:"
+             "\nPurchase Value - Salvage Value - Froze Depreciation.")
+    # tax_froze_period = fields.Integer(
+    #     string="Tax Froze Periods",
+    #     states={'draft': [('readonly', False)]}, readonly=True,
+    #     help="This is amount for froze depreciation periods."
+    #          "\nThe frozen depreciation will separate on this periods"
+    #          "\nby choice type period bellow."
+    # )
     depreciation_base = fields.Float(
         compute='_compute_depreciation_base',
         digits=dp.get_precision('Account'),
@@ -95,6 +136,11 @@ class AccountAsset(models.Model):
         compute='_compute_depreciation',
         digits=dp.get_precision('Account'),
         string='Depreciated Value',
+        store=True)
+    value_begin_depreciated = fields.Float(
+        compute='_compute_depreciation',
+        digits=dp.get_precision('Account'),
+        string='Depreciated Value on Begin of year',
         store=True)
     fy_value_residual = fields.Float(
         compute='_compute_depreciation',
@@ -115,6 +161,11 @@ class AccountAsset(models.Model):
         compute='_compute_depreciation',
         digits=dp.get_precision('Account'),
         string='Depreciated Value',
+        store=True)
+    tax_value_begin_depreciated = fields.Float(
+        compute='_compute_depreciation',
+        digits=dp.get_precision('Account'),
+        string='Depreciated Value on Begin of year',
         store=True)
     tax_fy_value_residual = fields.Float(
         compute='_compute_depreciation',
@@ -235,25 +286,25 @@ class AccountAsset(models.Model):
              "number of depreciation lines.\n"
              "  * Number of Years: Specify the number of years "
              "for the depreciation.\n"
-             # "  * Number of Depreciations: Fix the number of "
-             # "depreciation lines and the time between 2 depreciations.\n"
-             # "  * Ending Date: Choose the time between 2 depreciations "
-             # "and the date the depreciations won't go beyond."
+        # "  * Number of Depreciations: Fix the number of "
+        # "depreciation lines and the time between 2 depreciations.\n"
+        # "  * Ending Date: Choose the time between 2 depreciations "
+        # "and the date the depreciations won't go beyond."
     )
     method_tax_time = fields.Selection(selection=lambda self: self.env[
-            'account.bg.asset.profile']._selection_method(),
-        string='Fiscal Time Method',
-        required=True, readonly=True,
-        states={'draft': [('readonly', False)]}, default='percentage',
-        help="Choose the method to use to compute the dates and "
-             "number of depreciation lines.\n"
-             "  * Number of Years: Specify the number of years "
-             "for the depreciation.\n"
-             # "  * Number of Depreciations: Fix the number of "
-             # "depreciation lines and the time between 2 depreciations.\n"
-             # "  * Ending Date: Choose the time between 2 depreciations "
-             # "and the date the depreciations won't go beyond."
-        )
+        'account.bg.asset.profile']._selection_method(),
+                                       string='Fiscal Time Method',
+                                       required=True, readonly=True,
+                                       states={'draft': [('readonly', False)]}, default='percentage',
+                                       help="Choose the method to use to compute the dates and "
+                                            "number of depreciation lines.\n"
+                                            "  * Number of Years: Specify the number of years "
+                                            "for the depreciation.\n"
+                                       # "  * Number of Depreciations: Fix the number of "
+                                       # "depreciation lines and the time between 2 depreciations.\n"
+                                       # "  * Ending Date: Choose the time between 2 depreciations "
+                                       # "and the date the depreciations won't go beyond."
+                                       )
     fiscal_method_percentage = fields.Float(related="tax_profile_id.method_percentage",
                                             string="Fiscal Percentage per Year",
                                             store=True)
@@ -277,6 +328,10 @@ class AccountAsset(models.Model):
         comodel_name='account.asset.restatement.value',
         inverse_name='asset_id',
         string='Restatement Lines', copy=False)
+    sleep_period_line_ids = fields.One2many(
+        comodel_name='account.asset.sleep.periods',
+        inverse_name='asset_id',
+        string='Sleep period Lines', copy=False)
     type = fields.Selection(
         selection=[('view', 'View'),
                    ('normal', 'Normal')],
@@ -338,6 +393,15 @@ class AccountAsset(models.Model):
                     asset.move_line_check = True
                     break
 
+    @api.multi
+    @api.depends('froze_date')
+    def _compute_froze_period(self):
+        for record in self:
+            if record.date_start and record.froze_date:
+                date_start = fields.Date.from_string(record.date_start)
+                date_stop = fields.Date.from_string(record.froze_date)
+                record.froze_period = (date_stop.year - date_start.year) * 12 + date_stop.month - date_start.month
+
     @api.depends('purchase_value', 'salvage_value', 'type', 'method')
     @api.multi
     def _compute_depreciation_base(self):
@@ -349,7 +413,16 @@ class AccountAsset(models.Model):
             else:
                 asset.depreciation_base = \
                     asset.purchase_value - asset.salvage_value
-            asset.depreciation_base += asset.depreciation_restatement_line_ids.get_restatement_value(['create'], asset.date_start, '<=', 'depreciation_base')
+            asset.depreciation_base += asset.depreciation_restatement_line_ids.get_restatement_value(['create'],
+                                                                                                     asset.date_start,
+                                                                                                     '<=',
+                                                                                                     'depreciation_base')
+            if self._context.get('period_date'):
+                asset.depreciation_base += asset.depreciation_restatement_line_ids.get_restatement_value(
+                    ['restatement', 'diminution'],
+                    self._context['period_date'],
+                    '<=',
+                    'depreciated_value')
 
     @api.multi
     @api.depends('type', 'depreciation_base',
@@ -357,7 +430,7 @@ class AccountAsset(models.Model):
                  'depreciation_line_ids.amount',
                  'depreciation_line_ids.previous_id',
                  'depreciation_line_ids.init_entry',
-                 'depreciation_line_ids.move_check',)
+                 'depreciation_line_ids.move_check', )
     def _compute_depreciation(self):
         for asset in self:
             if asset.type == 'normal':
@@ -365,41 +438,57 @@ class AccountAsset(models.Model):
                 fy = asset.company_id.find_daterange_fy(fy_date_start)
                 lines = asset.depreciation_line_ids.filtered(
                     lambda l: l.type in ('depreciate', 'remove') and
-                    (l.init_entry or l.move_check))
+                              (l.init_entry or l.move_check))
                 value_depreciated = sum([l.amount for l in lines])
+                if value_depreciated == 0 and asset.froze_depreciation > 0 and not self._context.get(
+                        'force_exclude_froze'):
+                    value_depreciated += asset.froze_depreciation
+                value_begin_depreciated = sum([l.amount for l in lines if l.line_date < fy.date_start])
                 residual = asset.depreciation_base - value_depreciated
                 depreciated = value_depreciated
-                fy_value_depreciated = sum([l.amount for l in lines if l.line_date >= fy.date_start and l.line_date <= fy.date_end])
+                begin_depreciated = value_begin_depreciated
+
+                fy_value_depreciated = sum(
+                    [l.amount for l in lines if fy.date_start <= l.line_date <= fy.date_end])
                 fy_residual = asset.depreciation_base + asset.salvage_value + asset.fiscal_correction_value - fy_value_depreciated
                 fy_depreciated = fy_value_depreciated
 
                 lines = asset.depreciation_bg_line_ids.filtered(
-                    lambda l: l.type in ('depreciate', 'remove'))
+                    lambda l: l.type in ('depreciate', 'storno', 'remove'))
                 tax_value_depreciated = sum([l.amount for l in lines if l.line_date <= fy.date_end])
+                tax_value_begin_depreciated = sum([l.amount for l in lines if l.line_date < fy.date_start])
+                if tax_value_depreciated == 0 and asset.tax_froze_depreciation > 0 and not self._context.get(
+                        'force_exclude_froze'):
+                    tax_value_depreciated += asset.tax_froze_depreciation
                 # _logger.info("DATES %s-%s" % (fy.date_start, fy.date_end))
                 tax_residual = asset.depreciation_base - tax_value_depreciated
                 tax_depreciated = tax_value_depreciated
+                begin_tax_depreciated = tax_value_begin_depreciated
                 tax_fy_value_depreciated = sum(
-                    [l.amount for l in lines if l.line_date >= fy.date_start and l.line_date <= fy.date_end])
+                    [l.amount for l in lines if fy.date_start <= l.line_date <= fy.date_end])
                 tax_fy_residual = asset.depreciation_base + asset.salvage_value - tax_fy_value_depreciated
                 tax_fy_depreciated = tax_fy_value_depreciated
 
             else:
                 residual = 0.0
                 depreciated = 0.0
+                begin_depreciated = 0.0
                 fy_residual = 0.0
                 fy_depreciated = 0.0
                 tax_residual = 0.0
                 tax_depreciated = 0.0
+                begin_tax_depreciated = 0.0
                 tax_fy_residual = 0.0
                 tax_fy_depreciated = 0.0
             asset.update({
                 'value_residual': residual,
                 'value_depreciated': depreciated,
+                'value_begin_depreciated': begin_depreciated,
                 'fy_value_residual': fy_residual,
                 'fy_value_depreciated': fy_depreciated,
                 'tax_value_residual': tax_residual,
                 'tax_value_depreciated': tax_depreciated,
+                'tax_value_begin_depreciated': begin_tax_depreciated,
                 'tax_fy_value_residual': tax_fy_residual,
                 'tax_fy_value_depreciated': tax_fy_depreciated,
             })
@@ -431,11 +520,20 @@ class AccountAsset(models.Model):
                     raise UserError(
                         _("The Start Date must precede the Ending Date."))
 
+    @api.onchange('froze_date')
+    def _froze_date(self):
+        if self.froze_date:
+            date_start = fields.Date.from_string(self.date_start)
+            date_stop = fields.Date.from_string(self.froze_date)
+            self.froze_period = (date_stop.year - date_start.year) * 12 + date_stop.month - date_start.month
+        else:
+            self.froze_period = 0
+
     @api.onchange('move_line_id')
     def _onchange_move_line_id(self):
         if self.move_line_id:
             self.lot_id = self.move_line_id.lot_id
-            #self.move_line_ids.write({'asset_id': False})
+            # self.move_line_ids.write({'asset_id': False})
             # for line in self.move_line_id:
             #     line.write({'asset_id': self.id})
 
@@ -468,7 +566,7 @@ class AccountAsset(models.Model):
                 'amount': self.depreciation_base + self.salvage_value + self.fiscal_correction_value,
             })
             depreciation_start_date = fields.Datetime.from_string(self.date_start)
-            depreciation_start_date = depreciation_start_date + relativedelta(months=1, day=1)
+            depreciation_start_date = depreciation_start_date.replace(day=1)
             if fields.Datetime.to_string(depreciation_start_date) != dl_bg_create_line.line_date:
                 dl_bg_create_line.update({
                     'line_date': fields.Datetime.to_string(depreciation_start_date)
@@ -530,14 +628,15 @@ class AccountAsset(models.Model):
             vals['prorata'] = True
         if vals.get('type') == 'view':
             vals['date_start'] = False
+        # _logger.info("ASSETS %s" % vals)
         asset = super().create(vals)
         if self.env.context.get('create_asset_from_move_line'):
             # Trigger compute of depreciation_base
             asset.salvage_value = 0.0
         if asset.type == 'normal':
             asset._create_first_asset_line()
-        if 'move_line_id' in vals:
-            asset.move_line_id.asset_id = asset.id
+            if vals.get('move_line_id'):
+                asset.move_line_id.asset_id = asset.id
         return asset
 
     @api.multi
@@ -557,7 +656,7 @@ class AccountAsset(models.Model):
                 asset.compute_depreciation_board()
                 # extra context to avoid recursion
                 asset.with_context(asset_validate_from_write=True).validate()
-            if 'move_line_id' in vals:
+            if vals.get('move_line_id'):
                 asset.move_line_id.asset_id = asset.id
         if 'depreciation_restatement_line_ids' in vals:
             self.recalculate()
@@ -581,7 +680,7 @@ class AccountAsset(models.Model):
                 asset_line.move_id = self.env.context['move_id']
         elif self.depreciation_base and self.fiscal_method_percentage > 0.0 and not self.depreciation_bg_line_ids:
             depreciation_start_date = fields.Datetime.from_string(self.date_start)
-            depreciation_start_date = depreciation_start_date + relativedelta(months=1, day=1)
+            depreciation_start_date = depreciation_start_date.replace(day=1)
             asset_line_obj = self.env['account.bg.asset.line']
             asset_line_value = {
                 'amount': self.depreciation_base + self.salvage_value + self.fiscal_correction_value,
@@ -650,13 +749,15 @@ class AccountAsset(models.Model):
         else:
             self.depreciation_base = \
                 self.purchase_value - self.salvage_value
-        self.depreciation_base += restatement_obj.get_restatement_value(['create'], self.date_start, '<=', 'depreciation_base')
+        self.depreciation_base += restatement_obj.get_restatement_value(['create'], self.date_start, '<=',
+                                                                        'depreciation_base')
         if self.env.context.get("bg_asset_line"):
             dlines = self.depreciation_bg_line_ids
         else:
             dlines = self.depreciation_line_ids
         for dl in dlines.filtered(lambda l: l.type == 'create'):
-            dl.with_context(dict(self.env.context, allow_asset_line_update=True)).write({'amount': self.depreciation_base})
+            dl.with_context(dict(self.env.context, allow_asset_line_update=True)).write(
+                {'amount': self.depreciation_base})
         dlines = dlines.filtered(lambda l: l.type == 'depreciate')
         dlines = dlines.sorted(key=lambda l: l.line_date)
         depreciated_value = remaining_value = 0.0
@@ -665,17 +766,18 @@ class AccountAsset(models.Model):
             if i == 0:
                 depreciation_base = dl.depreciation_base
                 depreciation_base += restatement_obj.get_restatement_value(['create'], dl.line_date, '<=',
-                                                      'depreciation_base')
+                                                                           'depreciation_base')
                 depreciated_value = dl.previous_id \
-                    and (depreciation_base - dl.previous_id.remaining_value) \
-                    or 0.0
+                                    and (depreciation_base - dl.previous_id.remaining_value) \
+                                    or 0.0
                 depreciated_value += restatement_obj.get_restatement_value(['restatement', 'diminution'], dl.line_date,
-                                                                            '<=', 'depreciated_value')
+                                                                           '<=', 'depreciated_value')
                 remaining_value = \
                     depreciation_base - depreciated_value - dl.amount
             else:
-                depreciated_value += dl.previous_id.amount + restatement_obj.get_restatement_value(['restatement', 'diminution'], dl.line_date,
-                                                                            '=', 'depreciated_value')
+                depreciated_value += dl.previous_id.amount + restatement_obj.get_restatement_value(
+                    ['restatement', 'diminution'], dl.line_date,
+                    '=', 'depreciated_value')
                 remaining_value -= dl.amount
             dl.depreciated_value = depreciated_value
             dl.remaining_value = remaining_value
@@ -683,15 +785,18 @@ class AccountAsset(models.Model):
     @api.multi
     def validate(self):
         for asset in self:
-            if asset.type == 'normal' and asset.company_currency_id.is_zero(
-                    asset.value_residual):
+            _logger.info("ASSET VALIDATE %s:%s" % (asset.state, self._context))
+            if asset.type == 'normal' and (asset.company_currency_id.is_zero(asset.value_residual) or
+                                           (asset.state == 'open' and self._context.get('asset_out'))):
                 asset.state = 'close'
-            else:
+            elif not self._context.get('asset_out'):
                 # force recalculate base desperation
                 asset._compute_depreciation_base()
                 asset._create_first_asset_line()
                 asset.with_context(dict(self._context, allow_asset_line_update=True))._onchange_purchase_salvage_value()
                 asset.state = 'open'
+            elif asset.state == 'draft' and self._context.get('asset_out'):
+                asset.unlink()
         return True
 
     @api.multi
@@ -753,7 +858,7 @@ class AccountAsset(models.Model):
         digits = self.env['decimal.precision'].precision_get('Account')
 
         for asset in self:
-            if asset.value_residual == 0.0:
+            if asset.with_context(dict(self._context, force_exclude_froze=True)).value_residual == 0.0:
                 continue
             if self.env.context.get("bg_asset_line"):
                 domain = [
@@ -766,13 +871,12 @@ class AccountAsset(models.Model):
                     ('asset_id', '=', asset.id),
                     ('type', '=', 'depreciate'),
                     '|', ('move_check', '=', True), ('init_entry', '=', True)]
-            posted_lines = line_obj.search(
-                domain, order='line_date desc')
+            posted_lines = line_obj.search(domain, order='line_date desc')
             if posted_lines:
                 last_line = posted_lines[0]
             else:
                 last_line = line_obj
-            _logger.info("POSTED LINES %s:%s" % (last_line, self._context))
+            # _logger.info("POSTED LINES %s:%s" % (last_line, self._context))
             if self.env.context.get("bg_asset_line"):
                 domain = [
                     ('asset_id', '=', asset.id),
@@ -794,15 +898,14 @@ class AccountAsset(models.Model):
                     old_lines.unlink()
 
             table = asset._compute_depreciation_table()
-            _logger.info("TABLE %s" % table)
+            # _logger.info("TABLE %s" % table)
             if not table:
                 continue
 
             # group lines prior to depreciation start period
-            depreciation_start_date = fields.Datetime.from_string(
-                asset.date_start)
+            depreciation_start_date = fields.Datetime.from_string(asset.date_start)
             if self._context.get('bg_asset_line'):
-                depreciation_start_date = depreciation_start_date + relativedelta(months=1, day=1)
+                depreciation_start_date = depreciation_start_date.replace(day=1)
             lines = table[0]['lines']
             lines1 = []
             lines2 = []
@@ -821,8 +924,10 @@ class AccountAsset(models.Model):
 
             # check table with posted entries and
             # recompute in case of deviation
-            depreciated_value_posted = depreciated_value = 0.0
+            depreciated_value_posted = 0.0
             if posted_lines:
+                table_i_start = line_i_start = 0
+                residual_amount_table = 0.0
                 last_depreciation_date = fields.Datetime.from_string(
                     last_line.line_date)
                 last_date_in_table = table[-1]['lines'][-1]['date']
@@ -832,34 +937,31 @@ class AccountAsset(models.Model):
                           "posted depreciation table entry dates."))
 
                 for table_i, entry in enumerate(table):
-                    residual_amount_table = \
-                        entry['lines'][-1]['remaining_value']
-                    if entry['date_start'] <= last_depreciation_date \
-                            <= entry['date_stop']:
+                    residual_amount_table = entry['lines'][-1]['remaining_value']
+                    if entry['date_start'] <= last_depreciation_date <= entry['date_stop']:
+                        if entry['date_stop'] == last_depreciation_date:
+                            table_i += 1
+                            line_i = 0
+                        else:
+                            line_i = 0
+                            entry = table[table_i]
+                            date_min = entry['date_start']
+                            for line_i, line in enumerate(entry['lines']):
+                                residual_amount_table = line['remaining_value']
+                                if date_min <= last_depreciation_date <= line['date']:
+                                    if line['date'] == last_depreciation_date:
+                                        line_i += 1
+                                    break
+                                date_min = line['date']
+                        table_i_start = table_i
+                        line_i_start = line_i
                         break
-                if entry['date_stop'] == last_depreciation_date:
-                    table_i += 1
-                    line_i = 0
-                else:
-                    entry = table[table_i]
-                    date_min = entry['date_start']
-                    for line_i, line in enumerate(entry['lines']):
-                        residual_amount_table = line['remaining_value']
-                        if date_min <= last_depreciation_date <= line['date']:
-                            break
-                        date_min = line['date']
-                    if line['date'] == last_depreciation_date:
-                        line_i += 1
-                table_i_start = table_i
-                line_i_start = line_i
 
                 # check if residual value corresponds with table
                 # and adjust table when needed
-                depreciated_value_posted = depreciated_value = \
-                    sum([l.amount for l in posted_lines])
+                depreciated_value_posted = depreciated_value = sum([l.amount for l in posted_lines])
                 residual_amount = asset.depreciation_base - depreciated_value
-                amount_diff = round(
-                    residual_amount_table - residual_amount, digits)
+                amount_diff = round(residual_amount_table - residual_amount, digits)
                 if amount_diff:
                     # compensate in first depreciation entry
                     # after last posting
@@ -883,14 +985,14 @@ class AccountAsset(models.Model):
                         # depreciates the remaining value
                         if asset.method in ['linear-limit', 'degr-limit']:
                             depr_max = asset.depreciation_base \
-                                - asset.salvage_value
+                                       - asset.salvage_value
                         else:
                             depr_max = asset.depreciation_base
                         amount = depr_max - depreciated_value
                     else:
                         amount = line['amount']
-                    if amount:
-                        _logger.info("LINE %s:%s" % (line, name))
+                    if amount or line['sleep_period']:
+                        # _logger.info("LINE %s:%s" % (line, name))
                         vals = {
                             'previous_id': depr_line.id,
                             'amount': amount,
@@ -898,10 +1000,15 @@ class AccountAsset(models.Model):
                             'name': name,
                             'line_date': line['date'].strftime('%Y-%m-%d'),
                             'init_entry': entry['init'],
+                            'sleep_period': line['sleep_period'],
                         }
+                        if amount < 0 and self.env.context.get("bg_asset_line"):
+                            vals.update({
+                                'type': 'storno',
+                            })
                         depr_line = line_obj.create(vals)
                         depreciated_value += amount
-                        _logger.info("LINE NEW %s:%s" % (line_obj,depr_line))
+                        # _logger.info("LINE NEW %s:%s" % (line_obj, depr_line))
                     else:
                         seq -= 1
                 line_i_start = 0
@@ -921,8 +1028,8 @@ class AccountAsset(models.Model):
         fy_date_start = fields.Datetime.from_string(fy.date_start)
         fy_date_stop = fields.Datetime.from_string(fy.date_end)
         days = (fy_date_stop - fy_date_start).days + 1
-        months = (fy_date_stop.year - fy_date_start.year) * 12  \
-            + (fy_date_stop.month - fy_date_start.month) + 1
+        months = (fy_date_stop.year - fy_date_start.year) * 12 \
+                 + (fy_date_stop.month - fy_date_start.month) + 1
         if option == 'days':
             return days
         elif option == 'months':
@@ -937,11 +1044,11 @@ class AccountAsset(models.Model):
                         duration = (fy_date_stop - fy_date_start).days + 1
                     else:
                         duration = (
-                            dt(year, 12, 31) - fy_date_start).days + 1
+                                           dt(year, 12, 31) - fy_date_start).days + 1
                     factor = float(duration) / cy_days
                 elif i == cnt - 1:  # last year
                     duration = (
-                        fy_date_stop - dt(year, 1, 1)).days + 1
+                                       fy_date_stop - dt(year, 1, 1)).days + 1
                     factor += float(duration) / cy_days
                 else:
                     factor += 1.0
@@ -994,7 +1101,7 @@ class AccountAsset(models.Model):
             depreciation_start_date = fields.Datetime.from_string(
                 self.date_start)
             if self._context.get('bg_asset_line'):
-                depreciation_start_date = depreciation_start_date + relativedelta(months=1, day=1)
+                depreciation_start_date = depreciation_start_date.replace(day=1)
         else:
             fy_date_start = fields.Datetime.from_string(fy.date_start)
             depreciation_start_date = dt(
@@ -1003,40 +1110,41 @@ class AccountAsset(models.Model):
 
     def _get_depreciation_stop_date(self, depreciation_start_date):
         method_time = self.method_time
+        depreciation_stop_date = depreciation_start_date
 
         if self._context.get('bg_asset_line'):
             method_time = self.method_tax_time
 
         if method_time == 'year':
             depreciation_stop_date = depreciation_start_date + \
-                relativedelta(years=self.method_number, days=-1)
+                                     relativedelta(years=self.method_number, days=-1)
         elif method_time == 'month':
             (month, year) = (self.method_number % 12, self.method_number // 12)
             depreciation_stop_date = depreciation_start_date + \
-                relativedelta(years=year, days=-1)
+                                     relativedelta(years=year, days=-1)
             depreciation_stop_date = depreciation_stop_date + \
-                relativedelta(months=month, days=-1)
+                                     relativedelta(months=month, days=-1)
         elif method_time == 'percentage':
-            percentage_month = (100/self.fiscal_method_percentage)*12
+            percentage_month = (100 / self.fiscal_method_percentage) * 12
             (month, year) = (percentage_month % 12, percentage_month // 12)
             depreciation_stop_date = depreciation_start_date + \
-                relativedelta(years=year, days=-1) +\
-                relativedelta(months=month, days=-1)
+                                     relativedelta(years=int(year), days=-1) + \
+                                     relativedelta(months=int(month), days=-1)
         elif method_time == 'number':
             if self.method_period == 'month':
                 depreciation_stop_date = depreciation_start_date + \
-                    relativedelta(months=self.method_number, days=-1)
+                                         relativedelta(months=self.method_number, days=-1)
             elif self.method_period == 'quarter':
                 m = [x for x in [3, 6, 9, 12]
                      if x >= depreciation_start_date.month][0]
                 first_line_date = depreciation_start_date \
-                    + relativedelta(month=m, day=31)
+                                  + relativedelta(month=m, day=31)
                 months = self.method_number * 3
                 depreciation_stop_date = first_line_date \
-                    + relativedelta(months=months - 1, days=-1)
+                                         + relativedelta(months=months - 1, days=-1)
             elif self.method_period == 'year':
                 depreciation_stop_date = depreciation_start_date + \
-                    relativedelta(years=self.method_number, days=-1)
+                                         relativedelta(years=self.method_number, days=-1)
         elif method_time == 'end':
             depreciation_stop_date = fields.Datetime.from_string(
                 self.method_end)
@@ -1059,27 +1167,41 @@ class AccountAsset(models.Model):
             amount = entry['fy_amount'] - amount * full_periods
         return amount
 
-    def _compute_year_amount(self, residual_amount):
+    def _compute_year_amount(self, residual_amount, depreciation_base, froze_period, sleep_mounts):
         """
         Localization: override this method to change the degressive-linear
         calculation logic according to local legislation.
+        the depreciation_base is fake base linked with frozen base.
+        when has frozen base we will start with this base and depreciate and after continue wit rest
         """
         method_time = self.method_time
 
         if self._context.get('bg_asset_line'):
             method_time = self.method_tax_time
 
-        if method_time not in ['year', 'month', 'percentage']:
+        if method_time != 'year':
             raise UserError(
                 _("The '_compute_year_amount' method is only intended for "
                   "Time Method 'Number of Years."))
-        koef = 1
         if method_time == 'month':
+            method_number = self.method_number
+            koef = 1
+        elif method_time == 'year':
+            method_number = self.method_number
             koef = 12
-        if method_time == 'percentage':
-            year_amount_linear = self.depreciation_base * (self.fiscal_method_percentage/100)
+        elif method_time == 'percentage':
+            method_number = 100 / self.fiscal_method_percentage * 12
+            koef = 12
         else:
-            year_amount_linear = self.depreciation_base / (method_time * koef)
+            method_number = self.method_number
+            koef = 1
+
+        if int(froze_period) > 0 and self.tax_froze_depreciation:
+            method_number = self.froze_period
+        elif int(froze_period) == 0 and self.tax_froze_depreciation and method_time != 'percentage':
+            method_number = self.method_number - self.froze_period
+
+        year_amount_linear = depreciation_base / ((method_number) * koef)
 
         if self.method == 'linear':
             return year_amount_linear
@@ -1089,7 +1211,7 @@ class AccountAsset(models.Model):
             else:
                 return year_amount_linear
         year_amount_degressive = residual_amount * \
-            self.method_progress_factor
+                                 self.method_progress_factor
         if self.method == 'degressive':
             return year_amount_degressive
         if self.method == 'degr-linear':
@@ -1155,8 +1277,11 @@ class AccountAsset(models.Model):
         digits = self.env['decimal.precision'].precision_get('Account')
         asset_sign = 1 if self.depreciation_base >= 0 else -1
         i_max = len(table) - 1
-        remaining_value = self.depreciation_base
+        remaining_value = self.with_context(dict(self._context, period_date=depreciation_start_date)).depreciation_base
         depreciated_value = 0.0
+
+        li_sleep = 0
+        sleep_amount = 0.0
 
         for i, entry in enumerate(table):
 
@@ -1169,22 +1294,23 @@ class AccountAsset(models.Model):
                 if round(remaining_value, digits) == 0.0:
                     break
 
-                if (line_date > min(entry['date_stop'],
-                                    depreciation_stop_date) and not
-                        (i == i_max and li == li_max)):
+                if line_date > min(entry['date_stop'], depreciation_stop_date) and not (i == i_max and li == li_max):
                     break
 
-                if self.method == 'degr-linear' \
-                        and asset_sign * (fy_amount - fy_amount_check) < 0:
+                if self.method == 'degr-linear' and asset_sign * (fy_amount - fy_amount_check) < 0:
                     break
 
                 if i == 0 and li == 0:
-                    amount = self._get_first_period_amount(
-                        table, entry, depreciation_start_date, line_dates)
+                    amount = self._get_first_period_amount(table, entry, depreciation_start_date, line_dates)
                     amount = round(amount, digits)
                 else:
                     amount = entry.get('period_amount')
-
+                sleep_period = self.sleep_period_line_ids.in_sleep_period(line_date)
+                if sleep_period:
+                    li_sleep += 1
+                    sleep_amount += amount
+                if sleep_period and not self._context.get('bg_asset_line'):
+                    amount = 0.0
                 # last year, last entry
                 # Handle rounding deviations.
                 if i == i_max and li == li_max:
@@ -1192,15 +1318,32 @@ class AccountAsset(models.Model):
                     remaining_value = 0.0
                 else:
                     remaining_value -= amount
+                    if li_sleep == 12 and self._context.get('bg_asset_line'):
+                        remaining_value += sleep_period
                 fy_amount_check += amount
+                if li_sleep == 12 and self._context.get('bg_asset_line'):
+                    fy_amount_check -= sleep_period
                 line = {
                     'date': line_date,
                     'amount': amount,
                     'depreciated_value': depreciated_value,
                     'remaining_value': remaining_value,
+                    'sleep_period': sleep_period,
                 }
                 lines.append(line)
                 depreciated_value += amount
+                if li_sleep == 12 and self._context.get('bg_asset_line'):
+                    line = {
+                        'date': line_date,
+                        'amount': -sleep_amount,
+                        'depreciated_value': depreciated_value,
+                        'remaining_value': remaining_value,
+                        'sleep_period': sleep_period,
+                    }
+                    lines.append(line)
+                    depreciated_value -= sleep_amount
+                    li_sleep = 0
+                    sleep_amount = 0.0
 
             # Handle rounding and extended/shortened FY deviations.
             #
@@ -1252,7 +1395,7 @@ class AccountAsset(models.Model):
         init_flag = False
         asset_date_start = dt.strptime(self.date_start, '%Y-%m-%d')
         if self._context.get('bg_asset_line'):
-            asset_date_start = asset_date_start + relativedelta(months=1, day=1)
+            asset_date_start = asset_date_start.replace(day=1)
         fy = company.find_daterange_fy(asset_date_start)
         fiscalyear_lock_date = company.fiscalyear_lock_date
         if fiscalyear_lock_date and fiscalyear_lock_date >= self.date_start:
@@ -1279,7 +1422,7 @@ class AccountAsset(models.Model):
             fy_date_start = first_fy_date_start
             if asset_date_start > fy_date_start:
                 asset_ref = self.code and '%s (ref: %s)' \
-                    % (self.name, self.code) or self.name
+                            % (self.name, self.code) or self.name
                 raise UserError(
                     _("You cannot compute a depreciation table for an asset "
                       "starting in an undefined future fiscal year."
@@ -1298,36 +1441,41 @@ class AccountAsset(models.Model):
             init_flag = True
 
         depreciation_start_date = self._get_depreciation_start_date(fy)
-        depreciation_stop_date = self._get_depreciation_stop_date(
-            depreciation_start_date)
+        depreciation_stop_date = self._get_depreciation_stop_date(depreciation_start_date)
+        if len(self.sleep_period_line_ids.ids) > 0:
+            # _logger.info("DATE BEFORE %s" % depreciation_stop_date)
+            sleep_days, sleep_mounts = self.sleep_period_line_ids.get_sleep_days_mounts()
+            depreciation_stop_date = depreciation_stop_date + relativedelta(months=sleep_mounts)
+        else:
+            sleep_mounts = 0
+            # _logger.info("DATE AFTER %s" % depreciation_stop_date)
         unblock_move = True
+        _logger.info("DATES %s-%s+%s" % (
+            depreciation_start_date, depreciation_stop_date, sleep_mounts))
         while fy_date_start <= depreciation_stop_date:
             table.append({
                 'fy_id': fy_id,
                 'date_start': fy_date_start,
                 'date_stop': fy_date_stop,
-                'init': init_flag})
+                'init': init_flag,
+            })
             fy_date_start = fy_date_stop + relativedelta(days=1)
             fy = company.find_daterange_fy(fy_date_start)
             if fy:
-                if (
-                    fiscalyear_lock_date and
-                    fiscalyear_lock_date >= fy.date_end
-                ):
+                fy_id = fy.id
+                if fiscalyear_lock_date and fiscalyear_lock_date >= fy.date_end:
                     init_flag = True
                 else:
                     init_flag = False
                 fy_date_stop = dt.strptime(fy.date_end, '%Y-%m-%d')
                 unblock_move = False
             else:
+                fy_id = False
                 fy_date_stop = fy_date_stop + relativedelta(years=1)
                 if unblock_move:
                     fiscalyear_lock_date = fy_date_stop.strftime('%Y-%m-%d')
-                if (
-                    fiscalyear_lock_date and
-                    fiscalyear_lock_date >= fy_date_stop.strftime('%Y-%m-%d')
-                ):
-                    #init_flag = True
+                if fiscalyear_lock_date and fiscalyear_lock_date >= fy_date_stop.strftime('%Y-%m-%d'):
+                    # init_flag = True
                     init_flag = False
                 else:
                     init_flag = False
@@ -1335,21 +1483,61 @@ class AccountAsset(models.Model):
         # Calculate depreciation amount per fiscal year.
         # This is calculation is skipped for method_time != 'year'.
         digits = self.env['decimal.precision'].precision_get('Account')
-        fy_residual_amount = self.depreciation_base
         i_max = len(table) - 1
         asset_sign = self.depreciation_base >= 0 and 1 or -1
-        line_dates = self._compute_line_dates(
-            table, depreciation_start_date, depreciation_stop_date)
+        line_dates = self._compute_line_dates(table, depreciation_start_date, depreciation_stop_date)
+        froze_period = False
+        # _logger.info("TABLE %s(%s)" % (table, line_dates))
         for i, entry in enumerate(table):
+            if self.method_period in 'year':
+                froze_period = self.froze_period
+            elif self.method_period == 'quarter':
+                froze_period = self.froze_period / 4
+            elif self.method_period == 'month':
+                froze_period = self.froze_period / 12
 
-            if method_time in ('year', 'month', 'percentage'):
-                year_amount = self._compute_year_amount(fy_residual_amount)
-                if self.method_period in 'year':
+            if self.froze_depreciation and self.froze_period and i + 1 <= froze_period:
+                if self._context.get('bg_asset_line'):
+                    depreciation_base = fy_residual_amount = self.tax_froze_depreciation
+                else:
+                    depreciation_base = fy_residual_amount = self.froze_depreciation
+                # force block period like init period
+                entry.update({
+                    'init': True,
+                })
+            elif self.froze_depreciation and self.froze_period and i + 1 > froze_period:
+                froze_period = False
+                if self._context.get('bg_asset_line'):
+                    # To many cases
+                    # froze_amount = self.tax_froze_depreciation / self.froze_period total_amount = (
+                    # self.with_context(dict(self._context, period_date=entry['date_start'])).depreciation_base *
+                    # self.fiscal_method_percentage / 100) / 12 if float_compare(froze_amount, total_amount,
+                    # precision_rounding=self.company_currency_id.rounding) == 0: correction_value =
+                    # self.fiscal_correction_value else: correction_value = self.tax_froze_depreciation +
+                    # self.fiscal_correction_value
+                    correction_value = self.fiscal_correction_value
+                else:
+                    correction_value = self.froze_depreciation
+                depreciation_base = fy_residual_amount = self.with_context(
+                    dict(self._context, period_date=entry['date_start'])).depreciation_base - correction_value
+            else:
+                correction_value = 0.0
+                if self._context.get('bg_asset_line'):
+                    correction_value = self.fiscal_correction_value
+                depreciation_base = fy_residual_amount = self.with_context(
+                    dict(self._context, period_date=entry['date_start'])).depreciation_base - correction_value
+
+            if method_time == 'year':
+                year_amount = self._compute_year_amount(fy_residual_amount, depreciation_base, froze_period,
+                                                        sleep_mounts)
+                if self.method_period == 'year':
                     period_amount = year_amount
                 elif self.method_period == 'quarter':
                     period_amount = year_amount / 4
                 elif self.method_period == 'month':
                     period_amount = year_amount / 12
+                else:
+                    period_amount = year_amount
                 if i == i_max:
                     if self.method in ['linear-limit', 'degr-limit']:
                         fy_amount = fy_residual_amount - self.salvage_value
@@ -1357,8 +1545,7 @@ class AccountAsset(models.Model):
                         fy_amount = fy_residual_amount
                 else:
                     firstyear = i == 0 and True or False
-                    fy_factor = self._get_fy_duration_factor(
-                        entry, firstyear)
+                    fy_factor = self._get_fy_duration_factor(entry, firstyear)
                     fy_amount = year_amount * fy_factor
                 if asset_sign * (fy_amount - fy_residual_amount) > 0:
                     fy_amount = fy_residual_amount
@@ -1366,36 +1553,51 @@ class AccountAsset(models.Model):
                 fy_amount = round(fy_amount, digits)
             else:
                 fy_amount = False
-                if method_time == 'number':
-                    number = self.method_number
-                elif method_time == 'end':
-                    number = len(line_dates)
-                period_amount = round(self.depreciation_base / number, digits)
+                if self._context.get('bg_asset_line'):
+                    # month = 1
+                    # month = (entry['date_stop'].year - entry['date_start'].year) * 12 + \
+                    #         (entry['date_stop'].month - entry['date_start'].month) + 1
+                    if int(froze_period) > 0 and self.tax_froze_depreciation:
+                        period_amount = round(depreciation_base / (self.froze_period - 1), digits)
+                    else:
+                        fiscal_method_percentage = self.fiscal_method_percentage / 100
+                        period_amount = round((depreciation_base * fiscal_method_percentage) / 12, digits)
+                else:
+                    if method_time == 'number':
+                        number = self.method_number
+                        if int(froze_period) == 0 and self.froze_period:
+                            number = self.method_number - self.froze_period
+                        elif int(froze_period) > 0 and self.froze_period:
+                            number = self.froze_period
+                    elif method_time == 'percentage':
+                        number = 100 / self.fiscal_method_percentage * 12
+                    elif method_time == 'end':
+                        number = len(line_dates)
+                    else:
+                        number = self.method_number
+                    period_amount = round(depreciation_base / number, digits)
 
             entry.update({
                 'period_amount': period_amount,
                 'fy_amount': fy_amount,
             })
+            # _logger.info("LINE %s => %s (%s)" % (entry, method_time, self._context))
             if method_time in ['year', 'month']:
                 fy_residual_amount -= fy_amount
                 if round(fy_residual_amount, digits) == 0:
                     break
         i_max = i
         table = table[:i_max + 1]
-
+        _logger.info("TABLE %s" % table)
         # Step 2:
         # Spread depreciation amount per fiscal year
         # over the depreciation periods.
-        self._compute_depreciation_table_lines(
-            table, depreciation_start_date, depreciation_stop_date,
-            line_dates)
-
+        self._compute_depreciation_table_lines(table, depreciation_start_date, depreciation_stop_date, line_dates)
         return table
 
     def _get_depreciation_entry_name(self, seq):
         """ use this method to customise the name of the accounting entry """
         return (self.code or str(self.id)) + '/' + str(seq)
-
 
     @api.model
     def _server_compute_entries(self):
@@ -1406,20 +1608,20 @@ class AccountAsset(models.Model):
         else:
             date_now = fields.Date.today()
             date_end = fields.Datetime.from_string(date_now) - relativedelta(months=1)
-            date_end = datetime.date(date_end.year, date_end.month, calendar.monthrange(date_end.year, date_end.month)[-1])
+            date_end = datetime.date(date_end.year, date_end.month,
+                                     calendar.monthrange(date_end.year, date_end.month)[-1])
             date_end = fields.Date.to_string(date_end)
         result, error_log = self._compute_entries(date_end, check_triggers=True)
         _logger.info("Server side start: %s:%s:%s" % (date_end, result, error_log))
         if result:
             actions_now = actions.create({
-                                        'date_action': date_now,
-                                        'date_end': date_end,
-                                        'asset_move_ids': [(6, 0, result)],
-                                        })
+                'date_action': date_now,
+                'date_end': date_end,
+                'asset_move_ids': [(6, 0, result)],
+            })
         if actions_now and error_log:
             actions_now.note = _("Compute Assets errors") + ':\n' + error_log
         return actions_now and (actions_now.asset_move_ids, actions_now.note) or False
-
 
     @api.multi
     def _compute_entries(self, date_end, check_triggers=False):
@@ -1443,7 +1645,7 @@ class AccountAsset(models.Model):
             ('line_date', '<=', date_end),
             ('move_check', '=', False)],
             order='line_date')
-        _logger.info("Compute enteries %s:%s" % (depreciations, date_end))
+        # _logger.info("Compute enteries %s:%s" % (depreciations, date_end))
         for depreciation in depreciations:
             try:
                 with self.env.cr.savepoint():
@@ -1452,7 +1654,7 @@ class AccountAsset(models.Model):
                 e = exc_info()[0]
                 tb = ''.join(format_exception(*exc_info()))
                 asset_ref = depreciation.asset_id.code and '%s (ref: %s)' \
-                    % (asset.name, asset.code) or asset.name
+                            % (asset.name, asset.code) or asset.name
                 error_log += _(
                     "\nError while processing asset '%s': %s"
                 ) % (asset_ref, str(e))
@@ -1514,13 +1716,14 @@ class AccountAsset(models.Model):
                 last_depr_date = create_dl.line_date
 
             period_number_days = (
-                datetime.strptime(first_date, '%Y-%m-%d') -
-                datetime.strptime(last_depr_date, '%Y-%m-%d')).days
-            date_remove = datetime.strptime(date_remove, '%Y-%m-%d')
+                    fields.Datetime.from_string(first_date) -
+                    fields.Datetime.from_string(last_depr_date)).days
+            date_remove = fields.Datetime.from_string(date_remove)
             new_line_date = date_remove + relativedelta(days=-1)
+            new_line_date_bg = new_line_date.replace(day=1) + relativedelta(months=1) + relativedelta(days=-1)
             to_depreciate_days = (
-                new_line_date -
-                datetime.strptime(last_depr_date, '%Y-%m-%d')).days
+                    new_line_date -
+                    fields.Datetime.from_string(last_depr_date)).days
             to_depreciate_amount = round(
                 float(to_depreciate_days) / float(period_number_days) *
                 first_to_depreciate_dl.amount, digits)
@@ -1536,6 +1739,8 @@ class AccountAsset(models.Model):
             dlines.unlink()
             bg_dlines = asset.depreciation_bg_line_ids.filtered(lambda r: r.line_date >= bg_date_remove)
             bg_dlines.unlink()
+            bg_dlines_bg = asset.depreciation_bg_line_ids.filtered(lambda r: fields.Datetime.from_string(r.line_date) > new_line_date_bg)
+            bg_dlines_bg.unlink()
         return residual_value
 
     @api.multi
@@ -1545,6 +1750,7 @@ class AccountAsset(models.Model):
                 for line in asset.depreciation_bg_line_ids.filtered(lambda r: r.type in ['depreciate', 'remove']):
                     line.unlink()
             else:
-                for line in asset.depreciation_line_ids.filtered(lambda r: r.type in ['depreciate', 'remove'] and not r.move_check):
+                for line in asset.depreciation_line_ids.filtered(
+                        lambda r: r.type in ['depreciate', 'remove', 'storno'] and not r.move_check):
                     line.unlink()
             asset._compute_depreciation()

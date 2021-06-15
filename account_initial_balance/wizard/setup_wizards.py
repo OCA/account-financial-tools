@@ -8,8 +8,8 @@ class OpeningAccountMoveWizard(models.TransientModel):
     _inherit = 'account.opening'
 
     @api.model
-    def default_get(self, fields):
-        res = super(OpeningAccountMoveWizard, self).default_get(fields)
+    def default_get(self, fields_list):
+        res = super(OpeningAccountMoveWizard, self).default_get(fields_list)
         company = self.env['res.company'].browse(self._context.get('default_company_id', False))
         if company:
             opening_move_id = company.opening_move_id

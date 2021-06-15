@@ -53,12 +53,28 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     asset_profile_id = fields.Many2one(comodel_name='account.asset.profile', string='Asset Profile')
+    tax_profile_id = fields.Many2one(comodel_name='account.bg.asset.profile', string='Tax Asset Profile')
     asset_id = fields.Many2one(comodel_name='account.asset', string='Asset', ondelete='restrict')
     asset_salvage_value = fields.Float(string='Salvage Value', digits=dp.get_precision('Account'))
 
     @api.onchange('account_id')
     def _onchange_account_id(self):
         self.asset_profile_id = self.account_id.asset_profile_id
+
+    def _prepare_asset(self, vals):
+        move = self.env['account.move'].browse(vals['move_id'])
+        depreciation_base = vals['debit'] or -vals['credit']
+        return {
+            'name': vals['name'],
+            'profile_id': vals.get('asset_profile_id', False),
+            'tax_profile_id': vals.get('tax_profile_id', False),
+            'purchase_value': depreciation_base,
+            'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'],
+            'partner_id': vals['partner_id'],
+            'date_start': move.date,
+            'date_buy': self.invoice_id and self.invoice_id.date_invoice or move.date,
+            'product_id': vals['product_id'],
+            }
 
     @api.model
     def create(self, vals):
@@ -80,19 +96,7 @@ class AccountMoveLine(models.Model):
             if not correction:
                 # create asset
                 asset_obj = self.env['account.asset']
-                move = self.env['account.move'].browse(vals['move_id'])
-                depreciation_base = vals['debit'] or -vals['credit']
-                temp_vals = {
-                    'name': vals['name'],
-                    'profile_id': vals.get('asset_profile_id', False),
-                    'tax_profile_id': vals.get('tax_profile_id', False),
-                    'purchase_value': depreciation_base,
-                    'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'],
-                    'partner_id': vals['partner_id'],
-                    'date_start': move.date,
-                    'date_buy': self.invoice_id and self.invoice_id.date_invoice or move.date,
-                    'product_id': vals['product_id'],
-                }
+                temp_vals = self._prepare_asset(vals)
                 if vals.get('move_line_id'):
                     temp_vals.update({
                         'move_line_id': vals['move_line_id'],

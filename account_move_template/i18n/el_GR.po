@@ -1,67 +1,80 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_move_template
+#	* account_move_template
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Greek (Greece) (https://www.transifex.com/oca/teams/23907/"
-"el_GR/)\n"
-"Language: el_GR\n"
+"POT-Creation-Date: 2021-02-17 08:28+0000\n"
+"PO-Revision-Date: 2021-02-17 08:28+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_account_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_account_id
-msgid "Account id"
-msgstr ""
+msgid "Account"
+msgstr "Λογαριασμός"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_accounting_date
+msgid "Accounting Date"
+msgstr "Ημερ. Λογιστικής"
+
+#. module: account_move_template
+#: model:ir.model.fields,help:account_move_template.field_wizard_select_move_template_post
+msgid "After generate account move post and close without open it."
+msgstr "After generate account move post and close without open it."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_amount
 msgid "Amount"
-msgstr ""
+msgstr "Ποσό"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_analytic_account_id
-msgid "Analytic account id"
-msgstr ""
+msgid "Analytic Account"
+msgstr "Αναλυτικός Λογαριασμός"
+
+#. module: account_move_template
+#: selection:account.move.template.line,move_line_type:0
+#: selection:wizard.select.move.template.line,move_line_type:0
+msgid "Auto"
+msgstr "Auto"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Cancel"
-msgstr "Άκυρο"
+msgstr "Cancel"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_document_template.py:57
+#: code:addons/account_move_template/models/account_document_template.py:102
 #, python-format
 msgid "Code \"%s\" refers to non existing line"
-msgstr ""
+msgstr "Code \"%s\" refers to non existing line"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_company_id
-msgid "Company id"
-msgstr ""
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_company_id
+msgid "Company"
+msgstr "Εταιρία"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "Computed"
-msgstr ""
+msgstr "Computed"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
 #: model:ir.ui.menu,name:account_move_template.menu_action_wizard_select_template
 msgid "Create Move from Template"
-msgstr ""
+msgstr "Δημιουργία Εγγραφής απο Πρότυπο"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_create_uid
@@ -71,7 +84,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_create_uid
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_create_uid
 msgid "Created by"
-msgstr "Δημιουργήθηκε από "
+msgstr "Δημιουργήθηκε από"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_create_date
@@ -87,13 +100,33 @@ msgstr "Δημιουργήθηκε στις"
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Credit"
-msgstr ""
+msgstr "Πίστωση"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_date_from
+msgid "Date from"
+msgstr "Date from"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_date_range_id
+msgid "Date range"
+msgstr "Λογιστική Περίοδος"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_date_to
+msgid "Date to"
+msgstr "Μέχρι σήμερα"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
-msgstr ""
+msgstr "Χρέωση"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_analytic_tag_ids
+msgid "Default Analytic tags"
+msgstr "Προεπιλεγμένες αναλυτικές ετικέτες"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_display_name
@@ -103,7 +136,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_display_name
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Εμφάνιση Ονόματος"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_date_due
+msgid "Due Date"
+msgstr "Ημερ. Λήξης"
+
+#. module: account_move_template
+#: selection:wizard.select.move.template,choice_period_type:0
+msgid "Fiscal month"
+msgstr "Φορολογική περίοδος μήνας"
+
+#. module: account_move_template
+#: selection:wizard.select.move.template,choice_period_type:0
+msgid "Fiscal year"
+msgstr "Οικονομικό έτος"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_amount_input
+msgid "Holder for default amount"
+msgstr "Holder for default amount"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_id
@@ -116,22 +169,22 @@ msgid "ID"
 msgstr "Κωδικός"
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_journal_id
+msgid "Journal"
+msgstr "Ημερολόγιο"
+
+#. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_form
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_search
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_tree
 msgid "Journal Entry Template"
-msgstr ""
+msgstr "Journal Entry Template"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_tree
 msgid "Journal Entry Template Line"
-msgstr ""
-
-#. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_journal_id
-msgid "Journal id"
-msgstr ""
+msgstr "Journal Entry Template Line"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template___last_update
@@ -141,7 +194,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template___last_update
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Τελευταία τροποποίηση στις"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_write_uid
@@ -151,7 +204,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_write_uid
 msgid "Last Updated by"
-msgstr "Τελευταία ενημέρωση από"
+msgstr "Τελευταία Ενημέρωση από"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_write_date
@@ -161,51 +214,51 @@ msgstr "Τελευταία ενημέρωση από"
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_write_date
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_write_date
 msgid "Last Updated on"
-msgstr "Τελευταία ενημέρωση στις"
-
-#. module: account_move_template
-#: code:addons/account_move_template/models/account_document_template.py:47
-#, python-format
-msgid "Line %s can't refer to itself"
-msgstr ""
+msgstr "Τελευταία Ενημέρωση στις"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_ids
-msgid "Line ids"
-msgstr ""
+msgid "Line"
+msgstr "Γραμμή"
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_document_template.py:55
+#, python-format
+msgid "Line %s can't refer to itself"
+msgstr "Line %s can't refer to itself"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Load"
-msgstr ""
+msgstr "Φόρτωση"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Modify the lines before create them or edit them after creation."
-msgstr ""
+msgstr "Modify the lines before create them or edit them after creation."
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_move_line_type
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_move_line_type
+msgid "Move Line Type"
+msgstr "Move Line Type"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Move Template"
-msgstr ""
+msgstr "Move Template"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template_line
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template_line_tree
 msgid "Move Template Line"
-msgstr ""
+msgstr "Move Template Line"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_move_template_form
 #: model:ir.ui.menu,name:account_move_template.menu_action_move_template_form
 msgid "Move Templates"
-msgstr ""
-
-#. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_move_line_type
-#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_move_line_type
-msgid "Move line type"
-msgstr ""
+msgstr "Πρότυπα αυτοματοποιημένων λογιστικών εγγραφών"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_name
@@ -214,130 +267,150 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_name
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_name
 msgid "Name"
-msgstr ""
+msgstr "Περιγραφή"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_partner_id
 msgid "Partner"
-msgstr ""
+msgstr "Συναλλασόμενος"
 
 #. module: account_move_template
-#: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
-msgid "Python Code"
-msgstr ""
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_post
+msgid "Post after generate"
+msgstr "Post after generate"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_python_code
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_python_code
-msgid "Python code"
-msgstr ""
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
+msgid "Python Code"
+msgstr "Python Code"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template
 msgid "Select Move Template"
-msgstr ""
+msgstr "Επιλέξτε ένα πρότυπο δημοσίευσης"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_sequence
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_sequence
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Ακολουθία"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_state
 msgid "State"
-msgstr ""
-
-#. module: account_move_template
-#: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
-msgid "Template Lines"
-msgstr ""
+msgstr "Νομός/Πολιτεία"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_template_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_template_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_template_id
-msgid "Template id"
-msgstr ""
+msgid "Template"
+msgstr "Πρότυπο"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_template_line_ids
-msgid "Template line ids"
-msgstr ""
+msgid "Template Line"
+msgstr "Template Line"
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
+msgid "Template Lines"
+msgstr "Template Lines"
 
 #. module: account_move_template
 #: selection:wizard.select.move.template,state:0
 msgid "Template selected"
-msgstr ""
+msgstr "Template selected"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_form
 msgid "Test template"
-msgstr ""
+msgstr "Test template"
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
 msgid "The sequence of the line must be unique per template !"
-msgstr ""
+msgstr "The sequence of the line must be unique per template !"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_type
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_choice_period_type
+msgid "Type period"
+msgstr "Τύπος περιόδου"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "User input"
-msgstr ""
+msgstr "User input"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_document_template.py:64
+#: model:ir.actions.act_window,name:account_move_template.wizard_create_move_sale_order
+msgid "Wizard for creating Move from Sale Order"
+msgstr "Wizard for creating Move from Sale Order"
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_document_template.py:109
 #, python-format
-msgid ""
-"You can not add a different number of lines in this wizard you should try to "
-"create the move normally and then edit the created move. Inconsistent "
-"between input lines and  filled lines for template %s"
-msgstr ""
+msgid "You can not add a different number of lines in this wizard you should try to create the move normally and then edit the created move. Inconsistent between input lines and  filled lines for template %s"
+msgstr "You can not add a different number of lines in this wizard you should try to create the move normally and then edit the created move. Inconsistent between input lines and  filled lines for template %s"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
-msgid ""
-"You can refer to other lines using their\n"
+msgid "You can refer to other lines using their\n"
 "                        sequence number (e.g. 'L(1)' for first line).\n"
-"                        Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; "
-"'L(1)\n"
-"                            + L(2) + L(3)'; '1250'"
-msgstr ""
+"                        Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1)\n"
+"                            + L(2) + L(3)'; '1250'\n"
+"                        DBTFY: Debit movement for This Fiscal year\n"
+"                        CRTFY: Credit movement for This Fiscal year\n"
+"                        SALFY: End balance for This Fiscal year\n"
+"                        SALDBTFY: End Debit balance for This Fiscal year\n"
+"                        SALCRTFY: End Credit balance for This Fiscal year"
+msgstr "You can refer to other lines using their\n"
+"                        sequence number (e.g. 'L(1)' for first line).\n"
+"                        Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1)\n"
+"                            + L(2) + L(3)'; '1250'\n"
+"                        DBTFY: Debit movement for This Fiscal year\n"
+"                        CRTFY: Credit movement for This Fiscal year\n"
+"                        SALFY: End balance for This Fiscal year\n"
+"                        SALDBTFY: End Debit balance for This Fiscal year\n"
+"                        SALCRTFY: End Credit balance for This Fiscal year"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_document_template
 msgid "account.document.template"
-msgstr ""
+msgstr "account.document.template"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_document_template_line
 msgid "account.document.template.line"
-msgstr ""
+msgstr "account.document.template.line"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
 msgid "account.move.template"
-msgstr ""
+msgstr "account.move.template"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "account.move.template.line"
-msgstr ""
+msgstr "account.move.template.line"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_wizard_select_move_template
 msgid "wizard.select.move.template"
-msgstr ""
+msgstr "wizard.select.move.template"
+

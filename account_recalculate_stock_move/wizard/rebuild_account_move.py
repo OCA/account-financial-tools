@@ -3,6 +3,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo import models, fields, api, _
+from odoo.addons.queue_job.job import job
 
 
 class WizardRebuldMovePickingTransfer(models.TransientModel):
@@ -11,6 +12,11 @@ class WizardRebuldMovePickingTransfer(models.TransientModel):
     company_id = fields.Many2one(comodel_name='res.company', string="Company",
                                  default=lambda self: self.env.user.company_id.id)
 
+    @job
+    def _rebuild_move_pickings(self, picking):
+        picking.with_context(self._context, rebuld_try=True,).rebuild_account_move()
+        return True
+
     @api.multi
     def rebuild_move_pickings(self):
         context = dict(self._context or {})
@@ -18,10 +24,16 @@ class WizardRebuldMovePickingTransfer(models.TransientModel):
         if context.get('active_ids'):
             pickings = self.env['stock.picking'].browse(context["active_ids"])
         if not pickings:
+            domain = []
             if self.company_id:
-                domain = [('company_id', '=', self.company_id.id)]
+                domain += [('company_id', '=', self.company_id.id)]
             pickings = self.env['stock.picking'].search(domain)
-        pickings.rebuild_account_move()
+        if not pickings:
+            return {'type': 'ir.actions.act_window_close'}
+        batch = self.env['queue.job.batch'].get_new_batch('pickings %s' % len(pickings.ids))
+        for picking in pickings:
+            self.with_context(job_batch=batch).with_delay()._rebuild_account_move(picking)
+        batch.enqueue()
         return {'type': 'ir.actions.act_window_close'}
 
     @api.multi

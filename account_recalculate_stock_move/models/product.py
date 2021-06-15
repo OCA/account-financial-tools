@@ -14,6 +14,8 @@ _logger = logging.getLogger(__name__)
 class Product(models.Model):
     _inherit = "product.product"
 
+    account_move_line_ids = fields.One2many('account.move.line', inverse_name="product_id", string="Account entries")
+
     def rebuild_moves(self):
         company = self.env.user.company_id.id
         warehouse = self.env['stock.warehouse'].search([('company_id', '=', company)], limit=1)
@@ -40,9 +42,31 @@ class Product(models.Model):
             #             raise
             # moves.force_rebuild_moves()
 
+    @api.multi
+    def action_get_account_move_lines(self):
+        self.ensure_one()
+        action_ref = self.env.ref('account.action_account_moves_all_a')
+        if not action_ref:
+            return False
+        action_data = action_ref.read()[0]
+        action_data['domain'] = [('id', 'in', self.account_move_line_ids.ids)]
+        action_data['context'] = {'search_default_movegroup': 1}
+        return action_data
+
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
+
+    account_move_line_ids = fields.One2many('account.move.line', compute="_compute_account_move_line_ids")
+
+    def _compute_account_move_line_ids(self):
+        for template in self:
+            template.account_move_line_ids = False
+            for product in template.product_variant_ids:
+                if not template.account_move_line_ids:
+                    template.account_move_line_ids = product.account_move_line_ids
+                else:
+                    template.account_move_line_ids |= product.account_move_line_ids
 
     def rebuild_moves(self):
         company = self.env.user.company_id.id
@@ -108,3 +132,14 @@ class ProductTemplate(models.Model):
                                 'accounting_date': move.inventory_id.accounting_date or move.inventory_id.date})
                     move.move_line_ids.write({'date': move.inventory_id.accounting_date or move.inventory_id.date})
                 move.with_context(dict(self._context, force_date=move.date, rebuld_try=True)).rebuild_account_move()
+
+    @api.multi
+    def action_get_account_move_lines(self):
+        self.ensure_one()
+        action_ref = self.env.ref('account.action_account_moves_all_a')
+        if not action_ref:
+            return False
+        action_data = action_ref.read()[0]
+        action_data['domain'] = [('id', 'in', self.account_move_line_ids.ids)]
+        action_data['context'] = {'search_default_movegroup': 1}
+        return action_data

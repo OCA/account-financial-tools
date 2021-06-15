@@ -14,6 +14,7 @@
                     <field name="type"/>
                     <field name="python_code" />
                     <field name="move_line_type"/>
+                    <button name="action_dublicate" type="object" icon="fa-clone" class="oe_edit_only"/>
                 </tree>
             </field>
         </record>
@@ -40,6 +41,7 @@
                         </group>
                         <label for="python_code" string="Python Code"
                                    attrs="{'invisible': [('type', '!=', 'computed')]}" nolabel="1"/>
+                        <button name="action_close" type="object" icon="fa-calculator" attrs="{'invisible': [('type', '!=', 'computed')]}"/>
                         <field name="python_code" colspan="4" attrs="{'readonly': [('type', '!=', 'computed')]}" nolabel="1"/>
                         <div class="oe_account_help">You can refer to other lines using their
                         sequence number (e.g. 'L(1)' for first line).
@@ -47,7 +49,9 @@
                             + L(2) + L(3)'; '1250'
                         DBTFY: Debit movement for This Fiscal year
                         CRTFY: Credit movement for This Fiscal year
-                        SALFY: End balance for This Fiscal year</div>
+                        SALFY: End balance for This Fiscal year
+                        SALDBTFY: End Debit balance for This Fiscal year
+                        SALCRTFY: End Credit balance for This Fiscal year</div>
                     </sheet>
                 </form>
             </field>

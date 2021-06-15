@@ -11,7 +11,14 @@
               "Technologies,Vauxoo",
     'website': 'https://github.com/OCA/account-financial-tools',
     'license': 'AGPL-3',
-    'depends': ['account', 'analytic', 'sale'],
+    'depends': [
+        'account',
+        'analytic',
+        'sale',
+        'date_range',
+        'account_fiscal_month',
+        'account_fiscal_year',
+    ],
     'data': [
         'security/ir.model.access.csv',
         'view/move_template.xml',

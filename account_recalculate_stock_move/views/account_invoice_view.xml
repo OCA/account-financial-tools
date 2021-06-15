@@ -28,7 +28,7 @@
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='button_box']" position="inside">
-                    <button name="action_get_account_moves"
+                    <button name="action_get_account_move_lines"
                             type="object"
                             icon="fa-usd"
                             class="oe_stat_button"

@@ -12,11 +12,12 @@
                             icon="fa-building-o"
                             string="Quants"
                             type="object"/>
-                    <button name="action_get_account_moves"
+                    <button name="action_get_account_move_lines"
                             icon="fa-usd"
                             class="oe_stat_button"
                             string="Accounting Entries"
-                            type="object"/>
+                            type="object"
+                            groups="account.group_account_user"/>
                     <button name="rebuild_account_move"
                             icon="fa fa-book"
                             class="oe_stat_button"
@@ -44,10 +45,11 @@
             <field name="inherit_id" ref="stock.view_inventory_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='button_box']" position="inside">
-                    <button name="action_get_account_moves"
+                    <button name="action_get_account_move_lines"
                             icon="fa-usd" class="oe_stat_button"
                             string="Accounting Entries"
-                            type="object"/>
+                            type="object"
+                            groups="account.group_account_user"/>
                     <button name="rebuild_account_move"
                                     icon="fa fa-book"
                                     class="oe_stat_button"

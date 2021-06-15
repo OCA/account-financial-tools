@@ -12,7 +12,7 @@ _logger = logging.getLogger(__name__)
 class AccountBgAssetLine(models.Model):
     _name = 'account.bg.asset.line'
     _description = 'BG Asset depreciation table line'
-    _order = 'type, line_date'
+    _order = 'line_date'
 
     name = fields.Char(string='Depreciation Name', size=64, readonly=True)
     asset_id = fields.Many2one(
@@ -50,12 +50,17 @@ class AccountBgAssetLine(models.Model):
         selection=[
             ('create', 'Depreciation Base'),
             ('depreciate', 'Depreciation'),
+            ('storno', 'Storno fiscal amount'),
             ('remove', 'Asset Removal')],
         readonly=True, default='depreciate')
     init_entry = fields.Boolean(
         string='Initial Balance Entry',
         help="Set this flag for entries of previous fiscal years "
              "for which Odoo has not generated accounting entries.")
+    sleep_period = fields.Boolean(
+        string='Sleep period',
+        help='This is period not have depreciation if this line available in sleeping periods',
+    )
 
     @api.depends('amount', 'previous_id', 'type')
     @api.multi
@@ -69,16 +74,19 @@ class AccountBgAssetLine(models.Model):
         dlines = dlines.sorted(key=lambda l: l.line_date)
 
         for i, dl in enumerate(dlines):
+            coef = 1
+            if type == 'storno':
+                coef = -1
             if i == 0:
                 depreciation_base = dl.depreciation_base
                 depreciated_value = dl.previous_id \
                     and (depreciation_base - dl.previous_id.remaining_value) \
                     or 0.0
                 remaining_value = \
-                    depreciation_base - depreciated_value - dl.amount
+                    depreciation_base - depreciated_value - dl.amount*coef
             else:
-                depreciated_value += dl.previous_id.amount
-                remaining_value -= dl.amount
+                depreciated_value += dl.previous_id.amount*coef
+                remaining_value -= dl.amount*coef
             dl.depreciated_value = depreciated_value
             dl.remaining_value = remaining_value
 

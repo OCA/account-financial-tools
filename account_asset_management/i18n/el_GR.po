@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0+e-20191023\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 15:50+0000\n"
-"PO-Revision-Date: 2020-04-06 15:50+0000\n"
+"POT-Creation-Date: 2021-04-21 13:59+0000\n"
+"PO-Revision-Date: 2021-04-21 13:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1212
+#: code:addons/account_asset_management/models/account_asset.py:1476
 #, python-format
 msgid "\n"
 "Error while processing asset '%s': %s"
@@ -41,7 +41,7 @@ msgstr "# Τιμολογούνται στην Πώληση"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_product_variant_count
 msgid "# Product Variants"
-msgstr "# Product Variants"
+msgstr "# Παραλλαγών Προϊόντος"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_sales_count
@@ -94,6 +94,11 @@ msgid "Account move for this actions"
 msgstr "Account move for this actions"
 
 #. module: account_asset_management
+#: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Accounted"
+msgstr "Accounted"
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_message_needaction
 msgid "Action Needed"
 msgstr "Απαιτείται ενέργεια"
@@ -139,6 +144,12 @@ msgid "Amount Restatement Depreciated"
 msgstr "Amount Restatement Depreciated"
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset.py:813
+#, python-format
+msgid "An asset entered in the tax depreciation plan can only be written off."
+msgstr "An asset entered in the tax depreciation plan can only be written off."
+
+#. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Analytic Information"
 msgstr "Analytic Information"
@@ -163,14 +174,16 @@ msgstr "Are you sure ?"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_protocol_line_asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line_asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_sale_order_line_asset_id
+#: model:ir.model.fields,field_description:account_asset_management.field_stock_inventory_line_asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_stock_move_asset_id
+#: model:ir.model.fields,field_description:account_asset_management.field_stock_move_line_asset_id
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Asset"
 msgstr "Πάγιo"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:193
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:204
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
 msgstr "Asset '%s' Removal Journal Entry"
@@ -224,10 +237,14 @@ msgstr "Όνομα Παγίου"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_account_asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_threshold_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_line_asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_protocol_line_asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line_asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_purchase_order_line_asset_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_stock_inventory_line_asset_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_stock_move_asset_profile_id
+#: model:ir.ui.view,arch_db:account_asset_management.account_account_bg_asset_profile_view_search
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 msgid "Asset Profile"
 msgstr "Asset Profile"
@@ -276,13 +293,16 @@ msgstr "Asset depreciation table line"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_account_asset_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_product_product_account_asset_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_product_template_account_asset_ids
+#: model:ir.model.fields,field_description:account_asset_management.field_stock_inventory_line_account_asset_ids
 msgid "Asset files"
-msgstr "Asset files"
+msgstr "Αρχεία Παγίων"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
+#: model:ir.ui.view,arch_db:account_asset_management.account_account_bg_asset_profile_view_tree
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
+#: model:ir.ui.view,arch_db:account_asset_management.account_bg_asset_profile_view_form
 msgid "Asset profile"
 msgstr "Asset profile"
 
@@ -460,14 +480,25 @@ msgstr "Choose the method to use to compute the amount of depreciation lines.\n"
 "  * Degressive: Calculated on basis of: Residual Value * Degressive Factor  * Degressive-Linear (only for Time Method = Year): Degressive becomes linear when the annual linear depreciation exceeds the annual degressive depreciation"
 
 #. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset_method_time
-#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile_method_time
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_method_tax_time
 msgid "Choose the method to use to compute the dates and number of depreciation lines.\n"
 "  * Number of Years: Specify the number of years for the depreciation.\n"
 ""
 msgstr "Choose the method to use to compute the dates and number of depreciation lines.\n"
 "  * Number of Years: Specify the number of years for the depreciation.\n"
 ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_method_time
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile_method_time
+msgid "Choose the method to use to compute the dates and number of depreciation lines.\n"
+"  * Number of Years: Specify the number of years for the depreciation.\n"
+"  * Number of Depreciations: Fix the number of depreciation lines and the time between 2 depreciations.\n"
+"  * Ending Date: Choose the time between 2 depreciations and the date the depreciations won't go beyond."
+msgstr "Choose the method to use to compute the dates and number of depreciation lines.\n"
+"  * Number of Years: Specify the number of years for the depreciation.\n"
+"  * Number of Depreciations: Fix the number of depreciation lines and the time between 2 depreciations.\n"
+"  * Ending Date: Choose the time between 2 depreciations and the date the depreciations won't go beyond."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile_method
@@ -537,9 +568,15 @@ msgstr "Πλήρες Όνομα"
 #: model:ir.model.fields,help:account_asset_management.field_account_invoice_line_asset_id
 #: model:ir.model.fields,help:account_asset_management.field_account_invoice_protocol_line_asset_id
 #: model:ir.model.fields,help:account_asset_management.field_sale_order_line_asset_id
+#: model:ir.model.fields,help:account_asset_management.field_stock_inventory_line_asset_id
 #: model:ir.model.fields,help:account_asset_management.field_stock_move_asset_id
 msgid "Complete this field when selling an asset in order to facilitate the creation of the asset removal accounting entries via the asset 'Removal' button"
 msgstr "Complete this field when selling an asset in order to facilitate the creation of the asset removal accounting entries via the asset 'Removal' button"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_stock_move_line_asset_id
+msgid "Complete this field when use an asset in order to facilitate the creation of the asset removal accounting entries via the asset 'Removal' button"
+msgstr "Complete this field when use an asset in order to facilitate the creation of the asset removal accounting entries via the asset 'Removal' button"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger_date_completed
@@ -577,7 +614,7 @@ msgid "Compute Assets"
 msgstr "Υπολογισμός Περιουσιακών Στοιχείων"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1176
+#: code:addons/account_asset_management/models/account_asset.py:1441
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:33
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:40
 #, python-format
@@ -745,6 +782,11 @@ msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr "Default Asset Profile when creating invoice lines with this account."
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_account_tax_profile_id
+msgid "Default Tax Asset profile when creating by invoice lines with this account"
+msgstr "Default Tax Asset profile when creating by invoice lines with this account"
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_uom_id
 msgid "Default Unit of Measure used for all stock operation."
 msgstr "Προεπιλεγμένη Μονάδα Μέτρησης που χρησιμοποιείται από όλες τις λειτουργίες αποθήκευσης"
@@ -755,13 +797,13 @@ msgid "Default Unit of Measure used for purchase orders. It must be in the same 
 msgstr "Προεπιλεγμένη Μονάδα Μέτρησης για Παραγγελίες Αγορών. Θα πρέπει να είναι στην ίδια κατηγορία με την προεπιλεγμένη μονάδα μέτρησης."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:143
+#: code:addons/account_asset_management/models/account_asset_profile.py:149
 #, python-format
 msgid "Degressive"
 msgstr "Degressive"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:145
+#: code:addons/account_asset_management/models/account_asset_profile.py:151
 #, python-format
 msgid "Degressive  up to Salvage Value"
 msgstr "Degressive  up to Salvage Value"
@@ -773,14 +815,14 @@ msgid "Degressive Factor"
 msgstr "Συντελεστής Σταδιακής Μείωσης"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:144
+#: code:addons/account_asset_management/models/account_asset_profile.py:150
 #, python-format
 msgid "Degressive-Linear"
 msgstr "Degressive-Linear"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:301
-#: code:addons/account_asset_management/models/account_asset_profile.py:175
+#: code:addons/account_asset_management/models/account_asset.py:440
+#: code:addons/account_asset_management/models/account_asset_profile.py:181
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
 msgstr "Degressive-Linear is only supported for Time Method = Year."
@@ -789,6 +831,11 @@ msgstr "Degressive-Linear is only supported for Time Method = Year."
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Delete Move"
 msgstr "Delete Move"
+
+#. module: account_asset_management
+#: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Delete Moves"
+msgstr "Delete Moves"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_route_ids
@@ -801,6 +848,7 @@ msgid "Depr. Expense Account"
 msgstr "Depr. Expense Account"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_tax_value_depreciated
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_value_depreciated
 msgid "Depreciated Value"
 msgstr "Depreciated Value"
@@ -834,6 +882,7 @@ msgstr "Πίνακας Αποσβέσεων"
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model:ir.ui.view,arch_db:account_asset_management.account_bg_asset_profile_view_form
 msgid "Depreciation Dates"
 msgstr "Depreciation Dates"
 
@@ -850,6 +899,7 @@ msgstr "Γραμμές Απόσβεσης"
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model:ir.ui.view,arch_db:account_asset_management.account_bg_asset_profile_view_form
 msgid "Depreciation Method"
 msgstr "Μέθοδος Απόσβεσης"
 
@@ -883,7 +933,7 @@ msgstr "Περιγραφή στις Συλλογές"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_description_pickingin
 msgid "Description on Receptions"
-msgstr "Περιγραφή για Κρατήσεις"
+msgstr "Περιγραφή για Παραλαβές"
 
 #. module: account_asset_management
 #: selection:account.asset.restatement.value,type:0
@@ -922,6 +972,12 @@ msgid "Draft Assets"
 msgstr "Draft Assets"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_fy_value_residual
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_tax_fy_value_residual
+msgid "End FY Residual Value"
+msgstr "End FY Residual Value"
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_method_end
 msgid "Ending Date"
 msgstr "Λήξη"
@@ -932,7 +988,7 @@ msgid "Entries"
 msgstr "Καταχωρήσεις"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:292
+#: code:addons/account_asset_management/models/account_asset.py:431
 #, python-format
 msgid "Error ! You can not create recursive assets."
 msgstr "Error ! You can not create recursive assets."
@@ -944,7 +1000,7 @@ msgid "Error ! You cannot create recursive categories."
 msgstr "Error ! You cannot create recursive categories."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1215
+#: code:addons/account_asset_management/models/account_asset.py:1479
 #, python-format
 msgid "Error while processing asset '%s': \n"
 "\n"
@@ -994,6 +1050,27 @@ msgid "Expense from diminution Account"
 msgstr "Expense from diminution Account"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_fy_value_depreciated
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_tax_fy_value_depreciated
+msgid "FY Depreciated Value"
+msgstr "FY Depreciated Value"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_fiscal_method_percentage
+msgid "Fiscal Percentage per Year"
+msgstr "Fiscal Percentage per Year"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_method_tax_time
+msgid "Fiscal Time Method"
+msgstr "Fiscal Time Method"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_fiscal_correction_value
+msgid "Fiscal correction Value"
+msgstr "Fiscal correction Value"
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_message_follower_ids
 msgid "Followers"
 msgstr "Ακόλουθοι"
@@ -1030,7 +1107,17 @@ msgstr "Πρόβλεψη ποσότητας (υπολογίζεται ώς Πο�
 "Αλλιώς, αυτό περιλαμβάνει αγαθά αποθηκευμένα σε κάθε Τοποθεσία Αποθέματος με 'εσωτερικό' τύπο."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:113
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_froze_depreciation
+msgid "Froze Depreciation"
+msgstr "Froze Depreciation"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_froze_period
+msgid "Froze Periods"
+msgstr "Froze Periods"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:117
 #, python-format
 msgid "Gain/Loss on Sale"
 msgstr "Gain/Loss on Sale"
@@ -1041,7 +1128,7 @@ msgid "General"
 msgstr "Γενικά"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:526
+#: code:addons/account_asset_management/models/account_asset.py:733
 #, python-format
 msgid "Generate Asset Removal entries"
 msgstr "Generate Asset Removal entries"
@@ -1102,7 +1189,7 @@ msgid "If checked, new messages require your attention."
 msgstr "Εάν επιλεγεί τα νέα μηνύματα χρειάζονται την προσοχή σας."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:880
+#: code:addons/account_asset_management/models/account_asset.py:1130
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr "Illegal value %s in asset.method."
@@ -1162,12 +1249,22 @@ msgstr "Εσωτερική Κατηγορία"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_default_code
 msgid "Internal Reference"
-msgstr "Εσωτερικός Κωδικός"
+msgstr "REF"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_barcode
 msgid "International Article Number used for product identification."
 msgstr "Διεθνής Αριθμός Είδους που χρησιμοποιείται για την αναγνώριση προϊόντος"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_stock_inventory
+msgid "Inventory"
+msgstr "Αποθήκη"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Γραμή Αποθέματος"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_property_stock_inventory
@@ -1191,6 +1288,7 @@ msgstr "Inventory Value"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove_invoice_id
 msgid "Invoice"
 msgstr "Τιμολόγιο"
 
@@ -1225,15 +1323,15 @@ msgid "Journal"
 msgstr "Ημερολόγιο"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:546
+#: code:addons/account_asset_management/models/account_asset.py:753
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
 msgid "Journal Entries"
 msgstr "Ημερολογιακές Καταχωρήσεις"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:283
-#: code:addons/account_asset_management/models/account_asset_restatement_value.py:73
+#: code:addons/account_asset_management/models/account_asset_line.py:286
+#: code:addons/account_asset_management/models/account_asset_restatement_value.py:84
 #, python-format
 msgid "Journal Entry"
 msgstr "Εγγραφή Ημερολογίου"
@@ -1311,13 +1409,13 @@ msgid "Left Parent"
 msgstr "Αριστερή Μητρική"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:141
+#: code:addons/account_asset_management/models/account_asset_profile.py:147
 #, python-format
 msgid "Linear"
 msgstr "Linear"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:142
+#: code:addons/account_asset_management/models/account_asset_profile.py:148
 #, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Linear up to Salvage Value"
@@ -1333,6 +1431,11 @@ msgstr "Linked to asset"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_location_id
 msgid "Location"
 msgstr "Τοποθεσία"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_location_ids
+msgid "Locatons"
+msgstr "Locatons"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_lot_id
@@ -1371,6 +1474,12 @@ msgid "Margin Date To"
 msgstr "Περιθώριο Ημερομηνίας Έως"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_threshold
+#: model:ir.model.fields,field_description:account_asset_management.field_account_bg_asset_profile_threshold
+msgid "Materiality threshold"
+msgstr "Materiality threshold"
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_image_medium
 msgid "Medium-sized image"
 msgstr "Μεσαίου-μεγέθους εικόνα"
@@ -1397,8 +1506,8 @@ msgid "Minimum Stock Rules"
 msgstr "Κανόνες Ελάχιστου Αποθέματος"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:151
-#: code:addons/account_asset_management/models/account_asset_profile.py:164
+#: code:addons/account_asset_management/models/account_asset_profile.py:157
+#: code:addons/account_asset_management/models/account_asset_profile.py:170
 #, python-format
 msgid "Month"
 msgstr "Μήνας"
@@ -1432,7 +1541,7 @@ msgid "Next Period Depreciation"
 msgstr "Επόμενη Περίοδος Απόσβεσης"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1032
+#: code:addons/account_asset_management/models/account_asset.py:1299
 #, python-format
 msgid "No Fiscal Year defined."
 msgstr "No Fiscal Year defined."
@@ -1471,8 +1580,15 @@ msgstr "Σημείωση"
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model:ir.ui.view,arch_db:account_asset_management.account_bg_asset_profile_view_form
 msgid "Notes"
 msgstr "Σημειώσεις"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_method_number
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_method_number
+msgid "Number"
+msgstr "Αριθμός"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_message_needaction_counter
@@ -1480,9 +1596,7 @@ msgid "Number of Actions"
 msgstr "Πλήθος ενεργειών"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:163
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_method_number
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_method_number
+#: code:addons/account_asset_management/models/account_asset_profile.py:169
 #, python-format
 msgid "Number of Years"
 msgstr "Number of Years"
@@ -1523,6 +1637,16 @@ msgid "Open"
 msgstr "Ανοιχτό"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_move_line_id
+msgid "Operaraton"
+msgstr "Operaraton"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_move_line_ids
+msgid "Operations"
+msgstr "Λειτουργίες"
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_invoice_policy
 msgid "Ordered Quantity: Invoice based on the quantity the customer ordered.\n"
 "Delivered Quantity: Invoiced based on the quantity the vendor delivered (time or deliveries)."
@@ -1538,6 +1662,11 @@ msgstr "Άλλες Πληροφορίες"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_outgoing_qty
 msgid "Outgoing"
 msgstr "Εξερχόμενα"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_stock_move_line
+msgid "Packing Operation"
+msgstr "Λειτουργία Συσκευασίας"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
@@ -1572,13 +1701,13 @@ msgid "Partner"
 msgstr "Συναλλασόμενος"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:165
+#: code:addons/account_asset_management/models/account_asset_profile.py:171
 #, python-format
 msgid "Percentage law fixed"
 msgstr "Percentage law fixed"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile_bg.py:48
+#: code:addons/account_asset_management/models/account_asset_profile_bg.py:54
 #: model:ir.model.fields,field_description:account_asset_management.field_account_bg_asset_profile_method_percentage
 #, python-format
 msgid "Percentage per Year"
@@ -1728,6 +1857,11 @@ msgid "Purchase Gap"
 msgstr "Κενό Αγορών"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_purchase_line_ids
+msgid "Purchase Line"
+msgstr "Purchase Line"
+
+#. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_purchase_order_line
 msgid "Purchase Order Line"
 msgstr "Γραμμή Παραγγελίας Αγοράς"
@@ -1745,12 +1879,12 @@ msgstr "Историческа/покупна цена"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_qty_available_not_res
 msgid "Qty Available Not Reserved"
-msgstr "Qty Available Not Reserved"
+msgstr "Διαθέσιμη Ποσότητα (Μή Δεσμευμένη)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_qty_available
 msgid "Quantity On Hand"
-msgstr "Ποσότητα στο Χέρι"
+msgstr "Συνολικό Απόθεμα (Δεσμευμένο και Αδέσμευτο)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_incoming_qty
@@ -1775,7 +1909,12 @@ msgstr "Quantity of planned outgoing products.\n"
 "Otherwise, this includes goods leaving any Stock Location with 'internal' type."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:152
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_quant_ids
+msgid "Quants"
+msgstr "Διαθεσιμότητα"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset_profile.py:158
 #, python-format
 msgid "Quarter"
 msgstr "Τρίμηνο"
@@ -1847,7 +1986,8 @@ msgid "Reordering Rules"
 msgstr "Κανόνες Επανα-Παραγγελίας"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:112
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:116
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_tax_value_residual
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_value_residual
 #, python-format
 msgid "Residual Value"
@@ -1987,6 +2127,11 @@ msgid "Search Asset Profile"
 msgstr "Search Asset Profile"
 
 #. module: account_asset_management
+#: model:ir.ui.view,arch_db:account_asset_management.account_account_bg_asset_profile_view_search
+msgid "Search TAX Asset Profile"
+msgstr "Search TAX Asset Profile"
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_categ_id
 msgid "Select category for the current product"
 msgstr "Επιλέξτε κατηγορία για το τρέχον είδος"
@@ -2119,6 +2264,11 @@ msgid "Stock Quant"
 msgstr "Quant Απόθεμα "
 
 #. module: account_asset_management
+#: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Stock move Detailed Operations"
+msgstr "Stock move Detailed Operations"
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_normal_cost
 msgid "Sum of Multiplication of Cost price and quantity of Vendor Bills"
 msgstr "Sum of Multiplication of Cost price and quantity of Vendor Bills"
@@ -2141,7 +2291,7 @@ msgstr "Sum of Multiplication of Sale Catalog price and quantity of Customer Inv
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_sale_num_invoiced
 msgid "Sum of Quantity in Customer Invoices"
-msgstr "Άθροισμα Ποσοτήτων στα Τιμολόγια Πελάτη"
+msgstr "Άθροισμα Ποσοτήτων στα Τιμολόγια Πελατών"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_purchase_num_invoiced
@@ -2154,14 +2304,31 @@ msgid "TAX Depreciation Board"
 msgstr "TAX Depreciation Board"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account_tax_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_tax_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_bg_asset_profile_threshold_tax_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_line_tax_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line_tax_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_stock_inventory_line_tax_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_stock_move_tax_profile_id
 msgid "Tax Asset Profile"
 msgstr "Tax Asset Profile"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.account_account_bg_asset_profile_action
+#: model:ir.ui.menu,name:account_asset_management.account_bg_asset_profile_menu
+msgid "Tax Asset Profiles"
+msgstr "Tax Asset Profiles"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_bg_asset_profile
 msgid "Tax Asset profile"
 msgstr "Tax Asset profile"
+
+#. module: account_asset_management
+#: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Taxed"
+msgstr "Taxed"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_pricelist_id
@@ -2175,30 +2342,31 @@ msgid "Technical: used to compute quantities."
 msgstr "Technical: used to compute quantities."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:848
+#: code:addons/account_asset_management/models/account_asset.py:1097
 #, python-format
 msgid "The '_compute_year_amount' method is only intended for Time Method 'Number of Years."
 msgstr "The '_compute_year_amount' method is only intended for Time Method 'Number of Years."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_account.py:23
+#: code:addons/account_asset_management/models/account_account.py:28
 #, python-format
 msgid "The Asset Account defined in the Asset Profile must be equal to the account."
 msgstr "The Asset Account defined in the Asset Profile must be equal to the account."
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_fiscal_method_percentage
 #: model:ir.model.fields,help:account_asset_management.field_account_bg_asset_profile_method_percentage
 msgid "The Percentage per year needed to depreciate your asset"
 msgstr "The Percentage per year needed to depreciate your asset"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:63
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:67
 #, python-format
 msgid "The Sale Value must be positive!"
 msgstr "The Sale Value must be positive!"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:311
+#: code:addons/account_asset_management/models/account_asset.py:450
 #, python-format
 msgid "The Start Date must precede the Ending Date."
 msgstr "The Start Date must precede the Ending Date."
@@ -2209,7 +2377,7 @@ msgid "The average delay in days between the confirmation of the customer order 
 msgstr "Η μέση καθυστέρηση σε ημέρες μεταξύ της επιβεβαίωσης της παραγγελίας του πελάτη και της παράδοσης των τελικών ειδών.  Αυτός είναι ο χρόνος  που υπόσχεστε στους πελάτες σας."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:623
+#: code:addons/account_asset_management/models/account_asset.py:852
 #, python-format
 msgid "The duration of the asset conflicts with the posted depreciation table entry dates."
 msgstr "The duration of the asset conflicts with the posted depreciation table entry dates."
@@ -2227,18 +2395,24 @@ msgid "The expense is accounted for when a vendor bill is validated, except in a
 msgstr "The expense is accounted for when a vendor bill is validated, except in anglo-saxon accounting with perpetual inventory valuation in which case the expense (Cost of Goods Sold account) is recognized at the customer invoice validation. If the field is empty, it uses the one defined in the product category."
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_method_number
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile_method_number
+msgid "The meaning of this parameter depends on the Time Method.\n"
+"  * Number of Years: Specify the number of years for the depreciation.\n"
+"  * Number of Depreciations: Fix the number of depreciation lines and the time between 2 depreciations.\n"
+"  * Ending Date: Choose the time between 2 depreciations and the date the depreciations won't go beyond."
+msgstr "The meaning of this parameter depends on the Time Method.\n"
+"  * Number of Years: Specify the number of years for the depreciation.\n"
+"  * Number of Depreciations: Fix the number of depreciation lines and the time between 2 depreciations.\n"
+"  * Ending Date: Choose the time between 2 depreciations and the date the depreciations won't go beyond."
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_category_asset_count
 msgid "The number of assets under this category (Does not consider the children categories)"
 msgstr "The number of assets under this category (Does not consider the children categories)"
 
 #. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset_method_number
-#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile_method_number
-msgid "The number of years needed to depreciate your asset"
-msgstr "The number of years needed to depreciate your asset"
-
-#. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:156
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:161
 #, python-format
 msgid "The removal date must be after the last depreciation date."
 msgstr "The removal date must be after the last depreciation date."
@@ -2280,6 +2454,15 @@ msgid "This amount represent the depreciation base of the asset (Purchase Value 
 msgstr "This amount represent the depreciation base of the asset (Purchase Value - Salvage Value."
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_froze_depreciation
+msgid "This amount represent the initial value of the asset depreciation.\n"
+"The Depreciation Base is calculated as follows:\n"
+"Purchase Value - Salvage Value - Froze Depreciation."
+msgstr "This amount represent the initial value of the asset depreciation.\n"
+"The Depreciation Base is calculated as follows:\n"
+"Purchase Value - Salvage Value - Froze Depreciation."
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_purchase_value
 msgid "This amount represent the initial value of the asset.\n"
 "The Depreciation Base is calculated as follows:\n"
@@ -2294,12 +2477,21 @@ msgid "This field holds the image used as image for the product variant, limited
 msgstr "Στο πεδίο περιέχεται η εικόνα της παραλλαγής του είδους, με περιορισμό σε 1024x1024px."
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_froze_period
+msgid "This is amount for froze depreciation periods.\n"
+"The frozen depreciation will separate on this periods\n"
+"by choice type period bellow."
+msgstr "This is amount for froze depreciation periods.\n"
+"The frozen depreciation will separate on this periods\n"
+"by choice type period bellow."
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_price_extra
 msgid "This is the sum of the extra price of all attributes"
 msgstr "Αυτό είναι το άθροισμα όλων των επιπλέον τιμών των χαρακτηριστικών"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:138
+#: code:addons/account_asset_management/models/account_move.py:164
 #, python-format
 msgid "This option should only be used for a single id at a time."
 msgstr "This option should only be used for a single id at a time."
@@ -2318,6 +2510,15 @@ msgstr "Θα χρησιμοποιηθεί αυτή η τοποθεσία απο�
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_property_stock_inventory
 msgid "This stock location will be used, instead of the default one, as the source location for stock moves generated when you do an inventory."
 msgstr "Αυτή η τοποθεσία των αποθεμάτων θα χρησιμοποιηθεί, αντί για την προκαθορισμένη, όταν η θέση προέλευσης για τις κινήσεις των αποθεμάτων που δημιουργούνται όταν κάνετε μια απογραφή."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_fiscal_correction_value
+msgid "This value is used for correction Depreciation Base. \n"
+"If you are have some amount with for fiscal restricts, \n"
+"enter it with minus."
+msgstr "This value is used for correction Depreciation Base. \n"
+"If you are have some amount with for fiscal restricts, \n"
+"enter it with minus."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_method_time
@@ -2392,7 +2593,7 @@ msgstr "Τύπος"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_uom_id
 msgid "Unit of Measure"
-msgstr "ΜΜ"
+msgstr "Μ. Μ."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_message_unread
@@ -2407,12 +2608,12 @@ msgstr "Μετρητής μη αναγνωσμένων μηνυμάτων"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_valuation
 msgid "Valuation"
-msgstr "Valuation"
+msgstr "Κοστολόγηση"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_product_product_value_depreciated
 msgid "Value Depreciated"
-msgstr "Value Depreciated"
+msgstr "Αξία πλεόν αποσβέσεων"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_image_variant
@@ -2510,14 +2711,15 @@ msgid "When doing real-time inventory valuation, counterpart journal items for a
 msgstr "Όταν γίνεται αποτίμηση των αποθεμάτων σε πραγματικό χρόνο,τα αντίστοιχα είδη του ημερολογίου  για όλες τις εξερχόμενες κινήσεις των αποθεμάτων θα αναρτηθούν σε αυτό το λογαριασμό, εκτός εάν υπάρχει ένας συγκεκριμένος λογαριασμός αποτίμησης στην τοποθεσία προορισμού. Όταν δεν έχει οριστεί επί του είδους, ένα από την κατηγορία είδους θα χρησιμοποιηθεί."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:153
+#: code:addons/account_asset_management/models/account_asset_profile.py:159
+#: code:addons/account_asset_management/models/account_asset_profile_bg.py:55
 #, python-format
 msgid "Year"
 msgstr "Έτος"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:67
-#: code:addons/account_asset_management/models/account_move.py:133
+#: code:addons/account_asset_management/models/account_move.py:68
+#: code:addons/account_asset_management/models/account_move.py:159
 #, python-format
 msgid "You are not allowed to link an accounting entry to an asset.\n"
 "You should generate such entries from the asset."
@@ -2525,7 +2727,7 @@ msgstr "You are not allowed to link an accounting entry to an asset.\n"
 "You should generate such entries from the asset."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:148
+#: code:addons/account_asset_management/models/account_asset_line.py:150
 #: code:addons/account_asset_management/models/account_move.py:33
 #, python-format
 msgid "You are not allowed to remove an accounting entry linked to an asset.\n"
@@ -2534,19 +2736,19 @@ msgstr "You are not allowed to remove an accounting entry linked to an asset.\n"
 "You should remove such entries from the asset."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:425
+#: code:addons/account_asset_management/models/account_asset.py:619
 #, python-format
 msgid "You can only delete assets in draft state."
 msgstr "You can only delete assets in draft state."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:229
+#: code:addons/account_asset_management/models/account_asset.py:1526
 #, python-format
 msgid "You can't make an early removal if all the depreciation lines for previous periods are not posted."
 msgstr "You can't make an early removal if all the depreciation lines for previous periods are not posted."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:156
+#: code:addons/account_asset_management/models/account_asset_line.py:186
 #, python-format
 msgid "You cannot change a depreciation line with an associated accounting entry."
 msgstr "You cannot change a depreciation line with an associated accounting entry."
@@ -2558,19 +2760,19 @@ msgid "You cannot change an accounting entry linked to an asset depreciation lin
 msgstr "You cannot change an accounting entry linked to an asset depreciation line."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:129
+#: code:addons/account_asset_management/models/account_move.py:155
 #, python-format
 msgid "You cannot change an accounting item linked to an asset depreciation line."
 msgstr "You cannot change an accounting item linked to an asset depreciation line."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:334
+#: code:addons/account_asset_management/models/account_asset.py:500
 #, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr "You cannot change the profile of an asset with accounting entries."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1040
+#: code:addons/account_asset_management/models/account_asset.py:1307
 #, python-format
 msgid "You cannot compute a depreciation table for an asset starting in an undefined future fiscal year.\n"
 "Please correct the start date for asset '%s'."
@@ -2578,40 +2780,39 @@ msgstr "You cannot compute a depreciation table for an asset starting in an unde
 "Please correct the start date for asset '%s'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:197
-#: code:addons/account_asset_management/models/account_asset_line_bg.py:129
+#: code:addons/account_asset_management/models/account_asset_line.py:200
 #, python-format
 msgid "You cannot delete a depreciation line with an associated accounting entry."
 msgstr "You cannot delete a depreciation line with an associated accounting entry."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:429
+#: code:addons/account_asset_management/models/account_asset.py:623
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr "You cannot delete an asset that contains posted depreciation lines."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:193
+#: code:addons/account_asset_management/models/account_asset_line.py:196
 #: code:addons/account_asset_management/models/account_asset_line_bg.py:125
 #, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
 msgstr "You cannot remove an asset line of type 'Depreciation Base'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:164
+#: code:addons/account_asset_management/models/account_asset_line.py:161
 #, python-format
 msgid "You cannot set the 'Initial Balance Entry' flag on a depreciation line with prior posted entries."
 msgstr "You cannot set the 'Initial Balance Entry' flag on a depreciation line with prior posted entries."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:176
+#: code:addons/account_asset_management/models/account_asset_line.py:173
 #: code:addons/account_asset_management/models/account_asset_line_bg.py:108
 #, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr "You cannot set the Asset Start Date after already posted entries."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:183
+#: code:addons/account_asset_management/models/account_asset_line.py:180
 #: code:addons/account_asset_management/models/account_asset_line_bg.py:115
 #, python-format
 msgid "You cannot set the date on a depreciation line prior to already posted entries."

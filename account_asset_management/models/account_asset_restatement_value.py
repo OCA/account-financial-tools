@@ -7,7 +7,9 @@ from odoo import api, fields, models, _
 import odoo.addons.decimal_precision as dp
 from odoo.exceptions import UserError
 import logging
+
 _logger = logging.getLogger(__name__)
+
 
 class AccountAssetRestatementValue(models.Model):
     _name = 'account.asset.restatement.value'
@@ -19,8 +21,8 @@ class AccountAssetRestatementValue(models.Model):
         comodel_name='account.asset', string='Asset',
         required=True, ondelete='cascade')
     previous_id = fields.Many2one(
-        comodel_name='account.asset.line',
-        string='Previous Depreciation Line',
+        comodel_name='account.asset.restatement.value',
+        string='Previous Restatement Line',
         readonly=True)
     parent_state = fields.Selection(
         related='asset_id.state',
@@ -28,7 +30,8 @@ class AccountAssetRestatementValue(models.Model):
         readonly=True,
     )
     depreciation_base = fields.Float(string='Restatement Depreciation Base', readonly=True, )
-    depreciated_value = fields.Float(string='Restatement Depreciated Amount', digits=dp.get_precision('Account'), readonly=True)
+    depreciated_value = fields.Float(string='Restatement Depreciated Amount', digits=dp.get_precision('Account'),
+                                     readonly=True)
     line_date = fields.Date(string='Date', required=True)
     move_id = fields.Many2one(
         comodel_name='account.move',
@@ -57,6 +60,7 @@ class AccountAssetRestatementValue(models.Model):
 
     def get_restatement_value(self, type, line_date, operator='<=', field=False):
         res = 0.0
+        values = self
         if operator == '<=':
             values = self.filtered(lambda r: r.type in type and r.line_date <= line_date)
         elif operator == '=':
@@ -69,10 +73,13 @@ class AccountAssetRestatementValue(models.Model):
             values = self.filtered(lambda r: r.type in type and r.line_date > line_date)
         elif operator == '!=':
             values = self.filtered(lambda r: r.type in type and r.line_date != line_date)
-        #_logger.info("VALUES %s:%s" % (values, field))
+        # _logger.info("VALUES %s:%s" % (values, field))
         if field and values:
             for value in values:
-                res += getattr(value, field)
+                coefficient = 1
+                if value.type == 'diminution':
+                    coefficient = -1
+                res += getattr(value, field) * coefficient
             return res
         else:
             return values or res

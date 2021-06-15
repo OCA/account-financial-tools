@@ -62,3 +62,29 @@ class PurchaseOrder(models.Model):
                 'context': sale._get_documents_context()
             }
         return False
+
+
+class AccountDocuments(models.Model):
+    _inherit = "account.documents"
+
+    sale_order_id = fields.Many2one('sale.order', 'Sale order')
+
+    def _get_domain_type(self):
+        model_id = self.env['ir.model'].search([('name', '=', 'sale.order')])
+        return super(AccountDocuments, self)._get_domain_type() + [('model_id', '=', model_id.id)]
+
+
+class IrActionsReport(models.Model):
+    _inherit = 'ir.actions.report'
+
+    @api.multi
+    def postprocess_pdf_report(self, record, buffer):
+        attachment = super(IrActionsReport, self).postprocess_pdf_report(record, buffer)
+        if attachment:
+            sale = self.env[attachment.res_model].browse(attachment.res_id)
+            docs = self.env['account.documents'].search([('ir_attachment_id', '=', attachment.id)])
+            if docs and attachment.res_model == 'sale.order':
+                docs.sale_order_id = sale
+                domain = self.env['account.documents.type']._get_domain('sale.order', '', sale.state)
+                docs.document_type_id = self.env['account.documents.type'].search(domain)
+        return attachment

@@ -18,6 +18,7 @@ class AccountDocuments(models.Model):
 
     ir_attachment_id = fields.Many2one('ir.attachment', string='Related attachment', required=True, ondelete='cascade')
     document_type_id = fields.Many2one('account.documents.type', 'Type of document', domain=_get_domain_type)
+    color = fields.Integer(string="Color")
 
 
 class IrActionsReport(models.Model):
@@ -29,7 +30,9 @@ class IrActionsReport(models.Model):
         if attachment:
             docs = self.env['account.documents'].search([('ir_attachment_id', '=', attachment.id)])
             if not docs:
-                docs.create({'ir_attachment_id': attachment.id})
+                values = {'ir_attachment_id': attachment.id}
+                docs.create(values)
+                _logger.info("DOCUMENTS %s(%s)" % (docs, values))
         return attachment
 
 
@@ -54,7 +57,7 @@ class AccountDocumentsType(models.Model):
 
     def get_document_type(self, model, type, state, field_name='print_name'):
         domain = self._get_domain(model, type, state)
-        _logger.info("DOMAIN %s:%s" % (domain, model))
+        # _logger.info("DOMAIN %s:%s" % (domain, model))
         type = self.search(domain)
         return getattr(type, field_name)
 

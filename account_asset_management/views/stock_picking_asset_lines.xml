@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_asset_lines_view_form" model="ir.ui.view">
+        <field name="name">stock.picking.asset.lines.form</field>
+        <field name="model">stock.picking.asset.lines</field>
+        <field name="arch" type="xml">
+            <form string="Possible asset">
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <div class="oe_title">
+                        <label for="product_id" class="oe_edit_only"/>
+                        <h1>
+                            <field name="product_id" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <group string="Asset profiles">
+                        <field name="asset_profile_id"/>
+                        <field name="tax_asset_profile_id"/>
+                        <field name="move_id" invisible="1"/>
+                        <field name="move_line_id" invisible="1"/>
+                        <field name="picking_asset_id" invisible="1"/>
+                    </group>
+                    <group string="Asset data">
+                        <field name="quantity"/>
+                        <field name="uom_id"/>
+                        <field name="price_unit"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="stock_picking_asset_lines_view_tree" model="ir.ui.view">
+        <field name="name">stock.picking.asset.lines.tree</field>
+        <field name="model">stock.picking.asset.lines</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="picking_asset_id" invisible="1"/>
+                <field name="move_id" invisible="1"/>
+                <field name="move_line_id" invisible="1"/>
+                <field name="asset_profile_id"/>
+                <field name="tax_asset_profile_id"/>
+                <field name="product_id"/>
+                <field name="quantity"/>
+                <field name="uom_id"/>
+                <field name="price_unit"/>
+            </tree>
+        </field>
+    </record>
+    <record id="stock_picking_asset_lines_view_search" model="ir.ui.view">
+        <field name="name">stock.picking.asset.lines.search</field>
+        <field name="model">stock.picking.asset.lines</field>
+        <field name="arch" type="xml">
+            <search string="Possible assets">
+                <field name="product_id" string="Asset"/>
+                <field name="asset_profile_id"/>
+                <field name="tax_asset_profile_id"/>
+                <group expand="0" string="Group By...">
+                  <filter string="Asset Profile" domain="" context="{'group_by': 'asset_profile_id'}"/>
+                  <filter string="Tax Asset Profile" domain="" context="{'group_by': 'tax_asset_profile_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="account_stock_picking_asset_lines" model="ir.actions.act_window">
+        <field name="name">Possible assets</field>
+        <field name="res_model">stock.picking.asset.lines</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="stock_picking_asset_lines_view_tree"/>
+        <field name="search_view_id" ref="stock_picking_asset_lines_view_search"/>
+    </record>
+    <record id="stock_picking_asset_view_form" model="ir.ui.view">
+        <field name="name">stock.picking.asset.form</field>
+        <field name="model">stock.picking.asset</field>
+        <field name="arch" type="xml">
+            <form string="From Picking possible asset">
+                <sheet>
+                    <group>
+                        <field name="picking_id"/>
+                    </group>
+                    <field name="asset_lines" nolabel="1" colspan="4">
+                        <tree>
+                            <field name="picking_asset_id" invisible="1"/>
+                            <field name="move_id" invisible="1"/>
+                            <field name="move_line_id" invisible="1"/>
+                            <field name="asset_profile_id"/>
+                            <field name="tax_asset_profile_id"/>
+                            <field name="product_id"/>
+                            <field name="quantity"/>
+                            <field name="uom_id"/>
+                            <field name="price_unit"/>
+                        </tree>
+                    </field>
+                    <footer>
+                        <button name="cancel" string="Cancel" class="oe_link"
+                            special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <act_window name="Show possible assets in picking" id="stock_picking_asset_action"
+            res_model="stock.picking.asset"
+            src_model="stock.picking"
+            key2="client_action_multi"
+            view_mode="form"
+            target="new"/>
+
+</odoo>

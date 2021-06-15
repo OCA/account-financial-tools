@@ -45,26 +45,26 @@ class AccountInvoice(models.Model):
             inv.account_move_line_ids = False
             account_move = inv.move_id
             if account_move.state == 'posted':
-                inv.account_move_line_ids |= account_move.line_ids
+                inv.account_move_line_ids |= account_move.mapped('line_ids')
             for line in inv.invoice_line_ids:
                 picking_ids = self.env['stock.picking']
                 for stock_move_line in line.move_line_ids:
                     for move_line in stock_move_line.move_line_ids:
                         for move in move_line.move_id:
                             for account_move in move.account_move_ids:
-                                inv.account_move_line_ids |= account_move.line_ids
+                                inv.account_move_line_ids |= account_move.mapped('line_ids')
                 for purchase in line.purchase_id:
                     for picking in purchase.picking_ids:
                         picking_ids |= purchase.picking_ids
                         for move_line in picking.move_lines:
                             if line.purchase_line_id == move_line.purchase_line_id:
                                 for account_move in move_line.account_move_ids:
-                                    inv.account_move_line_ids |= account_move.line_ids
+                                    inv.account_move_line_ids |= account_move.mapped('line_ids')
                 landed_cost = self.env['stock.landed.cost'].search([('picking_ids', 'in', picking_ids.ids)])
                 if landed_cost:
                     for landed_cost_line in landed_cost:
                         for account_move in landed_cost_line.account_move_id:
-                            inv.account_move_line_ids |= account_move.line_ids.filtered(lambda r: r.product_id == line.product_id)
+                            inv.account_move_line_ids |= account_move.mapped('line_ids').filtered(lambda r: r.product_id == line.product_id)
 
     @api.multi
     def action_get_account_moves(self):
@@ -85,6 +85,7 @@ class AccountInvoice(models.Model):
             return False
         action_data = action_ref.read()[0]
         action_data['domain'] = [('id', 'in', self.account_move_line_ids.ids)]
+        action_data['context'] = {'search_default_movegroup': 1}
         return action_data
 
     def _action_invoice_rebuild_pre(self):

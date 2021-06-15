@@ -9,20 +9,28 @@
                     <group>
                         <group colspan="4">
                             <field name="template_id" widget="selection"
-                                   attrs="{'invisible':[('state','=','template_selected')]}"/>
+                                   attrs="{'invisible':[('state','=','template_selected')]}" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
                         </group>
                     </group>
                     <group name="filters">
+                        <group name="configure_period_type">
+                            <label for="choice_period_type" class="oe_edit_only"/>
+                            <field name="choice_period_type" nolabel="1" options="{'horizontal': true}" class="oe_edit_only" widget="radio"/>
+                        </group>
+                        <group name="dates">
+                            <field name="accounting_date"/>
+                            <field name="date_due"/>
+                        </group>
                         <group name="date_range">
-                            <field name="date_range_id"/>
+                            <field name="date_range_id" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
                             <field name="date_from"/>
                             <field name="date_to"/>
                         </group>
                         <group>
+                            <field name="company_id"/>
                             <field name="partner_id" attrs="{'invisible':[('state','=','template_selected')]}"/>
                             <field name="amount_input" invisible="1"/>
-                            <field name="date_due"/>
-                            <field name="accounting_date"/>
+                            <field name="post"/>
                         </group>
                     </group>
                     <separator

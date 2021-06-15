@@ -18,7 +18,7 @@
                  attrs="{'invisible': [('type', '=', 'view')]}"/>
         </header>
         <sheet>
-          <div class="oe_button_box">
+          <div class="oe_button_box" name="button_box">
             <button name="toggle_active" type="object"
                     class="oe_stat_button" icon="fa-archive">
                     <field name="active" widget="boolean_button"
@@ -32,7 +32,7 @@
             <h1>
               <field name="name" class="oe_inline"/>
             </h1>
-            <label for="product_id" class="oe_edit_only"/>
+            <label for="product_id" class="oe_edit_only" attrs="{'required': [('type', '=', 'normal')]}"/>
             <h2>
               <field name="product_id" class="oe_inline"/>
             </h2>
@@ -59,12 +59,19 @@
             <group name="product">
               <field name="lot_id" domain="[('product_id', '=', product_id)]" groups="stock.group_production_lot" context="{'default_product_id': product_id}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="location_ids" widget="many2many_tags" groups="stock.group_production_lot" context="{'default_product_id': product_id}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="lot_qty" groups="stock.group_production_lot" context="{'default_product_id': product_id}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
               <field name="product_asset_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="maintenance_asset_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'view')]}"/>
             </group>
           </group>
           <group name="depreciation">
             <group string="Accounted">
               <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="value_begin_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
               <field name="value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
@@ -75,6 +82,8 @@
             </group>
             <group string="Taxed">
               <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="tax_value_begin_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
               <field name="tax_value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
@@ -105,6 +114,17 @@
                   <field name="fiscal_correction_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                          attrs="{'readonly': ['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
                   <field name="date_remove"/>
+                </group>
+                <group>
+                  <field name="froze_depreciation" widget="monetary" options="{'currency_field': 'currency_id'}"
+                         attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
+                  <field name="froze_date" attrs="{'readonly':[('move_line_check', '=', True)]}"/>
+                  <field name="froze_period" attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
+                </group>
+                <group>
+                  <field name="tax_froze_depreciation" widget="monetary" options="{'currency_field': 'currency_id'}"
+                         attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
+<!--                  <field name="tax_froze_period" attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>-->
                 </group>
               </group>
               <separator string="Other Information" colspan="4"/>
@@ -155,9 +175,10 @@
                   <field name="remaining_value" readonly="1"/>
                   <field name="init_entry" string="Init"/>
                   <field name="move_check"/>
+                  <field name="sleep_period"/>
                   <field name="parent_state" invisible="1"/>
                   <button name="create_move" icon="fa-cog" string="Create Move" type="object"
-                          attrs="{'invisible': ['|', '|', ('init_entry', '=', True), ('move_check', '!=', False), ('parent_state', '!=', 'open')]}"/>
+                          attrs="{'invisible': ['|', '|', '|', ('init_entry', '=', True), ('move_check', '!=', False), ('parent_state', '!=', 'open'), ('sleep_period', '=', True)]}"/>
                   <button name="open_move" icon="fa-folder-open-o" string="View Move" type="object"
                           attrs="{'invisible': [('move_check', '!=', True)]}"/>
                   <button name="unlink_move" icon="fa-times"
@@ -176,6 +197,7 @@
                       <field name="init_entry" attrs="{'readonly': ['|', ('move_check', '=', True), ('type', '=', 'create')]}"/>
                       <field name="move_id"/>
                       <field name="move_check"/>
+                      <field name="sleep_period"/>
                     </group>
                     <group>
                       <field name="line_date" attrs="{'readonly': [('move_check', '=', True)]}"/>
@@ -204,6 +226,7 @@
                   <field name="amount"/>
                   <field name="remaining_value" readonly="1"/>
                   <field name="init_entry" string="Init"/>
+                  <field name="sleep_period"/>
                   <field name="parent_state" invisible="1"/>
                 </tree>
                 <form string="Asset Line">
@@ -215,12 +238,44 @@
                       <field name="name"/>
                       <field name="amount"/>
                       <field name="init_entry" attrs="{'readonly': [('type', '=', 'create')]}"/>
+                      <field name="sleep_period"/>
                     </group>
                     <group>
                       <field name="line_date"/>
                       <field name="depreciated_value" readonly="1"/>
                       <field name="remaining_value" readonly="1"/>
                     </group>
+                  </group>
+                </form>
+              </field>
+            </page>
+            <page string="Sleep periods">
+              <field name="sleep_period_line_ids" mode="tree" options="{'reload_on_button': true}" context="{'default_asset_id': active_id}">
+                <tree string="Sleep periods">
+                  <field name="name"/>
+                  <field name="asset_id" invisible="1"/>
+                  <field name="line_start_date"/>
+                  <field name="line_end_date"/>
+                  <field name="line_days"/>
+                  <field name="line_mounts"/>
+                  <field name="line_fiscal_breaks"/>
+                  <field name="parent_state" invisible="1"/>
+                </tree>
+                <form string="Sleep period">
+                  <group>
+                    <group>
+                      <field name="name" readonly="0"/>
+                      <field name="line_days"/>
+                      <field name="line_mounts"/>
+                      <field name="line_fiscal_breaks"/>
+                      <field name="asset_id" invisible="1"/>
+                      <field name="parent_state" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="line_start_date" readonly="0"/>
+                      <field name="line_end_date" readonly="0"/>
+                    </group>
+                    <field name="note" nolabel="1" colspan="4" readonly="0"/>
                   </group>
                 </form>
               </field>
@@ -328,9 +383,9 @@
         <field name="type" invisible="1"/>
         <field name="code"/>
         <field name="diff_purchase_value"/>
-        <field name="depreciation_base" attrs="{'invisible': [('type', '=', 'view')]}"/>
-        <field name="value_depreciated" attrs="{'invisible': [('type', '=', 'view')]}"/>
-        <field name="value_residual" attrs="{'invisible': [('type', '=', 'view')]}"/>
+        <field name="depreciation_base" attrs="{'invisible': [('type', '=', 'view')]}" sum="Total depreciation base"/>
+        <field name="value_depreciated" attrs="{'invisible': [('type', '=', 'view')]}" sum="Total value depreciated"/>
+        <field name="value_residual" attrs="{'invisible': [('type', '=', 'view')]}" sum="Total value residual"/>
         <field name="date_start"/>
         <field name="date_remove"/>
         <field name="profile_id"/>
