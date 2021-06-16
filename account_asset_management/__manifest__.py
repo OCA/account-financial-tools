@@ -16,7 +16,7 @@
     ],
     'excludes': ['account_asset'],
     'author': "Rosen Vladimirov (Bioprint Ltd.), Noviat,Odoo Community Association (OCA)",
-    'website': 'https://github.com/OCA/account-financial-tools',
+    'website': 'https://github.com/rosenvladimirov/account-financial-tools',
     'category': 'Accounting & Finance',
     'data': [
         'security/account_asset_security.xml',

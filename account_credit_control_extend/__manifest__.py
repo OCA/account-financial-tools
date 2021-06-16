@@ -21,7 +21,7 @@
      'website_sale',
      'account_documents',
  ],
- 'website': 'https://github.com/OCA/account-financial-tools',
+ 'website': 'https://github.com/rosenvladimirov/account-financial-tools',
  'data': [
      # Views
      "views/account_invoice.xml",

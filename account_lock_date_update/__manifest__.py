@@ -9,7 +9,7 @@
     'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV, Odoo Community Association (OCA)',
-    'website': 'https://github.com/OCA/account-financial-tools',
+    'website': 'https://github.com/rosenvladimirov/account-financial-tools',
     'installable': True,
     'conflicts': [
         'account_accountant',

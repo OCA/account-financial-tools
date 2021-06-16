@@ -97,6 +97,7 @@ class AccountMoveLine(models.Model):
                 # create asset
                 asset_obj = self.env['account.asset']
                 temp_vals = self._prepare_asset(vals)
+                _logger.info("ASSET INSIDE %s" % temp_vals)
                 if vals.get('move_line_id'):
                     temp_vals.update({
                         'move_line_id': vals['move_line_id'],

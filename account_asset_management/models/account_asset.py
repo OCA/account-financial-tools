@@ -737,8 +737,64 @@ class AccountAsset(models.Model):
             result.append((asset.id, name))
         return result
 
+    def _get_board(self, type='obj'):
+        if type == 'obj':
+            if self.env.context.get("bg_asset_line"):
+                line_obj = self.env['account.bg.asset.line']
+            else:
+                line_obj = self.env['account.asset.line']
+            return line_obj
+        elif type == 'dlines':
+            if self.env.context.get("bg_asset_line"):
+                dlines = self.depreciation_bg_line_ids
+            else:
+                dlines = self.depreciation_line_ids
+            return dlines
+        elif type == 'method_time':
+            if self._context.get('bg_asset_line'):
+                method_time = self.method_tax_time
+            else:
+                method_time = self.method_time
+            return method_time
+        elif type == 'dlines_filtered':
+            _logger.info("FILTERED %s:%s" % (self._context, self))
+            if self._context.get('bg_asset_line'):
+                dlines = self.depreciation_bg_line_ids.filtered(lambda r: r.type in ['depreciate', 'storno', 'remove'])
+            else:
+                dlines = self.depreciation_line_ids.filtered(
+                    lambda r: r.type in ['depreciate', 'remove'] and not r.move_check)
+            return dlines
+        elif type == 'domain1':
+            if self.env.context.get("bg_asset_line"):
+                domain = [
+                    ('asset_id', '=', self.id),
+                    ('type', '=', 'depreciate'),
+                    ('init_entry', '=', True),
+                ]
+            else:
+                domain = [
+                    ('asset_id', '=', self.id),
+                    ('type', '=', 'depreciate'),
+                    '|', ('move_check', '=', True), ('init_entry', '=', True)]
+            return domain
+        elif type == 'domain2':
+            if self.env.context.get("bg_asset_line"):
+                domain = [
+                    ('asset_id', '=', self.id),
+                    ('type', '=', 'depreciate'),
+                    ('init_entry', '=', False),
+                ]
+            else:
+                domain = [
+                    ('asset_id', '=', self.id),
+                    ('type', '=', 'depreciate'),
+                    ('move_id', '=', False),
+                    ('init_entry', '=', False)]
+            return domain
+
     @api.multi
     def recalculate(self):
+        self.ensure_one()
         # recalculate and save all restatement data
         restatement_obj = self.env['account.asset.restatement.value']
 
@@ -751,10 +807,7 @@ class AccountAsset(models.Model):
                 self.purchase_value - self.salvage_value
         self.depreciation_base += restatement_obj.get_restatement_value(['create'], self.date_start, '<=',
                                                                         'depreciation_base')
-        if self.env.context.get("bg_asset_line"):
-            dlines = self.depreciation_bg_line_ids
-        else:
-            dlines = self.depreciation_line_ids
+        dlines = self._get_board('dlines')
         for dl in dlines.filtered(lambda l: l.type == 'create'):
             dl.with_context(dict(self.env.context, allow_asset_line_update=True)).write(
                 {'amount': self.depreciation_base})
@@ -851,45 +904,51 @@ class AccountAsset(models.Model):
             y.update({'amount': x['amount'] + y['amount']})
             return y
 
-        if self.env.context.get("bg_asset_line"):
-            line_obj = self.env['account.bg.asset.line']
-        else:
-            line_obj = self.env['account.asset.line']
+        # if self.env.context.get("bg_asset_line"):
+        #     line_obj = self.env['account.bg.asset.line']
+        # else:
+        #     line_obj = self.env['account.asset.line']
+
+        line_obj = self._get_board('obj')
         digits = self.env['decimal.precision'].precision_get('Account')
 
         for asset in self:
             if asset.with_context(dict(self._context, force_exclude_froze=True)).value_residual == 0.0:
                 continue
-            if self.env.context.get("bg_asset_line"):
-                domain = [
-                    ('asset_id', '=', asset.id),
-                    ('type', '=', 'depreciate'),
-                    ('init_entry', '=', True),
-                ]
-            else:
-                domain = [
-                    ('asset_id', '=', asset.id),
-                    ('type', '=', 'depreciate'),
-                    '|', ('move_check', '=', True), ('init_entry', '=', True)]
+            # if self.env.context.get("bg_asset_line"):
+            #     domain = [
+            #         ('asset_id', '=', asset.id),
+            #         ('type', '=', 'depreciate'),
+            #         ('init_entry', '=', True),
+            #     ]
+            # else:
+            #     domain = [
+            #         ('asset_id', '=', asset.id),
+            #         ('type', '=', 'depreciate'),
+            #         '|', ('move_check', '=', True), ('init_entry', '=', True)]
+            domain = asset._get_board('domain1')
             posted_lines = line_obj.search(domain, order='line_date desc')
             if posted_lines:
                 last_line = posted_lines[0]
             else:
                 last_line = line_obj
             # _logger.info("POSTED LINES %s:%s" % (last_line, self._context))
-            if self.env.context.get("bg_asset_line"):
-                domain = [
-                    ('asset_id', '=', asset.id),
-                    ('type', '=', 'depreciate'),
-                    ('init_entry', '=', False),
-                ]
-            else:
-                domain = [
-                    ('asset_id', '=', asset.id),
-                    ('type', '=', 'depreciate'),
-                    ('move_id', '=', False),
-                    ('init_entry', '=', False)]
+            # if self.env.context.get("bg_asset_line"):
+            #     domain = [
+            #         ('asset_id', '=', asset.id),
+            #         ('type', '=', 'depreciate'),
+            #         ('init_entry', '=', False),
+            #     ]
+            # else:
+            #     domain = [
+            #         ('asset_id', '=', asset.id),
+            #         ('type', '=', 'depreciate'),
+            #         ('move_id', '=', False),
+            #         ('init_entry', '=', False)]
+
+            domain = asset._get_board('domain2')
             old_lines = line_obj.search(domain)
+            _logger.info("OLD LINES %s:%s" % (self._context, old_lines))
             if old_lines:
                 if self.env.context.get("bg_asset_line"):
                     raise UserError(
@@ -1109,12 +1168,14 @@ class AccountAsset(models.Model):
         return depreciation_start_date
 
     def _get_depreciation_stop_date(self, depreciation_start_date):
-        method_time = self.method_time
         depreciation_stop_date = depreciation_start_date
 
-        if self._context.get('bg_asset_line'):
-            method_time = self.method_tax_time
+        # if self._context.get('bg_asset_line'):
+        #     method_time = self.method_tax_time
+        # else:
+        #     method_time = self.method_time
 
+        method_time = self._get_board('method_time')
         if method_time == 'year':
             depreciation_stop_date = depreciation_start_date + \
                                      relativedelta(years=self.method_number, days=-1)
@@ -1157,10 +1218,13 @@ class AccountAsset(models.Model):
         'Prorata Temporis'
         """
         amount = entry.get('period_amount')
-        method_time = self.method_time
 
-        if self._context.get('bg_asset_line'):
-            method_time = self.method_tax_time
+        # if self._context.get('bg_asset_line'):
+        #     method_time = self.method_tax_time
+        # else:
+        #     method_time = self.method_time
+
+        method_time = self._get_board('method_time')
         if self.prorata and method_time in ['year', 'month']:
             dates = [x for x in line_dates if x <= entry['date_stop']]
             full_periods = len(dates) - 1
@@ -1174,10 +1238,13 @@ class AccountAsset(models.Model):
         the depreciation_base is fake base linked with frozen base.
         when has frozen base we will start with this base and depreciate and after continue wit rest
         """
-        method_time = self.method_time
 
-        if self._context.get('bg_asset_line'):
-            method_time = self.method_tax_time
+        # if self._context.get('bg_asset_line'):
+        #     method_time = self.method_tax_time
+        # else:
+        #     method_time = self.method_time
+
+        method_time = self._get_board('method_time')
 
         if method_time != 'year':
             raise UserError(
@@ -1260,10 +1327,12 @@ class AccountAsset(models.Model):
                 i += 1
 
         # last entry
-        method_time = self.method_time
+        # if self._context.get('bg_asset_line'):
+        #     method_time = self.method_tax_time
+        # else:
+        #     method_time = self.method_time
 
-        if self._context.get('bg_asset_line'):
-            method_time = self.method_tax_time
+        method_time = self._get_board('method_time')
 
         if not (method_time == 'number' and
                 len(line_dates) == self.method_number):
@@ -1353,10 +1422,13 @@ class AccountAsset(models.Model):
             # was compensated in the first FY depreciation line.
             # The code has now been simplified with compensation
             # always in last FT depreciation line.
-            method_time = self.method_time
 
-            if self._context.get('bg_asset_line'):
-                method_time = self.method_tax_time
+            # if self._context.get('bg_asset_line'):
+            #     method_time = self.method_tax_time
+            # else:
+            #     method_time = self.method_time
+
+            method_time = self._get_board('method_time')
 
             if method_time in ['year', 'month']:
                 if round(fy_amount_check - fy_amount, digits) != 0:
@@ -1383,10 +1455,13 @@ class AccountAsset(models.Model):
     def _compute_depreciation_table(self):
 
         table = []
-        method_time = self.method_time
 
-        if self._context.get('bg_asset_line'):
-            method_time = self.method_tax_time
+        # if self._context.get('bg_asset_line'):
+        #     method_time = self.method_tax_time
+        # else:
+        #     method_time = self.method_time
+
+        method_time = self._get_board('method_time')
 
         if method_time in ['year', 'month', 'percentage', 'number'] and not self.method_number:
             return table
@@ -1746,11 +1821,14 @@ class AccountAsset(models.Model):
     @api.multi
     def unlink_move(self):
         for asset in self:
-            if self._context.get('bg_asset_line'):
-                for line in asset.depreciation_bg_line_ids.filtered(lambda r: r.type in ['depreciate', 'remove']):
-                    line.unlink()
-            else:
-                for line in asset.depreciation_line_ids.filtered(
-                        lambda r: r.type in ['depreciate', 'remove', 'storno'] and not r.move_check):
-                    line.unlink()
+            # if self._context.get('bg_asset_line'):
+            #     dlines = asset.depreciation_bg_line_ids.filtered(lambda r: r.type in ['depreciate', 'remove'])
+            # else:
+            #     dlines = asset.depreciation_line_ids.filtered(
+            #         lambda r: r.type in ['depreciate', 'remove', 'storno'] and not r.move_check)
+
+            dlines = asset._get_board('dlines_filtered')
+            _logger.info("DLINES %s" % dlines)
+            for line in dlines:
+                line.unlink()
             asset._compute_depreciation()

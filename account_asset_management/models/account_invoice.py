@@ -15,11 +15,26 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     count_assets = fields.Integer('Count assets', compute='_compute_count_assets')
+    count_in_assets = fields.Integer('Count added assets', compute='_compute_count_assets')
 
     @api.multi
     def _compute_count_assets(self):
         for record in self:
             record.count_assets = len(record.invoice_line_ids._check_for_assets())
+            if record.move_id:
+                record.count_in_assets = len([x for x in record.move_id.line_ids if x.asset_id])
+                _logger.info("ASSET %s::%s:%s" % (record.count_in_assets, record.move_id.line_ids, [x for x in record.move_id.line_ids if x.asset_id]))
+
+    def _value_depreciation_restatement_line(self, asset, line):
+        return {
+            'asset_id': asset.id,
+            'name': asset._get_depreciation_entry_name(0),
+            'type': 'create',
+            'move_id': self.move_id.id,
+            'init_entry': True,
+            'line_date': self.refund_invoice_id.date_invoice,
+            'depreciation_base': line['debit'] - line['credit']
+        }
 
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
@@ -50,13 +65,10 @@ class AccountInvoice(models.Model):
                         if assets:
                             asset = assets[0]
                             line['save_asset_id'] = asset.id
-                            asset.write({'depreciation_restatement_line_ids': [(0, False, {'asset_id': asset.id,
-                                                                                           'name': asset._get_depreciation_entry_name(0),
-                                                                                           'type': 'create',
-                                                                                           'move_id': self.move_id.id,
-                                                                                           'init_entry': True,
-                                                                                           'line_date': self.refund_invoice_id.date_invoice,
-                                                                                           'depreciation_base': line['debit'] - line['credit']})]})
+                            asset.write({
+                                'depreciation_restatement_line_ids':
+                                    [(0, False, self._value_depreciation_restatement_line(asset, line))]
+                            })
                         for analytic_line_tuple in line['analytic_line_ids']:
                             analytic_line = analytic_line_tuple[2]
                             analytic_line['amount'] = round(
@@ -73,14 +85,10 @@ class AccountInvoice(models.Model):
                                 if inx in range(-len(assets), len(assets)):
                                     asset = assets[inx]
                                     new_line[2]['save_asset_id'] = asset.id
-                                    asset.write({'depreciation_restatement_line_ids': [(0, False, {'asset_id': asset.id,
-                                               'name': asset._get_depreciation_entry_name(0),
-                                               'type': 'create',
-                                               'move_id': self.move_id.id,
-                                               'init_entry': True,
-                                               'line_date': self.refund_invoice_id.date_invoice,
-                                               'depreciation_base': new_line[2]['debit'] - new_line[2]['credit']})]})
-                            #_logger.info("ASSETS %s" % new_line[2])
+                                    asset.write({
+                                        'depreciation_restatement_line_ids':
+                                            [(0, False, self._value_depreciation_restatement_line(asset, new_line[2]))]
+                                    })
                             new_lines.append(new_line)
                         # Compute rounding difference and apply it on the first
                         # line
@@ -109,7 +117,7 @@ class AccountInvoice(models.Model):
                                 dp.precision_get('Account'))
                             i += 1
             move_lines.extend(new_lines)
-        _logger.info("DATA %s" % move_lines)
+        # _logger.info("DATA %s" % move_lines)
         return move_lines
 
     @api.multi
@@ -230,6 +238,23 @@ class AccountInvoice(models.Model):
             "target": "new",
         }
 
+    @api.multi
+    def action_view_asset(self):
+        assets = []
+        action = self.env.ref('account_asset_management.account_asset_action').read()[0]
+        for record in self:
+            if record.move_id:
+                for line in record.move_id.line_ids:
+                    assets.append(line.asset_id.id)
+        if not assets:
+            action = {'type': 'ir.actions.act_window_close'}
+        elif len(assets) == 1:
+            action['views'] = [(self.env.ref('account_asset_management.account_asset_view_form').id, 'form')]
+            action['res_id'] = assets[0]
+        elif len(assets) > 1:
+            action['domain'] = [('id', 'in', assets)]
+        return action
+
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
@@ -256,7 +281,7 @@ class AccountInvoiceLine(models.Model):
         check = {}
         for record in self:
             if record.asset_profile_id:
-                check[record] = record.asset_profile_id
+                # check[record] = record.asset_profile_id
                 continue
             # Check in product valuations
             product_tmpl = record.product_id.product_tmpl_id.categ_id

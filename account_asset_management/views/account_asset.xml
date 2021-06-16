@@ -96,7 +96,7 @@
           <separator string="Other Information" colspan="4" attrs="{'invisible': [('type', '=', 'normal')]}"/>
           <field name="child_ids" nolabel="1" colspan="4" attrs="{'invisible': [('type', '=', 'normal')]}" context="{'default_parent_id': active_id}"/>
           <notebook colspan="4" attrs="{'invisible': [('type', '=', 'view')]}">
-            <page string="General">
+            <page name="general" string="General">
               <group colspan="4" col="4">
                 <group>
                   <field name="diff_purchase_value" invisible="1"/>
@@ -157,7 +157,7 @@
                 </group>
               </group>
             </page>
-            <page string="Depreciation Board">
+            <page name="board" string="Depreciation Board">
               <div>
                 <button type="object" name="compute_depreciation_board"
                         string=" Compute" icon="fa-gears"
@@ -209,7 +209,7 @@
                 </form>
               </field>
             </page>
-            <page string="TAX Depreciation Board">
+            <page name="tax_board" string="TAX Depreciation Board">
               <div>
                 <button type="object" name="compute_depreciation_board"
                         string=" Compute" icon="fa-gears"
@@ -249,7 +249,7 @@
                 </form>
               </field>
             </page>
-            <page string="Sleep periods">
+            <page name="sleep_board" string="Sleep periods">
               <field name="sleep_period_line_ids" mode="tree" options="{'reload_on_button': true}" context="{'default_asset_id': active_id}">
                 <tree string="Sleep periods">
                   <field name="name"/>
@@ -280,7 +280,7 @@
                 </form>
               </field>
             </page>
-            <page string="Restatement Board">
+            <page name="restatement_board" string="Restatement Board">
               <field name="depreciation_restatement_line_ids" mode="tree" options="{'reload_on_button': true}">
                 <tree string="Asset Lines" decoration-info="(move_check == False)" create="false">
                   <field name="type"/>
@@ -315,7 +315,7 @@
                 </form>
               </field>
             </page>
-            <page string="History">
+            <page name="history" string="History">
               <field name="account_move_line_ids" readonly="1">
                 <tree string="Journal Items">
                   <field name="move_id"/>
@@ -346,7 +346,7 @@
                 </form>
               </field>
             </page>
-            <page string="Stock move Detailed Operations">
+            <page name="moves" string="Stock move Detailed Operations">
               <field name="move_line_ids">
                   <tree editable="bottom" decoration-muted="(state == 'done' and is_locked == True)" decoration-danger="qty_done&gt;product_uom_qty and state!='done'" decoration-success="qty_done==product_uom_qty and state!='done'">
                       <field name="product_id" required="1" attrs="{'readonly': ['|', ('state', '=', 'done'), ('move_id', '!=', False)]}"/>
@@ -365,7 +365,7 @@
                   </tree>
               </field>
             </page>
-            <page string="Notes">
+            <page name="note" string="Notes">
               <field name="note" placeholder="Add an internal note here..."/>
             </page>
           </notebook>

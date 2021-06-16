@@ -26,6 +26,12 @@
               attrs="{'invisible': [('count_assets', '=', 0)]}">
               <field string="Add assets" name="count_assets" widget="statinfo"/>
           </button>
+          <button name="action_view_asset" type="object"
+              class="oe_stat_button"
+              icon="fa fa-paperclip"
+              attrs="{'invisible': [('count_in_assets', '=', 0)]}">
+              <field string="View assets" name="count_in_assets" widget="statinfo"/>
+          </button>
       </xpath>
     </field>
   </record>
