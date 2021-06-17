@@ -186,7 +186,7 @@ class AccountAssetProfile(models.Model):
 
     @api.model
     def _selection_method_period(self):
-        return [("month", _("Month")), ("quarter", _("Quarter")), ("year", _("Year"))]
+        return [("month", _("Month-long")), ("quarter", _("Quarter")), ("year", _("Year"))]
 
     @api.model
     def _selection_method_time(self):

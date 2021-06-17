@@ -992,7 +992,7 @@ msgstr ""
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
-msgid "Month"
+msgid "Month-long"
 msgstr "Mes"
 
 #. module: account_asset_management
