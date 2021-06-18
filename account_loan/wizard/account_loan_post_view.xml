@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
+     Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_loan_post_form" model="ir.ui.view">
+        <field name="name">Post loan</field>
+        <field name="model">account.loan.post</field>
+        <field name="arch" type="xml">
+            <form string="Pay amount">
+                <group>
+                    <field name="loan_id" readonly="True" />
+                    <field name="account_id" />
+                    <field name="journal_id" />
+                </group>
+                <footer>
+                    <button
+                        name="run"
+                        string="Run"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="account_loan_post_action" model="ir.actions.act_window">
+        <field name="name">Post loan</field>
+        <field name="res_model">account.loan.post</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_loan_id': active_id}</field>
+    </record>
+</odoo>
