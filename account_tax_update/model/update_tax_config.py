@@ -21,9 +21,10 @@
 ##############################################################################
 
 from datetime import datetime
-import pickle
+
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
+from openerp.tools.misc import pickle
 
 
 class UpdateTaxConfig(orm.Model):

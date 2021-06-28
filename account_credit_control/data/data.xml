@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--Email template -->
+    <record id="email_template_credit_control_base" model="mail.template">
+        <field name="name">Credit Control Email</field>
+        <field name="email_from">${object.partner_id.company_id.email or ''}</field>
+        <field name="subject">Credit Control:
+            (${object.current_policy_level.name or 'n/a'})
+        </field>
+        <field name="email_to">${object.get_email() or  ''}</field>
+        <field name="model_id" ref="model_credit_control_communication"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="lang">
+            ${object.get_contact_address().lang or 'en_US'}
+        </field>
+        <field name="report_template" ref="credit_control_summary"/>
+        <field name="body_html"><![CDATA[
+  Dear ${object.contact_address.name or ''}
+  <br/>
+  <br/>
+  ${object.current_policy_level.custom_mail_text | safe}
+  ]]></field>
+    </record>
+
+    <!-- policy no follow -->
+    <record model="credit.control.policy"
+            id="credit_control_no_follow">
+        <field name="name">No follow</field>
+        <field name="do_nothing" eval="1"/>
+    </record>
+
+    <!-- no follow policy -->
+    <record model="credit.control.policy.level"
+            id="no_follow_1">
+        <field name="name">No follow</field>
+        <field name="level" eval="1"/>
+        <field name="computation_mode">net_days</field>
+        <field name="delay_days" eval="0"/>
+        <field name="email_template_id"
+               ref="email_template_credit_control_base"/>
+        <field name="policy_id" ref="credit_control_no_follow"/>
+        <field name="channel">email</field>
+        <field name="custom_text">Manual no follow</field>
+
+        <field name="custom_mail_text">Manual no follow</field>
+    </record>
+
+    <!-- policy 1 -->
+    <record model="credit.control.policy"
+            id="credit_control_3_time">
+        <field name="name">3 time policy</field>
+    </record>
+
+    <record model="credit.control.policy.level"
+            id="3_time_1">
+        <field name="name">10 days net</field>
+        <field name="level" eval="1"/>
+        <field name="computation_mode">net_days</field>
+        <field name="delay_days" eval="10"/>
+        <field name="email_template_id"
+               ref="email_template_credit_control_base"/>
+        <field name="policy_id" ref="credit_control_3_time"/>
+        <field name="channel">email</field>
+        <field name="custom_text">Our records indicate that we have not received the payment of the invoice mentioned below.
+            If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
+
+            Thank you in advance for your anticipated cooperation in this matter.
+
+            Best regards
+        </field>
+
+        <field name="custom_mail_text"><![CDATA[
+  Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br/>
+  <br/>
+  If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br/>
+  <br/>
+  Thank you in advance for your anticipated cooperation in this matter.<br/>
+  <br/>
+  Best regards
+  ]]></field>
+    </record>
+
+    <record model="credit.control.policy.level"
+            id="3_time_2">
+        <field name="name">30 days end of month</field>
+        <field name="level" eval="2"/>
+        <field name="computation_mode">end_of_month</field>
+        <field name="delay_days" eval="30"/>
+        <field name="email_template_id"
+               ref="email_template_credit_control_base"/>
+        <field name="policy_id" ref="credit_control_3_time"/>
+        <field name="channel">email</field>
+        <field name="custom_text">Our records indicate that we have not yet received the payment of the invoice mentioned below despite our first reminder.
+            If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.
+
+            Thank you in advance for your anticipated cooperation in this matter.
+
+            Best regards
+        </field>
+        <field name="custom_mail_text"><![CDATA[
+  Our records indicate that we have not yet received the payment of the invoices mentioned in the attached document despite our first reminder.<br/>
+  If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.<br/>
+  <br/>
+  Thank you in advance for your anticipated cooperation in this matter.<br/>
+  <br/>
+  Best regards
+  ]]></field>
+    </record>
+
+    <record model="credit.control.policy.level"
+            id="3_time_3">
+        <field name="name">10 days last reminder</field>
+        <field name="level" eval="3"/>
+        <field name="computation_mode">previous_date</field>
+        <field name="delay_days" eval="10"/>
+        <field name="email_template_id"
+               ref="email_template_credit_control_base"/>
+        <field name="policy_id" ref="credit_control_3_time"/>
+        <field name="channel">letter</field>
+        <field name="custom_text">
+            Our records indicate that we still have not received the payment of the invoice mentioned below despite our two reminders.
+            If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+            If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
+
+            Should you need us to arrange a payment plan for you, please advise.
+            A customer account statement is enclosed for you convenience.
+
+            Thank you in advance for your anticipated cooperation in this matter.
+
+            Best regards
+        </field>
+
+        <field name="custom_mail_text"><![CDATA[
+  Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our two reminders.<br/>
+  If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br/>
+  If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.<br/>
+  <br/>
+  Should you need us to arrange a payment plan for you, please advise.<br/>
+  A customer account statement is enclosed for you convenience.<br/>
+  <br/>
+  Thank you in advance for your anticipated cooperation in this matter.<br/>
+  <br/>
+  Best regards
+  ]]></field>
+    </record>
+
+    <!-- policy 2 -->
+    <record model="credit.control.policy"
+            id="credit_control_2_time">
+        <field name="name">2 time policy</field>
+    </record>
+
+    <record model="credit.control.policy.level"
+            id="2_time_1">
+        <field name="name">30 days end of month</field>
+        <field name="level" eval="1"/>
+        <field name="computation_mode">end_of_month</field>
+        <field name="delay_days" eval="30"/>
+        <field name="email_template_id"
+               ref="email_template_credit_control_base"/>
+        <field name="policy_id" ref="credit_control_2_time"/>
+        <field name="channel">email</field>
+        <field name="custom_text">Our records indicate that we have not received the payment of the invoice mentioned below.
+            If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
+
+            Thank you in advance for your anticipated cooperation in this matter.
+
+            Best regards
+        </field>
+        <field name="custom_mail_text"><![CDATA[
+  Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br/>
+  If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br/>
+  <br/>
+  Thank you in advance for your anticipated cooperation in this matter.<br/>
+  <br/>
+  Best regards
+  ]]></field>
+    </record>
+
+    <record model="credit.control.policy.level"
+            id="2_time_2">
+        <field name="name">60 days last reminder</field>
+        <field name="level" eval="2"/>
+        <field name="computation_mode">previous_date</field>
+        <field name="delay_days" eval="60"/>
+        <field name="email_template_id"
+               ref="email_template_credit_control_base"/>
+        <field name="policy_id" ref="credit_control_2_time"/>
+        <field name="channel">letter</field>
+        <field name="custom_text">Our records indicate that we still have not received the payment of the mentioned below invoice despite our reminder.
+
+            If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+            If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
+
+            Should you need us to arrange a payment plan for you, please advise.
+            A customer account statement is enclosed for you convenience.
+
+            Thank you in advance for your anticipated cooperation in this matter.
+
+            Best regards
+        </field>
+        <field name="custom_mail_text"><![CDATA[
+  Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our reminder.
+  <br/>
+  <br/>
+  If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br/>
+  If your payment has not been received in the next 5 days, your file will be transfered to our debt<br/>
+  collection agency.<br/>
+  <br/>
+  Should you need us to arrange a payment plan for you, please advise.<br/>
+  A customer account statement is enclosed for you convenience.<br/>
+  <br/>
+  Thank you in advance for your anticipated cooperation in this matter.<br/>
+  <br/>
+  Best regards
+  ]]></field>
+    </record>
+
+
+    <record id="base.main_company" model="res.company">
+        <field name="credit_policy_id" ref="credit_control_3_time"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014-2015 Akretion (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data noupdate="1">
+
+<!-- The user will have to configure manually the default_credit_account_id
+and default_debit_account_id, we can't do that for him -->
+<record id="check_received_journal" model="account.journal">
+    <field name="name">Check Received</field>
+    <field name="code">CHK</field>
+    <field name="type">bank</field>
+    <field name="company_id" ref="base.main_company"/>
+</record>
+
+
+</data>
+</openerp>

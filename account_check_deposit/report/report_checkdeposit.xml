@@ -20,9 +20,9 @@
 <h1>Check Deposit n°<span t-field="o.name"/></h1>
 
 <h3>Bank:</h3>
-<p><span t-field="o.partner_bank_id.bank.name"/><br/>
-<span t-field="o.partner_bank_id.bank.street"/><br/>
-<span t-field="o.partner_bank_id.bank.zip"/> <span t-field="o.partner_bank_id.bank.city"/></p>
+<p><span t-field="o.partner_bank_id.bank_id.name"/><br/>
+<span t-field="o.partner_bank_id.bank_id.street"/><br/>
+<span t-field="o.partner_bank_id.bank_id.zip"/> <span t-field="o.partner_bank_id.bank_id.city"/></p>
 
 <h3>Beneficiary:</h3>
 <div t-field="o.company_id.partner_id"

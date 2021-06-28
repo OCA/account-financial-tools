@@ -1,20 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_move_locking
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:24+0000\n"
+"POT-Creation-Date: 2017-10-27 23:09+0000\n"
 "PO-Revision-Date: 2016-04-14 08:56+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Vietnamese (Viet Nam) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/vi_VN/)\n"
+"Language-Team: Vietnamese (Viet Nam) (http://www.transifex.com/oca/OCA-"
+"account-financial-tools-9-0/language/vi_VN/)\n"
+"Language: vi_VN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: vi_VN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_move_locking
@@ -133,4 +134,4 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "or"
-msgstr ""
+msgstr "hoặc"

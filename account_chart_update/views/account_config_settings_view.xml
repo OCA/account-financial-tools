@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+<record id="view_account_config_settings" model="ir.ui.view">
+    <field name="name">Open Account Chart Update Wizard</field>
+    <field name="model">account.config.settings</field>
+    <field name="inherit_id" ref="account.view_account_config_settings"/>
+    <field name="arch" type="xml">
+        <xpath expr="//button[@name='%(account.open_account_charts_modules)d']/.." position="after">
+            <div>
+                <button string="Update chart template"
+                        name="%(action_wizard_update_chart)d"
+                        context="{'default_company_id': company_id}"
+                        type="action"
+                        class="oe_link"
+                />
+            </div>
+        </xpath>
+    </field>
+</record>
+
+</odoo>
