@@ -449,6 +449,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     ("repartition_type", "=", repartition_type),
                     ("account_id", "=", account_id),
                 ]
+                + [("tag_ids", "=", tag_id) for tag_id in tpl.tag_ids.ids]
             )
             if not existing:
                 # create a new mapping
