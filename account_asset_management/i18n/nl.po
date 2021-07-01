@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2021-06-30 14:48+0000\n"
+"PO-Revision-Date: 2021-07-01 14:48+0000\n"
 "Last-Translator: Gijs-Jan Otten <gj@sunflowerweb.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/nl/)\n"
@@ -40,7 +40,7 @@ msgid ""
 "Error while processing asset '%s': %s"
 msgstr ""
 "\n"
-"Fout bij verwerken van activum '%s': %s"
+"Fout bij verwerken van activa '%s': %s"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -131,7 +131,7 @@ msgstr "Activa"
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
-msgstr ""
+msgstr "Journaalboeking voor verwijdering van activa '%s'"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
@@ -158,7 +158,7 @@ msgstr "Activagroep"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
 #: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
 msgid "Asset Groups"
-msgstr "Activagroep"
+msgstr "Activagroepen"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -287,6 +287,9 @@ msgid ""
 "this setting, an accounting entry will be created by product item. So, there "
 "will be an asset by product item."
 msgstr ""
+"Tijdens de validatie van een factuur worden standaard per factuurregel "
+"activa aangemaakt, zolang ook een boeking per factuurregel wordt aangemaakt. "
+"Met deze instelling wordt per productitem een boeking gemaakt."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__days_calc
@@ -308,7 +311,7 @@ msgid ""
 "Check this if you want to automatically confirm the assets of this profile "
 "when created by invoices."
 msgstr ""
-"Vink dit aan als u automatisch de activa van deze categorie wilt bevestigen "
+"Vink dit aan als u automatisch de activa van dit profiel wilt bevestigen "
 "wanneer deze worden aangemaakt door facturen."
 
 #. module: account_asset_management
@@ -348,6 +351,18 @@ msgid ""
 "   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base "
 "is equal to the asset value."
 msgstr ""
+"Kies de methode die u wilt gebruiken om de afschrijvingsregels te berekenen."
+"\n"
+"  * Lineair: Berekend op basis van: afschrijvingsgrondslag / aantal "
+"afschrijvingen. De afschrijvingsbasis = aankoopwaarde - restwaarde.\n"
+"  * Lineaire limiet: Lineair tot bergingswaarde. Afschrijvingsbasis = "
+"aankoopwaarde.\n"
+"  * Degressief: Berekend op basis van: restwaarde * degressieve Factor.\n"
+"  * Degressief-lineair (alleen voor tijdmethode = Jaar): Degressief wordt "
+"lineair wanneer de jaarlijkse lineaire afschrijving groter is dan de "
+"jaarlijkse degressieve afschrijving.\n"
+"   * Degressieve limiet: degressief tot bergingswaarde. De "
+"afschrijvingsgrondslag is gelijk aan de vermogenswaarde."
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__close
@@ -748,6 +763,11 @@ msgid ""
 "        carried forward to the first depreciation line of the current open\n"
 "        period."
 msgstr ""
+"Als u activa aanmaakt in een fiscale periode die reeds is afgesloten\n"
+"        het geaccumuleerde bedrag aan afschrijvingen dat niet kan worden "
+"geboekt, is:\n"
+"        overgedragen naar de eerste afschrijvingsregel van de huidige open\n"
+"        periode."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__use_leap_years
@@ -760,12 +780,19 @@ msgid ""
 "amount to depreciate per year will be calculated as depreciation base / "
 "(depreciation end date - start date + 1) * days in the current year."
 msgstr ""
+"Indien niet ingesteld, verdeelt het systeem het af te schrijven bedrag "
+"gelijkmatig over de jaren, op basis van het aantal jaren. Het bedrag per "
+"jaar wordt dus: Afschrijvingsgrondslag / aantal jaren.\n"
+"Indien ingesteld, zal het systeem nagaan of het huidige jaar een "
+"schrikkeljaar is. Het af te schrijven bedrag per jaar wordt berekend als: "
+"Afschrijvingsgrondslag / (einddatum afschrijving - startdatum + 1) * dagen "
+"in het lopende jaar."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "Illegal value %s in asset.method."
-msgstr ""
+msgstr "Ongeldige waarde %s in asset.method."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__draft
@@ -779,6 +806,8 @@ msgid ""
 "Inconsistent reporting structure.\n"
 "Please correct Asset Group '%s' (id %s)"
 msgstr ""
+"Inconsistente rapportagestructuur.\n"
+"Corrigeer activagroep '%s' (id %s)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
@@ -787,6 +816,9 @@ msgid ""
 "Indicates that the first depreciation entry for this asset has to be done "
 "from the depreciation start date instead of the first day of the fiscal year."
 msgstr ""
+"Geeft aan dat de eerste afschrijvingsboeking voor deze activa moet worden "
+"gedaan vanaf de startdatum van de afschrijving, in plaats van de eerste dag "
+"van het fiscale jaar."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -882,7 +914,7 @@ msgstr "Lineair tot bergingswaarde"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_min_value_id
 msgid "Min-Value Account"
-msgstr "Min-waarde rekening"
+msgstr "Waardeverminderingsrekening"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -1015,7 +1047,7 @@ msgstr "Periodelengte voor de afschrijvingsboekingen"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_plus_value_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_plus_value_id
 msgid "Plus-Value Account"
-msgstr "Plus-waarde rekening"
+msgstr "Waardevermeerderingsrekening"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__move_check
@@ -1079,12 +1111,19 @@ msgid ""
 "  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value "
 "Account' or 'Min-Value Account' "
 msgstr ""
+"Beleid bij verwijdering:\n"
+"  * Restwaarde: De niet-afgeschreven waarde wordt geboekt op de "
+"'Restwaarderekening'\n"
+"  * Winst/verlies bij verkoop: de winst of het verlies wordt geboekt op de "
+"'Waardevermeerderings' of 'Waardeverminderingsrekening' "
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__date_remove
 msgid ""
 "Removal date must be after the last posted entry in case of early removal"
 msgstr ""
+"De verwijderingsdatum moet na de laatst geplaatste invoer zijn in geval van "
+"vroegtijdige verwijdering"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1161,6 +1200,8 @@ msgid ""
 "Set this flag for entries of previous fiscal years for which Odoo has not "
 "generated accounting entries."
 msgstr ""
+"Stel deze optie in voor mutaties uit vorige fiscale jaren, waarvoor Odoo "
+"geen boekingen heeft gegenereerd."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1201,6 +1242,8 @@ msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years'."
 msgstr ""
+"De '_compute_year_amount'-methode is alleen bedoeld voor Tijdmethode 'Aantal "
+"jaren'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -1214,6 +1257,8 @@ msgstr ""
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
 msgstr ""
+"De rekening moet gelijk zijn aan de activarekening die in het activaprofiel "
+"is gedefinieerd."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
@@ -1243,6 +1288,9 @@ msgid ""
 "its useful life.\n"
 "This value is used to determine the depreciation amounts."
 msgstr ""
+"De geschatte waarde die activa zullen realiseren bij verkoop aan het einde "
+"van de gebruiksduur.\n"
+"Deze waarde wordt gebruikt om de afschrijvingsbedragen te bepalen."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_number
@@ -1425,7 +1473,7 @@ msgstr ""
 #, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
-"Het is niet mogelijk een activaprofiel met aanverwante boekingen te "
+"Het is niet mogelijk een profiel op activa met aanverwante boekingen te "
 "verwijderen."
 
 #. module: account_asset_management
