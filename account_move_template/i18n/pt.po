@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2020-02-26 21:13+0000\n"
-"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
+"PO-Revision-Date: 2021-07-02 22:49+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
@@ -34,7 +34,7 @@ msgstr ""
 #: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid "%s (copy)"
-msgstr "%s (copy)"
+msgstr "%s (cópia)"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -50,12 +50,12 @@ msgstr "Conta"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
 msgid "Account Opt."
-msgstr ""
+msgstr "Conta Opc."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
 msgid "Active"
-msgstr ""
+msgstr "Ativo"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
@@ -83,13 +83,13 @@ msgstr "Etiquetas Analíticas"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Archive"
-msgstr ""
+msgstr "Arquivar"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Archived"
-msgstr ""
+msgstr "Arquivado"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -232,12 +232,14 @@ msgid ""
 "Invalid dictionary: {}\n"
 "{}"
 msgstr ""
+"Dicionário inválido: {}\n"
+"{}"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__is_refund
 msgid "Is a refund?"
-msgstr ""
+msgstr "É um Reembolso?"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__journal_id
@@ -274,7 +276,7 @@ msgstr "Modelo de Item de Diário"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Keys must be line sequence, i..e, L1, L2, ..."
-msgstr ""
+msgstr "As chaves devem ser sequência de linhas, i.e., L1, L2, ..."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -362,13 +364,13 @@ msgstr "Substituir Parceiro"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__overwrite
 msgid "Overwrite"
-msgstr ""
+msgstr "Sobrescrever"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Overwrite value must be a valid python dict"
-msgstr ""
+msgstr "O valor a sobrescrever deve ser um dicionário python válido"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__partner_id
@@ -403,7 +405,7 @@ msgstr "Referência"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Restore"
-msgstr ""
+msgstr "Restaurar"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
@@ -430,7 +432,7 @@ msgstr "Estado"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_repartition_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_repartition_line_id
 msgid "Tax Repartition Line"
-msgstr ""
+msgstr "Linha de Repartição de Impostos"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_ids
@@ -483,12 +485,12 @@ msgstr "Entrada do utilizador"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Valid fields to overwrite are %s"
-msgstr ""
+msgstr "O campos válidos para sobrescrever são %s"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
 msgid "When amount is negative, use this account instead"
-msgstr ""
+msgstr "Quando valor é negativo, utilize antes esta conta"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
