@@ -346,6 +346,11 @@ msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
 msgstr ""
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__name
 msgid "Name"
 msgstr ""
