@@ -51,13 +51,48 @@ msgid "<b>Transfer Date:</b>"
 msgstr ""
 
 #. module: account_check_deposit
+#: model:ir.model.constraint,message:account_check_deposit.constraint_account_check_deposit_name_company_unique
+msgid "A check deposit with this reference already exists in this company."
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_check_deposit
 msgid "Account Check Deposit"
 msgstr ""
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Amount"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_attachment_count
+msgid "Attachment Count"
 msgstr ""
 
 #. module: account_check_deposit
@@ -67,7 +102,6 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__bank_journal_id
-#: model:ir.model.fields.selection,name:account_check_deposit.selection__res_company__check_deposit_offsetting_account__bank_account
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Bank Account"
 msgstr ""
@@ -90,21 +124,9 @@ msgid "Check Deposit"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:0
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid "Check Deposit %s"
-msgstr ""
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:0
-#, python-format
-msgid "Check Deposit - Ref. Check %s"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_offsetting_account
-#: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_offsetting_account
-msgid "Check Deposit Offsetting Account"
 msgstr ""
 
 #. module: account_check_deposit
@@ -113,14 +135,15 @@ msgid "Check Deposit n°"
 msgstr ""
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.res_config_settings_view_form
-msgid "Check Deposits"
-msgstr ""
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Payments"
+msgstr ""
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "Check Ref. %s"
 msgstr ""
 
 #. module: account_check_deposit
@@ -135,19 +158,9 @@ msgid "Checks Deposits"
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model,name:account_check_deposit.model_res_company
-msgid "Companies"
-msgstr ""
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__company_id
 msgid "Company"
 msgstr "Vállalat"
-
-#. module: account_check_deposit
-#: model:ir.model,name:account_check_deposit.model_res_config_settings
-msgid "Config Settings"
-msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__create_uid
@@ -166,11 +179,6 @@ msgid "Currency"
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__currency_none_same_company_id
-msgid "Currency (False if same as company)"
-msgstr ""
-
-#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Date"
 msgstr "Dátum"
@@ -181,11 +189,6 @@ msgid "Debtor"
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_default_account_id
-msgid "Default Debit Account of the Journal"
-msgstr ""
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Deposit Date"
@@ -193,6 +196,7 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__display_name
 msgid "Display Name"
 msgstr "Név megjelenítése"
 
@@ -209,18 +213,78 @@ msgid "Draft"
 msgstr "Tervezet"
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+#, python-format
+msgid "Get All Received Checks"
+msgstr ""
+
+#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Group By"
 msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__id
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__journal_default_account_id
-msgid "It acts as a default account for debit amount"
+msgid ""
+"Incoming payments entries triggered by invoices/refunds will be posted on "
+"the Outstanding Receipts Account and displayed as blue lines in the bank "
+"reconciliation widget. During the reconciliation process, concerned "
+"transactions will be reconciled with entries on the Outstanding Receipts "
+"Account instead of the receivable account."
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_is_follower
+msgid "Is Follower"
 msgstr ""
 
 #. module: account_check_deposit
@@ -241,6 +305,7 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line____last_update
 msgid "Last Modified on"
 msgstr "Utolsó frissítés dátuma"
 
@@ -265,15 +330,29 @@ msgid "List of checks:"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:0
-#, python-format
-msgid "Missing 'Check Deposit Offsetting Account' on the company '%s'."
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_main_attachment_id
+msgid "Main Attachment"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:0
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
-msgid "Missing 'Default Debit Account' on bank journal '%s'"
+msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
+msgid "My Activity Deadline"
 msgstr ""
 
 #. module: account_check_deposit
@@ -282,14 +361,53 @@ msgid "Name"
 msgstr "Név"
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_count
 msgid "Number of Checks"
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_post_move
-#: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_post_move
-msgid "Post Move for Check Deposits"
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_default_account_id
+msgid "Outstanding Receipts Account"
 msgstr ""
 
 #. module: account_check_deposit
@@ -308,12 +426,31 @@ msgid "Reference"
 msgstr "Hivatkozás"
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__state
 msgid "Status"
 msgstr "Státusz"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:0
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
@@ -321,10 +458,18 @@ msgid ""
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:0
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting it."
+msgstr ""
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid ""
+"There are no received checks in account '%s' in currency '%s' that are not "
+"already in this check deposit."
 msgstr ""
 
 #. module: account_check_deposit
@@ -333,24 +478,18 @@ msgid "Total Amount"
 msgstr ""
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
-msgid "Total Credit"
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_decoration
+msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
-msgid "Total Debit"
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_unread
+msgid "Unread Messages"
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model.fields.selection,name:account_check_deposit.selection__res_company__check_deposit_offsetting_account__transfer_account
-msgid "Transfer Account"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_transfer_account_id
-#: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_transfer_account_id
-msgid "Transfer Account for Check Deposits"
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_unread_counter
+msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: account_check_deposit
@@ -359,9 +498,11 @@ msgid "Validate"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:0
-#, python-format
-msgid ""
-"You must configure the 'Check Deposit Offsetting Account' on the Accounting "
-"Settings page"
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
+msgid "Website communication history"
 msgstr ""
