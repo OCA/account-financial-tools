@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-09 23:24+0000\n"
-"PO-Revision-Date: 2020-02-28 00:13+0000\n"
-"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
+"PO-Revision-Date: 2021-07-02 22:50+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_check_deposit
 #: model:ir.actions.report,print_report_name:account_check_deposit.report_account_check_deposit
@@ -26,6 +26,8 @@ msgid ""
 "'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or "
 "'')"
 msgstr ""
+"'depósito_cheques-%s%s' % (object.name, object.state == 'draft' and '-"
+"rascunho' or '')"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
