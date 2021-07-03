@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo14-addon-account_move_line_tax_editable',
         'odoo14-addon-account_move_template',
         'odoo14-addon-account_no_default',
+        'odoo14-addon-product_category_tax',
     ],
     classifiers=[
         'Programming Language :: Python',
