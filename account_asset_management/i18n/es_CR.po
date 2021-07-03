@@ -612,7 +612,7 @@ msgstr "Historia"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line_id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_id_5686
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_id_5780
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove_id
 msgid "ID"

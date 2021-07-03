@@ -18,8 +18,8 @@ msgstr ""
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
 "PO-Revision-Date: 2021-01-13 15:44+0000\n"
 "Last-Translator: Eugeni Chafer <eugeni@chafer.cat>\n"
-"Language-Team: Catalan (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -610,7 +610,7 @@ msgstr "Història"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line_id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_id_5686
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_id_5780
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove_id
 msgid "ID"
