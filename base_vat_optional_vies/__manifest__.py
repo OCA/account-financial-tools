@@ -6,7 +6,7 @@
 {
     "name": "Optional validation of VAT via VIES",
     "category": "Accounting",
-    "version": "13.0.1.0.1",
+    "version": "14.0.1.0.0",
     "depends": ["base_vat"],
     "external_dependencies": {"python": ["vatnumber"]},
     "data": ["views/res_partner_view.xml"],

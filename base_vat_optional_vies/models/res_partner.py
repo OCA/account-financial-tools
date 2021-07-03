@@ -12,10 +12,12 @@ class ResPartner(models.Model):
 
     @api.model
     def simple_vat_check(self, country_code, vat_number):
-        res = super(ResPartner, self).simple_vat_check(country_code, vat_number,)
+        res = super(ResPartner, self).simple_vat_check(
+            country_code,
+            vat_number,
+        )
         partner = self.env.context.get("vat_partner")
-        if partner and self.vies_passed:
-            # Can not be sure that this VAT is signed up in VIES
+        if partner:
             partner.update({"vies_passed": False})
         return res
 
@@ -27,8 +29,6 @@ class ResPartner(models.Model):
             # call simple_vat_check and thus the flag will be removed
             partner.update({"vies_passed": True})
         res = super(ResPartner, self).vies_vat_check(country_code, vat_number)
-        if not res:
-            return self.simple_vat_check(country_code, vat_number)
         return res
 
     @api.constrains("vat", "country_id")
@@ -36,3 +36,4 @@ class ResPartner(models.Model):
         for partner in self:
             partner = partner.with_context(vat_partner=partner)
             super(ResPartner, partner).check_vat()
+        return True
