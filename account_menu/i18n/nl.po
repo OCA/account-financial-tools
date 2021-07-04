@@ -70,6 +70,11 @@ msgid "Accounts"
 msgstr "Rekeningen"
 
 #. module: account_menu
+#: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
+msgid "Anglo-Saxon Accounting"
+msgstr ""
+
+#. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_bank
 msgid "Bank Statements"
 msgstr "Bankafschriften"
@@ -90,9 +95,15 @@ msgid "Chart of Accounts Templates"
 msgstr "Grootboekschema"
 
 #. module: account_menu
+#: model:ir.model,name:account_menu.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__display_name
 #: model:ir.model.fields,field_description:account_menu.field_account_group__display_name
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__display_name
+#: model:ir.model.fields,field_description:account_menu.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "Weergavenaam"
 
@@ -106,6 +117,7 @@ msgstr "Fiscale positie sjabloon"
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__id
 #: model:ir.model.fields,field_description:account_menu.field_account_group__id
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__id
+#: model:ir.model.fields,field_description:account_menu.field_res_config_settings__id
 msgid "ID"
 msgstr "ID"
 
@@ -113,8 +125,25 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag____last_update
 #: model:ir.model.fields,field_description:account_menu.field_account_group____last_update
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group____last_update
+#: model:ir.model.fields,field_description:account_menu.field_res_config_settings____last_update
 msgid "Last Modified on"
 msgstr "Laatst bijgewerkt op"
+
+#. module: account_menu
+#: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
+msgid ""
+"Record the cost of a good as an expense when this good is\n"
+"                                invoiced to a final customer (instead of "
+"recording the cost as soon\n"
+"                                as the product is received in stock)."
+msgstr ""
+
+#. module: account_menu
+#: model:ir.model.fields,help:account_menu.field_res_config_settings__anglo_saxon_accounting
+msgid ""
+"Record the cost of a good as an expense when this good is invoiced to a "
+"final customer."
+msgstr ""
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_tax_group
@@ -135,3 +164,8 @@ msgstr "Belastingen"
 #: model:ir.ui.menu,name:account_menu.menu_account_coa_settings
 msgid "Templates"
 msgstr "Sjablonen"
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_res_config_settings__anglo_saxon_accounting
+msgid "Use anglo-saxon accounting"
+msgstr ""
