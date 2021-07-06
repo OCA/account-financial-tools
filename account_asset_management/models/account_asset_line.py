@@ -23,6 +23,7 @@ class AccountAssetLine(models.Model):
     )
     previous_id = fields.Many2one(
         comodel_name="account.asset.line",
+        compute="_compute_previous_id",
         string="Previous Depreciation Line",
         readonly=True,
     )
@@ -41,13 +42,13 @@ class AccountAssetLine(models.Model):
     remaining_value = fields.Monetary(
         compute="_compute_values",
         string="Next Period Depreciation",
-        store=True,
+        store=False,
         currency_field="company_currency_id",
     )
     depreciated_value = fields.Monetary(
         compute="_compute_values",
         string="Amount Already Depreciated",
-        store=True,
+        store=False,
         currency_field="company_currency_id",
     )
     line_date = fields.Date(string="Date", required=True)
@@ -80,10 +81,19 @@ class AccountAssetLine(models.Model):
         related="asset_id.company_id.currency_id", store=True, string="Company Currency"
     )
 
+    @api.depends("line_date")
+    def _compute_previous_id(self):
+        for rec in self:
+            rec.previous_id = False
+            if rec.line_date:
+                prev_lines = rec.asset_id.depreciation_line_ids.filtered(
+                    lambda l: l.line_date < rec.line_date and l.type == "depreciate"
+                ).sorted(key=lambda l: l.line_date)
+                if prev_lines:
+                    rec.previous_id = prev_lines[-1]
+
     @api.depends("amount", "previous_id", "type")
     def _compute_values(self):
-        self.depreciated_value = 0.0
-        self.remaining_value = 0.0
         dlines = self
         if self.env.context.get("no_compute_asset_line_ids"):
             # skip compute for lines in unlink
@@ -215,7 +225,7 @@ class AccountAssetLine(models.Model):
                 lambda l: l.previous_id == dl and l not in self
             )
             if next_line:
-                next_line.previous_id = previous
+                next_line.write({"previous_id": previous.id})
         return super(
             AccountAssetLine, self.with_context(no_compute_asset_line_ids=self.ids)
         ).unlink()
