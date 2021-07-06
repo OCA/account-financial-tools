@@ -248,6 +248,14 @@ class AccountAsset(models.Model):
         states=READONLY_STATES,
         check_company=True,
     )
+    depreciation_line_manual_ids = fields.One2many(
+        comodel_name="account.asset.line",
+        inverse_name="asset_id",
+        string="Depreciation Lines",
+        copy=False,
+        states=READONLY_STATES,
+        check_company=True,
+    )
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
@@ -269,6 +277,8 @@ class AccountAsset(models.Model):
         readonly=False,
         store=True,
     )
+    editable_lines = fields.Boolean(string="Allow editing the depreciation board")
+    manual_lines = fields.Boolean(string="Manual depreciation board")
     analytic_tag_ids = fields.Many2many(
         comodel_name="account.analytic.tag",
         string="Analytic tags",
@@ -307,7 +317,6 @@ class AccountAsset(models.Model):
         "depreciation_base",
         "depreciation_line_ids.type",
         "depreciation_line_ids.amount",
-        "depreciation_line_ids.previous_id",
         "depreciation_line_ids.init_entry",
         "depreciation_line_ids.move_check",
     )
@@ -321,6 +330,41 @@ class AccountAsset(models.Model):
             residual = asset.depreciation_base - value_depreciated
             depreciated = value_depreciated
             asset.update({"value_residual": residual, "value_depreciated": depreciated})
+
+    @api.constrains("depreciation_line_ids", "state")
+    def _check_depreciation(self):
+        for rec in self.filtered(lambda a: a.editable_lines or a.manual_lines):
+            depreciation_base = rec.depreciation_line_ids.filtered(
+                lambda l: l.type == "create"
+            )
+            if rec.depreciation_line_ids and not depreciation_base:
+                raise UserError(
+                    _(
+                        "You should at least have a starting depreciation "
+                        "line of Type 'Depreciation Base'."
+                    )
+                )
+            if depreciation_base and rec.depreciation_line_ids.filtered(
+                lambda l: l.line_date < depreciation_base.line_date
+                and l.type in ["depreciate", "remove"]
+            ):
+                raise UserError(
+                    _(
+                        "You cannot enter depreciation or asset removal lines "
+                        "before the asset depreciation base."
+                    )
+                )
+            if rec.depreciation_line_ids and rec.state == "open":
+                depreciations = rec.depreciation_line_ids.filtered(
+                    lambda l: l.type == "depreciate"
+                )
+                if not depreciations:
+                    raise UserError(_("A confirmed assets must have depreciations"))
+                last_depreciation = depreciations[-1]
+                if last_depreciation.remaining_value != 0.0:
+                    raise UserError(
+                        _("The last depreciation's remaining " "value must be zero.")
+                    )
 
     @api.depends("profile_id")
     def _compute_group_ids(self):
@@ -437,6 +481,10 @@ class AccountAsset(models.Model):
             dl_create_line.update(
                 {"amount": self.depreciation_base, "line_date": self.date_start}
             )
+
+    @api.onchange("manual_lines")
+    def _onchange_manual_lines(self):
+        self.editable_lines = self.manual_lines
 
     @api.model
     def create(self, vals):

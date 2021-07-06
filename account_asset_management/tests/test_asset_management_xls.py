@@ -31,7 +31,9 @@ class TestAssetManagementXls(SavepointCase):
         cls.wiz_model = cls.env["wiz.account.asset.report"]
         cls.company = cls.env.ref("base.main_company")
         # Ensure we have something to report on
-        cls.env.ref("account_asset_management." "account_asset_asset_ict0").validate()
+        ict0 = cls.env.ref("account_asset_management.account_asset_asset_ict0")
+        ict0.compute_depreciation_board()
+        ict0.validate()
         asset_group_id = cls.wiz_model._default_asset_group_id()
         fy_dates = cls.company.compute_fiscalyear_dates(fields.date.today())
 
