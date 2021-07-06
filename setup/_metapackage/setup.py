@@ -44,6 +44,7 @@ setuptools.setup(
         'odoo12-addon-account_permanent_lock_move',
         'odoo12-addon-account_renumber',
         'odoo12-addon-account_spread_cost_revenue',
+        'odoo12-addon-account_subsequence_fiscal_year',
         'odoo12-addon-account_tag_menu',
         'odoo12-addon-account_template_active',
         'odoo12-addon-account_type_menu',
