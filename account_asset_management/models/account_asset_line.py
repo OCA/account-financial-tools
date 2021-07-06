@@ -296,16 +296,38 @@ class AccountAssetLine(models.Model):
             "context": self.env.context,
         }
 
+    def update_asset_line_after_unlink_move(self):
+        self.write({"move_id": False})
+        if self.parent_state == "close":
+            self.asset_id.write({"state": "open"})
+        elif self.parent_state == "removed" and self.type == "remove":
+            self.asset_id.write({"state": "close", "date_remove": False})
+            self.unlink()
+
     def unlink_move(self):
         for line in self:
-            move = line.move_id
-            move.button_draft()
-            move.with_context(force_delete=True, unlink_from_asset=True).unlink()
-            # trigger store function
-            line.with_context(unlink_from_asset=True).write({"move_id": False})
-            if line.parent_state == "close":
-                line.asset_id.write({"state": "open"})
-            elif line.parent_state == "removed" and line.type == "remove":
-                line.asset_id.write({"state": "close", "date_remove": False})
-                line.unlink()
+            if line.asset_id.profile_id.allow_reversal:
+                context = dict(self._context or {})
+                context.update(
+                    {
+                        "active_model": self._name,
+                        "active_ids": line.ids,
+                        "active_id": line.id,
+                    }
+                )
+                return {
+                    "name": _("Reverse Move"),
+                    "view_mode": "form",
+                    "res_model": "wiz.asset.move.reverse",
+                    "target": "new",
+                    "type": "ir.actions.act_window",
+                    "context": context,
+                }
+            else:
+                move = line.move_id
+                move.button_draft()
+                move.with_context(force_delete=True, unlink_from_asset=True).unlink()
+                line.with_context(
+                    unlink_from_asset=True
+                ).update_asset_line_after_unlink_move()
         return True
