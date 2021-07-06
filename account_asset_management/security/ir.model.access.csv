@@ -16,3 +16,4 @@ access_account_asset_group_manager,account.asset.group,model_account_asset_group
 access_account_asset_remove_user,account.asset.remove,model_account_asset_remove,account.group_account_user,1,1,1,1
 access_account_asset_compute_user,account.asset.compute,model_account_asset_compute,account.group_account_user,1,1,1,1
 access_wiz_account_asset_report,wiz.account.asset.report,model_wiz_account_asset_report,account.group_account_readonly,1,1,1,0
+access_wiz_asset_move_reverse_user,wiz.asset.move.reverse,model_wiz_asset_move_reverse,account.group_account_user,1,1,1,1

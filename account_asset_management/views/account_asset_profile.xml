@@ -38,6 +38,7 @@
                             <field name="account_plus_value_id" />
                             <field name="account_min_value_id" />
                             <field name="account_residual_value_id" />
+                            <field name="allow_reversal" />
                         </group>
                         <group string="Depreciation Dates">
                             <field name="method_time" />

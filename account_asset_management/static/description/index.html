@@ -386,32 +386,33 @@ the standard account_asset module from Odoo.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#usage" id="id6">Usage</a></li>
-<li><a class="reference internal" href="#changelog" id="id7">Changelog</a><ul>
-<li><a class="reference internal" href="#id1" id="id8">14.0.1.0.0 (2021-01-08)</a></li>
-<li><a class="reference internal" href="#id2" id="id9">13.0.2.0.0 (2021-02-19)</a></li>
-<li><a class="reference internal" href="#id3" id="id10">13.0.1.0.0 (2019-10-21)</a></li>
-<li><a class="reference internal" href="#id4" id="id11">12.0.2.1.0 (2019-10-21)</a></li>
-<li><a class="reference internal" href="#id5" id="id12">12.0.1.0.0 (2019-01-13)</a></li>
+<li><a class="reference internal" href="#usage" id="id7">Usage</a></li>
+<li><a class="reference internal" href="#changelog" id="id8">Changelog</a><ul>
+<li><a class="reference internal" href="#id1" id="id9">14.0.1.0.0 (2021-01-08)</a></li>
+<li><a class="reference internal" href="#id2" id="id10">13.0.3.0.0 (2021-07-06)</a></li>
+<li><a class="reference internal" href="#id3" id="id11">13.0.2.0.0 (2021-02-19)</a></li>
+<li><a class="reference internal" href="#id4" id="id12">13.0.1.0.0 (2019-10-21)</a></li>
+<li><a class="reference internal" href="#id5" id="id13">12.0.2.1.0 (2019-10-21)</a></li>
+<li><a class="reference internal" href="#id6" id="id14">12.0.1.0.0 (2019-01-13)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#bug-tracker" id="id13">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="id14">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="id15">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="id16">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="id17">Maintainers</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="id15">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="id16">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="id17">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="id18">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="id19">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="usage">
-<h1><a class="toc-backref" href="#id6">Usage</a></h1>
+<h1><a class="toc-backref" href="#id7">Usage</a></h1>
 <p>The module in NOT compatible with the standard account_asset module.</p>
 </div>
 <div class="section" id="changelog">
-<h1><a class="toc-backref" href="#id7">Changelog</a></h1>
+<h1><a class="toc-backref" href="#id8">Changelog</a></h1>
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id8">14.0.1.0.0 (2021-01-08)</a></h2>
+<h2><a class="toc-backref" href="#id9">14.0.1.0.0 (2021-01-08)</a></h2>
 <blockquote>
 <ul class="simple">
 <li>[BREAKING] Removed all functionality associated with <cite>account.fiscal.year</cite></li>
@@ -419,13 +420,20 @@ the standard account_asset module from Odoo.</p>
 </blockquote>
 </div>
 <div class="section" id="id2">
-<h2><a class="toc-backref" href="#id9">13.0.2.0.0 (2021-02-19)</a></h2>
+<h2><a class="toc-backref" href="#id10">13.0.3.0.0 (2021-07-06)</a></h2>
+<ul class="simple">
+<li>Allow to reverse the posting of a depreciation line instead of deleting the
+journal entry.</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id11">13.0.2.0.0 (2021-02-19)</a></h2>
 <ul class="simple">
 <li>Add support for multi-company</li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h2><a class="toc-backref" href="#id10">13.0.1.0.0 (2019-10-21)</a></h2>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id12">13.0.1.0.0 (2019-10-21)</a></h2>
 <ul class="simple">
 <li>Python code and views were adapted to be compatible with v13.</li>
 <li>When assets are created through accounting journal items,
@@ -442,14 +450,14 @@ allow the module to be uninstalled by unchecking that configuration option.</li>
 <li>Tests were adapted.</li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h2><a class="toc-backref" href="#id11">12.0.2.1.0 (2019-10-21)</a></h2>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id13">12.0.2.1.0 (2019-10-21)</a></h2>
 <ul class="simple">
 <li>[IMP] Add option to calculate depreciation table by days</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h2><a class="toc-backref" href="#id12">12.0.1.0.0 (2019-01-13)</a></h2>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id14">12.0.1.0.0 (2019-01-13)</a></h2>
 <ul class="simple">
 <li>[BREAKING] account.asset: parent_path has replaced parent_left &amp; parent_right (TODO: migration script)</li>
 <li>[BREAKING] account.asset.recompute.trigger: depends on date_range.py (TODO: re-implement in account_fiscal_year.py)</li>
@@ -457,7 +465,7 @@ allow the module to be uninstalled by unchecking that configuration option.</li>
 </div>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#id13">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#id15">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/account-financial-tools/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
@@ -465,15 +473,15 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#id14">Credits</a></h1>
+<h1><a class="toc-backref" href="#id16">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#id15">Authors</a></h2>
+<h2><a class="toc-backref" href="#id17">Authors</a></h2>
 <ul class="simple">
 <li>Noviat</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#id16">Contributors</a></h2>
+<h2><a class="toc-backref" href="#id18">Contributors</a></h2>
 <ul class="simple">
 <li>OpenERP SA</li>
 <li>Luc De Meyer (Noviat)</li>
@@ -493,10 +501,15 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <li>Víctor Martínez</li>
 </ul>
 </li>
+<li><a class="reference external" href="https://www.forgeflow.com">ForgeFlow</a>:<ul>
+<li>Jordi Ballester &lt;<a class="reference external" href="mailto:jordi.ballester&#64;forgeflow.com">jordi.ballester&#64;forgeflow.com</a>&gt;</li>
+<li>Miquel Raïch &lt;<a class="reference external" href="mailto:miquel.raich&#64;forgeflow.com">miquel.raich&#64;forgeflow.com</a>&gt;</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#id17">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#id19">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose

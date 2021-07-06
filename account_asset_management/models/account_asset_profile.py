@@ -163,6 +163,12 @@ class AccountAssetProfile(models.Model):
         "product item. So, there will be an asset by product item.",
     )
     active = fields.Boolean(default=True)
+    allow_reversal = fields.Boolean(
+        "Allow Reversal of journal entries",
+        help="If set, when pressing the Delete/Reverse Move button in a "
+        "posted depreciation line will prompt the option to reverse the "
+        "journal entry, instead of deleting them.",
+    )
 
     @api.model
     def _default_company_id(self):
