@@ -3,6 +3,12 @@
 
  * [BREAKING] Removed all functionality associated with `account.fiscal.year`
 
+13.0.3.0.0 (2021-07-06)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Allow to reverse the posting of a depreciation line instead of deleting the
+  journal entry.
+
 13.0.2.0.0 (2021-02-19)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
