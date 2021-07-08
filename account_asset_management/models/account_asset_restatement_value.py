@@ -41,16 +41,21 @@ class AccountAssetRestatementValue(models.Model):
         string='Posted',
         store=True)
     type = fields.Selection(
-        selection=[
-            ('create', 'Depreciation Base'),
-            ('restatement', 'Restatement of value'),
-            ('diminution', 'Diminution of asset'),
-            ('remove', 'Asset Removal')],
-        readonly=True, default='depreciate')
+        selection=lambda self: self._selection_method(),
+        readonly=True, default='create')
     init_entry = fields.Boolean(
         string='Initial Balance Entry',
         help="Set this flag for entries of previous fiscal years "
              "for which Odoo has not generated accounting entries.")
+
+    @api.model
+    def _selection_method(self):
+        return [
+            ('create', 'Depreciation Base'),
+            ('restatement', 'Restatement of value'),
+            ('diminution', 'Diminution of asset'),
+            ('remove', 'Asset Removal')
+        ]
 
     @api.depends('move_id')
     @api.multi
@@ -73,13 +78,13 @@ class AccountAssetRestatementValue(models.Model):
             values = self.filtered(lambda r: r.type in type and r.line_date > line_date)
         elif operator == '!=':
             values = self.filtered(lambda r: r.type in type and r.line_date != line_date)
-        # _logger.info("VALUES %s:%s" % (values, field))
-        if field and values:
+        if field and values._fields:
             for value in values:
                 coefficient = 1
                 if value.type == 'diminution':
                     coefficient = -1
                 res += getattr(value, field) * coefficient
+            # _logger.info("VALUES %s:%s,%s" % (values, field, res))
             return res
         else:
             return values or res

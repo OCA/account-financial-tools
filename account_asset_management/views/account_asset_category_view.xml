@@ -35,7 +35,8 @@
                         </div>
                         <group name="first" col="2">
                             <field name="parent_id" class="oe_inline"/>
-                            <field name="company_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="type_assets"/>
                         </group>
                     </sheet>
                 </form>
@@ -47,8 +48,9 @@
             <field name="priority">1</field>
             <field name="arch" type="xml">
                 <tree string="Asset Categories">
-                    <field name="display_name"/>
-                    <field name="company_id"/>
+                    <field name="complete_name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="type_assets"/>
                 </tree>
             </field>
         </record>

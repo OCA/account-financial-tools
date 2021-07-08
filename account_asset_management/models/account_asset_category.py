@@ -25,6 +25,12 @@ class ProductCategory(models.Model):
     child_id = fields.One2many('account.asset.category', 'parent_id', 'Child Categories')
     parent_left = fields.Integer('Left Parent', index=1)
     parent_right = fields.Integer('Right Parent', index=1)
+    type_assets = fields.Selection(
+        selection=lambda self: self._selection_type_assets(),
+        string='Type of assets',
+        help='Type of assets.\n'
+               '* equipment - Maintained equipment\n'
+               '* cars - Cars')
     asset_count = fields.Integer(
         '# Assets', compute='_compute_asset_count',
         help="The number of assets under this category (Does not consider the children categories)")
@@ -59,6 +65,12 @@ class ProductCategory(models.Model):
         if not self._check_recursion():
             raise ValidationError(_('Error ! You cannot create recursive categories.'))
         return True
+
+    def _selection_type_assets(self):
+        return [
+            ('equipment', 'Maintained equipment'),
+            ('cars', 'Cars'),
+        ]
 
     @api.model
     def name_create(self, name):

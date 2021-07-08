@@ -85,24 +85,26 @@
                             <field name="asset_profile_id"/>
                             <field name="tax_asset_profile_id"/>
                             <field name="product_id"/>
+                            <field name="lot_id"/>
+                            <field name="lot_name" invisible="1"/>
                             <field name="quantity"/>
                             <field name="uom_id"/>
                             <field name="price_unit"/>
                         </tree>
                     </field>
                     <footer>
-                        <button name="cancel" string="Cancel" class="oe_link"
-                            special="cancel" />
+                        <button string="Generate Accounting entries" name="rebuild_picking_move" type="object" class="oe_highlight"/>
+                        <button name="cancel" string="Cancel" class="oe_link" special="cancel" />
                     </footer>
                 </sheet>
             </form>
         </field>
     </record>
-    <act_window name="Show possible assets in picking" id="stock_picking_asset_action"
-            res_model="stock.picking.asset"
-            src_model="stock.picking"
-            key2="client_action_multi"
-            view_mode="form"
-            target="new"/>
+<!--    <act_window name="Show possible assets in picking" id="stock_picking_asset_action"-->
+<!--            res_model="stock.picking.asset"-->
+<!--            src_model="stock.picking"-->
+<!--            key2="client_action_multi"-->
+<!--            view_mode="form"-->
+<!--            target="new"/>-->
 
 </odoo>

@@ -50,7 +50,7 @@ class AccountBgAssetProfile(models.Model):
 
     @api.model
     def _selection_method(self):
-        return[
+        return [
             ('percentage', _('Percentage per Year')),
             ('year', _('Year')),
         ]

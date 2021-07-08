@@ -56,6 +56,8 @@ class AccountMoveLine(models.Model):
     tax_profile_id = fields.Many2one(comodel_name='account.bg.asset.profile', string='Tax Asset Profile')
     asset_id = fields.Many2one(comodel_name='account.asset', string='Asset', ondelete='restrict')
     asset_salvage_value = fields.Float(string='Salvage Value', digits=dp.get_precision('Account'))
+    restatement_asset_id = fields.Many2one(comodel_name='account.asset', string='Restatement Asset', ondelete='restrict')
+    restatement_type = fields.Selection(selection=lambda self: self.env['account.asset.restatement.value']._selection_method(),  default='create')
 
     @api.onchange('account_id')
     def _onchange_account_id(self):
@@ -74,7 +76,31 @@ class AccountMoveLine(models.Model):
             'date_start': move.date,
             'date_buy': self.invoice_id and self.invoice_id.date_invoice or move.date,
             'product_id': vals['product_id'],
-            }
+            # 'company_id': vals.get('company_id'),
+        }
+
+    @api.multi
+    def _prepare_asset_create(self, vals):
+        self.ensure_one()
+        debit = 'debit' in vals and vals.get('debit', 0.0) or self.debit
+        credit = 'credit' in vals and \
+                 vals.get('credit', 0.0) or self.credit
+        depreciation_base = debit - credit
+        partner_id = 'partner' in vals and \
+                     vals.get('partner', False) or self.partner_id.id
+        date_start = 'date' in vals and \
+                     vals.get('date', False) or self.date
+        return {
+            'name': vals.get('name') or self.name,
+            'profile_id': vals.get('asset_profile_id', False),
+            'tax_profile_id': vals.get('tax_profile_id', False),
+            'purchase_value': depreciation_base,
+            'partner_id': partner_id,
+            'date_start': date_start,
+            'date_buy': self.invoice_id and self.invoice_id.date_invoice or date_start,
+            'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'] or self.asset_salvage_value,
+            'company_id': vals.get('company_id') or self.company_id.id,
+        }
 
     @api.model
     def create(self, vals):
@@ -83,6 +109,15 @@ class AccountMoveLine(models.Model):
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
+
+        if vals.get('restatement_asset_id'):
+            asset = self.env['account.asset'].browse(vals['restatement_asset_id'])
+            move = self.env['account.move'].browse(vals['move_id'])
+            asset.write({
+                'depreciation_restatement_line_ids':
+                    [(0, False, asset._value_depreciation_restatement_line(vals, move, move.date, type=vals.get('restatement_type')))]
+            })
+
         if vals.get('asset_profile_id'):
             # check for additional values added now
             #account = False
@@ -93,6 +128,7 @@ class AccountMoveLine(models.Model):
                 correction = True
                 vals['asset_id'] = vals['save_asset_id']
                 del vals['save_asset_id']
+
             if not correction:
                 # create asset
                 asset_obj = self.env['account.asset']
@@ -124,29 +160,6 @@ class AccountMoveLine(models.Model):
         return super().create(vals)
 
     @api.multi
-    def _prepare_asset_create(self, vals):
-        self.ensure_one()
-        debit = 'debit' in vals and vals.get('debit', 0.0) or self.debit
-        credit = 'credit' in vals and \
-                 vals.get('credit', 0.0) or self.credit
-        depreciation_base = debit - credit
-        partner_id = 'partner' in vals and \
-                     vals.get('partner', False) or self.partner_id.id
-        date_start = 'date' in vals and \
-                     vals.get('date', False) or self.date
-        return {
-            'name': vals.get('name') or self.name,
-            'profile_id': vals.get('asset_profile_id', False),
-            'tax_profile_id': vals.get('tax_profile_id', False),
-            'purchase_value': depreciation_base,
-            'partner_id': partner_id,
-            'date_start': date_start,
-            'date_buy': self.invoice_id and self.invoice_id.date_invoice or date_start,
-            'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'] or self.asset_salvage_value,
-            'company_id': vals.get('company_id') or self.company_id.id,
-        }
-
-    @api.multi
     def write(self, vals):
         if (
             self.mapped('asset_id') and
@@ -163,6 +176,12 @@ class AccountMoveLine(models.Model):
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
+        if vals.get('restatement_asset_id'):
+            asset = self.env['account.asset'].browse(vals['restatement_asset_id'])
+            asset.write({
+                'depreciation_restatement_line_ids':
+                    [(0, False, asset._value_depreciation_restatement_line(vals, self.move_id, self.date, self=vals.get('restatement_type', self.restatement_type)))]
+            })
         if vals.get('asset_profile_id'):
             if len(self) == 1:
                 raise AssertionError(_(

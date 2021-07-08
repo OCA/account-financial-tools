@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='barcode']" position="after">
-                <field name="account_asset_ids" widget="many2many_tags" readonly="1"/>
+                <field name="account_asset_ids" widget="many2many_tags" options="{'open_view': True}" readonly="1"/>
             </xpath>
         </field>
     </record>

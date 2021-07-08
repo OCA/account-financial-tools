@@ -32,6 +32,11 @@ class AccountBgAssetLine(models.Model):
         string='Depreciation Base',
         readonly=True,
     )
+    fiscal_correction_value = fields.Float(
+        related='asset_id.fiscal_correction_value',
+        string='Fiscal Correction Value',
+        readonly=True,
+    )
     amount = fields.Float(
         string='Amount', digits=dp.get_precision('Account'),
         required=True)
@@ -78,7 +83,7 @@ class AccountBgAssetLine(models.Model):
             if type == 'storno':
                 coef = -1
             if i == 0:
-                depreciation_base = dl.depreciation_base
+                depreciation_base = dl.depreciation_base - dl.asset_id.fiscal_correction_value
                 depreciated_value = dl.previous_id \
                     and (depreciation_base - dl.previous_id.remaining_value) \
                     or 0.0

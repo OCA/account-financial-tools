@@ -42,7 +42,7 @@ class StockMove(models.Model):
         return vals
 
     def _account_entry_move(self):
-        if self.asset_profile_id:
+        if self.asset_profile_id and not self.move_line_ids.mapped('asset_id'):
             line_to_create_sum = 0.0
             line_to_create = self.quantity_done
             for line in self.move_line_ids:
@@ -54,7 +54,8 @@ class StockMove(models.Model):
             if line_to_create - line_to_create_sum > 0:
                 qty = line_to_create - line_to_create_sum
                 super(StockMove, self.with_context(dict(self._context, forced_quantity=qty)))._account_entry_move()
-        elif self.move_line_ids.mapped('asset_id'):
+        elif not self.asset_profile_id and \
+                self.move_line_ids.mapped('asset_id'):
             line_to_create_sum = 0.0
             line_to_create = self.quantity_done
             for line in self.move_line_ids.filtered(lambda r: r.asset_id):
@@ -73,7 +74,7 @@ class StockMove(models.Model):
     def _get_accounting_data_for_valuation(self):
         journal_id, acc_src, acc_dest, acc_valuation = super(StockMove, self)._get_accounting_data_for_valuation()
         if self._context.get('force_asset'):
-            asset = self._context.get('force_asset', self.asset_id)
+            asset = self._context.get('force_asset', False)
             if asset:
                 journal_id = asset.profile_id.journal_id.id
         return journal_id, acc_src, acc_dest, acc_valuation
@@ -81,7 +82,7 @@ class StockMove(models.Model):
     def _prepare_account_move_line(self, qty, cost, credit_account_id, debit_account_id):
         res = super(StockMove, self)._prepare_account_move_line(qty, cost, credit_account_id, debit_account_id)
         # _logger.info("RES %s" % res)
-        if self.asset_profile_id and self._is_in():
+        if self.asset_profile_id and not self.move_line_ids.mapped('asset_id') and self._is_in():
             # _logger.info("ASSET Dt-%s/Ct-%s" % (res[0][2], res[1][2]))
             res[0][2]['asset_profile_id'] = self.asset_profile_id.id
             res[0][2]['tax_profile_id'] = self.tax_profile_id and self.tax_profile_id.id or False
@@ -118,11 +119,7 @@ class StockMove(models.Model):
     def _check_for_assets(self):
         check = {}
         for record in self:
-            if record.asset_profile_id:
-                check[record] = {
-                    'asset_profile_id': record.asset_profile_id,
-                    'tax_profile_id': record.tax_profile_id,
-                }
+            if len(record.mapped('move_line_ids').mapped('asset_id').ids) > 0:
                 continue
             # Check in product valuations
             product_tmpl = record.product_id.product_tmpl_id.categ_id

@@ -7,64 +7,55 @@ from odoo import api, fields, models, _
 class AccountAssetCompute(models.TransientModel):
     _name = 'account.asset.compute'
     _description = "Compute Assets"
+    _inherit = ['multi.step.wizard.mixin']
 
+    name = fields.Char()
     date_end = fields.Date(
         string='Date', required=True,
         default=fields.Date.today,
         help="All depreciation lines prior to this date will be automatically"
              " posted")
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string='Company', required=True,
+        default=lambda self: self.env['res.company']._company_default_get('account.asset'))
     note = fields.Text()
+    action = fields.Many2one(
+        comodel_name='account.asset.actions',
+        string='Action',
+        readonly=True
+    )
+
+    @api.model
+    def _selection_state(self):
+        return [
+            ('start', 'Compute'),
+            ('final', 'View Asset Moves'),
+        ]
+
+    def state_exit_start(self):
+        self.state = 'final'
+        self.asset_compute()
 
     @api.multi
     def asset_compute(self):
         actions_now = False
-        assets = self.env['account.asset'].search(
-            [('state', '=', 'open'), ('type', '=', 'normal')])
-        created_move_ids, error_log = assets._compute_entries(
-            self.date_end, check_triggers=True)
-
-        if created_move_ids:
-            actions_now = self.env['account.asset.actions'].create({
-                                    'date_action': fields.Date.today(),
-                                    'date_end': self.date_end,
-                                    'asset_move_ids': [(6, 0, created_move_ids)],
-                                    })
-        if actions_now and error_log:
-            actions_now.note = _("Compute Assets errors") + ':\n' + error_log
-
-        if error_log:
-            module = __name__.split('addons.')[1].split('.')[0]
-            result_view = self.env.ref(
-                '%s.%s_view_form_result'
-                % (module, self._name))
-            self.note = _("Compute Assets errors") + ':\n' + error_log
-
-            return {
-                'name': _('Compute Assets result'),
-                'res_id': self.id,
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'account.asset.compute',
-                'view_id': result_view.id,
-                'target': 'new',
-                'type': 'ir.actions.act_window',
-                'context': {'asset_move_ids': created_move_ids},
-            }
-
-        return {
-            'name': _('Created Asset Moves'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'account.move',
-            'view_id': False,
-            'domain': [('id', 'in', created_move_ids)],
-            'type': 'ir.actions.act_window',
-        }
+        error_log = ''
+        created_move_ids = self.env['account.move']
+        for record in self:
+            assets = self.env['account.asset'].search(
+                [('state', '=', 'open'), ('type', '=', 'normal'), ('company_id', '=', record.company_id.id)])
+            if assets:
+                actions_now = self.env['account.asset.actions'].create({
+                    'date_action': fields.Date.today(),
+                })
+                record.action = actions_now
+                assets.with_delay()._server_with_delay_compute_entries(actions_now)
 
     @api.multi
     def view_asset_moves(self):
         self.ensure_one()
-        domain = [('id', 'in', self.env.context.get('asset_move_ids', []))]
+        domain = [('id', 'in', self.action.asset_move_ids.ids)]
         return {
             'name': _('Created Asset Moves'),
             'view_type': 'form',

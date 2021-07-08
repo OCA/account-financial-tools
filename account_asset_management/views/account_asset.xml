@@ -46,6 +46,7 @@
               <field name="code"/>
               <field name="parent_id"/>
               <field name="move_line_check" invisible="1"/>
+              <field name="type_assets" invisible="1"/>
             </group>
             <group name="company">
               <field name="type"/>
@@ -53,8 +54,10 @@
               <field name="company_currency_id" groups="base.group_multi_currency" invisible="1"/>
             </group>
             <group name="pickings">
-              <field name="purchase_line_ids" widget="many2many_tags" options="{'open_view': True}"/>
-              <field name="move_line_id" domain="[('product_id', '=', product_id), ('move_id.purchase_line_id', 'in', purchase_line_ids)]"/>
+              <field name="has_purchase_line_ids" invisible="1"/>
+              <field name="purchase_line_ids" widget="many2many_tags" options="{'open_view': True}" attrs="{'invisible': ['|', ('type', '=', 'view'), ('has_purchase_line_ids', '=', False)]}"/>
+              <field name="other_move_line_id" domain="[('product_id', '=', product_id), ('move_id.purchase_line_id', '=', False)]" attrs="{'invisible': ['|', ('type', '=', 'view'), ('has_purchase_line_ids', '!=', False)]}"/>
+              <field name="move_line_id" domain="[('product_id', '=', product_id), ('move_id.purchase_line_id', 'in', purchase_line_ids)]"  attrs="{'invisible': ['|', ('type', '=', 'view'), ('has_purchase_line_ids', '=', False)]}"/>
             </group>
             <group name="product">
               <field name="lot_id" domain="[('product_id', '=', product_id)]" groups="stock.group_production_lot" context="{'default_product_id': product_id}"
