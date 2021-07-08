@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2021-07-08 10:48+0000\n"
+"PO-Revision-Date: 2021-07-08 19:48+0000\n"
 "Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -94,7 +94,7 @@ msgstr "Deposito Assegno %s"
 #: code:addons/account_check_deposit/models/account_deposit.py:171
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
-msgstr "deposito Assegno - Rif. Assegno %s"
+msgstr "Deposito Assegno - Rif. Assegno %s"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_offsetting_account
@@ -105,18 +105,18 @@ msgstr ""
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Check Deposit n°"
-msgstr ""
+msgstr "Deposito Assegno n°"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.res_config_settings_view_form
 msgid "Check Deposits"
-msgstr ""
+msgstr "Depositi Assegno"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Payments"
-msgstr ""
+msgstr "Pagamenti Assegni"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
@@ -342,13 +342,13 @@ msgstr "Totale Debiti"
 #. module: account_check_deposit
 #: selection:res.company,check_deposit_offsetting_account:0
 msgid "Transfer Account"
-msgstr ""
+msgstr "Trasferisci Conto"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_transfer_account_id
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_transfer_account_id
 msgid "Transfer Account for Check Deposits"
-msgstr ""
+msgstr "Trasferisci Conti per Deposito Assegno"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
