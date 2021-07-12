@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2021-07-07 13:48+0000\n"
-"Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
+"PO-Revision-Date: 2021-07-12 11:49+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgstr "Calcolato"
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_run_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_run_menu
 msgid "Create Entry from Template"
-msgstr "Crea Registrazione Contabile"
+msgstr "Crea Registrazione da Modello"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -164,9 +164,9 @@ msgstr "Nome da visualizzare"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:102
-#, fuzzy, python-format
+#, python-format
 msgid "Entry from template %s"
-msgstr "Inserimento da Modello %s"
+msgstr "Record da Modello %s"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
@@ -190,7 +190,7 @@ msgid ""
 "sequence than the current line."
 msgstr ""
 "Impossibile calcolare la formula della riga con sequenza %s ( Formula: %s). "
-"Controlla che le righe usate nella formula esistono veramente e hanno una "
+"Controlla che le righe usate nella formula esistano veramente e abbiano una "
 "sequenza inferiore alla riga corrente."
 
 #. module: account_move_template
@@ -200,7 +200,7 @@ msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s): "
 "the syntax of the formula is wrong."
 msgstr ""
-"Impossibile calcolare la formula della riga con sequenza %s ( formula: %s): "
+"Impossibile calcolare la formula della riga con sequenza %s (formula: %s): "
 "la sintassi della formula è sbagliata."
 
 #. module: account_move_template
@@ -231,9 +231,8 @@ msgstr "Configurazione Registrazioni Contabili"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
-#, fuzzy
 msgid "Journal Item Template"
-msgstr "Modello Articolo Registro"
+msgstr "Modello Oggetto Registro"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -423,9 +422,8 @@ msgstr "Procedura Guidata"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line_run
-#, fuzzy
 msgid "Wizard Lines to generate move from template"
-msgstr "Righe Guidate per generare movimenti dal modello"
+msgstr "Righe Wizard per generare movimenti dal modello"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_run
