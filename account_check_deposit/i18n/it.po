@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2021-07-09 15:49+0000\n"
+"PO-Revision-Date: 2021-07-12 11:49+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -100,7 +100,7 @@ msgstr "Deposito Assegno - Rif. Assegno %s"
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_offsetting_account
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_offsetting_account
 msgid "Check Deposit Offsetting Account"
-msgstr ""
+msgstr "Conto di Compensazione Deposito Assegno"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -216,7 +216,7 @@ msgstr "ID"
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__journal_default_account_id
 msgid "It acts as a default account for debit amount"
-msgstr ""
+msgstr "Viene usato come conto predefinito per l'importo a debito"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
@@ -232,7 +232,7 @@ msgstr "Registrazione Contabile"
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Oggetto Giornale"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
@@ -264,12 +264,14 @@ msgstr "Elenco dei controlli:"
 #, python-format
 msgid "Missing 'Check Deposit Offsetting Account' on the company '%s'."
 msgstr ""
+"Non è impostato 'Conto di Compensazione Deposito Assegno' per l'azienda '%s'."
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_deposit.py:190
 #, python-format
 msgid "Missing 'Default Debit Account' on bank journal '%s'"
 msgstr ""
+"Non è impostato 'Conto di Debito Predefinito' nel registro bancario '%s'"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__name
@@ -285,7 +287,7 @@ msgstr "Numero dei Controlli"
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_post_move
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_post_move
 msgid "Post Move for Check Deposits"
-msgstr ""
+msgstr "Inserisci Movimento per Deposito Assegni"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
@@ -315,13 +317,15 @@ msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
 "deposit is in currency %s."
 msgstr ""
+"L'assegno di importo %s e riferimento '%s' è nella valuta %s ma il deposito "
+"è in valuta %s."
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_deposit.py:127
 #, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting it."
-msgstr ""
+msgstr "Il deposito '%s' è validato, devi annullarlo per poterlo eliminare."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount
@@ -361,3 +365,5 @@ msgid ""
 "You must configure the 'Check Deposit Offsetting Account' on the Accounting "
 "Settings page"
 msgstr ""
+"Devi configurare il \"Conto di Compensazione Deposito Assegni\" nelle "
+"impostazioni della fatturazione"
