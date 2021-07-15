@@ -109,7 +109,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
 msgstr ""
@@ -1210,7 +1209,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The removal date must be after the last depreciation date."
 msgstr ""
@@ -1349,7 +1347,6 @@ msgid "You can only delete assets in draft state."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid ""
