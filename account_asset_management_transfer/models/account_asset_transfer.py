@@ -34,10 +34,13 @@ class AccountAssetTransfer(models.Model):
         default=lambda self: self.env.user,
     )
     date_transfer = fields.Date(
-        required=True, default=lambda self: fields.Date.context_today(self),
+        required=True,
+        default=lambda self: fields.Date.context_today(self),
     )
     move_id = fields.Many2one(
-        comodel_name="account.move", string="Journal Entries", readonly=True,
+        comodel_name="account.move",
+        string="Journal Entries",
+        readonly=True,
     )
     state = fields.Selection(
         selection=[
@@ -65,19 +68,26 @@ class AccountAssetTransfer(models.Model):
         store=True,
     )
     source_asset_value = fields.Monetary(
-        compute="_compute_asset_value", currency_field="company_currency_id",
+        compute="_compute_asset_value",
+        currency_field="company_currency_id",
     )
-    source_asset_count = fields.Integer(compute="_compute_asset_count",)
+    source_asset_count = fields.Integer(
+        compute="_compute_asset_count",
+    )
     source_asset_ids = fields.Many2many(
         comodel_name="account.asset",
         # domain=[("state", "in", ("open", "close"))],
     )
     target_asset_value = fields.Monetary(
-        compute="_compute_asset_value", currency_field="company_currency_id",
+        compute="_compute_asset_value",
+        currency_field="company_currency_id",
     )
-    target_asset_count = fields.Integer(compute="_compute_asset_count",)
+    target_asset_count = fields.Integer(
+        compute="_compute_asset_count",
+    )
     target_asset_ids = fields.One2many(
-        comodel_name="account.asset.transfer.target", inverse_name="transfer_id",
+        comodel_name="account.asset.transfer.target",
+        inverse_name="transfer_id",
     )
     new_asset_ids = fields.Many2many(
         comodel_name="account.asset",
@@ -371,9 +381,17 @@ class AccountAssetTransferTarget(models.Model):
     _name = "account.asset.transfer.target"
     _description = "Asset Transfer Target"
 
-    transfer_id = fields.Many2one(comodel_name="account.asset.transfer",)
+    transfer_id = fields.Many2one(
+        comodel_name="account.asset.transfer",
+    )
     asset_profile_id = fields.Many2one(
-        comodel_name="account.asset.profile", string="To Asset Category", required=True,
+        comodel_name="account.asset.profile",
+        string="To Asset Category",
+        required=True,
     )
     asset_name = fields.Char(required=True)
-    depreciation_base = fields.Float(string="Value", required=True, default=0.0,)
+    depreciation_base = fields.Float(
+        string="Value",
+        required=True,
+        default=0.0,
+    )
