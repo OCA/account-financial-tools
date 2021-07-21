@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_asset_profile_view_form" model="ir.ui.view">
+        <field name="name">account.asset.profile.form</field>
+        <field name="model">account.asset.profile</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_profile_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//sheet/group/group/field[@name='company_id']"
+                position="after"
+            >
+                <field name="use_sequence" />
+                <field
+                    name="sequence_id"
+                    attrs="{'invisible':[('use_sequence', '!=', True)], 'required':[('use_sequence', '=', True)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
