@@ -152,10 +152,13 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     asset_profile_id = fields.Many2one(
-        comodel_name="account.asset.profile", string="Asset Profile",
+        comodel_name="account.asset.profile",
+        string="Asset Profile",
     )
     asset_id = fields.Many2one(
-        comodel_name="account.asset", string="Asset", ondelete="restrict",
+        comodel_name="account.asset",
+        string="Asset",
+        ondelete="restrict",
     )
 
     @api.onchange("account_id")
