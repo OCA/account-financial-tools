@@ -70,7 +70,10 @@ class AccountAssetLine(models.Model):
         "for which Odoo has not generated accounting entries.",
     )
     company_id = fields.Many2one(
-        "res.company", store=True, readonly=True, related="asset_id.company_id",
+        "res.company",
+        store=True,
+        readonly=True,
+        related="asset_id.company_id",
     )
 
     @api.depends("amount", "previous_id", "type")
