@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="account_asset_view_form">
+        <field name="name">account.asset.form</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_form"
+        />
+        <field name="arch" type="xml">
+            <h1 position="after">
+                <field name="use_sequence" invisible="True" />
+                <label for="number" class="oe_edit_only" />
+                <h2>
+                    <field
+                        name="number"
+                        class="oe_inline"
+                        attrs="{'readonly':[('use_sequence', '=', True)]}"
+                    />
+                </h2>
+            </h1>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="account_asset_view_tree">
+        <field name="name">account.asset.tree</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_tree"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="number" />
+            </xpath>
+        </field>
+    </record>
+    <record id="account_asset_view_search" model="ir.ui.view">
+        <field name="name">account.asset.search</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_search"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute
+                    name="filter_domain"
+                >['|', ('name', 'ilike', self), ('number', 'ilike', self)]</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
