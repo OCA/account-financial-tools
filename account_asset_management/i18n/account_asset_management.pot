@@ -477,13 +477,11 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive  up to Salvage Value"
@@ -497,14 +495,12 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear"
 msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
@@ -861,13 +857,11 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Linear"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Linear up to Salvage Value"
@@ -886,7 +880,6 @@ msgid "Missing depreciation table"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Month"
@@ -935,7 +928,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Depreciations"
 msgstr ""
@@ -949,7 +941,6 @@ msgid "Number of Years"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Years or end date"
@@ -1045,7 +1036,6 @@ msgid "Purchase Value"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Quarter"
@@ -1387,14 +1377,11 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Year"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:0
-#: code:addons/account_asset_management/models/account_move.py:0
 #: code:addons/account_asset_management/models/account_move.py:0
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
@@ -1441,7 +1428,6 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:0
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
