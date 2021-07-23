@@ -93,6 +93,11 @@ msgid "All depreciation lines prior to this date will be automatically posted"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__allow_reversal
+msgid "Allow Reversal of journal entries"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
 msgid "Amount"
 msgstr ""
@@ -169,6 +174,7 @@ msgid "Asset Groups"
 msgstr "Varade kategooriad"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__line_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset Line"
 msgstr ""
@@ -310,6 +316,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
 msgid "Cancel"
 msgstr "Loobu"
 
@@ -434,6 +441,11 @@ msgid "Compute Assets results"
 msgstr "Arvestus"
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
+msgid "Confirm"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Confirm Asset"
 msgstr "Kinnita vara"
@@ -463,6 +475,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__create_uid
 msgid "Created by"
 msgstr "Loonud"
 
@@ -475,6 +488,7 @@ msgstr "Loonud"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__create_date
 msgid "Created on"
 msgstr "Loodud"
 
@@ -532,7 +546,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Delete Move"
+msgid "Delete/Reverse Move"
 msgstr ""
 
 #. module: account_asset_management
@@ -606,6 +620,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__display_name
 msgid "Display Name"
 msgstr "Näidatav nimi"
 
@@ -735,6 +750,7 @@ msgstr "Ajalugu"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__id
 #: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__id
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__id
 msgid "ID"
 msgstr "ID"
 
@@ -749,6 +765,11 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_wiz_asset_move_reverse__journal_id
+msgid "If empty, uses the journal of the journal entry to be reversed."
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__use_leap_years
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__use_leap_years
 msgid ""
@@ -758,6 +779,14 @@ msgid ""
 " If set, the system will consider if the current year is a leap year. The "
 "amount to depreciate per year will be calculated as depreciation base / "
 "(depreciation end date - start date + 1) * days in the current year."
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__allow_reversal
+msgid ""
+"If set, when pressing the Delete/Reverse Move button in a posted "
+"depreciation line will prompt the option to reverse the journal entry, "
+"instead of deleting them."
 msgstr ""
 
 #. module: account_asset_management
@@ -838,6 +867,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
 msgid "Last Modified on"
 msgstr "Viimati muudetud"
 
@@ -850,6 +880,7 @@ msgstr "Viimati muudetud"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__write_uid
 msgid "Last Updated by"
 msgstr "Viimati uuendatud"
 
@@ -862,6 +893,7 @@ msgstr "Viimati uuendatud"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__write_date
 msgid "Last Updated on"
 msgstr "Viimati uuendatud"
 
@@ -1055,6 +1087,7 @@ msgstr ""
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__reason
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__reason
 #, python-format
 msgid "Reason"
 msgstr "Põhjus"
@@ -1126,6 +1159,27 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 msgid "Results :"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__date_reversal
+msgid "Reversal date"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
+msgid "Reverse Journal Entry"
+msgstr ""
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset_line.py:0
+#, python-format
+msgid "Reverse Move"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_wiz_asset_move_reverse
+msgid "Reverse posted journal entry on depreciation line"
 msgstr ""
 
 #. module: account_asset_management
@@ -1326,6 +1380,11 @@ msgstr "Tüüp"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Undetermined error"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
+msgid "Use Specific Journal"
 msgstr ""
 
 #. module: account_asset_management
