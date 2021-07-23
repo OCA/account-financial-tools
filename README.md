@@ -33,6 +33,7 @@ addon | version | summary
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.1.1.0 | Allows to edit taxes on non-posted account move lines
 [account_move_template](account_move_template/) | 14.0.1.1.0 | Templates for recurring Journal Entries
 [account_no_default](account_no_default/) | 14.0.1.0.0 | Remove default expense account for vendor bills journal
+[base_vat_optional_vies](base_vat_optional_vies/) | 14.0.1.0.0 | Optional validation of VAT via VIES
 [product_category_tax](product_category_tax/) | 14.0.1.0.0 | Configure taxes in the product category
 
 [//]: # (end addons)
