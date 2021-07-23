@@ -26,5 +26,6 @@
         "views/menuitem.xml",
         "data/cron.xml",
         "wizard/wiz_account_asset_report.xml",
+        "wizard/wiz_asset_move_reverse.xml",
     ],
 }

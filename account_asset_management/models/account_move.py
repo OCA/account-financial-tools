@@ -125,8 +125,15 @@ class AccountMove(models.Model):
             for line_command in move_vals.get("line_ids", []):
                 line_vals = line_command[2]  # (0, 0, {...})
                 asset = self.env["account.asset"].browse(line_vals["asset_id"])
-                asset.unlink()
-                line_vals.update(asset_profile_id=False, asset_id=False)
+                # We remove the asset if we recognize that we are reversing
+                # the asset creation
+                if asset:
+                    asset_line = self.env["account.asset.line"].search(
+                        [("asset_id", "=", asset.id), ("type", "=", "create")], limit=1
+                    )
+                    if asset_line and asset_line.move_id == self:
+                        asset.unlink()
+                        line_vals.update(asset_profile_id=False, asset_id=False)
         return move_vals
 
     def action_view_assets(self):
