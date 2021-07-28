@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo12-addon-account_fiscal_month',
         'odoo12-addon-account_fiscal_position_vat_check',
         'odoo12-addon-account_fiscal_year',
+        'odoo12-addon-account_fiscal_year_auto_create',
         'odoo12-addon-account_group_menu',
         'odoo12-addon-account_invoice_constraint_chronology',
         'odoo12-addon-account_invoice_currency',
