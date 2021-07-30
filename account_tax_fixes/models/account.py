@@ -69,7 +69,7 @@ class AccountTax(models.Model):
     def _compute_amount(self, base_amount, price_unit, quantity=1.0, product=None, partner=None):
         if self._context.get('force_fix', False):
             ret = self._compute_amount_fix(base_amount, price_unit, quantity=quantity, product=product, partner=partner, force_price_include=True)
-        elif self._context.get('force_purchase', False):
+        elif self._context.get('force_purchase', False) or self._name == 'purchase.order.line':
             ret = self._compute_amount_purchase(base_amount, price_unit, quantity=quantity, product=product, partner=partner)
         else:
             ret = super(AccountTax, self)._compute_amount(base_amount, price_unit, quantity=quantity, product=product, partner=partner)

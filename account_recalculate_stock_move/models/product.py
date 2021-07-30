@@ -77,6 +77,7 @@ class ProductTemplate(models.Model):
         for product in self.product_variant_ids:
             rounding = product.uom_id.rounding
             quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+            # _logger.info("QUINTS FOR PRODUCT IN LOCATIONS %s:%s:%s:%s" % (product.default_code, product, location.name, quants))
 
             for quant in quants:
                 try:
@@ -98,11 +99,20 @@ class ProductTemplate(models.Model):
                     else:
                         raise
 
+            history = self.env['product.price.history'].search([
+                ('company_id', '=', company.id),
+                ('product_id', 'in', self.product_variant_ids)], order='datetime desc,id desc')
+            if history:
+                history.unlink()
             quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+            # _logger.info("QUINTS FOR PRODUCT IN LOCATIONS %s:%s:%s:%s" % (product.default_code, product, location.name, quants))
+
             moves = self.env['stock.move'].search([('product_id', '=', product.id), ('state', '=', 'done')])
             if self._uid == SUPERUSER_ID:
                 moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
 
+            #try:
+            # _logger.info("MOVES %s" % moves)
             for move in moves.sorted(lambda r: r.date):
                 #move.write({"state": 'assigned'})
                 #move.move_line_ids.write({"state": 'assigned'})

@@ -10,6 +10,7 @@
         'sale',
         'purchase',
         'stock_landed_costs',
+        'stock_account',
         # 'account_recalculate_stock_move',
         'stock_picking_invoice_link',
         'stock_inventory_cost_info',
@@ -18,7 +19,7 @@
     ],
     'excludes': ['account_asset'],
     'author': "Rosen Vladimirov (Bioprint Ltd.), Noviat,Odoo Community Association (OCA)",
-    'website': 'https://github.com/rosenvladimirov/account-financial-tools',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Accounting & Finance',
     'data': [
         'security/account_asset_security.xml',

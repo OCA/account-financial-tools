@@ -156,7 +156,8 @@ class AccountAsset(models.Model):
     fy_value_depreciated = fields.Float(
         compute='_compute_depreciation',
         digits=dp.get_precision('Account'),
-        string='FY Depreciated Value')
+        string='FY Depreciated Value',
+    )
     tax_value_residual = fields.Float(
         compute='_compute_depreciation',
         digits=dp.get_precision('Account'),
@@ -449,12 +450,12 @@ class AccountAsset(models.Model):
                 fy_date_start = date.today() + relativedelta(days=1)
                 if self._context.get('force_date'):
                     fy_date_start = self._context['force_date']
-                _logger.info("DATE START %s" % fy_date_start)
+                # _logger.info("DATE START %s" % fy_date_start)
                 fy = asset.company_id.find_daterange_fy(fy_date_start)
                 lines = asset.depreciation_line_ids.filtered(
                     lambda l: l.type in ('depreciate', 'remove') and
                               (l.init_entry or l.move_check))
-                value_depreciated = sum([l.amount for l in lines])
+                value_depreciated = sum([l.amount for l in lines if l.line_date <= fy.date_end])
                 if value_depreciated == 0 and asset.froze_depreciation > 0 and not self._context.get(
                         'force_exclude_froze'):
                     value_depreciated += asset.froze_depreciation
@@ -465,7 +466,7 @@ class AccountAsset(models.Model):
 
                 fy_value_depreciated = sum(
                     [l.amount for l in lines if fy.date_start <= l.line_date <= fy.date_end])
-                fy_residual = asset.depreciation_base - asset.salvage_value - fy_value_depreciated
+                fy_residual = asset.depreciation_base - asset.salvage_value - value_begin_depreciated - fy_value_depreciated
                 fy_depreciated = fy_value_depreciated
 
                 lines = asset.depreciation_bg_line_ids.filtered(
@@ -481,7 +482,7 @@ class AccountAsset(models.Model):
                 begin_tax_depreciated = tax_value_begin_depreciated
                 tax_fy_value_depreciated = sum(
                     [l.amount for l in lines if fy.date_start <= l.line_date <= fy.date_end])
-                tax_fy_residual = asset.depreciation_base + asset.salvage_value - asset.fiscal_correction_value - tax_fy_value_depreciated
+                tax_fy_residual = asset.depreciation_base + asset.salvage_value - asset.fiscal_correction_value - tax_value_begin_depreciated - tax_fy_value_depreciated
                 tax_fy_depreciated = tax_fy_value_depreciated
 
             else:
@@ -652,6 +653,26 @@ class AccountAsset(models.Model):
         if self.depreciation_bg_line_ids:
             self.depreciation_bg_line_ids.unlink()
 
+    @api.multi
+    def _update_account_moves(self, vals, asset_id):
+        for asset in self:
+            for field in ['move_line_id', 'other_move_line_id']:
+                move = False
+                if field == 'move_line_id' and 'move_line_id' in vals.keys() and asset.move_line_id:
+                    asset.move_line_id.asset_id = asset.id
+                    move = asset.move_line_id.move_id
+                if field == 'other_move_line_id' and 'other_move_line_id' in vals.keys() and asset.other_move_line_id:
+                    asset.other_move_line_id.asset_id = asset.id
+                    move = asset.other_move_line_id.move_id
+                if move:
+                    accounts = move.mapped('account_move_ids')
+                    for line in accounts:
+                        # line.button_cancel()
+                        for account_move in line.line_ids:
+                            account_move.with_context(dict(self._context, allow_asset=True, allow_asset_removal=True)).write({
+                                'asset_id': asset_id,
+                            })
+
     @api.model
     def create(self, vals):
         if vals.get('method_time') not in ['year', 'month'] and not vals.get('prorata'):
@@ -659,7 +680,7 @@ class AccountAsset(models.Model):
         if vals.get('type') == 'view':
             vals['date_start'] = False
         # _logger.info("ASSETS %s" % vals)
-        asset = super().create(vals)
+        asset = super(AccountAsset, self).create(vals)
         if self.env.context.get('create_asset_from_move_line'):
             # Trigger compute of depreciation_base
             asset.salvage_value = 0.0
@@ -667,14 +688,22 @@ class AccountAsset(models.Model):
             asset._create_first_asset_line()
             if vals.get('move_line_id'):
                 asset.move_line_id.asset_id = asset.id
+
+        asset._update_account_moves(vals, asset.id)
         return asset
 
     @api.multi
     def write(self, vals):
+        #_logger.info('VALS %s' % vals)
         if vals.get('method_time'):
             if vals['method_time'] not in ['year', 'month'] and not vals.get('prorata'):
                 vals['prorata'] = True
-        res = super().write(vals)
+
+        for asset in self:
+            asset._update_account_moves(vals, False)
+
+        res = super(AccountAsset, self).write(vals)
+
         for asset in self:
             asset_type = vals.get('type') or asset.type
             if asset_type == 'view' or self.env.context.get('asset_validate_from_write'):
@@ -684,8 +713,8 @@ class AccountAsset(models.Model):
                 asset.compute_depreciation_board()
                 # extra context to avoid recursion
                 asset.with_context(asset_validate_from_write=True).validate()
-            if vals.get('move_line_id'):
-                asset.move_line_id.asset_id = asset.id
+
+            asset._update_account_moves(vals, asset.id)
         # if 'depreciation_restatement_line_ids' in vals:
         #     self.recalculate()
         return res
@@ -909,19 +938,15 @@ class AccountAsset(models.Model):
     @api.multi
     def open_entries(self):
         self.ensure_one()
-        amls = self.env['account.move.line'].search(
-            [('asset_id', '=', self.id)], order='date ASC')
-        am_ids = [l.move_id.id for l in amls]
-        return {
-            'name': _("Journal Entries"),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'account.move',
-            'view_id': False,
-            'type': 'ir.actions.act_window',
-            'context': self.env.context,
-            'domain': [('id', 'in', am_ids)],
-        }
+        am_ids = self.env['account.move.line'].search([('asset_id', '=', self.id)], order='date ASC')
+        action_ref = self.env.ref('account.action_account_moves_all_a')
+        if not action_ref or len(am_ids.ids) == 0:
+            return False
+        # _logger.info("MOVE %s:%s" % (am_ids.ids, action_ref))
+        action_data = action_ref.read()[0]
+        action_data['domain'] = [('id', 'in', am_ids.ids)]
+        action_data['context'] = {'search_default_misc_filter': 0, 'view_no_maturity': True}
+        return action_data
 
     @api.multi
     def compute_depreciation_board(self):
@@ -941,36 +966,13 @@ class AccountAsset(models.Model):
         for asset in self:
             if asset.with_context(dict(self._context, force_exclude_froze=True)).value_residual == 0.0:
                 continue
-            # if self.env.context.get("bg_asset_line"):
-            #     domain = [
-            #         ('asset_id', '=', asset.id),
-            #         ('type', '=', 'depreciate'),
-            #         ('init_entry', '=', True),
-            #     ]
-            # else:
-            #     domain = [
-            #         ('asset_id', '=', asset.id),
-            #         ('type', '=', 'depreciate'),
-            #         '|', ('move_check', '=', True), ('init_entry', '=', True)]
             domain = asset._get_board('domain1')
             posted_lines = line_obj.search(domain, order='line_date desc')
+
             if posted_lines:
                 last_line = posted_lines[0]
             else:
                 last_line = line_obj
-            # _logger.info("POSTED LINES %s:%s" % (last_line, self._context))
-            # if self.env.context.get("bg_asset_line"):
-            #     domain = [
-            #         ('asset_id', '=', asset.id),
-            #         ('type', '=', 'depreciate'),
-            #         ('init_entry', '=', False),
-            #     ]
-            # else:
-            #     domain = [
-            #         ('asset_id', '=', asset.id),
-            #         ('type', '=', 'depreciate'),
-            #         ('move_id', '=', False),
-            #         ('init_entry', '=', False)]
 
             domain = asset._get_board('domain2')
             old_lines = line_obj.search(domain)
@@ -1064,10 +1066,17 @@ class AccountAsset(models.Model):
             depr_line = last_line
             last_date = table[-1]['lines'][-1]['date']
             depreciated_value = depreciated_value_posted
+            if self.env.context.get("bg_asset_line"):
+                depr_max_froze = self.tax_froze_depreciation
+            else:
+                depr_max_froze = self.froze_depreciation
+            depreciated_value_froze = 0.0
+            froze_period = 0
             for entry in table[table_i_start:]:
                 for line in entry['lines'][line_i_start:]:
                     init_flag = entry['init']
                     seq += 1
+                    froze_period += 1
                     name = asset._get_depreciation_entry_name(seq)
                     if line['date'] == last_date:
                         # ensure that the last entry of the table always
@@ -1082,8 +1091,10 @@ class AccountAsset(models.Model):
                         amount = depr_max - depreciated_value
                     else:
                         amount = line['amount']
-                    if init_flag and line['date'].strftime('%Y-%m-%d') > self.froze_date:
+                    if init_flag and self.froze_date and line['date'].strftime('%Y-%m-%d') > self.froze_date:
                         init_flag = False
+                    if self.froze_period > 0 and self.froze_period == froze_period:
+                        amount = depr_max_froze - depreciated_value_froze
                     if amount or line['sleep_period']:
                         # _logger.info("LINE %s:%s" % (line, name))
                         vals = {
@@ -1102,7 +1113,9 @@ class AccountAsset(models.Model):
                             })
                         depr_line = line_obj.create(vals)
                         depreciated_value += amount
-                        # _logger.info("LINE NEW %s:%s" % (line_obj, depr_line))
+                        if self.froze_date and line['date'].strftime('%Y-%m-%d') <= self.froze_date:
+                            depreciated_value_froze += amount
+                    # _logger.info("LINE NEW %s:%s" % (line_obj, depr_line))
                     else:
                         seq -= 1
                 line_i_start = 0

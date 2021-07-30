@@ -7,7 +7,7 @@
     'license': 'AGPL-3',
     'author': "Rosen Vladimirov, dXFactory Ltd., "
               "Odoo Community Association (OCA)",
-    'website': 'https://github.com/rosenvladimirov/account-financial-tools',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Accounting',
     'depends': [
         'account',

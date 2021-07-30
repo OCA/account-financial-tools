@@ -6,7 +6,7 @@
     'version': '11.0.0.1.0',
     "author": "Rosen Vladimirov <vladimirov.rosen@gmail.com>, "
               "dXFactory Ltd. <http://www.dxfactory.eu>",
-    'website': 'https://github.com/rosenvladimirov/account-financial-tools',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Hidden/Dependency',
     'depends' : ['analytic'],
     'description': """

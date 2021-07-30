@@ -234,7 +234,7 @@ class StockMove(models.Model):
                 line.taxes_id.with_context(round=False).compute_all(price_unit, currency=line.order_id.currency_id,
                                                                     quantity=1.0)['total_excluded']
             if line.product_uom.id != line.product_id.uom_id.id:
-                price_unit *= line.product_uom.factor / line.product_id.uom_id.factor
+                price_unit = line.product_uom.factor / line.product_id.uom_id.factor
             if order.currency_id != order.company_id.currency_id:
                 # DO NOT FORWARD-PORT! ONLY FOR V11!!!
                 # The date must be today, and not the date of the move since the move move is still

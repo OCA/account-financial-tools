@@ -7,6 +7,7 @@ from odoo.tools import float_compare
 from odoo.addons.account.models import account_invoice as accountinvoice
 
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -16,7 +17,7 @@ class AccountInvoice(models.Model):
     account_move_ids = fields.One2many('account.move', compute="_compute_account_move_ids")
     account_move_line_ids = fields.One2many('account.move.line', compute="_compute_account_move_line_ids")
 
-    #account_ids = fields.Many2one('product.product', related='invoice_line_ids.account_id', string='Account in lines')
+    # account_ids = fields.Many2one('product.product', related='invoice_line_ids.account_id', string='Account in lines')
     product_id = fields.Many2one('product.product', related='invoice_line_ids.product_id', string='Product_id')
 
     @api.multi
@@ -64,7 +65,8 @@ class AccountInvoice(models.Model):
                 if landed_cost:
                     for landed_cost_line in landed_cost:
                         for account_move in landed_cost_line.account_move_id:
-                            inv.account_move_line_ids |= account_move.mapped('line_ids').filtered(lambda r: r.product_id == line.product_id)
+                            inv.account_move_line_ids |= account_move.mapped('line_ids').filtered(
+                                lambda r: r.product_id == line.product_id)
 
     @api.multi
     def action_get_account_moves(self):
@@ -98,15 +100,18 @@ class AccountInvoice(models.Model):
     def action_invoice_rebuild(self):
         moves = self.env['account.move']
         for invoice in self:
-            if invoice.filtered(lambda inv: float_compare(inv.amount_total, 0.0, precision_rounding=inv.currency_id.rounding) == -1):
-                raise UserError(_("You cannot rebuild an invoice with a negative total amount. You should create a credit note instead."))
+            if invoice.filtered(lambda inv: float_compare(inv.amount_total, 0.0,
+                                                          precision_rounding=inv.currency_id.rounding) == -1):
+                raise UserError(
+                    _("You cannot rebuild an invoice with a negative total amount. You should create a credit note instead."))
 
             invoice._action_invoice_rebuild_pre()
-            #_logger.info("REBUILD %s" % invoice)
+            # _logger.info("REBUILD %s" % invoice)
             if invoice.move_id:
                 moves += invoice.move_id
             if invoice.payment_move_line_ids:
-                raise UserError(_('You cannot rebuild an invoice which is partially paid. You need to unreconcile related payment entries first.'))
+                raise UserError(
+                    _('You cannot rebuild an invoice which is partially paid. You need to unreconcile related payment entries first.'))
 
             # First, set the invoices as cancelled and detach the move ids
             self.write({'move_id': False})
@@ -126,3 +131,44 @@ class AccountInvoice(models.Model):
             invoice.compute_taxes()
             invoice.action_move_create()
             invoice._action_invoice_rebuild_post()
+
+    @api.multi
+    def invoice_validate(self):
+        pickings = self.env['stock.picking']
+        msg = _('Found difference between PO and Invoice in follow product')
+        for record in self:
+            inx = 0
+            for line in record.invoice_line_ids:
+                if line.po_change_price:
+                    inx += 1
+                    msg += '\n%s. %s:%s' % (inx, line.product_id.name, line.price_unit)
+                    pickings |= line.purchase_line_id.order_id.picking_ids
+
+            if pickings:
+                if inx > 0:
+                    msg += _('We will fix...')
+                    raise ValidationError(msg)
+                _logger.info(msg)
+                for picking in pickings:
+                    picking.rebuild_account_move()
+        return super(AccountInvoice, self).invoice_validate()
+
+
+class AccountInvoiceLine(models.Model):
+    _inherit = "account.invoice.line"
+
+    po_change_price = fields.Boolean(help="Technical field to follow changes in price")
+
+    @api.onchange
+    def _onchange_price_unit(self):
+        if self.purchase_line_id:
+            line = self.purchase_line_id
+            price_unit = line.order_id.currency_id.with_context(date=self.date_invoice).compute(line.price_unit,
+                                                                                                self.currency_id,
+                                                                                                round=False)
+            inv_price_unit = self.invoice_id.currency_id.with_context(date=self.date_invoice).compute(self.price_unit,
+                                                                                                      self.currency_id,
+                                                                                                      round=False)
+            if price_unit != inv_price_unit and self.uom_id == line.product_uom:
+                line.price_unit = inv_price_unit
+                self.po_change_price = True

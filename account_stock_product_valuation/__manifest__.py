@@ -9,7 +9,7 @@
         "stock_account",
     ],
     'author': "Rosen Vladimirov, Bioprint Ltd.,",
-    "website": 'https://github.com/rosenvladimirov/account-financial-tools',
+    "website": 'https://github.com/OCA/account-financial-tools',
     "category": "Finance",
     "data": [
         'views/product_views.xml',

@@ -77,12 +77,17 @@ class InventoryLine(models.Model):
         comodel_name='account.bg.asset.profile',
         string='Tax Asset Profile')
     account_asset_ids = fields.One2many("account.asset", related="product_id.account_asset_ids")
+    price_unit = fields.Float(
+        string='Unit Price',
+        help="Technical field used to record the product cost set by the user during a picking confirmation (when costing "
+            "method used is 'average price' or 'real'). Value given in company currency and in product uom.",
+        copy=False)  # as it's a technical field, we intentionally don't provide the digits attribute
 
-    @api.onchange('product_id')
+    @api.onchange('product_id', 'prod_lot_id')
     def onchange_product(self):
         res = super(InventoryLine, self).onchange_product()
         if self.product_id:
-            if not len(self.account_asset_ids.ids) > 0:
+            if not len(self.account_asset_ids.filtered(lambda r: r.lot_id != self.prod_lot_id).ids) > 0:
                 price_subtotal_signed = self.standard_price
                 # Check in product valuations
                 product_tmpl = self.product_id.product_tmpl_id.categ_id
@@ -108,7 +113,11 @@ class InventoryLine(models.Model):
     #     return res
 
     def _get_move_values(self, qty, location_id, location_dest_id, out):
-        res = super()._get_move_values(qty, location_id, location_dest_id, out)
+        res = super(InventoryLine, self)._get_move_values(qty, location_id, location_dest_id, out)
+        price_unit = self.price_unit
+        if self.price_unit == 0.0:
+            price_unit = self.standard_price
+        res.update({'price_unit': price_unit})
         if self.asset_id:
             res['move_line_ids'][0][2].update({'asset_id': self.asset_id.id})
         if self.asset_profile_id and qty == 1 and not out:

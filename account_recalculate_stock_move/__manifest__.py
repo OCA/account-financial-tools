@@ -15,7 +15,7 @@
         "account_move_line_stock_info",
         "account_asset_management",
         "queue_job",
-        "queue_job_batch",
+        # "queue_job_batch",
     ],
     # "conflicts": [
     #     "purchase_stock_price_unit_sync",

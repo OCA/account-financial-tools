@@ -157,7 +157,7 @@ class AccountMoveLine(models.Model):
                     del vals['move_line_id']
                 if vals.get('lot_id') and 'lot_id' not in self._fields:
                     del vals['lot_id']
-        return super().create(vals)
+        return super(AccountMoveLine, self).create(vals)
 
     @api.multi
     def write(self, vals):
@@ -209,7 +209,7 @@ class AccountMoveLine(models.Model):
                         create_asset_from_move_line=True,
                         move_id=aml.move_id.id).create(asset_vals)
                     vals['asset_id'] = asset.id
-        return super().write(vals)
+        return super(AccountMoveLine, self).write(vals)
 
     @api.model
     def _get_asset_analytic_values(self, vals, asset_vals):

@@ -101,9 +101,11 @@ class StockMove(models.Model):
                 debit_line_vals = res[0][2].copy()
                 credit_line_vals = res[1][2]
                 res[0][2]['debit'] = credit_line_vals['credit'] - residual_value
+                res[0][2]['asset_id'] = asset.id
                 res[1][2]['asset_id'] = asset.id
                 debit_line_vals['debit'] = residual_value
                 debit_line_vals['account_id'] = asset.profile_id.account_depreciation_id.id
+                debit_line_vals['asset_id'] = asset.id
                 del debit_line_vals['product_id']
                 del debit_line_vals['quantity']
                 del debit_line_vals['product_uom_id']
@@ -171,6 +173,6 @@ class StockMoveLine(models.Model):
                 product_id = vals.get('product_id') or record.product_id.id
                 asset = self.env['account.asset'].search([('product_id', '=', product_id),
                                                           ('lot_id', '=', vals['lot_id'])])
-                if asset and self.asset_id != asset or not vals.get('asset_id'):
+                if asset and len(asset.ids) == 1 and self.asset_id != asset or not vals.get('asset_id'):
                     vals['asset_id'] = asset.id
         return super(StockMoveLine, self).write(vals)

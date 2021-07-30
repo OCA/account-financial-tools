@@ -4,6 +4,9 @@
 from odoo import api, fields, models, _
 
 import logging
+
+from odoo.exceptions import ValidationError
+
 _logger = logging.getLogger(__name__)
 
 
@@ -67,3 +70,23 @@ class PurchaseOrder(models.Model):
         action_data['domain'] = [('id', 'in', self.account_move_ids.ids)]
         action_data['context'] = {'search_default_misc_filter': 0, 'view_no_maturity': True}
         return action_data
+
+    @api.multi
+    def rebuild_account_move(self):
+        for record in self:
+            # check before for invoice prices
+            msg = _('Found difference between PO and Invoice in follow product')
+            inx = 0
+            for line in record.order_line:
+                inv = line.invoice_lines.filtered(lambda r: r.product_id == line.product_id)
+                if len(inv.ids) > 0 and line.price_unit != inv[0].price_unit:
+                    line.price_unit = inv[0].price_unit
+                    inx += 1
+                    msg += '\n%s. %s:%s' % (inx, line.product_id.name, inv[0].price_unit)
+            if inx > 0:
+                msg += _('We will fix...')
+                raise ValidationError(msg)
+            if inx > 0:
+                _logger.info(msg)
+            for picking in record.picking_ids:
+                picking.rebuild_account_move()

@@ -10,6 +10,13 @@
                         icon="fa-usd" class="oe_stat_button"
                         string="Accounting Entries"
                         type="object"/>
+                <button name="rebuild_account_move"
+                        icon="fa fa-book"
+                        class="oe_stat_button"
+                        string="Rebuild Acc. Entries"
+                        states="purchase"
+                        type="object"
+                        groups="base.group_no_one"/>
             </xpath>
             <field name="invoice_status" position="before">
                 <label for="account_move_inv_debit" string="Invoice: Debit/Credit"/>

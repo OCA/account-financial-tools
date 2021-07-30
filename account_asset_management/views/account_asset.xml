@@ -24,7 +24,11 @@
                     <field name="active" widget="boolean_button"
                            options='{"terminology": "archive"}'/>
             </button>
-            <button name="open_entries" string="Journal Entries" type="object" class="oe_stat_button" icon="fa-bars"
+            <button name="open_entries"
+                    string="Journal Entries"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-usd"
                     attrs="{'invisible': [('type', '=', 'view')]}"/>
           </div>
           <div class="oe_title">
@@ -141,8 +145,8 @@
               <group colspan="4">
                 <group>
                   <separator string="Depreciation Dates" colspan="2"/>
-                  <field name="method_tax_time" invisible="1"/>
-                  <field name="fiscal_method_percentage" invisible="1"/>
+                  <field name="method_tax_time" readonly="1" groups="base.group_no_one"/>
+                  <field name="fiscal_method_percentage" readonly="1" groups="base.group_no_one"/>
                   <field name="method_time"/>
                   <field name="method_number"
                          attrs="{'invisible': [('method_time', '=', 'end')], 'required': [('method_time', 'in', ['number', 'month', 'year'])]}"/>

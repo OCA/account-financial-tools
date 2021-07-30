@@ -9,7 +9,7 @@
         "mrp_bom_losses",
     ],
     'author': "Rosen Vladimirov, Bioprint Ltd.,",
-    "website": 'https://github.com/rosenvladimirov/account-financial-tools',
+    "website": 'https://github.com/OCA/account-financial-tools',
     "category": "Finance",
     "data": [
         "data/account_recalculate_stock_move.xml",
