@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_invoice_asset_view_form" model="ir.ui.view">
+        <field name="name">account.invoice.asset.form</field>
+        <field name="model">account.invoice.asset</field>
+        <field name="arch" type="xml">
+            <form string="Choice assets from invoice">
+                <group>
+                    <group>
+                        <group>
+                            <field name="invoice_id" invisible="0" readonly="1"/>
+                            <field name="partner_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="reference" readonly="1"/>
+                            <field name="date_invoice" readonly="1"/>
+                            <field name="move_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="invoice_line_ids" colspan="4" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="invoice_line_id" invisible="1"/>
+                            <field name="product_id"/>
+                            <field name="account_id"/>
+                            <field name="asset_profile_id"/>
+                            <field name="tax_asset_profile_id"/>
+                            <field name="quantity"/>
+                            <field name="price_unit"/>
+                            <field name="uom_id"/>
+                            <field name="price_subtotal"/>
+                        </tree>
+                    </field>
+                    <field name="move_line_ids" invisible="1" colspan="4" nolabel="1"/>
+                </group>
+                <footer>
+                    <button string="Generate Accounting entries" name="rebuild_account_move" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

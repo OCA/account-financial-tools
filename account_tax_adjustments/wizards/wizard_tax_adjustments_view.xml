@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tax_adjustments_wizard" model="ir.ui.view">
+            <field name="name">tax.adjustments.wizard.form</field>
+            <field name="model">tax.adjustments.wizard</field>
+            <field name="inherit_id" ref="account.tax_adjustments_wizard"/>
+            <field name="arch" type="xml">
+                <field name="date" position="replace"/>
+                <xpath expr="//group/group" position="before">
+                    <group name="configure_period_type">
+                        <field name="template_id" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                        <label for="choice_period_type" class="oe_edit_only"/>
+                        <field name="choice_period_type" nolabel="1" options="{'horizontal': true}" class="oe_edit_only" widget="radio"/>
+                        <field name="company_id"/>
+                        <field name="post"/>
+                    </group>
+                    <group name="dates">
+                        <field name="date"/>
+                        <field name="date_range_id" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </xpath>
+                <field name="debit_account_id" position="attributes">
+                    <attribute name='domain'>[('deprecated', '=', False), '|', ('company_id', '=', company_id), ('company_id', '=', False)]</attribute>
+                </field>
+                <field name="credit_account_id" position="attributes">
+                    <attribute name='domain'>[('deprecated', '=', False), '|', ('company_id', '=', company_id), ('company_id', '=', False)]</attribute>
+                </field>
+                <field name="journal_id" position="attributes">
+                    <attribute name='domain'>[('type', '=', 'general'), '|', ('company_id', '=', company_id), ('company_id', '=', False)]</attribute>
+                </field>
+                <xpath expr="//group" position="inside">
+                    <field name="note" nolabel="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

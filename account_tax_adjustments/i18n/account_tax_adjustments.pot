@@ -1,0 +1,175 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_tax_adjustments
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-21 14:00+0000\n"
+"PO-Revision-Date: 2021-04-21 14:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_tax_id
+msgid "Adjustment Tax"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_adjustment_type
+msgid "Adjustment Type"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: selection:tax.adjustment.template,adjustment_type:0
+msgid "Applied on credit journal item"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: selection:tax.adjustment.template,adjustment_type:0
+msgid "Applied on debit journal item"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_company_id
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_credit_account_id
+msgid "Credit account"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_date_from
+msgid "Date from"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_date_range_id
+msgid "Date range"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_date_to
+msgid "Date to"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_debit_account_id
+msgid "Debit account"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_note
+msgid "Description"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: selection:tax.adjustment.template,choice_period_type:0
+#: selection:tax.adjustments.wizard,choice_period_type:0
+msgid "Fiscal month"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: selection:tax.adjustment.template,choice_period_type:0
+#: selection:tax.adjustments.wizard,choice_period_type:0
+msgid "Fiscal year"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_template_id
+msgid "Get from template"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_id
+msgid "ID"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_reason
+msgid "Justification"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_name
+msgid "Name of template"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_post
+msgid "Post after create"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.actions.act_window,name:account_tax_adjustments.action_tax_adjustment_template_form
+#: model:ir.ui.menu,name:account_tax_adjustments.menu_action_tax_adjustment_template_form
+#: model:ir.ui.view,arch_db:account_tax_adjustments.view_tax_adjustment_template_form
+#: model:ir.ui.view,arch_db:account_tax_adjustments.view_tax_adjustment_template_search
+#: model:ir.ui.view,arch_db:account_tax_adjustments.view_tax_adjustment_template_tree
+msgid "Tax Adjustment Template"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model,name:account_tax_adjustments.model_tax_adjustment_template
+msgid "Template for tax adjustment"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustment_template_choice_period_type
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_choice_period_type
+msgid "Type period"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model.fields,field_description:account_tax_adjustments.field_tax_adjustments_wizard_unsigned_amount
+msgid "Unsigned Amount"
+msgstr ""
+
+#. module: account_tax_adjustments
+#: model:ir.model,name:account_tax_adjustments.model_tax_adjustments_wizard
+msgid "Wizard for Tax Adjustments"
+msgstr ""
+

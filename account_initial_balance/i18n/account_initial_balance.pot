@@ -1,0 +1,213 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_initial_balance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-21 13:59+0000\n"
+"PO-Revision-Date: 2021-04-21 13:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.module.category,name:account_initial_balance.module_account_initial_balance
+msgid "Account Initial Balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:res.groups,name:account_initial_balance.group_initial_balance_manager
+msgid "Adviser manager for initial balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:res.groups,name:account_initial_balance.group_initial_balance_user
+msgid "Adviser user for initial balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.ui.view,arch_db:account_initial_balance.wizard_rebooking_inventory
+msgid "Apply"
+msgstr ""
+
+#. module: account_initial_balance
+#: code:addons/account_initial_balance/models/stock.py:121
+#, python-format
+msgid "Automatic Balancing Line"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_stock_inventory_stop_account_move
+msgid "Block account move"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.ui.view,arch_db:account_initial_balance.wizard_rebooking_inventory
+msgid "Cancel"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory_company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.actions.act_window,name:account_initial_balance.action_wizard_rebooking_inventory
+#: model:ir.ui.view,arch_db:account_initial_balance.wizard_rebooking_inventory
+msgid "Force move to initial balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory_future_initial_balance
+msgid "Future Initial Balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory_id
+msgid "ID"
+msgstr ""
+
+#. module: account_initial_balance
+#: code:addons/account_initial_balance/models/account_move.py:21
+#: model:ir.actions.act_window,name:account_initial_balance.action_setup_opening_move_wizard_form
+#: model:ir.actions.server,name:account_initial_balance.action_srv_setup_opening_move_wizard_form
+#: model:ir.ui.menu,name:account_initial_balance.menu_action_setup_opening_move_wizard_form
+#, python-format
+msgid "Initial balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: code:addons/account_initial_balance/models/stock.py:58
+#, python-format
+msgid "Initial balance - %s"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_wizard_rebooking_inventory_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.module.category,description:account_initial_balance.module_account_initial_balance
+msgid "Manage all documents linked with\n"
+"            initial balance like as PO, SO, Invoices, Inventory Adjustment...\n"
+"        "
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_stock_inventory_future_initial_balance
+msgid "Mark for initial balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: code:addons/account_initial_balance/models/stock.py:32
+#, python-format
+msgid "Not opened initial balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_stock_move_line
+msgid "Packing Operation"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_sale_order
+msgid "Quotation"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.actions.server,name:account_initial_balance.ir_cron_rebuild_inventory_scheduler_ir_actions_server
+#: model:ir.cron,cron_name:account_initial_balance.ir_cron_rebuild_inventory_scheduler
+#: model:ir.cron,name:account_initial_balance.ir_cron_rebuild_inventory_scheduler
+msgid "Rebuild inventory Scheduler"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_account_move_is_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_purchase_order_is_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_sale_order_is_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_stock_inventory_is_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_stock_move_is_initial_balance
+#: model:ir.model.fields,field_description:account_initial_balance.field_stock_picking_is_initial_balance
+#: model:ir.ui.view,arch_db:account_initial_balance.purchase_order_form
+#: model:ir.ui.view,arch_db:account_initial_balance.view_move_form
+#: model:ir.ui.view,arch_db:account_initial_balance.view_order_form
+#: model:ir.ui.view,arch_db:account_initial_balance.view_picking_form
+msgid "This is initial balance"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_account_opening
+msgid "account.opening"
+msgstr ""
+
+#. module: account_initial_balance
+#: model:ir.model,name:account_initial_balance.model_wizard_rebooking_inventory
+msgid "wizard.rebooking.inventory"
+msgstr ""
+

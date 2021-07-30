@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.server" id="action_recalculate_all_account_move">
+        <field name="name">Re-booking all account move</field>
+        <field name="model_id" ref="account_recalculate_stock_move.model_wizard_rebuild_all_account_moves"/>
+        <field name="state">code</field>
+        <field name="code">
+            model.server_rebuild()
+        </field>
+    </record>
+    <record model="ir.actions.server" id="action_recalculate_inventory">
+        <field name="name">Re-booking all account move</field>
+        <field name="model_id" ref="account_recalculate_stock_move.model_wizard_rebuild_move_stock_inventory"/>
+        <field name="state">code</field>
+        <field name="code">
+            model.server_rebuild()
+        </field>
+    </record>
+    <record model="ir.actions.server" id="action_recalculate_picking">
+        <field name="name">Re-booking all stock pickings</field>
+        <field name="model_id" ref="account_recalculate_stock_move.model_wizard_rebuild_move_picking_transfer"/>
+        <field name="state">code</field>
+        <field name="code">
+            model.server_rebuild()
+        </field>
+    </record>
+    <!--
+    <record model="ir.actions.server" id="action_recalculate_account_move">
+        <field name="name">Re-booking The stock move</field>
+        <field name="model_id" ref="stock.model_stock_move"/>
+        <field name="code">
+            for item in records:
+            item._rebuild_account_move()
+        </field>
+    </record>
+    <record model="ir.values" id="ir_recalculate_account_move">
+        <field name="name">Manual Account Movement</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.server,%d' % action_recalculate_account_move"/>
+        <field name="model">stock.move</field>
+    </record>
+    -->
+</odoo>

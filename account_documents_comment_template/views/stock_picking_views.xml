@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_print_user_form" model="ir.ui.view">
+        <field name="name">stock.picking.user.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="product_properties.view_picking_print_user_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_sub_type']" position="after">
+                <field name="static_template_id" context="{'default_position': 'prints'}"
+                       domain="[('company_id', '=', company_id)]"/>
+            </xpath>
+            <xpath expr="//separator[@name='staticproperties']" position="before">
+                <separator name="staticnote" string="Note" groups="product_properties.group_properties_print"/>
+                <field name="static_note" colspan="4" nolabel="1" groups="product_properties.group_properties_print"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

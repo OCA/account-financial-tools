@@ -1,0 +1,73 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_tax_fixes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-21 14:00+0000\n"
+"PO-Revision-Date: 2021-04-21 14:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_tax_fixes
+#: model:ir.model,name:account_tax_fixes.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_tax_fixes
+#: code:addons/account_tax_fixes/models/account_invoice.py:39
+#, python-format
+msgid "Cannot find a chart of accounts for this company, You should configure it. \n"
+"Please go to Account Configuration."
+msgstr ""
+
+#. module: account_tax_fixes
+#: code:addons/account_tax_fixes/models/account_invoice.py:40
+#, python-format
+msgid "Go to the configuration panel"
+msgstr ""
+
+#. module: account_tax_fixes
+#: model:ir.model,name:account_tax_fixes.model_account_invoice_tax
+msgid "Invoice Tax"
+msgstr ""
+
+#. module: account_tax_fixes
+#: model:ir.actions.act_window,name:account_tax_fixes.action_invoice_tax_tree
+msgid "Invoices Taxes"
+msgstr ""
+
+#. module: account_tax_fixes
+#: model:ir.model,name:account_tax_fixes.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_tax_fixes
+#: model:ir.ui.view,arch_db:account_tax_fixes.view_invoice_tax_ext_form
+#: model:ir.ui.view,arch_db:account_tax_fixes.view_invoice_tax_ext_tree
+msgid "Manual Invoice Taxes"
+msgstr ""
+
+#. module: account_tax_fixes
+#: model:ir.model,name:account_tax_fixes.model_account_tax
+msgid "Tax"
+msgstr ""
+
+#. module: account_tax_fixes
+#: model:ir.ui.view,arch_db:account_tax_fixes.invoice_fixes_form
+#: model:ir.ui.view,arch_db:account_tax_fixes.invoice_supplier_fixes_form
+msgid "Taxes"
+msgstr ""
+
+#. module: account_tax_fixes
+#: code:addons/account_tax_fixes/models/account_invoice.py:67
+#, python-format
+msgid "Warning for %s"
+msgstr ""
+

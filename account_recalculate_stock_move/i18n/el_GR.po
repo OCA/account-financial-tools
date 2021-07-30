@@ -1,0 +1,671 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_recalculate_stock_move
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-21 14:00+0000\n"
+"PO-Revision-Date: 2021-04-21 14:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+msgid "<span>Ct: </span>"
+msgstr "<span>Ct: </span>"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+msgid "<span>Dt: </span>"
+msgstr "<span>Dt: </span>"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+msgid "Account Journal Items"
+msgstr "Account Journal Items"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_account_invoice_account_move_ids
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_purchase_order_account_move_ids
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_sale_order_account_move_ids
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_inventory_account_move_ids
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_picking_account_move_ids
+msgid "Account Move"
+msgstr "Account Move"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+msgid "Account Move Details"
+msgstr "Account Move Details"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_account_invoice_account_move_line_ids
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_inventory_account_move_line_ids
+msgid "Account Move Line"
+msgstr "Account Move Line"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.invoice_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.invoice_supplier_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.purchase_order_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_order_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_picking_form_inherit_re
+msgid "Accounting Entries"
+msgstr "Λογιστικές Εγγραφές"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_stock_inventory_cancel
+msgid "Before Date"
+msgstr "Before Date"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_move_transfer
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_picking
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_all_account_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_inventories
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_invoices
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_picking
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_stock_inventory_cancel
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_stock_inventory_cancel
+msgid "Cancel inventory and remove it"
+msgstr "Cancel inventory and remove it"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,help:account_recalculate_stock_move.field_stock_move_accounting_date
+#: model:ir.model.fields,help:account_recalculate_stock_move.field_stock_picking_accounting_date
+msgid "Choose the accounting date at which you want to value the stock moves created by the inventory instead of the default one (the inventory end date)"
+msgstr "Επιλέξτε την λογιστική ημερομηνία που θέλετε να εκτιμηθούν οι κινήσεις αποθεμάτων που δημιουργούνται από την απογραφή αντί για τη προεπιλεγμένη (η ημερομηνία λήξης της απογραφής)"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_company_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_company_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_company_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_account_invoice_company_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_picking_transfer_company_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_stock_inventory_company_id
+msgid "Company"
+msgstr "Εταιρία"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.act_window,name:account_recalculate_stock_move.action_wizard_rebooking_move_transfer
+msgid "Create Account Move"
+msgstr "Create Account Move"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_create_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_create_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_create_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_create_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_account_invoice_create_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_picking_transfer_create_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_stock_inventory_create_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel_create_uid
+msgid "Created by"
+msgstr "Δημιουργήθηκε από"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_create_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_create_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_create_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_create_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_account_invoice_create_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_picking_transfer_create_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_stock_inventory_create_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel_create_date
+msgid "Created on"
+msgstr "Δημιουργήθηκε στις"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel_date
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_date_from
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_date_from
+msgid "Date From"
+msgstr "Date From"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_date_to
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_date_to
+msgid "Date To"
+msgstr "Date To"
+
+#. module: account_recalculate_stock_move
+#: selection:wizard.rebuild.all.account.moves,interval_type:0
+msgid "Days"
+msgstr "Ημέρες"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_purchase_order_account_move_inv_credit
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_purchase_order_account_move_inv_debit
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_purchase_order_account_move_pick_credit
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_purchase_order_account_move_pick_debit
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_sale_order_account_move_inv_credit
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_sale_order_account_move_inv_debit
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_sale_order_account_move_pick_credit
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_sale_order_account_move_pick_debit
+msgid "Debit on invoice"
+msgstr "Debit on invoice"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_stock_inventory_cancel
+msgid "Delete after cancel"
+msgstr "Delete after cancel"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_display_name
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_display_name
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_display_name
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_display_name
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_account_invoice_display_name
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_picking_transfer_display_name
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_stock_inventory_display_name
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel_display_name
+msgid "Display Name"
+msgstr "Εμφάνιση Ονόματος"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,help:account_recalculate_stock_move.field_stock_inventory_line_only_quantity
+#: model:ir.model.fields,help:account_recalculate_stock_move.field_stock_move_only_quantity
+msgid "Do not use amount for accounting entries"
+msgstr "Do not use amount for accounting entries"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_move_transfer
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_picking
+msgid "End Date"
+msgstr "Ημερ. Λήξης"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_all_account_move
+msgid "Execute for interval"
+msgstr "Execute for interval"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_inventories
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_invoices
+msgid "Execute on Server"
+msgstr "Execute on Server"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_move_accounting_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_picking_accounting_date
+msgid "Force Accounting Date"
+msgstr "Αναγκαστική Ημερ. Λογιστικής"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_move_has_account_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_move_line_has_account_move
+msgid "Has Account Move"
+msgstr "Has Account Move"
+
+#. module: account_recalculate_stock_move
+#: selection:wizard.rebuild.all.account.moves,interval_type:0
+msgid "Hours"
+msgstr "Ώρες"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_account_invoice_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_picking_transfer_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_stock_inventory_id
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel_id
+msgid "ID"
+msgstr "Κωδικός"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_interval_number
+msgid "Interval Number"
+msgstr "Interval Number"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_interval_type
+msgid "Interval Unit"
+msgstr "Μονάδα Διαστήματος"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_stock_inventory
+msgid "Inventory"
+msgstr "Αποθήκη"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Γραμή Αποθέματος"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_stock_location
+msgid "Inventory Locations"
+msgstr "Τοποθεσίες Αποθέματος"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_account_invoice
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_invoice_id
+msgid "Invoice"
+msgstr "Τιμολόγιο"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_check_invoice_moves
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_check_invoice_moves
+msgid "Invoice movement"
+msgstr "Invoice movement"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.purchase_order_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_order_form
+msgid "Invoice: Debit/Credit"
+msgstr "Αξιόγραφο: Χρεωστικό/Πιστωτικό"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_invoices
+msgid "Invoices"
+msgstr "Τιμολόγια"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+msgid "Journal Items"
+msgstr "Εγγραφές Ημερολογίων"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_landed_cost_id
+msgid "Landed Cost"
+msgstr "Landed Cost"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer___last_update
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer___last_update
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves___last_update
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves___last_update
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_account_invoice___last_update
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_picking_transfer___last_update
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_stock_inventory___last_update
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel___last_update
+msgid "Last Modified on"
+msgstr "Τελευταία τροποποίηση στις"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_write_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_write_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_write_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_write_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_account_invoice_write_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_picking_transfer_write_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_stock_inventory_write_uid
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel_write_uid
+msgid "Last Updated by"
+msgstr "Τελευταία Ενημέρωση από"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_write_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_write_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_write_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_write_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_account_invoice_write_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_picking_transfer_write_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_move_stock_inventory_write_date
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel_write_date
+msgid "Last Updated on"
+msgstr "Τελευταία Ενημέρωση στις"
+
+#. module: account_recalculate_stock_move
+#: selection:wizard.rebuild.all.account.moves,interval_type:0
+msgid "Minutes"
+msgstr "Λεπτά"
+
+#. module: account_recalculate_stock_move
+#: selection:wizard.rebuild.all.account.moves,interval_type:0
+msgid "Months"
+msgstr "Μήνες"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_move_transfer
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_picking
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_picking
+msgid "Move transfers"
+msgstr "Move transfers"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_move_transfer
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_picking
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_picking
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_stock_inventory_cancel
+msgid "Next"
+msgstr "Επόμενο"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_nextcall
+msgid "Next Execution Date"
+msgstr "Επόμενη Ημέρα Εκτέλεσης"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,help:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_nextcall
+msgid "Next planned execution date for this job."
+msgstr "Επόμενη προγραμματισμένη ημερομηνία εκτέλεσης για αυτή την εργασία"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form
+msgid "No Bookkeep Entries"
+msgstr "No Bookkeep Entries"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_inventory_line_only_quantity
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_stock_move_only_quantity
+msgid "No amount"
+msgstr "No amount"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_user_id
+msgid "Notified User"
+msgstr "Notified User"
+
+#. module: account_recalculate_stock_move
+#: code:addons/account_recalculate_stock_move/models/stock_inventory.py:96
+#, python-format
+msgid "On this inventory is not have movement."
+msgstr "On this inventory is not have movement."
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_move_transfer_only_remove
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebooking_picking_transfer_only_remove
+msgid "Only Remove"
+msgstr "Only Remove"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_stock_move_line
+msgid "Packing Operation"
+msgstr "Λειτουργία Συσκευασίας"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.purchase_order_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_order_form_inherit_sale_stock
+msgid "Picking: Debit/Credit"
+msgstr "ΔΑ: Χρεωστικό/Πιστωτικό"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_product_product
+msgid "Product"
+msgstr "Προϊόν"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_product_template
+msgid "Product Template (Multi-Company)"
+msgstr "Product Template (Multi-Company)"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_check_product_moves
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_check_product_moves
+msgid "Product movement"
+msgstr "Product movement"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_account_invoice_product_id
+msgid "Product_id"
+msgstr "Product_id"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_inventories
+msgid "Productions"
+msgstr "Παραγωγές"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_purchase_order
+msgid "Purchase Order"
+msgstr "Παραγγελία Αγοράς"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_stock_quant
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_picking_form_inherit_re
+msgid "Quants"
+msgstr "Διαθεσιμότητα"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_sale_order
+msgid "Quotation"
+msgstr "ΠΡΟΣΦΟΡΑ"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_inventories
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_move_invoices
+msgid "Re-booking"
+msgstr "Re-booking"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.product_form_view_rebuild_button
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.product_template_form_view_rebuild_button
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_picking_form_inherit_re
+msgid "Re-booking Picking Entries"
+msgstr "Re-booking Picking Entries"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.server,name:account_recalculate_stock_move.action_recalculate_all_account_move
+#: model:ir.actions.server,name:account_recalculate_stock_move.action_recalculate_inventory
+msgid "Re-booking all account move"
+msgstr "Re-booking all account move"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.server,name:account_recalculate_stock_move.action_recalculate_picking
+msgid "Re-booking all stock pickings"
+msgstr "Re-booking all stock pickings"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_ready
+msgid "Ready"
+msgstr "Έτοιμη"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_all_account_move
+msgid "Rebuild"
+msgstr "Rebuild"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.invoice_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.invoice_supplier_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_move_form_inherit_re
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_move_line_form
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_picking_form_inherit_re
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_stock_landed_cost_form
+msgid "Rebuild Acc. Entries"
+msgstr "Επανάληψη Λογιστικών Εγγραφών"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.act_window,name:account_recalculate_stock_move.action_wizard_rebooking_picking
+#: model:ir.ui.menu,name:account_recalculate_stock_move.stock_move_menu
+msgid "Rebuild Picking"
+msgstr "Rebuild Picking"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.act_window,name:account_recalculate_stock_move.action_wizard_rebuild_move_inventory
+msgid "Rebuild acc. move on Inventory"
+msgstr "Rebuild acc. move on Inventory"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.act_window,name:account_recalculate_stock_move.action_wizard_rebuild_move_invoices
+msgid "Rebuild acc. move on Invoices"
+msgstr "Rebuild acc. move on Invoices"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.act_window,name:account_recalculate_stock_move.action_wizard_rebuild_move_picking
+msgid "Rebuild acc. move on Picking"
+msgstr "Rebuild acc. move on Picking"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.act_window,name:account_recalculate_stock_move.action_rebuild_all_account_move
+#: model:ir.ui.menu,name:account_recalculate_stock_move.menu_rebuild_all_account_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_all_account_move
+msgid "Rebuild all acc. entries"
+msgstr "Rebuild all acc. entries"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_rebuild_lines
+msgid "Rebuild lines"
+msgstr "Rebuild lines"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_stock_inventory_cancel_remove_after
+msgid "Remove After"
+msgstr "Remove After"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,help:account_recalculate_stock_move.field_wizard_rebuild_all_account_moves_interval_number
+msgid "Repeat every x."
+msgstr "Επανάληψη κάθε Χ."
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_sequence
+msgid "Sequence"
+msgstr "Ακολουθία"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_move_transfer
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebooking_picking
+msgid "Start Date"
+msgstr "Ημερομηνία Έναρξης"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.wizard_rebuild_all_account_move
+msgid "Start on server"
+msgstr "Start on server"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_inventory_id
+msgid "Stock Inventory"
+msgstr "Απογραφή Αποθέματος"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_stock_landed_cost
+msgid "Stock Landed Cost"
+msgstr "Stock Landed Cost"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_stock_move
+msgid "Stock Move"
+msgstr "Κίνηση Αποθέματος"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_picking_id
+msgid "Stock Picking"
+msgstr "Συλλογή Αποθέματος"
+
+#. module: account_recalculate_stock_move
+#: model:ir.actions.act_window,name:account_recalculate_stock_move.action_wizard_stock_inventory_cancel
+msgid "Stock inventory cancel"
+msgstr "Stock inventory cancel"
+
+#. module: account_recalculate_stock_move
+#: code:addons/account_recalculate_stock_move/models/stock.py:134
+#, python-format
+msgid "The operation will not be performed because one of the following conditions may not have been met: \n"
+"\n"
+" %s1. Status not in \"Done\" \n"
+"%s2. The spelling in the product or its category is not in real time.\n"
+"%s3. This is not a movement at the entrance or exit of the company."
+msgstr "The operation will not be performed because one of the following conditions may not have been met: \n"
+"\n"
+" %s1. Status not in \"Done\" \n"
+"%s2. The spelling in the product or its category is not in real time.\n"
+"%s3. This is not a movement at the entrance or exit of the company."
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+msgid "Total Credit"
+msgstr "Πιστωτικό Σύνολο"
+
+#. module: account_recalculate_stock_move
+#: model:ir.ui.view,arch_db:account_recalculate_stock_move.view_inventory_form_inherit
+msgid "Total Debit"
+msgstr "Χρεωστικό Σύνολο"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_stock_picking
+msgid "Transfer"
+msgstr "Μεταφορά"
+
+#. module: account_recalculate_stock_move
+#: selection:wizard.rebuild.all.account.moves,interval_type:0
+msgid "Weeks"
+msgstr "Εβδομάδες"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model.fields,field_description:account_recalculate_stock_move.field_wizard_rebuild_lines_account_moves_rebuild_id
+msgid "Wizard for rebuild"
+msgstr "Wizard for rebuild"
+
+#. module: account_recalculate_stock_move
+#: code:addons/account_recalculate_stock_move/models/account_invoice.py:108
+#, python-format
+msgid "You cannot rebuild an invoice which is partially paid. You need to unreconcile related payment entries first."
+msgstr "You cannot rebuild an invoice which is partially paid. You need to unreconcile related payment entries first."
+
+#. module: account_recalculate_stock_move
+#: code:addons/account_recalculate_stock_move/models/account_invoice.py:101
+#, python-format
+msgid "You cannot rebuild an invoice with a negative total amount. You should create a credit note instead."
+msgstr "You cannot rebuild an invoice with a negative total amount. You should create a credit note instead."
+
+#. module: account_recalculate_stock_move
+#: code:addons/account_recalculate_stock_move/models/product.py:24
+#, python-format
+msgid "You cannot rebuild quantities from pickings moves in product.\n"
+" You need to try from the product template."
+msgstr "You cannot rebuild quantities from pickings moves in product.\n"
+" You need to try from the product template."
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_wizard_rebooking_move_transfer
+msgid "wizard.rebooking.move.transfer"
+msgstr "wizard.rebooking.move.transfer"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_wizard_rebooking_picking_transfer
+msgid "wizard.rebooking.picking.transfer"
+msgstr "wizard.rebooking.picking.transfer"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_wizard_rebuild_all_account_moves
+msgid "wizard.rebuild.all.account.moves"
+msgstr "wizard.rebuild.all.account.moves"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_wizard_rebuild_lines_account_moves
+msgid "wizard.rebuild.lines.account.moves"
+msgstr "wizard.rebuild.lines.account.moves"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_wizard_rebuild_move_account_invoice
+msgid "wizard.rebuild.move.account.invoice"
+msgstr "wizard.rebuild.move.account.invoice"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_wizard_rebuild_move_picking_transfer
+msgid "wizard.rebuild.move.picking.transfer"
+msgstr "wizard.rebuild.move.picking.transfer"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_wizard_rebuild_move_stock_inventory
+msgid "wizard.rebuild.move.stock.inventory"
+msgstr "wizard.rebuild.move.stock.inventory"
+
+#. module: account_recalculate_stock_move
+#: model:ir.model,name:account_recalculate_stock_move.model_wizard_stock_inventory_cancel
+msgid "wizard.stock.inventory.cancel"
+msgstr "wizard.stock.inventory.cancel"
+

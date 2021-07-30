@@ -1,0 +1,67 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_move_inventory
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-21 13:59+0000\n"
+"PO-Revision-Date: 2021-04-21 13:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_inventory
+#: model:ir.model.fields,field_description:account_move_inventory.field_wiz_stock_move_location_company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_move_inventory
+#: model:ir.model.fields,field_description:account_move_inventory.field_stock_inventory_edit_accounts
+#: model:ir.model.fields,field_description:account_move_inventory.field_wiz_stock_move_location_edit_accounts
+msgid "Edit accounts"
+msgstr ""
+
+#. module: account_move_inventory
+#: code:addons/account_move_inventory/wizard/stock_move_location.py:45
+#, python-format
+msgid "INV: from %s to %s"
+msgstr ""
+
+#. module: account_move_inventory
+#: model:ir.model,name:account_move_inventory.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: account_move_inventory
+#: model:ir.model,name:account_move_inventory.model_product_template
+msgid "Product Template (Multi-Company)"
+msgstr ""
+
+#. module: account_move_inventory
+#: model:ir.model.fields,field_description:account_move_inventory.field_stock_inventory_property_stock_account_input
+#: model:ir.model.fields,field_description:account_move_inventory.field_wiz_stock_move_location_property_stock_account_input
+msgid "Stock Input Account"
+msgstr ""
+
+#. module: account_move_inventory
+#: model:ir.model.fields,field_description:account_move_inventory.field_stock_inventory_property_stock_account_output
+#: model:ir.model.fields,field_description:account_move_inventory.field_wiz_stock_move_location_property_stock_account_output
+msgid "Stock Output Account"
+msgstr ""
+
+#. module: account_move_inventory
+#: model:ir.model.fields,field_description:account_move_inventory.field_stock_inventory_property_stock_valuation_account_id
+#: model:ir.model.fields,field_description:account_move_inventory.field_wiz_stock_move_location_property_stock_valuation_account_id
+msgid "Stock Valuation Account"
+msgstr ""
+
+#. module: account_move_inventory
+#: model:ir.model,name:account_move_inventory.model_wiz_stock_move_location
+msgid "wiz.stock.move.location"
+msgstr ""
+

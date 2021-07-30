@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tax_adjustment_template_form" model="ir.ui.view">
+        <field name="name">tax.adjustment.template.form</field>
+        <field name="model">tax.adjustment.template</field>
+        <field name="arch" type="xml">
+            <form string="Tax Adjustment Template">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" widget='selection' groups="base.group_multi_company"/>
+                            <field name="journal_id" domain="[('type', '=', 'general'), '|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                            <field name="reason"/>
+                            <field name="adjustment_type" options="{'horizontal': true}" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="choice_period_type" options="{'horizontal': true}" widget="radio"/>
+                            <field name="debit_account_id" domain="[('deprecated', '=', False), '|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                            <field name="credit_account_id" domain="[('deprecated', '=', False), '|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                            <field name="tax_id" widget="selection" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_tax_adjustment_template_tree" model="ir.ui.view">
+        <field name="name">tax.adjustment.template.tree</field>
+        <field name="model">tax.adjustment.template</field>
+        <field name="arch" type="xml">
+            <tree string="Tax Adjustment Template">
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="journal_id" domain="[('type', '=', 'general'), '|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                <field name="reason"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_tax_adjustment_template_search" model="ir.ui.view">
+        <field name="name">tax.adjustment.template.search</field>
+        <field name="model">tax.adjustment.template</field>
+        <field name="arch" type="xml">
+            <search string="Tax Adjustment Template">
+              <group>
+                <separator orientation="vertical"/>
+                  <field name="name"/>
+                  <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                  <field name="journal_id"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_tax_adjustment_template_form" model="ir.actions.act_window">
+        <field name="name">Tax Adjustment Template</field>
+        <field name="res_model">tax.adjustment.template</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_tax_adjustment_template_search"/>
+    </record>
+    <menuitem
+        action="action_tax_adjustment_template_form"
+        id="menu_action_tax_adjustment_template_form" sequence="300"
+        parent="account.menu_finance_configuration"
+        groups="account.group_account_manager"/>
+</odoo>

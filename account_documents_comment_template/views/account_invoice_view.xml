@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_properties_form_print" model="ir.ui.view">
+            <field name="name">account.invoice.sets.print.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="product_properties.invoice_properties_form_print"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_sub_type']" position="after">
+                    <field name="static_template_id" context="{'default_position': 'prints'}"
+                           domain="[('company_id', '=', company_id)]"/>
+                </xpath>
+                <xpath expr="//separator[@name='staticproperties']" position="before">
+                    <separator name="staticnote" string="Note" groups="product_properties.group_properties_print"/>
+                    <field name="static_note" colspan="4" nolabel="1" groups="product_properties.group_properties_print"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

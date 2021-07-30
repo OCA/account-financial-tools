@@ -1,0 +1,394 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_move_transfer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-21 14:00+0000\n"
+"PO-Revision-Date: 2021-04-21 14:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_account_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_account_id
+msgid "Account"
+msgstr "Сметка"
+
+#. module: account_move_transfer
+#: model:ir.model,name:account_move_transfer.model_account_move
+msgid "Account Entry"
+msgstr "Запис от сметка"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_account_move_line_ids
+msgid "Account Move Line"
+msgstr "Account Move Line"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_account_move_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_account_move_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_account_move_id
+msgid "Account move"
+msgstr "Account move"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_account_move_origin_move_id
+msgid "Account move for which this move is the origin for transfer"
+msgstr "Account move for which this move is the origin for transfer"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_account_move_origin_move_ids
+msgid "Account move for which this move is the ref for transfer"
+msgstr "Account move for which this move is the ref for transfer"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+msgid "Amount"
+msgstr "Сума"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+msgid "Analytic"
+msgstr "Аналитичен"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_analytic_account_id
+msgid "Analytic Account"
+msgstr "Аналитична сметка"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_analytic_tag_ids
+msgid "Analytic tags"
+msgstr "Аналитични етикети"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Base on"
+msgstr "Базирано на"
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "By Current Cost"
+msgstr "По текущи разходи"
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "By Quantity"
+msgstr "По количество"
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "By Volume"
+msgstr "По обем"
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "By Weight"
+msgstr "По тегло"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Cancel"
+msgstr "Откажи"
+
+#. module: account_move_transfer
+#: selection:wizard.create.move.transfer,move_line_type:0
+msgid "Clear balance"
+msgstr "Clear balance"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_cost_price
+msgid "Clear balance price"
+msgstr "Clear balance price"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_company_id
+msgid "Company"
+msgstr "Фирма"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_company_currency_id
+msgid "Company Currency"
+msgstr "Валута на фирмата"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_wizard_create_move_line_transfer_company_id
+msgid "Company related to this journal"
+msgstr "Предприятие свързано с този дневник"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_account_id
+msgid "Contra Account"
+msgstr "Contra Account"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_price_unit
+msgid "Cost"
+msgstr "Стойност"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_landed_cost_transfer_form
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_landed_cost_transfer_tree
+msgid "Cost Lines"
+msgstr "Редове на разходи"
+
+#. module: account_move_transfer
+#: model:ir.actions.act_window,name:account_move_transfer.action_wizard_create_move_transfer
+msgid "Create Move transfers from account move"
+msgstr "Create Move transfers from account move"
+
+#. module: account_move_transfer
+#: selection:wizard.create.move.transfer,next_wizard:0
+msgid "Create landed cost"
+msgstr "Create landed cost"
+
+#. module: account_move_transfer
+#: selection:wizard.create.move.transfer,next_wizard:0
+msgid "Create move"
+msgstr "Create move"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_create_uid
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_create_uid
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_create_uid
+msgid "Created by"
+msgstr "Създадено от"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_create_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_create_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_create_date
+msgid "Created on"
+msgstr "Създадено на"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_credit
+#: selection:wizard.create.move.transfer,move_line_type:0
+msgid "Credit"
+msgstr "Кредит"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_currency_id
+msgid "Currency"
+msgstr "Валута"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_date
+msgid "Date"
+msgstr "Дата"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+msgid "Dates"
+msgstr "Дати"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_debit
+#: selection:wizard.create.move.transfer,move_line_type:0
+msgid "Debit"
+msgstr "Дебит"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_name
+msgid "Description"
+msgstr "Описание"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_display_name
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_display_name
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_display_name
+msgid "Display Name"
+msgstr "Име за показване"
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "Equal"
+msgstr "Равно"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_account_move_has_origin_move_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_account_move_has_origin_move_ids
+msgid "Has Origin Move"
+msgstr "Has Origin Move"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+msgid "Information"
+msgstr "Информация"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_journal_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_journal_id
+msgid "Journal"
+msgstr "Дневник"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.view_move_form
+msgid "Journal Entries"
+msgstr "Операции в журнала"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_name
+msgid "Label"
+msgstr "Етикет"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_landed_cost_ids
+msgid "Landed Cost"
+msgstr "Landed Cost"
+
+#. module: account_move_transfer
+#: model:ir.model,name:account_move_transfer.model_wizard_create_landed_cost_transfer
+msgid "Landed cost lines"
+msgstr "Landed cost lines"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer___last_update
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer___last_update
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer___last_update
+msgid "Last Modified on"
+msgstr "Последно обновено на"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_write_uid
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_write_uid
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_write_uid
+msgid "Last Updated by"
+msgstr "Последно обновено от"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_write_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_write_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_write_date
+msgid "Last Updated on"
+msgstr "Последно обновено на"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Modify the lines before create them or edit them after creation."
+msgstr "Modify the lines before create them or edit them after creation."
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_move_line_type
+msgid "Move Line Type"
+msgstr "Move Line Type"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_tree
+msgid "Move Transfers Line"
+msgstr "Move Transfers Line"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Move transfers"
+msgstr "Move transfers"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Next"
+msgstr "Следващ"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_next_wizard
+msgid "Next Wizard"
+msgstr "Next Wizard"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_account_move_origin_move_id
+msgid "Origin move"
+msgstr "Origin move"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_partner_id
+msgid "Partner"
+msgstr "Партньор"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_product_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_product_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_product_id
+msgid "Product"
+msgstr "Продукт"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_quantity
+msgid "Quantity"
+msgstr "Количество"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_account_move_origin_move_ids
+#: model:ir.ui.view,arch_db:account_move_transfer.view_move_form
+msgid "Ref moves"
+msgstr "Ref moves"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_split_method
+msgid "Split Method"
+msgstr "Метод на разделяне"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_wizard_create_move_line_transfer_currency_id
+msgid "The optional other currency if it is a multi-currency entry."
+msgstr "Възможна друга валута ако това е запис с много валути."
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_wizard_create_move_line_transfer_quantity
+msgid "The optional quantity expressed by this line, eg: number of product sold. The quantity is not a legal requirement but is very useful for some reports."
+msgstr "Незадължителното количество, изразено в този ред, например: брой продаден продукт. Количеството не е законово изискване, но е много полезно за някои доклади."
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.view_move_form
+msgid "Total Amount"
+msgstr "Обща сума"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_tree
+msgid "Total Credit"
+msgstr "Общо кредит"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_tree
+msgid "Total Debit"
+msgstr "Общ дебит"
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.view_move_form
+msgid "Transfers"
+msgstr "Трансфери"
+
+#. module: account_move_transfer
+#: model:ir.model,name:account_move_transfer.model_wizard_create_move_line_transfer
+msgid "Transfers Lines"
+msgstr "Transfers Lines"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_product_uom_id
+msgid "Unit of Measure"
+msgstr "Мерна единица"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_wizard_create_move_line_transfer_company_currency_id
+msgid "Utility field to express amount currency"
+msgstr "Поле за изразяване на сума във валута"
+
+#. module: account_move_transfer
+#: model:ir.model,name:account_move_transfer.model_wizard_create_move_transfer
+msgid "wizard.create.move.transfer"
+msgstr "wizard.create.move.transfer"
+

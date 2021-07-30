@@ -1,0 +1,394 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_move_transfer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-21 14:00+0000\n"
+"PO-Revision-Date: 2021-04-21 14:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_account_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_account_id
+msgid "Account"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model,name:account_move_transfer.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_account_move_line_ids
+msgid "Account Move Line"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_account_move_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_account_move_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_account_move_id
+msgid "Account move"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_account_move_origin_move_id
+msgid "Account move for which this move is the origin for transfer"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_account_move_origin_move_ids
+msgid "Account move for which this move is the ref for transfer"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+msgid "Amount"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+msgid "Analytic"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_analytic_account_id
+msgid "Analytic Account"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_analytic_tag_ids
+msgid "Analytic tags"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Base on"
+msgstr ""
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "By Current Cost"
+msgstr ""
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "By Quantity"
+msgstr ""
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "By Volume"
+msgstr ""
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "By Weight"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Cancel"
+msgstr ""
+
+#. module: account_move_transfer
+#: selection:wizard.create.move.transfer,move_line_type:0
+msgid "Clear balance"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_cost_price
+msgid "Clear balance price"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_company_currency_id
+msgid "Company Currency"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_wizard_create_move_line_transfer_company_id
+msgid "Company related to this journal"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_account_id
+msgid "Contra Account"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_price_unit
+msgid "Cost"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_landed_cost_transfer_form
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_landed_cost_transfer_tree
+msgid "Cost Lines"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.actions.act_window,name:account_move_transfer.action_wizard_create_move_transfer
+msgid "Create Move transfers from account move"
+msgstr ""
+
+#. module: account_move_transfer
+#: selection:wizard.create.move.transfer,next_wizard:0
+msgid "Create landed cost"
+msgstr ""
+
+#. module: account_move_transfer
+#: selection:wizard.create.move.transfer,next_wizard:0
+msgid "Create move"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_create_uid
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_create_uid
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_create_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_create_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_credit
+#: selection:wizard.create.move.transfer,move_line_type:0
+msgid "Credit"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_date
+msgid "Date"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+msgid "Dates"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_debit
+#: selection:wizard.create.move.transfer,move_line_type:0
+msgid "Debit"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_name
+msgid "Description"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_display_name
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_display_name
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_transfer
+#: selection:wizard.create.landed.cost.transfer,split_method:0
+msgid "Equal"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_account_move_has_origin_move_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_account_move_has_origin_move_ids
+msgid "Has Origin Move"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+msgid "Information"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_journal_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.view_move_form
+msgid "Journal Entries"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_name
+msgid "Label"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_landed_cost_ids
+msgid "Landed Cost"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model,name:account_move_transfer.model_wizard_create_landed_cost_transfer
+msgid "Landed cost lines"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer___last_update
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer___last_update
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_write_uid
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_write_uid
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_write_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_write_date
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Modify the lines before create them or edit them after creation."
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_move_line_type
+msgid "Move Line Type"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_form
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_tree
+msgid "Move Transfers Line"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Move transfers"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_transfer
+msgid "Next"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_next_wizard
+msgid "Next Wizard"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_account_move_origin_move_id
+msgid "Origin move"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_product_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_product_id
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_transfer_product_id
+msgid "Product"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_quantity
+msgid "Quantity"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_account_move_origin_move_ids
+#: model:ir.ui.view,arch_db:account_move_transfer.view_move_form
+msgid "Ref moves"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_landed_cost_transfer_split_method
+msgid "Split Method"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_wizard_create_move_line_transfer_currency_id
+msgid "The optional other currency if it is a multi-currency entry."
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_wizard_create_move_line_transfer_quantity
+msgid "The optional quantity expressed by this line, eg: number of product sold. The quantity is not a legal requirement but is very useful for some reports."
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.view_move_form
+msgid "Total Amount"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_tree
+msgid "Total Credit"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.wizard_create_move_line_transfer_tree
+msgid "Total Debit"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.ui.view,arch_db:account_move_transfer.view_move_form
+msgid "Transfers"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model,name:account_move_transfer.model_wizard_create_move_line_transfer
+msgid "Transfers Lines"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,field_description:account_move_transfer.field_wizard_create_move_line_transfer_product_uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model.fields,help:account_move_transfer.field_wizard_create_move_line_transfer_company_currency_id
+msgid "Utility field to express amount currency"
+msgstr ""
+
+#. module: account_move_transfer
+#: model:ir.model,name:account_move_transfer.model_wizard_create_move_transfer
+msgid "wizard.create.move.transfer"
+msgstr ""
+
