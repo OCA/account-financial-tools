@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2021-08-03 18:49+0000\n"
+"Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account
@@ -36,7 +37,7 @@ msgstr "Toujours"
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Écriture comptable"
 
 #. module: account_partner_required
 #: selection:account.account.type,partner_policy:0
@@ -55,6 +56,8 @@ msgid ""
 "Partner policy is set to 'Always' with account '%s' but the partner is "
 "missing in the account move line with label '%s'."
 msgstr ""
+"La stratégie de partenaire est définie sur « Toujours » avec le compte'%s', "
+"mais le partenaire est manquant dans la ligne avec le libellé '%s'."
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/models/account.py:61
@@ -63,11 +66,14 @@ msgid ""
 "Partner policy is set to 'Never' with account '%s' but the account move line "
 "with label '%s' has a partner '%s'."
 msgstr ""
+"La stratégie de partenaire est définie sur « Jamais » avec le compte '%s', "
+"mais la ligne de déplacement de compte avec le libellé '%s' a un partenaire "
+"'%s'."
 
 #. module: account_partner_required
 #: model:ir.model.fields,field_description:account_partner_required.field_account_account_type__partner_policy
 msgid "Policy for Partner Field"
-msgstr ""
+msgstr "Politique pour le champ partenaire"
 
 #. module: account_partner_required
 #: model:ir.model.fields,help:account_partner_required.field_account_account_type__partner_policy
@@ -78,3 +84,9 @@ msgid ""
 "message if there is no partner ; if you select 'Never', the accountant will "
 "get an error message if a partner is present."
 msgstr ""
+"Définir la politique du champ partenaire : si vous sélectionnez "
+"'Facultatif', le comptable est libre de mettre un partenaire sur une ligne "
+"de déplacement de compte avec ce type de compte ; si vous sélectionnez "
+"'Toujours', le comptable recevra un message d'erreur s'il n'y a pas "
+"d'associé ; si vous sélectionnez 'Jamais', le comptable recevra un message "
+"d'erreur si un partenaire est présent."
