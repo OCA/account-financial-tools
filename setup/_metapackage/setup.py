@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo13-addon-account_move_line_sale_info',
         'odoo13-addon-account_move_line_tax_editable',
         'odoo13-addon-account_move_line_used_currency',
+        'odoo13-addon-account_move_print',
         'odoo13-addon-account_move_reversal_choose_method',
         'odoo13-addon-account_move_template',
         'odoo13-addon-account_netting',
