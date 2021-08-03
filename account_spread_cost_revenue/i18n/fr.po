@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-02-17 17:13+0000\n"
-"Last-Translator: Martronic SA <info@martronic.ch>\n"
+"PO-Revision-Date: 2021-08-03 18:49+0000\n"
+"Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -25,9 +25,9 @@ msgid ""
 "reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
-"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-"[('is_credit_account_deprecated','!=',True)]}\">\n"
-"                                  Ce compte est obsolète! Le lettrage ne "
+"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible' :[("
+"'is_credit_account_deprecated',' !=',True)]}\">\n"
+"                                  Ce compte est obsolète ! Le lettrage ne "
 "sera PAS possible.\n"
 "                            </span>"
 
@@ -40,15 +40,14 @@ msgid ""
 "reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
-"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-"[('is_debit_account_deprecated','!=',True)]}\">\n"
-"                                  Ce compte est obsolète! Le lettrage ne "
+"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible' :[("
+"'is_debit_account_deprecated',' !=',True)]}\">\n"
+"                                  Ce compte est obsolète ! Le lettrage ne "
 "sera PAS possible.\n"
 "                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
-#, fuzzy
 msgid ""
 "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
 "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
@@ -63,14 +62,14 @@ msgid ""
 "line.<br/>Usually the same account of the vendor bill line.\n"
 "                                </span>"
 msgstr ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-"[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[("
+"'invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
 "                                  Le compte de bilan utilisé pour cette "
 "régularisation.<br/>Ce compte est la contrepartie du compte utilisé dans la "
 "ligne de facture.\n"
 "                            </span>\n"
-"                            <span class=\"help-block\" colspan=\"2\" attrs="
-"\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                            <span class=\"help-block\" colspan=\"2\" attrs=\""
+"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
 "                                  Le compte de dépense dans la ligne de "
 "facture fournisseur.<br/>Généralement le même compte que la ligne de facture "
 "fournisseur.\n"
@@ -641,9 +640,8 @@ msgstr "Ligne de facture"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_credit_account_deprecated
-#, fuzzy
 msgid "Is Credit Account Deprecated"
-msgstr "Est compte de crédit obsolète"
+msgstr "Compte Créditeur Est-il Déprécié"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_debit_account_deprecated
@@ -1004,13 +1002,13 @@ msgid ""
 "This spread line is already linked to a journal entry! Please post or delete "
 "it."
 msgstr ""
-"Cette ligne de régularisation est déjà liée à une écriture comptable! "
+"Cette ligne de régularisation est déjà liée à une écriture comptable ! "
 "Veuillez la comptabiliser ou la supprimer."
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "This will delete the move. Are you sure ?"
-msgstr "Cela supprimera la pièce comptable. Êtes-vous sûr?"
+msgstr "Cela supprimera la pièce comptable. Êtes-vous sûr ?"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:99
