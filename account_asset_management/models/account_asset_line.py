@@ -133,6 +133,12 @@ class AccountAssetLine(models.Model):
             )
 
     def write(self, vals):
+        if "previous_id" in vals:
+            vals2 = {"previous_id": vals["previous_id"]}
+            super().write(vals2)
+            del vals["previous_id"]
+        if not vals:
+            return super().write(vals)
         for dl in self:
             line_date = vals.get("line_date") or dl.line_date
             asset_lines = dl.asset_id.depreciation_line_ids
