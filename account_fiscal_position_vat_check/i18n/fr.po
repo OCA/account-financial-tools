@@ -9,19 +9,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-01 18:55+0000\n"
-"PO-Revision-Date: 2016-11-01 18:55+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2021-08-03 18:49+0000\n"
+"Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
@@ -43,6 +44,10 @@ msgid ""
 "Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
 "of this Customer in Odoo and try to validate again."
 msgstr ""
+"Vous essayez de valider une facture/avoir client avec la position fiscale "
+"'%s' qui nécessite que le client ait un numéro de TVA. Mais le client '%s' "
+"n'a pas de numéro de TVA dans sa fiche. Veuillez ajouter le numéro de TVA de "
+"ce Client et réessayer de valider."
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/partner.py:20
