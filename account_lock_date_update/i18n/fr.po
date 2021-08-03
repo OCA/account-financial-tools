@@ -9,19 +9,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2021-08-03 18:49+0000\n"
+"Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_lock_date_update
 #: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
 msgid "Account Update Lock_date"
-msgstr ""
+msgstr "Mise à Jour Date Blocage Comptable"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
