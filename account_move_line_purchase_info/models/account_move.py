@@ -6,13 +6,10 @@ from odoo import fields, models
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = "account.move.line"
 
-    purchase_id = fields.Many2one(
+    purchase_order_id = fields.Many2one(
         comodel_name="purchase.order",
-        related="purchase_line_id.order_id",
-        string="Purchase Order",
         store=True,
         index=True,
     )
