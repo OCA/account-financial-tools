@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2019-10-03 00:25+0000\n"
-"Last-Translator: Valaeys Stéphane <svalaeys@fiefmanage.ch>\n"
+"PO-Revision-Date: 2021-08-03 18:49+0000\n"
+"Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.8\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:69
@@ -126,8 +126,8 @@ msgid ""
 msgstr ""
 "La fonctionalité 'Compenser' est prévue pour lettré des opérations dans des "
 "comptes différents pour le même partenaire.\n"
-"Si toutes les écritures appartiennent au même compte, veuillez utiliser la "
-"fonction Lettrage."
+"Si toutes les écritures appartiennent au même compte, \n"
+"Veuillez utiliser la fonction Lettrage."
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form

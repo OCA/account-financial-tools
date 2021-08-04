@@ -1,0 +1,216 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_document_reversal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-07-05 08:39+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"Language-Team: none\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_document_reversal
+msgid "Abstract Module for Document Reversal"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_reverse_account_document
+msgid "Account Document Reversal"
+msgstr "Tilbageførsel af regnskabsdokument"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Bank kontoudtogslinie"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__cancel_method
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__cancel_method
+msgid "Cancel Method"
+msgstr "Annulerings metode"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_reverse_account_document__use_different_journal
+msgid "Checked, if the journal of underlineing document is checked."
+msgstr ""
+
+#. module: account_document_reversal
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_reverse_account_document
+msgid "Confirm"
+msgstr "Bekræft"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__create_uid
+msgid "Created by"
+msgstr "Oprettet af"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__create_date
+msgid "Created on"
+msgstr "Oprettet den"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__reversal_journal_id
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__reversal_journal_id
+msgid "Default Reversal Journal"
+msgstr "Standard tilbageførsels journal"
+
+#. module: account_document_reversal
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_reverse_account_document
+msgid "Discard"
+msgstr "Kassér"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_document_reversal__display_name
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__display_name
+msgid "Display Name"
+msgstr "Vist navn"
+
+#. module: account_document_reversal
+#: model:ir.actions.act_window,name:account_document_reversal.action_view_reverse_account_document
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_reverse_account_document
+msgid "Document Cancel"
+msgstr "Annuller dokument"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_document_reversal__id
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__id
+msgid "ID"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__use_different_journal
+#: model:ir.model.fields,help:account_document_reversal.field_account_journal__use_different_journal
+msgid "If checked, reversal wizard will show field Reversal Journal"
+msgstr ""
+"Hvis dette er markeret, viser tilbageførselsguiden feltet "
+"Tilbageførselsjournal"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_reverse_account_document__journal_id
+msgid "If empty, uses the journal of the journal entry to be reversed."
+msgstr ""
+"Hvis det er tomt, skal du anvende journal for journalpost for tilbageførslen."
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_invoice
+msgid "Invoice"
+msgstr "Faktura"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_move
+msgid "Journal Entries"
+msgstr "Posteringer"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__reversal_journal_id
+#: model:ir.model.fields,help:account_document_reversal.field_account_journal__reversal_journal_id
+msgid "Journal in this field will show in reversal wizard as default"
+msgstr "Journal i dette felt vises som standard i guiden til tilbageførsel"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_document_reversal____last_update
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document____last_update
+msgid "Last Modified on"
+msgstr "Senest ændret den"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__write_uid
+msgid "Last Updated by"
+msgstr "Senest ændret af"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__write_date
+msgid "Last Updated on"
+msgstr "Senest ændret den"
+
+#. module: account_document_reversal
+#: selection:account.journal,cancel_method:0
+msgid "Normal (delete journal entries if exists)"
+msgstr "Normal (slet journalposter, hvis de findes)"
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_invoice.py:24
+#, python-format
+msgid "Only fully unpaid invoice can be cancelled.\n"
+"To cancel this invoice, make sure all payment(s) are also cancelled."
+msgstr ""
+"Kun fuldt ubetalte faktura kan annulleres.\n"
+"For at annullere denne faktura skal du sørge for, at alle betalinger også "
+"annulleres."
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_bank_statement.py:20
+#, python-format
+msgid "Only new bank statement can be cancelled"
+msgstr "Kun nye bank kontoudtog kan blive annulleret"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_payment
+msgid "Payments"
+msgstr "Betalinger"
+
+#. module: account_document_reversal
+#: selection:account.journal,cancel_method:0
+msgid "Reversal (create reversed journal entries)"
+msgstr "Tilbageførsel (opret omvendte journalposter)"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__journal_id
+msgid "Reversal Journal"
+msgstr "Tilbageførselsjournal"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__date
+msgid "Reversal date"
+msgstr "Tilbageførselsdato"
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_move.py:22
+#, python-format
+msgid "This action is not allowed for cancel with reversal.\n"
+"Please use Reverse Entry."
+msgstr ""
+"Denne handling er ikke tilladt for annullering med tilbageførsel.\n"
+"Brug Tilbagefør postering."
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__is_cancel_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_journal__is_cancel_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_move__is_cancel_reversal
+msgid "True, when journal allow cancel entries with method is reversal"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__is_cancel_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__is_cancel_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_move__is_cancel_reversal
+msgid "Use Cancel Reversal"
+msgstr "Anvend Tilbageførsel"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__use_different_journal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__use_different_journal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__use_different_journal
+msgid "Use different journal for reversal"
+msgstr "Anvend en anden journal for tilbageførsel"
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_invoice.py:36
+#: code:addons/account_document_reversal/models/account_payment.py:27
+#, python-format
+msgid "You are trying to cancel the cancelled document"
+msgstr "Du prøver at annullere det annullerede dokument"

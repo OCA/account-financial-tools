@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:35
+#: code:addons/account_move_template/models/account_move_template.py:36
 #, python-format
 msgid "%s (copy)"
 msgstr ""
@@ -34,6 +34,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
 msgid "Account"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
+msgid "Active"
 msgstr ""
 
 #. module: account_move_template
@@ -57,6 +62,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
+msgid "Archived"
 msgstr ""
 
 #. module: account_move_template
@@ -173,7 +183,7 @@ msgid "ID"
 msgstr "Κωδικός"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:46
+#: code:addons/account_move_template/models/account_move_template.py:47
 #, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s). "
@@ -182,7 +192,7 @@ msgid ""
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:52
+#: code:addons/account_move_template/models/account_move_template.py:53
 #, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s): "
@@ -321,7 +331,7 @@ msgid "Python Code"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:136
+#: code:addons/account_move_template/models/account_move_template.py:137
 #, python-format
 msgid "Python Code must be set for computed line with sequence %d."
 msgstr ""
@@ -414,7 +424,7 @@ msgid "Wizard to generate move from template"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:68
+#: code:addons/account_move_template/models/account_move_template.py:69
 #, python-format
 msgid ""
 "You added a line in the wizard. This is not allowed: you should either "
@@ -430,7 +440,7 @@ msgid ""
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:62
+#: code:addons/account_move_template/models/account_move_template.py:63
 #, python-format
 msgid ""
 "You deleted a line in the wizard. This is not allowed: you should either "

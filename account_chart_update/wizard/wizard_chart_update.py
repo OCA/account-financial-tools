@@ -656,7 +656,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             ('res_id', '=', template.id),
         ])
         new_xml_id = "%d_%s" % (self.company_id.id, template_xmlid.name)
-        return not ir_model_data.search([
+        return template_xmlid and not ir_model_data.search([
             ('res_id', '=', real_obj.id),
             ('model', '=', real_obj._name),
             ('module', '=', template_xmlid.module),

@@ -442,13 +442,13 @@ msgid "Compute Assets"
 msgstr "Izračunj osnovna sredstva"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:30
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:35
 #, fuzzy, python-format
 msgid "Compute Assets errors"
 msgstr "Izračunj osnovna sredstva"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:32
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:37
 #, fuzzy, python-format
 msgid "Compute Assets result"
 msgstr "Izračunj osnovna sredstva"
@@ -480,8 +480,8 @@ msgid "Create an asset by product item"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:44
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:58
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:49
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:63
 #, python-format
 msgid "Created Asset Moves"
 msgstr "Kreirana kretanja amortizacije"
