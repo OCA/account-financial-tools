@@ -74,7 +74,7 @@ class ResCompany(models.Model):
 
             # The user attempts to set a lock date for advisors after
             # the first day of next month
-            if fiscalyear_lock_to_date < next_month:
+            if fiscalyear_lock_to_date > next_month:
                 raise ValidationError(
                     _('You cannot lock a period that is not finished yet. '
                       'Please make sure that the lock date for advisors is '
