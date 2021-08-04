@@ -140,7 +140,10 @@ class AccountAssetLine(models.Model):
         if not vals:
             return super().write(vals)
         for dl in self:
-            line_date = vals.get("line_date") or dl.line_date
+            line_date = vals.get("line_date") or ""
+            if line_date:
+                line_date = fields.Date.from_string(line_date)
+            line_date = line_date or dl.line_date
             asset_lines = dl.asset_id.depreciation_line_ids
             if list(vals.keys()) == ["move_id"] and not vals["move_id"]:
                 # allow to remove an accounting entry via the
