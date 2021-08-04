@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-01 04:03+0000\n"
-"PO-Revision-Date: 2021-08-03 18:49+0000\n"
+"PO-Revision-Date: 2021-08-04 11:49+0000\n"
 "Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -46,12 +46,12 @@ msgstr "Ligne de commande d'achat"
 #. module: account_move_line_purchase_info
 #: model:res.groups,name:account_move_line_purchase_info.group_account_move_purchase_info
 msgid "Purchase info in Journal Items"
-msgstr ""
+msgstr "Info de Bon de Commande dans les Journaux"
 
 #. module: account_move_line_purchase_info
 #: model:ir.model,name:account_move_line_purchase_info.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Mouvement de Stock"
 
 #~ msgid "Quants"
 #~ msgstr "Quants"
