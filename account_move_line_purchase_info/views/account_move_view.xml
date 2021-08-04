@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <field name="quantity" position="before">
                 <field
-                    name="purchase_id"
+                    name="purchase_order_id"
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
                 <field
@@ -24,11 +24,13 @@
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
                 <field
-                    name="purchase_id"
+                    name="purchase_order_id"
+                    optional="show"
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
                 <field
                     name="purchase_line_id"
+                    optional="hide"
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
             </field>
@@ -41,7 +43,7 @@
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
                 <field
-                    name="purchase_id"
+                    name="purchase_order_id"
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
                 <field
@@ -54,7 +56,7 @@
                     name="group_by_purchase_order"
                     string="Purchase Order"
                     domain="[]"
-                    context="{'group_by':'purchase_id'}"
+                    context="{'group_by':'purchase_order_id'}"
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
                 <filter
@@ -82,7 +84,21 @@
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
                 <field
-                    name="purchase_id"
+                    name="purchase_order_id"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='line_ids']/form//field[@name='partner_id']"
+                position="after"
+            >
+                <field
+                    name="purchase_line_id"
+                    context="{'po_line_info': True}"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+                <field
+                    name="purchase_order_id"
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
             </xpath>
