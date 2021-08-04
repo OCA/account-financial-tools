@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2021-08-03 18:49+0000\n"
+"PO-Revision-Date: 2021-08-04 11:49+0000\n"
 "Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -48,18 +48,18 @@ msgstr "Société"
 #: model:ir.model.fields,field_description:account_cost_center.field_account_move_line__cost_center_id
 #: model_terms:ir.ui.view,arch_db:account_cost_center.view_account_invoice_report_search
 msgid "Cost Center"
-msgstr ""
+msgstr "Centre de coût"
 
 #. module: account_cost_center
 #: model:ir.actions.act_window,name:account_cost_center.account_cost_center_action
 #: model:ir.ui.menu,name:account_cost_center.cost_center_menu
 msgid "Cost Centers"
-msgstr ""
+msgstr "Centres de Coût"
 
 #. module: account_cost_center
 #: model_terms:ir.actions.act_window,help:account_cost_center.account_cost_center_action
 msgid "Cost centers provide an extra analytic dimension"
-msgstr ""
+msgstr "Les centres de coût fournissent une dimension analytique supplémentaire"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_uid
