@@ -87,9 +87,13 @@ class AccountInvoiceLine(models.Model):
             spread_type = (
                 'sale' if line.invoice_type in ['out_invoice', 'out_refund']
                 else 'purchase')
-            spread_auto = self.env['account.spread.template.auto'].search(
-                [('template_id.auto_spread', '=', True),
-                 ('template_id.spread_type', '=', spread_type)])
+            # Search with sudo() so that no template access is required in order
+            # to confirm invoices to which no template applies
+            spread_auto = self.env['account.spread.template.auto'].sudo().search([
+                ('template_id.auto_spread', '=', True),
+                ('template_id.spread_type', '=', spread_type),
+                ('company_id', '=', line.company_id.id)
+            ])
             matched = spread_auto.filtered(lambda a, i=line: _filter_line(a, i))
             template = matched.mapped('template_id')
             if not template:
