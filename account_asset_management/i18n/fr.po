@@ -1310,7 +1310,7 @@ msgid ""
 "generated accounting entries."
 msgstr ""
 "Cocher cette case pour les lignes des exercices antérieurs pour lesquels "
-"il n'a pas généré de pièce comptable dans le système."
+"il n'a pas été généré de pièce comptable dans le système."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
