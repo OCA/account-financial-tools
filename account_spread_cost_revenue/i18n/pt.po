@@ -987,7 +987,7 @@ msgid "This will delete the move. Are you sure ?"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:99
+#: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:103
 #, python-format
 msgid "Too many auto spread templates (%s) matched with the invoice line, %s"
 msgstr ""

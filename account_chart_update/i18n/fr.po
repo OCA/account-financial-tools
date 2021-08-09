@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2021-08-03 18:49+0000\n"
+"PO-Revision-Date: 2021-08-04 11:49+0000\n"
 "Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -42,17 +42,17 @@ msgstr "Champs de compte"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__account_id
 msgid "Account template"
-msgstr ""
+msgstr "Modèle de compte"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
 msgid "Account that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Compte qui doit être mis à jour (nouveau ou mis à jour dans le modèle)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_account_id
 msgid "Account to update"
-msgstr ""
+msgstr "Compte à mettre à jour"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_ids
