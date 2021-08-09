@@ -63,7 +63,7 @@
         </field>
     </record>
 
-    <menuitem name="Assets" action="action_account_asset_report"
+    <menuitem name="Assets Analysis" action="action_account_asset_report"
               id="menu_action_account_asset_report"
               parent="account_asset_report_menu" sequence="20"/>
 </odoo>
