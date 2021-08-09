@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-03 23:22+0000\n"
-"PO-Revision-Date: 2021-08-04 11:49+0000\n"
+"PO-Revision-Date: 2021-08-09 17:49+0000\n"
 "Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
 "Language-Team: French (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/fr/)\n"
@@ -994,7 +994,7 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_date
 msgid "Last Updated on"
-msgstr "Dernière mis à jour le"
+msgstr "Dernière mise à jour le"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:147
@@ -1714,7 +1714,7 @@ msgstr "ou"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_report_account_asset_management_asset_report_xls
 msgid "report.account_asset_management.asset_report_xls"
-msgstr "report.account_asset_management.asset_report_xls"
+msgstr "report.account_asset_management.rapport_des_immobilisations_xls"
 
 #~ msgid ""
 #~ "Choose the method to use to compute the dates and number of depreciation "
