@@ -267,7 +267,7 @@ msgstr "Immobilisations à l'état En cours"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_res_config_settings__module_account_asset_management
 msgid "Assets management (OCA)"
-msgstr "Gestion des immobilisations (OCA)"
+msgstr "Gestion des immobilisations"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:671
@@ -1310,7 +1310,7 @@ msgid ""
 "generated accounting entries."
 msgstr ""
 "Cocher cette case pour les lignes des exercices antérieurs pour lesquels "
-"Odoo n'a pas généré de pièce comptable."
+"il n'a pas généré de pièce comptable dans le système."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
