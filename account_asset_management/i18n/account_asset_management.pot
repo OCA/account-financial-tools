@@ -219,7 +219,6 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_menu
-#: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_report
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_assets
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_config_assets
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_tree
@@ -229,6 +228,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_account_asset_report
 #: model:ir.model,name:account_asset_management.model_account_asset_report
+#: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_report
 #: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_graph
 #: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_pivot
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
@@ -662,7 +662,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
-msgid "Financial Assets"
+msgid "Financial Assets Reports"
 msgstr ""
 
 #. module: account_asset_management

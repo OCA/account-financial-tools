@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pascal GOUHIER <p.gouhier@khetys.fr>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 "X-Generator: Poedit 2.4.3\n"
-"Last-Translator: Pascal GOUHIER <p.gouhier@khetys.fr>\n"
-"Language: fr\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1054
@@ -228,7 +228,6 @@ msgstr "Déclencheurs du calcul du tableau d'amortissements"
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_menu
-#: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_report
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_assets
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_config_assets
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_tree
@@ -238,6 +237,7 @@ msgstr "Immobilisations"
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_account_asset_report
 #: model:ir.model,name:account_asset_management.model_account_asset_report
+#: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_report
 #: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_graph
 #: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_pivot
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
@@ -733,8 +733,8 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
-msgid "Financial Assets"
-msgstr "Immobilisations"
+msgid "Financial Assets Reports"
+msgstr "Rapports des immobilisations"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.wiz_account_asset_report_action
@@ -1309,8 +1309,8 @@ msgid ""
 "Set this flag for entries of previous fiscal years for which Odoo has not "
 "generated accounting entries."
 msgstr ""
-"Cocher cette case pour les lignes des exercices antérieurs pour lesquels "
-"il n'a pas été généré de pièce comptable dans le système."
+"Cocher cette case pour les lignes des exercices antérieurs pour lesquels il "
+"n'a pas été généré de pièce comptable dans le système."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1701,3 +1701,6 @@ msgstr "ou"
 #: model:ir.model,name:account_asset_management.model_report_account_asset_management_asset_report_xls
 msgid "report.account_asset_management.asset_report_xls"
 msgstr "report.account_asset_management.rapport_des_immobilisations_xls"
+
+#~ msgid "Financial Assets"
+#~ msgstr "Immobilisations"

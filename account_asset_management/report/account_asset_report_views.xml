@@ -65,5 +65,5 @@
 
     <menuitem name="Assets" action="action_account_asset_report"
               id="menu_action_account_asset_report"
-              parent="menu_finance_assets" sequence="20"/>
+              parent="account_asset_report_menu" sequence="20"/>
 </odoo>

@@ -34,7 +34,7 @@
   </record>
 
   <menuitem id="account_asset_report_menu"
-            name="Financial Assets"
+            name="Financial Assets Reports"
             parent="menu_finance_assets"
             sequence="30"/>
 
