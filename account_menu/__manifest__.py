@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "summary": "Adds missing menu entries for Account module",
     "author": "GRAP, Akretion, Odoo Community Association (OCA)",
+    "maintainers": ["legalsylvain"],
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
     "data": [
