@@ -182,7 +182,6 @@ class AccountAssetRemove(models.TransientModel):
 
         # create move
         move_vals = {
-            "name": asset.name,
             "date": date_remove,
             "ref": line_name,
             "journal_id": journal_id,
