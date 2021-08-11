@@ -19,7 +19,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[account_asset_management](account_asset_management/) | 14.0.2.0.1 | Assets Management
+[account_asset_management](account_asset_management/) | 14.0.2.0.2 | Assets Management
 [account_balance_line](account_balance_line/) | 14.0.1.0.0 | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 14.0.1.0.0 | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 14.0.1.0.0 | Manage deposit of checks to the bank
