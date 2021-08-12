@@ -79,14 +79,10 @@ class AccountMove(models.Model):
                     "date_start": move.date,
                     "account_analytic_id": aml.analytic_account_id,
                 }
-                if self.env.context.get("company_id"):
-                    vals["company_id"] = self.env["res.company"].browse(
-                        self.env.context["company_id"]
-                    )
                 asset_form = Form(
-                    self.env["account.asset"].with_context(
-                        create_asset_from_move_line=True, move_id=move.id
-                    )
+                    self.env["account.asset"]
+                    .with_company(move.company_id)
+                    .with_context(create_asset_from_move_line=True, move_id=move.id)
                 )
                 for key, val in vals.items():
                     setattr(asset_form, key, val)
