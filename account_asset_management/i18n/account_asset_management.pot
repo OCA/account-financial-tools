@@ -1285,7 +1285,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_move.py:0
-#: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "This invoice created the asset(s): %s"
 msgstr ""
@@ -1385,8 +1384,6 @@ msgstr ""
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_move.py:0
 #: code:addons/account_asset_management/models/account_move.py:0
-#: code:addons/account_asset_management/models/account_move.py:0
-#: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
 "You are not allowed to link an accounting entry to an asset.\n"
@@ -1431,7 +1428,6 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:0
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
