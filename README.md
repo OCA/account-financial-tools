@@ -17,25 +17,25 @@ TODO: add repo description.
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[account_asset_management](account_asset_management/) | 14.0.2.0.3 | Assets Management
-[account_balance_line](account_balance_line/) | 14.0.1.0.0 | Display balance totals in move line view
-[account_chart_update](account_chart_update/) | 14.0.1.0.0 | Wizard to update a company's account chart from a template
-[account_check_deposit](account_check_deposit/) | 14.0.1.0.0 | Manage deposit of checks to the bank
-[account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.0.0 | Check VAT on invoice validation
-[account_fiscal_year](account_fiscal_year/) | 14.0.1.1.0 | Create Account Fiscal Year
-[account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 14.0.1.0.0 | Account Invoice Constraint Chronology
-[account_journal_lock_date](account_journal_lock_date/) | 14.0.1.0.0 | Lock each journal independently
-[account_lock_date_update](account_lock_date_update/) | 14.0.1.0.0 | Allow an Account adviser to update locking date without having access to all technical settings
-[account_menu](account_menu/) | 14.0.1.1.0 | Adds missing menu entries for Account module
-[account_move_force_removal](account_move_force_removal/) | 14.0.1.0.0 | Allow force removal account moves
-[account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 | Adds a Journal Items menu
-[account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.1.1.0 | Allows to edit taxes on non-posted account move lines
-[account_move_template](account_move_template/) | 14.0.1.1.0 | Templates for recurring Journal Entries
-[account_no_default](account_no_default/) | 14.0.1.0.0 | Remove default expense account for vendor bills journal
-[base_vat_optional_vies](base_vat_optional_vies/) | 14.0.1.0.0 | Optional validation of VAT via VIES
-[product_category_tax](product_category_tax/) | 14.0.1.0.0 | Configure taxes in the product category
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[account_asset_management](account_asset_management/) | 14.0.2.0.3 |  | Assets Management
+[account_balance_line](account_balance_line/) | 14.0.1.0.0 |  | Display balance totals in move line view
+[account_chart_update](account_chart_update/) | 14.0.1.0.0 |  | Wizard to update a company's account chart from a template
+[account_check_deposit](account_check_deposit/) | 14.0.1.0.0 |  | Manage deposit of checks to the bank
+[account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.0.0 |  | Check VAT on invoice validation
+[account_fiscal_year](account_fiscal_year/) | 14.0.1.1.0 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Create Account Fiscal Year
+[account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 14.0.1.0.0 |  | Account Invoice Constraint Chronology
+[account_journal_lock_date](account_journal_lock_date/) | 14.0.1.0.0 |  | Lock each journal independently
+[account_lock_date_update](account_lock_date_update/) | 14.0.1.0.0 |  | Allow an Account adviser to update locking date without having access to all technical settings
+[account_menu](account_menu/) | 14.0.1.1.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module
+[account_move_force_removal](account_move_force_removal/) | 14.0.1.0.0 |  | Allow force removal account moves
+[account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 |  | Adds a Journal Items menu
+[account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.1.1.0 |  | Allows to edit taxes on non-posted account move lines
+[account_move_template](account_move_template/) | 14.0.1.1.0 |  | Templates for recurring Journal Entries
+[account_no_default](account_no_default/) | 14.0.1.0.0 | [![dreispt](https://github.com/dreispt.png?size=30px)](https://github.com/dreispt) | Remove default expense account for vendor bills journal
+[base_vat_optional_vies](base_vat_optional_vies/) | 14.0.1.0.0 |  | Optional validation of VAT via VIES
+[product_category_tax](product_category_tax/) | 14.0.1.0.0 |  | Configure taxes in the product category
 
 [//]: # (end addons)
 
