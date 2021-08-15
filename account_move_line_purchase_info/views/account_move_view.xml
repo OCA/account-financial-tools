@@ -25,10 +25,12 @@
             <field name="partner_id" position="after">
                 <field
                     name="purchase_id"
+                    optional="show"
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
                 <field
                     name="purchase_line_id"
+                    optional="hide"
                     groups="account_move_line_purchase_info.group_account_move_purchase_info"
                 />
             </field>
