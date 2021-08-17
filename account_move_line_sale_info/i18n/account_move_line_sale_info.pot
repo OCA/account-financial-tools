@@ -24,7 +24,13 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: account_move_line_sale_info
+#: model_terms:ir.ui.view,arch_db:account_move_line_sale_info.view_account_move_line_filter
+msgid "Sale Order"
+msgstr ""
+
+#. module: account_move_line_sale_info
 #: model:ir.model.fields,field_description:account_move_line_sale_info.field_account_move_line__sale_line_id
+#: model_terms:ir.ui.view,arch_db:account_move_line_sale_info.view_account_move_line_filter
 msgid "Sale Order Line"
 msgstr ""
 
@@ -46,14 +52,4 @@ msgstr ""
 #. module: account_move_line_sale_info
 #: model:ir.model,name:account_move_line_sale_info.model_stock_move
 msgid "Stock Move"
-msgstr ""
-
-#. module: account_move_line_sale_info
-#: model_terms:ir.ui.view,arch_db:account_move_line_sale_info.view_account_move_line_filter
-msgid "sale Order"
-msgstr ""
-
-#. module: account_move_line_sale_info
-#: model_terms:ir.ui.view,arch_db:account_move_line_sale_info.view_account_move_line_filter
-msgid "sale Order Line"
 msgstr ""
