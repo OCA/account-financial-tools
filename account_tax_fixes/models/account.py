@@ -58,7 +58,7 @@ class AccountTax(models.Model):
             else:
                 return quantity * self.amount
         if self.tax_credit_payable == 'taxadvpay':
-            base_amount = 0.0
+            return 0.0
         if (self.amount_type == 'percent' and not self.price_include) or (self.amount_type == 'division' and self.price_include):
             return base_amount * self.amount / 100
         if self.amount_type == 'percent' and self.price_include:

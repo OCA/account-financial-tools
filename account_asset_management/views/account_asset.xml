@@ -86,6 +86,8 @@
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
               <field name="value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="froze_depreciation" widget="monetary" options="{'currency_field': 'currency_id'}"
+                     attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
             </group>
             <group string="Taxed">
               <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
@@ -98,6 +100,8 @@
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
               <field name="tax_value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                      attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="tax_froze_depreciation" widget="monetary" options="{'currency_field': 'currency_id'}"
+                     attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
             </group>
           </group>
           <separator string="Other Information" colspan="4" attrs="{'invisible': [('type', '=', 'normal')]}"/>

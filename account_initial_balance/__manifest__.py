@@ -11,8 +11,9 @@
         "account",
         "account_recalculate_stock_move",
         ],
-    'author': "Rosen Vladimirov, Bioprint Ltd.,",
-    "website": 'https://github.com/OCA/account-financial-tools',
+    'author': "Rosen Vladimirov, "
+              "Bioprint Ltd.",
+    "website": 'https://github.com/rosenvladimirov/account-financial-tools',
     "category": "Finance",
     "data": [
         "data/ir_module_account_initial_balance.xml",

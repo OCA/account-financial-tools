@@ -2,12 +2,15 @@
 # Copyright 2015-2017 See manifest
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.addons import decimal_precision as dp
 from odoo.addons.stock_landed_costs.models import product
 import time
 
 import logging
+
+from odoo.exceptions import UserError
+
 _logger = logging.getLogger(__name__)
 
 
@@ -120,12 +123,15 @@ class WizardCreateMoveTransfer(models.TransientModel):
         name = self.account_move_id.name
         partner = self.partner_id.id
         moves = self.env['account.move']
+        move = False
         for journal in self.journal_id:
             lines = []
             move = self._create_move(name, journal.id, partner, self.account_move_id.id)
             for line in self.account_move_line_ids:
                 lines.append((0, 0, self._prepare_line(line, partner, move)))
             move.write({'line_ids': lines})
+        if not move:
+            UserError(_('First choice Journal...'))
         return {
             'domain': [('id', 'in', [move.id])],
             'name': 'Entries from transfer: %s' % name,

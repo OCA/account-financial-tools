@@ -1908,9 +1908,9 @@ class AccountAsset(models.Model):
             #         lambda r: r.type in ['depreciate', 'remove', 'storno'] and not r.move_check)
 
             dlines = asset._get_board('dlines_filtered')
-            _logger.info("DLINES %s" % dlines)
+            # _logger.info("DLINES %s" % dlines)
             for line in dlines:
-                line.unlink()
+                line.with_context(dict(self._context, allow_asset_line_update=True)).unlink()
             asset._compute_depreciation()
 
     def _value_depreciation_restatement_line(self, line, move, date_move, type='create'):

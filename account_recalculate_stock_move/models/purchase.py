@@ -14,6 +14,8 @@ class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     account_move_ids = fields.One2many('account.move', compute="_compute_account_move_ids")
+    account_move_line_ids = fields.One2many('account.move.line', compute="_compute_account_move_line_ids")
+
     account_move_inv_debit = fields.Float('Debit on invoice', compute="_compute_account_move_inv")
     account_move_inv_credit = fields.Float('Debit on invoice', compute="_compute_account_move_inv")
     account_move_pick_debit = fields.Float('Debit on invoice', compute="_compute_account_move_pick")
@@ -38,6 +40,26 @@ class PurchaseOrder(models.Model):
                             order.account_move_ids = move
                         else:
                             order.account_move_ids |= move
+
+    def _compute_account_move_line_ids(self):
+        for order in self:
+            order.account_move_line_ids = False
+            for picking in order.picking_ids:
+                if picking.move_lines.mapped("account_move_ids"):
+                    for line in picking.move_lines:
+                        if not picking.account_move_ids:
+                            order.account_move_line_ids = line.mapped('account_move_ids').mapped('line_ids')
+                        else:
+                            order.account_move_line_ids = order.account_move_line_ids | line.mapped('account_move_ids').mapped('line_ids')
+            invoice_ids = order.invoice_ids.filtered(lambda r: r.type in ['in_invoice', 'in_refund'])
+            if invoice_ids:
+                for inv in invoice_ids:
+                    if inv.move_id:
+                        move = inv.move_id
+                        if not order.account_move_line_ids:
+                            order.account_move_line_ids = move.mapped('line_ids')
+                        else:
+                            order.account_move_line_ids |= move.mapped('line_ids')
 
     def _compute_account_move_inv(self):
         for order in self:
@@ -69,6 +91,17 @@ class PurchaseOrder(models.Model):
         action_data = action_ref.read()[0]
         action_data['domain'] = [('id', 'in', self.account_move_ids.ids)]
         action_data['context'] = {'search_default_misc_filter': 0, 'view_no_maturity': True}
+        return action_data
+
+    @api.multi
+    def action_get_account_move_lines(self):
+        self.ensure_one()
+        action_ref = self.env.ref('account.action_account_moves_all_a')
+        if not action_ref:
+            return False
+        action_data = action_ref.read()[0]
+        action_data['domain'] = [('id', 'in', self.account_move_line_ids.ids)]
+        action_data['context'] = {'search_default_movegroup': 1}
         return action_data
 
     @api.multi
