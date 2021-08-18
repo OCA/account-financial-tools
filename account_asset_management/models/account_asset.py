@@ -406,6 +406,7 @@ class AccountAsset(models.Model):
         if self.filtered(
             lambda a: a.method_time == "year"
             and not a.method_number
+            and a.method_end
             and a.method_end <= a.date_start
         ):
             raise UserError(_("The Start Date must precede the Ending Date."))
