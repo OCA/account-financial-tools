@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Quentin DUPONT <quentin.dupont@grap.coop>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_fiscal_position_template_tree" model="ir.ui.view">
+        <field name="model">account.fiscal.position.template</field>
+        <field name="inherit_id" ref="account.view_account_position_template_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-muted">not active</attribute>
+            </xpath>
+            <field name="name" position="after">
+                <field name="active" widget="boolean_toggle" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_fiscal_position_template_form" model="ir.ui.view">
+        <field name="model">account.fiscal.position.template</field>
+        <field name="inherit_id" ref="account.view_account_position_template_form" />
+        <field name="arch" type="xml">
+            <field name="chart_template_id" position="after">
+                <field name="active" />
+            </field>
+            <xpath expr="//field[@name='tax_ids']/tree" position="attributes">
+                <attribute name="decoration-muted">not active</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='tax_ids']/tree/field[@name='tax_dest_id']"
+                position="after"
+            >
+                <field name="active" widget="boolean_toggle" />
+            </xpath>
+            <xpath
+                expr="//field[@name='tax_ids']/form/field[@name='tax_dest_id']"
+                position="after"
+            >
+                <field name="active" />
+            </xpath>
+            <xpath
+                expr="//field[@name='account_ids']/tree/field[@name='account_dest_id']"
+                position="after"
+            >
+                <field name="active" widget="boolean_toggle" />
+            </xpath>
+            <xpath
+                expr="//field[@name='account_ids']/form/field[@name='account_dest_id']"
+                position="after"
+            >
+                <field name="active" />
+            </xpath>
+        </field>
+    </record>
+
+    <record
+        id="account_menu.account_fiscal_position_template_action"
+        model="ir.actions.act_window"
+    >
+        <field name="context">{"active_test": False}</field>
+    </record>
+
+</odoo>

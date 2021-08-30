@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Quentin DUPONT <quentin.dupont@grap.coop>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_account_template_tree" model="ir.ui.view">
+        <field name="model">account.account.template</field>
+        <field name="inherit_id" ref="account.view_account_template_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-muted">not active</attribute>
+            </xpath>
+            <field name="user_type_id" position="after">
+                <field name="active" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_template_form" model="ir.ui.view">
+        <field name="model">account.account.template</field>
+        <field name="inherit_id" ref="account.view_account_template_form" />
+        <field name="arch" type="xml">
+            <field name="chart_template_id" position="after">
+                <field name="active" />
+            </field>
+        </field>
+    </record>
+
+    <record
+        id="account_menu.account_account_template_action"
+        model="ir.actions.act_window"
+    >
+        <field name="context">{"active_test": False}</field>
+    </record>
+
+</odoo>
