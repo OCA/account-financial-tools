@@ -30,6 +30,17 @@ FIELDS_AFFECTS_ASSET_MOVE_LINE = {
 class AccountMove(models.Model):
     _inherit = "account.move"
 
+    asset_count = fields.Integer(compute="_compute_asset_count")
+
+    def _compute_asset_count(self):
+        for rec in self:
+            assets = (
+                self.env["account.asset.line"]
+                .search([("move_id", "=", self.id)])
+                .mapped("asset_id")
+            )
+            rec.asset_count = len(assets)
+
     def unlink(self):
         # for move in self:
         deprs = self.env["account.asset.line"].search(
@@ -116,15 +127,38 @@ class AccountMove(models.Model):
                 line_vals.update(asset_profile_id=False, asset_id=False)
         return move_vals
 
+    def action_view_assets(self):
+        assets = (
+            self.env["account.asset.line"]
+            .search([("move_id", "=", self.id)])
+            .mapped("asset_id")
+        )
+        action = self.env.ref("account_asset_management.account_asset_action")
+        action_dict = action.read()[0]
+        if len(assets) == 1:
+            res = self.env.ref(
+                "account_asset_management.account_asset_view_form", False
+            )
+            action_dict["views"] = [(res and res.id or False, "form")]
+            action_dict["res_id"] = assets.id
+        elif assets:
+            action_dict["domain"] = [("id", "in", assets.ids)]
+        else:
+            action_dict = {"type": "ir.actions.act_window_close"}
+        return action_dict
+
 
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     asset_profile_id = fields.Many2one(
-        comodel_name="account.asset.profile", string="Asset Profile"
+        comodel_name="account.asset.profile",
+        string="Asset Profile",
     )
     asset_id = fields.Many2one(
-        comodel_name="account.asset", string="Asset", ondelete="restrict"
+        comodel_name="account.asset",
+        string="Asset",
+        ondelete="restrict",
     )
 
     @api.onchange("account_id")

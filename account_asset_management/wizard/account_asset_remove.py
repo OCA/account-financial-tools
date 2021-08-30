@@ -15,7 +15,15 @@ _logger = logging.getLogger(__name__)
 class AccountAssetRemove(models.TransientModel):
     _name = "account.asset.remove"
     _description = "Remove Asset"
+    _check_company_auto = True
 
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        string="Company",
+        readonly=True,
+        required=True,
+        default=lambda self: self._default_company_id(),
+    )
     date_remove = fields.Date(
         string="Asset Removal Date",
         required=True,
@@ -30,25 +38,25 @@ class AccountAssetRemove(models.TransientModel):
     account_sale_id = fields.Many2one(
         comodel_name="account.account",
         string="Asset Sale Account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
         default=lambda self: self._default_account_sale_id(),
     )
     account_plus_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Plus-Value Account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
         default=lambda self: self._default_account_plus_value_id(),
     )
     account_min_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Min-Value Account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
         default=lambda self: self._default_account_min_value_id(),
     )
     account_residual_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Residual Value Account",
-        domain=[("deprecated", "=", False)],
+        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
         default=lambda self: self._default_account_residual_value_id(),
     )
     posting_regime = fields.Selection(
@@ -68,6 +76,12 @@ class AccountAssetRemove(models.TransientModel):
     def _check_sale_value(self):
         if self.sale_value < 0:
             raise ValidationError(_("The Sale Value must be positive!"))
+
+    @api.model
+    def _default_company_id(self):
+        asset_id = self.env.context.get("active_id")
+        asset = self.env["account.asset"].browse(asset_id)
+        return asset.company_id
 
     @api.model
     def _default_sale_value(self):

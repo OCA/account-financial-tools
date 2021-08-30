@@ -10,10 +10,15 @@ class AccountAssetLine(models.Model):
     _name = "account.asset.line"
     _description = "Asset depreciation table line"
     _order = "type, line_date"
+    _check_company_auto = True
 
     name = fields.Char(string="Depreciation Name", size=64, readonly=True)
     asset_id = fields.Many2one(
-        comodel_name="account.asset", string="Asset", required=True, ondelete="cascade"
+        comodel_name="account.asset",
+        string="Asset",
+        required=True,
+        ondelete="cascade",
+        check_company=True,
     )
     previous_id = fields.Many2one(
         comodel_name="account.asset.line",
@@ -42,7 +47,10 @@ class AccountAssetLine(models.Model):
     line_date = fields.Date(string="Date", required=True)
     line_days = fields.Integer(string="Days", readonly=True)
     move_id = fields.Many2one(
-        comodel_name="account.move", string="Depreciation Entry", readonly=True
+        comodel_name="account.move",
+        string="Depreciation Entry",
+        readonly=True,
+        check_company=True,
     )
     move_check = fields.Boolean(
         compute="_compute_move_check", string="Posted", store=True
@@ -60,6 +68,12 @@ class AccountAssetLine(models.Model):
         string="Initial Balance Entry",
         help="Set this flag for entries of previous fiscal years "
         "for which Odoo has not generated accounting entries.",
+    )
+    company_id = fields.Many2one(
+        "res.company",
+        store=True,
+        readonly=True,
+        related="asset_id.company_id",
     )
 
     @api.depends("amount", "previous_id", "type")
