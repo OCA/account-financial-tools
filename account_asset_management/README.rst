@@ -63,6 +63,11 @@ Changelog
 
  * [BREAKING] Removed all functionality associated with `account.fiscal.year`
 
+13.0.2.0.0 (2021-02-19)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Add support for multi-company
+
 13.0.1.0.0 (2019-10-21)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
