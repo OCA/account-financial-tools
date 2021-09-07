@@ -8,7 +8,7 @@
     'summary': "Transfer saldo to other account inside movement in Journal Entries",
     'author': "Rosen Vladimirov, "
               "dXFactory Ltd.",
-    'website': 'https://github.com/OCA/account-financial-tools',
+    'website': 'https://github.com/rosenvladimirov/account-financial-tools',
     'license': 'AGPL-3',
     'depends': ['account', 'stock_landed_costs'],
     'data': [

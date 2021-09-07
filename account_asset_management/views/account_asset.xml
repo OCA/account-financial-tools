@@ -125,6 +125,7 @@
                   <field name="fiscal_correction_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                          attrs="{'readonly': ['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
                   <field name="date_remove"/>
+                  <field name="force_include"/>
                 </group>
                 <group>
                   <field name="froze_depreciation" widget="monetary" options="{'currency_field': 'currency_id'}"
@@ -172,7 +173,7 @@
               <div>
                 <button type="object" name="compute_depreciation_board"
                         string=" Compute" icon="fa-gears"
-                        attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
+                        attrs="{'invisible': [('state', 'in', ['close', 'removed']), ('force_include', '=', False)]}"/>
                 <button type="object" name="unlink_move"
                         string="Delete Moves" icon="fa-times" confirm="Are you sure ?" groups="account.group_account_manager"
                         attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
@@ -224,7 +225,7 @@
               <div>
                 <button type="object" name="compute_depreciation_board"
                         string=" Compute" icon="fa-gears"
-                        attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}" context="{'bg_asset_line': True}"/>
+                        attrs="{'invisible': [('state', 'in', ['close', 'removed']), ('force_include', '=', False)]}" context="{'bg_asset_line': True}"/>
                 <button type="object" name="unlink_move"
                         string="Delete Moves" icon="fa-times" confirm="Are you sure ?" groups="account.group_account_manager"
                         attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}" context="{'bg_asset_line': True}"/>

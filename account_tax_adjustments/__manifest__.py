@@ -9,7 +9,7 @@
     'author': "Rosen Vladimirov, "
               "BioPrint Ltd."
               "Odoo Community Association (OCA)",
-    'website': 'https://github.com/OCA/account-financial-tools',
+    'website': 'https://github.com/rosenvladimirov/account-financial-tools',
     'license': 'AGPL-3',
     'depends': [
         'account',

@@ -100,8 +100,8 @@ class ProductTemplate(models.Model):
                         raise
 
             history = self.env['product.price.history'].search([
-                ('company_id', '=', company.id),
-                ('product_id', 'in', self.product_variant_ids)], order='datetime desc,id desc')
+                ('company_id', '=', company),
+                ('product_id', 'in', self.product_variant_ids.ids)], order='datetime desc,id desc')
             if history:
                 history.unlink()
             quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)

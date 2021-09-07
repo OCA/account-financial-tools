@@ -8,7 +8,7 @@
         #"account_recalculate_stock_move"
     ],
     'author': "Rosen Vladimirov, dXFactory Ltd.,",
-    "website": 'https://github.com/OCA/account-financial-tools',
+    "website": 'https://github.com/rosenvladimirov/account-financial-tools',
     "category": "Finance",
     "data": [
     ],

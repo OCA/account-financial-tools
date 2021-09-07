@@ -361,6 +361,9 @@ class AccountAsset(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
         domain=[('parent_id', '=', False)])
+    force_include = fields.Boolean(
+        string='Force depreciation',
+        help="If residual is 0, and check box it the system will calculate depreciation")
 
     @api.multi
     def _compute_purchase_line_ids(self):
@@ -964,7 +967,8 @@ class AccountAsset(models.Model):
         digits = self.env['decimal.precision'].precision_get('Account')
 
         for asset in self:
-            if asset.with_context(dict(self._context, force_exclude_froze=True)).value_residual == 0.0:
+            if asset.with_context(dict(self._context, force_exclude_froze=True)).value_residual == 0.0 \
+                    and not asset.force_include:
                 continue
             domain = asset._get_board('domain1')
             posted_lines = line_obj.search(domain, order='line_date desc')
@@ -1120,6 +1124,7 @@ class AccountAsset(models.Model):
                         seq -= 1
                 line_i_start = 0
             # asset.recalculate()
+            asset.with_context(dict(self._context, force_exclude_froze=True))._compute_depreciation()
         return True
 
     def _get_fy_duration(self, fy_id, option='days'):
