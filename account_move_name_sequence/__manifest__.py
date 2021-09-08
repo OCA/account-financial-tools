@@ -14,7 +14,9 @@
     "depends": ["account"],
     "data": [
         "views/account_journal.xml",
+        "views/account_move.xml",
         "security/ir.model.access.csv",
     ],
+    "post_init_hook": "create_journal_sequences",
     "installable": True,
 }
