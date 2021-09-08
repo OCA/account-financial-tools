@@ -13,6 +13,7 @@ class AccountJournal(models.Model):
         "ir.sequence",
         string="Entry Sequence",
         copy=False,
+        required=True,
         check_company=True,
         domain="[('company_id', '=', company_id)]",
         help="This sequence will be used to generate the journal entry number.",
