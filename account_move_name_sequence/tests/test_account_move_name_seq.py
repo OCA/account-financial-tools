@@ -78,6 +78,9 @@ class TestAccountMoveNameSequence(TransactionCase):
             ]
         )
         self.assertEqual(drange_count, 1)
+        move.button_draft()
+        move.action_post()
+        self.assertEqual(move.name, move_name)
 
     def test_in_refund(self):
         in_refund_invoice = self.env["account.move"].create(
@@ -104,4 +107,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         seq = self.purchase_journal.refund_sequence_id
         move_name = "%s%s" % (seq.prefix, "1".zfill(seq.padding))
         move_name = move_name.replace("%(range_year)s", str(self.date.year))
+        self.assertEqual(in_refund_invoice.name, move_name)
+        in_refund_invoice.button_draft()
+        in_refund_invoice.action_post()
         self.assertEqual(in_refund_invoice.name, move_name)
