@@ -73,7 +73,7 @@ class AccountMove(models.Model):
         return super().write(vals)
 
     def _prepare_asset_vals(self, aml):
-        depreciation_base = aml.price_subtotal
+        depreciation_base = aml.balance
         return {
             "name": aml.name,
             "code": self.name,
