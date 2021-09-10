@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo13-addon-account_loan',
         'odoo13-addon-account_lock_date_update',
         'odoo13-addon-account_lock_to_date',
+        'odoo13-addon-account_maturity_date_default',
         'odoo13-addon-account_menu',
         'odoo13-addon-account_move_budget',
         'odoo13-addon-account_move_force_removal',
