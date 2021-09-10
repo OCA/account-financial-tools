@@ -1207,6 +1207,15 @@ class AccountAsset(models.Model):
         """use this method to customise the name of the accounting entry"""
         return (self.code or str(self.id)) + "/" + str(seq)
 
+    def _get_asset_line_domain(self, date_end):
+        return [
+            ("asset_id", "in", self.ids),
+            ("type", "=", "depreciate"),
+            ("init_entry", "=", False),
+            ("line_date", "<=", date_end),
+            ("move_check", "=", False),
+        ]
+
     def _compute_entries(self, date_end, check_triggers=False):
         # TODO : add ir_cron job calling this method to
         # generate periodical accounting entries
@@ -1222,13 +1231,7 @@ class AccountAsset(models.Model):
                         asset.compute_depreciation_board()
 
         depreciations = self.env["account.asset.line"].search(
-            [
-                ("asset_id", "in", self.ids),
-                ("type", "=", "depreciate"),
-                ("init_entry", "=", False),
-                ("line_date", "<=", date_end),
-                ("move_check", "=", False),
-            ],
+            self._get_asset_line_domain(date_end),
             order="line_date",
         )
         for depreciation in depreciations:

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_asset_compute_batch_invoice,account.asset.compute.batch,model_account_asset_compute_batch,account.group_account_invoice,1,1,1,1
+access_account_asset_compute_batch_profile_report,access_account_asset_compute_batch_profile_report,model_account_asset_compute_batch_profile_report,base.group_user,1,0,0,0
