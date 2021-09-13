@@ -56,6 +56,17 @@ class TestAccountMove(common.SavepointCase):
         invoice = move_form.save()
         return invoice
 
+    def test_invoice_move_update(self):
+        invoice = self._create_invoice()
+        invoice.line_ids.write({"date_maturity": False})
+        invoice.write({"date": "1999-12-31"})
+        invoice_line = invoice.line_ids.filtered(
+            lambda x: x.account_id.internal_type == "receivable"
+        )
+        self.assertEqual(
+            invoice_line.date_maturity, fields.Date.from_string("1999-12-31")
+        )
+
     def test_invoice_reconciliation(self):
         invoice = self._create_invoice()
         invoice.action_post()
