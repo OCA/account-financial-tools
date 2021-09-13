@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-07-02 22:50+0000\n"
+"PO-Revision-Date: 2021-09-13 13:33+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
@@ -25,7 +25,7 @@ msgstr "Grupo de Contas"
 #: model:ir.actions.act_window,name:account_menu.account_group_action
 #: model:ir.ui.menu,name:account_menu.account_group_menu
 msgid "Account Groups"
-msgstr "Grupos Contabilísticos"
+msgstr "Grupos de Contas"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_account_tag
@@ -71,7 +71,7 @@ msgstr "Contas"
 #. module: account_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
 msgid "Anglo-Saxon Accounting"
-msgstr ""
+msgstr "Contabilidade Anglo-Saxónica"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_bank
@@ -96,7 +96,7 @@ msgstr "Modelos de Plano de Contas"
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Parâmetros de Configuração"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__display_name
@@ -136,6 +136,9 @@ msgid ""
 "recording the cost as soon\n"
 "                                as the product is received in stock)."
 msgstr ""
+"Registar o custo de um bem como despesa quando este bem\n"
+"é faturado ao cliente final (em vez de o registar assim\n"
+"que o produto é recebido em stock)."
 
 #. module: account_menu
 #: model:ir.model.fields,help:account_menu.field_res_config_settings__anglo_saxon_accounting
@@ -143,6 +146,8 @@ msgid ""
 "Record the cost of a good as an expense when this good is invoiced to a "
 "final customer."
 msgstr ""
+"Registar o custo de um bem como despesa quando este é faturado ao cliente "
+"final."
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_tax_group
@@ -167,4 +172,4 @@ msgstr "Modelos"
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
-msgstr ""
+msgstr "Utilizar contabilidade anglo-saxónica"
