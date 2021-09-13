@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_maturity_date_default
+#: model:ir.model,name:account_maturity_date_default.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#. module: account_maturity_date_default
 #: model:ir.model,name:account_maturity_date_default.model_account_move_line
 msgid "Journal Item"
 msgstr ""
