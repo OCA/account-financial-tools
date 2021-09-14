@@ -46,6 +46,7 @@
         'views/account_move_line.xml',
         'views/account_asset_actions.xml',
         'views/stock_inventory_views.xml',
+        'views/stock_move_line_view.xml',
         'views/stock_picking_views.xml',
         'views/menuitem.xml',
     ],

@@ -453,8 +453,8 @@ class AccountAsset(models.Model):
                 fy_date_start = date.today() + relativedelta(days=1)
                 if self._context.get('force_date'):
                     fy_date_start = self._context['force_date']
-                # _logger.info("DATE START %s" % fy_date_start)
                 fy = asset.company_id.find_daterange_fy(fy_date_start)
+                _logger.info("DATE START %s:%s-%s" % (fy_date_start, fy.date_start, fy.date_end))
                 lines = asset.depreciation_line_ids.filtered(
                     lambda l: l.type in ('depreciate', 'remove') and
                               (l.init_entry or l.move_check))

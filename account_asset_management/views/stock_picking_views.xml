@@ -21,6 +21,12 @@
                     <field string="View assets" name="count_in_assets" widget="statinfo"/>
                 </button>
             </xpath>
+            <xpath expr="//field[@name='move_line_ids']/tree/field[@name='product_id']" position="after">
+                 <field name="asset_id"/>
+            </xpath>
+            <xpath expr="//field[@name='move_lines']/tree/field[@name='product_id']" position="after">
+                 <field name="asset_profile_id"/>
+            </xpath>
         </field>
     </record>
 </odoo>
