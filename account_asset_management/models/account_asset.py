@@ -260,7 +260,7 @@ class AccountAsset(models.Model):
     depreciation_line_manual_ids = fields.One2many(
         comodel_name="account.asset.line",
         inverse_name="asset_id",
-        string="Depreciation Lines",
+        string="Depreciation Lines (manual)",
         copy=False,
         states=READONLY_STATES,
         check_company=True,
