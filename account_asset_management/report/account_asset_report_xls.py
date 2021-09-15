@@ -42,7 +42,9 @@ class AssetReportXlsx(models.AbstractModel):
                 "header": {"type": "string", "value": self._("Account")},
                 "asset": {
                     "type": "string",
-                    "value": self._render("asset.profile_id.account_asset_id.code"),
+                    "value": self._render(
+                        "asset.profile_id.account_asset_id.code or ''"
+                    ),
                 },
                 "totals": {"type": "string", "value": self._("Totals")},
                 "width": 20,
@@ -68,7 +70,7 @@ class AssetReportXlsx(models.AbstractModel):
             "date_start": {
                 "header": {"type": "string", "value": self._("Asset Start Date")},
                 "asset": {
-                    "value": self._render("asset.date_start"),
+                    "value": self._render("asset.date_start or ''"),
                     "format": FORMATS["format_tcell_date_left"],
                 },
                 "width": 20,
@@ -76,7 +78,7 @@ class AssetReportXlsx(models.AbstractModel):
             "date_remove": {
                 "header": {"type": "string", "value": self._("Asset Removal Date")},
                 "asset": {
-                    "value": self._render("asset.date_remove"),
+                    "value": self._render("asset.date_remove or ''"),
                     "format": FORMATS["format_tcell_date_left"],
                 },
                 "width": 20,
@@ -123,6 +125,29 @@ class AssetReportXlsx(models.AbstractModel):
                 "totals": {
                     "type": "formula",
                     "value": self._render("salvage_total_formula"),
+                    "format": FORMATS["format_theader_yellow_amount_right"],
+                },
+                "width": 18,
+            },
+            "purchase_value": {
+                "header": {
+                    "type": "string",
+                    "value": self._("Purchase Value"),
+                    "format": FORMATS["format_theader_yellow_right"],
+                },
+                "asset_group": {
+                    "type": "number",
+                    "value": self._render('group_entry["_purchase_value"]'),
+                    "format": FORMATS["format_theader_blue_amount_right"],
+                },
+                "asset": {
+                    "type": "number",
+                    "value": self._render("asset.purchase_value"),
+                    "format": FORMATS["format_tcell_amount_right"],
+                },
+                "totals": {
+                    "type": "formula",
+                    "value": self._render("purchase_total_formula"),
                     "format": FORMATS["format_theader_yellow_amount_right"],
                 },
                 "width": 18,
@@ -465,6 +490,7 @@ class AssetReportXlsx(models.AbstractModel):
 
         asset_entries = []
         group_entry = {
+            "_purchase_value": 0.0,
             "_depreciation_base": 0.0,
             "_salvage_value": 0.0,
             "_period_start_value": 0.0,
@@ -473,6 +499,7 @@ class AssetReportXlsx(models.AbstractModel):
         }
         for asset in assets:
             asset_entry = {"asset": asset}
+            group_entry["_purchase_value"] += asset.purchase_value
             group_entry["_depreciation_base"] += asset.depreciation_base
             group_entry["_salvage_value"] += asset.salvage_value
             dls_all = asset.depreciation_line_ids.filtered(
@@ -559,6 +586,7 @@ class AssetReportXlsx(models.AbstractModel):
         ws.freeze_panes(row_pos, 0)
 
         row_pos_start = row_pos
+        purchase_value_pos = "purchase_value" in wl and wl.index("purchase_value")
         depreciation_base_pos = "depreciation_base" in wl and wl.index(
             "depreciation_base"
         )
@@ -584,6 +612,7 @@ class AssetReportXlsx(models.AbstractModel):
                 parent = entry["group"].parent_id
                 for parent_entry in reversed(entries[: -i - 1]):
                     if "group" in parent_entry and parent_entry["group"] == parent:
+                        parent_entry["_purchase_value"] += entry["_purchase_value"]
                         parent_entry["_depreciation_base"] += entry[
                             "_depreciation_base"
                         ]
@@ -649,6 +678,9 @@ class AssetReportXlsx(models.AbstractModel):
                     default_format=FORMATS["format_tcell_left"],
                 )
 
+        purchase_total_formula = purchase_value_pos and self._rowcol_to_cell(
+            row_pos_start, purchase_value_pos
+        )
         asset_total_formula = depreciation_base_pos and self._rowcol_to_cell(
             row_pos_start, depreciation_base_pos
         )
@@ -683,6 +715,7 @@ class AssetReportXlsx(models.AbstractModel):
             ws_params,
             col_specs_section="totals",
             render_space={
+                "purchase_total_formula": purchase_total_formula,
                 "asset_total_formula": asset_total_formula,
                 "salvage_total_formula": salvage_total_formula,
                 "period_start_total_formula": period_start_total_formula,
