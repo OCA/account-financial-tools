@@ -72,24 +72,27 @@ class AccountMove(models.Model):
                 )
         return super().write(vals)
 
+    def _prepare_asset_vals(self, aml):
+        depreciation_base = aml.price_subtotal
+        return {
+            "name": aml.name,
+            "code": self.name,
+            "profile_id": aml.asset_profile_id,
+            "purchase_value": depreciation_base,
+            "partner_id": aml.partner_id,
+            "date_start": self.date,
+            "account_analytic_id": aml.analytic_account_id,
+        }
+
     def action_post(self):
         super().action_post()
         for move in self:
             for aml in move.line_ids.filtered("asset_profile_id"):
-                depreciation_base = aml.price_subtotal
+                vals = move._prepare_asset_vals(aml)
                 if not aml.name:
                     raise UserError(
                         _("Asset name must be set in the label of the line.")
                     )
-                vals = {
-                    "name": aml.name,
-                    "code": move.name,
-                    "profile_id": aml.asset_profile_id,
-                    "purchase_value": depreciation_base,
-                    "partner_id": aml.partner_id,
-                    "date_start": move.date,
-                    "account_analytic_id": aml.analytic_account_id,
-                }
                 asset_form = Form(
                     self.env["account.asset"]
                     .with_company(move.company_id)
