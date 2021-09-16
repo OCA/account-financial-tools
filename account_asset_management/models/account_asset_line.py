@@ -216,7 +216,7 @@ class AccountAssetLine(models.Model):
         for dl in self:
             if dl.type == "create" and dl.amount:
                 raise UserError(
-                    _("You cannot remove an asset line " "of type 'Depreciation Base'.")
+                    _("You cannot remove an asset line of type 'Depreciation Base'.")
                 )
             elif dl.move_id:
                 raise UserError(

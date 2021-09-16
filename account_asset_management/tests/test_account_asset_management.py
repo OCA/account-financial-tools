@@ -8,6 +8,7 @@ import time
 from datetime import date, datetime
 
 from odoo import fields
+from odoo.exceptions import UserError
 from odoo.tests.common import Form
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -760,3 +761,61 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         # In the last month of the fiscal year we compensate for the small
         # deviations if that is necessary.
         self.assertAlmostEqual(asset.depreciation_line_ids[12].amount, 166.63, places=2)
+
+    def test_17_manual_depreciation_constraints(self):
+        """Test constraints of manual depreciation table,
+        Note: use direct sql in some test, otherwise it will not pass write(), unlink()
+        """
+        asset = self.asset_model.create(
+            {
+                "name": "test asset depreciaion board",
+                "profile_id": self.car5y.id,
+                "purchase_value": 3333,
+                "salvage_value": 0,
+                "date_start": time.strftime("%Y-07-07"),
+                "method_time": "year",
+                "method_number": 5,
+                # "method_period": "month",
+                "prorata": True,
+                "editable_lines": True,
+            }
+        )
+        # You cannot enter depreciation or asset removal lines
+        # before the asset depreciation base
+        asset.compute_depreciation_board()
+        depre1 = asset.depreciation_line_ids.filtered(lambda l: l.type == "depreciate")[
+            :1
+        ]
+        self.env.cr.execute(
+            "update account_asset_line set line_date = %s where id = %s",
+            (
+                time.strftime("%Y-07-06"),
+                depre1.id,
+            ),
+        )
+        asset.refresh()
+        with self.assertRaises(UserError):
+            asset._check_depreciation()
+        # Test a confirmed assets must have depreciations
+        asset.compute_depreciation_board()
+        depre_lines = asset.depreciation_line_ids.filtered(
+            lambda l: l.type == "depreciate"
+        )
+        depre_lines.unlink()
+        with self.assertRaises(UserError):
+            asset.validate()
+        # The last depreciation's remaining value must be zero
+        asset.compute_depreciation_board()
+        asset.refresh()
+        depre_last = asset.depreciation_line_ids[1]
+        depre_last.write({"amount": depre_last.amount - 1})
+        with self.assertRaises(UserError):
+            asset.validate()
+        # You should at least have a starting depreciation line of Type 'Depreciation Base'
+        depre0 = asset.depreciation_line_ids.filtered(lambda l: l.type == "create")
+        self.env.cr.execute(
+            "delete from account_asset_line where id = %s", (depre0.id,)
+        )
+        asset.refresh()
+        with self.assertRaises(UserError):
+            asset._check_depreciation()
