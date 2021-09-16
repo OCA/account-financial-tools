@@ -8,21 +8,22 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 16:31+0000\n"
-"PO-Revision-Date: 2015-06-03 15:57+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/it/)\n"
+"PO-Revision-Date: 2021-09-16 14:34+0000\n"
+"Last-Translator: Lorenzo Battistini <lb@takobi.online>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_bank_statement_import_journal_creation__check_chronology
 #: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal__check_chronology
 msgid "Check Chronology"
-msgstr ""
+msgstr "Controllare cronologia"
 
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
@@ -31,6 +32,8 @@ msgid ""
 "Chronology Error. Please confirm older draft invoices before {date_invoice} "
 "and try again."
 msgstr ""
+"Errore cronologia. Prego confermare le fatture bozza più vecchi del "
+"{date_invoice} e riprovare."
 
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:82
@@ -39,6 +42,8 @@ msgid ""
 "Chronology Error. There exist at least one invoice with a later date to "
 "{date_invoice}."
 msgstr ""
+"Errore cronologia. Esiste almeno una fattura con data successiva a "
+"{date_invoice}."
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
@@ -48,4 +53,4 @@ msgstr "Fattura"
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
-msgstr "Sezionale"
+msgstr "Registro"
