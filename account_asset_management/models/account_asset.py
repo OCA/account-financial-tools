@@ -236,6 +236,7 @@ class AccountAsset(models.Model):
     state = fields.Selection(
         selection=[
             ('draft', 'Draft'),
+            ('sell', 'Wait for selling'),
             ('open', 'Running'),
             ('close', 'Close'),
             ('removed', 'Removed'),
@@ -364,6 +365,7 @@ class AccountAsset(models.Model):
     force_include = fields.Boolean(
         string='Force depreciation',
         help="If residual is 0, and check box it the system will calculate depreciation")
+    to_sell = fields.Boolean('Wait for selling')
 
     @api.multi
     def _compute_purchase_line_ids(self):
@@ -404,6 +406,10 @@ class AccountAsset(models.Model):
                 if line.move_id:
                     asset.move_line_check = True
                     break
+    @api.multi
+    def toggle_to_sell(self):
+        for record in self:
+            record.to_sell = not record.to_sell
 
     @api.multi
     @api.depends('froze_date')

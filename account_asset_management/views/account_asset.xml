@@ -19,17 +19,24 @@
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
+            <button name="toggle_to_sell" type="object"
+                class="oe_stat_button"
+                icon="fa fa-usd"
+                style="background-color: #dc3545 !important; color: #fff !important;" attrs="{'invisible': [('type', '=', 'view'), ('state', 'in', ['draft', 'close', 'removed'])]}">
+                <field name="to_sell" widget="boolean_button"
+                    options='{"terminology": {"string_true": "Selling", "hover_true": "Depreciation", "string_false": "Depreciation", "hover_false": "Selling"}}'/>
+            </button>
             <button name="toggle_active" type="object"
-                    class="oe_stat_button" icon="fa-archive">
-                    <field name="active" widget="boolean_button"
-                           options='{"terminology": "archive"}'/>
+                class="oe_stat_button" icon="fa-archive">
+                <field name="active" widget="boolean_button"
+                       options='{"terminology": "archive"}'/>
             </button>
             <button name="open_entries"
-                    string="Journal Entries"
-                    type="object"
-                    class="oe_stat_button"
-                    icon="fa-usd"
-                    attrs="{'invisible': [('type', '=', 'view')]}"/>
+                string="Journal Entries"
+                type="object"
+                class="oe_stat_button"
+                icon="fa-usd"
+                attrs="{'invisible': [('type', '=', 'view')]}"/>
           </div>
           <div class="oe_title">
             <label for="name" class="oe_edit_only"/>
