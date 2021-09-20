@@ -454,7 +454,6 @@ class AccountAsset(models.Model):
                 if self._context.get('force_date'):
                     fy_date_start = self._context['force_date']
                 fy = asset.company_id.find_daterange_fy(fy_date_start)
-                _logger.info("DATE START %s:%s-%s" % (fy_date_start, fy.date_start, fy.date_end))
                 lines = asset.depreciation_line_ids.filtered(
                     lambda l: l.type in ('depreciate', 'remove') and
                               (l.init_entry or l.move_check))
@@ -1730,12 +1729,13 @@ class AccountAsset(models.Model):
         """ use this method to customise the name of the accounting entry """
         return (self.code or str(self.id)) + '/' + str(seq)
 
-    @api.model
+    @api.multi
     @job
     def _server_with_delay_compute_entries(self, actions):
         actions_now = False
         if self._context.get("date_end", False):
             date_end = self._context['date_end']
+            date_now = fields.Date.today()
         else:
             date_now = fields.Date.today()
             date_end = fields.Datetime.from_string(date_now) - relativedelta(months=1)
@@ -1743,7 +1743,7 @@ class AccountAsset(models.Model):
                                      calendar.monthrange(date_end.year, date_end.month)[-1])
             date_end = fields.Date.to_string(date_end)
         result, error_log = self._compute_entries(date_end, check_triggers=True)
-        # _logger.info("Server side start: %s:%s:%s" % (date_end, result, error_log))
+        _logger.info("Server side start: %s:%s:%s" % (date_end, result, error_log))
         if result:
             actions.write({
                 'date_action': date_now,
@@ -1762,6 +1762,7 @@ class AccountAsset(models.Model):
         actions_now = False
         if self._context.get("date_end", False):
             date_end = self._context['date_end']
+            date_now = fields.Date.today()
         else:
             date_now = fields.Date.today()
             date_end = fields.Datetime.from_string(date_now) - relativedelta(months=1)

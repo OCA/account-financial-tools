@@ -50,7 +50,9 @@ class AccountAssetCompute(models.TransientModel):
                     'date_action': fields.Date.today(),
                 })
                 record.action = actions_now
-                assets.with_delay()._server_with_delay_compute_entries(actions_now)
+                # assets.with_delay()._server_with_delay_compute_entries(actions_now)
+                for asset in assets:
+                    asset._server_compute_entries()
 
     @api.multi
     def view_asset_moves(self):

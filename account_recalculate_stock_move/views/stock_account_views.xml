@@ -227,6 +227,9 @@
                 <field name="reference" position="after">
                     <field name="move_id"/>
                 </field>
+                <field name="date" position="after">
+                    <field name="accounting_date"/>
+                </field>
                 <!--
                 <xpath expr="//group" position="inside">
                     <label for="quant_ids"/>
@@ -251,6 +254,9 @@
                 <xpath expr="//tree" position="attributes">
                     <attribute name="decoration-warning">has_account_move == False</attribute>
                 </xpath>
+                <field name="date" position="after">
+                    <field name="accounting_date"/>
+                </field>
             </field>
         </record>
         <record id="view_inventory_form" model="ir.ui.view">
