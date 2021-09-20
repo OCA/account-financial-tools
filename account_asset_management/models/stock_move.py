@@ -59,6 +59,8 @@ class StockMove(models.Model):
             line_to_create_sum = 0.0
             line_to_create = self.quantity_done
             for line in self.move_line_ids.filtered(lambda r: r.asset_id):
+                if line.asset_id.to_sell:
+                    continue
                 line_to_create_sum += line.qty_done
                 super(StockMove, self.with_context(dict(self._context, forced_quantity=line.qty_done,
                                                         force_asset=line.asset_id)))._account_entry_move()
