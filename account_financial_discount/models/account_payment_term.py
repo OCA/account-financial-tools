@@ -45,3 +45,4 @@ class AccountPaymentTerm(models.Model):
                         )
                         % term.name
                     )
+        return super().write(values)
