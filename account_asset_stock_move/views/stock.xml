@@ -1,0 +1,28 @@
+<odoo>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button
+                    name="action_view_assets"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-cube"
+                    attrs="{'invisible': [('asset_count', '=', 0)]}"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="asset_count" />
+                        </span>
+                        <span class="o_stat_text"> Asset(s)</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
