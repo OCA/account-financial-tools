@@ -65,5 +65,5 @@ class TestAccountFiscalMonth(TransactionCase):
         january_2017_1st = Date.from_string("2017-01-01")
         date_ranges = self.company.find_daterange_fm(january_2017_1st)
 
-        self.assertEquals(len(date_ranges), 1)
-        self.assertEquals(date_ranges[0], self.date_range_january_2017)
+        self.assertEqual(len(date_ranges), 1)
+        self.assertEqual(date_ranges[0], self.date_range_january_2017)
