@@ -16,4 +16,4 @@ class DateRangeType(models.Model):
         )
         if date_range_type_fm.id in self.ids:
             raise UserError(_("You can't delete date range type: " "Fiscal month"))
-        return super(DateRangeType, self).unlink()
+        return super().unlink()
