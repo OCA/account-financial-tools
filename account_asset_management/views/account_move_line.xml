@@ -10,6 +10,7 @@
                     name="asset_profile_id"
                     domain="[('company_id','=', parent.company_id)]"
                 />
+                <field name="asset_group_ids" widget="many2many_tags" optional="hide" />
                 <field name="asset_id" />
             </field>
         </field>

@@ -31,6 +31,13 @@
                     optional="show"
                 />
                 <field
+                    name="asset_group_ids"
+                    widget="many2many_tags"
+                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('in_invoice', 'in_refund'))]}"
+                    groups="account.group_account_manager"
+                    optional="hide"
+                />
+                <field
                     name="asset_id"
                     attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund'))]}"
                     groups="account.group_account_manager"
@@ -44,6 +51,12 @@
                 <field
                     name="asset_profile_id"
                     domain="[('company_id','=', parent.company_id)]"
+                />
+                <field
+                    name="asset_group_ids"
+                    widget="many2many_tags"
+                    domain="[('company_id','=', parent.company_id)]"
+                    optional="hide"
                 />
                 <field name="asset_id" groups="account.group_account_manager" />
             </xpath>

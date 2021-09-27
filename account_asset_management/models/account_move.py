@@ -102,6 +102,7 @@ class AccountMove(models.Model):
                     setattr(asset_form, key, val)
                 asset = asset_form.save()
                 asset.analytic_tag_ids = aml.analytic_tag_ids
+                asset.group_ids = aml.asset_group_ids
                 aml.with_context(allow_asset=True).asset_id = asset.id
             refs = [
                 "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"
@@ -158,6 +159,13 @@ class AccountMoveLine(models.Model):
         comodel_name="account.asset.profile",
         string="Asset Profile",
     )
+    asset_group_ids = fields.Many2many(
+        comodel_name="account.asset.group",
+        relation="account_move_line_asset_group_rel",
+        column1="asset_id",
+        column2="group_id",
+        string="Asset Groups",
+    )
     asset_id = fields.Many2one(
         comodel_name="account.asset",
         string="Asset",
@@ -172,7 +180,8 @@ class AccountMoveLine(models.Model):
 
     @api.onchange("asset_profile_id")
     def _onchange_asset_profile_id(self):
-        if self.asset_profile_id.account_asset_id:
+        if self.asset_profile_id:
+            self.asset_group_ids = self.asset_profile_id.group_ids
             self.account_id = self.asset_profile_id.account_asset_id
 
     @api.model_create_multi
