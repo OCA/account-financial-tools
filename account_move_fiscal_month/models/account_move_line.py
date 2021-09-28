@@ -8,4 +8,6 @@ class AccountMoveLine(models.Model):
 
     _inherit = "account.move.line"
 
-    date_range_fm_id = fields.Many2one(related="move_id.date_range_fm_id",)
+    date_range_fm_id = fields.Many2one(
+        related="move_id.date_range_fm_id",
+    )
