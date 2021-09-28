@@ -100,7 +100,7 @@ class TestAccountMoveFiscalMonth(TransactionCase):
         january_1st = Date.from_string("2017-01-01")
         move = self.create_account_move(january_1st)
 
-        self.assertEquals(
+        self.assertEqual(
             move.date_range_fm_id,
             self.date_range_january_2017,
             msg="Move period should be January 2017",
