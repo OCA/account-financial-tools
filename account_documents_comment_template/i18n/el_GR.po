@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_documents_comment_template
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20191023\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-21 13:59+0000\n"
+"PO-Revision-Date: 2021-04-21 13:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_documents_comment_template
+#: model:ir.model,name:account_documents_comment_template.model_base_comment_template
+msgid "Base comment template"
+msgstr "Base comment template"
+
+#. module: account_documents_comment_template
+#: model:ir.model,name:account_documents_comment_template.model_account_documents
+msgid "Collection of all scaned and copy of original documents linked with deal."
+msgstr "Collection of all scaned and copy of original documents linked with deal."
+
+#. module: account_documents_comment_template
+#: model:ir.model.fields,field_description:account_documents_comment_template.field_account_documents_comment_template_id
+msgid "Comment Template"
+msgstr "Προεπιλογή Σχολίου"
+
+#. module: account_documents_comment_template
+#: model:ir.model.fields,field_description:account_documents_comment_template.field_account_documents_journal_name
+msgid "Journal Attachment Name"
+msgstr "Journal Attachment Name"
+
+#. module: account_documents_comment_template
+#: model:ir.model.fields,field_description:account_documents_comment_template.field_account_documents_direction
+msgid "Movement of the documents"
+msgstr "Movement of the documents"
+
+#. module: account_documents_comment_template
+#: model:ir.model.fields,help:account_documents_comment_template.field_account_documents_stage_id
+msgid "Select the current stage of the attachment."
+msgstr "Select the current stage of the attachment."
+
+#. module: account_documents_comment_template
+#: model:ir.model.fields,field_description:account_documents_comment_template.field_account_documents_stage_id
+msgid "Stage"
+msgstr "Στάδιο"
+
+#. module: account_documents_comment_template
+#: model:ir.model.fields,field_description:account_documents_comment_template.field_account_documents_note
+msgid "Top Comment"
+msgstr "Top Comment"
+

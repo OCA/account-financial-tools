@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div t-name="reconciliation.line.create">
+        <div class="quick_add">
+            <div class="btn-group btn-group-sm o_reconcile_models" t-if="state.reconcileModels">
+                <t t-foreach="state.reconcileModels" t-as="reconcileModel">
+                    <button class="btn btn-primary" t-att-data-reconcile-model-id="reconcileModel.id"><t t-esc="reconcileModel.name"/></button>
+                </t>
+                <p t-if="!state.reconcileModels.length" style="color: #bbb;">You did not configure any reconcile model yet, you can do it <a style="cursor: pointer;" class="reconcile_model_create">there</a>.</p>
+            </div>
+            <div class="dropdown pull-right">
+                <a data-toggle="dropdown" href="#"><span class="fa fa-cog"/></a>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="Presets config">
+                    <li><a class="reconcile_model_create" href="#">Create model</a></li>
+                    <li><a class="reconcile_model_edit" href="#">Modify models</a></li>
+                </ul>
+            </div>
+        </div>
+        <table class="pull-left">
+            <tr class="create_account_id">
+                <td class="o_td_label">Account</td>
+                <td class="o_td_field"></td>
+            </tr>
+            <tr class="create_tax_id">
+                <td class="o_td_label">Tax</td>
+                <td class="o_td_field"></td>
+            </tr>
+            <tr class="create_tax_included">
+                <td class="o_td_label">Tax included</td>
+                <td class="o_td_field"></td>
+            </tr>
+            <tr class="create_analytic_account_id">
+                <td class="o_td_label">Analytic Acc.</td>
+                <td class="o_td_field"></td>
+            </tr>
+        </table>
+        <table class="pull-right">
+            <tbody>
+                <tr class="create_journal_id" style="display: none;">
+                    <td class="o_td_label">Journal</td>
+                    <td class="o_td_field"></td>
+                </tr>
+                <tr class="create_label">
+                    <td class="o_td_label">Label</td>
+                    <td class="o_td_field"></td>
+                </tr>
+                <tr class="create_tax_ids">
+                    <td class="o_td_label">Taxes</td>
+                    <td class="o_td_field"></td>
+                </tr>
+                <tr class="create_amount">
+                    <td class="o_td_label">Amount</td>
+                    <td class="o_td_field"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="add_line_container">
+            <a class="add_line" t-att-style="!state.balance.amout ? 'display: none;' : null"><i class="fa fa-plus-circle"/> Save and New</a>
+        </div>
+    </div>
+</templates>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view of cacelling multiple journal entries -->
+    <record id="view_refund_journal_entry_wizard" model="ir.ui.view">
+        <field name="name">refund.journal.entries.form</field>
+        <field name="model">refund.journal.entries</field>
+        <field name="arch" type="xml">
+             <form string="Cancel Journal Entries">
+                <strong>Are you sure you want to Refund/Normal these journal entries? And check to delete after? </strong>
+                <field name="type"/>
+                <footer>
+                    <button name="refund_journal_entries" string="Refund Journal Entries" type="object"
+                    class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window 
+        id="action_refund_journal_entries_wizard"
+        multi="True"
+        key2="client_action_multi" 
+        name="Refund/Normal Journal Entries"
+        res_model="refund.journal.entries"
+        src_model="account.move" 
+        view_mode="form" 
+        target="new" 
+        view_type="form"
+        view_id="view_refund_journal_entry_wizard" />
+
+        <!-- Form view of cacelling multiple journal entries -->
+    <record id="view_refund_journal_line_entry_wizard" model="ir.ui.view">
+        <field name="name">cancel.journal.line.entries.form</field>
+        <field name="model">refund.journal.line.entries</field>
+        <field name="arch" type="xml">
+             <form string="Refund Journal Entries">
+                <strong>Are you sure you want to Refund/Normal these journal entries? And check to delete after? </strong>
+                 <field name="type"/>
+                <footer>
+                    <button name="refund_journal_entries" string="Refund/Normal Journal Entries" type="object" class="btn-primary"/>
+                    <button string="cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window
+        id="action_refund_journal_line_entry_wizard"
+        multi="True"
+        key2="client_action_multi"
+        name="Refund/Normal Journal Entries"
+        res_model="refund.journal.line.entries"
+        src_model="account.move.line"
+        view_mode="form"
+        target="new"
+        view_type="form"
+        view_id="view_refund_journal_line_entry_wizard" />
+
+</odoo>

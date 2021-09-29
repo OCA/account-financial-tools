@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tax_adjustments_wizard" model="ir.ui.view">
+            <field name="name">tax.adjustments.wizard.form</field>
+            <field name="model">tax.adjustments.wizard</field>
+            <field name="inherit_id" ref="account.tax_adjustments_wizard"/>
+            <field name="arch" type="xml">
+                <field name="tax_id" position="after">
+                    <field name="vattype"/>
+                    <field name="narration_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
