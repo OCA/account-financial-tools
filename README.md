@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [account_menu](account_menu/) | 14.0.1.1.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module
 [account_move_force_removal](account_move_force_removal/) | 14.0.1.0.0 |  | Allow force removal account moves
 [account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 |  | Adds a Journal Items menu
+[account_move_line_purchase_info](account_move_line_purchase_info/) | 14.0.1.0.0 |  | Introduces the purchase order line to the journal items
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.1.1.0 |  | Allows to edit taxes on non-posted account move lines
 [account_move_template](account_move_template/) | 14.0.1.1.0 |  | Templates for recurring Journal Entries
 [account_no_default](account_no_default/) | 14.0.1.0.0 | [![dreispt](https://github.com/dreispt.png?size=30px)](https://github.com/dreispt) | Remove default expense account for vendor bills journal
