@@ -18,7 +18,7 @@ class AccountDocuments(models.Model):
 
     ir_attachment_id = fields.Many2one('ir.attachment', string='Related attachment', required=True, ondelete='cascade')
     document_type_id = fields.Many2one('account.documents.type', 'Type of document', domain=_get_domain_type)
-    color = fields.Integer(string="Color")
+    #color = fields.Integer(string="Color")
 
 
 class IrActionsReport(models.Model):

@@ -24,15 +24,16 @@ class AccountMove(models.Model):
         for record in self:
             record.use_refund = not record.use_refund
             for line in record.line_ids:
-                if line.invoice_id and line.invoice_id.type in ['in_refund', 'out_refund']\
-                        and (line.tax_ids or line.tax_line_id) and line.tax_sign == 1:
-                    line.tax_sign = -1
-                elif line.invoice_id and line.invoice_id.type in ['in_invoice', 'out_invoice'] \
-                        and (line.tax_ids or line.tax_line_id) and line.tax_sign == -1:
-                    line.tax_sign = 1
-
-                if record.use_refund and (line.tax_ids or line.tax_line_id) and not line.invoice_id:
-                    line.tax_sign = -1
-                elif not record.use_refund and (line.tax_ids or line.tax_line_id) and not line.invoice_id:
-                    line.tax_sign = 1
+                if line.invoice_id:
+                    if line.invoice_id.type in ['in_refund', 'out_refund']\
+                            and (line.tax_ids or line.tax_line_id) and line.tax_sign == 1:
+                        line.tax_sign = -1
+                    elif line.invoice_id.type in ['in_invoice', 'out_invoice'] \
+                            and (line.tax_ids or line.tax_line_id) and line.tax_sign == -1:
+                        line.tax_sign = 1
+                else:
+                    if record.use_refund:
+                        line.tax_sign = -1
+                    elif not record.use_refund:
+                        line.tax_sign = 1
             self._compute_use_refund()
