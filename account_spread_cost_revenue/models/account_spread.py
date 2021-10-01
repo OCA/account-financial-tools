@@ -273,7 +273,7 @@ class AccountSpread(models.Model):
     @api.constrains("invoice_id", "invoice_type")
     def _check_invoice_type(self):
         if self.filtered(
-            lambda s: s.invoice_id and s.invoice_type != s.invoice_id.type
+            lambda s: s.invoice_id and s.invoice_type != s.invoice_id.move_type
         ):
             raise ValidationError(
                 _("The Invoice Type does not correspond to the Invoice")
@@ -498,6 +498,8 @@ class AccountSpread(models.Model):
         if mls_to_reconcile:
             do_reconcile = mls_to_reconcile + self.invoice_line_id
             do_reconcile.remove_move_reconcile()
+            # ensure to reconcile only posted items
+            do_reconcile = do_reconcile.filtered(lambda l: l.move_id.state == "posted")
             do_reconcile._check_spread_reconcile_validity()
             do_reconcile.reconcile()
 
@@ -507,11 +509,12 @@ class AccountSpread(models.Model):
 
     def _post_spread_moves(self, moves):
         self.ensure_one()
+        moves = moves.filtered(lambda l: l.state != "posted")
         if not moves:
             return
         ctx = dict(self.env.context, skip_unique_sequence_number=True)
         if self.company_id.force_move_auto_post or self.move_line_auto_post:
-            moves.with_context(ctx).post()
+            moves.with_context(ctx).action_post()
 
     @api.depends("debit_account_id.deprecated", "credit_account_id.deprecated")
     def _compute_deprecated_accounts(self):

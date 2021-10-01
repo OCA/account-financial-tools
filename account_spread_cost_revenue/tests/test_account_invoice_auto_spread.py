@@ -3,9 +3,7 @@
 
 from odoo.exceptions import UserError
 
-from odoo.addons.account_spread_cost_revenue.tests.test_account_invoice_spread import (
-    TestAccountInvoiceSpread,
-)
+from .test_account_invoice_spread import TestAccountInvoiceSpread
 
 
 class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
@@ -18,9 +16,7 @@ class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
                 "period_number": 5,
                 "period_type": "month",
                 "spread_account_id": self.account_payable.id,
-                "spread_journal_id": self.ref(
-                    "account_spread_cost_revenue.expenses_journal"
-                ),
+                "spread_journal_id": self.expenses_journal.id,
                 "auto_spread": False,  # Auto Spread = False
                 "auto_spread_ids": [
                     (0, 0, {"account_id": self.vendor_bill_line.account_id.id})
@@ -41,9 +37,7 @@ class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
                 "period_number": 5,
                 "period_type": "month",
                 "spread_account_id": self.account_payable.id,
-                "spread_journal_id": self.ref(
-                    "account_spread_cost_revenue.expenses_journal"
-                ),
+                "spread_journal_id": self.expenses_journal.id,
                 "auto_spread": True,  # Auto Spread
                 "auto_spread_ids": [
                     (0, 0, {"account_id": self.vendor_bill_line.account_id.id})
@@ -57,9 +51,7 @@ class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
                 "period_number": 5,
                 "period_type": "month",
                 "spread_account_id": self.account_payable.id,
-                "spread_journal_id": self.ref(
-                    "account_spread_cost_revenue.expenses_journal"
-                ),
+                "spread_journal_id": self.expenses_journal.id,
                 "auto_spread": True,  # Auto Spread
                 "auto_spread_ids": [
                     (0, 0, {"account_id": self.vendor_bill_line.account_id.id})
@@ -92,9 +84,7 @@ class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
                 "period_number": 5,
                 "period_type": "month",
                 "spread_account_id": self.account_receivable.id,
-                "spread_journal_id": self.ref(
-                    "account_spread_cost_revenue.sales_journal"
-                ),
+                "spread_journal_id": self.sales_journal.id,
                 "auto_spread": True,  # Auto Spread
                 "auto_spread_ids": [
                     (0, 0, {"account_id": self.invoice_line.account_id.id})
