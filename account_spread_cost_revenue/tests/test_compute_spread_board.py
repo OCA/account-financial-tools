@@ -311,9 +311,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
             attrs = spread_line.open_move()
             self.assertTrue(isinstance(attrs, dict))
 
-        # post and then unlink all created moves
-        for line in self.spread.line_ids:
-            line.move_id.post()
+        # unlink all created moves
         self.spread.line_ids.unlink_move()
         for spread_line in self.spread.line_ids:
             self.assertFalse(spread_line.move_id)
@@ -375,9 +373,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
         self.assertEqual(len(spread_lines), 3)
-        self.assertAlmostEquals(115.32, spread_lines[0].amount)
-        self.assertAlmostEquals(115.32, spread_lines[1].amount)
-        self.assertAlmostEquals(115.32, spread_lines[2].amount)
+        self.assertAlmostEqual(115.32, spread_lines[0].amount)
+        self.assertAlmostEqual(115.32, spread_lines[1].amount)
+        self.assertAlmostEqual(115.32, spread_lines[2].amount)
         self.assertEqual(datetime.date(2017, 1, 31), spread_lines[0].date)
         self.assertEqual(datetime.date(2017, 2, 28), spread_lines[1].date)
         self.assertEqual(datetime.date(2017, 3, 31), spread_lines[2].date)
@@ -572,10 +570,10 @@ class TestComputeSpreadBoard(common.TransactionCase):
         for line in spread_lines:
             self.assertFalse(line.move_id)
 
-        spread_lines[0]._create_moves().post()
-        spread_lines[1]._create_moves().post()
-        spread_lines[2]._create_moves().post()
-        spread_lines[3]._create_moves().post()
+        spread_lines[0]._create_moves().action_post()
+        spread_lines[1]._create_moves().action_post()
+        spread_lines[2]._create_moves().action_post()
+        spread_lines[3]._create_moves().action_post()
 
         self.assertEqual(spread_lines[0].move_id.state, "posted")
         self.assertEqual(spread_lines[1].move_id.state, "posted")

@@ -88,7 +88,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
     def _compute_invoice_type(self):
         for wizard in self:
             invoice = wizard.invoice_line_id.move_id
-            wizard.invoice_type = invoice.type
+            wizard.invoice_type = invoice.move_type
             if invoice.is_sale_document(include_receipts=True):
                 wizard.spread_type = "sale"
             else:
