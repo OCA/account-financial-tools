@@ -35,8 +35,6 @@ class AccountInvoiceSpreadLine(models.Model):
                     for move in created_moves
                 )
                 spread.message_post(body=post_msg)
-            if spread.invoice_id.state == "posted":
-                spread._reconcile_spread_moves(created_moves)
             spread._post_spread_moves(created_moves)
 
     def create_move(self):
@@ -123,6 +121,7 @@ class AccountInvoiceSpreadLine(models.Model):
             "name": self.name or "/",
             "ref": self.name,
             "date": spread_date,
+            "invoice_date": spread_date,
             "journal_id": spread.journal_id.id,
             "line_ids": line_ids,
             "company_id": spread.company_id.id,
@@ -168,7 +167,9 @@ class AccountInvoiceSpreadLine(models.Model):
             .mapped("move_id")
             .filtered(lambda m: m.state != "posted")
         )
-        unposted_moves.filtered(lambda m: m.company_id.force_move_auto_post).post()
+        unposted_moves.filtered(
+            lambda m: m.company_id.force_move_auto_post
+        ).action_post()
 
         spreads_to_archive = (
             self.env["account.spread"]

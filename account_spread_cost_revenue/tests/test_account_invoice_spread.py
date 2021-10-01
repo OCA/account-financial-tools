@@ -5,29 +5,15 @@ import datetime
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
-from odoo.modules.module import get_resource_path
 from odoo.tests import Form, common
-from odoo.tools import convert_file
 
 
 class TestAccountInvoiceSpread(common.TransactionCase):
-    def _load(self, module, *args):
-        convert_file(
-            self.cr,
-            "account_spread_cost_revenue",
-            get_resource_path(module, *args),
-            {},
-            "init",
-            False,
-            "test",
-            self.registry._assertion_report,
-        )
-
     def create_account_invoice(self, invoice_type, quantity=1.0, price_unit=1000.0):
         """ Create an invoice as in a view by triggering its onchange methods"""
 
         invoice_form = Form(
-            self.env["account.move"].with_context(default_type=invoice_type)
+            self.env["account.move"].with_context(default_move_type=invoice_type)
         )
         invoice_form.partner_id = self.env["res.partner"].create(
             {"name": "Partner Name"}
@@ -41,7 +27,41 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
     def setUp(self):
         super().setUp()
-        self._load("account", "test", "account_minimal_test.xml")
+
+        # Define minimal accounting data to run
+        a_expense = self.env["account.account"].create(
+            {
+                "code": "X2120",
+                "name": "Expenses - (test)",
+                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
+            }
+        )
+        a_sale = self.env["account.account"].create(
+            {
+                "code": "X2020",
+                "name": "Product Sales - (test)",
+                "user_type_id": self.env.ref("account.data_account_type_revenue").id,
+            }
+        )
+
+        self.expenses_journal = self.env["account.journal"].create(
+            {
+                "name": "Vendor Bills - Test",
+                "code": "TEXJ",
+                "type": "purchase",
+                "default_account_id": a_expense.id,
+                "refund_sequence": True,
+            }
+        )
+        self.sales_journal = self.env["account.journal"].create(
+            {
+                "name": "Customer Invoices - Test",
+                "code": "TINV",
+                "type": "sale",
+                "default_account_id": a_sale.id,
+                "refund_sequence": True,
+            }
+        )
 
         self.account_payable = self.env["account.account"].create(
             {
@@ -88,8 +108,11 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         )
 
         # Invoices
+
         self.vendor_bill = self.create_account_invoice("in_invoice")
+        self.vendor_bill.invoice_date = fields.Date.today()
         self.sale_invoice = self.create_account_invoice("out_invoice")
+        self.sale_invoice.invoice_date = fields.Date.today()
         self.vendor_bill_line = self.vendor_bill.invoice_line_ids[0]
         self.invoice_line = self.sale_invoice.invoice_line_ids[0]
 
@@ -174,12 +197,10 @@ class TestAccountInvoiceSpread(common.TransactionCase):
     def test_02_wizard_defaults(self):
         Wizard = self.env["account.spread.invoice.line.link.wizard"]
 
-        exp_journal = self.ref("account_spread_cost_revenue.expenses_journal")
-        sales_journal = self.ref("account_spread_cost_revenue.sales_journal")
         self.env.company.default_spread_revenue_account_id = self.account_receivable
         self.env.company.default_spread_expense_account_id = self.account_payable
-        self.env.company.default_spread_revenue_journal_id = sales_journal
-        self.env.company.default_spread_expense_journal_id = exp_journal
+        self.env.company.default_spread_revenue_journal_id = self.sales_journal
+        self.env.company.default_spread_expense_journal_id = self.expenses_journal
 
         self.assertTrue(self.env.company.default_spread_revenue_account_id)
         self.assertTrue(self.env.company.default_spread_expense_account_id)
@@ -201,7 +222,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertTrue(wizard1.spread_account_id)
         self.assertTrue(wizard1.spread_journal_id)
         self.assertEqual(wizard1.spread_account_id, self.account_payable)
-        self.assertEqual(wizard1.spread_journal_id.id, exp_journal)
+        self.assertEqual(wizard1.spread_journal_id.id, self.expenses_journal.id)
         self.assertTrue(wizard1.spread_invoice_type_domain_ids)
 
         wizard2 = Wizard.with_context(
@@ -218,7 +239,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertTrue(wizard2.spread_account_id)
         self.assertTrue(wizard2.spread_journal_id)
         self.assertEqual(wizard2.spread_account_id, self.account_receivable)
-        self.assertEqual(wizard2.spread_journal_id.id, sales_journal)
+        self.assertEqual(wizard2.spread_journal_id.id, self.sales_journal.id)
         self.assertTrue(wizard2.spread_invoice_type_domain_ids)
 
     def test_03_link_invoice_line_with_spread_sheet(self):
@@ -241,9 +262,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertEqual(wizard1.spread_action_type, "link")
 
         wizard1.spread_account_id = self.account_receivable
-        wizard1.spread_journal_id = self.ref(
-            "account_spread_cost_revenue.expenses_journal"
-        )
+        wizard1.spread_journal_id = self.expenses_journal
         wizard1.spread_id = self.spread
         res_action = wizard1.confirm()
         self.assertTrue(isinstance(res_action, dict))
@@ -277,7 +296,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         Wizard = self.env["account.spread.invoice.line.link.wizard"]
 
-        spread_journal_id = self.ref("account_spread_cost_revenue.expenses_journal")
+        spread_journal_id = self.expenses_journal
 
         wizard1 = Wizard.with_context(
             default_invoice_line_id=self.vendor_bill_line.id,
@@ -348,7 +367,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         spread_account = self.account_payable
         self.assertTrue(spread_account)
-        spread_journal_id = self.ref("account_spread_cost_revenue.expenses_journal")
+        spread_journal_id = self.expenses_journal.id
 
         template = self.env["account.spread.template"].create(
             {
@@ -537,7 +556,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             if spread_ml.debit:
                 self.assertFalse(spread_ml.full_reconcile_id)
             if spread_ml.credit:
-                self.assertTrue(spread_ml.full_reconcile_id)
+                self.assertFalse(spread_ml.full_reconcile_id)
 
         action_reconcile_view = self.spread2.open_reconcile_view()
         self.assertTrue(isinstance(action_reconcile_view, dict))
@@ -648,8 +667,8 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         for spread_ml in spread_mls:
             if spread_ml.debit:
                 self.assertEqual(spread_ml.account_id, balance_sheet)
-                self.assertTrue(spread_ml.reconciled)
-                self.assertTrue(spread_ml.full_reconcile_id)
+                self.assertFalse(spread_ml.reconciled)
+                self.assertFalse(spread_ml.full_reconcile_id)
             if spread_ml.credit:
                 self.assertEqual(spread_ml.account_id, payable_account)
                 self.assertFalse(spread_ml.reconciled)
@@ -662,7 +681,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         action_reconcile_view = self.spread2.open_reconcile_view()
         self.assertTrue(isinstance(action_reconcile_view, dict))
-        self.assertTrue(action_reconcile_view.get("domain")[0][2])
+        self.assertFalse(action_reconcile_view.get("domain")[0][2])
         self.assertFalse(action_reconcile_view.get("res_id"))
         self.assertTrue(action_reconcile_view.get("context"))
 
