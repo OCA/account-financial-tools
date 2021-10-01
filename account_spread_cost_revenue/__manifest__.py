@@ -9,7 +9,7 @@
     "author": "Onestein,Odoo Community Association (OCA)",
     "maintainers": ["astirpe"],
     "license": "AGPL-3",
-    "website": "https://github.com/OCA/account-financial-tools/",
+    "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting & Finance",
     "depends": ["account"],
     "data": [
