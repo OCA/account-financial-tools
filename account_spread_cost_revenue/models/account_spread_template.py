@@ -178,10 +178,23 @@ class AccountSpreadTemplateAuto(models.Model):
         ondelete="cascade",
         index=True,
     )
-    company_id = fields.Many2one(related="template_id.company_id", store=True,)
-    name = fields.Char(required=True, default="/",)
-    product_id = fields.Many2one(comodel_name="product.product", string="Product",)
-    account_id = fields.Many2one(comodel_name="account.account", string="Account",)
+    company_id = fields.Many2one(
+        related="template_id.company_id",
+        store=True,
+    )
+    name = fields.Char(
+        required=True,
+        default="/",
+    )
+    product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="Product",
+    )
+    account_id = fields.Many2one(
+        comodel_name="account.account",
+        string="Account",
+    )
     analytic_account_id = fields.Many2one(
-        comodel_name="account.analytic.account", string="Analytic",
+        comodel_name="account.analytic.account",
+        string="Analytic",
     )
