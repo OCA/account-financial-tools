@@ -1025,7 +1025,9 @@ msgid "Prorata Temporis"
 msgstr "Pro rata Temporis"
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__purchase_value
+#, python-format
 msgid "Purchase Value"
 msgstr ""
 
