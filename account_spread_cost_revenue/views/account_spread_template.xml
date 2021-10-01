@@ -37,7 +37,7 @@
                             />
                             <field
                                 name="exp_rev_account_id"
-                                attrs="{'invisible': ['|', ('use_invoice_line_account', '=', False)], 'required': [('use_invoice_line_account', '=', True)]}"
+                                attrs="{'invisible': [('use_invoice_line_account', '=', False)], 'required': [('use_invoice_line_account', '=', True)]}"
                                 domain="[('company_id', '=', company_id), ('deprecated', '=', False)]"
                                 options="{'no_create': True}"
                             />
