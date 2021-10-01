@@ -63,10 +63,22 @@ class AccountSpread(models.Model):
         compute="_compute_deprecated_accounts"
     )
     is_debit_account_deprecated = fields.Boolean(compute="_compute_deprecated_accounts")
-    unspread_amount = fields.Float(digits="Account", compute="_compute_amounts",)
-    unposted_amount = fields.Float(digits="Account", compute="_compute_amounts",)
-    posted_amount = fields.Float(digits="Account", compute="_compute_amounts",)
-    total_amount = fields.Float(digits="Account", compute="_compute_amounts",)
+    unspread_amount = fields.Float(
+        digits="Account",
+        compute="_compute_amounts",
+    )
+    unposted_amount = fields.Float(
+        digits="Account",
+        compute="_compute_amounts",
+    )
+    posted_amount = fields.Float(
+        digits="Account",
+        compute="_compute_amounts",
+    )
+    total_amount = fields.Float(
+        digits="Account",
+        compute="_compute_amounts",
+    )
     all_posted = fields.Boolean(compute="_compute_all_posted", store=True)
     line_ids = fields.One2many(
         "account.spread.line", "spread_id", string="Spread Lines"
@@ -92,7 +104,9 @@ class AccountSpread(models.Model):
         store=True,
     )
     invoice_id = fields.Many2one(
-        related="invoice_line_id.move_id", readonly=True, store=True,
+        related="invoice_line_id.move_id",
+        readonly=True,
+        store=True,
     )
     estimated_amount = fields.Float(digits="Account")
     company_id = fields.Many2one(

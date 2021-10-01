@@ -46,7 +46,8 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         store=True,
     )
     spread_invoice_type_domain_ids = fields.One2many(
-        "account.spread", compute="_compute_spread_invoice_type_domain",
+        "account.spread",
+        compute="_compute_spread_invoice_type_domain",
     )
     spread_id = fields.Many2one(
         "account.spread",
@@ -115,7 +116,6 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
 
     def _inverse_spread_journal_account(self):
         """Keep this for making the fields editable"""
-        pass
 
     @api.depends("company_id", "invoice_type")
     def _compute_spread_invoice_type_domain(self):
