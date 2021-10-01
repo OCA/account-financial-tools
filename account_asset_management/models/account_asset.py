@@ -1239,6 +1239,7 @@ class AccountAsset(models.Model):
             "name",
             "code",
             "date_start",
+            "purchase_value",
             "depreciation_base",
             "salvage_value",
         ]
@@ -1253,6 +1254,7 @@ class AccountAsset(models.Model):
             "name",
             "code",
             "date_start",
+            "purchase_value",
             "depreciation_base",
             "salvage_value",
             "period_start_value",
@@ -1275,6 +1277,7 @@ class AccountAsset(models.Model):
             "name",
             "code",
             "date_remove",
+            "purchase_value",
             "depreciation_base",
             "salvage_value",
         ]
