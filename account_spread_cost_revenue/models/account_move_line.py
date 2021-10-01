@@ -68,7 +68,7 @@ class AccountMoveLine(models.Model):
         for line in self:
             if not line.spread_id:
                 pass
-            elif line.move_id.type in ("out_invoice", "in_refund"):
+            elif line.move_id.move_type in ("out_invoice", "in_refund"):
                 if line.account_id != line.spread_id.debit_account_id:
                     raise ValidationError(
                         _(
@@ -76,7 +76,7 @@ class AccountMoveLine(models.Model):
                             "to the Balance Sheet (debit account) of the spread"
                         )
                     )
-            elif line.move_id.type in ("in_invoice", "out_refund"):
+            elif line.move_id.move_type in ("in_invoice", "out_refund"):
                 if line.account_id != line.spread_id.credit_account_id:
                     raise ValidationError(
                         _(
@@ -110,10 +110,10 @@ class AccountMoveLine(models.Model):
             raise ValidationError(msg)
 
     def create_auto_spread(self):
-        """ Create auto spread table for each invoice line, when needed """
+        """Create auto spread table for each invoice line, when needed"""
 
         def _filter_line(aline, iline):
-            """ Find matching template auto line with invoice line """
+            """Find matching template auto line with invoice line"""
             if aline.product_id and iline.product_id != aline.product_id:
                 return False
             if aline.account_id and iline.account_id != aline.account_id:
@@ -130,7 +130,7 @@ class AccountMoveLine(models.Model):
                 continue
             spread_type = (
                 "sale"
-                if line.move_id.type in ["out_invoice", "out_refund"]
+                if line.move_id.move_type in ["out_invoice", "out_refund"]
                 else "purchase"
             )
             spread_auto = self.env["account.spread.template.auto"].search(

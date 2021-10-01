@@ -269,7 +269,7 @@
                                         string="Create Move"
                                         type="object"
                                         groups="account.group_account_manager"
-                                        attrs="{'invisible':['|',('move_id','!=',False)]}"
+                                        attrs="{'invisible':[('move_id','!=',False)]}"
                                     />
                                     <button
                                         name="open_move"
