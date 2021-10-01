@@ -1,4 +1,4 @@
-odoo.define("account_spread_cost_revenue.widget", function(require) {
+odoo.define("account_spread_cost_revenue.widget", function (require) {
     "use strict";
 
     var AbstractField = require("web.AbstractField");
@@ -16,7 +16,7 @@ odoo.define("account_spread_cost_revenue.widget", function(require) {
         /**
          * @override
          */
-        isSet: function() {
+        isSet: function () {
             return this.value !== "unavailable";
         },
 
@@ -24,7 +24,7 @@ odoo.define("account_spread_cost_revenue.widget", function(require) {
          * @override
          * @private
          */
-        _render: function() {
+        _render: function () {
             var className = "";
             var style = "btn fa fa-arrow-circle-right o_spread_line ";
             var title = "";
@@ -45,7 +45,7 @@ odoo.define("account_spread_cost_revenue.widget", function(require) {
          * @private
          * @param {MouseEvent} event
          */
-        _onClick: function(event) {
+        _onClick: function (event) {
             event.stopPropagation();
             this.trigger_up("button_clicked", {
                 attrs: {
