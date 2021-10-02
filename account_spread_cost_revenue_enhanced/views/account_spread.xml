@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_spread" model="ir.ui.view">
+        <field name="name">view.account.spread</field>
+        <field name="model">account.spread</field>
+        <field
+            name="inherit_id"
+            ref="account_spread_cost_revenue.view_account_spread"
+        />
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field name="create_move_type" />
+            </field>
+        </field>
+    </record>
+</odoo>
