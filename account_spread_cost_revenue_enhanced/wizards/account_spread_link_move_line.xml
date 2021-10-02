@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_spread_link_move_line_form" model="ir.ui.view">
+        <field name="name">view.account.spread.link.move.line.form</field>
+        <field name="model">account.spread.link.move.line</field>
+        <field name="arch" type="xml">
+            <form string="Link Spread Cost/Revenue With Journal Item">
+                <p>
+                    Please choose the Journal Entry, and then the <b
+                    >Journal Item</b> you want to link with this spread costs/revenues sheet.
+                </p>
+                <group>
+                    <field name="move_id" />
+                    <field name="move_line_id" />
+                </group>
+                <footer>
+                    <button
+                        string="Link with Journal Item"
+                        name="link_move_line"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_spread_link_move_line" model="ir.actions.act_window">
+        <field name="name">Link with Journal Item</field>
+        <field name="res_model">account.spread.link.move.line</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_account_spread_link_move_line_form" />
+        <field name="target">new</field>
+        <field
+            name="binding_model_id"
+            ref="account_spread_cost_revenue.model_account_spread"
+        />
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>
