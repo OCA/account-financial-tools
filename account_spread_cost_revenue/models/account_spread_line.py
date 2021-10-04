@@ -118,7 +118,7 @@ class AccountInvoiceSpreadLine(models.Model):
         ]
 
         return {
-            "name": self.name or "/",
+            "name": False,
             "ref": self.name,
             "date": spread_date,
             "invoice_date": spread_date,
