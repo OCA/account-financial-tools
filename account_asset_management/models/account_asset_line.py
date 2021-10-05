@@ -172,7 +172,7 @@ class AccountAssetLine(models.Model):
                         lambda l: l.type != 'create' and
                         (l.init_entry or l.move_check) and
                         l.line_date < vals['line_date'])
-                    if check:
+                    if check and not self._context.get('force_asset'):
                         raise UserError(
                             _("You cannot set the Asset Start Date "
                               "after already posted entries."))

@@ -1899,7 +1899,7 @@ class AccountAsset(models.Model):
                     'amount': to_depreciate_amount,
                     'line_date': new_line_date
                 }
-                first_to_depreciate_dl.write(update_vals)
+                first_to_depreciate_dl.with_context(dict(self._context, allow_asset_line_update=True)).write(update_vals)
                 dlines[0].create_move()
                 dlines -= dlines[0]
             dlines.unlink()
