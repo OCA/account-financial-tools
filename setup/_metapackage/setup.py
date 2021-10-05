@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo14-addon-account_balance_line',
         'odoo14-addon-account_chart_update',
         'odoo14-addon-account_check_deposit',
+        'odoo14-addon-account_fiscal_month',
         'odoo14-addon-account_fiscal_position_vat_check',
         'odoo14-addon-account_fiscal_year',
         'odoo14-addon-account_invoice_constraint_chronology',
