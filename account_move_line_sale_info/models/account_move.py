@@ -56,6 +56,7 @@ class AccountMoveLine(models.Model):
         string="Sale Order Line",
         ondelete="set null",
         index=True,
+        copy=False,
     )
 
     sale_order_id = fields.Many2one(
@@ -65,4 +66,5 @@ class AccountMoveLine(models.Model):
         ondelete="set null",
         store=True,
         index=True,
+        copy=False,
     )
