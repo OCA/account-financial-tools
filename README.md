@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 [account_balance_line](account_balance_line/) | 14.0.1.0.0 |  | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 14.0.1.0.0 |  | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 14.0.1.0.0 |  | Manage deposit of checks to the bank
+[account_fiscal_month](account_fiscal_month/) | 14.0.1.0.0 |  | Provide a fiscal month date range type
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.0.0 |  | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 14.0.1.1.0 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Create Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 14.0.1.0.0 |  | Account Invoice Constraint Chronology
