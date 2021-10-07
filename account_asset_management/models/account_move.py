@@ -30,7 +30,7 @@ FIELDS_AFFECTS_ASSET_MOVE_LINE = {
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    asset_count = fields.Integer(compute="_compute_asset_count")
+    asset_count = fields.Integer(compute="_compute_asset_count", compute_sudo=True)
 
     def _compute_asset_count(self):
         for rec in self:
