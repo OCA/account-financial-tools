@@ -662,7 +662,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         }
         to_include = template_field_mapping[template._name].mapped("name")
         for key, field in template._fields.items():
-            if key in ignore or key not in to_include:
+            if key in ignore or key not in to_include or not hasattr(real, key):
                 continue
             expected = None
             # Translate template records to reals for comparison
