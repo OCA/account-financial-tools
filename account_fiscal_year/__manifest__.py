@@ -6,7 +6,7 @@
     "name": "Account Fiscal Year",
     "summary": "Create Account Fiscal Year",
     "version": "14.0.1.1.0",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools"
     "14.0/account_fiscal_year",
