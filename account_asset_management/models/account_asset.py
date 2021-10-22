@@ -233,6 +233,9 @@ class AccountAsset(models.Model):
              "if the Depreciation Start Date is different from the date "
              "for which accounting entries need to be generated.")
     date_remove = fields.Date(string='Asset Removal Date', readonly=True)
+    date_last = fields.Date(
+       string='date of last depreciation',
+       compute='_compute_date_last')
     state = fields.Selection(
         selection=[
             ('draft', 'Draft'),
@@ -406,6 +409,16 @@ class AccountAsset(models.Model):
                 if line.move_id:
                     asset.move_line_check = True
                     break
+
+    @api.multi
+    @api.depends('depreciation_line_ids')
+    def _compute_date_last(self):
+        for record in self:
+            if len(record.depreciation_line_ids.ids) > 0:
+                record.date_last = record.depreciation_line_ids[-1].line_date
+            else:
+                record.date_last = record.date_start
+
     @api.multi
     def toggle_to_sell(self):
         for record in self:

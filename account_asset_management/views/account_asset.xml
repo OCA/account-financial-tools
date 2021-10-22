@@ -132,6 +132,7 @@
                   <field name="fiscal_correction_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                          attrs="{'readonly': ['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
                   <field name="date_remove"/>
+                   <field name="date_last"/>
                   <field name="force_include"/>
                 </group>
                 <group>
