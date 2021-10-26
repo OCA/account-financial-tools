@@ -16,5 +16,13 @@ class ProductTemplate(models.Model):
 
     def set_tax_from_category(self):
         self.ensure_one()
-        self.taxes_id = [(6, 0, self.categ_id.taxes_id.ids)]
-        self.supplier_taxes_id = [(6, 0, self.categ_id.supplier_taxes_id.ids)]
+        if self.categ_id.taxes_id.ids:
+            self.taxes_id = [(6, 0, self.categ_id.taxes_id.ids)]
+        else:
+            self.taxes_id = [(6, 0, self.env.company.account_sale_tax_id.ids)]
+        if self.categ_id.supplier_taxes_id.ids:
+            self.supplier_taxes_id = [(6, 0, self.categ_id.supplier_taxes_id.ids)]
+        else:
+            self.supplier_taxes_id = [
+                (6, 0, self.env.company.account_purchase_tax_id.ids)
+            ]
