@@ -27,8 +27,6 @@ class CreditControlRun(models.Model):
 
     policy_ids = fields.Many2many(
         'credit.control.policy',
-        rel="credit_run_policy_rel",
-        id1='run_id', id2='policy_id',
         string='Policies',
         readonly=True,
         states={'draft': [('readonly', False)]},
