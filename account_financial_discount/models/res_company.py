@@ -4,12 +4,12 @@ from odoo import fields, models
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
     financial_discount_revenue_account_id = fields.Many2one(
-        'account.account', string='Financial discount writeoff revenue account'
+        "account.account", string="Financial discount writeoff revenue account"
     )
 
     financial_discount_expense_account_id = fields.Many2one(
-        'account.account', string='Financial discount writeoff expense account'
+        "account.account", string="Financial discount writeoff expense account"
     )
