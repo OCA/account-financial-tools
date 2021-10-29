@@ -123,7 +123,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         return product
 
     def _create_sale(self, line_products):
-        """ Create a sale order.
+        """Create a sale order.
 
         ``line_products`` is a list of tuple [(product, qty)]
         """
