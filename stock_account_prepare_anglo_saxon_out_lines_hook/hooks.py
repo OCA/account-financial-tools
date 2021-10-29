@@ -23,27 +23,17 @@ def post_load_hook():
                 # FIRST HOOK ENDS
 
                 # Retrieve accounts needed to generate the COGS.
-                accounts = line.product_id.product_tmpl_id.with_context(
-                    force_company=line.company_id.id
+                accounts = line.product_id.product_tmpl_id.with_company(
+                    line.company_id
                 ).get_product_accounts(fiscal_pos=move.fiscal_position_id)
                 debit_interim_account = accounts["stock_output"]
-                credit_expense_account = accounts["expense"]
-                if not credit_expense_account:
-                    if self.type == "out_refund":
-                        credit_expense_account = (
-                            self.journal_id.default_credit_account_id
-                        )
-                    else:  # out_invoice/out_receipt
-                        credit_expense_account = (
-                            self.journal_id.default_debit_account_id
-                        )
+                credit_expense_account = (
+                    accounts["expense"] or self.journal_id.default_account_id
+                )
                 if not debit_interim_account or not credit_expense_account:
                     continue
-
                 # Add interim account line.
                 # SECOND HOOK STARTS
-                if not debit_interim_account or not credit_expense_account:
-                    continue
                 interim_account_line_vals = self._prepare_interim_account_line_vals(
                     line, move, debit_interim_account
                 )
