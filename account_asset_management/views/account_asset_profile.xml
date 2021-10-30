@@ -6,17 +6,29 @@
             <field name="model">account.asset.profile</field>
             <field name="arch" type="xml">
                 <form string="Asset profile">
+                    <sheet>
+                        <widget
+                            name="web_ribbon"
+                            title="Archived"
+                            bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"
+                        />
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                                <field name="name" />
+                        </h1>
+                </div>
                     <group>
                         <group>
-                            <field name="name" />
                             <field name="group_ids" widget="many2many_tags" />
                             <field name="asset_product_item" />
-                            <field name="active" />
+                            <field name="active" invisible="1" />
                             <field
-                                name="company_id"
-                                widget="selection"
-                                groups="base.group_multi_company"
-                            />
+                                    name="company_id"
+                                    widget="selection"
+                                    groups="base.group_multi_company"
+                                />
                         </group>
                         <group>
                             <field name="journal_id" />
@@ -30,38 +42,43 @@
                         <group string="Depreciation Dates">
                             <field name="method_time" />
                             <field
-                                name="method_number"
-                                attrs="{'invisible': [('method_time', 'not in', ['number', 'year'])], 'required': [('method_time', 'in', ['number', 'year'])]}"
-                            />
+                                    name="method_number"
+                                    attrs="{'invisible': [('method_time', 'not in', ['number', 'year'])], 'required': [('method_time', 'in', ['number', 'year'])]}"
+                                />
                             <field name="method_period" />
                             <field name="days_calc" />
                             <field
-                                name="use_leap_years"
-                                attrs="{'invisible': [('days_calc', '=', True)]}"
-                            />
+                                    name="use_leap_years"
+                                    attrs="{'invisible': [('days_calc', '=', True)]}"
+                                />
                         </group>
                         <group string="Depreciation Method">
                             <field name="method" />
                             <field
-                                name="method_progress_factor"
-                                attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
-                            />
+                                    name="method_progress_factor"
+                                    attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
+                                />
                             <field
-                                name="prorata"
-                                attrs="{'readonly':[('method_time','!=','year')]}"
-                            />
+                                    name="prorata"
+                                    attrs="{'readonly':[('method_time','!=','year')]}"
+                                />
                             <field name="open_asset" />
                         </group>
                         <group
-                            groups="analytic.group_analytic_accounting"
-                            string="Analytic Information"
-                        >
+                                groups="analytic.group_analytic_accounting"
+                                string="Analytic Information"
+                            >
                             <field name="account_analytic_id" />
-                            <field name="analytic_tag_ids" widget="many2many_tags" />
+                            <field
+                                    name="analytic_tag_ids"
+                                    widget="many2many_tags"
+                                    groups="analytic.group_analytic_tags"
+                                />
                         </group>
                     </group>
                     <separator string="Notes" />
                     <field name="note" />
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -71,9 +88,22 @@
             <field name="arch" type="xml">
                 <tree string="Asset profile">
                     <field name="name" />
-                    <field name="journal_id" />
-                    <field name="method" />
-                    <field name="company_id" groups="base.group_multi_company" />
+                    <field name="method_number" optional="hide" />
+                    <field name="method_period" optional="hide" />
+                    <field name="journal_id" optional="show" />
+                    <field name="account_asset_id" optional="hide" />
+                    <field name="account_depreciation_id" optional="hide" />
+                    <field name="account_expense_depreciation_id" optional="hide" />
+                    <field name="account_plus_value_id" optional="hide" />
+                    <field name="account_min_value_id" optional="hide" />
+                    <field name="account_analytic_id" optional="hide" />
+                    <field name="method" optional="show" />
+                    <field name="prorata" optional="hide" />
+                    <field
+                        name="company_id"
+                        groups="base.group_multi_company"
+                        optional="show"
+                    />
                 </tree>
             </field>
         </record>
@@ -84,6 +114,24 @@
                 <search string="Search Asset Profile">
                     <field name="name" string="Asset Profile" />
                     <field name="journal_id" />
+                    <separator />
+                    <filter
+                        string="Archived"
+                        name="inactive"
+                        domain="[('active', '=', False)]"
+                    />
+                    <group name="groupby">
+                        <filter
+                            name="account_analytic_groupby"
+                            string="account_analytic_id"
+                            context="{'group_by': 'account_analytic_id'}"
+                        />
+                        <filter
+                            name="method_groupby"
+                            string="Computation Method"
+                            context="{'group_by': 'method'}"
+                        />
+                    </group>
                 </search>
             </field>
         </record>
