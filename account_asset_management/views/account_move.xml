@@ -45,8 +45,13 @@
                 <field
                     name="asset_profile_id"
                     domain="[('company_id','=', parent.company_id)]"
+                    optional="hide"
                 />
-                <field name="asset_id" groups="account.group_account_manager" />
+                <field
+                    name="asset_id"
+                    groups="account.group_account_manager"
+                    optional="show"
+                />
             </xpath>
         </field>
     </record>
