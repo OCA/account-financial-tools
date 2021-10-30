@@ -35,7 +35,13 @@
                     />
                 </header>
                 <sheet>
-                    <div class="oe_button_box">
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <div class="oe_button_box" name="button_box">
                         <button
                             name="open_entries"
                             string="Journal Entries"
@@ -50,7 +56,7 @@
                             <field name="name" class="oe_inline" />
                         </h1>
                     </div>
-                    <group colspan="4" col="4">
+                    <group col="4">
                         <field name="code" />
                         <field
                             name="company_id"
@@ -79,10 +85,11 @@
                             widget="monetary"
                             options="{'currency_field': 'company_currency_id'}"
                         />
+                        <field name="active" invisible="1" />
                     </group>
                     <notebook colspan="4">
                         <page string="General">
-                            <group colspan="4" col="4">
+                            <group>
                                 <group>
                                     <field
                                         name="purchase_value"
@@ -105,8 +112,7 @@
                                     <field name="date_remove" />
                                 </group>
                             </group>
-                            <separator string="Other Information" colspan="4" />
-                            <group colspan="4" col="4">
+                            <group col="4" string="Other Information">
                                 <field name="profile_id" />
                                 <field name="group_ids" widget="many2many_tags" />
                                 <field name="partner_id" />
@@ -116,16 +122,12 @@
                                 />
                                 <field
                                     name="analytic_tag_ids"
-                                    groups="analytic.group_analytic_accounting"
+                                    groups="analytic.group_analytic_tags"
                                     widget="many2many_tags"
                                 />
                             </group>
-                            <group colspan="4">
-                                <group>
-                                    <separator
-                                        string="Depreciation Dates"
-                                        colspan="2"
-                                    />
+                            <group>
+                                <group string="Depreciation Dates">
                                     <field name="method_time" required="1" />
                                     <field
                                         name="method_number"
@@ -142,11 +144,7 @@
                                         attrs="{'invisible': [('days_calc', '=', True)]}"
                                     />
                                 </group>
-                                <group>
-                                    <separator
-                                        string="Depreciation Method"
-                                        colspan="2"
-                                    />
+                                <group string="Depreciation Method">
                                     <field name="method" required="1" />
                                     <field
                                         name="method_progress_factor"
@@ -254,45 +252,21 @@
                         <page string="History">
                             <field name="account_move_line_ids" readonly="1">
                                 <tree string="Journal Items">
+                                    <field name="date" />
                                     <field name="move_id" />
-                                    <field name="journal_id" />
-                                    <field name="date" />
-                                    <field name="ref" />
-                                    <field name="partner_id" />
+                                    <field name="journal_id" optional="show" />
                                     <field name="account_id" />
-                                    <field name="debit" sum="Total Debit" />
-                                    <field name="credit" sum="Total Credit" />
-                                </tree>
-                                <form string="Journal Item">
-                                    <field
-                                        name="journal_id"
-                                        options='{"no_open":True}'
-                                    />
-                                    <field name="move_id" options='{"no_open":True}' />
-                                    <newline />
-                                    <field name="name" />
-                                    <field name="ref" />
-                                    <newline />
-                                    <field name="date" />
-                                    <newline />
-                                    <field
-                                        name="partner_id"
-                                        options='{"no_open":True}'
-                                    />
-                                    <newline />
-                                    <field
-                                        name="account_id"
-                                        options='{"no_open":True}'
-                                    />
+                                    <field name="partner_id" optional="show" />
                                     <field
                                         name="analytic_account_id"
                                         groups="analytic.group_analytic_accounting"
-                                        options='{"no_open": True}'
+                                        optional="show"
                                     />
-                                    <newline />
-                                    <field name="debit" sum="Total Debit" />
-                                    <field name="credit" sum="Total Credit" />
-                                </form>
+                                    <field name="ref" />
+                                    <field name="name" optional="hide" />
+                                    <field name="debit" sum="1" />
+                                    <field name="credit" sum="1" />
+                                </tree>
                             </field>
                         </page>
                         <page string="Notes">
@@ -312,16 +286,30 @@
         <field name="arch" type="xml">
             <tree string="Assets">
                 <field name="name" />
-                <field name="code" />
-                <field name="depreciation_base" />
-                <field name="value_depreciated" />
-                <field name="value_residual" />
-                <field name="date_start" />
-                <field name="date_remove" />
-                <field name="profile_id" />
-                <field name="state" />
-                <field name="group_ids" widget="many2many_tags" />
-                <field name="company_id" groups="base.group_multi_company" />
+                <field name="code" optional="show" />
+                <field name="depreciation_base" optional="show" />
+                <field name="value_depreciated" optional="show" />
+                <field name="value_residual" optional="show" />
+                <field name="date_start" optional="show" />
+                <field name="date_remove" optional="show" />
+                <field name="profile_id" optional="show" />
+                <field name="account_analytic_id" optional="hide" />
+                <field name="method" optional="hide" />
+                <field name="prorata" optional="hide" />
+                <field name="group_ids" widget="many2many_tags" optional="hide" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="show"
+                />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state == 'open'"
+                    decoration-warning="state == 'removed'"
+                    decoration-info="state == 'draft'"
+                    decoration-muted="state == 'close'"
+                />
             </tree>
         </field>
     </record>
@@ -334,28 +322,30 @@
                     string="Draft"
                     name="draft"
                     domain="[('state', '=', 'draft')]"
-                    help="Draft Assets"
                 />
                 <filter
                     string="Running"
                     name="running"
                     domain="[('state', '=', 'open')]"
-                    help="Assets in Running State"
                 />
                 <filter
                     string="Close"
                     name="close"
                     domain="[('state', '=', 'close')]"
-                    help="Assets in Close State"
                 />
                 <filter
                     string="Removed"
                     name="removed"
                     domain="[('state', '=', 'removed')]"
-                    help="Assets which have been removed"
                 />
-                <separator orientation="vertical" />
-                <field name="name" string="Asset" />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+                <separator />
+                <field name="name" />
                 <field name="code" />
                 <field name="date_start" />
                 <field name="profile_id" />
@@ -364,12 +354,30 @@
                     name="partner_id"
                     filter_domain="[('partner_id', 'child_of', self)]"
                 />
-                <group expand="0" string="Group By...">
+                <group name="groupby">
                     <filter
                         string="Profile"
                         name="profile"
                         domain=""
                         context="{'group_by': 'profile_id'}"
+                    />
+                    <filter
+                        string="Status"
+                        name="state_groupby"
+                        domain=""
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        string="Analytic account"
+                        name="account_analytic_groupby"
+                        domain=""
+                        context="{'group_by': 'account_analytic_id'}"
+                    />
+                    <filter
+                        string="Computation Method"
+                        name="method_groupby"
+                        domain=""
+                        context="{'group_by': 'method'}"
                     />
                 </group>
             </search>
@@ -379,8 +387,6 @@
         <field name="name">Assets</field>
         <field name="res_model">account.asset</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="account_asset_view_tree" />
-        <field name="search_view_id" ref="account_asset_view_search" />
     </record>
     <record id="act_entries_open" model="ir.actions.act_window">
         <field name="name">Journal Items</field>

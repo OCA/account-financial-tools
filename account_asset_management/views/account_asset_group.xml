@@ -27,7 +27,7 @@
             <field name="arch" type="xml">
                 <tree string="Asset Group" editable="bottom">
                     <field name="name" />
-                    <field name="code" />
+                    <field name="code" optional="show" />
                     <field name="parent_id" />
                     <field name="company_id" groups="base.group_multi_company" />
                 </tree>

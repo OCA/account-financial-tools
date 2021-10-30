@@ -288,12 +288,12 @@ class AccountAssetLine(models.Model):
         self.ensure_one()
         return {
             "name": _("Journal Entry"),
-            "view_mode": "tree,form",
+            "view_mode": "form",
+            "res_id": self.move_id.id,
             "res_model": "account.move",
             "view_id": False,
             "type": "ir.actions.act_window",
             "context": self.env.context,
-            "domain": [("id", "=", self.move_id.id)],
         }
 
     def unlink_move(self):
