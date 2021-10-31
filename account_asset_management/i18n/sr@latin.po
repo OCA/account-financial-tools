@@ -96,6 +96,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_analytic_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Analytic account"
 msgstr "Analitički konto"
 
@@ -103,6 +104,14 @@ msgstr "Analitički konto"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
 msgid "Analytic tags"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Archived"
 msgstr ""
 
 #. module: account_asset_management
@@ -115,7 +124,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Asset"
 msgstr "Sredstvo"
 
@@ -256,24 +264,9 @@ msgid "Assets"
 msgstr "Sredstva"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Close State"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Running State"
-msgstr ""
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets which have been removed"
 msgstr ""
 
 #. module: account_asset_management
@@ -380,6 +373,8 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Computation Method"
 msgstr ""
 
@@ -609,11 +604,6 @@ msgid "Draft"
 msgstr "Nacrt"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Draft Assets"
-msgstr ""
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Duplicate reporting entries"
@@ -691,11 +681,6 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Generate Report"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Group By..."
 msgstr ""
 
 #. module: account_asset_management
@@ -794,7 +779,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Item"
 msgstr ""
 
@@ -1170,6 +1154,7 @@ msgstr ""
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 #, python-format
 msgid "Status"
 msgstr ""
@@ -1272,17 +1257,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Credit"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Total Days"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Debit"
 msgstr ""
 
 #. module: account_asset_management
@@ -1453,6 +1428,11 @@ msgid ""
 "You should manually add depreciation lines with the depreciations of "
 "previous fiscal years if the Depreciation Start Date is different from the "
 "date for which accounting entries need to be generated."
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+msgid "account_analytic_id"
 msgstr ""
 
 #. module: account_asset_management

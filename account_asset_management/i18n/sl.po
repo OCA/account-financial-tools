@@ -94,6 +94,7 @@ msgstr "Analitika"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_analytic_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Analytic account"
 msgstr "Analitični konto"
 
@@ -101,6 +102,14 @@ msgstr "Analitični konto"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
 msgid "Analytic tags"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Archived"
 msgstr ""
 
 #. module: account_asset_management
@@ -113,7 +122,6 @@ msgstr "Ste prepričani?"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Asset"
 msgstr "Osnovno sredstvo"
 
@@ -257,25 +265,10 @@ msgid "Assets"
 msgstr "Osnovna sredstva"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Close State"
-msgstr "Sredstva v stanju 'zaključeno'"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Running State"
-msgstr "Sredstva v stanju 'v teku'"
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
 msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets which have been removed"
-msgstr "Sredstva, ki so bila odstranjena"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
@@ -391,6 +384,8 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Computation Method"
 msgstr "Metoda izračuna"
 
@@ -623,11 +618,6 @@ msgid "Draft"
 msgstr "Osnutek"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Draft Assets"
-msgstr "Osnutki sredstev"
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Duplicate reporting entries"
@@ -707,11 +697,6 @@ msgstr "Ustvari vnose odstranitve"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Generate Report"
 msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Group By..."
-msgstr "Združeno po..."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
@@ -811,7 +796,6 @@ msgstr "Dnevniški vnos"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Item"
 msgstr "Dnevniška postavka"
 
@@ -1201,6 +1185,7 @@ msgstr "Status osnovnega sredstva"
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 #, python-format
 msgid "Status"
 msgstr "Status"
@@ -1312,18 +1297,8 @@ msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Credit"
-msgstr "Skupaj v dobro"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, fuzzy
 msgid "Total Days"
-msgstr "Skupaj v breme"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Debit"
 msgstr "Skupaj v breme"
 
 #. module: account_asset_management
@@ -1528,9 +1503,35 @@ msgstr ""
 "knjigovodski vnosi ustvarjajo."
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+msgid "account_analytic_id"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "ali"
+
+#~ msgid "Assets in Close State"
+#~ msgstr "Sredstva v stanju 'zaključeno'"
+
+#~ msgid "Assets in Running State"
+#~ msgstr "Sredstva v stanju 'v teku'"
+
+#~ msgid "Assets which have been removed"
+#~ msgstr "Sredstva, ki so bila odstranjena"
+
+#~ msgid "Draft Assets"
+#~ msgstr "Osnutki sredstev"
+
+#~ msgid "Group By..."
+#~ msgstr "Združeno po..."
+
+#~ msgid "Total Credit"
+#~ msgstr "Skupaj v dobro"
+
+#~ msgid "Total Debit"
+#~ msgstr "Skupaj v breme"
 
 #~ msgid ""
 #~ "Choose the method to use to compute the dates and number of depreciation "

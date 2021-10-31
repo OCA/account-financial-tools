@@ -103,6 +103,7 @@ msgstr "Información analítica"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_analytic_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Analytic account"
 msgstr "Cuenta analítica"
 
@@ -110,6 +111,14 @@ msgstr "Cuenta analítica"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
 msgid "Analytic tags"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Archived"
 msgstr ""
 
 #. module: account_asset_management
@@ -122,7 +131,6 @@ msgstr "¿Está seguro?"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Asset"
 msgstr "Activo"
 
@@ -260,25 +268,10 @@ msgid "Assets"
 msgstr "Activos"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Close State"
-msgstr "Activos cerrados"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Running State"
-msgstr "Activos en ejecución"
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
 msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets which have been removed"
-msgstr "Activos que han sido eliminados"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
@@ -402,6 +395,8 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Computation Method"
 msgstr "Método de cálculo"
 
@@ -635,11 +630,6 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Draft Assets"
-msgstr "Activos borrador"
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Duplicate reporting entries"
@@ -721,11 +711,6 @@ msgstr "Generar asientos de eliminación"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Generate Report"
 msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Group By..."
-msgstr "Agrupado por..."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
@@ -832,7 +817,6 @@ msgstr "Asiento contable"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Item"
 msgstr "Apunte contable"
 
@@ -1217,6 +1201,7 @@ msgstr "Estado del activo"
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 #, python-format
 msgid "Status"
 msgstr "Estado"
@@ -1333,18 +1318,8 @@ msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Credit"
-msgstr "Total haber"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Total Days"
 msgstr "Días totales"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Debit"
-msgstr "Total debe"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -1546,9 +1521,35 @@ msgstr ""
 "diferente de la fecha para la cual se deben generar asientos contables."
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+msgid "account_analytic_id"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr ""
+
+#~ msgid "Assets in Close State"
+#~ msgstr "Activos cerrados"
+
+#~ msgid "Assets in Running State"
+#~ msgstr "Activos en ejecución"
+
+#~ msgid "Assets which have been removed"
+#~ msgstr "Activos que han sido eliminados"
+
+#~ msgid "Draft Assets"
+#~ msgstr "Activos borrador"
+
+#~ msgid "Group By..."
+#~ msgstr "Agrupado por..."
+
+#~ msgid "Total Credit"
+#~ msgstr "Total haber"
+
+#~ msgid "Total Debit"
+#~ msgstr "Total debe"
 
 #~ msgid ""
 #~ "Choose the method to use to compute the dates and number of depreciation "
