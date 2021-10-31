@@ -99,6 +99,7 @@ msgstr "辅助核算信息"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_analytic_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Analytic account"
 msgstr "辅助核算项"
 
@@ -106,6 +107,14 @@ msgstr "辅助核算项"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
 msgid "Analytic tags"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Archived"
 msgstr ""
 
 #. module: account_asset_management
@@ -118,7 +127,6 @@ msgstr "确认操作？"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Asset"
 msgstr "资产卡片"
 
@@ -260,24 +268,9 @@ msgid "Assets"
 msgstr "固定资产"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Close State"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Running State"
-msgstr ""
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets which have been removed"
 msgstr ""
 
 #. module: account_asset_management
@@ -385,6 +378,8 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Computation Method"
 msgstr "计算方法"
 
@@ -614,11 +609,6 @@ msgid "Draft"
 msgstr "草稿"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Draft Assets"
-msgstr "草稿固定资产"
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Duplicate reporting entries"
@@ -697,11 +687,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Generate Report"
 msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Group By..."
-msgstr "分组..."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
@@ -799,7 +784,6 @@ msgstr "会计凭证"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Item"
 msgstr "会计凭证"
 
@@ -1179,6 +1163,7 @@ msgstr "资产状态"
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 #, python-format
 msgid "Status"
 msgstr "状态"
@@ -1281,17 +1266,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Credit"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Total Days"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Debit"
 msgstr ""
 
 #. module: account_asset_management
@@ -1465,9 +1440,20 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+msgid "account_analytic_id"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "或"
+
+#~ msgid "Draft Assets"
+#~ msgstr "草稿固定资产"
+
+#~ msgid "Group By..."
+#~ msgstr "分组..."
 
 #~ msgid "Invoice"
 #~ msgstr "发票"
