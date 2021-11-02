@@ -24,19 +24,42 @@ msgid "Companies"
 msgstr ""
 
 #. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_res_company__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_bank_statement_line__date_range_fy_id
 #: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__date_range_fy_id
 #: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_payment__date_range_fy_id
 msgid "Fiscal year"
 msgstr ""
 
 #. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_res_company__id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move
-msgid "Journal Entries"
+msgid "Journal Entry"
 msgstr ""
 
 #. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move_line
 msgid "Journal Item"
+msgstr ""
+
+#. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_res_company____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #~ msgid "Account Entry"
