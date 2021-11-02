@@ -152,7 +152,7 @@ class StockMoveLine(models.Model):
     def onchange_serial_number(self):
         res = super(StockMoveLine, self).onchange_serial_number()
         if self.product_id and self.lot_id:
-            asset = self.env['account.asset'].search([('company_id', '=', self.company_id.id),
+            asset = self.env['account.asset'].search([('company_id', '=', self.move_id.company_id.id),
                                                       ('product_id', '=', self.product_id.id),
                                                       ('lot_id', '=', self.lot_id.id)], limit=1)
             if asset:

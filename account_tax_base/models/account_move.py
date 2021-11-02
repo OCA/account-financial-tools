@@ -4,6 +4,9 @@
 from odoo import api, fields, models, _
 from odoo.addons.account.models import account_move as AccountMove
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
@@ -14,6 +17,7 @@ class AccountMoveLine(models.Model):
     def _prepare_writeoff_first_line_values(self, values):
         line_values = values.copy()
         line_values['account_id'] = self[0].account_id.id
+
         if 'analytic_account_id' in line_values:
             del line_values['analytic_account_id']
         if 'tax_ids' in line_values:
@@ -27,7 +31,10 @@ class AccountMoveLine(models.Model):
             purchase = any([tax.type_tax_use == 'purchase' for tax in taxes])
             # Check second possibility in child taxes
             amount = line_values['credit'] - line_values['debit']
-            amount_tax = taxes.compute_all(amount)['total_included']
+            if line_values['manual_edit']:
+                amount_tax = amount
+            else:
+                amount_tax = taxes.compute_all(amount)['total_included']
             line_values['credit'] = amount_tax > 0 and amount_tax or 0.0
             line_values['debit'] = amount_tax < 0 and abs(amount_tax) or 0.0
             line_values['tax_base'] = amount
@@ -53,8 +60,15 @@ class AccountMoveLine(models.Model):
         partner = self.env['res.partner'].browse(vals.get('partner_id'))
         ctx = dict(self._context)
         ctx['round'] = ctx.get('round', True)
+#        _logger.info("VALS %s" % vals)
+
         res = taxes.with_context(ctx).compute_all(amount,
             currency, 1, vals.get('product_id'), partner)
+        if vals.get('manual_tax_amount') and res.get('taxes'):
+            res['taxes'][0]['amount'] = amount > 0 and abs(vals['manual_tax_amount']) or vals['manual_tax_amount']
+            all_tax_amount = sum(x['amount'] for x in res['taxes'])
+            res['total_included'] = res['total_excluded'] + all_tax_amount
+#        _logger.info("RES %s" % res)
         # Adjust line amount if any tax is price_include
         if abs(res['total_excluded']) < abs(amount):
             if vals['debit'] != 0.0: vals['debit'] = res['total_excluded']

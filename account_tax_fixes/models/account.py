@@ -12,6 +12,18 @@ _logger = logging.getLogger(__name__)
 class AccountTax(models.Model):
     _inherit = 'account.tax'
 
+    tax_credit_payable = fields.Selection([('taxcredit', 'Tax credit receivable from the taxpayer'),
+                                           ('taxpay', 'Tax payable by the taxpayer'),
+                                           ('eutaxcredit', 'Tax credit receivable from the taxpayer on EU deals'),
+                                           ('eutaxpay', 'Tax payable by the taxpayer on EU deals'),
+                                           ('taxadvpay', 'Tax payable by the taxpayer when Imports from outside EU'),
+                                           ('taxbalance', 'Account for balance of taxes'),
+                                           ('othertax', 'Different by VAT Tax payable by the taxpayer')],
+                                          'Who pays tax', required=False, default='taxpay',
+                                          help="If not applicable (computed through a Python code), the tax won't "
+                                               "appear on the invoice.Who pays the tax purchaser or seller ( for "
+                                               "imports from outside the EU pay the buyer )")
+
     def _compute_amount_fix(self, base_amount, price_unit, quantity=1.0, product=None, partner=None, force_price_include=False):
         """ Returns the amount of a single tax. base_amount is the actual amount on which the tax is applied, which is
             price_unit * quantity eventually affected by previous taxes (if tax is include_base_amount XOR price_include)

@@ -10,8 +10,9 @@
     'website': 'https://github.com/rosenvladimirov/account-financial-tools',
     'license': 'AGPL-3',
     "depends": [
-            'account',
-            ],
+        'account',
+        'purchase',
+    ],
     'data': [
             'views/account_view.xml',
             'views/account_invoice_view.xml',
