@@ -396,7 +396,7 @@ class AccountAsset(models.Model):
     def _default_company_id(self):
         return self.env['res.company']._company_default_get('account.asset')
 
-    @api.depends('purchase_value', 'diff_purchase_value')
+    @api.depends('purchase_value')
     @api.multi
     def _compute_diff_purchase_value(self):
         for asset in self:
