@@ -24,6 +24,7 @@ setuptools.setup(
         'odoo14-addon-account_move_line_purchase_info',
         'odoo14-addon-account_move_line_tax_editable',
         'odoo14-addon-account_move_template',
+        'odoo14-addon-account_netting',
         'odoo14-addon-account_no_default',
         'odoo14-addon-account_template_active',
         'odoo14-addon-base_vat_optional_vies',
