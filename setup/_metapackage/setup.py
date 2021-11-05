@@ -29,6 +29,7 @@ setuptools.setup(
         'odoo14-addon-account_template_active',
         'odoo14-addon-base_vat_optional_vies',
         'odoo14-addon-product_category_tax',
+        'odoo14-addon-stock_account_prepare_anglo_saxon_out_lines_hook',
     ],
     classifiers=[
         'Programming Language :: Python',
