@@ -40,6 +40,7 @@ addon | version | maintainers | summary
 [account_template_active](account_template_active/) | 14.0.1.0.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Allow to disable / enable account template items (tax, fiscal position, account)
 [base_vat_optional_vies](base_vat_optional_vies/) | 14.0.1.0.0 |  | Optional validation of VAT via VIES
 [product_category_tax](product_category_tax/) | 14.0.1.0.0 |  | Configure taxes in the product category
+[stock_account_prepare_anglo_saxon_out_lines_hook](stock_account_prepare_anglo_saxon_out_lines_hook/) | 14.0.1.0.0 |  | Modify when and how anglo saxon journal items are created
 
 [//]: # (end addons)
 
