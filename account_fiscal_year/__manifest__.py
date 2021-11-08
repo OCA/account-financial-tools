@@ -14,11 +14,10 @@
     "Odoo Community Association (OCA)",
     "maintainers": ["eLBati"],
     "license": "AGPL-3",
-    "depends": [
-        "account",
-    ],
+    "depends": ["account", "date_range"],
     "data": [
         "security/ir.model.access.csv",
+        "data/date_range_type.xml",
         "security/account_fiscal_year_rule.xml",
         "views/account_fiscal_year_views.xml",
     ],
