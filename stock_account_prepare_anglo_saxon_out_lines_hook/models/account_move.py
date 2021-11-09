@@ -10,7 +10,7 @@ class AccountMove(models.Model):
 
     def _prepare_interim_account_line_vals(self, line, move, debit_interim_account):
         # Compute accounting fields.
-        sign = -1 if move.type == "out_refund" else 1
+        sign = -1 if move.move_type == "out_refund" else 1
         price_unit = line._stock_account_get_anglo_saxon_price_unit()
         balance = sign * line.quantity * price_unit
         return {
@@ -29,7 +29,7 @@ class AccountMove(models.Model):
 
     def _prepare_expense_account_line_vals(self, line, move, credit_expense_account):
         # Compute accounting fields.
-        sign = -1 if move.type == "out_refund" else 1
+        sign = -1 if move.move_type == "out_refund" else 1
         price_unit = line._stock_account_get_anglo_saxon_price_unit()
         balance = sign * line.quantity * price_unit
         return {
