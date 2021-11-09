@@ -66,9 +66,9 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         )
 
     def _create_user(self, login, groups, company):
-        """ Create a user."""
+        """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.with_context({"no_reset_password": True}).create(
+        user = self.res_users_model.with_context(**{"no_reset_password": True}).create(
             {
                 "name": "Test User",
                 "login": login,
@@ -123,7 +123,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         return product
 
     def _create_sale(self, line_products):
-        """ Create a sale order.
+        """Create a sale order.
 
         ``line_products`` is a list of tuple [(product, qty)]
         """
@@ -198,7 +198,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         }
         payment = (
             self.env["sale.advance.payment.inv"]
-            .with_context(self.context)
+            .with_context(**self.context)
             .create({"advance_payment_method": "delivered"})
         )
         payment.create_invoices()
@@ -217,7 +217,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
     def test_name_get(self):
         sale = self._create_sale([(self.product, 1)])
         so_line = sale.order_line[0]
-        name_get = so_line.with_context({"so_line_info": True}).name_get()
+        name_get = so_line.with_context(**{"so_line_info": True}).name_get()
         self.assertEqual(
             name_get,
             [
@@ -232,7 +232,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                 )
             ],
         )
-        name_get_no_ctx = so_line.with_context({}).name_get()
+        name_get_no_ctx = so_line.with_context(**{}).name_get()
         self.assertEqual(
             name_get_no_ctx,
             [
