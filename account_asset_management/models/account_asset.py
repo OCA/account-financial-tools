@@ -680,9 +680,16 @@ class AccountAsset(models.Model):
             # recompute in case of deviation
             depreciated_value_posted = depreciated_value = 0.0
             if posted_lines:
+                total_table_lines = sum([len(entry["lines"]) for entry in table])
+                move_check_lines = asset.depreciation_line_ids.filtered("move_check")
                 last_depreciation_date = last_line.line_date
                 last_date_in_table = table[-1]["lines"][-1]["date"]
-                if last_date_in_table <= last_depreciation_date:
+                # If the number of lines in the table is the same as the depreciation
+                # lines, we will not show an error even if the dates are the same.
+                if (last_date_in_table < last_depreciation_date) or (
+                    last_date_in_table == last_depreciation_date
+                    and total_table_lines != len(move_check_lines)
+                ):
                     raise UserError(
                         _(
                             "The duration of the asset conflicts with the "
@@ -723,6 +730,17 @@ class AccountAsset(models.Model):
                 residual_amount = asset.depreciation_base - depreciated_value
                 amount_diff = round(residual_amount_table - residual_amount, digits)
                 if amount_diff:
+                    # We will auto-create a new line because the number of lines in
+                    # the tables are the same as the posted depreciations and there
+                    # is still a residual value. Only in this case we will need to
+                    # add a new line to the table with the amount of the difference.
+                    if len(move_check_lines) == total_table_lines:
+                        table[table_i_start]["lines"].append(
+                            table[table_i_start]["lines"][line_i_start - 1]
+                        )
+                        line = table[table_i_start]["lines"][line_i_start]
+                        line["days"] = 0
+                        line["amount"] = amount_diff
                     # compensate in first depreciation entry
                     # after last posting
                     line = table[table_i_start]["lines"][line_i_start]
