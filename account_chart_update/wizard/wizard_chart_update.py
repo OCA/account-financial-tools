@@ -69,7 +69,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         help="Existing taxes are updated. Taxes are searched by name.",
     )
     update_tax_repartition_line_account = fields.Boolean(
-        string="Update Tax Account",
+        string="Update Tax Accounts",
         default=True,
         help="Update account_id field on existing Tax repartition lines",
     )
