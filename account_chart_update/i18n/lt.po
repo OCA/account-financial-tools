@@ -601,7 +601,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
-msgid "Update Tax Account"
+msgid "Update Tax Accounts"
 msgstr ""
 
 #. module: account_chart_update
