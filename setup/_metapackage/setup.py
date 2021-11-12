@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo14-addon-account_move_force_removal',
         'odoo14-addon-account_move_line_menu',
         'odoo14-addon-account_move_line_purchase_info',
+        'odoo14-addon-account_move_line_sale_info',
         'odoo14-addon-account_move_line_tax_editable',
         'odoo14-addon-account_move_template',
         'odoo14-addon-account_netting',
