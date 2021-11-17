@@ -241,7 +241,12 @@ class ProductTemplate(models.Model):
                         ret = acc_move.button_cancel()
                         if ret:
                             acc_move.unlink()
-                move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0)._action_done()
+                move.remaining_value = 0.0
+                move.remaining_qty = 0.0
+                move.value = 0.0
+                for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
+                    correction_value = move._run_valuation(move_line.qty_done)
+                    move_line._action_done()
                 # _logger.info("MOVE %s" % move.reference)
                 if move.picking_id:
                     move.write({'date': move.picking_id.date_done,
@@ -251,7 +256,8 @@ class ProductTemplate(models.Model):
                     move.write({'date': move.inventory_id.accounting_date or move.inventory_id.date,
                                 'accounting_date': move.inventory_id.accounting_date or move.inventory_id.date})
                     move.move_line_ids.write({'date': move.inventory_id.accounting_date or move.inventory_id.date})
-                move.with_context(dict(self._context, force_date=move.date, rebuld_try=True)).rebuild_account_move()
+                move.with_context(dict(self._context, force_valuation_amount=correction_value, force_date=move.date,
+                                       rebuld_try=True)).rebuild_account_move()
 
     @api.multi
     def action_get_account_move_lines(self):
