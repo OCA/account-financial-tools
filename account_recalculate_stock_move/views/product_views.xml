@@ -45,5 +45,19 @@
                 </xpath>
             </field>
         </record>
+        <record id="view_stock_product_tree2" model="ir.ui.view">
+            <field name="name">product.stock.tree.account.2</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock_account.view_stock_product_tree2"/>
+            <field name="arch" type="xml">
+                <field name="qty_at_date" position="after">
+                    <field name="account_qty_at_date"/>
+                </field>
+                <field name="stock_value" position="after">
+                    <field name="history_value" sum="Stock History Valuation" widget="monetary" options="{'currency_field': 'cost_currency_id'}"/>
+                    <field name="account_value" sum="Stock Account Valuation" widget="monetary" options="{'currency_field': 'cost_currency_id'}"/>
+                </field>
+            </field>
+        </record>
     </data>
 </odoo>
