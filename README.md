@@ -15,7 +15,11 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[account_move_line_sale_info](account_move_line_sale_info/) | 15.0.1.0.0 |  | Introduces the purchase order line to the journal items
 
 [//]: # (end addons)
 
