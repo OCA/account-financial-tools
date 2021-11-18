@@ -28,7 +28,11 @@ class TestAccountLockDateUpdate(TransactionCase):
             .create({"company_id": self.company.id})
         )
         wizard.write(
-            {"period_lock_date": "2000-02-01", "fiscalyear_lock_date": "2000-01-01"}
+            {
+                "period_lock_date": "2000-02-01",
+                "fiscalyear_lock_date": "2000-01-01",
+                "tax_lock_date": "2000-01-01",
+            }
         )
         wizard.with_user(self.demo_user.id).execute()
         self.assertEqual(
@@ -36,4 +40,7 @@ class TestAccountLockDateUpdate(TransactionCase):
         )
         self.assertEqual(
             fields.Date.to_string(self.company.fiscalyear_lock_date), "2000-01-01"
+        )
+        self.assertEqual(
+            fields.Date.to_string(self.company.tax_lock_date), "2000-01-01"
         )
