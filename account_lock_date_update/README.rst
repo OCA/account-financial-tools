@@ -25,7 +25,7 @@ Account Lock Date Update
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-Allow an Account adviser to update locking date without having
+Allow an Account adviser to update locking dates without having
 access to all technical settings.
 
 **Table of contents**
@@ -39,7 +39,7 @@ Usage
 To use this module, you need to be a Billing Administrator and go to:
 
 * Invoicing -> Accounting -> Actions -> Update accounting lock dates
-* Change values and click on update button
+* Change values and click on **Update** button
 
 Bug Tracker
 ===========

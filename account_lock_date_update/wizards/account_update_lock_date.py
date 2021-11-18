@@ -17,10 +17,15 @@ class AccountUpdateLockDate(models.TransientModel):
         "open fiscal year, for example.",
     )
     fiscalyear_lock_date = fields.Date(
-        string="Lock Date",
+        string="Lock Date for All Users",
         help="No users, including Advisers, can edit accounts prior to and "
         "inclusive of this date. Use it for fiscal year locking for "
         "example.",
+    )
+    tax_lock_date = fields.Date(
+        string="Tax Lock Date",
+        help="No users can edit journal entries related to a tax prior and "
+        "inclusive of this date.",
     )
 
     @api.model
@@ -32,6 +37,7 @@ class AccountUpdateLockDate(models.TransientModel):
                 "company_id": company.id,
                 "period_lock_date": company.period_lock_date,
                 "fiscalyear_lock_date": company.fiscalyear_lock_date,
+                "tax_lock_date": company.tax_lock_date,
             }
         )
         return res
@@ -49,5 +55,6 @@ class AccountUpdateLockDate(models.TransientModel):
             {
                 "period_lock_date": self.period_lock_date,
                 "fiscalyear_lock_date": self.fiscalyear_lock_date,
+                "tax_lock_date": self.tax_lock_date,
             }
         )

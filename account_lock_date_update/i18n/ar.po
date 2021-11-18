@@ -72,13 +72,20 @@ msgstr "آخر تحديث في"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
-msgid "Lock Date"
-msgstr "تاريخ الاقفال"
+msgid "Lock Date for All Users"
+msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
 msgid "Lock Date for Non-Advisers"
 msgstr "تاريخ الاقفال لغير المدير المالي"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid ""
+"No users can edit journal entries related to a tax prior and inclusive of "
+"this date."
+msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
@@ -101,6 +108,11 @@ msgstr ""
 "التاريخ. قم باستخدام هذه الخاصية عند المراجعة قبل اقفال السنة المالية مثلاً."
 
 #. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid "Tax Lock Date"
+msgstr ""
+
+#. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Update"
 msgstr "تحديث"
@@ -108,11 +120,17 @@ msgstr "تحديث"
 #. module: account_lock_date_update
 #: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
 #: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
-msgid "Update accounting lock dates"
-msgstr "تحديث تواريخ الاقفال"
+msgid "Update Lock Dates"
+msgstr ""
 
 #. module: account_lock_date_update
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
 msgstr "لا يمكنك اتمام هذه العملية."
+
+#~ msgid "Lock Date"
+#~ msgstr "تاريخ الاقفال"
+
+#~ msgid "Update accounting lock dates"
+#~ msgstr "تحديث تواريخ الاقفال"
