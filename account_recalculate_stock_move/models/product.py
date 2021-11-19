@@ -6,6 +6,7 @@ from psycopg2 import OperationalError, Error
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_is_zero, float_compare
+from odoo.addons import decimal_precision as dp
 from odoo.addons.stock_account.models.product import ProductProduct as productproduct
 
 import logging
@@ -20,8 +21,12 @@ class Product(models.Model):
         'Account Value', compute='_compute_stock_value')
     account_qty_at_date = fields.Float(
         'Account Quantity', compute='_compute_stock_value')
+    account_standard_price = fields.Float(
+        'Account Cost', compute='_compute_stock_value',
+        digits=dp.get_precision('Product Price'))
     history_value = fields.Float(
-        'History Value', compute='_compute_stock_value')
+        'History Value', compute='_compute_stock_value',
+        digits=dp.get_precision('Product Price'))
 
     def rebuild_moves(self):
         company = self.env.user.company_id.id
@@ -122,6 +127,7 @@ class Product(models.Model):
                     date=to_date,
                 )
             product.history_value = price_used * qty_available
+            product.account_standard_price = price_used
 
             if product.cost_method in ['standard', 'average']:
                 product.stock_value = price_used * qty_available
@@ -136,6 +142,8 @@ class Product(models.Model):
                         product.stock_fifo_manual_move_ids = StockMove.browse(product_move_ids[product.id])
                         product.account_value = product_values[product.id]
                         product.account_qty_at_date = qty_available
+                        if qty_available != 0:
+                            product.account_standard_price = product_values[product.id]/qty_available
                     elif product.product_tmpl_id.valuation == 'real_time':
                         valuation_account_id = product.categ_id.property_stock_valuation_account_id.id
                         value, quantity, aml_ids = fifo_automated_values.get((product.id, valuation_account_id)) or (
@@ -145,6 +153,8 @@ class Product(models.Model):
                         product.stock_fifo_real_time_aml_ids = self.env['account.move.line'].browse(aml_ids)
                         product.account_value = value
                         product.account_qty_at_date = quantity
+                        if quantity != 0:
+                            product.account_standard_price = value/quantity
                 else:
                     product.stock_value = product_values[product.id]
                     product.qty_at_date = qty_available
@@ -152,6 +162,8 @@ class Product(models.Model):
                         product.stock_fifo_manual_move_ids = StockMove.browse(product_move_ids[product.id])
                         product.account_value = product_values[product.id]
                         product.account_qty_at_date = qty_available
+                        if qty_available != 0:
+                            product.account_standard_price = product_values[product.id]/qty_available
                     elif product.product_tmpl_id.valuation == 'real_time':
                         valuation_account_id = product.categ_id.property_stock_valuation_account_id.id
                         value, quantity, aml_ids = fifo_automated_values.get((product.id, valuation_account_id)) or (
@@ -159,6 +171,8 @@ class Product(models.Model):
                         product.stock_fifo_real_time_aml_ids = self.env['account.move.line'].browse(aml_ids)
                         product.account_value = value
                         product.account_qty_at_date = quantity
+                        if quantity != 0:
+                            product.account_standard_price = value/quantity
 
 
 productproduct._compute_stock_value = Product._compute_stock_value
