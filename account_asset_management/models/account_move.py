@@ -36,6 +36,7 @@ class AccountMove(models.Model):
         for rec in self:
             assets = (
                 self.env["account.asset.line"]
+                .sudo()
                 .search([("move_id", "=", rec.id)])
                 .mapped("asset_id")
             )
