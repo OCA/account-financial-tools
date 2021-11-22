@@ -105,7 +105,7 @@ class Picking(models.Model):
                 for line in move.move_line_ids:
                     if not line.asset_id and line.move_id._is_out():
                         if line.product_id and line.lot_id:
-                            asset = self.env['account.asset'].search([('company_id', '=', line.company_id.id),
+                            asset = self.env['account.asset'].search([('company_id', '=', line.move_id.company_id.id),
                                                                       ('product_id', '=', line.product_id.id),
                                                                       ('lot_id', '=', line.lot_id.id)], limit=1)
                             if asset:
