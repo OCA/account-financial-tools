@@ -258,8 +258,9 @@ class ProductTemplate(models.Model):
                 move.remaining_value = 0.0
                 move.remaining_qty = 0.0
                 move.value = 0.0
+                correction_value = 0.0
                 for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
-                    correction_value = move._run_valuation(move_line.qty_done)
+                    correction_value += move._run_valuation(move_line.qty_done)
                     move_line._action_done()
                 # _logger.info("MOVE %s" % move.reference)
                 if move.picking_id:
