@@ -1,8 +1,8 @@
 from odoo import fields
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class TestFiscalPosition(SavepointCase):
+class TestFiscalPosition(TransactionCase):
     def check_compute_fiscal_year(
         self, company, date, expected_date_from, expected_date_to
     ):
