@@ -7,6 +7,7 @@
         "account_recalculate_stock_move",
         "mrp",
         "mrp_bom_losses",
+        "queue_job",
     ],
     'author': "Rosen Vladimirov, Bioprint Ltd.,",
     "website": 'https://github.com/rosenvladimirov/account-financial-tools',

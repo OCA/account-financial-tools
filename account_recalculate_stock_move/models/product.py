@@ -192,6 +192,9 @@ class ProductTemplate(models.Model):
                 else:
                     template.account_move_line_ids |= product.account_move_line_ids
 
+    def _rebuild_moves(self, product, move, date_move):
+        return
+
     def rebuild_moves(self):
         company = self.env.user.company_id.id
         warehouse = self.env['stock.warehouse'].search([('company_id', '=', company)], limit=1)
@@ -228,15 +231,16 @@ class ProductTemplate(models.Model):
                 ('product_id', 'in', self.product_variant_ids.ids)], order='datetime desc,id desc')
             if history:
                 history.unlink()
-            quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+            # quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
             # _logger.info("QUINTS FOR PRODUCT IN LOCATIONS %s:%s:%s:%s" % (product.default_code, product, location.name, quants))
 
             moves = self.env['stock.move'].search([('product_id', '=', product.id), ('state', '=', 'done')])
             if self._uid == SUPERUSER_ID:
                 moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
-
+            landed_cost = self.env['stock.valuation.adjustment.lines'].search([('move_id', 'in', moves.ids)])
             #try:
             # _logger.info("MOVES %s" % moves)
+            date_move = False
             for move in moves.sorted(lambda r: r.date):
                 #move.write({"state": 'assigned'})
                 #move.move_line_ids.write({"state": 'assigned'})
@@ -258,9 +262,8 @@ class ProductTemplate(models.Model):
                 move.remaining_value = 0.0
                 move.remaining_qty = 0.0
                 move.value = 0.0
-                correction_value = 0.0
+                correction_value = move._run_valuation(move.qty_done)
                 for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
-                    correction_value += move._run_valuation(move_line.qty_done)
                     move_line._action_done()
                 # _logger.info("MOVE %s" % move.reference)
                 if move.picking_id:
@@ -273,6 +276,17 @@ class ProductTemplate(models.Model):
                     move.move_line_ids.write({'date': move.inventory_id.accounting_date or move.inventory_id.date})
                 move.with_context(dict(self._context, force_valuation_amount=correction_value, force_date=move.date,
                                        rebuld_try=True)).rebuild_account_move()
+                move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
+                if move_landed_cost:
+                    move_landed_cost.former_cost = move.value
+                if not date_move:
+                    date_move = move.date
+                move_landed_cost = landed_cost.filtered(lambda r: date_move > r.cost_id.date <= move.date)
+                if move_landed_cost:
+                    move_landed_cost.mapped('cost_id').rebuild_account_move()
+                self._rebuild_moves(product, move, date_move)
+                date_move = move.date
+
 
     @api.multi
     def action_get_account_move_lines(self):
