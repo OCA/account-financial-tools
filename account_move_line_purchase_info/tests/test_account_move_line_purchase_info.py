@@ -1,4 +1,4 @@
-# Copyright 2019 ForgeFlow S.L.
+# Copyright 2021 ForgeFlow S.L.
 #   (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -7,57 +7,59 @@ from odoo.tests import Form, common
 
 
 class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
-    def setUp(self):
-        super(TestAccountMoveLinePurchaseInfo, self).setUp()
-        self.purchase_model = self.env["purchase.order"]
-        self.purchase_line_model = self.env["purchase.order.line"]
-        self.product_model = self.env["product.product"]
-        self.product_ctg_model = self.env["product.category"]
-        self.acc_type_model = self.env["account.account.type"]
-        self.account_model = self.env["account.account"]
-        self.am_model = self.env["account.move"]
-        self.aml_model = self.env["account.move.line"]
-        self.res_users_model = self.env["res.users"]
+    @classmethod
+    def setUpClass(cls):
+        super(TestAccountMoveLinePurchaseInfo, cls).setUpClass()
+        cls.purchase_model = cls.env["purchase.order"]
+        cls.purchase_line_model = cls.env["purchase.order.line"]
+        cls.product_model = cls.env["product.product"]
+        cls.product_ctg_model = cls.env["product.category"]
+        cls.acc_type_model = cls.env["account.account.type"]
+        cls.account_model = cls.env["account.account"]
+        cls.am_model = cls.env["account.move"]
+        cls.aml_model = cls.env["account.move.line"]
+        cls.res_users_model = cls.env["res.users"]
 
-        self.partner1 = self.env.ref("base.res_partner_1")
-        self.location_stock = self.env.ref("stock.stock_location_stock")
-        self.company = self.env.ref("base.main_company")
-        self.group_purchase_user = self.env.ref("purchase.group_purchase_user")
-        self.group_account_invoice = self.env.ref("account.group_account_invoice")
-        self.group_account_manager = self.env.ref("account.group_account_manager")
+        cls.partner1 = cls.env.ref("base.res_partner_1")
+        cls.location_stock = cls.env.ref("stock.stock_location_stock")
+        cls.company = cls.env.ref("base.main_company")
+        cls.group_purchase_user = cls.env.ref("purchase.group_purchase_user")
+        cls.group_account_invoice = cls.env.ref("account.group_account_invoice")
+        cls.group_account_manager = cls.env.ref("account.group_account_manager")
 
         # Create account for Goods Received Not Invoiced
-        acc_type = self._create_account_type("equity", "other")
+        acc_type = cls._create_account_type(cls, "equity", "other")
         name = "Goods Received Not Invoiced"
         code = "grni"
-        self.account_grni = self._create_account(acc_type, name, code, self.company)
+        cls.account_grni = cls._create_account(cls, acc_type, name, code, cls.company)
 
         # Create account for Cost of Goods Sold
-        acc_type = self._create_account_type("expense", "other")
+        acc_type = cls._create_account_type(cls, "expense", "other")
         name = "Cost of Goods Sold"
         code = "cogs"
-        self.account_cogs = self._create_account(acc_type, name, code, self.company)
+        cls.account_cogs = cls._create_account(cls, acc_type, name, code, cls.company)
         # Create account for Inventory
-        acc_type = self._create_account_type("asset", "other")
+        acc_type = cls._create_account_type(cls, "asset", "other")
         name = "Inventory"
         code = "inventory"
-        self.account_inventory = self._create_account(
-            acc_type, name, code, self.company
+        cls.account_inventory = cls._create_account(
+            cls, acc_type, name, code, cls.company
         )
         # Create Product
-        self.product = self._create_product()
+        cls.product = cls._create_product(cls)
 
         # Create users
-        self.purchase_user = self._create_user(
+        cls.purchase_user = cls._create_user(
+            cls,
             "purchase_user",
-            [self.group_purchase_user, self.group_account_invoice],
-            self.company,
+            [cls.group_purchase_user, cls.group_account_invoice],
+            cls.company,
         )
-        self.account_invoice = self._create_user(
-            "account_invoice", [self.group_account_invoice], self.company
+        cls.account_invoice = cls._create_user(
+            cls, "account_invoice", [cls.group_account_invoice], cls.company
         )
-        self.account_manager = self._create_user(
-            "account_manager", [self.group_account_manager], self.company
+        cls.account_manager = cls._create_user(
+            cls, "account_manager", [cls.group_account_manager], cls.company
         )
 
     def _create_user(self, login, groups, company):
@@ -195,7 +197,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         f.partner_id = purchase.partner_id
         f.purchase_id = purchase
         invoice = f.save()
-        invoice.post()
+        invoice.action_post()
         purchase.flush()
 
         for aml in invoice.invoice_line_ids:
