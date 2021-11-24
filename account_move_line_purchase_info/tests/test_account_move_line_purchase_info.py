@@ -61,9 +61,9 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         )
 
     def _create_user(self, login, groups, company):
-        """ Create a user."""
+        """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.with_context({"no_reset_password": True}).create(
+        user = self.res_users_model.with_context(**{"no_reset_password": True}).create(
             {
                 "name": "Test User",
                 "login": login,
@@ -210,7 +210,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
     def test_name_get(self):
         purchase = self._create_purchase([(self.product, 1)])
         po_line = purchase.order_line[0]
-        name_get = po_line.with_context({"po_line_info": True}).name_get()
+        name_get = po_line.with_context(**{"po_line_info": True}).name_get()
         self.assertEqual(
             name_get,
             [
