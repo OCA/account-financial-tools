@@ -5,7 +5,7 @@
     "name": "Account Invoice Constraint Chronology",
     "version": "13.0.1.0.1",
     "author": "Odoo Community Association (OCA), ACSONE SA/NV, CorporateHub",
-    "website": "https://github.com/OCA/account-financial-tools/",
+    "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
     "category": "Accounting",
     "depends": ["account"],

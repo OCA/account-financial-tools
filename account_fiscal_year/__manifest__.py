@@ -1,6 +1,6 @@
 # Copyright 2016 Camptocamp SA
 # Copyright 2018 Lorenzo Battistini <https://github.com/eLBati>
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 {
     "name": "Account Fiscal Year",
     "summary": "Create a menu for Account Fiscal Year",
@@ -11,7 +11,7 @@
     "author": "Agile Business Group, Camptocamp SA, "
     "Odoo Community Association (OCA)",
     "maintainers": ["eLBati"],
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "application": False,
     "installable": True,
     "depends": ["account", "date_range"],
