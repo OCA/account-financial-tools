@@ -115,7 +115,6 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
 
     def _inverse_spread_journal_account(self):
         """Keep this for making the fields editable"""
-        pass
 
     @api.depends("company_id", "invoice_type")
     def _compute_spread_invoice_type_domain(self):
