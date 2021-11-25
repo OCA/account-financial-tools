@@ -3,6 +3,7 @@
 {
     "name": "Account Move Line Amount Currency",
     "version": "13.0.1.0.0",
+    "website": "https://github.com/OCA/account-financial-tools",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "category": "Accounts",
     "license": "LGPL-3",
