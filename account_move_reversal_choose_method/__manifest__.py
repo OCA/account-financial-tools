@@ -5,7 +5,7 @@
     "name": "Account Move Reversal Choose Method",
     "summary": "Let's choose the Credit Method "
     "when adding a credit note to a journal entry.",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
