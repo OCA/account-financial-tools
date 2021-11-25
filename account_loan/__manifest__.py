@@ -4,7 +4,7 @@
     "name": "Account Loan management",
     "version": "13.0.1.1.0",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
-    "website": "http://github.com/OCA/account-financial-tools",
+    "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
     "category": "Accounting",
     "depends": ["account"],
