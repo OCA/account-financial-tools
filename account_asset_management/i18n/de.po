@@ -15,8 +15,8 @@ msgstr ""
 "POT-Creation-Date: 2016-09-24 00:46+0000\n"
 "PO-Revision-Date: 2021-07-05 16:48+0000\n"
 "Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
-"Language-Team: German (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,6 +26,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1054
+#: code:addons/account_asset_management/models/account_asset.py:1074
 #, python-format
 msgid ""
 "\n"
@@ -356,8 +357,8 @@ msgid ""
 msgstr ""
 "Hier kann die Methode gewählt werden, mit der die Daten und Beträge der "
 "Abschreibungszeilen berechnet werden.\n"
-"  * Anzahl der Jahre: Hier die Anzahl der Jahre für die Abschreibung angeben."
-"\n"
+"  * Anzahl der Jahre: Hier die Anzahl der Jahre für die Abschreibung "
+"angeben.\n"
 "  * Anzahl der Abschreibungen: Hier die Anzahl der Abschreibungszeilen und "
 "die Zeit zwischen zwei Abschreibungen angeben.\n"
 
@@ -724,6 +725,7 @@ msgstr "Buchungen"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1057
+#: code:addons/account_asset_management/models/account_asset.py:1077
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -854,6 +856,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:772
+#: code:addons/account_asset_management/models/account_asset.py:792
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr "Unzulässiger Wert %s in asset.method."
@@ -1346,6 +1349,7 @@ msgstr "Status"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:745
+#: code:addons/account_asset_management/models/account_asset.py:765
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1384,6 +1388,7 @@ msgstr "Das Startdatum muss vor dem Enddatum liegen."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:533
+#: code:addons/account_asset_management/models/account_asset.py:542
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
@@ -1572,8 +1577,8 @@ msgid ""
 "You are not allowed to remove an accounting entry linked to an asset.\n"
 "You should remove such entries from the asset."
 msgstr ""
-"Sie dürfen eine mit einem Anlagegut verknüpfte Finanzbuchung nicht löschen. "
-"\n"
+"Sie dürfen eine mit einem Anlagegut verknüpfte Finanzbuchung nicht "
+"löschen. \n"
 "Sie müssen solche Buchungen in dem Anlagegut selbst entfernen."
 
 #. module: account_asset_management
