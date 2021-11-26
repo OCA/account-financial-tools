@@ -1,5 +1,6 @@
 # Copyright 2014 Camptocamp SA, 2017 ACSONE
 # Copyright 2018 Camptocamp SA
+# Copyright 2021 FactorLibre - Luis J. Salvatierra <luis.salvatierra@factorlibre.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -59,7 +60,8 @@ class AccountMove(models.Model):
         for move in moves:
             job = move.with_delay(eta=eta).validate_one_move()
             moves_job_mapping.append((move.id, job.uuid))
-        self._update_moves_with_job_uuid(moves_job_mapping)
+        if moves_job_mapping:
+            self._update_moves_with_job_uuid(moves_job_mapping)
 
     @api.model
     def _update_moves_with_job_uuid(self, moves_job_mapping):
@@ -68,7 +70,7 @@ class AccountMove(models.Model):
             SET post_job_uuid = v.job_uuid
             FROM (VALUES %s ) AS v (move_id, job_uuid)
             WHERE am.id = v.move_id;
-        """
+        """ % ', '.join(["%s" for _ in range(len(moves_job_mapping))])
         self.env.cr.execute(sql, tuple(moves_job_mapping))
 
     @api.model
