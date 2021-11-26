@@ -353,7 +353,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_id
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_id_5686
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_id_5762
 msgid "ID"
 msgstr ""
 
