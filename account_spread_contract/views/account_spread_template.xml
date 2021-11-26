@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_spread_template" model="ir.ui.view">
+        <field name="model">account.spread.template</field>
+        <field name="inherit_id" ref="account_spread_cost_revenue.view_account_spread_template"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button name="action_unlink_contract_line" type="object" string="Unlink Contract Line" invisible="not context.get('force_contract_line_id')" groups="account.group_account_manager"/>
+            </header>
+        </field>
+    </record>
+
+</odoo>
