@@ -33,7 +33,6 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1054
 #: code:addons/account_asset_management/models/account_asset.py:1074
 #, python-format
 msgid ""
@@ -736,7 +735,6 @@ msgid "Entries"
 msgstr "Pièces comptables"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1057
 #: code:addons/account_asset_management/models/account_asset.py:1077
 #, python-format
 msgid ""
@@ -869,7 +867,6 @@ msgstr ""
 "dans l'année en cours."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:772
 #: code:addons/account_asset_management/models/account_asset.py:792
 #, python-format
 msgid "Illegal value %s in asset.method."
@@ -1364,7 +1361,6 @@ msgid "Status"
 msgstr "Statut"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:745
 #: code:addons/account_asset_management/models/account_asset.py:765
 #, python-format
 msgid ""
@@ -1403,7 +1399,6 @@ msgid "The Start Date must precede the Ending Date."
 msgstr "La date de début doit précéder la date de fin."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:533
 #: code:addons/account_asset_management/models/account_asset.py:542
 #, python-format
 msgid ""
