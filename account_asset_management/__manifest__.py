@@ -4,7 +4,7 @@
 
 {
     'name': 'Assets Management',
-    'version': '12.0.3.1.4',
+    'version': '12.0.3.1.5',
     'license': 'AGPL-3',
     'depends': [
         'account',
