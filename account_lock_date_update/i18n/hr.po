@@ -72,13 +72,20 @@ msgstr "Zadnje ažurirano dana"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
-msgid "Lock Date"
-msgstr "Datum zaključavanja"
+msgid "Lock Date for All Users"
+msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
 msgid "Lock Date for Non-Advisers"
 msgstr "Datum zaključavanja za ne savjetnike"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid ""
+"No users can edit journal entries related to a tax prior and inclusive of "
+"this date."
+msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
@@ -98,6 +105,11 @@ msgstr ""
 "ovog datuma. Koristiti za zaključavanje perioda unutar fiskalne godine."
 
 #. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid "Tax Lock Date"
+msgstr ""
+
+#. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Update"
 msgstr "Ažuriraj"
@@ -105,11 +117,17 @@ msgstr "Ažuriraj"
 #. module: account_lock_date_update
 #: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
 #: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
-msgid "Update accounting lock dates"
-msgstr "Ažuriraj datume zaključavanja"
+msgid "Update Lock Dates"
+msgstr ""
 
 #. module: account_lock_date_update
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
 msgstr "Nije vam odobreno izvršiti ovu radnju."
+
+#~ msgid "Lock Date"
+#~ msgstr "Datum zaključavanja"
+
+#~ msgid "Update accounting lock dates"
+#~ msgstr "Ažuriraj datume zaključavanja"
