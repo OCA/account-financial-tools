@@ -7,9 +7,9 @@ Cost-Revenue Spread Contract
    !! changes will be overwritten.                   !!
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/maturity-Alpha-red.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
-    :alt: Alpha
+    :alt: Beta
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
@@ -59,6 +59,9 @@ the spreading right-arrow icon is now displayed in green color.
 
 When generating an invoice from the contract, the spread table will be automatically created
 and linked to the respective invoice line.
+The spread date is the date from the next invoice date present in the contract.
+The period of the contract is copied to the spread. So if the contract is 3 months, it will also set
+the spread period to 3x1 months.
 
 Changelog
 =========
