@@ -19,6 +19,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[account_move_line_purchase_info](account_move_line_purchase_info/) | 15.0.1.0.0 |  | Introduces the purchase order line to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 15.0.1.0.0 |  | Introduces the purchase order line to the journal items
 
 [//]: # (end addons)
