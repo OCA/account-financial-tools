@@ -162,7 +162,7 @@ class AccountMove(models.Model):
         else:
             company_currency = self.company_id.currency_id
             diff_currency = self.currency_id != company_currency
-            date_invoice = self.date or self.invoice_date or fields.Date.today()
+            date_invoice = self.invoice_date or self.date or fields.Date.today()
             date_discount = payment_term.calc_discount_date(date_invoice)
             # if there is a discount defined we always want the amount
             # the date is enough to lock it down.
