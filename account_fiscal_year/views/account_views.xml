@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem
+        id="menu_date_range_accounting"
+        name="Date ranges"
+        parent="account.account_account_menu"
+        sequence="50"
+    />
+    <menuitem
+        id="menu_actions_account_fiscal_year"
+        action="account.actions_account_fiscal_year"
+        parent="menu_date_range_accounting"
+    />
+    <menuitem
+        id="menu_date_range_action_accounting"
+        action="date_range.date_range_action"
+        parent="menu_date_range_accounting"
+    />
+    <menuitem
+        id="menu_date_range_type_action_accounting"
+        action="date_range.date_range_type_action"
+        parent="menu_date_range_accounting"
+    />
+    <menuitem
+        id="menu_date_range_generator_action"
+        action="date_range.date_range_generator_action"
+        parent="menu_date_range_accounting"
+    />
+</odoo>

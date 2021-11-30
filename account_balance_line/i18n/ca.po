@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_balance_line
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-08 03:37+0000\n"
+"PO-Revision-Date: 2017-01-08 03:37+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_balance_line
+#: model_terms:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_tree
+#: model_terms:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_tree_grouped
+msgid "Total Balance"
+msgstr ""
+
+#~ msgid "Balance"
+#~ msgstr "Balanç"

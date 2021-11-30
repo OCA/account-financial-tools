@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="account_move_line_balance_tree">
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="credit" position="after">
+                <field name="balance" sum="Total Balance" optional="show" />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="account_move_line_balance_tree_grouped">
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree_grouped" />
+        <field name="arch" type="xml">
+            <field name="credit" position="after">
+                <field name="balance" sum="Total Balance" optional="show" />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="account_move_line_balance_audit_tree">
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tax_audit_tree" />
+        <field name="arch" type="xml">
+            <field name="balance" position="replace" optional="show" />
+        </field>
+    </record>
+</odoo>

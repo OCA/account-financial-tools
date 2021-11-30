@@ -1,0 +1,2 @@
+numpy<=1.19.4
+numpy-financial<=1.0.0
