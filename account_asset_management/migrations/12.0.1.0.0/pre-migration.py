@@ -99,6 +99,10 @@ def migrate(env, version):
             openupgrade.rename_columns(cr, _column_renames)
             openupgrade.rename_fields(env, _field_renames)
             openupgrade.rename_xmlids(cr, _xml_ids_renames)
+            openupgrade.lift_constraints(cr, 'account_asset', 'invoice_id')
+            openupgrade.lift_constraints(cr, 'product_template', 'asset_category_id')
+            openupgrade.lift_constraints(
+                cr, 'product_template', 'deferred_revenue_category_id')
             handle_account_asset_disposal_migration(env)
             if openupgrade.column_exists(cr, 'account_asset',
                                          'analytic_account_id'):
