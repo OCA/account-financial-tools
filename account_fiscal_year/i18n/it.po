@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-09 08:15+0000\n"
-"PO-Revision-Date: 2020-11-09 08:15+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2021-12-03 12:36+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_fiscal_year
 #: model_terms:ir.actions.act_window,help:account_fiscal_year.actions_account_fiscal_year
@@ -34,12 +35,12 @@ msgstr "Azienda"
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__display_name
@@ -77,7 +78,7 @@ msgstr "Anni fiscali"
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__id
 #: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
@@ -88,12 +89,12 @@ msgstr "Ultima modifica il"
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__name
