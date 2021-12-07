@@ -3,11 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Account - Missing Menus",
+    "name": "Account - Missing Menus & Saxon Accounting",
     "version": "15.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
-    "summary": "Adds missing menu entries for Account module",
+    "summary": "Adds missing menu entries for Account module and"
+    " adds the option to enable Saxon Accounting",
     "author": "GRAP, Akretion, Odoo Community Association (OCA)",
     "maintainers": ["legalsylvain"],
     "website": "https://github.com/OCA/account-financial-tools",

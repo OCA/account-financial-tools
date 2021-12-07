@@ -23,7 +23,7 @@ Account - Missing Menus
     :target: https://runbot.odoo-community.org/runbot/92/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds all missing menu entries for the **Account** module.
 
@@ -62,6 +62,7 @@ Known issues / Roadmap
 
 * Suggest to rename to something like `account_usability` in 15.0, given that
   there are now non-menu usability improvements in this module.
+* The previous change has already been applied.
 
 Bug Tracker
 ===========
@@ -88,6 +89,7 @@ Contributors
 * Sylvain LE GAL <https://twitter.com/legalsylvain>
 * Raf Ven <raf.ven@dynapps.be>
 * Alexis de Lattre <alexis.delattre@akretion.com>
+* Álvaro Trius <alvaro.trius@forgeflow.com>
 
 Maintainers
 ~~~~~~~~~~~
@@ -108,7 +110,7 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-legalsylvain| 
+|maintainer-legalsylvain|
 
 This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/14.0/account_menu>`_ project on GitHub.
 
