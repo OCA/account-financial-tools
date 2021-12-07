@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2019 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_account_chart_template_form" model="ir.ui.view">
+        <field name="model">account.chart.template</field>
+        <field name="inherit_id" ref="account.view_account_chart_template_form" />
+        <field name="arch" type="xml">
+            <field name="complete_tax_set" position="after">
+                <field name="use_anglo_saxon" />
+            </field>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_account_chart_template"
+        action="account.action_account_chart_template_form"
+        parent="menu_account_coa_settings"
+        sequence="10"
+    />
+</odoo>
