@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2019 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="account_fiscal_position_template_action" model="ir.actions.act_window">
+            <field name="name">Fiscal Position Templates</field>
+            <field name="res_model">account.fiscal.position.template</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_account_fiscal_position_template"
+        action="account_fiscal_position_template_action"
+        parent="menu_account_coa_settings"
+        sequence="40"
+    />
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_group_form" model="ir.ui.view">
+        <field name="name">account.group.form</field>
+        <field name="model">account.group</field>
+        <field name="inherit_id" ref="account.view_account_group_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <group>
+                    <group id="links">
+                        <label for="account_ids" />
+                        <field
+                            name="account_ids"
+                            widget="many2many"
+                            nolabel="1"
+                            options="{'no_create_edit': True}"
+                        />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_group_action" model="ir.actions.act_window">
+        <field name="name">Account Groups</field>
+        <field name="res_model">account.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="account_group_menu"
+        action="account_group_action"
+        sequence="50"
+        parent="account.account_account_menu"
+    />
+</odoo>
