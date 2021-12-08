@@ -149,6 +149,12 @@ class AccountAsset(models.Model):
         compute='_compute_depreciation',
         digits=dp.get_precision('Account'),
         string='Depreciated Value on Begin of year')
+    fy_depreciation_base = fields.Float(
+        compute='_compute_depreciation_base',
+        digits=dp.get_precision('Account'),
+        string='FY Depreciation Base',
+        help="This amount represent the depreciation base for fiscal year"
+             "of the asset (Purchase Value - Salvage Value, if is purchase in this fiscal year")
     fy_value_residual = fields.Float(
         compute='_compute_depreciation',
         digits=dp.get_precision('Account'),
@@ -158,6 +164,10 @@ class AccountAsset(models.Model):
         digits=dp.get_precision('Account'),
         string='FY Depreciated Value',
     )
+    fy_value_residual_end = fields.Float(
+        compute='_compute_depreciation',
+        digits=dp.get_precision('Account'),
+        string='FY Residual Value closed')
     tax_value_residual = fields.Float(
         compute='_compute_depreciation',
         digits=dp.get_precision('Account'),
@@ -234,8 +244,8 @@ class AccountAsset(models.Model):
              "for which accounting entries need to be generated.")
     date_remove = fields.Date(string='Asset Removal Date', readonly=True)
     date_last = fields.Date(
-       string='date of last depreciation',
-       compute='_compute_date_last')
+        string='date of last depreciation',
+        compute='_compute_date_last')
     state = fields.Selection(
         selection=[
             ('draft', 'Draft'),
@@ -458,6 +468,16 @@ class AccountAsset(models.Model):
                     self._context['period_date'],
                     '<=',
                     'depreciated_value')
+            fy_date_start = date.today() + relativedelta(days=1)
+            if self._context.get('force_date'):
+                fy_date_start = self._context['force_date']
+            fy = asset.company_id.find_daterange_fy(fy_date_start)
+            if asset.depreciation_line_ids:
+                line = asset.depreciation_line_ids[0]
+                if fy.date_start <= line.line_date <= fy.date_end:
+                    asset.fy_depreciation_base = line.depreciation_base
+                else:
+                    asset.fy_depreciation_base = 0.0
 
     @api.multi
     @api.depends('type', 'depreciation_base',
@@ -485,6 +505,10 @@ class AccountAsset(models.Model):
                 depreciated = value_depreciated
                 begin_depreciated = value_begin_depreciated
 
+                if len(lines.ids) > 0 and fy.date_start <= lines[-1].line_date <= fy.date_end:
+                    fy_value_residual_end = asset.value_residual
+                else:
+                    fy_value_residual_end = 0.0
                 fy_value_depreciated = sum(
                     [l.amount for l in lines if fy.date_start <= l.line_date <= fy.date_end])
                 fy_residual = asset.depreciation_base - asset.salvage_value - value_begin_depreciated - fy_value_depreciated
@@ -510,6 +534,7 @@ class AccountAsset(models.Model):
                 residual = 0.0
                 depreciated = 0.0
                 begin_depreciated = 0.0
+                fy_value_residual_end = 0.0
                 fy_residual = 0.0
                 fy_depreciated = 0.0
                 tax_residual = 0.0
@@ -523,6 +548,7 @@ class AccountAsset(models.Model):
                 'value_begin_depreciated': begin_depreciated,
                 'fy_value_residual': fy_residual,
                 'fy_value_depreciated': fy_depreciated,
+                'fy_value_residual_end': fy_value_residual_end,
                 'tax_value_residual': tax_residual,
                 'tax_value_depreciated': tax_depreciated,
                 'tax_value_begin_depreciated': begin_tax_depreciated,
@@ -587,9 +613,9 @@ class AccountAsset(models.Model):
     @api.onchange('purchase_value', 'salvage_value', 'date_start', 'method')
     def _onchange_purchase_salvage_value(self):
         restatement = self.depreciation_restatement_line_ids.get_restatement_value(['create'],
-                                                                                    self.date_start,
-                                                                                    '<=',
-                                                                                    'depreciation_base')
+                                                                                   self.date_start,
+                                                                                   '<=',
+                                                                                   'depreciation_base')
         if self.method in ['linear-limit', 'degr-limit']:
             self.depreciation_base = self.purchase_value + restatement or 0.0
         else:
@@ -690,7 +716,8 @@ class AccountAsset(models.Model):
                     for line in accounts:
                         # line.button_cancel()
                         for account_move in line.line_ids:
-                            account_move.with_context(dict(self._context, allow_asset=True, allow_asset_removal=True)).write({
+                            account_move.with_context(
+                                dict(self._context, allow_asset=True, allow_asset_removal=True)).write({
                                 'asset_id': asset_id,
                             })
 
@@ -715,7 +742,7 @@ class AccountAsset(models.Model):
 
     @api.multi
     def write(self, vals):
-        #_logger.info('VALS %s' % vals)
+        # _logger.info('VALS %s' % vals)
         if vals.get('method_time'):
             if vals['method_time'] not in ['year', 'month'] and not vals.get('prorata'):
                 vals['prorata'] = True
@@ -894,13 +921,15 @@ class AccountAsset(models.Model):
         for i, dl in enumerate(dlines):
             if i == 0:
                 depreciation_base = dl.depreciation_base
-                depreciation_base += self.depreciation_restatement_line_ids.get_restatement_value(['create'], dl.line_date, '<=',
-                                                                           'depreciation_base')
+                depreciation_base += self.depreciation_restatement_line_ids.get_restatement_value(['create'],
+                                                                                                  dl.line_date, '<=',
+                                                                                                  'depreciation_base')
                 depreciated_value = dl.previous_id \
                                     and (depreciation_base - dl.previous_id.remaining_value) \
                                     or 0.0
-                depreciated_value += self.depreciation_restatement_line_ids.get_restatement_value(['restatement', 'diminution'], dl.line_date,
-                                                                           '<=', 'depreciated_value')
+                depreciated_value += self.depreciation_restatement_line_ids.get_restatement_value(
+                    ['restatement', 'diminution'], dl.line_date,
+                    '<=', 'depreciated_value')
                 remaining_value = \
                     depreciation_base - depreciated_value - dl.amount
             else:
@@ -1912,7 +1941,8 @@ class AccountAsset(models.Model):
                     'amount': to_depreciate_amount,
                     'line_date': new_line_date
                 }
-                first_to_depreciate_dl.with_context(dict(self._context, allow_asset_line_update=True)).write(update_vals)
+                first_to_depreciate_dl.with_context(dict(self._context, allow_asset_line_update=True)).write(
+                    update_vals)
                 dlines[0].create_move()
                 dlines -= dlines[0]
             dlines.unlink()

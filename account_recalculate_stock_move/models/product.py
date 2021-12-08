@@ -262,7 +262,7 @@ class ProductTemplate(models.Model):
                 move.remaining_value = 0.0
                 move.remaining_qty = 0.0
                 move.value = 0.0
-                correction_value = move._run_valuation(move.qty_done)
+                correction_value = move._run_valuation(move.quantity_done)
                 for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
                     move_line._action_done()
                 # _logger.info("MOVE %s" % move.reference)
@@ -277,8 +277,8 @@ class ProductTemplate(models.Model):
                 move.with_context(dict(self._context, force_valuation_amount=correction_value, force_date=move.date,
                                        rebuld_try=True)).rebuild_account_move()
                 move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
-                if move_landed_cost:
-                    move_landed_cost.former_cost = move.value
+                for landed_cost_adjustment in move_landed_cost:
+                    landed_cost_adjustment.former_cost = move.value
                 if not date_move:
                     date_move = move.date
                 move_landed_cost = landed_cost.filtered(lambda r: date_move > r.cost_id.date <= move.date)

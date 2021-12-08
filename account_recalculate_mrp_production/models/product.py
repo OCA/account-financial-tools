@@ -12,6 +12,6 @@ class ProductTemplate(models.Model):
         res = super(ProductTemplate, self)._rebuild_moves(product, move, date_move)
         if move.workorder_id:
             production = move.workorder_id.production_id
-            if date_move > production.date_finished <= move.date:
+            if production.date_finished and date_move > production.date_finished <= move.date:
                 production.rebuild_account_move()
         return res
