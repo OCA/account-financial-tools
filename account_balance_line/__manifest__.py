@@ -4,7 +4,7 @@
 {
     "name": "Balance on journal items",
     "summary": "Display balance totals in move line view",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Camptocamp," "Tecnativa," "Odoo Community Association (OCA)",
