@@ -13,22 +13,7 @@ installed.
 As a result, you can then reconfigure the company chart of account with the
 same or a different chart template.
 
-Usage
-=====
 
-To prevent major disasters when this module is installed, no interface is
-provided. Please run through xmlrpc, for instance using erppeek: ::
-
-    import erppeek
-    
-    host = 'localhost'
-    port = '8069'
-    admin_pw = 'admin'
-    dbname = 'openerp'
-    
-    client = erppeek.Client('http://%s:%s' % (host, port))
-    client.login('admin', admin_pw, dbname)
-    client.execute('res.company', 'reset_chart', 1)
 
 Known issues / Roadmap
 ======================
@@ -56,6 +41,7 @@ Contributors
 ------------
 
 * Stefan Rijnhart <stefan@therp.nl>
+* Dhara Solanki <dhara.solanki@initos.com>
 
 Icon courtesy of Alan Klim (CC-BY-20) -
 https://www.flickr.com/photos/igraph/6469812927/
