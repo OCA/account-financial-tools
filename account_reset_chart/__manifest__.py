@@ -3,15 +3,14 @@
 
 {
     "name": "Reset a chart of accounts",
-    "summary": "Delete the accounting setup from an otherwise reusable "
-               "database",
+    "summary": "Delete the accounting setup from an otherwise reusable " "database",
     "version": "14.0.1.0.0",
     "author": "Therp BV, LasLabs, Odoo Community Association (OCA)",
-    "category": 'Accounting & Finance',
+    "category": "Accounting & Finance",
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": [
-        'account',
+        "account",
     ],
-    'license': 'AGPL-3',
-    'installable': False,
+    "license": "AGPL-3",
+    "installable": True,
 }
