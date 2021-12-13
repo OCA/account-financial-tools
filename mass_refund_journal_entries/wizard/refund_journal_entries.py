@@ -20,7 +20,7 @@ class RefundJournalEntries(models.TransientModel):
                 for line in move.line_ids:
                     if not line.invoice_id:
                         if record.type:
-                            line.tax_sign = 0
+                            line.tax_sign = 1
                         else:
                             line.tax_sign = -1
                         _logger.info("MARK %s" % line.tax_sign)
@@ -43,7 +43,7 @@ class RefundJournalLineEntries(models.TransientModel):
                 for line in move.line_ids:
                     if not line.invoice_id:
                         if record.type:
-                            line.tax_sign = 0
+                            line.tax_sign = 1
                         else:
                             line.tax_sign = -1
                         _logger.info("MARK %s" % line.tax_sign)

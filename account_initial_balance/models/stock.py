@@ -26,7 +26,7 @@ class StockMove(models.Model):
 
     def _create_account_move_line(self, credit_account_id, debit_account_id, journal_id):
         for record in self:
-            if record.is_initial_balance:
+            if record.is_initial_balance and not self._context.get('force_re_calculate'):
                 opening_move_id = record.company_id.account_opening_move_id
                 if not opening_move_id:
                     raise UserError(_('Not opened initial balance'))

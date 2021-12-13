@@ -470,7 +470,7 @@ class AccountAsset(models.Model):
                     'depreciated_value')
             fy_date_start = date.today() + relativedelta(days=1)
             if self._context.get('force_date'):
-                fy_date_start = self._context['force_date']
+                fy_date_start = fields.Date.from_string(self._context['force_date'])
             fy = asset.company_id.find_daterange_fy(fy_date_start)
             if asset.depreciation_line_ids:
                 line = asset.depreciation_line_ids[0]

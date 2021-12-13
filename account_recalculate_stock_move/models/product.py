@@ -246,11 +246,11 @@ class ProductTemplate(models.Model):
                 #move.move_line_ids.write({"state": 'assigned'})
                 acc_moves = False
                 for acc_move in move.account_move_ids:
-                    if acc_move.state == 'posted':
-                        if not acc_moves:
-                            acc_moves = acc_move
-                        else:
-                            acc_moves |= acc_move
+                    # if acc_move.state == 'posted':
+                    if not acc_moves:
+                        acc_moves = acc_move
+                    else:
+                        acc_moves |= acc_move
                 if acc_moves:
                     for acc_move in acc_moves:
                         if acc_move.state == 'draft':
@@ -275,7 +275,7 @@ class ProductTemplate(models.Model):
                                 'accounting_date': move.inventory_id.accounting_date or move.inventory_id.date})
                     move.move_line_ids.write({'date': move.inventory_id.accounting_date or move.inventory_id.date})
                 move.with_context(dict(self._context, force_valuation_amount=correction_value, force_date=move.date,
-                                       rebuld_try=True)).rebuild_account_move()
+                                       rebuld_try=True, force_re_calculate=True)).rebuild_account_move()
                 move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
                 for landed_cost_adjustment in move_landed_cost:
                     landed_cost_adjustment.former_cost = move.value

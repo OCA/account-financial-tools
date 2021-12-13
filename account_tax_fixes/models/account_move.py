@@ -31,6 +31,11 @@ class AccountMove(models.Model):
                     elif line.invoice_id.type in ['in_invoice', 'out_invoice'] \
                             and (line.tax_ids or line.tax_line_id) and line.tax_sign == -1:
                         line.tax_sign = 1
+                    else:
+                        if record.use_refund:
+                            line.tax_sign = -1
+                        elif not record.use_refund:
+                            line.tax_sign = 1
                 else:
                     if record.use_refund:
                         line.tax_sign = -1
