@@ -3,7 +3,7 @@
 
 {
     "name": "Assets Management Menu",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["account_asset_management", "account_menu"],
     "author": "ForgeFlow, Odoo Community Association (OCA)",
