@@ -15,6 +15,7 @@
         "account_move_line_stock_info",
         "account_asset_management",
         "queue_job",
+        "queue_job_batch",
         # "queue_job_batch",
     ],
     # "conflicts": [
@@ -39,6 +40,7 @@
         "wizard/rebuild_inventory_account_move.xml",
         "wizard/rebuild_invoice_account_move.xml",
         "wizard/rebuild_all_account_move.xml",
+        "wizard/rebuild_moves_product.xml",
     ],
     'license': 'AGPL-3',
     "auto_install": False,

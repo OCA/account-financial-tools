@@ -8,3 +8,4 @@ from . import rebuild_account_move
 from . import rebuild_all_account_move
 from . import rebuild_inventory_account_move
 from . import rebuild_invoice_account_move
+from . import rebuild_moves_product

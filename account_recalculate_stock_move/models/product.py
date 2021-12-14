@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
+import uuid
 
 from odoo import SUPERUSER_ID
 from psycopg2 import OperationalError, Error
@@ -8,6 +9,7 @@ from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_is_zero, float_compare
 from odoo.addons import decimal_precision as dp
 from odoo.addons.stock_account.models.product import ProductProduct as productproduct
+from odoo.addons.queue_job.job import job
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -191,6 +193,12 @@ class ProductTemplate(models.Model):
                     template.account_move_line_ids = product.account_move_line_ids
                 else:
                     template.account_move_line_ids |= product.account_move_line_ids
+
+    @api.multi
+    @job
+    def server_rebuild_action(self):
+        for product in self:
+            product.rebuild_moves()
 
     def _rebuild_moves(self, product, move, date_move):
         return
