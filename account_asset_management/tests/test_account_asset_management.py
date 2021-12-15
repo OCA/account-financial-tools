@@ -866,3 +866,38 @@ class TestAssetManagement(SavepointCase):
         self.assertEqual(ict0.value_residual, 1500)
         move = self.env["account.move"].search([("id", "=", original_move_id)])
         self.assertFalse(move)
+
+    def test_20_asset_removal_with_value_residual(self):
+        """Asset removal with value residual"""
+        asset = self.asset_model.create(
+            {
+                "name": "test asset removal",
+                "profile_id": self.ref(
+                    "account_asset_management." "account_asset_profile_car_5Y"
+                ),
+                "purchase_value": 1000,
+                "salvage_value": 0,
+                "date_start": "2019-01-01",
+                "method_time": "number",
+                "method_number": 10,
+                "method_period": "month",
+                "prorata": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.validate()
+        lines = asset.depreciation_line_ids.filtered(lambda x: not x.init_entry)
+        self.assertEqual(len(lines), 10)
+        last_line = lines[-1]
+        last_line["amount"] = last_line["amount"] - 0.10
+        for asset_line in lines:
+            asset_line.create_move()
+        self.assertEqual(asset.value_residual, 0.10)
+        asset.compute_depreciation_board()
+        lines = asset.depreciation_line_ids.filtered(lambda x: not x.init_entry)
+        self.assertEqual(len(lines), 11)
+        last_line = lines[-1]
+        self.assertEqual(last_line.amount, 0.10)
+        last_line.create_move()
+        self.assertEqual(asset.value_residual, 0)
+        self.assertEqual(asset.state, "close")
