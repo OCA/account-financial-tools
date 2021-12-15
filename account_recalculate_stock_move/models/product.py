@@ -270,6 +270,8 @@ class ProductTemplate(models.Model):
                 move.remaining_value = 0.0
                 move.remaining_qty = 0.0
                 move.value = 0.0
+                if move.quantity_done == 0:
+                    continue
                 correction_value = move._run_valuation(move.quantity_done)
                 for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
                     move_line._action_done()

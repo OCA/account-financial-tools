@@ -4,7 +4,7 @@
 import uuid
 
 from odoo import models, fields, api, _
-from odoo.addons.queue_job.job import job
+# from odoo.addons.queue_job.job import job
 
 
 class WizardRebuildMovesProducts(models.TransientModel):
@@ -21,8 +21,8 @@ class WizardRebuildMovesProducts(models.TransientModel):
             products = self.env['product.template'].browse(context["active_ids"])
         if not products:
             return {'type': 'ir.actions.act_window_close'}
-        batch = self.env['queue.job.batch'].get_new_batch('Product template %s' % str(uuid.uuid4()))
-        for product in products:
-            product.with_context(job_batch=batch).with_delay().server_rebuild_action()
-        batch.enqueue()
+        # batch = self.env['queue.job.batch'].get_new_batch('Product template %s' % str(uuid.uuid4()))
+        # for product in products:
+        products.with_delay().server_rebuild_action()
+        # batch.enqueue()
         return {'type': 'ir.actions.act_window_close'}
