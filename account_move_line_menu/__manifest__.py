@@ -3,7 +3,7 @@
 
 {
     "name": "Account Move Line Menu",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "summary": "Adds a Journal Items menu",
     "website": "https://github.com/OCA/account-financial-tools",
