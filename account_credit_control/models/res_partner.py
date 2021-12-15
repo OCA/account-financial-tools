@@ -21,6 +21,7 @@ class ResPartner(models.Model):
              "partner. This setting can be forced on the "
              "invoice. If nothing is defined, it will use "
              "the company setting.",
+        track_visibility="onchange",
     )
     credit_control_line_ids = fields.One2many('credit.control.line',
                                               'invoice_id',
