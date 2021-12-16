@@ -93,7 +93,7 @@ Valid dictionary to overwrite template lines:
         if not self.line_ids:
             return self.generate_move()
         action = self.env.ref("account_move_template.account_move_template_run_action")
-        result = action.read()[0]
+        result = action.sudo().read()[0]
         result.update({"res_id": self.id, "context": self.env.context})
 
         # Overwrite self.line_ids to show overwrite values
@@ -183,7 +183,7 @@ Valid dictionary to overwrite template lines:
                 )
         move = self.env["account.move"].create(move_vals)
         action = self.env.ref("account.action_move_journal_line")
-        result = action.read()[0]
+        result = action.sudo().read()[0]
         result.update(
             {
                 "name": _("Entry from template %s") % self.template_id.name,
