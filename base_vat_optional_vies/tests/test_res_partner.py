@@ -12,7 +12,9 @@ class TestResPartner(common.TransactionCase):
         super(TestResPartner, self).setUp()
         self.company = self.env.user.company_id
         self.company.vat_check_vies = True
-        self.partner = self.env["res.partner"].create({"name": "Test partner"})
+        self.partner = self.env["res.partner"].create(
+            {"name": "Test partner", "is_company": True}
+        )
         self.vatnumber_path = "odoo.addons.base_vat.models.res_partner.check_vies"
 
     def test_validate_vat_vies(self):
