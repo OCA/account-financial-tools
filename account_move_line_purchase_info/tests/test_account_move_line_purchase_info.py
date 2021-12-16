@@ -195,7 +195,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         f.partner_id = purchase.partner_id
         f.purchase_id = purchase
         invoice = f.save()
-        invoice.post()
+        invoice._post()
         purchase.flush()
 
         for aml in invoice.invoice_line_ids:

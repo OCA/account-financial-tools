@@ -195,7 +195,7 @@ class TestPayment(TransactionCase):
         register_payments.action_create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
 
-        self.assertAlmostEquals(payment.amount, 300)
+        self.assertAlmostEqual(payment.amount, 300)
         self.assertEqual(payment.state, "posted")
         self.assertEqual(inv_1.state, "posted")
         self.assertEqual(inv_2.state, "posted")
