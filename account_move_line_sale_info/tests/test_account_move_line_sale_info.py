@@ -203,7 +203,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         )
         payment.create_invoices()
         invoice = sale.invoice_ids[0]
-        invoice.post()
+        invoice._post()
 
         for aml in invoice.line_ids:
             if aml.product_id == so_line.product_id and aml.move_id:
