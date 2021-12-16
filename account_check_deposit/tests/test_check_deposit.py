@@ -100,48 +100,54 @@ class TestPayment(TransactionCase):
                 }
             )
 
-        self.check_journal = self.journal_model.search(
-            [("code", "=", "CHK"), ("company_id", "=", self.main_company.id)], limit=1
+        self.manual_method_in = self.env.ref("account.account_payment_method_manual_in")
+        self.check_journal = self.journal_model.create(
+            {
+                "name": "received check",
+                "type": "bank",
+                "code": "CHK",
+                "company_id": self.main_company.id,
+                "inbound_payment_method_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "payment_method_id": self.manual_method_in.id,
+                            "payment_account_id": self.received_check_account_id.id,
+                        },
+                    )
+                ],
+            }
         )
-        if not self.check_journal:
-            self.check_journal = self.journal_model.create(
-                {
-                    "name": "received check",
-                    "type": "bank",
-                    "code": "CHK",
-                    "company_id": self.main_company.id,
-                }
-            )
-        self.check_journal.payment_debit_account_id = self.received_check_account_id
-        self.check_journal.payment_credit_account_id = self.received_check_account_id
-        self.bank_journal = self.journal_model.search(
-            [("code", "=", "BNK1"), ("company_id", "=", self.main_company.id)], limit=1
+        self.partner_bank_id = self.res_partner_bank_model.create(
+            {
+                "acc_number": "SI56 1910 0000 0123 438 584",
+                "partner_id": self.main_company.partner_id.id,
+            }
         )
-        if not self.bank_journal:
-            self.bank_journal = self.journal_model.create(
-                {
-                    "name": "Bank",
-                    "type": "bank",
-                    "code": "BNK1",
-                    "company_id": self.main_company.id,
-                }
-            )
-        self.bank_journal.payment_debit_account_id = self.transfer_account_id
-        self.bank_journal.payment_credit_account_id = self.transfer_account_id
-        self.partner_bank_id = self.res_partner_bank_model.search(
-            [("partner_id", "=", self.main_company.partner_id.id)], limit=1
+
+        self.bank_journal = self.journal_model.create(
+            {
+                "name": "Bank Test Chq",
+                "type": "bank",
+                "code": "TEST@@",
+                "company_id": self.main_company.id,
+                "bank_account_id": self.partner_bank_id.id,
+                "inbound_payment_method_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "payment_method_id": self.manual_method_in.id,
+                            "payment_account_id": self.transfer_account_id.id,
+                        },
+                    )
+                ],
+            }
         )
-        if not self.partner_bank_id:
-            self.partner_bank_id = self.res_partner_bank_model.create(
-                {
-                    "acc_number": "SI56 1910 0000 0123 438 584",
-                    "partner_id": self.main_company.partner_id.id,
-                }
-            )
-        self.bank_journal.bank_account_id = self.partner_bank_id.id
 
     def create_invoice(self, amount=100, inv_type="out_invoice", currency_id=None):
-        """ Returns an open invoice """
+        """Returns an open invoice"""
         invoice = self.move_model.create(
             {
                 "company_id": self.main_company.id,
@@ -164,8 +170,8 @@ class TestPayment(TransactionCase):
         invoice.action_post()
         return invoice
 
-    def create_check_deposit(self, move_lines):
-        """ Returns an validated check deposit """
+    def create_check_deposit(self):
+        """Returns an validated check deposit"""
         check_deposit = self.check_deposit_model.create(
             {
                 "company_id": self.main_company.id,
@@ -184,32 +190,24 @@ class TestPayment(TransactionCase):
         inv_1 = self.create_invoice(amount=100, currency_id=self.currency_id)
         inv_2 = self.create_invoice(amount=200, currency_id=self.currency_id)
 
-        ctx = {"active_model": "account.move", "active_ids": [inv_1.id, inv_2.id]}
-        register_payments = self.register_payments_model.with_context(ctx).create(
-            {
-                "journal_id": self.check_journal.id,
-                "payment_method_id": self.payment_method_manual_in.id,
-                "group_payment": True,
-            }
-        )
+        register_payments = self.register_payments_model.with_context(
+            active_model="account.move",
+            active_ids=[inv_1.id, inv_2.id],
+            default_journal_id=self.check_journal.id,
+        ).create({"group_payment": True})
         register_payments.action_create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
-
-        self.assertAlmostEquals(payment.amount, 300)
+        self.assertAlmostEqual(payment.amount, 300)
         self.assertEqual(payment.state, "posted")
         self.assertEqual(inv_1.state, "posted")
         self.assertEqual(inv_2.state, "posted")
 
-        check_aml = payment.move_id.line_ids.filtered(
-            lambda r: r.account_id == self.received_check_account_id
-        )
-
-        check_deposit = self.create_check_deposit([check_aml])
+        check_deposit = self.create_check_deposit()
         liquidity_aml = check_deposit.move_id.line_ids.filtered(
             lambda r: r.account_id == self.transfer_account_id
         )
 
-        self.assertEqual(check_deposit.total_amount, 300)
-        self.assertEqual(liquidity_aml.debit, 300)
+        self.assertAlmostEqual(check_deposit.total_amount, 300)
+        self.assertAlmostEqual(liquidity_aml.debit, 300)
         self.assertEqual(check_deposit.move_id.state, "posted")
         self.assertEqual(check_deposit.state, "done")
