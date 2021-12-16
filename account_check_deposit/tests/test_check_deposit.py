@@ -141,7 +141,7 @@ class TestPayment(TransactionCase):
         self.bank_journal.bank_account_id = self.partner_bank_id.id
 
     def create_invoice(self, amount=100, inv_type="out_invoice", currency_id=None):
-        """ Returns an open invoice """
+        """Returns an open invoice"""
         invoice = self.move_model.create(
             {
                 "company_id": self.main_company.id,
@@ -165,7 +165,7 @@ class TestPayment(TransactionCase):
         return invoice
 
     def create_check_deposit(self, move_lines):
-        """ Returns an validated check deposit """
+        """Returns an validated check deposit"""
         check_deposit = self.check_deposit_model.create(
             {
                 "company_id": self.main_company.id,
@@ -195,7 +195,7 @@ class TestPayment(TransactionCase):
         register_payments.action_create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
 
-        self.assertAlmostEquals(payment.amount, 300)
+        self.assertAlmostEqual(payment.amount, 300)
         self.assertEqual(payment.state, "posted")
         self.assertEqual(inv_1.state, "posted")
         self.assertEqual(inv_2.state, "posted")
