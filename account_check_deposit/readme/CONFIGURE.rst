@@ -4,9 +4,9 @@ journal:
 * Name: Checks Received
 * Type: Bank
 * Short Code: CHK (or any code you want)
-* Outstanding Receipts Account: select an account for checks received
+* in the tab *Incoming Payments*, add a line with *Payment Method* = *Manual* and *Outstanding receipts account* set to the account for the checks in hand.
 
-Note that, on this *Checks Received* journal, the bank account and suspense account will not be used, so don't worry about these parameters.
+Note that, on this *Checks Received* journal, the bank account and suspense account will not be used, so don't worry about these parameters. The field *Account number* must be empty.
 
 This bank journal will be available as a payment method in Odoo. The account
 you configured as *Outstanding Receipts Account* is the

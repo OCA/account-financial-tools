@@ -1,9 +1,9 @@
-# Copyright 2012-2020 Akretion (http://www.akretion.com/)
+# Copyright 2012-2021 Akretion (http://www.akretion.com/)
 # @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 # @author: Chafique DELLI <chafique.delli@akretion.com>
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # @author: Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
-# Copyright 2018 Tecnativa - Pedro M. Baeza
+# Copyright 2018-2021 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
@@ -16,6 +16,100 @@ class AccountCheckDeposit(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "deposit_date desc"
     _check_company_auto = True
+
+    name = fields.Char(size=64, readonly=True, default="/", copy=False)
+    check_payment_ids = fields.One2many(
+        comodel_name="account.move.line",
+        inverse_name="check_deposit_id",
+        string="Check Payments",
+        states={"done": [("readonly", "=", True)]},
+    )
+    deposit_date = fields.Date(
+        required=True,
+        states={"done": [("readonly", "=", True)]},
+        default=fields.Date.context_today,
+        tracking=True,
+        copy=False,
+    )
+    journal_id = fields.Many2one(
+        comodel_name="account.journal",
+        string="Check Journal",
+        domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
+        "('bank_account_id', '=', False)]",
+        required=True,
+        check_company=True,
+        states={"done": [("readonly", "=", True)]},
+        tracking=True,
+    )
+    in_hand_check_account_id = fields.Many2one(
+        comodel_name="account.account",
+        compute="_compute_in_hand_check_account_id",
+        store=True,
+    )
+    currency_id = fields.Many2one(
+        comodel_name="res.currency",
+        required=True,
+        states={"done": [("readonly", "=", True)]},
+        tracking=True,
+    )
+    state = fields.Selection(
+        selection=[("draft", "Draft"), ("done", "Done")],
+        string="Status",
+        default="draft",
+        readonly=True,
+        tracking=True,
+    )
+    move_id = fields.Many2one(
+        comodel_name="account.move",
+        string="Journal Entry",
+        readonly=True,
+        check_company=True,
+    )
+    bank_journal_id = fields.Many2one(
+        comodel_name="account.journal",
+        string="Bank Account",
+        required=True,
+        domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
+        "('bank_account_id', '!=', False)]",
+        check_company=True,
+        states={"done": [("readonly", "=", True)]},
+        tracking=True,
+    )
+    line_ids = fields.One2many(
+        comodel_name="account.move.line",
+        related="move_id.line_ids",
+        string="Lines",
+    )
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        required=True,
+        states={"done": [("readonly", "=", True)]},
+        default=lambda self: self.env.company,
+        tracking=True,
+    )
+    total_amount = fields.Monetary(
+        compute="_compute_check_deposit",
+        store=True,
+        currency_field="currency_id",
+        tracking=True,
+    )
+    check_count = fields.Integer(
+        compute="_compute_check_deposit",
+        store=True,
+        string="Number of Checks",
+        tracking=True,
+    )
+    is_reconcile = fields.Boolean(
+        compute="_compute_check_deposit", store=True, string="Reconcile"
+    )
+
+    _sql_constraints = [
+        (
+            "name_company_unique",
+            "unique(company_id, name)",
+            "A check deposit with this reference already exists in this company.",
+        )
+    ]
 
     @api.depends(
         "company_id",
@@ -57,103 +151,19 @@ class AccountCheckDeposit(models.Model):
             deposit.is_reconcile = reconcile
             deposit.check_count = count
 
-    name = fields.Char(string="Name", size=64, readonly=True, default="/", copy=False)
-    check_payment_ids = fields.One2many(
-        comodel_name="account.move.line",
-        inverse_name="check_deposit_id",
-        string="Check Payments",
-        states={"done": [("readonly", "=", True)]},
-    )
-    deposit_date = fields.Date(
-        string="Deposit Date",
-        required=True,
-        states={"done": [("readonly", "=", True)]},
-        default=fields.Date.context_today,
-        tracking=True,
-        copy=False,
-    )
-    journal_id = fields.Many2one(
-        comodel_name="account.journal",
-        string="Journal",
-        domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
-        "('bank_account_id', '=', False)]",
-        required=True,
-        check_company=True,
-        states={"done": [("readonly", "=", True)]},
-        tracking=True,
-    )
-    journal_default_account_id = fields.Many2one(
-        comodel_name="account.account",
-        related="journal_id.payment_debit_account_id",
-        string="Outstanding Receipts Account",
-    )
-    currency_id = fields.Many2one(
-        comodel_name="res.currency",
-        string="Currency",
-        required=True,
-        states={"done": [("readonly", "=", True)]},
-        tracking=True,
-    )
-    state = fields.Selection(
-        selection=[("draft", "Draft"), ("done", "Done")],
-        string="Status",
-        default="draft",
-        readonly=True,
-        tracking=True,
-    )
-    move_id = fields.Many2one(
-        comodel_name="account.move",
-        string="Journal Entry",
-        readonly=True,
-        check_company=True,
-    )
-    bank_journal_id = fields.Many2one(
-        comodel_name="account.journal",
-        string="Bank Account",
-        required=True,
-        domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
-        "('bank_account_id', '!=', False)]",
-        check_company=True,
-        states={"done": [("readonly", "=", True)]},
-        tracking=True,
-    )
-    line_ids = fields.One2many(
-        comodel_name="account.move.line",
-        related="move_id.line_ids",
-        string="Lines",
-    )
-    company_id = fields.Many2one(
-        comodel_name="res.company",
-        string="Company",
-        required=True,
-        states={"done": [("readonly", "=", True)]},
-        default=lambda self: self.env.company,
-        tracking=True,
-    )
-    total_amount = fields.Monetary(
-        compute="_compute_check_deposit",
-        string="Total Amount",
-        store=True,
-        currency_field="currency_id",
-        tracking=True,
-    )
-    check_count = fields.Integer(
-        compute="_compute_check_deposit",
-        store=True,
-        string="Number of Checks",
-        tracking=True,
-    )
-    is_reconcile = fields.Boolean(
-        compute="_compute_check_deposit", store=True, string="Reconcile"
-    )
-
-    _sql_constraints = [
-        (
-            "name_company_unique",
-            "unique(company_id, name)",
-            "A check deposit with this reference already exists in this company.",
-        )
-    ]
+    @api.depends("journal_id")
+    def _compute_in_hand_check_account_id(self):
+        for rec in self:
+            in_hand_check_account_id = False
+            if rec.journal_id:
+                for line in rec.journal_id.inbound_payment_method_line_ids:
+                    if (
+                        line.payment_method_id.code == "manual"
+                        and line.payment_account_id
+                    ):
+                        in_hand_check_account_id = line.payment_account_id.id
+                        break
+            rec.in_hand_check_account_id = in_hand_check_account_id
 
     @api.model
     def default_get(self, fields_list):
@@ -178,15 +188,14 @@ class AccountCheckDeposit(models.Model):
                 if line.currency_id != deposit_currency:
                     raise ValidationError(
                         _(
-                            "The check with amount %s and reference '%s' "
-                            "is in currency %s but the deposit is in "
-                            "currency %s."
-                        )
-                        % (
-                            line.debit,
-                            line.ref or "",
-                            line.currency_id.name,
-                            deposit_currency.name,
+                            "The check with amount {amount} and reference '{ref}' "
+                            "is in currency {check_currency} but the deposit is in "
+                            "currency {deposit_currency}."
+                        ).format(
+                            amount=line.debit,
+                            ref=line.ref or "",
+                            check_currency=line.currency_id.name,
+                            deposit_currency=deposit_currency.name,
                         )
                     )
 
@@ -251,15 +260,22 @@ class AccountCheckDeposit(models.Model):
 
     def _prepare_counterpart_move_lines_vals(self, total_debit, total_amount_currency):
         self.ensure_one()
-        if not self.bank_journal_id.payment_debit_account_id:
+        account_id = False
+        for line in self.bank_journal_id.inbound_payment_method_line_ids:
+            if line.payment_method_id.code == "manual" and line.payment_account_id:
+                account_id = line.payment_account_id.id
+                break
+        if not account_id:
+            account_id = self.company_id.account_journal_payment_debit_account_id.id
+        if not account_id:
             raise UserError(
-                _("Missing 'Outstanding Receipts Account' on the bank journal '%s'.")
-                % self.bank_journal_id.display_name
+                _("Missing 'Outstanding Receipts Account' on the company '%s'.")
+                % self.company_id.display_name
             )
         return {
             "debit": total_debit,
             "credit": 0.0,
-            "account_id": self.bank_journal_id.payment_debit_account_id.id,
+            "account_id": account_id,
             "partner_id": False,
             "currency_id": self.currency_id.id or False,
             "amount_currency": total_amount_currency,
@@ -331,7 +347,7 @@ class AccountCheckDeposit(models.Model):
             [
                 ("company_id", "=", self.company_id.id),
                 ("reconciled", "=", False),
-                ("account_id", "=", self.journal_id.payment_debit_account_id.id),
+                ("account_id", "=", self.in_hand_check_account_id.id),
                 ("debit", ">", 0),
                 ("check_deposit_id", "=", False),
                 ("currency_id", "=", self.currency_id.id),
@@ -344,11 +360,10 @@ class AccountCheckDeposit(models.Model):
         else:
             raise UserError(
                 _(
-                    "There are no received checks in account '%s' in currency '%s' "
-                    "that are not already in this check deposit."
-                )
-                % (
-                    self.journal_id.payment_debit_account_id.display_name,
-                    self.currency_id.display_name,
+                    "There are no received checks in account '{account}' in currency "
+                    "'{currency}' that are not already in this check deposit."
+                ).format(
+                    account=self.in_hand_check_account_id.display_name,
+                    currency=self.currency_id.display_name,
                 )
             )
