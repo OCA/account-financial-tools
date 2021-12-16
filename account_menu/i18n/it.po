@@ -6,41 +6,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2021-12-16 20:39+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_group
 msgid "Account Group"
-msgstr ""
+msgstr "Gruppo dei Conti"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_group_action
 #: model:ir.ui.menu,name:account_menu.account_group_menu
 msgid "Account Groups"
-msgstr ""
+msgstr "Gruppi dei Conti"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "Tag Conto"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_account_tag_action
 #: model:ir.ui.menu,name:account_menu.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "Tag Conto"
 
 #. module: account_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_form
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Group"
-msgstr ""
+msgstr "Gruppo Imposte Conto"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.action_account_tax_group
