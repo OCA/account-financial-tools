@@ -205,34 +205,35 @@ class ProductTemplate(models.Model):
 
     def rebuild_moves(self):
         company = self.env.user.company_id.id
-        warehouse = self.env['stock.warehouse'].search([('company_id', '=', company)], limit=1)
-        location = warehouse.lot_stock_id
+        # warehouse = self.env['stock.warehouse'].search([('company_id', '=', company)], limit=1)
 
         # force remove quant's
         for product in self.product_variant_ids:
             rounding = product.uom_id.rounding
-            quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
-            # _logger.info("QUINTS FOR PRODUCT IN LOCATIONS %s:%s:%s:%s" % (product.default_code, product, location.name, quants))
+            for warehouse in self.env['stock.warehouse'].search([('company_id', '=', company)]):
+                location = warehouse.lot_stock_id
+                quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # _logger.info("QUINTS FOR PRODUCT IN LOCATIONS %s:%s:%s:%s" % (product.default_code, product, location.name, quants))
 
-            for quant in quants:
-                try:
-                    with self._cr.savepoint():
-                        self._cr.execute("SELECT 1 FROM stock_quant WHERE id = %s FOR UPDATE NOWAIT", [quant.id],
-                                         log_exceptions=False)
-                        quant.write({
-                            'quantity': 0,
-                            'reserved_quantity': 0,
-                        })
-                        # cleanup empty quants
-                        if float_is_zero(quant.quantity, precision_rounding=rounding) and float_is_zero(
-                                quant.reserved_quantity, precision_rounding=rounding):
-                            quant.unlink()
-                        #break
-                except OperationalError as e:
-                    if e.pgcode == '55P03':  # could not obtain the lock
-                        continue
-                    else:
-                        raise
+                for quant in quants:
+                    try:
+                        with self._cr.savepoint():
+                            self._cr.execute("SELECT 1 FROM stock_quant WHERE id = %s FOR UPDATE NOWAIT", [quant.id],
+                                             log_exceptions=False)
+                            quant.write({
+                                'quantity': 0,
+                                'reserved_quantity': 0,
+                            })
+                            # cleanup empty quants
+                            if float_is_zero(quant.quantity, precision_rounding=rounding) and float_is_zero(
+                                    quant.reserved_quantity, precision_rounding=rounding):
+                                quant.unlink()
+                            #break
+                    except OperationalError as e:
+                        if e.pgcode == '55P03':  # could not obtain the lock
+                            continue
+                        else:
+                            raise
 
             history = self.env['product.price.history'].search([
                 ('company_id', '=', company),

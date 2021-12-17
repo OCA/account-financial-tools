@@ -2,6 +2,12 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, tools, _
+from odoo.exceptions import UserError
+from odoo.addons.stock_landed_costs.models.stock_landed_cost import AdjustmentLines as adjustmentlines
+
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class LandedCost(models.Model):
@@ -76,3 +82,29 @@ class LandedCost(models.Model):
             move = move.create(move_vals)
             cost.write({'state': 'done', 'account_move_id': move.id})
             move.post()
+
+
+class AdjustmentLines(models.Model):
+    _inherit = 'stock.valuation.adjustment.lines'
+
+    def _create_accounting_entries(self, move, qty_out):
+        # TDE CLEANME: product chosen for computation ?
+        cost_product = self.cost_line_id.product_id
+        if not cost_product:
+            return False
+        accounts = self.product_id.product_tmpl_id.get_product_accounts()
+        debit_account_id = accounts.get('stock_valuation') and accounts['stock_valuation'].id or False
+        # If the stock move is dropshipped move we need to get the cost account instead the stock valuation account
+        if self.move_id._is_dropshipped():
+            _logger.info("")
+            debit_account_id = accounts.get('stock_output') and accounts['stock_output'].id or False
+        already_out_account_id = accounts['stock_output'].id
+        credit_account_id = self.cost_line_id.account_id.id or cost_product.property_account_expense_id.id or cost_product.categ_id.property_account_expense_categ_id.id
+
+        if not credit_account_id:
+            raise UserError(_('Please configure Stock Expense Account for product: %s.') % (cost_product.name))
+
+        return self._create_account_move_line(move, credit_account_id, debit_account_id, qty_out, already_out_account_id)
+
+
+adjustmentlines._create_accounting_entries = AdjustmentLines._create_accounting_entries

@@ -55,7 +55,6 @@ class StockMoveLine(models.Model):
                 if self._context.get("force_accounting_date"):
                     product = move.product_id.with_context(
                         dict(self._context, to_date=self._context['force_accounting_date']))
-                    # _logger.info("FORCE ACCOUNT DATE %s=%s/%s" % (self._context['force_accounting_date'], product.stock_value, product.qty_at_date))
                     if product.qty_at_date != 0:
                         coef = (move._is_out() or move._is_out_inventory()) and -1 or 1
                         move.price_unit = coef * (product.stock_value / product.qty_at_date)
@@ -63,27 +62,9 @@ class StockMoveLine(models.Model):
                 if move.purchase_line_id:
                     price_unit = move._get_price_unit()
                 amount = self.qty_done * abs(price_unit)
-                # if amount == 0.0 and self.product_id.standard_price == 0.0:
-                #    # first try to get PO
-                #    if move.purchase_line_id:
-                #        price_unit = move.purchase_line_id.price_unit
-                #        if price_unit == 0.0:
-                #            sellers = self.product_id._prepare_sellers(False)
-                #            price_unit = 0.0
-                #            for seller in sellers.filtered(lambda s: not s.company_id or s.company_id.id == self.company_id.id):
-                #                if seller.product_id and seller.product_id != self or seller.product_tmpl_id.id != self.product_tmpl_id.id:
-                #                    continue
-                #                price_unit = self.product_id.currency_id.compute(seller.price, seller.currency_id)
-                #                break
-                #        move.write({"price_unit": price_unit})
-                # elif amount == 0.0 and self.product_id.standard_price != 0.0:
-                #    move.write({"price_unit": self.product_id.standard_price})
-                #    amount = self.qty_done * abs(move.price_unit)
-
-                # if (move._is_in() and not move.inventory_id) or (move._is_in_inventory() and move.inventory_id):
-                # amount = -amount
-                # _logger.info("TEST %s=%s:%s:%s:%s::%s*%s" % (move.inventory_id, move._is_in(), move._is_out(), move._is_in_inventory(), move._is_out_inventory(), self.qty_done, amount))
-                move.with_context(dict(self._context, forced_quantity=self.qty_done, force_valuation_amount=amount,
+                move.with_context(dict(self._context,
+                                       forced_quantity=self.qty_done,
+                                       force_valuation_amount=amount,
                                        force_period_date=date))._account_entry_move()
 
     @api.multi
@@ -139,7 +120,8 @@ class StockMove(models.Model):
 
     def rebuild_account_move(self):
         if not self.account_move_ids and self.state == 'done' and self.product_id.valuation == 'real_time' and (
-                self._is_in() or self._is_out() or self._is_in_inventory() or self._is_out_inventory()):
+                self._is_in() or self._is_out() or self._is_in_inventory() or self._is_out_inventory()
+                or self._is_dropshipped() or self._is_dropshipped_returned()):
             self._rebuild_account_move()
         elif not self.env.context.get("rebuld_try"):
             state = (self.state == 'done') and " " or "*"
