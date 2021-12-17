@@ -27,6 +27,7 @@ setuptools.setup(
         'odoo14-addon-account_move_template',
         'odoo14-addon-account_netting',
         'odoo14-addon-account_no_default',
+        'odoo14-addon-account_sequence_option',
         'odoo14-addon-account_template_active',
         'odoo14-addon-base_vat_optional_vies',
         'odoo14-addon-product_category_tax',
