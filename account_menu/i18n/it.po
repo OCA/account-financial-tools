@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-12-16 20:39+0000\n"
+"PO-Revision-Date: 2021-12-17 17:39+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,13 +19,13 @@ msgstr ""
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_group
 msgid "Account Group"
-msgstr "Gruppo dei Conti"
+msgstr "Gruppo di Conti"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_group_action
 #: model:ir.ui.menu,name:account_menu.account_group_menu
 msgid "Account Groups"
-msgstr "Gruppi dei Conti"
+msgstr "Gruppi di Conti"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_account_tag
@@ -42,61 +42,61 @@ msgstr "Tag Conto"
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_form
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Group"
-msgstr "Gruppo Imposte Conto"
+msgstr "Gruppo di Imposte"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.action_account_tax_group
 #: model:ir.ui.menu,name:account_menu.account_tax_group_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Groups"
-msgstr ""
+msgstr "Gruppi di Imposte"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_account_template_action
 #: model:ir.ui.menu,name:account_menu.menu_account_account_template
 msgid "Account Templates"
-msgstr ""
+msgstr "Modelli di Conto"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.account_type_menu
 msgid "Account Types"
-msgstr ""
+msgstr "Tipi di Conto"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_menu.field_account_group__account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "Conti"
 
 #. module: account_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
 msgid "Anglo-Saxon Accounting"
-msgstr ""
+msgstr "Contabilità Anglosassone"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_bank
 msgid "Bank Statements"
-msgstr ""
+msgstr "Estratti Conto Bancari"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_bank_and_cash
 msgid "Bank and Cash"
-msgstr ""
+msgstr "Banca e Cassa"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_cash
 msgid "Cash Registers"
-msgstr ""
+msgstr "Registri di Cassa"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_chart_template
 msgid "Chart of Accounts Templates"
-msgstr ""
+msgstr "Modelli Piano dei Conti"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni Configurazione"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__display_name
@@ -104,13 +104,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__display_name
 #: model:ir.model.fields,field_description:account_menu.field_res_config_settings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome Visualizzato"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_menu.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
-msgstr ""
+msgstr "Modelli Posizioni Fiscali"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__id
@@ -118,7 +118,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__id
 #: model:ir.model.fields,field_description:account_menu.field_res_config_settings__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag____last_update
@@ -126,7 +126,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group____last_update
 #: model:ir.model.fields,field_description:account_menu.field_res_config_settings____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima Modifica il"
 
 #. module: account_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
@@ -135,6 +135,10 @@ msgid ""
 "                                invoiced to a final customer (instead of recording the cost as soon\n"
 "                                as the product is received in stock)."
 msgstr ""
+"Registra il costo di un bene come una spesa quando tale bene\n"
+"                                è fatturato al cliente finale (invece di "
+"registrare il costo appena\n"
+"                                il prodotto è ricevuto in magazzino)."
 
 #. module: account_menu
 #: model:ir.model.fields,help:account_menu.field_res_config_settings__anglo_saxon_accounting
@@ -142,28 +146,30 @@ msgid ""
 "Record the cost of a good as an expense when this good is invoiced to a "
 "final customer."
 msgstr ""
+"Registra il costo di un bene come una spesa quando tale bene è fatturato al "
+"cliente finale."
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_tax_group
 msgid "Tax Group"
-msgstr ""
+msgstr "Gruppo imposte"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_tax_template
 msgid "Tax Templates"
-msgstr ""
+msgstr "Modelli imposte"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "Imposte"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_coa_settings
 msgid "Templates"
-msgstr ""
+msgstr "Modelli"
 
 #. module: account_menu
 #: model:ir.model.fields,field_description:account_menu.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
-msgstr ""
+msgstr "Usa contabilità anglosassone"
