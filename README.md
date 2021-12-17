@@ -38,6 +38,7 @@ addon | version | maintainers | summary
 [account_move_template](account_move_template/) | 14.0.1.1.0 |  | Templates for recurring Journal Entries
 [account_netting](account_netting/) | 14.0.1.0.0 |  | Compensate AR/AP accounts from the same partner
 [account_no_default](account_no_default/) | 14.0.1.0.0 | [![dreispt](https://github.com/dreispt.png?size=30px)](https://github.com/dreispt) | Remove default expense account for vendor bills journal
+[account_sequence_option](account_sequence_option/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Manage sequence options for account.move, i.e., invoice, bill, entry
 [account_template_active](account_template_active/) | 14.0.1.0.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Allow to disable / enable account template items (tax, fiscal position, account)
 [base_vat_optional_vies](base_vat_optional_vies/) | 14.0.1.0.1 |  | Optional validation of VAT via VIES
 [product_category_tax](product_category_tax/) | 14.0.1.0.0 |  | Configure taxes in the product category
