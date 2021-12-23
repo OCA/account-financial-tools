@@ -184,6 +184,7 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     account_move_line_ids = fields.One2many('account.move.line', compute="_compute_account_move_line_ids")
+    only_quants = fields.Boolean('Only quantity rebuild')
 
     def _compute_account_move_line_ids(self):
         for template in self:
@@ -253,6 +254,18 @@ class ProductTemplate(models.Model):
             for move in moves.sorted(lambda r: r.date):
                 #move.write({"state": 'assigned'})
                 #move.move_line_ids.write({"state": 'assigned'})
+                move.remaining_value = 0.0
+                move.remaining_qty = 0.0
+                move.value = 0.0
+                if move.quantity_done == 0:
+                    continue
+                correction_value = move._run_valuation(move.quantity_done)
+                for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
+                    move_line._action_done()
+                if self.only_quants:
+                    continue
+
+                # now to regenerate account moves
                 acc_moves = False
                 for acc_move in move.account_move_ids:
                     # if acc_move.state == 'posted':
@@ -268,14 +281,6 @@ class ProductTemplate(models.Model):
                         ret = acc_move.button_cancel()
                         if ret:
                             acc_move.unlink()
-                move.remaining_value = 0.0
-                move.remaining_qty = 0.0
-                move.value = 0.0
-                if move.quantity_done == 0:
-                    continue
-                correction_value = move._run_valuation(move.quantity_done)
-                for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
-                    move_line._action_done()
                 # _logger.info("MOVE %s" % move.reference)
                 if move.picking_id:
                     move.write({'date': move.picking_id.date_done,

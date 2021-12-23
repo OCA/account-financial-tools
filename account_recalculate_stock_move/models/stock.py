@@ -62,6 +62,8 @@ class StockMoveLine(models.Model):
                 if move.purchase_line_id:
                     price_unit = move._get_price_unit()
                 amount = self.qty_done * abs(price_unit)
+                _logger.info("MOVE STOCK MOVE %s(%s) %s*%s" % (move, move._is_dropshipped(), self.qty_done, price_unit))
+
                 move.with_context(dict(self._context,
                                        forced_quantity=self.qty_done,
                                        force_valuation_amount=amount,
@@ -110,6 +112,7 @@ class StockMove(models.Model):
             if not move.account_move_ids and move.state == 'done' and self.env.context.get("rebuld_try"):
                 try:
                     for line in move.move_line_ids:
+                        _logger.info("STOCK MOVE LINE %s" % line)
                         line._rebuild_account_move()
                 except UserError:
                     _logger.info("STOCK MOVE %s unposted" % move.name)
