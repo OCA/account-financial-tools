@@ -1,4 +1,4 @@
-# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019-21 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
@@ -199,8 +199,9 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         self.assertTrue(po.unreconciled)
         # Invoice created and validated:
         po.action_create_invoice()
-        po.invoice_ids.invoice_date = datetime.now()
-        po.invoice_ids.action_post()
+        invoice_ids = po.invoice_ids.filtered(lambda i: i.move_type == "in_invoice")
+        invoice_ids.invoice_date = datetime.now()
+        invoice_ids.action_post()
         self.assertEqual(po.state, "purchase")
         # odoo does it automatically
         po._compute_unreconciled()
@@ -225,7 +226,9 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         po = self.po_2
         self.assertTrue(po.unreconciled)
         po.action_create_invoice()
-        invoice_form = Form(po.invoice_ids[0])
+        invoice_form = Form(
+            po.invoice_ids.filtered(lambda i: i.move_type == "in_invoice")[0]
+        )
         # v14 reconciles automatically so here we force discrepancy
         # with invoice_form.edit(0) as inv_form:
         invoice_form.invoice_date = datetime.now()
@@ -247,7 +250,9 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         # Invoice created and validated:
         # Odoo reconciles automatically so here we force discrepancy
         po.action_create_invoice()
-        invoice_form = Form(po.invoice_ids[0])
+        invoice_form = Form(
+            po.invoice_ids.filtered(lambda i: i.move_type == "in_invoice")[0]
+        )
         invoice_form.invoice_date = datetime.now()
         with invoice_form.invoice_line_ids.edit(0) as line_form:
             line_form.price_unit = 99
@@ -323,6 +328,11 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
                 "code": "ref",
                 "type": "sale",
                 "company_id": self.ref("stock.res_company_1"),
+            }
+        )
+        invoice.write(
+            {
+                "name": "/",
             }
         )
         invoice.write(

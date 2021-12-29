@@ -1,4 +1,4 @@
-# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019-21 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
@@ -45,6 +45,8 @@ class AccountMoveLine(models.Model):
             "credit": amount_writeoff < 0.0 and -amount_writeoff or 0.0,
             "partner_id": len(partners) == 1 and partners.id or False,
             "account_id": writeoff_vals["account_id"],
+            # TODO: this does not work because purchase_order_id is related field
+            # either remove this or use a different field
             "purchase_order_id": writeoff_vals["purchase_order_id"],
             "journal_id": writeoff_vals["journal_id"],
             "currency_id": writeoff_vals["currency_id"],
