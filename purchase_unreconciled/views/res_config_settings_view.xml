@@ -13,9 +13,28 @@
                 >
                     <div
                         class="col-xs-12 col-md-6 o_setting_box"
-                        id="account_check_deposit_offsetting_account"
+                        id="purchase_reconcile_account"
                     >
-                        <div class="o_setting_left_pane" />
+
+                        <div>
+                            <div class="o_setting_left_pane">
+                                <field name="purchase_lock_auto_reconcile" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="purchase_lock_auto_reconcile" />
+                                <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    role="img"
+                                    aria-label="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
+                                <div class="text-muted">
+                                    Reconcile PO upon locking
+                                </div>
+                            </div>
+                        <br />
+                        </div>
                         <div class="o_setting_right_pane">
                             <label for="purchase_reconcile_account_id" />
                             <div class="content-group">
@@ -28,6 +47,13 @@
                             <div class="content-group">
                                 <field
                                     name="purchase_reconcile_journal_id"
+                                    class="o_light_label mt16"
+                                />
+                            </div>
+                            <label for="purchase_reconcile_tolerance" />
+                            <div class="content-group">
+                                <field
+                                    name="purchase_reconcile_tolerance"
                                     class="o_light_label mt16"
                                 />
                             </div>
