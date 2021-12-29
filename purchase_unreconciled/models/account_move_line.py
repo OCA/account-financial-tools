@@ -13,10 +13,10 @@ class AccountMoveLine(models.Model):
     def _get_writeoff_amounts(self):
         precision = self.env["decimal.precision"].precision_get("Account")
         writeoff_amount = round(
-            sum([line["amount_residual"] for line in self]), precision
+            sum(line["amount_residual"] for line in self), precision
         )
         writeoff_amount_curr = round(
-            sum([line["amount_residual_currency"] for line in self]), precision
+            sum(line["amount_residual_currency"] for line in self), precision
         )
 
         first_currency = self[0]["currency_id"]
