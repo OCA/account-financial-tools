@@ -45,14 +45,18 @@
                     groups="account.group_account_manager"
                     help="Purchase orders with unreconciled journal items."
                 />
-                <filter
-                    name="accounting_review"
-                    string="To Review By Accounting"
-                    domain="[('unreconciled','=', True), ('invoice_status', '=', 'invoiced'), ('is_shipped', '=', True)]"
-                    groups="account.group_account_manager"
-                    help="No unreconciled journal items should remain after receive and bill"
-                />
             </filter>
+        </field>
+    </record>
+
+    <record id="unreconciled_amount_purchase_order_view_tree" model="ir.ui.view">
+        <field name="name">unreconciled.amount.purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+        <field name="arch" type="xml">
+            <field name="invoice_status" position="after">
+                <field name="amount_unreconciled" sum="sum_ar" optional="hide" />
+            </field>
         </field>
     </record>
 </odoo>

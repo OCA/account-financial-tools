@@ -1,4 +1,4 @@
-# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019-21 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
@@ -91,7 +91,14 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
                 "categ_id": cls.product_categ.id,
             }
         )
-
+        cls.product_to_reconcile2 = cls.product_obj.create(
+            {
+                "name": "Purchased Product 2 (To reconcile)",
+                "type": "product",
+                "standard_price": 100.0,
+                "categ_id": cls.product_categ.id,
+            }
+        )
         # Create PO's:
         cls.po = cls.po_obj.create(
             {
@@ -132,6 +139,7 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
             }
         )
         # company settings for automated valuation
+        cls.company.purchase_lock_auto_reconcile = True
         cls.company.purchase_reconcile_account_id = cls.writeoff_acc
         cls.company.purchase_reconcile_journal_id = cls.stock_journal
 
@@ -186,7 +194,8 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
     def _do_picking(self, picking, date):
         """Do picking with only one move on the given date."""
         picking.action_confirm()
-        picking.move_lines.quantity_done = picking.move_lines.product_uom_qty
+        for ml in picking.move_lines:
+            ml.quantity_done = ml.product_uom_qty
         picking._action_done()
         for move in picking.move_lines:
             move.date = date
@@ -199,8 +208,9 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         self.assertTrue(po.unreconciled)
         # Invoice created and validated:
         po.action_create_invoice()
-        po.invoice_ids.invoice_date = datetime.now()
-        po.invoice_ids.action_post()
+        invoice_ids = po.invoice_ids.filtered(lambda i: i.move_type == "in_invoice")
+        invoice_ids.invoice_date = datetime.now()
+        invoice_ids.action_post()
         self.assertEqual(po.state, "purchase")
         # odoo does it automatically
         po._compute_unreconciled()
@@ -225,7 +235,9 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         po = self.po_2
         self.assertTrue(po.unreconciled)
         po.action_create_invoice()
-        invoice_form = Form(po.invoice_ids[0])
+        invoice_form = Form(
+            po.invoice_ids.filtered(lambda i: i.move_type == "in_invoice")[0]
+        )
         # v14 reconciles automatically so here we force discrepancy
         # with invoice_form.edit(0) as inv_form:
         invoice_form.invoice_date = datetime.now()
@@ -247,7 +259,9 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         # Invoice created and validated:
         # Odoo reconciles automatically so here we force discrepancy
         po.action_create_invoice()
-        invoice_form = Form(po.invoice_ids[0])
+        invoice_form = Form(
+            po.invoice_ids.filtered(lambda i: i.move_type == "in_invoice")[0]
+        )
         invoice_form.invoice_date = datetime.now()
         with invoice_form.invoice_line_ids.edit(0) as line_form:
             line_form.price_unit = 99
@@ -327,6 +341,11 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         )
         invoice.write(
             {
+                "name": "/",
+            }
+        )
+        invoice.write(
+            {
                 "company_id": self.ref("stock.res_company_1"),
                 "journal_id": chicago_journal.id,
             }
@@ -343,3 +362,63 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
             [("purchase_order_id", "=", po.id), ("move_id", "!=", invoice.id)]
         )
         self.assertEqual(po.company_id, ji.mapped("company_id"))
+
+    def test_08_reconcile_by_product(self):
+        """
+        Create a write-off by product
+        """
+        po = self.po.copy()
+        po.write(
+            {
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_to_reconcile2.id,
+                            "name": self.product_to_reconcile2.name,
+                            "product_qty": 5.0,
+                            "price_unit": 100.0,
+                            "product_uom": self.product_to_reconcile.uom_id.id,
+                            "date_planned": fields.Datetime.now(),
+                        },
+                    )
+                ],
+            }
+        )
+        po.button_confirm()
+        self._do_picking(po.picking_ids, fields.Datetime.now())
+        # Invoice created and validated:
+        move_form = Form(self.invoice_obj.with_context(default_type="in_invoice"))
+        move_form.partner_id = self.partner
+        move_form.purchase_id = po
+        # force discrepancies
+        with move_form.invoice_line_ids.edit(0) as line_form:
+            line_form.price_unit = 99
+        with move_form.invoice_line_ids.edit(0) as line_form:
+            line_form.price_unit = 99
+        invoice = move_form.save()
+        invoice._post()
+        # The bill is different price so this is unreconciled
+        po._compute_unreconciled()
+        self.assertTrue(po.unreconciled)
+        po.button_done()
+        po._compute_unreconciled()
+        self.assertFalse(po.unreconciled)
+        # we check all the journals are balanced by product
+        ji_p1 = self.env["account.move.line"].search(
+            [
+                ("purchase_order_id", "=", po.id),
+                ("product_id", "=", self.product_to_reconcile.id),
+                ("account_id", "=", self.account_grni.id),
+            ]
+        )
+        ji_p2 = self.env["account.move.line"].search(
+            [
+                ("purchase_order_id", "=", po.id),
+                ("product_id", "=", self.product_to_reconcile2.id),
+                ("account_id", "=", self.account_grni.id),
+            ]
+        )
+        self.assertEqual(sum(ji_p1.mapped("balance")), 0.0)
+        self.assertEqual(sum(ji_p2.mapped("balance")), 0.0)
