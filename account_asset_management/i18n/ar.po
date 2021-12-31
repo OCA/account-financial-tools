@@ -18,16 +18,17 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Arabic (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/ar/)\n"
+"PO-Revision-Date: 2021-12-31 14:39+0000\n"
+"Last-Translator: Rachid Al Assir <rachidalassir@gmail.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/ar/)\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -47,7 +48,7 @@ msgstr ""
 #: model:ir.model,name:account_asset_management.model_account_account
 #, python-format
 msgid "Account"
-msgstr ""
+msgstr "الحساب"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
@@ -64,22 +65,22 @@ msgstr "نشِط"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Active Assets"
-msgstr ""
+msgstr "الأصول النشطة"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Add an internal note here..."
-msgstr ""
+msgstr "أضف ملاحظة داخلية هنا ..."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_compute__date_end
 msgid "All depreciation lines prior to this date will be automatically posted"
-msgstr ""
+msgstr "سيتم ترحيل جميع بنود الإهلاك السابقة لهذا التاريخ تلقائيًا"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
 msgid "Amount"
-msgstr ""
+msgstr "المبلغ"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciated_value
@@ -89,7 +90,7 @@ msgstr "القيمة المستهلكة بالفعل"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Analytic Information"
-msgstr ""
+msgstr "معلومات تحليلية"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
@@ -102,7 +103,7 @@ msgstr "حساب تحليلي"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
 msgid "Analytic tags"
-msgstr ""
+msgstr "الوسوم التحليلية"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -115,7 +116,7 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Are you sure ?"
-msgstr ""
+msgstr "هل أنت متأكد ؟"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset
@@ -211,7 +212,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__date_remove
 #, python-format
 msgid "Asset Removal Date"
-msgstr ""
+msgstr "تاريخ إزالة الأصل"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_sale_id
@@ -223,7 +224,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_start
 #, python-format
 msgid "Asset Start Date"
-msgstr ""
+msgstr "تاريخ بدء الأصل"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_line
@@ -544,9 +545,9 @@ msgstr "حساب الإستهلاك"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__create
-#, fuzzy, python-format
+#, python-format
 msgid "Depreciation Base"
-msgstr "تاريخ الإستهلاك"
+msgstr "مبلغ قاعدة الإهلاك"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
