@@ -2,6 +2,7 @@
 # Copyright 2016 Tecnativa - Sergio Teruel
 # Copyright 2017 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
 import mock
 
 from odoo.tests import common
