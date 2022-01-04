@@ -12,6 +12,7 @@
     "depends": [
         'account',
         'purchase',
+        'sale_only_company',
     ],
     'data': [
             'views/account_view.xml',

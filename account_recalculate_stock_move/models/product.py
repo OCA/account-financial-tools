@@ -79,8 +79,16 @@ class Product(models.Model):
         if real_time_product_ids:
             self.env['account.move.line'].check_access_rights('read')
             fifo_automated_values = {}
-            query = """SELECT aml.product_id, aml.account_id, sum(aml.debit) - sum(aml.credit), sum(quantity), array_agg(aml.id)
+            query = """SELECT aml.product_id, aml.account_id, sum(aml.debit) - sum(aml.credit), sum((aml.quantity/pu.factor)*ppu.factor), array_agg(aml.id)
                          FROM account_move_line AS aml
+                            INNER JOIN product_uom AS pu
+                                ON pu.id = aml.product_uom_id
+                            INNER JOIN product_product AS pp
+                                ON pp.id = aml.product_id
+                            INNER JOIN product_template AS pt
+                                ON pt.id = pp.product_tmpl_id
+                            INNER JOIN product_uom AS ppu
+                                ON ppu.id = pt.uom_id
                         WHERE aml.product_id IN %%s AND aml.company_id=%%s %s
                      GROUP BY aml.product_id, aml.account_id"""
             params = (tuple(real_time_product_ids), self.env.user.company_id.id)
@@ -257,8 +265,15 @@ class ProductTemplate(models.Model):
                 move.remaining_value = 0.0
                 move.remaining_qty = 0.0
                 move.value = 0.0
+                move.price_unit = 0.0
                 if move.quantity_done == 0:
                     continue
+                if move.raw_material_production_id:
+                    force_accounting_date = move.raw_material_production_id.date_finished
+                    product = move.product_id.with_context(
+                        dict(self._context, to_date=force_accounting_date))
+                    if product.qty_at_date != 0:
+                        move.price_unit = product.account_value / product.qty_at_date
                 correction_value = move._run_valuation(move.quantity_done)
                 for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
                     move_line._action_done()
@@ -292,13 +307,17 @@ class ProductTemplate(models.Model):
                     move.move_line_ids.write({'date': move.inventory_id.accounting_date or move.inventory_id.date})
                 move.with_context(dict(self._context, force_valuation_amount=correction_value, force_date=move.date,
                                        rebuld_try=True, force_re_calculate=True)).rebuild_account_move()
-                move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
-                for landed_cost_adjustment in move_landed_cost:
-                    landed_cost_adjustment.former_cost = move.value
+                # move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
+                # for landed_cost_adjustment in move_landed_cost:
+                #     landed_cost_adjustment.former_cost = move.value
                 if not date_move:
                     date_move = move.date
-                move_landed_cost = landed_cost.filtered(lambda r: date_move > r.cost_id.date <= move.date)
+                move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move and (date_move > r.cost_id.date <= move.date))
+                _logger.info("move_landed_cost %s=%s (date_move(%s) > r.cost_id.date(%s) <= move.date(%s))" %
+                             (move_landed_cost, move, move_landed_cost, date_move, move.date))
                 if move_landed_cost:
+                    for landed_cost_adjustment in move_landed_cost:
+                        landed_cost_adjustment.former_cost = move.value
                     move_landed_cost.mapped('cost_id').rebuild_account_move()
                 self._rebuild_moves(product, move, date_move)
                 date_move = move.date

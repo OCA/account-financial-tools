@@ -6,6 +6,7 @@ from odoo.exceptions import Warning
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_round, float_compare, float_is_zero
 from odoo.addons.stock_account.models.stock import StockMove as stockmove
+
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -52,17 +53,22 @@ class StockMoveLine(models.Model):
                     move._is_in() or move._is_out() or move._is_in_inventory() or move._is_out_inventory()
                     or (not move.company_id.anglo_saxon_accounting and
                         (move._is_dropshipped() or move._is_dropshipped_returned()))):
-                if self._context.get("force_accounting_date"):
-                    product = move.product_id.with_context(
-                        dict(self._context, to_date=self._context['force_accounting_date']))
-                    if product.qty_at_date != 0:
-                        coef = (move._is_out() or move._is_out_inventory()) and -1 or 1
-                        move.price_unit = coef * (product.stock_value / product.qty_at_date)
+                # if self._context.get("force_accounting_date"):
+                #     product = move.product_id.with_context(
+                #         dict(self._context, to_date=self._context['force_accounting_date']))
+                #     if product.qty_at_date != 0:
+                #         coef = (move._is_out() or move._is_out_inventory()) and -1 or 1
+                #         move.price_unit = coef * (product.account_value / product.qty_at_date)
+                # if self._context.get('force_production', False):
+                #     price_unit = move.value / move.quantity_done
+                # else:
                 price_unit = move.price_unit
                 if move.purchase_line_id:
                     price_unit = move._get_price_unit()
                 amount = self.qty_done * abs(price_unit)
-                _logger.info("MOVE STOCK MOVE %s(%s) %s*%s" % (move, move._is_dropshipped(), self.qty_done, price_unit))
+                _logger.info("MOVE STOCK MOVE self._context(%s)::%s\n%s(%s) %s(%s)*%s (purchase_line_id:%s)" %
+                             (self._context, move.remaining_qty, move.product_id.display_name, move._is_dropshipped(), self.qty_done,
+                              price_unit, move.product_id.standard_price, move.purchase_line_id))
 
                 move.with_context(dict(self._context,
                                        forced_quantity=self.qty_done,
