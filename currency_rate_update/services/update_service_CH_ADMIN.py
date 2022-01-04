@@ -5,7 +5,6 @@
 from .currency_getter_interface import CurrencyGetterInterface
 import logging
 from datetime import datetime
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -17,6 +16,7 @@ class ChAdminGetter(CurrencyGetterInterface):
 
     code = 'CH_ADMIN'
     name = 'Admin.ch'
+    supported_date_format = '%d.%m.%Y'
 
     supported_currency_array = [
         "AED", "ALL", "ARS", "AUD", "AZN", "BAM", "BDT", "BGN", "BHD", "BRL",
@@ -46,8 +46,7 @@ class ChAdminGetter(CurrencyGetterInterface):
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
         """Implementation of abstract method of Curreny_getter_interface"""
-        url = ('http://www.pwebapps.ezv.admin.ch/apps/rates/rate/'
-               'getxml?activeSearchType=today')
+        url = ('https://www.backend-rates.bazg.admin.ch/api/xmldaily')
         # We do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
@@ -58,15 +57,16 @@ class ChAdminGetter(CurrencyGetterInterface):
         dom = etree.fromstring(rawfile)
         _logger.debug("Admin.ch sent a valid XML file")
         adminch_ns = {
-            'def': 'http://www.pwebapps.ezv.admin.ch/apps/rates'
+            'def': 'https://www.backend-rates.ezv.admin.ch/xmldaily'
         }
         rate_date = dom.xpath(
             '/def:wechselkurse/def:datum/text()',
             namespaces=adminch_ns
         )
         rate_date = rate_date[0]
-        rate_date_datetime = datetime.strptime(rate_date,
-                                               DEFAULT_SERVER_DATE_FORMAT)
+        rate_date_datetime = datetime.strptime(
+            rate_date, self.supported_date_format
+        )
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # we dynamically update supported currencies
         self.supported_currency_array = dom.xpath(
