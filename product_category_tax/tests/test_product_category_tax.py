@@ -41,7 +41,7 @@ class ProductCategoryTax(common.SavepointCase):
         )
 
     def test_01_copy_taxes(self):
-        """ Default taxes taken from the category"""
+        """Default taxes taken from the category"""
         test_categ = self.categ_obj.create(
             {
                 "name": "Super Category",
@@ -56,7 +56,7 @@ class ProductCategoryTax(common.SavepointCase):
         self.assertEqual(self.product_test.supplier_taxes_id, self.tax_purchase)
 
     def test_02_update_taxes(self):
-        """ Default update """
+        """Default update"""
         self.product_test = self.product_obj.create(
             {
                 "name": "TEST 02",
@@ -78,7 +78,7 @@ class ProductCategoryTax(common.SavepointCase):
         self.assertEqual(self.product_test.supplier_taxes_id, self.tax_purchase)
 
     def test_03_taxes_not_updeatable(self):
-        """ Avoid update specific products"""
+        """Avoid update specific products"""
         self.product_test3 = self.product_obj.create(
             {
                 "name": "TEST 03",
