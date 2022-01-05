@@ -29,6 +29,12 @@ class ResPartner(models.Model):
             # call simple_vat_check and thus the flag will be removed
             partner.update({"vies_passed": True})
         res = super(ResPartner, self).vies_vat_check(country_code, vat_number)
+        if res is False:
+            if partner:
+                partner.update({"vies_passed": False})
+            return self.simple_vat_check(country_code, vat_number)
+        elif partner:
+            partner.update({"vies_passed": True})
         return res
 
     @api.constrains("vat", "country_id")
