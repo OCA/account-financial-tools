@@ -10,18 +10,29 @@ class AccountMoveBudget(models.Model):
     _description = "Account Move Budget"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
-    name = fields.Char(required=True, track_visibility="onchange")
-    description = fields.Char(track_visibility="onchange")
+    name = fields.Char(
+        required=True,
+        tracking=True,
+    )
+    description = fields.Char(
+        tracking=True,
+    )
     date_range_id = fields.Many2one(comodel_name="date.range", string="Date range")
     date_from = fields.Date(
-        required=True, string="From Date", track_visibility="onchange"
+        required=True,
+        string="From Date",
+        tracking=True,
     )
-    date_to = fields.Date(required=True, string="To Date", track_visibility="onchange")
+    date_to = fields.Date(
+        required=True,
+        string="To Date",
+        tracking=True,
+    )
     state = fields.Selection(
         [("draft", "Draft"), ("confirmed", "Confirmed"), ("cancelled", "Cancelled")],
         required=True,
         default="draft",
-        track_visibility="onchange",
+        tracking=True,
     )
     line_ids = fields.One2many(
         comodel_name="account.move.budget.line", inverse_name="budget_id", copy=True
