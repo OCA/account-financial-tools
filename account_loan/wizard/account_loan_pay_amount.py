@@ -9,14 +9,21 @@ class AccountLoan(models.TransientModel):
     _name = "account.loan.pay.amount"
     _description = "Loan pay amount"
 
-    loan_id = fields.Many2one("account.loan", required=True, readonly=True,)
+    loan_id = fields.Many2one(
+        "account.loan",
+        required=True,
+        readonly=True,
+    )
     currency_id = fields.Many2one(
         "res.currency", related="loan_id.currency_id", readonly=True
     )
-    cancel_loan = fields.Boolean(default=False,)
+    cancel_loan = fields.Boolean(
+        default=False,
+    )
     date = fields.Date(required=True, default=fields.Date.today())
     amount = fields.Monetary(
-        currency_field="currency_id", string="Amount to reduce from Principal",
+        currency_field="currency_id",
+        string="Amount to reduce from Principal",
     )
     fees = fields.Monetary(currency_field="currency_id", string="Bank fees")
 
