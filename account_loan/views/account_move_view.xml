@@ -8,7 +8,7 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
+            <field name="date" position="after">
                 <field
                     name="loan_line_id"
                     attrs="{'invisible': [('loan_line_id', '=', False)]}"

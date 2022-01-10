@@ -22,10 +22,7 @@ class AccountLoan(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     def _default_company(self):
-        force_company = self._context.get("force_company")
-        if not force_company:
-            return self.env.user.company_id.id
-        return force_company
+        return self.env.company
 
     name = fields.Char(
         copy=False,
@@ -61,7 +58,10 @@ class AccountLoan(models.Model):
         default="draft",
     )
     line_ids = fields.One2many(
-        "account.loan.line", readonly=True, inverse_name="loan_id", copy=False,
+        "account.loan.line",
+        readonly=True,
+        inverse_name="loan_id",
+        copy=False,
     )
     periods = fields.Integer(
         required=True,
@@ -88,7 +88,7 @@ class AccountLoan(models.Model):
         default=0.0,
         digits=(8, 6),
         help="Currently applied rate",
-        track_visibility="always",
+        tracking=True,
     )
     rate_period = fields.Float(
         compute="_compute_rate_period",
@@ -117,12 +117,20 @@ class AccountLoan(models.Model):
         default="fixed-annuity",
     )
     fixed_amount = fields.Monetary(
-        currency_field="currency_id", compute="_compute_fixed_amount",
+        currency_field="currency_id",
+        compute="_compute_fixed_amount",
     )
     fixed_loan_amount = fields.Monetary(
-        currency_field="currency_id", readonly=True, copy=False, default=0,
+        currency_field="currency_id",
+        readonly=True,
+        copy=False,
+        default=0,
     )
-    fixed_periods = fields.Integer(readonly=True, copy=False, default=0,)
+    fixed_periods = fields.Integer(
+        readonly=True,
+        copy=False,
+        default=0,
+    )
     loan_amount = fields.Monetary(
         currency_field="currency_id",
         required=True,
@@ -153,7 +161,9 @@ class AccountLoan(models.Model):
         help="When checked, the first payment will be on start date",
     )
     currency_id = fields.Many2one(
-        "res.currency", compute="_compute_currency", readonly=True,
+        "res.currency",
+        compute="_compute_currency",
+        readonly=True,
     )
     journal_type = fields.Char(compute="_compute_journal_type")
     journal_id = fields.Many2one(
@@ -190,7 +200,9 @@ class AccountLoan(models.Model):
         states={"draft": [("readonly", False)]},
     )
     is_leasing = fields.Boolean(
-        default=False, readonly=True, states={"draft": [("readonly", False)]},
+        default=False,
+        readonly=True,
+        states={"draft": [("readonly", False)]},
     )
     leased_asset_account_id = fields.Many2one(
         "account.account",
@@ -212,7 +224,8 @@ class AccountLoan(models.Model):
     )
     move_ids = fields.One2many("account.move", copy=False, inverse_name="loan_id")
     pending_principal_amount = fields.Monetary(
-        currency_field="currency_id", compute="_compute_total_amounts",
+        currency_field="currency_id",
+        compute="_compute_total_amounts",
     )
     payment_amount = fields.Monetary(
         currency_field="currency_id",
@@ -438,7 +451,7 @@ class AccountLoan(models.Model):
         self.ensure_one()
         action = self.env.ref("account.action_move_out_invoice_type")
         result = action.read()[0]
-        result["domain"] = [("loan_id", "=", self.id), ("type", "=", "in_invoice")]
+        result["domain"] = [("loan_id", "=", self.id), ("move_type", "=", "in_invoice")]
         return result
 
     @api.model
