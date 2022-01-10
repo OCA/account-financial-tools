@@ -215,7 +215,10 @@
             </form>
         </field>
     </record>
-    <act_window id="account_loan_action" name="Loans" res_model="account.loan" />
+    <record id="account_loan_action" model="ir.actions.act_window">
+        <field name="name">Loans</field>
+        <field name="res_model">account.loan</field>
+    </record>
     <menuitem
         id="account_loan_menu"
         parent="account.menu_finance_entries"

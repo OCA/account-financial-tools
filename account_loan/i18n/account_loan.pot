@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -62,6 +62,11 @@ msgstr ""
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_state
 msgid "Activity State"
+msgstr ""
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_type_icon
+msgid "Activity Type Icon"
 msgstr ""
 
 #. module: account_loan
@@ -208,6 +213,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__display_name
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__display_name
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post__display_name
+#: model:ir.model.fields,field_description:account_loan.field_account_move__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -272,6 +278,11 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_loan
 #: model:ir.ui.menu,name:account_loan.account_loan_generate_wizard_menu
 msgid "Generate Loan Entries"
 msgstr ""
@@ -298,6 +309,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post__id
+#: model:ir.model.fields,field_description:account_loan.field_account_move__id
 msgid "ID"
 msgstr ""
 
@@ -372,7 +384,7 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_move
-msgid "Journal Entries"
+msgid "Journal Entry"
 msgstr ""
 
 #. module: account_loan
@@ -386,6 +398,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line____last_update
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount____last_update
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post____last_update
+#: model:ir.model.fields,field_description:account_loan.field_account_move____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -434,10 +447,12 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_bank_statement_line__loan_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__loan_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__loan_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post__loan_id
 #: model:ir.model.fields,field_description:account_loan.field_account_move__loan_id
+#: model:ir.model.fields,field_description:account_loan.field_account_payment__loan_id
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Loan"
 msgstr ""
@@ -448,7 +463,9 @@ msgid "Loan Amount"
 msgstr ""
 
 #. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_bank_statement_line__loan_line_id
 #: model:ir.model.fields,field_description:account_loan.field_account_move__loan_line_id
+#: model:ir.model.fields,field_description:account_loan.field_account_payment__loan_line_id
 msgid "Loan Line"
 msgstr ""
 
@@ -548,6 +565,11 @@ msgstr ""
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Moves"
+msgstr ""
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__my_activity_date_deadline
+msgid "My Activity Deadline"
 msgstr ""
 
 #. module: account_loan
