@@ -130,7 +130,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
 
     def test_05_lock_period_with_draft_moves(self):
         """We test that we cannot change the fiscal year lock to date
-           if there are draft journal entries after that date."""
+        if there are draft journal entries after that date."""
         self.create_account_move("2900-02-01")
         with self.assertRaises(ValidationError):
             self.company.period_lock_to_date = "2900-01-01"
