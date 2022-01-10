@@ -20,38 +20,44 @@ class AccountLoanLine(models.Model):
 
     name = fields.Char(compute="_compute_name")
     loan_id = fields.Many2one(
-        "account.loan", required=True, readonly=True, ondelete="cascade",
+        "account.loan",
+        required=True,
+        readonly=True,
+        ondelete="cascade",
     )
-    is_leasing = fields.Boolean(related="loan_id.is_leasing", readonly=True,)
+    is_leasing = fields.Boolean(
+        related="loan_id.is_leasing",
+        readonly=True,
+    )
     loan_type = fields.Selection(
-        [
-            ("fixed-annuity", "Fixed Annuity"),
-            ("fixed-principal", "Fixed Principal"),
-            ("interest", "Only interest"),
-        ],
         related="loan_id.loan_type",
         readonly=True,
     )
     loan_state = fields.Selection(
-        [
-            ("draft", "Draft"),
-            ("posted", "Posted"),
-            ("cancelled", "Cancelled"),
-            ("closed", "Closed"),
-        ],
         related="loan_id.state",
         readonly=True,
         store=True,
     )
     sequence = fields.Integer(required=True, readonly=True)
     date = fields.Date(
-        required=True, readonly=True, help="Date when the payment will be accounted",
+        required=True,
+        readonly=True,
+        help="Date when the payment will be accounted",
     )
     long_term_loan_account_id = fields.Many2one(
-        "account.account", readony=True, related="loan_id.long_term_loan_account_id",
+        "account.account",
+        readonly=True,
+        related="loan_id.long_term_loan_account_id",
     )
-    currency_id = fields.Many2one("res.currency", related="loan_id.currency_id",)
-    rate = fields.Float(required=True, readonly=True, digits=(8, 6),)
+    currency_id = fields.Many2one(
+        "res.currency",
+        related="loan_id.currency_id",
+    )
+    rate = fields.Float(
+        required=True,
+        readonly=True,
+        digits=(8, 6),
+    )
     pending_principal_amount = fields.Monetary(
         currency_field="currency_id",
         readonly=True,
@@ -88,7 +94,10 @@ class AccountLoanLine(models.Model):
         compute="_compute_amounts",
         help="Pending amount of the loan after the payment",
     )
-    move_ids = fields.One2many("account.move", inverse_name="loan_line_id",)
+    move_ids = fields.One2many(
+        "account.move",
+        inverse_name="loan_line_id",
+    )
     has_moves = fields.Boolean(compute="_compute_has_moves")
     has_invoices = fields.Boolean(compute="_compute_has_invoices")
     _sql_constraints = [
@@ -241,9 +250,7 @@ class AccountLoanLine(models.Model):
 
     def move_line_vals(self):
         vals = []
-        partner = self.loan_id.partner_id.with_context(
-            force_company=self.loan_id.company_id.id
-        )
+        partner = self.loan_id.partner_id.with_company(self.loan_id.company_id)
         vals.append(
             {
                 "account_id": partner.property_account_payable_id.id,
@@ -287,7 +294,7 @@ class AccountLoanLine(models.Model):
         return {
             "loan_line_id": self.id,
             "loan_id": self.loan_id.id,
-            "type": "in_invoice",
+            "move_type": "in_invoice",
             "partner_id": self.loan_id.partner_id.id,
             "invoice_date": self.date,
             "journal_id": self.loan_id.journal_id.id,
@@ -426,7 +433,10 @@ class AccountLoanLine(models.Model):
             "default_loan_line_id": self.id,
             "default_loan_id": self.loan_id.id,
         }
-        result["domain"] = [("loan_line_id", "=", self.id), ("type", "=", "in_invoice")]
+        result["domain"] = [
+            ("loan_line_id", "=", self.id),
+            ("move_type", "=", "in_invoice"),
+        ]
         if len(self.move_ids) == 1:
             res = self.env.ref("account.view_move_form", False)
             result["views"] = [(res and res.id or False, "form")]
