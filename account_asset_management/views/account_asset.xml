@@ -25,7 +25,7 @@
                         string="Remove"
                         type="object"
                         groups="account.group_account_manager"
-                        attrs="{'invisible':['|', ('method_time', '!=', 'year'), ('state', 'not in', ['open', 'close'])]}"
+                        attrs="{'invisible':[('state', 'not in', ['open', 'close'])]}"
                         help="Asset removal."
                     />
                     <field
