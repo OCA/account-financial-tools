@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="is_cancel_reversal" invisible="1" />
+                <field name="cancel_reversal" invisible="1" />
+            </field>
+            <button name="button_cancel" position="after">
+                <button
+                    name="button_cancel_reversal"
+                    string="Cancel Entry"
+                    type="object"
+                    groups="account.group_account_invoice"
+                    attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('is_cancel_reversal', '=', False), ('cancel_reversal', '=', True)]}"
+                />
+            </button>
+            <field name="id" position="before">
+                <widget
+                    name="web_ribbon"
+                    title="Cancelled"
+                    attrs="{'invisible': ['|', ('cancel_reversal', '=', False), ('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"
+                />
+            </field>
+            <field name="reversed_entry_id" position="after">
+                <field
+                    name="reverse_entry_id"
+                    attrs="{'invisible': [('reverse_entry_id', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">view.account.invoice.filter</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <filter name="unpaid" position="after">
+                <filter
+                    name="cancelled"
+                    string="Cancelled"
+                    domain="['|', ('state', '=', 'cancel'), ('cancel_reversal', '=', True)]"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="account_invoice_view_tree" model="ir.ui.view">
+        <field name="name">account.invoice.view.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="cancel_reversal" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>

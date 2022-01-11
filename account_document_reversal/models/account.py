@@ -1,6 +1,6 @@
 # Copyright 2019 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class AccountJournal(models.Model):
@@ -8,7 +8,7 @@ class AccountJournal(models.Model):
 
     cancel_method = fields.Selection(
         [
-            ("normal", "Normal (delete journal entries if exists)"),
+            ("normal", "Normal (remove journal entries)"),
             ("reversal", "Reversal (create reversed journal entries)"),
         ],
         string="Cancel Method",
@@ -30,9 +30,6 @@ class AccountJournal(models.Model):
         help="Journal in this field will show in reversal wizard as default",
     )
 
-    @api.multi
     def _compute_is_cancel_reversal(self):
         for rec in self:
-            rec.is_cancel_reversal = (
-                rec.update_posted and rec.cancel_method == "reversal"
-            )
+            rec.is_cancel_reversal = rec.cancel_method == "reversal"

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_payment_form" model="ir.ui.view">
+        <field name="name">view.account.payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="is_cancel_reversal" invisible="1" />
+            </field>
+            <button name="cancel" position="after">
+                <button
+                    name="cancel_reversal"
+                    attrs="{'invisible': ['|', ('state', '!=', 'posted'), ('is_cancel_reversal', '=', False)]}"
+                    string="Cancel"
+                    type="object"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>

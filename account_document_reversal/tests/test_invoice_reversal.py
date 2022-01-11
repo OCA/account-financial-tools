@@ -7,12 +7,11 @@ class TestInvoiceReversal(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestInvoiceReversal, cls).setUpClass()
-        cls.partner = cls.env["res.partner"].create({"name": "Test"})
         cls.account_type_receivable = cls.env["account.account.type"].create(
-            {"name": "Test Receivable", "type": "receivable",}
+            {"name": "Test Receivable", "type": "receivable", "internal_group": "asset"}
         )
         cls.account_type_regular = cls.env["account.account.type"].create(
-            {"name": "Test Regular", "type": "other",}
+            {"name": "Test Regular", "type": "other", "internal_group": "income"}
         )
         cls.account_receivable = cls.env["account.account"].create(
             {
@@ -31,24 +30,28 @@ class TestInvoiceReversal(SavepointCase):
             }
         )
         cls.sale_journal = cls.env["account.journal"].search([("type", "=", "sale")])[0]
-        cls.invoice = cls.env["account.invoice"].create(
+        cls.partner = cls.env["res.partner"].create(
+            {
+                "name": "Test",
+                "property_account_receivable_id": cls.account_receivable.id,
+            }
+        )
+        cls.invoice = cls.env["account.move"].create(
             {
                 "name": "Test Customer Invoice",
                 "journal_id": cls.sale_journal.id,
                 "partner_id": cls.partner.id,
-                "account_id": cls.account_receivable.id,
+                "type": "out_invoice",
             }
         )
-        cls.invoice_line = cls.env["account.invoice.line"]
-        cls.invoice_line1 = cls.invoice_line.create(
-            {
-                "invoice_id": cls.invoice.id,
-                "name": "Line 1",
-                "price_unit": 200.0,
-                "account_id": cls.account_income.id,
-                "quantity": 1,
-            }
-        )
+        cls.invoice_line = {
+            "move_id": cls.invoice.id,
+            "name": "Line 1",
+            "price_unit": 200.0,
+            "account_id": cls.account_income.id,
+            "quantity": 1,
+        }
+        cls.invoice.write({"invoice_line_ids": [(0, 0, cls.invoice_line)]})
 
     def test_journal_invoice_cancel_reversal(self):
         """ Tests cancel with reversal, end result must follow,
@@ -56,30 +59,26 @@ class TestInvoiceReversal(SavepointCase):
         - Status is changed to cancel
         """
         # Test journal
+        self.sale_journal.write({"cancel_method": "normal"})
+        self.sale_journal.invalidate_cache()
         self.sale_journal.write(
-            {"update_posted": True, "cancel_method": "normal",}
-        )
-        self.assertFalse(self.sale_journal.is_cancel_reversal)
-        self.sale_journal.write(
-            {
-                "update_posted": True,
-                "cancel_method": "reversal",
-                "use_different_journal": True,
-            }
+            {"cancel_method": "reversal", "use_different_journal": True}
         )
         # Open invoice
-        self.invoice.action_invoice_open()
-        move = self.invoice.move_id
+        self.invoice.post()
+        # Normal cancel button is not usable.
+        with self.assertRaises(Exception):
+            self.invoice.button_cancel()
         # Click Cancel will open reverse document wizard
-        res = self.invoice.action_invoice_cancel()
+        res = self.invoice.button_cancel_reversal()
         self.assertEqual(res["res_model"], "reverse.account.document")
         # Cancel invoice
-        ctx = {"active_model": "account.invoice", "active_ids": [self.invoice.id]}
+        ctx = {"active_model": "account.move", "active_ids": [self.invoice.id]}
         f = Form(self.env[res["res_model"]].with_context(ctx))
         cancel_wizard = f.save()
         cancel_wizard.action_cancel()
-        reversed_move = move.reverse_entry_id
-        move_reconcile = move.mapped("line_ids").mapped("full_reconcile_id")
+        reversed_move = self.invoice.reverse_entry_id
+        move_reconcile = self.invoice.mapped("line_ids").mapped("full_reconcile_id")
         reversed_move_reconcile = reversed_move.mapped("line_ids").mapped(
             "full_reconcile_id"
         )
@@ -87,4 +86,8 @@ class TestInvoiceReversal(SavepointCase):
         self.assertTrue(move_reconcile)
         self.assertTrue(reversed_move_reconcile)
         self.assertEqual(move_reconcile, reversed_move_reconcile)
-        self.assertEqual(self.invoice.state, "cancel")
+        self.assertEqual(self.invoice.state, "posted")
+        self.assertEqual(self.invoice.cancel_reversal, True)
+        # After reversed, set to draft is not allowed
+        with self.assertRaises(Exception):
+            self.invoice.button_draft()
