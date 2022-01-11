@@ -163,3 +163,6 @@ def migrate(env, version):
     handle_account_asset_disposal_migration(env)
     set_asset_line_previous(env)
     add_asset_initial_entry(env)
+    openupgrade.delete_records_safely_by_xml_id(
+        env, ["account_asset_management.account_asset_category_multi_company_rule",
+              "account_asset_management.account_asset_asset_multi_company_rule"])
