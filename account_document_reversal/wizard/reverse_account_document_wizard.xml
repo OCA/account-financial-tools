@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_reverse_account_document" model="ir.ui.view">
+            <field name="name">reverse.account.document.form</field>
+            <field name="model">reverse.account.document</field>
+            <field name="arch" type="xml">
+                <form string="Document Cancel">
+                    <group>
+                        <group>
+                            <field name="date" />
+                        </group>
+                        <group>
+                            <field name="use_different_journal" invisible="1" />
+                            <field
+                                name="journal_id"
+                                attrs="{'invisible': [('use_different_journal', '=', False)]}"
+                            />
+                        </group>
+                    </group>
+                    <footer>
+                        <button
+                            string="Confirm"
+                            name="action_cancel"
+                            type="object"
+                            class="btn-primary"
+                        />
+                        <button
+                            string="Discard"
+                            class="btn-secondary"
+                            special="cancel"
+                        />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_view_reverse_account_document" model="ir.actions.act_window">
+            <field name="name">Document Cancel</field>
+            <field name="res_model">reverse.account.document</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_reverse_account_document" />
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
