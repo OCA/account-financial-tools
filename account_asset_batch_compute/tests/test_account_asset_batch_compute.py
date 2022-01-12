@@ -40,13 +40,6 @@ class TestAccountAssetBatchCompute(TransactionCase):
                 "name": "Test",
             }
         )
-        self.fiscal_year = self.env["account.fiscal.year"].create(
-            {
-                "name": "FY",
-                "date_from": time.strftime("2019-01-01"),
-                "date_to": time.strftime("2019-12-31"),
-            }
-        )
         self.asset01 = self.asset_model.create(
             {
                 "name": "test asset",
