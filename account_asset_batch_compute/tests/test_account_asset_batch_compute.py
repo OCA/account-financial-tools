@@ -128,7 +128,8 @@ class TestAccountAssetBatchCompute(TransactionCase):
         )
         self.assertTrue(len(depreciation_line) == 0)
         job_name = "Creating move for asset with id {} to {}".format(
-            self.asset01.id, self.nextmonth,
+            self.asset01.id,
+            self.nextmonth,
         )
         jobs = self.env["queue.job"].search(
             [("name", "=", job_name)], order="date_created desc", limit=1
