@@ -21,7 +21,7 @@ class AccountAssetCompute(models.TransientModel):
                 self.date_end,
             )
             job = self.with_delay(description=description).asset_compute()
-            return u"Job created with uuid {}".format(job.uuid)
+            return "Job created with uuid {}".format(job.uuid)
         else:
             return super(
                 AccountAssetCompute, self.with_context(asset_batch_processing=True)
