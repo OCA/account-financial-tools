@@ -1,0 +1,16 @@
+<odoo>
+    <record id="account_asset_profile_view_form" model="ir.ui.view">
+        <field name="name">account.asset.profile.form</field>
+        <field name="model">account.asset.profile</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_profile_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <separator />
+                <field name="transfer_journal_id" />
+            </field>
+        </field>
+    </record>
+</odoo>
