@@ -1,0 +1,45 @@
+<odoo>
+
+    <record model="ir.ui.view" id="account_asset_view_form">
+        <field name="name">account.asset.form</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_form"
+        />
+        <field name="arch" type="xml">
+            <button name="remove" position="after">
+                <field name="can_transfer" invisible="1" />
+                <button
+                    name="transfer"
+                    string="Transfer"
+                    type="object"
+                    groups="account.group_account_manager"
+                    attrs="{'invisible': [('can_transfer', '=', False)]}"
+                    help="Transfer asset from AUC to Asset"
+                />
+            </button>
+        </field>
+    </record>
+
+    <record id="account_asset_view_search" model="ir.ui.view">
+        <field name="name">account.asset.search</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_search"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//separator[last()]" position="before">
+                <separator name="transfer" />
+                <filter
+                    string="Transferable"
+                    name="can_transfer"
+                    domain="[('can_transfer', '=', True)]"
+                    help="Can be transferred"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
