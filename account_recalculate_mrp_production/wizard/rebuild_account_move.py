@@ -24,7 +24,7 @@ class WizardRebuildMoveMrpProduction(models.TransientModel):
             domain = [('company_id', '=', company_id.id)]
             productions = self.env['mrp.production'].search(domain)
         if productions:
-            productions.rebuild_account_move()
+            productions.with_context(dict(self._context, force_only_production=True)).rebuild_account_move()
         return {'type': 'ir.actions.act_window_close'}
 
     @api.multi
@@ -46,4 +46,4 @@ class WizardRebuildMoveMrpProduction(models.TransientModel):
             domain = [('company_id', '=', company_id.id)]
             productions = self.env['mrp.production'].search(domain)
         if productions:
-            productions.rebuild_account_move()
+            productions.with_context(dict(self._context, force_only_production=True)).rebuild_account_move()

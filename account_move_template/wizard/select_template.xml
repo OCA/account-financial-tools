@@ -29,7 +29,7 @@
                         <group>
                             <field name="company_id"/>
                             <field name="partner_id" attrs="{'invisible':[('state','=','template_selected')]}"/>
-                            <field name="amount_input" invisible="1"/>
+                            <field name="amount_input" invisible="0"/>
                             <field name="post"/>
                         </group>
                     </group>

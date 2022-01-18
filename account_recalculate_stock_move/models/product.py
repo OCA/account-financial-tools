@@ -10,8 +10,10 @@ from odoo.tools.float_utils import float_is_zero, float_compare
 from odoo.addons import decimal_precision as dp
 from odoo.addons.stock_account.models.product import ProductProduct as productproduct
 from odoo.addons.queue_job.job import job
+# from odoo.tools.misc import profile
 
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -79,16 +81,8 @@ class Product(models.Model):
         if real_time_product_ids:
             self.env['account.move.line'].check_access_rights('read')
             fifo_automated_values = {}
-            query = """SELECT aml.product_id, aml.account_id, sum(aml.debit) - sum(aml.credit), sum((aml.quantity/pu.factor)*ppu.factor), array_agg(aml.id)
-                         FROM account_move_line AS aml
-                            INNER JOIN product_uom AS pu
-                                ON pu.id = aml.product_uom_id
-                            INNER JOIN product_product AS pp
-                                ON pp.id = aml.product_id
-                            INNER JOIN product_template AS pt
-                                ON pt.id = pp.product_tmpl_id
-                            INNER JOIN product_uom AS ppu
-                                ON ppu.id = pt.uom_id
+            query = """SELECT aml.product_id, aml.account_id, sum(aml.debit) - sum(aml.credit), sum(quantity), array_agg(aml.id)
+                        FROM account_move_line AS aml
                         WHERE aml.product_id IN %%s AND aml.company_id=%%s %s
                      GROUP BY aml.product_id, aml.account_id"""
             params = (tuple(real_time_product_ids), self.env.user.company_id.id)
@@ -129,17 +123,17 @@ class Product(models.Model):
             product_move_ids[product_id] = move_ids
 
         for product in self:
-            qty_available = product.with_context(company_owned=True, owner_id=False).qty_available
-            price_used = product.standard_price
-            if to_date:
-                price_used = product.get_history_price(
-                    self.env.user.company_id.id,
-                    date=to_date,
-                )
-            product.history_value = price_used * qty_available
-            product.account_standard_price = price_used
-
             if product.cost_method in ['standard', 'average']:
+                qty_available = product.with_context(company_owned=True, owner_id=False).qty_available
+                price_used = product.standard_price
+                if to_date:
+                    price_used = product.get_history_price(
+                        self.env.user.company_id.id,
+                        date=to_date,
+                    )
+                product.history_value = price_used * qty_available
+                product.account_standard_price = price_used
+
                 product.stock_value = price_used * qty_available
                 product.qty_at_date = qty_available
                 product.account_value = price_used * qty_available
@@ -148,24 +142,26 @@ class Product(models.Model):
                 if to_date:
                     if product.product_tmpl_id.valuation == 'manual_periodic':
                         product.stock_value = product_values[product.id]
+                        qty_available = product.with_context(company_owned=True, owner_id=False).qty_available
                         product.qty_at_date = qty_available
                         product.stock_fifo_manual_move_ids = StockMove.browse(product_move_ids[product.id])
                         product.account_value = product_values[product.id]
                         product.account_qty_at_date = qty_available
                         if qty_available != 0:
-                            product.account_standard_price = product_values[product.id]/qty_available
+                            product.account_standard_price = product_values[product.id] / qty_available
                     elif product.product_tmpl_id.valuation == 'real_time':
                         valuation_account_id = product.categ_id.property_stock_valuation_account_id.id
                         value, quantity, aml_ids = fifo_automated_values.get((product.id, valuation_account_id)) or (
-                        0, 0, [])
+                            0, 0, [])
                         product.stock_value = value
                         product.qty_at_date = quantity
                         product.stock_fifo_real_time_aml_ids = self.env['account.move.line'].browse(aml_ids)
                         product.account_value = value
                         product.account_qty_at_date = quantity
                         if quantity != 0:
-                            product.account_standard_price = value/quantity
+                            product.account_standard_price = value / quantity
                 else:
+                    qty_available = product.with_context(company_owned=True, owner_id=False).qty_available
                     product.stock_value = product_values[product.id]
                     product.qty_at_date = qty_available
                     if product.product_tmpl_id.valuation == 'manual_periodic':
@@ -173,16 +169,16 @@ class Product(models.Model):
                         product.account_value = product_values[product.id]
                         product.account_qty_at_date = qty_available
                         if qty_available != 0:
-                            product.account_standard_price = product_values[product.id]/qty_available
+                            product.account_standard_price = product_values[product.id] / qty_available
                     elif product.product_tmpl_id.valuation == 'real_time':
                         valuation_account_id = product.categ_id.property_stock_valuation_account_id.id
                         value, quantity, aml_ids = fifo_automated_values.get((product.id, valuation_account_id)) or (
-                        0, 0, [])
+                            0, 0, [])
                         product.stock_fifo_real_time_aml_ids = self.env['account.move.line'].browse(aml_ids)
                         product.account_value = value
                         product.account_qty_at_date = quantity
                         if quantity != 0:
-                            product.account_standard_price = value/quantity
+                            product.account_standard_price = value / quantity
 
 
 productproduct._compute_stock_value = Product._compute_stock_value
@@ -203,6 +199,7 @@ class ProductTemplate(models.Model):
                 else:
                     template.account_move_line_ids |= product.account_move_line_ids
 
+    # @profile('/tmp/prof.profile')
     @api.multi
     @job
     def server_rebuild_action(self):
@@ -221,6 +218,11 @@ class ProductTemplate(models.Model):
             rounding = product.uom_id.rounding
             for warehouse in self.env['stock.warehouse'].search([('company_id', '=', company)]):
                 location = warehouse.lot_stock_id
+                location |= warehouse.wh_input_stock_loc_id
+                location |= warehouse.wh_qc_stock_loc_id
+                location |= warehouse.wh_output_stock_loc_id
+                location |= warehouse.wh_pack_stock_loc_id
+
                 quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
                 # _logger.info("QUINTS FOR PRODUCT IN LOCATIONS %s:%s:%s:%s" % (product.default_code, product, location.name, quants))
 
@@ -237,7 +239,7 @@ class ProductTemplate(models.Model):
                             if float_is_zero(quant.quantity, precision_rounding=rounding) and float_is_zero(
                                     quant.reserved_quantity, precision_rounding=rounding):
                                 quant.unlink()
-                            #break
+                            # break
                     except OperationalError as e:
                         if e.pgcode == '55P03':  # could not obtain the lock
                             continue
@@ -256,26 +258,36 @@ class ProductTemplate(models.Model):
             if self._uid == SUPERUSER_ID:
                 moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
             landed_cost = self.env['stock.valuation.adjustment.lines'].search([('move_id', 'in', moves.ids)])
-            #try:
+            # try:
             # _logger.info("MOVES %s" % moves)
             date_move = False
             for move in moves.sorted(lambda r: r.date):
-                #move.write({"state": 'assigned'})
-                #move.move_line_ids.write({"state": 'assigned'})
+                # move.write({"state": 'assigned'})
+                # move.move_line_ids.write({"state": 'assigned'})
+                # # !!!! need to move special module if you are mrp is ok but is not this logic is incorrect !!!!
+                # if move.production_id:
+                #     production = move.production_id
+                #     production.with_context(dict(self._context, force_only_production=True)).rebuild_account_move()
+                #     continue
                 move.remaining_value = 0.0
                 move.remaining_qty = 0.0
                 move.value = 0.0
                 move.price_unit = 0.0
                 if move.quantity_done == 0:
                     continue
-                if move.raw_material_production_id:
-                    force_accounting_date = move.raw_material_production_id.date_finished
-                    product = move.product_id.with_context(
-                        dict(self._context, to_date=force_accounting_date))
-                    if product.qty_at_date != 0:
-                        move.price_unit = product.account_value / product.qty_at_date
+                if move.inventory_id:
+                    prod_inventory = move.inventory_id.line_ids.filtered(lambda r: r.product_id == move.product_id)
+                    if prod_inventory and prod_inventory[0].price_unit != 0:
+                        move.price_unit = prod_inventory[0].price_unit
+                # if move.raw_material_production_id:
+                #     force_accounting_date = move.raw_material_production_id.date_finished
+                #     product = move.product_id.with_context(
+                #         dict(self._context, to_date=force_accounting_date))
+                #     if product.qty_at_date != 0:
+                #         move.price_unit = product.account_value / product.qty_at_date
                 correction_value = move._run_valuation(move.quantity_done)
-                for move_line in move.move_line_ids.filtered(lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
+                for move_line in move.move_line_ids.filtered(
+                        lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
                     move_line._action_done()
                 if self.only_quants:
                     continue
@@ -310,18 +322,20 @@ class ProductTemplate(models.Model):
                 # move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
                 # for landed_cost_adjustment in move_landed_cost:
                 #     landed_cost_adjustment.former_cost = move.value
-                if not date_move:
-                    date_move = move.date
-                move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move and (date_move > r.cost_id.date <= move.date))
-                _logger.info("move_landed_cost %s=%s (date_move(%s) > r.cost_id.date(%s) <= move.date(%s))" %
-                             (move_landed_cost, move, move_landed_cost, date_move, move.date))
-                if move_landed_cost:
-                    for landed_cost_adjustment in move_landed_cost:
-                        landed_cost_adjustment.former_cost = move.value
-                    move_landed_cost.mapped('cost_id').rebuild_account_move()
+                # if not date_move:
+                #     date_move = move.date
+                # _logger.info("move_landed_cost %s <> %s" % (date_move, move.date))
+                # move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move and (date_move > r.cost_id.date <= move.date))
+                # if move_landed_cost:
+                #     _logger.info("move_landed_cost %s=%s (date_move(%s) > r.cost_id.date(%s) <= move.date(%s))" %
+                #                  (move_landed_cost.cost_id.name, move, date_move, move_landed_cost.cost_id.date,
+                #                   move.date))
+                #     for landed_cost_adjustment in move_landed_cost:
+                #         landed_cost_adjustment.former_cost = move.value
+                #     move_landed_cost.mapped('cost_id').rebuild_account_move()
                 self._rebuild_moves(product, move, date_move)
-                date_move = move.date
-
+                # date_move = move.date
+            landed_cost.mapped('cost_id').rebuild_account_move()
 
     @api.multi
     def action_get_account_move_lines(self):

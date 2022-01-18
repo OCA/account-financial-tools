@@ -43,8 +43,6 @@ class StockMoveLine(models.Model):
             move.product_price_update_before_done()
 
         if move.state == 'done':
-            if self._context.get("force_valuation"):
-                move._run_valuation(self.qty_done)
             if self._context.get("force_accounting_date"):
                 date = self._context['force_accounting_date']
             else:
@@ -65,10 +63,12 @@ class StockMoveLine(models.Model):
                 price_unit = move.price_unit
                 if move.purchase_line_id:
                     price_unit = move._get_price_unit()
-                amount = self.qty_done * abs(price_unit)
-                _logger.info("MOVE STOCK MOVE self._context(%s)::%s\n%s(%s) %s(%s)*%s (purchase_line_id:%s)" %
-                             (self._context, move.remaining_qty, move.product_id.display_name, move._is_dropshipped(), self.qty_done,
-                              price_unit, move.product_id.standard_price, move.purchase_line_id))
+                
+                valued_quantity = self.product_uom_id._compute_quantity(self.qty_done, self.product_id.uom_id)
+                amount = valued_quantity * abs(price_unit)
+                # _logger.info("MOVE STOCK MOVE self._context(%s)::%s\n%s(%s) %s(%s)=%s*%s (purchase_line_id:%s)" %
+                #              (self._context, move.remaining_qty, move.product_id.display_name, move._is_dropshipped(), self.qty_done,
+                #               price_unit, amount, move.product_id.standard_price, move.purchase_line_id))
 
                 move.with_context(dict(self._context,
                                        forced_quantity=self.qty_done,
@@ -118,7 +118,7 @@ class StockMove(models.Model):
             if not move.account_move_ids and move.state == 'done' and self.env.context.get("rebuld_try"):
                 try:
                     for line in move.move_line_ids:
-                        _logger.info("STOCK MOVE LINE %s" % line)
+                        # _logger.info("STOCK MOVE LINE %s" % line)
                         line._rebuild_account_move()
                 except UserError:
                     _logger.info("STOCK MOVE %s unposted" % move.name)
