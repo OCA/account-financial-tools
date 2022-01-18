@@ -47,6 +47,17 @@ _field_renames = [
      'asset_category_id', 'asset_profile_id'),
 ]
 
+_xml_ids_renames = [
+    (
+        "account_asset_management.account_asset_category_multi_company_rule",
+        "account_asset_management.account_asset_profile_multi_company_rule",
+    ),
+    (
+        "account_asset_management.account_asset_asset_multi_company_rule",
+        "account_asset_management.account_asset_multi_company_rule",
+    ),
+]
+
 
 def handle_account_asset_disposal_migration(env):
     """Take care of potentially installed `account_asset_disposal` module.
@@ -87,6 +98,7 @@ def migrate(env, version):
             openupgrade.copy_columns(cr, _column_copies)
             openupgrade.rename_columns(cr, _column_renames)
             openupgrade.rename_fields(env, _field_renames)
+            openupgrade.rename_xmlids(cr, _xml_ids_renames)
             handle_account_asset_disposal_migration(env)
             if openupgrade.column_exists(cr, 'account_asset',
                                          'analytic_account_id'):
