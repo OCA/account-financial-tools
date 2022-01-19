@@ -32,6 +32,7 @@ addon | version | maintainers | summary
 [account_journal_lock_date](account_journal_lock_date/) | 14.0.1.0.0 |  | Lock each journal independently
 [account_lock_date_update](account_lock_date_update/) | 14.0.2.0.0 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_menu](account_menu/) | 14.0.1.1.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module
+[account_move_budget](account_move_budget/) | 14.0.1.0.0 |  | Create Accounting Budgets
 [account_move_force_removal](account_move_force_removal/) | 14.0.1.0.0 |  | Allow force removal account moves
 [account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 |  | Adds a Journal Items menu
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 14.0.1.0.2 |  | Introduces the purchase order line to the journal items
