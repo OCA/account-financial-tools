@@ -21,6 +21,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 15.0.1.0.1 |  | Introduces the purchase order line to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 15.0.1.0.1 |  | Introduces the purchase order line to the journal items
+[base_vat_optional_vies](base_vat_optional_vies/) | 15.0.1.0.0 |  | Optional validation of VAT via VIES
 
 [//]: # (end addons)
 
