@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo14-addon-account_journal_lock_date',
         'odoo14-addon-account_lock_date_update',
         'odoo14-addon-account_menu',
+        'odoo14-addon-account_move_budget',
         'odoo14-addon-account_move_force_removal',
         'odoo14-addon-account_move_line_menu',
         'odoo14-addon-account_move_line_purchase_info',
