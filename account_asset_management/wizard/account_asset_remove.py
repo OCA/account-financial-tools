@@ -273,9 +273,14 @@ class AccountAssetRemove(models.TransientModel):
             )
             last_depr_date = create_dl.line_date
 
-        period_number_days = (first_date - last_depr_date).days + 1
+        # Never create move.
+        same_month = (
+            last_depr_date.month == first_to_depreciate_dl.line_date.month and 1 or 0
+        )
+
+        period_number_days = (first_date - last_depr_date).days + same_month
         new_line_date = date_remove + relativedelta(days=-1)
-        to_depreciate_days = (new_line_date - last_depr_date).days + 1
+        to_depreciate_days = (new_line_date - last_depr_date).days + same_month
         to_depreciate_amount = round(
             float(to_depreciate_days)
             / float(period_number_days)
