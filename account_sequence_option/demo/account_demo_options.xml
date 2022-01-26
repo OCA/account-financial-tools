@@ -6,90 +6,90 @@
         <field name="name">Customer Invoice</field>
         <field name="padding" eval="5" />
         <field name="prefix">CINV/</field>
+        <field name="use_date_range">false</field>
     </record>
 
     <record id="seq_customer_refund_1" model="ir.sequence">
         <field name="name">Customer Refund</field>
         <field name="padding" eval="5" />
         <field name="prefix">CREF/</field>
+        <field name="use_date_range">false</field>
     </record>
 
     <record id="seq_vendor_bill_1" model="ir.sequence">
         <field name="name">Vendor Bill</field>
         <field name="padding" eval="5" />
         <field name="prefix">VBIL/</field>
+        <field name="use_date_range">false</field>
     </record>
 
     <record id="seq_vendor_refund_1" model="ir.sequence">
         <field name="name">Vendor Refund</field>
         <field name="padding" eval="5" />
         <field name="prefix">VREF/</field>
+        <field name="use_date_range">false</field>
     </record>
 
     <record id="seq_customer_payment_1" model="ir.sequence">
         <field name="name">Customer Payment</field>
         <field name="padding" eval="5" />
         <field name="prefix">CPAY/</field>
+        <field name="use_date_range">false</field>
     </record>
 
     <record id="seq_vendor_payment_1" model="ir.sequence">
         <field name="name">Vendor Payment</field>
         <field name="padding" eval="5" />
         <field name="prefix">VPAY/</field>
+        <field name="use_date_range">false</field>
     </record>
 
     <!-- Demo Options-->
 
     <record id="account_customer_invoice_1" model="ir.sequence.option.line">
-        <field name="base_id" ref="account_sequence" />
+        <field name="base_id" ref="account_sequence_option.account_sequence" />
         <field name="name">Customer Invoice</field>
         <field name="filter_domain">[("move_type", "=", "out_invoice")]</field>
-        <field
-            name="sequence_id"
-            ref="account_sequence_option.seq_customer_invoice_1"
-        />
+        <field name="sequence_id" ref="seq_customer_invoice_1" />
     </record>
 
     <record id="account_customer_refund_1" model="ir.sequence.option.line">
-        <field name="base_id" ref="account_sequence" />
+        <field name="base_id" ref="account_sequence_option.account_sequence" />
         <field name="name">Customer Refund</field>
         <field name="filter_domain">[("move_type", "=", "out_refund")]</field>
-        <field name="sequence_id" ref="account_sequence_option.seq_customer_refund_1" />
+        <field name="sequence_id" ref="seq_customer_refund_1" />
     </record>
 
     <record id="account_vendor_bill_1" model="ir.sequence.option.line">
-        <field name="base_id" ref="account_sequence" />
+        <field name="base_id" ref="account_sequence_option.account_sequence" />
         <field name="name">Vendor Bill</field>
         <field name="filter_domain">[("move_type", "=", "in_invoice")]</field>
-        <field name="sequence_id" ref="account_sequence_option.seq_vendor_bill_1" />
+        <field name="sequence_id" ref="seq_vendor_bill_1" />
     </record>
 
     <record id="account_vendor_refund_1" model="ir.sequence.option.line">
-        <field name="base_id" ref="account_sequence" />
+        <field name="base_id" ref="account_sequence_option.account_sequence" />
         <field name="name">Vendor Refund</field>
         <field name="filter_domain">[("move_type", "=", "in_refund")]</field>
-        <field name="sequence_id" ref="account_sequence_option.seq_vendor_refund_1" />
+        <field name="sequence_id" ref="seq_vendor_refund_1" />
     </record>
 
     <record id="account_customer_payment_1" model="ir.sequence.option.line">
-        <field name="base_id" ref="account_sequence" />
+        <field name="base_id" ref="account_sequence_option.account_sequence" />
         <field name="name">Customer Payment</field>
         <field
             name="filter_domain"
         >[("move_type", "=", "entry"), ("payment_id.payment_type", "=", "inbound")]</field>
-        <field
-            name="sequence_id"
-            ref="account_sequence_option.seq_customer_payment_1"
-        />
+        <field name="sequence_id" ref="seq_customer_payment_1" />
     </record>
 
     <record id="account_vendor_payment_1" model="ir.sequence.option.line">
-        <field name="base_id" ref="account_sequence" />
+        <field name="base_id" ref="account_sequence_option.account_sequence" />
         <field name="name">Vendor Payment</field>
         <field
             name="filter_domain"
         >[("move_type", "=", "entry"), ("payment_id.payment_type", "=", "outbound")]</field>
-        <field name="sequence_id" ref="account_sequence_option.seq_vendor_payment_1" />
+        <field name="sequence_id" ref="seq_vendor_payment_1" />
     </record>
 
 </odoo>
