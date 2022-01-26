@@ -982,7 +982,9 @@ class AccountAsset(models.Model):
         day_amount = 0.0
         if self.days_calc:
             days = (depreciation_stop_date - depreciation_start_date).days + 1
-            day_amount = self.depreciation_base / days
+            purchase_value = self.purchase_value or 0.0
+            salvage_value = self.salvage_value or 0.0
+            day_amount = (purchase_value - salvage_value) / days
 
         for i, entry in enumerate(table):
             if self.method_time == "year":
