@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.15.1: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils: http://docutils.sourceforge.net/" />
 <title>Account Sequence Option</title>
 <style type="text/css">
 
@@ -368,8 +368,27 @@ ul.auto-toc {
 !! changes will be overwritten.                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external" href="https://odoo-community.org/page/development-status"><img alt="Alpha" src="https://img.shields.io/badge/maturity-Alpha-red.png" /></a> <a class="reference external" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external" href="https://github.com/OCA/account-financial-tools/tree/14.0/account_sequence_option"><img alt="OCA/account-financial-tools" src="https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github" /></a> <a class="reference external" href="https://translation.odoo-community.org/projects/account-financial-tools-14-0/account-financial-tools-14-0-account_sequence_option"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external" href="https://runbot.odoo-community.org/runbot/92/14.0"><img alt="Try me on Runbot" src="https://img.shields.io/badge/runbot-Try%20me-875A7B.png" /></a></p>
-<p>This module extends module ir_sequence_option and allow you to
+<p>This module extends module base_sequence_option and allow you to
 provide optional sequences for account.move documents, i.e., invoice, bill, journal entry.</p>
+<p>To use this module, enable developer mode, and check “Use sequence options”
+under Settings -&gt; Technical -&gt; Manage Sequence Options.</p>
+<p>If you want to define your sequences in XML, feel free to use
+demo/account_demo_options.xml as a base for your own sequence definitions.</p>
+<p>The demo sequences use a continuous numbering scheme, without the current year
+in the generated name. To use a scheme that does include the year, set
+<tt class="docutils literal">use_date_range</tt> to <tt class="docutils literal">true</tt>, and use <tt class="docutils literal">%(range_year)s</tt> the represent the year.
+For example, to generate an invoice scheme that will generate “2022F00001” in
+2022, try:</p>
+<pre class="literal-block">
+&lt;record id=&quot;seq_customer_invoice_1&quot; model=&quot;ir.sequence&quot;&gt;
+    &lt;field name=&quot;name&quot;&gt;Customer Invoice&lt;/field&gt;
+    &lt;field name=&quot;padding&quot; eval=&quot;5&quot; /&gt;
+    &lt;field name=&quot;prefix&quot;&gt;%(range_year)sF&lt;/field&gt;
+    &lt;field name=&quot;use_date_range&quot;&gt;true&lt;/field&gt;
+&lt;/record&gt;
+</pre>
+<p>Odoo will generate the date ranges automagically when the first invoice (or
+vendor bill, etc) of a year is posted.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">This is an alpha version, the data model and design can change at any time without warning.
