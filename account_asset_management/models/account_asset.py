@@ -520,7 +520,12 @@ class AccountAsset(models.Model):
 
     def validate(self):
         for asset in self:
-            if asset.company_currency_id.is_zero(asset.value_residual):
+            if (
+                asset.company_currency_id.compare_amounts(
+                    asset.value_residual, asset.salvage_value
+                )
+                == 0
+            ):
                 asset.state = "close"
             else:
                 asset.state = "open"
