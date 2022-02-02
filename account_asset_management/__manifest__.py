@@ -2,10 +2,11 @@
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2022 Pyming - Xavier Gutierrez
 
 {
     "name": "Assets Management",
-    "version": "14.0.2.4.4",
+    "version": "15.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["account", "report_xlsx_helper"],
     "excludes": ["account_asset"],

@@ -113,12 +113,14 @@ class AccountMove(models.Model):
             if refs:
                 message = _("This invoice created the asset(s): %s") % ", ".join(refs)
                 move.message_post(body=message)
+        return True
 
     def button_draft(self):
         invoices = self.filtered(lambda r: r.is_purchase_document())
         if invoices:
             invoices.line_ids.asset_id.unlink()
         super().button_draft()
+        return True
 
     def _reverse_move_vals(self, default_values, cancel=True):
         move_vals = super()._reverse_move_vals(default_values, cancel)
@@ -169,6 +171,7 @@ class AccountMoveLine(models.Model):
         if self.account_id.asset_profile_id:
             self.asset_profile_id = self.account_id.asset_profile_id
         super()._onchange_account_id()
+        return True
 
     @api.onchange("asset_profile_id")
     def _onchange_asset_profile_id(self):

@@ -58,7 +58,6 @@ class AccountAsset(models.Model):
         states=READONLY_STATES,
     )
     purchase_value = fields.Float(
-        string="Purchase Value",
         required=True,
         states=READONLY_STATES,
         help="This amount represent the initial value of the asset."
@@ -66,7 +65,6 @@ class AccountAsset(models.Model):
         "\nPurchase Value - Salvage Value.",
     )
     salvage_value = fields.Float(
-        string="Salvage Value",
         digits="Account",
         states=READONLY_STATES,
         help="The estimated value that an asset will realize upon "
@@ -76,7 +74,6 @@ class AccountAsset(models.Model):
     depreciation_base = fields.Float(
         compute="_compute_depreciation_base",
         digits="Account",
-        string="Depreciation Base",
         store=True,
         help="This amount represent the depreciation base "
         "of the asset (Purchase Value - Salvage Value).",
@@ -93,7 +90,7 @@ class AccountAsset(models.Model):
         string="Depreciated Value",
         store=True,
     )
-    note = fields.Text("Note")
+    note = fields.Text()
     profile_id = fields.Many2one(
         comodel_name="account.asset.profile",
         string="Asset Profile",
@@ -226,7 +223,6 @@ class AccountAsset(models.Model):
         help="Use number of days to calculate depreciation amount",
     )
     use_leap_years = fields.Boolean(
-        string="Use leap years",
         compute="_compute_use_leap_years",
         readonly=False,
         store=True,
@@ -1225,11 +1221,11 @@ class AccountAsset(models.Model):
                 asset_ref = depreciation.asset_id.name
                 if depreciation.asset_id.code:
                     asset_ref = "[{}] {}".format(depreciation.asset_id.code, asset_ref)
-                error_log += _("\nError while processing asset '%s': %s") % (
+                error_log += _("\nError while processing asset '{}': {}") % (
                     asset_ref,
                     str(e),
                 )
-                error_msg = _("Error while processing asset '%s': \n\n%s") % (
+                error_msg = _("Error while processing asset '{}': \n\n{}") % (
                     asset_ref,
                     tb,
                 )

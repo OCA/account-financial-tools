@@ -509,8 +509,9 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         asset.compute_depreciation_board()
         asset.validate()
-        wiz_ctx = {"active_id": asset.id, "early_removal": True}
-        wiz = self.remove_model.with_context(wiz_ctx).create(
+        wiz = self.remove_model.with_context(
+            active_id=asset.id, early_removal=True
+        ).create(
             {
                 "date_remove": "2019-01-31",
                 "sale_value": 0.0,
@@ -576,9 +577,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
 
     def test_11_assets_from_invoice(self):
         all_assets = self.env["account.asset"].search([])
-        ctx = dict(self.invoice_2._context)
-        del ctx["default_move_type"]
-        invoice = self.invoice_2.with_context(ctx)
+        invoice = self.invoice_2.with_context(default_move_type=False)
         asset_profile = self.car5y
         asset_profile.asset_product_item = True
         # Compute depreciation lines on invoice validation

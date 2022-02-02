@@ -357,21 +357,22 @@ class AssetReportXlsx(models.AbstractModel):
             "report_type": "removal",
         }
 
-    def _get_title(self, wiz, report, format="normal"):
+    def _get_title(self, wiz, report, formatting="normal"):
 
         prefix = "{} - {}".format(wiz.date_from, wiz.date_to)
+
         if report == "acquisition":
-            if format == "normal":
+            if formatting == "normal":
                 title = prefix + " : " + _("New Acquisitions")
             else:
                 title = "ACQ"
         elif report == "active":
-            if format == "normal":
+            if formatting == "normal":
                 title = prefix + " : " + _("Active Assets")
             else:
                 title = "ACT"
         else:
-            if format == "normal":
+            if formatting == "normal":
                 title = prefix + " : " + _("Removed Assets")
             else:
                 title = "DSP"
@@ -412,7 +413,7 @@ class AssetReportXlsx(models.AbstractModel):
                         raise UserError(
                             _(
                                 "Inconsistent reporting structure."
-                                "\nPlease correct Asset Group '%s' (id %s)"
+                                "\nPlease correct Asset Group '{}' (id %s)"
                             )
                             % (child.name, child.id)
                         )
@@ -468,8 +469,8 @@ class AssetReportXlsx(models.AbstractModel):
         report = ws_params["report_type"]
 
         def asset_filter(asset):
-            filter = getattr(self, "{}_filter".format(report))
-            return filter(wiz, asset)
+            filtering = getattr(self, "{}_filter".format(report))
+            return filtering(wiz, asset)
 
         def _has_assets(group, group_val):
             assets = group_val.get("assets")
@@ -567,8 +568,8 @@ class AssetReportXlsx(models.AbstractModel):
         row_pos = self._report_title(ws, row_pos, ws_params, data, wiz)
 
         def asset_filter(asset):
-            filter = getattr(self, "{}_filter".format(report))
-            return filter(wiz, asset)
+            filtering = getattr(self, "{}_filter".format(report))
+            return filtering(wiz, asset)
 
         assets = data["assets"].filtered(asset_filter)
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
         <record forcecreate="True" id="ir_cron_assets_generator" model="ir.cron">
             <field name="name">Asset Management: Generate assets</field>
             <field name="model_id" ref="model_account_asset_compute" />
@@ -13,5 +12,4 @@
             <field name="active" eval="False" />
             <field name="doall" eval="False" />
         </record>
-    </data>
 </odoo>

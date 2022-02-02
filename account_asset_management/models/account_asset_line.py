@@ -31,7 +31,7 @@ class AccountAssetLine(models.Model):
     depreciation_base = fields.Float(
         related="asset_id.depreciation_base", string="Depreciation Base", readonly=True
     )
-    amount = fields.Float(string="Amount", digits="Account", required=True)
+    amount = fields.Float(digits="Account", required=True)
     remaining_value = fields.Float(
         compute="_compute_values",
         digits="Account",
@@ -258,22 +258,29 @@ class AccountAssetLine(models.Model):
     def create_move(self):
         created_move_ids = []
         asset_ids = set()
-        ctx = dict(self.env.context, allow_asset=True, check_move_validity=False)
         for line in self:
             asset = line.asset_id
             depreciation_date = line.line_date
             am_vals = line._setup_move_data(depreciation_date)
-            move = self.env["account.move"].with_context(ctx).create(am_vals)
+            move = (
+                self.env["account.move"]
+                .with_context(allow_asset=True, check_move_validity=False)
+                .create(am_vals)
+            )
             depr_acc = asset.profile_id.account_depreciation_id
             exp_acc = asset.profile_id.account_expense_depreciation_id
             aml_d_vals = line._setup_move_line_data(
                 depreciation_date, depr_acc, "depreciation", move
             )
-            self.env["account.move.line"].with_context(ctx).create(aml_d_vals)
+            self.env["account.move.line"].with_context(
+                allow_asset=True, check_move_validity=False
+            ).create(aml_d_vals)
             aml_e_vals = line._setup_move_line_data(
                 depreciation_date, exp_acc, "expense", move
             )
-            self.env["account.move.line"].with_context(ctx).create(aml_e_vals)
+            self.env["account.move.line"].with_context(
+                allow_asset=True, check_move_validity=False
+            ).create(aml_e_vals)
             move.action_post()
             line.with_context(allow_asset_line_update=True).write({"move_id": move.id})
             created_move_ids.append(move.id)
