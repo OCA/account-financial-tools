@@ -63,7 +63,7 @@ addon | version | maintainers | summary
 [account_tax_repartition_line_tax_group_account](account_tax_repartition_line_tax_group_account/) | 13.0.1.0.0 |  | Set a default account from tax group to tax repartition lines
 [base_vat_optional_vies](base_vat_optional_vies/) | 13.0.1.0.1 |  | Optional validation of VAT via VIES
 [product_category_tax](product_category_tax/) | 13.0.1.1.0 |  | Configure taxes in the product category
-[stock_account_prepare_anglo_saxon_out_lines_hook](stock_account_prepare_anglo_saxon_out_lines_hook/) | 13.0.1.0.1 |  | Modify when and how anglo saxon journal items are created
+[stock_account_prepare_anglo_saxon_out_lines_hook](stock_account_prepare_anglo_saxon_out_lines_hook/) | 13.0.1.0.2 |  | Modify when and how anglo saxon journal items are created
 
 [//]: # (end addons)
 
