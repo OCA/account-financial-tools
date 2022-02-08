@@ -6,6 +6,7 @@
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # Copyright 2016 Jacques-Etienne Baudoux <je@bcim.be>
 # Copyright 2018 Tecnativa - Pedro M. Baeza
+# Copyright 2022 NuoBiT - Eric Antones <eantones@nuobit.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -899,8 +900,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Process taxes to create/update/deactivate."""
         # First create taxes in batch
         taxes_to_create = self.tax_ids.filtered(lambda x: x.type == "new")
-        taxes_to_create.mapped("tax_id")._generate_tax(self.company_id)
+        new_taxes = taxes_to_create.mapped("tax_id")._generate_tax(self.company_id)
         for wiz_tax in taxes_to_create:
+            wiz_tax.update_tax_id = new_taxes["tax_template_to_tax"][wiz_tax.tax_id.id]
             _logger.info(_("Created tax %s."), "'%s'" % wiz_tax.tax_id.name)
         for wiz_tax in self.tax_ids.filtered(lambda x: x.type != "new"):
             template, tax = wiz_tax.tax_id, wiz_tax.update_tax_id
@@ -999,23 +1001,39 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         when the referenced accounts are still not available).
         """
         for wiz_tax in self.tax_ids:
-            if wiz_tax.type == "deleted" or not wiz_tax.update_tax_id:
-                continue
             template = wiz_tax.tax_id
             tax = wiz_tax.update_tax_id
-            done = False
-            vals = {}
-            for key, value in self.diff_fields(template, tax).items():
-                if key in {
-                    "invoice_repartition_line_ids",
-                    "refund_repartition_line_ids",
-                }:
-                    vals[key] = value
-                    done = True
-            if vals:
-                tax.write(vals)
-            if done:
-                _logger.info(_("Post-updated tax %s."), "'%s'" % tax.name)
+            if wiz_tax.type == "new":
+                all_tax_rep_lines = (
+                    tax.invoice_repartition_line_ids.sorted()
+                    + tax.refund_repartition_line_ids.sorted()
+                )
+                all_template_rep_lines = (
+                    template.invoice_repartition_line_ids
+                    + template.refund_repartition_line_ids
+                )
+                for tax_rl, template_rl in zip(
+                    all_tax_rep_lines, all_template_rep_lines
+                ):
+                    template_account = template_rl.account_id
+                    if template_account:
+                        tax_rl.account_id = self.find_account_by_templates(
+                            template_account
+                        )
+            elif wiz_tax.type == "updated":
+                done = False
+                vals = {}
+                for key, value in self.diff_fields(template, tax).items():
+                    if key in {
+                        "invoice_repartition_line_ids",
+                        "refund_repartition_line_ids",
+                    }:
+                        vals[key] = value
+                        done = True
+                if vals:
+                    tax.write(vals)
+                if done:
+                    _logger.info(_("Post-updated tax %s."), "'%s'" % tax.name)
 
     def _prepare_fp_vals(self, fp_template):
         # Tax mappings

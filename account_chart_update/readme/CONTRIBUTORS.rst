@@ -8,3 +8,4 @@
 * Sylvain Van Hoof <sylvain@okia.be>
 * Nacho Muñoz <nacmuro@gmail.com>
 * Alberto Martín - Guadaltech <alberto.martin@guadaltech.es>
+* Eric Antones <eantones@nuobit.com>
