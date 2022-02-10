@@ -40,7 +40,6 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1074
 #: code:addons/account_asset_management/models/account_asset.py:1075
 #, python-format
 msgid ""
@@ -619,7 +618,6 @@ msgid "Degressive-Linear"
 msgstr "Decréscimo Linear"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:255
 #: code:addons/account_asset_management/models/account_asset.py:256
 #: code:addons/account_asset_management/models/account_asset_profile.py:180
 #, python-format
@@ -755,7 +753,6 @@ msgid "Entries"
 msgstr "Lançamentos"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1077
 #: code:addons/account_asset_management/models/account_asset.py:1078
 #, python-format
 msgid ""
@@ -825,7 +822,6 @@ msgid "General"
 msgstr "Geral"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:436
 #: code:addons/account_asset_management/models/account_asset.py:437
 #, python-format
 msgid "Generate Asset Removal entries"
@@ -914,7 +910,6 @@ msgstr ""
 "término da depreciação - data de início + 1) * dias no ano atual."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:792
 #: code:addons/account_asset_management/models/account_asset.py:793
 #, python-format
 msgid "Illegal value %s in asset.method."
@@ -982,7 +977,6 @@ msgid "Journal"
 msgstr "Diário"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:456
 #: code:addons/account_asset_management/models/account_asset.py:457
 #: model:ir.model,name:account_asset_management.model_account_move
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1490,7 +1484,6 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:765
 #: code:addons/account_asset_management/models/account_asset.py:766
 #, python-format
 msgid ""
@@ -1520,7 +1513,6 @@ msgid "The Sale Value must be positive!"
 msgstr "O Valor de Venda deve ser positivo!"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:265
 #: code:addons/account_asset_management/models/account_asset.py:266
 #: code:addons/account_asset_management/wizard/wiz_account_asset_report.py:52
 #, python-format
@@ -1528,7 +1520,6 @@ msgid "The Start Date must precede the Ending Date."
 msgstr "A Data Inicial deve preceder a Data Final."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:542
 #: code:addons/account_asset_management/models/account_asset.py:543
 #, python-format
 msgid ""
@@ -1747,7 +1738,6 @@ msgstr ""
 "Você deve removê-los a partir do ativo."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:371
 #: code:addons/account_asset_management/models/account_asset.py:372
 #, python-format
 msgid "You can only delete assets in draft state."
@@ -1791,7 +1781,6 @@ msgstr ""
 "depreciação de ativo."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:288
 #: code:addons/account_asset_management/models/account_asset.py:289
 #, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
@@ -1809,7 +1798,6 @@ msgstr ""
 "contábil."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:375
 #: code:addons/account_asset_management/models/account_asset.py:376
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
