@@ -175,6 +175,7 @@ msgid "Differences in these fields: %s."
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__display_name
@@ -281,6 +282,7 @@ msgid "Here you can set the matching order."
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__id
@@ -320,6 +322,7 @@ msgid "Language"
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching____last_update
@@ -430,6 +433,12 @@ msgid "No fiscal position found with this name."
 msgstr ""
 
 #. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+#, python-format
+msgid "No real account found for template account with ID %s"
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__code_digits
 msgid "No. of Digits to use for account code"
 msgstr ""
@@ -463,7 +472,7 @@ msgstr ""
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
-msgid "Post-updated tax %s."
+msgid "Post-updated account fields for taxes with IDs %s."
 msgstr ""
 
 #. module: account_chart_update
@@ -478,6 +487,9 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__recreate_xml_ids
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__recreate_xml_ids
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__recreate_xml_ids
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__recreate_xml_ids
 msgid "Recreate missing XML-IDs"
 msgstr ""
 
@@ -521,7 +533,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
-msgid "Tax Scope"
+msgid "Tax Type"
 msgstr ""
 
 #. module: account_chart_update
@@ -594,8 +606,23 @@ msgid "Update Chart Template"
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
+msgid "Update Tax Accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_tags
+msgid "Update Tax Tags"
+msgstr ""
+
+#. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Update Taxes, fiscal positions or chart of accounts."
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
+msgid "Update account_id field on existing Tax repartition lines"
 msgstr ""
 
 #. module: account_chart_update
@@ -632,6 +659,11 @@ msgstr ""
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Update records?"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_tags
+msgid "Update tag_ids field on existing Tax repartition lines"
 msgstr ""
 
 #. module: account_chart_update
