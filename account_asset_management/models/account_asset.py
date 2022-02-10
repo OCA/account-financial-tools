@@ -32,6 +32,7 @@ class DummyFy(object):
 
 class AccountAsset(models.Model):
     _name = "account.asset"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Asset"
     _order = "date_start desc, code, name"
     _check_company_auto = True
