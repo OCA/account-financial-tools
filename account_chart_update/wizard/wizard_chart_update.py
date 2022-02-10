@@ -961,7 +961,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     # We defer update because account might not be created yet
                     if key in [
                         "cash_basis_transition_account_id",
-                        "cash_basis_base_account_id",
                         "invoice_repartition_line_ids",
                         "refund_repartition_line_ids",
                     ]:
@@ -1055,7 +1054,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             vals = {}
             for fld in [
                 "cash_basis_transition_account_id",
-                "cash_basis_base_account_id",
             ]:
                 if v[fld]:
                     acc_id = self.find_account_by_templates(
@@ -1095,7 +1093,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             for key, value in self.diff_fields(template, tax).items():
                 if key in {
                     "cash_basis_transition_account_id",
-                    "cash_basis_base_account_id",
                     "invoice_repartition_line_ids",
                     "refund_repartition_line_ids",
                 }:
