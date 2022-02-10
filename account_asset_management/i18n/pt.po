@@ -53,6 +53,11 @@ msgid "Account Asset"
 msgstr "Conta ativos"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__active
 msgid "Active"
@@ -62,6 +67,26 @@ msgstr "Activo"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Active Assets"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_icon
+msgid "Activity Type Icon"
 msgstr ""
 
 #. module: account_asset_management
@@ -266,6 +291,11 @@ msgstr "Ativos"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_attachment_count
+msgid "Attachment Count"
 msgstr ""
 
 #. module: account_asset_management
@@ -667,6 +697,26 @@ msgid "Financial Assets report"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
 #, fuzzy
 msgid "Force accounting date"
@@ -726,6 +776,28 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__use_leap_years
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__use_leap_years
 msgid ""
@@ -776,6 +848,11 @@ msgstr "Init"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__init_entry
 msgid "Initial Balance Entry"
 msgstr "Mov. de Saldo Inicial"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_is_follower
+msgid "Is Follower"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__journal_id
@@ -860,6 +937,21 @@ msgid "Linear up to Salvage Value"
 msgstr "Valor Residual"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_min_value_id
 msgid "Min-Value Account"
@@ -878,6 +970,11 @@ msgid "Month"
 msgstr "Mês"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__name
@@ -889,6 +986,21 @@ msgstr "Nome"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "New Acquisitions"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_id
+msgid "Next Activity Type"
 msgstr ""
 
 #. module: account_asset_management
@@ -918,6 +1030,11 @@ msgid "Notes"
 msgstr "Notas"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Depreciations"
@@ -936,6 +1053,26 @@ msgstr "Número de Anos"
 #, fuzzy, python-format
 msgid "Number of Years or end date"
 msgstr "Número de Anos"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__open
@@ -1115,6 +1252,11 @@ msgid "Residual Value Account"
 msgstr "Conta de Valor Residual"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 msgid "Results :"
 msgstr ""
@@ -1124,6 +1266,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "Em Funcionamento"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
@@ -1191,6 +1338,15 @@ msgstr "Estado do ativo"
 #, python-format
 msgid "Status"
 msgstr "Estado"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -1321,9 +1477,24 @@ msgid "Type"
 msgstr "Tipo"
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Undetermined error"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread_counter
+msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: account_asset_management
@@ -1349,6 +1520,16 @@ msgstr "Movimento de ativos criados"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "View Move"
 msgstr "Vista Movimento"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__website_message_ids
+msgid "Website communication history"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__state
