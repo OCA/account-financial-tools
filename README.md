@@ -32,7 +32,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_asset_batch_compute](account_asset_batch_compute/) | 13.0.1.0.0 |  | Add the possibility to compute assets in batch
-[account_asset_management](account_asset_management/) | 13.0.3.7.0 |  | Assets Management
+[account_asset_management](account_asset_management/) | 13.0.3.7.1 |  | Assets Management
 [account_asset_management_menu](account_asset_management_menu/) | 13.0.1.0.0 |  | Assets Management Menu
 [account_balance_line](account_balance_line/) | 13.0.1.0.0 |  | Display balance totals in move line view
 [account_cash_basis_group_base_line](account_cash_basis_group_base_line/) | 13.0.0.0.1 |  | Compacting the creation of Journal Lines for CABA base lines.
