@@ -19,8 +19,8 @@ class AccountMove(models.Model):
         ondelete="restrict",
     )
 
-    def post(self):
-        res = super().post()
+    def action_post(self):
+        res = super().action_post()
         for record in self:
             loan_line_id = record.loan_line_id
             if loan_line_id:

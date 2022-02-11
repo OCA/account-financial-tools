@@ -305,7 +305,7 @@ class TestLoan(TransactionCase):
         self.assertTrue(line.move_ids)
         self.assertEqual(line.move_ids.state, "draft")
         self.assertTrue(line.has_moves)
-        line.move_ids.post()
+        line.move_ids.action_post()
         self.assertEqual(line.move_ids.state, "posted")
         self.assertIn(
             line.move_ids.id,
