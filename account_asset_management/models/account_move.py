@@ -79,6 +79,8 @@ class AccountMove(models.Model):
                     raise UserError(
                         _("Asset name must be set in the label of the line.")
                     )
+                if aml.asset_id:
+                    continue
                 vals = {
                     "name": aml.name,
                     "code": move.name,
@@ -99,7 +101,9 @@ class AccountMove(models.Model):
                     setattr(asset_form, key, val)
                 asset = asset_form.save()
                 asset.analytic_tag_ids = aml.analytic_tag_ids
-                aml.with_context(allow_asset=True).asset_id = asset.id
+                aml.with_context(
+                    allow_asset=True, allow_asset_removal=True
+                ).asset_id = asset.id
             refs = [
                 "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"
                 % tuple(name_get)
@@ -159,17 +163,26 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     asset_profile_id = fields.Many2one(
-        comodel_name="account.asset.profile", string="Asset Profile",
+        comodel_name="account.asset.profile",
+        string="Asset Profile",
+        compute="_compute_asset_profile",
+        store=True,
+        readonly=False,
+        copy=True,
     )
     asset_id = fields.Many2one(
         comodel_name="account.asset", string="Asset", ondelete="restrict",
     )
 
-    @api.onchange("account_id")
-    def _onchange_account_id(self):
-        if self.account_id.asset_profile_id:
-            self.asset_profile_id = self.account_id.asset_profile_id
-        super()._onchange_account_id()
+    @api.depends("account_id", "asset_id")
+    def _compute_asset_profile(self):
+        for rec in self:
+            if rec.account_id.asset_profile_id and not rec.asset_id:
+                rec.asset_profile_id = rec.account_id.asset_profile_id
+            elif rec.asset_id:
+                rec.asset_profile_id = rec.asset_id.profile_id
+            else:
+                rec.asset_profile_id = False
 
     @api.onchange("asset_profile_id")
     def _onchange_asset_profile_id(self):
