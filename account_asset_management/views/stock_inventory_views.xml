@@ -10,9 +10,9 @@
                 <field name="asset_id"/>
                 <field name="asset_profile_id"/>
             </field>
-            <field name="product_uom_id" position="after">
-                <field name="price_unit"/>
-            </field>
+<!--            <field name="product_uom_id" position="after">-->
+<!--                <field name="price_unit"/>-->
+<!--            </field>-->
         </field>
     </record>
 
@@ -25,9 +25,9 @@
                 <field name="asset_id"/>
                 <field name="asset_profile_id"/>
             </field>
-            <field name="product_uom_id" position="after">
-                <field name="price_unit"/>
-            </field>
+<!--            <field name="product_uom_id" position="after">-->
+<!--                <field name="price_unit"/>-->
+<!--            </field>-->
         </field>
     </record>
 
@@ -40,7 +40,7 @@
                 <field name="asset_id" domain="[('id', 'in', account_asset_ids)]"/>
                 <field name="asset_profile_id"/>
                 <field name="account_asset_ids" invisible="1"/>
-                <field name="price_unit"/>
+<!--                <field name="price_unit"/>-->
             </xpath>
         </field>
     </record>

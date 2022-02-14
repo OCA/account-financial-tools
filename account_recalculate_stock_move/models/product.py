@@ -188,7 +188,7 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     account_move_line_ids = fields.One2many('account.move.line', compute="_compute_account_move_line_ids")
-    only_quants = fields.Boolean('Only quantity rebuild')
+    # only_quants = fields.Boolean('Only quantity rebuild')
 
     def _compute_account_move_line_ids(self):
         for template in self:
@@ -206,25 +206,39 @@ class ProductTemplate(models.Model):
         for product in self:
             product.rebuild_moves()
 
-    def _rebuild_moves(self, product, move, date_move):
+    def _pre_rebuild_moves(self, product, move, date_move):
+        return
+
+    def _post_rebuild_moves(self, product, move, date_move):
         return
 
     def rebuild_moves(self):
         company = self.env.user.company_id.id
-        # warehouse = self.env['stock.warehouse'].search([('company_id', '=', company)], limit=1)
-
-        # force remove quant's
         for product in self.product_variant_ids:
-            rounding = product.uom_id.rounding
-            for warehouse in self.env['stock.warehouse'].search([('company_id', '=', company)]):
-                location = warehouse.lot_stock_id
-                location |= warehouse.wh_input_stock_loc_id
-                location |= warehouse.wh_qc_stock_loc_id
-                location |= warehouse.wh_output_stock_loc_id
-                location |= warehouse.wh_pack_stock_loc_id
+            moves = self.env['stock.move'].search([('product_id', '=', product.id), ('state', '=', 'done')])
+            if self._uid == SUPERUSER_ID:
+                moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
+            if sum([x.product_uom_qty for x in moves.mapped('move_line_ids')]) > 0.0:
+                raise UserError(_('Before to start recalculation first unreserved all quantity for this product'))
 
+            rounding = product.uom_id.rounding
+            # first clear all quantity in table for save
+            for warehouse in self.env['stock.warehouse'].search([('company_id', '=', company)]):
+                # get for main warehouse location
+                location = warehouse.lot_stock_id
                 quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
-                # _logger.info("QUINTS FOR PRODUCT IN LOCATIONS %s:%s:%s:%s" % (product.default_code, product, location.name, quants))
+                # get for reception warehouse location
+                location = warehouse.wh_input_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for quality control location
+                location = warehouse.wh_qc_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for delivery warehouse location
+                location = warehouse.wh_output_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for packaging location in warehouse
+                location = warehouse.wh_pack_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
 
                 for quant in quants:
                     try:
@@ -245,52 +259,48 @@ class ProductTemplate(models.Model):
                             continue
                         else:
                             raise
-
+            # second clear all history for product with average or standard price method for cost
             history = self.env['product.price.history'].search([
                 ('company_id', '=', company),
                 ('product_id', 'in', self.product_variant_ids.ids)], order='datetime desc,id desc')
             if history:
                 history.unlink()
-            # quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
-            # _logger.info("QUINTS FOR PRODUCT IN LOCATIONS %s:%s:%s:%s" % (product.default_code, product, location.name, quants))
 
-            moves = self.env['stock.move'].search([('product_id', '=', product.id), ('state', '=', 'done')])
-            if self._uid == SUPERUSER_ID:
-                moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
+            # collect all landed cost for recalculate
             landed_cost = self.env['stock.valuation.adjustment.lines'].search([('move_id', 'in', moves.ids)])
-            # try:
-            # _logger.info("MOVES %s" % moves)
+            move_landed_cost = {}
+            landed_move_cost = {}
+            for line_landed in landed_cost:
+                move_landed_cost[line_landed.move_id] = line_landed.cost_id
+                landed_move_cost[line_landed.cost_id] = landed_cost.filtered(lambda r: r.cost_id == line_landed.cost_id).ids
+            # start rebuild all stock moves and account moves
             date_move = False
+            current_landed_cost = False
             for move in moves.sorted(lambda r: r.date):
-                # move.write({"state": 'assigned'})
-                # move.move_line_ids.write({"state": 'assigned'})
-                # # !!!! need to move special module if you are mrp is ok but is not this logic is incorrect !!!!
-                # if move.production_id:
-                #     production = move.production_id
-                #     production.with_context(dict(self._context, force_only_production=True)).rebuild_account_move()
-                #     continue
+                if move.quantity_done == 0:
+                    continue
+                if not current_landed_cost:
+                    current_landed_cost = move_landed_cost.get(move, False)
+                if move_landed_cost.get(move, False) != current_landed_cost:
+                    current_landed_cost.rebuild_account_move()
+                    current_landed_cost = False
                 move.remaining_value = 0.0
                 move.remaining_qty = 0.0
                 move.value = 0.0
                 move.price_unit = 0.0
-                if move.quantity_done == 0:
-                    continue
                 if move.inventory_id:
                     prod_inventory = move.inventory_id.line_ids.filtered(lambda r: r.product_id == move.product_id)
                     if prod_inventory and prod_inventory[0].price_unit != 0:
                         move.price_unit = prod_inventory[0].price_unit
-                # if move.raw_material_production_id:
-                #     force_accounting_date = move.raw_material_production_id.date_finished
-                #     product = move.product_id.with_context(
-                #         dict(self._context, to_date=force_accounting_date))
-                #     if product.qty_at_date != 0:
-                #         move.price_unit = product.account_value / product.qty_at_date
+
+                self._pre_rebuild_moves(product, move, date_move)
+
                 correction_value = move._run_valuation(move.quantity_done)
                 for move_line in move.move_line_ids.filtered(
                         lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
                     move_line._action_done()
-                if self.only_quants:
-                    continue
+                # if self.only_quants:
+                #     continue
 
                 # now to regenerate account moves
                 acc_moves = False
@@ -319,6 +329,9 @@ class ProductTemplate(models.Model):
                     move.move_line_ids.write({'date': move.inventory_id.accounting_date or move.inventory_id.date})
                 move.with_context(dict(self._context, force_valuation_amount=correction_value, force_date=move.date,
                                        rebuld_try=True, force_re_calculate=True)).rebuild_account_move()
+                if landed_move_cost.get(move_landed_cost.get(move, False), -1) == 1:
+                    current_landed_cost.rebuild_account_move()
+                    current_landed_cost = False
                 # move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
                 # for landed_cost_adjustment in move_landed_cost:
                 #     landed_cost_adjustment.former_cost = move.value
@@ -333,9 +346,9 @@ class ProductTemplate(models.Model):
                 #     for landed_cost_adjustment in move_landed_cost:
                 #         landed_cost_adjustment.former_cost = move.value
                 #     move_landed_cost.mapped('cost_id').rebuild_account_move()
-                self._rebuild_moves(product, move, date_move)
+                self._post_rebuild_moves(product, move, date_move)
                 # date_move = move.date
-            landed_cost.mapped('cost_id').rebuild_account_move()
+            # landed_cost.mapped('cost_id').rebuild_account_move()
 
     @api.multi
     def action_get_account_move_lines(self):

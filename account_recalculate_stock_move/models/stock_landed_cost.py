@@ -96,15 +96,83 @@ class AdjustmentLines(models.Model):
         debit_account_id = accounts.get('stock_valuation') and accounts['stock_valuation'].id or False
         # If the stock move is dropshipped move we need to get the cost account instead the stock valuation account
         if self.move_id._is_dropshipped():
-            _logger.info("")
             debit_account_id = accounts.get('stock_output') and accounts['stock_output'].id or False
         already_out_account_id = accounts['stock_output'].id
         credit_account_id = self.cost_line_id.account_id.id or cost_product.property_account_expense_id.id or cost_product.categ_id.property_account_expense_categ_id.id
 
         if not credit_account_id:
             raise UserError(_('Please configure Stock Expense Account for product: %s.') % (cost_product.name))
-
         return self._create_account_move_line(move, credit_account_id, debit_account_id, qty_out, already_out_account_id)
+
+    def _create_account_move_line(self, move, credit_account_id, debit_account_id, qty_out, already_out_account_id):
+        """
+        Generate the account.move.line values to track the landed cost.
+        Afterwards, for the goods that are already out of stock, we should create the out moves
+        """
+        AccountMoveLine = []
+
+        base_line = {
+            'name': self.name,
+            'product_id': self.product_id.id,
+            'quantity': 0,
+        }
+        debit_line = dict(base_line, account_id=debit_account_id)
+        credit_line = dict(base_line, account_id=credit_account_id, product_id=self.cost_line_id.product_id.id)
+        diff = self.additional_landed_cost
+        if diff > 0:
+            debit_line['debit'] = diff
+            credit_line['credit'] = diff
+        else:
+            # negative cost, reverse the entry
+            debit_line['credit'] = -diff
+            credit_line['debit'] = -diff
+        AccountMoveLine.append([0, 0, debit_line])
+        AccountMoveLine.append([0, 0, credit_line])
+
+        # Create account move lines for quants already out of stock
+        if qty_out > 0:
+            debit_line = dict(base_line,
+                              name=(self.name + ": " + str(qty_out) + _(' already out')),
+                              quantity=0,
+                              account_id=already_out_account_id)
+            credit_line = dict(base_line,
+                               name=(self.name + ": " + str(qty_out) + _(' already out')),
+                               quantity=0,
+                               account_id=debit_account_id)
+            diff = diff * qty_out / self.quantity
+            if diff > 0:
+                debit_line['debit'] = diff
+                credit_line['credit'] = diff
+            else:
+                # negative cost, reverse the entry
+                debit_line['credit'] = -diff
+                credit_line['debit'] = -diff
+            AccountMoveLine.append([0, 0, debit_line])
+            AccountMoveLine.append([0, 0, credit_line])
+
+            # TDE FIXME: oh dear
+            if self.env.user.company_id.anglo_saxon_accounting:
+                debit_line = dict(base_line,
+                                  name=(self.name + ": " + str(qty_out) + _(' already out')),
+                                  quantity=0,
+                                  account_id=credit_account_id)
+                credit_line = dict(base_line,
+                                   name=(self.name + ": " + str(qty_out) + _(' already out')),
+                                   quantity=0,
+                                   account_id=already_out_account_id)
+
+                if diff > 0:
+                    debit_line['debit'] = diff
+                    credit_line['credit'] = diff
+                else:
+                    # negative cost, reverse the entry
+                    debit_line['credit'] = -diff
+                    credit_line['debit'] = -diff
+                AccountMoveLine.append([0, 0, debit_line])
+                AccountMoveLine.append([0, 0, credit_line])
+
+        return AccountMoveLine
 
 
 adjustmentlines._create_accounting_entries = AdjustmentLines._create_accounting_entries
+adjustmentlines._create_accounting_entries = AdjustmentLines._create_account_move_line

@@ -4,7 +4,9 @@
 
 from odoo import models, fields, api
 from odoo.addons.queue_job.job import job
+import logging
 
+_logger = logging.getLogger(__name__)
 
 class WizardRebuildMoveMrpProduction(models.TransientModel):
     _name = "wizard.rebuild.move.mrp.production"
@@ -41,6 +43,7 @@ class WizardRebuildMoveMrpProduction(models.TransientModel):
     def server_rebuild(self):
         if self._context.get('active_ids'):
             productions = self.env['mrp.production'].browse(self._context["active_ids"])
+            _logger.info("MO id's %s" % self._context.get('active_ids'))
         else:
             company_id = self.company_id or self.env.user.company_id
             domain = [('company_id', '=', company_id.id)]

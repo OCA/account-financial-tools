@@ -31,6 +31,7 @@ class StockMoveLine(models.Model):
     # quant_ids = fields.Many2many("stock.quant", relation="rel_quant_move_line", column1="move_line_id", column2="quant_id", string="Ref quant")
     has_account_move = fields.Boolean(compute="_compute_has_account_move")
     accounting_date = fields.Date('Force Accounting Date', related='move_id.accounting_date')
+    picking_date = fields.Datetime('Picking Date', related='picking_id.scheduled_date')
 
     @api.depends('account_move_line_ids')
     def _compute_has_account_move(self):

@@ -66,6 +66,9 @@
                     </div>
                 </xpath>
                 -->
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='product_id']" position="after">
+                    <field name="price_unit"/>
+                </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="Account Journal Items" groups="account.group_account_invoice">
                         <field name="account_move_line_ids" string="Account Move Details" mode="tree,kanban">
@@ -141,7 +144,26 @@
                 </xpath>
             </field>
         </record>
-
+        <record id="stock_inventory_line_tree" model="ir.ui.view">
+            <field name="name">stock.inventory.line.tree.cost.info</field>
+            <field name="model">stock.inventory.line</field>
+            <field name="inherit_id" ref="stock.stock_inventory_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_uom_id" position="after">
+                    <field name="price_unit"/>
+                </field>
+            </field>
+        </record>
+        <record id="stock_inventory_line_tree2" model="ir.ui.view">
+            <field name="name">stock.inventory.line.tree2.cost.info</field>
+            <field name="model">stock.inventory.line</field>
+            <field name="inherit_id" ref="stock.stock_inventory_line_tree2"/>
+            <field name="arch" type="xml">
+                <field name="product_uom_id" position="after">
+                    <field name="price_unit"/>
+                </field>
+            </field>
+        </record>
         <record id="view_move_form_inherit_re" model="ir.ui.view">
             <field name="name">stock.move.form.inherit</field>
             <field name="model">stock.move</field>
