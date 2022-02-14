@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2022-03-02 15:17+0000\n"
+"Last-Translator: Simon S <simon.stromberg@vertel.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
@@ -32,62 +33,62 @@ msgstr ""
 #: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kopia)"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "1250"
-msgstr ""
+msgstr "1250"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
 msgid "Account Opt."
-msgstr ""
+msgstr "Alternativt konto"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Amount"
-msgstr ""
+msgstr "Belopp"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Analytic"
-msgstr ""
+msgstr "Objekt"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_account_id
 msgid "Analytic Account"
-msgstr ""
+msgstr "Objektkonto"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
-msgstr ""
+msgstr "Objektetiketter"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Archive"
-msgstr ""
+msgstr "Arkivera"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Archived"
-msgstr ""
+msgstr "Arkiverad"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -100,35 +101,34 @@ msgstr "Avbryt"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__company_id
 msgid "Company"
-msgstr ""
+msgstr "Bolag"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_currency_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Bolagets valuta"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Compute Formula"
-msgstr ""
+msgstr "Beräkna formel"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__computed
 msgid "Computed"
-msgstr ""
+msgstr "Beräknad"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_run_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_run_menu
 msgid "Create Entry from Template"
-msgstr ""
+msgstr "Skapa verifikat från mall"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
-#, fuzzy
 msgid "Create Journal Entry"
-msgstr "Skapad den"
+msgstr "Skapa verifikat"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_uid
@@ -150,30 +150,30 @@ msgstr "Skapad den"
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__cr
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__cr
 msgid "Credit"
-msgstr ""
+msgstr "Kredit"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__date
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__dr
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__dr
 msgid "Debit"
-msgstr ""
+msgstr "Debet"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Debit and credit of all lines are null."
-msgstr ""
+msgstr "Debet och kredit på alla rader är null."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__move_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__move_line_type
 msgid "Direction"
-msgstr ""
+msgstr "Riktning"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__display_name
@@ -187,12 +187,12 @@ msgstr "Visa namn"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Entry from template %s"
-msgstr ""
+msgstr "Verifikat från mall %s"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Generate Journal Entry"
-msgstr ""
+msgstr "Generera verifikat"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__id
@@ -210,6 +210,9 @@ msgid ""
 "Check that the lines used in the formula really exists and have a lower "
 "sequence than the current line."
 msgstr ""
+"Det är omöjligt att beräkna formeln för raden med sekvens %s (formel: %s). "
+"Kontrollera att raderna som används i formeln verkligen finns och att de har "
+"en lägre sekvens än den aktuella raden."
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -218,6 +221,8 @@ msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s): "
 "the syntax of the formula is wrong."
 msgstr ""
+"Det är omöjligt att beräkna formeln för raden med sekvens %s (formula: %s): "
+"formelns syntax är fel."
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -231,14 +236,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__is_refund
 msgid "Is a refund?"
-msgstr ""
+msgstr "Är en återbetalning?"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__journal_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__journal_id
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
@@ -246,23 +251,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal Entry Template"
-msgstr ""
+msgstr "Verifikatmall"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Journal Entry Template Line"
-msgstr ""
+msgstr "Verifikatmallsrad"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_menu
 msgid "Journal Entry Templates"
-msgstr ""
+msgstr "Verifikatmallar"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "Journal Item Template"
-msgstr ""
+msgstr "Verifikatradsmall"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -273,22 +278,22 @@ msgstr ""
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L1 * 0.2"
-msgstr ""
+msgstr "L1 * 0,2"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L1 + L2 + L3"
-msgstr ""
+msgstr "L1 + L2 + L3"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L2 - L1"
-msgstr ""
+msgstr "L2 - L1"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__name
 msgid "Label"
-msgstr ""
+msgstr "Etikett"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
@@ -296,7 +301,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
 msgid "Last Modified on"
-msgstr "Senast redigerad"
+msgstr "Senast ändrad den"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_uid
@@ -312,18 +317,18 @@ msgstr "Senast uppdaterad av"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_date
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__write_date
 msgid "Last Updated on"
-msgstr "Senast uppdaterad"
+msgstr "Senast uppdaterad den"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__line_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__line_ids
 msgid "Lines"
-msgstr ""
+msgstr "Rader"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__template_id
 msgid "Move Template"
-msgstr ""
+msgstr "Verifikatmall"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__name
@@ -334,19 +339,19 @@ msgstr "Namn"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Next"
-msgstr ""
+msgstr "Nästa"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__note
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__note
 msgid "Note"
-msgstr ""
+msgstr "Anteckning"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_line_id
 msgid "Originator Tax"
-msgstr ""
+msgstr "Ursprungsmoms"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
@@ -357,7 +362,7 @@ msgstr "Företag"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__overwrite
 msgid "Overwrite"
-msgstr ""
+msgstr "Skriv över"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -369,18 +374,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__partner_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__partner_id
 msgid "Partner"
-msgstr "Företag"
+msgstr "Kontakt"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__payment_term_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__payment_term_id
 msgid "Payment Terms"
-msgstr ""
+msgstr "Betalningsvillkor"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__python_code
 msgid "Python Code"
-msgstr ""
+msgstr "Pythonkod"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -392,28 +397,28 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
 msgid "Reference"
-msgstr ""
+msgstr "Referens"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Restore"
-msgstr ""
+msgstr "Återställ"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
 msgid "Select Template"
-msgstr ""
+msgstr "Välj mall"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__sequence
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sekvens"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__set_lines
 msgid "Set Lines"
-msgstr ""
+msgstr "Skapa rader"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
@@ -431,12 +436,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Taxes"
-msgstr ""
+msgstr "Moms"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__template_id
 msgid "Template"
-msgstr ""
+msgstr "Mall"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -445,16 +450,18 @@ msgid ""
 "The selected template (%s) is not in the same company (%s) as the current "
 "user (%s)."
 msgstr ""
+"Den valda mallen (%s) tillhör inte samma bolag (%s) som den aktuella "
+"användaren (%s)."
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_line_sequence_template_uniq
 msgid "The sequence of the line must be unique per template!"
-msgstr ""
+msgstr "Radens sekvens måste vara unik för varje mall!"
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_name_company_unique
 msgid "This name is already used by another template!"
-msgstr ""
+msgstr "Det här namnet används redan av en annan mall!"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__type
@@ -464,28 +471,28 @@ msgstr "Typ"
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__payment_term_id
 msgid "Used to compute the due date of the journal item."
-msgstr ""
+msgstr "Används för att beräkna journalradens förfallodag."
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
 msgid "User input"
-msgstr ""
+msgstr "Inmatning av användaren"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Valid fields to overwrite are %s"
-msgstr ""
+msgstr "Giltiga fält att skriva över är %s"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
 msgid "When amount is negative, use this account instead"
-msgstr ""
+msgstr "När beloppet är negativt, använd det här kontot istället"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
 msgid "Wizard"
-msgstr ""
+msgstr "Guide"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line_run
@@ -505,6 +512,9 @@ msgid ""
 "update the template or modify the journal entry that will be generated by "
 "this wizard."
 msgstr ""
+"Du lade till en rad i guiden. Detta är inte tillåtet: du måste antingen "
+"uppdatera mallen eller ändra verifikatet som kommer att genereras av denna "
+"guide."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -512,6 +522,8 @@ msgid ""
 "You can refer to other lines using their sequence number e.g. <i>L1</i> for "
 "line with sequence = 1. Examples:"
 msgstr ""
+"Du kan referera till andra rader genom att använda deras sekvensnummer, "
+"t.ex. <i>L1</i> för raden med sekvens = 1. Exempel:"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -521,3 +533,6 @@ msgid ""
 "update the template or modify the journal entry that will be generated by "
 "this wizard."
 msgstr ""
+"Du tog bort en rad i guiden. Detta är inte tillåtet: du måste antingen "
+"uppdatera mallen eller ändra verifikatet som kommer att genereras av denna "
+"guide."
