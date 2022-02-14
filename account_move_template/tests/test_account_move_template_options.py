@@ -77,7 +77,7 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
         )
 
     def test_move_template_normal(self):
-        """ Test normal case, input amount 300 """
+        """Test normal case, input amount 300"""
         with Form(self.env["account.move.template.run"]) as f:
             f.template_id = self.move_template
         template_run = f.save()
@@ -103,7 +103,7 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
         )
 
     def test_move_template_optional(self):
-        """ Test optional case, input amount -300, expect optional account """
+        """Test optional case, input amount -300, expect optional account"""
         with Form(self.env["account.move.template.run"]) as f:
             f.template_id = self.move_template
         template_run = f.save()
@@ -129,7 +129,7 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
         )
 
     def test_move_template_overwrite(self):
-        """ Test case overwrite, amount = 3000, no need to manual input """
+        """Test case overwrite, amount = 3000, no need to manual input"""
         # Test for error when debit is not a valid field
         with Form(self.env["account.move.template.run"]) as f:
             f.template_id = self.move_template
