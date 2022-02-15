@@ -148,7 +148,7 @@ class AccountMove(models.Model):
             .mapped("asset_id")
         )
         action = self.env.ref("account_asset_management.account_asset_action")
-        action_dict = action.read()[0]
+        action_dict = action.sudo().read()[0]
         if len(assets) == 1:
             res = self.env.ref(
                 "account_asset_management.account_asset_view_form", False
