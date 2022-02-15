@@ -337,7 +337,7 @@ class AccountLoanLine(models.Model):
                 ):
                     raise UserError(_("Some moves must be created first"))
                 move = self.env["account.move"].create(record.move_vals())
-                move.post()
+                move.action_post()
                 res.append(move.id)
         return res
 
@@ -367,7 +367,7 @@ class AccountLoanLine(models.Model):
                 ):
                     invoice.write({"line_ids": record._get_long_term_move_line_vals()})
                 if record.loan_id.post_invoice:
-                    invoice.post()
+                    invoice.action_post()
         return res
 
     def _get_long_term_move_line_vals(self):

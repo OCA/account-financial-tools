@@ -387,7 +387,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             self.log = log_output.getvalue()
         # Check if errors where detected and wether we should stop.
         if EXCEPTION_TEXT in self.log and not self.continue_on_errors:
-            raise exceptions.Warning(_("One or more errors detected!\n\n%s") % self.log)
+            raise exceptions.UserError(
+                _("One or more errors detected!\n\n%s") % self.log
+            )
         # Store the data and go to the next step.
         self.state = "done"
         return self._reopen()
