@@ -154,6 +154,7 @@
                                         name="prorata"
                                         attrs="{'readonly': [('method_time', '!=', 'year')]}"
                                     />
+                                    <field name="carry_forward_missed_depreciations" />
                                 </group>
                             </group>
                         </page>
@@ -203,7 +204,7 @@
                                     <button
                                         name="unlink_move"
                                         icon="fa-times"
-                                        string="Delete Move"
+                                        string="Delete/Reverse Move"
                                         type="object"
                                         confirm="Are you sure ?"
                                         groups="account.group_account_manager"

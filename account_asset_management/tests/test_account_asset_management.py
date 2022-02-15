@@ -761,6 +761,130 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         # deviations if that is necessary.
         self.assertAlmostEqual(asset.depreciation_line_ids[12].amount, 166.63, places=2)
 
+    def test_17_carry_forward_missed_depreciations(self):
+        """Asset with accumulate missed depreciations."""
+        asset_profile = self.car5y
+        # Create an asset with carry_forward_missed_depreciations
+        # Theoretically, the depreciation would be 5000 / 12 months
+        # which is 416.67 per month
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": asset_profile.id,
+                "purchase_value": 5000,
+                "salvage_value": 0,
+                "date_start": time.strftime("2021-01-01"),
+                "method_time": "year",
+                "method_number": 1,
+                "method_period": "month",
+                "carry_forward_missed_depreciations": True,
+            }
+        )
+        # Set the fiscalyear lock date for the company
+        self.company_data["company"].fiscalyear_lock_date = time.strftime("2021-05-31")
+        # Compute the depreciation board
+        asset.compute_depreciation_board()
+        asset.refresh()
+        d_lines = asset.depreciation_line_ids
+        init_lines = d_lines[1:6]
+        # Jan to May entries are before the lock date -> marked as init
+        self.assertTrue(init_lines.mapped("init_entry"))
+        # Depreciation amount for these lines is set to 0
+        for line in init_lines:
+            self.assertEqual(line.amount, 0.0)
+        # The amount to be carried is 416.67 * 5 = 2083.35
+        # This amount is accumulated in the first depreciation for the current
+        # available period -> 416.67 + 2083.35 = 2500.02
+        self.assertAlmostEqual(d_lines[6].amount, 2500.02, places=2)
+        # The rest of the lines should have the corresponding amount of 416.67
+        # just as usual
+        for _i in range(7, 12):
+            self.assertAlmostEqual(d_lines[_i].amount, 416.67, places=2)
+        # In the last month the small deviations are compensated
+        self.assertAlmostEqual(d_lines[12].amount, 416.63, places=2)
+
+    def test_18_reverse_entries(self):
+        """Test that cancelling a posted entry creates a reversal."""
+        ict0 = self.asset_model.create(
+            {
+                "state": "draft",
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "year",
+                "name": "Laptop",
+                "code": "PI00101",
+                "purchase_value": 1500.0,
+                "profile_id": self.ict3Y.id,
+                "date_start": time.strftime("%Y-01-01"),
+            }
+        )
+        ict0.profile_id.allow_reversal = True
+        # compute the depreciation boards
+        ict0.compute_depreciation_board()
+        ict0.refresh()
+        # post the first depreciation line
+        ict0.validate()
+        ict0.depreciation_line_ids[1].create_move()
+        original_move = ict0.depreciation_line_ids[1].move_id
+        ict0.refresh()
+        self.assertEqual(ict0.state, "open")
+        self.assertEqual(ict0.value_depreciated, 500)
+        self.assertEqual(ict0.value_residual, 1000)
+        depreciation_line = ict0.depreciation_line_ids[1]
+        wiz_res = depreciation_line.unlink_move()
+        self.assertTrue(
+            "res_model" in wiz_res and wiz_res["res_model"] == "wiz.asset.move.reverse"
+        )
+        wiz = Form(
+            self.env["wiz.asset.move.reverse"].with_context(
+                {
+                    "active_model": depreciation_line._name,
+                    "active_id": depreciation_line.id,
+                    "active_ids": [depreciation_line.id],
+                }
+            )
+        )
+        reverse_wizard = wiz.save()
+        reverse_wizard.reverse_move()
+        ict0.refresh()
+        self.assertEqual(ict0.value_depreciated, 0)
+        self.assertEqual(ict0.value_residual, 1500)
+        self.assertEqual(len(original_move.reversal_move_id), 1)
+
+    def test_19_unlink_entries(self):
+        """Test that cancelling a posted entry creates a reversal, if the
+        journal entry has the inalterability hash."""
+        ict0 = self.asset_model.create(
+            {
+                "state": "draft",
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "year",
+                "name": "Laptop",
+                "code": "PI00101",
+                "purchase_value": 1500.0,
+                "profile_id": self.ict3Y.id,
+                "date_start": time.strftime("%Y-01-01"),
+            }
+        )
+        # compute the depreciation boards
+        ict0.compute_depreciation_board()
+        ict0.refresh()
+        # post the first depreciation line
+        ict0.validate()
+        ict0.depreciation_line_ids[1].create_move()
+        original_move_id = ict0.depreciation_line_ids[1].move_id.id
+        ict0.refresh()
+        self.assertEqual(ict0.state, "open")
+        self.assertEqual(ict0.value_depreciated, 500)
+        self.assertEqual(ict0.value_residual, 1000)
+        ict0.depreciation_line_ids[1].unlink_move()
+        ict0.refresh()
+        self.assertEqual(ict0.value_depreciated, 0)
+        self.assertEqual(ict0.value_residual, 1500)
+        move = self.env["account.move"].search([("id", "=", original_move_id)])
+        self.assertFalse(move)
+
     def test_20_asset_removal_with_value_residual(self):
         """Asset removal with value residual"""
         asset = self.asset_model.create(
