@@ -3,20 +3,21 @@
 
 from odoo import _, api, models
 from odoo.exceptions import UserError
+from odoo.addons.account.models.account_invoice import TYPE2JOURNAL
 
 
-class AccountMove(models.Model):
-    _inherit = "account.move"
+class AccountInvoice(models.Model):
+    _inherit = "account.invoice"
 
     @api.onchange("fiscal_position_id")
     def _onchange_fiscal_position_allowed_journal(self):
         self.ensure_one()
+        journal_type = TYPE2JOURNAL[self.type]
         journal_domain = [
             ("company_id", "=", self.company_id.id),
-            ("type", "=?", self.invoice_filter_type_domain),
+            ("type", "=", journal_type),
         ]
         if self.fiscal_position_id:
-            journal_type = "sale" if self.is_sale_document() else "purchase"
             allowed_journal = self.fiscal_position_id._get_allowed_journal(journal_type)
             if allowed_journal:
                 self.journal_id = allowed_journal
@@ -34,10 +35,9 @@ class AccountMove(models.Model):
         """
         for rec in self:
             if (
-                rec.is_invoice(include_receipts=True)
-                and self.fiscal_position_id
-                and self.fiscal_position_id.allowed_journal_ids
-                and rec.journal_id not in self.fiscal_position_id.allowed_journal_ids
+                rec.fiscal_position_id
+                and rec.fiscal_position_id.allowed_journal_ids
+                and rec.journal_id not in rec.fiscal_position_id.allowed_journal_ids
             ):
                 raise UserError(
                     _(
@@ -49,6 +49,6 @@ class AccountMove(models.Model):
                     )
                 )
 
-    def post(self):
+    def invoice_validate(self):
         self._check_journal_allowed_fiscal_position()
-        return super().post()
+        return super().invoice_validate()

@@ -7,7 +7,7 @@
         Allow defining allowed journals on fiscal positions.
         Related invoices can only use one of the allowed journals on the
         fiscal position.""",
-    "version": "13.0.1.0.0",
+    "version": "12.0.1.0.0",
     "development_status": "Beta",
     "category": "Accounting/Accounting",
     "license": "AGPL-3",

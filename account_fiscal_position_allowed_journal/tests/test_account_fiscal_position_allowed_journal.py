@@ -13,7 +13,7 @@ class TestAccountFiscalPositionAllowedJournal(SavepointCase):
         # MODELS
         cls.account_model = cls.env["account.account"]
         cls.fiscal_position_model = cls.env["account.fiscal.position"]
-        cls.invoice_model = cls.env["account.move"]
+        cls.invoice_model = cls.env["account.invoice"]
         cls.journal_model = cls.env["account.journal"]
         cls.partner_model = cls.env["res.partner"]
 
@@ -59,8 +59,8 @@ class TestAccountFiscalPositionAllowedJournal(SavepointCase):
             - The invoice is validated
         """
         self.assertEqual(self.invoice_01.state, "draft")
-        self.invoice_01.post()
-        self.assertEqual(self.invoice_01.state, "posted")
+        self.invoice_01.action_invoice_open()
+        self.assertEqual(self.invoice_01.state, "open")
 
     def test_02(self):
         """
@@ -76,7 +76,7 @@ class TestAccountFiscalPositionAllowedJournal(SavepointCase):
         self.fiscal_position_01.allowed_journal_ids = [(6, 0, self.journal_02.ids)]
         self.assertEqual(self.invoice_01.state, "draft")
         with self.assertRaises(UserError):
-            self.invoice_01.post()
+            self.invoice_01.action_invoice_open()
         self.assertEqual(self.invoice_01.state, "draft")
 
     def test_03(self):
@@ -92,8 +92,8 @@ class TestAccountFiscalPositionAllowedJournal(SavepointCase):
         """
         self.fiscal_position_01.allowed_journal_ids = [(6, 0, self.journal_01.ids)]
         self.assertEqual(self.invoice_01.state, "draft")
-        self.invoice_01.post()
-        self.assertEqual(self.invoice_01.state, "posted")
+        self.invoice_01.action_invoice_open()
+        self.assertEqual(self.invoice_01.state, "open")
 
     def test_04(self):
         """
