@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo-addon-account_move_line_purchase_info>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_sale_info>=15.0dev,<15.1dev',
         'odoo-addon-base_vat_optional_vies>=15.0dev,<15.1dev',
+        'odoo-addon-product_category_tax>=15.0dev,<15.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
