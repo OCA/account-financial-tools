@@ -129,3 +129,19 @@ class TestAccountInvoiceConstraintChronology(common.SavepointCase):
         refund = self.AccountMove.browse(refund["res_id"])
         with self.assertRaises(UserError):
             refund.action_post()
+
+    def test_modify_validated_past_invoice(self):
+        """We've got an invoice from yesterday that we need to modify but new ones
+        have been posted since. As the invoice already has a name, we should be able
+        to validate it"""
+        self.invoice_1.invoice_date = self.yesterday
+        self.invoice_1.action_post()
+        self.invoice_2.invoice_date = self.today
+        self.invoice_2.action_post()
+        self.invoice_1.button_cancel()
+        self.invoice_1.button_draft()
+        self.invoice_1.action_post()
+        self.invoice_1_5 = self.invoice_1.copy()
+        self.invoice_1_5.invoice_date = self.yesterday
+        with self.assertRaises(UserError):
+            self.invoice_1_5.action_post()

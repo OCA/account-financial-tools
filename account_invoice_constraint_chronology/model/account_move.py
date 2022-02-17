@@ -67,12 +67,14 @@ class AccountMove(models.Model):
     def write(self, vals):
         if vals.get("state") != "posted":
             return super().write(vals)
-
+        previously_validated = self.filtered(lambda m: m.name and m.name != "/")
         newly_posted = self.filtered(lambda move: move.state != "posted")
         res = super().write(vals)
         for move in newly_posted & self.filtered("journal_id.check_chronology"):
             if self.search(move._get_older_conflicting_invoices_domain(), limit=1):
                 move._raise_older_conflicting_invoices()
+            if move in previously_validated:
+                continue
             if self.search(move._get_newer_conflicting_invoices_domain(), limit=1):
                 move._raise_newer_conflicting_invoices()
 
