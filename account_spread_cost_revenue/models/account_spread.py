@@ -44,6 +44,11 @@ class AccountSpread(models.Model):
         help="Period length for the entries",
         required=True,
     )
+    days_calc = fields.Boolean(
+        string="Calculate by days",
+        default=False,
+        help="Use number of days to calculate amount",
+    )
     use_invoice_line_account = fields.Boolean()
     credit_account_id = fields.Many2one(
         "account.account",
@@ -242,6 +247,7 @@ class AccountSpread(models.Model):
                 self.period_type = self.template_id.period_type
             if self.template_id.start_date:
                 self.spread_date = self.template_id.start_date
+            self.days_calc = self.template_id.days_calc
 
     @api.depends("invoice_type", "company_id")
     def _compute_journal_id(self):
@@ -368,8 +374,9 @@ class AccountSpread(models.Model):
 
             for x in range(len(posted_line_ids), number_of_periods):
                 sequence = x + 1
+                date = self._get_last_day_of_month(spread_date)
                 amount = self._compute_board_amount(
-                    sequence, unposted_amount, number_of_periods
+                    sequence, unposted_amount, number_of_periods, date
                 )
                 amount = self.currency_id.round(amount)
                 rounding = self.currency_id.rounding
@@ -380,7 +387,7 @@ class AccountSpread(models.Model):
                     "amount": amount,
                     "spread_id": self.id,
                     "name": self._get_spread_entry_name(sequence),
-                    "date": self._get_last_day_of_month(spread_date),
+                    "date": date,
                 }
                 commands.append((0, False, vals))
 
@@ -399,21 +406,73 @@ class AccountSpread(models.Model):
         return self.period_number + 1 if month_day != 1 else self.period_number
 
     @staticmethod
+    def _get_first_day_of_month(spread_date):
+        return spread_date + relativedelta(day=1)
+
+    @staticmethod
     def _get_last_day_of_month(spread_date):
         return spread_date + relativedelta(day=31)
 
-    def _compute_board_amount(self, sequence, amount, number_of_periods):
+    def _get_spread_start_date(self, period_type, spread_end_date):
+        self.ensure_one()
+        spread_start_date = spread_end_date + relativedelta(days=1)
+        if period_type == "month":
+            spread_start_date = spread_end_date + relativedelta(day=1)
+        elif period_type == "quarter":
+            spread_start_date = spread_start_date - relativedelta(months=3)
+        elif period_type == "year":
+            spread_start_date = spread_start_date - relativedelta(years=1)
+        spread_start_date = self._get_first_day_of_month(spread_start_date)
+        spread_start_date = max(spread_start_date, self.spread_date)
+        return spread_start_date
+
+    def _get_spread_end_date(self, period_type, period_number, spread_start_date):
+        self.ensure_one()
+        spread_end_date = spread_start_date
+        number_of_periods = (
+            period_number if spread_start_date.day != 1 else period_number - 1
+        )
+        if period_type == "month":
+            spread_end_date = spread_start_date + relativedelta(
+                months=number_of_periods
+            )
+        elif period_type == "quarter":
+            months = number_of_periods * 3
+            spread_end_date = spread_start_date + relativedelta(months=months)
+        elif period_type == "year":
+            spread_end_date = spread_start_date + relativedelta(years=number_of_periods)
+        spread_end_date = self._get_last_day_of_month(spread_end_date)
+        return spread_end_date
+
+    def _get_amount_per_day(self, amount):
+        self.ensure_one()
+        spread_start_date = self.spread_date
+        spread_end_date = self._get_spread_end_date(
+            self.period_type, self.period_number, spread_start_date
+        )
+        number_of_days = (spread_end_date - spread_start_date).days + 1
+        return amount / number_of_days
+
+    def _compute_board_amount(
+        self, sequence, amount, number_of_periods, spread_end_date
+    ):
         """Calculates the amount for the spread lines."""
         self.ensure_one()
         amount_to_spread = self.total_amount
+        period = self.period_number
         if sequence != number_of_periods:
-            amount = amount_to_spread / self.period_number
+            amount = amount_to_spread / period
             if sequence == 1:
                 date = self.spread_date
                 month_days = calendar.monthrange(date.year, date.month)[1]
                 days = month_days - date.day + 1
-                period = self.period_number
                 amount = (amount_to_spread / period) / month_days * days
+            if self.days_calc:
+                spread_start_date = self._get_spread_start_date(
+                    self.period_type, spread_end_date
+                )
+                days = (spread_end_date - spread_start_date).days + 1
+                amount = self._get_amount_per_day(amount_to_spread) * days
         return amount
 
     def compute_spread_board(self):
