@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Account Invoice Constraint Chronology",
-    "version": "13.0.1.0.1",
+    "version": "13.0.1.0.2",
     "author": "Odoo Community Association (OCA), ACSONE SA/NV, CorporateHub",
     "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
