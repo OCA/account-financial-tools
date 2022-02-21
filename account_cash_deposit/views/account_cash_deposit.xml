@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+-->
+<odoo>
+    <record id="account_cash_deposit_form" model="ir.ui.view">
+        <field name="model">account.cash.deposit</field>
+        <field name="arch" type="xml">
+            <form>
+                    <header>
+                    <!-- order -->
+                    <button
+                        name="confirm_order"
+                        string="Confirm Order"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible': ['|', ('operation_type', '!=', 'order'), ('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="%(account_cash_order_reception_action)d"
+                        string="Cash Received"
+                        type="action"
+                        context="{'default_order_id': active_id}"
+                        class="btn-primary"
+                        attrs="{'invisible': ['|', ('operation_type', '!=', 'order'), ('state', '!=', 'confirmed')]}"
+                    />
+                    <!-- deposit -->
+                    <button
+                        name="validate"
+                        string="Validate"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible': ['|', ('operation_type', '!=', 'deposit'), ('state', '!=', 'draft')]}"
+                    />
+
+                    <button name="get_report" string="Print" type="object" />
+                    <button
+                        name="backtodraft"
+                        states="confirmed,done"
+                        string="Back to Draft"
+                        type="object"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                            <b><field name="operation_type" /></b>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group name="left">
+                            <field
+                                name="order_date"
+                                attrs="{'invisible': [('operation_type', '!=', 'order')]}"
+                            />
+
+                            <field
+                                name="currency_id"
+                                groups="base.group_multi_currency"
+                            />
+                            <field name="cash_journal_id" />
+                            <field name="bank_journal_id" />
+                        </group>
+                        <group name="right">
+                            <field name="total_amount" />
+                            <field name="date" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="move_id" />
+                        </group>
+                    </group>
+                    <group name="lines">
+                        <field
+                            name="line_ids"
+                            nolabel="1"
+                            context="{'default_currency_id': currency_id}"
+                        >
+                            <tree editable="bottom">
+                                <field name="cash_unit_id" />
+                                <field name="qty" />
+                                <field name="subtotal" sum="1" />
+                                <field name="currency_id" invisible="1" />
+                            </tree>
+                        </field>
+                    </group>
+                    <group name="notes" string="Notes">
+                        <field name="notes" nolabel="1" />
+                    </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers" />
+                <field name="activity_ids" widget="mail_activity" />
+                <field name="message_ids" widget="mail_thread" />
+            </div>
+            </form>
+        </field>
+    </record>
+    <record id="account_cash_deposit_tree" model="ir.ui.view">
+        <field name="model">account.cash.deposit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="operation_type" optional="hide" />
+                <field name="name" decoration-bf="1" />
+                <field
+                    name="order_date"
+                    invisible="context.get('default_operation_type')!='order'"
+                />
+                <field name="date" />
+                <field name="cash_journal_id" />
+                <field name="bank_journal_id" />
+                <field name="total_amount" decoration-bf="1" />
+                <field
+                    name="currency_id"
+                    groups="base.group_multi_currency"
+                    optional="hide"
+                />
+                <field name="is_reconcile" optional="show" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'confirmed'"
+                    decoration-success="state == 'done'"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="account_cash_deposit_search" model="ir.ui.view">
+        <field name="model">account.cash.deposit</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="cash_journal_id" domain="[('type', '=', 'cash')]" />
+                <field
+                    name="bank_journal_id"
+                    domain="[('type', '=', 'bank'), ('bank_account_id', '!=', False)]"
+                />
+                <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    name="confirmed"
+                    string="Confirmed"
+                    domain="[('state', '=', 'confirmed')]"
+                />
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
+                <separator />
+                <filter name="date" string="Date" date="date" />
+                <group string="Group By" name="groupby">
+                    <filter
+                        name="date_groupby"
+                        string="Date"
+                        context="{'group_by': 'date'}"
+                    />
+                    <filter
+                        name="cash_journal_groupby"
+                        string="Cash Box"
+                        context="{'group_by': 'cash_journal_id'}"
+                    />
+                    <filter
+                        name="bank_journal_id_groupby"
+                        string="Bank Account"
+                        context="{'group_by': 'bank_journal_id'}"
+                    />
+                    <filter
+                        name="currency_groupby"
+                        string="Currency"
+                        context="{'group_by': 'currency_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+</record>
+    <record id="account_cash_deposit_action" model="ir.actions.act_window">
+        <field name="name">Cash Deposits</field>
+        <field name="res_model">account.cash.deposit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('operation_type', '=', 'deposit')]</field>
+        <field name="context">{'default_operation_type': 'deposit'}</field>
+</record>
+
+    <menuitem
+        id="account_cash_deposit_menu"
+        action="account_cash_deposit_action"
+        parent="account.menu_finance_entries_accounting_miscellaneous"
+        sequence="35"
+    />
+    <record id="account_cash_order_action" model="ir.actions.act_window">
+        <field name="name">Cash Orders</field>
+        <field name="res_model">account.cash.deposit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('operation_type', '=', 'order')]</field>
+        <field name="context">{'default_operation_type': 'order'}</field>
+</record>
+
+    <menuitem
+        id="account_cash_order_menu"
+        action="account_cash_order_action"
+        parent="account.menu_finance_entries_accounting_miscellaneous"
+        sequence="37"
+    />
+
+
+
+</odoo>

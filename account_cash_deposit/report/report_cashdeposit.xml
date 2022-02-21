@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Akretion France (www.akretion.com)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <template id="report_cashdeposit">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+        <t t-call="web.external_layout">
+                    <div class="page">
+                        <h1><span t-field="o.display_name" /></h1>
+                        <h3>Bank:</h3>
+                        <p>
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.bank_id.name"
+                            />
+                            <br />
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.bank_id.street"
+                            />
+                            <br />
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.bank_id.zip"
+                            />
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.bank_id.city"
+                            />
+                        </p>
+                        <p>
+                            <b
+                                t-if="o.operation_type == 'deposit'"
+                            >Bank Account Number to Credit:</b>
+                            <b
+                                t-if="o.operation_type == 'order'"
+                            >Bank Account Number to Debit:</b>
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.acc_number"
+                            />
+                        </p>
+                        <p>
+                            <strong>Currency:</strong>
+                            <span t-field="o.currency_id.name" />
+                        </p>
+                        <p t-if="o.operation_type == 'order'">
+                            <strong>Order Date:</strong>
+                            <span t-field="o.order_date" />
+                        </p>
+                        <p t-if="o.operation_type == 'deposit'">
+                            <strong>Date:</strong>
+                            <span t-field="o.date" />
+                        </p>
+
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Cash Unit</th>
+                                    <th class="text-right">Quantity</th>
+                                    <th class="text-right">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span
+                                                t-field="line.cash_unit_id.display_name"
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="line.qty" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                t-field="line.subtotal"
+                                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                            />
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr class="border-black o_total">
+                                    <td />
+                                    <td class="text-right">
+                                        <strong>Total:</strong>
+                                    </td>
+                                    <td class="text-right">
+                                            <span
+                                            t-field="o.total_amount"
+                                            t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p t-if="o.notes" name="notes">
+                        <span t-field="o.notes" />
+                    </p>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

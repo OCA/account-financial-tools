@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="account_cash_order_reception_form" model="ir.ui.view">
+        <field name="model">account.cash.order.reception</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="main">
+                        <field name="order_id" />
+                        <field
+                        name="date"
+                        options="{'datepicker': {'warn_future': true}}"
+                    />
+                        <field name="total_amount" />
+                        <field name="currency_id" invisible="1" />
+                </group>
+                <footer>
+                        <button
+                        name="run"
+                        type="object"
+                        string="Confirm Cash Reception"
+                        class="btn-primary"
+                    />
+                        <button special="cancel" string="Cancel" />
+                </footer>
+        </form>
+</field>
+</record>
+
+<record id="account_cash_order_reception_action" model="ir.actions.act_window">
+        <field name="name">Cash Order Reception</field>
+        <field name="res_model">account.cash.order.reception</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+</record>
+
+</odoo>
