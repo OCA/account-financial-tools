@@ -1,0 +1,675 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_cash_deposit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-03 11:19+0000\n"
+"PO-Revision-Date: 2022-03-03 11:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Currency:</strong>"
+msgstr "<strong>Devise :</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Date :</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Order Date:</strong>"
+msgstr "<strong>Date de commande :</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Total:</strong>"
+msgstr "<strong>Total :</strong>"
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_name_company_unique
+msgid ""
+"A cash deposit/order with this reference already exists in this company."
+msgstr "Une commande/remise d'espèces existe déjà avec cette référence dans la même société."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_line_cash_unit_unique
+msgid "A line already exists for this cash unit."
+msgstr "Une ligne existe déjà avec cette unité d'espèces."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.cash_unit_form
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__auto_create
+msgid "Auto Create"
+msgstr "Création automatique"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Back to Draft"
+msgstr "Retour en brouillon"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__bank_journal_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Bank Account"
+msgstr "Compte bancaire"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank Account Number to Credit:"
+msgstr "Numéro de compte bancaire à créditer :"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank Account Number to Debit:"
+msgstr "Numéro de compte bancaire à débiter :"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank:"
+msgstr "Banque :"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__both
+msgid "Both"
+msgstr "Les deux"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_order_reception_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__cash_journal_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Cash Box"
+msgstr "Caisse"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__operation_type__deposit
+msgid "Cash Deposit"
+msgstr "Remise d'espèces"
+
+#. module: account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_account_cash_deposit_line
+msgid "Cash Deposit Lines"
+msgstr "Lignes de remise d'espèces"
+
+#. module: account_cash_deposit
+#: model:ir.actions.report,name:account_cash_deposit.report_account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_account_cash_deposit
+msgid "Cash Deposit/Order"
+msgstr "Commande/remise d'espèces"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_deposit_action
+#: model:ir.ui.menu,name:account_cash_deposit.account_cash_deposit_menu
+msgid "Cash Deposits"
+msgstr "Remises d'espèces"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__order_id
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__operation_type__order
+msgid "Cash Order"
+msgstr "Commande d'espèces"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_order_reception_action
+#: model:ir.model,name:account_cash_deposit.model_account_cash_order_reception
+msgid "Cash Order Reception"
+msgstr "Réception de la commande d'espèces"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_order_action
+#: model:ir.ui.menu,name:account_cash_deposit.account_cash_order_menu
+msgid "Cash Orders"
+msgstr "Commandes d'espèces"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Cash Received"
+msgstr "Èspèces reçues"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__date
+msgid "Cash Reception Date"
+msgstr "Date de réception des espèces"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.cash_unit_action
+#: model:ir.model,name:account_cash_deposit.model_cash_unit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__cash_unit_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Cash Unit"
+msgstr "Unité d'espèces"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency__cash_unit_ids
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.view_currency_form
+msgid "Cash Units"
+msgstr "Unités d'espèces"
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/wizards/account_cash_order_reception.py:0
+#, python-format
+msgid "Cash reception confirmed on %s."
+msgstr "Réception d'espèces confirmée le %s."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__coin
+msgid "Coin"
+msgstr "Pièce"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__coinroll_qty
+msgid "Coin Quantity"
+msgstr "Quantité de pièces"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__coinroll
+msgid "Coin Roll"
+msgstr "Rouleau de pièces"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_order_reception_form
+msgid "Confirm Cash Reception"
+msgstr "Confirmer la réception d'espèces"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Confirm Order"
+msgstr "Confirmer la commande"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__confirmed
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_res_currency
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__currency_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Currency"
+msgstr "Devise"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__date
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Date"
+msgstr "Date"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__deposit
+msgid "Deposit"
+msgstr "Remise"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__done
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Done"
+msgstr "Fait"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__draft
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/models/cash_unit.py:0
+#, python-format
+msgid "For a coin roll, the coin quantity must be strictly positive."
+msgstr "Pour un rouleau d'espèces, la quantité de pièces doit être strictement positive."
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Group By"
+msgstr "Groupé par"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency__id
+msgid "ID"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_needaction
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__auto_create
+msgid ""
+"If set, a line for this cash unit will be created by default on a new cash "
+"deposit or a new cash order or both."
+msgstr "Si coché, une ligne sera créé par défault pour cette unité d'espèce "
+"sur les nouvelles remises d'espèce ou les nouvelles commandes d'espèces ou les deux."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__move_id
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit____last_update
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line____last_update
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception____last_update
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit____last_update
+#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__line_ids
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "Missing Outstanding Payments Account on bank journal '%s'."
+msgstr "Compte de paiements sortants non configuré sur le journal de banque '%s'."
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "Missing Outstanding Receipts Account on bank journal '%s'."
+msgstr "Compte de paiements entrants non configuré sur le journal de banque '%s'."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__note
+msgid "Note"
+msgstr "Billet"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__notes
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Notes"
+msgstr "Notes"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid ""
+"On {deposit}, the cash journal {cash_journal} is not in the selected "
+"currency {currency}."
+msgstr "Sur {deposit}, la caisse {cash_journal} n'est pas dans la devise "
+"sélectionnée {currency}."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__operation_type
+msgid "Operation Type"
+msgstr "Type d'opération"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__order
+msgid "Order"
+msgstr "Commande"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__order_date
+msgid "Order Date"
+msgstr "Date de commande"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__parent_id
+msgid "Parent"
+msgstr "Parent"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__qty
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__is_reconcile
+msgid "Reconciled"
+msgstr "Lettré"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__name
+msgid "Reference"
+msgstr "Référence"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__state
+msgid "Status"
+msgstr "État"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__subtotal
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Subtotal"
+msgstr "Sous-total"
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "The %s is not in draft state, so you cannot delete it."
+msgstr "La %s n'est pas à l'état brouillon, donc vous ne pouvez pas la supprimer."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_coinroll_qty_positive
+msgid "The coin quantity must be positive."
+msgstr "La quantité de pièces doit être positive."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_line_qty_positive
+msgid "The quantity must be positive or null."
+msgstr "La quantité doit être positive ou nulle."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_value_positive
+msgid "The value must be strictly positive."
+msgstr "La valeur doit être strictement positive."
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "There are no non-zero lines on %s!"
+msgstr "Il n'y a aucune ligne non nulle sur %s !"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__cash_type
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__coinroll_qty
+msgid "This field should never be modified."
+msgstr "Ce champ ne doit jamais être modifié."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__value
+msgid ""
+"This field should never be modified. For a coin roll, you must enter the "
+"value of the coin."
+msgstr "Ce champ ne doit jamais être modifié. Pour un rouleau de pièces, "
+"vous devez entrer la valeur de la pièce."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__total_amount
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__total_amount
+msgid "Total Amount"
+msgstr "Montant total"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__total_value
+msgid "Total Value"
+msgstr "Valeur totale"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__tree_order
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__tree_order
+msgid "Tree Order"
+msgstr "Ordre dans la liste"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__cash_type
+msgid "Type"
+msgstr "Type"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__date
+msgid "Used as date for the journal entry."
+msgstr "Utilisé commande date pour la pièce comptable."
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__value
+msgid "Value"
+msgstr "Valeur"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid ""
+"You must delete cash lines that are linked to a currency other than %s."
+msgstr "Vous devez supprimer les lignes liées à une devise autre que %s."
