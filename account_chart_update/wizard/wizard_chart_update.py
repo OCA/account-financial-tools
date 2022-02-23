@@ -89,7 +89,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         "searched by name.",
     )
     continue_on_errors = fields.Boolean(
-        string="Continue on errors",
         default=False,
         help="If set, the wizard will continue to the next step even if "
         "there are minor errors.",
@@ -110,21 +109,15 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         inverse_name="update_chart_wizard_id",
         string="Fiscal positions",
     )
-    new_taxes = fields.Integer(string="New taxes", compute="_compute_new_taxes_count")
-    new_accounts = fields.Integer(
-        string="New accounts", compute="_compute_new_accounts_count"
-    )
+    new_taxes = fields.Integer(compute="_compute_new_taxes_count")
+    new_accounts = fields.Integer(compute="_compute_new_accounts_count")
     rejected_new_account_number = fields.Integer()
     new_fps = fields.Integer(
         string="New fiscal positions", compute="_compute_new_fps_count"
     )
-    updated_taxes = fields.Integer(
-        string="Updated taxes", compute="_compute_updated_taxes_count"
-    )
+    updated_taxes = fields.Integer(compute="_compute_updated_taxes_count")
     rejected_updated_account_number = fields.Integer()
-    updated_accounts = fields.Integer(
-        string="Updated accounts", compute="_compute_updated_accounts_count"
-    )
+    updated_accounts = fields.Integer(compute="_compute_updated_accounts_count")
     updated_fps = fields.Integer(
         string="Updated fiscal positions", compute="_compute_updated_fps_count"
     )
@@ -532,7 +525,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     try:
                         real |= self.env.ref(self._get_real_xml_name(template))
                     except BaseException:
-                        pass
+                        _logger.info("Is not real xml Name")
 
                 if not real:
                     continue
@@ -568,7 +561,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     try:
                         real |= self.env.ref(self._get_real_xml_name(template))
                     except BaseException:
-                        pass
+                        _logger.info("Is not real xml Name")
 
                 if not real:
                     continue
@@ -667,7 +660,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         specials_mapping = {
             "account.tax.template": {"chart_template_id", "children_tax_ids"},
-            "account.account.template": {"chart_template_id", "root_id", "nocreate"},
+            "account.account.template": set(self.env["mail.thread"]._fields)
+            | {"chart_template_id", "root_id", "nocreate"},
             "account.fiscal.position.template": {"chart_template_id"},
         }
         specials = {
@@ -944,9 +938,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         # First create taxes in batch
         taxes_to_create = self.tax_ids.filtered(lambda x: x.type == "new")
         todo_dict = taxes_to_create.mapped("tax_id")._generate_tax(self.company_id)
+        template_to_tax_dict = {}
+        for key in todo_dict["tax_template_to_tax"].keys():
+            template_to_tax_dict[key.id] = todo_dict["tax_template_to_tax"][key].id
         for wiz_tax in taxes_to_create:
             new_tax = self.env["account.tax"].browse(
-                todo_dict["tax_template_to_tax"][wiz_tax.tax_id.id]
+                template_to_tax_dict[wiz_tax.tax_id.id]
             )
             _logger.info(
                 _("Created tax %s."), "'{}' (ID:{})".format(new_tax.name, new_tax.id)
@@ -1060,14 +1057,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             ]:
                 if v[fld]:
                     acc_id = self.find_account_by_templates(
-                        self.env["account.account.template"].browse(v[fld])
+                        self.env["account.account.template"].browse(v[fld].id)
                     )
                     if acc_id:
                         vals[fld] = acc_id
                     else:
                         raise exceptions.UserError(
                             _("No real account found for template account with ID %s")
-                            % v[fld]
+                            % v[fld].id
                         )
             if vals:
                 tax = self.env["account.tax"].browse(k)
@@ -1078,7 +1075,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             if v["account_id"]:
                 rep_line = self.env["account.tax.repartition.line"].browse(k)
                 acc_id = self.find_account_by_templates(
-                    self.env["account.account.template"].browse(v["account_id"])
+                    self.env["account.account.template"].browse(v["account_id"].id)
                 )
                 if acc_id:
                     rep_line.write({"account_id": acc_id})
@@ -1086,7 +1083,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 else:
                     raise exceptions.UserError(
                         _("No real account found for template account with ID %s")
-                        % v["account_id"]
+                        % v["account_id"].id
                     )
 
         for wiz_tax in self.tax_ids.filtered(lambda r: r.type == "updated"):
@@ -1188,7 +1185,6 @@ class WizardUpdateChartsAccountsTax(models.TransientModel):
             ("updated", "Updated template"),
             ("deleted", "Tax to deactivate"),
         ],
-        string="Type",
         readonly=False,
     )
     type_tax_use = fields.Selection(related="tax_id.type_tax_use", readonly=True)
@@ -1198,11 +1194,8 @@ class WizardUpdateChartsAccountsTax(models.TransientModel):
         required=False,
         ondelete="set null",
     )
-    notes = fields.Text("Notes", readonly=True)
-    recreate_xml_ids = fields.Boolean(
-        string="Recreate missing XML-IDs",
-        related="update_chart_wizard_id.recreate_xml_ids",
-    )
+    notes = fields.Text(readonly=True)
+    recreate_xml_ids = fields.Boolean(related="update_chart_wizard_id.recreate_xml_ids")
 
 
 class WizardUpdateChartsAccountsAccount(models.TransientModel):
@@ -1224,7 +1217,6 @@ class WizardUpdateChartsAccountsAccount(models.TransientModel):
     )
     type = fields.Selection(
         selection=[("new", "New template"), ("updated", "Updated template")],
-        string="Type",
         readonly=False,
     )
     update_account_id = fields.Many2one(
@@ -1233,11 +1225,8 @@ class WizardUpdateChartsAccountsAccount(models.TransientModel):
         required=False,
         ondelete="set null",
     )
-    notes = fields.Text("Notes", readonly=True)
-    recreate_xml_ids = fields.Boolean(
-        string="Recreate missing XML-IDs",
-        related="update_chart_wizard_id.recreate_xml_ids",
-    )
+    notes = fields.Text(readonly=True)
+    recreate_xml_ids = fields.Boolean(related="update_chart_wizard_id.recreate_xml_ids")
 
 
 class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
@@ -1259,7 +1248,6 @@ class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
     )
     type = fields.Selection(
         selection=[("new", "New template"), ("updated", "Updated template")],
-        string="Type",
         readonly=False,
     )
     update_fiscal_position_id = fields.Many2one(
@@ -1268,7 +1256,7 @@ class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
         string="Fiscal position to update",
         ondelete="set null",
     )
-    notes = fields.Text("Notes", readonly=True)
+    notes = fields.Text(readonly=True)
     recreate_xml_ids = fields.Boolean(
         string="Recreate missing XML-IDs",
         related="update_chart_wizard_id.recreate_xml_ids",
