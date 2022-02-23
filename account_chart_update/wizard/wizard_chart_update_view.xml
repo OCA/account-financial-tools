@@ -214,7 +214,7 @@
                             attrs="{'invisible': [('update_tax', '=', False)]}"
                         >
                             <field name="tax_ids" nolabel="1">
-                                <tree string="Taxes" colors="red:type=='updated'">
+                                <tree decoration-danger="type=='updated'">
                                     <field name="tax_id" />
                                     <field name="update_tax_id" />
                                     <field name="type_tax_use" />
@@ -249,7 +249,7 @@
                             attrs="{'invisible': [('update_account', '=', False)]}"
                         >
                             <field name="account_ids" nolabel="1">
-                                <tree string="Accounts" colors="red:type=='updated'">
+                                <tree decoration-danger="type=='updated'">
                                     <field name="account_id" />
                                     <field name="update_account_id" />
                                     <field name="notes" />
@@ -283,8 +283,8 @@
                         >
                             <field name="fiscal_position_ids" nolabel="1">
                                 <tree
-                                    string="Fiscal positions"
-                                    colors="red:type=='updated'"
+                                    name="fiscal_positions"
+                                    decoration-danger="type=='updated'"
                                 >
                                     <field name="fiscal_position_id" />
                                     <field name="update_fiscal_position_id" />
