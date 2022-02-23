@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -91,7 +91,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__continue_on_errors
-msgid "Continue on errors"
+msgid "Continue On Errors"
 msgstr ""
 
 #. module: account_chart_update
@@ -166,7 +166,6 @@ msgid "Differences in these fields: %s."
 msgstr ""
 
 #. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__display_name
@@ -274,7 +273,6 @@ msgid "Here you can set the matching order."
 msgstr ""
 
 #. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__id
@@ -312,7 +310,6 @@ msgid "Language"
 msgstr ""
 
 #. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching____last_update
@@ -387,17 +384,17 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
-msgid "New accounts"
+msgid "New Accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
+msgid "New Taxes"
 msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_fps
 msgid "New fiscal positions"
-msgstr ""
-
-#. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
-msgid "New taxes"
 msgstr ""
 
 #. module: account_chart_update
@@ -664,6 +661,16 @@ msgid "Update taxes"
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
+msgid "Updated Accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
+msgid "Updated Taxes"
+msgstr ""
+
+#. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account %s."
@@ -673,11 +680,6 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account %s. (Recreated XML-ID)"
-msgstr ""
-
-#. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
-msgid "Updated accounts"
 msgstr ""
 
 #. module: account_chart_update
@@ -707,11 +709,6 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated tax %s. (Recreated XML-IDs)"
-msgstr ""
-
-#. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
-msgid "Updated taxes"
 msgstr ""
 
 #. module: account_chart_update
