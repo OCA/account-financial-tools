@@ -1,8 +1,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
+
 from odoo import fields
 from odoo.tests import common
 from odoo.tools import mute_logger
+
+_logger = logging.getLogger(__name__)
 
 
 class TestAccountChartUpdate(common.HttpCase):
@@ -67,8 +71,17 @@ class TestAccountChartUpdate(common.HttpCase):
 
     def setUp(self):
         super(TestAccountChartUpdate, self).setUp()
-        # Make sure user is in English
         self.env.user.lang = "en_US"
+        self.env.user.write(
+            {
+                "groups_id": [
+                    (6, 0, self.env.user.groups_id.ids),
+                    (4, self.env.ref("account.group_account_user").id),
+                    (4, self.env.ref("account.group_account_invoice").id),
+                    (4, self.env.ref("base.group_multi_company").id),
+                ]
+            }
+        )
         self.account_type = self.env["account.account.type"].create(
             {
                 "name": "Test account_chart_update account type",
@@ -78,16 +91,12 @@ class TestAccountChartUpdate(common.HttpCase):
         self.account_template = self._create_account_tmpl(
             "Test", "100000", self.account_type, False
         )
-        self.chart_template = self.env["account.chart.template"].create(
-            {
-                "name": "Test account_chart_update chart",
-                "currency_id": self.env.ref("base.EUR").id,
-                "code_digits": 6,
-                "cash_account_code_prefix": "570",
-                "bank_account_code_prefix": "572",
-                "transfer_account_code_prefix": "100000",
-            }
+        self.chart_template = self.env.ref(
+            "l10n_generic_coa.configurable_chart_template"
         )
+        # Avoid re-creating taxes.
+        # If false, the taxes that are created will be overwrited.
+        self.chart_template.complete_tax_set = True
         self.account_template.chart_template_id = self.chart_template.id
         self.account_template_pl = self._create_account_tmpl(
             "Undistributed Profits/Losses",
@@ -124,12 +133,20 @@ class TestAccountChartUpdate(common.HttpCase):
             {
                 "name": "Test account_chart_update company",
                 "currency_id": self.chart_template.currency_id.id,
+                "country_id": self.env.ref("base.es").id,
             }
         )
-        company_user = self.env.user.copy({"company_id": self.company.id})
-        chart_by_company_user = self.chart_template.with_user(company_user)
+        self.env.user.write(
+            {
+                "company_ids": [
+                    (6, 0, self.env.user.company_ids.ids),
+                    (4, self.company.id),
+                ],
+                "company_id": self.company.id,
+            }
+        )
+        chart_by_company_user = self.chart_template.with_user(self.env.user)
         chart_by_company_user.try_loading()
-
         self.tax = self.env["account.tax"].search(
             [
                 ("name", "=", self.tax_template.name),
@@ -261,7 +278,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.account_template.tag_ids = [
             (6, 0, [self.account_tag_1.id, self.account_tag_2.id])
         ]
-        self.fp_template.note = "Test note"
+        self.fp_template.note = "<p>Test note</p>"
         self.fp_template.account_ids.account_dest_id = new_account_tmpl.id
         self.fp_template.tax_ids.tax_dest_id = self.tax_template.id
         wizard = self.wizard_obj.create(self.wizard_vals)
@@ -318,7 +335,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertFalse(wizard.fiscal_position_ids)
         self.tax_template.description = "Test description"
         self.account_template.name = "Other name"
-        self.fp_template.note = "Test note"
+        self.fp_template.note = "<p>Test note</p>"
         wizard.unlink()
         # Remove objects
         new_tax_tmpl.unlink()
@@ -372,7 +389,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.tax_template.description = "Other description"
         wizard = self.wizard_obj.create(self.wizard_vals)
         wizard.action_find_records()
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa: B017
             wizard.action_update_records()
         # Errors on account update - continuing after that
         wizard.continue_on_errors = True
@@ -391,7 +408,7 @@ class TestAccountChartUpdate(common.HttpCase):
         wizard.action_find_records()
         self.assertEqual(wizard.account_ids.type, "new")
         new_account_tmpl_2.code = "333333"  # Trick the code for forcing error
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa: B017
             wizard.action_update_records()
         wizard.continue_on_errors = True
         wizard.action_update_records()
@@ -431,7 +448,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self._get_model_data(self.fp).unlink()
         self.tax_template.description = "Test 2 tax description changed"
         self.account_template.name = "Test 2 account name changed"
-        self.fp_template.note = "Test 2 fp note changed"
+        self.fp_template.note = "<p>Test 2 fp note changed</p>"
         wizard = self.wizard_obj.create(self.wizard_vals)
         wizard.action_find_records()
         self.assertEqual(wizard.tax_ids.tax_id, self.tax_template)
@@ -465,7 +482,7 @@ class TestAccountChartUpdate(common.HttpCase):
         # Test 1 recreate XML-ID
         self.tax_template.description = "Test 4 tax description changed"
         self.account_template.name = "Test 4 account name changed"
-        self.fp_template.note = "Test 4 fp note changed"
+        self.fp_template.note = "<p>Test 4 fp note changed</p>"
         self.wizard_vals.update(recreate_xml_ids=True)
         wizard = self.wizard_obj.create(self.wizard_vals)
         wizard.action_find_records()
