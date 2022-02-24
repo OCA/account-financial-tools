@@ -70,10 +70,10 @@ class AccountMove(models.Model):
         self.mapped("line_ids").filtered(
             lambda x: x.account_id.reconcile
         ).remove_move_reconcile()
-        Reversal = self.env["account.move.reversal"]
-        res = Reversal.with_context(
+        Reversal = self.env["account.move.reversal"].with_context(
             active_ids=self.ids, active_model="account.move"
-        ).default_get([])
+        )
+        res = Reversal.default_get([])
         res.update(
             {"journal_id": journal_id, "refund_method": "cancel", "move_type": "entry"}
         )
