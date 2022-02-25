@@ -63,10 +63,10 @@ class AccountMove(models.Model):
                 )
             )
         # Create reverse entries
-        self._cancel_reversal(journal_id)
+        self._cancel_reversal(journal_id, date=date)
         return True
 
-    def _cancel_reversal(self, journal_id):
+    def _cancel_reversal(self, journal_id, date=None):
         self.mapped("line_ids").filtered(
             lambda x: x.account_id.reconcile
         ).remove_move_reconcile()
@@ -77,6 +77,8 @@ class AccountMove(models.Model):
         res.update(
             {"journal_id": journal_id, "refund_method": "cancel", "move_type": "entry"}
         )
+        if date:
+            res["date"] = date
         reversal = Reversal.create(res)
         reversal.with_context(cancel_reversal=True).reverse_moves()
 
