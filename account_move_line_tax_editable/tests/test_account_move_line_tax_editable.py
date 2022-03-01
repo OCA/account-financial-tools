@@ -41,7 +41,7 @@ class TestAccountMoveLineTaxEditable(common.SavepointCase):
                     0,
                     0,
                     {
-                        "name": "move test",
+                        "name": "move test line 1",
                         "debit": 0.0,
                         "credit": 1000.0,
                         "account_id": account300.id,
@@ -51,7 +51,7 @@ class TestAccountMoveLineTaxEditable(common.SavepointCase):
                     0,
                     0,
                     {
-                        "name": "move test",
+                        "name": "move test line 2",
                         "debit": 1000.0,
                         "credit": 0.0,
                         "account_id": account100.id,
@@ -60,8 +60,30 @@ class TestAccountMoveLineTaxEditable(common.SavepointCase):
             ],
         }
         cls.move = cls.env["account.move"].create(move_vals)
+        cls.tax15 = cls.env["account.tax"].create(
+            {
+                "name": "Test tax 15",
+                "amount": 15,
+            }
+        )
 
     def test_compute_is_tax_editable(self):
         self.assertEqual(self.move.line_ids.mapped("is_tax_editable"), [True, True])
         self.move.action_post()
         self.assertEqual(self.move.line_ids.mapped("is_tax_editable"), [False, False])
+
+    def test_tax_edited(self):
+        line1 = self.move.line_ids[0]
+        line1.tax_line_id = self.tax15.id
+        line2 = self.move.line_ids[1]
+        self.move.action_post()
+        self.assertEqual(line1.tax_line_id.id, self.tax15.id)
+        self.assertEqual(line2.tax_line_id.id, False)
+        self.assertEqual(line1.tax_repartition_line_id.tax_id.id, self.tax15.id)
+
+    def test_tax_not_edited(self):
+        """In this case we set the tax_repartition_line_id field, simulating that the
+        move came from an invoice with tax applied. Thus, tax_line_id should be computed"""
+        line1 = self.move.line_ids[1]
+        line1.tax_repartition_line_id = self.tax15.invoice_repartition_line_ids[1]
+        self.assertEqual(line1.tax_line_id.id, self.tax15.id)

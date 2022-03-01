@@ -24,6 +24,11 @@ msgid "ID"
 msgstr ""
 
 #. module: account_move_line_tax_editable
+#: model:ir.model.fields,help:account_move_line_tax_editable.field_account_move_line__tax_line_id
+msgid "Indicates that this journal item is a tax line"
+msgstr ""
+
+#. module: account_move_line_tax_editable
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__is_tax_editable
 msgid "Is tax data editable?"
 msgstr ""
@@ -36,4 +41,9 @@ msgstr ""
 #. module: account_move_line_tax_editable
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line____last_update
 msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_line_tax_editable
+#: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__tax_line_id
+msgid "Originator Tax"
 msgstr ""

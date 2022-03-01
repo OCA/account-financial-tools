@@ -19,6 +19,21 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_move_line_tax_editable
+#: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_line_tax_editable
+#: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_line_tax_editable
+#: model:ir.model.fields,help:account_move_line_tax_editable.field_account_move_line__tax_line_id
+msgid "Indicates that this journal item is a tax line"
+msgstr ""
+
+#. module: account_move_line_tax_editable
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__is_tax_editable
 msgid "Is tax data editable?"
 msgstr "Les données de la taxe sont-elles éditables ?"
@@ -27,3 +42,13 @@ msgstr "Les données de la taxe sont-elles éditables ?"
 #: model:ir.model,name:account_move_line_tax_editable.model_account_move_line
 msgid "Journal Item"
 msgstr "Écriture comptable"
+
+#. module: account_move_line_tax_editable
+#: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_line_tax_editable
+#: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__tax_line_id
+msgid "Originator Tax"
+msgstr ""
