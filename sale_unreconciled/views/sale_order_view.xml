@@ -33,10 +33,10 @@
             </xpath>
         </field>
     </record>
-    <record id="view_sale_order_filter" model="ir.ui.view">
+    <record id="sale_order_view_search_inherit_sale" model="ir.ui.view">
         <field name="name">sale.quotation.select - sale_unreconciled</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_sales_order_filter" />
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale" />
         <field name="arch" type="xml">
             <filter name="my_sale_orders_filter" position="after">
                 <filter
