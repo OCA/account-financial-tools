@@ -66,6 +66,16 @@ class AccountMoveLine(models.Model):
                 "line_ids": [(0, 0, write_off_vals), (0, 0, counter_part)],
             }
         )
+        if writeoff_vals["sale_order_id"]:
+            # done this way because sale_order_id is a related field and will
+            # not being assign on create. Cannot assign purchase_line_id because
+            # it is a generic write-off for the whole SO
+            self.env.cr.execute(
+                """UPDATE account_move_line SET sale_order_id = %s
+            WHERE id in %s
+            """,
+                (writeoff_vals["sale_order_id"], tuple(move.line_ids.ids)),
+            )
         move.action_post()
         return move.line_ids.filtered(
             lambda l: l.account_id.id == counterpart_account.id
