@@ -45,7 +45,6 @@ class AccountMoveLine(models.Model):
             "credit": amount_writeoff < 0.0 and -amount_writeoff or 0.0,
             "partner_id": len(partners) == 1 and partners.id or False,
             "account_id": writeoff_vals["account_id"],
-            "purchase_order_id": writeoff_vals["purchase_order_id"],
             "journal_id": writeoff_vals["journal_id"],
             "currency_id": writeoff_vals["currency_id"],
         }
@@ -66,6 +65,16 @@ class AccountMoveLine(models.Model):
                 "line_ids": [(0, 0, write_off_vals), (0, 0, counter_part)],
             }
         )
+        if writeoff_vals["purchase_order_id"]:
+            # done this way because purchase_order_id is a related field and will
+            # not being assign on create. Cannot assign purchase_line_id because
+            # it is a generic write-off for the whole PO
+            self.env.cr.execute(
+                """UPDATE account_move_line SET purchase_order_id = %s
+            WHERE id in %s
+            """,
+                (writeoff_vals["purchase_order_id"], tuple(move.line_ids.ids)),
+            )
         move.action_post()
         return move.line_ids.filtered(
             lambda l: l.account_id.id == counterpart_account.id

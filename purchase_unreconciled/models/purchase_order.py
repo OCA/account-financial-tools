@@ -112,6 +112,13 @@ class PurchaseOrder(models.Model):
             acc_unrec_items = unreconciled_items.filtered(
                 lambda ml: ml.account_id == account
             )
+            # First try to reconcile the lines automatically to prevent unwanted
+            # write-offs
+            if not sum(acc_unrec_items.mapped("amount_residual")) and not sum(
+                acc_unrec_items.mapped("amount_residual_currency")
+            ):
+                # nothing to reconcile
+                continue
             all_aml_share_same_currency = all(
                 [x.currency_id == self[0].currency_id for x in acc_unrec_items]
             )
@@ -139,15 +146,17 @@ class PurchaseOrder(models.Model):
         # Check if reconciliation is total or needs an exchange rate entry to be created
         if remaining_moves:
             remaining_moves.filtered(lambda l: not l.reconciled).reconcile()
+            if writeoff_to_reconcile:
+                reconciled_ids = unreconciled_items + writeoff_to_reconcile
+            else:
+                reconciled_ids = unreconciled_items
             return {
                 "name": _("Reconciled journal items"),
                 "type": "ir.actions.act_window",
                 "view_type": "form",
                 "view_mode": "tree,form",
                 "res_model": "account.move.line",
-                "domain": [
-                    ("id", "in", unreconciled_items.ids + writeoff_to_reconcile.ids)
-                ],
+                "domain": [("id", "in", reconciled_ids.ids)],
             }
 
     def button_done(self):
