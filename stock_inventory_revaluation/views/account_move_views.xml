@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_view_move_form_inherited" model="ir.ui.view">
+        <field name="name">account.view.move.form.inherited</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="stock_revaluation_count" invisible="1" />
+                <field name="show_create_stock_revaluation_button" invisible="1" />
+                <button
+                    type="object"
+                    name="action_view_inventory_revaluation_lines"
+                    class="oe_stat_button"
+                    icon="fa-plus-square"
+                    attrs="{'invisible':['|','|',('move_type', 'not in', ('in_invoice', 'in_refund')), ('state', '!=', 'posted'), ('stock_revaluation_count' ,'=', 0)]}"
+                >
+                    <field
+                        name="stock_revaluation_count"
+                        string="Stock Reval."
+                        widget="statinfo"
+                    />
+                    </button>
+            </xpath>
+
+            <field name="state" position="before">
+                <button
+                    name="button_revaluate"
+                    class="oe_highlight"
+                    string="Create Inventory Revaluation"
+                    type="object"
+                    attrs="{'invisible':['|','|',('move_type', 'not in', ('in_invoice', 'in_refund')), ('state', '!=', 'posted'), ('show_create_stock_revaluation_button', '=', False)]}"
+                />
+            </field>
+
+        </field>
+    </record>
+
+</odoo>

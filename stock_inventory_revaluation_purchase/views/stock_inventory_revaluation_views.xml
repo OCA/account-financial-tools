@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id='view_stock_inventory_revaluation_form' model='ir.ui.view'>
+            <field name="name">stock.inventory.revaluation.form</field>
+            <field name="model">stock.inventory.revaluation</field>
+            <field
+                name="inherit_id"
+                ref="stock_inventory_revaluation.view_stock_inventory_revaluation_form"
+            />
+            <field name="arch" type="xml">
+                <field name="add_from_stock_move" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="currency_id" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="price_subtotal" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="original_value" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="additional_value" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <page name="additional_value" position="inside">
+                    <group class="oe_subtotal_footer oe_right">
+                        <button
+                            colspan="2"
+                            name="compute_inventory_revaluation"
+                            string="Compute"
+                            type="object"
+                            class="oe_right btn-secondary"
+                            states='draft'
+                        />
+                    </group>
+                </page>
+            </field>
+        </record>
+        <record id='view_stock_inventory_revaluation_tree' model='ir.ui.view'>
+            <field name="name">stock.inventory.revaluation.tree</field>
+            <field name="model">stock.inventory.revaluation</field>
+            <field
+                name="inherit_id"
+                ref="stock_inventory_revaluation.view_stock_inventory_revaluation_tree"
+            />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
