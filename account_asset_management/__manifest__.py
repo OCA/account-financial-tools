@@ -8,6 +8,7 @@
     "license": "AGPL-3",
     "depends": ["account", "report_xlsx_helper"],
     "excludes": ["account_asset"],
+    "development_status": "Production/Stable",
     "external_dependencies": {"python": ["python-dateutil"]},
     "author": "Noviat, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
