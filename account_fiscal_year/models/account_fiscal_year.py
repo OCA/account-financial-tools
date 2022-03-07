@@ -12,7 +12,6 @@ class AccountFiscalYear(models.Model):
     _rec_name = "name"
 
     name = fields.Char(
-        string="Name",
         required=True,
     )
     date_from = fields.Date(
