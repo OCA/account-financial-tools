@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_line_form" model="ir.ui.view">
+        <field name="name">account.move.line.form</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_form" />
+        <field name="arch" type="xml">
+            <field name="quantity" position="before">
+                <field name="stock_valuation_adjustment_line_id" />
+            </field>
+        </field>
+    </record>
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="stock_valuation_adjustment_line_id" optional="hide" />
+                <field name="stock_landed_cost_id" optional="show" />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_move_line_filter" model="ir.ui.view">
+        <field name="name">Journal Items</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="stock_valuation_adjustment_line_id" />
+            </field>
+            <filter name="group_by_partner" position="after">
+                <filter
+                    name="group_by_landed_cost"
+                    string="Stock Landed Cost"
+                    domain="[]"
+                    context="{'group_by':'stock_valuation_adjustment_line_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='line_ids']/tree//field[@name='partner_id']"
+                position="after"
+            >
+                <field name="stock_valuation_adjustment_line_id" optional="hide" />
+                <field name="stock_landed_cost_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
