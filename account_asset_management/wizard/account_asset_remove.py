@@ -25,10 +25,11 @@ class AccountAssetRemove(models.TransientModel):
     )
     date_remove = fields.Date(
         string="Asset Removal Date",
-        required=True,
+        required=False,
         default=fields.Date.today,
         help="Removal date must be after the last posted entry "
-        "in case of early removal",
+        "in case of early removal, if there is a removal JE the date on that move is "
+        "considered",
     )
     force_date = fields.Date(string="Force accounting date")
     sale_value = fields.Float(
@@ -70,6 +71,12 @@ class AccountAssetRemove(models.TransientModel):
         "the 'Plus-Value Account' or 'Min-Value Account' ",
     )
     note = fields.Text("Notes")
+    removal_account_move_id = fields.Many2one(
+        comodel_name="account.move",
+        string="Removal Journal Entry",
+        help="If the removal journal entry was manuall created please fill this field,"
+        "otherwise leave it empty",
+    )
 
     @api.constrains("sale_value")
     def _check_sale_value(self):
@@ -196,15 +203,17 @@ class AccountAssetRemove(models.TransientModel):
         else:
             date_remove = self.force_date
 
-        # create move
-        move_vals = {
-            "date": date_remove,
-            "ref": line_name,
-            "journal_id": journal_id,
-            "narration": self.note,
-        }
-        move = self.env["account.move"].create(move_vals)
-
+        if self.removal_account_move_id:
+            move = self.removal_account_move_id
+        else:
+            # create move
+            move_vals = {
+                "date": date_remove,
+                "ref": line_name,
+                "journal_id": journal_id,
+                "narration": self.note,
+            }
+            move = self.env["account.move"].create(move_vals)
         # create asset line
         asset_line_vals = {
             "amount": residual_value,
@@ -218,8 +227,13 @@ class AccountAssetRemove(models.TransientModel):
         asset.write({"state": "removed", "date_remove": self.date_remove})
 
         # create move lines
-        move_lines = self._get_removal_data(asset, residual_value)
-        move.with_context(allow_asset=True).write({"line_ids": move_lines})
+        if self.removal_account_move_id:
+            self.removal_account_move_id.with_context(allow_asset=True).mapped(
+                "line_ids"
+            ).write({"asset_id": asset.id})
+        else:
+            move_lines = self._get_removal_data(asset, residual_value)
+            move.with_context(allow_asset=True).write({"line_ids": move_lines})
 
         return {
             "name": _("Asset '%s' Removal Journal Entry") % asset_ref,
@@ -235,7 +249,10 @@ class AccountAssetRemove(models.TransientModel):
         """
         Generate last depreciation entry on the day before the removal date.
         """
-        date_remove = self.date_remove
+        if not self.removal_account_move_id:
+            date_remove = self.date_remove.date
+        else:
+            date_remove = self.date_remove
         asset_line_obj = self.env["account.asset.line"]
 
         digits = self.env["decimal.precision"].precision_get("Account")
@@ -370,3 +387,9 @@ class AccountAssetRemove(models.TransientModel):
                 }
                 move_lines.append((0, 0, move_line_vals))
         return move_lines
+
+    @api.onchange("removal_account_move_id")
+    def _onchange_removal_account_move_id(self):
+        for rec in self:
+            if rec.removal_account_move_id:
+                rec.date_remove = rec.removal_account_move_id.date
