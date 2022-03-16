@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-03 17:51+0000\n"
-"PO-Revision-Date: 2022-03-03 17:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: account_cash_deposit
+#: model:ir.actions.report,print_report_name:account_cash_deposit.report_account_cash_deposit
+msgid ""
+"'%s%s' % (object.display_name.replace(' ', '_'), object.state == 'draft' and"
+" '-draft' or '')"
+msgstr ""
 
 #. module: account_cash_deposit
 #: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
@@ -355,6 +360,7 @@ msgstr ""
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_error
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -418,18 +424,6 @@ msgstr ""
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_ids
 msgid "Messages"
-msgstr ""
-
-#. module: account_cash_deposit
-#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
-#, python-format
-msgid "Missing Outstanding Payments Account on bank journal '%s'."
-msgstr ""
-
-#. module: account_cash_deposit
-#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
-#, python-format
-msgid "Missing Outstanding Receipts Account on bank journal '%s'."
 msgstr ""
 
 #. module: account_cash_deposit
@@ -529,7 +523,7 @@ msgstr ""
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__is_reconcile
-msgid "Reconcile"
+msgid "Reconciled"
 msgstr ""
 
 #. module: account_cash_deposit
@@ -540,6 +534,11 @@ msgstr ""
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_user_id
 msgid "Responsible User"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_cash_deposit
@@ -566,6 +565,12 @@ msgstr ""
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid "The %s is not in draft state, so you cannot delete it."
+msgstr ""
+
+#. module: account_cash_deposit
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "The Inter-Banks Transfer Account is not configured."
 msgstr ""
 
 #. module: account_cash_deposit
