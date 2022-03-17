@@ -20,6 +20,12 @@
                             attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
                             class="oe_stat_button" icon="fa fa-free-code-camp"
                             groups="base.group_no_one"/>
+                    <button string="Clear reservation"
+                            type="object"
+                            name= "clear_reservation"
+                            attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                            class="oe_stat_button" icon="fa fa-shower"
+                            groups="base.group_no_one"/>
                 </xpath>
             </field>
         </record>
@@ -42,7 +48,18 @@
                             attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
                             class="oe_stat_button" icon="fa fa-free-code-camp"
                             groups="base.group_no_one"/>
+                    <button string="Clear reservation"
+                            type="object"
+                            name= "clear_reservation"
+                            attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                            class="oe_stat_button" icon="fa fa-shower"
+                            groups="base.group_no_one"/>
                 </xpath>
+<!--
+                <field name="categ_id" position="after">
+                    <field name="only_quants" groups="base.group_no_one"/>
+                </field>
+-->
             </field>
         </record>
         <record id="view_stock_product_tree2" model="ir.ui.view">

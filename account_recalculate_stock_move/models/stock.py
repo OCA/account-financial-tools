@@ -64,7 +64,7 @@ class StockMoveLine(models.Model):
                 price_unit = move.price_unit
                 if move.purchase_line_id:
                     price_unit = move._get_price_unit()
-                
+
                 valued_quantity = self.product_uom_id._compute_quantity(self.qty_done, self.product_id.uom_id)
                 amount = valued_quantity * abs(price_unit)
                 # _logger.info("MOVE STOCK MOVE self._context(%s)::%s\n%s(%s) %s(%s)=%s*%s (purchase_line_id:%s)" %
@@ -248,5 +248,18 @@ class StockMove(models.Model):
         if self._context.get('force_valuation_date'):
             domain += [('date', '<=', self._context['force_valuation_date'])]
         return domain
+
+    def _prepare_move_line_vals(self, quantity=None, reserved_quant=None):
+        if reserved_quant:
+            for record in self:
+                # production_id = record.raw_material_production_id
+                if record.picking_id:
+                    picking_id = record.picking_id
+                    product = record.product_id
+                    product.product_tmpl_id.message_post_with_view('mail.message_origin_link',
+                                                                   values={'self': product.product_tmpl_id,
+                                                                           'origin': picking_id},
+                                                                   subtype_id=self.env.ref('mail.mt_note').id)
+        return super(StockMove, self)._prepare_move_line_vals(quantity=quantity, reserved_quant=reserved_quant)
 
 # stockmove._get_price_unit = StockMove._get_price_unit

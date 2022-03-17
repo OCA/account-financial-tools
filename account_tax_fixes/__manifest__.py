@@ -15,8 +15,8 @@
         'sale_only_company',
     ],
     'data': [
-            'views/account_view.xml',
-            'views/account_invoice_view.xml',
+        'views/account_view.xml',
+        'views/account_invoice_view.xml',
     ],
     'installable': True,
 }

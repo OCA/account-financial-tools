@@ -32,11 +32,22 @@ class Product(models.Model):
         'History Value', compute='_compute_stock_value',
         digits=dp.get_precision('Product Price'))
 
+    def clear_reservation(self):
+        company = self.env.user.company_id.id
+        warehouse = self.env['stock.warehouse'].search([('company_id', '=', company)], limit=1)
+        # location = warehouse.lot_stock_id
+        # product = self
+        moves = self.env['stock.move'].search([('product_id', '=', self.id)])
+        if moves:
+            raise UserError(_(
+                "You cannot rebuild quantities from pickings moves in product.\n "
+                "You need to try from the product template."))
+
     def rebuild_moves(self):
         company = self.env.user.company_id.id
         warehouse = self.env['stock.warehouse'].search([('company_id', '=', company)], limit=1)
-        location = warehouse.lot_stock_id
-        product = self
+        # location = warehouse.lot_stock_id
+        # product = self
         moves = self.env['stock.move'].search([('product_id', '=', self.id)])
         if moves:
             raise UserError(_(
@@ -111,6 +122,7 @@ class Product(models.Model):
         query = StockMove._where_calc(domain)
         StockMove._apply_ir_rules(query, 'read')
         from_clause, where_clause, params = query.get_sql()
+        # where_clause += ' AND '
         query_str = """
             SELECT stock_move.product_id, SUM(COALESCE(stock_move.{}, 0.0)), ARRAY_AGG(stock_move.id)
             FROM {}
@@ -199,6 +211,52 @@ class ProductTemplate(models.Model):
                 else:
                     template.account_move_line_ids |= product.account_move_line_ids
 
+    def clear_reservation_full(self):
+        company = self.env.user.company_id.id
+        for product in self.product_variant_ids:
+            moves = self.env['stock.move'].search([('product_id', '=', product.id),
+                                                   ('state', 'in', ('assigned', 'partially_available', 'confirmed'))])
+            if self._uid == SUPERUSER_ID:
+                moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
+
+            # first clear all quantity in table for save
+            for warehouse in self.env['stock.warehouse'].search([('company_id', '=', company)]):
+                # get for main warehouse location
+                location = warehouse.lot_stock_id
+                quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for reception warehouse location
+                location = warehouse.wh_input_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for quality control location
+                location = warehouse.wh_qc_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for delivery warehouse location
+                location = warehouse.wh_output_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for packaging location in warehouse
+                location = warehouse.wh_pack_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+
+                for quant in quants:
+                    try:
+                        with self._cr.savepoint():
+                            self._cr.execute("SELECT 1 FROM stock_quant WHERE id = %s FOR UPDATE NOWAIT", [quant.id],
+                                             log_exceptions=False)
+                            quant.write({
+                                'reserved_quantity': 0,
+                            })
+                    except OperationalError as e:
+                        if e.pgcode == '55P03':  # could not obtain the lock
+                            continue
+                        else:
+                            raise
+            if moves:
+                # _logger.info("UPDATE stock_move_line SET product_uom_qty=0.0, product_qty=0.0, ordered_qty=0.0 WHERE id IN %s" % (tuple(moves.mapped('move_line_ids').ids),))
+                self._cr.execute("UPDATE stock_move_line SET product_uom_qty=0.0, product_qty=0.0 WHERE id IN %s",
+                                 (tuple(moves.mapped('move_line_ids').ids),), log_exceptions=False)
+                for move in moves:
+                    move._do_unreserve()
+
     # @profile('/tmp/prof.profile')
     @api.multi
     @job
@@ -211,6 +269,83 @@ class ProductTemplate(models.Model):
 
     def _post_rebuild_moves(self, product, move, date_move):
         return
+
+    def clear_reservation(self):
+        company = self.env.user.company_id.id
+        for product in self.product_variant_ids:
+            moves = self.env['stock.move'].search([('product_id', '=', product.id), ('state', '=', 'done')])
+            if self._uid == SUPERUSER_ID:
+                moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
+            if sum([x.product_uom_qty for x in moves.mapped('move_line_ids')]) > 0.0:
+                raise UserError(_('Before to start recalculation first unreserved all quantity for this product'))
+
+            rounding = product.uom_id.rounding
+            # first clear all quantity in table for save
+            for warehouse in self.env['stock.warehouse'].search([('company_id', '=', company)]):
+                # get for main warehouse location
+                location = warehouse.lot_stock_id
+                quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for reception warehouse location
+                location = warehouse.wh_input_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for quality control location
+                location = warehouse.wh_qc_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for delivery warehouse location
+                location = warehouse.wh_output_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+                # get for packaging location in warehouse
+                location = warehouse.wh_pack_stock_loc_id
+                quants |= self.env['stock.quant'].sudo()._gather(product, location, strict=False)
+
+                for quant in quants:
+                    try:
+                        with self._cr.savepoint():
+                            self._cr.execute("SELECT 1 FROM stock_quant WHERE id = %s FOR UPDATE NOWAIT", [quant.id],
+                                             log_exceptions=False)
+                            quant.write({
+                                'quantity': 0,
+                                'reserved_quantity': 0,
+                            })
+                            # cleanup empty quants
+                            if float_is_zero(quant.quantity, precision_rounding=rounding) and float_is_zero(
+                                    quant.reserved_quantity, precision_rounding=rounding):
+                                quant.unlink()
+                            # break
+                    except OperationalError as e:
+                        if e.pgcode == '55P03':  # could not obtain the lock
+                            continue
+                        else:
+                            raise
+            
+            for move in moves.sorted(lambda r: r.date):
+                if move.quantity_done == 0:
+                    continue
+
+                for move_line in move.move_line_ids.filtered(
+                        lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
+                    move_line._action_done()
+                    
+            #reservations        
+            
+            moves_reservation = self.env['stock.move'].search([('product_id', '=', product.id), ('state', 'in', ('assigned', 'partially_available', 'confirmed'))])
+            if self._uid == SUPERUSER_ID:
+                moves_reservation = moves_reservation.filtered(lambda r: r.company_id == self.env.user.company_id)
+            
+            for move in moves_reservation.sorted(lambda r: r.date): 
+                for line in move.move_line_ids:
+                    taken_quantity = line.product_qty
+                    try:
+                        if not float_is_zero(taken_quantity, precision_rounding=line.product_id.uom_id.rounding):
+                            _logger.info('Quant update_reserver %s for %s' % (taken_quantity, line.product_id.name))
+                            quants = self.env['stock.quant']._update_reserved_quantity(
+                                line.product_id, move.location_id, taken_quantity, lot_id=line.lot_id,
+                                package_id=line.package_id, owner_id=line.owner_id, strict=True
+                            )
+                    except UserError:
+                        _logger.info("Exception %s" % move.product_id.name)
+                        taken_quantity = 0
+
 
     def rebuild_moves(self):
         company = self.env.user.company_id.id
@@ -269,21 +404,25 @@ class ProductTemplate(models.Model):
             # collect all landed cost for recalculate
             landed_cost = self.env['stock.valuation.adjustment.lines'].search([('move_id', 'in', moves.ids)])
             move_landed_cost = {}
-            landed_move_cost = {}
+            # landed_move_cost = {}
+            if landed_cost:
+                landed_cost = landed_cost.sorted(lambda r: r.move_id.date)
             for line_landed in landed_cost:
                 move_landed_cost[line_landed.move_id] = line_landed.cost_id
-                landed_move_cost[line_landed.cost_id] = landed_cost.filtered(lambda r: r.cost_id == line_landed.cost_id).ids
+            # _logger.info("LANDED COST %s" % move_landed_cost)
+                # landed_move_cost[line_landed.cost_id] = landed_cost.filtered(lambda r: r.cost_id == line_landed.cost_id).ids
             # start rebuild all stock moves and account moves
             date_move = False
-            current_landed_cost = False
             for move in moves.sorted(lambda r: r.date):
                 if move.quantity_done == 0:
                     continue
-                if not current_landed_cost:
-                    current_landed_cost = move_landed_cost.get(move, False)
-                if move_landed_cost.get(move, False) != current_landed_cost:
-                    current_landed_cost.rebuild_account_move()
-                    current_landed_cost = False
+                # if not current_landed_cost:
+                #     current_landed_cost = move_landed_cost.get(move, False)
+                #     last_move_id = move
+                # if move_landed_cost.get(move, False) != current_landed_cost:
+                #     current_landed_cost.rebuild_account_move_lines(last_move_id)
+                #     current_landed_cost = False
+                #     last_move_id = False
                 move.remaining_value = 0.0
                 move.remaining_qty = 0.0
                 move.value = 0.0
@@ -299,7 +438,7 @@ class ProductTemplate(models.Model):
                 for move_line in move.move_line_ids.filtered(
                         lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
                     move_line._action_done()
-                # if self.only_quants:
+                # if self._context.get('force_update'):
                 #     continue
 
                 # now to regenerate account moves
@@ -329,9 +468,13 @@ class ProductTemplate(models.Model):
                     move.move_line_ids.write({'date': move.inventory_id.accounting_date or move.inventory_id.date})
                 move.with_context(dict(self._context, force_valuation_amount=correction_value, force_date=move.date,
                                        rebuld_try=True, force_re_calculate=True)).rebuild_account_move()
-                if landed_move_cost.get(move_landed_cost.get(move, False), -1) == 1:
-                    current_landed_cost.rebuild_account_move()
-                    current_landed_cost = False
+                current_landed_cost = move_landed_cost.get(move, False)
+                # _logger.info("CURRENT LANDED COST %s" % current_landed_cost)
+                if current_landed_cost:
+                    current_landed_cost.rebuild_account_move_lines(move)
+                # if landed_move_cost.get(move_landed_cost.get(move, False), -1) == 1:
+                #     current_landed_cost.rebuild_account_move()
+                #     current_landed_cost = False
                 # move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
                 # for landed_cost_adjustment in move_landed_cost:
                 #     landed_cost_adjustment.former_cost = move.value

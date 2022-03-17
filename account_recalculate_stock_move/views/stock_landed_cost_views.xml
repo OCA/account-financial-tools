@@ -8,6 +8,12 @@
             <field name="arch" type="xml">
                 <xpath expr="//div[hasclass('oe_title')]" position="before">
                     <div class="oe_button_box" name="button_box">
+                        <button name="action_get_account_move_lines"
+                            icon="fa-usd"
+                            class="oe_stat_button"
+                            string="Accounting Entries"
+                            type="object"
+                            groups="account.group_account_user"/>
                         <button name="rebuild_account_move"
                                 icon="fa fa-book"
                                 class="oe_stat_button"
@@ -16,6 +22,9 @@
                                 type="object"
                                 groups="base.group_no_one"/>
                     </div>
+                </xpath>
+                <xpath expr="//field[@name='account_move_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </xpath>
             </field>
         </record>

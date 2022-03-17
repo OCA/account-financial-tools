@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError
+from odoo.addons.stock_landed_costs.models.stock_landed_cost import LandedCost as landedcost
 from odoo.addons.stock_landed_costs.models.stock_landed_cost import AdjustmentLines as adjustmentlines
 
 import logging
@@ -13,7 +14,61 @@ _logger = logging.getLogger(__name__)
 class LandedCost(models.Model):
     _inherit = 'stock.landed.cost'
 
-    account_move_line_ids = fields.One2many('account.move.line', related="account_move_id.line_ids")
+    account_move_line_ids = fields.One2many('account.move.line', compute='_compute_account_move_line_ids')
+    account_move_ids = fields.One2many('account.move', 'landed_cost_id', 'Journal Entry', copy=False, readonly=True)
+
+    @api.multi
+    def _compute_account_move_line_ids(self):
+        for record in self:
+            if len(record.account_move_ids.ids) > 0:
+                record.account_move_line_ids = self.env['account.move.line']
+                for line in record.mapped('account_move_ids').mapped('line_ids'):
+                    record.account_move_line_ids |= line
+
+    @api.multi
+    def button_validate(self):
+        if any(cost.state != 'draft' for cost in self):
+            raise UserError(_('Only draft landed costs can be validated'))
+        if any(not cost.valuation_adjustment_lines for cost in self):
+            raise UserError(_('No valuation adjustments lines. You should maybe recompute the landed costs.'))
+        if not self._check_sum():
+            raise UserError(_('Cost and adjustments lines do not match. You should maybe recompute the landed costs.'))
+
+        for cost in self:
+            for line in cost.valuation_adjustment_lines.filtered(lambda line: line.move_id):
+                move = self.env['account.move']
+                move_vals = {
+                    'journal_id': cost.account_journal_id.id,
+                    'date': cost.date,
+                    'ref': cost.name,
+                    'line_ids': [],
+                    'landed_cost_id': cost.id,
+                    'stock_move_id': line.move_id.id,
+                }
+                # Prorate the value at what's still in stock
+                cost_to_add = (line.move_id.remaining_qty / line.move_id.product_qty) * line.additional_landed_cost
+
+                new_landed_cost_value = line.move_id.landed_cost_value + line.additional_landed_cost
+                line.move_id.write({
+                    'landed_cost_value': new_landed_cost_value,
+                    'value': line.move_id.value + line.additional_landed_cost,
+                    'remaining_value': line.move_id.remaining_value + cost_to_add,
+                    'price_unit': (line.move_id.value + line.additional_landed_cost) / line.move_id.product_qty,
+                })
+                # `remaining_qty` is negative if the move is out and delivered proudcts that were not
+                # in stock.
+                qty_out = 0
+                if line.move_id._is_in():
+                    qty_out = line.move_id.product_qty - line.move_id.remaining_qty
+                elif line.move_id._is_out():
+                    qty_out = line.move_id.product_qty
+                move_vals['line_ids'] += line._create_accounting_entries(move, qty_out)
+
+                move = move.create(move_vals)
+                # for compatible save last account move
+                cost.write({'state': 'done', 'account_move_id': move.id})
+                move.post()
+        return True
 
     @api.multi
     def action_get_account_moves(self):
@@ -39,9 +94,12 @@ class LandedCost(models.Model):
 
     def rebuild_account_move(self):
         for cost in self:
-            if cost.account_move_id:
+            if cost.account_move_ids or cost.account_move_id:
+                account_move_ids = cost.account_move_id
+                if cost.account_move_ids:
+                    account_move_ids |= cost.account_move_ids
                 moves = False
-                for move in cost.account_move_id:
+                for move in account_move_ids:
                     if move.state == 'posted':
                         if not moves:
                             moves = move
@@ -52,14 +110,17 @@ class LandedCost(models.Model):
                         ret = move.button_cancel()
                         if ret:
                             move.unlink()
-            move = self.env['account.move']
-            move_vals = {
-                'journal_id': cost.account_journal_id.id,
-                'date': cost.date,
-                'ref': cost.name,
-                'line_ids': [],
-            }
-            for line in cost.valuation_adjustment_lines.filtered(lambda line: line.move_id):
+
+            for line in cost.valuation_adjustment_lines.filtered(lambda r: r.move_id):
+                move = self.env['account.move']
+                move_vals = {
+                    'journal_id': cost.account_journal_id.id,
+                    'date': cost.date,
+                    'ref': cost.name,
+                    'line_ids': [],
+                    'landed_cost_id': cost.id,
+                    'stock_move_id': line.move_id.id,
+                }
                 # Prorate the value at what's still in stock
                 cost_to_add = (line.move_id.remaining_qty / line.move_id.product_qty) * line.additional_landed_cost
 
@@ -79,9 +140,60 @@ class LandedCost(models.Model):
                     qty_out = line.move_id.product_qty
                 move_vals['line_ids'] += line._create_accounting_entries(move, qty_out)
 
-            move = move.create(move_vals)
-            cost.write({'state': 'done', 'account_move_id': move.id})
-            move.post()
+                move = move.create(move_vals)
+                cost.write({'state': 'done', 'account_move_id': move.id})
+                move.post()
+
+    def rebuild_account_move_lines(self, stock_move_id):
+        for cost in self:
+            # if cost.account_move_ids:
+            moves = False
+            for move in cost.account_move_ids.filtered(lambda r: r.stock_move_id == stock_move_id):
+                if move.state == 'posted':
+                    if not moves:
+                        moves = move
+                    else:
+                        moves |= move
+            if moves:
+                for move in moves:
+                    ret = move.button_cancel()
+                    if ret:
+                        moves.unlink()
+            for line in cost.valuation_adjustment_lines.filtered(lambda r: r.move_id == stock_move_id):
+                move = self.env['account.move']
+                move_vals = {
+                    'journal_id': cost.account_journal_id.id,
+                    'date': cost.date,
+                    'ref': cost.name,
+                    'line_ids': [],
+                    'landed_cost_id': cost.id,
+                    'stock_move_id': line.move_id.id,
+                }
+                # Prorate the value at what's still in stock
+                cost_to_add = (line.move_id.remaining_qty / line.move_id.product_qty) * line.additional_landed_cost
+
+                new_landed_cost_value = line.move_id.landed_cost_value + line.additional_landed_cost
+                line.move_id.write({
+                    'landed_cost_value': new_landed_cost_value,
+                    'value': line.move_id.value + line.additional_landed_cost,
+                    'remaining_value': line.move_id.remaining_value + cost_to_add,
+                    'price_unit': (line.move_id.value + line.additional_landed_cost) / line.move_id.product_qty,
+                })
+                # `remaining_qty` is negative if the move is out and delivered proudcts that were not
+                # in stock.
+                qty_out = 0
+                if line.move_id._is_in():
+                    qty_out = line.move_id.product_qty - line.move_id.remaining_qty
+                elif line.move_id._is_out():
+                    qty_out = line.move_id.product_qty
+                move_vals['line_ids'] += line._create_accounting_entries(move, qty_out)
+                # _logger.info("CREATE NEW LANDED COST ACCOUNT MOVE LINE %s" % move_vals)
+                move = move.create(move_vals)
+                cost.write({'state': 'done', 'account_move_id': move.id})
+                move.post()
+
+
+landedcost.button_validate = LandedCost.button_validate
 
 
 class AdjustmentLines(models.Model):
@@ -115,6 +227,7 @@ class AdjustmentLines(models.Model):
             'name': self.name,
             'product_id': self.product_id.id,
             'quantity': 0,
+            # 'stock_move_id': move.id,
         }
         debit_line = dict(base_line, account_id=debit_account_id)
         credit_line = dict(base_line, account_id=credit_account_id, product_id=self.cost_line_id.product_id.id)

@@ -2,9 +2,9 @@
 <odoo>
     <data>
         <record id="invoice_supplier_force_manual_form" model="ir.ui.view">
-            <field name="name">account.invoice.manual.supplier.form</field>
+            <field name="name">account.invoice.manual.supplier.form (in account_move_line_tax_editable)</field>
             <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="inherit_id" ref="account_tax_fixes.invoice_supplier_fixes_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='tax_line_ids']/tree/field[@name='amount']" position="attributes">
                     <attribute name="context">{'force_manual': True}</attribute>
@@ -13,9 +13,9 @@
         </record>
 
         <record id="invoice_force_manual_form" model="ir.ui.view">
-            <field name="name">account.invoice.manual.form</field>
+            <field name="name">account.invoice.manual.form (in account_move_line_tax_editable)</field>
             <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="inherit_id" ref="account_tax_fixes.invoice_fixes_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='tax_line_ids']/tree/field[@name='amount']" position="attributes">
                     <attribute name="context">{'force_manual': True}</attribute>

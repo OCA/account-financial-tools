@@ -31,6 +31,7 @@
         "views/account_invoice_view.xml",
         "views/product_views.xml",
         "views/stock_landed_cost_views.xml",
+        "views/stock_scrap_views.xml",
         "views/account_move_line_view.xml",
         "wizard/create_transfer.xml",
         "wizard/revalidate_transfer.xml",

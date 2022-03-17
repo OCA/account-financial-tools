@@ -12,6 +12,7 @@
     'website': 'https://www.acsone.eu',
     'depends': [
         'account',
+        'account_tax_fixes',
     ],
     'data': [
         'views/account_move.xml',
