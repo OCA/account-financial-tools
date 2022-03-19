@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,76 +14,76 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "<strong>Accounting Date:</strong>"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "<strong>Company:</strong>"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "<strong>Journal:</strong>"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "<strong>Partner:</strong>"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "<strong>Reference:</strong>"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Account"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Amount in Currency"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Analytic Account"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Credit"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Debit"
 msgstr ""
 
 #. module: account_move_print
-#: model:ir.actions.report,name:account_move_print.journal_entries_move_print_id
+#: model:ir.actions.report,name:account_move_print.action_report_journal_entries
 msgid "Journal Entries"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Label"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Originator Tax"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Partner"
 msgstr ""
 
 #. module: account_move_print
-#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+#: model_terms:ir.ui.view,arch_db:account_move_print.report_journal_entry_document
 msgid "Taxes"
 msgstr ""
