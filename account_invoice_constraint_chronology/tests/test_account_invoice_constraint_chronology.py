@@ -9,7 +9,7 @@ from odoo.exceptions import UserError
 from odoo.tests import common
 
 
-class TestAccountInvoiceConstraintChronology(common.SavepointCase):
+class TestAccountInvoiceConstraintChronology(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
