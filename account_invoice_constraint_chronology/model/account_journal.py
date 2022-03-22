@@ -12,6 +12,7 @@ class AccountJournal(models.Model):
 
     @api.onchange("type")
     def _onchange_type(self):
-        super()._onchange_type()
+        res = super()._onchange_type()
         if self.type not in ["sale", "purchase"]:
             self.check_chronology = False
+        return res
