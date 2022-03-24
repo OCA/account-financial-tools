@@ -8,7 +8,8 @@ def handle_account_invoice_move_migration(env):
         env.cr,
         """
         UPDATE account_move_line aml
-        SET asset_profile_id = ail.asset_profile_id, asset_id = ail.asset_id
+        SET asset_profile_id = COALESCE(ail.asset_profile_id, aml.asset_profile_id),
+            asset_id = COALESCE(ail.asset_id, aml.asset_id)
         FROM account_invoice_line ail
         WHERE aml.old_invoice_line_id = ail.id AND
             (ail.asset_profile_id IS NOT NULL OR ail.asset_id IS NOT NULL)"""
