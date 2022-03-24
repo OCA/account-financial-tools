@@ -181,8 +181,8 @@ class AccountMoveLine(models.Model):
                 rec.asset_profile_id = rec.account_id.asset_profile_id
             elif rec.asset_id:
                 rec.asset_profile_id = rec.asset_id.profile_id
-            else:
-                rec.asset_profile_id = False
+            else:  # don't touch it - Needed for avoiding CacheMiss exceptions
+                rec.asset_profile_id = rec.asset_profile_id
 
     @api.onchange("asset_profile_id")
     def _onchange_asset_profile_id(self):
