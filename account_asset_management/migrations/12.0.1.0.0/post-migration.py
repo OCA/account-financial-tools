@@ -152,6 +152,20 @@ def handle_account_asset_disposal_migration(env):
     ).write({'type': 'remove'})
 
 
+def link_asset_line_with_move_when_type_create(env):
+    """move_id field should be set when type = create"""
+    openupgrade.logged_query(
+        env.cr,
+        """
+        UPDATE account_asset_line aal
+        SET move_id = ai.move_id
+        FROM account_asset aa
+        JOIN account_invoice ai ON aa.invoice_id = ai.id
+        WHERE aal.asset_id = aa.id AND aal.move_id IS NULL AND aal.type = 'create'
+            AND ai.move_id IS NOT NULL"""
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     copied_column = openupgrade.get_legacy_name('method_time')
@@ -163,6 +177,7 @@ def migrate(env, version):
     handle_account_asset_disposal_migration(env)
     set_asset_line_previous(env)
     add_asset_initial_entry(env)
+    link_asset_line_with_move_when_type_create(env)
     openupgrade.delete_records_safely_by_xml_id(
         env, ["account_asset_management.account_asset_category_multi_company_rule",
               "account_asset_management.account_asset_asset_multi_company_rule"])
