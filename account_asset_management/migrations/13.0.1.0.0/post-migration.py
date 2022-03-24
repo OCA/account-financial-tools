@@ -12,7 +12,7 @@ def handle_account_invoice_move_migration(env):
             asset_id = COALESCE(ail.asset_id, aml.asset_id)
         FROM account_invoice_line ail
         WHERE aml.old_invoice_line_id = ail.id AND
-            (ail.asset_profile_id IS NOT NULL OR ail.asset_id IS NOT NULL)"""
+            (ail.asset_profile_id IS NOT NULL OR ail.asset_id IS NOT NULL)""",
     )
 
 
