@@ -464,6 +464,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             existing_candidates = current_repartition.filtered(
                 lambda r: r.factor_percent == factor_percent
                 and r.repartition_type == repartition_type
+                and r.id not in existing_ids
             )
             if len(existing_candidates) == 1:
                 existing = existing_candidates
