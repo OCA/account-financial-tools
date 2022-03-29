@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -44,9 +44,11 @@ msgid ""
 "When giving a value to this field (only appears in edit mode), Originator "
 "tax will take its value. If non is set, Originator tax will maintain its "
 "value"
-msgstr ""
+msgstr "Al darle un valor a este campo (solo aparece en modo Editar), el Impuesto "
+"Originador tomará este valor. Si no está definido, el Impuesto originador mantendrá"
+" su valor."
 
 #. module: account_move_line_tax_editable
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__force_tax_line_id
 msgid "Force Originator Tax"
-msgstr ""
+msgstr "Forzar Impuesto del originador"

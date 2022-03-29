@@ -11,12 +11,11 @@
         <field name="arch" type="xml">
             <field name="tax_line_id" position="before">
                 <field name="is_tax_editable" invisible="1" />
-            </field>
-            <field name="tax_line_id" position="attributes">
-                <attribute name="readonly">0</attribute>
-                <attribute
-                    name="attrs"
-                >{'readonly': [('is_tax_editable', '=', False)]}</attribute>
+                <field
+                    name="force_tax_line_id"
+                    class="oe_edit_only"
+                    attrs="{'invisible': [('is_tax_editable', '=',  False)]}"
+                />
             </field>
             <field name="tax_ids" position="attributes">
                 <attribute name="readonly">0</attribute>
@@ -24,6 +23,14 @@
                     name="attrs"
                 >{'readonly': [('is_tax_editable', '=', False)]}</attribute>
             </field>
+            <xpath
+                expr="//page[@name='information']/group/group/field[@name='tax_line_id']/.."
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'invisible': [ ('is_tax_editable', '=', False), ('tax_line_id','=',False), ('tax_ids','=',[])]}</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>

@@ -13,10 +13,22 @@
             >
                 <field name="is_tax_editable" invisible="1" />
                 <field
-                    name="tax_line_id"
-                    attrs="{'readonly': [('is_tax_editable', '=', False)]}"
-                    optional="hide"
+                    name="force_tax_line_id"
+                    class="oe_edit_only"
+                    attrs="{'column_invisible': [('parent.state', '!=', 'draft')]}"
+                    optional="show"
                 />
+                  <xpath
+                    expr="//field[@name='line_ids']/tree/field[@name='tax_line_id']"
+                    position="move"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='line_ids']/tree/field[@name='tax_line_id']"
+                position="attributes"
+            >
+                     <attribute name="invisible" />
+                     <attribute name="optional">show</attribute>
             </xpath>
         </field>
     </record>
