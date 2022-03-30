@@ -392,7 +392,7 @@ class AssetReportXlsx(models.AbstractModel):
         ws.write_string(row_pos, 0, no_entries, FORMATS["format_left_bold"])
 
     def _get_assets(self, wiz, data):
-        """ Add the selected assets, both grouped and ungrouped, to `data` """
+        """Add the selected assets, both grouped and ungrouped, to `data`"""
         dom = [
             ("date_start", "<=", wiz.date_to),
             "|",
