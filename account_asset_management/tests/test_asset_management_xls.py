@@ -71,7 +71,7 @@ class TestAssetManagementXls(AccountTestInvoicingCommon):
         cls.report_action = cls.xls_report.xls_export()
 
     def test_01_action_xls(self):
-        """ Check report XLS action and generate report """
+        """Check report XLS action and generate report"""
         self.assertGreaterEqual(
             self.report_action.items(),
             {
