@@ -1204,7 +1204,7 @@ class AccountAsset(models.Model):
         return table
 
     def _get_depreciation_entry_name(self, seq):
-        """ use this method to customise the name of the accounting entry """
+        """use this method to customise the name of the accounting entry"""
         return (self.code or str(self.id)) + "/" + str(seq)
 
     def _compute_entries(self, date_end, check_triggers=False):
