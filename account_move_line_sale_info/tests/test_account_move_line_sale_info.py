@@ -66,7 +66,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         )
 
     def _create_user(self, login, groups, company):
-        """ Create a user."""
+        """Create a user."""
         group_ids = [group.id for group in groups]
         user = self.res_users_model.with_context({"no_reset_password": True}).create(
             {

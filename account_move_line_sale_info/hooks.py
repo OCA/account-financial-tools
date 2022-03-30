@@ -4,7 +4,7 @@
 
 def post_init_hook(cr, registry):
 
-    """ INIT sale references in acount move line """
+    """INIT sale references in acount move line"""
     # FOR stock moves
     cr.execute(
         """
