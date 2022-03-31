@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_invoice_constraint_chronology
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-30 16:31+0000\n"
+"PO-Revision-Date: 2015-06-03 15:57+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Spanish (Mexico) (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/es_MX/)\n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_bank_statement_import_journal_creation__check_chronology
+#: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal__check_chronology
+msgid "Check Chronology"
+msgstr ""
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
+#, python-format
+msgid ""
+"Chronology Error. Please confirm older draft invoices before {date_invoice} "
+"and try again."
+msgstr ""
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:82
+#, python-format
+msgid ""
+"Chronology Error. There exist at least one invoice with a later date to "
+"{date_invoice}."
+msgstr ""
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
+msgid "Journal"
+msgstr "Diario"
