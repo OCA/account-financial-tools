@@ -409,24 +409,41 @@ class ProductTemplate(models.Model):
                 landed_cost = landed_cost.sorted(lambda r: r.move_id.date)
             for line_landed in landed_cost:
                 move_landed_cost[line_landed.move_id] = line_landed.cost_id
-            # _logger.info("LANDED COST %s" % move_landed_cost)
-                # landed_move_cost[line_landed.cost_id] = landed_cost.filtered(lambda r: r.cost_id == line_landed.cost_id).ids
+
+            # first to remove all account moves
+            acc_moves_for_remove = self.env['account.move']
+            acc_move_acc = self.env['account.move']
+            landed_cost_cost_id = landed_cost.mapped('cost_id')
+            for landed_line in landed_cost_cost_id:
+                for landed_line_acc in landed_line.account_move_line_ids.\
+                        filtered(lambda r: r.stock_move_id.id in moves.ids):
+                    acc_move_acc |= landed_line_acc.move_id
+            acc_move_acc |= moves.mapped('account_move_ids')
+            for acc_move in acc_move_acc:
+                if acc_move.state == 'posted':
+                    acc_moves_for_remove |= acc_move
+            if acc_moves_for_remove:
+                for acc_move in acc_moves_for_remove:
+                    if acc_move.state == 'draft':
+                        acc_move.unlink()
+                        continue
+                    ret = acc_move.button_cancel()
+                    if ret:
+                        acc_move.unlink()
+            for move in moves.sorted(lambda r: r.date):
+                if move.quantity_done == 0:
+                    continue
+                move.landed_cost_value = 0.0
+                move.remaining_value = 0.0
+                move.remaining_qty = 0.0
+                move.value = 0.0
+                move.price_unit = 0.0
+
             # start rebuild all stock moves and account moves
             date_move = False
             for move in moves.sorted(lambda r: r.date):
                 if move.quantity_done == 0:
                     continue
-                # if not current_landed_cost:
-                #     current_landed_cost = move_landed_cost.get(move, False)
-                #     last_move_id = move
-                # if move_landed_cost.get(move, False) != current_landed_cost:
-                #     current_landed_cost.rebuild_account_move_lines(last_move_id)
-                #     current_landed_cost = False
-                #     last_move_id = False
-                move.remaining_value = 0.0
-                move.remaining_qty = 0.0
-                move.value = 0.0
-                move.price_unit = 0.0
                 if move.inventory_id:
                     prod_inventory = move.inventory_id.line_ids.filtered(lambda r: r.product_id == move.product_id)
                     if prod_inventory and prod_inventory[0].price_unit != 0:
@@ -438,25 +455,8 @@ class ProductTemplate(models.Model):
                 for move_line in move.move_line_ids.filtered(
                         lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
                     move_line._action_done()
-                # if self._context.get('force_update'):
-                #     continue
 
                 # now to regenerate account moves
-                acc_moves = False
-                for acc_move in move.account_move_ids:
-                    # if acc_move.state == 'posted':
-                    if not acc_moves:
-                        acc_moves = acc_move
-                    else:
-                        acc_moves |= acc_move
-                if acc_moves:
-                    for acc_move in acc_moves:
-                        if acc_move.state == 'draft':
-                            acc_move.unlink()
-                            continue
-                        ret = acc_move.button_cancel()
-                        if ret:
-                            acc_move.unlink()
                 # _logger.info("MOVE %s" % move.reference)
                 if move.picking_id:
                     move.write({'date': move.picking_id.date_done,
@@ -472,26 +472,7 @@ class ProductTemplate(models.Model):
                 # _logger.info("CURRENT LANDED COST %s" % current_landed_cost)
                 if current_landed_cost:
                     current_landed_cost.rebuild_account_move_lines(move)
-                # if landed_move_cost.get(move_landed_cost.get(move, False), -1) == 1:
-                #     current_landed_cost.rebuild_account_move()
-                #     current_landed_cost = False
-                # move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move)
-                # for landed_cost_adjustment in move_landed_cost:
-                #     landed_cost_adjustment.former_cost = move.value
-                # if not date_move:
-                #     date_move = move.date
-                # _logger.info("move_landed_cost %s <> %s" % (date_move, move.date))
-                # move_landed_cost = landed_cost.filtered(lambda r: r.move_id == move and (date_move > r.cost_id.date <= move.date))
-                # if move_landed_cost:
-                #     _logger.info("move_landed_cost %s=%s (date_move(%s) > r.cost_id.date(%s) <= move.date(%s))" %
-                #                  (move_landed_cost.cost_id.name, move, date_move, move_landed_cost.cost_id.date,
-                #                   move.date))
-                #     for landed_cost_adjustment in move_landed_cost:
-                #         landed_cost_adjustment.former_cost = move.value
-                #     move_landed_cost.mapped('cost_id').rebuild_account_move()
                 self._post_rebuild_moves(product, move, date_move)
-                # date_move = move.date
-            # landed_cost.mapped('cost_id').rebuild_account_move()
 
     @api.multi
     def action_get_account_move_lines(self):
