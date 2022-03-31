@@ -22,7 +22,9 @@
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account.view_move_line_tax_audit_tree" />
         <field name="arch" type="xml">
-            <field name="balance" position="replace" optional="show" />
+            <field name="balance" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
         </field>
     </record>
 </odoo>
