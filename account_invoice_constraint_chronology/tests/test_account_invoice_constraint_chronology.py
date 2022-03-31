@@ -96,7 +96,12 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
                 active_ids=self.invoice_1.ids,
             )
             .create(
-                {"date": self.today, "reason": "no reason", "refund_method": "refund"}
+                {
+                    "date": self.today,
+                    "reason": "no reason",
+                    "refund_method": "refund",
+                    "journal_id": self.invoice_1.journal_id.id,
+                }
             )
             .reverse_moves()
         )
@@ -113,7 +118,12 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
                 active_ids=self.invoice_1.ids,
             )
             .create(
-                {"date": self.today, "reason": "no reason", "refund_method": "refund"}
+                {
+                    "date": self.today,
+                    "reason": "no reason",
+                    "refund_method": "refund",
+                    "journal_id": self.invoice_1.journal_id.id,
+                }
             )
             .reverse_moves()
         )
