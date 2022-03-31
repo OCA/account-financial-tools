@@ -6,7 +6,7 @@
 {
     "name": "Optional validation of VAT via VIES",
     "category": "Accounting",
-    "version": "15.0.1.0.0",
+    "version": "15.0.1.0.1",
     "depends": ["base_vat"],
     "data": ["views/res_partner_view.xml"],
     "author": "Tecnativa," "Odoo Community Association (OCA)",
