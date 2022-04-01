@@ -104,7 +104,7 @@ class AccountMoveLine(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('asset_id') and not self.env.context.get('allow_asset'):
+        if vals.get('asset_id') and not self.env.context.get('allow_asset') and not vals.get('restatement_asset_id'):
             raise UserError(
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
@@ -115,7 +115,8 @@ class AccountMoveLine(models.Model):
             move = self.env['account.move'].browse(vals['move_id'])
             asset.write({
                 'depreciation_restatement_line_ids':
-                    [(0, False, asset._value_depreciation_restatement_line(vals, move, move.date, type=vals.get('restatement_type')))]
+                    [(0, False, asset._value_depreciation_restatement_line(vals, move, move.date,
+                                                                           type=vals.get('restatement_type')))]
             })
 
         if vals.get('asset_profile_id'):
@@ -163,15 +164,15 @@ class AccountMoveLine(models.Model):
     def write(self, vals):
         if (
             self.mapped('asset_id') and
-            set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE) and
-            not (
+            set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE)
+            and not (
                 self.env.context.get('allow_asset_removal') and
                 list(vals.keys()) == ['asset_id'])
         ):
             raise UserError(
                 _("You cannot change an accounting item "
                   "linked to an asset depreciation line."))
-        if vals.get('asset_id') and not self.env.context.get('allow_asset'):
+        if vals.get('asset_id') and not self.env.context.get('allow_asset') and not vals.get('restatement_asset_id'):
             raise UserError(
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
@@ -180,7 +181,11 @@ class AccountMoveLine(models.Model):
             asset = self.env['account.asset'].browse(vals['restatement_asset_id'])
             asset.write({
                 'depreciation_restatement_line_ids':
-                    [(0, False, asset._value_depreciation_restatement_line(vals, self.move_id, self.date, self=vals.get('restatement_type', self.restatement_type)))]
+                    [(0, False, asset._value_depreciation_restatement_line(
+                        vals,
+                        self.move_id,
+                        self.date,
+                        type=vals.get('restatement_type', self.restatement_type)))]
             })
         if vals.get('asset_profile_id'):
             if len(self) == 1:
