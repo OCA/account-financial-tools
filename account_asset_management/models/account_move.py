@@ -87,7 +87,9 @@ class AccountMove(models.Model):
     def action_post(self):
         super().action_post()
         for move in self:
-            for aml in move.line_ids.filtered("asset_profile_id"):
+            for aml in move.line_ids.filtered(
+                lambda line: line.asset_profile_id and not line.tax_line_id
+            ):
                 vals = move._prepare_asset_vals(aml)
                 if not aml.name:
                     raise UserError(
