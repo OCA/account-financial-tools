@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[account_balance_line](account_balance_line/) | 15.0.1.0.0 |  | Display balance totals in move line view
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 15.0.1.0.1 |  | Account Invoice Constraint Chronology
 [account_lock_date_update](account_lock_date_update/) | 15.0.1.0.1 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 15.0.1.0.1 |  | Introduces the purchase order line to the journal items
