@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo-addon-account_balance_line>=15.0dev,<15.1dev',
         'odoo-addon-account_invoice_constraint_chronology>=15.0dev,<15.1dev',
         'odoo-addon-account_lock_date_update>=15.0dev,<15.1dev',
+        'odoo-addon-account_move_line_menu>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_purchase_info>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_sale_info>=15.0dev,<15.1dev',
         'odoo-addon-base_vat_optional_vies>=15.0dev,<15.1dev',
