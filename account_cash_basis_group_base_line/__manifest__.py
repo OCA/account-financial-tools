@@ -1,11 +1,12 @@
 {
     "name": "Tax Cash Basis Group Base Lines",
-    "version": "14.0.0.0.1",
+    "version": "15.0.0.0.1",
     "summary": "Compacting the creation of Journal Lines for CABA base lines.",
     "sequence": 5,
     "category": "Accounting",
     "depends": ["account"],
     "author": "Vauxoo, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
     "data": [],
     "installable": True,

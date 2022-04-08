@@ -1,7 +1,7 @@
-from odoo.addons.account.tests.test_reconciliation import TestReconciliation
+from odoo.addons.account.tests.test_reconciliation import TestReconciliationExec
 
 
-class TestAccountReconciliationPartial(TestReconciliation):
+class TestAccountReconciliationPartial(TestReconciliationExec):
 
     """Tests for Account Reconciliation Partial"""
 
@@ -9,7 +9,7 @@ class TestAccountReconciliationPartial(TestReconciliation):
         super(TestAccountReconciliationPartial, self).__init__(methodName)
         # Skip original test from inherited class
         custom_attributes = set(dir(TestAccountReconciliationPartial)) - set(
-            dir(TestReconciliation)
+            dir(TestReconciliationExec)
         )
         custom_test_methods = [
             name
@@ -66,7 +66,6 @@ class TestAccountReconciliationPartial(TestReconciliation):
                 "debit": 1000,
                 "move_id": purchase_move.id,
                 "tax_ids": [(4, self.tax_cash_basis.id, False)],
-                "tax_exigible": False,
             }
         )
         aml_obj.create(
@@ -76,7 +75,6 @@ class TestAccountReconciliationPartial(TestReconciliation):
                 "debit": 300,
                 "move_id": purchase_move.id,
                 "tax_ids": [(4, self.tax_cash_basis.id, False)],
-                "tax_exigible": False,
             }
         )
         aml_obj.create(
@@ -86,7 +84,6 @@ class TestAccountReconciliationPartial(TestReconciliation):
                 "debit": 200,
                 "move_id": purchase_move.id,
                 "tax_ids": [(4, self.tax_cash_basis.id, False)],
-                "tax_exigible": False,
             }
         )
         tax_line = aml_obj.create(
@@ -96,7 +93,6 @@ class TestAccountReconciliationPartial(TestReconciliation):
                 "debit": 300,
                 "move_id": purchase_move.id,
                 "tax_line_id": self.tax_cash_basis.id,
-                "tax_exigible": False,
                 "tax_repartition_line_id": (
                     self.tax_cash_basis.invoice_repartition_line_ids.filtered(
                         lambda x: x.repartition_type == "tax"
@@ -105,7 +101,7 @@ class TestAccountReconciliationPartial(TestReconciliation):
                 "tax_base_amount": 1500,
             }
         )
-        purchase_move.post()
+        purchase_move.action_post()
 
         # Payment Move
         payment_move = self.env["account.move"].create(
@@ -125,7 +121,7 @@ class TestAccountReconciliationPartial(TestReconciliation):
                 "move_id": payment_move.id,
             }
         )
-        payment_move.post()
+        payment_move.action_post()
 
         to_reconcile = (
             (purchase_move + payment_move)
