@@ -302,8 +302,8 @@ class TestAccountMoveTransferPartner(TransactionCase):
         )
         wizard_form.currency_id = self.currency_2
         self.assertEqual(
-            wizard_form.total_amount_due,
-            self.invoice_with_payment_term.amount_residual,
+            round(wizard_form.total_amount_due, 2),
+            round(self.invoice_with_payment_term.amount_residual, 2),
         )
 
     def test_07_account_move_transfer_partner(self):
