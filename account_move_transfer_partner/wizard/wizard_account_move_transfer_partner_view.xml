@@ -94,5 +94,17 @@
             <field name="binding_model_id" ref="account.model_account_move" />
         </record>
 
+        <record
+            id="wizard_account_payment_transfer_partner_view_form_action"
+            model="ir.actions.act_window"
+        >
+            <field name="name">Transfer amount due to another partner</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.account.move.transfer.partner</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="account.model_account_payment" />
+        </record>
+
     </data>
 </odoo>
