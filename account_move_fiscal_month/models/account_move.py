@@ -14,6 +14,7 @@ class AccountMove(models.Model):
         string="Fiscal month",
         compute="_compute_date_range_fm",
         search="_search_date_range_fm",
+        store=True,
     )
 
     @api.depends("date", "company_id")
