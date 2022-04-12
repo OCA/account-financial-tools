@@ -58,32 +58,53 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
             total_amount_due = 0
             for move in self.move_ids:
                 if move._origin:
-                    invoice = move._origin
+                    real_move = move._origin
                 else:
-                    invoice = move
-                total_amount_due += invoice.currency_id.with_context(
+                    real_move = move
+                total_amount_due += real_move.currency_id.with_context(
                     date=self.account_date or fields.Date.today()
-                ).compute(invoice.amount_residual, self.currency_id)
+                ).compute(real_move.amount_residual, self.currency_id)
+                if real_move.payment_id:
+                    (
+                        liquidity_lines,
+                        counterpart_lines,
+                        writeoff_lines,
+                    ) = real_move.payment_id._seek_for_lines()
+                    payment_amount_due = abs(
+                        sum(counterpart_lines.mapped("amount_residual"))
+                    )
+                    total_amount_due += real_move.payment_id.currency_id.with_context(
+                        date=self.account_date or fields.Date.today()
+                    ).compute(payment_amount_due, self.currency_id)
             self.total_amount_due = total_amount_due
             self.amount_to_transfer = self.total_amount_due
 
     @api.model
     def default_get(self, fields_list):
         values = super(WizardAccountMoveTransferPartner, self).default_get(fields_list)
-        moves = (
-            self.env["account.move"]
-            .browse(self.env.context.get("active_ids"))
-            .filtered(lambda x: x.state == "posted")
-        )
+        current_model = self.env.context.get("active_model")
+        moves = self.env["account.move"].browse()
+        records = self.env[current_model].browse(self.env.context.get("active_ids"))
+        if current_model == "account.payment":
+            moves = records.mapped("move_id")
+        elif current_model == "account.move":
+            moves = records
+        moves = moves.filtered(lambda x: x.state == "posted")
+        allowed_moves = moves.filtered(lambda x: x.is_invoice() or x.payment_id)
         values["origin_partner_ids"] = moves.mapped("partner_id").ids
-        values["move_ids"] = moves.filtered(lambda x: x.is_invoice()).ids
-        values["no_invoice_documents"] = (
-            len(moves.filtered(lambda x: not x.is_invoice())) >= 1
-        )
-        due_amount = abs(sum(moves.mapped("amount_residual")))
+        values["move_ids"] = allowed_moves.ids
+        values["no_invoice_documents"] = len(moves - allowed_moves) >= 1
+        due_amount = abs(sum(allowed_moves.mapped("amount_residual")))
+        for payment in allowed_moves.mapped("payment_id"):
+            (
+                liquidity_lines,
+                counterpart_lines,
+                writeoff_lines,
+            ) = payment._seek_for_lines()
+            due_amount += abs(sum(counterpart_lines.mapped("amount_residual")))
         values["total_amount_due"] = due_amount
         values["amount_to_transfer"] = due_amount
-        values["allow_edit_amount_to_transfer"] = len(moves) == 1
+        values["allow_edit_amount_to_transfer"] = len(allowed_moves) == 1
         return values
 
     def action_create_move(self):
@@ -121,10 +142,18 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
             reconcilable_account = move.line_ids.mapped("account_id").filtered(
                 lambda x: x.user_type_id.type in ("receivable", "payable")
             )
-            lines = move.line_ids.filtered(
-                lambda line: line.account_id == reconcilable_account
-                and not line.reconciled
-            )
+            if move.payment_id:
+                (
+                    liquidity_lines,
+                    counterpart_lines,
+                    writeoff_lines,
+                ) = move.payment_id._seek_for_lines()
+                lines = counterpart_lines.filtered(lambda x: not x.reconciled)
+            else:
+                lines = move.line_ids.filtered(
+                    lambda line: line.account_id == reconcilable_account
+                    and not line.reconciled
+                )
             common_data = {
                 "account_id": reconcilable_account.id,
                 "move_id": new_move.id,
@@ -149,11 +178,18 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
                 )
                 credit_line_data = common_data.copy()
                 debit_line_data = common_data.copy()
+                is_inbound = (
+                    move.is_inbound() or move.payment_id.partner_type == "supplier"
+                )
+                is_outbound = (
+                    move.is_outbound() or move.payment_id.partner_type == "customer"
+                )
+                partner = line.move_id.payment_id.partner_id or line.move_id.partner_id
                 credit_line_data.update(
                     {
-                        "partner_id": move.is_inbound()
-                        and move.partner_id.id
-                        or move.is_outbound()
+                        "partner_id": is_inbound
+                        and partner.id
+                        or is_outbound
                         and self.destination_partner_id.id,
                         "credit": amount,
                         "debit": 0.0,
@@ -163,10 +199,10 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
                 )
                 debit_line_data.update(
                     {
-                        "partner_id": move.is_inbound()
+                        "partner_id": is_inbound
                         and self.destination_partner_id.id
-                        or move.is_outbound()
-                        and move.partner_id.id,
+                        or is_outbound
+                        and partner.id,
                         "credit": 0.0,
                         "debit": amount,
                         "amount_currency": amount_currency,
@@ -176,12 +212,22 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
                 credit_aml += aml_model.create(credit_line_data)
                 debit_aml += aml_model.create(debit_line_data)
             new_move.action_post()
-            if move.is_inbound():
-                for aml in credit_aml:
-                    move.js_assign_outstanding_line(aml.id)
-            if move.is_outbound():
-                for aml in debit_aml:
-                    move.js_assign_outstanding_line(aml.id)
+            if is_inbound:
+                if move.payment_id:
+                    lines_not_reconciled = lines.filtered(lambda x: not x.reconciled)
+                    lines_not_reconciled |= credit_aml
+                    lines_not_reconciled.reconcile()
+                else:
+                    for aml in credit_aml:
+                        move.js_assign_outstanding_line(aml.id)
+            if is_outbound:
+                if move.payment_id:
+                    lines_not_reconciled = lines.filtered(lambda x: not x.reconciled)
+                    lines_not_reconciled |= debit_aml
+                    lines_not_reconciled.reconcile()
+                else:
+                    for aml in debit_aml:
+                        move.js_assign_outstanding_line(aml.id)
             new_moves |= new_move
         action = self.env.ref("account.action_move_journal_line").read()[0]
         action.update({"domain": [("id", "in", new_moves.ids)]})
