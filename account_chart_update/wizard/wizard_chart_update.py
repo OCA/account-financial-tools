@@ -398,7 +398,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def find_taxes_by_templates(self, templates):
         tax_ids = []
         for tax in templates:
-            tax_ids.append(self.find_tax_by_templates(tax))
+            tax_id = self.find_tax_by_templates(tax)
+            if tax_id:
+                tax_ids.append(tax_id)
         return self.env["account.tax"].browse(tax_ids)
 
     @tools.ormcache("templates")
@@ -510,9 +512,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     )
                 )
 
-        # Mark to be removed the lines not found
-        remove_ids = [x for x in current_repartition.ids if x not in existing_ids]
-        result += [(2, x) for x in remove_ids]
+        if tax.amount_type != "group":
+            # Mark to be removed the lines not found
+            remove_ids = [x for x in current_repartition.ids if x not in existing_ids]
+            result += [(2, x) for x in remove_ids]
         return result
 
     @api.model
