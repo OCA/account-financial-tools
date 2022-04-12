@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-12-17 17:39+0000\n"
+"PO-Revision-Date: 2022-04-12 18:05+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -126,7 +126,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group____last_update
 #: model:ir.model.fields,field_description:account_menu.field_res_config_settings____last_update
 msgid "Last Modified on"
-msgstr "Ultima Modifica il"
+msgstr "Ultima modifica il"
 
 #. module: account_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
