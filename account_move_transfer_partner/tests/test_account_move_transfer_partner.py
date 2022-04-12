@@ -181,7 +181,9 @@ class TestAccountMoveTransferPartner(TransactionCase):
         all_invoices = self.invoice_1 + self.invoice_2 + self.invoice_3
         total_residual = sum(i.amount_residual for i in all_invoices)
         wizard_form = Form(
-            self.wizard_model.with_context({"active_ids": self.invoice_1.ids})
+            self.wizard_model.with_context(
+                {"active_ids": self.invoice_1.ids, "active_model": "account.move"}
+            )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
         wizard_form.amount_to_transfer = self.invoice_1.amount_residual + 1
@@ -197,7 +199,9 @@ class TestAccountMoveTransferPartner(TransactionCase):
         with self.assertRaises(ValidationError):
             wizard.action_create_move()
         wizard_form = Form(
-            self.wizard_model.with_context({"active_ids": all_invoices.ids})
+            self.wizard_model.with_context(
+                {"active_ids": all_invoices.ids, "active_model": "account.move"}
+            )
         )
         with self.assertRaises(AssertionError):
             wizard_form.amount_to_transfer = total_residual + 1
@@ -220,7 +224,9 @@ class TestAccountMoveTransferPartner(TransactionCase):
 
     def test_02_account_move_transfer_partner(self):
         wizard_form = Form(
-            self.wizard_model.with_context({"active_ids": self.in_invoice.ids})
+            self.wizard_model.with_context(
+                {"active_ids": self.in_invoice.ids, "active_model": "account.move"}
+            )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
         current_residual_amount = self.invoice_1.amount_residual
@@ -245,7 +251,9 @@ class TestAccountMoveTransferPartner(TransactionCase):
 
     def test_03_account_move_transfer_partner(self):
         wizard_form = Form(
-            self.wizard_model.with_context({"active_ids": self.out_refund.ids})
+            self.wizard_model.with_context(
+                {"active_ids": self.out_refund.ids, "active_model": "account.move"}
+            )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
         wizard_form.destination_partner_id = self.partner_3
@@ -255,7 +263,9 @@ class TestAccountMoveTransferPartner(TransactionCase):
 
     def test_04_account_move_transfer_partner(self):
         wizard_form = Form(
-            self.wizard_model.with_context({"active_ids": self.in_refund.ids})
+            self.wizard_model.with_context(
+                {"active_ids": self.in_refund.ids, "active_model": "account.move"}
+            )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
         wizard_form.destination_partner_id = self.partner_3
@@ -265,9 +275,11 @@ class TestAccountMoveTransferPartner(TransactionCase):
 
     def test_05_account_move_transfer_partner(self):
         wizard_form = Form(
-            self.wizard_model.with_context({"active_ids": self.general_move.ids})
+            self.wizard_model.with_context(
+                {"active_ids": self.general_move.ids, "active_model": "account.move"}
+            )
         )
-        self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
+        self.assertFalse(wizard_form.allow_edit_amount_to_transfer)
         self.assertTrue(wizard_form.no_invoice_documents)
         wizard_form.destination_partner_id = self.partner_3
         wizard = wizard_form.save()
@@ -288,7 +300,10 @@ class TestAccountMoveTransferPartner(TransactionCase):
         self.invoice_with_payment_term.action_post()
         wizard_form = Form(
             self.wizard_model.with_context(
-                {"active_ids": self.invoice_with_payment_term.ids}
+                {
+                    "active_ids": self.invoice_with_payment_term.ids,
+                    "active_model": "account.move",
+                }
             )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
@@ -320,7 +335,10 @@ class TestAccountMoveTransferPartner(TransactionCase):
         self.invoice_with_payment_term.action_post()
         wizard_form = Form(
             self.wizard_model.with_context(
-                {"active_ids": self.invoice_with_payment_term.ids}
+                {
+                    "active_ids": self.invoice_with_payment_term.ids,
+                    "active_model": "account.move",
+                }
             )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
