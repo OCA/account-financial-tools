@@ -20,3 +20,7 @@
 
   * Jordi Ballester <jordi.ballester@forgeflow.com>
   * Miquel Raïch <miquel.raich@forgeflow.com>
+
+* `Sygel <https://www.sygel.es>`_:
+
+  * Manuel Regidor <manuel.regidor@sygel.es>
