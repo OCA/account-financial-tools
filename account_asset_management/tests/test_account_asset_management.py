@@ -7,7 +7,7 @@ import calendar
 import time
 from datetime import date, datetime
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests.common import Form
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -27,37 +27,58 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         cls.product = cls.env["product.product"].create(
             {"name": "Test", "standard_price": 500.0}
         )
-        move_form = Form(
-            cls.env["account.move"].with_context(
-                default_move_type="in_invoice", check_move_validity=False
+
+        cls.invoice = (
+            cls.env["account.move"]
+            .with_context(check_move_validity=False)
+            .create(
+                {
+                    "move_type": "in_invoice",
+                    "invoice_date": fields.Date.context_today(cls.env.user),
+                    "partner_id": cls.partner.id,
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "name": "test",
+                                "product_id": cls.product.id,
+                                "price_unit": 2000.00,
+                                "quantity": 1,
+                            }
+                        ),
+                    ],
+                }
             )
         )
-        move_form.invoice_date = fields.Date.context_today(cls.env.user)
-        move_form.partner_id = cls.partner
-        with move_form.invoice_line_ids.new() as line_form:
-            line_form.name = "test"
-            line_form.product_id = cls.product
-            line_form.price_unit = 2000.00
-            line_form.quantity = 1
-        cls.invoice = move_form.save()
-        move_form = Form(
-            cls.env["account.move"].with_context(
-                default_move_type="in_invoice", check_move_validity=False
+
+        cls.invoice_2 = (
+            cls.env["account.move"]
+            .with_context(check_move_validity=False)
+            .create(
+                {
+                    "move_type": "in_invoice",
+                    "invoice_date": fields.Date.context_today(cls.env.user),
+                    "partner_id": cls.partner.id,
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "name": "test 2",
+                                "product_id": cls.product.id,
+                                "price_unit": 10000.00,
+                                "quantity": 1,
+                            }
+                        ),
+                        Command.create(
+                            {
+                                "name": "test 3",
+                                "product_id": cls.product.id,
+                                "price_unit": 20000.00,
+                                "quantity": 1,
+                            }
+                        ),
+                    ],
+                }
             )
         )
-        move_form.invoice_date = fields.Date.context_today(cls.env.user)
-        move_form.partner_id = cls.partner
-        with move_form.invoice_line_ids.new() as line_form:
-            line_form.name = "test 2"
-            line_form.product_id = cls.product
-            line_form.price_unit = 10000.00
-            line_form.quantity = 1
-        with move_form.invoice_line_ids.new() as line_form:
-            line_form.name = "test 3"
-            line_form.product_id = cls.product
-            line_form.price_unit = 20000.00
-            line_form.quantity = 1
-        cls.invoice_2 = move_form.save()
 
         # analytic configuration
         cls.env.user.write(
@@ -121,20 +142,28 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "amount": 15.0,
             }
         )
-        move_form = Form(
-            self.env["account.move"].with_context(
-                default_move_type="in_invoice", check_move_validity=False
+
+        invoice = (
+            self.env["account.move"]
+            .with_context(check_move_validity=False)
+            .create(
+                {
+                    "move_type": "in_invoice",
+                    "invoice_date": fields.Date.context_today(self.env.user),
+                    "partner_id": self.partner.id,
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "name": "Line 1",
+                                "price_unit": 200.0,
+                                "quantity": 1,
+                                "tax_ids": [tax.id],
+                            }
+                        ),
+                    ],
+                }
             )
         )
-        move_form.invoice_date = fields.Date.context_today(self.env.user)
-        move_form.partner_id = self.partner
-        with move_form.invoice_line_ids.new() as line_form:
-            line_form.name = "Line 1"
-            line_form.price_unit = 200.0
-            line_form.quantity = 1
-            line_form.tax_ids.clear()
-            line_form.tax_ids.add(tax)
-        invoice = move_form.save()
         self.assertEqual(invoice.partner_id, self.partner)
 
     def test_00_fiscalyear_lock_date_month(self):
@@ -510,7 +539,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         asset.compute_depreciation_board()
         asset.validate()
         wiz_ctx = {"active_id": asset.id, "early_removal": True}
-        wiz = self.remove_model.with_context(wiz_ctx).create(
+        wiz = self.remove_model.with_context(**wiz_ctx).create(
             {
                 "date_remove": "2019-01-31",
                 "sale_value": 0.0,
@@ -535,11 +564,10 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertTrue(len(invoice.invoice_line_ids) > 0)
         line = invoice.invoice_line_ids[0]
         self.assertTrue(line.price_unit > 0.0)
-        move_form = Form(invoice)
-        with move_form.invoice_line_ids.edit(0) as line_form:
-            line_form.quantity = 2
-            line_form.asset_profile_id = asset_profile
-        invoice = move_form.save()
+        invoice.invoice_line_ids[0].write(
+            {"quantity": 2, "asset_profile_id": asset_profile.id}
+        )
+        invoice._onchange_invoice_line_ids()
         invoice.action_post()
         # get all asset after invoice validation
         current_asset = self.env["account.asset"].search([])
@@ -577,8 +605,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
     def test_11_assets_from_invoice(self):
         all_assets = self.env["account.asset"].search([])
         ctx = dict(self.invoice_2._context)
-        del ctx["default_move_type"]
-        invoice = self.invoice_2.with_context(ctx)
+        invoice = self.invoice_2.with_context(**ctx)
         asset_profile = self.car5y
         asset_profile.asset_product_item = True
         # Compute depreciation lines on invoice validation
@@ -837,7 +864,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         wiz = Form(
             self.env["wiz.asset.move.reverse"].with_context(
-                {
+                **{
                     "active_model": depreciation_line._name,
                     "active_id": depreciation_line.id,
                     "active_ids": [depreciation_line.id],
@@ -845,6 +872,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             )
         )
         reverse_wizard = wiz.save()
+        reverse_wizard.write({"journal_id": depreciation_line.move_id.journal_id.id})
         reverse_wizard.reverse_move()
         ict0.refresh()
         self.assertEqual(ict0.value_depreciated, 0)

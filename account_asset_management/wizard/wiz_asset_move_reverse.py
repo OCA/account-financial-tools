@@ -18,7 +18,7 @@ class WizAssetMoveReverse(models.TransientModel):
         required=True,
         default=fields.Date.context_today,
     )
-    reason = fields.Char(string="Reason")
+    reason = fields.Char()
     journal_id = fields.Many2one(
         "account.journal",
         string="Use Specific Journal",
