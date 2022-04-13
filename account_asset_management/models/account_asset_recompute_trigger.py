@@ -8,7 +8,7 @@ class AccountAssetRecomputeTrigger(models.Model):
     _name = "account.asset.recompute.trigger"
     _description = "Asset table recompute triggers"
 
-    reason = fields.Char(string="Reason", required=True)
+    reason = fields.Char(required=True)
     company_id = fields.Many2one("res.company", string="Company", required=True)
     date_trigger = fields.Datetime(
         "Trigger Date",
@@ -18,7 +18,6 @@ class AccountAssetRecomputeTrigger(models.Model):
     date_completed = fields.Datetime("Completion Date", readonly=True)
     state = fields.Selection(
         selection=[("open", "Open"), ("done", "Done")],
-        string="State",
         default="open",
         readonly=True,
     )

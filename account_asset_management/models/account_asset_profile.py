@@ -11,7 +11,7 @@ class AccountAssetProfile(models.Model):
     _description = "Asset profile"
     _order = "name"
 
-    name = fields.Char(string="Name", size=64, required=True, index=True)
+    name = fields.Char(size=64, required=True, index=True)
     note = fields.Text()
     account_analytic_id = fields.Many2one(
         comodel_name="account.analytic.account", string="Analytic account"
@@ -129,7 +129,6 @@ class AccountAssetProfile(models.Model):
         help="Use number of days to calculate depreciation amount",
     )
     use_leap_years = fields.Boolean(
-        string="Use leap years",
         default=False,
         help="If not set, the system will distribute evenly the amount to "
         "amortize across the years, based on the number of years. "

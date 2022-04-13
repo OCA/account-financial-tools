@@ -308,8 +308,8 @@ class AssetReportXlsx(models.AbstractModel):
             self.env["account.asset"]._xls_acquisition_template()
         )
         wl_acq = self.env["account.asset"]._xls_acquisition_fields()
-        title = self._get_title(wiz, "acquisition", format="normal")
-        title_short = self._get_title(wiz, "acquisition", format="short")
+        title = self._get_title(wiz, "acquisition", frmt="normal")
+        title_short = self._get_title(wiz, "acquisition", frmt="short")
         sheet_name = title_short[:31].replace("/", "-")
 
         return {
@@ -326,8 +326,8 @@ class AssetReportXlsx(models.AbstractModel):
         active_template = self._get_asset_template()
         active_template.update(self.env["account.asset"]._xls_active_template())
         wl_act = self.env["account.asset"]._xls_active_fields()
-        title = self._get_title(wiz, "active", format="normal")
-        title_short = self._get_title(wiz, "active", format="short")
+        title = self._get_title(wiz, "active", frmt="normal")
+        title_short = self._get_title(wiz, "active", frmt="short")
         sheet_name = title_short[:31].replace("/", "-")
 
         return {
@@ -344,8 +344,8 @@ class AssetReportXlsx(models.AbstractModel):
         removal_template = self._get_asset_template()
         removal_template.update(self.env["account.asset"]._xls_removal_template())
         wl_dsp = self.env["account.asset"]._xls_removal_fields()
-        title = self._get_title(wiz, "removal", format="normal")
-        title_short = self._get_title(wiz, "removal", format="short")
+        title = self._get_title(wiz, "removal", frmt="normal")
+        title_short = self._get_title(wiz, "removal", frmt="short")
         sheet_name = title_short[:31].replace("/", "-")
 
         return {
@@ -357,21 +357,21 @@ class AssetReportXlsx(models.AbstractModel):
             "report_type": "removal",
         }
 
-    def _get_title(self, wiz, report, format="normal"):
+    def _get_title(self, wiz, report, frmt="normal"):
 
         prefix = "{} - {}".format(wiz.date_from, wiz.date_to)
         if report == "acquisition":
-            if format == "normal":
+            if frmt == "normal":
                 title = prefix + " : " + _("New Acquisitions")
             else:
                 title = "ACQ"
         elif report == "active":
-            if format == "normal":
+            if frmt == "normal":
                 title = prefix + " : " + _("Active Assets")
             else:
                 title = "ACT"
         else:
-            if format == "normal":
+            if frmt == "normal":
                 title = prefix + " : " + _("Removed Assets")
             else:
                 title = "DSP"
@@ -412,9 +412,8 @@ class AssetReportXlsx(models.AbstractModel):
                         raise UserError(
                             _(
                                 "Inconsistent reporting structure."
-                                "\nPlease correct Asset Group '%s' (id %s)"
-                            )
-                            % (child.name, child.id)
+                                "\nPlease correct Asset Group '{group}' (id {id})"
+                            ).format(group=child.name, id=child.id)
                         )
                     groups.extend(_child_get(child))
                 return groups
@@ -468,8 +467,8 @@ class AssetReportXlsx(models.AbstractModel):
         report = ws_params["report_type"]
 
         def asset_filter(asset):
-            filter = getattr(self, "{}_filter".format(report))
-            return filter(wiz, asset)
+            filt = getattr(self, "{}_filter".format(report))
+            return filt(wiz, asset)
 
         def _has_assets(group, group_val):
             assets = group_val.get("assets")
@@ -567,8 +566,8 @@ class AssetReportXlsx(models.AbstractModel):
         row_pos = self._report_title(ws, row_pos, ws_params, data, wiz)
 
         def asset_filter(asset):
-            filter = getattr(self, "{}_filter".format(report))
-            return filter(wiz, asset)
+            filt = getattr(self, "{}_filter".format(report))
+            return filt(wiz, asset)
 
         assets = data["assets"].filtered(asset_filter)
 
