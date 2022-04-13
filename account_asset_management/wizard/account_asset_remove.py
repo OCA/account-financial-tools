@@ -32,9 +32,7 @@ class AccountAssetRemove(models.TransientModel):
         "in case of early removal",
     )
     force_date = fields.Date(string="Force accounting date")
-    sale_value = fields.Float(
-        string="Sale Value", default=lambda self: self._default_sale_value()
-    )
+    sale_value = fields.Float(default=lambda self: self._default_sale_value())
     account_sale_id = fields.Many2one(
         comodel_name="account.account",
         string="Asset Sale Account",
