@@ -85,7 +85,7 @@ class AccountMove(models.Model):
         }
 
     def action_post(self):
-        super().action_post()
+        ret_val = super().action_post()
         for move in self:
             for aml in move.line_ids.filtered(
                 lambda line: line.asset_profile_id and not line.tax_line_id
@@ -119,12 +119,13 @@ class AccountMove(models.Model):
             if refs:
                 message = _("This invoice created the asset(s): %s") % ", ".join(refs)
                 move.message_post(body=message)
+        return ret_val
 
     def button_draft(self):
         invoices = self.filtered(lambda r: r.is_purchase_document())
         if invoices:
             invoices.line_ids.asset_id.unlink()
-        super().button_draft()
+        return super().button_draft()
 
     def _reverse_move_vals(self, default_values, cancel=True):
         move_vals = super()._reverse_move_vals(default_values, cancel)

@@ -14,7 +14,7 @@ class AccountAssetGroup(models.Model):
     _parent_store = True
     _check_company_auto = True
 
-    name = fields.Char(string="Name", size=64, required=True, index=True)
+    name = fields.Char(size=64, required=True, index=True)
     code = fields.Char(index=True)
     parent_path = fields.Char(index=True)
     company_id = fields.Many2one(
