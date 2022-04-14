@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 00:20+0000\n"
-"PO-Revision-Date: 2019-07-23 18:43+0000\n"
-"Last-Translator: Josep M <jmyepes@mac.com>\n"
+"PO-Revision-Date: 2022-04-14 17:05+0000\n"
+"Last-Translator: Harald Panten <harald.panten@sygel.es>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
@@ -151,7 +151,7 @@ msgstr "Creado impuesto %s."
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Deactivated tax %s."
-msgstr "Deactivado impuesto %s."
+msgstr "Desactivado impuesto %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__deleted_taxes
@@ -587,7 +587,7 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__deleted
 msgid "Tax to deactivate"
-msgstr "Impuesto a deactivar"
+msgstr "Impuesto a desactivar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_tax_id
@@ -621,7 +621,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "To deactivate: not in the template"
-msgstr "A deactivar: no está en la plantilla"
+msgstr "A desactivar: no está en la plantilla"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__type
