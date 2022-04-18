@@ -3,7 +3,7 @@
 
 {
     "name": "Asset Transfer from AUC to Asset",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "license": "AGPL-3",
     "depends": ["account_asset_management"],
     "author": "Ecosoft, Odoo Community Association (OCA)",
