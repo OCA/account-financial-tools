@@ -4,6 +4,7 @@
 
 from odoo import fields
 from odoo.exceptions import UserError
+from odoo.tests import tagged
 from odoo.tests.common import Form
 
 from odoo.addons.account_asset_management.tests.test_account_asset_management import (
@@ -11,6 +12,7 @@ from odoo.addons.account_asset_management.tests.test_account_asset_management im
 )
 
 
+@tagged("post_install", "-at_install")
 class TestAccountAssetTransfer(TestAssetManagement):
     @classmethod
     def setUpClass(cls):
