@@ -1,12 +1,13 @@
 
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=14.0)
-[![Build Status](https://travis-ci.com/OCA/account-financial-tools.svg?branch=14.0)](https://travis-ci.com/OCA/account-financial-tools)
+[![Pre-commit Status](https://github.com/OCA/account-financial-tools/actions/workflows/pre-commit.yml/badge.svg?branch=14.0)](https://github.com/OCA/account-financial-tools/actions/workflows/pre-commit.yml?query=branch%3A14.0)
+[![Build Status](https://github.com/OCA/account-financial-tools/actions/workflows/test.yml/badge.svg?branch=14.0)](https://github.com/OCA/account-financial-tools/actions/workflows/test.yml?query=branch%3A14.0)
 [![codecov](https://codecov.io/gh/OCA/account-financial-tools/branch/14.0/graph/badge.svg)](https://codecov.io/gh/OCA/account-financial-tools)
 [![Translation Status](https://translation.odoo-community.org/widgets/account-financial-tools-14-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/account-financial-tools-14-0/?utm_source=widget)
 
 <!-- /!\ do not modify above this line -->
 
-# account-financial-tools
+# Account financial Tools for Odoo
 
 TODO: add repo description.
 
