@@ -4,10 +4,12 @@
 from datetime import date, timedelta
 
 from odoo.exceptions import UserError
+from odoo.tests import tagged
 
 from odoo.addons.account.tests import common
 
 
+@tagged("post_install", "-at_install")
 class TestJournalLockDate(common.AccountTestInvoicingCommon):
     def setUp(self):
         super(TestJournalLockDate, self).setUp()
