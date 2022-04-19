@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-04-19 13:05+0000\n"
+"Last-Translator: Lorenzo Battistini <lb@takobi.online>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_account_update_lock_to_date
@@ -84,7 +86,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__period_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__period_lock_to_date
 msgid "Lock To Date for Non-Advisers"
-msgstr ""
+msgstr "Data di blocco per non \"consulenti\""
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
@@ -117,6 +119,8 @@ msgstr ""
 #, python-format
 msgid "The new lock to date for advisors must be set after the previous lock to date."
 msgstr ""
+"La nuova data di blocco per consulenti deve essere impostata dopo la "
+"precedente data di blocco."
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/res_company.py:111
@@ -133,7 +137,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_lock_to_date.account_update_lock_to_date_act_window
 #: model:ir.ui.menu,name:account_lock_to_date.account_update_lock_to_date_menu
 msgid "Update accounting lock to dates"
-msgstr ""
+msgstr "Aggiornare date di blocco per contabilità"
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/wizards/account_update_lock_to_date.py:43
