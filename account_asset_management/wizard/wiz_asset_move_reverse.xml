@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="wiz_asset_move_reverse_view_form" model="ir.ui.view">
+        <field name="name">wiz.asset.move.reverse.form</field>
+        <field name="model">wiz.asset.move.reverse</field>
+        <field name="arch" type="xml">
+            <form string="Reverse Journal Entry">
+                <group>
+                    <field name="line_id" invisible="True" />
+                    <field name="date_reversal" />
+                    <field name="journal_id" />
+                    <field name="reason" />
+                </group>
+                <newline />
+                <footer>
+                    <button
+                        string="Confirm"
+                        name="reverse_move"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
