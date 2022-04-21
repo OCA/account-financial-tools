@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2022-04-20 16:05+0000\n"
+"PO-Revision-Date: 2022-04-21 12:05+0000\n"
 "Last-Translator: Mario Montes <admin@syci.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/es/)\n"
@@ -607,7 +607,7 @@ msgstr "Decreciente"
 #: code:addons/account_asset_management/models/account_asset_profile.py:151
 #, python-format
 msgid "Degressive  up to Salvage Value"
-msgstr ""
+msgstr "Decreciente hasta el valor de rescate"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_progress_factor
@@ -1437,9 +1437,8 @@ msgstr "Valor de salvaguarda"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#, fuzzy
 msgid "Search Asset Group"
-msgstr "Buscar categoría de activo"
+msgstr "Buscar grupo de activo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
@@ -1508,12 +1507,14 @@ msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years."
 msgstr ""
+"El método '_compute_year_amount' sólo está diseñado para el método 'Number "
+"of Years."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:530
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
-msgstr ""
+msgstr "El campo 'account' is obligatorio para '_xls_1%s_fields' list !"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_account.py:23
@@ -1798,7 +1799,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:289
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
 "No puede cambiar la categoría de un activo que tiene asientos contables."
@@ -1871,7 +1872,7 @@ msgstr "o"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_report_account_asset_management_asset_report_xls
 msgid "report.account_asset_management.asset_report_xls"
-msgstr ""
+msgstr "report.account_asset_management.asset_report_xls"
 
 #~ msgid ""
 #~ "Choose the method to use to compute the dates and number of depreciation "
