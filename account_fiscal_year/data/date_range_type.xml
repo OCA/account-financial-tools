@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
+<odoo noupdate="1">
     <record id="fiscalyear" model="date.range.type">
         <field name="name">Fiscal Year</field>
         <field name="allow_overlap" eval="False" />
