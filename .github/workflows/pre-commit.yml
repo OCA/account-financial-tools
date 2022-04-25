@@ -15,8 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - name: Get python version
-        run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
+        with:  
+          # The pylint-odoo version we use here does not support python 3.10
+          # https://github.com/OCA/oca-addons-repo-template/issues/80
+          python-version: "3.9"      
       - uses: actions/cache@v1
         with:
           path: ~/.cache/pre-commit
