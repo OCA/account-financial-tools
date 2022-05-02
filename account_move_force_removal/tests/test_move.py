@@ -18,6 +18,16 @@ class TestMove(SavepointCase):
             {"name": "Test product", "type": "service"}
         )
         cls.company = cls.env.company
+        cls.company.currency_id.active = True
+        account_type = cls.env.ref("account.data_account_type_other_income")
+        cls.income_account = cls.env["account.account"].search(
+            [
+                ("user_type_id", "=", account_type.id),
+                ("company_id", "=", cls.company.id),
+            ],
+            limit=1,
+        )
+
         invoice = Form(
             cls.env["account.move"].with_context(
                 default_move_type="out_invoice", default_company_id=cls.env.company.id
@@ -31,14 +41,36 @@ class TestMove(SavepointCase):
         invoice = invoice.save()
         invoice.action_post()
         cls.invoice = invoice
+        cls.invoice2 = cls.invoice.copy()
+        cls.invoice2.action_post()
+        cls.invoice3 = cls.invoice.copy()
+        cls.invoice3.action_post()
 
     def test_remove_invoice_error(self):
-        # Delete invoice while name isn't /
+        # Delete invoice while name isn't / and
+        # user not in group_account_move_force_removal
         with self.assertRaises(UserError):
             self.invoice.unlink()
-
-    def test_ok_invoice_error(self):
-        # Delete invoice (previously draft + camcel)
+        # Delete invoice (previously draft + cancel) and
+        # user not in group_account_move_force_removal
         self.invoice.button_draft()
         self.invoice.button_cancel()
+        with self.assertRaises(UserError):
+            self.invoice.unlink()
+        # Delete invoice while name isn't / and
+        # user in group_account_move_force_removal
+        self.env.user.groups_id += self.env.ref(
+            "account_move_force_removal.group_account_move_force_removal"
+        )
+        with self.assertRaises(UserError):
+            self.invoice3.unlink()
+
+    def test_ok_invoice_error(self):
+        # Delete invoice (previously draft + cancel) and
+        # user in group_account_move_force_removal
+        self.invoice.button_draft()
+        self.invoice.button_cancel()
+        self.env.user.groups_id += self.env.ref(
+            "account_move_force_removal.group_account_move_force_removal"
+        )
         self.invoice.unlink()
