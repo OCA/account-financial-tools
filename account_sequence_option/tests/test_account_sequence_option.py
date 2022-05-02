@@ -1,6 +1,8 @@
 # Copyright 2021 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from datetime import timedelta
+
 from odoo import fields
 from odoo.tests.common import Form, TransactionCase, tagged
 
@@ -72,3 +74,14 @@ class TestAccountSequenceOption(TransactionCase):
         self.payment = self._create_payment("outbound", "supplier")
         self.payment.action_post()
         self.assertIn("VPAY", self.payment.name)
+        # 7. Create out invoice, post invoice, reset invoice to Draft
+        #       Change Date, post invoice.
+        self.invoice = self._create_invoice("out_invoice")
+        self.invoice.action_post()
+        old_name = self.invoice.name
+        self.invoice.button_draft()
+        self.invoice.write(
+            {"invoice_date": self.invoice.invoice_date - timedelta(days=1)}
+        )
+        self.invoice.action_post()
+        self.assertEqual(old_name, self.invoice.name)
