@@ -10,7 +10,10 @@
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting",
     "depends": ["account", "base_sequence_option"],
-    "data": ["data/account_sequence_option.xml"],
+    "data": [
+        "data/account_sequence_option.xml",
+        "views/account_move_views.xml",
+    ],
     "demo": ["demo/account_demo_options.xml"],
     "maintainers": ["kittiu"],
     "license": "LGPL-3",
