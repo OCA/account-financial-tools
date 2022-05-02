@@ -8,6 +8,10 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     def unlink(self):
-        cancelled_moves = self.filtered(lambda m: m.state == "cancel")
-        super(AccountMove, cancelled_moves.with_context(force_delete=True)).unlink()
+        cancelled_moves = self.env["account.move"]
+        if self.env.user.has_group(
+            "account_move_force_removal.group_account_move_force_removal"
+        ):
+            cancelled_moves = self.filtered(lambda m: m.state == "cancel")
+            super(AccountMove, cancelled_moves.with_context(force_delete=True)).unlink()
         return super(AccountMove, self - cancelled_moves).unlink()
