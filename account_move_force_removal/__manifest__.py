@@ -4,10 +4,11 @@
 {
     "name": "Account Move Force Removal",
     "summary": """Allow force removal account moves""",
-    "version": "15.0.1.0.0",
+    "version": "15.0.1.0.1",
     "category": "Account",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "depends": ["account"],
+    "data": ["security/account_move_force_removal_security.xml"],
 }
