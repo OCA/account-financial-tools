@@ -8,11 +8,13 @@ import time
 from datetime import date, datetime
 
 from odoo import Command, fields
+from odoo.tests import tagged
 from odoo.tests.common import Form
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
+@tagged("post_install", "-at_install")
 class TestAssetManagement(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
