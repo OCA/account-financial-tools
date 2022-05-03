@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_update_charts_accounts,wizard.update.charts.accounts,model_wizard_update_charts_accounts,,1,1,1,1
+access_wizard_update_charts_accounts_account,wizard.update.charts.accounts.account,model_wizard_update_charts_accounts_account,,1,1,1,1
+access_wizard_tax_matching,wizard.tax.matching,model_wizard_tax_matching,,1,1,1,1
+access_wizard_fp_matching,wizard.fp.matching,model_wizard_fp_matching,,1,1,1,1
+access_wizard_account_matching,wizard.account.matching,model_wizard_account_matching,,1,1,1,1
+access_wizard_update_charts_accounts_tax,wizard.update.charts.accounts.tax,model_wizard_update_charts_accounts_tax,,1,1,1,1
+access_wizard_matching,wizard.matching,model_wizard_matching,,1,1,1,1
+access_wizard_update_charts_accounts_fiscal_position,wizard.update.charts.accounts.fiscal.position,model_wizard_update_charts_accounts_fiscal_position,,1,1,1,1
