@@ -36,7 +36,8 @@ demo/account_demo_options.xml as a base for your own sequence definitions.
 
 The demo sequences use a continuous numbering scheme, without the current year
 in the generated name. To use a scheme that does include the year, set
-``use_date_range`` to ``true``, and use ``%(range_year)s`` the represent the year.
+``use_date_range`` to ``true``, and use ``%(range_year)s`` the represent the
+year.
 For example, to generate an invoice scheme that will generate "2022F00001" in
 2022, try::
 
