@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [account_asset_management](account_asset_management/) | 15.0.1.0.1 |  | Assets Management
 [account_balance_line](account_balance_line/) | 15.0.1.0.0 |  | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 15.0.1.0.1 |  | Wizard to update a company's account chart from a template
+[account_fiscal_year](account_fiscal_year/) | 15.0.1.0.0 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Create Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 15.0.1.0.1 |  | Account Invoice Constraint Chronology
 [account_lock_date_update](account_lock_date_update/) | 15.0.1.0.1 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_move_force_removal](account_move_force_removal/) | 15.0.1.0.0 |  | Allow force removal account moves
