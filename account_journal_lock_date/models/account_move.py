@@ -12,11 +12,6 @@ class AccountMove(models.Model):
 
     _inherit = "account.move"
 
-    def write(self, values):
-        res = super().write(values)
-        self._check_fiscalyear_lock_date()
-        return res
-
     def _check_fiscalyear_lock_date(self):
         res = super()._check_fiscalyear_lock_date()
         if self.env.context.get("bypass_journal_lock_date"):
