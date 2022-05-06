@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_move_force_removal
+#: model:res.groups,name:account_move_force_removal.group_account_move_force_removal
+msgid "Allow to delete invoices/journal entries"
+msgstr ""
+
+#. module: account_move_force_removal
 #: model:ir.model,name:account_move_force_removal.model_account_move
 msgid "Journal Entry"
 msgstr ""
