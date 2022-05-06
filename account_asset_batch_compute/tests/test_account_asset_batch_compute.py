@@ -139,4 +139,4 @@ class TestAccountAssetBatchCompute(TransactionCase):
         depreciation_line = self.asset01.depreciation_line_ids.filtered(
             lambda r: r.type == "depreciate" and r.move_id
         )
-        self.assertEquals(len(depreciation_line), 1)
+        self.assertEqual(len(depreciation_line), 1)
