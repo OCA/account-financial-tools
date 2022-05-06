@@ -4,3 +4,7 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Ernesto Tejeda
+
+* `Sygel <https://www.sygel.es>`_:
+
+  * Manuel Regidor
