@@ -188,10 +188,10 @@ class TestAccountMoveTemplate(TransactionCase):
             )
         )
 
-        self.assertEquals(template.company_id, self.user.company_id)
+        self.assertEqual(template.company_id, self.user.company_id)
 
         template_2 = template.copy()
-        self.assertEquals(template_2.name, "%s (copy)" % template.name)
+        self.assertEqual(template_2.name, "%s (copy)" % template.name)
 
         wiz = (
             self.env["wizard.select.move.template"]
@@ -210,11 +210,11 @@ class TestAccountMoveTemplate(TransactionCase):
         aml = self.env["account.move.line"].search(
             [("account_id", "=", self.account_company_1.id)], limit=1
         )
-        self.assertEquals(res["domain"], ([("id", "in", aml.move_id.ids)]))
+        self.assertEqual(res["domain"], ([("id", "in", aml.move_id.ids)]))
         aml = self.env["account.move.line"].search([("name", "=", "L1")], limit=1)
-        self.assertEquals(aml.tax_line_id, self.tax)
-        self.assertEquals(aml.partner_id, self.partner)
+        self.assertEqual(aml.tax_line_id, self.tax)
+        self.assertEqual(aml.partner_id, self.partner)
         aml = self.env["account.move.line"].search([("name", "=", "L2")], limit=1)
-        self.assertEquals(aml.tax_ids[0], self.tax)
+        self.assertEqual(aml.tax_ids[0], self.tax)
         with self.assertRaises(IntegrityError), mute_logger("odoo.sql_db"):
             template_2.name = template.name
