@@ -46,7 +46,7 @@ addon | version | maintainers | summary
 [account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 |  | Adds a Journal Items menu
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 14.0.1.0.2 |  | Introduces the purchase order line to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 14.0.1.0.1 |  | Introduces the purchase order line to the journal items
-[account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.1.1.0 |  | Allows to edit taxes on non-posted account move lines
+[account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.2.0.0 |  | Allows to edit taxes on non-posted account move lines
 [account_move_print](account_move_print/) | 14.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds the option to print Journal Entries
 [account_move_template](account_move_template/) | 14.0.1.1.0 |  | Templates for recurring Journal Entries
 [account_netting](account_netting/) | 14.0.1.0.0 |  | Compensate AR/AP accounts from the same partner
