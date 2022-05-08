@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-20 01:10+0100\n"
-"PO-Revision-Date: 2022-05-08 11:05+0000\n"
+"PO-Revision-Date: 2022-05-08 18:05+0000\n"
 "Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -302,7 +302,7 @@ msgstr "Activos en ejecución"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
-msgstr ""
+msgstr "Activos para ser corregidos"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
@@ -312,7 +312,7 @@ msgstr "Activos que han sido eliminados"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Número de adjuntos"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
