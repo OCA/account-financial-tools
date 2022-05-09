@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-20 01:10+0100\n"
-"PO-Revision-Date: 2022-05-09 17:07+0000\n"
+"PO-Revision-Date: 2022-05-09 21:05+0000\n"
 "Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -316,7 +316,6 @@ msgstr "Número de adjuntos"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
-#, fuzzy
 msgid ""
 "By default during the validation of an invoice, an asset is created by "
 "invoice line as long as an accounting entry is created by invoice line. With "
@@ -369,8 +368,8 @@ msgid ""
 msgstr ""
 "Seleccione el método para calcular las fechas y el número de líneas de "
 "amortización.\n"
-"  * Número de años: Especifique el número de años de la amortización.\n"
-"  * Número de amortizaciones: Fije el número de líneas de amortización y el "
+"   * Número de años: especifique el número de años de la amortización.\n"
+"   * Número de amortizaciones: fije el número de líneas de amortización y el "
 "tiempo entre 2 amortizaciones.\n"
 
 #. module: account_asset_management
@@ -555,7 +554,7 @@ msgstr "Dias"
 #: model:ir.model.fields,help:account_asset_management.field_account_account__asset_profile_id
 msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr ""
-"Categoría de activo por defecto cuando se creen líneas de factura con esta "
+"Categoría del activo por defecto cuando se creen líneas de factura con esta "
 "cuenta."
 
 #. module: account_asset_management
@@ -1167,7 +1166,7 @@ msgstr "Otra información"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
 msgid "Parent Asset Group"
-msgstr "Grupo de activo padre"
+msgstr "Grupo de activos padre"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
@@ -1392,7 +1391,7 @@ msgstr "Buscar grupo de activo"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 msgid "Search Asset Profile"
-msgstr "Buscar categoría de activo"
+msgstr "Buscar la categoría del activo"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__init_entry
@@ -1472,7 +1471,7 @@ msgstr ""
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
 msgstr ""
-"La cuenta de activo definida en la categoría de activo debe ser igual a la "
+"La cuenta del activo definida en la categoría de activo debe ser igual a la "
 "cuenta."
 
 #. module: account_asset_management
@@ -1652,10 +1651,10 @@ msgid ""
 "When the removal entries are generated, the asset goes into the 'Removed' "
 "status."
 msgstr ""
-"Cuando se crea un activo, el estado es 'Borrador'.\n"
-"Si el activo es confirmado, el estado pasa a 'En ejecución' y las líneas de "
-"amortización pueden ser creadas en la contabilizada.\n"
-"Si se crea la última línea de amortización, el activo pasa a estado "
+"Cuando se crea un activo, su estado es 'Borrador'.\n"
+"Si el activo se confirma, su estado pasa a 'En ejecución' y las líneas de "
+"amortización pueden ser publicadas en la contabilidad.\n"
+"Si la última línea de amortización se publica, el activo pasa a estado "
 "'Cerrado'.\n"
 "Cuando se generan los asientos de eliminación, el activo pasa a estado "
 "'Eliminado'."
