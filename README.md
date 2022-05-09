@@ -55,7 +55,7 @@ addon | version | maintainers | summary
 [account_move_force_removal](account_move_force_removal/) | 13.0.1.0.0 |  | Allow force removal account moves
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 13.0.1.1.2 |  | Introduces the purchase order line to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 13.0.1.0.3 |  | Introduces the purchase order line to the journal items
-[account_move_line_tax_editable](account_move_line_tax_editable/) | 13.0.1.1.0 |  | Allows to edit taxes on non-posted account move lines
+[account_move_line_tax_editable](account_move_line_tax_editable/) | 13.0.2.0.0 |  | Allows to edit taxes on non-posted account move lines
 [account_move_line_used_currency](account_move_line_used_currency/) | 13.0.1.0.0 |  | Account Move Line Amount Currency
 [account_move_print](account_move_print/) | 13.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds the option to print Journal Entries
 [account_move_reversal_choose_method](account_move_reversal_choose_method/) | 13.0.1.0.0 |  | Let's choose the Credit Method when adding a credit note to a journal entry.
