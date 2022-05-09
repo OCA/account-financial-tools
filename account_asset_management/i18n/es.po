@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-20 01:10+0100\n"
-"PO-Revision-Date: 2022-05-09 14:05+0000\n"
+"PO-Revision-Date: 2022-05-09 15:53+0000\n"
 "Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -876,7 +876,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__allow_reversal
-#, fuzzy
 msgid ""
 "If set, when pressing the Delete/Reverse Move button in a posted "
 "depreciation line will prompt the option to reverse the journal entry, "
@@ -1274,10 +1273,10 @@ msgid ""
 "Account' or 'Min-Value Account' "
 msgstr ""
 "Política para el asiento de eliminación\n"
-"* Valor residual: El valor no amortizado será llevado a la \"Cuenta de valor "
-"residual\"\n"
-"* Ganancia/Pérdida en la venta: La ganancia o pérdida será llevada a la "
-"\"Cuenta para ganancia de valor\" o a la \"Cuenta para pérdida de valor\""
+"  * Valor residual: el valor no amortizado será llevado a la \"Cuenta de "
+"valor residual\"\n"
+"  * Ganancia/Pérdida en la venta: la ganancia o pérdida será llevada a la "
+"\"Cuenta para ganancia de valor\" o a la \"Cuenta para pérdida de valor\" "
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__date_remove
@@ -1456,7 +1455,7 @@ msgstr ""
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
 msgstr ""
-"El campo 'cuenta' es una entrada obligatoria en la lista '_xls_%s_fields'"
+"El campo 'cuenta' es una entrada obligatoria en la lista '_xls_%s_fields'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_account.py:0
@@ -1537,9 +1536,9 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_move.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "This invoice created the asset(s): %s"
-msgstr "Esta factura ha creado el(los) activo(s): %s"
+msgstr "Esta factura ha creado el/los activo(s): %s"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
