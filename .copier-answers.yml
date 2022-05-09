@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.5.2
+_commit: v1.7.0
 _src_path: https://github.com/OCA/oca-addons-repo-template.git
 ci: GitHub
 dependency_installation_mode: OCA
@@ -15,3 +15,4 @@ repo_slug: account-financial-tools
 repo_website: https://github.com/OCA/account-financial-tools
 travis_apt_packages: []
 travis_apt_sources: []
+
