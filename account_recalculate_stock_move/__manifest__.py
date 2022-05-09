@@ -24,6 +24,7 @@
     "website": 'https://github.com/rosenvladimirov/account-financial-tools',
     "category": "Finance",
     "data": [
+        "security/ir.model.access.csv",
         "data/account_recalculate_stock_move.xml",
         "views/stock_account_views.xml",
         "views/sale_views.xml",
@@ -33,6 +34,7 @@
         "views/stock_landed_cost_views.xml",
         "views/stock_scrap_views.xml",
         "views/account_move_line_view.xml",
+        "report/report_stock_move_forecast.xml",
         "wizard/create_transfer.xml",
         "wizard/revalidate_transfer.xml",
         "wizard/cancel_inventory.xml",

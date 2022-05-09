@@ -32,6 +32,49 @@ class Product(models.Model):
         'History Value', compute='_compute_stock_value',
         digits=dp.get_precision('Product Price'))
 
+    def clear_reservation_single(self, moves_reservation, location_id, lot_id=None, package_id=None, owner_id=None):
+        taken_quantity = False
+        for product in self:
+            rounding = product.uom_id.rounding
+            quants = self.env['stock.quant'].sudo()._gather(product, location_id, lot_id=lot_id,
+                                                            package_id=package_id, owner_id=owner_id, strict=True)
+            for quant in quants:
+                try:
+                    with self._cr.savepoint():
+                        self._cr.execute("SELECT 1 FROM stock_quant WHERE id = %s FOR UPDATE NOWAIT", [quant.id],
+                                         log_exceptions=False)
+                        quant.write({
+                            'reserved_quantity': 0,
+                        })
+                        # cleanup empty quants
+                        if float_is_zero(quant.quantity, precision_rounding=rounding) and float_is_zero(
+                                quant.reserved_quantity, precision_rounding=rounding):
+                            quant.unlink()
+                        # break
+                except OperationalError as e:
+                    if e.pgcode == '55P03':  # could not obtain the lock
+                        continue
+                    else:
+                        raise
+
+            for move in moves_reservation.sorted(lambda r: r.date):
+                for line in move.move_line_ids:
+                    taken_quantity = line.product_qty
+                    try:
+                        if not float_is_zero(taken_quantity, precision_rounding=line.product_id.uom_id.rounding):
+                            _logger.info('Quant update reservation %s for %s from %s' %
+                                         (taken_quantity, line.product_id.display_name, line.move_id.name))
+                            quants = self.env['stock.quant']._update_reserved_quantity(
+                                line.product_id, move.location_id, taken_quantity, lot_id=line.lot_id,
+                                package_id=line.package_id, owner_id=line.owner_id, strict=True
+                            )
+                            available_quantity = sum(quants.mapped('quantity')) - sum(quants.mapped('reserved_quantity'))
+                            taken_quantity = taken_quantity <= available_quantity and taken_quantity or available_quantity
+                    except UserError:
+                        _logger.info("Exception %s from %s" % (move.product_id.display_name, line.move_id.name))
+                        taken_quantity = 0
+        return taken_quantity
+
     def clear_reservation(self):
         company = self.env.user.company_id.id
         warehouse = self.env['stock.warehouse'].search([('company_id', '=', company)], limit=1)
@@ -200,6 +243,7 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     account_move_line_ids = fields.One2many('account.move.line', compute="_compute_account_move_line_ids")
+
     # only_quants = fields.Boolean('Only quantity rebuild')
 
     def _compute_account_move_line_ids(self):
@@ -257,29 +301,16 @@ class ProductTemplate(models.Model):
                 for move in moves:
                     move._do_unreserve()
 
-    # @profile('/tmp/prof.profile')
-    @api.multi
-    @job
-    def server_rebuild_action(self):
-        for product in self:
-            product.rebuild_moves()
-
-    def _pre_rebuild_moves(self, product, move, date_move):
-        return
-
-    def _post_rebuild_moves(self, product, move, date_move):
-        return
-
     def clear_reservation(self):
         company = self.env.user.company_id.id
         for product in self.product_variant_ids:
-            moves = self.env['stock.move'].search([('product_id', '=', product.id), ('state', '=', 'done')])
-            if self._uid == SUPERUSER_ID:
-                moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
-            if sum([x.product_uom_qty for x in moves.mapped('move_line_ids')]) > 0.0:
-                raise UserError(_('Before to start recalculation first unreserved all quantity for this product'))
+            # moves = self.env['stock.move'].search([('product_id', '=', product.id), ('state', '=', 'done')])
+            # if self._uid == SUPERUSER_ID:
+            #     moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
+            # if sum([x.product_uom_qty for x in moves.mapped('move_line_ids')]) > 0.0:
+            #     raise UserError(_('Before to start recalculation first unreserved all quantity for this product'))
 
-            rounding = product.uom_id.rounding
+            # rounding = product.uom_id.rounding
             # first clear all quantity in table for save
             for warehouse in self.env['stock.warehouse'].search([('company_id', '=', company)]):
                 # get for main warehouse location
@@ -304,48 +335,59 @@ class ProductTemplate(models.Model):
                             self._cr.execute("SELECT 1 FROM stock_quant WHERE id = %s FOR UPDATE NOWAIT", [quant.id],
                                              log_exceptions=False)
                             quant.write({
-                                'quantity': 0,
                                 'reserved_quantity': 0,
                             })
-                            # cleanup empty quants
-                            if float_is_zero(quant.quantity, precision_rounding=rounding) and float_is_zero(
-                                    quant.reserved_quantity, precision_rounding=rounding):
-                                quant.unlink()
-                            # break
                     except OperationalError as e:
                         if e.pgcode == '55P03':  # could not obtain the lock
                             continue
                         else:
                             raise
-            
-            for move in moves.sorted(lambda r: r.date):
-                if move.quantity_done == 0:
-                    continue
 
-                for move_line in move.move_line_ids.filtered(
-                        lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
-                    move_line._action_done()
-                    
-            #reservations        
-            
-            moves_reservation = self.env['stock.move'].search([('product_id', '=', product.id), ('state', 'in', ('assigned', 'partially_available', 'confirmed'))])
+            # for move in moves.sorted(lambda r: r.date):
+            #     if move.quantity_done == 0:
+            #         continue
+            #
+            #     for move_line in move.move_line_ids.filtered(
+            #             lambda r: float_compare(r.qty_done, 0, precision_rounding=r.product_uom_id.rounding) > 0):
+            #         move_line._action_done()
+
+            # reservations
+
+            moves_reservation = self.env['stock.move'].search(
+                [('product_id', '=', product.id), ('state', 'in', ('assigned', 'partially_available', 'confirmed'))])
             if self._uid == SUPERUSER_ID:
                 moves_reservation = moves_reservation.filtered(lambda r: r.company_id == self.env.user.company_id)
-            
-            for move in moves_reservation.sorted(lambda r: r.date): 
+
+            for move in moves_reservation.sorted(lambda r: r.date):
                 for line in move.move_line_ids:
                     taken_quantity = line.product_qty
                     try:
                         if not float_is_zero(taken_quantity, precision_rounding=line.product_id.uom_id.rounding):
-                            _logger.info('Quant update_reserver %s for %s' % (taken_quantity, line.product_id.name))
+                            _logger.info('Quant update reservation %s for %s from %s' %
+                                         (taken_quantity, line.product_id.display_name, line.move_id.name))
                             quants = self.env['stock.quant']._update_reserved_quantity(
                                 line.product_id, move.location_id, taken_quantity, lot_id=line.lot_id,
                                 package_id=line.package_id, owner_id=line.owner_id, strict=True
                             )
                     except UserError:
-                        _logger.info("Exception %s" % move.product_id.name)
+                        _logger.info("Exception %s from %s" % (move.product_id.display_name, line.move_id.name))
+                        self._cr.execute(
+                            "UPDATE stock_move_line SET product_uom_qty=0.0, product_qty=0.0 WHERE id = %s",
+                            (line.id,), log_exceptions=False)
                         taken_quantity = 0
 
+    # @profile('/tmp/prof.profile')
+    @api.multi
+    @job
+    def server_rebuild_action(self):
+        for product in self:
+            product.rebuild_moves()
+
+    def _pre_rebuild_moves(self, product, move, date_move):
+        return
+
+    def _post_rebuild_moves(self, product, move, date_move):
+        return
 
     def rebuild_moves(self):
         company = self.env.user.company_id.id
@@ -415,7 +457,7 @@ class ProductTemplate(models.Model):
             acc_move_acc = self.env['account.move']
             landed_cost_cost_id = landed_cost.mapped('cost_id')
             for landed_line in landed_cost_cost_id:
-                for landed_line_acc in landed_line.account_move_line_ids.\
+                for landed_line_acc in landed_line.account_move_line_ids. \
                         filtered(lambda r: r.stock_move_id.id in moves.ids):
                     acc_move_acc |= landed_line_acc.move_id
             acc_move_acc |= moves.mapped('account_move_ids')

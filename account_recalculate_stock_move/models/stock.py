@@ -72,7 +72,7 @@ class StockMoveLine(models.Model):
                 #               price_unit, amount, move.product_id.standard_price, move.purchase_line_id))
 
                 move.with_context(dict(self._context,
-                                       forced_quantity=self.qty_done,
+                                       forced_quantity=valued_quantity,
                                        force_valuation_amount=amount,
                                        force_period_date=date))._account_entry_move()
 

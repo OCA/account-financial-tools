@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_move_level_forecast_tree" model="ir.ui.view">
+        <field name="name">stock.move.forecast.tree</field>
+        <field name="model">report.stock.move.forecast</field>
+        <field name="arch" type="xml">
+            <tree string="Stock move Compare with level forecast">
+                <field name="product_tmpl_id"/>
+                <field name="product_id"/>
+                <field name="product_uom_qty"/>
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_stock_move_level_forecast_pivot" model="ir.ui.view">
+        <field name="name">stock.move.forecast.pivot</field>
+        <field name="model">report.stock.move.forecast</field>
+        <field name="arch" type="xml">
+            <pivot string="Stock move Compare with level forecast" disable_linking="True">
+                <field name="product_id" type="row"/>
+                <field name="product_uom_qty" type="measure"/>
+                <field name="quantity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_stock_move_level_forecast_graph" model="ir.ui.view">
+        <field name="name">stock.move.forecast.graph</field>
+        <field name="model">report.stock.move.forecast</field>
+        <field name="arch" type="xml">
+            <graph string="Stock move Compare with level forecast" type="line">
+                <field name="product_id" type="col"/>
+                <field name="product_uom_qty" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_stock_move_level_forecast_filter" model="ir.ui.view">
+        <field name="name">view.stock.move.level.forecast.filter</field>
+        <field name="model">report.stock.move.forecast</field>
+        <field name="arch" type="xml">
+            <search string="Stock move Compare with level forecast">
+                <field name="product_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_stock_move_level_forecast_report_stock_move" model="ir.actions.act_window">
+        <field name="name">Stock move Compare with level forecast</field>
+        <field name="res_model">report.stock.move.forecast</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,pivot</field>
+        <field name="search_view_id" ref="view_stock_move_level_forecast_filter"/>
+        <field name="view_id" ref="view_stock_move_level_forecast_tree"/>
+    </record>
+
+    <record id="action_stock_level_forecast_report_product" model="ir.actions.act_window">
+        <field name="name">Stock Level Forecast</field>
+        <field name="res_model">report.stock.move.forecast</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,graph,pivot</field>
+        <field name="search_view_id" ref="view_stock_move_level_forecast_filter"/>
+        <field name="context">{'search_default_product_id': active_id}</field>
+        <field name="view_id" ref="view_stock_move_level_forecast_tree"/>
+    </record>
+</odoo>
