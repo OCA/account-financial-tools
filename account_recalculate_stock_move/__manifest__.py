@@ -43,6 +43,7 @@
         "wizard/rebuild_invoice_account_move.xml",
         "wizard/rebuild_all_account_move.xml",
         "wizard/rebuild_moves_product.xml",
+        "wizard/clear_reservation_product.xml",
     ],
     'license': 'AGPL-3',
     "auto_install": False,

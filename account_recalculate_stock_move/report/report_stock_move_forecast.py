@@ -8,7 +8,6 @@ class ReportStockMoveForecat(models.Model):
     _name = 'report.stock.move.forecast'
     _auto = False
 
-    product_tmpl_id = fields.Many2one('product.template', string='Product Template')
     product_id = fields.Many2one('product.product', string='Product', readonly=True)
     product_uom_qty = fields.Float(string='Initial Quantity', readonly=True)
     quantity = fields.Float(string='Available Quantity', readonly=True)
@@ -18,7 +17,6 @@ class ReportStockMoveForecat(models.Model):
         tools.drop_view_if_exists(self._cr, 'report_stock_forecast')
         self._cr.execute("""CREATE or REPLACE VIEW report_stock_move_forecast AS (SELECT 
         MIN(sm.id) as id,
-        pp.product_tmpl_id, 
         sm.product_id, 
         sum(coalesce(sf.quantity, 0.0)) AS quantity,
         sum(sm.product_uom_qty) AS product_uom_qty 
@@ -119,5 +117,5 @@ class ReportStockMoveForecat(models.Model):
     GROUP BY MAIN.product_id,SUB.date, MAIN.date
     ) AS FINAL
     GROUP BY product_id,date) AS sf ON sm.product_id = sf.product_id
-        GROUP BY sm.id, pp.product_tmpl_id, sm.product_id
-        ORDER BY sm.id, pp.product_tmpl_id, sm.product_id)""")
+        GROUP BY sm.id, sm.product_id
+        ORDER BY sm.id, sm.product_id)""")

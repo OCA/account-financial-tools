@@ -9,3 +9,4 @@ from . import rebuild_all_account_move
 from . import rebuild_inventory_account_move
 from . import rebuild_invoice_account_move
 from . import rebuild_moves_product
+from . import clear_reservation_product

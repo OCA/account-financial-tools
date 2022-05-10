@@ -53,10 +53,18 @@ class Picking(models.Model):
     @api.multi
     def action_open_quants(self):
         self.ensure_one()
-        # products_ids = set(self.move_lines.mapped('product_id').ids)
         # action = self.env.ref('stock.product_open_quants').read()[0]
+        # products_ids = set(self.move_lines.mapped('product_id').ids)
         # action['domain'] = [('product_id', 'in', list(products_ids))]
         # action['context'] = {'search_default_internal_loc': 1}
+
+        # action = self.env.ref('product.product_normal_action').read()[0]
+        # products_ids = set(self.move_lines.mapped('product_id').ids)
+        # action['domain'] = [('id', 'in', list(products_ids))]
+        # action['context'] = {'display_code': False}
+        # action['limit'] = 300
+        # action['view_mode'] = 'tree'
+
         action = self.env.ref('account_recalculate_stock_move.action_stock_move_level_forecast_report_stock_move').read()[0]
         action['domain'] = [('id', 'in', self.move_lines.ids)]
         return action

@@ -5,36 +5,35 @@
         <field name="name">stock.move.forecast.tree</field>
         <field name="model">report.stock.move.forecast</field>
         <field name="arch" type="xml">
-            <tree string="Stock move Compare with level forecast">
-                <field name="product_tmpl_id"/>
+            <tree string="Stock move Compare with level forecast" create="0" editable="bottom">
                 <field name="product_id"/>
                 <field name="product_uom_qty"/>
                 <field name="quantity"/>
             </tree>
         </field>
     </record>
-    <record id="view_stock_move_level_forecast_pivot" model="ir.ui.view">
-        <field name="name">stock.move.forecast.pivot</field>
-        <field name="model">report.stock.move.forecast</field>
-        <field name="arch" type="xml">
-            <pivot string="Stock move Compare with level forecast" disable_linking="True">
-                <field name="product_id" type="row"/>
-                <field name="product_uom_qty" type="measure"/>
-                <field name="quantity" type="measure"/>
-            </pivot>
-        </field>
-    </record>
+<!--    <record id="view_stock_move_level_forecast_pivot" model="ir.ui.view">-->
+<!--        <field name="name">stock.move.forecast.pivot</field>-->
+<!--        <field name="model">report.stock.move.forecast</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <pivot string="Stock move Compare with level forecast" disable_linking="True">-->
+<!--                <field name="product_id" type="row"/>-->
+<!--                <field name="product_uom_qty" type="measure"/>-->
+<!--                <field name="quantity" type="measure"/>-->
+<!--            </pivot>-->
+<!--        </field>-->
+<!--    </record>-->
 
-    <record id="view_stock_move_level_forecast_graph" model="ir.ui.view">
-        <field name="name">stock.move.forecast.graph</field>
-        <field name="model">report.stock.move.forecast</field>
-        <field name="arch" type="xml">
-            <graph string="Stock move Compare with level forecast" type="line">
-                <field name="product_id" type="col"/>
-                <field name="product_uom_qty" type="measure"/>
-            </graph>
-        </field>
-    </record>
+<!--    <record id="view_stock_move_level_forecast_graph" model="ir.ui.view">-->
+<!--        <field name="name">stock.move.forecast.graph</field>-->
+<!--        <field name="model">report.stock.move.forecast</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <graph string="Stock move Compare with level forecast" type="line">-->
+<!--                <field name="product_id" type="col"/>-->
+<!--                <field name="product_uom_qty" type="measure"/>-->
+<!--            </graph>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="view_stock_move_level_forecast_filter" model="ir.ui.view">
         <field name="name">view.stock.move.level.forecast.filter</field>
@@ -50,18 +49,35 @@
         <field name="name">Stock move Compare with level forecast</field>
         <field name="res_model">report.stock.move.forecast</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,pivot</field>
+        <field name="view_mode">tree</field>
         <field name="search_view_id" ref="view_stock_move_level_forecast_filter"/>
         <field name="view_id" ref="view_stock_move_level_forecast_tree"/>
     </record>
 
-    <record id="action_stock_level_forecast_report_product" model="ir.actions.act_window">
+    <record id="action_stock_move_level_forecast_report_product" model="ir.actions.act_window">
         <field name="name">Stock Level Forecast</field>
         <field name="res_model">report.stock.move.forecast</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,graph,pivot</field>
+        <field name="view_mode">tree</field>
         <field name="search_view_id" ref="view_stock_move_level_forecast_filter"/>
         <field name="context">{'search_default_product_id': active_id}</field>
         <field name="view_id" ref="view_stock_move_level_forecast_tree"/>
     </record>
+
+<!--    <record model="ir.ui.view" id="product_form_view_procurement_button">-->
+<!--        <field name="name">product.product.procurement</field>-->
+<!--        <field name="model">product.product</field>-->
+<!--        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>-->
+<!--        <field name="inherit_id" ref="product.product_normal_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <button name="toggle_active" position="before">-->
+<!--                <button type="action"-->
+<!--                    name="%(account_recalculate_stock_move.action_stock_move_level_forecast_report_product)d"-->
+<!--                    attrs="{'invisible':[('type', '!=', 'product')]}"-->
+<!--                    class="oe_stat_button" icon="fa-building-o">-->
+<!--                    <field name="virtual_available" widget="statinfo" string="Qty By Stock"/>-->
+<!--                </button>-->
+<!--            </button>-->
+<!--        </field>-->
+<!--    </record>-->
 </odoo>

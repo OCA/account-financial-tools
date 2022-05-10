@@ -68,7 +68,8 @@ class Product(models.Model):
                                 line.product_id, move.location_id, taken_quantity, lot_id=line.lot_id,
                                 package_id=line.package_id, owner_id=line.owner_id, strict=True
                             )
-                            available_quantity = sum(quants.mapped('quantity')) - sum(quants.mapped('reserved_quantity'))
+                            available_quantity = sum(quants.mapped('quantity')) - sum(
+                                quants.mapped('reserved_quantity'))
                             taken_quantity = taken_quantity <= available_quantity and taken_quantity or available_quantity
                     except UserError:
                         _logger.info("Exception %s from %s" % (move.product_id.display_name, line.move_id.name))
@@ -301,6 +302,12 @@ class ProductTemplate(models.Model):
                 for move in moves:
                     move._do_unreserve()
 
+    @api.multi
+    @job
+    def server_clear_reservation_action(self):
+        for product in self:
+            product.clear_reservation()
+
     def clear_reservation(self):
         company = self.env.user.company_id.id
         for product in self.product_variant_ids:
@@ -357,24 +364,61 @@ class ProductTemplate(models.Model):
                 [('product_id', '=', product.id), ('state', 'in', ('assigned', 'partially_available', 'confirmed'))])
             if self._uid == SUPERUSER_ID:
                 moves_reservation = moves_reservation.filtered(lambda r: r.company_id == self.env.user.company_id)
-
+            # moves_reservation_try = self.env['stock.move.line']
             for move in moves_reservation.sorted(lambda r: r.date):
                 for line in move.move_line_ids:
-                    taken_quantity = line.product_qty
-                    try:
-                        if not float_is_zero(taken_quantity, precision_rounding=line.product_id.uom_id.rounding):
-                            _logger.info('Quant update reservation %s for %s from %s' %
-                                         (taken_quantity, line.product_id.display_name, line.move_id.name))
+                    product_qty = line.product_uom_id._compute_quantity(line.ordered_qty,
+                                                                        line.product_id.uom_id,
+                                                                        rounding_method='HALF-UP')
+                    if not float_is_zero(line.ordered_qty, precision_rounding=line.product_uom_id.rounding) \
+                            and (float_is_zero(line.product_qty,
+                                               precision_rounding=line.product_id.uom_id.rounding)
+                                 or float_is_zero(line.product_uom_qty,
+                                                  precision_rounding=line.product_uom_id.rounding)):
+                        self._cr.execute(
+                            "UPDATE stock_move_line SET product_uom_qty = %s, product_qty = %s "
+                            "WHERE id = %s", (line.ordered_qty, product_qty, line.id,), log_exceptions=False)
+                        # _logger.info("Prepare for update %s(%s=%s) for %s from %s" %
+                        #              (line.product_qty,
+                        #               line.ordered_qty,
+                        #               line.product_uom_qty,
+                        #               line.product_id.display_name,
+                        #               line.move_id.name))
+                    if move.location_id.should_bypass_reservation() or move.product_id.type == 'consu':
+                        continue
+                    if move.procure_method == 'make_to_order':
+                        continue
+                    taken_quantity = product_qty
+                    # _logger.info("Before update %s(%s) for %s from %s" %
+                    #              (taken_quantity, line.ordered_qty, line.product_id.display_name, line.move_id.name))
+                    if not float_is_zero(taken_quantity, precision_rounding=line.product_id.uom_id.rounding):
+                        try:
+                            _logger.info('Quant update reservation %s(%s) for %s from %s' %
+                                         (taken_quantity, line.ordered_qty, line.product_id.display_name,
+                                          line.move_id.name))
                             quants = self.env['stock.quant']._update_reserved_quantity(
-                                line.product_id, move.location_id, taken_quantity, lot_id=line.lot_id,
+                                line.product_id, line.location_id, taken_quantity, lot_id=line.lot_id,
                                 package_id=line.package_id, owner_id=line.owner_id, strict=True
                             )
-                    except UserError:
-                        _logger.info("Exception %s from %s" % (move.product_id.display_name, line.move_id.name))
-                        self._cr.execute(
-                            "UPDATE stock_move_line SET product_uom_qty=0.0, product_qty=0.0 WHERE id = %s",
-                            (line.id,), log_exceptions=False)
-                        taken_quantity = 0
+                        except UserError:
+                            _logger.info("Exception %s from %s" % (move.product_id.display_name, line.move_id.name))
+                            # moves_reservation_try |= line
+                            self._cr.execute(
+                                "UPDATE stock_move_line SET product_uom_qty=0.0, product_qty=0.0 WHERE id = %s",
+                                (line.id,), log_exceptions=False)
+                            taken_quantity = 0
+            # for line in moves_reservation_try:
+            #     taken_quantity = line.product_qty
+            #     try:
+            #         if not float_is_zero(taken_quantity, precision_rounding=line.product_id.uom_id.rounding):
+            #             _logger.info('Quant update reservation second try %s for %s from %s' %
+            #                          (taken_quantity, line.product_id.display_name, line.move_id.name))
+            #             quants = self.env['stock.quant']._update_reserved_quantity(
+            #                 line.product_id, line.location_id, taken_quantity, lot_id=line.lot_id,
+            #                 package_id=line.package_id, owner_id=line.owner_id, strict=True
+            #             )
+            #     except UserError:
+            #         _logger.info("Final exception %s from %s" % (line.product_id.display_name, line.move_id.name))
 
     # @profile('/tmp/prof.profile')
     @api.multi

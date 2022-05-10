@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_clear_reservation_products" model="ir.ui.view">
+        <field name="name">Clean all reservation</field>
+        <field name="model">wizard.clear.reservation.products</field>
+        <field name="arch" type="xml">
+            <form string="Product templates" >
+                <group>
+                    <group>
+                        <field name="company_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="clear_reservation_server" class="btn-primary" string="Next" type="object"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+   <act_window name="Clean all reservation"
+        res_model="wizard.clear.reservation.products"
+        src_model="product.template"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="action_wizard_clean_reservation_products"
+        view_id="wizard_clear_reservation_products"/>
+</odoo>
