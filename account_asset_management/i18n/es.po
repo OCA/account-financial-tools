@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-20 01:10+0100\n"
-"PO-Revision-Date: 2022-05-09 18:20+0000\n"
+"PO-Revision-Date: 2022-05-10 10:05+0000\n"
 "Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -218,13 +218,13 @@ msgstr "Nombre de activo"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 msgid "Asset Profile"
-msgstr "Categoría del activo"
+msgstr "Categoría de activo"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_profile_menu
 msgid "Asset Profiles"
-msgstr "Categorías del activo"
+msgstr "Categorías de activo"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__remove
@@ -267,7 +267,7 @@ msgstr "El nombre del activo debe establecerse en la etiqueta de la línea."
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
 msgid "Asset profile"
-msgstr "Categoría del activo"
+msgstr "Categoría de activo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -552,7 +552,7 @@ msgstr "Dias"
 #: model:ir.model.fields,help:account_asset_management.field_account_account__asset_profile_id
 msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr ""
-"Categoría del activo por defecto cuando se creen líneas de factura con esta "
+"Categoría de activo por defecto cuando se crean líneas de factura con esta "
 "cuenta."
 
 #. module: account_asset_management
@@ -1384,7 +1384,7 @@ msgstr "Buscar grupo de activo"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 msgid "Search Asset Profile"
-msgstr "Buscar la categoría del activo"
+msgstr "Buscar categoría de activo"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__init_entry
@@ -1463,7 +1463,7 @@ msgstr ""
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
 msgstr ""
-"La cuenta del activo definida en la categoría de activo debe ser igual a la "
+"La cuenta de activo definida en la categoría de activo debe ser igual a la "
 "cuenta."
 
 #. module: account_asset_management
