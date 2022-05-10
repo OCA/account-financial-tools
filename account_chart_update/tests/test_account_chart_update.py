@@ -41,9 +41,11 @@ class TestAccountChartUpdate(common.HttpCase):
                 "refund_repartition_line_ids": [
                     (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
                     (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
+                    (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
                 ],
                 "invoice_repartition_line_ids": [
                     (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
+                    (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
                     (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
                 ],
             }
@@ -174,6 +176,12 @@ class TestAccountChartUpdate(common.HttpCase):
         wizard.unlink()
         # Add templates
         new_tax_tmpl = self._create_tax_tmpl("Test tax 2", self.chart_template)
+        new_tax_tmpl.refund_repartition_line_ids[2].write(
+            {"tag_ids": [(6, 0, self.account_tag_1.ids)]}
+        )
+        new_tax_tmpl.invoice_repartition_line_ids[2].write(
+            {"tag_ids": [(6, 0, self.account_tag_1.ids)]}
+        )
         new_account_tmpl = self._create_account_tmpl(
             "Test account 2", "333333", self.account_type, self.chart_template
         )
@@ -199,6 +207,8 @@ class TestAccountChartUpdate(common.HttpCase):
                 "update_tax": False,
                 "update_account": False,
                 "update_fiscal_position": False,
+                "update_tax_repartition_line_account": False,
+                "update_tax_repartition_line_tags": False,
             }
         )
         wizard = self.wizard_obj.create(wizard_vals)
@@ -245,7 +255,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.tax_template.tax_group_id = self.tax_group.id
         repartition = self.tax_template.refund_repartition_line_ids.filtered(
             lambda r: r.repartition_type == "tax"
-        )
+        )[0]
         repartition.account_id = new_account_tmpl.id
         self.account_template.name = "Other name"
         self.account_template.tag_ids = [
@@ -257,8 +267,10 @@ class TestAccountChartUpdate(common.HttpCase):
         wizard = self.wizard_obj.create(self.wizard_vals)
         wizard.action_find_records()
         self.assertTrue(wizard.tax_ids)
-        self.assertEqual(wizard.tax_ids.tax_id, self.tax_template)
-        self.assertEqual(wizard.tax_ids.type, "updated")
+        self.assertEqual(
+            wizard.tax_ids.tax_id.ids, [self.tax_template.id, new_tax_tmpl.id]
+        )
+        self.assertEqual(list(set(wizard.tax_ids.mapped("type")))[0], "updated")
         self.assertTrue(wizard.account_ids)
         self.assertEqual(wizard.account_ids.account_id, self.account_template)
         self.assertEqual(wizard.account_ids.type, "updated")
@@ -269,7 +281,7 @@ class TestAccountChartUpdate(common.HttpCase):
         )
         self.assertEqual(wizard.fiscal_position_ids.type, "updated")
         wizard.action_update_records()
-        self.assertEqual(wizard.updated_taxes, 1)
+        self.assertEqual(wizard.updated_taxes, 2)
         self.assertEqual(wizard.updated_accounts, 1)
         self.assertEqual(wizard.updated_fps, 1)
         self.assertEqual(self.tax.description, self.tax_template.description)
@@ -301,7 +313,7 @@ class TestAccountChartUpdate(common.HttpCase):
             [("model", "=", "account.fiscal.position.template"), ("name", "=", "note")]
         )
         wizard.action_find_records()
-        self.assertFalse(wizard.tax_ids)
+        self.assertTrue(wizard.tax_ids)
         self.assertFalse(wizard.account_ids)
         self.assertFalse(wizard.fiscal_position_ids)
         self.tax_template.description = "Test description"

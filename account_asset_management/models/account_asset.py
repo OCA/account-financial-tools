@@ -32,6 +32,7 @@ class DummyFy(object):
 
 class AccountAsset(models.Model):
     _name = "account.asset"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Asset"
     _order = "date_start desc, code, name"
     _check_company_auto = True
@@ -284,6 +285,13 @@ class AccountAsset(models.Model):
         compute="_compute_analytic_tag_ids",
         readonly=False,
         store=True,
+    )
+    carry_forward_missed_depreciations = fields.Boolean(
+        string="Accumulate missed depreciations",
+        help="""If create an asset in a fiscal period that is now closed
+        the accumulated amount of depreciations that cannot be posted will be
+        carried forward to the first depreciation line of the current open
+        period.""",
     )
 
     @api.model
@@ -613,18 +621,26 @@ class AccountAsset(models.Model):
         depr_line = last_line
         last_date = table[-1]["lines"][-1]["date"]
         depreciated_value = depreciated_value_posted
+        amount_to_allocate = 0.0
         for entry in table[table_i_start:]:
             for line in entry["lines"][line_i_start:]:
                 seq += 1
                 name = self._get_depreciation_entry_name(seq)
                 amount = line["amount"]
+                if self.carry_forward_missed_depreciations:
+                    if line["init"]:
+                        amount_to_allocate += amount
+                        amount = 0
+                    else:
+                        amount += amount_to_allocate
+                        amount_to_allocate = 0.0
                 if line["date"] == last_date:
                     # ensure that the last entry of the table always
                     # depreciates the remaining value
                     amount = self.depreciation_base - depreciated_value
                     if self.method in ["linear-limit", "degr-limit"]:
                         amount -= self.salvage_value
-                if amount:
+                if amount or self.carry_forward_missed_depreciations:
                     vals = {
                         "previous_id": depr_line.id,
                         "amount": round(amount, digits),
@@ -680,9 +696,16 @@ class AccountAsset(models.Model):
             # recompute in case of deviation
             depreciated_value_posted = depreciated_value = 0.0
             if posted_lines:
+                total_table_lines = sum([len(entry["lines"]) for entry in table])
+                move_check_lines = asset.depreciation_line_ids.filtered("move_check")
                 last_depreciation_date = last_line.line_date
                 last_date_in_table = table[-1]["lines"][-1]["date"]
-                if last_date_in_table <= last_depreciation_date:
+                # If the number of lines in the table is the same as the depreciation
+                # lines, we will not show an error even if the dates are the same.
+                if (last_date_in_table < last_depreciation_date) or (
+                    last_date_in_table == last_depreciation_date
+                    and total_table_lines != len(move_check_lines)
+                ):
                     raise UserError(
                         _(
                             "The duration of the asset conflicts with the "
@@ -723,6 +746,17 @@ class AccountAsset(models.Model):
                 residual_amount = asset.depreciation_base - depreciated_value
                 amount_diff = round(residual_amount_table - residual_amount, digits)
                 if amount_diff:
+                    # We will auto-create a new line because the number of lines in
+                    # the tables are the same as the posted depreciations and there
+                    # is still a residual value. Only in this case we will need to
+                    # add a new line to the table with the amount of the difference.
+                    if len(move_check_lines) == total_table_lines:
+                        table[table_i_start]["lines"].append(
+                            table[table_i_start]["lines"][line_i_start - 1]
+                        )
+                        line = table[table_i_start]["lines"][line_i_start]
+                        line["days"] = 0
+                        line["amount"] = amount_diff
                     # compensate in first depreciation entry
                     # after last posting
                     line = table[table_i_start]["lines"][line_i_start]
@@ -1170,7 +1204,7 @@ class AccountAsset(models.Model):
         return table
 
     def _get_depreciation_entry_name(self, seq):
-        """ use this method to customise the name of the accounting entry """
+        """use this method to customise the name of the accounting entry"""
         return (self.code or str(self.id)) + "/" + str(seq)
 
     def _compute_entries(self, date_end, check_triggers=False):
@@ -1239,6 +1273,7 @@ class AccountAsset(models.Model):
             "name",
             "code",
             "date_start",
+            "purchase_value",
             "depreciation_base",
             "salvage_value",
         ]
@@ -1253,6 +1288,7 @@ class AccountAsset(models.Model):
             "name",
             "code",
             "date_start",
+            "purchase_value",
             "depreciation_base",
             "salvage_value",
             "period_start_value",
@@ -1275,6 +1311,7 @@ class AccountAsset(models.Model):
             "name",
             "code",
             "date_remove",
+            "purchase_value",
             "depreciation_base",
             "salvage_value",
         ]

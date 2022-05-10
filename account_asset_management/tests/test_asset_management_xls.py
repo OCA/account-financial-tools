@@ -3,10 +3,12 @@
 import time
 
 from odoo import fields
+from odoo.tests import tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
+@tagged("post_install", "-at_install")
 class TestAssetManagementXls(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
@@ -71,7 +73,7 @@ class TestAssetManagementXls(AccountTestInvoicingCommon):
         cls.report_action = cls.xls_report.xls_export()
 
     def test_01_action_xls(self):
-        """ Check report XLS action and generate report """
+        """Check report XLS action and generate report"""
         self.assertGreaterEqual(
             self.report_action.items(),
             {

@@ -5,8 +5,8 @@
 {
     "name": "Account Fiscal Year",
     "summary": "Create Account Fiscal Year",
-    "version": "14.0.1.1.0",
-    "development_status": "Beta",
+    "version": "14.0.1.2.0",
+    "development_status": "Production/Stable",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools"
     "14.0/account_fiscal_year",
@@ -14,11 +14,10 @@
     "Odoo Community Association (OCA)",
     "maintainers": ["eLBati"],
     "license": "AGPL-3",
-    "depends": [
-        "account",
-    ],
+    "depends": ["account", "date_range"],
     "data": [
         "security/ir.model.access.csv",
+        "data/date_range_type.xml",
         "security/account_fiscal_year_rule.xml",
         "views/account_fiscal_year_views.xml",
     ],

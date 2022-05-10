@@ -60,6 +60,16 @@ msgid "Account Asset"
 msgstr "固定资产"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__carry_forward_missed_depreciations
+msgid "Accumulate missed depreciations"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__active
 msgid "Active"
@@ -72,6 +82,26 @@ msgid "Active Assets"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Add an internal note here..."
 msgstr "在这里添加一个内部提示 ..."
@@ -80,6 +110,11 @@ msgstr "在这里添加一个内部提示 ..."
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_compute__date_end
 msgid "All depreciation lines prior to this date will be automatically posted"
 msgstr "此日期之前的折旧将自动计提并过帐"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__allow_reversal
+msgid "Allow Reversal of journal entries"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
@@ -99,6 +134,7 @@ msgstr "辅助核算信息"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_analytic_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Analytic account"
 msgstr "辅助核算项"
 
@@ -106,6 +142,14 @@ msgstr "辅助核算项"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
 msgid "Analytic tags"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Archived"
 msgstr ""
 
 #. module: account_asset_management
@@ -118,7 +162,6 @@ msgstr "确认操作？"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Asset"
 msgstr "资产卡片"
 
@@ -158,6 +201,7 @@ msgid "Asset Groups"
 msgstr "资产分组"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__line_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset Line"
 msgstr "折旧明细"
@@ -260,24 +304,14 @@ msgid "Assets"
 msgstr "固定资产"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Close State"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets in Running State"
-msgstr ""
-
-#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
 msgstr ""
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Assets which have been removed"
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_attachment_count
+msgid "Attachment Count"
 msgstr ""
 
 #. module: account_asset_management
@@ -300,6 +334,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
 msgid "Cancel"
 msgstr "取消"
 
@@ -385,6 +420,8 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Computation Method"
 msgstr "计算方法"
 
@@ -424,6 +461,11 @@ msgid "Compute Assets results"
 msgstr "计提折旧结果"
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
+msgid "Confirm"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Confirm Asset"
 msgstr "初始化卡片"
@@ -453,6 +495,7 @@ msgstr "已创建折旧凭证"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__create_uid
 msgid "Created by"
 msgstr "创建者"
 
@@ -465,6 +508,7 @@ msgstr "创建者"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__create_date
 msgid "Created on"
 msgstr "创建时间"
 
@@ -522,7 +566,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Delete Move"
+msgid "Delete/Reverse Move"
 msgstr ""
 
 #. module: account_asset_management
@@ -599,6 +643,7 @@ msgstr "折旧说明"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__display_name
 msgid "Display Name"
 msgstr "显示名称"
 
@@ -612,11 +657,6 @@ msgstr "已完成"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Draft"
 msgstr "草稿"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Draft Assets"
-msgstr "草稿固定资产"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -667,6 +707,26 @@ msgid "Financial Assets report"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
 msgid "Force accounting date"
 msgstr ""
@@ -699,11 +759,6 @@ msgid "Generate Report"
 msgstr ""
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Group By..."
-msgstr "分组..."
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
 msgid "Has accounting entries"
 msgstr ""
@@ -726,8 +781,46 @@ msgstr "历史凭证"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__id
 #: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__id
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__id
 msgid "ID"
 msgstr "ID"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__carry_forward_missed_depreciations
+msgid ""
+"If create an asset in a fiscal period that is now closed\n"
+"        the accumulated amount of depreciations that cannot be posted will "
+"be\n"
+"        carried forward to the first depreciation line of the current open\n"
+"        period."
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_wiz_asset_move_reverse__journal_id
+msgid "If empty, uses the journal of the journal entry to be reversed."
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__use_leap_years
@@ -739,6 +832,14 @@ msgid ""
 " If set, the system will consider if the current year is a leap year. The "
 "amount to depreciate per year will be calculated as depreciation base / "
 "(depreciation end date - start date + 1) * days in the current year."
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__allow_reversal
+msgid ""
+"If set, when pressing the Delete/Reverse Move button in a posted "
+"depreciation line will prompt the option to reverse the journal entry, "
+"instead of deleting them."
 msgstr ""
 
 #. module: account_asset_management
@@ -779,6 +880,11 @@ msgid "Initial Balance Entry"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__journal_id
 msgid "Journal"
 msgstr "单据类型"
@@ -799,7 +905,6 @@ msgstr "会计凭证"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Item"
 msgstr "会计凭证"
 
@@ -822,6 +927,7 @@ msgstr "会计凭证"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
 msgid "Last Modified on"
 msgstr "最后修改时间"
 
@@ -834,6 +940,7 @@ msgstr "最后修改时间"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__write_uid
 msgid "Last Updated by"
 msgstr "最后更新者"
 
@@ -846,6 +953,7 @@ msgstr "最后更新者"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__write_date
 msgid "Last Updated on"
 msgstr "上次更新日期"
 
@@ -860,6 +968,21 @@ msgstr "线性"
 #, fuzzy, python-format
 msgid "Linear up to Salvage Value"
 msgstr "细分值"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_ids
+msgid "Messages"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
@@ -880,6 +1003,11 @@ msgid "Month"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__name
@@ -891,6 +1019,21 @@ msgstr "名称"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "New Acquisitions"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_id
+msgid "Next Activity Type"
 msgstr ""
 
 #. module: account_asset_management
@@ -920,6 +1063,11 @@ msgid "Notes"
 msgstr "备注"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Depreciations"
@@ -937,6 +1085,26 @@ msgstr ""
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Years or end date"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_unread_counter
+msgid "Number of unread messages"
 msgstr ""
 
 #. module: account_asset_management
@@ -1026,7 +1194,9 @@ msgid "Prorata Temporis"
 msgstr "年限百分比"
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__purchase_value
+#, python-format
 msgid "Purchase Value"
 msgstr "资产原值"
 
@@ -1039,6 +1209,7 @@ msgstr ""
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__reason
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__reason
 #, python-format
 msgid "Reason"
 msgstr "理由"
@@ -1108,8 +1279,34 @@ msgid "Residual Value Account"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 msgid "Results :"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__date_reversal
+msgid "Reversal date"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
+msgid "Reverse Journal Entry"
+msgstr ""
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset_line.py:0
+#, python-format
+msgid "Reverse Move"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_wiz_asset_move_reverse
+msgid "Reverse posted journal entry on depreciation line"
 msgstr ""
 
 #. module: account_asset_management
@@ -1117,6 +1314,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "运行中"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
@@ -1177,9 +1379,19 @@ msgstr "资产状态"
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 #, python-format
 msgid "Status"
 msgstr "状态"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -1279,17 +1491,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Credit"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Total Days"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Total Debit"
 msgstr ""
 
 #. module: account_asset_management
@@ -1309,9 +1511,29 @@ msgid "Type"
 msgstr "类型"
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Undetermined error"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
+msgid "Use Specific Journal"
 msgstr ""
 
 #. module: account_asset_management
@@ -1334,6 +1556,16 @@ msgstr "查看折旧凭证"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "View Move"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__website_message_ids
+msgid "Website communication history"
 msgstr ""
 
 #. module: account_asset_management
@@ -1463,9 +1695,20 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+msgid "account_analytic_id"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "或"
+
+#~ msgid "Draft Assets"
+#~ msgstr "草稿固定资产"
+
+#~ msgid "Group By..."
+#~ msgstr "分组..."
 
 #~ msgid "Invoice"
 #~ msgstr "发票"

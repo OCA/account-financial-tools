@@ -58,6 +58,7 @@ msgid "Ending Date, included in the fiscal year."
 msgstr "Einddatum, opnemen in het fiscale jaar."
 
 #. module: account_fiscal_year
+#: model:date.range.type,name:account_fiscal_year.fiscalyear
 #: model:ir.model,name:account_fiscal_year.model_account_fiscal_year
 msgid "Fiscal Year"
 msgstr "Fiscaal jaar"

@@ -4,10 +4,12 @@
 from datetime import date, timedelta
 
 from odoo.exceptions import UserError
+from odoo.tests import tagged
 
 from odoo.addons.account.tests import common
 
 
+@tagged("post_install", "-at_install")
 class TestJournalLockDate(common.AccountTestInvoicingCommon):
     def setUp(self):
         super(TestJournalLockDate, self).setUp()
@@ -154,7 +156,7 @@ class TestJournalLockDate(common.AccountTestInvoicingCommon):
         move3.action_post()
 
     def test_journal_lock_date_adviser(self):
-        """ The journal lock date is ignored for Advisers """
+        """The journal lock date is ignored for Advisers"""
         self.env.user.write(
             {"groups_id": [(4, self.env.ref("account.group_account_manager").id)]}
         )

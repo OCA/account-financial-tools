@@ -71,12 +71,19 @@ msgstr "上次更新日期"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
-msgid "Lock Date"
+msgid "Lock Date for All Users"
 msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
 msgid "Lock Date for Non-Advisers"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid ""
+"No users can edit journal entries related to a tax prior and inclusive of "
+"this date."
 msgstr ""
 
 #. module: account_lock_date_update
@@ -95,6 +102,11 @@ msgid ""
 msgstr ""
 
 #. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid "Tax Lock Date"
+msgstr ""
+
+#. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Update"
 msgstr ""
@@ -102,7 +114,7 @@ msgstr ""
 #. module: account_lock_date_update
 #: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
 #: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
-msgid "Update accounting lock dates"
+msgid "Update Lock Dates"
 msgstr ""
 
 #. module: account_lock_date_update

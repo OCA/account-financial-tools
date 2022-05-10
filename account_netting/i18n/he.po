@@ -1,0 +1,154 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_netting
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-03 03:46+0000\n"
+"PO-Revision-Date: 2017-12-03 03:46+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Hebrew (https://www.transifex.com/oca/teams/23907/he/)\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_netting
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "AR/AP netting"
+msgstr ""
+
+#. module: account_netting
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "All entries must have a receivable or payable account"
+msgstr ""
+
+#. module: account_netting
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "All entries mustn't been reconciled"
+msgstr ""
+
+#. module: account_netting
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid ""
+"All entries should have a partner and the partner must be the same for all."
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance
+msgid "Balance"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance_type
+msgid "Balance Type"
+msgstr ""
+
+#. module: account_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid "Cancel"
+msgstr "בטל"
+
+#. module: account_netting
+#: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid "Compensate"
+msgstr ""
+
+#. module: account_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid "Compensate entries"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_uid
+msgid "Created by"
+msgstr "נוצר על ידי"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_date
+msgid "Created on"
+msgstr "נוצר ב-"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__display_name
+msgid "Display Name"
+msgstr "השם המוצג"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__id
+msgid "ID"
+msgstr "מזהה"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
+msgid "Last Modified on"
+msgstr "תאריך שינוי אחרון"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
+msgid "Last Updated by"
+msgstr "עודכן לאחרונה על ידי"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_date
+msgid "Last Updated on"
+msgstr "עודכן לאחרונה על"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
+msgid "Move Line"
+msgstr ""
+
+#. module: account_netting
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid ""
+"The 'Compensate' function is intended to balance operations on different "
+"accounts for the same partner.\n"
+"In this case all selected entries belong to the same account.\n"
+" Please use the 'Reconcile' function."
+msgstr ""
+
+#. module: account_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid ""
+"This operation will generate account entries that are counterpart of the "
+"receivable/payable accounts selected, and reconcile each other, letting this "
+"balance in the partner."
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
+msgid "To pay"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
+msgid "To receive"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model,name:account_netting.model_account_move_make_netting
+msgid "Wizard to generate account moves for netting"
+msgstr ""
+
+#. module: account_netting
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "You should compensate at least 2 journal entries."
+msgstr ""

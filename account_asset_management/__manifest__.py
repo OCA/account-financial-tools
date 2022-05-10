@@ -5,10 +5,11 @@
 
 {
     "name": "Assets Management",
-    "version": "14.0.2.1.0",
+    "version": "14.0.2.7.2",
     "license": "AGPL-3",
     "depends": ["account", "report_xlsx_helper"],
     "excludes": ["account_asset"],
+    "development_status": "Mature",
     "external_dependencies": {"python": ["python-dateutil"]},
     "author": "Noviat, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
@@ -27,5 +28,6 @@
         "views/menuitem.xml",
         "data/cron.xml",
         "wizard/wiz_account_asset_report.xml",
+        "wizard/wiz_asset_move_reverse.xml",
     ],
 }

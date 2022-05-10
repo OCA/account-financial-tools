@@ -36,7 +36,7 @@ class AccountMove(models.Model):
         for rec in self:
             assets = (
                 self.env["account.asset.line"]
-                .search([("move_id", "=", self.id)])
+                .search([("move_id", "=", rec.id)])
                 .mapped("asset_id")
             )
             rec.asset_count = len(assets)
@@ -72,24 +72,31 @@ class AccountMove(models.Model):
                 )
         return super().write(vals)
 
+    def _prepare_asset_vals(self, aml):
+        depreciation_base = aml.balance
+        return {
+            "name": aml.name,
+            "code": self.name,
+            "profile_id": aml.asset_profile_id,
+            "purchase_value": depreciation_base,
+            "partner_id": aml.partner_id,
+            "date_start": self.date,
+            "account_analytic_id": aml.analytic_account_id,
+        }
+
     def action_post(self):
         super().action_post()
         for move in self:
-            for aml in move.line_ids.filtered("asset_profile_id"):
-                depreciation_base = aml.price_subtotal
+            for aml in move.line_ids.filtered(
+                lambda line: line.asset_profile_id and not line.tax_line_id
+            ):
+                vals = move._prepare_asset_vals(aml)
                 if not aml.name:
                     raise UserError(
                         _("Asset name must be set in the label of the line.")
                     )
-                vals = {
-                    "name": aml.name,
-                    "code": move.name,
-                    "profile_id": aml.asset_profile_id,
-                    "purchase_value": depreciation_base,
-                    "partner_id": aml.partner_id,
-                    "date_start": move.date,
-                    "account_analytic_id": aml.analytic_account_id,
-                }
+                if aml.asset_id:
+                    continue
                 asset_form = Form(
                     self.env["account.asset"]
                     .with_company(move.company_id)
@@ -99,7 +106,9 @@ class AccountMove(models.Model):
                     setattr(asset_form, key, val)
                 asset = asset_form.save()
                 asset.analytic_tag_ids = aml.analytic_tag_ids
-                aml.with_context(allow_asset=True).asset_id = asset.id
+                aml.with_context(
+                    allow_asset=True, allow_asset_removal=True
+                ).asset_id = asset.id
             refs = [
                 "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"
                 % tuple(name_get)
@@ -123,8 +132,15 @@ class AccountMove(models.Model):
             for line_command in move_vals.get("line_ids", []):
                 line_vals = line_command[2]  # (0, 0, {...})
                 asset = self.env["account.asset"].browse(line_vals["asset_id"])
-                asset.unlink()
-                line_vals.update(asset_profile_id=False, asset_id=False)
+                # We remove the asset if we recognize that we are reversing
+                # the asset creation
+                if asset:
+                    asset_line = self.env["account.asset.line"].search(
+                        [("asset_id", "=", asset.id), ("type", "=", "create")], limit=1
+                    )
+                    if asset_line and asset_line.move_id == self:
+                        asset.unlink()
+                        line_vals.update(asset_profile_id=False, asset_id=False)
         return move_vals
 
     def action_view_assets(self):
@@ -134,7 +150,7 @@ class AccountMove(models.Model):
             .mapped("asset_id")
         )
         action = self.env.ref("account_asset_management.account_asset_action")
-        action_dict = action.read()[0]
+        action_dict = action.sudo().read()[0]
         if len(assets) == 1:
             res = self.env.ref(
                 "account_asset_management.account_asset_view_form", False
@@ -154,6 +170,9 @@ class AccountMoveLine(models.Model):
     asset_profile_id = fields.Many2one(
         comodel_name="account.asset.profile",
         string="Asset Profile",
+        compute="_compute_asset_profile",
+        store=True,
+        readonly=False,
     )
     asset_id = fields.Many2one(
         comodel_name="account.asset",
@@ -161,11 +180,13 @@ class AccountMoveLine(models.Model):
         ondelete="restrict",
     )
 
-    @api.onchange("account_id")
-    def _onchange_account_id(self):
-        if self.account_id.asset_profile_id:
-            self.asset_profile_id = self.account_id.asset_profile_id
-        super()._onchange_account_id()
+    @api.depends("account_id", "asset_id")
+    def _compute_asset_profile(self):
+        for rec in self:
+            if rec.account_id.asset_profile_id and not rec.asset_id:
+                rec.asset_profile_id = rec.account_id.asset_profile_id
+            elif rec.asset_id:
+                rec.asset_profile_id = rec.asset_id.profile_id
 
     @api.onchange("asset_profile_id")
     def _onchange_asset_profile_id(self):

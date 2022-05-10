@@ -1,0 +1,175 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_menu
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-01-20 12:39+0000\n"
+"Last-Translator: Simon S <simon.stromberg@vertel.se>\n"
+"Language-Team: none\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_menu
+#: model:ir.model,name:account_menu.model_account_group
+msgid "Account Group"
+msgstr "Kontogrupp"
+
+#. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.account_group_action
+#: model:ir.ui.menu,name:account_menu.account_group_menu
+msgid "Account Groups"
+msgstr "Kontogrupper"
+
+#. module: account_menu
+#: model:ir.model,name:account_menu.model_account_account_tag
+msgid "Account Tag"
+msgstr "Kontoetikett"
+
+#. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.account_account_tag_action
+#: model:ir.ui.menu,name:account_menu.account_tag_menu
+msgid "Account Tags"
+msgstr "Kontoetiketter"
+
+#. module: account_menu
+#: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_form
+#: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
+msgid "Account Tax Group"
+msgstr "Kontomomsgrupp"
+
+#. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.action_account_tax_group
+#: model:ir.ui.menu,name:account_menu.account_tax_group_menu
+#: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
+msgid "Account Tax Groups"
+msgstr "Kontomomsgrupper"
+
+#. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.account_account_template_action
+#: model:ir.ui.menu,name:account_menu.menu_account_account_template
+msgid "Account Templates"
+msgstr "Kontomallar"
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.account_type_menu
+msgid "Account Types"
+msgstr "Kontotyper"
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_account_account_tag__account_ids
+#: model:ir.model.fields,field_description:account_menu.field_account_group__account_ids
+msgid "Accounts"
+msgstr "Konton"
+
+#. module: account_menu
+#: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
+msgid "Anglo-Saxon Accounting"
+msgstr "Anglosaxisk bokföring"
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_accounting_statement_bank
+msgid "Bank Statements"
+msgstr "Bankkontoutdrag"
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_accounting_bank_and_cash
+msgid "Bank and Cash"
+msgstr "Bank och kassa"
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_accounting_statement_cash
+msgid "Cash Registers"
+msgstr "Kassaregister"
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_account_chart_template
+msgid "Chart of Accounts Templates"
+msgstr "Kontoplansmallar"
+
+#. module: account_menu
+#: model:ir.model,name:account_menu.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_account_account_tag__display_name
+#: model:ir.model.fields,field_description:account_menu.field_account_group__display_name
+#: model:ir.model.fields,field_description:account_menu.field_account_tax_group__display_name
+#: model:ir.model.fields,field_description:account_menu.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.account_fiscal_position_template_action
+#: model:ir.ui.menu,name:account_menu.menu_account_fiscal_position_template
+msgid "Fiscal Position Templates"
+msgstr "Skatteområdesmallar"
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_account_account_tag__id
+#: model:ir.model.fields,field_description:account_menu.field_account_group__id
+#: model:ir.model.fields,field_description:account_menu.field_account_tax_group__id
+#: model:ir.model.fields,field_description:account_menu.field_res_config_settings__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_account_account_tag____last_update
+#: model:ir.model.fields,field_description:account_menu.field_account_group____last_update
+#: model:ir.model.fields,field_description:account_menu.field_account_tax_group____last_update
+#: model:ir.model.fields,field_description:account_menu.field_res_config_settings____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad den"
+
+#. module: account_menu
+#: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
+msgid ""
+"Record the cost of a good as an expense when this good is\n"
+"                                invoiced to a final customer (instead of recording the cost as soon\n"
+"                                as the product is received in stock)."
+msgstr ""
+"Redovisa kostnaden för en vara när denna vara har \n"
+"                                fakturerats till en slutkund (istället för "
+"att bokföra kostnaden när\n"
+"                                produkten tas emot i lagret)."
+
+#. module: account_menu
+#: model:ir.model.fields,help:account_menu.field_res_config_settings__anglo_saxon_accounting
+msgid ""
+"Record the cost of a good as an expense when this good is invoiced to a "
+"final customer."
+msgstr ""
+"Redovisa kostnaden för en vara när denna vara har fakturerats till en "
+"slutkund."
+
+#. module: account_menu
+#: model:ir.model,name:account_menu.model_account_tax_group
+msgid "Tax Group"
+msgstr "Momsgrupp"
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_account_tax_template
+msgid "Tax Templates"
+msgstr "Momsmallar"
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_account_tax_group__tax_ids
+msgid "Taxes"
+msgstr "Moms"
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_account_coa_settings
+msgid "Templates"
+msgstr "Mallar"
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_res_config_settings__anglo_saxon_accounting
+msgid "Use anglo-saxon accounting"
+msgstr "Använd anglosaxisk bokföring"
