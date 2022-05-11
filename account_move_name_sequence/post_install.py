@@ -10,7 +10,11 @@ from odoo import SUPERUSER_ID, api
 def create_journal_sequences(cr, registry):
     with api.Environment.manage():
         env = api.Environment(cr, SUPERUSER_ID, {})
-        journals = env["account.journal"].with_context(active_test=False).search([])
+        journals = (
+            env["account.journal"]
+            .with_context(active_test=False)
+            .search([("sequence_id", "!=", False)])
+        )
         for journal in journals:
             journal_vals = {
                 "code": journal.code,
