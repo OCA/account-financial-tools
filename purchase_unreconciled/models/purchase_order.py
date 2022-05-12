@@ -114,8 +114,9 @@ class PurchaseOrder(models.Model):
             )
             # First try to reconcile the lines automatically to prevent unwanted
             # write-offs
-            if not sum(acc_unrec_items.mapped("amount_residual")) and not sum(
-                acc_unrec_items.mapped("amount_residual_currency")
+            if all(
+                not x.amount_residual and not x.amount_residual_currency
+                for x in acc_unrec_items
             ):
                 # nothing to reconcile
                 continue
