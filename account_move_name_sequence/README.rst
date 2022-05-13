@@ -95,10 +95,13 @@ promote its widespread use.
 .. |maintainer-alexis-via| image:: https://github.com/alexis-via.png?size=40px
     :target: https://github.com/alexis-via
     :alt: alexis-via
+.. |maintainer-moylop260| image:: https://github.com/moylop260.png?size=40px
+    :target: https://github.com/moylop260
+    :alt: moylop260
 
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-alexis-via| 
+|maintainer-alexis-via| |maintainer-moylop260| 
 
 This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/14.0/account_move_name_sequence>`_ project on GitHub.
 

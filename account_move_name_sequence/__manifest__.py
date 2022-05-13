@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "summary": "Generate journal entry number from sequence",
     "author": "Akretion,Vauxoo,Odoo Community Association (OCA)",
-    "maintainers": ["alexis-via"],
+    "maintainers": ["alexis-via", "moylop260"],
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
     "data": [
