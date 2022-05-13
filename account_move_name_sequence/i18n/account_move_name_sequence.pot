@@ -14,6 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_move_name_sequence
+#: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
+msgid ""
+"A move can not be posted with name \"/\" or empty value\n"
+"Check the journal sequence, please"
+msgstr ""
+
+#. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
 msgid ""
 "Check this box if you don't want to share the same sequence for invoices and"
