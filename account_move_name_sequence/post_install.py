@@ -13,7 +13,7 @@ def create_journal_sequences(cr, registry):
         journals = (
             env["account.journal"]
             .with_context(active_test=False)
-            .search([("sequence_id", "!=", False)])
+            .search([("sequence_id", "=", False)])
         )
         for journal in journals:
             journal_vals = {
