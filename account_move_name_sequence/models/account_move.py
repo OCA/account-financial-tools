@@ -15,6 +15,15 @@ class AccountMove(models.Model):
     sequence_prefix = fields.Char(compute=False)
     sequence_number = fields.Integer(compute=False)
 
+    _sql_constraints = [
+        (
+            "name_state_diagonal",
+            "CHECK(COALESCE(name, '') NOT IN ('/', '') OR state!='posted')",
+            'A move can not be posted with name "/" or empty value\n'
+            "Check the journal sequence, please",
+        ),
+    ]
+
     @api.depends("state", "journal_id", "date")
     def _compute_name_by_sequence(self):
         for move in self:
