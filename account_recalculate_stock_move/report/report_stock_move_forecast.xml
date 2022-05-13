@@ -5,10 +5,10 @@
         <field name="name">stock.move.forecast.tree</field>
         <field name="model">report.stock.move.forecast</field>
         <field name="arch" type="xml">
-            <tree string="Stock move Compare with level forecast" create="0" editable="bottom">
-                <field name="product_id"/>
-                <field name="product_uom_qty"/>
-                <field name="quantity"/>
+            <tree string="Stock move Compare with level forecast" decoration-danger="quantity&lt;0" decoration-info="quantity&gt;0" create="0" delete="0" editable="top">
+                <field name="product_id" readonly="1"/>
+                <field name="product_uom_qty" readonly="1"/>
+                <field name="quantity" readonly="1"/>
             </tree>
         </field>
     </record>
