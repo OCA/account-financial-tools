@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2022-05-13 17:12+0000\n"
+"PO-Revision-Date: 2022-05-16 16:05+0000\n"
 "Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -86,7 +86,6 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__interests_amount
-#, fuzzy
 msgid "Amount of the payment that will be assigned to interests"
 msgstr "L'importo del pagamento che verrà assegnato agli interessi"
 
@@ -230,8 +229,9 @@ msgstr "TAN"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__final_pending_principal_amount
+#, fuzzy
 msgid "Final Pending Principal Amount"
-msgstr ""
+msgstr "Capitale residuo finale"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__fixed_amount
@@ -280,8 +280,9 @@ msgstr "Followers (Partner)"
 
 #. module: account_loan
 #: model:ir.ui.menu,name:account_loan.account_loan_generate_wizard_menu
+#, fuzzy
 msgid "Generate Loan Entries"
-msgstr ""
+msgstr "Genera prestiti"
 
 #. module: account_loan
 #: model:ir.actions.act_window,name:account_loan.account_loan_generate_wizard_action
@@ -352,7 +353,7 @@ msgstr "Fatture"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__post_invoice
 msgid "Invoices will be posted automatically"
-msgstr "La fatture verranno inviate automaticamente"
+msgstr "La fatture verranno registrate automaticamente"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_is_follower
@@ -367,8 +368,9 @@ msgstr "Leasing"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+#, fuzzy
 msgid "Items"
-msgstr ""
+msgstr "Oggetti"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__journal_id
@@ -378,14 +380,13 @@ msgstr "Registro"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_move
-#, fuzzy
 msgid "Journal Entries"
-msgstr "Sezionale"
+msgstr "Registrazioni contabili"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__journal_type
 msgid "Journal Type"
-msgstr ""
+msgstr "Tipo registro"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan____last_update
@@ -416,8 +417,9 @@ msgstr "Ultimo aggiornamento il"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__leased_asset_account_id
+#, fuzzy
 msgid "Leased Asset Account"
-msgstr ""
+msgstr "Conto Leasing"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -475,8 +477,9 @@ msgstr "Procedura guidata per la generazione del prestito"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
+#, fuzzy
 msgid "Loan items"
-msgstr ""
+msgstr "Prestito oggetti"
 
 #. module: account_loan
 #: sql_constraint:account.loan:0
@@ -485,18 +488,19 @@ msgstr "Il Nome del prestito deve essere univoco"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_pay_amount
+#, fuzzy
 msgid "Loan pay amount"
-msgstr ""
+msgstr "Importo del prestito"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_post
 msgid "Loan post"
-msgstr ""
+msgstr "Registra prestito"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__product_id
 msgid "Loan product"
-msgstr ""
+msgstr "Prodotto prestito"
 
 #. module: account_loan
 #: selection:account.loan.generate.wizard,loan_type:0
@@ -508,7 +512,6 @@ msgstr "Prestiti"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__long_term_pending_principal_amount
-#, fuzzy
 msgid "Long Term Pending Principal Amount"
 msgstr "Importo sospeso entro 12 mesi"
 
@@ -547,6 +550,7 @@ msgstr "Metodo di calcolo dei tassi applicati"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__loan_type
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__loan_type
+#, fuzzy
 msgid "Method of computation of the period annuity"
 msgstr "Metodo di calcolo del periodo tassivo"
 
@@ -570,17 +574,17 @@ msgstr "Nome"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Scadenza prossima attività"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Riepilogo prossima attività"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Tipo prossima attività"
 
 #. module: account_loan
 #: selection:account.loan,rate_type:0
@@ -600,17 +604,18 @@ msgstr "Numero di errori"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Numero di messaggi che richiedono un'azione"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Numero di messaggi con errore di consegna"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__periods
+#, fuzzy
 msgid "Number of periods that the loan will last"
-msgstr ""
+msgstr "Numero rate di durata del prestito"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_unread_counter
@@ -626,7 +631,7 @@ msgstr "Solo interessi"
 #: code:addons/account_loan/wizard/account_loan_post.py:91
 #, python-format
 msgid "Only loans in draft state can be posted"
-msgstr ""
+msgstr "Solo i prestiti in stato bozza possono essere registrati"
 
 #. module: account_loan
 #: selection:account.loan,activity_state:0
@@ -661,19 +666,22 @@ msgstr "Capitale residuo"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__final_pending_principal_amount
 msgid "Pending amount of the loan after the payment"
-msgstr ""
+msgstr "L'importo in sospeso del prestito dopo il pagamento"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__pending_principal_amount
 msgid "Pending amount of the loan before the payment"
-msgstr ""
+msgstr "L'importo in sospeso del prestito prima del pagamento"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__long_term_pending_principal_amount
+#, fuzzy
 msgid ""
 "Pending amount of the loan before the payment that will not be payed in, at "
 "least, 12 months"
 msgstr ""
+"L'importo in sospeso del prestito prima del pagamento che non sarà pagato "
+"entro, in almeno, 12 mesi"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__method_period
@@ -692,7 +700,6 @@ msgstr "Pianificato"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
-#, fuzzy
 msgid "Post"
 msgstr "Registra"
 
@@ -727,6 +734,8 @@ msgid ""
 "Product where the amount of interests will be assigned when the invoice is "
 "created"
 msgstr ""
+"Prodotto a cui verrà assegnato l'importo degli interessi al momento della "
+"creazione della fattura"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__product_id
@@ -734,6 +743,8 @@ msgid ""
 "Product where the amount of the loan will be assigned when the invoice is "
 "created"
 msgstr ""
+"Prodotto a cui verrà assegnato l'importo del prestito al momento della "
+"creazione della fattura"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__rate
@@ -764,7 +775,7 @@ msgstr "Tasso reale che sarà applicato ogni rata"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__residual_amount
 msgid "Residual Amount"
-msgstr ""
+msgstr "Importo residuo"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__residual_amount
@@ -787,8 +798,9 @@ msgstr "Arrotondare alla fine"
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_generate_wizard_form
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
+#, fuzzy
 msgid "Run"
-msgstr ""
+msgstr "Periodo"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__sequence
@@ -809,25 +821,25 @@ msgstr "Conto a corto termine"
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:65
 #, python-format
 msgid "Some future invoices already exists"
-msgstr ""
+msgstr "Alcune fatture future già esistono"
 
 #. module: account_loan
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:73
 #, python-format
 msgid "Some future moves already exists"
-msgstr "Alcuni Movimenti futuri esistono già"
+msgstr "Alcuni Movimenti futuri già esistono"
 
 #. module: account_loan
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:61
-#, python-format
+#, fuzzy, python-format
 msgid "Some invoices are not created"
-msgstr ""
+msgstr "Alcune fatture non vengono create"
 
 #. module: account_loan
 #: code:addons/account_loan/model/account_loan_line.py:358
 #, python-format
 msgid "Some invoices must be created first"
-msgstr ""
+msgstr "Alcune fatture devono essere create prima"
 
 #. module: account_loan
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:69
@@ -882,8 +894,9 @@ msgstr "Oggi"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__payment_amount
+#, fuzzy
 msgid "Total amount that will be payed (Annuity)"
-msgstr ""
+msgstr "Importo totale che verrà pagato (Tasso)"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
@@ -898,7 +911,7 @@ msgstr "Totale pagato interessi"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__payment_amount
 msgid "Total payed amount"
-msgstr "Totale pagato capitale"
+msgstr "Totale capitale pagato"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
@@ -908,12 +921,12 @@ msgstr "Totale Pagamenti"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Messaggi non letti"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Conteggio messaggi non letti"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
@@ -928,7 +941,7 @@ msgstr "Messaggi Sito web"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Storico comunicazioni sito web"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__round_on_end
@@ -942,7 +955,7 @@ msgstr ""
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__payment_on_first_period
 msgid "When checked, the first payment will be on start date"
-msgstr ""
+msgstr "Quando spuntato, il primo pagamento sarà alla data inizio"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_generate_wizard_form
