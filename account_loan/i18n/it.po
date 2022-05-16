@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2022-05-16 16:05+0000\n"
+"PO-Revision-Date: 2022-05-16 20:05+0000\n"
 "Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -552,7 +552,7 @@ msgstr "Metodo di calcolo dei tassi applicati"
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__loan_type
 #, fuzzy
 msgid "Method of computation of the period annuity"
-msgstr "Metodo di calcolo del periodo tassivo"
+msgstr "Metodo di calcolo del periodo di rendita"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__move_ids
@@ -831,7 +831,7 @@ msgstr "Alcuni Movimenti futuri già esistono"
 
 #. module: account_loan
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:61
-#, fuzzy, python-format
+#, python-format
 msgid "Some invoices are not created"
 msgstr "Alcune fatture non vengono create"
 
