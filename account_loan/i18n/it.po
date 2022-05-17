@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2022-05-16 20:05+0000\n"
+"PO-Revision-Date: 2022-05-17 12:05+0000\n"
 "Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -96,19 +96,18 @@ msgstr "L'importo del pagamento che ridurrà l'importo del prestito in sospeso"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__long_term_principal_amount
-#, fuzzy
 msgid "Amount that will reduce the pending loan amount on long term"
 msgstr "L'importo che ridurrà l'importo del prestito a lungo termine in sospeso"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__amount
 msgid "Amount to reduce from Principal"
-msgstr "importo da ridurre dal capitale"
+msgstr "Importo da ridurre dal capitale"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_line
 msgid "Annuity"
-msgstr ""
+msgstr "Tasso"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_attachment_count
@@ -163,7 +162,6 @@ msgstr "Azienda o Persona che presta i soldi con un tasso di interesse."
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
-#, fuzzy
 msgid "Compute items"
 msgstr "Calcola prestito"
 
@@ -229,7 +227,6 @@ msgstr "TAN"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__final_pending_principal_amount
-#, fuzzy
 msgid "Final Pending Principal Amount"
 msgstr "Capitale residuo finale"
 
@@ -280,9 +277,8 @@ msgstr "Followers (Partner)"
 
 #. module: account_loan
 #: model:ir.ui.menu,name:account_loan.account_loan_generate_wizard_menu
-#, fuzzy
 msgid "Generate Loan Entries"
-msgstr "Genera prestiti"
+msgstr "Genera movimenti prestiti"
 
 #. module: account_loan
 #: model:ir.actions.act_window,name:account_loan.account_loan_generate_wizard_action
@@ -368,9 +364,8 @@ msgstr "Leasing"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
-#, fuzzy
 msgid "Items"
-msgstr "Oggetti"
+msgstr "Piano"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__journal_id
@@ -417,7 +412,6 @@ msgstr "Ultimo aggiornamento il"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__leased_asset_account_id
-#, fuzzy
 msgid "Leased Asset Account"
 msgstr "Conto Leasing"
 
@@ -477,9 +471,8 @@ msgstr "Procedura guidata per la generazione del prestito"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
-#, fuzzy
 msgid "Loan items"
-msgstr "Prestito oggetti"
+msgstr "Piano prestito"
 
 #. module: account_loan
 #: sql_constraint:account.loan:0
@@ -488,7 +481,6 @@ msgstr "Il Nome del prestito deve essere univoco"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_pay_amount
-#, fuzzy
 msgid "Loan pay amount"
 msgstr "Importo del prestito"
 
@@ -517,7 +509,6 @@ msgstr "Importo sospeso entro 12 mesi"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__long_term_principal_amount
-#, fuzzy
 msgid "Long Term Principal Amount"
 msgstr "Importo sospeso oltre 12 mesi"
 
@@ -550,7 +541,6 @@ msgstr "Metodo di calcolo dei tassi applicati"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__loan_type
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__loan_type
-#, fuzzy
 msgid "Method of computation of the period annuity"
 msgstr "Metodo di calcolo del periodo di rendita"
 
@@ -613,9 +603,8 @@ msgstr "Numero di messaggi con errore di consegna"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__periods
-#, fuzzy
 msgid "Number of periods that the loan will last"
-msgstr "Numero rate di durata del prestito"
+msgstr "Numero in rate della durata del prestito"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_unread_counter
@@ -659,7 +648,6 @@ msgstr "Pagamento su prima rata"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__pending_principal_amount
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__pending_principal_amount
-#, fuzzy
 msgid "Pending Principal Amount"
 msgstr "Capitale residuo"
 
@@ -675,7 +663,6 @@ msgstr "L'importo in sospeso del prestito prima del pagamento"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__long_term_pending_principal_amount
-#, fuzzy
 msgid ""
 "Pending amount of the loan before the payment that will not be payed in, at "
 "least, 12 months"
@@ -782,7 +769,7 @@ msgstr "Importo residuo"
 msgid ""
 "Residual amount of the lease that must be payed on the end in order to "
 "acquire the asset"
-msgstr ""
+msgstr "Costo del riscatto"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_user_id
@@ -798,9 +785,8 @@ msgstr "Arrotondare alla fine"
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_generate_wizard_form
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
-#, fuzzy
 msgid "Run"
-msgstr "Periodo"
+msgstr "Esecuzione"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__sequence
@@ -872,7 +858,7 @@ msgstr "Stato"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__method_period
 msgid "State here the time between 2 depreciations, in months"
-msgstr ""
+msgstr "Calcolo periodo tra 2 rate, in mesi"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__activity_state
@@ -894,7 +880,6 @@ msgstr "Oggi"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__payment_amount
-#, fuzzy
 msgid "Total amount that will be payed (Annuity)"
 msgstr "Importo totale che verrà pagato (Tasso)"
 
