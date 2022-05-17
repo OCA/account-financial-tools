@@ -93,6 +93,7 @@ class TestAccountCashDeposit(TransactionCase):
         self.assertEqual(order.move_id.ref, order.display_name)
 
     def test_cash_deposit(self):
+        coin_amount = 12.42
         deposit = (
             self.env["account.cash.deposit"]
             .with_context(default_operation_type="deposit")
@@ -102,6 +103,7 @@ class TestAccountCashDeposit(TransactionCase):
                     "currency_id": self.currency.id,
                     "cash_journal_id": self.cash_journal.id,
                     "bank_journal_id": self.bank_journal.id,
+                    "coin_amount": coin_amount,
                     "line_ids": [
                         (0, 0, {"cash_unit_id": self.cash_unit_note.id, "qty": 3}),
                         (0, 0, {"cash_unit_id": self.cash_unit_coinroll.id, "qty": 6}),
@@ -116,7 +118,7 @@ class TestAccountCashDeposit(TransactionCase):
         total = (
             3 * self.cash_unit_note.total_value
             + 6 * self.cash_unit_coinroll.total_value
-        )
+        ) + coin_amount
         self.assertFalse(
             deposit.currency_id.compare_amounts(deposit.total_amount, total)
         )
