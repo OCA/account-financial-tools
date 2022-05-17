@@ -68,6 +68,10 @@
                             />
                             <field name="cash_journal_id" />
                             <field name="bank_journal_id" />
+                            <field
+                                name="coin_amount"
+                                attrs="{'invisible': [('operation_type', '!=', 'deposit')]}"
+                            />
                         </group>
                         <group name="right">
                             <field name="total_amount" />

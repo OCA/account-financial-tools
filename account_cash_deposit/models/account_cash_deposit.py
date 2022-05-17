@@ -98,6 +98,16 @@ class AccountCashDeposit(models.Model):
         states={"draft": [("readonly", "=", False)]},
         tracking=True,
     )
+    coin_amount = fields.Monetary(
+        string="Loose Coin Amount",
+        currency_field="currency_id",
+        readonly=True,
+        states={"draft": [("readonly", "=", False)]},
+        tracking=True,
+        help="If your bank has a coin counting machine, enter the total amount "
+        "of coins counted by the machine instead of creating a line for each type "
+        "of coin.",
+    )
     total_amount = fields.Monetary(
         compute="_compute_total_amount",
         string="Total Amount",
@@ -115,7 +125,12 @@ class AccountCashDeposit(models.Model):
             "name_company_unique",
             "unique(company_id, name)",
             "A cash deposit/order with this reference already exists in this company.",
-        )
+        ),
+        (
+            "coin_amount_positive",
+            "CHECK(coin_amount >= 0)",
+            "The loose coin amount must be positive or null.",
+        ),
     ]
 
     @api.constrains("cash_journal_id", "currency_id")
@@ -189,7 +204,7 @@ class AccountCashDeposit(models.Model):
         )
         mapped_data = {x["parent_id"][0]: x["subtotal"] for x in rg_res}
         for rec in self:
-            rec.total_amount = mapped_data.get(rec.id, 0)
+            rec.total_amount = mapped_data.get(rec.id, 0) + rec.coin_amount
 
     @api.depends("move_id.line_ids.reconciled", "company_id")
     def _compute_is_reconcile(self):
