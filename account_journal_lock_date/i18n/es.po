@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-20 04:25+0000\n"
-"PO-Revision-Date: 2021-11-28 21:36+0000\n"
-"Last-Translator: Rafa Martínez <rmartinez@puntsistemes.es>\n"
+"PO-Revision-Date: 2022-05-18 18:05+0000\n"
+"Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -119,9 +119,8 @@ msgstr "Actualizar"
 
 #. module: account_journal_lock_date
 #: model:ir.actions.act_window,name:account_journal_lock_date.update_journal_lock_dates_wizard_action
-#, fuzzy
 msgid "Update journals lock dates"
-msgstr "Actualizar fechas de bloqueo"
+msgstr "Actualizar fechas de bloqueo de los diarios"
 
 #. module: account_journal_lock_date
 #: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
