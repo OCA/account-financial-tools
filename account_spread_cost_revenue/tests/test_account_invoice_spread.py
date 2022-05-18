@@ -642,7 +642,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         payable_account = self.spread2.credit_account_id
         balance_sheet = self.spread2.debit_account_id
         self.assertTrue(balance_sheet.reconcile)
-
+        self.spread2.line_ids.mapped("move_id").action_post()
         spread_mls = self.spread2.line_ids.mapped("move_id.line_ids")
         self.assertTrue(spread_mls)
         for spread_ml in spread_mls:
