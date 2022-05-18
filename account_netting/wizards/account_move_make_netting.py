@@ -117,6 +117,7 @@ class AccountMoveMakeNetting(models.TransientModel):
         if move_lines:
             move.write({"line_ids": move_lines})
         # Make reconciliation
+        move.action_post()
         for move_line in move.line_ids:
             to_reconcile = move_line + self.move_line_ids.filtered(
                 lambda x: x.account_id == move_line.account_id
