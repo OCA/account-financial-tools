@@ -60,8 +60,8 @@ addon | version | maintainers | summary
 [account_move_print](account_move_print/) | 13.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds the option to print Journal Entries
 [account_move_reversal_choose_method](account_move_reversal_choose_method/) | 13.0.1.0.0 |  | Let's choose the Credit Method when adding a credit note to a journal entry.
 [account_move_template](account_move_template/) | 13.0.1.2.0 |  | Templates for recurring Journal Entries
-[account_netting](account_netting/) | 13.0.1.0.0 |  | Compensate AR/AP accounts from the same partner
-[account_spread_cost_revenue](account_spread_cost_revenue/) | 13.0.1.0.0 | [![astirpe](https://github.com/astirpe.png?size=30px)](https://github.com/astirpe) | Spread costs and revenues over a custom period
+[account_netting](account_netting/) | 13.0.1.0.1 |  | Compensate AR/AP accounts from the same partner
+[account_spread_cost_revenue](account_spread_cost_revenue/) | 13.0.1.0.1 | [![astirpe](https://github.com/astirpe.png?size=30px)](https://github.com/astirpe) | Spread costs and revenues over a custom period
 [account_tax_repartition_line_tax_group_account](account_tax_repartition_line_tax_group_account/) | 13.0.1.0.0 |  | Set a default account from tax group to tax repartition lines
 [base_vat_optional_vies](base_vat_optional_vies/) | 13.0.1.0.1 |  | Optional validation of VAT via VIES
 [product_category_tax](product_category_tax/) | 13.0.1.1.0 |  | Configure taxes in the product category
