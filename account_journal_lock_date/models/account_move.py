@@ -33,15 +33,21 @@ class AccountMove(models.Model):
                 lock_date = format_date(self.env, lock_date)
                 if self.user_has_groups("account.group_account_manager"):
                     message = _(
-                        "You cannot add/modify entries for the journal '%s' "
-                        "prior to and inclusive of the lock date %s"
-                    ) % (move.journal_id.display_name, lock_date)
+                        "You cannot add/modify entries for the journal '%(journal)s' "
+                        "prior to and inclusive of the lock date %(journal_date)s"
+                    ) % {
+                        "journal": move.journal_id.display_name,
+                        "journal_date": lock_date,
+                    }
                 else:
                     message = _(
-                        "You cannot add/modify entries for the journal '%s' "
-                        "prior to and inclusive of the lock date %s. "
+                        "You cannot add/modify entries for the journal '%(journal)s' "
+                        "prior to and inclusive of the lock date %(journal_date)s. "
                         "Check the Journal settings or ask someone "
                         "with the 'Adviser' role"
-                    ) % (move.journal_id.display_name, lock_date)
+                    ) % {
+                        "journal": move.journal_id.display_name,
+                        "journal_date": lock_date,
+                    }
                 raise UserError(message)
         return res
