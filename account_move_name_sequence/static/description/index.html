@@ -369,37 +369,82 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external" href="https://github.com/OCA/account-financial-tools/tree/14.0/account_move_name_sequence"><img alt="OCA/account-financial-tools" src="https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github" /></a> <a class="reference external" href="https://translation.odoo-community.org/projects/account-financial-tools-14-0/account-financial-tools-14-0-account_move_name_sequence"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external" href="https://runbot.odoo-community.org/runbot/92/14.0"><img alt="Try me on Runbot" src="https://img.shields.io/badge/runbot-Try%20me-875A7B.png" /></a></p>
 <p>In Odoo version 13.0 and previous versions, the number of journal entries was generated from a sequence configured on the journal.</p>
-<p>In Odoo version 14.0, the number of journal entries can be manually set by the user. Then, the number attributed for next journal entries in the same journal is computed by a complex piece of code that guesses the format of the journal entry number from the number of the journal entry which was manually entered by the user. It has several drawbacks:</p>
+<p>In Odoo version 14.0, the number of journal entries can be manually set by the user. Then, the number attributed for the next journal entries in the same journal is computed by a complex piece of code that guesses the format of the journal entry number from the number of the journal entry which was manually entered by the user. It has several drawbacks:</p>
 <ul class="simple">
 <li>the available options for the sequence are limited,</li>
 <li>it is not possible to configure the sequence in advance before the deployment in production,</li>
 <li>as it is error-prone, they added a <em>Resequence</em> wizard to re-generate the journal entry numbers, which can be considered as illegal in many countries,</li>
-<li>the <a class="reference external" href="https://github.com/odoo/odoo/blob/14.0/addons/account/models/sequence_mixin.py">piece of code</a> that handle this is not easy to understand and quite difficult to debug.</li>
+<li>the <a class="reference external" href="https://github.com/odoo/odoo/blob/14.0/addons/account/models/sequence_mixin.py">piece of code</a> that handles this is not easy to understand and quite difficult to debug.</li>
 </ul>
-<p>For those like me who think that the implementation before Odoo v14.0 was much better, for the accountants who think it should not be possible to manually enter the sequence of a customer invoice, for the auditor who consider that resequencing journal entries is prohibited by law, this module may be a solution to get out of the nightmare.</p>
+<p>Odoo&gt;=v14.0 raises new concurrency issues since it locks the last journal entry of the journal to get the new number causing a bottleneck
+Even if you only are creating a draft journal entry it locks the last one
+It applies to all accounting Journal Entries</p>
+<p>e.g.</p>
+<blockquote>
+<ul class="simple">
+<li>Customer Invoices</li>
+<li>Credit Notes</li>
+<li>Customer Payments</li>
+<li>Vendor Bills</li>
+<li>Vendor Refunds</li>
+<li>Vendor Payment</li>
+<li>Manual Journal Entries</li>
+</ul>
+</blockquote>
+<p>Then, the following concurrency errors are being raised now frequently:</p>
+<ul class="simple">
+<li>Editing the last record used to get the new number from another process</li>
+<li>Creating a new draft invoice/payment (not only when posting it)</li>
+<li>Creating a transaction to create an invoice then payment or vice versa raises a deadlock error</li>
+<li>Reconciling the last record it could be a heavy process</li>
+<li>Creating 2 or more Invoices/Bills at the same time</li>
+<li>Creating 2 or more Payments at the same time (Even if your country allows to relax gaps in these kinds of documents, you are not able anymore to change the implementation to standard)</li>
+<li>Creating 2 or more Journal Entries at the same time</li>
+</ul>
+<p>All these increases in concurrency errors bring more issues since that Odoo is not prepared:</p>
+<ul class="simple">
+<li>Using e-commerce, configured with Invoicing Policy Ordered and Automatic Invoice, the portal users will see errors in the checkout even if the payment was done, the sale order could be in state draft and request a new payment, so double charges</li>
+<li>Using <cite>subscription_template.payment_mode=success_payment</cite> you will see subscriptions with tag “payment exception”</li>
+<li>Using accounting creating invoice or payment, you will see errors then you will need to start the process again and again until you get the lock before another user</li>
+<li>The workers could be used for more time than before since that it could be waiting for release so less concurrent users supported or loading page is shown more frequently affecting the performance</li>
+</ul>
+<p>The new accounting number is a significant bottleneck</p>
+<img alt="https://media.istockphoto.com/vectors/road-highways-with-many-different-vehicles-vector-id1328678690" src="https://media.istockphoto.com/vectors/road-highways-with-many-different-vehicles-vector-id1328678690" />
+<p>If you do not believe all these issues are occurring, we have created the following issues and unittest to reproduce errors in v14.0 including the deadlock, but not v13.0:</p>
+<blockquote>
+<ul class="simple">
+<li>Passing unittest for <a class="reference external" href="https://github.com/odoo/odoo/pull/91614">13.0 - [REF] account: Adding unittests for concurrency issues in account_move sequences</a></li>
+<li>Concurrency errors for <a class="reference external" href="https://github.com/odoo/odoo/pull/91525">14.0 - [REF] account: Adding unittests for concurrency issues in account_move sequences</a></li>
+<li><a class="reference external" href="https://github.com/odoo/odoo/issues/90465">Stress testing and issue reported to Odoo</a></li>
+<li><a class="reference external" href="https://github.com/odoo/odoo/issues/91873">[BUG] account: Concurrency errors increased considerably in account.move for Odoo&gt;=v14.0 #91873</a></li>
+</ul>
+</blockquote>
+<p>Using this module, you can configure what kind of documents the gap sequence may be relaxed
+And even if you must use no-gap in your company or country it will reduce the concurrency issues since the module is using an extra table (ir_sequence) instead of locking the last record</p>
+<p>For those like me who think that the implementation before Odoo v14.0 was much better, for the accountants who think it should not be possible to manually enter the sequence of a customer invoice, for the auditor who considers that resequencing journal entries is prohibited by law, this module may be a solution to get out of the nightmare.</p>
 <p>The field names used in this module to configure the sequence on the journal are exactly the same as in Odoo version 13.0 and previous versions. That way, if you migrate to Odoo version 14.0 and you install this module immediately after the migration, you should keep the previous behavior and the same sequences will continue to be used.</p>
 <p>The module removes access to the <em>Resequence</em> wizard on journal entries.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#configuration" id="id1">Configuration</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="id2">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="id3">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="id4">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="id5">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="id6">Maintainers</a></li>
+<li><a class="reference internal" href="#configuration" id="id2">Configuration</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="id3">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="id4">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="id5">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="id6">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="id7">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="configuration">
-<h1><a class="toc-backref" href="#id1">Configuration</a></h1>
+<h1><a class="toc-backref" href="#id2">Configuration</a></h1>
 <p>On the form view of an account journal, in the first tab, there is a many2one link to the sequence. When you create a new journal, you can keep this field empty and a new sequence will be automatically created when you save the journal.</p>
 <p>On sale and purchase journals, you have an additionnal option to have another sequence dedicated to refunds.</p>
 <p>Upon module installation, all existing journals will be updated with a journal entry sequence (and also a credit note sequence for sale and purchase journals). You should update the configuration of the sequences to fit your needs. You can uncheck the option <em>Dedicated Credit Note Sequence</em> on existing sale and purchase journals if you don’t want it. For the journals which already have journal entries, you should update the sequence configuration to avoid a discontinuity in the numbering for the next journal entry.</p>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#id2">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#id3">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/account-financial-tools/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
@@ -407,23 +452,23 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#id3">Credits</a></h1>
+<h1><a class="toc-backref" href="#id4">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#id4">Authors</a></h2>
+<h2><a class="toc-backref" href="#id5">Authors</a></h2>
 <ul class="simple">
 <li>Akretion</li>
 <li>Vauxoo</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#id5">Contributors</a></h2>
+<h2><a class="toc-backref" href="#id6">Contributors</a></h2>
 <ul class="simple">
 <li>Alexis de Lattre &lt;<a class="reference external" href="mailto:alexis.delattre&#64;akretion.com">alexis.delattre&#64;akretion.com</a>&gt;</li>
 <li>Moisés López &lt;<a class="reference external" href="mailto:moylop260&#64;vauxoo.com">moylop260&#64;vauxoo.com</a>&gt;</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#id6">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#id7">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
