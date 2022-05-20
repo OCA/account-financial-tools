@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2018-08-01 11:18+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"PO-Revision-Date: 2022-05-20 20:05+0000\n"
+"Last-Translator: Dept. Técnico <tecnico@extrememicro.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.1.1\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_lock_date_update
 #: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
@@ -72,7 +72,7 @@ msgstr "Última actualización en"
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
 msgid "Lock Date for All Users"
-msgstr ""
+msgstr "Fecha bloqueo para todos los usuarios"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
@@ -85,6 +85,8 @@ msgid ""
 "No users can edit journal entries related to a tax prior and inclusive of "
 "this date."
 msgstr ""
+"Ningún usuario puede editar los asientos relacionados con un impuesto "
+"anterior e inclusive a esta fecha."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
@@ -110,7 +112,7 @@ msgstr ""
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
 msgid "Tax Lock Date"
-msgstr ""
+msgstr "Fecha de bloqueo de impuestos"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
@@ -121,7 +123,7 @@ msgstr "Actualizar"
 #: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
 #: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
 msgid "Update Lock Dates"
-msgstr ""
+msgstr "Actualizar las fechas de bloqueo"
 
 #. module: account_lock_date_update
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
