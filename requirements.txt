@@ -1,4 +1,5 @@
 # generated from manifests external_dependencies
+freezegun
 numpy
 numpy-financial<=1.0.0
 python-dateutil
