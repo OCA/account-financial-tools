@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Moduon
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+<data>
+
+    <record id="view_account_journal_tree" model="ir.ui.view">
+        <field name="name">Add move number sequence to tree</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_tree" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field name="entry_number_sequence_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="name">Add move number sequence to form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <field name="refund_sequence" position="before">
+                <field name="entry_number_sequence_id" />
+            </field>
+        </field>
+    </record>
+
+</data>
