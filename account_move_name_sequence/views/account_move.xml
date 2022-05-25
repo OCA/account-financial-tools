@@ -2,6 +2,8 @@
 <!--
   Copyright 2021 Akretion France (http://www.akretion.com/)
   @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  @author: Moisés López <moylop260@vauxoo.com>
+  @author: Francisco Luna <fluna@vauxoo.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
@@ -10,23 +12,21 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-                <xpath
+            <xpath
                 expr="//div[hasclass('oe_title')]/h1[hasclass('mt0')]"
                 position="attributes"
             >
-                        <attribute
-                    name="attrs"
-                >{'invisible': [('name', '=', '/')]}</attribute>
-                </xpath>
-                <xpath
+                <attribute name="attrs">{'invisible': [('name', '=', '/')]}</attribute>
+            </xpath>
+            <xpath
                 expr="//div[hasclass('oe_title')]//field[@name='name']"
                 position="attributes"
             >
-                        <attribute name="attrs">{'readonly': 1}</attribute>
-                </xpath>
-                <xpath expr="//field[@name='highest_name']/.." position="attributes">
+                <attribute name="attrs">{'readonly': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='highest_name']/.." position="attributes">
                 <attribute name="attrs">{'invisible': 1}</attribute>
-                </xpath>
+            </xpath>
         </field>
     </record>
 

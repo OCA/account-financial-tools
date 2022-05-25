@@ -1,5 +1,7 @@
 # Copyright 2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
+# @author: Moisés López <moylop260@vauxoo.com>
+# @author: Francisco Luna <fluna@vauxoo.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
@@ -9,7 +11,7 @@ from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
 
-@tagged("post_install", "-at_install")
+@tagged("post_install", "-at_install", "account_move")
 class TestAccountMoveNameSequence(TransactionCase):
     def setUp(self):
         super().setUp()

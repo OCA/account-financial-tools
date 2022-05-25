@@ -17,11 +17,11 @@ class IrSequence(models.Model):
             date_from = date_obj
             date_to = date_obj
         elif "%(range_month)s" in prefix_suffix:
-            date_from = date_obj + relativedelta(day=1)
-            date_to = date_obj + relativedelta(day=31)
+            date_from = fields.Date.start_of(date_obj, "month")
+            date_to = fields.Date.end_of(date_obj, "month")
         else:
-            date_from = date_obj + relativedelta(day=1, month=1)
-            date_to = date_obj + relativedelta(day=31, month=12)
+            date_from = fields.Date.start_of(date_obj, "year")
+            date_to = fields.Date.end_of(date_obj, "year")
         date_range = self.env["ir.sequence.date_range"].search(
             [
                 ("sequence_id", "=", self.id),

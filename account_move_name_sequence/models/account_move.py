@@ -1,5 +1,7 @@
 # Copyright 2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
+# @author: Moisés López <moylop260@vauxoo.com>
+# @author: Francisco Luna <fluna@vauxoo.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -19,7 +21,7 @@ class AccountMove(models.Model):
         (
             "name_state_diagonal",
             "CHECK(COALESCE(name, '') NOT IN ('/', '') OR state!='posted')",
-            'A move can not be posted with name "/" or empty value\n'
+            "A move can not be posted with name '/' or empty value\n"
             "Check the journal sequence, please",
         ),
     ]
