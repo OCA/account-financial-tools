@@ -30,4 +30,40 @@
             </field>
         </field>
     </record>
+    <record id="account_tag_view_form" model="ir.ui.view">
+        <field name="name">tag_addd_accounts_taxes</field>
+        <field name="model">account.account.tag</field>
+        <field name="inherit_id" ref="account.account_tag_view_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="code"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="parent_id"/>
+                <field name="color_picker"/>
+            </field>
+            <xpath expr="//group" position="after">
+                <group>
+                    <group id="aplicability">
+                        <field name="applicability" widget="selection"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Tax &amp; Accounts configuration" attrs="{'invisible':[('applicability','!=', 'accounts')]}">
+                        <group>
+                            <group id="links">
+                                <label for="account_ids" attrs="{'invisible':[('applicability','!=', 'accounts')]}"/>
+                                <field name="account_ids" widget="many2many_tags" nolabel="1"
+                                    attrs="{'invisible':[('applicability','!=', 'accounts')]}"
+                                    options="{'no_create_edit': True}"/>
+                                <label for="tax_ids" attrs="{'invisible':[('applicability','!=', 'taxes')]}"/>
+                                <field name="tax_ids" widget="many2many_tags" nolabel="1"
+                                    attrs="{'invisible':[('applicability','!=', 'taxes')]}"
+                                    options="{'no_create_edit': True}"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
 </odoo>

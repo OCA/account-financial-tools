@@ -6,20 +6,20 @@ import math
 from odoo import models, api, fields, _
 
 import logging
+
+from odoo.exceptions import ValidationError
+
 _logger = logging.getLogger(__name__)
 
 
 class AccountTax(models.Model):
     _inherit = 'account.tax'
 
-    tax_credit_payable = fields.Selection([('taxcredit', 'Tax credit receivable from the taxpayer'),
-                                           ('taxpay', 'Tax payable by the taxpayer'),
-                                           ('eutaxcredit', 'Tax credit receivable from the taxpayer on EU deals'),
-                                           ('eutaxpay', 'Tax payable by the taxpayer on EU deals'),
-                                           ('taxadvpay', 'Tax payable by the taxpayer when Imports from outside EU'),
-                                           ('taxbalance', 'Account for balance of taxes'),
-                                           ('othertax', 'Different by VAT Tax payable by the taxpayer')],
-                                          'Who pays tax', required=False, default='taxpay',
+    def _get_tax_credit_payable(self):
+        return self.env['account.tax.template']._get_tax_credit_payable()
+
+    tax_credit_payable = fields.Selection(selection='_get_tax_credit_payable', string='Who pays tax', required=False,
+                                          default='taxpay',
                                           help="If not applicable (computed through a Python code), the tax won't "
                                                "appear on the invoice.Who pays the tax purchaser or seller ( for "
                                                "imports from outside the EU pay the buyer )")
@@ -244,3 +244,114 @@ class AccountTax(models.Model):
         if partner_id:
             partner_id = self.env['res.partner'].browse(partner_id)
         return self.with_context(self._context, force_fix=True).compute_all(price_unit, currency=currency_id, quantity=quantity, product=product_id, partner=partner_id)
+
+
+class AccountAccountTag(models.Model):
+    _inherit = 'account.account.tag'
+    _parent_name = "parent_id"
+    _parent_store = True
+    _parent_order = 'name'
+    _order = 'parent_left'
+
+    def _get_type_taxes(self):
+        return self.env['account.account.tag.template']._get_type_taxes()
+
+    def _get_type_info(self):
+        return self.env['account.account.tag.template']._get_type_info()
+
+    code = fields.Char("Code", index=True, copy=False)
+    account_ids = fields.Many2many('account.account', relation='account_account_account_tag',
+                                   column1='account_account_tag_id', column2='account_account_id', string='Accounts',
+                                   help="Assigned accounts for custom reporting")
+    tax_ids = fields.Many2many('account.tax', 'account_tax_account_tag',
+                               column1='account_account_tag_id', column2='account_tax_id', string='Taxes',
+                               help="Assigned taxes for custom reporting")
+
+    color_picker = fields.Selection([('0', 'Grey'),
+                                     ('1', 'Green'),
+                                     ('2', 'Yellow'),
+                                     ('3', 'Orange'),
+                                     ('4', 'Red'),
+                                     ('5', 'Purple'),
+                                     ('6', 'Blue'),
+                                     ('7', 'Cyan'),
+                                     ('8', 'Aquamarine'),
+                                     ('9', 'Pink')], string='Tags Color',
+                                    required=True, default='0')
+    color = fields.Integer('Color Index', compute='_compute_color_index', store=True)
+
+    parent_id = fields.Many2one('account.account.tag', string='Parent Tag', index=True, ondelete='cascade')
+    child_ids = fields.One2many('account.account.tag', 'parent_id', string='Child Tags')
+    parent_left = fields.Integer('Left Parent', index=1)
+    parent_right = fields.Integer('Right Parent', index=1)
+    company_id = fields.Many2one('res.company', string='Company', required=True,
+                                 default=lambda self: self.env['res.company']._company_default_get(
+                                     'account.account.tag'))
+
+    type_taxes = fields.Selection(selection='_get_type_taxes', string='Type taxes')
+    type_info = fields.Selection(selection='_get_type_info', string='Type info')
+
+    display_name = fields.Char(compute='_compute_display_name')
+
+    @api.depends('name', 'code')
+    def _compute_display_name(self):
+        for tag in self:
+            if self._context.get('only_code'):
+                tag.display_name = "%s" % tag.code
+            if tag.code and tag.name:
+                tag.display_name = "[%s] %s" % (tag.code, tag.name)
+            elif tag.code and not tag.name:
+                tag.display_name = "%s" % tag.code
+            elif tag.name and not tag.code:
+                tag.display_name = "%s" % tag.code
+            else:
+                tag.display_name = "%s" % tag.code
+
+    @api.depends('color_picker')
+    def _compute_color_index(self):
+        for tag in self:
+            if tag.parent_id:
+                color = tag.parent_id.color_picker
+            else:
+                color = tag.color_picker
+            tag.color = int(color)
+
+    @api.constrains('parent_id')
+    def _check_parent_id(self):
+        if not self._check_recursion():
+            raise ValidationError(_('Error ! You can not create recursive tags.'))
+
+    @api.model
+    def name_create(self, name):
+        return self.create({'name': name}).name_get()[0]
+
+    @api.multi
+    def name_get(self):
+        """ Return the tags' display name, including their direct
+            parent by default.
+
+            If ``context['account_tag_display']`` is ``'short'``, the short
+            version of the category name (without the direct parent) is used.
+            The default is the long version.
+        """
+        if self._context.get('account_tag_display') == 'short':
+            return super(AccountAccountTag, self).name_get()
+
+        res = []
+        for tag in self:
+            names = []
+            current = tag
+            while current:
+                names.append("[%s] %s" % (current.code, current.name))
+                current = current.parent_id
+            res.append((tag.id, ' / '.join(reversed(names))))
+        return res
+
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        if name:
+            # Be sure name_search is symetric to name_get
+            name = name.split(' / ')[-1]
+            args = [('name', operator, name)] + args
+        return self.search(args, limit=limit).name_get()
