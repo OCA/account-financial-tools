@@ -484,3 +484,89 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
         self.assertEqual(additional_valuation_value, 0)
         self.assertEqual(product_avg.value_svl, 50)
         self.assertEqual(product_avg.standard_price, 10.0)
+
+    def test_06_stock_inventory_revaluation_partial_return(self):
+        """
+        Average price, receive in a Purchase order 10 units at 10
+        Receive in another PO at 10 units at 10 and invoice 1
+        Return 5 units
+        Invoice 4 units at 20
+        The result should be 11 units at 10 + 4 units at 20 = 13 AVG cost
+        """
+        product_avg = self._create_product("AVG90", 10, self.categ_real_time_avg)
+        # I create 1 picking incoming only
+        moves = [
+            {
+                "product": product_avg,
+                "location_id": self.ref("stock.stock_location_suppliers"),
+                "qty": 10,
+                "location_dest_id": self.warehouse.lot_stock_id.id,
+            },
+        ]
+        picking_type_id = self.warehouse.in_type_id.id
+        picking_1 = self._create_picking(picking_type_id, moves)
+        self._do_picking(picking_1)
+        vendor = self.partner_model.create({"name": "Vendor"})
+        # create a bill with normal price
+        bill = self._create_bill("in_invoice", vendor, [product_avg], [10], [10])
+        bill._post()
+        # I create another picking
+        moves = [
+            {
+                "product": product_avg,
+                "location_id": self.ref("stock.stock_location_suppliers"),
+                "qty": 10,
+                "location_dest_id": self.warehouse.lot_stock_id.id,
+            },
+        ]
+        picking_type_id = self.warehouse.in_type_id.id
+        picking_to_revaluate_2 = self._create_picking(picking_type_id, moves)
+        self._do_picking(picking_to_revaluate_2)
+        vendor = self.partner_model.create({"name": "Vendor"})
+        # create a bill with normal price for one unit
+        bill = self._create_bill("in_invoice", vendor, [product_avg], [1], [10])
+        bill._post()
+        # We return half of the quantity
+        stock_return_picking_form = Form(
+            self.env["stock.return.picking"].with_context(
+                active_ids=picking_to_revaluate_2.ids,
+                active_id=picking_to_revaluate_2.ids[0],
+                active_model="stock.picking",
+            )
+        )
+        stock_return_picking = stock_return_picking_form.save()
+        stock_return_picking.product_return_moves.quantity = 5
+        stock_return_picking_action = stock_return_picking.create_returns()
+        return_pick = self.env["stock.picking"].browse(
+            stock_return_picking_action["res_id"]
+        )
+        return_pick.move_lines[0].move_line_ids[0].qty_done = 5
+        return_pick.button_validate()
+        # Now I invoice 4 units at 20
+        bill2 = self._create_bill("in_invoice", vendor, [product_avg], [1], [20])
+        bill2._post()
+        bill2.button_revaluate()
+        revaluation_ids = bill2.action_view_inventory_revaluation_lines()["domain"][0][
+            2
+        ]
+        revaluation = self.revaluation_model.browse(revaluation_ids)
+        revaluation.vendor_bill_id = bill2
+        revaluation.add_from_stock_move = picking_to_revaluate_2.move_lines[0]
+        revaluation.onchange_add_from_stock_move()
+        # I check the revaluation lines
+        reval1 = revaluation.stock_inventory_revaluation_line_ids.filtered(
+            lambda l: l.product_id == product_avg
+        )
+        # The additional value is added for the 4 units
+        self.assertEqual(reval1.additional_value, 10.0)
+        revaluation.button_validate()
+        additional_valuation_value = sum(
+            revaluation.account_move_id.line_ids.filtered(
+                lambda aml: aml.account_id
+                == self.company_data["default_account_stock_valuation"]
+            ).mapped("balance")
+        )
+        # Test that the value is what is expected
+        self.assertEqual(additional_valuation_value, 40)
+        self.assertEqual(product_avg.value_svl, 195.0)  # 13*15
+        self.assertEqual(product_avg.standard_price, 13.0)

@@ -126,7 +126,7 @@ class StockInventoryRevaluation(models.Model):
                     continue
                 # `remaining_qty` is negative if the move is out and delivered proudcts
                 #  that were not
-                # in stock.
+                # in stock._get_qty_out
                 qty_out = self._get_qty_out(line, remaining_qty)
                 move_vals["line_ids"] += line._create_accounting_entries(
                     move, line, qty_out
@@ -175,12 +175,17 @@ class StockInventoryRevaluation(models.Model):
                 ):
                     accounts = product.product_tmpl_id.get_product_accounts()
                     input_account = accounts["stock_input"]
+                    # re-reconcile interim accounts
+                    all_amls.filtered(
+                        lambda aml: aml.account_id == input_account
+                        and aml.product_id == product
+                        and not aml.full_reconcile_id
+                    ).remove_move_reconcile()
                     all_amls.filtered(
                         lambda aml: aml.account_id == input_account
                         and aml.product_id == product
                         and not aml.full_reconcile_id
                     ).reconcile()
-
         return True
 
     def get_valuation_lines(self, move=False):
