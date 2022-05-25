@@ -52,3 +52,12 @@ class AccountMove(models.Model):
     # We must by-pass this constraint of sequence.mixin
     def _constrains_date_sequence(self):
         return True
+
+    def _is_end_of_seq_chain(self):
+        invoices_no_gap_sequences = self.filtered(
+            lambda inv: inv.journal_id.sequence_id.implementation == "no_gap"
+        )
+        invoices_other_sequences = self - invoices_no_gap_sequences
+        if not invoices_other_sequences and invoices_no_gap_sequences:
+            return False
+        return super(AccountMove, invoices_other_sequences)._is_end_of_seq_chain()
