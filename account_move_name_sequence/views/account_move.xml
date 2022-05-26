@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[hasclass('oe_title')]/h1[hasclass('mt0')]"
+                position="attributes"
+            >
+                <attribute name="attrs">{'invisible': [('name', '=', '/')]}</attribute>
+            </xpath>
+            <xpath
+                expr="//div[hasclass('oe_title')]//field[@name='name']"
+                position="attributes"
+            >
+                <attribute name="attrs">{'readonly': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='highest_name']/.." position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
