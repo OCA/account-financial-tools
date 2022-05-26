@@ -2,6 +2,7 @@
 # Copyright 2022 Vauxoo (https://www.vauxoo.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # @author: Moisés López <moylop260@vauxoo.com>
+# @author: Francisco Luna <fluna@vauxoo.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -45,26 +46,26 @@ class AccountJournal(models.Model):
                 raise ValidationError(
                     _(
                         "On journal '%s', the same sequence is used as "
-                        "Entry Sequence and Credit Note Entry Sequence."
+                        "Entry Sequence and Credit Note Entry Sequence.",
+                        journal.display_name,
                     )
-                    % journal.display_name
                 )
             if journal.sequence_id and not journal.sequence_id.company_id:
-                raise ValidationError(
-                    _(
-                        "The company is not set on sequence '%s' configured on "
-                        "journal '%s'."
-                    )
-                    % (journal.sequence_id.display_name, journal.display_name)
+                msg = _(
+                    "The company is not set on sequence '%(sequence)s' configured on "
+                    "journal '%(journal)s'.",
+                    sequence=journal.sequence_id.display_name,
+                    journal=journal.display_name,
                 )
+                raise ValidationError(msg)
             if journal.refund_sequence_id and not journal.refund_sequence_id.company_id:
-                raise ValidationError(
-                    _(
-                        "The company is not set on sequence '%s' configured as "
-                        "credit note sequence of journal '%s'."
-                    )
-                    % (journal.refund_sequence_id.display_name, journal.display_name)
+                msg = _(
+                    "The company is not set on sequence '%(sequence)s' configured as "
+                    "credit note sequence of journal '%(journal)s'.",
+                    sequence=journal.refund_sequence_id.display_name,
+                    journal=journal.display_name,
                 )
+                raise ValidationError(msg)
 
     @api.model
     def create(self, vals):
@@ -180,7 +181,10 @@ class AccountJournal(models.Model):
                 )
                 select_max_number = (
                     "MAX(split_part(name, '%s', %d)::INTEGER) AS max_number"
-                    % (prefixes[-1], prefixes.count(prefixes[-1]) + 1)
+                    % (
+                        prefixes[-1],
+                        prefixes.count(prefixes[-1]) + 1,
+                    )
                 )
                 query = (
                     "SELECT %s, %s, %s FROM account_move "
