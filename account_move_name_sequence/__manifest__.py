@@ -2,18 +2,21 @@
 # Copyright 2022 Vauxoo (https://www.vauxoo.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # @author: Moisés López <moylop260@vauxoo.com>
+# @author: Francisco Luna <fluna@vauxoo.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Account Move Number Sequence",
-    "version": "14.0.1.2.1",
+    "version": "14.0.1.2.2",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Generate journal entry number from sequence",
     "author": "Akretion,Vauxoo,Odoo Community Association (OCA)",
-    "maintainers": ["alexis-via", "moylop260"],
+    "maintainers": ["alexis-via", "moylop260", "frahikLV"],
     "website": "https://github.com/OCA/account-financial-tools",
-    "depends": ["account"],
+    "depends": [
+        "account",
+    ],
     "data": [
         "views/account_journal.xml",
         "views/account_move.xml",
