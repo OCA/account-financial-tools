@@ -6,8 +6,6 @@
 
 import logging
 
-from dateutil.relativedelta import relativedelta
-
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -222,7 +220,7 @@ class AccountJournal(models.Model):
                             year = "20" + year
                     if month:
                         date_from = fields.Date.to_date("%s-%s-1" % (year, month))
-                        date_to = date_from + relativedelta(day=31)
+                        date_to = fields.Date.end_of(date_from, "month")
                     else:
                         date_from = fields.Date.to_date("%s-1-1" % year)
                         date_to = fields.Date.to_date("%s-12-31" % year)
