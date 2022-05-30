@@ -3,3 +3,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 "access_stock_inventory_revaluation_lines_account_manager","stock.inventory.revaluation.lines.account.manager","model_stock_inventory_revaluation_line","account.group_account_manager",1,1,1,1
 "access_stock_inventory_revaluation_account_user","stock.inventory.revaluation.account.user","model_stock_inventory_revaluation","account.group_account_user",1,1,1,1
 "access_stock_inventory_revaluation_lines_account_user","stock.inventory.revaluation.lines.account.user","model_stock_inventory_revaluation_line","account.group_account_user",1,1,1,1
+"access_stock_inventory_revaluation_account_all","stock.inventory.revaluation.account.all","model_stock_inventory_revaluation","base.group_user",1,0,0,0
+"access_stock_inventory_revaluation_lines_account_all","stock.inventory.revaluation.lines.account.all","model_stock_inventory_revaluation_line","base.group_user",1,0,0,0
