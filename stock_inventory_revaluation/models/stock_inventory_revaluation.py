@@ -201,16 +201,17 @@ class StockInventoryRevaluation(models.Model):
                 or not move.product_qty
             ):
                 continue
-            (
-                original_value,
-                price_subtotal,
-                additional_value,
-                bill_qty,
-            ) = self.vendor_bill_id._get_additional_value(move)
-            vals = self._prepare_valuation_lines(
-                move, original_value, price_subtotal, additional_value, bill_qty
-            )
-            lines.append(vals)
+            if self.vendor_bill_id:
+                (
+                    original_value,
+                    price_subtotal,
+                    additional_value,
+                    bill_qty,
+                ) = self.vendor_bill_id._get_additional_value(move)
+                vals = self._prepare_valuation_lines(
+                    move, original_value, price_subtotal, additional_value, bill_qty
+                )
+                lines.append(vals)
         return lines
 
     def action_view_stock_valuation_layers(self):
