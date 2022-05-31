@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_move_line_form" model="ir.ui.view">
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account.view_move_line_form" />
@@ -10,7 +9,6 @@
             </field>
         </field>
     </record>
-
     <record id="view_move_line_tree" model="ir.ui.view">
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account.view_move_line_tree" />
@@ -21,5 +19,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
