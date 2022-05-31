@@ -12,15 +12,14 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2021-07-09 15:49+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2017-01-12 03:43+0000\n"
+"Last-Translator: Andrea Cometa <a.cometa@apuliasoftware.it>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_cost_center
@@ -43,17 +42,18 @@ msgid "Company"
 msgstr "Azienda"
 
 #. module: account_cost_center
-#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice__cost_center_id
-#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_line__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_bank_statement_line__cost_center_id
 #: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_report__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_move__cost_center_id
 #: model:ir.model.fields,field_description:account_cost_center.field_account_move_line__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_payment__cost_center_id
 #: model_terms:ir.ui.view,arch_db:account_cost_center.view_account_invoice_report_search
 msgid "Cost Center"
 msgstr ""
 
 #. module: account_cost_center
 #: model:ir.actions.act_window,name:account_cost_center.account_cost_center_action
-#: model:ir.ui.menu,name:account_cost_center.cost_center_menu
+#: model:ir.ui.menu,name:account_cost_center.account_cost_center_menu
 msgid "Cost Centers"
 msgstr ""
 
@@ -65,15 +65,17 @@ msgstr ""
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_uid
 msgid "Created by"
-msgstr "Creato da"
+msgstr "Created by"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_date
 msgid "Created on"
-msgstr "Creato il"
+msgstr "Created on"
 
 #. module: account_cost_center
-#: model:ir.model.fields,help:account_cost_center.field_account_invoice__cost_center_id
+#: model:ir.model.fields,help:account_cost_center.field_account_bank_statement_line__cost_center_id
+#: model:ir.model.fields,help:account_cost_center.field_account_move__cost_center_id
+#: model:ir.model.fields,help:account_cost_center.field_account_payment__cost_center_id
 msgid "Default Cost Center"
 msgstr ""
 
@@ -88,19 +90,15 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_cost_center
-#: model:ir.model,name:account_cost_center.model_account_invoice
-msgid "Invoice"
-msgstr "Fattura"
-
-#. module: account_cost_center
-#: model:ir.model,name:account_cost_center.model_account_invoice_line
-msgid "Invoice Line"
-msgstr "Riga fattura"
-
-#. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_report
 msgid "Invoices Statistics"
 msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_move
+#, fuzzy
+msgid "Journal Entry"
+msgstr "Voci sezionale"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move_line
@@ -116,12 +114,12 @@ msgstr "Ultima modifica il"
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__write_uid
 msgid "Last Updated by"
-msgstr "Ultimo Aggiornamento di"
+msgstr "Last Updated by"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__write_date
 msgid "Last Updated on"
-msgstr "Ultimo Aggiornamento il"
+msgstr "Last Updated on"
 
 #. module: account_cost_center
 #: model_terms:ir.ui.view,arch_db:account_cost_center.account_cost_center_view_search
@@ -132,6 +130,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__name
 msgid "Title"
 msgstr "Titolo"
+
+#~ msgid "Invoice"
+#~ msgstr "Fattura"
+
+#~ msgid "Invoice Line"
+#~ msgstr "Riga fattura"
 
 #~ msgid "Analytic Account"
 #~ msgstr "Conto Analitico"

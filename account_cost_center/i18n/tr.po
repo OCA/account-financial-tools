@@ -41,17 +41,18 @@ msgid "Company"
 msgstr "Şirket"
 
 #. module: account_cost_center
-#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice__cost_center_id
-#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_line__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_bank_statement_line__cost_center_id
 #: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_report__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_move__cost_center_id
 #: model:ir.model.fields,field_description:account_cost_center.field_account_move_line__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_payment__cost_center_id
 #: model_terms:ir.ui.view,arch_db:account_cost_center.view_account_invoice_report_search
 msgid "Cost Center"
 msgstr ""
 
 #. module: account_cost_center
 #: model:ir.actions.act_window,name:account_cost_center.account_cost_center_action
-#: model:ir.ui.menu,name:account_cost_center.cost_center_menu
+#: model:ir.ui.menu,name:account_cost_center.account_cost_center_menu
 msgid "Cost Centers"
 msgstr ""
 
@@ -71,7 +72,9 @@ msgid "Created on"
 msgstr "Oluşturuldu"
 
 #. module: account_cost_center
-#: model:ir.model.fields,help:account_cost_center.field_account_invoice__cost_center_id
+#: model:ir.model.fields,help:account_cost_center.field_account_bank_statement_line__cost_center_id
+#: model:ir.model.fields,help:account_cost_center.field_account_move__cost_center_id
+#: model:ir.model.fields,help:account_cost_center.field_account_payment__cost_center_id
 msgid "Default Cost Center"
 msgstr ""
 
@@ -86,19 +89,15 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_cost_center
-#: model:ir.model,name:account_cost_center.model_account_invoice
-msgid "Invoice"
-msgstr "Fatura"
-
-#. module: account_cost_center
-#: model:ir.model,name:account_cost_center.model_account_invoice_line
-msgid "Invoice Line"
-msgstr "Fatura kalemi"
-
-#. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_report
 msgid "Invoices Statistics"
 msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_move
+#, fuzzy
+msgid "Journal Entry"
+msgstr "Günlük Maddeleri"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move_line
@@ -130,3 +129,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__name
 msgid "Title"
 msgstr "Başlık"
+
+#~ msgid "Invoice"
+#~ msgstr "Fatura"
+
+#~ msgid "Invoice Line"
+#~ msgstr "Fatura kalemi"
