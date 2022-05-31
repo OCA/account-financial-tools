@@ -44,3 +44,14 @@ class RenumberCase(TestAccountReconciliationCommon):
         wiz = wiz_f.save()
         wiz.action_renumber()
         self.assertGreater(new_invoice.entry_number, old_invoice.entry_number)
+        # Add opening move
+        opening_invoice = self._create_invoice(
+            date_invoice="2022-01-01", auto_validate=True
+        )
+        self.assertGreater(opening_invoice.entry_number, new_invoice.entry_number)
+        # Renumber again, starting from zero
+        wiz_f = Form(self.env["account.move.renumber.wizard"])
+        wiz_f.starting_number = 0
+        wiz = wiz_f.save()
+        wiz.action_renumber()
+        self.assertEqual(opening_invoice.entry_number, "2022/0000000000")
