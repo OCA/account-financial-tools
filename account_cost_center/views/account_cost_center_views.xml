@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <!-- Cost Center views -->
+    <!-- Account Cost Center views -->
     <record id="account_cost_center_view_form" model="ir.ui.view">
         <field name="model">account.cost.center</field>
         <field name="arch" type="xml">
@@ -33,7 +32,6 @@
             </form>
         </field>
     </record>
-
     <record id="account_cost_center_view_tree" model="ir.ui.view">
         <field name="model">account.cost.center</field>
         <field name="arch" type="xml">
@@ -44,7 +42,6 @@
             </tree>
         </field>
     </record>
-
     <record id="account_cost_center_view_search" model="ir.ui.view">
         <field name="model">account.cost.center</field>
         <field name="arch" type="xml">
@@ -57,12 +54,10 @@
             </search>
         </field>
     </record>
-
     <record id="account_cost_center_action" model="ir.actions.act_window">
         <field name="name">Cost Centers</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.cost.center</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="account_cost_center_view_search" />
         <field name="help" type="html">
@@ -75,12 +70,12 @@
         </field>
     </record>
 
-    <!-- Cost Center menu-->
+    <!-- Account Cost Center menu-->
     <menuitem
-        id="cost_center_menu"
+        id="account_cost_center_menu"
         parent="account.menu_analytic_accounting"
         action="account_cost_center_action"
-        groups="account.group_account_user"
+        groups="account.group_account_invoice"
         sequence="40"
     />
 
