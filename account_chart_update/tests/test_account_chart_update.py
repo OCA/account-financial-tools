@@ -57,6 +57,42 @@ class TestAccountChartUpdate(common.HttpCase):
         self._create_xml_id(record)
         return record
 
+    def _create_tax_template_with_account(self, name, chart_template, account):
+        record = self.env["account.tax.template"].create(
+            {
+                "name": name,
+                "amount": 0,
+                "chart_template_id": chart_template.id,
+                "tax_group_id": self.env.ref("account.tax_group_taxes").id,
+                "refund_repartition_line_ids": [
+                    (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
+                    (
+                        0,
+                        0,
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 100.0,
+                            "account_id": account.id,
+                        },
+                    ),
+                ],
+                "invoice_repartition_line_ids": [
+                    (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
+                    (
+                        0,
+                        0,
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 100.0,
+                            "account_id": account.id,
+                        },
+                    ),
+                ],
+            }
+        )
+        self._create_xml_id(record)
+        return record
+
     def _create_fp_tmpl(self, name, chart_template):
         record = self.env["account.fiscal.position.template"].create(
             {"name": name, "chart_template_id": chart_template.id}
@@ -217,6 +253,10 @@ class TestAccountChartUpdate(common.HttpCase):
             }
         )
         self._create_xml_id(fp_template_account)
+        # Tax with account in repartition lines
+        tax_template_with_account = self._create_tax_template_with_account(
+            "Test tax with account", self.chart_template, new_account_tmpl
+        )
         # Check that no action is performed if the option is not selected
         wizard_vals = self.wizard_vals.copy()
         wizard_vals.update(
@@ -238,17 +278,19 @@ class TestAccountChartUpdate(common.HttpCase):
         wizard = self.wizard_obj.create(self.wizard_vals)
         wizard.action_find_records()
         self.assertTrue(wizard.tax_ids)
-        self.assertEqual(wizard.tax_ids.tax_id, new_tax_tmpl)
-        self.assertEqual(wizard.tax_ids.type, "new")
+        self.assertEqual(
+            wizard.tax_ids.tax_id, new_tax_tmpl + tax_template_with_account
+        )
+        for tax in wizard.tax_ids:
+            self.assertEqual(tax.type, "new")
         self.assertTrue(wizard.account_ids)
         self.assertEqual(wizard.account_ids.account_id, new_account_tmpl)
-        self.assertEqual(wizard.tax_ids.type, "new")
         self.assertTrue(wizard.fiscal_position_ids)
         self.assertEqual(wizard.fiscal_position_ids.fiscal_position_id, new_fp)
         self.assertEqual(wizard.fiscal_position_ids.type, "new")
         wizard.action_update_records()
         self.assertEqual(wizard.state, "done")
-        self.assertEqual(wizard.new_taxes, 1)
+        self.assertEqual(wizard.new_taxes, 2)
         self.assertEqual(wizard.new_accounts, 1)
         self.assertEqual(wizard.new_fps, 1)
         self.assertTrue(wizard.log)
@@ -256,6 +298,13 @@ class TestAccountChartUpdate(common.HttpCase):
             [("name", "=", new_tax_tmpl.name), ("company_id", "=", self.company.id)]
         )
         self.assertTrue(new_tax)
+        tax_with_account = self.env["account.tax"].search(
+            [
+                ("name", "=", "Test tax with account"),
+                ("company_id", "=", self.company.id),
+            ]
+        )
+        self.assertTrue(tax_with_account)
         new_account = self.env["account.account"].search(
             [("code", "=", new_account_tmpl.code), ("company_id", "=", self.company.id)]
         )
