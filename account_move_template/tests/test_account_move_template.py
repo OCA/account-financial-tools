@@ -4,7 +4,7 @@ import logging
 
 from psycopg2 import IntegrityError
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
@@ -20,7 +20,7 @@ class TestAccountMoveTemplate(TransactionCase):
     def _chart_of_accounts_create(self, company, chart):
         _logger.debug("Creating chart of account")
         self.env.user.write(
-            {"company_ids": [(4, company.id)], "company_id": company.id}
+            {"company_ids": [Command.link(company.id)], "company_id": company.id}
         )
         self.with_context(company_id=company.id, force_company=company.id)
         wizard = self.env["wizard.multi.charts.accounts"].create(
@@ -71,7 +71,7 @@ class TestAccountMoveTemplate(TransactionCase):
                         )
                     ],
                     "company_id": self.company.id,
-                    "company_ids": [(4, self.company.id)],
+                    "company_ids": [Command.link(self.company.id)],
                 }
             )
         )
@@ -179,7 +179,7 @@ class TestAccountMoveTemplate(TransactionCase):
                                 "sequence": 2,
                                 "account_id": self.account_company_1.id,
                                 "move_line_type": "cr",
-                                "tax_ids": [(4, self.tax.id)],
+                                "tax_ids": [Command.link(self.tax.id)],
                                 "type": "input",
                             },
                         ),
