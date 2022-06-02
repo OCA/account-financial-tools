@@ -2,7 +2,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from ast import literal_eval
 
-from odoo import _, fields, models
+from odoo import Command, _, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -51,9 +51,9 @@ Valid dictionary to overwrite template lines:
             "partner_id": tmpl_line.partner_id.id or False,
             "move_line_type": tmpl_line.move_line_type,
             "tax_line_id": tmpl_line.tax_line_id.id,
-            "tax_ids": [(6, 0, tmpl_line.tax_ids.ids)],
+            "tax_ids": [Command.set(tmpl_line.tax_ids.ids)],
             "analytic_account_id": tmpl_line.analytic_account_id.id,
-            "analytic_tag_ids": [(6, 0, tmpl_line.analytic_tag_ids.ids)],
+            "analytic_tag_ids": [Command.set(tmpl_line.analytic_tag_ids.ids)],
             "note": tmpl_line.note,
             "payment_term_id": tmpl_line.payment_term_id.id or False,
             "is_refund": tmpl_line.is_refund,
@@ -70,13 +70,11 @@ Valid dictionary to overwrite template lines:
         if self.company_id != self.template_id.company_id:
             raise UserError(
                 _(
-                    "The selected template (%s) is not in the same company (%s) "
-                    "as the current user (%s)."
-                )
-                % (
-                    self.template_id.name,
-                    self.template_id.company_id.display_name,
-                    self.company_id.display_name,
+                    "The selected template (%(template)s) is not in the same company "
+                    "(%(company)s) as the current user (%(user_company)s).",
+                    template=self.template_id.name,
+                    company=self.template_id.company_id.display_name,
+                    user_company=self.company_id.display_name,
                 )
             )
         tmpl_lines = self.template_id.line_ids
@@ -121,8 +119,10 @@ Valid dictionary to overwrite template lines:
         try:
             overwrite_vals = literal_eval(overwrite_vals)
             assert isinstance(overwrite_vals, dict)
-        except (SyntaxError, ValueError, AssertionError):
-            raise ValidationError(_("Overwrite value must be a valid python dict"))
+        except (SyntaxError, ValueError, AssertionError) as err:
+            raise ValidationError(
+                _("Overwrite value must be a valid python dict")
+            ) from err
         # First level keys must be L1, L2, ...
         keys = overwrite_vals.keys()
         if list(filter(lambda x: x[:1] != "L" or not x[1:].isdigit(), keys)):
@@ -144,7 +144,13 @@ Valid dictionary to overwrite template lines:
         'L2': {'partner_id': 2, 'amount': 20},
     }
             """
-            raise ValidationError(_("Invalid dictionary: {}\n{}".format(e, msg)))
+            raise ValidationError(
+                _(
+                    "Invalid dictionary: %(exception)s\n%(msg)s",
+                    exception=e,
+                    msg=msg,
+                )
+            ) from e
         return overwrite_vals
 
     def _safe_vals(self, model, vals):
@@ -179,7 +185,7 @@ Valid dictionary to overwrite template lines:
             amount = sequence2amount[line.sequence]
             if not company_cur.is_zero(amount):
                 move_vals["line_ids"].append(
-                    (0, 0, self._prepare_move_line(line, amount))
+                    Command.create(self._prepare_move_line(line, amount))
                 )
         move = self.env["account.move"].create(move_vals)
         action = self.env.ref("account.action_move_journal_line")
@@ -223,9 +229,9 @@ Valid dictionary to overwrite template lines:
             "tax_repartition_line_id": line.tax_repartition_line_id.id or False,
         }
         if line.analytic_tag_ids:
-            values["analytic_tag_ids"] = [(6, 0, line.analytic_tag_ids.ids)]
+            values["analytic_tag_ids"] = [Command.set(line.analytic_tag_ids.ids)]
         if line.tax_ids:
-            values["tax_ids"] = [(6, 0, line.tax_ids.ids)]
+            values["tax_ids"] = [Command.set(line.tax_ids.ids)]
             tax_repartition = "refund_tax_id" if line.is_refund else "invoice_tax_id"
             atrl_ids = self.env["account.tax.repartition.line"].search(
                 [
@@ -233,9 +239,11 @@ Valid dictionary to overwrite template lines:
                     ("repartition_type", "=", "base"),
                 ]
             )
-            values["tag_ids"] = [(6, 0, atrl_ids.mapped("tag_ids").ids)]
+            values["tax_tag_ids"] = [Command.set(atrl_ids.mapped("tag_ids").ids)]
         if line.tax_repartition_line_id:
-            values["tag_ids"] = [(6, 0, line.tax_repartition_line_id.tag_ids.ids)]
+            values["tax_tag_ids"] = [
+                Command.set(line.tax_repartition_line_id.tag_ids.ids)
+            ]
         # With overwrite options
         overwrite = self._context.get("overwrite", {})
         move_line_vals = overwrite.get("L{}".format(line.sequence), {})
@@ -264,8 +272,8 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     company_currency_id = fields.Many2one(
         related="wizard_id.company_id.currency_id", string="Company Currency"
     )
-    sequence = fields.Integer("Sequence", required=True)
-    name = fields.Char("Name", readonly=True)
+    sequence = fields.Integer(required=True)
+    name = fields.Char(readonly=True)
     account_id = fields.Many2one("account.account", required=True, readonly=True)
     analytic_account_id = fields.Many2one("account.analytic.account", readonly=True)
     analytic_tag_ids = fields.Many2many(
@@ -285,9 +293,7 @@ class AccountMoveTemplateLineRun(models.TransientModel):
         readonly=True,
         string="Direction",
     )
-    amount = fields.Monetary(
-        "Amount", required=True, currency_field="company_currency_id"
-    )
+    amount = fields.Monetary(required=True, currency_field="company_currency_id")
     note = fields.Char(readonly=True)
     is_refund = fields.Boolean(string="Is a refund?", readonly=True)
     tax_repartition_line_id = fields.Many2one(
