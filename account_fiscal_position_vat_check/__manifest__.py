@@ -13,6 +13,7 @@
     "depends": ["account", "base_vat"],
     "data": [
         "views/account_fiscal_position.xml",
+        "views/res_partner.xml",
     ],
     "installable": True,
 }
