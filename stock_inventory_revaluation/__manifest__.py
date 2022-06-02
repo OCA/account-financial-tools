@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "ForgeFlow S.L., Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
-    "depends": ["stock_account"],
+    "depends": ["stock_account", "stock_valuation_layer_usage"],
     "data": [
         "security/ir.model.access.csv",
         "data/stock_inventory_revaluation_data.xml",

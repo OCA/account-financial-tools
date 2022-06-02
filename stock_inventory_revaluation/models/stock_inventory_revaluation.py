@@ -1,11 +1,9 @@
 # Copyright 2022 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from collections import defaultdict
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools.float_utils import float_is_zero
 
 
 class StockInventoryRevaluation(models.Model):
@@ -97,57 +95,43 @@ class StockInventoryRevaluation(models.Model):
             move = self.env["account.move"]
             move_vals = self._prepare_move_vals(revaluation)
             valuation_layer_ids = []
-            revaluation_to_add_byproduct = defaultdict(lambda: 0.0)
             for line in revaluation.stock_inventory_revaluation_line_ids.filtered(
                 lambda l: l.additional_value
             ):
+                product = line.product_id
                 layers = self.vendor_bill_id._get_move_stock_valuation_layer_ids(
                     line.stock_move_id
                 )
-                remaining_qty = self._get_remaining_qty(line, layers)
+                remaining_qty = self._get_affected_qty(line, layers)
                 linked_layer = layers[:1]
                 # Prorate the value at what's still in stock
-                revaluation_to_add = (
+                product_additional_value = (
                     remaining_qty / line.stock_move_id.product_qty
                 ) * line.additional_value
-                if not revaluation.company_id.currency_id.is_zero(revaluation_to_add):
+                if not revaluation.company_id.currency_id.is_zero(
+                    product_additional_value
+                ):
                     new_layer_ids = self._create_revaluation_layers(
-                        revaluation_to_add, linked_layer, revaluation, line
+                        product_additional_value, linked_layer, revaluation, line
                     )
                     valuation_layer_ids.extend(new_layer_ids)
-
-                # Update the AVCO
-                product = line.product_id
-                if product.cost_method == "average":
-                    revaluation_to_add_byproduct[product] += revaluation_to_add
                 # Products with manual inventory valuation are ignored because they
                 # do not need to create journal entries.
                 if product.valuation != "real_time":
                     continue
+
                 # `remaining_qty` is negative if the move is out and delivered proudcts
                 #  that were not
                 # in stock._get_qty_out
-                qty_out = self._get_qty_out(line, remaining_qty)
-                move_vals["line_ids"] += line._create_accounting_entries(
-                    move, line, qty_out
-                )
-
-            # batch standard price computation avoid recompute quantity_svl at
-            # each iteration
-            products = self.env["product.product"].browse(
-                p.id for p in revaluation_to_add_byproduct.keys()
-            )
-            for (
-                product
-            ) in products:  # iterate on recordset to prefetch efficiently quantity_svl
-                if not float_is_zero(
-                    product.quantity_svl, precision_rounding=product.uom_id.rounding
-                ):
+                move_vals = line.create_output_valuation_entries(move_vals, move)
+            # Update the AVCO
+            for product in revaluation.stock_inventory_revaluation_line_ids.mapped(
+                "product_id"
+            ):
+                if product.cost_method == "average":
                     product.with_company(revaluation.company_id).sudo().with_context(
                         disable_auto_svl=True
-                    ).standard_price += (
-                        revaluation_to_add_byproduct[product] / product.quantity_svl
-                    )
+                    ).standard_price = (product.value_svl / product.quantity_svl)
 
             move_vals["stock_valuation_layer_ids"] = [(6, None, valuation_layer_ids)]
             # We will only create the accounting entry when there are defined lines
@@ -273,12 +257,22 @@ class StockInventoryRevaluation(models.Model):
         }
         return vals
 
-    def _get_remaining_qty(self, line, layers):
-        """returns the remaining qty for a revalaution line"""
+    def _get_affected_qty(self, line, layers):
+        """Returns the affected qty for a revaluation line
+        Known issue: you don't know if the revaluation applies to the
+        reamining_qty or the qty_left on partial invoices or not in this case"""
+        revaluation_qty = line.quantity
         remaining_qty = sum(layers.mapped("remaining_qty"))
-        if line.stock_move_id._is_out():
-            remaining_qty = -1 * sum(layers.mapped("quantity"))
-        return remaining_qty
+        if revaluation_qty <= remaining_qty:
+            # it is a partial invoice, and we don't know if we are revaluating what
+            # remains in stock, what is is out, or a mix. We assume it is what remains
+            # in stock
+            affected_qty = sum(layers.mapped("quantity"))
+        else:
+            # it is a partial invoice and we assume we revaluate what it is in stock
+            # and the part from it was delivered
+            affected_qty = sum(layers.mapped("quantity")) - remaining_qty
+        return affected_qty
 
     def _create_revaluation_layers(
         self, revaluation_to_add, linked_layer, revaluation, line
@@ -291,14 +285,6 @@ class StockInventoryRevaluation(models.Model):
         line.created_stock_valuation_layer_ids = [(4, valuation_layer.id)]
         linked_layer.remaining_value += revaluation_to_add
         return [valuation_layer.id]
-
-    def _get_qty_out(self, line, remaining_qty):
-        qty_out = 0
-        if line.stock_move_id._is_in():
-            qty_out = line.stock_move_id.product_qty - remaining_qty
-        elif line.stock_move_id._is_out():
-            qty_out = line.stock_move_id.product_qty
-        return qty_out
 
     def _get_journal(self, revaluation):
         journal = (

@@ -66,7 +66,7 @@ class StockInventoryRevaluationLine(models.Model):
         for line in self:
             line.final_value = line.original_value + line.additional_value
 
-    def _create_accounting_entries(self, move, revaluation_line, qty_out):
+    def _create_accounting_entries(self, move, revaluation_line):
         revaluation_product = self.product_id
         if not revaluation_product:
             return False
@@ -86,7 +86,6 @@ class StockInventoryRevaluationLine(models.Model):
             revaluation_line,
             credit_account_id,
             debit_account_id,
-            qty_out,
             already_out_account_id,
         )
 
@@ -106,7 +105,6 @@ class StockInventoryRevaluationLine(models.Model):
         revaluation_line,
         credit_account_id,
         debit_account_id,
-        qty_out,
         already_out_account_id,
     ):
         """
@@ -129,58 +127,9 @@ class StockInventoryRevaluationLine(models.Model):
         AccountMoveLine.append([0, 0, debit_line])
         AccountMoveLine.append([0, 0, credit_line])
 
-        # Create account move lines for quants already out of stock, except if it
-        # is a revaluation of a return to supplier
-        if qty_out > 0:
-            debit_line = dict(
-                base_line,
-                name=(self.name + ": " + str(qty_out) + _(" already out")),
-                quantity=0,
-                account_id=already_out_account_id,
-            )
-            credit_line = dict(
-                base_line,
-                name=(self.name + ": " + str(qty_out) + _(" already out")),
-                quantity=0,
-                account_id=debit_account_id,
-            )
-            diff = diff * qty_out / self.quantity
-            if diff > 0.0:
-                debit_line["debit"] = diff
-                credit_line["credit"] = diff
-            else:
-                # negative revaluation, reverse the entry
-                debit_line["credit"] = -diff
-                credit_line["debit"] = -diff
-            AccountMoveLine.append([0, 0, debit_line])
-            AccountMoveLine.append([0, 0, credit_line])
-
-            if self.env.company.anglo_saxon_accounting:
-                expense_account = self._get_anglosaxon_expense_account()
-                expense_account_id = expense_account.id
-                debit_line = dict(
-                    base_line,
-                    name=(self.name + ": " + str(qty_out) + _(" already out")),
-                    quantity=0,
-                    account_id=expense_account_id,
-                )
-                credit_line = dict(
-                    base_line,
-                    name=(self.name + ": " + str(qty_out) + _(" already out")),
-                    quantity=0,
-                    account_id=already_out_account_id,
-                )
-
-                if diff > 0.0:
-                    debit_line["debit"] = diff
-                    credit_line["credit"] = diff
-                else:
-                    # negative revaluation, reverse the entry
-                    debit_line["credit"] = -diff
-                    credit_line["debit"] = -diff
-                AccountMoveLine.append([0, 0, debit_line])
-                AccountMoveLine.append([0, 0, credit_line])
-
+        self.create_account_move_line_already_out(
+            AccountMoveLine, base_line, already_out_account_id, debit_account_id
+        )
         return AccountMoveLine
 
     def _get_debit_account(self, accounts):
@@ -198,3 +147,73 @@ class StockInventoryRevaluationLine(models.Model):
 
     def _get_anglosaxon_expense_account(self):
         return self.product_id.product_tmpl_id.get_product_accounts()["expense"]
+
+    def create_output_valuation_entries(self, move_vals, move):
+        self.ensure_one()
+        move_vals["line_ids"] += self._create_accounting_entries(move, self)
+        return move_vals
+
+    def create_account_move_line_already_out(
+        self, AccountMoveLine, base_line, already_out_account_id, debit_account_id
+    ):
+        # Create account move lines for quants already out of stock, except if it
+        # is a revaluation of a return to supplier
+        diff = self.additional_value
+        # I exclude returns, considering the vendor bill is for the qty received
+        # or received and delivered to customers, but never a bill for qauntity
+        # returned
+        for usage in self.stock_move_id.stock_valuation_layer_ids.mapped(
+            "usage_ids"
+        ).filtered(lambda l: l.stock_move_id.location_dest_id.usage == "customer"):
+            qty_out = usage.quantity
+            if qty_out > 0:
+                # TODO: move this to a method out of here
+                debit_line = dict(
+                    base_line,
+                    name=(self.name + ": " + str(qty_out) + _(" already out")),
+                    quantity=0,
+                    account_id=already_out_account_id,
+                )
+                credit_line = dict(
+                    base_line,
+                    name=(self.name + ": " + str(qty_out) + _(" already out")),
+                    quantity=0,
+                    account_id=debit_account_id,
+                )
+                diff = diff * qty_out / self.quantity
+                if diff > 0.0:
+                    debit_line["debit"] = diff
+                    credit_line["credit"] = diff
+                else:
+                    # negative revaluation, reverse the entry
+                    debit_line["credit"] = -diff
+                    credit_line["debit"] = -diff
+                AccountMoveLine.append([0, 0, debit_line])
+                AccountMoveLine.append([0, 0, credit_line])
+
+                if self.env.company.anglo_saxon_accounting:
+                    expense_account = self._get_anglosaxon_expense_account()
+                    expense_account_id = expense_account.id
+                    debit_line = dict(
+                        base_line,
+                        name=(self.name + ": " + str(qty_out) + _(" already out")),
+                        quantity=0,
+                        account_id=expense_account_id,
+                    )
+                    credit_line = dict(
+                        base_line,
+                        name=(self.name + ": " + str(qty_out) + _(" already out")),
+                        quantity=0,
+                        account_id=already_out_account_id,
+                    )
+
+                    if diff > 0.0:
+                        debit_line["debit"] = diff
+                        credit_line["credit"] = diff
+                    else:
+                        # negative revaluation, reverse the entry
+                        debit_line["credit"] = -diff
+                        credit_line["debit"] = -diff
+                    AccountMoveLine.append([0, 0, debit_line])
+                    AccountMoveLine.append([0, 0, credit_line])
+        return AccountMoveLine

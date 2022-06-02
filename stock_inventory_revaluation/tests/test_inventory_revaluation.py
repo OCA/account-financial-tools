@@ -15,6 +15,15 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
     def test_01_stock_inventory_revaluation(self):
         """
         Revaluate FIFO and AVG products that partially left the company
+        Receive 10 at 10 = 100
+        Receive 10 at 20 = 200
+        deliver 5 at 10 = -50
+        deliver 5 at 20 = -100
+        revaluate 10 at extra 10 = 100
+        revaluate 10 at extra 20 = 200
+        revaluate -5 at extra 10 = -50
+        revaluate -5 at extra 20 = -100
+        Total value in the company = 300 -150 + 300 - 150 = 300
         """
         product_fifo = self._create_product("FIFO", 10, self.categ_real_time_fifo)
         product_avg = self._create_product("AVG", 20, self.categ_real_time_avg)
@@ -108,10 +117,25 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
             revaluation.account_move_id.line_ids.filtered(
                 lambda aml: aml.account_id
                 == self.company_data["default_account_stock_valuation"]
-            ).mapped("debit")
+            ).mapped("balance")
+        )
+        value_before_in_stock = sum(
+            self.env["account.move.line"]
+            .search(
+                [
+                    ("product_id", "in", (product_fifo + product_avg).ids),
+                    (
+                        "account_id",
+                        "=",
+                        self.company_data["default_account_stock_valuation"].id,
+                    ),
+                    ("id", "not in", revaluation.account_move_id.line_ids.ids),
+                ]
+            )
+            .mapped("balance")
         )
         product_value = abs(product_fifo.value_svl) + abs(product_avg.value_svl)
-        self.assertEqual(revaluation_value, product_value)
+        self.assertEqual(revaluation_value + value_before_in_stock, product_value)
 
         self.assertEqual(
             len(picking_to_revaluate_1.move_lines[0].stock_valuation_layer_ids), 2
@@ -372,7 +396,7 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
             revaluation.account_move_id.line_ids.filtered(
                 lambda aml: aml.account_id
                 == self.company_data["default_account_stock_valuation"]
-            ).mapped("debit")
+            ).mapped("balance")
         )
         product_value = abs(product_fifo.value_svl) + abs(product_avg.value_svl)
         self.assertEqual(revaluation_value, 18)
@@ -485,13 +509,13 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
         self.assertEqual(product_avg.value_svl, 50)
         self.assertEqual(product_avg.standard_price, 10.0)
 
-    def test_06_stock_inventory_revaluation_partial_return(self):
+    def test_00_stock_inventory_revaluation_partial_return(self):
         """
         Average price, receive in a Purchase order 10 units at 10
         Receive in another PO at 10 units at 10 and invoice 1
         Return 5 units
         Invoice 4 units at 20
-        The result should be 11 units at 10 + 4 units at 20 = 13 AVG cost
+        The result should be 11 units at 10 + 4 units at 20 = 190 / 15 = 12.67 AVG cost
         """
         product_avg = self._create_product("AVG90", 10, self.categ_real_time_avg)
         # I create 1 picking incoming only
@@ -543,7 +567,7 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
         return_pick.move_lines[0].move_line_ids[0].qty_done = 5
         return_pick.button_validate()
         # Now I invoice 4 units at 20
-        bill2 = self._create_bill("in_invoice", vendor, [product_avg], [1], [20])
+        bill2 = self._create_bill("in_invoice", vendor, [product_avg], [4], [20])
         bill2._post()
         bill2.button_revaluate()
         revaluation_ids = bill2.action_view_inventory_revaluation_lines()["domain"][0][
@@ -558,7 +582,7 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
             lambda l: l.product_id == product_avg
         )
         # The additional value is added for the 4 units
-        self.assertEqual(reval1.additional_value, 10.0)
+        self.assertEqual(reval1.additional_value, 40.0)
         revaluation.button_validate()
         additional_valuation_value = sum(
             revaluation.account_move_id.line_ids.filtered(
@@ -568,5 +592,135 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
         )
         # Test that the value is what is expected
         self.assertEqual(additional_valuation_value, 40)
-        self.assertEqual(product_avg.value_svl, 195.0)  # 13*15
-        self.assertEqual(product_avg.standard_price, 13.0)
+        self.assertEqual(product_avg.value_svl, 190.0)  # 100 + 10 + 80
+        self.assertEqual(product_avg.standard_price, 12.67)
+
+    def test_07_stock_inventory_revaluation_advance(self):
+        """
+        Revaluate AVG products that was received previously on other POs
+        and in there are delivires in current PO
+        Average price, receive in a Purchase order 10 units at 10
+        Receive in another PO at 10 units at 10 and invoice 1
+        Deliver 5 units
+        Invoice 4 units at 20
+        The result should be 5 units at 10 + 4 units at 20 = 130 / 15 = 16.67 AVG cost
+        """
+        product_avg = self._create_product("AVG140", 10, self.categ_real_time_avg)
+        self.assertEqual(product_avg.value_svl, 0)
+        self.assertEqual(product_avg.quantity_svl, 0)
+
+        # I create 3 picking 2 in 1 out
+        moves = [
+            {
+                "product": product_avg,
+                "location_id": self.ref("stock.stock_location_suppliers"),
+                "qty": 10,
+                "location_dest_id": self.warehouse.lot_stock_id.id,
+            },
+        ]
+        picking_type_id = self.warehouse.in_type_id.id
+        picking_1 = self._create_picking(picking_type_id, moves)
+        self._do_picking(picking_1)
+        # second picking, the one to revaluate
+        moves = [
+            {
+                "product": product_avg,
+                "qty": 10,
+                "location_id": self.ref("stock.stock_location_suppliers"),
+                "location_dest_id": self.warehouse.lot_stock_id.id,
+            },
+        ]
+        picking_type_id = self.warehouse.in_type_id.id
+        picking_to_revaluate_1 = self._create_picking(picking_type_id, moves)
+
+        # Confirm and assign picking
+        self._do_picking(picking_to_revaluate_1)
+        # Move some qty out in another picking
+        moves = [
+            {
+                "product": product_avg,
+                "qty": 5,
+                "location_dest_id": self.ref("stock.stock_location_customers"),
+                "location_id": self.warehouse.lot_stock_id.id,
+            },
+        ]
+        picking_type_id = self.warehouse.out_type_id.id
+        picking_to_revaluate_2 = self._create_picking(picking_type_id, moves)
+
+        # Confirm and assign picking
+        self._do_picking(picking_to_revaluate_2)
+
+        # Check the value is the expected (this is still standard, just checking)
+        self.assertEqual(product_avg.value_svl, 150)
+        self.assertEqual(product_avg.quantity_svl, 15)
+
+        # I create a bill and a revaluation at double price
+        vendor = self.partner_model.create({"name": "Vendor"})
+        bill = self._create_bill("in_invoice", vendor, [product_avg], [10], [20])
+        bill._post()
+        bill.button_revaluate()
+        revaluation_ids = bill.action_view_inventory_revaluation_lines()["domain"][0][2]
+        revaluation = self.revaluation_model.browse(revaluation_ids)
+        revaluation.vendor_bill_id = bill
+        # Calling the onchange directly cannot save the form of existing object
+        # and get the changes applied in the same variable
+        revaluation.add_from_stock_move = picking_to_revaluate_1.move_lines[0]
+        revaluation.onchange_add_from_stock_move()
+
+        # I check the revaluation lines
+        reval = revaluation.stock_inventory_revaluation_line_ids.filtered(
+            lambda l: l.product_id == product_avg
+        )
+        self.assertEqual(reval.additional_value, 100)
+
+        # I confirm the revaluation that creates the layers and account moves
+        revaluation.button_validate()
+
+        # I check the journal entry
+        self.assertEqual(revaluation.state, "done")
+        self.assertTrue(revaluation.account_move_id)
+
+        revaluation_value = sum(
+            revaluation.account_move_id.line_ids.filtered(
+                lambda aml: aml.account_id
+                == self.company_data["default_account_stock_valuation"]
+            ).mapped("balance")
+        )
+        value_before_in_stock = sum(
+            self.env["account.move.line"]
+            .search(
+                [
+                    ("product_id", "in", (product_avg).ids),
+                    (
+                        "account_id",
+                        "=",
+                        self.company_data["default_account_stock_valuation"].id,
+                    ),
+                    ("id", "not in", revaluation.account_move_id.line_ids.ids),
+                ]
+            )
+            .mapped("balance")
+        )
+        product_value = abs(product_avg.value_svl)
+        self.assertEqual(revaluation_value + value_before_in_stock, product_value)
+
+        self.assertEqual(
+            len(picking_to_revaluate_1.move_lines[0].stock_valuation_layer_ids), 2
+        )
+        # Test the interim accounts and COGS account values
+        interim_received_value = sum(
+            revaluation.account_move_id.line_ids.filtered(
+                lambda aml: aml.account_id
+                == self.company_data["default_account_stock_in"]
+            ).mapped("balance")
+        )
+        # The additional interim received should match the overall additional value
+        # Excluding what is was delivered
+        # 10*10 (negative because is a credit)
+        self.assertEqual(interim_received_value, -100)
+        # There is no COGS because the picking used for the delivery is the first one
+        # Check the standard price (10*20+5*20)/15 = 16.67
+        self.assertEqual(product_avg.standard_price, 16.67)
+        # Test it is late to cancel
+        with self.assertRaises(UserError):
+            revaluation.button_cancel()

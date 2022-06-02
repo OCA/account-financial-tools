@@ -30,9 +30,9 @@ class StockInventoryRevaluation(models.Model):
             ]
         return res
 
-    def _get_remaining_qty(self, line, layers):
+    def _get_affected_qty(self, line, layers):
         """in case of dropship consider all quantity"""
-        remaining_qty = super()._get_remaining_qty(line, layers)
+        remaining_qty = super()._get_affected_qty(line, layers)
         if line.stock_move_id._is_dropshipped():
             remaining_qty = sum(layers.mapped("quantity"))
         return remaining_qty
@@ -67,10 +67,3 @@ class StockInventoryRevaluation(models.Model):
             return super()._create_revaluation_layers(
                 revaluation_to_add, linked_layer, revaluation, line
             )
-
-    def _get_qty_out(self, line, remaining_qty):
-        """if dropship consider all qty, because all wen out"""
-        qty_out = super()._get_qty_out(line, remaining_qty)
-        if line.stock_move_id._is_dropshipped():
-            qty_out = line.stock_move_id.product_qty
-        return qty_out

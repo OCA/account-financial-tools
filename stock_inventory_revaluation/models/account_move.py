@@ -97,7 +97,7 @@ class AccountMove(models.Model):
         )
         if not bill_qty:
             # Cannot revaluate bill with 0 qty
-            return original_value, original_value, 0.0
+            return original_value, original_value, 0.0, 0.0
         move_qty = move.product_uom_qty
         qty_diff = move_qty - bill_qty
         if not bill_qty or not move_qty:
@@ -124,7 +124,8 @@ class AccountMove(models.Model):
             additional_value = (
                 (old_price * qty_diff) + (new_price * bill_qty) - original_value
             )
-        return original_value, price, additional_value, bill_qty
+        original_value_for_bill_qty = original_value * bill_qty / move_qty
+        return original_value_for_bill_qty, price, additional_value, bill_qty
 
     def _get_move_stock_valuation_layer_ids(self, move):
         """Override this to exclude or add layers on different processes"""
