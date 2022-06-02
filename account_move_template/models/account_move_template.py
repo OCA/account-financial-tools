@@ -45,24 +45,26 @@ class AccountMoveTemplate(models.Model):
         try:
             val = safe_eval(line.python_code, safe_eval_dict)
             sequence2amount[line.sequence] = val
-        except ValueError:
+        except ValueError as err:
             raise UserError(
                 _(
-                    "Impossible to compute the formula of line with sequence %s "
-                    "(formula: %s). Check that the lines used in the formula "
+                    "Impossible to compute the formula of line with sequence %(sequence)s "
+                    "(formula: %(code)s). Check that the lines used in the formula "
                     "really exists and have a lower sequence than the current "
-                    "line."
+                    "line.",
+                    sequence=line.sequence,
+                    code=line.python_code,
                 )
-                % (line.sequence, line.python_code)
-            )
-        except SyntaxError:
+            ) from err
+        except SyntaxError as err:
             raise UserError(
                 _(
-                    "Impossible to compute the formula of line with sequence %s "
-                    "(formula: %s): the syntax of the formula is wrong."
+                    "Impossible to compute the formula of line with sequence %(sequence)s "
+                    "(formula: %(code)s): the syntax of the formula is wrong.",
+                    sequence=line.sequence,
+                    code=line.python_code,
                 )
-                % (line.sequence, line.python_code)
-            )
+            ) from err
 
     def compute_lines(self, sequence2amount):
         company_cur = self.company_id.currency_id
@@ -109,7 +111,7 @@ class AccountMoveTemplateLine(models.Model):
         "account.move.template", string="Move Template", ondelete="cascade"
     )
     name = fields.Char(string="Label", required=True)
-    sequence = fields.Integer("Sequence", required=True)
+    sequence = fields.Integer(required=True)
     account_id = fields.Many2one(
         "account.account",
         string="Account",
@@ -138,11 +140,10 @@ class AccountMoveTemplateLine(models.Model):
     note = fields.Char()
     type = fields.Selection(
         [("computed", "Computed"), ("input", "User input")],
-        string="Type",
         required=True,
         default="input",
     )
-    python_code = fields.Text("Python Code")
+    python_code = fields.Text()
     move_line_type = fields.Selection(
         [("cr", "Credit"), ("dr", "Debit")], required=True, string="Direction"
     )
