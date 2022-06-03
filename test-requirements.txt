@@ -1,0 +1,3 @@
+git+https://github.com/OCA/product-attribute@refs/pull/837/head#subdirectory=setup/product_category_product_link
+git+https://github.com/OCA/stock-logistics-workflow@refs/pull/1004/head#subdirectory=setup/stock_valuation_layer_usage
+git+https://github.com/OCA/stock-logistics-workflow@refs/pull/1004/head#subdirectory=setup/stock_account_product_run_fifo_hook
