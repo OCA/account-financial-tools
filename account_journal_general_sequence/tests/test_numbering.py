@@ -55,3 +55,19 @@ class RenumberCase(TestAccountReconciliationCommon):
         wiz = wiz_f.save()
         wiz.action_renumber()
         self.assertEqual(opening_invoice.entry_number, "2022/0000000000")
+
+    def test_install_no_entry_number(self):
+        """No entry numbers assigned on module installation."""
+        # Imitate installation environment
+        self.env = self.env(
+            context=dict(self.env.context, module="account_journal_general_sequence")
+        )
+        self.env["ir.module.module"].search(
+            [("name", "=", "account_journal_general_sequence")]
+        ).state = "to install"
+        # Do some action that would make the move get an entry number
+        invoice = self._create_invoice()
+        self.assertFalse(invoice.entry_number)
+        invoice.action_post()
+        # Ensure there's no entry number
+        self.assertFalse(invoice.entry_number)
