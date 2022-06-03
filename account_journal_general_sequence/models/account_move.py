@@ -6,6 +6,8 @@ from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
+ADDON = "account_journal_general_sequence"
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"
@@ -30,6 +32,15 @@ class AccountMove(models.Model):
     @api.depends("state")
     def _compute_entry_number(self):
         """Assign an entry number when posting."""
+        # Skip if installing module, for performance reasons
+        if self.env.context.get("module") == ADDON:
+            module = self.env["ir.module.module"].search([("name", "=", ADDON)])
+            if module.state == "to install":
+                _logger.info(
+                    "Skipping entry number generation at install for %s.",
+                    self,
+                )
+                return
         canceled = self.filtered_domain(
             [("state", "=", "cancel"), ("entry_number", "!=", False)]
         )
