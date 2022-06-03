@@ -371,6 +371,9 @@ ul.auto-toc {
 <p>With this module, when a user tries to validate a customer invoice or refund
 with a fiscal position that requires VAT, Odoo blocks the validation of the invoice
 if the customer doesn’t have a VAT number in Odoo.</p>
+<div class="figure">
+<img alt="Error upon customer invoice validation" src="https://raw.githubusercontent.com/OCA/account-financial-tools/14.0/account_fiscal_position_vat_check/static/description/vat_check_invoice_validation.png" />
+</div>
 <p>In the European Union (EU), when an EU company sends an invoice to
 another EU company in another country, it can invoice without VAT
 (most of the time) but the VAT number of the customer must be displayed
@@ -394,12 +397,18 @@ on the invoice.</p>
 <p>To configure this module, go to the menu <em>Invoicing &gt; Configuration &gt; Accounting
 &gt; Fiscal Positions</em> and enable the option <strong>VAT Required</strong> on the relevant
 fiscal positions.</p>
+<div class="figure">
+<img alt="Fiscal Position form view" src="https://raw.githubusercontent.com/OCA/account-financial-tools/14.0/account_fiscal_position_vat_check/static/description/fiscal_position_form.png" />
+</div>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#id2">Usage</a></h1>
-<p>On the partner form view, Odoo will display a warning when a user sets
-a fiscal position that has the option <strong>VAT Required</strong> on a partner
-that doesn’t have a VAT number yet.</p>
+<p>On the partner form view, Odoo will display a yellow warning banner
+when the partner has a fiscal position that has the option <strong>VAT Required</strong>
+but its VAT number is not set.</p>
+<div class="figure">
+<img alt="Warning Banner on partner form view" src="https://raw.githubusercontent.com/OCA/account-financial-tools/14.0/account_fiscal_position_vat_check/static/description/warning_banner_vat_required.png" />
+</div>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#id3">Bug Tracker</a></h1>
