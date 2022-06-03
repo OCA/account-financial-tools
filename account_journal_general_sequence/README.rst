@@ -126,6 +126,14 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
+.. |maintainer-yajo| image:: https://github.com/yajo.png?size=40px
+    :target: https://github.com/yajo
+    :alt: yajo
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-yajo| 
+
 This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/15.0/account_journal_general_sequence>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
