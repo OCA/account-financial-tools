@@ -36,6 +36,16 @@ that Odoo adds by default, and has different purpose.
 .. contents::
    :local:
 
+Installation
+============
+
+After installing this module, no entry numbers will be generated because that
+could have a very negative impact in installations that already had a lot of
+account moves.
+
+If you need to add numbers to preexisting account moves, please use the
+renumbering wizard as explained in the *Usage* section.
+
 Configuration
 =============
 
@@ -115,6 +125,14 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
+
+.. |maintainer-yajo| image:: https://github.com/yajo.png?size=40px
+    :target: https://github.com/yajo
+    :alt: yajo
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-yajo| 
 
 This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/15.0/account_journal_general_sequence>`_ project on GitHub.
 

@@ -3,12 +3,13 @@
 {
     "name": "General sequence in account journals",
     "summary": "Add configurable sequence to account moves, per journal",
-    "version": "15.0.1.0.1",
+    "version": "15.0.1.0.2",
     "category": "Accounting/Accounting",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Moduon, Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "external_dependencies": {"python": ["freezegun"]},
+    "maintainers": ["yajo"],
     "depends": [
         "account",
     ],
