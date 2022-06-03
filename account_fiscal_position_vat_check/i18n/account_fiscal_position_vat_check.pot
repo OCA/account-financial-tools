@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_fiscal_position_vat_check
+#: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
+msgid "<b>Missing VAT number</b>: this partner has the fiscal position"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
 msgid "Contact"
 msgstr ""
@@ -42,9 +47,9 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/models/partner.py:0
-#, python-format
-msgid "Missing VAT number:"
+#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner__show_warning_vat_required
+#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_users__show_warning_vat_required
+msgid "Show Warning Vat Required"
 msgstr ""
 
 #. module: account_fiscal_position_vat_check
@@ -58,10 +63,6 @@ msgid ""
 msgstr ""
 
 #. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/models/partner.py:0
-#, python-format
-msgid ""
-"You have set the fiscal position '%s' that require customers to have a VAT "
-"number. If you plan to use this partner as a customer, you should add its "
-"VAT number."
+#: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
+msgid "that require to know the VAT number of the partner."
 msgstr ""
