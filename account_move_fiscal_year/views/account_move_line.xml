@@ -9,11 +9,9 @@
         <field name="inherit_id" ref="account.view_move_line_form" />
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
-
             <field name="date" position="after">
                 <field name="date_range_fy_id" options="{'no_open': True}" />
             </field>
-
         </field>
     </record>
 
@@ -39,11 +37,9 @@
         <field name="inherit_id" ref="account.view_move_line_tree" />
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
-
             <field name="date" position="after">
                 <field name="date_range_fy_id" />
             </field>
-
         </field>
     </record>
 
