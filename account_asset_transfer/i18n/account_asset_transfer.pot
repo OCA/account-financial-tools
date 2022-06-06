@@ -173,6 +173,13 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_asset_transfer
+#: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_view_form
+msgid ""
+"There are no journal entries on current asset(s), asset transfer will use "
+"account settings from the asset/asset profile instead."
+msgstr ""
+
+#. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__to_asset_ids
 msgid "To Asset(s)"
 msgstr ""
