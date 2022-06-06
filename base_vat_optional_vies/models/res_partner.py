@@ -3,7 +3,9 @@
 # Copyright 2019 FactorLibre - Rodrigo Bonilla
 # Copyright 2022 Moduon - Eduardo de Miguel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+
+from odoo.addons.base_vat.models.res_partner import _ref_vat
 
 
 class ResPartner(models.Model):
@@ -36,7 +38,20 @@ class ResPartner(models.Model):
 
     @api.constrains("vat", "country_id")
     def check_vat(self):
+        self.update({"vies_passed": False})
         for partner in self:
             partner = partner.with_context(vat_partner=partner)
             super(ResPartner, partner).check_vat()
         return True
+
+    def _construct_constraint_msg(self, country_code):
+        self.ensure_one()
+        return "\n" + _(
+            "The VAT number [%(vat)s] for partner [%(name)s] does not seem to be valid. "
+            "\nNote: the expected format is %(format)s",
+            vat=self.vat,
+            name=self.name,
+            format=_ref_vat.get(
+                country_code, "'CC##' (CC=Country Code, ##=VAT Number)"
+            ),
+        )
