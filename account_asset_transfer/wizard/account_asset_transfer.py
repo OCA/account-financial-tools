@@ -142,17 +142,33 @@ class AccountAssetTransfer(models.TransientModel):
             "domain": [("id", "=", move.id)],
         }
 
-    def _get_move_line_from_asset(self, move_line):
-        return {
-            "name": move_line.name,
-            "account_id": move_line.account_id.id,
-            "analytic_account_id": move_line.analytic_account_id.id,
-            "analytic_tag_ids": [(4, tag.id) for tag in move_line.analytic_tag_ids],
-            "debit": move_line.credit,
-            "credit": move_line.debit,
-            "partner_id": move_line.partner_id.id,
-            "asset_id": move_line.asset_id.id,  # Link to existing asset
-        }
+    def _get_move_line_from_asset(self, asset):
+        # Case asset created with account move
+        if asset.account_move_line_ids:
+            asset.account_move_line_ids.ensure_one()
+            move_line = asset.account_move_line_ids[0]
+            return {
+                "name": move_line.name,
+                "account_id": move_line.account_id.id,
+                "analytic_account_id": move_line.analytic_account_id.id or False,
+                "analytic_tag_ids": [(4, tag.id) for tag in move_line.analytic_tag_ids],
+                "debit": move_line.credit,
+                "credit": move_line.debit,
+                "partner_id": move_line.partner_id.id,
+                "asset_id": move_line.asset_id.id,  # Link to existing asset
+            }
+        # Case asset created without account moves
+        else:
+            return {
+                "name": asset.name,
+                "account_id": asset.profile_id.account_asset_id.id,
+                "analytic_account_id": asset.account_analytic_id.id,
+                "analytic_tag_ids": [(4, tag.id) for tag in asset.analytic_tag_ids],
+                "debit": 0.0,
+                "credit": asset.purchase_value or 0.0,
+                "partner_id": asset.partner_id.id,
+                "asset_id": asset.id,  # Link to existing asset
+            }
 
     def _get_move_line_to_asset(self, to_asset):
         return {
@@ -170,11 +186,10 @@ class AccountAssetTransfer(models.TransientModel):
     def _get_transfer_data(self):
         move_lines = []
         # Create lines from assets
-        for asset in self.from_asset_ids:
-            asset.account_move_line_ids.ensure_one()
-            move_line = asset.account_move_line_ids[0]
-            move_line_vals = self._get_move_line_from_asset(move_line)
-            move_lines.append((0, 0, move_line_vals))
+        move_lines += [
+            (0, 0, self._get_move_line_from_asset(from_asset))
+            for from_asset in self.from_asset_ids
+        ]
         # Create lines for new assets
         move_lines += [
             (0, 0, self._get_move_line_to_asset(to_asset))
