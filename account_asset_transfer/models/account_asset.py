@@ -20,7 +20,6 @@ class AccountAsset(models.Model):
                 not asset.method_number
                 and asset.value_residual
                 and asset.state == "open"
-                and asset.account_move_line_ids
             )
 
     def _search_can_transfer(self, operator, value):
@@ -29,7 +28,6 @@ class AccountAsset(models.Model):
                 ("method_number", "=", 0),
                 ("value_residual", ">", 0),
                 ("state", "=", "open"),
-                ("account_move_line_ids", "!=", False),
             ]
         if operator == "!=":
             return [
@@ -39,7 +37,6 @@ class AccountAsset(models.Model):
                 ("method_number", ">", 0),
                 ("value_residual", "=", 0),
                 ("state", "!=", "open"),
-                ("account_move_line_ids", "=", False),
             ]
 
     def _check_can_transfer(self):

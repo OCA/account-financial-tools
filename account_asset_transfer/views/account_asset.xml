@@ -19,6 +19,16 @@
                     help="Transfer asset from AUC to Asset"
                 />
             </button>
+            <xpath expr="//header[last()]" position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': ['|', ('can_transfer', '=', 'False'), ('account_move_line_ids', '!=', [])]}"
+                >
+                    There are no journal entries on current asset(s), asset transfer will use account settings from the asset/asset profile instead.
+                </div>
+            </xpath>
         </field>
     </record>
 
