@@ -1,0 +1,32 @@
+<odoo>
+
+    <record id="account_payment_intransit_view_form" model="ir.ui.view">
+        <field name="name">account.payment.intransit.form</field>
+        <field name="model">account.payment.intransit</field>
+        <field name="inherit_id" ref="account_payment_intransit.account_payment_intransit_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='total_amount']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='total_amount']" position="before">
+                <field name="manual_total_amount"/>
+            </xpath>
+            <xpath expr="/form/sheet//group[@name='main']//group[@name='right']" position="inside">
+                <field name="payment_difference" attrs="{'invisible': [('payment_difference', '=', 0.0)]}"/>
+            </xpath>
+            <xpath expr="/form/sheet/notebook//page[@name='bank_intransit']" position="after">
+                <page string="Payment Difference" name="payment_diff" attrs="{'invisible': [('payment_difference', '=', 0.0)]}">
+                    <field name="deduction_ids" context="{'default_amount': payment_difference}">
+                        <tree editable="bottom">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="account_id"/>
+                            <field name="name"/>
+                            <field name="amount" sum="Total Deduction"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
