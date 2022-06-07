@@ -45,7 +45,7 @@ class AccountMoveBudgetLine(models.Model):
         domain=[("deprecated", "=", False)],
         default=lambda self: self._context.get("account_id", False),
     )
-    date = fields.Date(string="Date", index=True, required=True)
+    date = fields.Date(index=True, required=True)
     analytic_account_id = fields.Many2one(
         "account.analytic.account", string="Analytic Account"
     )
