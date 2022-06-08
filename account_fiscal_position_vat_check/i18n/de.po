@@ -63,14 +63,17 @@ msgstr ""
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
 #, python-format
 msgid ""
-"You are trying to validate a customer invoice/refund with the fiscal "
-"position '%s' that require the customer to have a VAT number. But the "
-"Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
-"of this Customer in Odoo and try to validate again."
+"You are trying to validate a customer "
+"invoice/refund with the fiscal position '%(fp)s' "
+"that require the customer to have a VAT number. "
+"But the Customer '%(rp)s' "
+"doesn't have a VAT number in Odoo. "
+"Please add the VAT number of this Customer in Odoo "
+"and try to validate again."
 msgstr ""
 "Sie versuchen, eine Ausgangsrechnung/-gutschrift mit der Steuerzuordnung "
-"'%s' zu genehmigen, für die der Kunde eine Umsatzsteuernummer benötigt. Der "
-"Kunde '%s' hat aber keine USt-ID in Odoo. Bitte geben Sie die USt-ID des "
+"'%(fp)s' zu genehmigen, für die der Kunde eine Umsatzsteuernummer benötigt. Der "
+"Kunde '%(rp)s' hat aber keine USt-ID in Odoo. Bitte geben Sie die USt-ID des "
 "Kunden in Odoo an und starten Sie die Prüfung erneut."
 
 #. module: account_fiscal_position_vat_check
