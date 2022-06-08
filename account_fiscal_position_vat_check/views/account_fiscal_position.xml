@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ Copyright 2013-2020 Akretion France (https://akretion.com/)
+ @author: Alexis de Lattre <alexis.delattre@akretion.com>
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_account_position_form" model="ir.ui.view">
+        <field name="name">customer.must.have.vat.fiscal_position_form</field>
+        <field name="model">account.fiscal.position</field>
+        <field name="inherit_id" ref="account.view_account_position_form" />
+        <field name="arch" type="xml">
+            <field name="vat_required" position="attributes">
+                <!-- always display that field -->
+                <attribute name="attrs">{}</attribute>
+            </field>
+        </field>
+    </record>
+    <record id="view_account_position_tree" model="ir.ui.view">
+        <field name="name">customer.must.have.vat.fiscal_position_tree</field>
+        <field name="model">account.fiscal.position</field>
+        <field name="inherit_id" ref="account.view_account_position_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="vat_required" />
+            </field>
+        </field>
+    </record>
+</odoo>
