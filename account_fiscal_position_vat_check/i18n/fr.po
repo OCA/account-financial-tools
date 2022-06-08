@@ -62,14 +62,17 @@ msgstr ""
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
 #, python-format
 msgid ""
-"You are trying to validate a customer invoice/refund with the fiscal "
-"position '%s' that require the customer to have a VAT number. But the "
-"Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
-"of this Customer in Odoo and try to validate again."
+"You are trying to validate a customer "
+"invoice/refund with the fiscal position '%(fp)s' "
+"that require the customer to have a VAT number. "
+"But the Customer '%(rp)s' "
+"doesn't have a VAT number in Odoo. "
+"Please add the VAT number of this Customer in Odoo "
+"and try to validate again."
 msgstr ""
 "Vous essayez de valider une facture/remboursement client avec la position "
-"fiscale '%s' qui exige que le client ait un numéro de TVA. Mais le client "
-"'%s' n'a pas de numéro de TVA dans Odoo. Veuillez ajouter le numéro de TVA "
+"fiscale '%(fp)s' qui exige que le client ait un numéro de TVA. Mais le client "
+"'%(rp)s' n'a pas de numéro de TVA dans Odoo. Veuillez ajouter le numéro de TVA "
 "de ce client dans Odoo et essayer de valider à nouveau."
 
 #. module: account_fiscal_position_vat_check

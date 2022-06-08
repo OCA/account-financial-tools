@@ -20,15 +20,17 @@ class AccountMove(models.Model):
             ):
                 raise UserError(
                     _(
-                        "You are trying to validate a customer invoice/refund "
-                        "with the fiscal position '%s' that require the customer "
-                        "to have a VAT number. But the Customer '%s' doesn't have "
-                        "a VAT number in Odoo. Please add the VAT number of this "
-                        "Customer in Odoo and try to validate again."
+                        "You are trying to validate a customer "
+                        "invoice/refund with the fiscal position '%(fp)s' "
+                        "that require the customer to have a VAT number. "
+                        "But the Customer '%(rp)s' "
+                        "doesn't have a VAT number in Odoo. "
+                        "Please add the VAT number of this Customer in Odoo "
+                        "and try to validate again."
                     )
-                    % (
-                        move.fiscal_position_id.display_name,
-                        move.commercial_partner_id.display_name,
-                    )
+                    % {
+                        "fp": move.fiscal_position_id.display_name,
+                        "rp": move.commercial_partner_id.display_name,
+                    }
                 )
         return super()._post(soft=soft)
