@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo-addon-account_move_line_tax_editable>=15.0dev,<15.1dev',
         'odoo-addon-account_move_name_sequence>=15.0dev,<15.1dev',
         'odoo-addon-account_move_print>=15.0dev,<15.1dev',
+        'odoo-addon-account_move_template>=15.0dev,<15.1dev',
         'odoo-addon-account_usability>=15.0dev,<15.1dev',
         'odoo-addon-base_vat_optional_vies>=15.0dev,<15.1dev',
         'odoo-addon-product_category_tax>=15.0dev,<15.1dev',
