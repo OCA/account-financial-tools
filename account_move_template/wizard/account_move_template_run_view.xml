@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_move_template_run_form" model="ir.ui.view">
+        <field name="model">account.move.template.run</field>
+        <field name="arch" type="xml">
+            <form string="Journal Entry Template">
+                <group name="main">
+                    <field name="state" invisible="1" />
+                    <field
+                        name="template_id"
+                        widget="selection"
+                        domain="[('company_id', '=', company_id)]"
+                        attrs="{'readonly': [('state', '=', 'set_lines')]}"
+                    />
+                    <field
+                        name="overwrite"
+                        widget="ace"
+                        options="{'mode': 'python'}"
+                        invisible="1"
+                    />
+                    <!-- Initial invisibility status of the overwrite field:
+                         attrs="{'invisible': [('state', '=', 'set_lines')]}"
+
+                         The overwrite option is useful when generating
+the move via code, but I think it's not a good idea to display it to
+the user. We can't expect users to write a python dict to enter data
+via the web interface for their daily usage of Odoo. Of course, most
+users will just leave the field empty and use the module as normal, but
+it complexifies the interface for everybody, and many users will wonder
+what they should enter in this "Overwrite" field and wait for help. So
+let's make that field invisible, and you can un-hide it for specific
+project where you have an accountant that is good at writing python
+dicts and finding IDs of partners!
+                    -->
+                    <field name="company_id" groups="base.group_multi_company" />
+                    <field name="date" states="set_lines" />
+                    <field name="journal_id" states="set_lines" />
+                    <field name="ref" states="set_lines" />
+                    <field name="partner_id" states="set_lines" />
+                </group>
+                <group name="lines" states="set_lines">
+                    <field name="line_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="sequence" invisible="1" />
+                            <field name="name" />
+                            <field
+                                name="account_id"
+                                domain="[('company_id','=',company_id)]"
+                            />
+                            <field name="partner_id" />
+                            <field
+                                name="analytic_account_id"
+                                domain="[('company_id','=',company_id)]"
+                                groups="analytic.group_analytic_accounting"
+                            />
+                            <field
+                                name="analytic_tag_ids"
+                                widget="many2many_tags"
+                                groups="analytic.group_analytic_tags"
+                            />
+                            <field
+                                name="tax_line_id"
+                                attrs="{'invisible': [('tax_line_id','=',False)]}"
+                            />
+                            <field
+                                name="tax_ids"
+                                widget="many2many_tags"
+                                attrs="{'invisible': [('tax_ids','=',[])]}"
+                            />
+                            <field name="move_line_type" />
+                            <field name="amount" />
+                            <field name="note" />
+                            <field name="payment_term_id" />
+                            <field name="company_id" invisible="1" />
+                            <field name="company_currency_id" invisible="1" />
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button
+                        name="load_lines"
+                        class="btn-primary"
+                        string="Next"
+                        type="object"
+                        states="select_template"
+                    />
+                    <button
+                        name="generate_move"
+                        class="btn-primary"
+                        string="Create Journal Entry"
+                        type="object"
+                        states="set_lines"
+                    />
+                    <button special="cancel" string="Cancel" class="btn-default" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="account_move_template_run_action" model="ir.actions.act_window">
+        <field name="name">Create Entry from Template</field>
+        <field name="res_model">account.move.template.run</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="account_move_template_run_menu"
+        parent="account.menu_finance_entries_actions"
+        action="account_move_template_run_action"
+        sequence="10"
+    />
+</odoo>

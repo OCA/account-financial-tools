@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_move_template_line_tree" model="ir.ui.view">
+        <field name="name">account.move.template.line.tree</field>
+        <field name="model">account.move.template.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" />
+                <field name="account_id" domain="[('company_id', '=', company_id)]" />
+                <field
+                    name="opt_account_id"
+                    domain="[('company_id', '=', company_id)]"
+                />
+                <field name="partner_id" />
+                <field name="name" />
+                <field
+                    name="analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <field
+                    name="analytic_tag_ids"
+                    widget="many2many_tags"
+                    groups="analytic.group_analytic_tags"
+                />
+                <field name="move_line_type" />
+                <field name="type" />
+                <field name="note" />
+                <field name="tax_line_id" invisible="1" />
+                <field
+                    name="tax_ids"
+                    widget="many2many_tags"
+                    options="{'no_create': True}"
+                />
+                <field name="payment_term_id" />
+                <field name="company_id" invisible="1" />
+                <field name="company_currency_id" invisible="1" />
+            </tree>
+        </field>
+    </record>
+    <record id="account_move_template_line_form" model="ir.ui.view">
+        <field name="name">account.move.template.line.form</field>
+        <field name="model">account.move.template.line</field>
+        <field name="arch" type="xml">
+            <form string="Journal Entry Template Line">
+                <sheet>
+                    <group name="main">
+                        <group name="account">
+                            <field name="sequence" />
+                            <field name="name" />
+                            <field
+                                name="account_id"
+                                domain="[('company_id', '=', company_id)]"
+                            />
+                            <field
+                                name="opt_account_id"
+                                domain="[('company_id', '=', company_id)]"
+                            />
+                            <field name="partner_id" />
+                            <field name="payment_term_id" />
+                            <field name="company_id" invisible="1" />
+                        </group>
+                        <group
+                            groups="analytic.group_analytic_accounting"
+                            string="Analytic"
+                            name="analytic"
+                        >
+                            <field
+                                name="analytic_account_id"
+                                domain="[('company_id','=',company_id)]"
+                            />
+                            <field
+                                name="analytic_tag_ids"
+                                widget="many2many_tags"
+                                groups="analytic.group_analytic_tags"
+                            />
+                        </group>
+                        <group name="amount" string="Amount">
+                            <field name="move_line_type" />
+                            <field name="type" />
+                            <field name="note" />
+                        </group>
+                        <group string="Taxes" name="tax">
+                            <field name="is_refund" />
+                            <field name="tax_line_id" />
+                            <field
+                                name="tax_repartition_line_id"
+                                attrs="{'invisible': [('tax_line_id','=',False)]}"
+                            />
+                            <field name="tax_ids" widget="many2many_tags" />
+                        </group>
+                    </group>
+                    <group
+                        name="python_code"
+                        attrs="{'invisible': [('type', '!=', 'computed')]}"
+                        col="1"
+                        string="Compute Formula"
+                    >
+                        <div class="oe_account_help">
+                            <p
+                            >You can refer to other lines using their sequence number e.g. <i
+                                >L1</i> for line with sequence = 1. Examples:</p>
+                            <ul>
+                                <li>L1 * 0.2</li>
+                                <li>L2 - L1</li>
+                                <li>L1 + L2 + L3</li>
+                                <li>1250</li>
+                            </ul>
+                        </div>
+                        <field
+                            name="python_code"
+                            nolabel="1"
+                            attrs="{'required': [('type', '=', 'computed')]}"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="account_move_template_form" model="ir.ui.view">
+        <field name="name">account.move.template.form</field>
+        <field name="model">account.move.template</field>
+        <field name="arch" type="xml">
+            <form string="Journal Entry Template">
+                <header>
+                    <button
+                        string="Generate Journal Entry"
+                        name="generate_journal_entry"
+                        class="btn-primary"
+                        type="object"
+                    />
+                    <button
+                        type="object"
+                        name="toggle_active"
+                        string="Archive"
+                        attrs="{'invisible': [('active', '=', False)]}"
+                    />
+                    <button
+                        type="object"
+                        name="toggle_active"
+                        string="Restore"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                </header>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="active" invisible="1" />
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group name="main-left">
+                            <field
+                                name="company_id"
+                                widget="selection"
+                                groups="base.group_multi_company"
+                            />
+                            <field
+                                name="journal_id"
+                                options="{'no_open': True, 'no_create': True}"
+                            />
+                        </group>
+                        <group name="main-right">
+                            <field name="ref" />
+                        </group>
+                    </group>
+                    <group name="lines">
+                        <field
+                            name="line_ids"
+                            nolabel="1"
+                            context="{'default_company_id': company_id}"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="account_move_template_tree" model="ir.ui.view">
+        <field name="name">account.move.template.tree</field>
+        <field name="model">account.move.template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="journal_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record id="account_move_template_search" model="ir.ui.view">
+        <field name="name">account.move.template.search</field>
+        <field name="model">account.move.template</field>
+        <field name="arch" type="xml">
+            <search string="Journal Entry Template">
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
+                />
+                <field name="name" />
+                <group name="groupby">
+                    <filter
+                        name="journal_groupby"
+                        string="Journal"
+                        context="{'group_by': 'journal_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="account_move_template_action" model="ir.actions.act_window">
+        <field name="name">Journal Entry Templates</field>
+        <field name="res_model">account.move.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="account_move_template_menu"
+        action="account_move_template_action"
+        parent="account.account_account_menu"
+        sequence="300"
+    />
+</odoo>

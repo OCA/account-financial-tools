@@ -1,0 +1,523 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_template
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Vietnamese (Viet Nam) (https://www.transifex.com/oca/"
+"teams/23907/vi_VN/)\n"
+"Language: vi_VN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: account_move_template
+#: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
+msgid ""
+"\n"
+"Valid dictionary to overwrite template lines:\n"
+"{'L1': {'partner_id': 1, 'amount': 100, 'name': 'some label'},\n"
+" 'L2': {'partner_id': 2, 'amount': 200, 'name': 'some label 2'}, }\n"
+"        "
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_move_template.py:0
+#, python-format
+msgid "%s (copy)"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "1250"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
+msgid "Account"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
+msgid "Account Opt."
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
+msgid "Active"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "Amount"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "Analytic"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_account_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_account_id
+msgid "Analytic Account"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_tag_ids
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
+msgid "Analytic Tags"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Archive"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
+msgid "Archived"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__company_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_currency_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_currency_id
+msgid "Company Currency"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "Compute Formula"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__computed
+msgid "Computed"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.actions.act_window,name:account_move_template.account_move_template_run_action
+#: model:ir.ui.menu,name:account_move_template.account_move_template_run_menu
+msgid "Create Entry from Template"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
+#, fuzzy
+msgid "Create Journal Entry"
+msgstr "Tạo vào"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__create_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__create_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__create_uid
+msgid "Created by"
+msgstr "Tạo bởi"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__create_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__create_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__create_date
+msgid "Created on"
+msgstr "Tạo vào"
+
+#. module: account_move_template
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__cr
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__cr
+msgid "Credit"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__date
+msgid "Date"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__dr
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__dr
+msgid "Debit"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid "Debit and credit of all lines are null."
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__move_line_type
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__move_line_type
+msgid "Direction"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__display_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__display_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__display_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid "Entry from template %s"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Generate Journal Entry"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_move_template.py:0
+#, python-format
+msgid ""
+"Impossible to compute the formula of line with sequence %s (formula: %s). "
+"Check that the lines used in the formula really exists and have a lower "
+"sequence than the current line."
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_move_template.py:0
+#, python-format
+msgid ""
+"Impossible to compute the formula of line with sequence %s (formula: %s): "
+"the syntax of the formula is wrong."
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid ""
+"Invalid dictionary: {}\n"
+"{}"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__is_refund
+msgid "Is a refund?"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__journal_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__journal_id
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
+msgid "Journal"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
+msgid "Journal Entry Template"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "Journal Entry Template Line"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.actions.act_window,name:account_move_template.account_move_template_action
+#: model:ir.ui.menu,name:account_move_template.account_move_template_menu
+msgid "Journal Entry Templates"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_move_template_line
+msgid "Journal Item Template"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid "Keys must be line sequence, i..e, L1, L2, ..."
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "L1 * 0.2"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "L1 + L2 + L3"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "L2 - L1"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__name
+msgid "Label"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line____last_update
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__write_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__write_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__line_ids
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__line_ids
+msgid "Lines"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__template_id
+msgid "Move Template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__name
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__name
+msgid "Name"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
+msgid "Next"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__note
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__note
+msgid "Note"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_line_id
+msgid "Originator Tax"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
+msgid "Override Partner"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__overwrite
+msgid "Overwrite"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid "Overwrite value must be a valid python dict"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__partner_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__payment_term_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__payment_term_id
+msgid "Payment Terms"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__python_code
+msgid "Python Code"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_move_template.py:0
+#, python-format
+msgid "Python Code must be set for computed line with sequence %d."
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
+msgid "Reference"
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
+msgid "Restore"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
+msgid "Select Template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__sequence
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__set_lines
+msgid "Set Lines"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
+msgid "State"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_repartition_line_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_repartition_line_id
+msgid "Tax Repartition Line"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_ids
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_ids
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid "Taxes"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__template_id
+msgid "Template"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid ""
+"The selected template (%s) is not in the same company (%s) as the current "
+"user (%s)."
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_line_sequence_template_uniq
+msgid "The sequence of the line must be unique per template!"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_name_company_unique
+msgid "This name is already used by another template!"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__type
+msgid "Type"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,help:account_move_template.field_account_move_template_line__payment_term_id
+msgid "Used to compute the due date of the journal item."
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
+msgid "User input"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid "Valid fields to overwrite are %s"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
+msgid "When amount is negative, use this account instead"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
+msgid "Wizard"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_move_template_line_run
+msgid "Wizard Lines to generate move from template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_move_template_run
+msgid "Wizard to generate move from template"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_move_template.py:0
+#, python-format
+msgid ""
+"You added a line in the wizard. This is not allowed: you should either "
+"update the template or modify the journal entry that will be generated by "
+"this wizard."
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
+msgid ""
+"You can refer to other lines using their sequence number e.g. <i>L1</i> for "
+"line with sequence = 1. Examples:"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_move_template.py:0
+#, python-format
+msgid ""
+"You deleted a line in the wizard. This is not allowed: you should either "
+"update the template or modify the journal entry that will be generated by "
+"this wizard."
+msgstr ""
