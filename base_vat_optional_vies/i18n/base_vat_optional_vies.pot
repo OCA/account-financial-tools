@@ -34,6 +34,14 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: base_vat_optional_vies
+#: code:addons/base_vat_optional_vies/models/res_partner.py:0
+#, python-format
+msgid ""
+"The VAT number [%(vat)s] for partner [%(name)s] does not seem to be valid. \n"
+"Note: the expected format is %(format)s"
+msgstr ""
+
+#. module: base_vat_optional_vies
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__vies_passed
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_users__vies_passed
 msgid "VIES validation"
