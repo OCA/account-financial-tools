@@ -10,6 +10,11 @@
                         name="asset_group_id"
                         options="{'no_create_edit': True, 'no_create': True}"
                     />
+                    <field
+                        name="asset_profile_ids"
+                        widget="many2many_tags"
+                        options="{'no_create_edit': True, 'no_create': True}"
+                    />
                     <field name="date_from" />
                     <field name="date_to" />
                     <field name="draft" />

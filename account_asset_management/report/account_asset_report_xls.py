@@ -421,6 +421,8 @@ class AssetReportXlsx(models.AbstractModel):
 
             groups = _child_get(parent_group)
             dom.append(("group_ids", "in", [x.id for x in groups]))
+        if wiz.asset_profile_ids:
+            dom.append(("profile_id", "in", wiz.asset_profile_ids.ids))
 
         if not wiz.draft:
             dom.append(("state", "!=", "draft"))

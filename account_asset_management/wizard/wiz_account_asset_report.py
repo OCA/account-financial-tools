@@ -16,6 +16,10 @@ class WizAccountAssetReport(models.TransientModel):
         string="Asset Group",
         default=lambda self: self._default_asset_group_id(),
     )
+    asset_profile_ids = fields.Many2many(
+        comodel_name="account.asset.profile",
+        string="Asset Profiles",
+    )
     date_from = fields.Date(string="Start Date", required=True)
     date_to = fields.Date(string="End Date", required=True)
     draft = fields.Boolean(string="Include draft assets")
