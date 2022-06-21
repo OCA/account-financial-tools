@@ -34,7 +34,7 @@ addon | version | maintainers | summary
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.1.0 |  | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 14.0.1.2.0 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Create Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 14.0.1.0.0 |  | Account Invoice Constraint Chronology
-[account_journal_general_sequence](account_journal_general_sequence/) | 14.0.1.0.1 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Add configurable sequence to account moves, per journal
+[account_journal_general_sequence](account_journal_general_sequence/) | 14.0.1.0.2 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Add configurable sequence to account moves, per journal
 [account_journal_lock_date](account_journal_lock_date/) | 14.0.1.0.1 |  | Lock each journal independently
 [account_loan](account_loan/) | 14.0.1.0.2 |  | Account Loan management
 [account_lock_date_update](account_lock_date_update/) | 14.0.2.0.0 |  | Allow an Account adviser to update locking date without having access to all technical settings
