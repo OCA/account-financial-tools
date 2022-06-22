@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-06-21 16:05+0000\n"
+"PO-Revision-Date: 2022-06-22 18:05+0000\n"
 "Last-Translator: Pierre Verkest <pierreverkest84@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -29,7 +29,7 @@ msgstr "Nom affiché"
 #. module: base_vat_optional_vies
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_vat_optional_vies
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner____last_update
@@ -44,7 +44,7 @@ msgid ""
 "Note: the expected format is %(format)s"
 msgstr ""
 "Le numéro de TVA [%(vat)s] du partenaire [%(name)s] ne semble pas valide. \n"
-"Note: format attendu : %(format)s"
+"Note : format attendu %(format)s"
 
 #. module: base_vat_optional_vies
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__vies_passed
