@@ -1,0 +1,188 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_journal_general_sequence
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. module: account_journal_general_sequence
+#: code:addons/account_journal_general_sequence/models/account_journal.py:0
+#, python-format
+msgid "Account entry default numbering"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__entry_number_sequence_id
+msgid "Account entry number sequence"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model,name:account_journal_general_sequence.model_account_move_renumber_wizard
+msgid "Account move entry renumbering wizard"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_bank_statement_line__entry_number
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move__entry_number
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_line__entry_number
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_payment__entry_number
+msgid "Automatic numbering, based on journal configuration."
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__available_sequence_ids
+msgid "Available sequences"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model_terms:ir.ui.view,arch_db:account_journal_general_sequence.account_move_renumber_wizard_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__display_name
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_bank_statement_line__entry_number
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move__entry_number
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line__entry_number
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_payment__entry_number
+msgid "Entry Number"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.constraint,message:account_journal_general_sequence.constraint_account_move_entry_number_unique
+msgid "Entry number must be unique per company."
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__id
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move__id
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model_terms:ir.ui.view,arch_db:account_journal_general_sequence.account_move_renumber_wizard_view_form
+msgid ""
+"If you have already filed and legalized your journals with the competent "
+"authority, this action could change it. Continue?"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model,name:account_journal_general_sequence.model_account_journal
+msgid "Journal"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model,name:account_journal_general_sequence.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model,name:account_journal_general_sequence.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal____last_update
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: code:addons/account_journal_general_sequence/wizards/account_move_renumber_wizard.py:0
+#, python-format
+msgid "No account moves found."
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model_terms:ir.ui.view,arch_db:account_journal_general_sequence.account_move_renumber_wizard_view_form
+msgid "Renumber"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model_terms:ir.ui.view,arch_db:account_journal_general_sequence.account_move_renumber_wizard_view_form
+msgid "Renumber account entry numbers"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_renumber_wizard__starting_date
+msgid "Renumber account moves starting this day."
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.actions.act_window,name:account_journal_general_sequence.account_move_renumber_wizard_action
+#: model:ir.ui.menu,name:account_journal_general_sequence.account_move_renumber_wizard_menu
+msgid "Renumber journal entries"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_renumber_wizard__starting_number
+msgid "Reset sequence to this number before starting."
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__sequence_id
+msgid "Sequence"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_renumber_wizard__sequence_id
+msgid ""
+"Sequence to use for renumbering. Affects all journals that use this "
+"sequence."
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_journal__entry_number_sequence_id
+msgid "Sequence used for account entry numbering."
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__starting_date
+msgid "Starting Date"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__starting_number
+msgid "Starting Number"
+msgstr ""
