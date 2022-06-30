@@ -39,7 +39,7 @@ class AccountCashDeposit(models.Model):
     )
     date = fields.Date(
         string="Date",
-        readonly=True,
+        states={"done": [("readonly", "=", True)]},
         tracking=True,
         copy=False,
         help="Used as date for the journal entry.",
@@ -281,7 +281,7 @@ class AccountCashDeposit(models.Model):
 
     def _prepare_account_move(self, vals):
         self.ensure_one()
-        date = vals["date"]
+        date = vals.get("date") or self.date
         op_type = self.operation_type
         total_amount_comp_cur = self.currency_id._convert(
             self.total_amount, self.company_id.currency_id, self.company_id, date
@@ -328,7 +328,7 @@ class AccountCashDeposit(models.Model):
         vals = {"state": "done"}
         if force_date:
             vals["date"] = force_date
-        else:
+        elif not self.date:
             vals["date"] = fields.Date.context_today(self)
         return vals
 
