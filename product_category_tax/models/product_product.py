@@ -8,7 +8,7 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     @api.onchange("categ_id")
-    def onchange_categ_id(self):
+    def _onchange_categ_id_set_taxes(self):
         if self.categ_id:
             self.set_tax_from_category()
 
