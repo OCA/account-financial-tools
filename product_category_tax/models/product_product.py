@@ -13,6 +13,4 @@ class ProductProduct(models.Model):
             self.set_tax_from_category()
 
     def set_tax_from_category(self):
-        self.ensure_one()
-        self.taxes_id = [(6, 0, self.categ_id.taxes_id.ids)]
-        self.supplier_taxes_id = [(6, 0, self.categ_id.supplier_taxes_id.ids)]
+        return self.product_tmpl_id.set_tax_from_category()
