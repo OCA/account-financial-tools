@@ -28,3 +28,15 @@ class ProductTemplate(models.Model):
                 }
             )
         return True
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("categ_id"):
+                if "taxes_id" not in vals:
+                    categ = self.env["product.category"].browse(vals["categ_id"])
+                    vals["taxes_id"] = [(6, 0, categ.taxes_id.ids)]
+                if "supplier_taxes_id" not in vals:
+                    categ = self.env["product.category"].browse(vals["categ_id"])
+                    vals["supplier_taxes_id"] = [(6, 0, categ.supplier_taxes_id.ids)]
+        return super().create(vals_list)
