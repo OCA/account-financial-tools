@@ -52,8 +52,8 @@ class ProductCategoryTax(TransactionCase):
         self.product_test = self.product_obj.create(
             {"name": "TEST 01", "categ_id": test_categ.id, "list_price": 155.0}
         )
-        self.product_test.product_tmpl_id.onchange_categ_id()
-        self.assertEqual(self.product_test.supplier_taxes_id, self.tax_purchase)
+        self.product_test.product_tmpl_id._onchange_categ_id_set_taxes()
+        self.assertEquals(self.product_test.supplier_taxes_id, self.tax_purchase)
 
     def test_02_update_taxes(self):
         """Default update"""
