@@ -11,11 +11,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         parent="account.menu_finance_entries"
         sequence="15"
     />
+    <!-- Accounting Templates are useful only when creating a new company/loading
+        a chart of accounts, so we put it under 'Settings > Technical' and not
+        under 'Invoicing > Configuration' -->
     <menuitem
         id="menu_account_coa_settings"
         sequence="200"
-        name="Templates"
-        parent="account.menu_finance_configuration"
+        name="Accounting Templates"
+        parent="base.menu_custom"
         groups="base.group_no_one"
     />
 </odoo>
