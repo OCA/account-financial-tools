@@ -27,10 +27,7 @@ class TestStockInventoryRevaluationCommon(ValuationReconciliationTestCommon):
         cls.EUR = cls.env.ref("base.EUR")
         cls.USD = cls.env.ref("base.USD")
         cls.warehouse = cls.company_data["default_warehouse"]
-        cls.supplier_id = cls.env["res.partner"].create({"name": "My Test Supplier"}).id
-        cls.customer_id = cls.env["res.partner"].create({"name": "My Test Customer"}).id
-        cls.supplier_location_id = cls.env.ref("stock.stock_location_suppliers").id
-        cls.customer_location_id = cls.env.ref("stock.stock_location_customers").id
+        cls.customer = cls.env["res.partner"].create({"name": "My Test Customer"})
         cls.categ_all = cls.stock_account_product_categ
         cls.company_data.update(
             {
@@ -210,3 +207,21 @@ class TestStockInventoryRevaluationCommon(ValuationReconciliationTestCommon):
         cls.env["res.currency.rate"].create(
             {"currency_id": currency_id.id, "name": name, "rate": rate}
         )
+
+    @classmethod
+    def create_sale_order(cls, products, qty):
+        with Form(cls.env["sale.order"]) as sale_form:
+            sale_form.partner_id = cls.customer
+            sale_form.partner_invoice_id = cls.customer
+            sale_form.partner_shipping_id = cls.customer
+            sale_form.pricelist_id = cls.env.ref("product.list0")
+            for p in products:
+                with sale_form.order_line.new() as order_line:
+                    order_line.product_id = p
+                    order_line.name = p.name
+                    order_line.product_uom_qty = qty
+                    order_line.product_uom = p.uom_id
+                    order_line.price_unit = p.list_price
+        sale = sale_form.save()
+        sale_form = Form(sale)
+        return sale_form.save()

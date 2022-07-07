@@ -509,7 +509,7 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
         self.assertEqual(product_avg.value_svl, 50)
         self.assertEqual(product_avg.standard_price, 10.0)
 
-    def test_00_stock_inventory_revaluation_partial_return(self):
+    def test_06_stock_inventory_revaluation_partial_return(self):
         """
         Average price, receive in a Purchase order 10 units at 10
         Receive in another PO at 10 units at 10 and invoice 1
@@ -724,3 +724,59 @@ class TestStockInventoryRevaluation(TestStockInventoryRevaluationCommon):
         # Test it is late to cancel
         with self.assertRaises(UserError):
             revaluation.button_cancel()
+
+    def test_08_revaluate_outout_distribution(self):
+        """
+        Receive and use in 2 SO
+        Check the COGS is distributed by so line
+        """
+        product_fifo = self._create_product("FIFO", 10, self.categ_real_time_fifo)
+
+        # I create 1 picking that will be distributed:
+        moves = [
+            {
+                "product": product_fifo,
+                "location_id": self.ref("stock.stock_location_suppliers"),
+                "qty": 20,
+                "location_dest_id": self.warehouse.lot_stock_id.id,
+            },
+        ]
+        picking_type_id = self.warehouse.in_type_id.id
+        picking_to_revaluate_1 = self._create_picking(picking_type_id, moves)
+
+        # Confirm and assign picking
+        self._do_picking(picking_to_revaluate_1)
+        # Now deliver in separate SO and invoice
+        so1 = self.create_sale_order([product_fifo], 10)
+        so1.action_confirm()
+        self._do_picking(so1.picking_ids)
+        so1._create_invoices()
+        so1.invoice_ids._post()
+        so2 = self.create_sale_order([product_fifo], 10)
+        so2.action_confirm()
+        self._do_picking(so2.picking_ids)
+        so2._create_invoices()
+        so2.invoice_ids._post()
+        # I create a bill and a revaluation at double price and 4 times price
+        vendor = self.partner_model.create({"name": "Vendor"})
+        bill = self._create_bill("in_invoice", vendor, [product_fifo], [20], [20])
+        bill._post()
+        bill.button_revaluate()
+        revaluation_ids = bill.action_view_inventory_revaluation_lines()["domain"][0][2]
+        revaluation = self.revaluation_model.browse(revaluation_ids)
+        revaluation.vendor_bill_id = bill
+        # Calling the onchange directly cannot save the form of existing object
+        # and get the changes applied in the same variable
+        revaluation.add_from_stock_move = picking_to_revaluate_1.move_lines[0]
+        revaluation.onchange_add_from_stock_move()
+        # I check the revaluation lines
+        # I confirm the revaluation that creates the layers and account moves
+        revaluation.button_validate()
+        # I check the COGS is distributed
+        cogs = revaluation.account_move_id.line_ids.filtered(
+            lambda aml: aml.account_id
+            == self.company_data["default_account_stock_expense"]
+            and aml.stock_move_id == picking_to_revaluate_1.move_lines[0]
+        )
+        self.assertEqual(cogs[0].sale_line_ids, so1.order_line)
+        self.assertEqual(cogs[1].sale_line_ids, so2.order_line)

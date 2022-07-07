@@ -93,7 +93,7 @@ class StockInventoryRevaluationLine(models.Model):
         base_line = {
             "name": self.name,
             "product_id": self.product_id.id,
-            "stock_move_id": move.id,
+            "stock_move_id": revaluation_line.stock_move_id.id,
             "stock_inventory_revaluation_line_id": revaluation_line.id,
             "quantity": 0,
         }
@@ -185,17 +185,11 @@ class StockInventoryRevaluationLine(models.Model):
                 if self.env.company.anglo_saxon_accounting:
                     expense_account = self._get_anglosaxon_expense_account()
                     expense_account_id = expense_account.id
-                    debit_line = dict(
-                        base_line,
-                        name=(self.name + ": " + str(qty_out) + _(" already out")),
-                        quantity=0,
-                        account_id=expense_account_id,
+                    debit_line = self.get_debit_line(
+                        base_line, usage, expense_account_id, anglosaxon=True
                     )
-                    credit_line = dict(
-                        base_line,
-                        name=(self.name + ": " + str(qty_out) + _(" already out")),
-                        quantity=0,
-                        account_id=already_out_account_id,
+                    credit_line = self.get_credit_line(
+                        base_line, usage, already_out_account_id, anglosaxon=True
                     )
 
                     if diff > 0.0:
@@ -209,7 +203,9 @@ class StockInventoryRevaluationLine(models.Model):
                     AccountMoveLine.append([0, 0, credit_line])
         return AccountMoveLine
 
-    def get_debit_line(self, base_line, usage, already_out_account_id):
+    def get_debit_line(
+        self, base_line, usage, already_out_account_id, anglosaxon=False
+    ):
         self.ensure_one()
         qty_out = usage.quantity
         debit_line = dict(
@@ -218,9 +214,14 @@ class StockInventoryRevaluationLine(models.Model):
             quantity=0,
             account_id=already_out_account_id,
         )
+        if anglosaxon and usage.stock_move_id.sale_line_id:
+            debit_line = dict(
+                debit_line,
+                sale_line_ids=[(6, None, [usage.stock_move_id.sale_line_id.id])],
+            )
         return debit_line
 
-    def get_credit_line(self, base_line, usage, debit_account_id):
+    def get_credit_line(self, base_line, usage, debit_account_id, anglosaxon=False):
         self.ensure_one()
         qty_out = usage.quantity
         credit_line = dict(
@@ -229,4 +230,9 @@ class StockInventoryRevaluationLine(models.Model):
             quantity=0,
             account_id=debit_account_id,
         )
+        if anglosaxon and usage.stock_move_id.sale_line_id:
+            credit_line = dict(
+                credit_line,
+                sale_line_ids=[(6, None, [usage.stock_move_id.sale_line_id.id])],
+            )
         return credit_line
