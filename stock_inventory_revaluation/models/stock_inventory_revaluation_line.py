@@ -167,19 +167,10 @@ class StockInventoryRevaluationLine(models.Model):
         ).filtered(lambda l: l.stock_move_id.location_dest_id.usage == "customer"):
             qty_out = usage.quantity
             if qty_out > 0:
-                # TODO: move this to a method out of here
-                debit_line = dict(
-                    base_line,
-                    name=(self.name + ": " + str(qty_out) + _(" already out")),
-                    quantity=0,
-                    account_id=already_out_account_id,
+                debit_line = self.get_debit_line(
+                    base_line, usage, already_out_account_id
                 )
-                credit_line = dict(
-                    base_line,
-                    name=(self.name + ": " + str(qty_out) + _(" already out")),
-                    quantity=0,
-                    account_id=debit_account_id,
-                )
+                credit_line = self.get_credit_line(base_line, usage, debit_account_id)
                 diff = diff * qty_out / self.quantity
                 if diff > 0.0:
                     debit_line["debit"] = diff
@@ -217,3 +208,25 @@ class StockInventoryRevaluationLine(models.Model):
                     AccountMoveLine.append([0, 0, debit_line])
                     AccountMoveLine.append([0, 0, credit_line])
         return AccountMoveLine
+
+    def get_debit_line(self, base_line, usage, already_out_account_id):
+        self.ensure_one()
+        qty_out = usage.quantity
+        debit_line = dict(
+            base_line,
+            name=(self.name + ": " + str(qty_out) + _(" already out")),
+            quantity=0,
+            account_id=already_out_account_id,
+        )
+        return debit_line
+
+    def get_credit_line(self, base_line, usage, debit_account_id):
+        self.ensure_one()
+        qty_out = usage.quantity
+        credit_line = dict(
+            base_line,
+            name=(self.name + ": " + str(qty_out) + _(" already out")),
+            quantity=0,
+            account_id=debit_account_id,
+        )
+        return credit_line
