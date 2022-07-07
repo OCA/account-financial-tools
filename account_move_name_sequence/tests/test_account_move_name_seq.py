@@ -4,6 +4,8 @@
 
 from datetime import datetime
 
+from freezegun import freeze_time
+
 from odoo import fields
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
@@ -81,6 +83,57 @@ class TestAccountMoveNameSequence(TransactionCase):
         move.button_draft()
         move.action_post()
         self.assertEqual(move.name, move_name)
+
+    def test_prefix_move_name_use_move_date(self):
+        seq = self.misc_journal.sequence_id
+        seq.prefix = "TEST-%(year)s-%(month)s-"
+        self.env["ir.sequence.date_range"].sudo().create(
+            {
+                "date_from": "2021-07-01",
+                "date_to": "2022-06-30",
+                "sequence_id": seq.id,
+            }
+        )
+        with freeze_time("2022-01-01"):
+            move = self.env["account.move"].create(
+                {
+                    "date": "2021-12-31",
+                    "journal_id": self.misc_journal.id,
+                    "line_ids": [
+                        (0, 0, {"account_id": self.account1.id, "debit": 10}),
+                        (0, 0, {"account_id": self.account2.id, "credit": 10}),
+                    ],
+                }
+            )
+            move.action_post()
+        self.assertEqual(move.name, "TEST-2021-12-0001")
+        with freeze_time("2022-01-01"):
+            move = self.env["account.move"].create(
+                {
+                    "date": "2022-06-30",
+                    "journal_id": self.misc_journal.id,
+                    "line_ids": [
+                        (0, 0, {"account_id": self.account1.id, "debit": 10}),
+                        (0, 0, {"account_id": self.account2.id, "credit": 10}),
+                    ],
+                }
+            )
+            move.action_post()
+        self.assertEqual(move.name, "TEST-2022-06-0002")
+
+        with freeze_time("2022-01-01"):
+            move = self.env["account.move"].create(
+                {
+                    "date": "2022-07-01",
+                    "journal_id": self.misc_journal.id,
+                    "line_ids": [
+                        (0, 0, {"account_id": self.account1.id, "debit": 10}),
+                        (0, 0, {"account_id": self.account2.id, "credit": 10}),
+                    ],
+                }
+            )
+            move.action_post()
+        self.assertEqual(move.name, "TEST-2022-07-0001")
 
     def test_in_refund(self):
         in_refund_invoice = self.env["account.move"].create(
