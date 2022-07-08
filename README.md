@@ -48,7 +48,7 @@ addon | version | maintainers | summary
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 14.0.1.0.2 |  | Introduces the purchase order line to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 14.0.1.0.1 |  | Introduces the purchase order line to the journal items
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.2.0.0 |  | Allows to edit taxes on non-posted account move lines
-[account_move_name_sequence](account_move_name_sequence/) | 14.0.1.2.2 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) [![moylop260](https://github.com/moylop260.png?size=30px)](https://github.com/moylop260) [![frahikLV](https://github.com/frahikLV.png?size=30px)](https://github.com/frahikLV) | Generate journal entry number from sequence
+[account_move_name_sequence](account_move_name_sequence/) | 14.0.1.3.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) [![moylop260](https://github.com/moylop260.png?size=30px)](https://github.com/moylop260) [![frahikLV](https://github.com/frahikLV.png?size=30px)](https://github.com/frahikLV) | Generate journal entry number from sequence
 [account_move_print](account_move_print/) | 14.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds the option to print Journal Entries
 [account_move_reversal_choose_method](account_move_reversal_choose_method/) | 14.0.1.0.0 |  | Let's choose the Credit Method when adding a credit note to a journal entry.
 [account_move_template](account_move_template/) | 14.0.1.1.1 |  | Templates for recurring Journal Entries
