@@ -7,7 +7,7 @@
         <field name="name">account.loan.tree</field>
         <field name="model">account.loan</field>
         <field name="arch" type="xml">
-            <tree string="Loans">
+            <tree>
                 <field name="name" />
                 <field name="company_id" />
                 <field name="is_leasing" />
@@ -150,7 +150,7 @@
         <field name="name">account.loan.line.tree</field>
         <field name="model">account.loan.line</field>
         <field name="arch" type="xml">
-            <tree string="Loan items" create="0">
+            <tree create="0">
                 <field name="sequence" />
                 <field name="date" />
                 <field name="rate" />
