@@ -10,6 +10,28 @@ from odoo.exceptions import AccessError, UserError
 
 _logger = logging.getLogger(__name__)
 
+GET_TYPE_TAXES = [
+    ('0', _('Tax base')),
+    ('2', _('Tax base (debit)')),
+    ('3', _('Tax base (credit)')),
+    ('1', _('Coupled tax')),
+    ('98', _('Boot Tax base and tax EU deals')),
+    ('99', _('Boot Tax base and tax')),
+]
+
+GET_TYPE_INFO = [
+    ('period', 'Fiscal period'),
+    ('vat', 'Get partner VAT'),
+    ('name', 'Get partner name'),
+    ('vatcompany', 'Get company VAT'),
+    ('namecompany', 'Get company name'),
+    ('addresscompany', 'Get company address'),
+    ('movenumber', 'Get account move number'),
+    ('date', 'Get account move date'),
+    ('narration', 'Get account move narration'),
+    ('ref', 'Get account move ref'),
+]
+
 
 def noupdate_existing_xmlid(cr, model, module, name):
     env = api.Environment(cr, SUPERUSER_ID, {})
@@ -19,6 +41,7 @@ def noupdate_existing_xmlid(cr, model, module, name):
 
 
 class WizardMultiChartsAccounts(models.TransientModel):
+    _inherit = 'wizard.multi.charts.accounts'
 
     @api.multi
     def execute_update(self):
@@ -297,30 +320,6 @@ class AccountAccountTagTemplate(models.Model):
     _parent_order = 'name'
     _order = 'parent_left'
 
-    def _get_type_taxes(self):
-        return [
-            ('0', _('Tax base')),
-            ('2', _('Tax base (debit)')),
-            ('3', _('Tax base (credit)')),
-            ('1', _('Coupled tax')),
-            ('98', _('Boot Tax base and tax EU deals')),
-            ('99', _('Boot Tax base and tax')),
-        ]
-
-    def _get_type_info(self):
-        return [
-            ('period', 'Fiscal period'),
-            ('vat', 'Get partner VAT'),
-            ('name', 'Get partner name'),
-            ('vatcompany', 'Get company VAT'),
-            ('namecompany', 'Get company name'),
-            ('addresscompany', 'Get company address'),
-            ('movenumber', 'Get account move number'),
-            ('date', 'Get account move date'),
-            ('narration', 'Get account move narration'),
-            ('ref', 'Get account move ref'),
-        ]
-
     name = fields.Char(required=True)
     code = fields.Char("Code", index=True, copy=False)
     applicability = fields.Selection([('accounts', 'Accounts'), ('taxes', 'Taxes')], required=True, default='accounts')
@@ -336,8 +335,8 @@ class AccountAccountTagTemplate(models.Model):
     parent_left = fields.Integer('Left Parent', index=1)
     parent_right = fields.Integer('Right Parent', index=1)
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id)
-    type_taxes = fields.Selection(selection='_get_type_taxes', string='Type taxes')
-    type_info = fields.Selection(selection='_get_type_info', string='Type info')
+    type_taxes = fields.Selection(selection=GET_TYPE_TAXES, string='Type taxes')
+    type_info = fields.Selection(selection=GET_TYPE_INFO, string='Type info')
 
     _sql_constraints = [
         ('name_company_uniq', 'unique(name, company_id)', 'Tag names must be unique by company!'),

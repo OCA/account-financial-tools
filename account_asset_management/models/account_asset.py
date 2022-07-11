@@ -944,17 +944,21 @@ class AccountAsset(models.Model):
     def validate(self):
         for asset in self:
             # _logger.info("ASSET VALIDATE %s:%s" % (asset.state, self._context))
-            if asset.type == 'normal' and (asset.company_currency_id.is_zero(asset.value_residual) or
-                                           (asset.state == 'open' and self._context.get('asset_out'))):
+            if asset.type == 'normal' and asset.state == 'open' and self._context.get('asset_out') \
+                    and (asset.company_currency_id.is_zero(asset.value_residual) or asset.to_sell):
+                asset.state = 'sell'
+            elif asset.type == 'normal' and asset.state == 'open' and not self._context.get('asset_out') \
+                    and asset.company_currency_id.is_zero(asset.value_residual) and not asset.to_sell:
                 asset.state = 'close'
+            elif asset.type == 'normal' and asset.state == 'draft' and self._context.get('asset_out') \
+                    and not asset.to_sell:
+                asset.active = False
             elif not self._context.get('asset_out'):
                 # force recalculate base desperation
                 # asset._compute_depreciation_base()
                 # asset._create_first_asset_line()
                 # asset.with_context(dict(self._context, allow_asset_line_update=True))._onchange_purchase_salvage_value()
                 asset.state = 'open'
-            elif asset.state == 'draft' and self._context.get('asset_out'):
-                asset.unlink()
         return True
 
     @api.multi

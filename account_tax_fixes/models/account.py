@@ -2,12 +2,12 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import math
-
-from odoo import models, api, fields, _
-
 import logging
 
+from odoo import models, api, fields, _
 from odoo.exceptions import ValidationError
+from .chart_template import GET_TYPE_TAXES
+from .chart_template import GET_TYPE_INFO
 
 _logger = logging.getLogger(__name__)
 
@@ -24,7 +24,8 @@ class AccountTax(models.Model):
                                                "appear on the invoice.Who pays the tax purchaser or seller ( for "
                                                "imports from outside the EU pay the buyer )")
 
-    def _compute_amount_fix(self, base_amount, price_unit, quantity=1.0, product=None, partner=None, force_price_include=False):
+    def _compute_amount_fix(self, base_amount, price_unit, quantity=1.0, product=None, partner=None,
+                            force_price_include=False):
         """ Returns the amount of a single tax. base_amount is the actual amount on which the tax is applied, which is
             price_unit * quantity eventually affected by previous taxes (if tax is include_base_amount XOR price_include)
         """
@@ -44,7 +45,8 @@ class AccountTax(models.Model):
                 return quantity * self.amount
         if self.amount_type == 'percent' and force_price_include:
             return base_amount - (base_amount / (1 + self.amount / 100))
-        if (self.amount_type == 'percent' and not self.price_include) or (self.amount_type == 'division' and self.price_include):
+        if (self.amount_type == 'percent' and not self.price_include) or (
+                self.amount_type == 'division' and self.price_include):
             return base_amount * self.amount / 100
         if self.amount_type == 'percent' and self.price_include:
             return base_amount - (base_amount / (1 + self.amount / 100))
@@ -71,7 +73,8 @@ class AccountTax(models.Model):
                 return quantity * self.amount
         if self.tax_credit_payable == 'taxadvpay':
             return 0.0
-        if (self.amount_type == 'percent' and not self.price_include) or (self.amount_type == 'division' and self.price_include):
+        if (self.amount_type == 'percent' and not self.price_include) or (
+                self.amount_type == 'division' and self.price_include):
             return base_amount * self.amount / 100
         if self.amount_type == 'percent' and self.price_include:
             return base_amount - (base_amount / (1 + self.amount / 100))
@@ -80,24 +83,31 @@ class AccountTax(models.Model):
 
     def _compute_amount(self, base_amount, price_unit, quantity=1.0, product=None, partner=None):
         if self._context.get('force_fix', False):
-            ret = self._compute_amount_fix(base_amount, price_unit, quantity=quantity, product=product, partner=partner, force_price_include=True)
+            ret = self._compute_amount_fix(base_amount, price_unit, quantity=quantity, product=product, partner=partner,
+                                           force_price_include=True)
         elif self._context.get('force_purchase', False) or self._name == 'purchase.order.line':
-            ret = self._compute_amount_purchase(base_amount, price_unit, quantity=quantity, product=product, partner=partner)
+            ret = self._compute_amount_purchase(base_amount, price_unit, quantity=quantity, product=product,
+                                                partner=partner)
         else:
-            ret = super(AccountTax, self)._compute_amount(base_amount, price_unit, quantity=quantity, product=product, partner=partner)
+            ret = super(AccountTax, self)._compute_amount(base_amount, price_unit, quantity=quantity, product=product,
+                                                          partner=partner)
         return ret
 
     @api.multi
     def compute_all(self, price_unit, currency=None, quantity=1.0, product=None, partner=None):
         if self._context.get('force_fix', False):
-            return self.compute_all_fix(price_unit, currency=currency, quantity=quantity, product=product, partner=partner, force_price_include=True)
+            return self.compute_all_fix(price_unit, currency=currency, quantity=quantity, product=product,
+                                        partner=partner, force_price_include=True)
         if self._context.get('comapany_currency', False):
-            return self.compute_all_currency(price_unit, currency=currency, quantity=quantity, product=product, partner=partner)
+            return self.compute_all_currency(price_unit, currency=currency, quantity=quantity, product=product,
+                                             partner=partner)
         if self._context.get('customs_fix'):
-            tax = self.compute_all_customs_fix(price_unit, currency=currency, quantity=quantity, product=product, partner=partner)
+            tax = self.compute_all_customs_fix(price_unit, currency=currency, quantity=quantity, product=product,
+                                               partner=partner)
             if tax:
                 return tax
-        return super(AccountTax, self).compute_all(price_unit, currency=currency, quantity=quantity, product=product, partner=partner)
+        return super(AccountTax, self).compute_all(price_unit, currency=currency, quantity=quantity, product=product,
+                                                   partner=partner)
 
     @api.multi
     def compute_all_currency(self, price_unit, currency=None, quantity=1.0, product=None, partner=None):
@@ -110,7 +120,8 @@ class AccountTax(models.Model):
                                                     partner=partner)
         for tax in taxes:
             taxes_base[tax['id']] = tax
-        taxes_currency = super(AccountTax, self).compute_all(price_unit, currency=company_id.currency_id, quantity=quantity,
+        taxes_currency = super(AccountTax, self).compute_all(price_unit, currency=company_id.currency_id,
+                                                             quantity=quantity,
                                                              product=product, partner=partner)
         for tax in taxes_currency:
             tax.update({
@@ -126,7 +137,8 @@ class AccountTax(models.Model):
         return {}
 
     @api.multi
-    def compute_all_fix(self, price_unit, currency=None, quantity=1.0, product=None, partner=None, force_price_include=False):
+    def compute_all_fix(self, price_unit, currency=None, quantity=1.0, product=None, partner=None,
+                        force_price_include=False):
         """ Returns all information required to apply taxes (in self + their children in case of a tax goup).
             We consider the sequence of the parent for group of taxes.
                 Eg. considering letters as taxes and alphabetic order as sequence :
@@ -235,7 +247,8 @@ class AccountTax(models.Model):
         }
 
     @api.multi
-    def json_friendly_compute_all_fix(self, price_unit, currency_id=None, quantity=1.0, product_id=None, partner_id=None):
+    def json_friendly_compute_all_fix(self, price_unit, currency_id=None, quantity=1.0, product_id=None,
+                                      partner_id=None):
         """ Just converts parameters in browse records and calls for compute_all, because js widgets can't serialize browse records """
         if currency_id:
             currency_id = self.env['res.currency'].browse(currency_id)
@@ -243,7 +256,9 @@ class AccountTax(models.Model):
             product_id = self.env['product.product'].browse(product_id)
         if partner_id:
             partner_id = self.env['res.partner'].browse(partner_id)
-        return self.with_context(self._context, force_fix=True).compute_all(price_unit, currency=currency_id, quantity=quantity, product=product_id, partner=partner_id)
+        return self.with_context(self._context, force_fix=True).compute_all(price_unit, currency=currency_id,
+                                                                            quantity=quantity, product=product_id,
+                                                                            partner=partner_id)
 
 
 class AccountAccountTag(models.Model):
@@ -252,12 +267,6 @@ class AccountAccountTag(models.Model):
     _parent_store = True
     _parent_order = 'name'
     _order = 'parent_left'
-
-    def _get_type_taxes(self):
-        return self.env['account.account.tag.template']._get_type_taxes()
-
-    def _get_type_info(self):
-        return self.env['account.account.tag.template']._get_type_info()
 
     code = fields.Char("Code", index=True, copy=False)
     account_ids = fields.Many2many('account.account', relation='account_account_account_tag',
@@ -288,8 +297,8 @@ class AccountAccountTag(models.Model):
                                  default=lambda self: self.env['res.company']._company_default_get(
                                      'account.account.tag'))
 
-    type_taxes = fields.Selection(selection='_get_type_taxes', string='Type taxes')
-    type_info = fields.Selection(selection='_get_type_info', string='Type info')
+    type_taxes = fields.Selection(selection=GET_TYPE_TAXES, string='Type taxes')
+    type_info = fields.Selection(selection=GET_TYPE_INFO, string='Type info')
 
     display_name = fields.Char(compute='_compute_display_name')
 

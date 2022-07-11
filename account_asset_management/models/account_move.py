@@ -56,28 +56,35 @@ class AccountMoveLine(models.Model):
     tax_profile_id = fields.Many2one(comodel_name='account.bg.asset.profile', string='Tax Asset Profile')
     asset_id = fields.Many2one(comodel_name='account.asset', string='Asset', ondelete='restrict')
     asset_salvage_value = fields.Float(string='Salvage Value', digits=dp.get_precision('Account'))
-    restatement_asset_id = fields.Many2one(comodel_name='account.asset', string='Restatement Asset', ondelete='restrict')
-    restatement_type = fields.Selection(selection=lambda self: self.env['account.asset.restatement.value']._selection_method(),  default='create')
+    restatement_asset_id = fields.Many2one(comodel_name='account.asset', string='Restatement Asset',
+                                           ondelete='restrict')
+    restatement_type = fields.Selection(
+        selection=lambda self: self.env['account.asset.restatement.value']._selection_method(), default='create')
 
     @api.onchange('account_id')
     def _onchange_account_id(self):
         self.asset_profile_id = self.account_id.asset_profile_id
 
-    def _prepare_asset(self, vals):
-        move = self.env['account.move'].browse(vals['move_id'])
-        depreciation_base = vals['debit'] or -vals['credit']
-        return {
-            'name': vals['name'],
-            'profile_id': vals.get('asset_profile_id', False),
-            'tax_profile_id': vals.get('tax_profile_id', False),
-            'purchase_value': depreciation_base,
-            'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'],
-            'partner_id': vals['partner_id'],
-            'date_start': move.date,
-            'date_buy': self.invoice_id and self.invoice_id.date_invoice or move.date,
-            'product_id': vals['product_id'],
-            # 'company_id': vals.get('company_id'),
-        }
+    # def _prepare_asset(self, vals):
+    #     self.ensure_one()
+    #     move = self.env['account.move'].browse(vals['move_id'])
+    #     depreciation_base = vals['debit'] or -vals['credit']
+    #     if 'invoice_id' in vals:
+    #         invoice_id = self.env['account.invoice'].browse(vals['invoice_id'])
+    #     else:
+    #         invoice_id = self.invoice_id
+    #     return {
+    #         'name': vals['name'],
+    #         'profile_id': vals.get('asset_profile_id', False),
+    #         'tax_profile_id': vals.get('tax_profile_id', False),
+    #         'purchase_value': depreciation_base,
+    #         'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'],
+    #         'partner_id': vals['partner_id'],
+    #         'date_start': move.date,
+    #         'date_buy': invoice_id and invoice_id.date_invoice or move.date,
+    #         'product_id': vals['product_id'],
+    #         # 'company_id': vals.get('company_id'),
+    #     }
 
     @api.multi
     def _prepare_asset_create(self, vals):
@@ -90,6 +97,20 @@ class AccountMoveLine(models.Model):
                      vals.get('partner', False) or self.partner_id.id
         date_start = 'date' in vals and \
                      vals.get('date', False) or self.date
+        product_id = 'product_id' in vals and vals.get('product_id', False) or self.product_id.id
+        if 'invoice_id' in vals:
+            invoice_id = self.env['account.invoice'].browse(vals['invoice_id'])
+        else:
+            invoice_id = self.invoice_id
+        # lot_id = 'lot_id' in vals and vals.get('lot_id', False) or False
+        # if invoice_id:
+        #     other_move_line_id = invoice_id.move_lines.filtered(lambda r: r.product_id.id == product_id)
+        #     if
+        #     lot_id = other_move_line_id.mapped('lot_id')
+        #     if len(lot_id.ids) > 1:
+        #         lot_id = lot_id[0]
+        #     lot_id = lot_id.id
+        #     other_move_line_id =
         return {
             'name': vals.get('name') or self.name,
             'profile_id': vals.get('asset_profile_id', False),
@@ -97,8 +118,9 @@ class AccountMoveLine(models.Model):
             'purchase_value': depreciation_base,
             'partner_id': partner_id,
             'date_start': date_start,
-            'date_buy': self.invoice_id and self.invoice_id.date_invoice or date_start,
+            'date_buy': invoice_id and self.invoice_id.date_invoice or date_start,
             'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'] or self.asset_salvage_value,
+            # 'lot_id': lot_id,
             'company_id': vals.get('company_id') or self.company_id.id,
         }
 
@@ -121,8 +143,8 @@ class AccountMoveLine(models.Model):
 
         if vals.get('asset_profile_id'):
             # check for additional values added now
-            #account = False
-            #if vals.get('account_id'):
+            # account = False
+            # if vals.get('account_id'):
             #    account = self.env['account.account'].browse(vals['account_id'])
             correction = False
             if vals.get('save_asset_id'):
@@ -133,8 +155,8 @@ class AccountMoveLine(models.Model):
             if not correction:
                 # create asset
                 asset_obj = self.env['account.asset']
-                temp_vals = self._prepare_asset(vals)
-                _logger.info("ASSET INSIDE %s" % temp_vals)
+                temp_vals = self._prepare_asset_create(vals)
+                # _logger.info("ASSET INSIDE %s" % temp_vals)
                 if vals.get('move_line_id'):
                     temp_vals.update({
                         'move_line_id': vals['move_line_id'],
@@ -163,14 +185,14 @@ class AccountMoveLine(models.Model):
     @api.multi
     def write(self, vals):
         if (
-            self.mapped('asset_id') and
-            set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE)
-            and not (
+                (self.mapped('asset_id') and vals.get('asset_id', False)) and
+                set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE)
+                and not (
                 self.env.context.get('allow_asset_removal') and
                 list(vals.keys()) == ['asset_id'])
         ):
             raise UserError(
-                _("You cannot change an accounting item "
+                _("You cannot change an accounting item line "
                   "linked to an asset depreciation line."))
         if vals.get('asset_id') and not self.env.context.get('allow_asset') and not vals.get('restatement_asset_id'):
             raise UserError(
@@ -228,5 +250,5 @@ class AccountMoveLine(models.Model):
         asset_temp._onchange_profile_id()
         for field in asset_temp._fields:
             if field not in vals and asset_temp[field]:
-                vals[field] = asset_temp._fields[field].\
+                vals[field] = asset_temp._fields[field]. \
                     convert_to_write(asset_temp[field], asset_temp)

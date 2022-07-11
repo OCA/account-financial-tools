@@ -32,7 +32,7 @@ class ReportStockMoveForecat(models.Model):
         product_id as product_id,
         date as date,
         sum(product_qty) AS quantity,
-        sum(sum(product_qty)) OVER (PARTITION BY product_id ORDER BY date) AS cumulative_quantity
+        sum(product_qty) OVER (PARTITION BY product_id ORDER BY date) AS cumulative_quantity
         FROM
         (SELECT
         MIN(id) as id,

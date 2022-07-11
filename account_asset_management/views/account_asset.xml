@@ -248,6 +248,7 @@
                   <field name="init_entry" string="Init"/>
                   <field name="sleep_period"/>
                   <field name="parent_state" invisible="1"/>
+                  <button name="unlink" icon="fa-times" string="Delete Move" type="object" confirm="Are you sure ?" groups="account.group_account_manager"/>
                 </tree>
                 <form string="Asset Line">
                   <group>

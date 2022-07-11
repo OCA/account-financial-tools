@@ -56,7 +56,8 @@ class AccountInvoiceAssetLines(models.TransientModel):
     _name = 'account.invoice.asset.lines'
     _description = 'Wizard to add invoice from invoice lines'
 
-    wizard_asset_id = fields.Many2one('account.invoice.asset', 'Wizard account invoice asset')
+    wizard_asset_id = fields.Many2one('account.invoice.asset', 'Wizard account invoice asset', index=True,
+                                      ondelete='cascade')
     invoice_line_id = fields.Many2one('account.invoice.line', 'Invoice line')
     product_id = fields.Many2one('product.product', 'Product', related='invoice_line_id.product_id')
     account_id = fields.Many2one('account.account', 'Account', related='invoice_line_id.account_id')

@@ -42,33 +42,30 @@ class StockMove(models.Model):
         return vals
 
     def _account_entry_move(self):
-        if self.asset_profile_id and not self.move_line_ids.mapped('asset_id'):
-            line_to_create_sum = 0.0
-            line_to_create = self.quantity_done
-            for line in self.move_line_ids:
-                while line_to_create > 1:
-                    line_to_create -= 1
-                    line_to_create_sum += 1
-                    qty = 1.0
-                    super(StockMove, self.with_context(dict(self._context, forced_quantity=qty)))._account_entry_move()
-            if line_to_create - line_to_create_sum > 0:
-                qty = line_to_create - line_to_create_sum
-                super(StockMove, self.with_context(dict(self._context, forced_quantity=qty)))._account_entry_move()
-        elif not self.asset_profile_id and \
-                self.move_line_ids.mapped('asset_id'):
-            line_to_create_sum = 0.0
-            line_to_create = self.quantity_done
-            for line in self.move_line_ids.filtered(lambda r: r.asset_id):
-                if line.asset_id.to_sell:
-                    continue
-                line_to_create_sum += line.qty_done
-                super(StockMove, self.with_context(dict(self._context, forced_quantity=line.qty_done,
-                                                        force_asset=line.asset_id)))._account_entry_move()
-                if self._is_out():
-                    line.asset_id.with_context(dict(self._context, asset_out=True)).validate()
-            if line_to_create - line_to_create_sum > 0:
-                qty = line_to_create - line_to_create_sum
-                super(StockMove, self.with_context(dict(self._context, forced_quantity=qty)))._account_entry_move()
+        if not self.asset_profile_id and self.move_line_ids.mapped('asset_id').filtered(lambda r: not r.to_sell):
+            if self._context.get('force_asset'):
+                force_asset = self._context['force_asset']
+            else:
+                force_asset = self.move_line_ids.mapped('asset_id').filtered(lambda r: not r.to_sell)
+            allow_asset_removal = self._is_out()
+            allow_asset = self._is_in()
+            date = self.date
+            if len(force_asset.ids) > 1:
+                force_asset = force_asset[0]
+            if force_asset.date_start.year == date.year:
+                force_asset.to_sell = True
+                force_asset = False
+                allow_asset_removal = False
+            if allow_asset_removal and force_asset.state == 'draft' and force_asset.date_start.year != date.year:
+                force_asset.validate()
+                force_asset.compute_depreciation_board()
+                force_asset.with_context(dict(self._context, bg_asset_line=True)).compute_depreciation_board()
+            super(StockMove, self).with_context(dict(self._context,
+                                                     force_asset=force_asset,
+                                                     allow_asset_removal=allow_asset_removal,
+                                                     allow_asset=allow_asset))._account_entry_move()
+            if allow_asset_removal:
+                force_asset.with_context(dict(self._context, asset_out=True)).validate()
         else:
             super(StockMove, self)._account_entry_move()
 
@@ -77,24 +74,29 @@ class StockMove(models.Model):
         journal_id, acc_src, acc_dest, acc_valuation = super(StockMove, self)._get_accounting_data_for_valuation()
         if self._context.get('force_asset'):
             asset = self._context.get('force_asset', False)
-            if asset:
-                journal_id = asset.profile_id.journal_id.id
+            if asset and asset.profile_id.journal_stock_move_id:
+                journal_id = asset.profile_id.journal_stock_move_id.id
         return journal_id, acc_src, acc_dest, acc_valuation
 
     def _prepare_account_move_line(self, qty, cost, credit_account_id, debit_account_id):
         res = super(StockMove, self)._prepare_account_move_line(qty, cost, credit_account_id, debit_account_id)
         # _logger.info("RES %s" % res)
-        if self.asset_profile_id and not self.move_line_ids.mapped('asset_id') and self._is_in():
-            # _logger.info("ASSET Dt-%s/Ct-%s" % (res[0][2], res[1][2]))
-            res[0][2]['asset_profile_id'] = self.asset_profile_id.id
-            res[0][2]['tax_profile_id'] = self.tax_profile_id and self.tax_profile_id.id or False
-            if len(self.move_line_ids.ids) == 1:
-                res[0][2]['move_line_id'] = self.move_line_ids[0].id
-                for move_line in self.move_line_ids.filtered(lambda r: r.lot_id):
-                    res[0][2]['lot_id'] = move_line.lot_id.id
-                    break
+        if not self.asset_profile_id and self._context.get('force_asset') and self._is_in():
+            asset = self._context.get('force_asset')
+            res[0][2]['asset_id'] = asset.id
+            res[1][2]['asset_id'] = asset.id
 
-        elif self._context.get('force_asset') and self._is_out():
+        # if self.asset_profile_id and not self.move_line_ids.mapped('asset_id') and self._is_in():
+        #     # _logger.info("ASSET Dt-%s/Ct-%s" % (res[0][2], res[1][2]))
+        #     res[0][2]['asset_profile_id'] = self.asset_profile_id.id
+        #     res[0][2]['tax_profile_id'] = self.tax_profile_id and self.tax_profile_id.id or False
+        #     if len(self.move_line_ids.ids) == 1:
+        #         res[0][2]['move_line_id'] = self.move_line_ids[0].id
+        #         for move_line in self.move_line_ids.filtered(lambda r: r.lot_id):
+        #             res[0][2]['lot_id'] = move_line.lot_id.id
+        #             break
+
+        if self._context.get('force_asset') and self._is_out():
             asset = self._context.get('force_asset')
             if asset.state == 'open':
                 date = self.accounting_date or self.date

@@ -70,11 +70,18 @@ class StockMoveLine(models.Model):
                 # _logger.info("MOVE STOCK MOVE self._context(%s)::%s\n%s(%s) %s(%s)=%s*%s (purchase_line_id:%s)" %
                 #              (self._context, move.remaining_qty, move.product_id.display_name, move._is_dropshipped(), self.qty_done,
                 #               price_unit, amount, move.product_id.standard_price, move.purchase_line_id))
-
+                force_asset = allow_asset_removal = allow_asset = False
+                if self.asset_id and not self.asset_id.to_sell:
+                    force_asset = self.asset_id
+                    allow_asset_removal = move._is_out()
+                    allow_asset = move._is_in()
                 move.with_context(dict(self._context,
                                        forced_quantity=valued_quantity,
                                        force_valuation_amount=amount,
-                                       force_period_date=date))._account_entry_move()
+                                       force_period_date=date,
+                                       force_asset=force_asset,
+                                       allow_asset=allow_asset,
+                                       allow_asset_removal=allow_asset_removal))._account_entry_move()
 
     @api.multi
     def rebuild_account_move(self):

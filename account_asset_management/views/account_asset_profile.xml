@@ -26,6 +26,7 @@
               </group>
               <group>
                 <field name="journal_id"/>
+                <field name="journal_stock_move_id"/>
                 <field name="account_asset_id" domain="[('company_id', '=', company_id)]"/>
                 <field name="account_depreciation_id" domain="[('company_id', '=', company_id)]"/>
                 <field name="account_expense_depreciation_id" domain="[('company_id', '=', company_id)]"/>

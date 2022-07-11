@@ -55,6 +55,10 @@ class AccountAssetProfile(models.Model):
         comodel_name='account.journal',
         domain=[('type', '=', 'general')],
         string='Journal', required=True)
+    journal_stock_move_id = fields.Many2one(
+        comodel_name='account.journal',
+        domain=[('type', '=', 'general')],
+        string='Asset move journal')
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company', required=True,
