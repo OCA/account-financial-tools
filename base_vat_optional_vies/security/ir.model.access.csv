@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vies_vat_check_vies_vat_check_extension,vies_vat_check.vies_vat_check_extension,model_vies_vat_check_extension,base.group_user,1,1,1,0
