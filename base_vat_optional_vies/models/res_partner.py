@@ -119,6 +119,10 @@ class ResPartner(models.Model):
         if company_id.vat:
             company_country_code = company_id.vat[:2]
             company_vat_number = company_id.vat[2:]
+        else:
+            error_msg = _(
+                "You must set a valid VAT-ID in your company profile in order to use extended VAT validation by VIES.")
+            raise self.env['res.config.settings'].get_config_warning(error_msg)
         url = "https://ec.europa.eu/taxation_customs/vies/services/checkVatService"
         headers = {"content-type": "application/soap+xml"}
         body = """
