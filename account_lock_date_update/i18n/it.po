@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2022-04-19 13:05+0000\n"
-"Last-Translator: Lorenzo Battistini <lb@takobi.online>\n"
+"PO-Revision-Date: 2022-07-12 19:06+0000\n"
+"Last-Translator: Sergio Corato <sergiocorato@gmail.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. module: account_lock_date_update
 #: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
 msgid "Account Update Lock_date"
-msgstr ""
+msgstr "Aggiorna Date di Blocco Contabili nel passato"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
@@ -62,22 +62,22 @@ msgstr "Ultima modifica il"
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Ultimo Aggiornamento da"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultimo Aggiornamento il"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
 msgid "Lock Date"
-msgstr "Data blocco"
+msgstr "Data blocco nel passato"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
 msgid "Lock Date for Non-Advisers"
-msgstr "Data blocco per non consulenti"
+msgstr "Data blocco nel passato per non consulenti"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
@@ -85,8 +85,9 @@ msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
 "this date. Use it for fiscal year locking for example."
 msgstr ""
-"Nessun utente, inclusi i consulenti, possono modificare la contabilità prima "
-"di questa data, inclusa. Usarla per esempio per bloccare l'anno fiscale."
+"Nessun utente, inclusi i consulenti, può modificare i movimenti contabili "
+"prima di, e incluso, questa data. Usarla per esempio per bloccare l'anno "
+"fiscale."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__period_lock_date
@@ -95,8 +96,8 @@ msgid ""
 "of this date. Use it for period locking inside an open fiscal year, for "
 "example."
 msgstr ""
-"Solo gli utenti con il ruolo \"consulente\" possono modificare la "
-"contabilità prima di questa data, inclusa. Usarla per bloccare periodi "
+"Solo gli utenti con il ruolo \"consulente\" possono modificare i movimenti "
+"contabili prima di, e incluso, questa data. Usarla per bloccare periodi "
 "all'interno di un anno fiscale aperto, per esempio."
 
 #. module: account_lock_date_update
@@ -108,7 +109,7 @@ msgstr "Aggiornare"
 #: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
 #: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
 msgid "Update accounting lock dates"
-msgstr "Aggiornare date di blocco contabilità"
+msgstr "Aggiornare date di blocco contabilità nel passato"
 
 #. module: account_lock_date_update
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:42
