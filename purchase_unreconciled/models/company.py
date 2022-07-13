@@ -18,3 +18,4 @@ class ResCompany(models.Model):
     purchase_reconcile_journal_id = fields.Many2one(
         "account.journal", string="WriteOff Journal for Purchases"
     )
+    purchase_lock_auto_reconcile = fields.Boolean()
