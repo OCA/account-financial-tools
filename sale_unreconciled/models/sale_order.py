@@ -146,8 +146,14 @@ class SaleOrder(models.Model):
                 "domain": [("id", "in", reconciled_ids.ids)],
             }
 
+    def reconcile_criteria(self):
+        """Gets the criteria where SOs are locked or not, by default uses the company
+        configuration"""
+        self.ensure_one()
+        return self.unreconciled and self.company_id.sale_lock_auto_reconcile
+
     def action_done(self):
         for rec in self:
-            if rec.unreconciled:
+            if rec.reconcile_criteria():
                 rec.action_reconcile()
         return super(SaleOrder, self).action_done()
