@@ -19,3 +19,4 @@ class ResCompany(models.Model):
     sale_reconcile_journal_id = fields.Many2one(
         "account.journal", string="Writeoff Journal for Sales"
     )
+    sale_lock_auto_reconcile = fields.Boolean()
