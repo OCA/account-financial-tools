@@ -11,7 +11,25 @@
                     <div
                         class="col-xs-12 col-md-6 o_setting_box"
                         id="sale_unreconciled_setting_account"
-                    >
+                    >                        <div>
+                        <div class="o_setting_left_pane">
+                                <field name="sale_lock_auto_reconcile" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="sale_lock_auto_reconcile" />
+                            <span
+                                    class="fa fa-lg fa-building-o"
+                                    title="Values set here are company-specific."
+                                    role="img"
+                                    aria-label="Values set here are company-specific."
+                                    groups="base.group_multi_company"
+                                />
+                            <div class="text-muted">
+                                Reconcile PO upon locking
+                            </div>
+                        </div>
+                        <br />
+                        </div>
                         <div class="o_setting_left_pane" />
                         <div class="o_setting_right_pane">
                             <label for="sale_reconcile_account_id" />

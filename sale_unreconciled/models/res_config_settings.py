@@ -13,3 +13,6 @@ class ResConfigSettings(models.TransientModel):
     sale_reconcile_journal_id = fields.Many2one(
         related="company_id.sale_reconcile_journal_id", readonly=False
     )
+    sale_lock_auto_reconcile = fields.Boolean(
+        related="company_id.sale_lock_auto_reconcile", readonly=False
+    )

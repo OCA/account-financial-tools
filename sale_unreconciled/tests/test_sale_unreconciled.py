@@ -107,6 +107,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
             }
         )
         # company settings for automated valuation
+        cls.company.sale_lock_auto_reconcile = True
         cls.company.sale_reconcile_account_id = cls.writeoff_acc
         cls.company.sale_reconcile_journal_id = cls.sale_journal
 
