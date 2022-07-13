@@ -39,7 +39,7 @@ addon | version | maintainers | summary
 [account_loan](account_loan/) | 14.0.1.0.2 |  | Account Loan management
 [account_lock_date_update](account_lock_date_update/) | 14.0.2.0.0 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_lock_to_date](account_lock_to_date/) | 14.0.1.0.0 |  | Allows to set an account lock date in the future.
-[account_menu](account_menu/) | 14.0.1.1.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module
+[account_menu](account_menu/) | 14.0.1.1.1 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module
 [account_move_budget](account_move_budget/) | 14.0.1.0.0 |  | Create Accounting Budgets
 [account_move_fiscal_month](account_move_fiscal_month/) | 14.0.1.0.0 |  | Display the fiscal month on journal entries/item
 [account_move_fiscal_year](account_move_fiscal_year/) | 14.0.1.0.1 |  | Display the fiscal year on journal entries/item
