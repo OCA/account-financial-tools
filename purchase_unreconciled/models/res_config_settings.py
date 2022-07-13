@@ -14,3 +14,6 @@ class ResConfigSettings(models.TransientModel):
     purchase_reconcile_journal_id = fields.Many2one(
         related="company_id.purchase_reconcile_journal_id", readonly=False
     )
+    purchase_lock_auto_reconcile = fields.Boolean(
+        related="company_id.purchase_lock_auto_reconcile", readonly=False
+    )

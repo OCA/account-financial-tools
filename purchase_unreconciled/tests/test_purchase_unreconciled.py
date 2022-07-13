@@ -132,6 +132,7 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
             }
         )
         # company settings for automated valuation
+        cls.company.purchase_lock_auto_reconcile = True
         cls.company.purchase_reconcile_account_id = cls.writeoff_acc
         cls.company.purchase_reconcile_journal_id = cls.stock_journal
 
