@@ -45,8 +45,6 @@ msgid "Account Tax Group"
 msgstr "Gruppo di Imposte"
 
 #. module: account_menu
-#: model:ir.actions.act_window,name:account_menu.action_account_tax_group
-#: model:ir.ui.menu,name:account_menu.account_tax_group_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Groups"
 msgstr "Gruppi di Imposte"
@@ -132,7 +130,8 @@ msgstr "Ultima modifica il"
 #: model_terms:ir.ui.view,arch_db:account_menu.res_config_settings_view_form
 msgid ""
 "Record the cost of a good as an expense when this good is\n"
-"                                invoiced to a final customer (instead of recording the cost as soon\n"
+"                                invoiced to a final customer (instead of "
+"recording the cost as soon\n"
 "                                as the product is received in stock)."
 msgstr ""
 "Registra il costo di un bene come una spesa quando tale bene\n"
@@ -153,6 +152,12 @@ msgstr ""
 #: model:ir.model,name:account_menu.model_account_tax_group
 msgid "Tax Group"
 msgstr "Gruppo imposte"
+
+#. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.action_account_tax_group
+#: model:ir.ui.menu,name:account_menu.account_tax_group_menu
+msgid "Tax Groups"
+msgstr ""
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_tax_template

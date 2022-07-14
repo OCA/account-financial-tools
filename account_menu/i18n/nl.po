@@ -46,8 +46,6 @@ msgid "Account Tax Group"
 msgstr "BTW-groep"
 
 #. module: account_menu
-#: model:ir.actions.act_window,name:account_menu.action_account_tax_group
-#: model:ir.ui.menu,name:account_menu.account_tax_group_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Groups"
 msgstr "Belastingsgroepen"
@@ -149,6 +147,12 @@ msgstr ""
 #: model:ir.model,name:account_menu.model_account_tax_group
 msgid "Tax Group"
 msgstr "Belastingsgroep"
+
+#. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.action_account_tax_group
+#: model:ir.ui.menu,name:account_menu.account_tax_group_menu
+msgid "Tax Groups"
+msgstr ""
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_tax_template
