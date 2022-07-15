@@ -11,6 +11,7 @@ class TestResPartner(common.TransactionCase):
     def setUp(self):
         super(TestResPartner, self).setUp()
         self.company = self.env.user.company_id
+        self.company.vat = "DE158359013"
         self.company.vat_check_vies = True
         self.partner = self.env["res.partner"].create(
             {
@@ -24,20 +25,17 @@ class TestResPartner(common.TransactionCase):
     def test_validate_vat_vies(self):
         with mock.patch(self.vatnumber_path) as mock_vatnumber:
             mock_vatnumber.check_vies.return_value = True
-            self.env.company.vat = "DE158359013"
             self.partner.vat = "ESB87530432"
             self.assertEqual(self.partner.vies_passed, True)
 
     def test_exception_vat_vies(self):
         with mock.patch(self.vatnumber_path) as mock_vatnumber:
             mock_vatnumber.check_vies.side_effect = Exception()
-            self.env.company.vat = "DE158359013"
             self.partner.vat = "ESB87530432"
             self.assertEqual(self.partner.vies_passed, False)
 
     def test_no_validate_vat(self):
         with mock.patch(self.vatnumber_path) as mock_vatnumber:
             mock_vatnumber.check_vies.return_value = False
-            self.env.company.vat = "DE158359013"
             self.partner.vat = "ESB87530432"
             self.assertEqual(self.partner.vies_passed, False)
