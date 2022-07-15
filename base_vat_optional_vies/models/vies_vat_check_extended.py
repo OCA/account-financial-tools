@@ -3,7 +3,7 @@
 from odoo import models, fields, api, _
 
 
-class vies_vat_check_extension(models.Model):
+class ViesVatCheckExtension(models.Model):
      _name = 'vies_vat_check_extension'
      _description = 'vies_vat_check_extension'
      _order = 'requestdate desc, id desc'
