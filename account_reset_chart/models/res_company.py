@@ -110,6 +110,8 @@ class ResCompany(models.Model):
         unlink_from_company("account.analytic.line")
         unlink_from_company("account.tax")
         unlink_from_company("account.tax.code")
+        unlink_from_company("pos.config")
+        unlink_from_company("pos.payment.method")
         unlink_from_company("account.journal")
         unlink_from_company("account.journal.group")
         unlink_from_company("account.account")
