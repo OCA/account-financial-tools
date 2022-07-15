@@ -4,7 +4,7 @@
         <field name="name">res.partner.vies_vat_check.form.view</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
-        <field name="priority">98</field>
+        <field name="priority">99</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vat']" position="replace">
                 <field name="vat" attrs="{'invisible': [('vat_id_last_check_date','!=', False)]}" style="background-color:lightyellow;" />

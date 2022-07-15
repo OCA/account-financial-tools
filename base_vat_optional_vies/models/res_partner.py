@@ -1,7 +1,7 @@
 # Copyright 2015 Tecnativa - Antonio Espinosa
 # Copyright 2017 Tecnativa - David Vidal
 # Copyright 2019 FactorLibre - Rodrigo Bonilla
-# COpyright 2022 Wolfswerke Sachsen GmbH - Heiko Groeneweg
+# Copyright 2022 Wolfswerke Sachsen GmbH - Heiko Groeneweg
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models, _
 import requests
