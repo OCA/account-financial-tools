@@ -36,7 +36,8 @@ class ResPartner(models.Model):
         if not res:
             return self.simple_vat_check(country_code, vat_number)
         else:
-            self.vies_vat_check_extended(country_code, vat_number)
+            if isinstance(res, bool): # Do not run extended check during module test with exception
+                self.vies_vat_check_extended(country_code, vat_number)
 
         return res
 
