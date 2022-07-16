@@ -3,44 +3,59 @@
     <record id="res_partner_vies_vat_ceck_form_view" model="ir.ui.view">
         <field name="name">res.partner.vies_vat_check.form.view</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="inherit_id" ref="base.view_partner_form" />
         <field name="priority">99</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vat']" position="replace">
-                <field name="vat" attrs="{'invisible': [('vat_id_last_check_date','!=', False)]}" style="background-color:lightyellow;" />
-                <field name="vat" attrs="{'invisible': [
+                <field
+                    name="vat"
+                    attrs="{'invisible': [('vat_id_last_check_date','!=', False)]}"
+                    style="background-color: lightyellow;"
+                />
+                <field
+                    name="vat"
+                    attrs="{'invisible': [
                 '|'
                 , ('vat_id_last_check_date','=', False)
                 , ('vies_passed', '=', True)
-                ]}" style="background-color:tomato;" />
-                <field name="vat" attrs="{'invisible': [
+                ]}"
+                    style="background-color:tomato;"
+                />
+                <field
+                    name="vat"
+                    attrs="{'invisible': [
                 '|'
                 , ('vat_id_last_check_date','=', False)
                 , ('vies_passed', '=', False)
-                ]}" style="background-color:lightgreen;" />
-                <field name="vies_passed" widget="boolean_toggle" invisible="True"/>
-                <field name="vat_id_last_check_date" readonly="True"/>
+                ]}"
+                    style="background-color:lightgreen;"
+                />
+                <field name="vies_passed" widget="boolean_toggle" invisible="True" />
+                <field name="vat_id_last_check_date" readonly="True" />
             </xpath>
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <page name="vies_check_ids" string="EU VAT Checks">
-                    <field name="vies_check_ids" options="{'no_create': True, 'no_edit': True, 'no_open': True}">
+                    <field
+                        name="vies_check_ids"
+                        options="{'no_create': True, 'no_edit': True, 'no_open': True}"
+                    >
                         <tree>
-                            <field name="requestdate"/>
-                            <field name="countrycode"/>
-                            <field name="vatnumber"/>
-                            <field name="valid"/>
-                            <field name="tradername"/>
-                            <field name="tradercompanytype"/>
-                            <field name="traderaddress"/>
-                            <field name="traderstreet"/>
-                            <field name="traderpostcode"/>
-                            <field name="tradercity"/>
-                            <field name="tradernamematch" optional="hide"/>
-                            <field name="tradercompanytypematch" optional="hide"/>
-                            <field name="traderstreetmatch" optional="hide"/>
-                            <field name="traderpostcodematch" optional="hide"/>
-                            <field name="tradercitymatch" optional="hide"/>
-                            <field name="requestidentifier"/>
+                            <field name="requestdate" />
+                            <field name="countrycode" />
+                            <field name="vatnumber" />
+                            <field name="valid" />
+                            <field name="tradername" />
+                            <field name="tradercompanytype" />
+                            <field name="traderaddress" />
+                            <field name="traderstreet" />
+                            <field name="traderpostcode" />
+                            <field name="tradercity" />
+                            <field name="tradernamematch" optional="hide" />
+                            <field name="tradercompanytypematch" optional="hide" />
+                            <field name="traderstreetmatch" optional="hide" />
+                            <field name="traderpostcodematch" optional="hide" />
+                            <field name="tradercitymatch" optional="hide" />
+                            <field name="requestidentifier" />
                         </tree>
                     </field>
                 </page>

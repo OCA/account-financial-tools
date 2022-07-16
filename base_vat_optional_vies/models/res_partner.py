@@ -3,10 +3,12 @@
 # Copyright 2019 FactorLibre - Rodrigo Bonilla
 # Copyright 2022 Wolfswerke Sachsen GmbH - Heiko Groeneweg
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models, _
-import requests
-from xml.etree import ElementTree as ET
 import html
+from xml.etree import ElementTree as ET
+
+import requests
+
+from odoo import _, api, fields, models
 
 
 class ResPartner(models.Model):
@@ -14,7 +16,7 @@ class ResPartner(models.Model):
 
     vies_passed = fields.Boolean(string="VIES validation", readonly=True)
     vat_id_last_check_date = fields.Datetime("VAT-ID last checked date")
-    vies_check_ids = fields.One2many('vies_vat_check_extension', 'res_partner_id')
+    vies_check_ids = fields.One2many("vies_vat_check_extension", "res_partner_id")
 
     @api.model
     def simple_vat_check(self, country_code, vat_number):
@@ -36,7 +38,9 @@ class ResPartner(models.Model):
         if not res:
             return self.simple_vat_check(country_code, vat_number)
         else:
-            if isinstance(res, bool): # Do not run extended check during module test with exception
+            if isinstance(
+                res, bool
+            ):  # Do not run extended check during module test with exception
                 self.vies_vat_check_extended(country_code, vat_number)
 
         return res
@@ -65,19 +69,32 @@ class ResPartner(models.Model):
                         <urn:vatNumber>%s</urn:vatNumber>
                         <urn:requesterCountryCode>%s</urn:requesterCountryCode>
                         <urn:requesterVatNumber>%s</urn:requesterVatNumber>
-            """ % (country_code, vat_number, company_country_code, company_vat_number)
+            """ % (
+            country_code,
+            vat_number,
+            company_country_code,
+            company_vat_number,
+        )
         if partner.name:
             body += """<urn:traderName>%s</urn:traderName>
-                        """ % html.escape(partner.name)
+                        """ % html.escape(
+                partner.name
+            )
         if partner.street:
             body += """<urn:traderStreet>%s</urn:traderStreet>
-                     """ % html.escape(partner.street)
+                     """ % html.escape(
+                partner.street
+            )
         if partner.city:
             body += """<urn:traderCity>%s</urn:traderCity>
-                     """ % html.escape(partner.city)
+                     """ % html.escape(
+                partner.city
+            )
         if partner.zip:
             body += """<urn:traderPostcode>%s</urn:traderPostcode>
-                     """ % html.escape(partner.zip)
+                     """ % html.escape(
+                partner.zip
+            )
         body += """</urn:checkVatApprox>
                      </soapenv:Body>
                  </soapenv:Envelope>
@@ -86,34 +103,48 @@ class ResPartner(models.Model):
             response = requests.post(url, data=body, headers=headers)
         except IOError:
             error_msg = _(
-                "Something went wrong during VIES enquiry. Maybe your internet connection is lost.")
-            raise self.env['res.config.settings'].get_config_warning(error_msg)
+                "Something went wrong during VIES enquiry. Maybe your internet connection is lost."
+            )
+            raise self.env["res.config.settings"].get_config_warning(error_msg)
         if response:
             response_text = ET.fromstring(response.text)
             if response.status_code in (100, 200) and partner:
-                nsp = {'soap': 'http://schemas.xmlsoap.org/soap/envelope/',
-                       'urn': 'ec.europa.eu:taxud:vies:services:checkVat:types'}
+                nsp = {
+                    "soap": "http://schemas.xmlsoap.org/soap/envelope/",
+                    "urn": "ec.europa.eu:taxud:vies:services:checkVat:types",
+                }
                 vals = {}
                 for data in response_text.findall(
-                    ".//{urn:ec.europa.eu:taxud:vies:services:checkVat:types}checkVatApproxResponse/"):
-                    if data.text == 'true' or data.text == '1':
+                    ".//{urn:ec.europa.eu:taxud:vies:services:checkVat:types}checkVatApproxResponse/"
+                ):
+                    if data.text == "true" or data.text == "1":
                         val = True
-                    elif data.text in ('false', '2', '3'):
+                    elif data.text in ("false", "2", "3"):
                         val = False
                     else:
                         val = data.text
-                    vals[data.tag.replace('{urn:ec.europa.eu:taxud:vies:services:checkVat:types}',
-                                          '').lower()] = val
+                    vals[
+                        data.tag.replace(
+                            "{urn:ec.europa.eu:taxud:vies:services:checkVat:types}", ""
+                        ).lower()
+                    ] = val
 
-                if vals['valid'] == True:
+                if vals["valid"] == True:
                     partner.update({"vies_passed": True})
                 else:
                     partner.update({"vies_passed": False})
-                date_string = vals['requestdate']
-                partner.update({"vat_id_last_check_date": fields.datetime.strptime(date_string[:10], '%Y-%m-%d')})
-                vals['res_partner_id'] = partner.id
-                vals['name'] = partner.name + " - " + vals['requestdate']
-                self.env['vies_vat_check_extension'].create(vals)@api.model
+                date_string = vals["requestdate"]
+                partner.update(
+                    {
+                        "vat_id_last_check_date": fields.datetime.strptime(
+                            date_string[:10], "%Y-%m-%d"
+                        )
+                    }
+                )
+                vals["res_partner_id"] = partner.id
+                vals["name"] = partner.name + " - " + vals["requestdate"]
+                self.env["vies_vat_check_extension"].create(vals) @ api.model
+
     def vies_vat_check_extended(self, country_code, vat_number):
         company_id = self.company_id or self.env.company
         partner = self.env.context.get("vat_partner")
@@ -122,8 +153,9 @@ class ResPartner(models.Model):
             company_vat_number = company_id.vat[2:]
         else:
             error_msg = _(
-                "You must set a valid VAT-ID in your company profile in order to use extended VAT validation by VIES.")
-            raise self.env['res.config.settings'].get_config_warning(error_msg)
+                "You must set a valid VAT-ID in your company profile in order to use extended VAT validation by VIES."
+            )
+            raise self.env["res.config.settings"].get_config_warning(error_msg)
         url = "https://ec.europa.eu/taxation_customs/vies/services/checkVatService"
         headers = {"content-type": "application/soap+xml"}
         body = """
@@ -135,19 +167,32 @@ class ResPartner(models.Model):
                     <urn:vatNumber>%s</urn:vatNumber>
                     <urn:requesterCountryCode>%s</urn:requesterCountryCode>
                     <urn:requesterVatNumber>%s</urn:requesterVatNumber>
-        """ % (country_code, vat_number, company_country_code, company_vat_number )
+        """ % (
+            country_code,
+            vat_number,
+            company_country_code,
+            company_vat_number,
+        )
         if partner.name:
             body += """<urn:traderName>%s</urn:traderName>
-                    """ % html.escape(partner.name)
+                    """ % html.escape(
+                partner.name
+            )
         if partner.street:
             body += """<urn:traderStreet>%s</urn:traderStreet>
-                 """ % html.escape(partner.street)
+                 """ % html.escape(
+                partner.street
+            )
         if partner.city:
             body += """<urn:traderCity>%s</urn:traderCity>
-                 """ % html.escape(partner.city)
+                 """ % html.escape(
+                partner.city
+            )
         if partner.zip:
             body += """<urn:traderPostcode>%s</urn:traderPostcode>
-                 """ % html.escape(partner.zip)
+                 """ % html.escape(
+                partner.zip
+            )
         body += """</urn:checkVatApprox>
                  </soapenv:Body>
              </soapenv:Envelope>
@@ -156,30 +201,44 @@ class ResPartner(models.Model):
             response = requests.post(url, data=body, headers=headers)
         except IOError:
             error_msg = _(
-                "Something went wrong during VIES enquiry. Maybe your internet connection is lost.")
-            raise self.env['res.config.settings'].get_config_warning(error_msg)
+                "Something went wrong during VIES enquiry. Maybe your internet connection is lost."
+            )
+            raise self.env["res.config.settings"].get_config_warning(error_msg)
         if response:
             response_text = ET.fromstring(response.text)
             if response.status_code in (100, 200) and partner:
-                nsp = {'soap': 'http://schemas.xmlsoap.org/soap/envelope/',
-                       'urn': 'ec.europa.eu:taxud:vies:services:checkVat:types'}
-                vals= {}
-                for data in response_text.findall(".//{urn:ec.europa.eu:taxud:vies:services:checkVat:types}checkVatApproxResponse/"):
-                    if data.text == 'true' or data.text == '1':
+                nsp = {
+                    "soap": "http://schemas.xmlsoap.org/soap/envelope/",
+                    "urn": "ec.europa.eu:taxud:vies:services:checkVat:types",
+                }
+                vals = {}
+                for data in response_text.findall(
+                    ".//{urn:ec.europa.eu:taxud:vies:services:checkVat:types}checkVatApproxResponse/"
+                ):
+                    if data.text == "true" or data.text == "1":
                         val = True
-                    elif data.text in ('false', '2', '3'):
+                    elif data.text in ("false", "2", "3"):
                         val = False
                     else:
                         val = data.text
-                    vals[data.tag.replace('{urn:ec.europa.eu:taxud:vies:services:checkVat:types}',
-                                              '').lower()] = val
+                    vals[
+                        data.tag.replace(
+                            "{urn:ec.europa.eu:taxud:vies:services:checkVat:types}", ""
+                        ).lower()
+                    ] = val
 
-                if vals['valid'] == True:
+                if vals["valid"] == True:
                     partner.update({"vies_passed": True})
                 else:
                     partner.update({"vies_passed": False})
-                date_string = vals['requestdate']
-                partner.update({"vat_id_last_check_date": fields.datetime.strptime(date_string[:10], '%Y-%m-%d')})
-                vals['res_partner_id'] = partner.id
-                vals['name'] = partner.name + " - " + vals['requestdate']
-                self.env['vies_vat_check_extension'].create(vals)
+                date_string = vals["requestdate"]
+                partner.update(
+                    {
+                        "vat_id_last_check_date": fields.datetime.strptime(
+                            date_string[:10], "%Y-%m-%d"
+                        )
+                    }
+                )
+                vals["res_partner_id"] = partner.id
+                vals["name"] = partner.name + " - " + vals["requestdate"]
+                self.env["vies_vat_check_extension"].create(vals)

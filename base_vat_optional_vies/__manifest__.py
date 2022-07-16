@@ -9,9 +9,7 @@
     "version": "13.0.1.0.1",
     "depends": ["base_vat"],
     "external_dependencies": {"python": ["vatnumber"]},
-    "data": ['security/ir.model.access.csv',
-             "views/res_partner_view.xml"
-             ],
+    "data": ["security/ir.model.access.csv", "views/res_partner_view.xml"],
     "author": "Tecnativa," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
