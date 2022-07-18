@@ -34,6 +34,11 @@ msgid "Default taxes used when selling the product."
 msgstr ""
 
 #. module: product_category_tax
+#: model:ir.model,name:product_category_tax.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: product_category_tax
 #: model:ir.model,name:product_category_tax.model_product_category
 msgid "Product Category"
 msgstr ""
