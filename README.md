@@ -39,7 +39,7 @@ addon | version | maintainers | summary
 [account_move_template](account_move_template/) | 15.0.1.0.0 |  | Templates for recurring Journal Entries
 [account_usability](account_usability/) | 15.0.1.0.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module and adds the option to enable Saxon Accounting
 [base_vat_optional_vies](base_vat_optional_vies/) | 15.0.1.0.3 |  | Optional validation of VAT via VIES
-[product_category_tax](product_category_tax/) | 15.0.1.0.0 |  | Configure taxes in the product category
+[product_category_tax](product_category_tax/) | 15.0.1.1.0 |  | Configure taxes in the product category
 
 [//]: # (end addons)
 
