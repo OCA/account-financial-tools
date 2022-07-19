@@ -439,8 +439,8 @@ class ProductTemplate(models.Model):
             moves = self.env['stock.move'].search([('product_id', '=', product.id), ('state', '=', 'done')])
             if self._uid == SUPERUSER_ID:
                 moves = moves.filtered(lambda r: r.company_id == self.env.user.company_id)
-            if sum([x.product_uom_qty for x in moves.mapped('move_line_ids')]) > 0.0:
-                raise UserError(_('Before to start recalculation first unreserved all quantity for this product'))
+            # if sum([x.product_uom_qty for x in moves.mapped('move_line_ids')]) > 0.0:
+            #     raise UserError(_('Before to start recalculation first unreserved all quantity for this product'))
 
             rounding = product.uom_id.rounding
             # first clear all quantity in table for save
