@@ -4,7 +4,7 @@
 {
     "name": "Account Move Force Removal",
     "summary": """Allow force removal account moves""",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Account",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-financial-tools",
