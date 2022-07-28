@@ -1,11 +1,11 @@
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 
 from odoo import fields
 from odoo.tests import Form, common
 
 
-class TestAccountMove(common.SavepointCase):
+class TestAccountMove(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -38,16 +38,16 @@ class TestAccountMove(common.SavepointCase):
                 "reconcile": True,
             }
         )
-        cls.env["account.journal"].create(
-            {"name": "Test sale journal", "type": "sale", "code": "TEST-SALE"}
+        cls.journal_sale = cls.env["account.journal"].create(
+            {"name": "Test sale journal", "type": "sale", "code": "T-SALE"}
         )
         cls.journal_bank = cls.env["account.journal"].create(
-            {"name": "Test bank journal", "type": "bank", "code": "TEST-BANK"}
+            {"name": "Test bank journal", "type": "bank", "code": "T-BANK"}
         )
 
     def _create_invoice(self):
         move_form = Form(
-            self.env["account.move"].with_context(default_type="out_invoice")
+            self.env["account.move"].with_context(default_move_type="out_invoice")
         )
         move_form.partner_id = self.partner
         move_form.invoice_date = fields.Date.from_string("2000-01-01")
@@ -86,26 +86,20 @@ class TestAccountMove(common.SavepointCase):
                         {
                             "date": "2000-01-01",
                             "partner_id": self.partner.id,
-                            "name": invoice.name,
+                            "payment_ref": invoice.name,
                             "amount": 10.0,
                         },
                     )
                 ],
             }
         )
-        statement_line = statement.line_ids.filtered(lambda x: x.name == invoice.name)
-        statement_line.process_reconciliation(
-            counterpart_aml_dicts=[
-                {
-                    "move_line": invoice_line,
-                    "credit": 10.0,
-                    "debit": 0.0,
-                    "name": invoice.name,
-                }
-            ]
+        statement.button_post()
+        statement_line = statement.line_ids.filtered(
+            lambda x: x.payment_ref == invoice.name
         )
-        self.assertEqual(invoice.invoice_payment_state, "paid")
-        line_receivable = statement_line.journal_entry_ids.filtered(
+        statement_line.reconcile(lines_vals_list=[{"id": invoice_line.id}])
+        self.assertEqual(invoice.payment_state, "paid")
+        line_receivable = statement_line.move_id.line_ids.filtered(
             lambda x: x.account_id.internal_type == "receivable"
         )
         self.assertEqual(line_receivable.date_maturity, line_receivable.move_id.date)
