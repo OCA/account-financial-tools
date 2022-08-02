@@ -518,7 +518,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def find_accounts_by_templates(self, templates):
         account_ids = []
         for account in templates:
-            account_ids.append(self.find_tax_by_templates(account))
+            account_ids.append(self.find_account_by_templates(account))
         return self.env["account.account"].browse(account_ids)
 
     @tools.ormcache("templates")
