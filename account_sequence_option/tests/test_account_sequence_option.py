@@ -36,7 +36,7 @@ class TestAccountSequenceOption(TransactionCase):
             "default_partner_type": partner_type,
             "default_move_journal_types": ("bank", "cash"),
         }
-        move_form = Form(self.env["account.payment"].with_context(ctx))
+        move_form = Form(self.env["account.payment"].with_context(**ctx))
         move_form.payment_type = payment_type
         move_form.partner_type = partner_type
         move_form.partner_id = self.partner_id
