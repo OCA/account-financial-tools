@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="ir_sequence_demo" model="ir.sequence">
+        <field name="name">Standard Sequence Demo</field>
+        <field name="prefix">demo/%(range_year)s/</field>
+        <field name="use_date_range" eval="True" />
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id" ref="base.main_company" />
+    </record>
+</odoo>
