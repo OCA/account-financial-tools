@@ -17,6 +17,9 @@
     "depends": [
         "account",
     ],
+    "demo": [
+        "demo/ir_sequence_demo.xml",
+    ],
     "data": [
         "views/account_journal.xml",
         "views/account_move.xml",
