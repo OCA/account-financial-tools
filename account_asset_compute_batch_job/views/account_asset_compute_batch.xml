@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_asset_compute_batch_form" model="ir.ui.view">
+        <field name="name">account.asset.compute.batch.form</field>
+        <field name="model">account.asset.compute.batch</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_compute_batch.view_account_asset_compute_batch_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//header//button[@name='action_compute']"
+                position="attributes"
+            >
+                <attribute name="states" />
+                <attribute
+                    name="attrs"
+                >{'invisible': [('job_current', '!=', False), '|', ('job_state', 'not in', ['failed', 'cancelled']), ('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//header[last()]" position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': ['|', ('job_state', 'in', ['failed', 'cancelled', False]), ('state', '!=', 'draft')]}"
+                >
+                    This asset batch still compute with job queue.
+                </div>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="open_queue_job"
+                    icon="fa-clock-o"
+                    class="oe_stat_button"
+                    string="Job Queue"
+                    type="object"
+                />
+            </xpath>
+            <xpath expr="//header//button[@name='action_compute']" position="after">
+                <button
+                    name="action_compute_job"
+                    type="object"
+                    string="Compute as Background"
+                    class="oe_highlight"
+                    attrs="{'invisible': [('job_current', '!=', False), '|', ('job_state', 'not in', ['failed', 'cancelled']), ('state', '!=', 'draft')]}"
+                />
+            </xpath>
+            <xpath
+                expr="//group[@name='main_group']//field[@name='profile_ids']"
+                position="after"
+            >
+                <field name="job_current" />
+                <field name="job_state" />
+            </xpath>
+        </field>
+    </record>
+    <record id="search_account_asset_compute_batch_filter" model="ir.ui.view">
+        <field name="name">search.account.asset.compute.batch.filter</field>
+        <field name="model">account.asset.compute.batch</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_compute_batch.search_account_asset_compute_batch_filter"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator />
+                <filter
+                    name="filter_job_id"
+                    string="Run As Background"
+                    domain="[('job_current','!=',False)]"
+                />
+                <filter
+                    name="filter_job_state_start"
+                    string="Job Started"
+                    domain="[('job_current.state','=','started')]"
+                />
+                <filter
+                    name="filter_job_state_done"
+                    string="Job Done"
+                    domain="[('job_current.state','=','done')]"
+                />
+                <filter
+                    name="filter_job_state_failed"
+                    string="Job Failed"
+                    domain="[('job_current.state','=','failed')]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

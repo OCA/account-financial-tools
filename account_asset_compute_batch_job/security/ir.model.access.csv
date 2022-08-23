@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_job_queue_account_readonly,access_job_queue_account_readonly,queue_job.model_queue_job,account.group_account_invoice,1,0,0,0
