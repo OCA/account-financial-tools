@@ -65,7 +65,7 @@ class AccountMoveLine(models.Model):
                 "line_ids": [(0, 0, write_off_vals), (0, 0, counter_part)],
             }
         )
-        if writeoff_vals["purchase_order_id"]:
+        if writeoff_vals.get("purchase_order_id", False):
             # done this way because purchase_order_id is a related field and will
             # not being assign on create. Cannot assign purchase_line_id because
             # it is a generic write-off for the whole PO

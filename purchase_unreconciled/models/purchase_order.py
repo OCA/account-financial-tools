@@ -107,49 +107,49 @@ class PurchaseOrder(models.Model):
             [unreconciled_domain, [("company_id", "=", self.company_id.id)]]
         )
         unreconciled_items = self.env["account.move.line"].search(unreconciled_domain)
-        writeoff_to_reconcile = False
+        writeoff_to_reconcile = self.env["account.move.line"]
+        all_writeoffs = self.env["account.move.line"]
         for account in unreconciled_items.mapped("account_id"):
             acc_unrec_items = unreconciled_items.filtered(
                 lambda ml: ml.account_id == account
             )
-            # First try to reconcile the lines automatically to prevent unwanted
-            # write-offs
-            if not sum(acc_unrec_items.mapped("amount_residual")) and not sum(
-                acc_unrec_items.mapped("amount_residual_currency")
-            ):
-                # nothing to reconcile
-                continue
-            all_aml_share_same_currency = all(
-                [x.currency_id == self[0].currency_id for x in acc_unrec_items]
-            )
-            writeoff_vals = {
-                "account_id": self.company_id.purchase_reconcile_account_id.id,
-                "journal_id": self.company_id.purchase_reconcile_journal_id.id,
-                "purchase_order_id": self.id,
-                "currency_id": self.currency_id.id,
-            }
-            if not all_aml_share_same_currency:
-                writeoff_vals["amount_currency"] = False
-            if writeoff_to_reconcile:
-                writeoff_to_reconcile += unreconciled_items._create_writeoff(
+            for currency in acc_unrec_items.mapped("currency_id"):
+                unreconciled_items_currency = acc_unrec_items.filtered(
+                    lambda l: l.currency_id == currency
+                )
+                remaining_moves = self.env["account.move.line"]
+                # First try to reconcile the lines automatically to prevent unwanted
+                # write-offs
+                if all(
+                    not x.amount_residual and not x.amount_residual_currency
+                    for x in unreconciled_items_currency
+                ):
+                    # nothing to reconcile
+                    continue
+                all_aml_share_same_currency = all(
+                    [
+                        x.currency_id == self[0].currency_id
+                        for x in unreconciled_items_currency
+                    ]
+                )
+                writeoff_vals = {
+                    "account_id": self.company_id.purchase_reconcile_account_id.id,
+                    "journal_id": self.company_id.purchase_reconcile_journal_id.id,
+                    "purchase_order_id": self.id,
+                    "currency_id": currency.id,
+                }
+                if not all_aml_share_same_currency:
+                    writeoff_vals["amount_currency"] = False
+                writeoff_to_reconcile |= unreconciled_items_currency._create_writeoff(
                     writeoff_vals
                 )
-            else:
-                writeoff_to_reconcile = unreconciled_items._create_writeoff(
-                    writeoff_vals
-                )
-        # add writeoff line to reconcile algorithm and finish the reconciliation
-        if writeoff_to_reconcile:
-            remaining_moves = unreconciled_items + writeoff_to_reconcile
-        else:
-            remaining_moves = unreconciled_items
-        # Check if reconciliation is total or needs an exchange rate entry to be created
-        if remaining_moves:
-            remaining_moves.filtered(lambda l: not l.reconciled).reconcile()
-            if writeoff_to_reconcile:
-                reconciled_ids = unreconciled_items + writeoff_to_reconcile
-            else:
-                reconciled_ids = unreconciled_items
+                all_writeoffs |= writeoff_to_reconcile
+                # add writeoff line to reconcile algorithm and finish the reconciliation
+                remaining_moves = unreconciled_items_currency | writeoff_to_reconcile
+                # Check if reconciliation is total or needs an exchange rate entry to be created
+                if remaining_moves:
+                    remaining_moves.filtered(lambda l: not l.reconciled).reconcile()
+            reconciled_ids = unreconciled_items | all_writeoffs
             return {
                 "name": _("Reconciled journal items"),
                 "type": "ir.actions.act_window",
