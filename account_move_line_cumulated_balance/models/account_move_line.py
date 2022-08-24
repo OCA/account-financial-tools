@@ -28,46 +28,50 @@ class AccountMoveLine(models.Model):
 
     @api.model
     def search_read(self, domain=None, fields=None, offset=0, limit=None, order=None):
-        def to_tuple(t):
-            return tuple(map(to_tuple, t)) if isinstance(t, (list, tuple)) else t
-
-        # Add the domain and order by in order to compute the cumulated
-        # balance in _compute_cumulated_balance
-        order = (order or self._order) + ", id desc"
+        # Add the significant domain in order to compute the cumulated balance in
+        # _compute_cumulated_balance.
+        cumulated_domain = []
+        for term in domain:
+            if isinstance(term, (tuple, list)) and term[0] == "move_id.state":
+                # TODO: Allow multiple state conditions joined by OR
+                cumulated_domain.append(("parent_state", term[1], term[2]))
+            elif term[0] == "full_reconcile_id":
+                cumulated_domain.append(tuple(term))
         return super(
-            AccountMoveLine, self.with_context(order_cumulated_balance=order,),
+            AccountMoveLine,
+            self.with_context(domain_cumulated_balance=cumulated_domain),
         ).search_read(domain, fields, offset, limit, order)
 
-    @api.depends_context("order_cumulated_balance")
+    @api.depends_context("domain_cumulated_balance", "partner_ledger")
     def _compute_cumulated_balance(self):
         self.cumulated_balance = 0
         self.cumulated_balance_currency = 0
-        order_cumulated_balance = (
-            self.env.context.get("order_cumulated_balance", self._order) + ", id"
-        )
-        order_string = ", ".join(
-            self._generate_order_by_inner(
-                self._table, order_cumulated_balance, "", reverse_direction=False,
-            )
-        )
-        query = sql.SQL(
-            """SELECT account_move_line.id,
-                SUM(account_move_line.balance) OVER (
-                    ORDER BY {order_by_clause}
-                    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-                ),
-                SUM(account_move_line.amount_currency)  OVER (
-                    ORDER BY {order_by_clause}
-                    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-                )
-            FROM account_move_line
-            LEFT JOIN account_move on account_move_line.move_id = account_move.id
-            WHERE
-            account_move.state = 'posted'
-            """
-        ).format(order_by_clause=sql.SQL(order_string),)
-        self.env.cr.execute(query)
-        result = {r[0]: (r[1], r[2]) for r in self.env.cr.fetchall()}
+        query = self._where_calc(self.env.context.get("domain_cumulated_balance") or [])
+        _f, where_clause, where_clause_params = query.get_sql()
         for record in self:
-            record.cumulated_balance = result[record.id][0]
-            record.cumulated_balance_currency = result[record.id][1]
+            query_args = where_clause_params + [
+                record.account_id.id,
+                record.company_id.id,
+                record.date,
+                record.date,
+                record.id,
+            ]
+            # WHERE clause last line is set according order in view where this is used
+            query = sql.SQL(
+                """
+                SELECT SUM(balance), SUM(amount_currency)
+                FROM account_move_line
+                WHERE {}
+                    AND account_id = %s
+                    AND company_id = %s
+                    AND (date < %s OR (date=%s AND id <= %s))
+                """
+            ).format(sql.SQL(where_clause or "TRUE"))
+            if self.env.context.get("partner_ledger"):
+                # If showing partner ledger group by partner by default
+                query_args.append(record.partner_id.id)
+                query += sql.SQL("AND partner_id = %s")
+            self.env.cr.execute(query, tuple(query_args))
+            result = self.env.cr.fetchone()
+            record.cumulated_balance = result[0]
+            record.cumulated_balance_currency = result[1]
