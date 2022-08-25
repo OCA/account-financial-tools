@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.15.1: http://docutils.sourceforge.net/" />
 <title>Journal Ledger Cumulated Balance</title>
 <style type="text/css">
 
@@ -412,8 +412,13 @@ module installed and belonging to such group.</li>
 <div class="section" id="known-issues-roadmap">
 <h1><a class="toc-backref" href="#id3">Known issues / Roadmap</a></h1>
 <ul class="simple">
-<li>For v14, there’s only need to migrate the field amount_currency_balance, as
-the other one already exists in core.</li>
+<li>For v14, there’s a similar feature, but it doesn’t cumulate in an absolute way like
+this one, and there’s no cumulated in amount currency, so this module may be fully
+preserved.</li>
+<li>There’s no support for filtering at the same time by several entries state (posted,
+not posted, cancel, etc).</li>
+<li>In the partner ledger, removing the group by partner won’t make the cumulated balances
+to be considered globally by account.</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">
