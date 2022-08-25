@@ -28,6 +28,7 @@ setuptools.setup(
         'odoo13-addon-account_menu',
         'odoo13-addon-account_move_budget',
         'odoo13-addon-account_move_force_removal',
+        'odoo13-addon-account_move_line_cumulated_balance',
         'odoo13-addon-account_move_line_purchase_info',
         'odoo13-addon-account_move_line_sale_info',
         'odoo13-addon-account_move_line_tax_editable',
