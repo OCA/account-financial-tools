@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_line_cumulated_balance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-09 14:47+0000\n"
+"PO-Revision-Date: 2022-07-09 14:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_line_cumulated_balance
+#: model:ir.model.fields,field_description:account_move_line_cumulated_balance.field_account_move_line__cumulated_balance
+msgid "Cumulated Balance"
+msgstr ""
+
+#. module: account_move_line_cumulated_balance
+#: model:ir.model.fields,field_description:account_move_line_cumulated_balance.field_account_move_line__cumulated_balance_currency
+msgid "Cumulated Balance in Currency"
+msgstr ""
+
+#. module: account_move_line_cumulated_balance
+#: model:ir.model.fields,help:account_move_line_cumulated_balance.field_account_move_line__cumulated_balance
+msgid ""
+"Cumulated balance depending on the domain and the order chosen in the view."
+msgstr ""
+
+#. module: account_move_line_cumulated_balance
+#: model:ir.model.fields,help:account_move_line_cumulated_balance.field_account_move_line__cumulated_balance_currency
+msgid ""
+"Cumulated balance in currency depending on the domain and the order chosen "
+"in the view."
+msgstr ""
+
+#. module: account_move_line_cumulated_balance
+#: model:ir.model,name:account_move_line_cumulated_balance.model_account_move_line
+msgid "Journal Item"
+msgstr ""
