@@ -20,10 +20,8 @@ def post_load_hook():
             for line in move.invoice_line_ids:
 
                 # Filter out lines being not eligible for COGS.
-                # FIRST HOOK STARTS
                 if not line._eligible_for_cogs():
                     continue
-                # FIRST HOOK ENDS
 
                 # Retrieve accounts needed to generate the COGS.
                 accounts = line.product_id.product_tmpl_id.get_product_accounts(
@@ -35,8 +33,8 @@ def post_load_hook():
                 )
                 if not debit_interim_account or not credit_expense_account:
                     continue
-                # Add interim account line.
-                # SECOND HOOK STARTS
+
+                # HOOK STARTS
                 interim_account_line_vals = self._prepare_interim_account_line_vals(
                     line, move, debit_interim_account
                 )
@@ -45,7 +43,7 @@ def post_load_hook():
                     line, move, credit_expense_account
                 )
                 lines_vals_list.append(expense_account_line_vals)
-                # SECOND HOOK ENDS
+                # HOOK ENDS
         return lines_vals_list
 
     if not hasattr(
