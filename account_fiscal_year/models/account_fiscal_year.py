@@ -9,7 +9,6 @@ from odoo.osv import expression
 class AccountFiscalYear(models.Model):
     _name = "account.fiscal.year"
     _description = "Fiscal Year"
-    _rec_name = "name"
 
     name = fields.Char(
         required=True,
