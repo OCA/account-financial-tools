@@ -2,7 +2,7 @@
 from datetime import timedelta
 
 from odoo import models
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, date_utils
+from odoo.tools import date_utils
 
 
 class ResCompany(models.Model):
@@ -19,14 +19,13 @@ class ResCompany(models.Model):
             * [Optionally] record: The fiscal year record.
         """
         self.ensure_one()
-        date_str = current_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
 
         # Search a fiscal year record containing the date.
         fiscalyear = self.env["account.fiscal.year"].search(
             [
                 ("company_id", "=", self.id),
-                ("date_from", "<=", date_str),
-                ("date_to", ">=", date_str),
+                ("date_from", "<=", current_date),
+                ("date_to", ">=", current_date),
             ],
             limit=1,
         )
@@ -52,24 +51,22 @@ class ResCompany(models.Model):
         # =>
         # The period 2017-02-02 - 2017-02-30 is not covered by a fiscal year record.
 
-        date_from_str = date_from.strftime(DEFAULT_SERVER_DATE_FORMAT)
         fiscalyear_from = self.env["account.fiscal.year"].search(
             [
                 ("company_id", "=", self.id),
-                ("date_from", "<=", date_from_str),
-                ("date_to", ">=", date_from_str),
+                ("date_from", "<=", date_from),
+                ("date_to", ">=", date_from),
             ],
             limit=1,
         )
         if fiscalyear_from:
             date_from = fiscalyear_from.date_to + timedelta(days=1)
 
-        date_to_str = date_to.strftime(DEFAULT_SERVER_DATE_FORMAT)
         fiscalyear_to = self.env["account.fiscal.year"].search(
             [
                 ("company_id", "=", self.id),
-                ("date_from", "<=", date_to_str),
-                ("date_to", ">=", date_to_str),
+                ("date_from", "<=", date_to),
+                ("date_to", ">=", date_to),
             ],
             limit=1,
         )
