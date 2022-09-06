@@ -5,7 +5,7 @@
     "name": "Account Fiscal Year",
     "summary": "Create a menu for Account Fiscal Year",
     "version": "12.0.1.0.0",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Agile Business Group, Camptocamp SA, "
