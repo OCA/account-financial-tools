@@ -13,14 +13,14 @@ def migrate(env, version):
     new_purchase_column = "purchase_order_id"
 
     if not openupgrade.column_exists(env.cr, "account_move_line", new_purchase_column):
-        openupgrade.rename_fields(
-            env,
-            [
-                (
-                    "account.move.line",
-                    "account_move_line",
-                    old_purchase_column,
-                    new_purchase_column,
-                ),
-            ],
+        openupgrade.rename_columns(
+            env.cr,
+            {
+                "account_move_line": [
+                    (
+                        old_purchase_column,
+                        new_purchase_column,
+                    ),
+                ]
+            },
         )
