@@ -11,6 +11,10 @@
     "category": "Generic",
     "depends": ["purchase_stock"],
     "license": "AGPL-3",
-    "data": ["security/account_security.xml", "views/account_move_view.xml"],
+    "data": [
+        "security/account_security.xml",
+        "views/account_move_view.xml",
+        "views/purchase_order_view.xml",
+    ],
     "installable": True,
 }
