@@ -225,3 +225,21 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         )
         name_get_no_ctx = po_line.name_get()
         self.assertEqual(name_get_no_ctx, [(po_line.id, po_line.name)])
+
+    def test_purchase_order_with_journal_entries_and_vendor_bills(self):
+        purchase = self._create_purchase([(self.product, 1)])
+        purchase.button_confirm()
+        purchase._compute_invoice()
+        purchase._compute_journal_entries()
+        self.assertEqual(purchase.journal_entry_ids.id, False)
+        self.assertEqual(purchase.invoice_ids.id, False)
+        self.assertEqual(purchase.journal_entries_count, 0)
+        self.assertEqual(purchase.invoice_count, 0)
+        purchase.picking_ids.move_ids_without_package.quantity_done = 1
+        purchase.picking_ids.button_validate()
+        self.assertEqual(purchase.journal_entries_count, 1)
+        self.assertEqual(purchase.invoice_count, 0)
+        purchase.action_create_invoice()
+        self.assertEqual(purchase.journal_entries_count, 1)
+        self.assertEqual(purchase.invoice_count, 1)
+        self.assertNotEqual(purchase.action_view_journal_entries(), None)
