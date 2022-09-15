@@ -26,6 +26,13 @@ class AccountInvoice(models.Model):
             )
         return {"domain": {"journal_id": journal_domain}}
 
+    @api.model
+    def create(self, vals):
+        invoice = super(AccountInvoice, self).create(vals)
+        invoice._onchange_fiscal_position_allowed_journal()
+        invoice._convert_to_write(invoice._cache)
+        return invoice
+
     def _check_journal_allowed_fiscal_position(self):
         """
         This method checks whether the journal of the invoice is allowed for the
