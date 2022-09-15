@@ -31,6 +31,7 @@ setuptools.setup(
         'odoo14-addon-account_move_fiscal_month',
         'odoo14-addon-account_move_fiscal_year',
         'odoo14-addon-account_move_force_removal',
+        'odoo14-addon-account_move_line_check_number',
         'odoo14-addon-account_move_line_menu',
         'odoo14-addon-account_move_line_purchase_info',
         'odoo14-addon-account_move_line_sale_info',
