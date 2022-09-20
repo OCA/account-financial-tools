@@ -108,9 +108,7 @@ class StockInventoryRevaluation(models.Model):
                 product_additional_value = (
                     remaining_qty / line.stock_move_id.product_qty
                 ) * line.additional_value
-                if not revaluation.company_id.currency_id.is_zero(
-                    product_additional_value
-                ):
+                if not line.company_id.currency_id.is_zero(product_additional_value):
                     new_layer_ids = self._create_revaluation_layers(
                         product_additional_value, linked_layer, revaluation, line
                     )
@@ -192,10 +190,16 @@ class StockInventoryRevaluation(models.Model):
                     additional_value,
                     bill_qty,
                 ) = self.vendor_bill_id._get_additional_value(move)
-                vals = self._prepare_valuation_lines(
-                    move, original_value, price_subtotal, additional_value, bill_qty
-                )
-                lines.append(vals)
+            else:
+                layers = move.stock_valuation_layer_ids
+                original_value = sum(layers.mapped("value"))
+                additional_value = 0.0
+                price_subtotal = original_value
+                bill_qty = move.product_uom_qty
+            vals = self._prepare_valuation_lines(
+                move, original_value, price_subtotal, additional_value, bill_qty
+            )
+            lines.append(vals)
         return lines
 
     def action_view_stock_valuation_layers(self):
@@ -236,7 +240,7 @@ class StockInventoryRevaluation(models.Model):
             "product_id": line.product_id.id,
             # The layer is linked to the revaluation line
             "stock_inventory_revaluation_line_id": line.id,
-            "company_id": revaluation.company_id.id,
+            "company_id": line.company_id.id,
         }
 
     def _prepare_valuation_lines(

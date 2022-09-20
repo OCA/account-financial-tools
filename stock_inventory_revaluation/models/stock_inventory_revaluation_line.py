@@ -23,7 +23,12 @@ class StockInventoryRevaluationLine(models.Model):
     currency_id = fields.Many2one(
         "res.currency", related="stock_inventory_revaluation_id.currency_id"
     )
-    stock_move_id = fields.Many2one("stock.move", "Stock Move", readonly=True)
+    stock_move_id = fields.Many2one(
+        "stock.move", "Stock Move", readonly=True, required=True
+    )
+    company_id = fields.Many2one(
+        "res.company", string="Company", related="stock_move_id.company_id"
+    )
     quantity = fields.Float("Quantity", default=1.0, digits=0, required=True)
     original_value = fields.Monetary("Original Value")
     price_subtotal = fields.Monetary("Total Value", required=True, default=0.0)
