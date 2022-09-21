@@ -241,3 +241,17 @@ class StockInventoryRevaluationLine(models.Model):
                 sale_line_ids=[(6, None, [usage.stock_move_id.sale_line_id.id])],
             )
         return credit_line
+
+    @api.constrains("stock_move_id")
+    def check_duplicated_revaluation(self):
+        for line in self:
+            if line.stock_move_id in (
+                line.stock_inventory_revaluation_id.stock_inventory_revaluation_line_ids
+                - line
+            ).mapped("stock_move_id"):
+                raise UserError(
+                    _(
+                        "The stock move is already revaluated in this revaluation, "
+                        "please use the existing one"
+                    )
+                )
