@@ -9,7 +9,7 @@ def post_init_hook(cr, registry):
     cr.execute(
         """
         UPDATE account_move_line aml
-            SET purchase_line_id = sm.purchase_line_id, purchase_id = pol.order_id
+            SET purchase_line_id = sm.purchase_line_id, purchase_order_id = pol.order_id
         FROM stock_move sm
             INNER JOIN purchase_order_line pol ON pol.id = sm.purchase_line_id
             INNER JOIN account_move am ON am.stock_move_id  = sm.id
