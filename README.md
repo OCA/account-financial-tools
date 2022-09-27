@@ -33,7 +33,7 @@ addon | version | maintainers | summary
 [account_maturity_date_default](account_maturity_date_default/) | 15.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Maturity Date Default
 [account_move_force_removal](account_move_force_removal/) | 15.0.1.1.0 |  | Allow force removal account moves
 [account_move_line_menu](account_move_line_menu/) | 15.0.1.0.0 |  | Adds a Journal Items menu
-[account_move_line_purchase_info](account_move_line_purchase_info/) | 15.0.1.0.1 |  | Introduces the purchase order line to the journal items
+[account_move_line_purchase_info](account_move_line_purchase_info/) | 15.0.1.1.0 |  | Introduces the purchase order line to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 15.0.1.0.1 |  | Introduces the purchase order line to the journal items
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 15.0.1.0.1 |  | Allows to edit taxes on non-posted account move lines
 [account_move_name_sequence](account_move_name_sequence/) | 15.0.1.1.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) [![moylop260](https://github.com/moylop260.png?size=30px)](https://github.com/moylop260) [![frahikLV](https://github.com/frahikLV.png?size=30px)](https://github.com/frahikLV) | Generate journal entry number from sequence
