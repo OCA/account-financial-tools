@@ -20,11 +20,8 @@
                     role="alert"
                     attrs="{'invisible': [('show_warning_vat_required', '=', False)]}"
                 >
-                <b>Missing VAT number</b>: this partner has the fiscal position <em
-                    ><field
-                            name="property_account_position_id"
-                            readonly="1"
-                        /></em> that require to know the VAT number of the partner.
+                <b
+                    >Missing VAT number</b>: this partner has a fiscal position that requires to know the VAT number of the partner.
                 </div>
             </div>
             <group name="fiscal_information" position="inside">
