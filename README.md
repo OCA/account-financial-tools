@@ -31,7 +31,7 @@ addon | version | maintainers | summary
 [account_chart_update](account_chart_update/) | 14.0.2.0.4 |  | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 14.0.1.0.1 |  | Manage deposit of checks to the bank
 [account_fiscal_month](account_fiscal_month/) | 14.0.1.0.0 |  | Provide a fiscal month date range type
-[account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.1.0 |  | Check VAT on invoice validation
+[account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.2.0 |  | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 14.0.1.2.0 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Create Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 14.0.1.0.0 |  | Account Invoice Constraint Chronology
 [account_journal_general_sequence](account_journal_general_sequence/) | 14.0.1.0.2 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Add configurable sequence to account moves, per journal
