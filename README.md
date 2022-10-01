@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [account_journal_general_sequence](account_journal_general_sequence/) | 15.0.1.0.3 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Add configurable sequence to account moves, per journal
 [account_lock_date_update](account_lock_date_update/) | 15.0.1.0.1 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_maturity_date_default](account_maturity_date_default/) | 15.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Maturity Date Default
+[account_move_budget](account_move_budget/) | 15.0.1.0.0 |  | Create Accounting Budgets
 [account_move_force_removal](account_move_force_removal/) | 15.0.1.1.0 |  | Allow force removal account moves
 [account_move_line_menu](account_move_line_menu/) | 15.0.1.0.0 |  | Adds a Journal Items menu
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 15.0.1.1.0 |  | Introduces the purchase order line to the journal items
