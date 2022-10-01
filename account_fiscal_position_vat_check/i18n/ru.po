@@ -22,7 +22,9 @@ msgstr ""
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
-msgid "<b>Missing VAT number</b>: this partner has the fiscal position"
+msgid ""
+"<b>Missing VAT number</b>: this partner has a fiscal position that requires "
+"to know the VAT number of the partner."
 msgstr ""
 
 #. module: account_fiscal_position_vat_check
@@ -67,11 +69,6 @@ msgid ""
 "position '%s' that require the customer to have a VAT number. But the "
 "Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
 "of this Customer in Odoo and try to validate again."
-msgstr ""
-
-#. module: account_fiscal_position_vat_check
-#: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
-msgid "that require to know the VAT number of the partner."
 msgstr ""
 
 #~ msgid "Invoice"

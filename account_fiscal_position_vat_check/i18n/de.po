@@ -22,7 +22,9 @@ msgstr ""
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
-msgid "<b>Missing VAT number</b>: this partner has the fiscal position"
+msgid ""
+"<b>Missing VAT number</b>: this partner has a fiscal position that requires "
+"to know the VAT number of the partner."
 msgstr ""
 
 #. module: account_fiscal_position_vat_check
@@ -72,11 +74,6 @@ msgstr ""
 "'%s' zu genehmigen, für die der Kunde eine Umsatzsteuernummer benötigt. Der "
 "Kunde '%s' hat aber keine USt-ID in Odoo. Bitte geben Sie die USt-ID des "
 "Kunden in Odoo an und starten Sie die Prüfung erneut."
-
-#. module: account_fiscal_position_vat_check
-#: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
-msgid "that require to know the VAT number of the partner."
-msgstr ""
 
 #~ msgid "Invoice"
 #~ msgstr "Rechnung"

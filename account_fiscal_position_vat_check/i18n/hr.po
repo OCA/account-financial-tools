@@ -23,8 +23,10 @@ msgstr ""
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
-msgid "<b>Missing VAT number</b>: this partner has the fiscal position"
-msgstr "<b>Nedostaje porezni broj</b>: ovaj partner ima fiskalnu poziciju"
+msgid ""
+"<b>Missing VAT number</b>: this partner has a fiscal position that requires "
+"to know the VAT number of the partner."
+msgstr ""
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
@@ -74,10 +76,11 @@ msgstr ""
 "broj upisan u odoo. Molimo dodajte porezni broj ovog partnera i pokušajte "
 "ponoviti potvrđivanje."
 
-#. module: account_fiscal_position_vat_check
-#: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
-msgid "that require to know the VAT number of the partner."
-msgstr "koji zahtjeva prikazani porezni broj partnera."
+#~ msgid "<b>Missing VAT number</b>: this partner has the fiscal position"
+#~ msgstr "<b>Nedostaje porezni broj</b>: ovaj partner ima fiskalnu poziciju"
+
+#~ msgid "that require to know the VAT number of the partner."
+#~ msgstr "koji zahtjeva prikazani porezni broj partnera."
 
 #~ msgid "Invoice"
 #~ msgstr "Račun"

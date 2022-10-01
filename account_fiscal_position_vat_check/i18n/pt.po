@@ -21,7 +21,9 @@ msgstr ""
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
-msgid "<b>Missing VAT number</b>: this partner has the fiscal position"
+msgid ""
+"<b>Missing VAT number</b>: this partner has a fiscal position that requires "
+"to know the VAT number of the partner."
 msgstr ""
 
 #. module: account_fiscal_position_vat_check
@@ -70,11 +72,6 @@ msgstr ""
 "Está a tentar validar uma fatura ou reembolso com a posição fiscal '%s', que "
 "obriga a que o cliente tenha um NIFo que não acontece no caso do cliente "
 "'%s'. Por favor, adicione um e tente validar novamente."
-
-#. module: account_fiscal_position_vat_check
-#: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
-msgid "that require to know the VAT number of the partner."
-msgstr ""
 
 #~ msgid "Invoice"
 #~ msgstr "Fatura"
