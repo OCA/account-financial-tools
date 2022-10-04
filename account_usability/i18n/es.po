@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2022-10-04 13:36+0000\n"
-"Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -19,90 +19,90 @@ msgstr ""
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_group
 msgid "Account Group"
-msgstr ""
+msgstr "Grupo de cuenta"
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_group_action
 #: model:ir.ui.menu,name:account_usability.account_group_menu
 msgid "Account Groups"
-msgstr ""
+msgstr "Grupos de cuentas"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "Etiqueta de cuenta"
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_account_tag_action
 #: model:ir.ui.menu,name:account_usability.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "Etiquetas de cuenta"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_form
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
 msgid "Account Tax Group"
-msgstr ""
+msgstr "Grupo de impuestos"
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.action_account_tax_group
 #: model:ir.ui.menu,name:account_usability.account_tax_group_menu
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
 msgid "Account Tax Groups"
-msgstr ""
+msgstr "Grupos de impuestos"
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_account_template_action
 #: model:ir.ui.menu,name:account_usability.menu_account_account_template
 msgid "Account Templates"
-msgstr ""
+msgstr "Plantillas de cuentas"
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.account_type_menu
 msgid "Account Types"
-msgstr ""
+msgstr "Tipos de cuentas"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "Cuentas"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid "Anglo-Saxon Accounting"
-msgstr ""
+msgstr "Contabilidad anglo-sajona"
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_accounting_statement_bank
 msgid "Bank Statements"
-msgstr ""
+msgstr "Extractos bancarios"
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_accounting_bank_and_cash
 msgid "Bank and Cash"
-msgstr ""
+msgstr "Banco y caja"
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_accounting_statement_cash
 msgid "Cash Registers"
-msgstr ""
+msgstr "Registros de caja"
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_account_chart_template
 msgid "Chart of Accounts Templates"
-msgstr ""
+msgstr "Plantillas de planes contables"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes"
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_usability.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
-msgstr ""
+msgstr "Plantillas de posición fiscal"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
@@ -128,24 +128,24 @@ msgstr ""
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_tax_group
 msgid "Tax Group"
-msgstr ""
+msgstr "Grupo de impuestos"
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_account_tax_template
 msgid "Tax Templates"
-msgstr ""
+msgstr "Plantillas de impuestos"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_tax_group__tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "Impuestos"
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_account_coa_settings
 msgid "Templates"
-msgstr ""
+msgstr "Plantillas"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
-msgstr ""
+msgstr "Utilizar contabilidad anglo-sajona"
