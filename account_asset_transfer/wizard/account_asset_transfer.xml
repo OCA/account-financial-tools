@@ -23,6 +23,14 @@
                 </group>
                 <notebook>
                     <page name="to_asset" string="To New Asset">
+                        <div class="oe_right" name="buttons">
+                            <button
+                                name="expand_to_asset_ids"
+                                type="object"
+                                string="Expand Asset"
+                                icon="fa-bars"
+                            />
+                        </div>
                         <field
                             name="to_asset_ids"
                             context="{
@@ -35,6 +43,8 @@
                             <tree editable="bottom">
                                 <field name="asset_profile_id" />
                                 <field name="asset_name" />
+                                <field name="price_unit" />
+                                <field name="quantity" />
                                 <field name="asset_value" />
                                 <field name="partner_id" />
                                 <field
@@ -67,6 +77,13 @@
                 </footer>
             </form>
         </field>
+    </record>
+
+    <record id="action_account_asset_transfer" model="ir.actions.act_window">
+        <field name="name">Transfer Asset</field>
+        <field name="res_model">account.asset.transfer</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
     </record>
 
     <record id="action_asset_transfer_from_list" model="ir.actions.server">

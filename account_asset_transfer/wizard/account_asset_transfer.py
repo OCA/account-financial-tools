@@ -197,6 +197,16 @@ class AccountAssetTransfer(models.TransientModel):
         ]
         return move_lines
 
+    def expand_to_asset_ids(self):
+        self.ensure_one()
+        lines = self.to_asset_ids.filtered(lambda l: l.asset_profile_id and l.quantity)
+        for line in lines:
+            line._expand_asset_line()
+        action = self.env.ref("account_asset_transfer.action_account_asset_transfer")
+        result = action.sudo().read()[0]
+        result.update({"res_id": self.id})
+        return result
+
 
 class AccountAssetTransferLine(models.TransientModel):
     _name = "account.asset.transfer.line"
@@ -212,10 +222,22 @@ class AccountAssetTransferLine(models.TransientModel):
         required=True,
     )
     asset_name = fields.Char(required=True)
-    asset_value = fields.Float(
-        string="Asset Value",
+    quantity = fields.Float(
+        string="Quantity",
         required=True,
         default=0.0,
+    )
+    price_unit = fields.Float(
+        string="Unit Price",
+        required=True,
+        default=0.0,
+    )
+    asset_value = fields.Float(
+        string="Asset Value",
+        compute="_compute_asset_value",
+        default=0.0,
+        store=True,
+        required=True,
     )
     partner_id = fields.Many2one(
         comodel_name="res.partner",
@@ -229,3 +251,19 @@ class AccountAssetTransferLine(models.TransientModel):
         comodel_name="account.analytic.tag",
         string="Analytic tags",
     )
+
+    @api.depends("quantity", "price_unit")
+    def _compute_asset_value(self):
+        for rec in self:
+            rec.asset_value = rec.quantity * rec.price_unit
+
+    def _expand_asset_line(self):
+        self.ensure_one()
+        profile = self.asset_profile_id
+        if profile and self.quantity > 1.0 and profile.asset_product_item:
+            line = self
+            qty = self.quantity
+            name = self.asset_name
+            self.update({"quantity": 1, "asset_name": "{} {}".format(name, 1)})
+            for i in range(1, int(qty)):
+                line.copy({"asset_name": "{} {}".format(name, i + 1)})
