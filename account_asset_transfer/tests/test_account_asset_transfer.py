@@ -29,6 +29,7 @@ class TestAccountAssetTransfer(TestAssetManagement):
                 ].id,
                 "journal_id": cls.company_data["default_journal_purchase"].id,
                 "transfer_journal_id": cls.company_data["default_journal_misc"].id,
+                "asset_product_item": True,
                 "name": "Asset Under Construction",
                 "method_time": "year",
                 "method_number": 0,
@@ -47,6 +48,7 @@ class TestAccountAssetTransfer(TestAssetManagement):
                     "default_account_assets"
                 ].id,
                 "journal_id": cls.company_data["default_journal_purchase"].id,
+                "asset_product_item": True,
                 "name": "Room - 5 Years",
                 "method_time": "year",
                 "method_number": 5,
@@ -110,12 +112,18 @@ class TestAccountAssetTransfer(TestAssetManagement):
         with transfer_form.to_asset_ids.new() as to_asset:
             to_asset.asset_name = "Asset 1"
             to_asset.asset_profile_id = self.profile_asset
-            to_asset.asset_value = 3000
+            to_asset.quantity = 6
+            to_asset.price_unit = 500
         with transfer_form.to_asset_ids.new() as to_asset:
             to_asset.asset_name = "Asset 2"
             to_asset.asset_profile_id = self.profile_asset
-            to_asset.asset_value = 20000
+            to_asset.quantity = 1
+            to_asset.price_unit = 20000
         transfer_form.save()
+        # Test expand asset lines from quantity line
+        self.assertEqual(len(transfer_wiz.to_asset_ids), 2)
+        transfer_wiz.expand_to_asset_ids()
+        self.assertEqual(len(transfer_wiz.to_asset_ids), 7)
         res = transfer_wiz.transfer()
         transfer_move = self.env["account.move"].browse(res["domain"][0][2])
         assets = transfer_move.invoice_line_ids.mapped("asset_id")
