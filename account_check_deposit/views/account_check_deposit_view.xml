@@ -81,6 +81,7 @@
                                         ('currency_id', '=', currency_id),
                                 ('account_id', '=', journal_default_account_id),
                                 ('company_id', '=', company_id),
+                                ('parent_state', '=', 'posted'),
                                 ]"
                             context="{'currency': currency_id,
                                         'journal_id': journal_id}"
