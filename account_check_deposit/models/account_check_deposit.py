@@ -335,6 +335,7 @@ class AccountCheckDeposit(models.Model):
                 ("debit", ">", 0),
                 ("check_deposit_id", "=", False),
                 ("currency_id", "=", self.currency_id.id),
+                ("parent_state", "=", "posted"),
             ]
         )
         if all_pending_checks:
