@@ -39,10 +39,10 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
         ) as invoice_form:
             invoice_form.invoice_date = cls.today
             invoice_form.partner_id = cls.partner_2
-            invoice_form.journal_id = cls.sale_journal
             with invoice_form.invoice_line_ids.new() as line_form:
                 line_form.product_id = cls.product
             cls.invoice_1 = invoice_form.save()
+        cls.invoice_1.update({"journal_id": cls.sale_journal})
         cls.invoice_2 = cls.invoice_1.copy()
 
         cls.AccountMoveReversal = cls.env["account.move.reversal"]
