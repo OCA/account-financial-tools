@@ -5,6 +5,12 @@ Copyright (C) 2019 - Today: GRAP (http://www.grap.coop)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
+
+    <!-- Rename groups to fit with EE naming 'Billing' -> 'Accounting' -->
+    <record id="account.menu_finance" model="ir.ui.menu">
+        <field name="name">Accounting</field>
+    </record>
+
     <menuitem
         id="menu_accounting_bank_and_cash"
         name="Bank and Cash"

@@ -4,7 +4,7 @@
 
 {
     "name": "Account - Missing Menus & Saxon Accounting",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Adds missing menu entries for Account module and"
@@ -14,17 +14,17 @@
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
     "data": [
+        "data/ir_module_category.xml",
+        "security/res_groups.xml",
         "views/menu.xml",
         "views/res_config_settings_views.xml",
-        "views/view_account_account_template.xml",
         "views/view_account_bank_statement.xml",
-        "views/view_account_chart_template.xml",
-        "views/view_account_fiscal_position_template.xml",
         "views/view_account_group.xml",
         "views/view_account_tag.xml",
-        "views/view_account_tax_group.xml",
+        "views/view_account_chart_template.xml",
+        "views/view_account_account_template.xml",
         "views/view_account_tax_template.xml",
-        "views/view_account_type.xml",
+        "views/view_account_fiscal_position_template.xml",
     ],
     "demo": ["demo/res_groups.xml"],
     "installable": True,
