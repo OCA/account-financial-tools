@@ -1,11 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_usability
+#   * account_usability
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-10 12:42+0000\n"
+"PO-Revision-Date: 2022-10-10 12:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,16 +38,9 @@ msgid "Account Tags"
 msgstr ""
 
 #. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_form
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
-msgid "Account Tax Group"
-msgstr ""
-
-#. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.action_account_tax_group
-#: model:ir.ui.menu,name:account_usability.account_tax_group_menu
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
-msgid "Account Tax Groups"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Account Template"
 msgstr ""
 
 #. module: account_usability
@@ -55,13 +50,14 @@ msgid "Account Templates"
 msgstr ""
 
 #. module: account_usability
-#: model:ir.ui.menu,name:account_usability.account_type_menu
-msgid "Account Types"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+msgid "Account Type"
 msgstr ""
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_group_form
 msgid "Accounts"
 msgstr ""
 
@@ -86,6 +82,7 @@ msgid "Cash Registers"
 msgstr ""
 
 #. module: account_usability
+#: model:ir.actions.act_window,name:account_usability.action_account_chart_template_form
 #: model:ir.ui.menu,name:account_usability.menu_account_chart_template
 msgid "Chart of Accounts Templates"
 msgstr ""
@@ -96,9 +93,66 @@ msgid "Config Settings"
 msgstr ""
 
 #. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
+msgid "Default Taxes"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Expense Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
+msgid "Extra configuration"
+msgstr ""
+
+#. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_usability.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Group By"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Income Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+msgid "Internal notes..."
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
+msgid "Note"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+msgid "Notes"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Payable Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
+msgid "Properties"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Receivable Account"
 msgstr ""
 
 #. module: account_usability

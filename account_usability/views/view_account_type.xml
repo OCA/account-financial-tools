@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <menuitem
-        id="account_type_menu"
-        action="account.action_account_type_form"
-        sequence="30"
-        parent="account.account_account_menu"
-    />
-</odoo>

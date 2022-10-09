@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright (C) 2022-Today GRAP (http://www.grap.coop)
+    @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- Rename groups to fit with EE naming
+    Previously named 'Show Accounting Features – Readonly' in CE ->
+    -->
+    <record id="account.group_account_readonly" model="res.groups">
+        <field name="name">Read-only</field>
+        <field name="category_id" ref="base.module_category_accounting_accounting" />
+    </record>
+
+    <!-- Rename groups to fit with EE naming
+    Previously named 'Show Full Accounting Features' in CE ->
+    -->
+    <record id="account.group_account_user" model="res.groups">
+        <field name="name">Bookkeeper</field>
+        <field name="category_id" ref="base.module_category_accounting_accounting" />
+    </record>
+
+    <!-- Rename groups to fit with EE naming
+    Previously named 'Billing Administrator' in CE ->
+    -->
+    <record id="account.group_account_manager" model="res.groups">
+        <field name="name">Accountant</field>
+        <field name="category_id" ref="base.module_category_accounting_accounting" />
+    </record>
+</odoo>
