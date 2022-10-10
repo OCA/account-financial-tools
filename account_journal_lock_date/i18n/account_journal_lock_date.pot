@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,15 +29,11 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__display_name
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__id
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_move__id
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__id
 msgid "ID"
 msgstr ""
@@ -53,8 +49,6 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal____last_update
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_move____last_update
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -122,15 +116,15 @@ msgstr ""
 #: code:addons/account_journal_lock_date/models/account_move.py:0
 #, python-format
 msgid ""
-"You cannot add/modify entries for the journal '%s' prior to and inclusive of"
-" the lock date %s"
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s"
 msgstr ""
 
 #. module: account_journal_lock_date
 #: code:addons/account_journal_lock_date/models/account_move.py:0
 #, python-format
 msgid ""
-"You cannot add/modify entries for the journal '%s' prior to and inclusive of"
-" the lock date %s. Check the Journal settings or ask someone with the "
-"'Adviser' role"
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s. Check the Journal settings or "
+"ask someone with the 'Adviser' role"
 msgstr ""
