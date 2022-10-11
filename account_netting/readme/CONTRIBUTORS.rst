@@ -1,2 +1,5 @@
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
-* Vicent Cubells <vicent.cubells@serviciosbaeza.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Pedro M. Baeza
+  * Vicent Cubells
+  * Víctor Martínez

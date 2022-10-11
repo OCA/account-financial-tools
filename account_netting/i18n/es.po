@@ -162,9 +162,3 @@ msgstr "Asistente para generar movimientos de compensación"
 #, python-format
 msgid "You should compensate at least 2 journal entries."
 msgstr "Debe compensar al menos 2 apuntes."
-
-#~ msgid "Select the journal where storing the journal entries"
-#~ msgstr "Seleccione el diario en el que se guardarán los apuntes"
-
-#~ msgid "account.move.make.netting"
-#~ msgstr "cuenta.asiento.hacer.neteo"
