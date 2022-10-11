@@ -162,9 +162,3 @@ msgstr "Assistente para gerar lançamentos de encontros de contas"
 #, python-format
 msgid "You should compensate at least 2 journal entries."
 msgstr "Deve compensar pelos menos 2 itens de diário."
-
-#~ msgid "Select the journal where storing the journal entries"
-#~ msgstr "Selecione o Diário onde guardar os lançamentos"
-
-#~ msgid "account.move.make.netting"
-#~ msgstr "account.move.make.netting"
