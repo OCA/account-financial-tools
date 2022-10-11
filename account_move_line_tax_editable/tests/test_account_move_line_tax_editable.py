@@ -5,10 +5,10 @@ import odoo.tests.common as common
 from odoo import fields
 
 
-class TestAccountMoveLineTaxEditable(common.SavepointCase):
+class TestAccountMoveLineTaxEditable(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestAccountMoveLineTaxEditable, cls).setUpClass()
+        super().setUpClass()
 
         acc_obj = cls.env["account.account"]
         account100 = acc_obj.create(
