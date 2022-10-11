@@ -125,7 +125,9 @@ class AccountMoveMakeNetting(models.TransientModel):
             )
             to_reconcile.reconcile()
         # Open created move
-        action = self.env.ref("account.action_move_journal_line").read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "account.action_move_journal_line"
+        )
         action["view_mode"] = "form"
         del action["views"]
         del action["view_id"]

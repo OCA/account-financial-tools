@@ -162,9 +162,3 @@ msgstr ""
 #, python-format
 msgid "You should compensate at least 2 journal entries."
 msgstr "Sie müssen mindestens 2 Journalposten kompensieren."
-
-#~ msgid "Select the journal where storing the journal entries"
-#~ msgstr "Wählen Sie das Journal zur Aufnahme der Posten"
-
-#~ msgid "account.move.make.netting"
-#~ msgstr "account.move.make.netting"
