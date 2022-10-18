@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-03 23:22+0000\n"
-"PO-Revision-Date: 2022-10-17 18:19+0000\n"
+"PO-Revision-Date: 2022-10-18 07:54+0000\n"
 "Last-Translator: Vincent Hatakeyama <vincent+github@hatakeyama.fr>\n"
 "Language-Team: French (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/fr/)\n"
@@ -1502,22 +1502,21 @@ msgid ""
 "its useful life.\n"
 "This value is used to determine the depreciation amounts."
 msgstr ""
-"La valeur estimée qu'atteindra une immobilisation lors de sa vente à la fin "
+"La valeur estimée qu’atteindra une immobilisation lors de sa vente à la fin "
 "de sa durée de vie utile.\n"
-"Cette valeur détermine les montants d'amortissement."
+"Cette valeur détermine les montants d’amortissement."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_number
 msgid "The number of years needed to depreciate your asset"
-msgstr ""
-"Le nombre d'années nécessaires pour l'amortissement de l'immobilisation"
+msgstr "Le nombre d’années nécessaires pour l’amortissement de l’immobilisation"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The removal date must be after the last depreciation date."
-msgstr "La date de sortie doit succéder à la dernière date d'amortissement."
+msgstr "La date de sortie doit succéder à la dernière date d’amortissement."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
@@ -1526,8 +1525,8 @@ msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value)."
 msgstr ""
-"Ce montant représente la base d'amortissement de l'immobilisation (valeur "
-"d'achat - valeur de revente)."
+"Ce montant représente la base d’amortissement de l’immobilisation (valeur d’"
+"achat − valeur de revente)."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__purchase_value
@@ -1536,15 +1535,15 @@ msgid ""
 "The Depreciation Base is calculated as follows:\n"
 "Purchase Value - Salvage Value."
 msgstr ""
-"Ce montant représente la valeur initiale de l'immobilisation.\n"
-"La base d'amortissement est calculée comme suit:\n"
-"Valeur d'achat - Valeur de revente."
+"Ce montant représente la valeur initiale de l’immobilisation.\n"
+"La base d’amortissement est calculée comme suit :\n"
+"Valeur d'achat − valeur de revente."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "This invoice created the asset(s): %s"
-msgstr "Cette facture a créé le ou les actifs:%s"
+msgstr "Cette facture a créé la ou les immobilisations :%s"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
@@ -1556,7 +1555,7 @@ msgstr "Méthode de temps"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Tot. Depreciation"
-msgstr "Tot. Amortissement"
+msgstr "Tot. amortissement"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1582,7 +1581,7 @@ msgstr "Type"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Type d’activité d’exception enregistrée."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -1593,17 +1592,17 @@ msgstr "Erreur inconnue"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Messages non lus"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Nombre de messages non lus"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
 msgid "Use Specific Journal"
-msgstr ""
+msgstr "Utiliser un journal spécifique"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
@@ -1615,12 +1614,12 @@ msgstr "Utiliser des années bissextiles"
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__days_calc
 msgid "Use number of days to calculate depreciation amount"
-msgstr "Utiliser le nombre de jours pour calculer l'amortissement"
+msgstr "Utiliser le nombre de jours pour calculer l’amortissement"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 msgid "View Asset Moves"
-msgstr "Pièces d'amortissement créées"
+msgstr "Afficher les pièces d’amortissement"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1630,12 +1629,12 @@ msgstr "Afficher la pièce comptable"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messages du site sur la toile"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historique des communications du site"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__state
@@ -1649,12 +1648,12 @@ msgid ""
 "When the removal entries are generated, the asset goes into the 'Removed' "
 "status."
 msgstr ""
-"Quand une immobilisation est créée, son statut est  'Brouillon'.\n"
-"Quand l'immobilisation est confirmée, le statut devient 'En cours' et les "
+"Quand une immobilisation est créée, son statut est « Brouillon ».\n"
+"Quand l’immobilisation est confirmée, le statut devient « En cours » et les "
 "amortissements peuvent être comptabilisés.\n"
-"Si la dernière ligne d'amortissement est comptabiliée, le satut devient "
-"'Clôturé'.\n"
-"Quand l'immobilisation est sortie, son statut prend la valeur  'Sortie'."
+"Si la dernière ligne d’amortissement est comptabilisée, le statut devient « "
+"Clôturé ».\n"
+"Quand l’immobilisation est sortie, son statut prend la valeur « Sortie »."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
@@ -1669,8 +1668,8 @@ msgid ""
 "You are not allowed to link an accounting entry to an asset.\n"
 "You should generate such entries from the asset."
 msgstr ""
-"Vous n'avez pas le droit de lier une pièce comptable à une immobilisation.\n"
-"Vous devez générer ces pièces depuis l'immobilisation."
+"Vous n’avez pas le droit de lier une pièce comptable à une immobilisation.\n"
+"Vous devez générer ces pièces depuis l’immobilisation."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
@@ -1680,15 +1679,15 @@ msgid ""
 "You are not allowed to remove an accounting entry linked to an asset.\n"
 "You should remove such entries from the asset."
 msgstr ""
-"Vous n'avez pas le droit de supprimer une pièce comptable à une "
+"Vous n’avez pas le droit de supprimer une pièce comptable liée à une "
 "immobilisation.\n"
-"Vous devez générer ces pièces depuis l'immobilisation."
+"Vous devez générer ces pièces depuis l’immobilisation."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You can only delete assets in draft state."
-msgstr "Vous ne pouvez supprimer que des immobilisations 'Brouillon'."
+msgstr "Vous ne pouvez supprimer que des immobilisations en brouillon."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
@@ -1697,8 +1696,8 @@ msgid ""
 "You can't make an early removal if all the depreciation lines for previous "
 "periods are not posted."
 msgstr ""
-"Vous ne pouvez pas procéder à une sortie anticipée si les lignes "
-"d'amortissement pour les périodes antérieures ne sont pas comptabilisées."
+"Vous ne pouvez pas procéder à une sortie anticipée si les lignes d’"
+"amortissement pour les périodes antérieures ne sont pas comptabilisées."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
@@ -1706,7 +1705,7 @@ msgstr ""
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
 msgstr ""
-"Vous ne pouvez pas modifier une ligne d'amortissement liée à une pièce "
+"Vous ne pouvez pas modifier une ligne d’amortissement liée à une pièce "
 "comptable."
 
 #. module: account_asset_management
@@ -1716,7 +1715,7 @@ msgid ""
 "You cannot change an accounting entry linked to an asset depreciation line."
 msgstr ""
 "Vous ne pouvez pas modifier une pièce comptable liée à une ligne "
-"d'amortissement."
+"d’amortissement."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_move.py:0
@@ -1725,15 +1724,15 @@ msgid ""
 "You cannot change an accounting item linked to an asset depreciation line."
 msgstr ""
 "Vous ne pouvez pas modifier une pièce comptable liée à une ligne "
-"d'amortissement."
+"d’amortissement."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
-"Vous ne pouvez pas modifier la catégorie d'une immobilisation qui contient "
-"des lignes d'amortissement comptabilisées."
+"Vous ne pouvez pas modifier le profil d’une immobilisation qui contient des "
+"lignes d’amortissement comptabilisées."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
@@ -1741,7 +1740,7 @@ msgstr ""
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
 msgstr ""
-"Vous ne pouvez pas supprimer une ligne d'amortissement liée à une pièce "
+"Vous ne pouvez pas supprimer une ligne d’amortissement liée à une pièce "
 "comptable."
 
 #. module: account_asset_management
@@ -1749,15 +1748,15 @@ msgstr ""
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr ""
-"Vous ne pouvez pas supprimer une immobilisation qui contient des lignes "
-"d'amortissement comptabilisées."
+"Vous ne pouvez pas supprimer une immobilisation qui contient des lignes d’"
+"amortissement comptabilisées."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
 msgstr ""
-"Vous ne pouvez pas supprimer une ligne de type \"Base d'immobilisation\"."
+"Vous ne pouvez pas supprimer une ligne de type « Base d’amortissement »."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
@@ -1766,7 +1765,7 @@ msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
 "prior posted entries."
 msgstr ""
-"Vous ne pouvez pas cocher \"Balance initiale\" sur une ligne d'amortissement "
+"Vous ne pouvez pas cocher « Balance initiale » sur une ligne d’amortissement "
 "avec des pièces comptabilisées antérieures."
 
 #. module: account_asset_management
@@ -1774,8 +1773,8 @@ msgstr ""
 #, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr ""
-"Vous ne pouvez pas ajuster la date de début de l'immobilisation après des "
-"pièces déjà comptabilisées."
+"Vous ne pouvez pas ajuster la date de début de l’immobilisation une fois des "
+"pièces comptabilisées."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
@@ -1784,8 +1783,8 @@ msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
 "entries."
 msgstr ""
-"Vous ne pouvez pas ajuster la date sur une ligne d'amortissement qui "
-"précéderait des pièces comptabiliées."
+"Vous ne pouvez pas ajuster la date sur une ligne d’amortissement qui "
+"précéderait des pièces comptabilisées."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__date_start
@@ -1801,7 +1800,7 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 msgid "account_analytic_id"
-msgstr ""
+msgstr "account_analytic_id"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
