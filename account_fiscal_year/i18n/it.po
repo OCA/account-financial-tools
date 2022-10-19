@@ -44,7 +44,6 @@ msgstr "Creato il"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__display_name
-#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
@@ -76,13 +75,11 @@ msgstr "Anni fiscali"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__id
-#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
-#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company____last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
 
