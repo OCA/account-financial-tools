@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-account_account_constraint_code',
         'odoo14-addon-account_asset_batch_compute',
+        'odoo14-addon-account_asset_low_value',
         'odoo14-addon-account_asset_management',
         'odoo14-addon-account_asset_management_menu',
         'odoo14-addon-account_asset_number',
