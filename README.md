@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 16.0.1.0.1 |  | Account Invoice Constraint Chronology
+[account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 16.0.1.0.2 |  | Account Invoice Constraint Chronology
 
 [//]: # (end addons)
 
