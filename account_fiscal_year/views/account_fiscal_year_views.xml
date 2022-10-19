@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ Copyright 2020 Simone Rubino - Agile Business Group
+  ~ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+  -->
+<odoo>
+    <record id="account_fiscal_year_form_view" model="ir.ui.view">
+        <field name="name">Form view for account.fiscal.year</field>
+        <field name="model">account.fiscal.year</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" placeholder="Fiscal Year 2020" />
+                        <field name="date_from" />
+                        <field name="date_to" />
+                        <field name="company_id" groups="base.group_multi_company" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_fiscal_year_search_view" model="ir.ui.view">
+        <field name="name">Search view for account.fiscal.year</field>
+        <field name="model">account.fiscal.year</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record id="account_fiscal_year_tree_view" model="ir.ui.view">
+        <field name="name">Tree view for account.fiscal.year</field>
+        <field name="model">account.fiscal.year</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="actions_account_fiscal_year" model="ir.actions.act_window">
+        <field name="name">Fiscal Years</field>
+        <field name="res_model">account.fiscal.year</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to create a new fiscal year.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_actions_account_fiscal_year"
+        parent="account.account_account_menu"
+        action="actions_account_fiscal_year"
+    />
+</odoo>
