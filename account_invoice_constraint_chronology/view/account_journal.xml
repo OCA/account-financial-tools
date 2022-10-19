@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2015-2019 ACSONE SA/NV
+    Copyright 2021 CorporateHub (https://corporatehub.eu)
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="name">
+            account.journal.form (account_invoice_constraint_chronology)
+        </field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field
+                    name="check_chronology"
+                    attrs="{'invisible': [('type', 'not in', ['sale', 'purchase'])]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
