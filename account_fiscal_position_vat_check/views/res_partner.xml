@@ -9,18 +9,15 @@
     <record id="view_partner_property_form" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form" />
-        <field
-            name="groups_id"
-            eval="[(4, ref('account.group_account_invoice')), (4, ref('account.group_account_readonly'))]"
-        />
         <field name="arch" type="xml">
             <div role="alert" position="after">
                 <div
                     class="alert alert-warning"
                     role="alert"
+                    groups="account.group_account_invoice,account.group_account_readonly"
                     attrs="{'invisible': [('show_warning_vat_required', '=', False)]}"
                 >
-                <b>Missing VAT number</b>: this partner has the fiscal position <em
+                    <b>Missing VAT number</b>: this partner has the fiscal position <em
                     ><field
                             name="property_account_position_id"
                             readonly="1"
