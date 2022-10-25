@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-03 23:22+0000\n"
-"PO-Revision-Date: 2022-10-18 07:54+0000\n"
+"PO-Revision-Date: 2022-10-25 14:59+0000\n"
 "Last-Translator: Vincent Hatakeyama <vincent+github@hatakeyama.fr>\n"
 "Language-Team: French (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/fr/)\n"
@@ -1079,7 +1079,7 @@ msgstr "Type d’activité suivant"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__remaining_value
 msgid "Next Period Depreciation"
-msgstr "Période d’amortissement suivante"
+msgstr "Amortissement après la période"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
