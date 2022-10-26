@@ -45,11 +45,6 @@
                                 <th name="th_partner" class="text-left">Partner</th>
                                 <th name="th_label" class="text-left">Label</th>
                                 <th
-                                    name="th_analytic_account"
-                                    class="text-left"
-                                    groups="analytic.group_analytic_accounting"
-                                >Analytic Account</th>
-                                <th
                                     name="th_amount_currency"
                                     class="text-left"
                                     groups="base.group_multi_currency"
@@ -82,12 +77,6 @@
                                     </td>
                                     <td name='tb_line_name'>
                                         <span t-field="line.name" />
-                                    </td>
-                                    <td
-                                        name='tb_analytic'
-                                        groups="analytic.group_analytic_accounting"
-                                    >
-                                        <span t-field="line.analytic_account_id.name" />
                                     </td>
                                     <td
                                         name='tb_amount_currency'
