@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Le Filament
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_line_tree_view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="analytic_account_id" position="after">
+                <button
+                    name="account_move_update_analytic_account.action_view_account_move_update_analytic_account"
+                    string="Update Analytic Account"
+                    type="action"
+                    groups="analytic.group_analytic_accounting"
+                    attrs="{'invisible': [('parent_state', '!=', 'posted'),]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

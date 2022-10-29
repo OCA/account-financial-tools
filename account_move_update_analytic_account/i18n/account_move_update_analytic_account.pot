@@ -1,0 +1,102 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_update_analytic_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 15:05+0000\n"
+"PO-Revision-Date: 2022-11-03 15:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model,name:account_move_update_analytic_account.model_account_move_update_analytic_wizard
+msgid "Account Move Update Analytic Account Wizard"
+msgstr ""
+
+#. module: account_move_update_analytic_account
+#: model_terms:ir.ui.view,arch_db:account_move_update_analytic_account.view_account_move_update_analytic_account
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__current_analytic_account_id
+msgid "Current Analytic Account"
+msgstr "Compte Analytique Actuel"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__display_name
+msgid "Display Name"
+msgstr "Nom Affiché"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__line_id
+msgid "Invoice line"
+msgstr "Ligne de Facture"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_move_update_analytic_account
+#: model:ir.model.fields,field_description:account_move_update_analytic_account.field_account_move_update_analytic_wizard__new_analytic_account_id
+msgid "New Analytic Account"
+msgstr "Nouveau Compte Analytique"
+
+#. module: account_move_update_analytic_account
+#: model_terms:ir.ui.view,arch_db:account_move_update_analytic_account.account_move_form_view
+#: model_terms:ir.ui.view,arch_db:account_move_update_analytic_account.account_move_line_tree_view
+msgid "Update Analytic Account"
+msgstr "Mettre à jour le Compte Analytique"
+
+#. module: account_move_update_analytic_account
+#: model:ir.actions.act_window,name:account_move_update_analytic_account.action_view_account_move_update_analytic_account
+msgid "Update Analytic Account for selected Account Moves"
+msgstr "Mettre à jour le compte analytique pour les factures sélectionnées"
+
+#. module: account_move_update_analytic_account
+#: model_terms:ir.ui.view,arch_db:account_move_update_analytic_account.view_account_move_update_analytic_account
+msgid "Update Analytic Accounts"
+msgstr "Mettre à jour les comptes analytiques"
+
+#. module: account_move_update_analytic_account
+#: model_terms:ir.ui.view,arch_db:account_move_update_analytic_account.view_account_move_update_analytic_account
+msgid "Update analytic accounts"
+msgstr "Mettre à jour les comptes analytiques"
