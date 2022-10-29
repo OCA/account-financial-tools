@@ -8,7 +8,12 @@
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting",
     "depends": ["sale_mrp", "account_move_line_sale_info"],
-    "data": ["views/sale_order_view.xml", "views/res_config_settings_view.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/sale_order_view.xml",
+        "views/res_config_settings_view.xml",
+        "wizards/sale_unreconciled_exceeded_view.xml",
+    ],
     "license": "AGPL-3",
     "installable": True,
     "development_status": "Alpha",

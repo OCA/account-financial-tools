@@ -16,3 +16,6 @@ class ResConfigSettings(models.TransientModel):
     sale_lock_auto_reconcile = fields.Boolean(
         related="company_id.sale_lock_auto_reconcile", readonly=False
     )
+    sale_reconcile_tolerance = fields.Float(
+        related="company_id.sale_reconcile_tolerance", readonly=False
+    )
