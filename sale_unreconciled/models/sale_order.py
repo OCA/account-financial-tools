@@ -16,6 +16,7 @@ class SaleOrder(models.Model):
              everything is reconciled or that the related accounts do not
              allow reconciliation""",
     )
+    amount_unreconciled = fields.Float(compute="_compute_unreconciled")
 
     @api.model
     def _get_sale_unreconciled_base_domain(self):
@@ -48,6 +49,7 @@ class SaleOrder(models.Model):
             )
             unreconciled_items = acc_item.search(unreconciled_domain)
             rec.unreconciled = len(unreconciled_items) > 0
+            rec.amount_unreconciled = sum(unreconciled_items.mapped("amount_residual"))
 
     def _search_unreconciled(self, operator, value):
         if operator != "=" or not isinstance(value, bool):
@@ -153,5 +155,55 @@ class SaleOrder(models.Model):
     def action_done(self):
         for rec in self:
             if rec.reconcile_criteria():
-                rec.action_reconcile()
-        return super(SaleOrder, self).action_done()
+                exception_msg = rec.unreconciled_exception_msg()
+                if exception_msg:
+                    res = rec.sale_unreconciled_exception(exception_msg)
+                    return res
+                else:
+                    rec.action_reconcile()
+                    return super(SaleOrder, self).action_done()
+            else:
+                return super(SaleOrder, rec).action_done()
+
+    def sale_unreconciled_exception(self, exception_msg=None):
+        """This mean to be run when the SO cannot be reconciled because it is over
+        tolerance"""
+        self.ensure_one()
+        if exception_msg:
+            return (
+                self.env["sale.unreconciled.exceeded.wiz"]
+                .create(
+                    {
+                        "exception_msg": exception_msg,
+                        "sale_id": self.id,
+                        "origin_reference": "{},{}".format("sale.order", self.id),
+                        "continue_method": "action_reconcile",
+                    }
+                )
+                .action_show()
+            )
+
+    def unreconciled_exception_msg(self):
+        self.ensure_one()
+        exception_msg = ""
+        if (
+            self.company_id.sale_reconcile_tolerance
+            and self.amount_total
+            and abs(self.amount_unreconciled / self.amount_total)
+            >= self.company_id.sale_reconcile_tolerance / 100.0
+        ):
+            params = {
+                "amount_unreconciled": self.amount_unreconciled,
+                "amount_allowed": self.amount_total
+                * self.company_id.sale_reconcile_tolerance
+                / 100.0,
+            }
+            exception_msg = (
+                _(
+                    "Finance Warning: \nUnreconciled amount is too high. Total "
+                    "unreconciled amount: %(amount_unreconciled)s Maximum unreconciled"
+                    " amount accepted: %(amount_allowed)s "
+                )
+                % params
+            )
+        return exception_msg
