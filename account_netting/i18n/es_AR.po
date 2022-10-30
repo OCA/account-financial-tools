@@ -9,33 +9,34 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2017-12-03 03:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
-"teams/23907/es_AR/)\n"
+"PO-Revision-Date: 2022-10-30 17:43+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/"
+"23907/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "AR/AP netting"
-msgstr ""
+msgstr "Compensación AR/AP"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "All entries must have a receivable or payable account"
-msgstr ""
+msgstr "Todos los asientos deben tener una cuenta a cobrar o a pagar"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "All entries mustn't been reconciled"
-msgstr ""
+msgstr "No se deben conciliar todos los asientos"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
@@ -43,16 +44,18 @@ msgstr ""
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
 msgstr ""
+"Todos los asientos deben tener un contacto y el contacto debe ser el mismo "
+"para todos."
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance_type
 msgid "Balance Type"
-msgstr ""
+msgstr "Tipo de Saldo"
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -63,12 +66,12 @@ msgstr "Cancelar"
 #: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate"
-msgstr ""
+msgstr "Compensar"
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate entries"
-msgstr ""
+msgstr "Compensar asientos"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_uid
@@ -93,7 +96,7 @@ msgstr "ID"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
@@ -113,7 +116,7 @@ msgstr "Última actualización el"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
 msgid "Move Line"
-msgstr ""
+msgstr "Línea de Movimiento"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
@@ -124,6 +127,11 @@ msgid ""
 "In this case all selected entries belong to the same account.\n"
 " Please use the 'Reconcile' function."
 msgstr ""
+"La función 'Compensar' está destinada a cuadrar operaciones en diferentes "
+"cuentas para el mismo contacto.\n"
+"En este caso, todos los asientos seleccionados pertenecen a la misma cuenta."
+"\n"
+" Utilice la función 'Conciliar'."
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -132,24 +140,27 @@ msgid ""
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner."
 msgstr ""
+"Esta operación generará asientos en cuenta que son contrapartida de las "
+"cuentas por cobrar/por pagar seleccionadas, y se concilian entre sí, dejando "
+"este saldo en el contacto."
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
 msgid "To pay"
-msgstr ""
+msgstr "A pagar"
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
 msgid "To receive"
-msgstr ""
+msgstr "A cobrar"
 
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "Wizard to generate account moves for netting"
-msgstr ""
+msgstr "Asistente para generar movimientos contables para compensación"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "You should compensate at least 2 journal entries."
-msgstr ""
+msgstr "Debe compensar al menos dos asientos contables."
