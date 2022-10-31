@@ -16,6 +16,8 @@
         'stock_inventory_cost_info',
         'account_documents',
         'multi_step_wizard',
+        'account_stock_product_valuation',
+        'account_move_line_stock_info',
     ],
     'excludes': ['account_asset'],
     'author': "Rosen Vladimirov (Bioprint Ltd.), Noviat,Odoo Community Association (OCA)",

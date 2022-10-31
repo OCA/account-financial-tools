@@ -68,12 +68,15 @@ class StockPickingAsset(models.TransientModel):
                             if len(move.account_move_ids.ids) > 0:
                                 lines.append(line.id)
                 elif move._is_in():
-                    for asset_line in record.asset_lines.filtered(lambda r: r.move_line_id == line and not r.move_id.asset_profile_id):
+                    for asset_line in record.asset_lines.\
+                            filtered(lambda r: r.move_line_id == line and not r.move_id.asset_profile_id):
+
                         move.write({
                             'asset_profile_id': asset_line.asset_profile_id.id,
-                            'tax_profile_id': asset_line.tax_asset_profile_id and asset_line.tax_asset_profile_id.id or False,
+                            'tax_profile_id':
+                                asset_line.tax_asset_profile_id and asset_line.tax_asset_profile_id.id or False,
                         })
-                        _logger.info("ASSET RE-TYPE %s" % move.asset_profile_id)
+                        # _logger.info("ASSET RE-TYPE %s" % move.asset_profile_id)
                     if len(move.account_move_ids.ids) > 0:
                         lines.append(line.id)
             if lines:

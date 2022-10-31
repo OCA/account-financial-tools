@@ -69,6 +69,7 @@ class AccountAsset(models.Model):
     product_id = fields.Many2one('product.product', string='Base on Product', required=True, ondelete='cascade')
     categ_id = fields.Many2one(
         'product.category', 'Internal Category', related="product_id.product_tmpl_id.categ_id")
+    # account_id = fields.Many2one('account.account', string='Account name', compute='_compute_account_id', store=True)
     lot_id = fields.Many2one('stock.production.lot', 'Lot')
     lot_name = fields.Char('Lot/Serial Number')
     quant_ids = fields.One2many('stock.quant', string='Quants', related="lot_id.quant_ids", readonly=True)
@@ -380,6 +381,14 @@ class AccountAsset(models.Model):
         help="If residual is 0, and check box it the system will calculate depreciation")
     to_sell = fields.Boolean('Wait for selling')
 
+    # @api.multi
+    # def _compute_account_id(self):
+    #     for asset in self:
+    #         if asset.product_id:
+    #             accounts = asset.product_id.product_tmpl_id._get_product_accounts()
+    #             if accounts:
+    #                 asset.account_id = accounts['stock_valuation']
+
     @api.multi
     def _compute_purchase_line_ids(self):
         for asset in self:
@@ -583,6 +592,15 @@ class AccountAsset(models.Model):
                     raise UserError(
                         _("The Start Date must precede the Ending Date."))
 
+    # @api.onchange('product_id')
+    # @api.depends('account_id')
+    # def onchange_product_id(self):
+    #     if self.product_id:
+    #         accounts = self.product_id.product_tmpl_id._get_product_accounts()
+    #         _logger.info("ACCOUNTS %s" % accounts)
+    #         if accounts:
+    #             self.account_id = accounts['stock_valuation']
+
     @api.onchange('froze_date')
     def _froze_date(self):
         if self.froze_date:
@@ -704,22 +722,21 @@ class AccountAsset(models.Model):
     def _update_account_moves(self, vals, asset_id):
         for asset in self:
             for field in ['move_line_id', 'other_move_line_id']:
-                move = False
+                account_move_line_ids = []
                 if field == 'move_line_id' and 'move_line_id' in vals.keys() and asset.move_line_id:
-                    asset.move_line_id.asset_id = asset.id
-                    move = asset.move_line_id.move_id
+                    if asset.move_line_id.lot_id == asset.lot_id:
+                        asset.move_line_id.asset_id = asset.id
+                        account_move_line_ids = asset.move_line_id.move_id.mapped('account_move_line_ids')
                 if field == 'other_move_line_id' and 'other_move_line_id' in vals.keys() and asset.other_move_line_id:
-                    asset.other_move_line_id.asset_id = asset.id
-                    move = asset.other_move_line_id.move_id
-                if move:
-                    accounts = move.mapped('account_move_ids')
-                    for line in accounts:
-                        # line.button_cancel()
-                        for account_move in line.line_ids:
-                            account_move.with_context(
-                                dict(self._context, allow_asset=True, allow_asset_removal=True)).write({
-                                'asset_id': asset_id,
-                            })
+                    if asset.other_move_line_id.lot_id == asset.lot_id:
+                        asset.other_move_line_id.asset_id = asset.id
+                        account_move_line_ids = asset.other_move_line_id.move_id.mapped('account_move_line_ids')
+
+                for account_move in account_move_line_ids:
+                    account_move.with_context(
+                        dict(self._context, allow_asset=True, allow_asset_removal=True)).write({
+                        'asset_id': asset_id,
+                    })
 
     @api.model
     def create(self, vals):

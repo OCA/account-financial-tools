@@ -20,10 +20,17 @@
     <field name="inherit_id" ref="account_documents.invoice_supplier_documents_form"/>
     <field name="arch" type="xml">
       <xpath expr="//div[@name='button_box']" position="inside">
+          <field name="count_all_assets" invisible="1"/>
+          <button name="toggle_force_add_assets" type="object"
+                  class="oe_stat_button"
+                  icon="fa-cubes" attrs="{'invisible': [('count_all_assets', '=', 0)]}">
+                  <field name="force_add_assets" widget="boolean_button"
+                      options='{"terminology": {"string_true": "Force assets", "hover_true": "FORCE ADD", "string_false": "Choice assets", "hover_false": "NO ADDS"}}'/>
+          </button>
           <button name="action_add_asset" type="object"
               class="oe_stat_button"
               icon="fa fa-paperclip"
-              attrs="{'invisible': [('count_assets', '=', 0)]}">
+              attrs="{'invisible': ['|', ('count_assets', '=', 0), ('force_add_assets', '=', True)]}">
               <field string="Add assets" name="count_assets" widget="statinfo"/>
           </button>
           <button name="action_view_asset" type="object"

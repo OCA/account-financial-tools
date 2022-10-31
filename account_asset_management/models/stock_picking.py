@@ -29,13 +29,19 @@ class Picking(models.Model):
                 # _logger.info("PICKING %s:%s" % (picking, line))
                 asset_profile = line.move_id._check_for_assets()
                 # _logger.info("ASSET PROFILE %s" % asset_profile)
-                if asset_profile:
+                if asset_profile and asset_profile.get(line.move_id):
+                    get_asset_profile = asset_profile.get(line.move_id)
+                    pull_asset_profile_id = pull_tax_profile_id = False
+                    if get_asset_profile and get_asset_profile.get('asset_profile_id'):
+                        pull_asset_profile_id = get_asset_profile['asset_profile_id'].id
+                    if get_asset_profile and get_asset_profile.get('tax_profile_id'):
+                        pull_tax_profile_id = get_asset_profile['tax_profile_id'].id
                     line_obj = line_obj.new({
                         'move_id': line.move_id.id,
                         'move_line_id': line.id,
                         'product_id': line.product_id.id,
-                        'asset_profile_id': asset_profile.get(line.move_id) and asset_profile[line.move_id]['asset_profile_id'].id or False,
-                        'tax_asset_profile_id': asset_profile.get(line.move_id) and asset_profile[line.move_id]['tax_profile_id'].id or False,
+                        'asset_profile_id': pull_asset_profile_id,
+                        'tax_asset_profile_id': pull_tax_profile_id,
                         'quantity': line.qty_done,
                         'uom_id': line.product_uom_id.id,
                         'price_unit': line.move_id.price_unit,

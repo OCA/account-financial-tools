@@ -52,11 +52,14 @@ class StockMove(models.Model):
             date = self.date
             if len(force_asset.ids) > 1:
                 force_asset = force_asset[0]
-            if force_asset.date_start.year == date.year:
+            # _logger.info("YEAR ASSET %s == %s" % (fields.Date.from_string(force_asset.date_start),
+            #                                       fields.Date.from_string(date)))
+            if fields.Date.from_string(force_asset.date_start).year == fields.Date.from_string(date).year:
                 force_asset.to_sell = True
                 force_asset = False
                 allow_asset_removal = False
-            if allow_asset_removal and force_asset.state == 'draft' and force_asset.date_start.year != date.year:
+            if allow_asset_removal and force_asset.state == 'draft' \
+                    and fields.Date.from_string(force_asset.date_start).year != fields.Date.from_string(date).year:
                 force_asset.validate()
                 force_asset.compute_depreciation_board()
                 force_asset.with_context(dict(self._context, bg_asset_line=True)).compute_depreciation_board()
@@ -85,16 +88,6 @@ class StockMove(models.Model):
             asset = self._context.get('force_asset')
             res[0][2]['asset_id'] = asset.id
             res[1][2]['asset_id'] = asset.id
-
-        # if self.asset_profile_id and not self.move_line_ids.mapped('asset_id') and self._is_in():
-        #     # _logger.info("ASSET Dt-%s/Ct-%s" % (res[0][2], res[1][2]))
-        #     res[0][2]['asset_profile_id'] = self.asset_profile_id.id
-        #     res[0][2]['tax_profile_id'] = self.tax_profile_id and self.tax_profile_id.id or False
-        #     if len(self.move_line_ids.ids) == 1:
-        #         res[0][2]['move_line_id'] = self.move_line_ids[0].id
-        #         for move_line in self.move_line_ids.filtered(lambda r: r.lot_id):
-        #             res[0][2]['lot_id'] = move_line.lot_id.id
-        #             break
 
         if self._context.get('force_asset') and self._is_out():
             asset = self._context.get('force_asset')
@@ -125,14 +118,41 @@ class StockMove(models.Model):
     def _check_for_assets(self):
         check = {}
         for record in self:
-            if len(record.mapped('move_line_ids').mapped('asset_id').ids) > 0:
+            asset_profile_id = tax_profile_id = False
+
+            if record.asset_profile_id:
+                # check[record] = record.asset_profile_id
                 continue
             # Check in product valuations
-            product_tmpl = record.product_id.product_tmpl_id.categ_id
-            if product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
+            price_subtotal_signed = record.price_unit
+
+            if record.product_id.product_tmpl_id.property_stock_valuation_account:
+                asset_profile_id = record.product_id.product_tmpl_id.property_stock_valuation_account.asset_profile_id
+                tax_profile_id = record.product_id.product_tmpl_id.property_stock_valuation_account.tax_profile_id
+
+            if not asset_profile_id:
+                product_tmpl = record.product_id.product_tmpl_id.categ_id
+                if product_tmpl.property_stock_valuation_account_id \
+                        and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
+                    asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id
+                    tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id
+
+            if asset_profile_id and asset_profile_id.threshold >= price_subtotal_signed:
+                if asset_profile_id:
+                    asset_profile_id = asset_profile_id.threshold_profile_id
+                if tax_profile_id:
+                    tax_profile_id = tax_profile_id.threshold_tax_profile_id
+
+            if asset_profile_id or tax_profile_id:
                 check[record] = {
-                    'asset_profile_id': product_tmpl.property_stock_valuation_account_id.asset_profile_id,
-                    'tax_profile_id': product_tmpl.property_stock_valuation_account_id.tax_profile_id,
+                    'asset_profile_id': asset_profile_id.id,
+                    'tax_profile_id': tax_profile_id.id,
+                }
+
+            if record.product_id.product_tmpl_id.asset_profile_id or record.product_id.product_tmpl_id.tax_profile_id:
+                check[record] = {
+                    'asset_profile_id': record.product_id.product_tmpl_id.asset_profile_id.id,
+                    'tax_profile_id': record.product_id.product_tmpl_id.tax_profile_id.id,
                 }
         return check
 

@@ -10,7 +10,11 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     account_asset_ids = fields.One2many("account.asset", compute="_compute_account_asset_ids", string="Asset files")
-    product_asset_ids = fields.Many2many("account.asset", relation="asset_product_tmpl_rel", column1="product_tmpl_id", column2="asset_id", string="Linked to asset")
+    product_asset_ids = fields.Many2many("account.asset", relation="asset_product_tmpl_rel",
+                                         column1="product_tmpl_id",
+                                         column2="asset_id", string="Linked to asset")
+    asset_profile_id = fields.Many2one('account.asset.profile', string='Asset Profile')
+    tax_profile_id = fields.Many2one('account.bg.asset.profile', string='Tax Asset Profile')
 
     @api.multi
     def _compute_account_asset_ids(self):

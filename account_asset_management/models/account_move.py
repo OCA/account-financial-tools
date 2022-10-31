@@ -61,9 +61,9 @@ class AccountMoveLine(models.Model):
     restatement_type = fields.Selection(
         selection=lambda self: self.env['account.asset.restatement.value']._selection_method(), default='create')
 
-    @api.onchange('account_id')
-    def _onchange_account_id(self):
-        self.asset_profile_id = self.account_id.asset_profile_id
+    # @api.onchange('account_id')
+    # def _onchange_account_id(self):
+    #     self.asset_profile_id = self.account_id.asset_profile_id
 
     # def _prepare_asset(self, vals):
     #     self.ensure_one()
@@ -85,6 +85,50 @@ class AccountMoveLine(models.Model):
     #         'product_id': vals['product_id'],
     #         # 'company_id': vals.get('company_id'),
     #     }
+
+    @api.multi
+    def _check_for_assets(self):
+        check = {}
+        for record in self:
+            asset_profile_id = tax_profile_id = False
+
+            if (record.asset_profile_id and not self._context.get('force_asset_all', False)) or not record.product_id:
+                # check[record] = record.asset_profile_id
+                continue
+            # Check in product valuations
+            if record.quantity != 1:
+                continue
+            price_subtotal_signed = (record.debit - record.credit)/record.quantity
+
+            if record.product_id.product_tmpl_id.property_stock_valuation_account:
+                asset_profile_id = record.product_id.product_tmpl_id.property_stock_valuation_account.asset_profile_id
+                tax_profile_id = record.product_id.product_tmpl_id.property_stock_valuation_account.tax_profile_id
+
+            if not asset_profile_id:
+                product_tmpl = record.product_id.product_tmpl_id.categ_id
+                if product_tmpl.property_stock_valuation_account_id \
+                        and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
+                    asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id
+                    tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id
+
+            if asset_profile_id and asset_profile_id.threshold >= price_subtotal_signed:
+                if asset_profile_id:
+                    asset_profile_id = asset_profile_id.threshold_profile_id
+                if tax_profile_id:
+                    tax_profile_id = tax_profile_id.threshold_tax_profile_id
+
+            if asset_profile_id or tax_profile_id:
+                check[record] = {
+                    'asset_profile_id': asset_profile_id.id,
+                    'tax_profile_id': tax_profile_id,
+                }
+
+            if record.product_id.product_tmpl_id.asset_profile_id or record.product_id.product_tmpl_id.tax_profile_id:
+                check[record] = {
+                    'asset_profile_id': record.product_id.product_tmpl_id.asset_profile_id,
+                    'tax_profile_id': record.product_id.product_tmpl_id.tax_profile_id.id,
+                }
+        return check
 
     @api.multi
     def _prepare_asset_create(self, vals):
@@ -118,7 +162,7 @@ class AccountMoveLine(models.Model):
             'purchase_value': depreciation_base,
             'partner_id': partner_id,
             'date_start': date_start,
-            'date_buy': invoice_id and self.invoice_id.date_invoice or date_start,
+            'date_buy': invoice_id and invoice_id.date_invoice or date_start,
             'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'] or self.asset_salvage_value,
             # 'lot_id': lot_id,
             'company_id': vals.get('company_id') or self.company_id.id,
@@ -132,7 +176,7 @@ class AccountMoveLine(models.Model):
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
 
-        if vals.get('restatement_asset_id'):
+        if vals.get('restatement_asset_id') and not self.env.context.get('allow_asset'):
             asset = self.env['account.asset'].browse(vals['restatement_asset_id'])
             move = self.env['account.move'].browse(vals['move_id'])
             asset.write({
@@ -141,7 +185,7 @@ class AccountMoveLine(models.Model):
                                                                            type=vals.get('restatement_type')))]
             })
 
-        if vals.get('asset_profile_id'):
+        if vals.get('asset_profile_id') and not self.env.context.get('allow_asset'):
             # check for additional values added now
             # account = False
             # if vals.get('account_id'):
@@ -199,7 +243,7 @@ class AccountMoveLine(models.Model):
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
-        if vals.get('restatement_asset_id'):
+        if vals.get('restatement_asset_id') and not self.env.context.get('allow_asset'):
             asset = self.env['account.asset'].browse(vals['restatement_asset_id'])
             asset.write({
                 'depreciation_restatement_line_ids':
@@ -209,7 +253,7 @@ class AccountMoveLine(models.Model):
                         self.date,
                         type=vals.get('restatement_type', self.restatement_type)))]
             })
-        if vals.get('asset_profile_id'):
+        if vals.get('asset_profile_id') and not self.env.context.get('allow_asset'):
             if len(self) == 1:
                 raise AssertionError(_(
                     'This option should only be used for a single id at a '

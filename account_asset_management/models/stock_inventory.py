@@ -84,23 +84,58 @@ class InventoryLine(models.Model):
     #         "method used is 'average price' or 'real'). Value given in company currency and in product uom.",
     #     copy=False)  # as it's a technical field, we intentionally don't provide the digits attribute
 
+    @api.multi
+    def _check_for_assets(self):
+        check = {}
+        for record in self:
+            asset_profile_id = tax_profile_id = False
+
+            if record.asset_profile_id:
+                # check[record] = record.asset_profile_id
+                continue
+
+            # Check in product valuations
+            price_subtotal_signed = record.standard_price
+
+            if record.product_id.product_tmpl_id.property_stock_valuation_account:
+                asset_profile_id = record.product_id.product_tmpl_id.property_stock_valuation_account.asset_profile_id
+                tax_profile_id = record.product_id.product_tmpl_id.property_stock_valuation_account.tax_profile_id
+
+            if not asset_profile_id:
+                product_tmpl = record.product_id.product_tmpl_id.categ_id
+                if product_tmpl.property_stock_valuation_account_id \
+                        and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
+                    asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id
+                    tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id
+
+            if asset_profile_id and asset_profile_id.threshold >= price_subtotal_signed:
+                if asset_profile_id:
+                    asset_profile_id = asset_profile_id.threshold_profile_id
+                if tax_profile_id:
+                    tax_profile_id = tax_profile_id.threshold_tax_profile_id
+
+            if asset_profile_id or tax_profile_id:
+                check[record] = {
+                    'asset_profile_id': asset_profile_id,
+                    'tax_profile_id': tax_profile_id,
+                }
+
+            if record.product_id.product_tmpl_id.asset_profile_id or record.product_id.product_tmpl_id.tax_profile_id:
+                check[record] = {
+                    'asset_profile_id': record.product_id.product_tmpl_id.asset_profile_id,
+                    'tax_profile_id': record.product_id.product_tmpl_id.tax_profile_id,
+                }
+        return check
+
     @api.onchange('product_id', 'prod_lot_id')
     def onchange_product(self):
         res = super(InventoryLine, self).onchange_product()
-        if self.product_id:
-            if not len(self.account_asset_ids.filtered(lambda r: r.lot_id != self.prod_lot_id).ids) > 0:
-                price_subtotal_signed = self.standard_price
+        if self.product_id and not len(self.account_asset_ids.filtered(lambda r: r.lot_id != self.prod_lot_id).ids) > 0:
                 # Check in product valuations
-                product_tmpl = self.product_id.product_tmpl_id.categ_id
-                if product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
-                    self.asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id
-                    if product_tmpl.property_stock_valuation_account_id.asset_profile_id.threshold >= price_subtotal_signed:
-                        self.asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id.threshold_profile_id
+                asset_profile = self._check_for_assets()
 
-                if product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.tax_profile_id:
-                    self.tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id
-                    if product_tmpl.property_stock_valuation_account_id.tax_profile_id.threshold >= price_subtotal_signed:
-                        self.tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id.threshold_tax_profile_id
+                if asset_profile.get(self):
+                    self.update(asset_profile[self])
         return res
 
     # @api.onchange('prod_lot_id')

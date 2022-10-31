@@ -22,7 +22,7 @@
             <button name="toggle_to_sell" type="object"
                 class="oe_stat_button"
                 icon="fa fa-usd"
-                style="background-color: #dc3545 !important; color: #fff !important;" attrs="{'invisible': [('type', '=', 'view'), ('state', 'in', ['draft', 'close', 'removed'])]}">
+                style="color: #dc3545 !important;" attrs="{'invisible': [('type', '=', 'view'), ('state', 'in', ['draft', 'close', 'removed'])]}">
                 <field name="to_sell" widget="boolean_button"
                     options='{"terminology": {"string_true": "Selling", "hover_true": "Depreciation", "string_false": "Depreciation", "hover_false": "Selling"}}'/>
             </button>
@@ -58,6 +58,7 @@
               <field name="parent_id"/>
               <field name="move_line_check" invisible="1"/>
               <field name="type_assets" invisible="1"/>
+<!--              <field name="account_id"/>-->
             </group>
             <group name="company">
               <field name="type"/>

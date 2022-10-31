@@ -16,14 +16,33 @@ class AccountInvoice(models.Model):
 
     count_assets = fields.Integer('Count assets', compute='_compute_count_assets')
     count_in_assets = fields.Integer('Count added assets', compute='_compute_count_assets')
+    count_all_assets = fields.Integer('Count possible assets', compute='_compute_count_assets')
+    force_add_assets = fields.Boolean('Force add asset')
 
     @api.multi
     def _compute_count_assets(self):
         for record in self:
             record.count_assets = len(record.invoice_line_ids._check_for_assets())
+            record.count_all_assets = len(record.invoice_line_ids.
+                                          with_context(dict(self._context, force_all=True))._check_for_assets())
             if record.move_id:
                 record.count_in_assets = len([x for x in record.move_id.line_ids if x.asset_id])
                 # _logger.info("ASSET %s::%s:%s" % (record.count_in_assets, record.move_id.line_ids, [x for x in record.move_id.line_ids if x.asset_id]))
+
+    @api.one
+    def toggle_force_add_assets(self):
+        self.force_add_assets = not self.force_add_assets
+        if self.force_add_assets and self.type in ('in_invoice', 'in_refund'):
+                asset_profile = self.invoice_line_ids._check_for_assets()
+                for line in self.invoice_line_ids:
+                    if asset_profile.get(line):
+                        line.update(asset_profile[line])
+        elif not self.force_add_assets and self.type in ('in_invoice', 'in_refund'):
+            for line in self.invoice_line_ids:
+                line.update({
+                    'asset_profile_id': False,
+                    'tax_profile_id': False
+                })
 
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
@@ -185,6 +204,8 @@ class AccountInvoice(models.Model):
 
     def _action_invoice_rebuild_pre(self):
         result = super()._action_invoice_rebuild_pre()
+        if not self.force_add_assets:
+            return result
         assets = self.env['account.asset']
         # Remove all assets from move_id
         move = self.move_id
@@ -197,8 +218,10 @@ class AccountInvoice(models.Model):
             assets.unlink()
         #_logger.info("ASSET %s" % self.type)
         if self.type in ('in_invoice', 'in_refund'):
+            asset_profile = self.invoice_line_ids._check_for_assets()
             for line in self.invoice_line_ids:
-                line._onchange_account_id()
+                if asset_profile.get(line):
+                    line.write(asset_profile[line])
                 #_logger.info("LINE ASSET %s" % line)
         # add check for sallied assets
         return result
@@ -210,10 +233,12 @@ class AccountInvoice(models.Model):
             'move_line_ids': [(4, r.id) for r in self.move_id.mapped('line_ids')],
         })
         invoice = wizard.invoice_id
+        asset_profile = invoice.invoice_line_ids._check_for_assets()
         for line in invoice.invoice_line_ids:
-            if not line.asset_profile_id:
-                line._onchange_account_id()
-            if line.asset_profile_id:
+            # if not line.asset_profile_id:
+            #     line._onchange_account_id()
+            # if line.asset_profile_id:
+            if asset_profile.get(line):
                 wizard.invoice_line_ids += wizard.invoice_line_ids.new({
                     'invoice_line_id': line.id,
                     # 'product_id': line.product_id.id,
@@ -271,50 +296,92 @@ class AccountInvoiceLine(models.Model):
     def _check_for_assets(self):
         check = {}
         for record in self:
-            if record.asset_profile_id:
+            asset_profile_id = tax_profile_id = False
+
+            if record.asset_profile_id and not self._context.get('forced_all', False):
                 # check[record] = record.asset_profile_id
                 continue
+
             # Check in product valuations
-            product_tmpl = record.product_id.product_tmpl_id.categ_id
-            if product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
-                check[record] = product_tmpl.property_stock_valuation_account_id.asset_profile_id
+            price_subtotal_signed = record.price_unit
+            if record.invoice_id.currency_id \
+                    and record.invoice_id.currency_id != record.invoice_id.company_id.currency_id:
+                price_subtotal_signed = record.invoice_id.currency_id.with_context(
+                    date=record.invoice_id._get_currency_rate_date()).\
+                    compute(price_subtotal_signed, record.invoice_id.company_id.currency_id)
+
+            if record.product_id.product_tmpl_id.property_stock_valuation_account:
+                asset_profile_id = record.product_id.product_tmpl_id.property_stock_valuation_account.asset_profile_id
+                tax_profile_id = record.product_id.product_tmpl_id.property_stock_valuation_account.tax_profile_id
+
+            if not asset_profile_id:
+                product_tmpl = record.product_id.product_tmpl_id.categ_id
+                if product_tmpl.property_stock_valuation_account_id \
+                        and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
+                    asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id
+                    tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id
+
+            if asset_profile_id and asset_profile_id.threshold >= price_subtotal_signed:
+                if asset_profile_id:
+                    asset_profile_id = asset_profile_id.threshold_profile_id
+                if tax_profile_id:
+                    tax_profile_id = tax_profile_id.threshold_tax_profile_id
+
+            if asset_profile_id or tax_profile_id:
+                check[record] = {
+                    'asset_profile_id': asset_profile_id.id,
+                    'tax_profile_id': tax_profile_id.id,
+                }
+
+            if record.product_id.product_tmpl_id.asset_profile_id or record.product_id.product_tmpl_id.tax_profile_id:
+                check[record] = {
+                    'asset_profile_id': record.product_id.product_tmpl_id.asset_profile_id,
+                    'tax_profile_id': record.product_id.product_tmpl_id.tax_profile_id,
+                }
 
             # override with account from line
             if record.account_id.asset_profile_id:
-                check[record] = record.account_id.asset_profile_id
+                check[record] = {
+                    'asset_profile_id': record.account_id.asset_profile_id.id,
+                    'tax_profile_id': record.account_id.tax_profile_id.id,
+                }
         return check
 
-    @api.onchange('account_id')
-    def _onchange_account_id(self):
-        price_subtotal_signed = self.price_unit
-        if self.invoice_id.currency_id and self.invoice_id.currency_id != self.invoice_id.company_id.currency_id:
-            price_subtotal_signed = self.invoice_id.currency_id.with_context(
-                date=self.invoice_id._get_currency_rate_date()).compute(price_subtotal_signed,
-                                                                        self.invoice_id.company_id.currency_id)
-        # Check in product valuations
-        product_tmpl = self.product_id.product_tmpl_id.categ_id
-        if product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.asset_profile_id:
-            self.asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id
-            if product_tmpl.property_stock_valuation_account_id.asset_profile_id.threshold >= price_subtotal_signed:
-                self.asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id.threshold_profile_id
-
-        if product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.tax_profile_id:
-            self.tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id
-            if product_tmpl.property_stock_valuation_account_id.tax_profile_id.threshold >= price_subtotal_signed:
-                self.tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id.threshold_tax_profile_id
-
-        # override with account from line
-        if self.account_id.asset_profile_id:
-            self.asset_profile_id = self.account_id.asset_profile_id
-            if self.account_id.asset_profile_id.threshold >= price_subtotal_signed:
-                self.asset_profile_id = self.account_id.asset_profile_id.threshold_profile_id
-
-        if self.account_id.tax_profile_id:
-            self.tax_profile_id = self.account_id.tax_profile_id
-            if self.account_id.tax_profile_id.threshold >= price_subtotal_signed:
-                self.tax_profile_id = self.account_id.tax_profile_id.threshold_tax_profile_id
-        #_logger.info("ACCOUNT ONCHANGE %s:%s:%s:%s:%s:%s" % (self, price_subtotal_signed, product_tmpl, product_tmpl.property_stock_valuation_account_id, product_tmpl.property_stock_valuation_account_id and product_tmpl.property_stock_valuation_account_id.tax_profile_id, self.account_id.asset_profile_id))
-        return super()._onchange_account_id()
+    # @api.onchange('account_id')
+    # def _onchange_account_id(self):
+    #     price_subtotal_signed = self.price_unit
+    #     if self.invoice_id.currency_id and self.invoice_id.currency_id != self.invoice_id.company_id.currency_id:
+    #         price_subtotal_signed = self.invoice_id.currency_id.with_context(
+    #             date=self.invoice_id._get_currency_rate_date()).compute(price_subtotal_signed,
+    #                                                                     self.invoice_id.company_id.currency_id)
+    #     # Check in product valuations
+    #     asset_profile_id = tax_profile_id = False
+    #     if self.product_id and self.product_id.product_tmpl_id.property_stock_valuation_account:
+    #         asset_profile_id = self.product_id.product_tmpl_id.property_stock_valuation_account.asset_profile_id
+    #         tax_profile_id = self.product_id.product_tmpl_id.property_stock_valuation_account.tax_profile_id
+    #
+    #     if not asset_profile_id and self.product_id:
+    #         product_tmpl = self.product_id.product_tmpl_id.categ_id
+    #         if product_tmpl and product_tmpl.property_stock_valuation_account_id:
+    #             asset_profile_id = product_tmpl.property_stock_valuation_account_id.asset_profile_id
+    #             tax_profile_id = product_tmpl.property_stock_valuation_account_id.tax_profile_id
+    #
+    #     if self.account_id and self.account_id.asset_profile_id:
+    #         asset_profile_id = self.account_id.asset_profile_id
+    #
+    #     if self.account_id and self.account_id.tax_profile_id:
+    #         tax_profile_id = self.account_id.tax_profile_id
+    #
+    #     if asset_profile_id.threshold >= price_subtotal_signed:
+    #         if asset_profile_id:
+    #             asset_profile_id = asset_profile_id.threshold_profile_id
+    #         if tax_profile_id:
+    #             tax_profile_id = tax_profile_id.threshold_tax_profile_id
+    #
+    #     self.asset_profile_id = asset_profile_id
+    #     self.tax_profile_id = tax_profile_id
+    #
+    #     return super()._onchange_account_id()
 
     @api.onchange('product_id')
     def _onchange_product_id(self):

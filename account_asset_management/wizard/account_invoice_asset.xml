@@ -34,6 +34,7 @@
                 </group>
                 <footer>
                     <button string="Generate Accounting entries" name="rebuild_account_move" type="object" class="oe_highlight"/>
+                    <button string="Force create asset" name="force_create_assets" type="object" class="oe_highlight"/>
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>
