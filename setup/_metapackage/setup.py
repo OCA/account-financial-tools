@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo-addon-account_asset_management_menu>=15.0dev,<15.1dev',
         'odoo-addon-account_balance_line>=15.0dev,<15.1dev',
         'odoo-addon-account_chart_update>=15.0dev,<15.1dev',
+        'odoo-addon-account_chart_update_l10n_eu_oss>=15.0dev,<15.1dev',
         'odoo-addon-account_fiscal_position_vat_check>=15.0dev,<15.1dev',
         'odoo-addon-account_fiscal_year>=15.0dev,<15.1dev',
         'odoo-addon-account_invoice_constraint_chronology>=15.0dev,<15.1dev',
