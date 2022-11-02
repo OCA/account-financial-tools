@@ -88,31 +88,37 @@ class TestAccountMoveLineCurrency(common.SavepointCase):
 
     def test_account_move_line_used_currency(self):
         self.assertEqual(
-            self.invoice_1.amount_total, 14400,
+            self.invoice_1.amount_total,
+            14400,
         )
 
         self.assertEqual(
-            self.invoice_2.amount_total, 6000,
+            self.invoice_2.amount_total,
+            6000,
         )
 
         item_1 = self.env["account.move.line"].browse(
             self.invoice_1.invoice_line_ids.id
         )
         self.assertEqual(
-            item_1.amount_used_currency, -12000,
+            item_1.amount_used_currency,
+            -12000,
         )
 
         self.assertEqual(
-            item_1.used_currency_id.id, self.currency_euro.id,
+            item_1.used_currency_id.id,
+            self.currency_euro.id,
         )
 
         item_2 = self.env["account.move.line"].browse(
             self.invoice_2.invoice_line_ids.id
         )
         self.assertEqual(
-            item_2.amount_used_currency, -5000,
+            item_2.amount_used_currency,
+            -5000,
         )
 
         self.assertEqual(
-            item_2.used_currency_id.id, self.currency_usd.id,
+            item_2.used_currency_id.id,
+            self.currency_usd.id,
         )
