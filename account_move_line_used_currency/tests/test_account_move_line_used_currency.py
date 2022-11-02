@@ -4,7 +4,7 @@
 from odoo.tests import common
 
 
-class TestAccountMoveLineCurrency(common.SavepointCase):
+class TestAccountMoveLineCurrency(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -31,8 +31,22 @@ class TestAccountMoveLineCurrency(common.SavepointCase):
         )
 
         # Currencies
-        cls.currency_euro = cls.env["res.currency"].search([("name", "=", "EUR")])
-        cls.currency_usd = cls.env["res.currency"].search([("name", "=", "USD")])
+        cls.currency_euro = (
+            cls.env["res.currency"]
+            .with_context(active_test=False)
+            .search([("name", "=", "EUR")])
+        )
+        if not cls.currency_euro.active:
+            cls.currency_euro.write(
+                {
+                    "active": True,
+                }
+            )
+        cls.currency_usd = (
+            cls.env["res.currency"]
+            .with_context(active_test=False)
+            .search([("name", "=", "USD")])
+        )
         cls.currency_rate = cls.env["res.currency.rate"].create(
             {"rate": 1.30, "currency_id": cls.currency_usd.id}
         )
