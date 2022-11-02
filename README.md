@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [account_asset_management_menu](account_asset_management_menu/) | 15.0.1.0.0 |  | Assets Management Menu
 [account_balance_line](account_balance_line/) | 15.0.1.0.0 |  | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 15.0.1.0.3 |  | Wizard to update a company's account chart from a template
+[account_chart_update_l10n_eu_oss](account_chart_update_l10n_eu_oss/) | 15.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Account Chart update OSS
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 15.0.1.0.1 |  | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 15.0.1.0.0 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Create Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 15.0.1.0.1 |  | Account Invoice Constraint Chronology
