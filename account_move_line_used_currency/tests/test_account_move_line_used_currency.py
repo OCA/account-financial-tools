@@ -41,7 +41,7 @@ class TestAccountMoveLineCurrency(common.SavepointCase):
         cls.invoice_1 = cls.env["account.move"].create(
             [
                 {
-                    "type": "out_invoice",
+                    "move_type": "out_invoice",
                     "partner_id": cls.res_partner_1.id,
                     "currency_id": cls.currency_euro.id,
                     "invoice_line_ids": [
@@ -63,7 +63,7 @@ class TestAccountMoveLineCurrency(common.SavepointCase):
         cls.invoice_2 = cls.env["account.move"].create(
             [
                 {
-                    "type": "out_invoice",
+                    "move_type": "out_invoice",
                     "partner_id": cls.res_partner_1.id,
                     "currency_id": cls.currency_usd.id,
                     "invoice_line_ids": [
