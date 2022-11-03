@@ -24,8 +24,16 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">account.fiscal.position.template</field>
         <field name="inherit_id" ref="account.view_account_position_template_form" />
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']/.." position="before">
+                <widget
+                    name="web_ribbon"
+                    title="Archived"
+                    bg_color="bg-danger"
+                    attrs=" {'invisible': [('active', '=', True)]}"
+                />
+            </xpath>
             <field name="chart_template_id" position="after">
-                <field name="active" />
+                <field name="active" invisible="1" />
             </field>
             <xpath expr="//field[@name='tax_ids']/tree" position="attributes">
                 <attribute name="decoration-muted">not active</attribute>
@@ -58,7 +66,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <record
-        id="account_menu.account_fiscal_position_template_action"
+        id="account_usability.account_fiscal_position_template_action"
         model="ir.actions.act_window"
     >
         <field name="context">{"active_test": False}</field>

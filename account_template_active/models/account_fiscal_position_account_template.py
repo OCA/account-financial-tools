@@ -8,7 +8,7 @@ from odoo import fields, models
 class AccountFiscalPositionAccountTemplate(models.Model):
     _inherit = "account.fiscal.position.account.template"
 
-    active = fields.Boolean("Active", default=True)
+    active = fields.Boolean(default=True)
 
     def write(self, vals):
         AccountTemplate = self.env["account.account.template"]

@@ -15,8 +15,6 @@ class TestModule(TransactionCase):
         self.AFPATemplate = self.env["account.fiscal.position.account.template"]
         self.AFPTTemplate = self.env["account.fiscal.position.tax.template"]
 
-        self.receivable_type = self.env.ref("account.data_account_type_receivable")
-
         self.template = self.ACTemplate.create(
             {
                 "name": "Chart of Account",
@@ -31,7 +29,7 @@ class TestModule(TransactionCase):
             {
                 "name": "Account Template",
                 "code": "CODE",
-                "user_type_id": self.receivable_type.id,
+                "account_type": "asset_receivable",
                 "chart_template_id": self.template.id,
             }
         )
