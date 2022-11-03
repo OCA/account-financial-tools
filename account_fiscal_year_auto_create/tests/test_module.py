@@ -29,10 +29,10 @@ class TestModule(TransactionCase):
         )
 
     def test_cron(self):
+        # Run cron should create a new fiscal year
         existing_fiscal_years = self.AccountFiscalYear.search([])
         self.AccountFiscalYear.cron_auto_create()
 
-        # Run cron should create a new fiscal year
         new_fiscal_year = self.AccountFiscalYear.search(
             [("id", "not in", existing_fiscal_years.ids)]
         )
@@ -46,7 +46,6 @@ class TestModule(TransactionCase):
         existing_fiscal_years = self.AccountFiscalYear.search([])
         self.AccountFiscalYear.cron_auto_create()
 
-        # Run cron should create a new fiscal year
         new_fiscal_year = self.AccountFiscalYear.search(
             [("id", "not in", existing_fiscal_years.ids)]
         )
