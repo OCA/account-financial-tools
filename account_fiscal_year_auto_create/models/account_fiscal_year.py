@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, models
@@ -16,12 +17,11 @@ class AccountFiscalYear(models.Model):
         companies = self.env["res.company"].search([])
         for company in companies:
             last_fiscal_year = self.search(
-                [('company_id', '=', company.id)],
-                order="date_to desc", limit=1)
+                [("company_id", "=", company.id)], order="date_to desc", limit=1
+            )
 
             if last_fiscal_year and (
-                last_fiscal_year.date_to <
-                datetime.now().date() + relativedelta(days=1)
+                last_fiscal_year.date_to < datetime.now().date() + relativedelta(days=1)
             ):
                 self.create(last_fiscal_year._prepare_next_fiscal_year())
 
@@ -33,18 +33,13 @@ class AccountFiscalYear(models.Model):
         # - "FY 2018" will be replace by "FY 2019"
         # - "FY 2018-2019" will be replace by "FY 2019-2020"
         new_name = self.name.replace(
-            str((self.date_to.year)), str((self.date_to.year + 1))
-        ).replace(
-            str((self.date_from.year)), str((self.date_from.year + 1))
-        )
-        if self.search([
-                ("name", "=", new_name),
-                ("company_id", "=", self.company_id.id)
-        ]):
+            str(self.date_to.year), str(self.date_to.year + 1)
+        ).replace(str(self.date_from.year), str(self.date_from.year + 1))
+        if self.search(
+            [("name", "=", new_name), ("company_id", "=", self.company_id.id)]
+        ):
             # the replace process fail to guess a correct unique name
-            new_name = _("FY %s - %s") % (
-                str(self.date_to), str(self.date_from)
-            )
+            new_name = _("FY %s - %s") % (str(self.date_to), str(self.date_from))
         # compute new dates, handling leap years
         new_date_from = self.date_to + relativedelta(days=1)
         new_date_to = new_date_from + relativedelta(years=1, days=-1)
