@@ -8,7 +8,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="cron_fiscal_year_auto_create" model="ir.cron">
         <field name="name">Auto Create Fiscal Years</field>
         <field name="active" eval="True" />
-        <field name="model_id" ref="account.model_account_fiscal_year" />
+        <field name="model_id" ref="account_fiscal_year.model_account_fiscal_year" />
         <field name="state">code</field>
         <field name="code">model.cron_auto_create()</field>
         <field name="interval_number">1</field>
