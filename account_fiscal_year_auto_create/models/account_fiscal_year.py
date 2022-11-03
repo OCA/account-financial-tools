@@ -25,7 +25,6 @@ class AccountFiscalYear(models.Model):
             ):
                 self.create(last_fiscal_year._prepare_next_fiscal_year())
 
-    @api.multi
     def _prepare_next_fiscal_year(self):
         self.ensure_one()
         # try to generate a new name, based on the previous
@@ -39,7 +38,11 @@ class AccountFiscalYear(models.Model):
             [("name", "=", new_name), ("company_id", "=", self.company_id.id)]
         ):
             # the replace process fail to guess a correct unique name
-            new_name = _("FY %s - %s") % (str(self.date_to), str(self.date_from))
+            new_name = _(
+                "FY %(date_to)s - %(date_from)s",
+                date_to=str(self.date_to),
+                date_from=str(self.date_from),
+            )
         # compute new dates, handling leap years
         new_date_from = self.date_to + relativedelta(days=1)
         new_date_to = new_date_from + relativedelta(years=1, days=-1)
