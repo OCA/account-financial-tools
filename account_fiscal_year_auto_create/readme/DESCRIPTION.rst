@@ -9,7 +9,7 @@ This module is interesting specially in multi company context, to avoid annoying
 The fiscal year created has a classical "12 monthes" duration, but the accountant
 can modify it, once created.
 
-Exemple
+Example
 ~~~~~~~
 
 If a company has it last fiscal year, defined as:
