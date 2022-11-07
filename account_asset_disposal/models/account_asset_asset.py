@@ -173,3 +173,20 @@ class AccountAssetAsset(models.Model):
             'disposal_date': False,
             'disposal_move_id': False,
         })
+
+
+class AccountAssetDepreciationLine(models.Model):
+    _inherit = "account.asset.depreciation.line"
+
+    @api.multi
+    def post_lines_and_close_asset(self):
+        assets_disposed_depreciation_lines = self.env["account.asset.depreciation.line"]
+        for line in self:
+            asset = line.asset_id
+            if "disposed" == asset.state and asset.currency_id.is_zero(
+                asset.value_residual
+            ):
+                assets_disposed_depreciation_lines |= line
+        super(
+            AccountAssetDepreciationLine, self - assets_disposed_depreciation_lines
+        ).post_lines_and_close_asset()
