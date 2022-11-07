@@ -35,7 +35,7 @@ class SaleOrder(models.Model):
             ("move_id.state", "=", "posted"),
             # for some reason when amount_residual is zero
             # is marked as reconciled, this is better check
-            ("full_reconcile_id", "=", False),
+            ("amount_residual", "!=", 0.0),
             ("company_id", "in", self.env.companies.ids),
         ]
         return unreconciled_domain
@@ -105,13 +105,17 @@ class SaleOrder(models.Model):
                 unreconciled_items_currency = acc_unrec_items.filtered(
                     lambda l: l.currency_id == currency
                 )
-                # First try to reconcile the lines automatically to prevent unwanted
-                # write-offs
+                # nothing to reconcile
+                # if journal items are zero zero then we force a matching number
                 if all(
                     not x.amount_residual and not x.amount_residual_currency
                     for x in unreconciled_items_currency
                 ):
-                    # nothing to reconcile
+                    self.env["account.full.reconcile"].create(
+                        {
+                            "reconciled_line_ids": [(6, 0, unreconciled_items.ids)],
+                        }
+                    )
                     continue
                 all_aml_share_same_currency = all(
                     [
@@ -135,7 +139,9 @@ class SaleOrder(models.Model):
                 remaining_moves = unreconciled_items_currency | writeoff_to_reconcile
                 # Check if reconciliation is total or needs an exchange rate entry to be created
                 if remaining_moves:
-                    remaining_moves.filtered(lambda l: not l.reconciled).reconcile()
+                    remaining_moves.filtered(
+                        lambda l: l.amount_residual != 0.0
+                    ).reconcile()
             reconciled_ids = unreconciled_items | all_writeoffs
             return {
                 "name": _("Reconciled journal items"),
