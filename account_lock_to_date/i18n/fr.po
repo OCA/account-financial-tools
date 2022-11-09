@@ -6,91 +6,93 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-11-09 20:44+0000\n"
+"Last-Translator: Valaeys Stéphane <svalaeys@fiefmanage.ch>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_account_update_lock_to_date
 msgid "Account Update Lock_to_date"
-msgstr ""
+msgstr "Verrouillage des dates comptables futures"
 
 #. module: account_lock_to_date
 #: model_terms:ir.ui.view,arch_db:account_lock_to_date.account_update_lock_to_date_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Sociétés"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__company_id
 msgid "Company"
-msgstr ""
+msgstr "Société"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__display_name
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_move__id
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__id
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Pièce comptable"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_move____last_update
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date____last_update
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__fiscalyear_lock_to_date
 msgid "Lock To Date"
-msgstr ""
+msgstr "Date de verrouillage future"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__period_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__period_lock_to_date
 msgid "Lock To Date for Non-Advisers"
-msgstr ""
+msgstr "Date de verrouillage future pour les non-conseillers"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
@@ -98,6 +100,9 @@ msgid ""
 "No users, including Advisers, can edit accounts after and inclusive of this "
 "date. Use it for fiscal year locking for example."
 msgstr ""
+"Aucun utilisateur, y compris les conseillers, ne peuvent modifier des "
+"éléments comptables à partir de et y compris cette date. À utiliser pour "
+"limiter un exercice fiscal, par exemple."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_res_company__fiscalyear_lock_to_date
@@ -105,6 +110,8 @@ msgid ""
 "No users, including Advisers, can edit accounts after this date. Use it for "
 "fiscal year locking for example."
 msgstr ""
+"Aucun utilisateur, y compris les conseillers, ne peuvent modifier des "
+"éléments comptables après cette date."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__period_lock_to_date
@@ -146,19 +153,19 @@ msgstr ""
 #. module: account_lock_to_date
 #: model_terms:ir.ui.view,arch_db:account_lock_to_date.account_update_lock_to_date_form_view
 msgid "Update"
-msgstr ""
+msgstr "Mettre à jour"
 
 #. module: account_lock_to_date
 #: model:ir.actions.act_window,name:account_lock_to_date.account_update_lock_to_date_act_window
 #: model:ir.ui.menu,name:account_lock_to_date.account_update_lock_to_date_menu
 msgid "Update accounting lock to dates"
-msgstr ""
+msgstr "Mettre à jour les dates de verrouillage futures"
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/wizards/account_update_lock_to_date.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
-msgstr ""
+msgstr "Vous n'êtes pas autorisé à exécuter cette action."
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/account_move.py:0
@@ -166,6 +173,8 @@ msgstr ""
 msgid ""
 "You cannot add/modify entries after and inclusive of the lock to date %s"
 msgstr ""
+"Il n'est pas permis d'ajouter / modifier des éléments comptables après et y "
+"compris la date de %s"
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/account_move.py:0
@@ -174,6 +183,9 @@ msgid ""
 "You cannot add/modify entries after and inclusive of the lock to date %s. "
 "Check the company settings or ask someone with the 'Adviser' role"
 msgstr ""
+"Vous n'avez pas le droit d'ajouter / modifier des éléments comptables après "
+"et y compris la date de %s. Veuillez vérifier la configuration de la société "
+"ou vous rapprocher d'une personne avec le rôle de conseiller."
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/res_company.py:0
@@ -182,6 +194,10 @@ msgid ""
 "You cannot define stricter conditions on advisors than on users. Please make"
 " sure that the lock date on advisor is set after the lock date for users."
 msgstr ""
+"Il n'est pas permis de définir des conditions plus strictes pour les "
+"conseillers que les autres utilisateurs. Veuillez vous assurer que la date "
+"de verrouillage future pour les conseillers et ultérieure à celle pour les "
+"autres utilisateurs."
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/res_company.py:0
@@ -190,3 +206,6 @@ msgid ""
 "You cannot lock a period that is not finished yet. Please make sure that the"
 " lock date for advisors is set at or after the last day of the next month."
 msgstr ""
+"Vous ne pouvez pas verrouiller une période qui n'est pas encore finie. "
+"Veuille vous assurer que la date pour les conseillers est après le dernier "
+"jour du mois prochain."
