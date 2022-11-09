@@ -1,0 +1,53 @@
+<odoo>
+    <record id="view_account_move_user_type_tree" model="ir.ui.view">
+        <field name="name">account.move.user.type.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field
+                    name="amount_total_signed_account_internal_group_asset"
+                    sum="Total Signed Asset"
+                    string="Total Asset"
+                    decoration-bf="1"
+                    optional="hide"
+                />
+                <field
+                    name="amount_total_signed_account_internal_group_equity"
+                    sum="Total Signed Equity"
+                    string="Total Equity"
+                    decoration-bf="1"
+                    optional="hide"
+                />
+                <field
+                    name="amount_total_signed_account_internal_group_liability"
+                    sum="Total Signed Liability"
+                    string="Total Liability"
+                    decoration-bf="1"
+                    optional="hide"
+                />
+                <field
+                    name="amount_total_signed_account_internal_group_income"
+                    sum="Total Signed Income"
+                    string="Total Income"
+                    decoration-bf="1"
+                    optional="hide"
+                />
+                <field
+                    name="amount_total_signed_account_internal_group_expense"
+                    sum="Total Signed Expense"
+                    string="Total Expense"
+                    decoration-bf="1"
+                    optional="hide"
+                />
+                <field
+                    name="amount_total_signed_account_internal_group_off_balance"
+                    sum="Total Signed Off Balance"
+                    string="Total Off Balance"
+                    decoration-bf="1"
+                    optional="hide"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
