@@ -42,7 +42,7 @@ class PurchaseOrder(models.Model):
             invoices = self.journal_entry_ids
 
         result = self.env["ir.actions.act_window"]._for_xml_id(
-            "account.action_move_in_invoice_type"
+            "account.action_move_journal_line"
         )
         # choose the view_mode accordingly
         if len(invoices) > 1:
