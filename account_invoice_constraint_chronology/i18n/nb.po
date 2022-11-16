@@ -19,33 +19,46 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_invoice_constraint_chronology
-#: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_bank_statement_import_journal_creation__check_chronology
 #: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal__check_chronology
 msgid "Check Chronology"
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
+#. odoo-python
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
-"Chronology Error. Please confirm older draft invoices before {date_invoice} "
-"and try again."
+"Chronology conflict: A conflicting draft invoice dated before {date_invoice} "
+"exists, please validate it first."
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:82
+#. odoo-python
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
-"Chronology Error. There exist at least one invoice with a later date to "
-"{date_invoice}."
+"Chronology conflict: A conflicting validated invoice dated after "
+"{date_invoice} exists."
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
-msgid "Invoice"
-msgstr "Faktura"
+#. odoo-python
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
+#, python-format
+msgid ""
+"Chronology conflict: An invoice with a higher number {highest_name} dated "
+"before {date_invoice} exists."
+msgstr ""
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
 msgstr "Journal"
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#~ msgid "Invoice"
+#~ msgstr "Faktura"
