@@ -108,12 +108,14 @@ msgid "Start Date, included in the fiscal year."
 msgstr "Begindatum, opgenomen in het fiscale jaar."
 
 #. module: account_fiscal_year
+#. odoo-python
 #: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
 #, python-format
 msgid "The ending date must not be prior to the starting date."
 msgstr "De einddatum kan niet eerder zijn dan de start datum."
 
 #. module: account_fiscal_year
+#. odoo-python
 #: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
 #, python-format
 msgid ""
