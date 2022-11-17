@@ -50,6 +50,13 @@
                                     class="o_light_label mt16"
                                 />
                             </div>
+                            <label for="purchase_reconcile_tolerance" />
+                            <div class="content-group">
+                                <field
+                                    name="purchase_reconcile_tolerance"
+                                    class="o_light_label mt16"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -19,3 +19,9 @@ class ResCompany(models.Model):
         "account.journal", string="WriteOff Journal for Purchases"
     )
     purchase_lock_auto_reconcile = fields.Boolean()
+    purchase_reconcile_tolerance = fields.Float(
+        string="Purchase Reconcile Tolerance (%)",
+        default=0.0,
+        help="Percentage of tolerance of residual amount vs total amount of the "
+        "Purchase Order. Leave zero to accept all discrepancies",
+    )
