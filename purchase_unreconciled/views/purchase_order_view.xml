@@ -45,13 +45,6 @@
                     groups="account.group_account_manager"
                     help="Purchase orders with unreconciled journal items."
                 />
-                <filter
-                    name="accounting_review"
-                    string="To Review By Accounting"
-                    domain="[('unreconciled','=', True), ('invoice_status', '=', 'invoiced'), ('is_shipped', '=', True)]"
-                    groups="account.group_account_manager"
-                    help="No unreconciled journal items should remain after receive and bill"
-                />
             </filter>
         </field>
     </record>

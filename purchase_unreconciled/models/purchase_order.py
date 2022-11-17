@@ -16,7 +16,7 @@ class PurchaseOrder(models.Model):
         "everything is reconciled or that the related accounts do not "
         "allow reconciliation",
     )
-    is_shipped = fields.Boolean(search="_search_is_shipped")
+    amount_unreconciled = fields.Float(compute="_compute_unreconciled")
 
     @api.model
     def _get_purchase_unreconciled_base_domain(self):
@@ -40,15 +40,6 @@ class PurchaseOrder(models.Model):
         ]
         return unreconciled_domain
 
-    def _search_is_shipped(self, operator, value):
-        if operator != "=" or not isinstance(value, bool):
-            raise ValueError(_("Unsupported search operator"))
-        is_shipped_pos = self.search([("picking_ids.state", "in", ("done", "cancel"))])
-        if value:
-            return [("id", "in", is_shipped_pos.ids)]
-        else:
-            return [("id", "not in", is_shipped_pos.ids)]
-
     def _compute_unreconciled(self):
         acc_item = self.env["account.move.line"]
         for rec in self:
@@ -58,6 +49,7 @@ class PurchaseOrder(models.Model):
             )
             unreconciled_items = acc_item.search(unreconciled_domain)
             rec.unreconciled = len(unreconciled_items) > 0
+            rec.amount_unreconciled = sum(unreconciled_items.mapped("amount_residual"))
 
     def _search_unreconciled(self, operator, value):
         if operator != "=" or not isinstance(value, bool):
@@ -99,6 +91,7 @@ class PurchaseOrder(models.Model):
                 )
             )
         self.ensure_one()
+        res = {}
         domain = self._get_purchase_unreconciled_base_domain()
         unreconciled_domain = expression.AND(
             [domain, [("purchase_order_id", "=", self.id)]]
@@ -160,7 +153,7 @@ class PurchaseOrder(models.Model):
                         lambda l: l.amount_residual != 0.0
                     ).reconcile()
             reconciled_ids = unreconciled_items | all_writeoffs
-            return {
+            res = {
                 "name": _("Reconciled journal items"),
                 "type": "ir.actions.act_window",
                 "view_type": "form",
@@ -168,6 +161,10 @@ class PurchaseOrder(models.Model):
                 "res_model": "account.move.line",
                 "domain": [("id", "in", reconciled_ids.ids)],
             }
+        if self.env.context.get("bypass_unreconciled", False):
+            # When calling the method from the wizard, lock after reconciling
+            self.button_done()
+        return res
 
     def reconcile_criteria(self):
         """Gets the criteria where POs are locked or not, by default uses the company
@@ -177,6 +174,57 @@ class PurchaseOrder(models.Model):
 
     def button_done(self):
         for rec in self:
-            if rec.reconcile_criteria():
-                rec.action_reconcile()
-        return super(PurchaseOrder, self).button_done()
+            if rec.unreconciled:
+                exception_msg = rec.unreconciled_exception_msg()
+                if exception_msg:
+                    res = rec.purchase_unreconciled_exception(exception_msg)
+                    return res
+                else:
+                    if rec.reconcile_criteria():
+                        rec.action_reconcile()
+                    return super(PurchaseOrder, self).button_done()
+            else:
+                return super(PurchaseOrder, rec).button_done()
+
+    def purchase_unreconciled_exception(self, exception_msg=None):
+        """This mean to be run when the SO cannot be reconciled because it is over
+        tolerance"""
+        self.ensure_one()
+        if exception_msg:
+            return (
+                self.env["purchase.unreconciled.exceeded.wiz"]
+                .create(
+                    {
+                        "exception_msg": exception_msg,
+                        "purchase_id": self.id,
+                        "origin_reference": "{},{}".format("purchase.order", self.id),
+                        "continue_method": "action_reconcile",
+                    }
+                )
+                .action_show()
+            )
+
+    def unreconciled_exception_msg(self):
+        self.ensure_one()
+        exception_msg = ""
+        if (
+            self.company_id.purchase_reconcile_tolerance
+            and self.amount_total
+            and abs(self.amount_unreconciled / self.amount_total)
+            >= self.company_id.purchase_reconcile_tolerance / 100.0
+        ):
+            params = {
+                "amount_unreconciled": self.amount_unreconciled,
+                "amount_allowed": self.amount_total
+                * self.company_id.purchase_reconcile_tolerance
+                / 100.0,
+            }
+            exception_msg = (
+                _(
+                    "Finance Warning: \nUnreconciled amount is too high. Total "
+                    "unreconciled amount: %(amount_unreconciled)s Maximum unreconciled"
+                    " amount accepted: %(amount_allowed)s "
+                )
+                % params
+            )
+        return exception_msg
