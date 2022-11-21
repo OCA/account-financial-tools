@@ -43,7 +43,9 @@ class PurchaseOrder(models.Model):
     def _compute_unreconciled(self):
         acc_item = self.env["account.move.line"]
         for rec in self:
-            domain = rec._get_purchase_unreconciled_base_domain()
+            domain = rec.with_company(
+                rec.company_id
+            )._get_purchase_unreconciled_base_domain()
             unreconciled_domain = expression.AND(
                 [domain, [("purchase_order_id", "=", rec.id)]]
             )
