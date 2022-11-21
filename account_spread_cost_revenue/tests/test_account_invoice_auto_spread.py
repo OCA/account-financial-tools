@@ -3,9 +3,7 @@
 
 from odoo.exceptions import UserError
 
-from odoo.addons.account_spread_cost_revenue.tests.test_account_invoice_spread import (
-    TestAccountInvoiceSpread,
-)
+from .test_account_invoice_spread import TestAccountInvoiceSpread
 
 
 class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
