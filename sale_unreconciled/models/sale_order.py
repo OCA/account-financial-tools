@@ -43,7 +43,9 @@ class SaleOrder(models.Model):
     def _compute_unreconciled(self):
         acc_item = self.env["account.move.line"]
         for rec in self:
-            domain = rec._get_sale_unreconciled_base_domain()
+            domain = rec.with_company(
+                rec.company_id
+            )._get_sale_unreconciled_base_domain()
             unreconciled_domain = expression.AND(
                 [domain, [("sale_order_id", "=", rec.id)]]
             )
