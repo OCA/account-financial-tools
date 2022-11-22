@@ -1,23 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_cost_center
+# 	* account_cost_center
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# Pedro Castro Silva <pedrocs@sossia.pt>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2017-01-12 03:43+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@sossia.pt>, 2017\n"
-"Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
-"Language: pt\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_cost_center
@@ -32,12 +26,12 @@ msgstr ""
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__code
 msgid "Code"
-msgstr "Código"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__company_id
 msgid "Company"
-msgstr "Empresa"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_bank_statement_line__cost_center_id
@@ -63,12 +57,12 @@ msgstr ""
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_uid
 msgid "Created by"
-msgstr "Criado por"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_date
 msgid "Created on"
-msgstr "Criado em"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model.fields,help:account_cost_center.field_account_bank_statement_line__cost_center_id
@@ -80,12 +74,12 @@ msgstr ""
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__display_name
 msgid "Display Name"
-msgstr "Nome"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_report
@@ -94,30 +88,28 @@ msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move
-#, fuzzy
 msgid "Journal Entry"
-msgstr "Items Diários"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move_line
-#, fuzzy
 msgid "Journal Item"
-msgstr "Items Diários"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center____last_update
 msgid "Last Modified on"
-msgstr "Modificado a última vez por"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__write_uid
 msgid "Last Updated by"
-msgstr "Última alteração por"
+msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__write_date
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: account_cost_center
 #: model_terms:ir.ui.view,arch_db:account_cost_center.account_cost_center_view_search
@@ -127,13 +119,4 @@ msgstr ""
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__name
 msgid "Title"
-msgstr "Título"
-
-#~ msgid "Invoice"
-#~ msgstr "Fatura"
-
-#~ msgid "Invoice Line"
-#~ msgstr "Linha de fatura"
-
-#~ msgid "Analytic Account"
-#~ msgstr "Conta Analítica"
+msgstr ""
