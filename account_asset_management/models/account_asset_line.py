@@ -19,6 +19,7 @@ class AccountAssetLine(models.Model):
         required=True,
         ondelete="cascade",
         check_company=True,
+        index=True,
     )
     previous_id = fields.Many2one(
         comodel_name="account.asset.line",
