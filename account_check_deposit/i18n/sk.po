@@ -506,6 +506,3 @@ msgstr ""
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr ""
-
-#~ msgid "Companies"
-#~ msgstr "Spoločnosti"
