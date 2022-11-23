@@ -35,6 +35,11 @@ dicts and finding IDs of partners!
                     <field name="company_id" groups="base.group_multi_company" />
                     <field name="date" states="set_lines" />
                     <field name="journal_id" states="set_lines" />
+                    <field
+                        name="currency_id"
+                        states="set_lines"
+                        groups="base.group_multi_currency"
+                    />
                     <field name="ref" states="set_lines" />
                     <field name="partner_id" states="set_lines" />
                 </group>

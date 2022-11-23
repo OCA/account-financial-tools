@@ -24,6 +24,13 @@ class AccountMoveTemplateRun(models.TransientModel):
     )
     date = fields.Date(required=True, default=fields.Date.context_today)
     journal_id = fields.Many2one("account.journal", string="Journal", readonly=True)
+    currency_id = fields.Many2one(
+        comodel_name="res.currency",
+        readonly=True,
+        required=True,
+        string="Currency",
+        default=lambda self: self.env.company.currency_id,
+    )
     ref = fields.Char(string="Reference")
     line_ids = fields.One2many(
         "account.move.template.line.run", "wizard_id", string="Lines"
@@ -86,6 +93,7 @@ Valid dictionary to overwrite template lines:
         self.write(
             {
                 "journal_id": self.template_id.journal_id.id,
+                "currency_id": self.template_id.currency_id.id,
                 "ref": self.template_id.ref,
                 "state": "set_lines",
             }
@@ -221,6 +229,7 @@ Valid dictionary to overwrite template lines:
             "partner_id": self.partner_id.id or line.partner_id.id,
             "date_maturity": date_maturity or self.date,
             "tax_repartition_line_id": line.tax_repartition_line_id.id or False,
+            "currency_id": line.currency_id.id,
         }
         if line.analytic_tag_ids:
             values["analytic_tag_ids"] = [(6, 0, line.analytic_tag_ids.ids)]
@@ -233,9 +242,9 @@ Valid dictionary to overwrite template lines:
                     ("repartition_type", "=", "base"),
                 ]
             )
-            values["tag_ids"] = [(6, 0, atrl_ids.mapped("tag_ids").ids)]
+            values["tax_tag_ids"] = [(6, 0, atrl_ids.mapped("tag_ids").ids)]
         if line.tax_repartition_line_id:
-            values["tag_ids"] = [(6, 0, line.tax_repartition_line_id.tag_ids.ids)]
+            values["tax_tag_ids"] = [(6, 0, line.tax_repartition_line_id.tag_ids.ids)]
         # With overwrite options
         overwrite = self._context.get("overwrite", {})
         move_line_vals = overwrite.get("L{}".format(line.sequence), {})
@@ -264,6 +273,7 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     company_currency_id = fields.Many2one(
         related="wizard_id.company_id.currency_id", string="Company Currency"
     )
+    currency_id = fields.Many2one(related="wizard_id.currency_id", string="Currency")
     sequence = fields.Integer("Sequence", required=True)
     name = fields.Char("Name", readonly=True)
     account_id = fields.Many2one("account.account", required=True, readonly=True)
