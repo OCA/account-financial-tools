@@ -510,29 +510,3 @@ msgstr ""
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr ""
-
-#~ msgid "Check Deposit - Ref. Check %s"
-#~ msgstr "Čekovni depozit - sklic čeka %s"
-
-#, fuzzy
-#~ msgid "Check Deposits"
-#~ msgstr "Čekovni depoziti"
-
-#~ msgid "Companies"
-#~ msgstr "Družbe"
-
-#~ msgid "Currency (False if same as company)"
-#~ msgstr "Valuta (neveljavno če je ista kot valuta družbe)"
-
-#~ msgid "Default Debit Account of the Journal"
-#~ msgstr "Privzeti konto obveznosti za dnevnik"
-
-#~ msgid "It acts as a default account for debit amount"
-#~ msgstr "Deluje kot privzeti konto za znesek obveznosti"
-
-#, fuzzy
-#~ msgid "Post Move for Check Deposits"
-#~ msgstr "Čekovni depoziti"
-
-#~ msgid "Checks Deposit Search"
-#~ msgstr "Iskalnik čekovnih depozitov"

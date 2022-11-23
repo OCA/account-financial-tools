@@ -507,12 +507,3 @@ msgstr ""
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr ""
-
-#~ msgid "Currency (False if same as company)"
-#~ msgstr "Currency (False if same as company)"
-
-#~ msgid "Default Debit Account of the Journal"
-#~ msgstr "Default Debit Account of the Journal"
-
-#~ msgid "It acts as a default account for debit amount"
-#~ msgstr "It acts as a default account for debit amount"
