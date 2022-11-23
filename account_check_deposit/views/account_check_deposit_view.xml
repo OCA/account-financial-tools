@@ -11,7 +11,7 @@
         <field name="model">account.check.deposit</field>
         <field name="arch" type="xml">
             <form>
-                    <header>
+                <header>
                     <button
                         name="get_all_checks"
                         states="draft"
@@ -107,12 +107,12 @@
                             </tree>
                         </field>
                     </group>
-            </sheet>
-            <div class="oe_chatter">
-                <field name="message_follower_ids" widget="mail_followers" />
-                <field name="activity_ids" widget="mail_activity" />
-                <field name="message_ids" widget="mail_thread" />
-            </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
             </form>
         </field>
     </record>
@@ -132,7 +132,6 @@
                     groups="base.group_multi_currency"
                     optional="show"
                 />
-                <field name="is_reconcile" optional="show" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field
                     name="state"
@@ -183,17 +182,17 @@
                 </group>
             </search>
         </field>
-</record>
-<record id="check_deposit_pivot" model="ir.ui.view">
+    </record>
+    <record id="check_deposit_pivot" model="ir.ui.view">
         <field name="model">account.check.deposit</field>
         <field name="arch" type="xml">
                 <pivot>
-                        <field name="deposit_date" interval="month" type="row" />
-                        <field name="bank_journal_id" type="col" />
-                        <field name="check_count" type="measure" />
+                    <field name="deposit_date" interval="month" type="row" />
+                    <field name="bank_journal_id" type="col" />
+                    <field name="check_count" type="measure" />
                 </pivot>
         </field>
-</record>
+    </record>
     <record id="action_check_deposit_tree" model="ir.actions.act_window">
         <field name="name">Checks Deposits</field>
         <field name="res_model">account.check.deposit</field>

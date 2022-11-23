@@ -99,9 +99,6 @@ class AccountCheckDeposit(models.Model):
         string="Number of Checks",
         tracking=True,
     )
-    is_reconcile = fields.Boolean(
-        compute="_compute_check_deposit", store=True, string="Reconcile"
-    )
 
     _sql_constraints = [
         (
@@ -134,36 +131,23 @@ class AccountCheckDeposit(models.Model):
         }
 
         for deposit in self:
-            reconcile = False
-            company_cur = deposit.company_id.currency_id
-            if company_cur != deposit.currency_id:
+            if deposit.company_id.currency_id != deposit.currency_id:
                 total = mapped_data.get(deposit.id, {"amount_currency": 0.0})[
                     "amount_currency"
                 ]
             else:
                 total = mapped_data.get(deposit.id, {"debit": 0.0})["debit"]
             count = mapped_data.get(deposit.id, {"count": 0})["count"]
-            if deposit.move_id:
-                for line in deposit.move_id.line_ids:
-                    if not company_cur.is_zero(line.debit) and line.reconciled:
-                        reconcile = True
             deposit.total_amount = total
-            deposit.is_reconcile = reconcile
             deposit.check_count = count
 
     @api.depends("journal_id")
     def _compute_in_hand_check_account_id(self):
         for rec in self:
-            in_hand_check_account_id = False
-            if rec.journal_id:
-                for line in rec.journal_id.inbound_payment_method_line_ids:
-                    if (
-                        line.payment_method_id.code == "manual"
-                        and line.payment_account_id
-                    ):
-                        in_hand_check_account_id = line.payment_account_id.id
-                        break
-            rec.in_hand_check_account_id = in_hand_check_account_id
+            account = rec.journal_id.inbound_payment_method_line_ids.filtered(
+                lambda line: line.payment_method_id.code == "manual"
+            ).payment_account_id
+            rec.in_hand_check_account_id = account
 
     @api.model
     def default_get(self, fields_list):
@@ -200,15 +184,14 @@ class AccountCheckDeposit(models.Model):
                     )
 
     def unlink(self):
-        for deposit in self:
-            if deposit.state == "done":
-                raise UserError(
-                    _(
-                        "The deposit '%s' is in valid state, so you must "
-                        "cancel it before deleting it."
-                    )
-                    % deposit.name
+        for deposit in self.filtered(lambda x: x.state == "done"):
+            raise UserError(
+                _(
+                    "The deposit '%s' is in valid state, so you must "
+                    "cancel it before deleting it."
                 )
+                % deposit.name
+            )
         return super().unlink()
 
     def backtodraft(self):
@@ -285,8 +268,7 @@ class AccountCheckDeposit(models.Model):
         am_obj = self.env["account.move"]
         move_line_obj = self.env["account.move.line"]
         for deposit in self:
-            move_vals = deposit._prepare_account_move_vals()
-            move = am_obj.create(move_vals)
+            move = am_obj.create(deposit._prepare_account_move_vals())
             total_debit = 0.0
             total_amount_currency = 0.0
             to_reconcile_lines = []
@@ -316,25 +298,22 @@ class AccountCheckDeposit(models.Model):
     @api.onchange("company_id")
     def onchange_company_id(self):
         if self.company_id:
-            bank_journals = self.env["account.journal"].search(
+            self.bank_journal_id = self.env["account.journal"].search(
                 [
                     ("company_id", "=", self.company_id.id),
                     ("type", "=", "bank"),
                     ("bank_account_id", "!=", False),
-                ]
+                ],
+                limit=1,
             )
-            if len(bank_journals) == 1:
-                self.bank_journal_id = bank_journals[0]
         else:
             self.bank_journal_id = False
 
     @api.onchange("journal_id")
     def onchange_journal_id(self):
-        if self.journal_id:
-            if self.journal_id.currency_id:
-                self.currency_id = self.journal_id.currency_id
-            else:
-                self.currency_id = self.journal_id.company_id.currency_id
+        self.currency_id = (
+            self.journal_id.currency_id or self.journal_id.company_id.currency_id
+        )
 
     def get_report(self):
         report = self.env.ref("account_check_deposit.report_account_check_deposit")
