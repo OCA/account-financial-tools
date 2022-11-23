@@ -522,30 +522,3 @@ msgstr ""
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr ""
-
-#~ msgid "Check Deposit - Ref. Check %s"
-#~ msgstr "Remise - Ref. Cheque %s"
-
-#~ msgid "Check Deposits"
-#~ msgstr "Remises de chèques"
-
-#~ msgid "Companies"
-#~ msgstr "Sociétés"
-
-#~ msgid "Currency (False if same as company)"
-#~ msgstr "Devise (False s'il s'agit de la même que la société)"
-
-#~ msgid "Default Debit Account of the Journal"
-#~ msgstr "Compte de débit par défaut du journal"
-
-#~ msgid "Post Move for Check Deposits"
-#~ msgstr "Comptabiliser les écritures des remises de chèques"
-
-#~ msgid "Transfer Account"
-#~ msgstr "Compte de transfert"
-
-#~ msgid "Transfer Account for Check Deposits"
-#~ msgstr "Compte de transfert pour les remises de chèques"
-
-#~ msgid "Checks Deposit Search"
-#~ msgstr "Rechercher une Remise de Chèques"
