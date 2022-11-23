@@ -8,7 +8,7 @@
     <template id="report_checkdeposit">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
-                <t t-call="web.internal_layout">
+                <t t-call="web.external_layout">
                     <div class="page">
                         <h1>Check Deposit n°<span t-field="o.name" /></h1>
                         <h3>Bank:</h3>
