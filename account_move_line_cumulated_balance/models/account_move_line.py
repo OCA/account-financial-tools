@@ -67,7 +67,7 @@ class AccountMoveLine(models.Model):
                     AND (date < %s OR (date=%s AND id <= %s))
                 """
             ).format(sql.SQL(where_clause or "TRUE"))
-            if self.env.context.get("partner_ledger"):
+            if self.env.context.get("partner_ledger") and record.partner_id:
                 # If showing partner ledger group by partner by default
                 query_args.append(record.partner_id.id)
                 query += sql.SQL("AND partner_id = %s")
