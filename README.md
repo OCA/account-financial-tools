@@ -53,7 +53,7 @@ addon | version | maintainers | summary
 [account_menu](account_menu/) | 13.0.1.0.0 |  | Adds missing menu entries for Account module
 [account_move_budget](account_move_budget/) | 13.0.1.0.0 |  | Create Accounting Budgets
 [account_move_force_removal](account_move_force_removal/) | 13.0.1.0.0 |  | Allow force removal account moves
-[account_move_line_cumulated_balance](account_move_line_cumulated_balance/) | 13.0.1.0.0 |  | Show cumulated balances on the interactive journal ledgers
+[account_move_line_cumulated_balance](account_move_line_cumulated_balance/) | 13.0.1.0.1 |  | Show cumulated balances on the interactive journal ledgers
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 13.0.1.1.3 |  | Introduces the purchase order line to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 13.0.1.0.3 |  | Introduces the purchase order line to the journal items
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 13.0.2.0.0 |  | Allows to edit taxes on non-posted account move lines
