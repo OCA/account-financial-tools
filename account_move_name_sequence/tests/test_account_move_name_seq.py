@@ -9,7 +9,7 @@ from datetime import datetime
 from freezegun import freeze_time
 
 from odoo import fields
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
@@ -168,7 +168,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         in_refund_invoice.action_post()
         self.assertEqual(in_refund_invoice.name, move_name)
 
-    def test_remove_invoice_error(self):
+    def test_remove_invoice_error_secuence_no_grap(self):
         invoice = self.env["account.move"].create(
             {
                 "date": self.date,
@@ -189,3 +189,55 @@ class TestAccountMoveNameSequence(TransactionCase):
         error_msg = "You cannot delete this entry, as it has already consumed a"
         with self.assertRaisesRegex(UserError, error_msg):
             invoice.unlink()
+
+    def test_remove_invoice_error_secuence_standard(self):
+        implementation = {"implementation": "standard"}
+        self.purchase_journal.sequence_id.write(implementation)
+        self.purchase_journal.refund_sequence_id.write(implementation)
+        in_refund_invoice = self.env["account.move"].create(
+            {
+                "journal_id": self.purchase_journal.id,
+                "invoice_date": self.date,
+                "partner_id": self.env.ref("base.res_partner_3").id,
+                "move_type": "in_refund",
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "account_id": self.account1.id,
+                            "price_unit": 42.0,
+                            "quantity": 12,
+                        },
+                    )
+                ],
+            }
+        )
+        in_refund_invoice._compute_split_sequence()
+        self.assertEqual(in_refund_invoice.name, "/")
+        in_refund_invoice.action_post()
+        error_msg = "You cannot delete an item linked to a posted entry."
+        with self.assertRaisesRegex(UserError, error_msg):
+            in_refund_invoice.unlink()
+        in_refund_invoice.button_draft()
+        in_refund_invoice.button_cancel()
+        self.assertTrue(in_refund_invoice.unlink())
+
+    def test_journal_check_journal_sequence(self):
+        new_journal = self.purchase_journal.copy()
+        # same sequence_id and refund_sequence_id
+        with self.assertRaises(ValidationError):
+            new_journal.write({"refund_sequence_id": new_journal.sequence_id})
+
+        # company_id in sequence_id or refund_sequence_id to False
+        new_sequence_id = new_journal.sequence_id.copy({"company_id": False})
+        new_refund_sequence_id = new_journal.refund_sequence_id.copy(
+            {"company_id": False}
+        )
+        with self.assertRaises(ValidationError):
+            new_journal.write({"sequence_id": new_sequence_id.id})
+        with self.assertRaises(ValidationError):
+            new_journal.write({"refund_sequence_id": new_refund_sequence_id.id})
+
+    def test_constrains_date_sequence_true(self):
+        self.assertTrue(self.env["account.move"]._constrains_date_sequence())
