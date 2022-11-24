@@ -139,6 +139,11 @@ msgid "Check Deposit n°"
 msgstr "Depósito de Cheque nº"
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
+msgid "Check Journal"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Payments"
@@ -200,7 +205,6 @@ msgstr "Data do Depósito"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__display_name
 msgid "Display Name"
 msgstr "Nome a exibir"
 
@@ -220,11 +224,6 @@ msgstr "Rascunho"
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_follower_ids
 msgid "Followers"
 msgstr "Seguidores"
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Seguidores (Canais)"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_partner_ids
@@ -249,8 +248,12 @@ msgid "Group By"
 msgstr "Agrupar Por"
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__id
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__id
 msgid "ID"
 msgstr "ID"
 
@@ -277,19 +280,9 @@ msgid "If checked, some messages have a delivery error."
 msgstr "Se selecionado, algumas mensagens tem um erro de entrega."
 
 #. module: account_check_deposit
-#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__journal_default_account_id
-msgid ""
-"Incoming payments entries triggered by invoices/refunds will be posted on "
-"the Outstanding Receipts Account and displayed as blue lines in the bank "
-"reconciliation widget. During the reconciliation process, concerned "
-"transactions will be reconciled with entries on the Outstanding Receipts "
-"Account instead of the receivable account."
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__in_hand_check_account_id
+msgid "In Hand Check Account"
 msgstr ""
-"Os pagamentos provocados por faturas/créditos serão lançadas na Conta de "
-"Recibos Pendentes e exibidos como linhas azuis na funcionalidade de "
-"reconciliação bancária. Durante o processo de reconciliação, as transações "
-"em questão serão reconciliadas com os lançamentos na Conta de Recibos "
-"Pendentes em vez da conta a receber."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_is_follower
@@ -297,7 +290,6 @@ msgid "Is Follower"
 msgstr "É Seguidor"
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Journal"
 msgstr "Diário"
@@ -314,7 +306,6 @@ msgstr "Item do Diário"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line____last_update
 msgid "Last Modified on"
 msgstr "Última Modificação em"
 
@@ -356,8 +347,8 @@ msgstr "Mensagens"
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
-msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
-msgstr "Falta 'Conta de Recibos Pendentes' no diário do banco '%s'."
+msgid "Missing 'Outstanding Receipts Account' on the company '%s'."
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
@@ -415,19 +406,9 @@ msgid "Number of unread messages"
 msgstr "Número de mensagens não lidas"
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_default_account_id
-msgid "Outstanding Receipts Account"
-msgstr "Conta de Recibos Pendentes"
-
-#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Print"
 msgstr "Imprimir"
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__is_reconcile
-msgid "Reconcile"
-msgstr "Reconciliar"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -466,11 +447,9 @@ msgstr ""
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
-"The check with amount %s and reference '%s' is in currency %s but the "
-"deposit is in currency %s."
+"The check with amount {amount} and reference '{ref}' is in currency "
+"{check_currency} but the deposit is in currency {deposit_currency}."
 msgstr ""
-"O cheque no valor %s e referência '%s' está na moeda %s mas o depósito está "
-"na moeda %s."
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
@@ -485,11 +464,9 @@ msgstr ""
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
-"There are no received checks in account '%s' in currency '%s' that are not "
-"already in this check deposit."
+"There are no received checks in account '{account}' in currency '{currency}' "
+"that are not already in this check deposit."
 msgstr ""
-"Não há cheques recebidos na conta '%s' em moeda '%s' que ainda não estejam "
-"neste depósito de cheques."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount
@@ -525,3 +502,45 @@ msgstr "Mensagens do Website"
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr "Histórico de Comunicação do Website"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Seguidores (Canais)"
+
+#~ msgid ""
+#~ "Incoming payments entries triggered by invoices/refunds will be posted on "
+#~ "the Outstanding Receipts Account and displayed as blue lines in the bank "
+#~ "reconciliation widget. During the reconciliation process, concerned "
+#~ "transactions will be reconciled with entries on the Outstanding Receipts "
+#~ "Account instead of the receivable account."
+#~ msgstr ""
+#~ "Os pagamentos provocados por faturas/créditos serão lançadas na Conta de "
+#~ "Recibos Pendentes e exibidos como linhas azuis na funcionalidade de "
+#~ "reconciliação bancária. Durante o processo de reconciliação, as "
+#~ "transações em questão serão reconciliadas com os lançamentos na Conta de "
+#~ "Recibos Pendentes em vez da conta a receber."
+
+#, python-format
+#~ msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
+#~ msgstr "Falta 'Conta de Recibos Pendentes' no diário do banco '%s'."
+
+#~ msgid "Outstanding Receipts Account"
+#~ msgstr "Conta de Recibos Pendentes"
+
+#~ msgid "Reconcile"
+#~ msgstr "Reconciliar"
+
+#, python-format
+#~ msgid ""
+#~ "The check with amount %s and reference '%s' is in currency %s but the "
+#~ "deposit is in currency %s."
+#~ msgstr ""
+#~ "O cheque no valor %s e referência '%s' está na moeda %s mas o depósito "
+#~ "está na moeda %s."
+
+#, python-format
+#~ msgid ""
+#~ "There are no received checks in account '%s' in currency '%s' that are "
+#~ "not already in this check deposit."
+#~ msgstr ""
+#~ "Não há cheques recebidos na conta '%s' em moeda '%s' que ainda não "
+#~ "estejam neste depósito de cheques."

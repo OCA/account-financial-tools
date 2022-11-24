@@ -135,6 +135,11 @@ msgid "Check Deposit n°"
 msgstr ""
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
+msgid "Check Journal"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Payments"
@@ -196,7 +201,6 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__display_name
 msgid "Display Name"
 msgstr "ชื่อที่ใช้แสดง"
 
@@ -215,11 +219,6 @@ msgstr "ฉบับร่าง"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_follower_ids
 msgid "Followers"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_channel_ids
-msgid "Followers (Channels)"
 msgstr ""
 
 #. module: account_check_deposit
@@ -245,8 +244,12 @@ msgid "Group By"
 msgstr ""
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__id
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__id
 msgid "ID"
 msgstr "รหัส"
 
@@ -273,13 +276,8 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__journal_default_account_id
-msgid ""
-"Incoming payments entries triggered by invoices/refunds will be posted on "
-"the Outstanding Receipts Account and displayed as blue lines in the bank "
-"reconciliation widget. During the reconciliation process, concerned "
-"transactions will be reconciled with entries on the Outstanding Receipts "
-"Account instead of the receivable account."
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__in_hand_check_account_id
+msgid "In Hand Check Account"
 msgstr ""
 
 #. module: account_check_deposit
@@ -288,7 +286,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Journal"
 msgstr ""
@@ -305,7 +302,6 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line____last_update
 msgid "Last Modified on"
 msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
 
@@ -347,7 +343,7 @@ msgstr ""
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
-msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
+msgid "Missing 'Outstanding Receipts Account' on the company '%s'."
 msgstr ""
 
 #. module: account_check_deposit
@@ -406,18 +402,8 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_default_account_id
-msgid "Outstanding Receipts Account"
-msgstr ""
-
-#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Print"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__is_reconcile
-msgid "Reconcile"
 msgstr ""
 
 #. module: account_check_deposit
@@ -453,8 +439,8 @@ msgstr ""
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
-"The check with amount %s and reference '%s' is in currency %s but the "
-"deposit is in currency %s."
+"The check with amount {amount} and reference '{ref}' is in currency "
+"{check_currency} but the deposit is in currency {deposit_currency}."
 msgstr ""
 
 #. module: account_check_deposit
@@ -468,8 +454,8 @@ msgstr ""
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
-"There are no received checks in account '%s' in currency '%s' that are not "
-"already in this check deposit."
+"There are no received checks in account '{account}' in currency '{currency}' "
+"that are not already in this check deposit."
 msgstr ""
 
 #. module: account_check_deposit
