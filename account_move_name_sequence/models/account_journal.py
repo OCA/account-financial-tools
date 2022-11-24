@@ -86,7 +86,7 @@ class AccountJournal(models.Model):
         prefix = "%s%s/%%(range_year)s/" % (refund and "R" or "", code)
         seq_vals = {
             "name": "%s%s"
-            % (vals.get("name", _("Sequence")), refund and _("Refund") + " " or ""),
+            % (vals.get("name", _("Sequence")), refund and " " + _("Refund") or ""),
             "company_id": vals.get("company_id") or self.env.company.id,
             "implementation": "no_gap",
             "prefix": prefix,
