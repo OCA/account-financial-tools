@@ -10,20 +10,20 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-            <xpath
-                expr="//div[hasclass('oe_title')]/h1[hasclass('mt0')]"
-                position="attributes"
-            >
-                <attribute name="attrs">{'invisible': [('name', '=', '/')]}</attribute>
+            <xpath expr="//field[@name='highest_name']/.." position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
             <xpath
                 expr="//div[hasclass('oe_title')]//field[@name='name']"
                 position="attributes"
             >
-                <attribute name="attrs">{'readonly': 1}</attribute>
+                <attribute name="attrs">{'invisible': [('name', '=', '/')]}</attribute>
+                <attribute name="readonly">1</attribute>
             </xpath>
-            <xpath expr="//field[@name='highest_name']/.." position="attributes">
-                <attribute name="attrs">{'invisible': 1}</attribute>
+            <xpath expr="//div[hasclass('oe_title')]//h1//span" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': ['|', ('state', '!=', 'draft'), ('name', '!=', '/')]}</attribute>
             </xpath>
         </field>
     </record>
