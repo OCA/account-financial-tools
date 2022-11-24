@@ -4,7 +4,7 @@
 {
     "name": "Journal Ledger Cumulated Balance",
     "summary": "Show cumulated balances on the interactive journal ledgers",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "category": "Account",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-financial-tools",
