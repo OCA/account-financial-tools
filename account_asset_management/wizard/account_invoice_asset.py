@@ -103,10 +103,8 @@ class AccountInvoiceAssetLines(models.TransientModel):
     invoice_line_id = fields.Many2one('account.invoice.line', 'Invoice line')
     product_id = fields.Many2one('product.product', 'Product', related='invoice_line_id.product_id')
     account_id = fields.Many2one('account.account', 'Account', related='invoice_line_id.account_id')
-    asset_profile_id = fields.Many2one('account.asset.profile', 'Asset profile',
-                                       related='invoice_line_id.asset_profile_id')
-    tax_asset_profile_id = fields.Many2one('account.bg.asset.profile', 'Tax asset profile',
-                                           related="invoice_line_id.tax_profile_id")
+    asset_profile_id = fields.Many2one('account.asset.profile', 'Asset profile',)
+    tax_asset_profile_id = fields.Many2one('account.bg.asset.profile', 'Tax asset profile')
     quantity = fields.Float('Quantity', related='invoice_line_id.quantity', store=True)
     uom_id = fields.Many2one('product.uom', 'UOM', related='invoice_line_id.uom_id')
     price_unit = fields.Float('Unit price', related='invoice_line_id.price_unit')

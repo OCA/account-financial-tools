@@ -42,7 +42,7 @@ class StockMove(models.Model):
         return vals
 
     def _account_entry_move(self):
-        if not self.asset_profile_id and self.move_line_ids.mapped('asset_id').filtered(lambda r: not r.to_sell):
+        if not self._context.get('block_move', False) and not self.asset_profile_id and self.move_line_ids.mapped('asset_id').filtered(lambda r: not r.to_sell):
             if self._context.get('force_asset'):
                 force_asset = self._context['force_asset']
             else:
@@ -66,7 +66,8 @@ class StockMove(models.Model):
             super(StockMove, self).with_context(dict(self._context,
                                                      force_asset=force_asset,
                                                      allow_asset_removal=allow_asset_removal,
-                                                     allow_asset=allow_asset))._account_entry_move()
+                                                     allow_asset=allow_asset,
+                                                     block_move=True))._account_entry_move()
             if allow_asset_removal:
                 force_asset.with_context(dict(self._context, asset_out=True)).validate()
         else:
@@ -146,13 +147,13 @@ class StockMove(models.Model):
             if asset_profile_id or tax_profile_id:
                 check[record] = {
                     'asset_profile_id': asset_profile_id.id,
-                    'tax_profile_id': tax_profile_id.id,
+                    'tax_profile_id': tax_profile_id and tax_profile_id.id or False,
                 }
 
             if record.product_id.product_tmpl_id.asset_profile_id or record.product_id.product_tmpl_id.tax_profile_id:
                 check[record] = {
                     'asset_profile_id': record.product_id.product_tmpl_id.asset_profile_id.id,
-                    'tax_profile_id': record.product_id.product_tmpl_id.tax_profile_id.id,
+                    'tax_profile_id': record.product_id.product_tmpl_id.tax_profile_id.id and record.product_id.product_tmpl_id.tax_profile_id or False,
                 }
         return check
 

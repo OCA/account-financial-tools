@@ -6,6 +6,7 @@
     'version': '11.0.3.0.0',
     'license': 'AGPL-3',
     'depends': [
+        'account',
         'account_fiscal_year',
         'sale',
         'purchase',
@@ -31,6 +32,8 @@
         'wizard/account_asset_remove.xml',
         'wizard/account_invoice_asset.xml',
         'wizard/stock_picking_asset.xml',
+        'wizard/account_asset_force.xml',
+        'report/account_invoice_report_view.xml',
         'views/account_account.xml',
         'views/account_asset.xml',
         'views/product_template_view.xml',

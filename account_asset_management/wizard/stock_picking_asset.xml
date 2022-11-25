@@ -82,8 +82,8 @@
                             <field name="picking_asset_id" invisible="1"/>
                             <field name="move_id" invisible="1"/>
                             <field name="move_line_id" invisible="1"/>
-                            <field name="asset_profile_id"/>
-                            <field name="tax_asset_profile_id"/>
+                            <field name="asset_profile_id" force_save="1"/>
+                            <field name="tax_asset_profile_id" force_save="1"/>
                             <field name="product_id"/>
                             <field name="lot_id"/>
                             <field name="lot_name" invisible="1"/>

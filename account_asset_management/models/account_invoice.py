@@ -330,20 +330,20 @@ class AccountInvoiceLine(models.Model):
             if asset_profile_id or tax_profile_id:
                 check[record] = {
                     'asset_profile_id': asset_profile_id.id,
-                    'tax_profile_id': tax_profile_id.id,
+                    'tax_profile_id': tax_profile_id and tax_profile_id.id or False,
                 }
 
             if record.product_id.product_tmpl_id.asset_profile_id or record.product_id.product_tmpl_id.tax_profile_id:
                 check[record] = {
                     'asset_profile_id': record.product_id.product_tmpl_id.asset_profile_id,
-                    'tax_profile_id': record.product_id.product_tmpl_id.tax_profile_id,
+                    'tax_profile_id': record.product_id.product_tmpl_id.tax_profile_id and record.product_id.product_tmpl_id.tax_profile_id.id or False,
                 }
 
             # override with account from line
             if record.account_id.asset_profile_id:
                 check[record] = {
                     'asset_profile_id': record.account_id.asset_profile_id.id,
-                    'tax_profile_id': record.account_id.tax_profile_id.id,
+                    'tax_profile_id': record.account_id.tax_profile_id and record.account_id.tax_profile_id.id or False,
                 }
         return check
 

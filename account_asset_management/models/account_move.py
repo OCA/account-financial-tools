@@ -3,6 +3,8 @@
 
 import logging
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.addons import decimal_precision as dp
@@ -132,29 +134,42 @@ class AccountMoveLine(models.Model):
 
     @api.multi
     def _prepare_asset_create(self, vals):
-        self.ensure_one()
         debit = 'debit' in vals and vals.get('debit', 0.0) or self.debit
         credit = 'credit' in vals and \
                  vals.get('credit', 0.0) or self.credit
         depreciation_base = debit - credit
         partner_id = 'partner' in vals and \
                      vals.get('partner', False) or self.partner_id.id
-        date_start = 'date' in vals and \
-                     vals.get('date', False) or self.date
-        product_id = 'product_id' in vals and vals.get('product_id', False) or self.product_id.id
+        product_id = vals.get('product_id', False) or self.product_id.id
+
+        if 'move_id' in vals:
+            move_id = self.env['account.move'].browse(vals['move_id'])
+        else:
+            move_id = self.move_id
+
         if 'invoice_id' in vals:
             invoice_id = self.env['account.invoice'].browse(vals['invoice_id'])
         else:
             invoice_id = self.invoice_id
-        # lot_id = 'lot_id' in vals and vals.get('lot_id', False) or False
-        # if invoice_id:
-        #     other_move_line_id = invoice_id.move_lines.filtered(lambda r: r.product_id.id == product_id)
-        #     if
-        #     lot_id = other_move_line_id.mapped('lot_id')
-        #     if len(lot_id.ids) > 1:
-        #         lot_id = lot_id[0]
-        #     lot_id = lot_id.id
-        #     other_move_line_id =
+
+        if vals.get('date', False):
+            date_start = vals['date']
+        else:
+            date_start = self.date
+
+        if not date_start and move_id:
+            date_start = move_id.date
+
+        if not date_start and invoice_id:
+            date_start = invoice_id.date and invoice_id.date_invoice or invoice_id.date
+
+        if not date_start:
+            date_start = fields.Date.today()
+
+        date_start = (fields.Date.from_string(date_start).replace(day=1) + relativedelta(days=31)).replace(day=1)
+        date_start = fields.Date.to_string(date_start)
+        # _logger.info("DATE START %s:%s" % (date_start, invoice_id))
+
         return {
             'name': vals.get('name') or self.name,
             'profile_id': vals.get('asset_profile_id', False),
@@ -162,9 +177,9 @@ class AccountMoveLine(models.Model):
             'purchase_value': depreciation_base,
             'partner_id': partner_id,
             'date_start': date_start,
+            'product_id': product_id,
             'date_buy': invoice_id and invoice_id.date_invoice or date_start,
             'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'] or self.asset_salvage_value,
-            # 'lot_id': lot_id,
             'company_id': vals.get('company_id') or self.company_id.id,
         }
 
@@ -199,6 +214,7 @@ class AccountMoveLine(models.Model):
             if not correction:
                 # create asset
                 asset_obj = self.env['account.asset']
+                # _logger.info("ASSET INSIDE %s" % vals)
                 temp_vals = self._prepare_asset_create(vals)
                 # _logger.info("ASSET INSIDE %s" % temp_vals)
                 if vals.get('move_line_id'):

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_asset_force_remove_form" model="ir.ui.view">
+            <field name="name">account.asset.force.remove.form</field>
+            <field name="model">account.asset.force.remove</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="asset_ids" widget="many2many_tags" readonly="1" force_save="1"/>
+                        <field name="account_ids" widget="many2many_tags" invisible="1" force_save="1"/>
+                        <field name="company_id" groups="base.group_multi_company" invisible="1" force_save="1"/>
+                        <field name="force_unlink"/>
+                        <field name="force_delete" />
+                    </group>
+                    <field name="account_line_ids">
+                        <tree editable="bottom">
+                            <field name="original_account_id" domain="[('id', 'in', parent.account_ids)]"/>
+                            <field name="replace_account_id" domain="[('company_id', '=', parent.company_id)]"/>
+                        </tree>
+                    </field>
+                    <footer>
+                        <button name="add_force" type="object" string="Force update" class="btn-primary" barcode_trigger="validate"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window
+                id="action_account_asset_force_remove"
+                name="Force update accounts"
+                src_model="account.asset"
+                res_model="account.asset.force.remove"
+                view_type="form"
+                view_mode="form"
+                key2="client_action_multi"
+                target="new"/>
+
+        <record id="act_account_asset_force_remove" model="ir.actions.act_window">
+            <field name="name">Force update accounts</field>
+            <field name="res_model">account.asset.force.remove</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_asset_force_remove_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

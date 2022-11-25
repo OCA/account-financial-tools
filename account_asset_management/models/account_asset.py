@@ -39,7 +39,9 @@ class AccountAsset(models.Model):
     account_move_line_ids = fields.One2many(
         comodel_name='account.move.line',
         inverse_name='asset_id',
-        string='Entries', readonly=True, copy=False)
+        string='Entries', 
+        readonly=True, 
+        copy=False)
     purchase_line_ids = fields.One2many(
         comodel_name='purchase.order.line',
         compute='_compute_purchase_line_ids'
@@ -478,7 +480,9 @@ class AccountAsset(models.Model):
                     '<=',
                     'depreciated_value')
             fy_date_start = date.today() + relativedelta(days=1)
-            if self._context.get('force_date'):
+            if self._context.get('force_date') and isinstance(self._context['force_date'], str):
+                fy_date_start = fields.Date.from_string(self._context['force_date'])
+            elif self._context.get('force_date') and not isinstance(self._context['force_date'], str):
                 fy_date_start = self._context['force_date']
             fy = asset.company_id.find_daterange_fy(fy_date_start)
             if asset.depreciation_line_ids:
@@ -499,7 +503,9 @@ class AccountAsset(models.Model):
         for asset in self:
             if asset.type == 'normal':
                 fy_date_start = date.today() + relativedelta(days=1)
-                if self._context.get('force_date'):
+                if self._context.get('force_date') and isinstance(self._context['force_date'], str):
+                    fy_date_start = fields.Date.from_string(self._context['force_date'])
+                elif self._context.get('force_date') and not isinstance(self._context['force_date'], str):
                     fy_date_start = self._context['force_date']
                 fy = asset.company_id.find_daterange_fy(fy_date_start)
                 lines = asset.depreciation_line_ids.filtered(
@@ -1010,6 +1016,9 @@ class AccountAsset(models.Model):
     def open_entries(self):
         self.ensure_one()
         am_ids = self.env['account.move.line'].search([('asset_id', '=', self.id)], order='date ASC')
+        move_id = self.depreciation_line_ids.mapped('move_id')
+        if move_id:
+            am_ids |= move_id.mapped('line_ids')
         action_ref = self.env.ref('account.action_account_moves_all_a')
         if not action_ref or len(am_ids.ids) == 0:
             return False
@@ -1932,6 +1941,7 @@ class AccountAsset(models.Model):
             first_to_depreciate_dl = dlines[0]
 
             first_date = first_to_depreciate_dl.line_date
+            # _logger.info("DATE %s=>%s < %s" % (asset.name, first_date, date_remove))
             if date_remove > first_date:
                 raise UserError(
                     _("You can't make an early removal if all the depreciation "
@@ -1962,8 +1972,8 @@ class AccountAsset(models.Model):
                     'amount': to_depreciate_amount,
                     'line_date': new_line_date
                 }
-                first_to_depreciate_dl.with_context(dict(self._context, allow_asset_line_update=True)).write(
-                    update_vals)
+                first_to_depreciate_dl.\
+                    with_context(dict(self._context, allow_asset_line_update=True)).write(update_vals)
                 dlines[0].create_move()
                 dlines -= dlines[0]
             dlines.unlink()
@@ -1972,6 +1982,11 @@ class AccountAsset(models.Model):
             bg_dlines_bg = asset.depreciation_bg_line_ids.filtered(
                 lambda r: fields.Datetime.from_string(r.line_date) > new_line_date_bg)
             bg_dlines_bg.unlink()
+            dlines = _dlines(asset)
+            if not dlines.filtered(lambda r: r.line_date > date_remove):
+                asset.write({
+                    'state': 'removed',
+                })
         return residual_value
 
     @api.multi

@@ -33,9 +33,9 @@ class Picking(models.Model):
                     get_asset_profile = asset_profile.get(line.move_id)
                     pull_asset_profile_id = pull_tax_profile_id = False
                     if get_asset_profile and get_asset_profile.get('asset_profile_id'):
-                        pull_asset_profile_id = get_asset_profile['asset_profile_id'].id
+                        pull_asset_profile_id = get_asset_profile['asset_profile_id']
                     if get_asset_profile and get_asset_profile.get('tax_profile_id'):
-                        pull_tax_profile_id = get_asset_profile['tax_profile_id'].id
+                        pull_tax_profile_id = get_asset_profile['tax_profile_id']
                     line_obj = line_obj.new({
                         'move_id': line.move_id.id,
                         'move_line_id': line.id,

@@ -11,10 +11,12 @@ class AccountAssetCompute(models.TransientModel):
 
     name = fields.Char()
     date_end = fields.Date(
-        string='Date', required=True,
+        string='Date',
+        required=True,
         default=fields.Date.today,
         help="All depreciation lines prior to this date will be automatically"
-             " posted")
+             " posted",
+    )
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company', required=True,

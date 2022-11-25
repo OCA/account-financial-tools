@@ -14,62 +14,81 @@ class AccountAssetProfile(models.Model):
     note = fields.Text()
     account_analytic_id = fields.Many2one(
         comodel_name='account.analytic.account',
-        string='Analytic account')
+        string='Analytic account'
+    )
     account_asset_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Asset Account', required=True)
+        string='Asset Account',
+        required=True,
+    )
     account_depreciation_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Depreciation Account', required=True)
+        string='Depreciation Account',
+        required=True,
+    )
     account_expense_depreciation_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Depr. Expense Account', required=True)
+        string='Depr. Expense Account',
+        required=True,
+    )
     account_plus_value_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Plus-Value Account')
+        string='Plus-Value Account',
+    )
     account_min_value_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Min-Value Account')
+        string='Min-Value Account'
+    )
     account_residual_value_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Residual Value Account')
+        string='Residual Value Account',
+    )
     account_revaluation_reserve_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Revaluation reserve Account')
+        string='Revaluation reserve Account',
+    )
     account_revenue_assessment_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Revenue from assessment Account')
+        string='Revenue from assessment Account',
+    )
     account_expense_diminution_id = fields.Many2one(
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
-        string='Expense from diminution Account')
+        string='Expense from diminution Account',
+    )
     journal_id = fields.Many2one(
         comodel_name='account.journal',
         domain=[('type', '=', 'general')],
-        string='Journal', required=True)
+        string='Journal',
+        required=True,
+    )
     journal_stock_move_id = fields.Many2one(
         comodel_name='account.journal',
         domain=[('type', '=', 'general')],
         string='Asset move journal')
     company_id = fields.Many2one(
         comodel_name='res.company',
-        string='Company', required=True,
-        default=lambda self: self._default_company_id())
+        string='Company',
+        required=True,
+        default=lambda self: self._default_company_id(),
+    )
     parent_id = fields.Many2one(
         comodel_name='account.asset',
         string='Parent Asset',
-        domain=[('type', '=', 'view')])
+        domain=[('type', '=', 'view')]
+    )
     category_id = fields.Many2one(
         comodel_name='account.asset.category',
-        string='Asset Category')
+        string='Asset Category'
+    )
     method = fields.Selection(
         selection=lambda self: self._selection_method(),
         string='Computation Method',
@@ -87,21 +106,28 @@ class AccountAssetProfile(models.Model):
              "depreciation exceeds the annual degressive depreciation.\n"
              "   * Degressive-Limit: Degressive up to Salvage Value. "
              "The Depreciation Base is equal to the asset value.",
-        default='linear')
+        default='linear'
+    )
     method_number = fields.Integer(
         string='Number of Years',
         help="The number of years needed to depreciate your asset",
-        default=5)
+        default=5,
+    )
     method_period = fields.Selection(
         selection=lambda self: self._selection_method_period(),
-        string='Period Length', required=True,
+        string='Period Length',
+        required=True,
         default='month',
-        help="Period length for the depreciation accounting entries")
+        help='Period length for the depreciation accounting entries'
+    )
     method_progress_factor = fields.Float(
-        string='Degressive Factor', default=0.3)
+        string='Degressive Factor',
+        default=0.3
+    )
     method_time = fields.Selection(
         selection=lambda self: self._selection_method_time(),
-        string='Time Method', required=True,
+        string='Time Method',
+        required=True,
         default='year',
         help="Choose the method to use to compute the dates and "
              "number of depreciation lines.\n"
@@ -111,11 +137,13 @@ class AccountAssetProfile(models.Model):
         string='Prorata Temporis',
         help="Indicates that the first depreciation entry for this asset "
              "has to be done from the depreciation start date instead of "
-             "the first day of the fiscal year.")
+             "the first day of the fiscal year."
+    )
     open_asset = fields.Boolean(
         string='Skip Draft State',
         help="Check this if you want to automatically confirm the assets "
-             "of this profile when created by invoices.")
+             "of this profile when created by invoices.",
+    )
     asset_product_item = fields.Boolean(
         string='Create an asset by product item',
         default=True,
@@ -123,13 +151,15 @@ class AccountAssetProfile(models.Model):
              "is created by invoice line as long as an accounting entry is "
              "created by invoice line. "
              "With this setting, an accounting entry will be created by "
-             "product item. So, there will be an asset by product item.")
+             "product item. So, there will be an asset by product item.",
+    )
     get_posting_regime = fields.Char("Posting regime", compute="_compute_get_posting_regime")
 
     threshold = fields.Float('Materiality threshold')
     threshold_profile_id = fields.Many2one(
         comodel_name='account.asset.profile',
-        string='Asset Profile')
+        string='Asset Profile'
+    )
 
     active = fields.Boolean(default=True)
 
@@ -147,7 +177,7 @@ class AccountAssetProfile(models.Model):
 
     @api.model
     def _selection_method(self):
-        return[
+        return [
             ('linear', _('Linear')),
             ('linear-limit', _('Linear up to Salvage Value')),
             ('degressive', _('Degressive')),

@@ -18,12 +18,15 @@ class AccountAssetLine(models.Model):
 
     name = fields.Char(string='Depreciation Name', size=64, readonly=True)
     asset_id = fields.Many2one(
-        comodel_name='account.asset', string='Asset',
-        required=True, ondelete='cascade')
+        comodel_name='account.asset',
+        string='Asset',
+        required=True,
+        ondelete='cascade')
     previous_id = fields.Many2one(
         comodel_name='account.asset.line',
         string='Previous Depreciation Line',
-        readonly=True)
+        readonly=True,
+    )
     parent_state = fields.Selection(
         related='asset_id.state',
         string='State of Asset',
@@ -41,17 +44,20 @@ class AccountAssetLine(models.Model):
     )
     amount = fields.Float(
         string='Amount', digits=dp.get_precision('Account'),
-        required=True)
+        required=True,
+    )
     remaining_value = fields.Float(
         compute='_compute_values',
         digits=dp.get_precision('Account'),
         string='Next Period Depreciation',
-        store=True)
+        store=True,
+    )
     depreciated_value = fields.Float(
         compute='_compute_values',
         digits=dp.get_precision('Account'),
         string='Amount Already Depreciated',
-        store=True)
+        store=True,
+    )
     depreciation_restatement_value = fields.Float(
         compute='_compute_depreciation_restatement_value',
         string='Amount Restatement Depreciated',
@@ -60,21 +66,28 @@ class AccountAssetLine(models.Model):
     line_date = fields.Date(string='Date', required=True)
     move_id = fields.Many2one(
         comodel_name='account.move',
-        string='Depreciation Entry', readonly=True)
+        string='Depreciation Entry',
+        readonly=True,
+    )
     move_check = fields.Boolean(
         compute='_compute_move_check',
         string='Posted',
-        store=True)
+        store=True,
+    )
     type = fields.Selection(
         selection=[
             ('create', 'Depreciation Base'),
             ('depreciate', 'Depreciation'),
-            ('remove', 'Asset Removal')],
-        readonly=True, default='depreciate')
+            ('remove', 'Asset Removal'),
+        ],
+        readonly=True,
+        default='depreciate',
+    )
     init_entry = fields.Boolean(
         string='Initial Balance Entry',
         help="Set this flag for entries of previous fiscal years "
-             "for which Odoo has not generated accounting entries.")
+             "for which Odoo has not generated accounting entries."
+    )
     sleep_period = fields.Boolean(
         string='Sleep period',
         help='This is period not have depreciation if this line available in sleeping periods',
@@ -171,7 +184,8 @@ class AccountAssetLine(models.Model):
                     check = asset_lines.filtered(
                         lambda l: l.type != 'create' and
                         (l.init_entry or l.move_check) and
-                        l.line_date < vals['line_date'])
+                        l.line_date < vals['line_date']
+                    )
                     if check and not self._context.get('force_asset'):
                         raise UserError(
                             _("You cannot set the Asset Start Date "
@@ -179,18 +193,18 @@ class AccountAssetLine(models.Model):
                 else:
                     check = asset_lines.filtered(
                         lambda l: (l.init_entry or l.move_check) and
-                        l.line_date > vals['line_date'] and l != dl)
+                        l.line_date > vals['line_date'] and l != dl
+                    )
+                    _logger.info("VALS %s=>%s" % (vals, dl.asset_id.name))
                     if check:
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
                             "prior to already posted entries."))
             elif dl.move_id and not self.env.context.get(
                     'allow_asset_line_update'):
-                _logger.info("VALS %s" % vals)
                 raise UserError(_(
                     "You cannot change a depreciation line "
                     "with an associated accounting entry."))
-        #_logger.info("Write vals= %s" % (vals))
         return super().write(vals)
 
     @api.multi
@@ -199,7 +213,8 @@ class AccountAssetLine(models.Model):
             if dl.type == 'create' and dl.amount:
                 raise UserError(_(
                     "You cannot remove an asset line "
-                    "of type 'Depreciation Base'."))
+                    "of type 'Depreciation Base'.")
+                )
             elif dl.move_id:
                 raise UserError(_(
                     "You cannot delete a depreciation line with "
@@ -223,6 +238,7 @@ class AccountAssetLine(models.Model):
         return move_data
 
     def _setup_move_line_data(self, depreciation_date, account, ml_type, move):
+        """Prepare data to be propagated to account.move.line"""
         asset = self.asset_id
         amount = self.amount
         analytic_id = False
@@ -265,7 +281,8 @@ class AccountAssetLine(models.Model):
                 depreciation_date, depr_acc, 'depreciation', move)
             self.env['account.move.line'].with_context(ctx).create(aml_d_vals)
             aml_e_vals = line._setup_move_line_data(
-                depreciation_date, exp_acc, 'expense', move)
+                depreciation_date, exp_acc, 'expense', move
+            )
             self.env['account.move.line'].with_context(ctx).create(aml_e_vals)
             move.post()
             line.with_context(allow_asset_line_update=True).write({
