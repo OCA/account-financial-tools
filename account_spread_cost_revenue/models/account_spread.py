@@ -3,6 +3,7 @@
 
 import calendar
 import time
+from datetime import timedelta
 
 from dateutil.relativedelta import relativedelta
 
@@ -441,7 +442,11 @@ class AccountSpread(models.Model):
             spread_end_date = spread_start_date + relativedelta(months=months)
         elif period_type == "year":
             spread_end_date = spread_start_date + relativedelta(years=number_of_periods)
-        spread_end_date = self._get_last_day_of_month(spread_end_date)
+        # calculate by days and not first day of month should compute residual day only
+        if self.days_calc and spread_end_date.day != 1:
+            spread_end_date = spread_end_date - timedelta(days=1)
+        else:
+            spread_end_date = self._get_last_day_of_month(spread_end_date)
         return spread_end_date
 
     def _get_amount_per_day(self, amount):

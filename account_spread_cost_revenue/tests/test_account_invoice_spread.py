@@ -10,7 +10,7 @@ from odoo.tests import Form, common
 
 class TestAccountInvoiceSpread(common.TransactionCase):
     def create_account_invoice(self, invoice_type, quantity=1.0, price_unit=1000.0):
-        """ Create an invoice as in a view by triggering its onchange methods"""
+        """Create an invoice as in a view by triggering its onchange methods"""
 
         invoice_form = Form(
             self.env["account.move"].with_context(default_move_type=invoice_type)

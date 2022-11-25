@@ -110,10 +110,10 @@ class AccountMoveLine(models.Model):
             raise ValidationError(msg)
 
     def create_auto_spread(self):
-        """ Create auto spread table for each invoice line, when needed """
+        """Create auto spread table for each invoice line, when needed"""
 
         def _filter_line(aline, iline):
-            """ Find matching template auto line with invoice line """
+            """Find matching template auto line with invoice line"""
             if aline.product_id and iline.product_id != aline.product_id:
                 return False
             if aline.account_id and iline.account_id != aline.account_id:
