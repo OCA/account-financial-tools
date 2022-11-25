@@ -9,3 +9,7 @@
 
   * Pedro M. Baeza
   * Ernesto Tejeda
+
+* `Factor Libre <https://www.factorlibre.com>`_:
+
+  * Rodrigo Bonilla Martinez <rodrigo.bonilla@factorlibre.com>

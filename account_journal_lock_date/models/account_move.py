@@ -1,9 +1,7 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import date
-
-from odoo import _, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.misc import format_date
 
@@ -21,13 +19,15 @@ class AccountMove(models.Model):
         res = super()._check_fiscalyear_lock_date()
         if self.env.context.get("bypass_journal_lock_date"):
             return res
+
+        date_min = fields.date.min
         for move in self:
             if self.user_has_groups("account.group_account_manager"):
-                lock_date = move.journal_id.fiscalyear_lock_date or date.min
+                lock_date = move.journal_id.fiscalyear_lock_date or date_min
             else:
                 lock_date = max(
-                    move.journal_id.period_lock_date or date.min,
-                    move.journal_id.fiscalyear_lock_date or date.min,
+                    move.journal_id.period_lock_date or date_min,
+                    move.journal_id.fiscalyear_lock_date or date_min,
                 )
             if move.date <= lock_date:
                 lock_date = format_date(self.env, lock_date)
