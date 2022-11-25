@@ -51,11 +51,15 @@ class AccountAssetAsset(models.Model):
         if not float_is_zero(self.value_residual,
                              precision_rounding=self.currency_id.rounding):
             loss_value += self.value_residual
+        if hasattr(self, "account_analytic_id") and self.account_analytic_id:
+            account_analytic_id = self.account_analytic_id.id
+        else:
+            account_analytic_id = self.category_id.account_analytic_id.id
         return {
             'name': _('Asset loss'),
             'journal_id': self.category_id.journal_id.id,
             'account_id': loss_account.id,
-            'analytic_account_id': self.category_id.account_analytic_id.id,
+            'analytic_account_id': account_analytic_id,
             'date': date,
             'debit': loss_value,
             'credit': 0.0,
