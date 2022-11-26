@@ -1,12 +1,31 @@
 #  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import timedelta
 
-from odoo import models
+from odoo import fields, models
 from odoo.tools import date_utils
 
 
 class ResCompany(models.Model):
     _inherit = "res.company"
+
+    fiscal_year_date_from = fields.Date(
+        string="Start Date of the Fiscal Year",
+        compute="_compute_fiscal_year_dates",
+        compute_sudo=True,
+    )
+
+    fiscal_year_date_to = fields.Date(
+        string="End Date of the Fiscal Year",
+        compute="_compute_fiscal_year_dates",
+        compute_sudo=True,
+    )
+
+    def _compute_fiscal_year_dates(self):
+        today = fields.Date.today()
+        for company in self:
+            res = company.compute_fiscalyear_dates(today)
+            company.fiscal_year_date_from = res["date_from"]
+            company.fiscal_year_date_to = res["date_to"]
 
     def compute_fiscalyear_dates(self, current_date):
         """Computes the start and end dates of the fiscal year

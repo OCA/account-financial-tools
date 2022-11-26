@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2022 - Today: GRAP (http://www.grap.coop)
+    @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="res_company_view_tree" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="fiscal_year_date_from" optional="show" />
+                <field name="fiscal_year_date_to" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="res_company_view_form" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="fiscal_year_date_from" />
+                <field name="fiscal_year_date_to" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
