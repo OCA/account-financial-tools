@@ -107,3 +107,17 @@ class AccountFiscalYear(models.Model):
                 intersection_domain,
             ]
         )
+
+    @api.model
+    def _get_fiscal_year(self, company, date_from, date_to):
+        """Return a fiscal year for the given company
+        that contains the two dates. (or False if no fiscal years)
+        matches the selection"""
+        return self.search(
+            [
+                ("company_id", "=", company.id),
+                ("date_from", "<=", date_from),
+                ("date_to", ">=", date_to),
+            ],
+            limit=1,
+        )
