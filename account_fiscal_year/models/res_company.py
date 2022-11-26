@@ -20,15 +20,13 @@ class ResCompany(models.Model):
         """
         self.ensure_one()
 
+        AccountFiscalYear = self.env["account.fiscal.year"]
+
         # Search a fiscal year record containing the date.
-        fiscalyear = self.env["account.fiscal.year"].search(
-            [
-                ("company_id", "=", self.id),
-                ("date_from", "<=", current_date),
-                ("date_to", ">=", current_date),
-            ],
-            limit=1,
+        fiscalyear = AccountFiscalYear._get_fiscal_year(
+            self, current_date, current_date
         )
+
         if fiscalyear:
             return {
                 "date_from": fiscalyear.date_from,
@@ -51,25 +49,13 @@ class ResCompany(models.Model):
         # =>
         # The period 2017-02-02 - 2017-02-30 is not covered by a fiscal year record.
 
-        fiscalyear_from = self.env["account.fiscal.year"].search(
-            [
-                ("company_id", "=", self.id),
-                ("date_from", "<=", date_from),
-                ("date_to", ">=", date_from),
-            ],
-            limit=1,
-        )
+        fiscalyear_from = AccountFiscalYear._get_fiscal_year(self, date_from, date_from)
+
         if fiscalyear_from:
             date_from = fiscalyear_from.date_to + timedelta(days=1)
 
-        fiscalyear_to = self.env["account.fiscal.year"].search(
-            [
-                ("company_id", "=", self.id),
-                ("date_from", "<=", date_to),
-                ("date_to", ">=", date_to),
-            ],
-            limit=1,
-        )
+        fiscalyear_to = AccountFiscalYear._get_fiscal_year(self, date_to, date_to)
+
         if fiscalyear_to:
             date_to = fiscalyear_to.date_from - timedelta(days=1)
 
