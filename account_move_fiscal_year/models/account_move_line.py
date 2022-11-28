@@ -6,9 +6,9 @@ from odoo import fields, models
 
 class AccountMoveLine(models.Model):
 
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     date_range_fy_id = fields.Many2one(
-        related='move_id.date_range_fy_id',
+        related="move_id.date_range_fy_id",
         readonly=True,
     )

@@ -1,28 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template id="report_credit_control_summary_document">
         <t t-call="web.external_layout">
-            <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
+            <t
+                t-set="doc"
+                t-value="doc.with_context({'lang':doc.partner_id.lang})"
+            />
             <div class="page">
                 <div class="row" id="address">
                     <div class="col-xs-5 col-xs-offset-7">
-                        <address t-field="doc.contact_address"
-                                 t-options='{"widget": "contact",
+                        <address
+                            t-field="doc.contact_address"
+                            t-options='{"widget": "contact",
                                              "fields": ["address", "name"],
-                                             "no_marker": true}'/>
+                                             "no_marker": true}'
+                        />
                     </div>
                     <div class="col-xs-5 col-xs-offset-7">
-                        <span t-field="doc.report_date"/>
+                        <span t-field="doc.report_date" />
                     </div>
                 </div>
 
                 <h2 id="policy_level">
-                    <span t-field="doc.current_policy_level.name"/>
+                    <span t-field="doc.current_policy_level.name" />
                 </h2>
 
                 <div class="row mt32 mb32">
                     <div class="col-xs-12">
-                       <span t-field="doc.current_policy_level.custom_text"/>
+                       <span t-field="doc.current_policy_level.custom_text" />
                     </div>
                 </div>
 
@@ -42,29 +47,35 @@
                         <tr t-foreach="doc.credit_control_line_ids" t-as="l">
                             <t t-if="l.invoice_id">
                                 <td>
-                                    <span t-field="l.invoice_id.number"/>
+                                    <span t-field="l.invoice_id.number" />
                                     <t t-if="l.invoice_id.name">
-                                        <span t-field="l.invoice_id.name"/>
+                                        <span t-field="l.invoice_id.name" />
                                     </t>
                                 </td>
                             </t>
                             <t t-if="not l.invoice_id">
                                 <td>
-                                    <span t-field="l.move_line_id.name"/>
+                                    <span t-field="l.move_line_id.name" />
                                 </td>
                             </t>
                             <td>
-                                <span t-field="l.date_entry"/>
+                                <span t-field="l.date_entry" />
                             </td>
                             <td>
-                                <span t-field="l.date_due"/>
+                                <span t-field="l.date_due" />
                             </td>
 
                             <td class="text-right">
-                                <span t-field="l.amount_due" t-options='{"widget": "monetary", "display_currency": l.currency_id or l.company_id.currency_id}'/>
+                                <span
+                                    t-field="l.amount_due"
+                                    t-options='{"widget": "monetary", "display_currency": l.currency_id or l.company_id.currency_id}'
+                                />
                             </td>
                             <td class="text-right">
-                                <span t-field="l.balance_due" t-options="{'widget': 'monetary', 'display_currency': l.currency_id or l.company_id.currency_id}"/>
+                                <span
+                                    t-field="l.balance_due"
+                                    t-options="{'widget': 'monetary', 'display_currency': l.currency_id or l.company_id.currency_id}"
+                                />
                             </td>
                         </tr>
                     </tbody>
@@ -78,7 +89,10 @@
                                     <strong>Total Invoiced</strong>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="doc.total_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                    <span
+                                        t-field="doc.total_invoiced"
+                                        t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"
+                                    />
                                 </td>
                             </tr>
                             <tr>
@@ -86,7 +100,10 @@
                                     <strong>Total Due</strong>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="doc.total_due" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                    <span
+                                        t-field="doc.total_due"
+                                        t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"
+                                    />
                                 </td>
                             </tr>
                         </table>
@@ -96,7 +113,9 @@
                 <t t-if="doc.current_policy_level.custom_text_after_details">
                     <div class="row mt32 mb32">
                         <div class="col-xs-12">
-                            <p t-field="doc.current_policy_level.custom_text_after_details"/>
+                            <p
+                                t-field="doc.current_policy_level.custom_text_after_details"
+                            />
                         </div>
                     </div>
                 </t>
@@ -108,7 +127,10 @@
     <template id="report_credit_control_summary">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
-                <t t-call="account_credit_control.report_credit_control_summary_document" t-lang="doc.partner_id.lang" />
+                <t
+                    t-call="account_credit_control.report_credit_control_summary_document"
+                    t-lang="doc.partner_id.lang"
+                />
             </t>
         </t>
     </template>

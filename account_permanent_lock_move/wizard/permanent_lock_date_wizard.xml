@@ -5,13 +5,25 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Lock permanently entries">
-                <label string="All journal entries prior to and included at this date will be permanently locked."/>
+                <label
+                    string="All journal entries prior to and included at this date will be permanently locked."
+                />
                 <group>
-                    <field name="lock_date" required="1"/>
+                    <field name="lock_date" required="1" />
                 </group>
                 <footer>
-                    <button string="Lock Journal Entries" name="confirm_date" type="object" default_focus="1" class="btn-primary"/>
-                    <button string="Cancel" class="btn-default" special="cancel"/>
+                    <button
+                        string="Lock Journal Entries"
+                        name="confirm_date"
+                        type="object"
+                        default_focus="1"
+                        class="btn-primary"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn-default"
+                        special="cancel"
+                    />
                 </footer>
             </form>
         </field>

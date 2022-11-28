@@ -1,64 +1,74 @@
 # Copyright 2017-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
 from odoo.exceptions import UserError
+from odoo.tests import common
 
 
 class TestComputeSpreadBoard(common.TransactionCase):
-
     def setUp(self):
         super().setUp()
-        type_receivable = self.env.ref('account.data_account_type_receivable')
-        type_expenses = self.env.ref('account.data_account_type_expenses')
+        type_receivable = self.env.ref("account.data_account_type_receivable")
+        type_expenses = self.env.ref("account.data_account_type_expenses")
 
-        journal = self.env['account.journal'].create({
-            'name': 'Test', 'type': 'general', 'code': 'test'})
+        journal = self.env["account.journal"].create(
+            {"name": "Test", "type": "general", "code": "test"}
+        )
 
-        self.receivable_account = self.env['account.account'].create({
-            'name': 'test_account_receivable',
-            'code': '123',
-            'user_type_id': type_receivable.id,
-            'reconcile': True
-        })
+        self.receivable_account = self.env["account.account"].create(
+            {
+                "name": "test_account_receivable",
+                "code": "123",
+                "user_type_id": type_receivable.id,
+                "reconcile": True,
+            }
+        )
 
-        self.expense_account = self.env['account.account'].create({
-            'name': 'test account_expenses',
-            'code': '765',
-            'user_type_id': type_expenses.id,
-            'reconcile': True
-        })
+        self.expense_account = self.env["account.account"].create(
+            {
+                "name": "test account_expenses",
+                "code": "765",
+                "user_type_id": type_expenses.id,
+                "reconcile": True,
+            }
+        )
 
-        self.spread_account = self.env['account.account'].create({
-            'name': 'test spread account_expenses',
-            'code': '321',
-            'user_type_id': type_expenses.id,
-            'reconcile': True
-        })
+        self.spread_account = self.env["account.account"].create(
+            {
+                "name": "test spread account_expenses",
+                "code": "321",
+                "user_type_id": type_expenses.id,
+                "reconcile": True,
+            }
+        )
 
-        self.spread = self.env['account.spread'].create({
-            'name': 'test',
-            'debit_account_id': self.spread_account.id,
-            'credit_account_id': self.expense_account.id,
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-02-01',
-            'estimated_amount': 1000.0,
-            'journal_id': journal.id,
-            'invoice_type': 'in_invoice',
-        })
+        self.spread = self.env["account.spread"].create(
+            {
+                "name": "test",
+                "debit_account_id": self.spread_account.id,
+                "credit_account_id": self.expense_account.id,
+                "period_number": 12,
+                "period_type": "month",
+                "spread_date": "2017-02-01",
+                "estimated_amount": 1000.0,
+                "journal_id": journal.id,
+                "invoice_type": "in_invoice",
+            }
+        )
 
-        self.spread2 = self.env['account.spread'].create({
-            'name': 'test2',
-            'debit_account_id': self.spread_account.id,
-            'credit_account_id': self.expense_account.id,
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-02-01',
-            'estimated_amount': 1000.0,
-            'journal_id': journal.id,
-            'invoice_type': 'out_invoice',
-        })
+        self.spread2 = self.env["account.spread"].create(
+            {
+                "name": "test2",
+                "debit_account_id": self.spread_account.id,
+                "credit_account_id": self.expense_account.id,
+                "period_number": 12,
+                "period_type": "month",
+                "spread_date": "2017-02-01",
+                "estimated_amount": 1000.0,
+                "journal_id": journal.id,
+                "invoice_type": "out_invoice",
+            }
+        )
 
     def test_01_supplier_invoice(self):
         self.spread.compute_spread_board()
@@ -78,18 +88,18 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(83.33, spread_lines[10].amount)
         self.assertEqual(83.37, spread_lines[11].amount)
 
-        self.assertEqual('2017-02-28', spread_lines[0].date)
-        self.assertEqual('2017-03-31', spread_lines[1].date)
-        self.assertEqual('2017-04-30', spread_lines[2].date)
-        self.assertEqual('2017-05-31', spread_lines[3].date)
-        self.assertEqual('2017-06-30', spread_lines[4].date)
-        self.assertEqual('2017-07-31', spread_lines[5].date)
-        self.assertEqual('2017-08-31', spread_lines[6].date)
-        self.assertEqual('2017-09-30', spread_lines[7].date)
-        self.assertEqual('2017-10-31', spread_lines[8].date)
-        self.assertEqual('2017-11-30', spread_lines[9].date)
-        self.assertEqual('2017-12-31', spread_lines[10].date)
-        self.assertEqual('2018-01-31', spread_lines[11].date)
+        self.assertEqual("2017-02-28", spread_lines[0].date)
+        self.assertEqual("2017-03-31", spread_lines[1].date)
+        self.assertEqual("2017-04-30", spread_lines[2].date)
+        self.assertEqual("2017-05-31", spread_lines[3].date)
+        self.assertEqual("2017-06-30", spread_lines[4].date)
+        self.assertEqual("2017-07-31", spread_lines[5].date)
+        self.assertEqual("2017-08-31", spread_lines[6].date)
+        self.assertEqual("2017-09-30", spread_lines[7].date)
+        self.assertEqual("2017-10-31", spread_lines[8].date)
+        self.assertEqual("2017-11-30", spread_lines[9].date)
+        self.assertEqual("2017-12-31", spread_lines[10].date)
+        self.assertEqual("2018-01-31", spread_lines[11].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -109,11 +119,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
     def test_02_supplier_invoice(self):
         # spread date set
-        self.spread.write({
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-01-07'
-        })
+        self.spread.write(
+            {"period_number": 12, "period_type": "month", "spread_date": "2017-01-07"}
+        )
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
 
@@ -135,19 +143,19 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(83.33, spread_lines[11].amount)
         self.assertEqual(16.17, spread_lines[12].amount)
 
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
-        self.assertEqual('2017-04-30', spread_lines[3].date)
-        self.assertEqual('2017-05-31', spread_lines[4].date)
-        self.assertEqual('2017-06-30', spread_lines[5].date)
-        self.assertEqual('2017-07-31', spread_lines[6].date)
-        self.assertEqual('2017-08-31', spread_lines[7].date)
-        self.assertEqual('2017-09-30', spread_lines[8].date)
-        self.assertEqual('2017-10-31', spread_lines[9].date)
-        self.assertEqual('2017-11-30', spread_lines[10].date)
-        self.assertEqual('2017-12-31', spread_lines[11].date)
-        self.assertEqual('2018-01-31', spread_lines[12].date)
+        self.assertEqual("2017-01-31", spread_lines[0].date)
+        self.assertEqual("2017-02-28", spread_lines[1].date)
+        self.assertEqual("2017-03-31", spread_lines[2].date)
+        self.assertEqual("2017-04-30", spread_lines[3].date)
+        self.assertEqual("2017-05-31", spread_lines[4].date)
+        self.assertEqual("2017-06-30", spread_lines[5].date)
+        self.assertEqual("2017-07-31", spread_lines[6].date)
+        self.assertEqual("2017-08-31", spread_lines[7].date)
+        self.assertEqual("2017-09-30", spread_lines[8].date)
+        self.assertEqual("2017-10-31", spread_lines[9].date)
+        self.assertEqual("2017-11-30", spread_lines[10].date)
+        self.assertEqual("2017-12-31", spread_lines[11].date)
+        self.assertEqual("2018-01-31", spread_lines[12].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -161,12 +169,14 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
     def test_03_supplier_invoice(self):
         # spread date set
-        self.spread.write({
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-01-31',
-            'move_line_auto_post': False
-        })
+        self.spread.write(
+            {
+                "period_number": 12,
+                "period_type": "month",
+                "spread_date": "2017-01-31",
+                "move_line_auto_post": False,
+            }
+        )
 
         self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
@@ -185,19 +195,19 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(83.33, spread_lines[11].amount)
         self.assertEqual(80.68, spread_lines[12].amount)
 
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
-        self.assertEqual('2017-04-30', spread_lines[3].date)
-        self.assertEqual('2017-05-31', spread_lines[4].date)
-        self.assertEqual('2017-06-30', spread_lines[5].date)
-        self.assertEqual('2017-07-31', spread_lines[6].date)
-        self.assertEqual('2017-08-31', spread_lines[7].date)
-        self.assertEqual('2017-09-30', spread_lines[8].date)
-        self.assertEqual('2017-10-31', spread_lines[9].date)
-        self.assertEqual('2017-11-30', spread_lines[10].date)
-        self.assertEqual('2017-12-31', spread_lines[11].date)
-        self.assertEqual('2018-01-31', spread_lines[12].date)
+        self.assertEqual("2017-01-31", spread_lines[0].date)
+        self.assertEqual("2017-02-28", spread_lines[1].date)
+        self.assertEqual("2017-03-31", spread_lines[2].date)
+        self.assertEqual("2017-04-30", spread_lines[3].date)
+        self.assertEqual("2017-05-31", spread_lines[4].date)
+        self.assertEqual("2017-06-30", spread_lines[5].date)
+        self.assertEqual("2017-07-31", spread_lines[6].date)
+        self.assertEqual("2017-08-31", spread_lines[7].date)
+        self.assertEqual("2017-09-30", spread_lines[8].date)
+        self.assertEqual("2017-10-31", spread_lines[9].date)
+        self.assertEqual("2017-11-30", spread_lines[10].date)
+        self.assertEqual("2017-12-31", spread_lines[11].date)
+        self.assertEqual("2018-01-31", spread_lines[12].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -232,28 +242,30 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(83.33, spread_lines[11].amount)
         self.assertEqual(80.68, spread_lines[12].amount)
 
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
-        self.assertEqual('2017-04-30', spread_lines[3].date)
-        self.assertEqual('2017-05-31', spread_lines[4].date)
-        self.assertEqual('2017-06-30', spread_lines[5].date)
-        self.assertEqual('2017-07-31', spread_lines[6].date)
-        self.assertEqual('2017-08-31', spread_lines[7].date)
-        self.assertEqual('2017-09-30', spread_lines[8].date)
-        self.assertEqual('2017-10-31', spread_lines[9].date)
-        self.assertEqual('2017-11-30', spread_lines[10].date)
-        self.assertEqual('2017-12-31', spread_lines[11].date)
-        self.assertEqual('2018-01-31', spread_lines[12].date)
+        self.assertEqual("2017-01-31", spread_lines[0].date)
+        self.assertEqual("2017-02-28", spread_lines[1].date)
+        self.assertEqual("2017-03-31", spread_lines[2].date)
+        self.assertEqual("2017-04-30", spread_lines[3].date)
+        self.assertEqual("2017-05-31", spread_lines[4].date)
+        self.assertEqual("2017-06-30", spread_lines[5].date)
+        self.assertEqual("2017-07-31", spread_lines[6].date)
+        self.assertEqual("2017-08-31", spread_lines[7].date)
+        self.assertEqual("2017-09-30", spread_lines[8].date)
+        self.assertEqual("2017-10-31", spread_lines[9].date)
+        self.assertEqual("2017-11-30", spread_lines[10].date)
+        self.assertEqual("2017-12-31", spread_lines[11].date)
+        self.assertEqual("2018-01-31", spread_lines[12].date)
 
     def test_04_supplier_invoice(self):
-        self.spread.write({
-            'credit_account_id': self.expense_account.id,
-            'debit_account_id': self.spread_account.id,
-            'period_number': 3,
-            'period_type': 'year',
-            'spread_date': '2018-10-24'
-        })
+        self.spread.write(
+            {
+                "credit_account_id": self.expense_account.id,
+                "debit_account_id": self.spread_account.id,
+                "period_number": 3,
+                "period_type": "year",
+                "spread_date": "2018-10-24",
+            }
+        )
 
         # change the state of invoice to open by clicking Validate button
         self.spread.compute_spread_board()
@@ -278,11 +290,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
     def test_05_supplier_invoice(self):
         # spread date set
-        self.spread.write({
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-02-01'
-        })
+        self.spread.write(
+            {"period_number": 12, "period_type": "month", "spread_date": "2017-02-01"}
+        )
 
         self.spread.compute_spread_board()
 
@@ -293,7 +303,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
             self.assertTrue(isinstance(attrs, dict))
 
         # post and then unlink all created moves
-        self.spread.journal_id.write({'update_posted': True})
+        self.spread.journal_id.write({"update_posted": True})
         for line in self.spread.line_ids:
             line.move_id.post()
         self.spread.line_ids.unlink_move()
@@ -305,11 +315,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
     def test_06_supplier_invoice(self):
         # spread date set
-        self.spread.write({
-            'period_number': 3,
-            'period_type': 'quarter',
-            'move_line_auto_post': False
-        })
+        self.spread.write(
+            {"period_number": 3, "period_type": "quarter", "move_line_auto_post": False}
+        )
 
         self.spread.compute_spread_board()
 
@@ -326,35 +334,39 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
         for line in self.spread.line_ids:
             self.assertTrue(line.move_id)
-            self.assertFalse(line.move_id.state == 'posted')
+            self.assertFalse(line.move_id.state == "posted")
 
-        self.assertEqual(self.spread.unspread_amount, 0.)
-        self.assertEqual(self.spread.unposted_amount, 1000.)
+        self.assertEqual(self.spread.unspread_amount, 0.0)
+        self.assertEqual(self.spread.unposted_amount, 1000.0)
 
         # try to create move lines again: an error is raised
         for line in self.spread.line_ids:
             with self.assertRaises(UserError):
                 line.create_move()
 
-        self.spread.write({
-            'move_line_auto_post': True,
-        })
+        self.spread.write(
+            {
+                "move_line_auto_post": True,
+            }
+        )
         self.spread.action_recalculate_spread()
 
         for line in self.spread.line_ids:
             self.assertTrue(line.move_id)
-            self.assertTrue(line.move_id.state == 'posted')
+            self.assertTrue(line.move_id.state == "posted")
 
-        self.assertEqual(self.spread.unspread_amount, 0.)
-        self.assertEqual(self.spread.unposted_amount, 0.)
+        self.assertEqual(self.spread.unspread_amount, 0.0)
+        self.assertEqual(self.spread.unposted_amount, 0.0)
 
     def test_07_supplier_invoice(self):
-        self.spread.write({
-            'period_number': 3,
-            'period_type': 'month',
-            'spread_date': '2017-01-01',
-            'estimated_amount': 345.96,
-        })
+        self.spread.write(
+            {
+                "period_number": 3,
+                "period_type": "month",
+                "spread_date": "2017-01-01",
+                "estimated_amount": 345.96,
+            }
+        )
 
         self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
@@ -362,9 +374,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(115.32, spread_lines[0].amount)
         self.assertEqual(115.32, spread_lines[1].amount)
         self.assertEqual(115.32, spread_lines[2].amount)
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
+        self.assertEqual("2017-01-31", spread_lines[0].date)
+        self.assertEqual("2017-02-28", spread_lines[1].date)
+        self.assertEqual("2017-03-31", spread_lines[2].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -374,11 +386,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
     def test_08_supplier_invoice(self):
         # spread date set
-        self.spread.write({
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-02-01'
-        })
+        self.spread.write(
+            {"period_number": 12, "period_type": "month", "spread_date": "2017-02-01"}
+        )
 
         self.spread.compute_spread_board()
         self.assertTrue(self.spread.line_ids)
@@ -390,11 +400,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
     def test_09_supplier_invoice(self):
         # spread date set
-        self.spread.write({
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-02-01'
-        })
+        self.spread.write(
+            {"period_number": 12, "period_type": "month", "spread_date": "2017-02-01"}
+        )
 
         self.spread.compute_spread_board()
         for line in self.spread.line_ids:
@@ -413,11 +421,11 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
     def test_10_create_entries(self):
-        self.env['account.spread.line']._create_entries()
+        self.env["account.spread.line"]._create_entries()
         self.assertFalse(self.spread.line_ids)
 
         self.spread.compute_spread_board()
-        self.env['account.spread.line']._create_entries()
+        self.env["account.spread.line"]._create_entries()
         self.assertTrue(self.spread.line_ids)
         for line in self.spread.line_ids:
             self.assertTrue(line.move_id)
@@ -429,7 +437,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
             self.assertFalse(line.move_id)
             line.create_move()
             self.assertTrue(line.move_id)
-            self.assertFalse(line.move_id.state == 'posted')
+            self.assertFalse(line.move_id.state == "posted")
 
         self.spread2.action_undo_spread()
         for line in self.spread2.line_ids:
@@ -439,18 +447,20 @@ class TestComputeSpreadBoard(common.TransactionCase):
         for line in self.spread2.line_ids:
             self.assertTrue(line.move_id)
             self.assertTrue(line.move_id)
-            self.assertFalse(line.move_id.state == 'posted')
+            self.assertFalse(line.move_id.state == "posted")
             # try to create move lines again: an error is raised
             with self.assertRaises(UserError):
                 line.create_move()
 
     def test_12_supplier_invoice_auto_post(self):
         # spread date set
-        self.spread.write({
-            'period_number': 8,
-            'period_type': 'month',
-            'move_line_auto_post': True,
-        })
+        self.spread.write(
+            {
+                "period_number": 8,
+                "period_type": "month",
+                "move_line_auto_post": True,
+            }
+        )
 
         self.spread.compute_spread_board()
 
@@ -468,16 +478,18 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertTrue(self.spread.move_line_auto_post)
         for line in self.spread.line_ids:
             self.assertTrue(line.move_id)
-            self.assertTrue(line.move_id.state == 'posted')
+            self.assertTrue(line.move_id.state == "posted")
 
-        self.assertEqual(self.spread.unspread_amount, 0.)
-        self.assertEqual(self.spread.unposted_amount, 0.)
+        self.assertEqual(self.spread.unspread_amount, 0.0)
+        self.assertEqual(self.spread.unposted_amount, 0.0)
 
     def test_13_create_move_in_invoice_auto_post(self):
-        self.spread2.write({
-            'period_number': 4,
-            'move_line_auto_post': True,
-        })
+        self.spread2.write(
+            {
+                "period_number": 4,
+                "move_line_auto_post": True,
+            }
+        )
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
 
@@ -486,19 +498,21 @@ class TestComputeSpreadBoard(common.TransactionCase):
             self.assertFalse(line.move_id)
             line.create_move()
             self.assertTrue(line.move_id)
-            self.assertTrue(line.move_id.state == 'posted')
+            self.assertTrue(line.move_id.state == "posted")
 
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
     def test_14_negative_amount(self):
         # spread date set
-        self.spread.write({
-            'estimated_amount': -1000.0,
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-01-07'
-        })
+        self.spread.write(
+            {
+                "estimated_amount": -1000.0,
+                "period_number": 12,
+                "period_type": "month",
+                "spread_date": "2017-01-07",
+            }
+        )
         self.spread.compute_spread_board()
 
         spread_lines = self.spread.line_ids
@@ -539,11 +553,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
     def test_18_supplier_invoice(self):
         # spread date set
-        self.spread.write({
-            'period_number': 12,
-            'period_type': 'month',
-            'spread_date': '2017-01-07'
-        })
+        self.spread.write(
+            {"period_number": 12, "period_type": "month", "spread_date": "2017-01-07"}
+        )
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
 
@@ -559,10 +571,10 @@ class TestComputeSpreadBoard(common.TransactionCase):
         spread_lines[2]._create_moves().post()
         spread_lines[3]._create_moves().post()
 
-        self.assertEqual(spread_lines[0].move_id.state, 'posted')
-        self.assertEqual(spread_lines[1].move_id.state, 'posted')
-        self.assertEqual(spread_lines[2].move_id.state, 'posted')
-        self.assertEqual(spread_lines[3].move_id.state, 'posted')
+        self.assertEqual(spread_lines[0].move_id.state, "posted")
+        self.assertEqual(spread_lines[1].move_id.state, "posted")
+        self.assertEqual(spread_lines[2].move_id.state, "posted")
+        self.assertEqual(spread_lines[3].move_id.state, "posted")
 
         self.assertAlmostEqual(self.spread.unspread_amount, 682.81)
         self.assertAlmostEqual(self.spread.unposted_amount, 682.81)
@@ -585,19 +597,19 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(83.33, spread_lines[11].amount)
         self.assertEqual(16.17, spread_lines[12].amount)
 
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
-        self.assertEqual('2017-04-30', spread_lines[3].date)
-        self.assertEqual('2017-05-31', spread_lines[4].date)
-        self.assertEqual('2017-06-30', spread_lines[5].date)
-        self.assertEqual('2017-07-31', spread_lines[6].date)
-        self.assertEqual('2017-08-31', spread_lines[7].date)
-        self.assertEqual('2017-09-30', spread_lines[8].date)
-        self.assertEqual('2017-10-31', spread_lines[9].date)
-        self.assertEqual('2017-11-30', spread_lines[10].date)
-        self.assertEqual('2017-12-31', spread_lines[11].date)
-        self.assertEqual('2018-01-31', spread_lines[12].date)
+        self.assertEqual("2017-01-31", spread_lines[0].date)
+        self.assertEqual("2017-02-28", spread_lines[1].date)
+        self.assertEqual("2017-03-31", spread_lines[2].date)
+        self.assertEqual("2017-04-30", spread_lines[3].date)
+        self.assertEqual("2017-05-31", spread_lines[4].date)
+        self.assertEqual("2017-06-30", spread_lines[5].date)
+        self.assertEqual("2017-07-31", spread_lines[6].date)
+        self.assertEqual("2017-08-31", spread_lines[7].date)
+        self.assertEqual("2017-09-30", spread_lines[8].date)
+        self.assertEqual("2017-10-31", spread_lines[9].date)
+        self.assertEqual("2017-11-30", spread_lines[10].date)
+        self.assertEqual("2017-12-31", spread_lines[11].date)
+        self.assertEqual("2018-01-31", spread_lines[12].date)
 
         self.assertAlmostEqual(self.spread.unspread_amount, 682.81)
         self.assertAlmostEqual(self.spread.unposted_amount, 682.81)

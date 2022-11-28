@@ -1,6 +1,6 @@
 # Copyright 2014-2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import models, api
+from odoo import api, models
 
 
 class FeesComputer(models.BaseModel):
@@ -14,7 +14,7 @@ class FeesComputer(models.BaseModel):
     Similar to AbstractModel but log access and actions
     """
 
-    _name = 'credit.control.dunning.fees.computer'
+    _name = "credit.control.dunning.fees.computer"
     _auto = False
     _log_access = True
     _register = True
@@ -34,11 +34,10 @@ class FeesComputer(models.BaseModel):
                  self, credit_line (record)
 
         """
-        if level_fees_type == 'fixed':
+        if level_fees_type == "fixed":
             return self.compute_fixed_fees
         else:
-            raise NotImplementedError('fees type %s is not supported' %
-                                      level_fees_type)
+            raise NotImplementedError("fees type %s is not supported" % level_fees_type)
 
     @api.model
     def _compute_fees(self, credit_lines):
@@ -73,7 +72,7 @@ class FeesComputer(models.BaseModel):
         compute = self._get_compute_fun(fees_type)
         fees = compute(credit_line)
         if fees:
-            credit_line.write({'dunning_fees_amount': fees})
+            credit_line.write({"dunning_fees_amount": fees})
         return credit_line
 
     @api.model
@@ -90,14 +89,14 @@ class FeesComputer(models.BaseModel):
         :return: fees amount float (in credit line currency)
 
         """
-        credit_currency = (credit_line.currency_id or
-                           credit_line.company_id.currency_id)
+        credit_currency = credit_line.currency_id or credit_line.company_id.currency_id
         level = credit_line.policy_level_id
         fees_amount = level.dunning_fixed_amount
         if not fees_amount:
             return 0.0
-        fees_currency = (level.dunning_currency_id or
-                         level.policy_id.company_id.currency_id)
+        fees_currency = (
+            level.dunning_currency_id or level.policy_id.company_id.currency_id
+        )
         if fees_currency == credit_currency:
             return fees_amount
         else:

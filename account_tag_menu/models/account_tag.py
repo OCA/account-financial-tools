@@ -5,13 +5,17 @@ from odoo import fields, models
 
 
 class AccountAccountTag(models.Model):
-    _inherit = 'account.account.tag'
+    _inherit = "account.account.tag"
 
     account_ids = fields.Many2many(
-        'account.account', 'account_account_account_tag',
-        string='Accounts',
-        help="Assigned accounts for custom reporting")
+        "account.account",
+        "account_account_account_tag",
+        string="Accounts",
+        help="Assigned accounts for custom reporting",
+    )
     tax_ids = fields.Many2many(
-        'account.tax', 'account_tax_account_tag',
-        string='Taxes',
-        help="Assigned taxes for custom reporting")
+        "account.tax",
+        "account_tax_account_tag",
+        string="Taxes",
+        help="Assigned taxes for custom reporting",
+    )

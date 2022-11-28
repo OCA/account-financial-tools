@@ -2,13 +2,13 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api, _, exceptions
+from odoo import _, api, exceptions, fields, models
 
 
 class DateRangeType(models.Model):
     _inherit = "date.range.type"
 
-    fiscal_year = fields.Boolean(string='Is fiscal year?', default=False)
+    fiscal_year = fields.Boolean(string="Is fiscal year?", default=False)
 
     @api.multi
     def unlink(self):
@@ -18,8 +18,7 @@ class DateRangeType(models.Model):
         for rec in self:
             if rec.fiscal_year:
                 raise exceptions.ValidationError(
-                    _('You cannot delete a date range type with '
-                      'flag "fiscal_year"')
+                    _("You cannot delete a date range type with " 'flag "fiscal_year"')
                 )
             else:
                 super(DateRangeType, rec).unlink()

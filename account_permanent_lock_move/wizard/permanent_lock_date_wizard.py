@@ -5,31 +5,32 @@ from odoo.exceptions import UserError
 
 
 class PermanentLockDateWizard(models.TransientModel):
-    _name = 'permanent.lock.date.wizard'
+    _name = "permanent.lock.date.wizard"
 
     lock_date = fields.Date(string="Lock Date")
-    company_id = fields.Many2one(comodel_name='res.company',
-                                 string='Company')
+    company_id = fields.Many2one(comodel_name="res.company", string="Company")
 
     @api.multi
     def confirm_date(self):
         self.ensure_one()
         company = self.company_id
-        if (company.permanent_lock_date and
-                self.lock_date < company.permanent_lock_date):
-            raise UserError(
-                _("You cannot set the permanent lock date in the past.")
-            )
+        if company.permanent_lock_date and self.lock_date < company.permanent_lock_date:
+            raise UserError(_("You cannot set the permanent lock date in the past."))
         # Then check if unposted moves are present before the date
-        moves = self.env['account.move'].search(
-            [('company_id', '=', company.id),
-             ('date', '<=', self.lock_date),
-             ('state', '=', 'draft')])
+        moves = self.env["account.move"].search(
+            [
+                ("company_id", "=", company.id),
+                ("date", "<=", self.lock_date),
+                ("state", "=", "draft"),
+            ]
+        )
         if moves:
             raise UserError(
-                _("You cannot set the permanent lock date since entries are "
-                  "still unposted before this date.")
+                _(
+                    "You cannot set the permanent lock date since entries are "
+                    "still unposted before this date."
+                )
             )
 
         company.permanent_lock_date = self.lock_date
-        return {'type': 'ir.actions.act_window_close'}
+        return {"type": "ir.actions.act_window_close"}

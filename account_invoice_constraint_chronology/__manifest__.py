@@ -5,10 +5,10 @@
     "version": "11.0.1.0.0",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "maintainer": "ACSONE SA/NV",
-    "website": "http://www.acsone.eu",
+    "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
     "category": "Accounting",
     "depends": ["account"],
     "data": ["view/account_view.xml"],
-    'installable': True,
+    "installable": True,
 }

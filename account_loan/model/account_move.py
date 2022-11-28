@@ -5,18 +5,18 @@ from odoo import api, fields, models
 
 
 class AccountMove(models.Model):
-    _inherit = 'account.move'
+    _inherit = "account.move"
 
     loan_line_id = fields.Many2one(
-        'account.loan.line',
+        "account.loan.line",
         readonly=True,
-        ondelete='restrict',
+        ondelete="restrict",
     )
     loan_id = fields.Many2one(
-        'account.loan',
+        "account.loan",
         readonly=True,
         store=True,
-        ondelete='restrict',
+        ondelete="restrict",
     )
 
     @api.multi
