@@ -1,0 +1,22 @@
+# Do NOT update manually; changes here will be overwritten by Copier
+_commit: v1.11.1
+_src_path: gh:oca/oca-addons-repo-template
+ci: GitHub
+dependency_installation_mode: PIP
+generate_requirements_txt: false
+github_check_license: false
+github_enable_codecov: false
+github_enable_makepot: true
+github_enable_stale_action: false
+github_enforce_dev_status_compatibility: false
+include_wkhtmltopdf: false
+odoo_version: 11.0
+org_name: Odoo Community Association (OCA)
+org_slug: OCA
+rebel_module_groups: []
+repo_description: 'TODO: add repo description.'
+repo_name: account-financial-tools
+repo_slug: account-financial-tools
+repo_website: https://github.com/OCA/account-financial-tools
+travis_apt_packages: []
+travis_apt_sources: []

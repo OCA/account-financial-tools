@@ -1,0 +1,96 @@
+[MASTER]
+load-plugins=pylint_odoo
+score=n
+
+[ODOOLINT]
+readme_template_url="https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"
+manifest_required_authors=Odoo Community Association (OCA)
+manifest_required_keys=license
+manifest_deprecated_keys=description,active
+license_allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
+valid_odoo_versions=11.0
+
+[MESSAGES CONTROL]
+disable=all
+
+# This .pylintrc contains optional AND mandatory checks and is meant to be
+# loaded in an IDE to have it check everything, in the hope this will make
+# optional checks more visible to contributors who otherwise never look at a
+# green travis to see optional checks that failed.
+# .pylintrc-mandatory containing only mandatory checks is used the pre-commit
+# config as a blocking check.
+
+enable=anomalous-backslash-in-string,
+    assignment-from-none,
+    dangerous-default-value,
+    development-status-allowed,
+    duplicate-key,
+    duplicate-po-message-definition,
+    missing-import-error,
+    missing-manifest-dependency,
+    po-msgstr-variables,
+    po-syntax-error,
+    pointless-statement,
+    pointless-string-statement,
+    print-used,
+    redundant-keyword-arg,
+    reimported,
+    relative-import,
+    return-in-init,
+    rst-syntax-error,
+    too-few-format-args,
+    unreachable,
+    eval-used,
+    eval-referenced,
+    license-allowed,
+    manifest-author-string,
+    manifest-required-author,
+    manifest-required-key,
+    manifest-version-format,
+    api-one-deprecated,
+    api-one-multi-together,
+    attribute-deprecated,
+    class-camelcase,
+    create-user-wo-reset-password,
+    consider-merging-classes-inherited,
+    copy-wo-api-one,
+    dangerous-filter-wo-user,
+    dangerous-view-replace-wo-priority,
+    deprecated-module,
+    duplicate-id-csv,
+    duplicate-po-message-definition,
+    duplicate-xml-fields,
+    duplicate-xml-record-id,
+    file-not-used,
+    incoherent-interpreter-exec-perm,
+    invalid-commit,
+    javascript-lint,
+    manifest-deprecated-key,
+    method-compute,
+    method-inverse,
+    method-required-super,
+    method-search,
+    missing-newline-extrafiles,
+    missing-readme,
+    po-msgstr-variables,
+    po-syntax-error,
+    no-utf8-coding-comment,
+    unnecessary-utf8-coding-comment,
+    odoo-addons-relative-import,
+    old-api7-method-defined,
+    openerp-exception-warning,
+    redefined-builtin,
+    redundant-modulename-xml,
+    sql-injection,
+    too-complex,
+    translation-field,
+    translation-required,
+    use-vim-comment,
+    wrong-tabs-instead-of-spaces,
+    xml-syntax-error,
+
+
+[REPORTS]
+msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}
+output-format=colorized
+reports=no

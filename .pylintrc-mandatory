@@ -1,0 +1,47 @@
+[MASTER]
+load-plugins=pylint_odoo
+score=n
+
+[ODOOLINT]
+readme_template_url="https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"
+manifest_required_authors=Odoo Community Association (OCA)
+manifest_required_keys=license
+manifest_deprecated_keys=description,active
+license_allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
+valid_odoo_versions=11.0
+
+[MESSAGES CONTROL]
+disable=all
+
+enable=anomalous-backslash-in-string,
+    assignment-from-none,
+    dangerous-default-value,
+    development-status-allowed,
+    duplicate-key,
+    duplicate-po-message-definition,
+    missing-import-error,
+    missing-manifest-dependency,
+    /* po-msgstr-variables, */
+    po-syntax-error,
+    pointless-statement,
+    pointless-string-statement,
+    print-used,
+    redundant-keyword-arg,
+    reimported,
+    relative-import,
+    return-in-init,
+    rst-syntax-error,
+    too-few-format-args,
+    unreachable,
+    eval-used,
+    eval-referenced,
+    license-allowed,
+    manifest-author-string,
+    manifest-required-author,
+    manifest-required-key,
+    manifest-version-format
+
+[REPORTS]
+msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}
+output-format=colorized
+reports=no
