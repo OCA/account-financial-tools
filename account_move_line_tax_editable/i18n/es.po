@@ -29,7 +29,7 @@ msgstr "Identificación"
 #. module: account_move_line_tax_editable
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__is_tax_editable
 msgid "Is tax data editable?"
-msgstr ""
+msgstr "¿Los datos fiscales son editables?"
 
 #. module: account_move_line_tax_editable
 #: model:ir.model,name:account_move_line_tax_editable.model_account_move_line
