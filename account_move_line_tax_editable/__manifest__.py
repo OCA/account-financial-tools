@@ -4,10 +4,10 @@
 {
     "name": "Account Move Line Tax Editable",
     "summary": "Allows to edit taxes on non-posted account move lines",
-    "version": "15.0.1.0.1",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
-    "data": ["views/account_move.xml", "views/account_move_line.xml"],
+    "data": ["views/account_move.xml"],
 }
