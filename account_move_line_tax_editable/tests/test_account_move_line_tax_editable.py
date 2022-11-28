@@ -1,89 +1,104 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
-import odoo.tests.common as common
 from odoo import fields
+from odoo.tests import tagged
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestAccountMoveLineTaxEditable(common.TransactionCase):
+@tagged("post_install", "-at_install")
+class TestAccountMoveLineTaxEditable(AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        acc_obj = cls.env["account.account"]
-        account100 = acc_obj.create(
-            {
-                "code": "100",
-                "name": "Account 100",
-                "user_type_id": cls.env.ref("account.data_account_type_receivable").id,
-                "reconcile": True,
-            }
+    def setUpClass(cls, chart_template_ref=None):
+        super().setUpClass(chart_template_ref=chart_template_ref)
+        refund_repartitions = cls.company_data[
+            "default_tax_sale"
+        ].refund_repartition_line_ids
+        tax_repartition_line = refund_repartitions.filtered(
+            lambda line: line.repartition_type == "tax"
         )
-        account300 = acc_obj.create(
+        cls.account_revenue = cls.company_data["default_account_revenue"]
+        cls.account_expense = cls.company_data["default_account_expense"]
+        cls.account_tax_sale = cls.company_data["default_account_tax_sale"]
+        cls.tax_sale = cls.company_data["default_tax_sale"]
+        cls.tax_sale_copy = cls.tax_sale.copy()
+        cls.test_move = cls.env["account.move"].create(
             {
-                "code": "300",
-                "name": "Account 300",
-                "user_type_id": cls.env.ref(
-                    "account.data_account_type_other_income"
-                ).id,
-            }
-        )
-
-        journal = cls.env["account.journal"].create(
-            {"name": "Test journal", "type": "sale", "code": "TEST"}
-        )
-        move_vals = {
-            "journal_id": journal.id,
-            "name": "move test",
-            "date": fields.Date.today(),
-            "line_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "name": "move test line 1",
-                        "debit": 0.0,
-                        "credit": 1000.0,
-                        "account_id": account300.id,
-                    },
-                ),
-                (
-                    0,
-                    0,
-                    {
-                        "name": "move test line 2",
-                        "debit": 1000.0,
-                        "credit": 0.0,
-                        "account_id": account100.id,
-                    },
-                ),
-            ],
-        }
-        cls.move = cls.env["account.move"].create(move_vals)
-        cls.tax15 = cls.env["account.tax"].create(
-            {
-                "name": "Test tax 15",
-                "amount": 15,
+                "move_type": "entry",
+                "date": fields.Date.from_string("2016-01-01"),
+                "line_ids": [
+                    (
+                        0,
+                        None,
+                        {
+                            "name": "revenue line 1",
+                            "account_id": cls.account_revenue.id,
+                            "debit": 500.0,
+                            "credit": 0.0,
+                        },
+                    ),
+                    (
+                        0,
+                        None,
+                        {
+                            "name": "revenue line 2",
+                            "account_id": cls.account_revenue.id,
+                            "debit": 1000.0,
+                            "credit": 0.0,
+                            "tax_ids": [(6, 0, cls.tax_sale.ids)],
+                        },
+                    ),
+                    (
+                        0,
+                        None,
+                        {
+                            "name": "tax line",
+                            "account_id": cls.account_tax_sale.id,
+                            "debit": 150.0,
+                            "credit": 0.0,
+                            "tax_repartition_line_id": tax_repartition_line.id,
+                        },
+                    ),
+                    (
+                        0,
+                        None,
+                        {
+                            "name": "counterpart line",
+                            "account_id": cls.account_expense.id,
+                            "debit": 0.0,
+                            "credit": 1650.0,
+                        },
+                    ),
+                ],
             }
         )
 
     def test_compute_is_tax_editable(self):
-        self.assertEqual(self.move.line_ids.mapped("is_tax_editable"), [True, True])
-        self.move.action_post()
-        self.assertEqual(self.move.line_ids.mapped("is_tax_editable"), [False, False])
+        self.assertTrue(all(self.test_move.line_ids.mapped("is_tax_editable")))
+        self.test_move.action_post()
+        self.assertFalse(any(self.test_move.line_ids.mapped("is_tax_editable")))
 
     def test_tax_edited(self):
-        line1 = self.move.line_ids[0]
-        line1.tax_line_id = self.tax15.id
-        line2 = self.move.line_ids[1]
-        self.move.action_post()
-        self.assertEqual(line1.tax_line_id.id, self.tax15.id)
-        self.assertEqual(line2.tax_line_id.id, False)
-        self.assertEqual(line1.tax_repartition_line_id.tax_id.id, self.tax15.id)
+        tax_line = self.test_move.line_ids.filtered(
+            lambda x: x.account_id == self.account_tax_sale
+        )
+        self.assertEqual(tax_line.tax_repartition_line_id.tax_id, self.tax_sale)
+        self.assertEqual(tax_line.tax_line_id, self.tax_sale)
+        tax_line.tax_line_id = self.tax_sale_copy.id
+        self.test_move.action_post()
+        self.assertEqual(tax_line.tax_line_id.id, self.tax_sale_copy.id)
+        self.assertEqual(
+            tax_line.tax_repartition_line_id.tax_id.id, self.tax_sale_copy.id
+        )
 
     def test_tax_not_edited(self):
         """In this case we set the tax_repartition_line_id field, simulating that the
         move came from an invoice with tax applied. Thus, tax_line_id should be computed"""
-        line1 = self.move.line_ids[1]
-        line1.tax_repartition_line_id = self.tax15.invoice_repartition_line_ids[1]
-        self.assertEqual(line1.tax_line_id.id, self.tax15.id)
+        tax_line = self.test_move.line_ids.filtered(
+            lambda x: x.account_id == self.account_tax_sale
+        )
+        tax_line.tax_line_id = self.tax_sale_copy.id
+        tax_line.tax_repartition_line_id = (
+            self.tax_sale_copy.invoice_repartition_line_ids[1]
+        )
+        self.assertEqual(tax_line.tax_line_id.id, self.tax_sale_copy.id)
