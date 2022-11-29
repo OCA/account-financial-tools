@@ -24,6 +24,9 @@ class AccountAssetRemove(models.TransientModel):
         required=True,
         default=lambda self: self._default_company_id(),
     )
+    company_currency_id = fields.Many2one(
+        related="company_id.currency_id", string="Company Currency"
+    )
     date_remove = fields.Date(
         string="Asset Removal Date",
         required=True,
@@ -32,7 +35,11 @@ class AccountAssetRemove(models.TransientModel):
         "in case of early removal",
     )
     force_date = fields.Date(string="Force accounting date")
-    sale_value = fields.Float(default=lambda self: self._default_sale_value())
+    sale_value = fields.Monetary(
+        string="Sale Value",
+        default=lambda self: self._default_sale_value(),
+        currency_field="company_currency_id",
+    )
     account_sale_id = fields.Many2one(
         comodel_name="account.account",
         string="Asset Sale Account",
@@ -70,9 +77,9 @@ class AccountAssetRemove(models.TransientModel):
     )
     note = fields.Text("Notes")
 
-    @api.constrains("sale_value")
+    @api.constrains("sale_value", "company_id")
     def _check_sale_value(self):
-        if self.sale_value < 0:
+        if self.company_id.currency_id.compare_amounts(self.sale_value, 0) < 0:
             raise ValidationError(_("The Sale Value must be positive!"))
 
     @api.model
@@ -105,10 +112,11 @@ class AccountAssetRemove(models.TransientModel):
             inv_curr = inv.currency_id
             if line.move_id.payment_state == "paid" or line.parent_state == "draft":
                 account_sale_id = line.account_id.id
-                amount = line.price_subtotal
-                if inv_curr != comp_curr:
-                    amount = comp_curr.compute(amount)
-                sale_value += amount
+                amount_inv_cur = line.price_subtotal
+                amount_comp_cur = inv_curr._convert(
+                    amount_inv_cur, comp_curr, inv.company_id, inv.date
+                )
+                sale_value += amount_comp_cur
         return {"sale_value": sale_value, "account_sale_id": account_sale_id}
 
     @api.model
@@ -234,7 +242,7 @@ class AccountAssetRemove(models.TransientModel):
         date_remove = self.date_remove
         asset_line_obj = self.env["account.asset.line"]
 
-        digits = self.env["decimal.precision"].precision_get("Account")
+        currency = asset.company_id.currency_id
 
         def _dlines(asset):
             lines = asset.depreciation_line_ids
@@ -279,11 +287,10 @@ class AccountAssetRemove(models.TransientModel):
         period_number_days = (first_date - last_depr_date).days + same_month
         new_line_date = date_remove + relativedelta(days=-1)
         to_depreciate_days = (new_line_date - last_depr_date).days + same_month
-        to_depreciate_amount = round(
+        to_depreciate_amount = currency.round(
             float(to_depreciate_days)
             / float(period_number_days)
             * first_to_depreciate_dl.amount,
-            digits,
         )
         residual_value = asset.value_residual - to_depreciate_amount
         if to_depreciate_amount:
@@ -302,25 +309,28 @@ class AccountAssetRemove(models.TransientModel):
         move_lines = []
         partner_id = asset.partner_id and asset.partner_id.id or False
         profile = asset.profile_id
+        currency = asset.company_id.currency_id
 
         # asset and asset depreciation account reversal
         depr_amount = asset.depreciation_base - residual_value
+        depr_amount_comp = currency.compare_amounts(depr_amount, 0)
         if depr_amount:
             move_line_vals = {
                 "name": asset.name,
                 "account_id": profile.account_depreciation_id.id,
-                "debit": depr_amount > 0 and depr_amount or 0.0,
-                "credit": depr_amount < 0 and -depr_amount or 0.0,
+                "debit": depr_amount_comp > 0 and depr_amount or 0.0,
+                "credit": depr_amount_comp < 0 and -depr_amount or 0.0,
                 "partner_id": partner_id,
                 "asset_id": asset.id,
             }
             move_lines.append((0, 0, move_line_vals))
 
+        depreciation_base_comp = currency.compare_amounts(asset.depreciation_base, 0)
         move_line_vals = {
             "name": asset.name,
             "account_id": profile.account_asset_id.id,
-            "debit": (asset.depreciation_base < 0 and -asset.depreciation_base or 0.0),
-            "credit": (asset.depreciation_base > 0 and asset.depreciation_base or 0.0),
+            "debit": (depreciation_base_comp < 0 and -asset.depreciation_base or 0.0),
+            "credit": (depreciation_base_comp > 0 and asset.depreciation_base or 0.0),
             "partner_id": partner_id,
             "asset_id": asset.id,
         }
@@ -356,9 +366,10 @@ class AccountAssetRemove(models.TransientModel):
                     }
                     move_lines.append((0, 0, move_line_vals))
                 balance = self.sale_value - residual_value
+                balance_comp = currency.compare_amounts(balance, 0)
                 account_id = (
                     self.account_plus_value_id.id
-                    if balance > 0
+                    if balance_comp > 0
                     else self.account_min_value_id.id
                 )
                 move_line_vals = {
@@ -366,8 +377,8 @@ class AccountAssetRemove(models.TransientModel):
                     "account_id": account_id,
                     "analytic_account_id": asset.account_analytic_id.id,
                     "analytic_tag_ids": [(4, tag.id) for tag in asset.analytic_tag_ids],
-                    "debit": balance < 0 and -balance or 0.0,
-                    "credit": balance > 0 and balance or 0.0,
+                    "debit": balance_comp < 0 and -balance or 0.0,
+                    "credit": balance_comp > 0 and balance or 0.0,
                     "partner_id": partner_id,
                     "asset_id": asset.id,
                 }
