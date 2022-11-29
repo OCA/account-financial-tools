@@ -20,6 +20,7 @@
     ],
     "data": [
         "data/date_range_type.xml",
-        "views/account_views.xml"
+        "views/account_views.xml",
+        "views/res_company_views.xml",
     ],
 }
