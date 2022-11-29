@@ -58,37 +58,41 @@ class AccountAsset(models.Model):
         size=32,
         states=READONLY_STATES,
     )
-    purchase_value = fields.Float(
+    purchase_value = fields.Monetary(
+        string="Purchase Value",
         required=True,
         states=READONLY_STATES,
+        currency_field="company_currency_id",
         help="This amount represent the initial value of the asset."
         "\nThe Depreciation Base is calculated as follows:"
         "\nPurchase Value - Salvage Value.",
     )
-    salvage_value = fields.Float(
-        digits="Account",
+    salvage_value = fields.Monetary(
+        string="Salvage Value",
         states=READONLY_STATES,
+        currency_field="company_currency_id",
         help="The estimated value that an asset will realize upon "
         "its sale at the end of its useful life.\n"
         "This value is used to determine the depreciation amounts.",
     )
-    depreciation_base = fields.Float(
+    depreciation_base = fields.Monetary(
         compute="_compute_depreciation_base",
-        digits="Account",
+        string="Depreciation Base",
         store=True,
+        currency_field="company_currency_id",
         help="This amount represent the depreciation base "
         "of the asset (Purchase Value - Salvage Value).",
     )
-    value_residual = fields.Float(
+    value_residual = fields.Monetary(
         compute="_compute_depreciation",
-        digits="Account",
         string="Residual Value",
+        currency_field="company_currency_id",
         store=True,
     )
-    value_depreciated = fields.Float(
+    value_depreciated = fields.Monetary(
         compute="_compute_depreciation",
-        digits="Account",
         string="Depreciated Value",
+        currency_field="company_currency_id",
         store=True,
     )
     note = fields.Text()
@@ -266,7 +270,6 @@ class AccountAsset(models.Model):
         related="company_id.currency_id",
         string="Company Currency",
         store=True,
-        readonly=True,
     )
     account_analytic_id = fields.Many2one(
         comodel_name="account.analytic.account",
@@ -607,8 +610,8 @@ class AccountAsset(models.Model):
         last_line,
         posted_lines,
     ):
-        digits = self.env["decimal.precision"].precision_get("Account")
         company = self.company_id
+        currency = company.currency_id
         fiscalyear_lock_date = company.fiscalyear_lock_date or fields.Date.to_date(
             "1901-01-01"
         )
@@ -639,14 +642,14 @@ class AccountAsset(models.Model):
                 if amount or self.carry_forward_missed_depreciations:
                     vals = {
                         "previous_id": depr_line.id,
-                        "amount": round(amount, digits),
+                        "amount": currency.round(amount),
                         "asset_id": self.id,
                         "name": name,
                         "line_date": line["date"],
                         "line_days": line["days"],
                         "init_entry": fiscalyear_lock_date >= line["date"],
                     }
-                    depreciated_value += round(amount, digits)
+                    depreciated_value += currency.round(amount)
                     depr_line = self.env["account.asset.line"].create(vals)
                 else:
                     seq -= 1
@@ -655,10 +658,10 @@ class AccountAsset(models.Model):
     def compute_depreciation_board(self):
 
         line_obj = self.env["account.asset.line"]
-        digits = self.env["decimal.precision"].precision_get("Account")
 
         for asset in self:
-            if asset.value_residual == 0.0:
+            currency = asset.company_id.currency_id
+            if currency.is_zero(asset.value_residual):
                 continue
             domain = [
                 ("asset_id", "=", asset.id),
@@ -740,7 +743,7 @@ class AccountAsset(models.Model):
                     posted_line.amount for posted_line in posted_lines
                 )
                 residual_amount = asset.depreciation_base - depreciated_value
-                amount_diff = round(residual_amount_table - residual_amount, digits)
+                amount_diff = currency.round(residual_amount_table - residual_amount)
                 if amount_diff:
                     # We will auto-create a new line because the number of lines in
                     # the tables are the same as the posted depreciations and there
@@ -987,7 +990,8 @@ class AccountAsset(models.Model):
     def _compute_depreciation_amount_per_fiscal_year(
         self, table, line_dates, depreciation_start_date, depreciation_stop_date
     ):
-        digits = self.env["decimal.precision"].precision_get("Account")
+        self.ensure_one()
+        currency = self.company_id.currency_id
         fy_residual_amount = self.depreciation_base
         i_max = len(table) - 1
         asset_sign = self.depreciation_base >= 0 and 1 or -1
@@ -1019,17 +1023,22 @@ class AccountAsset(models.Model):
                     firstyear = i == 0 and True or False
                     fy_factor = self._get_fy_duration_factor(entry, firstyear)
                     fy_amount = year_amount * fy_factor
-                if asset_sign * (fy_amount - fy_residual_amount) > 0:
+                if (
+                    currency.compare_amounts(
+                        asset_sign * (fy_amount - fy_residual_amount), 0
+                    )
+                    > 0
+                ):
                     fy_amount = fy_residual_amount
-                period_amount = round(period_amount, digits)
-                fy_amount = round(fy_amount, digits)
+                period_amount = currency.round(period_amount)
+                fy_amount = currency.round(fy_amount)
             else:
                 fy_amount = False
                 if self.method_time == "number":
                     number = self.method_number
                 else:
                     number = len(line_dates)
-                period_amount = round(self.depreciation_base / number, digits)
+                period_amount = currency.round(self.depreciation_base / number)
             entry.update(
                 {
                     "period_amount": period_amount,
@@ -1039,7 +1048,7 @@ class AccountAsset(models.Model):
             )
             if self.method_time == "year":
                 fy_residual_amount -= fy_amount
-                if round(fy_residual_amount, digits) == 0:
+                if currency.is_zero(fy_residual_amount):
                     break
         i_max = i
         table = table[: i_max + 1]
@@ -1049,7 +1058,8 @@ class AccountAsset(models.Model):
         self, table, depreciation_start_date, depreciation_stop_date, line_dates
     ):
 
-        digits = self.env["decimal.precision"].precision_get("Account")
+        self.ensure_one()
+        currency = self.company_id.currency_id
         asset_sign = 1 if self.depreciation_base >= 0 else -1
         i_max = len(table) - 1
         remaining_value = self.depreciation_base
@@ -1068,7 +1078,7 @@ class AccountAsset(models.Model):
             prev_date = max(entry["date_start"], depreciation_start_date)
             for li, line_date in enumerate(line_dates):
                 line_days = (line_date - prev_date).days + 1
-                if round(remaining_value, digits) == 0.0:
+                if currency.is_zero(remaining_value):
                     break
 
                 if line_date > min(entry["date_stop"], depreciation_stop_date) and not (
@@ -1081,20 +1091,23 @@ class AccountAsset(models.Model):
 
                 if (
                     self.method == "degr-linear"
-                    and asset_sign * (fy_amount - fy_amount_check) < 0
+                    and currency.compare_amounts(
+                        asset_sign * (fy_amount - fy_amount_check), 0
+                    )
+                    < 0
                 ):
                     break
 
                 if i == 0 and li == 0:
-                    if entry.get("day_amount") > 0.0:
+                    if currency.compare_amounts(entry.get("day_amount"), 0) > 0:
                         amount = line_days * entry.get("day_amount")
                     else:
                         amount = self._get_first_period_amount(
                             table, entry, depreciation_start_date, line_dates
                         )
-                        amount = round(amount, digits)
+                        amount = currency.round(amount)
                 else:
-                    if entry.get("day_amount") > 0.0:
+                    if currency.compare_amounts(entry.get("day_amount"), 0) > 0:
                         amount = line_days * entry.get("day_amount")
                     else:
                         amount = entry.get("period_amount")
@@ -1127,7 +1140,7 @@ class AccountAsset(models.Model):
             # The code has now been simplified with compensation
             # always in last FT depreciation line.
             if self.method_time == "year" and not entry.get("day_amount"):
-                if round(fy_amount_check - fy_amount, digits) != 0:
+                if not currency.is_zero(fy_amount_check - fy_amount):
                     diff = fy_amount_check - fy_amount
                     amount = amount - diff
                     remaining_value += diff

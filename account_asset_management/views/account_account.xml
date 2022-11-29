@@ -5,8 +5,18 @@
         <field name="model">account.account</field>
         <field name="inherit_id" ref="account.view_account_form" />
         <field name="arch" type="xml">
-            <field name="user_type_id" position="before">
+            <group name="options_group" position="inside">
                 <field name="asset_profile_id" />
+            </group>
+        </field>
+    </record>
+
+    <record id="view_account_list" model="ir.ui.view">
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list" />
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="asset_profile_id" optional="hide" />
             </field>
         </field>
     </record>
