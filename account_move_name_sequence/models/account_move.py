@@ -83,3 +83,7 @@ class AccountMove(models.Model):
         if not self.quick_edit_mode:
             self.name = "/"
             self._compute_name_by_sequence()
+
+    def _post(self, soft=True):
+        self.flush()
+        return super()._post(soft=soft)
