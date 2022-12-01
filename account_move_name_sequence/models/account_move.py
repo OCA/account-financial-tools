@@ -55,3 +55,7 @@ class AccountMove(models.Model):
     # We must by-pass this constraint of sequence.mixin
     def _constrains_date_sequence(self):
         return True
+
+    def _post(self, soft=True):
+        self.flush()
+        return super()._post(soft=soft)
