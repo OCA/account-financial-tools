@@ -47,3 +47,9 @@ class AccountMoveLine(models.Model):
         index=True,
         copy=False,
     )
+
+    def _copy_data_extend_business_fields(self, values):
+        # Same way Odoo standard does for purchase_line_id field
+        res = super(AccountMoveLine, self)._copy_data_extend_business_fields(values)
+        values["sale_line_id"] = self.sale_line_id.id
+        return res
