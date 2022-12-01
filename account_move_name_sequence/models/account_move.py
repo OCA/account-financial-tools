@@ -64,3 +64,7 @@ class AccountMove(models.Model):
         if not invoices_other_sequences and invoices_no_gap_sequences:
             return False
         return super(AccountMove, invoices_other_sequences)._is_end_of_seq_chain()
+
+    def _post(self, soft=True):
+        self.flush()
+        return super()._post(soft=soft)
