@@ -64,3 +64,9 @@ class AccountMove(models.Model):
         if not invoices_other_sequences and invoices_no_gap_sequences:
             return False
         return super(AccountMove, invoices_other_sequences)._is_end_of_seq_chain()
+
+    def _fetch_duplicate_supplier_reference(self, only_posted=False):
+        moves = self.filtered(lambda m: m.is_purchase_document() and m.ref)
+        if moves:
+            self.flush_model(["name", "journal_id", "move_type", "state"])
+        return super()._fetch_duplicate_supplier_reference(only_posted=only_posted)
