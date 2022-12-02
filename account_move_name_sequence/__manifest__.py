@@ -7,7 +7,7 @@
 
 {
     "name": "Account Move Number Sequence",
-    "version": "15.0.1.1.1",
+    "version": "15.0.1.2.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Generate journal entry number from sequence",
