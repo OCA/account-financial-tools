@@ -72,7 +72,7 @@ class AccountJournal(models.Model):
             vals["sequence_id"] = self._create_sequence(vals).id
         if (
             vals.get("type") in ("sale", "purchase")
-            and vals.get("refund_sequence")
+            and vals.get("refund_sequence", True)
             and not vals.get("refund_sequence_id")
         ):
             vals["refund_sequence_id"] = self._create_sequence(vals, refund=True).id
