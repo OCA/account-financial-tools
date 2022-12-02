@@ -138,6 +138,102 @@ class TestAccountMoveNameSequence(TransactionCase):
             move.action_post()
         self.assertEqual(move.name, "TEST-2022-07-0001")
 
+    def test_in_invoice_and_refund(self):
+        in_invoice = self.env["account.move"].create(
+            {
+                "journal_id": self.purchase_journal.id,
+                "invoice_date": self.date,
+                "partner_id": self.env.ref("base.res_partner_3").id,
+                "move_type": "in_invoice",
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "account_id": self.account1.id,
+                            "price_unit": 42.0,
+                            "quantity": 12,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "account_id": self.account1.id,
+                            "price_unit": 48.0,
+                            "quantity": 10,
+                        },
+                    ),
+                ],
+            }
+        )
+        self.assertEqual(in_invoice.name, "/")
+        in_invoice.action_post()
+
+        move_reversal = (
+            self.env["account.move.reversal"]
+            .with_context(active_model="account.move", active_ids=in_invoice.ids)
+            .create(
+                {
+                    "journal_id": in_invoice.journal_id.id,
+                    "reason": "no reason",
+                    "refund_method": "cancel",
+                }
+            )
+        )
+        reversal = move_reversal.reverse_moves()
+        reversed_move = self.env["account.move"].browse(reversal["res_id"])
+        self.assertTrue(reversed_move)
+        self.assertEqual(reversed_move.state, "posted")
+
+        in_invoice = in_invoice.copy(
+            {
+                "invoice_date": self.date,
+            }
+        )
+        in_invoice.action_post()
+
+        move_reversal = (
+            self.env["account.move.reversal"]
+            .with_context(active_model="account.move", active_ids=in_invoice.ids)
+            .create(
+                {
+                    "journal_id": in_invoice.journal_id.id,
+                    "reason": "no reason",
+                    "refund_method": "modify",
+                }
+            )
+        )
+        reversal = move_reversal.reverse_moves()
+        draft_invoice = self.env["account.move"].browse(reversal["res_id"])
+        self.assertTrue(draft_invoice)
+        self.assertEqual(draft_invoice.state, "draft")
+        self.assertEqual(draft_invoice.move_type, "in_invoice")
+
+        in_invoice = in_invoice.copy(
+            {
+                "invoice_date": self.date,
+            }
+        )
+        in_invoice.action_post()
+
+        move_reversal = (
+            self.env["account.move.reversal"]
+            .with_context(active_model="account.move", active_ids=in_invoice.ids)
+            .create(
+                {
+                    "journal_id": in_invoice.journal_id.id,
+                    "reason": "no reason",
+                    "refund_method": "refund",
+                }
+            )
+        )
+        reversal = move_reversal.reverse_moves()
+        draft_reversed_move = self.env["account.move"].browse(reversal["res_id"])
+        self.assertTrue(draft_reversed_move)
+        self.assertEqual(draft_reversed_move.state, "draft")
+        self.assertEqual(draft_reversed_move.move_type, "in_refund")
+
     def test_in_refund(self):
         in_refund_invoice = self.env["account.move"].create(
             {
