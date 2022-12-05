@@ -33,12 +33,9 @@ class AccountMove(models.Model):
     asset_count = fields.Integer(compute="_compute_asset_count")
 
     def _compute_asset_count(self):
-        rg_res = self.env["account.asset.line"].read_group(
-            [("move_id", "in", self.ids)], ["move_id"], ["move_id"]
-        )
-        mapped_data = {x["move_id"][0]: x["move_id_count"] for x in rg_res}
+        # Used filtered instead of search or search_count because the result is cached.
         for move in self:
-            move.asset_count = mapped_data.get(move.id, 0)
+            move.asset_count = len(move.line_ids.filtered("asset_id"))
 
     def unlink(self):
         # for move in self:
@@ -145,11 +142,7 @@ class AccountMove(models.Model):
         return move_vals
 
     def action_view_assets(self):
-        assets = (
-            self.env["account.asset.line"]
-            .search([("move_id", "=", self.id)])
-            .mapped("asset_id")
-        )
+        assets = self.line_ids.mapped("asset_id")
         action = self.env.ref("account_asset_management.account_asset_action")
         action_dict = action.sudo().read()[0]
         if len(assets) == 1:
