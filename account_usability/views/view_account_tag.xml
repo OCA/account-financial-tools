@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_tag_view_form" model="ir.ui.view">
+        <field name="model">account.account.tag</field>
+        <field name="inherit_id" ref="account.account_tag_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <group>
+                    <group id="links">
+                        <label
+                            for="account_ids"
+                            attrs="{'invisible':[('applicability','!=', 'accounts')]}"
+                        />
+                        <field
+                            name="account_ids"
+                            widget="many2many_tags"
+                            nolabel="1"
+                            attrs="{'invisible':[('applicability','!=', 'accounts')]}"
+                            options="{'no_create_edit': True}"
+                        />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_account_tag_action" model="ir.actions.act_window">
+        <field name="name">Account Tags</field>
+        <field name="res_model">account.account.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="account_tag_menu"
+        action="account_account_tag_action"
+        sequence="40"
+        parent="account.account_account_menu"
+    />
+</odoo>

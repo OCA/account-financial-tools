@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2019 - Today: GRAP (http://www.grap.coop)
+Copyright (C) 2021 - Today: Odoo SA
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+        <record id="view_account_account_template_form" model="ir.ui.view">
+            <field name="model">account.account.template</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group col="4">
+                        <field name="name" />
+                        <field name="code" />
+                        <newline />
+                        <field
+                        name="account_type"
+                        widget="account_hierarchy_selection"
+                    />
+                        <field
+                        name="currency_id"
+                        options="{'no_create': True}"
+                        groups="base.group_multi_currency"
+                    />
+                        <field
+                        name="tag_ids"
+                        domain="[('applicability', '=', 'accounts')]"
+                        widget="many2many_tags"
+                        context="{'default_applicability': 'accounts'}"
+                    />
+                        <field name="reconcile" />
+                        <field name="nocreate" />
+                        <field name="chart_template_id" />
+                    </group>
+                    <separator string="Default Taxes" />
+                    <field name="tax_ids" />
+                    <separator string="Notes" />
+                    <field name="note" placeholder="Internal notes..." />
+                </form>
+            </field>
+        </record>
+
+        <record id="view_account_account_template_tree" model="ir.ui.view">
+            <field name="model">account.account.template</field>
+            <field name="arch" type="xml">
+                <tree decoration-muted="(nocreate)">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="account_type" />
+                    <field name="nocreate" invisible="1" />
+                    <field name="chart_template_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_account_template_search" model="ir.ui.view">
+            <field name="name">account.account.template.search</field>
+            <field name="model">account.account.template</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field
+                    name="name"
+                    filter_domain="['|', ('name','ilike',self), ('code','ilike',self)]"
+                    string="Account Template"
+                />
+                    <field name="account_type" />
+                    <group expand="0" string="Group By">
+                        <filter
+                        string="Account Type"
+                        name="accounttype"
+                        domain="[]"
+                        context="{'group_by':'account_type'}"
+                    />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+    <record id="account_account_template_action" model="ir.actions.act_window">
+        <field name="name">Account Templates</field>
+        <field name="res_model">account.account.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_account_account_template"
+        action="account_account_template_action"
+        parent="menu_account_coa_settings"
+        sequence="20"
+    />
+</odoo>
