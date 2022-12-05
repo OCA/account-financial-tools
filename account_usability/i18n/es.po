@@ -39,17 +39,10 @@ msgid "Account Tags"
 msgstr "Etiquetas de cuenta"
 
 #. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_form
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
-msgid "Account Tax Group"
-msgstr "Grupo de impuestos"
-
-#. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.action_account_tax_group
-#: model:ir.ui.menu,name:account_usability.account_tax_group_menu
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
-msgid "Account Tax Groups"
-msgstr "Grupos de impuestos"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Account Template"
+msgstr ""
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_account_template_action
@@ -58,13 +51,14 @@ msgid "Account Templates"
 msgstr "Plantillas de cuentas"
 
 #. module: account_usability
-#: model:ir.ui.menu,name:account_usability.account_type_menu
-msgid "Account Types"
-msgstr "Tipos de cuentas"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+msgid "Account Type"
+msgstr ""
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_group_form
 msgid "Accounts"
 msgstr "Cuentas"
 
@@ -89,6 +83,7 @@ msgid "Cash Registers"
 msgstr "Registros de caja"
 
 #. module: account_usability
+#: model:ir.actions.act_window,name:account_usability.action_account_chart_template_form
 #: model:ir.ui.menu,name:account_usability.menu_account_chart_template
 msgid "Chart of Accounts Templates"
 msgstr "Plantillas de planes contables"
@@ -99,16 +94,74 @@ msgid "Config Settings"
 msgstr "Ajustes"
 
 #. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
+msgid "Default Taxes"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Expense Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
+msgid "Extra configuration"
+msgstr ""
+
+#. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_usability.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
 msgstr "Plantillas de posición fiscal"
 
 #. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Group By"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Income Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+msgid "Internal notes..."
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
+msgid "Note"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+msgid "Notes"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Payable Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
+msgid "Properties"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Receivable Account"
+msgstr ""
+
+#. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid ""
 "Record the cost of a good as an expense when this good is\n"
-"                                invoiced to a final customer (instead of recording the cost as soon\n"
+"                                invoiced to a final customer (instead of "
+"recording the cost as soon\n"
 "                                as the product is received in stock)."
 msgstr ""
 "Registra el coste de un producto como un gasto cuando el producto se\n"
@@ -149,3 +202,12 @@ msgstr "Plantillas"
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
 msgstr "Utilizar contabilidad anglo-sajona"
+
+#~ msgid "Account Tax Group"
+#~ msgstr "Grupo de impuestos"
+
+#~ msgid "Account Tax Groups"
+#~ msgstr "Grupos de impuestos"
+
+#~ msgid "Account Types"
+#~ msgstr "Tipos de cuentas"

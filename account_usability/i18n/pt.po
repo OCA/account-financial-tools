@@ -39,17 +39,10 @@ msgid "Account Tags"
 msgstr "Etiquetas de Contas"
 
 #. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_form
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
-msgid "Account Tax Group"
-msgstr "Grupo de Impostos"
-
-#. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.action_account_tax_group
-#: model:ir.ui.menu,name:account_usability.account_tax_group_menu
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
-msgid "Account Tax Groups"
-msgstr "Grupos de Impostos"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Account Template"
+msgstr ""
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_account_template_action
@@ -58,13 +51,14 @@ msgid "Account Templates"
 msgstr "Modelos de Conta"
 
 #. module: account_usability
-#: model:ir.ui.menu,name:account_usability.account_type_menu
-msgid "Account Types"
-msgstr "Tipos de Conta"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+msgid "Account Type"
+msgstr ""
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_group_form
 msgid "Accounts"
 msgstr "Contas"
 
@@ -89,6 +83,7 @@ msgid "Cash Registers"
 msgstr "Registos de Caixa"
 
 #. module: account_usability
+#: model:ir.actions.act_window,name:account_usability.action_account_chart_template_form
 #: model:ir.ui.menu,name:account_usability.menu_account_chart_template
 msgid "Chart of Accounts Templates"
 msgstr "Modelos de Plano de Contas"
@@ -99,12 +94,20 @@ msgid "Config Settings"
 msgstr "Parâmetros de Configuração"
 
 #. module: account_usability
-#: model:ir.model.fields,field_description:account_usability.field_account_account_tag__display_name
-#: model:ir.model.fields,field_description:account_usability.field_account_group__display_name
-#: model:ir.model.fields,field_description:account_usability.field_account_tax_group__display_name
-#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__display_name
-msgid "Display Name"
-msgstr "Nome a Exibir"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
+msgid "Default Taxes"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Expense Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
+msgid "Extra configuration"
+msgstr ""
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
@@ -113,20 +116,45 @@ msgid "Fiscal Position Templates"
 msgstr "Modelos de Posições Fiscais"
 
 #. module: account_usability
-#: model:ir.model.fields,field_description:account_usability.field_account_account_tag__id
-#: model:ir.model.fields,field_description:account_usability.field_account_group__id
-#: model:ir.model.fields,field_description:account_usability.field_account_tax_group__id
-#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__id
-msgid "ID"
-msgstr "ID"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Group By"
+msgstr ""
 
 #. module: account_usability
-#: model:ir.model.fields,field_description:account_usability.field_account_account_tag____last_update
-#: model:ir.model.fields,field_description:account_usability.field_account_group____last_update
-#: model:ir.model.fields,field_description:account_usability.field_account_tax_group____last_update
-#: model:ir.model.fields,field_description:account_usability.field_res_config_settings____last_update
-msgid "Last Modified on"
-msgstr "Última Modificação em"
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Income Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+msgid "Internal notes..."
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
+msgid "Note"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+msgid "Notes"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Payable Account"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
+msgid "Properties"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Receivable Account"
+msgstr ""
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
@@ -173,3 +201,21 @@ msgstr "Modelos"
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
 msgstr "Utilizar contabilidade anglo-saxónica"
+
+#~ msgid "Account Tax Group"
+#~ msgstr "Grupo de Impostos"
+
+#~ msgid "Account Tax Groups"
+#~ msgstr "Grupos de Impostos"
+
+#~ msgid "Account Types"
+#~ msgstr "Tipos de Conta"
+
+#~ msgid "Display Name"
+#~ msgstr "Nome a Exibir"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificação em"
