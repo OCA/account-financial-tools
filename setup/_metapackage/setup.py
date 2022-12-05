@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo-addon-account_fiscal_position_vat_check>=16.0dev,<16.1dev',
         'odoo-addon-account_fiscal_year>=16.0dev,<16.1dev',
         'odoo-addon-account_invoice_constraint_chronology>=16.0dev,<16.1dev',
+        'odoo-addon-account_usability>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
