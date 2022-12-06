@@ -23,7 +23,6 @@ class AccountUpdateLockDate(models.TransientModel):
         "example.",
     )
     tax_lock_date = fields.Date(
-        string="Tax Lock Date",
         help="No users can edit journal entries related to a tax prior and "
         "inclusive of this date.",
     )
