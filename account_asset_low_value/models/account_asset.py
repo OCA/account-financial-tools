@@ -44,11 +44,12 @@ class AccountAsset(models.Model):
             ]
 
     def _compute_depreciation(self):
-        super()._compute_depreciation()
+        res = super()._compute_depreciation()
         # For low value asset, there is no depreciation
         for asset in self:
             if asset.low_value:
                 asset.value_residual = 0
+        return res
 
     def validate(self):
         res = super().validate()
