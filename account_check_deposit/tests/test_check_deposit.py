@@ -16,39 +16,38 @@ class TestPayment(TransactionCase):
         self.main_company = self.env.company
         self.currency = self.main_company.currency_id
         self.product = self.env["product.product"].create({"name": "Test product"})
-        # check if those accounts exist otherwise create them
         self.account_model.create(
             {
-                "code": "411100",
+                "code": "4111ZZ",
                 "name": "Debtors - (test)",
                 "reconcile": True,
-                "user_type_id": self.ref("account.data_account_type_receivable"),
+                "account_type": "asset_receivable",
                 "company_id": self.main_company.id,
             }
         )
         self.account_model.create(
             {
-                "code": "707100",
+                "code": "7071ZZ",
                 "name": "Product Sales - (test)",
-                "user_type_id": self.ref("account.data_account_type_revenue"),
+                "account_type": "income",
                 "company_id": self.main_company.id,
             }
         )
         received_check_account = self.account_model.create(
             {
-                "code": "511200",
+                "code": "5112ZZ",
                 "name": "Received check - (test)",
                 "reconcile": True,
-                "user_type_id": self.ref("account.data_account_type_current_assets"),
+                "account_type": "asset_current",
                 "company_id": self.main_company.id,
             }
         )
         self.transfer_account = self.account_model.create(
             {
-                "code": "511500",
+                "code": "5115ZZ",
                 "name": "Check deposis waiting for credit on bank account - (test)",
                 "reconcile": True,
-                "user_type_id": self.ref("account.data_account_type_current_assets"),
+                "account_type": "asset_current",
                 "company_id": self.main_company.id,
             }
         )
@@ -102,6 +101,7 @@ class TestPayment(TransactionCase):
                             "product_id": self.product.id,
                             "quantity": 1,
                             "price_unit": amount,
+                            "tax_ids": [],
                         },
                     )
                 ],
@@ -149,9 +149,7 @@ class TestPayment(TransactionCase):
         self.assertAlmostEqual(liquidity_aml.debit, 300)
         self.assertEqual(check_deposit.move_id.state, "posted")
         self.assertEqual(check_deposit.state, "done")
-        res = (
-            self.env["ir.actions.report"]
-            ._get_report_from_name("account_check_deposit.report_checkdeposit")
-            ._render_qweb_text(check_deposit.ids, False)
+        res = self.env["ir.actions.report"]._render_qweb_text(
+            "account_check_deposit.report_checkdeposit", check_deposit.ids
         )
         self.assertRegex(str(res[0]), "SI56 1910 0000 0123 438 584")
