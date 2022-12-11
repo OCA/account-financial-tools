@@ -198,13 +198,20 @@ class AccountCheckDeposit(models.Model):
         for deposit in self:
             if deposit.move_id:
                 move = deposit.move_id
-                # It will raise here if journal_id.update_posted = False
+                counterpart_move_line = move.line_ids.filtered(
+                    lambda x: x.account_id.id != deposit.in_hand_check_account_id.id
+                )
+                if counterpart_move_line.reconciled:
+                    raise UserError(
+                        _("Deposit '%s' has already been credited on the bank account.")
+                        % deposit.display_name
+                    )
+                move.line_ids.filtered(
+                    lambda x: x.account_id.id == deposit.in_hand_check_account_id.id
+                ).remove_move_reconcile()
                 if move.state == "posted":
-                    move.button_draft()
-                for line in deposit.check_payment_ids:
-                    if line.reconciled:
-                        line.remove_move_reconcile()
-                move.unlink()
+                    move.button_cancel()
+                move.with_context(force_delete=True).unlink()
             deposit.write({"state": "draft"})
 
     @api.model_create_multi
@@ -218,81 +225,74 @@ class AccountCheckDeposit(models.Model):
                 )
         return super().create(vals_list)
 
-    def _prepare_account_move_vals(self):
+    def _prepare_move_vals(self):
         self.ensure_one()
-        move_vals = {
-            "journal_id": self.journal_id.id,
-            "date": self.deposit_date,
-            "ref": _("Check Deposit %s") % self.name,
-            "company_id": self.company_id.id,
-        }
-        return move_vals
+        total_debit = 0.0
+        total_amount_currency = 0.0
+        for line in self.check_payment_ids:
+            total_debit += line.debit
+            total_amount_currency += line.amount_currency
 
-    @api.model
-    def _prepare_move_line_vals(self, line):
-        assert line.debit > 0, "Debit must have a value"
-        return {
-            "name": line.ref and _("Check Ref. %s") % line.ref or False,
-            "credit": line.debit,
-            "debit": 0.0,
-            "account_id": line.account_id.id,
-            "partner_id": line.partner_id.id,
-            "currency_id": line.currency_id.id or False,
-            "amount_currency": line.amount_currency * -1,
-        }
+        total_debit = self.company_id.currency_id.round(total_debit)
+        total_amount_currency = self.currency_id.round(total_amount_currency)
 
-    def _prepare_counterpart_move_lines_vals(self, total_debit, total_amount_currency):
-        self.ensure_one()
-        account_id = False
+        counterpart_account_id = False
         for line in self.bank_journal_id.inbound_payment_method_line_ids:
             if line.payment_method_id.code == "manual" and line.payment_account_id:
-                account_id = line.payment_account_id.id
+                counterpart_account_id = line.payment_account_id.id
                 break
-        if not account_id:
-            account_id = self.company_id.account_journal_payment_debit_account_id.id
-        if not account_id:
+        if not counterpart_account_id:
+            counterpart_account_id = (
+                self.company_id.account_journal_payment_debit_account_id.id
+            )
+        if not counterpart_account_id:
             raise UserError(
                 _("Missing 'Outstanding Receipts Account' on the company '%s'.")
                 % self.company_id.display_name
             )
-        return {
-            "debit": total_debit,
-            "credit": 0.0,
-            "account_id": account_id,
-            "partner_id": False,
-            "currency_id": self.currency_id.id or False,
-            "amount_currency": total_amount_currency,
+
+        vals = {
+            "journal_id": self.journal_id.id,
+            "date": self.deposit_date,
+            "ref": _("Check Deposit %s") % self.name,
+            "company_id": self.company_id.id,
+            "line_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "account_id": self.in_hand_check_account_id.id,
+                        "partner_id": False,
+                        "credit": total_debit,
+                        "currency_id": self.currency_id.id,
+                        "amount_currency": total_amount_currency * -1,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "account_id": counterpart_account_id,
+                        "partner_id": False,
+                        "debit": total_debit,
+                        "currency_id": self.currency_id.id,
+                        "amount_currency": total_amount_currency,
+                    },
+                ),
+            ],
         }
+        return vals
 
     def validate_deposit(self):
         am_obj = self.env["account.move"]
-        move_line_obj = self.env["account.move.line"]
         for deposit in self:
-            move = am_obj.create(deposit._prepare_account_move_vals())
-            total_debit = 0.0
-            total_amount_currency = 0.0
-            to_reconcile_lines = []
-            for line in deposit.check_payment_ids:
-                total_debit += line.debit
-                total_amount_currency += line.amount_currency
-                line_vals = self._prepare_move_line_vals(line)
-                line_vals["move_id"] = move.id
-                move_line = move_line_obj.with_context(
-                    check_move_validity=False
-                ).create(line_vals)
-                to_reconcile_lines.append(line + move_line)
-
-            # Create counter-part
-            counter_vals = deposit._prepare_counterpart_move_lines_vals(
-                total_debit, total_amount_currency
-            )
-            counter_vals["move_id"] = move.id
-            move_line_obj.create(counter_vals)
+            move = am_obj.create(deposit._prepare_move_vals())
             move.action_post()
-
+            lines_to_rec = self.check_payment_ids + move.line_ids.filtered(
+                lambda x: x.account_id.id == self.in_hand_check_account_id.id
+            )
+            lines_to_rec.reconcile()
             deposit.write({"state": "done", "move_id": move.id})
-            for reconcile_lines in to_reconcile_lines:
-                reconcile_lines.reconcile()
 
     @api.onchange("company_id")
     def onchange_company_id(self):
