@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    Copyright (C) 2014-2019 Akretion (www.akretion.com)
+    Copyright 2014-2022 Akretion France (www.akretion.com)
     @author: Alexis de Lattre <alexis.delattre@akretion.com>
     The licence is in the file __manifest__.py
 -->
@@ -31,7 +31,7 @@
                         <h3>Beneficiary:</h3>
                         <div
                             t-field="o.company_id.partner_id"
-                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'
+                            t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": true, "phone_icons": True}'
                         />
                         <p>
                             <b>Bank Account Number to Credit:</b>
@@ -56,15 +56,15 @@
                             <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Reference</th>
-                                    <th>Debtor</th>
+                                    <th class="text-start">Reference</th>
+                                    <th class="text-start">Debtor</th>
                                     <th>Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <t t-foreach="o.check_payment_ids" t-as="move_line">
                                     <tr>
-                                        <td>
+                                        <td class="text-center">
                                             <span t-field="move_line.date" />
                                         </td>
                                         <td>
@@ -73,21 +73,17 @@
                                         <td>
                                             <span t-field="move_line.partner_id.name" />
                                         </td>
-                                        <td>
+                                        <td class="text-end">
                                             <t
                                                 t-if="o.currency_id == o.company_id.currency_id"
                                             >
-                                                <span
-                                                    t-field="move_line.debit"
-                                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                                />
+                                                <span t-field="move_line.debit" />
                                             </t>
                                             <t
                                                 t-if="o.currency_id != o.company_id.currency_id"
                                             >
                                                 <span
                                                     t-field="move_line.amount_currency"
-                                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
                                                 />
                                             </t>
                                         </td>
@@ -96,15 +92,12 @@
                                 <tr>
                                     <td />
                                     <td />
-                                    <td>
+                                    <td class="text-end">
                                         <b>Total:</b>
                                     </td>
-                                    <td>
+                                    <td class="text-end">
                                         <b>
-                                            <span
-                                                t-field="o.total_amount"
-                                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                            />
+                                            <span t-field="o.total_amount" />
                                         </b>
                                     </td>
                                 </tr>
