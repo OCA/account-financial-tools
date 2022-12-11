@@ -20,3 +20,4 @@ repo_slug: account-financial-tools
 repo_website: https://github.com/OCA/account-financial-tools
 travis_apt_packages: []
 travis_apt_sources: []
+
