@@ -1,9 +1,9 @@
-# Copyright 2012-2021 Akretion (http://www.akretion.com/)
+# Copyright 2012-2022 Akretion (http://www.akretion.com/)
 # @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 # @author: Chafique DELLI <chafique.delli@akretion.com>
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # @author: Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
-# Copyright 2018-2021 Tecnativa - Pedro M. Baeza
+# Copyright 2018-2022 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
@@ -118,7 +118,7 @@ class AccountCheckDeposit(models.Model):
     def _compute_check_deposit(self):
         rg_res = self.env["account.move.line"].read_group(
             [("check_deposit_id", "in", self.ids)],
-            ["check_deposit_id", "debit", "amount_currency"],
+            ["check_deposit_id", "amount_currency:sum", "debit:sum"],
             ["check_deposit_id"],
         )
         mapped_data = {
@@ -138,7 +138,7 @@ class AccountCheckDeposit(models.Model):
             else:
                 total = mapped_data.get(deposit.id, {"debit": 0.0})["debit"]
             count = mapped_data.get(deposit.id, {"count": 0})["count"]
-            deposit.total_amount = total
+            deposit.total_amount = deposit.currency_id.round(total)
             deposit.check_count = count
 
     @api.depends("journal_id")
@@ -164,7 +164,7 @@ class AccountCheckDeposit(models.Model):
             res["bank_journal_id"] = bank_journals.id
         return res
 
-    @api.constrains("currency_id", "check_payment_ids", "company_id")
+    @api.constrains("currency_id", "check_payment_ids")
     def _check_deposit(self):
         for deposit in self:
             deposit_currency = deposit.currency_id
@@ -190,7 +190,7 @@ class AccountCheckDeposit(models.Model):
                     "The deposit '%s' is in valid state, so you must "
                     "cancel it before deleting it."
                 )
-                % deposit.name
+                % deposit.display_name
             )
         return super().unlink()
 
@@ -206,17 +206,17 @@ class AccountCheckDeposit(models.Model):
                         line.remove_move_reconcile()
                 move.unlink()
             deposit.write({"state": "draft"})
-        return True
 
-    @api.model
-    def create(self, vals):
-        if "company_id" in vals:
-            self = self.with_company(vals["company_id"])
-        if vals.get("name", "/") == "/":
-            vals["name"] = self.env["ir.sequence"].next_by_code(
-                "account.check.deposit", vals.get("deposit_date")
-            )
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if "company_id" in vals:
+                self = self.with_company(vals["company_id"])
+            if vals.get("name", "/") == "/":
+                vals["name"] = self.env["ir.sequence"].next_by_code(
+                    "account.check.deposit", vals.get("deposit_date")
+                )
+        return super().create(vals_list)
 
     def _prepare_account_move_vals(self):
         self.ensure_one()
@@ -293,7 +293,6 @@ class AccountCheckDeposit(models.Model):
             deposit.write({"state": "done", "move_id": move.id})
             for reconcile_lines in to_reconcile_lines:
                 reconcile_lines.reconcile()
-        return True
 
     @api.onchange("company_id")
     def onchange_company_id(self):
@@ -317,7 +316,7 @@ class AccountCheckDeposit(models.Model):
 
     def get_report(self):
         report = self.env.ref("account_check_deposit.report_account_check_deposit")
-        action = report.report_action(self)
+        action = report.with_context(discard_logo_check=True).report_action(self)
         return action
 
     def get_all_checks(self):
