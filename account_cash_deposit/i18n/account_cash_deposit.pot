@@ -372,6 +372,13 @@ msgid ""
 msgstr ""
 
 #. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__coin_amount
+msgid ""
+"If your bank has a coin counting machine, enter the total amount of coins "
+"counted by the machine instead of creating a line for each type of coin."
+msgstr ""
+
+#. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_is_follower
 msgid "Is Follower"
 msgstr ""
@@ -409,6 +416,11 @@ msgstr ""
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__line_ids
 msgid "Lines"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__coin_amount
+msgid "Loose Coin Amount"
 msgstr ""
 
 #. module: account_cash_deposit
@@ -576,6 +588,11 @@ msgstr ""
 #. module: account_cash_deposit
 #: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_coinroll_qty_positive
 msgid "The coin quantity must be positive."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_coin_amount_positive
+msgid "The loose coin amount must be positive or null."
 msgstr ""
 
 #. module: account_cash_deposit
