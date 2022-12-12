@@ -12,7 +12,7 @@
         <field name="arch" type="xml">
             <sheet position="inside">
                 <group name="cash_units" string="Cash Units">
-                    <field name="cash_unit_ids" nolabel="1" />
+                    <field name="cash_unit_ids" nolabel="1" colspan="2" />
                 </group>
             </sheet>
         </field>
