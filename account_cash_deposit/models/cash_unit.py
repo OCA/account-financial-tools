@@ -2,9 +2,13 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import format_amount
+
+logger = logging.getLogger(__name__)
 
 
 class CashUnit(models.Model):
@@ -127,8 +131,8 @@ class CashUnit(models.Model):
             value = False
             try:
                 value = float(name)
-            except Exception:
-                pass
+            except ValueError:
+                logger.debug("name %s is not a float. Make pylint happy.", name)
             if value:
                 recs = self.search([("value", "=", value)] + args, limit=limit)
                 if recs:
@@ -139,8 +143,8 @@ class CashUnit(models.Model):
                 if decimal_sep and decimal_sep != ".":
                     try:
                         value = float(name.replace(decimal_sep, ".", 1))
-                    except Exception:
-                        pass
+                    except ValueError:
+                        logger.debug("name %s is not a float. Make pylint happy.", name)
                     if value:
                         recs = self.search([("value", "=", value)] + args, limit=limit)
                         if recs:

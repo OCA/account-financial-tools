@@ -17,7 +17,10 @@
                     attrs="{'invisible': [('active', '=', True)]}"
                 />
                             <group name="main">
-                                    <field name="currency_id" />
+                                    <field
+                        name="currency_id"
+                        invisible="not context.get('cash_unit_main_view')"
+                    />
                                     <field name="active" invisible="1" />
                                     <field name="cash_type" />
                                     <field

@@ -56,8 +56,8 @@
                             <thead>
                                 <tr>
                                     <th>Cash Unit</th>
-                                    <th class="text-right">Quantity</th>
-                                    <th class="text-right">Subtotal</th>
+                                    <th class="text-end">Quantity</th>
+                                    <th class="text-end">Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,27 +68,30 @@
                                                 t-field="line.cash_unit_id.display_name"
                                             />
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                             <span t-field="line.qty" />
                                         </td>
-                                        <td class="text-right">
-                                            <span
-                                                t-field="line.subtotal"
-                                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                            />
+                                        <td class="text-end">
+                                            <span t-field="line.subtotal" />
                                         </td>
                                     </tr>
                                 </t>
+                                <tr class="border-black o_total" t-if="o.coin_amount">
+                                    <td />
+                                    <td class="text-end">
+                                        <strong>Loose Coins:</strong>
+                                    </td>
+                                    <td class="text-end">
+                                            <span t-field="o.coin_amount" />
+                                    </td>
+                                </tr>
                                 <tr class="border-black o_total">
                                     <td />
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <strong>Total:</strong>
                                     </td>
-                                    <td class="text-right">
-                                            <span
-                                            t-field="o.total_amount"
-                                            t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                        />
+                                    <td class="text-end">
+                                            <span t-field="o.total_amount" />
                                     </td>
                                 </tr>
                             </tbody>

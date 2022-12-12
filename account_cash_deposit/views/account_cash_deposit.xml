@@ -66,6 +66,7 @@
                                 name="currency_id"
                                 groups="base.group_multi_currency"
                             />
+                            <field name="currency_id" invisible="1" />
                             <field name="cash_journal_id" />
                             <field name="bank_journal_id" />
                             <field
@@ -80,6 +81,7 @@
                                 name="company_id"
                                 groups="base.group_multi_company"
                             />
+                            <field name="company_id" invisible="1" />
                             <field name="move_id" />
                         </group>
                     </group>
@@ -87,6 +89,7 @@
                         <field
                             name="line_ids"
                             nolabel="1"
+                            colspan="2"
                             context="{'default_currency_id': currency_id}"
                         >
                             <tree editable="bottom">
@@ -129,7 +132,11 @@
                     optional="hide"
                 />
                 <field name="is_reconcile" optional="show" />
-                <field name="company_id" groups="base.group_multi_company" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="show"
+                />
                 <field
                     name="state"
                     widget="badge"
@@ -183,6 +190,11 @@
                         name="currency_groupby"
                         string="Currency"
                         context="{'group_by': 'currency_id'}"
+                    />
+                    <filter
+                        name="state_groupby"
+                        string="State"
+                        context="{'group_by': 'state'}"
                     />
                 </group>
             </search>

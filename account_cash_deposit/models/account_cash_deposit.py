@@ -22,7 +22,6 @@ class AccountCashDeposit(models.Model):
             ("order", "Cash Order"),
         ],
         required=True,
-        string="Operation Type",
         readonly=True,
     )
     line_ids = fields.One2many(
@@ -38,7 +37,6 @@ class AccountCashDeposit(models.Model):
         states={"draft": [("readonly", "=", False)]},
     )
     date = fields.Date(
-        string="Date",
         states={"done": [("readonly", "=", True)]},
         tracking=True,
         copy=False,
@@ -56,7 +54,6 @@ class AccountCashDeposit(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        string="Currency",
         required=True,
         tracking=True,
         readonly=True,
@@ -92,7 +89,6 @@ class AccountCashDeposit(models.Model):
     )
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         required=True,
         readonly=True,
         states={"draft": [("readonly", "=", False)]},
@@ -110,7 +106,7 @@ class AccountCashDeposit(models.Model):
     )
     total_amount = fields.Monetary(
         compute="_compute_total_amount",
-        string="Total Amount",
+        precompute=True,
         store=True,
         currency_field="currency_id",
         tracking=True,
@@ -195,16 +191,15 @@ class AccountCashDeposit(models.Model):
             res["line_ids"] = [(0, 0, {"cash_unit_id": cu.id}) for cu in cash_units]
         return res
 
-    @api.depends("line_ids.subtotal")
+    @api.depends("line_ids.subtotal", "coin_amount")
     def _compute_total_amount(self):
-        rg_res = self.env["account.cash.deposit.line"].read_group(
-            [("parent_id", "in", self.ids)],
-            ["parent_id", "subtotal"],
-            ["parent_id"],
-        )
-        mapped_data = {x["parent_id"][0]: x["subtotal"] for x in rg_res}
+        # With precompute=True, we can't use read_group() any more,
+        # because it won't work with NewID
         for rec in self:
-            rec.total_amount = mapped_data.get(rec.id, 0) + rec.coin_amount
+            total_amount = rec.coin_amount
+            for line in rec.line_ids:
+                total_amount += line.subtotal
+            rec.total_amount = total_amount
 
     @api.depends("move_id.line_ids.reconciled", "company_id")
     def _compute_is_reconcile(self):
@@ -231,30 +226,35 @@ class AccountCashDeposit(models.Model):
     def backtodraft(self):
         for rec in self:
             if rec.move_id:
+                if rec.is_reconcile:
+                    raise UserError(
+                        _("%s has already been credited/debited on the bank account.")
+                        % rec.display_name
+                    )
                 move = rec.move_id
-                # It will raise here if journal_id.update_posted = False
                 if move.state == "posted":
                     move.button_draft()
-                move.unlink()
+                move.with_context(force_delete=True).unlink()
             rec.write({"state": "draft"})
 
-    @api.model
-    def create(self, vals):
-        if "company_id" in vals:
-            self = self.with_company(vals["company_id"])
-        if vals.get("name", "/") == "/":
-            if (
-                vals.get("operation_type") == "order"
-                or self._context.get("default_operation_type") == "order"
-            ):
-                vals["name"] = self.env["ir.sequence"].next_by_code(
-                    "account.cash.order", vals.get("order_date")
-                )
-            else:
-                vals["name"] = self.env["ir.sequence"].next_by_code(
-                    "account.cash.deposit"
-                )
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if "company_id" in vals:
+                self = self.with_company(vals["company_id"])
+            if vals.get("name", "/") == "/":
+                if (
+                    vals.get("operation_type") == "order"
+                    or self._context.get("default_operation_type") == "order"
+                ):
+                    vals["name"] = self.env["ir.sequence"].next_by_code(
+                        "account.cash.order", vals.get("order_date")
+                    )
+                else:
+                    vals["name"] = self.env["ir.sequence"].next_by_code(
+                        "account.cash.deposit"
+                    )
+        return super().create(vals_list)
 
     def name_get(self):
         res = []
@@ -381,7 +381,7 @@ class AccountCashDeposit(models.Model):
 
     def get_report(self):
         report = self.env.ref("account_cash_deposit.report_account_cash_deposit")
-        action = report.with_context({"discard_logo_check": True}).report_action(self)
+        action = report.with_context(discard_logo_check=True).report_action(self)
         return action
 
 
@@ -396,7 +396,7 @@ class AccountCashDepositLine(models.Model):
         "cash.unit", required=True, domain="[('currency_id', '=', currency_id)]"
     )
     tree_order = fields.Float(related="cash_unit_id.tree_order", store=True)
-    subtotal = fields.Monetary(compute="_compute_subtotal", store=True)
+    subtotal = fields.Monetary(compute="_compute_subtotal", store=True, precompute=True)
     currency_id = fields.Many2one(related="parent_id.currency_id", store=True)
 
     _sql_constraints = [
