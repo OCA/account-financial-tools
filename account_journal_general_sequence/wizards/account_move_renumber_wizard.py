@@ -74,8 +74,9 @@ class AccountMoveRenumberWizard(models.TransientModel):
         )
         future_ranges.unlink()
         current_range = self.sequence_id._get_current_sequence(self.starting_date)
-        current_range.number_next = self.starting_number
-        self.sequence_id.number_next = self.starting_number
+        # Safe `sudo`; wizard only available for accounting managers
+        current_range.sudo().number_next = self.starting_number
+        self.sequence_id.sudo().number_next = self.starting_number
         # Renumber the moves
         moves.entry_number = False
         moves.flush(["entry_number"])
