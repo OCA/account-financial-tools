@@ -49,7 +49,7 @@ addon | version | maintainers | summary
 [account_move_line_check_number](account_move_line_check_number/) | 14.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add the check number in the journal items
 [account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 |  | Adds a Journal Items menu
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 14.0.1.0.3 |  | Introduces the purchase order line to the journal items
-[account_move_line_sale_info](account_move_line_sale_info/) | 14.0.1.0.1 |  | Introduces the purchase order line to the journal items
+[account_move_line_sale_info](account_move_line_sale_info/) | 14.0.1.0.2 |  | Introduces the purchase order line to the journal items
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.2.0.0 |  | Allows to edit taxes on non-posted account move lines
 [account_move_line_used_currency](account_move_line_used_currency/) | 14.0.1.0.0 |  | Account Move Line Amount Currency
 [account_move_name_sequence](account_move_name_sequence/) | 14.0.1.4.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) [![moylop260](https://github.com/moylop260.png?size=30px)](https://github.com/moylop260) [![frahikLV](https://github.com/frahikLV.png?size=30px)](https://github.com/frahikLV) | Generate journal entry number from sequence
