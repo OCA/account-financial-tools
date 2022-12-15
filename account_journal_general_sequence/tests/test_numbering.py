@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from freezegun import freeze_time
 
-from odoo.tests.common import Form, tagged
+from odoo.tests.common import Form, new_test_user, tagged, users
 from odoo.tools import mute_logger
 
 from odoo.addons.account.tests.common import TestAccountReconciliationCommon
@@ -14,7 +14,14 @@ class RenumberCase(TestAccountReconciliationCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.invoicer = new_test_user(
+            cls.env, "test_invoicer", "account.group_account_invoice"
+        )
+        cls.manager = new_test_user(
+            cls.env, "test_manager", "account.group_account_manager"
+        )
 
+    @users("test_invoicer")
     def test_invoice_gets_entry_number(self):
         # Draft invoice without entry number
         invoice = self._create_invoice()
@@ -29,6 +36,7 @@ class RenumberCase(TestAccountReconciliationCommon):
             invoice.button_cancel()
         self.assertFalse(invoice.entry_number)
 
+    @users("test_manager")
     def test_renumber(self):
         # Post invoices in wrong order
         new_invoice = self._create_invoice(
@@ -56,13 +64,14 @@ class RenumberCase(TestAccountReconciliationCommon):
         wiz.action_renumber()
         self.assertEqual(opening_invoice.entry_number, "2022/0000000000")
 
+    @users("test_invoicer")
     def test_install_no_entry_number(self):
         """No entry numbers assigned on module installation."""
         # Imitate installation environment
         self.env = self.env(
             context=dict(self.env.context, module="account_journal_general_sequence")
         )
-        self.env["ir.module.module"].search(
+        self.env["ir.module.module"].sudo().search(
             [("name", "=", "account_journal_general_sequence")]
         ).state = "to install"
         # Do some action that would make the move get an entry number
