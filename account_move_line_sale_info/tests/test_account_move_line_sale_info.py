@@ -170,7 +170,15 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                 % (str(expected_balance), sale_line.name),
             )
 
-    def test_sale_invoice(self):
+    def move_reversal_wiz(self, move):
+        wizard = (
+            self.env["account.move.reversal"]
+            .with_context(active_model="account.move", active_ids=[move.id])
+            .create({})
+        )
+        return wizard
+
+    def test_01_sale_invoice(self):
         """Test that the po line moves from the sale order to the
         account move line and to the invoice line.
         """
@@ -214,7 +222,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                     "from the invoice to the account move line.",
                 )
 
-    def test_name_get(self):
+    def test_02_name_get(self):
         sale = self._create_sale([(self.product, 1)])
         so_line = sale.order_line[0]
         name_get = so_line.with_context({"so_line_info": True}).name_get()
@@ -242,3 +250,31 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                 )
             ],
         )
+
+    def test_03_credit_note(self):
+        """Test the credit note is linked to the sale order line
+        """
+        sale = self._create_sale([(self.product, 1)])
+        so_line = False
+        for line in sale.order_line:
+            so_line = line
+            break
+        sale.action_confirm()
+        picking = sale.picking_ids[0]
+        picking.move_lines.write({"quantity_done": 1.0})
+        picking.button_validate()
+        sale._create_invoices()
+        invoice = sale.invoice_ids[0]
+        invoice.post()
+        reversal_wizard = self.move_reversal_wiz(invoice)
+        credit_note = self.env["account.move"].browse(
+            reversal_wizard.reverse_moves()["res_id"]
+        )
+        for aml in credit_note.line_ids:
+            if aml.product_id == so_line.product_id and aml.move_id:
+                self.assertEqual(
+                    aml.sale_line_id,
+                    so_line,
+                    "sale Order line has not been copied "
+                    "from the invoice to the credit note.",
+                )
