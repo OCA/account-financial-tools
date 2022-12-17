@@ -38,7 +38,7 @@ class AccountPayment(models.Model):
         )
         moves = move_lines.mapped("move_id")
         # Create reverse entries
-        moves._cancel_reversal(journal_id)
+        moves._cancel_reversal(journal_id, date=date)
         # Set state cancelled and unlink with account.move
         self.write({"state": "cancelled"})
         return True
