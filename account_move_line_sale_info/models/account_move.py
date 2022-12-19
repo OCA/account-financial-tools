@@ -10,17 +10,11 @@ class AccountMove(models.Model):
     def _stock_account_prepare_anglo_saxon_out_lines_vals(self):
         res = super()._stock_account_prepare_anglo_saxon_out_lines_vals()
         for i, vals in enumerate(res):
-            if (
-                not vals.get("move_id", False)
-                or not vals.get("product_id", False)
-                or not vals.get("quantity", False)
-            ):
-                continue
             am = self.env["account.move"].browse(vals["move_id"])
             sale_line_id = am.invoice_line_ids.filtered(
                 lambda il: il.product_id.id == vals["product_id"]
                 and il.quantity == vals["quantity"]
-            ).mapped("sale_line_id")
+            ).mapped("sale_line_ids")
             if sale_line_id and len(sale_line_id) == 1:
                 res[i]["sale_line_id"] = sale_line_id.id
         return res
