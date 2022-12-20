@@ -784,6 +784,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             ]
         )
 
+    def _domain_taxes_to_deactivate(self, found_taxes_ids):
+        return [
+            ("company_id", "=", self.company_id.id),
+            ("id", "not in", found_taxes_ids),
+            ("active", "=", True),
+        ]
+
     def _find_taxes(self):
         """Search for, and load, tax templates to create/update/delete."""
         found_taxes_ids = []
@@ -827,11 +834,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         # search for taxes not in the template and propose them for
         # deactivation
         taxes_to_deactivate = self.env["account.tax"].search(
-            [
-                ("company_id", "=", self.company_id.id),
-                ("id", "not in", found_taxes_ids),
-                ("active", "=", True),
-            ]
+            self._domain_taxes_to_deactivate(found_taxes_ids)
         )
         for tax in taxes_to_deactivate:
             self.tax_ids.create(
