@@ -71,10 +71,10 @@ class PurchaseOrder(models.Model):
     def action_view_unreconciled(self):
         self.ensure_one()
         acc_item = self.env["account.move.line"]
-        domain = self._get_purchase_unreconciled_base_domain()
-        unreconciled_domain = expression.AND(
-            [domain, [("purchase_order_id", "=", self.id)]]
-        )
+        domain = self.with_company(
+            self.company_id.id
+        )._get_purchase_unreconciled_base_domain()
+        unreconciled_domain = expression.AND([domain, [("purchase_id", "=", self.id)]])
         unreconciled_items = acc_item.search(unreconciled_domain)
         action = self.env.ref("account.action_account_moves_all")
         action_dict = action.read()[0]
