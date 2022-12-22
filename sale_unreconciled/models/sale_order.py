@@ -69,7 +69,9 @@ class SaleOrder(models.Model):
     def action_view_unreconciled(self):
         self.ensure_one()
         acc_item = self.env["account.move.line"]
-        domain = self._get_sale_unreconciled_base_domain()
+        domain = self.with_company(
+            self.company_id.id
+        )._get_sale_unreconciled_base_domain()
         unreconciled_domain = expression.AND(
             [domain, [("sale_order_id", "=", self.id)]]
         )
