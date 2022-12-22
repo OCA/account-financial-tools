@@ -18,25 +18,28 @@ class SaleOrder(models.Model):
     )
     amount_unreconciled = fields.Float(compute="_compute_unreconciled")
 
-    @api.model
-    def _get_sale_unreconciled_base_domain(self):
+    def _get_account_domain(self):
+        self.ensure_one()
         included_accounts = (
             (
-                self.env["product.category"].search(
-                    [("property_valuation", "=", "real_time")]
-                )
+                self.env["product.category"]
+                .with_company(self.company_id.id)
+                .search([("property_valuation", "=", "real_time")])
             )
             .mapped("property_stock_account_output_categ_id")
             .ids
         )
+        return [("account_id", "in", included_accounts)]
+
+    @api.model
+    def _get_sale_unreconciled_base_domain(self):
         unreconciled_domain = [
             ("account_id.reconcile", "=", True),
-            ("account_id", "in", included_accounts),
+            ("account_id.internal_type", "not in", ["receivable", "payable"]),
             ("move_id.state", "=", "posted"),
             # for some reason when amount_residual is zero
             # is marked as reconciled, this is better check
-            ("amount_residual", "!=", 0.0),
-            ("company_id", "in", self.env.companies.ids),
+            ("full_reconcile_id", "=", False),
         ]
         return unreconciled_domain
 
@@ -46,8 +49,10 @@ class SaleOrder(models.Model):
             domain = rec.with_company(
                 rec.company_id
             )._get_sale_unreconciled_base_domain()
+            domain_account = rec._get_account_domain()
+            unreconciled_domain = expression.AND([domain, domain_account])
             unreconciled_domain = expression.AND(
-                [domain, [("sale_order_id", "=", rec.id)]]
+                [unreconciled_domain, [("sale_order_id", "=", rec.id)]]
             )
             unreconciled_items = acc_item.search(unreconciled_domain)
             rec.unreconciled = len(unreconciled_items) > 0
@@ -72,8 +77,10 @@ class SaleOrder(models.Model):
         domain = self.with_company(
             self.company_id.id
         )._get_sale_unreconciled_base_domain()
+        domain_account = self._get_account_domain()
+        unreconciled_domain = expression.AND([domain, domain_account])
         unreconciled_domain = expression.AND(
-            [domain, [("sale_order_id", "=", self.id)]]
+            [unreconciled_domain, [("sale_order_id", "=", self.id)]]
         )
         unreconciled_items = acc_item.search(unreconciled_domain)
         action = self.env.ref("account.action_account_moves_all")
@@ -95,8 +102,10 @@ class SaleOrder(models.Model):
         self.ensure_one()
         acc_item = self.env["account.move.line"]
         domain = self._get_sale_unreconciled_base_domain()
+        domain_account = self._get_account_domain()
+        unreconciled_domain = expression.AND([domain, domain_account])
         unreconciled_domain = expression.AND(
-            [domain, [("sale_order_id", "=", self.id)]]
+            [unreconciled_domain, [("sale_order_id", "=", self.id)]]
         )
         unreconciled_items = acc_item.search(unreconciled_domain)
         writeoff_to_reconcile = self.env["account.move.line"]
@@ -144,8 +153,16 @@ class SaleOrder(models.Model):
                 # Check if reconciliation is total or needs an exchange rate entry to be created
                 if remaining_moves:
                     remaining_moves.filtered(
-                        lambda l: l.amount_residual != 0.0
-                    ).reconcile()
+                        lambda l: l.balance != 0.0
+                    ).remove_move_reconcile()
+                    remaining_moves.filtered(lambda l: l.balance != 0.0).reconcile()
+                    # There are some journal items that are zero balance that shows
+                    # as unreconciled, we just attached the full reconcile just created
+                    full_reconcile_id = remaining_moves.mapped("full_reconcile_id")
+                    full_reconcile_id = full_reconcile_id and full_reconcile_id[0]
+                    remaining_moves.filtered(
+                        lambda l: l.balance == 0.0 and not l.full_reconcile_id
+                    ).write({"full_reconcile_id": full_reconcile_id})
             reconciled_ids = unreconciled_items | all_writeoffs
             return {
                 "name": _("Reconciled journal items"),
@@ -171,7 +188,7 @@ class SaleOrder(models.Model):
                     return res
                 else:
                     rec.action_reconcile()
-                    return super(SaleOrder, self).action_done()
+                    return super(SaleOrder, rec).action_done()
             else:
                 return super(SaleOrder, rec).action_done()
 
@@ -196,10 +213,18 @@ class SaleOrder(models.Model):
     def unreconciled_exception_msg(self):
         self.ensure_one()
         exception_msg = ""
+        amount_total = self.amount_total
+        if self.currency_id and self.company_id.currency_id != self.currency_id:
+            amount_total = self.currency_id._convert(
+                amount_total,
+                self.company_id.currency_id,
+                self.company_id,
+                fields.Date.today(),
+            )
         if (
             self.company_id.sale_reconcile_tolerance
-            and self.amount_total
-            and abs(self.amount_unreconciled / self.amount_total)
+            and amount_total
+            and abs(self.amount_unreconciled / amount_total)
             >= self.company_id.sale_reconcile_tolerance / 100.0
         ):
             params = {
