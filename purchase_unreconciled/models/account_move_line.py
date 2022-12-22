@@ -18,7 +18,9 @@ class AccountMoveLine(models.Model):
         writeoff_amount_curr = round(
             sum([line["amount_residual_currency"] for line in self]), precision
         )
-
+        if writeoff_amount_curr and not writeoff_amount:
+            # Data inconsistency, do not create the write-off
+            return (0.0, 0.0, True)
         first_currency = self[0]["currency_id"]
         if all([line["currency_id"] == first_currency for line in self]):
             same_curr = True
@@ -37,6 +39,8 @@ class AccountMoveLine(models.Model):
             amount_writeoff_curr,
             same_curr,
         ) = self._get_writeoff_amounts()
+        if not amount_writeoff:
+            return self.env["account.move.line"]
         partners = self.mapped("partner_id")
         write_off_vals = {
             "name": _("Automatic writeoff"),
@@ -50,7 +54,7 @@ class AccountMoveLine(models.Model):
         }
         counterpart_account = self.mapped("account_id")
         if len(counterpart_account) != 1:
-            raise ValidationError(_("CAnnot write-off more than one account"))
+            raise ValidationError(_("Cannot write-off more than one account"))
         counter_part = write_off_vals.copy()
         counter_part["debit"] = write_off_vals["credit"]
         counter_part["credit"] = write_off_vals["debit"]
