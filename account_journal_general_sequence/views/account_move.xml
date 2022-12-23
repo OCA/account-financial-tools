@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Moduon
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+<data>
+
+    <record id="view_move_tree" model="ir.ui.view">
+        <field name="name">Add move number to tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="entry_number" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">Add move number to form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='accounting_info_group']">
+                <field name="entry_number" />
+            </xpath>
+            <xpath expr="//group[@name='misc_group']">
+                <field name="entry_number" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_move_filter" model="ir.ui.view">
+        <field name="name">Add move number to search</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="entry_number" />
+            </field>
+        </field>
+    </record>
+
+</data>
