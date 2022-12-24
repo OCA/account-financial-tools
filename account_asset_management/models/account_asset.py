@@ -32,7 +32,7 @@ class DummyFy(object):
 
 class AccountAsset(models.Model):
     _name = "account.asset"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin", "analytic.mixin"]
     _description = "Asset"
     _order = "date_start desc, code, name"
     _check_company_auto = True
@@ -59,7 +59,6 @@ class AccountAsset(models.Model):
         states=READONLY_STATES,
     )
     purchase_value = fields.Monetary(
-        string="Purchase Value",
         required=True,
         states=READONLY_STATES,
         currency_field="company_currency_id",
@@ -68,7 +67,6 @@ class AccountAsset(models.Model):
         "\nPurchase Value - Salvage Value.",
     )
     salvage_value = fields.Monetary(
-        string="Salvage Value",
         states=READONLY_STATES,
         currency_field="company_currency_id",
         help="The estimated value that an asset will realize upon "
@@ -77,7 +75,6 @@ class AccountAsset(models.Model):
     )
     depreciation_base = fields.Monetary(
         compute="_compute_depreciation_base",
-        string="Depreciation Base",
         store=True,
         currency_field="company_currency_id",
         help="This amount represent the depreciation base "
@@ -271,20 +268,6 @@ class AccountAsset(models.Model):
         string="Company Currency",
         store=True,
     )
-    account_analytic_id = fields.Many2one(
-        comodel_name="account.analytic.account",
-        string="Analytic account",
-        compute="_compute_account_analytic_id",
-        readonly=False,
-        store=True,
-    )
-    analytic_tag_ids = fields.Many2many(
-        comodel_name="account.analytic.tag",
-        string="Analytic tags",
-        compute="_compute_analytic_tag_ids",
-        readonly=False,
-        store=True,
-    )
     carry_forward_missed_depreciations = fields.Boolean(
         string="Accumulate missed depreciations",
         help="""If create an asset in a fiscal period that is now closed
@@ -395,9 +378,9 @@ class AccountAsset(models.Model):
             asset.account_analytic_id = asset.profile_id.account_analytic_id
 
     @api.depends("profile_id")
-    def _compute_analytic_tag_ids(self):
+    def _compute_analytic_distribution(self):
         for asset in self:
-            asset.analytic_tag_ids = asset.profile_id.analytic_tag_ids
+            asset.analytic_distribution = asset.profile_id.analytic_distribution
 
     @api.constrains("method", "method_time")
     def _check_method(self):
@@ -444,14 +427,18 @@ class AccountAsset(models.Model):
                 {"amount": self.depreciation_base, "line_date": self.date_start}
             )
 
-    @api.model
-    def create(self, vals):
-        asset = super().create(vals)
-        if self.env.context.get("create_asset_from_move_line"):
-            # Trigger compute of depreciation_base
-            asset.salvage_value = 0.0
-        asset._create_first_asset_line()
-        return asset
+    @api.model_create_multi
+    def create(self, vals_list):
+        asset_ids = super().create(vals_list)
+        create_asset_from_move_line = self.env.context.get(
+            "create_asset_from_move_line"
+        )
+        for asset_id in asset_ids:
+            if create_asset_from_move_line:
+                # Trigger compute of depreciation_base
+                asset_id.salvage_value = 0.0
+            asset_id._create_first_asset_line()
+        return asset_ids
 
     def write(self, vals):
         res = super().write(vals)
