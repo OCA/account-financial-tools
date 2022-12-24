@@ -61,14 +61,12 @@ class AccountAsset(models.Model):
     purchase_value = fields.Monetary(
         required=True,
         states=READONLY_STATES,
-        currency_field="company_currency_id",
         help="This amount represent the initial value of the asset."
         "\nThe Depreciation Base is calculated as follows:"
         "\nPurchase Value - Salvage Value.",
     )
     salvage_value = fields.Monetary(
         states=READONLY_STATES,
-        currency_field="company_currency_id",
         help="The estimated value that an asset will realize upon "
         "its sale at the end of its useful life.\n"
         "This value is used to determine the depreciation amounts.",
@@ -76,20 +74,17 @@ class AccountAsset(models.Model):
     depreciation_base = fields.Monetary(
         compute="_compute_depreciation_base",
         store=True,
-        currency_field="company_currency_id",
         help="This amount represent the depreciation base "
         "of the asset (Purchase Value - Salvage Value).",
     )
     value_residual = fields.Monetary(
         compute="_compute_depreciation",
         string="Residual Value",
-        currency_field="company_currency_id",
         store=True,
     )
     value_depreciated = fields.Monetary(
         compute="_compute_depreciation",
         string="Depreciated Value",
-        currency_field="company_currency_id",
         store=True,
     )
     note = fields.Text()
@@ -262,7 +257,7 @@ class AccountAsset(models.Model):
         readonly=True,
         default=lambda self: self._default_company_id(),
     )
-    company_currency_id = fields.Many2one(
+    currency_id = fields.Many2one(
         comodel_name="res.currency",
         related="company_id.currency_id",
         string="Company Currency",
@@ -514,7 +509,7 @@ class AccountAsset(models.Model):
 
     def validate(self):
         for asset in self:
-            if asset.company_currency_id.is_zero(asset.value_residual):
+            if asset.currency_id.is_zero(asset.value_residual):
                 asset.state = "close"
             else:
                 asset.state = "open"

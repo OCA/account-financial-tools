@@ -66,7 +66,7 @@
                                 groups="base.group_multi_company"
                             />
                             <field
-                                name="company_currency_id"
+                                name="currency_id"
                                 groups="base.group_multi_currency"
                                 invisible="1"
                             />
@@ -174,7 +174,7 @@
                                     <field name="init_entry" string="Init" />
                                     <field name="move_check" />
                                     <field name="parent_state" invisible="1" />
-                                    <field name="company_currency_id" invisible="1" />
+                                    <field name="currency_id" invisible="1" />
                                     <button
                                         name="create_move"
                                         icon="fa-cog"
@@ -207,10 +207,7 @@
                                                 name="depreciation_base"
                                                 invisible="1"
                                             />
-                                            <field
-                                                name="company_currency_id"
-                                                invisible="1"
-                                            />
+                                            <field name="currency_id" invisible="1" />
                                             <field name="type" />
                                             <field name="name" />
                                             <field
@@ -302,7 +299,7 @@
                     decoration-info="state == 'draft'"
                     decoration-muted="state == 'close'"
                 />
-                <field name="company_currency_id" invisible="1" />
+                <field name="currency_id" invisible="1" />
             </tree>
         </field>
     </record>
