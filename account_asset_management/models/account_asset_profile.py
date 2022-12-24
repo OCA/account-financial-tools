@@ -7,18 +7,13 @@ from odoo.exceptions import UserError
 
 class AccountAssetProfile(models.Model):
     _name = "account.asset.profile"
+    _inherit = "analytic.mixin"
     _check_company_auto = True
     _description = "Asset profile"
     _order = "name"
 
     name = fields.Char(size=64, required=True, index=True)
     note = fields.Text()
-    account_analytic_id = fields.Many2one(
-        comodel_name="account.analytic.account", string="Analytic account"
-    )
-    analytic_tag_ids = fields.Many2many(
-        comodel_name="account.analytic.tag", string="Analytic tags"
-    )
     account_asset_id = fields.Many2one(
         comodel_name="account.account",
         domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
@@ -207,17 +202,22 @@ class AccountAssetProfile(models.Model):
             if profile.method_time != "year":
                 profile.prorata = True
 
-    @api.model
-    def create(self, vals):
-        if vals.get("method_time") != "year" and not vals.get("prorata"):
-            vals["prorata"] = True
-        profile = super().create(vals)
-        acc_id = vals.get("account_asset_id")
-        if acc_id:
-            account = self.env["account.account"].browse(acc_id)
-            if not account.asset_profile_id:
-                account.write({"asset_profile_id": profile.id})
-        return profile
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("method_time") != "year" and not vals.get("prorata"):
+                vals["prorata"] = True
+        profile_ids = super().create(vals_list)
+        account_dict = {}
+        for profile_id in profile_ids.filtered(
+            lambda x: not x.account_asset_id.asset_profile_id
+        ):
+            account_dict.setdefault(profile_id.account_asset_id, []).append(
+                profile_id.id
+            )
+        for account, profile_list in account_dict.items():
+            account.write({"asset_profile_id": profile_list[-1]})
+        return profile_ids
 
     def write(self, vals):
         if vals.get("method_time"):

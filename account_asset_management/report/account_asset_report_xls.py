@@ -5,7 +5,6 @@ import logging
 
 from odoo import _, models
 from odoo.exceptions import UserError
-from odoo.tools.translate import translate
 
 from odoo.addons.report_xlsx_helper.report.report_xlsx_format import (
     FORMATS,
@@ -23,11 +22,6 @@ class AssetReportXlsx(models.AbstractModel):
     _description = "Dynamic XLS asset report generator"
     _inherit = "report.report_xlsx.abstract"
 
-    def _(self, src):
-        lang = self.env.context.get("lang", "en_US")
-        val = translate(self.env.cr, IR_TRANSLATION_NAME, "report", lang, src) or src
-        return val
-
     def _get_ws_params(self, wb, data, wiz):
         self._get_assets(wiz, data)
         s1 = self._get_acquisition_ws_params(wb, data, wiz)
@@ -39,18 +33,18 @@ class AssetReportXlsx(models.AbstractModel):
 
         asset_template = {
             "account": {
-                "header": {"type": "string", "value": self._("Account")},
+                "header": {"type": "string", "value": _("Account")},
                 "asset": {
                     "type": "string",
                     "value": self._render(
                         "asset.profile_id.account_asset_id.code or ''"
                     ),
                 },
-                "totals": {"type": "string", "value": self._("Totals")},
+                "totals": {"type": "string", "value": _("Totals")},
                 "width": 20,
             },
             "name": {
-                "header": {"type": "string", "value": self._("Name")},
+                "header": {"type": "string", "value": _("Name")},
                 "asset_group": {
                     "type": "string",
                     "value": self._render("group.name or ''"),
@@ -59,7 +53,7 @@ class AssetReportXlsx(models.AbstractModel):
                 "width": 40,
             },
             "code": {
-                "header": {"type": "string", "value": self._("Reference")},
+                "header": {"type": "string", "value": _("Reference")},
                 "asset_group": {
                     "type": "string",
                     "value": self._render("group.code or ''"),
@@ -68,7 +62,7 @@ class AssetReportXlsx(models.AbstractModel):
                 "width": 20,
             },
             "date_start": {
-                "header": {"type": "string", "value": self._("Asset Start Date")},
+                "header": {"type": "string", "value": _("Asset Start Date")},
                 "asset": {
                     "value": self._render("asset.date_start or ''"),
                     "format": FORMATS["format_tcell_date_left"],
@@ -76,7 +70,7 @@ class AssetReportXlsx(models.AbstractModel):
                 "width": 20,
             },
             "date_remove": {
-                "header": {"type": "string", "value": self._("Asset Removal Date")},
+                "header": {"type": "string", "value": _("Asset Removal Date")},
                 "asset": {
                     "value": self._render("asset.date_remove or ''"),
                     "format": FORMATS["format_tcell_date_left"],
@@ -86,7 +80,7 @@ class AssetReportXlsx(models.AbstractModel):
             "depreciation_base": {
                 "header": {
                     "type": "string",
-                    "value": self._("Depreciation Base"),
+                    "value": _("Depreciation Base"),
                     "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
@@ -109,7 +103,7 @@ class AssetReportXlsx(models.AbstractModel):
             "salvage_value": {
                 "header": {
                     "type": "string",
-                    "value": self._("Salvage Value"),
+                    "value": _("Salvage Value"),
                     "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
@@ -132,7 +126,7 @@ class AssetReportXlsx(models.AbstractModel):
             "purchase_value": {
                 "header": {
                     "type": "string",
-                    "value": self._("Purchase Value"),
+                    "value": _("Purchase Value"),
                     "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
@@ -155,7 +149,7 @@ class AssetReportXlsx(models.AbstractModel):
             "period_start_value": {
                 "header": {
                     "type": "string",
-                    "value": self._("Period Start Value"),
+                    "value": _("Period Start Value"),
                     "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
@@ -178,7 +172,7 @@ class AssetReportXlsx(models.AbstractModel):
             "period_depr": {
                 "header": {
                     "type": "string",
-                    "value": self._("Period Depreciation"),
+                    "value": _("Period Depreciation"),
                     "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
@@ -201,7 +195,7 @@ class AssetReportXlsx(models.AbstractModel):
             "period_end_value": {
                 "header": {
                     "type": "string",
-                    "value": self._("Period End Value"),
+                    "value": _("Period End Value"),
                     "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
@@ -224,7 +218,7 @@ class AssetReportXlsx(models.AbstractModel):
             "period_end_depr": {
                 "header": {
                     "type": "string",
-                    "value": self._("Tot. Depreciation"),
+                    "value": _("Tot. Depreciation"),
                     "format": FORMATS["format_theader_yellow_right"],
                 },
                 "asset_group": {
@@ -247,7 +241,7 @@ class AssetReportXlsx(models.AbstractModel):
             "method": {
                 "header": {
                     "type": "string",
-                    "value": self._("Comput. Method"),
+                    "value": _("Comput. Method"),
                     "format": FORMATS["format_theader_yellow_center"],
                 },
                 "asset": {
@@ -260,7 +254,7 @@ class AssetReportXlsx(models.AbstractModel):
             "method_number": {
                 "header": {
                     "type": "string",
-                    "value": self._("Number of Years"),
+                    "value": _("Number of Years"),
                     "format": FORMATS["format_theader_yellow_center"],
                 },
                 "asset": {
@@ -273,7 +267,7 @@ class AssetReportXlsx(models.AbstractModel):
             "prorata": {
                 "header": {
                     "type": "string",
-                    "value": self._("Prorata Temporis"),
+                    "value": _("Prorata Temporis"),
                     "format": FORMATS["format_theader_yellow_center"],
                 },
                 "asset": {
@@ -286,7 +280,7 @@ class AssetReportXlsx(models.AbstractModel):
             "state": {
                 "header": {
                     "type": "string",
-                    "value": self._("Status"),
+                    "value": _("Status"),
                     "format": FORMATS["format_theader_yellow_center"],
                 },
                 "asset": {
