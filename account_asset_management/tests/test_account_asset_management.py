@@ -83,19 +83,20 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
 
         # analytic configuration
-        cls.env.user.write(
-            {
-                "groups_id": [
-                    (4, cls.env.ref("analytic.group_analytic_accounting").id),
-                    (4, cls.env.ref("analytic.group_analytic_tags").id),
-                ],
-            }
+        cls.env.user.groups_id += cls.env.ref("analytic.group_analytic_accounting")
+
+        cls.default_plan = cls.env["account.analytic.plan"].create(
+            {"name": "Default", "company_id": False}
         )
         cls.analytic_account = cls.env["account.analytic.account"].create(
-            {"name": "test_analytic_account"}
+            {"name": "test_analytic_account", "plan_id": cls.default_plan.id}
         )
-        cls.analytic_tag = cls.env["account.analytic.tag"].create(
-            {"name": "test_analytic_tag"}
+
+        cls.distribution = cls.env["account.analytic.distribution.model"].create(
+            {
+                "partner_id": cls.partner.id,
+                "analytic_distribution": {cls.analytic_account.id: 100},
+            }
         )
 
         # Asset Profile 1
@@ -130,8 +131,12 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "method_time": "year",
                 "method_number": 5,
                 "method_period": "year",
-                "account_analytic_id": cls.analytic_account.id,
-                "analytic_tag_ids": [(4, cls.analytic_tag.id)],
+                "analytic_distribution": cls.distribution._get_distribution(
+                    {
+                        "partner_id": cls.partner.id,
+                    }
+                ),
+                # "account_analytic_id": cls.analytic_account.id,
             }
         )
 
@@ -181,7 +186,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         self.assertTrue(asset.depreciation_line_ids[0].init_entry)
         for i in range(1, 36):
             self.assertFalse(asset.depreciation_line_ids[i].init_entry)
@@ -199,7 +204,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         self.assertTrue(asset.depreciation_line_ids[0].init_entry)
         for i in range(1, 4):
             self.assertFalse(asset.depreciation_line_ids[i].init_entry)
@@ -249,17 +254,17 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertEqual(len(vehicle0.depreciation_line_ids), 1)
         # Compute the depreciation boards
         ict0.compute_depreciation_board()
-        ict0.refresh()
+        ict0.invalidate_recordset()
         self.assertEqual(len(ict0.depreciation_line_ids), 4)
         self.assertEqual(ict0.depreciation_line_ids[1].amount, 500)
         vehicle0.compute_depreciation_board()
-        vehicle0.refresh()
+        vehicle0.invalidate_recordset()
         self.assertEqual(len(vehicle0.depreciation_line_ids), 6)
         self.assertEqual(vehicle0.depreciation_line_ids[1].amount, 2000)
         # Post the first depreciation line
         ict0.validate()
         ict0.depreciation_line_ids[1].create_move()
-        ict0.refresh()
+        ict0.invalidate_recordset()
         self.assertEqual(ict0.state, "open")
         self.assertEqual(ict0.value_depreciated, 500)
         self.assertEqual(ict0.value_residual, 1000)
@@ -271,11 +276,15 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 lambda line: line.account_id.internal_group == "expense"
             )
             self.assertEqual(
-                expense_line.analytic_account_id.id,
-                self.analytic_account.id,
+                expense_line.analytic_distribution,
+                self.distribution._get_distribution(
+                    {
+                        "partner_id": self.partner.id,
+                    }
+                )
+                or False,
             )
-            self.assertEqual(expense_line.analytic_tag_ids.id, self.analytic_tag.id)
-        vehicle0.refresh()
+        vehicle0.invalidate_recordset()
         self.assertEqual(vehicle0.state, "open")
         self.assertEqual(vehicle0.value_depreciated, 2000)
         self.assertEqual(vehicle0.value_residual, 8000)
@@ -296,7 +305,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         if calendar.isleap(date.today().year):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[1].amount, 46.44, places=2
@@ -347,7 +356,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         self.assertEqual(len(asset.depreciation_line_ids), 2)
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         # check the depreciated value is the initial value
         self.assertAlmostEqual(asset.value_depreciated, 325.08, places=2)
         # check computed values in the depreciation board
@@ -399,7 +408,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         self.assertEqual(len(asset.depreciation_line_ids), 2)
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         # check the depreciated value is the initial value
         self.assertAlmostEqual(asset.value_depreciated, 279.44, places=2)
         # check computed values in the depreciation board
@@ -440,7 +449,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         # check values in the depreciation board
         self.assertEqual(len(asset.depreciation_line_ids), 5)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 400.00, places=2)
@@ -464,7 +473,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         # check values in the depreciation board
         self.assertEqual(len(asset.depreciation_line_ids), 15)
         # lines prior to asset start period are grouped in the first entry
@@ -491,7 +500,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         # check values in the depreciation board
         self.assertEqual(len(asset.depreciation_line_ids), 6)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 400.00, places=2)
@@ -517,7 +526,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         # check values in the depreciation board
         self.assertEqual(len(asset.depreciation_line_ids), 6)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 200.00, places=2)
@@ -553,7 +562,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         wiz.remove()
-        asset.refresh()
+        asset.invalidate_recordset()
         self.assertEqual(len(asset.depreciation_line_ids), 3)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 81.46, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 4918.54, places=2)
@@ -569,7 +578,6 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         invoice.invoice_line_ids[0].write(
             {"quantity": 2, "asset_profile_id": asset_profile.id}
         )
-        invoice._onchange_invoice_line_ids()
         invoice.action_post()
         # get all asset after invoice validation
         current_asset = self.env["account.asset"].search([])
@@ -648,7 +656,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         day_rate = 3333 / 1827  # 3333 / 1827 depreciation days
         for i in range(1, 10):
             self.assertAlmostEqual(
@@ -680,7 +688,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         for i in range(2, 11):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[i].amount, 166.58, places=2
@@ -709,7 +717,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         for _i in range(1, 11):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[1].amount, 166.67, places=2
@@ -781,7 +789,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         for _i in range(1, 11):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[1].amount, 166.67, places=2
@@ -813,7 +821,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.company_data["company"].fiscalyear_lock_date = time.strftime("2021-05-31")
         # Compute the depreciation board
         asset.compute_depreciation_board()
-        asset.refresh()
+        asset.invalidate_recordset()
         d_lines = asset.depreciation_line_ids
         init_lines = d_lines[1:6]
         # Jan to May entries are before the lock date -> marked as init
@@ -850,12 +858,12 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         ict0.profile_id.allow_reversal = True
         # compute the depreciation boards
         ict0.compute_depreciation_board()
-        ict0.refresh()
+        ict0.invalidate_recordset()
         # post the first depreciation line
         ict0.validate()
         ict0.depreciation_line_ids[1].create_move()
         original_move = ict0.depreciation_line_ids[1].move_id
-        ict0.refresh()
+        ict0.invalidate_recordset()
         self.assertEqual(ict0.state, "open")
         self.assertEqual(ict0.value_depreciated, 500)
         self.assertEqual(ict0.value_residual, 1000)
@@ -876,7 +884,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         reverse_wizard = wiz.save()
         reverse_wizard.write({"journal_id": depreciation_line.move_id.journal_id.id})
         reverse_wizard.reverse_move()
-        ict0.refresh()
+        ict0.invalidate_recordset()
         self.assertEqual(ict0.value_depreciated, 0)
         self.assertEqual(ict0.value_residual, 1500)
         self.assertEqual(len(original_move.reversal_move_id), 1)
@@ -899,17 +907,17 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         # compute the depreciation boards
         ict0.compute_depreciation_board()
-        ict0.refresh()
+        ict0.invalidate_recordset()
         # post the first depreciation line
         ict0.validate()
         ict0.depreciation_line_ids[1].create_move()
         original_move_id = ict0.depreciation_line_ids[1].move_id.id
-        ict0.refresh()
+        ict0.invalidate_recordset()
         self.assertEqual(ict0.state, "open")
         self.assertEqual(ict0.value_depreciated, 500)
         self.assertEqual(ict0.value_residual, 1000)
         ict0.depreciation_line_ids[1].unlink_move()
-        ict0.refresh()
+        ict0.invalidate_recordset()
         self.assertEqual(ict0.value_depreciated, 0)
         self.assertEqual(ict0.value_residual, 1500)
         move = self.env["account.move"].search([("id", "=", original_move_id)])

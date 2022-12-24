@@ -36,7 +36,6 @@ class AccountAssetRemove(models.TransientModel):
     )
     force_date = fields.Date(string="Force accounting date")
     sale_value = fields.Monetary(
-        string="Sale Value",
         default=lambda self: self._default_sale_value(),
         currency_field="company_currency_id",
     )
@@ -341,8 +340,7 @@ class AccountAssetRemove(models.TransientModel):
                 move_line_vals = {
                     "name": asset.name,
                     "account_id": self.account_residual_value_id.id,
-                    "analytic_account_id": asset.account_analytic_id.id,
-                    "analytic_tag_ids": [(4, tag.id) for tag in asset.analytic_tag_ids],
+                    "analytic_distribution": asset.analytic_distribution,
                     "debit": residual_value,
                     "credit": 0.0,
                     "partner_id": partner_id,
@@ -355,10 +353,7 @@ class AccountAssetRemove(models.TransientModel):
                     move_line_vals = {
                         "name": asset.name,
                         "account_id": self.account_sale_id.id,
-                        "analytic_account_id": asset.account_analytic_id.id,
-                        "analytic_tag_ids": [
-                            (4, tag.id) for tag in asset.analytic_tag_ids
-                        ],
+                        "analytic_distribution": asset.analytic_distribution,
                         "debit": sale_value,
                         "credit": 0.0,
                         "partner_id": partner_id,
@@ -375,10 +370,9 @@ class AccountAssetRemove(models.TransientModel):
                 move_line_vals = {
                     "name": asset.name,
                     "account_id": account_id,
-                    "analytic_account_id": asset.account_analytic_id.id,
-                    "analytic_tag_ids": [(4, tag.id) for tag in asset.analytic_tag_ids],
                     "debit": balance_comp < 0 and -balance or 0.0,
                     "credit": balance_comp > 0 and balance or 0.0,
+                    "analytic_distribution": asset.analytic_distribution,
                     "partner_id": partner_id,
                     "asset_id": asset.id,
                 }
