@@ -33,20 +33,17 @@ class AccountAssetLine(models.Model):
     depreciation_base = fields.Monetary(
         related="asset_id.depreciation_base",
         string="Depreciation Base",
-        currency_field="company_currency_id",
     )
-    amount = fields.Monetary(required=True, currency_field="company_currency_id")
+    amount = fields.Monetary(required=True)
     remaining_value = fields.Monetary(
         compute="_compute_values",
         string="Next Period Depreciation",
         store=True,
-        currency_field="company_currency_id",
     )
     depreciated_value = fields.Monetary(
         compute="_compute_values",
         string="Amount Already Depreciated",
         store=True,
-        currency_field="company_currency_id",
     )
     line_date = fields.Date(string="Date", required=True)
     line_days = fields.Integer(string="Days", readonly=True)
@@ -74,7 +71,7 @@ class AccountAssetLine(models.Model):
         "for which Odoo has not generated accounting entries.",
     )
     company_id = fields.Many2one(related="asset_id.company_id", store=True)
-    company_currency_id = fields.Many2one(
+    currency_id = fields.Many2one(
         related="asset_id.company_id.currency_id", store=True, string="Company Currency"
     )
 
@@ -281,7 +278,7 @@ class AccountAssetLine(models.Model):
             asset_ids.add(asset.id)
         # we re-evaluate the assets to determine if we can close them
         for asset in self.env["account.asset"].browse(list(asset_ids)):
-            if asset.company_currency_id.is_zero(asset.value_residual):
+            if asset.currency_id.is_zero(asset.value_residual):
                 asset.state = "close"
         return created_move_ids
 
