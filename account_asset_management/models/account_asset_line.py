@@ -35,9 +35,7 @@ class AccountAssetLine(models.Model):
         string="Depreciation Base",
         currency_field="company_currency_id",
     )
-    amount = fields.Monetary(
-        string="Amount", required=True, currency_field="company_currency_id"
-    )
+    amount = fields.Monetary(required=True, currency_field="company_currency_id")
     remaining_value = fields.Monetary(
         compute="_compute_values",
         string="Next Period Depreciation",
@@ -235,16 +233,14 @@ class AccountAssetLine(models.Model):
         currency = asset.company_id.currency_id
         amount = self.amount
         amount_comp = currency.compare_amounts(amount, 0)
-        analytic_id = False
-        analytic_tags = self.env["account.analytic.tag"]
+        analytic_distribution = False
         if ml_type == "depreciation":
             debit = amount_comp < 0 and -amount or 0.0
             credit = amount_comp > 0 and amount or 0.0
         elif ml_type == "expense":
             debit = amount_comp > 0 and amount or 0.0
             credit = amount_comp < 0 and -amount or 0.0
-            analytic_id = asset.account_analytic_id.id
-            analytic_tags = asset.analytic_tag_ids
+            analytic_distribution = asset.analytic_distribution
         move_line_data = {
             "name": asset.name,
             "ref": self.name,
@@ -254,8 +250,7 @@ class AccountAssetLine(models.Model):
             "debit": debit,
             "journal_id": asset.profile_id.journal_id.id,
             "partner_id": asset.partner_id.id,
-            "analytic_account_id": analytic_id,
-            "analytic_tag_ids": [(4, tag.id) for tag in analytic_tags],
+            "analytic_distribution": analytic_distribution,
             "date": depreciation_date,
             "asset_id": asset.id,
         }
