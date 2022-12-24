@@ -80,7 +80,6 @@ class AccountMove(models.Model):
             "purchase_value": depreciation_base,
             "partner_id": aml.partner_id,
             "date_start": self.date,
-            "account_analytic_id": aml.analytic_account_id,
         }
 
     def action_post(self):
@@ -104,7 +103,7 @@ class AccountMove(models.Model):
                 for key, val in vals.items():
                     setattr(asset_form, key, val)
                 asset = asset_form.save()
-                asset.analytic_tag_ids = aml.analytic_tag_ids
+                asset.analytic_distribution = aml.analytic_distribution
                 aml.with_context(
                     allow_asset=True, allow_asset_removal=True
                 ).asset_id = asset.id
@@ -256,7 +255,5 @@ class AccountMoveLine(models.Model):
                 qty = self.quantity
                 name = self.name
                 aml.write({"quantity": 1, "name": "{} {}".format(name, 1)})
-                aml._onchange_price_subtotal()
                 for i in range(1, int(qty)):
                     aml.copy({"name": "{} {}".format(name, i + 1)})
-                aml.move_id._onchange_invoice_line_ids()

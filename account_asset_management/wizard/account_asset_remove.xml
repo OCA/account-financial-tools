@@ -5,30 +5,35 @@
         <field name="model">account.asset.remove</field>
         <field name="arch" type="xml">
             <form string="Remove Asset">
-                <group colspan="4" col="4">
-                    <field name="company_id" groups="base.group_multi_company" />
-                    <field name="date_remove" />
-                    <field name="force_date" />
-                    <field name="sale_value" />
-                    <field
-                        name="account_sale_id"
-                        attrs="{'invisible': [('sale_value', '=', 0.0)], 'required': [('sale_value', '>', 0.0)]}"
-                    />
-                    <newline />
-                    <field name="posting_regime" />
-                    <newline />
-                    <field
-                        name="account_plus_value_id"
-                        attrs="{'invisible': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"
-                    />
-                    <field
-                        name="account_min_value_id"
-                        attrs="{'invisible': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"
-                    />
-                    <field
-                        name="account_residual_value_id"
-                        attrs="{'invisible': [('posting_regime', '!=', 'residual_value')], 'required': [('posting_regime', '=', 'residual_value')]}"
-                    />
+                <group>
+                    <group>
+                        <field name="company_id" invisible="1" />
+                        <field name="company_id" groups="base.group_multi_company" />
+                        <field name="date_remove" />
+                        <field name="force_date" />
+                        <field name="sale_value" />
+                        <field
+                            name="account_sale_id"
+                            attrs="{'invisible': [('sale_value', '=', 0.0)], 'required': [('sale_value', '>', 0.0)]}"
+                        />
+                    </group>
+                    <group>
+                        <field
+                            name="account_plus_value_id"
+                            attrs="{'invisible': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"
+                        />
+                        <field
+                            name="account_min_value_id"
+                            attrs="{'invisible': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"
+                        />
+                        <field
+                            name="account_residual_value_id"
+                            attrs="{'invisible': [('posting_regime', '!=', 'residual_value')], 'required': [('posting_regime', '=', 'residual_value')]}"
+                        />
+                    </group>
+                    <group>
+                        <field name="posting_regime" />
+                    </group>
                     <separator string="Notes" colspan="4" />
                     <field name="note" nolabel="1" colspan="4" />
                 </group>

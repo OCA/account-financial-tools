@@ -16,7 +16,7 @@ class AccountAssetGroup(models.Model):
 
     name = fields.Char(size=64, required=True, index=True)
     code = fields.Char(index=True)
-    parent_path = fields.Char(index=True)
+    parent_path = fields.Char(index=True, unaccent=False)
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",

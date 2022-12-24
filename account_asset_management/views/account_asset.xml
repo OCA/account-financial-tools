@@ -56,24 +56,28 @@
                             <field name="name" class="oe_inline" />
                         </h1>
                     </div>
-                    <group col="4">
-                        <field name="code" />
-                        <field
-                            name="company_id"
-                            widget="selection"
-                            groups="base.group_multi_company"
-                        />
-                        <field
-                            name="company_currency_id"
-                            groups="base.group_multi_currency"
-                            invisible="1"
-                        />
-                        <field name="move_line_check" invisible="1" />
-                        <newline />
-                        <field name="depreciation_base" />
-                        <field name="value_depreciated" />
-                        <field name="value_residual" />
-                        <field name="active" invisible="1" />
+                    <group>
+                        <group id="header_left_group">
+                            <field name="company_id" invisible="1" />
+                            <field name="code" />
+                            <field
+                                name="company_id"
+                                widget="selection"
+                                groups="base.group_multi_company"
+                            />
+                            <field
+                                name="company_currency_id"
+                                groups="base.group_multi_currency"
+                                invisible="1"
+                            />
+                            <field name="move_line_check" invisible="1" />
+                        </group>
+                        <group id="header_right_group">
+                            <field name="depreciation_base" />
+                            <field name="value_depreciated" />
+                            <field name="value_residual" />
+                            <field name="active" invisible="1" />
+                        </group>
                     </group>
                     <notebook colspan="4">
                         <page string="General">
@@ -96,19 +100,19 @@
                                     <field name="date_remove" />
                                 </group>
                             </group>
-                            <group col="4" string="Other Information">
-                                <field name="profile_id" />
-                                <field name="group_ids" widget="many2many_tags" />
-                                <field name="partner_id" />
-                                <field
-                                    name="account_analytic_id"
-                                    groups="analytic.group_analytic_accounting"
-                                />
-                                <field
-                                    name="analytic_tag_ids"
-                                    groups="analytic.group_analytic_tags"
-                                    widget="many2many_tags"
-                                />
+                            <group string="Other Information">
+                                <group>
+                                    <field name="profile_id" />
+                                    <field name="group_ids" widget="many2many_tags" />
+                                </group>
+                                <group>
+                                    <field name="partner_id" />
+                                    <field
+                                        name="analytic_distribution"
+                                        groups="analytic.group_analytic_accounting"
+                                        widget="analytic_distribution"
+                                    />
+                                </group>
                             </group>
                             <group>
                                 <group string="Depreciation Dates">
@@ -246,11 +250,6 @@
                                     <field name="journal_id" optional="show" />
                                     <field name="account_id" />
                                     <field name="partner_id" optional="show" />
-                                    <field
-                                        name="analytic_account_id"
-                                        groups="analytic.group_analytic_accounting"
-                                        optional="show"
-                                    />
                                     <field name="ref" />
                                     <field name="name" optional="hide" />
                                     <field name="debit" sum="1" />
@@ -287,7 +286,6 @@
                 <field name="date_start" optional="show" />
                 <field name="date_remove" optional="show" />
                 <field name="profile_id" optional="show" />
-                <field name="account_analytic_id" optional="hide" />
                 <field name="method" optional="hide" />
                 <field name="prorata" optional="hide" />
                 <field name="group_ids" widget="many2many_tags" optional="hide" />
@@ -361,12 +359,6 @@
                         name="state_groupby"
                         domain=""
                         context="{'group_by': 'state'}"
-                    />
-                    <filter
-                        string="Analytic account"
-                        name="account_analytic_groupby"
-                        domain=""
-                        context="{'group_by': 'account_analytic_id'}"
                     />
                     <filter
                         string="Computation Method"
