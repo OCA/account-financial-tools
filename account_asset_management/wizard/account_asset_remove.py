@@ -24,7 +24,7 @@ class AccountAssetRemove(models.TransientModel):
         required=True,
         default=lambda self: self._default_company_id(),
     )
-    company_currency_id = fields.Many2one(
+    currency_id = fields.Many2one(
         related="company_id.currency_id", string="Company Currency"
     )
     date_remove = fields.Date(
@@ -37,7 +37,6 @@ class AccountAssetRemove(models.TransientModel):
     force_date = fields.Date(string="Force accounting date")
     sale_value = fields.Monetary(
         default=lambda self: self._default_sale_value(),
-        currency_field="company_currency_id",
     )
     account_sale_id = fields.Many2one(
         comodel_name="account.account",
@@ -107,7 +106,7 @@ class AccountAssetRemove(models.TransientModel):
         )
         for line in inv_lines:
             inv = line.move_id
-            comp_curr = inv.company_currency_id
+            comp_curr = inv.currency_id
             inv_curr = inv.currency_id
             if line.move_id.payment_state == "paid" or line.parent_state == "draft":
                 account_sale_id = line.account_id.id
