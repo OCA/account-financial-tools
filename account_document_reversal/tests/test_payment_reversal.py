@@ -204,9 +204,9 @@ class TestPaymentReversal(SavepointCase):
         )
         line_id = self.account_move_line_model
         # reconcile the payment with the invoice
-        for l in self.invoice.line_ids:
-            if l.account_id.id == self.account_receivable.id:
-                line_id = l
+        for inv_line in self.invoice.line_ids:
+            if inv_line.account_id.id == self.account_receivable.id:
+                line_id = inv_line
                 break
         bank_stmt_line.process_reconciliation(
             counterpart_aml_dicts=[
@@ -260,9 +260,9 @@ class TestPaymentReversal(SavepointCase):
         )
         line_id = self.account_move_line_model
         # reconcile the payment with the invoice
-        for l in self.invoice.line_ids:
-            if l.account_id.id == self.account_receivable.id:
-                line_id = l
+        for inv_line in self.invoice.line_ids:
+            if inv_line.account_id.id == self.account_receivable.id:
+                line_id = inv_line
                 break
         bank_stmt_line.process_reconciliation(
             counterpart_aml_dicts=[
