@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2020-2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+<record id="view_account_form" model="ir.ui.view">
+    <field name="model">account.account</field>
+    <field name="inherit_id" ref="account.view_account_form" />
+    <field name="arch" type="xml">
+        <field name="account_type" position="after">
+            <field name="partner_policy" />
+        </field>
+    </field>
+</record>
+
+<record id="view_account_list" model="ir.ui.view">
+    <field name="model">account.account</field>
+    <field name="inherit_id" ref="account.view_account_list" />
+    <field name="arch" type="xml">
+        <field name="reconcile" position="after">
+            <field name="partner_policy" optional="show" />
+        </field>
+    </field>
+</record>
+
+<record id="view_account_search" model="ir.ui.view">
+    <field name="model">account.account</field>
+    <field name="inherit_id" ref="account.view_account_search" />
+    <field name="arch" type="xml">
+        <filter name="accounttype" position="after">
+            <filter
+                    name="partner_policy_groupby"
+                    string="Partner Policy"
+                    context="{'group_by': 'partner_policy'}"
+                />
+        </filter>
+    </field>
+</record>
+
+
+</odoo>
