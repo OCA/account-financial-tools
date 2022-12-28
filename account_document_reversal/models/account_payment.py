@@ -12,7 +12,7 @@ class AccountPayment(models.Model):
         return self.reverse_document_wizard()
 
     def action_draft(self):
-        """ Case cancel reversal, set to draft allowed only when no moves """
+        """Case cancel reversal, set to draft allowed only when no moves"""
         for rec in self:
             if rec.is_cancel_reversal and rec.move_line_ids:
                 raise UserError(_("Cannot set to draft!"))
@@ -24,7 +24,7 @@ class AccountPayment(models.Model):
         return super().cancel()
 
     def action_document_reversal(self, date=None, journal_id=None):
-        """ Reverse all moves related to this payment + set state to cancel """
+        """Reverse all moves related to this payment + set state to cancel"""
         # Check document readiness
         valid_state = (
             len(self.mapped("state")) == 1

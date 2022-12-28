@@ -8,7 +8,7 @@ class SaleOrderLine(models.Model):
 
     @api.depends("invoice_lines.move_id.state", "invoice_lines.quantity")
     def _get_invoice_qty(self):
-        """ Cancel Reversal Entry is of type "entry", correction is needed """
+        """Cancel Reversal Entry is of type "entry", correction is needed"""
         res = super()._get_invoice_qty()
         for line in self:
             for invoice_line in line.invoice_lines:

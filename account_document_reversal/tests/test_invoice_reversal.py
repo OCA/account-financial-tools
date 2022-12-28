@@ -54,7 +54,7 @@ class TestInvoiceReversal(SavepointCase):
         cls.invoice.write({"invoice_line_ids": [(0, 0, cls.invoice_line)]})
 
     def test_journal_invoice_cancel_reversal(self):
-        """ Tests cancel with reversal, end result must follow,
+        """Tests cancel with reversal, end result must follow,
         - Reversal journal entry is created, and reconciled with original entry
         - Status is changed to cancel
         """

@@ -83,7 +83,7 @@ class AccountMove(models.Model):
         reversal.with_context(cancel_reversal=True).reverse_moves()
 
     def _reverse_moves(self, default_values_list=None, cancel=False):
-        """ Set flag on the moves and the reversal moves being reversed """
+        """Set flag on the moves and the reversal moves being reversed"""
         if self._context.get("cancel_reversal"):
             self.write({"cancel_reversal": True})
         reverse_moves = super()._reverse_moves(default_values_list, cancel)
@@ -92,7 +92,7 @@ class AccountMove(models.Model):
         return reverse_moves
 
     def _reverse_move_vals(self, default_values, cancel=True):
-        """ Reverse with cancel reversal, always use move_type = entry """
+        """Reverse with cancel reversal, always use move_type = entry"""
         if self._context.get("cancel_reversal"):
             default_values.update({"type": "entry"})
         return super()._reverse_move_vals(default_values, cancel)
@@ -102,7 +102,7 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     def remove_move_reconcile(self):
-        """ Freeze move with cancel_reversal = True, disallow unreconcile """
+        """Freeze move with cancel_reversal = True, disallow unreconcile"""
         if not self._context.get("cancel_reversal") and any(
             self.mapped("move_id").mapped("cancel_reversal")
         ):

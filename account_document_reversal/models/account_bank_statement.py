@@ -9,7 +9,7 @@ class AccountPayment(models.Model):
     _inherit = ["account.bank.statement.line", "account.document.reversal"]
 
     def button_cancel_reconciliation(self):
-        """ If cancel method is to reverse, use document reversal wizard """
+        """If cancel method is to reverse, use document reversal wizard"""
         cancel_reversal = all(
             self.mapped("journal_entry_ids.move_id.journal_id.is_cancel_reversal")
         )
@@ -21,7 +21,7 @@ class AccountPayment(models.Model):
         return super().button_cancel_reconciliation()
 
     def action_document_reversal(self, date=None, journal_id=None):
-        """ Reverse all moves related to this statement + delete payment """
+        """Reverse all moves related to this statement + delete payment"""
         # This part is from button_cancel_reconciliation()
         aml_to_unbind = self.env["account.move.line"]
         aml_to_cancel = self.env["account.move.line"]

@@ -12,7 +12,9 @@ class ReverseAccountDocument(models.TransientModel):
     _description = "Account Document Reversal"
 
     date = fields.Date(
-        string="Reversal date", default=fields.Date.context_today, required=True,
+        string="Reversal date",
+        default=fields.Date.context_today,
+        required=True,
     )
     use_different_journal = fields.Boolean(
         string="Use different journal for reversal",

@@ -8,11 +8,12 @@ class AccountDocumentReversal(models.AbstractModel):
     _description = "Abstract Module for Document Reversal"
 
     is_cancel_reversal = fields.Boolean(
-        string="Use Cancel Reversal", compute="_compute_is_cancel_reversal",
+        string="Use Cancel Reversal",
+        compute="_compute_is_cancel_reversal",
     )
 
     def _compute_is_cancel_reversal(self):
-        """ Based on setting in document's journal """
+        """Based on setting in document's journal"""
         for rec in self:
             rec.is_cancel_reversal = (
                 rec.journal_id.is_cancel_reversal if "journal_id" in rec else False
@@ -20,7 +21,7 @@ class AccountDocumentReversal(models.AbstractModel):
 
     @api.model
     def reverse_document_wizard(self):
-        """ Return Wizard to Cancel Document """
+        """Return Wizard to Cancel Document"""
         action = self.env.ref(
             "account_document_reversal.action_view_reverse_account_document"
         )
@@ -28,7 +29,7 @@ class AccountDocumentReversal(models.AbstractModel):
         return vals
 
     def action_document_reversal(self, date=None, journal_id=None):
-        """ Reverse with following guildeline,
+        """Reverse with following guildeline,
         - Check existing document state / raise warning
         - Find all related moves and unreconcile
         - Create reversed moves
