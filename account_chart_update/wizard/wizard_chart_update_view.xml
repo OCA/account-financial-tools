@@ -232,11 +232,9 @@
                         </notebook>
                     </page>
                 </notebook>
-                <group
-                    attrs="{'invisible':[('state','!=','ready'),]}"
-                    string="Records to create/update"
-                >
-                    <notebook colspan="4">
+                <div attrs="{'invisible':[('state','!=','ready')]}">
+                    <h3>Records to create/update</h3>
+                    <notebook>
                         <page
                             string="Taxes"
                             attrs="{'invisible': [('update_tax', '=', False)]}"
@@ -342,7 +340,7 @@
                             </field>
                         </page>
                     </notebook>
-                </group>
+                </div>
                 <group
                     col="4"
                     colspan="4"
