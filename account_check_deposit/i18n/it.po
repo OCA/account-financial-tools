@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2022-05-18 10:05+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-08-08 15:10+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_check_deposit
 #: model:ir.actions.report,print_report_name:account_check_deposit.report_account_check_deposit
@@ -29,17 +29,17 @@ msgstr ""
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Bank Account Number to Credit:</b>"
-msgstr "<b>Numero di Conto Bancario da Accreditare:</b>"
+msgstr "<b>Numero di conto bancario da accreditare:</b>"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Check Currency:</b>"
-msgstr "<b>Valuta Assegno:</b>"
+msgstr "<b>Valuta assegno:</b>"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Number of checks:</b>"
-msgstr "<b>Numero di Assegni:</b>"
+msgstr "<b>Numero di assegni:</b>"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -49,7 +49,7 @@ msgstr "<b>Totale:</b>"
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Transfer Date:</b>"
-msgstr "<b>Data Trasferimento:</b>"
+msgstr "<b>Data trasferimento:</b>"
 
 #. module: account_check_deposit
 #: model:ir.model.constraint,message:account_check_deposit.constraint_account_check_deposit_name_company_unique
@@ -64,7 +64,7 @@ msgstr "Conto Deposito Assegno"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction
 msgid "Action Needed"
-msgstr "Azione necessaria"
+msgstr "Azione richiesta"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_ids
@@ -79,12 +79,12 @@ msgstr "Decorazione eccezione attività"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_state
 msgid "Activity State"
-msgstr "Stato Attività"
+msgstr "Stato attività"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_type_icon
 msgid "Activity Type Icon"
-msgstr "Icona Tipo Attività"
+msgstr "Icona tipo attività"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -94,18 +94,18 @@ msgstr "Importo"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_attachment_count
 msgid "Attachment Count"
-msgstr "Conteggio Allegati"
+msgstr "Numero allegati"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Back to Draft"
-msgstr "Ritorna in Bozza"
+msgstr "Ritorna a bozza"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__bank_journal_id
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Bank Account"
-msgstr "Conto Bancario"
+msgstr "Conto bancario"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -150,7 +150,7 @@ msgstr "Pagamenti Assegno"
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid "Check Ref. %s"
-msgstr "Rif. Assegno%s"
+msgstr "Rif. assegno %s"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
@@ -198,12 +198,12 @@ msgstr "Debitore"
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Deposit Date"
-msgstr "Data di Deposito"
+msgstr "Data di deposito"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
 msgid "Display Name"
-msgstr "Nome da visualizzare"
+msgstr "Nome visualizzato"
 
 #. module: account_check_deposit
 #: model:ir.model.fields.selection,name:account_check_deposit.selection__account_check_deposit__state__done
@@ -220,12 +220,12 @@ msgstr "Bozza"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_follower_ids
 msgid "Followers"
-msgstr "Followers"
+msgstr "Seguito da"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Followers (Contatti)"
+msgstr "Seguito da (partner)"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_type_icon
@@ -268,7 +268,7 @@ msgstr "Icona per indicare un'attività eccezione."
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_unread
 msgid "If checked, new messages require your attention."
-msgstr "Se attivo, nuovi messaggi richiedono la tua attenzione."
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error
@@ -284,7 +284,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_is_follower
 msgid "Is Follower"
-msgstr "E' un follower"
+msgstr "Sta seguendo"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
@@ -294,12 +294,12 @@ msgstr "Sezionale"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
 msgid "Journal Entry"
-msgstr "Registrazione Contabile"
+msgstr "Registrazione contabile"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Item"
-msgstr "Oggetto Giornale"
+msgstr "Movimento contabile"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
