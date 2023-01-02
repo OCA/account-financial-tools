@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-09-13 13:33+0000\n"
+"PO-Revision-Date: 2023-01-03 02:19+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_group
@@ -42,7 +42,7 @@ msgstr "Etiquetas de Contas"
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Account Template"
-msgstr ""
+msgstr "Modelo de Conta"
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_account_template_action
@@ -53,7 +53,7 @@ msgstr "Modelos de Conta"
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
 msgid "Account Type"
-msgstr ""
+msgstr "Tipo de Conta"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
@@ -97,17 +97,17 @@ msgstr "Parâmetros de Configuração"
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
 msgid "Default Taxes"
-msgstr ""
+msgstr "Impostos Predefinidos"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Expense Account"
-msgstr ""
+msgstr "Conta de Gastos"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
 msgid "Extra configuration"
-msgstr ""
+msgstr "Configuração extra"
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
@@ -119,42 +119,42 @@ msgstr "Modelos de Posições Fiscais"
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar Por"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Income Account"
-msgstr ""
+msgstr "Conta de Receitas"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
 msgid "Internal notes..."
-msgstr ""
+msgstr "Notas internas ..."
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Payable Account"
-msgstr ""
+msgstr "Conta a Pagar"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
 msgid "Properties"
-msgstr ""
+msgstr "Propriedades"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Receivable Account"
-msgstr ""
+msgstr "Conta a Receber"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
