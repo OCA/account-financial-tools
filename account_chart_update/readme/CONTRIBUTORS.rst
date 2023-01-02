@@ -1,9 +1,9 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Pedro M. Baeza
-  * Jairo Llopis
   * Ernesto Tejeda
 
+* Jairo Llopis (https://www.moduon.team/)
 * Jacques-Etienne Baudoux <je@bcim.be>
 * Sylvain Van Hoof <sylvain@okia.be>
 * Nacho Muñoz <nacmuro@gmail.com>

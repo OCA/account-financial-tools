@@ -35,7 +35,6 @@
                         name="company_id"
                         attrs="{'invisible':[('state','!=','init')]}"
                     />
-                    <field name="code_digits" invisible="1" />
                     <field
                         name="chart_template_id"
                         domain="[('visible', '=', True)]"
@@ -57,6 +56,11 @@
                             >
                                 <field name="continue_on_errors" />
                                 <field name="recreate_xml_ids" />
+                                <field
+                                    name="code_digits"
+                                    options="{'invisible': [('update_account', '=', False)]}"
+                                    readonly="1"
+                                />
                             </group>
                         </group>
                         <group>
@@ -155,11 +159,19 @@
                                         edit="false"
                                         default_order="sequence"
                                     >
-                                        <field name="sequence" widget="handle" />
-                                        <field name="matching_value" />
+                                        <field
+                                            name="sequence"
+                                            widget="handle"
+                                            force_save="1"
+                                        />
+                                        <field name="matching_value" force_save="1" />
                                     </tree>
                                     <form>
-                                        <field name="matching_value" readonly="1" />
+                                        <field
+                                            name="matching_value"
+                                            readonly="1"
+                                            force_save="1"
+                                        />
                                     </form>
                                 </field>
                             </page>
@@ -174,11 +186,19 @@
                                         edit="false"
                                         default_order="sequence"
                                     >
-                                        <field name="sequence" widget="handle" />
-                                        <field name="matching_value" />
+                                        <field
+                                            name="sequence"
+                                            widget="handle"
+                                            force_save="1"
+                                        />
+                                        <field name="matching_value" force_save="1" />
                                     </tree>
                                     <form>
-                                        <field name="matching_value" readonly="1" />
+                                        <field
+                                            name="matching_value"
+                                            readonly="1"
+                                            force_save="1"
+                                        />
                                     </form>
                                 </field>
                             </page>
@@ -193,11 +213,19 @@
                                         edit="false"
                                         default_order="sequence"
                                     >
-                                        <field name="sequence" widget="handle" />
-                                        <field name="matching_value" />
+                                        <field
+                                            name="sequence"
+                                            widget="handle"
+                                            force_save="1"
+                                        />
+                                        <field name="matching_value" force_save="1" />
                                     </tree>
                                     <form>
-                                        <field name="matching_value" readonly="1" />
+                                        <field
+                                            name="matching_value"
+                                            readonly="1"
+                                            force_save="1"
+                                        />
                                     </form>
                                 </field>
                             </page>

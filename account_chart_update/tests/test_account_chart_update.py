@@ -589,3 +589,36 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertTrue(list(self.account.get_xml_id().values())[0])
         self.assertTrue(list(self.fp.get_xml_id().values())[0])
         wizard.unlink()
+
+    def test_custom_digits(self):
+        self.account.name = "changed"
+        # Change chart template to use 10 digits
+        self.chart_template.code_digits = 10
+        # Open wizard, select chart, code digits are inherited
+        wiz_f = common.Form(self.wizard_obj.with_company(self.company))
+        wiz_f.chart_template_id = self.chart_template
+        self.assertEqual(wiz_f.code_digits, 10)
+        # Execute it
+        wiz = wiz_f.save()
+        wiz.action_find_records()
+        wiz.action_update_records()
+        # Capital account updated its digits
+        self.assertEqual(self.account.name, "Test")
+        self.assertEqual(self.account.code, "1000000000")
+
+    def test_matching_code_prefix(self):
+        # User had 10 digits
+        self.account.name = "changed"
+        self.account.code = "1000000000"
+        # Open wizard, select chart, code digits are inherited
+        wiz_f = common.Form(self.wizard_obj.with_company(self.company))
+        wiz_f.chart_template_id = self.chart_template
+        wiz_f.recreate_xml_ids = True
+        self.assertEqual(wiz_f.code_digits, 6)
+        # Execute it
+        wiz = wiz_f.save()
+        wiz.action_find_records()
+        wiz.action_update_records()
+        # Capital account updated its digits
+        self.assertEqual(self.account.name, "Test")
+        self.assertEqual(self.account.code, "100000")

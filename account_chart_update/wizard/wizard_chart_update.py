@@ -223,7 +223,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         return self._get_matching_ids("wizard.tax.matching", ordered_opts)
 
     def _default_account_matching_ids(self):
-        ordered_opts = ["xml_id", "code", "name"]
+        ordered_opts = ["xml_id", "code", "code_prefix", "name"]
         return self._get_matching_ids("wizard.account.matching", ordered_opts)
 
     @api.model
@@ -530,11 +530,16 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 if not real:
                     continue
                 criteria = ("id", "in", real.ids)
-            elif matching.matching_value == "code":
+            elif matching.matching_value in {"code", "code_prefix"}:
                 codes = templates.mapped("code")
                 if not codes:
                     continue
-                criteria = ("code", "in", list(map(self.padded_code, codes)))
+                adapter = (
+                    self.padded_code
+                    if matching.matching_value == "code"
+                    else lambda code: code.rstrip("0")
+                )
+                criteria = (matching.matching_value, "in", list(map(adapter, codes)))
             else:
                 field_name = matching.matching_value
                 field_values = templates.mapped(field_name)
@@ -1279,7 +1284,9 @@ class WizardMatching(models.TransientModel):
         ondelete="cascade",
     )
     sequence = fields.Integer(required=True, default=1)
-    matching_value = fields.Selection(selection="_get_matching_selection")
+    matching_value = fields.Selection(
+        selection="_get_matching_selection", required=True
+    )
 
     def _get_matching_selection(self):
         return [("xml_id", "XML-ID")]
@@ -1313,7 +1320,9 @@ class WizardAccountMatching(models.TransientModel):
 
     def _get_matching_selection(self):
         vals = super(WizardAccountMatching, self)._get_matching_selection()
-        vals += self._selection_from_files("account.account.template", ["code", "name"])
+        vals += self._selection_from_files(
+            "account.account", ["code", "code_prefix", "name"]
+        )
         return vals
 
 
