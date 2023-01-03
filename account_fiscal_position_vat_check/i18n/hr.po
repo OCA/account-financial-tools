@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-23 01:41+0000\n"
-"PO-Revision-Date: 2019-11-12 15:34+0000\n"
+"PO-Revision-Date: 2023-01-04 00:59+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.8\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
 msgid "<b>Missing VAT number</b>: this partner has the fiscal position"
-msgstr ""
+msgstr "<b>Nedostaje porezni broj</b>: ovaj partner ima fiskalnu poziciju"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
@@ -35,30 +35,30 @@ msgstr "Kontakt"
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv za prikaz"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_account_move__id
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Stavka dnevnika"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_account_move____last_update
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnje modificirano"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner__show_warning_vat_required
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_users__show_warning_vat_required
 msgid "Show Warning Vat Required"
-msgstr ""
+msgstr "Prikaži upozorenje za Obavezni porezni broj"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
@@ -80,7 +80,7 @@ msgstr ""
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
 msgid "that require to know the VAT number of the partner."
-msgstr ""
+msgstr "koja traži upisani porezni broj partnera."
 
 #~ msgid "Invoice"
 #~ msgstr "Račun"
