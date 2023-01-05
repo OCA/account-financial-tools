@@ -12,30 +12,40 @@
 
 <t t-call="web.html_container">
 <t t-foreach="docs" t-as="o">
-<t t-call="web.internal_layout">
+<t t-call="web.external_layout">
 
 <div class="page">
 
-<h1>Check Deposit n°<span t-field="o.name"/></h1>
+<h2>Deposit n°<span t-field="o.name"/></h2>
 
-<h3>Bank:</h3>
-<p><span t-field="o.bank_journal_id.bank_account_id.bank_id.name"/><br/>
-<span t-field="o.bank_journal_id.bank_account_id.bank_id.street"/><br/>
-<span t-field="o.bank_journal_id.bank_account_id.bank_id.zip"/> <span t-field="o.bank_journal_id.bank_account_id.bank_id.city"/></p>
+<div id="informations" class="row mt32 mb32">
+    <div class="col-auto mw-100 mb-2" t-if="o.bank_journal_id.bank_account_id" name="bank_journal_id">
+        <strong>Bank:</strong>
+        <p class="m-0">
+            <span t-field="o.bank_journal_id.bank_account_id.bank_id.name"/><br/>
+            <span t-field="o.bank_journal_id.bank_account_id.bank_id.street"/><br/>
+            <span t-field="o.bank_journal_id.bank_account_id.bank_id.zip"/> <span t-field="o.bank_journal_id.bank_account_id.bank_id.city"/>
+        </p>
+    </div>
+    <div class="col-auto mw-100 mb-2" t-if="o.bank_journal_id.bank_account_id" name="acc_number">
+        <strong>Account Number:</strong>
+        <p class="m-0" t-field="o.bank_journal_id.bank_account_id.acc_number"/>
+    </div>
+    <div class="col-auto mw-100 mb-2" name="currency_id">
+        <strong>Currency:</strong>
+        <p class="m-0" t-field="o.currency_id.name"/>
+    </div>
+    <div class="col-auto mw-100 mb-2" name="deposit_date">
+        <strong>Transfer Date:</strong>
+        <p class="m-0" t-field="o.deposit_date"/>
+    </div>
+    <div class="col-auto mw-100 mb-2" name="check_count">
+        <strong>Lines:</strong>
+        <p class="m-0" t-field="o.check_count"/>
+    </div>
+</div>
 
-<h3>Beneficiary:</h3>
-<div t-field="o.company_id.partner_id"
-     t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
-
-<p><b>Bank Account Number to Credit:</b> <span t-field="o.bank_journal_id.bank_account_id.acc_number"/></p>
-
-<p><b>Check Currency:</b> <span t-field="o.currency_id.name"/></p>
-
-<p><b>Transfer Date:</b> <span t-field="o.deposit_date"/></p>
-
-<p><b>Number of checks:</b> <span t-field="o.check_count"/></p>
-
-<h3>List of checks:</h3>
+<h3>Details:</h3>
 
     <table class="table table-condensed">
     <thead>
@@ -56,8 +66,14 @@
             <td><span t-field="move_line.partner_id.name"/></td>
             <td>
                 <t t-if="o.currency_id == o.company_id.currency_id">
-                    <span t-field="move_line.debit"
-                        t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                    <t t-if="move_line.debit > 0">
+                        <span t-field="move_line.debit"
+                            t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                    </t>
+                    <t t-if="move_line.credit > 0">
+                        (<span t-field="move_line.credit"
+                            t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>)
+                    </t>
                 </t>
                 <t t-if="o.currency_id != o.company_id.currency_id">
                     <span t-field="move_line.amount_currency"

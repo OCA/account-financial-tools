@@ -6,16 +6,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Account Check Deposit',
-    'version': '12.0.1.0.1',
+    'name': 'Account Deposit in Bank',
+    'version': '12.0.2.0.1',
     'category': 'Accounting',
     'license': 'AGPL-3',
-    'summary': 'Manage deposit of checks to the bank',
+    'summary': 'Manage deposit of checks, cash, etc. to the bank',
     'author': "Odoo Community Association (OCA),"
               "Akretion,"
-              "Tecnativa",
-    'website': 'https://github.com/OCA/account-financial-tools'
-               'account_check_deposit',
+              "Tecnativa,"
+              "GRAP",
+    'website': 'https://github.com/OCA/account-financial-tools',
     'depends': [
         'account',
     ],
@@ -25,6 +25,7 @@
         'security/check_deposit_security.xml',
         'data/sequence.xml',
         'views/account_deposit_view.xml',
+        'views/account_journal_view.xml',
         'views/account_move_line_view.xml',
         'views/res_config_settings_views.xml',
         'report/report.xml',
