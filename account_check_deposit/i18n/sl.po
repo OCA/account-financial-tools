@@ -16,23 +16,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "<b>Bank Account Number to Credit:</b>"
-msgstr ""
-
-#. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "<b>Check Currency:</b>"
-msgstr ""
-
-#. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "<b>Number of checks:</b>"
+#: code:addons/account_check_deposit/models/account_deposit.py:162
+#: code:addons/account_check_deposit/models/account_deposit.py:202
+#, python-format
+msgid "%(journal_name)s Deposit %(deposit_name)s"
 msgstr ""
 
 #. module: account_check_deposit
@@ -42,7 +34,27 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "<b>Transfer Date:</b>"
+msgid "<strong>Account Number:</strong>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<strong>Bank:</strong>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<strong>Currency:</strong>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<strong>Lines:</strong>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<strong>Transfer Date:</strong>"
 msgstr ""
 
 #. module: account_check_deposit
@@ -68,34 +80,39 @@ msgid "Bank Account"
 msgstr "Bančni račun"
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "Bank:"
-msgstr "Banka:"
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Bank Deposit"
+msgstr ""
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "Beneficiary:"
-msgstr "Upravičenec:"
+#: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
+#: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
+msgid "Bank Deposits"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Bank Payments"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_bank_statement_import_journal_creation__can_receive_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_journal__can_receive_deposit
+msgid "Can Receive Deposit"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_bank_statement_import_journal_creation__can_be_deposited
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_journal__can_be_deposited
+msgid "Can be Deposited"
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.actions.report,name:account_check_deposit.report_account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__check_deposit_id
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Deposit"
 msgstr "Čekovni depozit"
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:163
-#: code:addons/account_check_deposit/models/account_deposit.py:201
-#, python-format
-msgid "Check Deposit %s"
-msgstr "Čekovni depozit %s"
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:171
-#, python-format
-msgid "Check Deposit - Ref. Check %s"
-msgstr "Čekovni depozit - sklic čeka %s"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_offsetting_account
@@ -104,31 +121,9 @@ msgid "Check Deposit Offsetting Account"
 msgstr ""
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "Check Deposit n°"
-msgstr "Čekovni depozit št."
-
-#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.res_config_settings_view_form
 #, fuzzy
 msgid "Check Deposits"
-msgstr "Čekovni depoziti"
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
-msgid "Check Payments"
-msgstr "Čekovna plačila"
-
-#. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
-msgid "Checks Deposit"
-msgstr "Čekovni depozit"
-
-#. module: account_check_deposit
-#: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
-#: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
-msgid "Checks Deposits"
 msgstr "Čekovni depoziti"
 
 #. module: account_check_deposit
@@ -173,6 +168,12 @@ msgid "Date"
 msgstr "Datum"
 
 #. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_bank_statement_import_journal_creation__deposit_debit_account_id
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_journal__deposit_debit_account_id
+msgid "Debit Account for Deposit"
+msgstr ""
+
+#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Debtor"
 msgstr "Dolžnik"
@@ -183,10 +184,26 @@ msgid "Default Debit Account of the Journal"
 msgstr "Privzeti konto obveznosti za dnevnik"
 
 #. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:172
+#, python-format
+msgid "Deposit - Ref. %s"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Deposit Date"
 msgstr "Datum depozita"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Deposit n°"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Details:"
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
@@ -216,11 +233,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_check_deposit
-#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__journal_default_account_id
-msgid "It acts as a default account for debit amount"
-msgstr "Deluje kot privzeti konto za znesek obveznosti"
-
-#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_journal
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Journal"
@@ -257,20 +270,15 @@ msgid "Lines"
 msgstr "Postavke"
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "List of checks:"
-msgstr "Seznam čekov:"
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:196
+#: code:addons/account_check_deposit/models/account_deposit.py:191
 #, python-format
-msgid "Missing 'Check Deposit Offsetting Account' on the company '%s'."
+msgid "Missing 'Default Debit Account' on bank journal '%s'"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:190
+#: code:addons/account_check_deposit/models/account_deposit.py:197
 #, python-format
-msgid "Missing 'Default Debit Account' on bank journal '%s'"
+msgid "Missing 'Deposit Offsetting Account' on the company '%s'."
 msgstr ""
 
 #. module: account_check_deposit
@@ -280,8 +288,13 @@ msgstr "Naziv"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_count
-msgid "Number of Checks"
-msgstr "Število čekov"
+msgid "Number of Deposit Lines"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
+msgid "Payments"
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_post_move
@@ -311,23 +324,22 @@ msgid "Status"
 msgstr "Status"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:106
-#: code:addons/account_check_deposit/models/account_deposit.py:116
-#, python-format
-msgid ""
-"The check with amount %s and reference '%s' is in currency %s but the "
-"deposit is in currency %s."
-msgstr ""
-"Ček z zneskom %s in sklicem '%s' je v valuti %s, a depozit je v valuti %s."
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:127
+#: code:addons/account_check_deposit/models/account_deposit.py:126
 #, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting it."
 msgstr ""
 "Depozit '%s' je v overjenem stanju, zato ga morate preklicati preden bi ga "
 "brisali."
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:105
+#: code:addons/account_check_deposit/models/account_deposit.py:115
+#, python-format
+msgid ""
+"The line with amount %s and reference '%s' is in currency %s but the deposit "
+"is in currency %s."
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount
@@ -361,12 +373,54 @@ msgid "Validate"
 msgstr "Overi"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:185
+#: code:addons/account_check_deposit/models/account_deposit.py:186
 #, python-format
 msgid ""
-"You must configure the 'Check Deposit Offsetting Account' on the Accounting "
+"You must configure the 'Deposit Offsetting Account' on the Accounting "
 "Settings page"
 msgstr ""
+
+#~ msgid "Bank:"
+#~ msgstr "Banka:"
+
+#~ msgid "Beneficiary:"
+#~ msgstr "Upravičenec:"
+
+#, python-format
+#~ msgid "Check Deposit %s"
+#~ msgstr "Čekovni depozit %s"
+
+#, python-format
+#~ msgid "Check Deposit - Ref. Check %s"
+#~ msgstr "Čekovni depozit - sklic čeka %s"
+
+#~ msgid "Check Deposit n°"
+#~ msgstr "Čekovni depozit št."
+
+#~ msgid "Check Payments"
+#~ msgstr "Čekovna plačila"
+
+#~ msgid "Checks Deposit"
+#~ msgstr "Čekovni depozit"
+
+#~ msgid "Checks Deposits"
+#~ msgstr "Čekovni depoziti"
+
+#~ msgid "It acts as a default account for debit amount"
+#~ msgstr "Deluje kot privzeti konto za znesek obveznosti"
+
+#~ msgid "List of checks:"
+#~ msgstr "Seznam čekov:"
+
+#~ msgid "Number of Checks"
+#~ msgstr "Število čekov"
+
+#, python-format
+#~ msgid ""
+#~ "The check with amount %s and reference '%s' is in currency %s but the "
+#~ "deposit is in currency %s."
+#~ msgstr ""
+#~ "Ček z zneskom %s in sklicem '%s' je v valuti %s, a depozit je v valuti %s."
 
 #~ msgid "Checks Deposit Search"
 #~ msgstr "Iskalnik čekovnih depozitov"
