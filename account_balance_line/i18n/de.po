@@ -20,6 +20,5 @@ msgstr ""
 
 #. module: account_balance_line
 #: model_terms:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_tree
-#: model_terms:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_tree_grouped
 msgid "Total Balance"
 msgstr "Gesamtsaldo"
