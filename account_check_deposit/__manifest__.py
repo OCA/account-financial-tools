@@ -14,7 +14,7 @@
     'author': "Odoo Community Association (OCA),"
               "Akretion,"
               "Tecnativa",
-    'website': 'https://github.com/OCA/account-financial-tools/tree/12.0/'
+    'website': 'https://github.com/OCA/account-financial-tools'
                'account_check_deposit',
     'depends': [
         'account',

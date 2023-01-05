@@ -12,7 +12,7 @@
               "BCIM, "
               "Okia, "
               "Odoo Community Association (OCA)",
-    "website": "http://github.com/OCA/account-financial-tools",
+    "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
     "category": "Accounting",
     "license": "AGPL-3",
