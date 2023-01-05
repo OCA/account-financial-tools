@@ -10,7 +10,7 @@
     "category": "Accounting",
     "author": "GRAP,Odoo Community Association (OCA)",
     "maintainers": ["legalsylvain"],
-    "website": "http://www.github.com/OCA/account-financial-tools",
+    "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
     "depends": [
         "account",
