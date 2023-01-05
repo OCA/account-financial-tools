@@ -7,7 +7,7 @@
     'category': 'Accounting & Finance',
     'summary': 'Enable printing in sale and purchase receipts',
     'author': 'Pordenone Linux User Group (PNLUG), Odoo Community Association (OCA)',
-    'website': 'https://github.com/OCA/account-financial-reporting',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'license': 'AGPL-3',
     'depends': [
         'account_voucher'],
