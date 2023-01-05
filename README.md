@@ -27,7 +27,7 @@ addon | version | maintainers | summary
 [account_bank_statement_chatter](account_bank_statement_chatter/) | 12.0.1.0.0 | [![cubells](https://github.com/cubells.png?size=30px)](https://github.com/cubells) | Chatter on bank statements
 [account_cash_basis_group_base_line](account_cash_basis_group_base_line/) | 12.0.0.0.1 |  | Tax Cash Basis Group Base Lines
 [account_chart_update](account_chart_update/) | 12.0.1.0.3 |  | Wizard to update a company's account chart from a template
-[account_check_deposit](account_check_deposit/) | 12.0.1.0.1 |  | Manage deposit of checks to the bank
+[account_check_deposit](account_check_deposit/) | 12.0.2.0.1 |  | Manage deposit of checks, cash, etc. to the bank
 [account_clearance_plan](account_clearance_plan/) | 12.0.1.0.1 |  | This addon allows to define clearance plans in order to reorganize debts (own and customers' ones).
 [account_coa_menu](account_coa_menu/) | 12.0.1.0.0 |  | Adds menu entries for Chart of Accounts templates
 [account_cost_center](account_cost_center/) | 12.0.1.0.0 |  | Cost center information for invoice lines
