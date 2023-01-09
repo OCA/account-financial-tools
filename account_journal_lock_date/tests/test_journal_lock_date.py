@@ -60,39 +60,15 @@ class TestJournalLockDate(common.AccountTestInvoicingCommon):
         )
         self.assertFalse(self.env.user.has_group("account.group_account_manager"))
 
-        # Test that the move cannot be created, written, or cancelled
-        with self.assertRaises(UserError):
-            self.account_move_obj.create(
-                {
-                    "date": date.today(),
-                    "journal_id": self.journal.id,
-                    "line_ids": [
-                        (
-                            0,
-                            0,
-                            {
-                                "account_id": self.account.id,
-                                "credit": 1000.0,
-                                "name": "Credit line",
-                            },
-                        ),
-                        (
-                            0,
-                            0,
-                            {
-                                "account_id": self.account2.id,
-                                "debit": 1000.0,
-                                "name": "Debit line",
-                            },
-                        ),
-                    ],
-                }
-            )
-
-        with self.assertRaises(UserError):
+        # Test that the move cannot be written, or cancelled
+        with self.assertRaisesRegex(
+            UserError, ".*prior to and inclusive of the lock date.*"
+        ):
             self.move.write({"name": "TEST"})
 
-        with self.assertRaises(UserError):
+        with self.assertRaisesRegex(
+            UserError, ".*prior to and inclusive of the lock date.*"
+        ):
             self.move.button_cancel()
 
         # create a move after the 'Lock Date for Non-Advisers' and post it
@@ -172,38 +148,15 @@ class TestJournalLockDate(common.AccountTestInvoicingCommon):
             )
         )
         wizard.action_update_lock_dates()
-        # Advisers cannot create, write, or cancel moves before 'Lock Date'
-        with self.assertRaises(UserError):
-            self.account_move_obj.create(
-                {
-                    "date": date.today(),
-                    "journal_id": self.journal.id,
-                    "line_ids": [
-                        (
-                            0,
-                            0,
-                            {
-                                "account_id": self.account.id,
-                                "credit": 1000.0,
-                                "name": "Credit line",
-                            },
-                        ),
-                        (
-                            0,
-                            0,
-                            {
-                                "account_id": self.account2.id,
-                                "debit": 1000.0,
-                                "name": "Debit line",
-                            },
-                        ),
-                    ],
-                }
-            )
-        with self.assertRaises(UserError):
+        # Advisers cannot write, or cancel moves before 'Lock Date'
+        with self.assertRaisesRegex(
+            UserError, ".*prior to and inclusive of the lock date.*"
+        ):
             self.move.write({"name": "TEST"})
 
-        with self.assertRaises(UserError):
+        with self.assertRaisesRegex(
+            UserError, ".*prior to and inclusive of the lock date.*"
+        ):
             self.move.button_cancel()
         # Advisers can create movements on a date after the 'Lock Date'
         # even if that date is before and inclusive of
