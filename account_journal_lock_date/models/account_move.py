@@ -13,8 +13,11 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     def write(self, values):
+        names = self.mapped("name")
         res = super().write(values)
-        self._check_fiscalyear_lock_date()
+        for i, am in enumerate(self):
+            if "name" in values and values["name"] != names[i]:
+                am._check_fiscalyear_lock_date()
         return res
 
     def _check_fiscalyear_lock_date(self):
