@@ -4,7 +4,7 @@
 {
     "name": "Account Journal Lock Date",
     "summary": "Lock each journal independently",
-    "version": "14.0.1.0.1",
+    "version": "14.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV, Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
