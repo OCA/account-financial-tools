@@ -327,7 +327,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.account_template.tag_ids = [
             (6, 0, [self.account_tag_1.id, self.account_tag_2.id])
         ]
-        self.fp_template.note = "<p>Test note</p>"
+        self.fp_template.note = "Test note. \n \n Multiline. \n"
         self.fp_template.account_ids.account_dest_id = new_account_tmpl.id
         self.fp_template.tax_ids.tax_dest_id = self.tax_template.id
         wizard = self.wizard_obj.create(self.wizard_vals)
@@ -341,7 +341,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(wizard.account_ids.account_id, self.account_template)
         self.assertEqual(wizard.account_ids.type, "updated")
         self.assertTrue(wizard.fiscal_position_ids)
-        self.assertTrue(wizard.fiscal_position_ids.type, "updated")
+        self.assertEqual(wizard.fiscal_position_ids.type, "updated")
         self.assertEqual(
             wizard.fiscal_position_ids.fiscal_position_id, self.fp_template
         )
@@ -359,7 +359,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(self.account.name, self.account_template.name)
         self.assertIn(self.account_tag_1, self.account.tag_ids)
         self.assertIn(self.account_tag_2, self.account.tag_ids)
-        self.assertEqual(self.fp.note, self.fp_template.note)
+        self.assertEqual(self.fp.note, f"<p>{self.fp_template.note}</p>")
         self.assertEqual(self.fp.account_ids.account_dest_id, new_account)
         self.assertEqual(self.fp.tax_ids.tax_dest_id, self.tax)
         wizard.unlink()
@@ -384,7 +384,6 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertFalse(wizard.fiscal_position_ids)
         self.tax_template.description = "Test description"
         self.account_template.name = "Other name"
-        self.fp_template.note = "<p>Test note</p>"
         wizard.unlink()
         # Remove objects
         new_tax_tmpl.unlink()
