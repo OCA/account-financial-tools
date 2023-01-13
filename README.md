@@ -24,7 +24,7 @@ addon | version | maintainers | summary
 [account_asset_management](account_asset_management/) | 15.0.1.0.2 |  | Assets Management
 [account_asset_management_menu](account_asset_management_menu/) | 15.0.1.0.0 |  | Assets Management Menu
 [account_balance_line](account_balance_line/) | 15.0.1.1.0 |  | Display balance totals in move line view
-[account_chart_update](account_chart_update/) | 15.0.1.0.4 |  | Wizard to update a company's account chart from a template
+[account_chart_update](account_chart_update/) | 15.0.1.1.0 |  | Wizard to update a company's account chart from a template
 [account_chart_update_l10n_eu_oss](account_chart_update_l10n_eu_oss/) | 15.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Account Chart update OSS
 [account_chart_update_l10n_eu_oss_oca](account_chart_update_l10n_eu_oss_oca/) | 15.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Account Chart update OSS OCA
 [account_check_deposit](account_check_deposit/) | 15.0.1.0.0 |  | Manage deposit of checks to the bank
