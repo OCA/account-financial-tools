@@ -143,6 +143,11 @@ msgid ""
 msgstr ""
 
 #. module: account_menu
+#: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
+msgid "Sequence"
+msgstr ""
+
+#. module: account_menu
 #: model:ir.model,name:account_menu.model_account_tax_group
 msgid "Tax Group"
 msgstr "Groupe de taxe"
