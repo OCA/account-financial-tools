@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,6 +12,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "%s has already been credited/debited on the bank account."
+msgstr ""
 
 #. module: account_cash_deposit
 #: model:ir.actions.report,print_report_name:account_cash_deposit.report_account_cash_deposit
@@ -28,6 +35,11 @@ msgstr ""
 #. module: account_cash_deposit
 #: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
 msgid "<strong>Date:</strong>"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Loose Coins:</strong>"
 msgstr ""
 
 #. module: account_cash_deposit
@@ -203,6 +215,7 @@ msgid "Cash Units"
 msgstr ""
 
 #. module: account_cash_deposit
+#. odoo-python
 #: code:addons/account_cash_deposit/wizards/account_cash_order_reception.py:0
 #, python-format
 msgid "Cash reception confirmed on %s."
@@ -286,7 +299,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__display_name
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__display_name
 #: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__display_name
-#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -308,11 +320,6 @@ msgid "Followers"
 msgstr ""
 
 #. module: account_cash_deposit
-#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_channel_ids
-msgid "Followers (Channels)"
-msgstr ""
-
-#. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
@@ -323,6 +330,7 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: account_cash_deposit
+#. odoo-python
 #: code:addons/account_cash_deposit/models/cash_unit.py:0
 #, python-format
 msgid "For a coin roll, the coin quantity must be strictly positive."
@@ -334,11 +342,15 @@ msgid "Group By"
 msgstr ""
 
 #. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__id
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__id
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__id
 #: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__id
-#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency__id
 msgid "ID"
 msgstr ""
 
@@ -354,7 +366,6 @@ msgstr ""
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_needaction
-#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
@@ -393,7 +404,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line____last_update
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception____last_update
 #: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit____last_update
-#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -490,11 +500,7 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: account_cash_deposit
-#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_unread_counter
-msgid "Number of unread messages"
-msgstr ""
-
-#. module: account_cash_deposit
+#. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid ""
@@ -554,6 +560,11 @@ msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "State"
+msgstr ""
+
+#. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__state
 msgid "Status"
 msgstr ""
@@ -574,12 +585,14 @@ msgid "Subtotal"
 msgstr ""
 
 #. module: account_cash_deposit
+#. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid "The %s is not in draft state, so you cannot delete it."
 msgstr ""
 
 #. module: account_cash_deposit
+#. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid "The Inter-Banks Transfer Account is not configured."
@@ -606,6 +619,7 @@ msgid "The value must be strictly positive."
 msgstr ""
 
 #. module: account_cash_deposit
+#. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid "There are no non-zero lines on %s!"
@@ -652,16 +666,6 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: account_cash_deposit
-#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: account_cash_deposit
-#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr ""
-
-#. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__date
 msgid "Used as date for the journal entry."
 msgstr ""
@@ -687,6 +691,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_cash_deposit
+#. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid ""
