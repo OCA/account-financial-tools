@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_cash_deposit_user,Full rights on account.cash.deposit to Accountant,model_account_cash_deposit,account.group_account_user,1,1,1,1
+access_account_cash_deposit_line_user,Full rights on account.cash.deposit.line to Accountant,model_account_cash_deposit_line,account.group_account_user,1,1,1,1
+access_account_cash_order_reception,Full rights on account.cash.order.reception wizard,model_account_cash_order_reception,account.group_account_user,1,1,1,1
+cash_unit_read,Read rights on cash.unit to everybody,model_cash_unit,,1,0,0,0
+cash_unit_full,Full rights on cash.unit to System group,model_cash_unit,base.group_system,1,1,1,1
