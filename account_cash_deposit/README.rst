@@ -14,13 +14,13 @@ Account Cash Deposit
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/14.0/account_cash_deposit
+    :target: https://github.com/OCA/account-financial-tools/tree/16.0/account_cash_deposit
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-14-0/account-financial-tools-14-0-account_cash_deposit
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_cash_deposit
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/92/14.0
+    :target: https://runbot.odoo-community.org/runbot/92/16.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -37,7 +37,7 @@ Configuration
 
 First, for each currency of your cash boxes, you must define the bank notes and coin rolls for that currency (coin rolls are often standardised by the Central Bank). You can also definie the coins, but it's not useful if your bank only accept coin rolls and not coins.
 
-.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/14.0/account_cash_deposit/static/description/currency_form_view.png
+.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_cash_deposit/static/description/currency_form_view.png
    :scale: 100 %
    :alt: Currency form view
 
@@ -55,7 +55,7 @@ To create a new cash **deposit**, go to the menu *Invoicing > Accounting > Misce
 * credits the cash account,
 * debits the inter-banks transfer account.
 
-.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/14.0/account_cash_deposit/static/description/cash_deposit_form.png
+.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_cash_deposit/static/description/cash_deposit_form.png
    :scale: 100 %
    :alt: Cash Deposit form view
 
@@ -70,7 +70,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_cash_deposit%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_cash_deposit%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -100,6 +100,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/14.0/account_cash_deposit>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/16.0/account_cash_deposit>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
