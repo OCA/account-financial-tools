@@ -4,7 +4,7 @@
 {
     "name": "Product Category Taxes",
     "summary": "Configure taxes in the product category",
-    "version": "13.0.1.2.1",
+    "version": "13.0.1.2.2",
     "license": "AGPL-3",
     "author": "ForgeFlow S.L., Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
