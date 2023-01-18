@@ -30,11 +30,6 @@ msgid "<span class=\"o_form_label\">Update Chart Template</span>"
 msgstr ""
 
 #. module: account_chart_update
-#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
-msgid "<span states=\"init,ready\"> or </span>"
-msgstr ""
-
-#. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
 #, fuzzy
 msgid "Account fields"
@@ -99,7 +94,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__continue_on_errors
-msgid "Continue on errors"
+msgid "Continue On Errors"
 msgstr ""
 
 #. module: account_chart_update
@@ -108,6 +103,7 @@ msgid "Create/Update"
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Created account %s."
@@ -126,6 +122,7 @@ msgid "Created by"
 msgstr "Aangemaakt door"
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Created fiscal position %s."
@@ -144,12 +141,14 @@ msgid "Created on"
 msgstr "Aangemaakt op"
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Created tax %s."
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Deactivated tax %s."
@@ -168,13 +167,13 @@ msgid ""
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Differences in these fields: %s."
 msgstr ""
 
 #. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__display_name
@@ -187,12 +186,14 @@ msgid "Display Name"
 msgstr "Te tonen naam"
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Exception creating account %s."
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Exception writing account %s."
@@ -281,7 +282,6 @@ msgid "Here you can set the matching order."
 msgstr ""
 
 #. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__id
@@ -321,7 +321,6 @@ msgid "Language"
 msgstr ""
 
 #. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching____last_update
@@ -381,12 +380,14 @@ msgid "Messages and Errors"
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Missing XML-ID."
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Name or description not found."
@@ -394,17 +395,17 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
-msgid "New accounts"
+msgid "New Accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
+msgid "New Taxes"
 msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_fps
 msgid "New fiscal positions"
-msgstr ""
-
-#. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
-msgid "New taxes"
 msgstr ""
 
 #. module: account_chart_update
@@ -420,18 +421,21 @@ msgid "Next"
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "No account found with this code."
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "No fiscal position found with this name."
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "No real account found for template account with ID %s"
@@ -455,6 +459,7 @@ msgid "Notes"
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid ""
@@ -469,6 +474,7 @@ msgid "Other options"
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Post-updated account fields for taxes with IDs %s."
@@ -541,6 +547,7 @@ msgid "Tax fields"
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Tax is disabled."
@@ -587,6 +594,7 @@ msgid ""
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "To deactivate: not in the template"
@@ -671,29 +679,38 @@ msgid "Update taxes"
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
+msgid "Updated Accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
+msgid "Updated Taxes"
+msgstr ""
+
+#. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account %s."
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account %s. (Recreated XML-ID)"
 msgstr ""
 
 #. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
-msgid "Updated accounts"
-msgstr ""
-
-#. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated fiscal position %s."
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated fiscal position %s. (Recreated XML-ID)"
@@ -705,20 +722,17 @@ msgid "Updated fiscal positions"
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated tax %s."
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated tax %s. (Recreated XML-IDs)"
-msgstr ""
-
-#. module: account_chart_update
-#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
-msgid "Updated taxes"
 msgstr ""
 
 #. module: account_chart_update
@@ -760,6 +774,7 @@ msgid "Wizard completed"
 msgstr ""
 
 #. module: account_chart_update
+#. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid ""
