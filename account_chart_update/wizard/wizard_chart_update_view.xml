@@ -16,7 +16,7 @@
                         statusbar_colors='{"ready":"blue","done":"blue"}'
                     />
                 </header>
-                <group attrs="{'invisible':[('state','!=','init')]}">
+                <div attrs="{'invisible':[('state','!=','init')]}">
                     <h3>
                         <p>
                             <center>
@@ -26,7 +26,7 @@
                         </center>
                         </p>
                     </h3>
-                </group>
+                </div>
                 <group
                     string="Chart of Accounts"
                     attrs="{'invisible':[('state','!=','init')]}"
@@ -59,7 +59,7 @@
                                 <field name="recreate_xml_ids" />
                             </group>
                         </group>
-                        <group>
+                        <div>
                             <h5>
                                 <p>
                                 If you leave these options set, the wizard will
@@ -70,7 +70,7 @@
                                 Note: Only the changed fields are updated.
                             </p>
                             </h5>
-                        </group>
+                        </div>
                     </page>
                     <page
                         string="Field options"
@@ -335,25 +335,28 @@
                     </group>
                 </group>
                 <footer>
-                    <span states="init">
-                        <button
-                            name="action_find_records"
-                            string="Next"
-                            class="oe_highlight"
-                            type="object"
-                        />
-                    </span>
-                    <span states="ready">
-                        <button name="action_init" string="Previous" type="object" />
-                        <button
-                            name="action_update_records"
-                            string="Create/Update"
-                            type="object"
-                            class="oe_highlight"
-                        />
-                    </span>
-                    <span states="init,ready"> or </span>
-                    <button special="cancel" string="Close" class="oe_link" />
+                    <button
+                        name="action_find_records"
+                        string="Next"
+                        type="object"
+                        class="btn-primary"
+                        states="init"
+                    />
+                    <button
+                        name="action_init"
+                        string="Previous"
+                        type="object"
+                        class="btn-secondary"
+                        states="ready"
+                    />
+                    <button
+                        name="action_update_records"
+                        string="Create/Update"
+                        type="object"
+                        class="btn-primary"
+                        states="ready"
+                    />
+                    <button special="cancel" string="Close" class="btn-secondary" />
                 </footer>
             </form>
         </field>
