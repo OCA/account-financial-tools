@@ -23,12 +23,12 @@ class TestAccountChartUpdate(common.HttpCase):
             }
         )
 
-    def _create_account_tmpl(self, name, code, user_type, chart_template):
+    def _create_account_tmpl(self, name, code, account_type, chart_template):
         record = self.env["account.account.template"].create(
             {
                 "name": name,
                 "code": code,
-                "user_type_id": user_type.id,
+                "account_type": account_type,
                 "chart_template_id": chart_template and chart_template.id,
             }
         )
@@ -118,26 +118,19 @@ class TestAccountChartUpdate(common.HttpCase):
                 ]
             }
         )
-        self.account_type = self.env["account.account.type"].create(
-            {
-                "name": "Test account_chart_update account type",
-                "internal_group": "income",
-            }
-        )
         self.account_template = self._create_account_tmpl(
-            "Test", "100000", self.account_type, False
+            "Test", "100000", "income", False
         )
         self.chart_template = self.env.ref(
             "l10n_generic_coa.configurable_chart_template"
         )
         # Avoid re-creating taxes.
         # If false, the taxes that are created will be overwrited.
-        self.chart_template.complete_tax_set = True
         self.account_template.chart_template_id = self.chart_template.id
         self.account_template_pl = self._create_account_tmpl(
             "Undistributed Profits/Losses",
             "999999",
-            self.env.ref("account.data_unaffected_earnings"),
+            "equity",
             self.chart_template,
         )
         self.tax_template = self._create_tax_tmpl("Test tax", self.chart_template)
@@ -236,7 +229,7 @@ class TestAccountChartUpdate(common.HttpCase):
             {"tag_ids": [(6, 0, self.account_tag_1.ids)]}
         )
         new_account_tmpl = self._create_account_tmpl(
-            "Test account 2", "333333", self.account_type, self.chart_template
+            "Test account 2", "333333", "income", self.chart_template
         )
         new_fp = self._create_fp_tmpl("Test fp 2", self.chart_template)
         fp_template_tax = self.env["account.fiscal.position.tax.template"].create(
@@ -450,7 +443,7 @@ class TestAccountChartUpdate(common.HttpCase):
         # Errors on account_creation
         self.account_template.currency_id = False
         new_account_tmpl_2 = self._create_account_tmpl(
-            "Test account 3", "444444", self.account_type, self.chart_template
+            "Test account 3", "444444", "income", self.chart_template
         )
         wizard = self.wizard_obj.create(self.wizard_vals)
         wizard.action_find_records()
@@ -543,9 +536,9 @@ class TestAccountChartUpdate(common.HttpCase):
             wizard.fiscal_position_ids.fiscal_position_id, self.fp_template
         )
         # There is no XML-ID
-        self.assertFalse(list(self.tax.get_xml_id().values())[0])
-        self.assertFalse(list(self.account.get_xml_id().values())[0])
-        self.assertFalse(list(self.fp.get_xml_id().values())[0])
+        self.assertFalse(list(self.tax.get_external_id().values())[0])
+        self.assertFalse(list(self.account.get_external_id().values())[0])
+        self.assertFalse(list(self.fp.get_external_id().values())[0])
         # Update for recreating XML-ID
         wizard.action_update_records()
         self.assertEqual(wizard.updated_taxes, 1)
@@ -555,9 +548,9 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(self.account.name, self.account_template.name)
         self.assertEqual(self.fp.note, self.fp_template.note)
         # There is XML-ID now
-        self.assertTrue(list(self.tax.get_xml_id().values())[0])
-        self.assertTrue(list(self.account.get_xml_id().values())[0])
-        self.assertTrue(list(self.fp.get_xml_id().values())[0])
+        self.assertTrue(list(self.tax.get_external_id().values())[0])
+        self.assertTrue(list(self.account.get_external_id().values())[0])
+        self.assertTrue(list(self.fp.get_external_id().values())[0])
         wizard.unlink()
 
         # Test 2 recreate XML-ID
@@ -575,16 +568,16 @@ class TestAccountChartUpdate(common.HttpCase):
             wizard.fiscal_position_ids.fiscal_position_id, self.fp_template
         )
         # There is no XML-ID
-        self.assertFalse(list(self.tax.get_xml_id().values())[0])
-        self.assertFalse(list(self.account.get_xml_id().values())[0])
-        self.assertFalse(list(self.fp.get_xml_id().values())[0])
+        self.assertFalse(list(self.tax.get_external_id().values())[0])
+        self.assertFalse(list(self.account.get_external_id().values())[0])
+        self.assertFalse(list(self.fp.get_external_id().values())[0])
         # Update for recreating XML-ID
         wizard.action_update_records()
         self.assertEqual(wizard.updated_taxes, 1)
         self.assertEqual(wizard.updated_accounts, 1)
         self.assertEqual(wizard.updated_fps, 1)
         # There is XML-ID now
-        self.assertTrue(list(self.tax.get_xml_id().values())[0])
-        self.assertTrue(list(self.account.get_xml_id().values())[0])
-        self.assertTrue(list(self.fp.get_xml_id().values())[0])
+        self.assertTrue(list(self.tax.get_external_id().values())[0])
+        self.assertTrue(list(self.account.get_external_id().values())[0])
+        self.assertTrue(list(self.fp.get_external_id().values())[0])
         wizard.unlink()

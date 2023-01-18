@@ -448,12 +448,24 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             repartition_type = tpl.repartition_type
             account_id = self.find_account_by_templates(tpl.account_id)
             tags = self.env["account.account.tag"]
-            tags += tpl.plus_report_line_ids.mapped("tag_ids").filtered(
-                lambda x: not x.tax_negate
+            plus_expressions = tpl.plus_report_expression_ids.filtered(
+                lambda x: x.engine == "tax_tags"
             )
-            tags += tpl.minus_report_line_ids.mapped("tag_ids").filtered(
-                lambda x: x.tax_negate
+            for expression in plus_expressions:
+                country = expression.report_line_id.report_id.country_id
+                existing_tags = self.env["account.account.tag"]._get_tax_tags(
+                    expression.formula, country.id
+                )
+                tags |= existing_tags.filtered(lambda x: not x.tax_negate)
+            minus_expressions = tpl.minus_report_expression_ids.filtered(
+                lambda x: x.engine == "tax_tags"
             )
+            for expression in minus_expressions:
+                country = expression.report_line_id.report_id.country_id
+                existing_tags = self.env["account.account.tag"]._get_tax_tags(
+                    expression.formula, country.id
+                )
+                tags |= existing_tags.filtered(lambda x: x.tax_negate)
             tags += tpl.tag_ids
             existing = self.env["account.tax.repartition.line"]
             existing_candidates = current_repartition.filtered(
@@ -719,7 +731,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 if expected != [] and (
                     key
                     in ["invoice_repartition_line_ids", "refund_repartition_line_ids"]
-                    or expected != real[key]
+                    or (isinstance(expected, models.Model) and expected != real[key])
+                    or (not isinstance(expected, models.Model))
                 ):
                     result[key] = expected
             else:
