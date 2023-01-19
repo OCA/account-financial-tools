@@ -4,7 +4,7 @@
 
 {
     "name": "Disable Account Template Items",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Allow to disable / enable account template items"
