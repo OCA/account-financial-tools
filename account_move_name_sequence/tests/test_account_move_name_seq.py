@@ -309,7 +309,6 @@ class TestAccountMoveNameSequence(TransactionCase):
                 ],
             }
         )
-        in_refund_invoice._compute_split_sequence()
         self.assertEqual(in_refund_invoice.name, "/")
         in_refund_invoice.action_post()
         error_msg = "You cannot delete an item linked to a posted entry."
