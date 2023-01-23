@@ -1,19 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
     <record id="view_account_group_form" model="ir.ui.view">
         <field name="name">account.group.form</field>
         <field name="model">account.group</field>
-        <field name="inherit_id" ref="account.view_account_group_form"/>
+        <field name="inherit_id" ref="account.view_account_group_form" />
         <field name="arch" type="xml">
             <xpath expr="//group" position="after">
                 <group>
                     <group id="links">
-                        <label for="account_ids"/>
-                        <field name="account_ids" widget="many2many" nolabel="1"
-                            options="{'no_create_edit': True}"/>
+                        <label for="account_ids" />
+                        <field
+                            name="account_ids"
+                            widget="many2many"
+                            nolabel="1"
+                            options="{'no_create_edit': True}"
+                        />
                     </group>
-                </group>                                  
+                </group>
             </xpath>
         </field>
     </record>
