@@ -3,7 +3,7 @@
 
 {
     "name": "Account Group Menu",
-    "version": "12.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Adds menu entries for Account Group and Tax Group",
