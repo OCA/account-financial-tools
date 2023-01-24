@@ -24,7 +24,7 @@
                         /></em> that require to know the VAT number of the partner.
                 </div>
             </div>
-            <group name="fiscal_information" position="inside">
+            <group name="sale" position="inside">
                 <field name="show_warning_vat_required" invisible="1" />
             </group>
         </field>
