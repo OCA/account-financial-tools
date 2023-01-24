@@ -68,3 +68,6 @@ class AccountMove(models.Model):
     def _post(self, soft=True):
         self.flush()
         return super()._post(soft=soft)
+
+    def _get_last_sequence(self, relaxed=False, with_prefix=None, lock=True):
+        return super()._get_last_sequence(relaxed, None, lock)
