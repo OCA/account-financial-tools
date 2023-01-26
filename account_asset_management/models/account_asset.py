@@ -67,6 +67,9 @@ class AccountAsset(models.Model):
     )
     salvage_value = fields.Float(
         digits="Account",
+        compute="_compute_salvage_value",
+        store=True,
+        readonly=False,
         states=READONLY_STATES,
         help="The estimated value that an asset will realize upon "
         "its sale at the end of its useful life.\n"
@@ -301,6 +304,18 @@ class AccountAsset(models.Model):
                 asset.depreciation_line_ids.filtered("move_id")
             )
 
+    def _get_salvage_value_profile(self):
+        self.ensure_one()
+        salvage_value = self.profile_id.salvage_value
+        if self.profile_id.salvage_type == "percent":
+            salvage_value = (salvage_value / 100) * self.purchase_value
+        return salvage_value
+
+    @api.depends("profile_id")
+    def _compute_salvage_value(self):
+        for asset in self:
+            asset.salvage_value = asset._get_salvage_value_profile()
+
     @api.depends("purchase_value", "salvage_value", "method")
     def _compute_depreciation_base(self):
         for asset in self:
@@ -444,9 +459,6 @@ class AccountAsset(models.Model):
     @api.model
     def create(self, vals):
         asset = super().create(vals)
-        if self.env.context.get("create_asset_from_move_line"):
-            # Trigger compute of depreciation_base
-            asset.salvage_value = 0.0
         asset._create_first_asset_line()
         return asset
 
