@@ -15,23 +15,20 @@ class ResPartner(models.Model):
 
     @api.model
     def simple_vat_check(self, country_code, vat_number):
-        res = super(ResPartner, self).simple_vat_check(
-            country_code,
-            vat_number,
-        )
-        partner = self.env.context.get("vat_partner")
+        res = super().simple_vat_check(country_code, vat_number)
+        partner = self._context.get("vat_partner")
         if partner:
             partner.update({"vies_passed": False})
         return res
 
     @api.model
     def vies_vat_check(self, country_code, vat_number):
-        partner = self.env.context.get("vat_partner")
+        partner = self._context.get("vat_partner")
         if partner:
             # If there's an exception checking VIES, the upstream method will
             # call simple_vat_check and thus the flag will be removed
             partner.update({"vies_passed": True})
-        res = super(ResPartner, self).vies_vat_check(country_code, vat_number)
+        res = super().vies_vat_check(country_code, vat_number)
         if res is False:
             if partner:
                 partner.update({"vies_passed": False})
