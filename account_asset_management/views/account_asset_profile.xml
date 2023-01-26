@@ -20,6 +20,22 @@
                     </div>
                     <group>
                         <group>
+                            <label for="salvage_value" />
+                            <div>
+                                <field
+                                    name="salvage_value"
+                                    class="oe_inline"
+                                    nolabel="1"
+                                />
+                                <span
+                                    class="o_form_label oe_inline"
+                                    attrs="{'invisible':[('salvage_type','!=','percent')]}"
+                                >%</span>
+                            </div>
+                            <field
+                                name="salvage_type"
+                                attrs="{'required': [('salvage_value', '!=', 0.0)]}"
+                            />
                             <field name="company_id" invisible="1" />
                             <field name="group_ids" widget="many2many_tags" />
                             <field name="asset_product_item" />
