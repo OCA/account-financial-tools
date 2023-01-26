@@ -74,6 +74,15 @@ class AccountAssetProfile(models.Model):
         check_company=True,
         string="Asset Groups",
     )
+    salvage_value = fields.Float(
+        digits="Account",
+        help="The estimated value that an asset will realize upon "
+        "its sale at the end of its useful life.\n"
+        "This value is used to determine the depreciation amounts.",
+    )
+    salvage_type = fields.Selection(
+        selection=[("fixed", "Fixed"), ("percent", "Percentage of Price")]
+    )
     method = fields.Selection(
         selection=lambda self: self._selection_method(),
         string="Computation Method",
