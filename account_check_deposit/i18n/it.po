@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2023-01-03 13:47+0000\n"
+"PO-Revision-Date: 2023-01-30 13:47+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -137,7 +137,7 @@ msgstr "Azienda"
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_config_settings
 msgid "Config Settings"
-msgstr "Impostazioni Configurazione"
+msgstr "Impostazioni di configurazione"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__create_uid
