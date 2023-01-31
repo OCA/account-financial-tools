@@ -17,22 +17,23 @@ class ResPartner(models.Model):
     def simple_vat_check(self, country_code, vat_number):
         res = super().simple_vat_check(country_code, vat_number)
         partner = self._context.get("vat_partner")
-        if partner:
+        if res is False and partner:
             partner.update({"vies_passed": False})
+        elif partner:
+            if self.env.context.get("company_id"):
+                company = self.env["res.company"].browse(self.env.context["company_id"])
+            else:
+                company = self.env.company
+            if company.vat_check_vies:
+                self.vies_vat_check(country_code, vat_number)
         return res
 
     @api.model
     def vies_vat_check(self, country_code, vat_number):
         partner = self._context.get("vat_partner")
-        if partner:
-            # If there's an exception checking VIES, the upstream method will
-            # call simple_vat_check and thus the flag will be removed
-            partner.update({"vies_passed": True})
         res = super().vies_vat_check(country_code, vat_number)
-        if res is False:
-            if partner:
-                partner.update({"vies_passed": False})
-            return self.simple_vat_check(country_code, vat_number)
+        if res is False and partner:
+            partner.update({"vies_passed": False})
         elif partner:
             partner.update({"vies_passed": True})
         return res
@@ -40,10 +41,25 @@ class ResPartner(models.Model):
     @api.constrains("vat", "country_id")
     def check_vat(self):
         self.update({"vies_passed": False})
-        for partner in self:
+        for partner in self.sorted(lambda p: bool(p.commercial_partner_id)):
             partner = partner.with_context(vat_partner=partner)
-            super(ResPartner, partner).check_vat()
+            if (
+                partner.commercial_partner_id
+                and partner.commercial_partner_id != partner
+            ):
+                partner.update(
+                    {"vies_passed": partner.commercial_partner_id.vies_passed}
+                )
+            else:
+                super(ResPartner, partner).check_vat()
         return True
+
+    @api.onchange("vat", "country_id")
+    def _onchange_check_vies(self):
+        self.update({"vies_passed": False})
+        return super(
+            ResPartner, self.with_context(vat_partner=self)
+        )._onchange_check_vies()
 
     @api.model
     def _build_vat_error_message(self, country_code, wrong_vat, record_label):
