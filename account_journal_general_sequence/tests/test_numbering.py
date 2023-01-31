@@ -39,6 +39,9 @@ class RenumberCase(TestAccountReconciliationCommon):
     @users("test_manager")
     def test_renumber(self):
         # Post invoices in wrong order
+        next_year_invoice = self._create_invoice(
+            date_invoice="2023-12-31", auto_validate=True
+        )
         new_invoice = self._create_invoice(
             date_invoice="2022-05-10", auto_validate=True
         )
@@ -59,10 +62,12 @@ class RenumberCase(TestAccountReconciliationCommon):
         self.assertGreater(opening_invoice.entry_number, new_invoice.entry_number)
         # Renumber again, starting from zero
         wiz_f = Form(self.env["account.move.renumber.wizard"])
-        wiz_f.starting_number = 0
         wiz = wiz_f.save()
         wiz.action_renumber()
-        self.assertEqual(opening_invoice.entry_number, "2022/0000000000")
+        self.assertEqual(opening_invoice.entry_number, "2022/0000000001")
+        self.assertEqual(old_invoice.entry_number, "2022/0000000002")
+        self.assertEqual(new_invoice.entry_number, "2022/0000000003")
+        self.assertEqual(next_year_invoice.entry_number, "2023/0000000001")
 
     @users("test_invoicer")
     def test_install_no_entry_number(self):
