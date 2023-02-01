@@ -26,7 +26,7 @@ addon | version | maintainers | summary
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 16.0.1.1.0 |  | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 16.0.1.0.1 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Create Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 16.0.1.0.2 |  | Account Invoice Constraint Chronology
-[account_journal_general_sequence](account_journal_general_sequence/) | 16.0.1.0.1 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Add configurable sequence to account moves, per journal
+[account_journal_general_sequence](account_journal_general_sequence/) | 16.0.1.0.2 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Add configurable sequence to account moves, per journal
 [account_move_name_sequence](account_move_name_sequence/) | 16.0.1.1.2 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) [![moylop260](https://github.com/moylop260.png?size=30px)](https://github.com/moylop260) [![frahikLV](https://github.com/frahikLV.png?size=30px)](https://github.com/frahikLV) | Generate journal entry number from sequence
 [account_move_print](account_move_print/) | 16.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds the option to print Journal Entries
 [account_template_active](account_template_active/) | 16.0.1.0.1 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Allow to disable / enable account template items (tax, fiscal position, account)
