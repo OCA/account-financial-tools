@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo-addon-account_asset_management>=16.0dev,<16.1dev',
         'odoo-addon-account_cash_deposit>=16.0dev,<16.1dev',
+        'odoo-addon-account_chart_update>=16.0dev,<16.1dev',
         'odoo-addon-account_fiscal_position_vat_check>=16.0dev,<16.1dev',
         'odoo-addon-account_fiscal_year>=16.0dev,<16.1dev',
         'odoo-addon-account_invoice_constraint_chronology>=16.0dev,<16.1dev',
