@@ -22,6 +22,7 @@ msgid "Contact"
 msgstr "Contacto"
 
 #. module: base_vat_optional_vies
+#. odoo-python
 #: code:addons/base_vat_optional_vies/models/res_partner.py:0
 #, python-format
 msgid ""
