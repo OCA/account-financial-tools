@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_fiscal_year_auto_create
+# 	* account_fiscal_year_auto_create
 #
 msgid ""
 msgstr ""
@@ -19,17 +19,21 @@ msgstr ""
 #. module: account_fiscal_year_auto_create
 #: model:ir.actions.server,name:account_fiscal_year_auto_create.cron_fiscal_year_auto_create_ir_actions_server
 #: model:ir.cron,cron_name:account_fiscal_year_auto_create.cron_fiscal_year_auto_create
-#: model:ir.cron,name:account_fiscal_year_auto_create.cron_fiscal_year_auto_create
 msgid "Auto Create Fiscal Years"
 msgstr "Créer Automatiquement Les Exercices Fiscaux"
 
 #. module: account_fiscal_year_auto_create
-#: code:addons/account_fiscal_year_auto_create/models/account_fiscal_year.py:45
+#. odoo-python
+#: code:addons/account_fiscal_year_auto_create/models/account_fiscal_year.py:0
 #, python-format
-msgid "FY %s - %s"
-msgstr "AF %s - %s"
+msgid "FY %(date_to)s - %(date_from)s"
+msgstr ""
 
 #. module: account_fiscal_year_auto_create
 #: model:ir.model,name:account_fiscal_year_auto_create.model_account_fiscal_year
 msgid "Fiscal Year"
 msgstr "Exercice Fiscal"
+
+#, python-format
+#~ msgid "FY %s - %s"
+#~ msgstr "AF %s - %s"
