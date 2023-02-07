@@ -412,8 +412,9 @@ class AccountLoanLine(models.Model):
 
     def view_account_moves(self):
         self.ensure_one()
-        action = self.env.ref("account.action_move_line_form")
-        result = action.read()[0]
+        result = self.env["ir.actions.act_window"]._for_xml_id(
+            "account.action_move_line_form"
+        )
         result["context"] = {
             "default_loan_line_id": self.id,
             "default_loan_id": self.loan_id.id,
@@ -427,8 +428,9 @@ class AccountLoanLine(models.Model):
 
     def view_account_invoices(self):
         self.ensure_one()
-        action = self.env.ref("account.action_move_out_invoice_type")
-        result = action.read()[0]
+        result = self.env["ir.actions.act_window"]._for_xml_id(
+            "account.action_move_out_invoice_type"
+        )
         result["context"] = {
             "default_loan_line_id": self.id,
             "default_loan_id": self.loan_id.id,
