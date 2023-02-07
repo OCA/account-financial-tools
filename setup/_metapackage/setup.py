@@ -47,6 +47,7 @@ setuptools.setup(
         'odoo14-addon-account_no_default',
         'odoo14-addon-account_reconcile_show_boolean',
         'odoo14-addon-account_sequence_option',
+        'odoo14-addon-account_spread_cost_revenue',
         'odoo14-addon-account_template_active',
         'odoo14-addon-base_vat_optional_vies',
         'odoo14-addon-product_category_tax',
