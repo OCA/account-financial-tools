@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_spread_cost_revenue_full,Full access on account.spread,model_account_spread,account.group_account_manager,1,1,1,1
+access_account_spread_cost_revenue_read,Read access on account.spread,model_account_spread,account.group_account_invoice,1,0,0,0
+access_account_spread_cost_revenue_line_full,Full access on account.spread.line,model_account_spread_line,account.group_account_manager,1,1,1,1
+access_account_spread_cost_revenue_line_read,Read access on account.spread.line,model_account_spread_line,account.group_account_invoice,1,0,0,0
+access_account_spread_cost_revenue_template_full,Full access on account.spread.template,model_account_spread_template,account.group_account_manager,1,1,1,1
+access_account_spread_cost_revenue_template_read,Read access on account.spread.template,model_account_spread_template,account.group_account_invoice,1,0,0,0
+access_account_spread_cost_revenue_template_auto_full,Full access on account.spread.template.auto,model_account_spread_template_auto,account.group_account_manager,1,1,1,1
+access_account_spread_cost_revenue_template_auto_read,Read access on account.spread.template.auto,model_account_spread_template_auto,account.group_account_invoice,1,0,0,0
+access_account_spread_invoice_line_link_wizard,access_account_spread_invoice_line_link_wizard,model_account_spread_invoice_line_link_wizard,base.group_user,1,1,1,1
