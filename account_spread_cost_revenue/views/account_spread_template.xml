@@ -26,6 +26,7 @@
                             <field name="period_number" />
                             <field name="period_type" />
                             <field name="start_date" />
+                            <field name="days_calc" />
                         </group>
                         <group>
                             <field name="use_invoice_line_account" />
