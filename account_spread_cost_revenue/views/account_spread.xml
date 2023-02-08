@@ -249,6 +249,7 @@
                                 domain="[('company_id', '=', company_id)]"
                                 widget="selection"
                             />
+                            <field name="days_calc" />
                         </group>
                     </group>
                     <notebook name="notebook">
