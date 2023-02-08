@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-account-financial-tools Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-account_asset_low_value>=15.0dev,<15.1dev',
         'odoo-addon-account_asset_management>=15.0dev,<15.1dev',
         'odoo-addon-account_asset_management_menu>=15.0dev,<15.1dev',
         'odoo-addon-account_balance_line>=15.0dev,<15.1dev',
