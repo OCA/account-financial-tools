@@ -4,7 +4,7 @@
 import datetime
 
 from odoo.exceptions import UserError
-from odoo.tests import common
+from odoo.tests import Form, common
 
 
 class TestComputeSpreadBoard(common.TransactionCase):
@@ -69,6 +69,34 @@ class TestComputeSpreadBoard(common.TransactionCase):
                 "estimated_amount": 1000.0,
                 "journal_id": journal.id,
                 "invoice_type": "out_invoice",
+            }
+        )
+
+        self.spread3 = self.env["account.spread"].create(
+            {
+                "name": "test by cal days",
+                "debit_account_id": self.spread_account.id,
+                "credit_account_id": self.expense_account.id,
+                "period_number": 12,
+                "period_type": "month",
+                "spread_date": "2017-02-01",
+                "estimated_amount": 12000.0,
+                "journal_id": journal.id,
+                "invoice_type": "out_invoice",
+                "days_calc": True,
+            }
+        )
+
+        self.template = self.env["account.spread.template"].create(
+            {
+                "name": "test",
+                "spread_type": "purchase",
+                "period_number": 5,
+                "period_type": "month",
+                "start_date": "2017-01-01",
+                "spread_account_id": self.spread_account.id,
+                "spread_journal_id": journal.id,
+                "days_calc": True,
             }
         )
 
@@ -617,3 +645,83 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
         self.assertAlmostEqual(self.spread.unspread_amount, 682.81)
         self.assertAlmostEqual(self.spread.unposted_amount, 682.81)
+
+    def test_19_supplier_invoice_calc_day(self):
+        self.assertTrue(self.spread3.days_calc)
+        self.spread3.compute_spread_board()
+        spread_lines = self.spread3.line_ids
+        self.assertEqual(len(spread_lines), 12)
+        # Calculate by day has formula:
+        # (amount spread cost / all spread cost day) * day of <period_type>
+        self.assertAlmostEqual(920.55, spread_lines[0].amount)
+        self.assertAlmostEqual(1019.18, spread_lines[1].amount)
+        self.assertAlmostEqual(986.30, spread_lines[2].amount)
+        self.assertAlmostEqual(1019.18, spread_lines[3].amount)
+        self.assertAlmostEqual(986.30, spread_lines[4].amount)
+        self.assertAlmostEqual(1019.18, spread_lines[5].amount)
+        self.assertAlmostEqual(1019.18, spread_lines[6].amount)
+        self.assertAlmostEqual(986.30, spread_lines[7].amount)
+        self.assertAlmostEqual(1019.18, spread_lines[8].amount)
+        self.assertAlmostEqual(986.30, spread_lines[9].amount)
+        self.assertAlmostEqual(1019.18, spread_lines[10].amount)
+        self.assertAlmostEqual(1019.17, spread_lines[11].amount)  # total left
+
+        self.assertEqual(datetime.date(2017, 2, 28), spread_lines[0].date)
+        self.assertEqual(datetime.date(2017, 3, 31), spread_lines[1].date)
+        self.assertEqual(datetime.date(2017, 4, 30), spread_lines[2].date)
+        self.assertEqual(datetime.date(2017, 5, 31), spread_lines[3].date)
+        self.assertEqual(datetime.date(2017, 6, 30), spread_lines[4].date)
+        self.assertEqual(datetime.date(2017, 7, 31), spread_lines[5].date)
+        self.assertEqual(datetime.date(2017, 8, 31), spread_lines[6].date)
+        self.assertEqual(datetime.date(2017, 9, 30), spread_lines[7].date)
+        self.assertEqual(datetime.date(2017, 10, 31), spread_lines[8].date)
+        self.assertEqual(datetime.date(2017, 11, 30), spread_lines[9].date)
+        self.assertEqual(datetime.date(2017, 12, 31), spread_lines[10].date)
+        self.assertEqual(datetime.date(2018, 1, 31), spread_lines[11].date)
+
+        # Period Type is 'Quarter'
+        self.spread3.period_type = "quarter"
+        self.spread3.compute_spread_board()
+        spread_lines = self.spread3.line_ids
+        self.assertEqual(len(spread_lines), 12)
+        self.assertAlmostEqual(325.27, spread_lines[0].amount)
+        self.assertAlmostEqual(1068.73, spread_lines[1].amount)
+        self.assertAlmostEqual(1068.73, spread_lines[2].amount)
+        self.assertAlmostEqual(1057.12, spread_lines[3].amount)
+        self.assertAlmostEqual(1045.50, spread_lines[4].amount)
+        self.assertAlmostEqual(1068.73, spread_lines[5].amount)
+        self.assertAlmostEqual(1068.73, spread_lines[6].amount)
+        self.assertAlmostEqual(1057.12, spread_lines[7].amount)
+        self.assertAlmostEqual(1045.50, spread_lines[8].amount)
+        self.assertAlmostEqual(1068.73, spread_lines[9].amount)
+        self.assertAlmostEqual(1068.73, spread_lines[10].amount)
+        self.assertAlmostEqual(1057.11, spread_lines[11].amount)  # total left
+
+        # Period Type is 'Year' and spread date is not first month
+        self.spread3.period_type = "year"
+        self.spread3.spread_date = "2017-02-02"
+        self.spread3.compute_spread_board()
+        spread_lines = self.spread3.line_ids
+        self.assertEqual(len(spread_lines), 13)
+        self.assertAlmostEqual(73.92, spread_lines[0].amount)
+        self.assertAlmostEqual(999.32, spread_lines[1].amount)
+        self.assertAlmostEqual(999.32, spread_lines[2].amount)
+        self.assertAlmostEqual(1002.05, spread_lines[3].amount)
+        self.assertAlmostEqual(999.32, spread_lines[4].amount)
+        self.assertAlmostEqual(999.32, spread_lines[5].amount)
+        self.assertAlmostEqual(999.32, spread_lines[6].amount)
+        self.assertAlmostEqual(1002.05, spread_lines[7].amount)
+        self.assertAlmostEqual(999.32, spread_lines[8].amount)
+        self.assertAlmostEqual(999.32, spread_lines[9].amount)
+        self.assertAlmostEqual(999.32, spread_lines[10].amount)
+        self.assertAlmostEqual(1002.05, spread_lines[11].amount)
+        self.assertAlmostEqual(925.37, spread_lines[12].amount)
+
+    def test_20_supplier_invoice_template(self):
+        """Test onchange template"""
+        self.assertEqual(self.spread3.invoice_type, "out_invoice")
+        with Form(self.spread3) as sp:
+            sp.template_id = self.template
+            sp.credit_account_id = self.expense_account
+        sp.save()
+        self.assertEqual(self.spread3.invoice_type, "in_invoice")

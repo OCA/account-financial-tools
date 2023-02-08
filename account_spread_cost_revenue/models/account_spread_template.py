@@ -50,6 +50,11 @@ class AccountSpreadTemplate(models.Model):
         help="Period length for the entries",
     )
     start_date = fields.Date()
+    days_calc = fields.Boolean(
+        string="Calculate by days",
+        default=False,
+        help="Use number of days to calculate amount",
+    )
     auto_spread = fields.Boolean(
         string="Auto assign template on invoice validate",
         help="If checked, provide option to auto create spread during "
@@ -120,6 +125,7 @@ class AccountSpreadTemplate(models.Model):
             "template_id": self.id,
             "journal_id": self.spread_journal_id.id,
             "use_invoice_line_account": self.use_invoice_line_account,
+            "days_calc": self.days_calc,
             "company_id": company.id,
         }
 
