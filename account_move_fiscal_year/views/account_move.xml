@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_form_view">
+        <field name="name">account.move.form (in account_move_fiscal_year)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <field name="invoice_date" position="after">
+                <field name="date_range_fy_id" options="{'no_open': True}" />
+            </field>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_move_search_view">
+        <field name="name">account.move.search (in account_move_fiscal_year)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter" />
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="date_range_fy_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_move_tree_view">
+        <field name="name">account.move.tree (in account_move_fiscal_year)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+
+            <field name="date" position="after">
+                <field name="date_range_fy_id" />
+            </field>
+
+        </field>
+    </record>
+
+</odoo>
