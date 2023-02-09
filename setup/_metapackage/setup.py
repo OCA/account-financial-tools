@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo-addon-account_lock_date_update>=15.0dev,<15.1dev',
         'odoo-addon-account_maturity_date_default>=15.0dev,<15.1dev',
         'odoo-addon-account_move_budget>=15.0dev,<15.1dev',
+        'odoo-addon-account_move_fiscal_year>=15.0dev,<15.1dev',
         'odoo-addon-account_move_force_removal>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_menu>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_purchase_info>=15.0dev,<15.1dev',
