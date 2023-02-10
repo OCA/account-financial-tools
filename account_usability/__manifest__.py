@@ -4,7 +4,7 @@
 
 {
     "name": "Account - Missing Menus & Saxon Accounting",
-    "version": "16.0.1.0.2",
+    "version": "16.0.1.0.3",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Adds missing menu entries for Account module and"
@@ -25,6 +25,7 @@
         "views/view_account_account_template.xml",
         "views/view_account_tax_template.xml",
         "views/view_account_fiscal_position_template.xml",
+        "views/view_account_move_line.xml",
     ],
     "demo": ["demo/res_groups.xml"],
     "installable": True,
