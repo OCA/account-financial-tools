@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2023 - Creu Blanca
+@author: Enric Tobella
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="account.action_account_moves_all_tree" model="ir.actions.act_window">
+        <field name="binding_model_id" ref="base.model_res_partner" />
+    </record>
+</odoo>
