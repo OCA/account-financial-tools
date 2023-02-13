@@ -25,6 +25,7 @@
         "views/view_account_account_template.xml",
         "views/view_account_tax_template.xml",
         "views/view_account_fiscal_position_template.xml",
+        "views/view_account_move_line.xml",
     ],
     "demo": ["demo/res_groups.xml"],
     "installable": True,
