@@ -128,6 +128,7 @@ msgid "Update Lock Dates"
 msgstr "Modifier les dates de clôture/verrouillage"
 
 #. module: account_lock_date_update
+#. odoo-python
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 #, python-format
 msgid "You are not allowed to execute this action."

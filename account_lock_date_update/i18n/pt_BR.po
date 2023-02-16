@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
 "PO-Revision-Date: 2022-09-23 00:07+0000\n"
 "Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,6 +124,7 @@ msgid "Update Lock Dates"
 msgstr "Atualizar Data de Bloqueio"
 
 #. module: account_lock_date_update
+#. odoo-python
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
