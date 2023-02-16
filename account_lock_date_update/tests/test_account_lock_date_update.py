@@ -7,11 +7,13 @@ from odoo.tests.common import TransactionCase
 
 
 class TestAccountLockDateUpdate(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.company = self.env.ref("base.main_company")
-        self.demo_user = self.env.ref("base.user_demo")
-        self.adviser_group = self.env.ref("account.group_account_manager")
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.company = cls.env.ref("base.main_company")
+        cls.demo_user = cls.env.ref("base.user_demo")
+        cls.adviser_group = cls.env.ref("account.group_account_manager")
 
     def test_01_update_without_access(self):
         self.demo_user.write({"groups_id": [(3, self.adviser_group.id)]})
