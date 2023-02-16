@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-23 01:41+0000\n"
-"PO-Revision-Date: 2023-02-11 14:22+0000\n"
+"PO-Revision-Date: 2023-02-16 10:08+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
@@ -165,6 +165,9 @@ msgid ""
 "Determines where the tax is selectable. Note : 'None' means a tax can't be "
 "used by itself, however it can still be used in a group."
 msgstr ""
+"Određuje gdje se porez može odabrati. Napomena: 'Nista' označava da se porez "
+"ne može kooristiti sam za sebe, ali još uvijek je moguće korištenje u grupi "
+"poreza."
 
 #. module: account_chart_update
 #. odoo-python
