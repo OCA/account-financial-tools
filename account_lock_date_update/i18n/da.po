@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_lock_date_update
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Danish (https://www.transifex.com/oca/teams/23907/da/)\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_lock_date_update
+#: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
+msgid "Account Update Lock_date"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+msgid "Cancel"
+msgstr "Annuller"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__create_uid
+msgid "Created by"
+msgstr "Oprettet af"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__create_date
+msgid "Created on"
+msgstr "Oprettet den"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__display_name
+msgid "Display Name"
+msgstr "Vist navn"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__id
+msgid "ID"
+msgstr "Id"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date____last_update
+msgid "Last Modified on"
+msgstr "Sidst ændret den"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_uid
+msgid "Last Updated by"
+msgstr "Sidst opdateret af"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_date
+msgid "Last Updated on"
+msgstr "Sidst opdateret den"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
+msgid "Lock Date for All Users"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
+msgid "Lock Date for Non-Advisers"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid ""
+"No users can edit journal entries related to a tax prior and inclusive of "
+"this date."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date. Use it for fiscal year locking for example."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__period_lock_date
+msgid ""
+"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
+"of this date. Use it for period locking inside an open fiscal year, for "
+"example."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid "Tax Lock Date"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+msgid "Update"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
+#: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
+msgid "Update Lock Dates"
+msgstr ""
+
+#. module: account_lock_date_update
+#: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
+#, python-format
+msgid "You are not allowed to execute this action."
+msgstr ""

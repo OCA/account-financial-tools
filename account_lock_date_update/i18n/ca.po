@@ -1,0 +1,126 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_lock_date_update
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2022-05-20 20:05+0000\n"
+"Last-Translator: Dept. Técnico <tecnico@extrememicro.es>\n"
+"Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_lock_date_update
+#: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
+msgid "Account Update Lock_date"
+msgstr "Actualització de la data de bloqueig comptable"
+
+#. module: account_lock_date_update
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__company_id
+msgid "Company"
+msgstr "Companyia"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__create_uid
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__create_date
+msgid "Created on"
+msgstr "Creat el"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__display_name
+msgid "Display Name"
+msgstr "Veure el nom"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date____last_update
+msgid "Last Modified on"
+msgstr "Darrera modificació el"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_uid
+msgid "Last Updated by"
+msgstr "Darrera Actualització per"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_date
+msgid "Last Updated on"
+msgstr "Darrera Actualització el"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
+msgid "Lock Date for All Users"
+msgstr "Data de bloqueig per tots els usuaris"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
+msgid "Lock Date for Non-Advisers"
+msgstr "Data de bloqueig per a no assessors"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid ""
+"No users can edit journal entries related to a tax prior and inclusive of "
+"this date."
+msgstr ""
+"Cap usuari pot editar els assentament relacionats amb un impost anterior i "
+"incloent aquesta data."
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date. Use it for fiscal year locking for example."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__period_lock_date
+msgid ""
+"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
+"of this date. Use it for period locking inside an open fiscal year, for "
+"example."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid "Tax Lock Date"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+msgid "Update"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
+#: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
+msgid "Update Lock Dates"
+msgstr ""
+
+#. module: account_lock_date_update
+#: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
+#, python-format
+msgid "You are not allowed to execute this action."
+msgstr ""
