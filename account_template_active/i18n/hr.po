@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-02-16 10:09+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: none\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -14,11 +15,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_template_active
 #: model:ir.model,name:account_template_active.model_account_fiscal_position_account_template
 msgid "Accounts Mapping Template of Fiscal Position"
-msgstr ""
+msgstr "Mapiranje konta na predlošku fiskalne pozicije"
 
 #. module: account_template_active
 #: model:ir.model.fields,field_description:account_template_active.field_account_account_template__active
@@ -26,31 +28,31 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_tax_template__active
 #: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_template__active
 msgid "Active"
-msgstr ""
+msgstr "Aktivan"
 
 #. module: account_template_active
 #: model_terms:ir.ui.view,arch_db:account_template_active.view_account_fiscal_position_template_form
 #: model_terms:ir.ui.view,arch_db:account_template_active.view_account_tax_template_form
 #: model_terms:ir.ui.view,arch_db:account_template_active.view_account_template_form
 msgid "Archived"
-msgstr ""
+msgstr "Arhiviran"
 
 #. module: account_template_active
 #: model:ir.model,name:account_template_active.model_account_fiscal_position_tax_template
 msgid "Tax Mapping Template of Fiscal Position"
-msgstr ""
+msgstr "Mapiranje poreza na predlošku fiskalne pozicije"
 
 #. module: account_template_active
 #: model:ir.model,name:account_template_active.model_account_fiscal_position_template
 msgid "Template for Fiscal Position"
-msgstr ""
+msgstr "Predložak fiskalne pozicije"
 
 #. module: account_template_active
 #: model:ir.model,name:account_template_active.model_account_account_template
 msgid "Templates for Accounts"
-msgstr ""
+msgstr "Predlošci konta"
 
 #. module: account_template_active
 #: model:ir.model,name:account_template_active.model_account_tax_template
 msgid "Templates for Taxes"
-msgstr ""
+msgstr "Predlošci poreza"
