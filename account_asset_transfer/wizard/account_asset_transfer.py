@@ -223,7 +223,6 @@ class AccountAssetTransferLine(models.TransientModel):
     )
     asset_name = fields.Char(required=True)
     quantity = fields.Float(
-        string="Quantity",
         required=True,
         default=0.0,
     )
@@ -233,7 +232,6 @@ class AccountAssetTransferLine(models.TransientModel):
         default=0.0,
     )
     asset_value = fields.Float(
-        string="Asset Value",
         compute="_compute_asset_value",
         default=0.0,
         store=True,
