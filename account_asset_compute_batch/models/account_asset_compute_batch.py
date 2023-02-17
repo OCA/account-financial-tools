@@ -17,13 +17,11 @@ class AssetComputeBatch(models.Model):
     _check_company_auto = True
 
     name = fields.Char(
-        string="Name",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
     description = fields.Char(
-        string="Description",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -58,7 +56,6 @@ class AssetComputeBatch(models.Model):
         "by setting auto_post=True, to be posted by cron job",
     )
     auto_compute = fields.Boolean(
-        string="Auto Compute",
         readonly=True,
         states={"draft": [("readonly", False)]},
         help="Auto compute draft batches with 'Date' up to today, by cron job",
@@ -173,10 +170,9 @@ class AssetComputeBatch(models.Model):
                 exc_info()[0]
                 tb = "".join(format_exception(*exc_info()))
                 batch_ref = ", ".join(batches.mapped("name"))
-                error_msg = _("Error while processing batches '%s': \n\n%s") % (
-                    batch_ref,
-                    tb,
-                )
+                error_msg = _(
+                    "Error while processing batches %(batch_ref)s: \n\n%(tb)s"
+                ) % {"batch_ref": batch_ref, "tb": tb}
                 _logger.error("%s, %s", self._name, error_msg)
 
 
@@ -200,7 +196,6 @@ class AccountAssetComputeBatchProfileReport(models.Model):
         readonly=True,
     )
     amount = fields.Monetary(
-        string="Amount",
         readonly=True,
     )
 

@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,7 +57,6 @@ msgstr ""
 #: code:addons/account_asset_compute_batch/wizard/account_asset_compute.py:0
 #: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.search_account_asset_compute_batch_filter
 #: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
-#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_tree
 #, python-format
 msgid "Asset Compute Batch"
 msgstr ""
@@ -224,13 +223,8 @@ msgid "Description"
 msgstr ""
 
 #. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset__display_name
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute__display_name
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__display_name
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report__display_name
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_line__display_name
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_move_line__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -243,9 +237,9 @@ msgstr ""
 #: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
 #, python-format
 msgid ""
-"Error while processing batches '%s': \n"
+"Error while processing batches %(batch_ref)s: \n"
 "\n"
-"%s"
+"%(tb)s"
 msgstr ""
 
 #. module: account_asset_compute_batch
@@ -265,11 +259,6 @@ msgid "Followers"
 msgstr ""
 
 #. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_channel_ids
-msgid "Followers (Channels)"
-msgstr ""
-
-#. module: account_asset_compute_batch
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
@@ -280,13 +269,13 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset__id
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute__id
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_asset_compute_batch
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__id
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report__id
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_line__id
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_move__id
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_move_line__id
 msgid "ID"
 msgstr ""
 
@@ -313,7 +302,6 @@ msgstr ""
 
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_has_error
-#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -346,13 +334,8 @@ msgid "Journal Items"
 msgstr ""
 
 #. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset____last_update
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute____last_update
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch____last_update
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report____last_update
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_line____last_update
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_move_line____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -456,11 +439,6 @@ msgstr ""
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_user_id
 msgid "Responsible User"
-msgstr ""
-
-#. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_asset_compute_batch

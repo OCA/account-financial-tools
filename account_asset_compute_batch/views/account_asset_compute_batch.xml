@@ -99,7 +99,7 @@
         <field name="name">account.asset.compute.batch.tree</field>
         <field name="model">account.asset.compute.batch</field>
         <field name="arch" type="xml">
-            <tree string="Asset Compute Batch">
+            <tree>
                 <field name="name" />
                 <field name="description" />
                 <field name="date_end" />

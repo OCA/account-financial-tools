@@ -9,12 +9,9 @@ class AccountAssetCompute(models.TransientModel):
 
     use_batch = fields.Boolean(string="Create Batch", help="Use batch opton")
     batch_name = fields.Char(
-        string="Batch Name",
         help="If batch name is specified, computation will be tracked by a batch",
     )
-    description = fields.Char(
-        string="Description",
-    )
+    description = fields.Char()
     profile_ids = fields.Many2many(
         comodel_name="account.asset.profile",
         string="Profiles",
