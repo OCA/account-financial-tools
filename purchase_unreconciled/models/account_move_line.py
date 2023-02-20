@@ -51,6 +51,8 @@ class AccountMoveLine(models.Model):
             "account_id": writeoff_vals["account_id"],
             "journal_id": writeoff_vals["journal_id"],
             "currency_id": writeoff_vals["currency_id"],
+            "product_id": writeoff_vals["product_id"],
+            "purchase_line_id": writeoff_vals["purchase_line_id"],
         }
         counterpart_account = self.mapped("account_id")
         if len(counterpart_account) != 1:
