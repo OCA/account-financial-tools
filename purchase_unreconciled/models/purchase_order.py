@@ -3,6 +3,7 @@
 
 from odoo import _, api, exceptions, fields, models
 from odoo.osv import expression
+from odoo.tools import float_is_zero
 
 
 class PurchaseOrder(models.Model):
@@ -89,6 +90,8 @@ class PurchaseOrder(models.Model):
         unreconciled_domain = expression.AND(
             [unreconciled_domain, [("purchase_order_id", "=", self.id)]]
         )
+        unreconciled_domain.remove(("full_reconcile_id", "=", False))
+        unreconciled_domain.remove("&")
         unreconciled_items = acc_item.search(unreconciled_domain)
         action = self.env.ref("account.action_account_moves_all")
         action_dict = action.read()[0]
@@ -121,40 +124,41 @@ class PurchaseOrder(models.Model):
         all_writeoffs = self.env["account.move.line"]
         reconciling_groups = self.env["account.move.line"].read_group(
             domain=unreconciled_domain,
-            fields=["account_id", "currency_id", "product_id", "purchase_line_id"],
-            groupby=["account_id", "currency_id", "product_id", "purchase_line_id"],
+            fields=["account_id", "product_id", "purchase_line_id"],
+            groupby=["account_id", "product_id", "purchase_line_id"],
             lazy=False,
         )
         unreconciled_items = self.env["account.move.line"].search(unreconciled_domain)
         for group in reconciling_groups:
             account_id = group["account_id"][0]
-            currency_id = group["currency_id"][0] if group["currency_id"] else False
             product_id = group["product_id"][0] if group["product_id"] else False
             purchase_line_id = (
                 group["purchase_line_id"][0] if group["purchase_line_id"] else False
             )
             unreconciled_items_group = unreconciled_items.filtered(
                 lambda l: (
-                    l.account_id.id == account_id
-                    and l.product_id.id == product_id
-                    and l.currency_id.id == currency_id
+                    l.account_id.id == account_id and l.product_id.id == product_id
                 )
             )
-            writeoff_vals = self._get_purchase_writeoff_vals(
-                purchase_line_id, currency_id, product_id
-            )
-            writeoff_to_reconcile = unreconciled_items_group._create_writeoff(
-                writeoff_vals
-            )
-            all_writeoffs |= writeoff_to_reconcile
-            # add writeoff line to reconcile algorithm and finish the reconciliation
-            moves_to_reconcile = unreconciled_items_group | writeoff_to_reconcile
+            if float_is_zero(
+                sum(unreconciled_items_group.mapped("amount_residual")),
+                precision_rounding=self.company_id.currency_id.rounding,
+            ):
+                moves_to_reconcile = unreconciled_items_group
+            else:
+                writeoff_vals = self._get_purchase_writeoff_vals(
+                    purchase_line_id, product_id
+                )
+                writeoff_to_reconcile = unreconciled_items_group._create_writeoff(
+                    writeoff_vals
+                )
+                all_writeoffs |= writeoff_to_reconcile
+                # add writeoff line to reconcile algorithm and finish the reconciliation
+                moves_to_reconcile = unreconciled_items_group | writeoff_to_reconcile
             # Check if reconciliation is total or needs an exchange rate entry to be
             # created
             if moves_to_reconcile:
-                moves_to_reconcile.filtered(
-                    lambda l: l.amount_residual != 0.0
-                ).reconcile()
+                moves_to_reconcile.filtered(lambda l: not l.reconciled).reconcile()
             reconciled_ids = unreconciled_items | all_writeoffs
             res = {
                 "name": _("Reconciled journal items"),
@@ -169,13 +173,12 @@ class PurchaseOrder(models.Model):
             self.button_done()
         return res
 
-    def _get_purchase_writeoff_vals(self, purchase_line_id, currency_id, product_id):
+    def _get_purchase_writeoff_vals(self, purchase_line_id, product_id):
         return {
             "account_id": self.company_id.purchase_reconcile_account_id.id,
             "journal_id": self.company_id.purchase_reconcile_journal_id.id,
             "purchase_id": self.id,
             "purchase_line_id": purchase_line_id or False,
-            "currency_id": currency_id,
             "product_id": product_id,
         }
 
