@@ -3,6 +3,7 @@
 
 from odoo import _, api, exceptions, fields, models
 from odoo.osv import expression
+from odoo.tools import float_is_zero
 
 
 class SaleOrder(models.Model):
@@ -82,6 +83,8 @@ class SaleOrder(models.Model):
         unreconciled_domain = expression.AND(
             [unreconciled_domain, [("sale_order_id", "=", self.id)]]
         )
+        unreconciled_domain.remove(("full_reconcile_id", "=", False))
+        unreconciled_domain.remove("&")
         unreconciled_items = acc_item.search(unreconciled_domain)
         action = self.env.ref("account.action_account_moves_all")
         action_dict = action.read()[0]
@@ -112,53 +115,53 @@ class SaleOrder(models.Model):
         all_writeoffs = self.env["account.move.line"]
         reconciling_groups = self.env["account.move.line"].read_group(
             domain=unreconciled_domain,
-            fields=["account_id", "currency_id", "product_id", "sale_line_id"],
-            groupby=["account_id", "currency_id", "product_id", "sale_line_id"],
+            fields=["account_id", "product_id", "sale_line_id"],
+            groupby=["account_id", "product_id", "sale_line_id"],
             lazy=False,
         )
         moves_to_reconcile = self.env["account.move.line"]
-        products_considered = {}
+        products_considered = self.env["product.product"]
         main_product = self.env["product.product"]
         for group in reconciling_groups:
             account_id = group["account_id"][0]
-            currency_id = group["currency_id"][0] if group["currency_id"] else False
-            products_considered[currency_id] = self.env["product.product"]
             product_id = group["product_id"][0] if group["product_id"] else False
             sale_line_id = group["sale_line_id"][0] if group["sale_line_id"] else False
-            if product_id and product_id in products_considered[currency_id].ids:
+            if product_id and product_id in products_considered.ids:
                 # avoid duplicate write-off for kits
                 continue
             if sale_line_id and product_id:
                 products, main_product = self.get_products(sale_line_id, product_id)
             else:
                 products = self.env["product.product"]
-            products_considered[currency_id] |= products
+            products_considered |= products
             unreconciled_items_group = unreconciled_items.filtered(
                 lambda l: (
-                    l.account_id.id == account_id
-                    and l.product_id.id in products.ids
-                    and l.currency_id.id == currency_id
+                    l.account_id.id == account_id and l.product_id.id in products.ids
                 )
             )
-            if main_product:
-                # If kit, use the product of the kit
-                product_id = main_product.id
-            writeoff_vals = self._get_sale_writeoff_vals(
-                sale_line_id, currency_id, product_id
-            )
-            if unreconciled_items_group:
-                writeoff_to_reconcile = unreconciled_items_group._create_writeoff(
-                    [writeoff_vals]
-                )
-                all_writeoffs |= writeoff_to_reconcile
-                # add writeoff line to reconcile algorithm and finish the reconciliation
-                moves_to_reconcile = unreconciled_items_group | writeoff_to_reconcile
+            if float_is_zero(
+                sum(unreconciled_items_group.mapped("amount_residual")),
+                precision_rounding=self.company_id.currency_id.rounding,
+            ):
+                moves_to_reconcile = unreconciled_items_group
+            else:
+                if main_product:
+                    # If kit, use the product of the kit
+                    product_id = main_product.id
+                writeoff_vals = self._get_sale_writeoff_vals(sale_line_id, product_id)
+                if unreconciled_items_group:
+                    writeoff_to_reconcile = unreconciled_items_group._create_writeoff(
+                        [writeoff_vals]
+                    )
+                    all_writeoffs |= writeoff_to_reconcile
+                    # add writeoff line to reconcile algorithm and finish the reconciliation
+                    moves_to_reconcile = (
+                        unreconciled_items_group | writeoff_to_reconcile
+                    )
             # Check if reconciliation is total or needs an exchange rate entry to be
             # created
             if moves_to_reconcile:
-                moves_to_reconcile.filtered(
-                    lambda l: l.amount_residual != 0.0
-                ).reconcile()
+                moves_to_reconcile.filtered(lambda l: not l.reconciled).reconcile()
             reconciled_ids = unreconciled_items | all_writeoffs
             res = {
                 "name": _("Reconciled journal items"),
@@ -187,15 +190,15 @@ class SaleOrder(models.Model):
             boms, lines = bom.explode(sale_line.product_id, sale_line.product_uom_qty)
             for line, _line_data in lines:
                 products |= line.product_id
+            products |= sale_line.product_id
         return products, sale_line.product_id
 
-    def _get_sale_writeoff_vals(self, sale_line_id, currency_id, product_id):
+    def _get_sale_writeoff_vals(self, sale_line_id, product_id):
         return {
             "account_id": self.company_id.sale_reconcile_account_id.id,
             "journal_id": self.company_id.sale_reconcile_journal_id.id,
             "sale_order_id": self.id,
             "sale_line_id": sale_line_id or False,
-            "currency_id": currency_id,
             "product_id": product_id,
         }
 
