@@ -491,3 +491,33 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
             [("sale_order_id", "=", so.id), ("move_id", "!=", invoice.id)]
         )
         self.assertEqual(so.company_id, ji.mapped("company_id"))
+
+    def test_08_reconcile_by_product(self):
+        """
+        Create a write-off by product
+        """
+        so = self._create_sale(
+            [(self.product_to_reconcile, 1), (self.product_to_reconcile2, 1)]
+        )
+        so.company_id.sale_reconcile_account_id = self.writeoff_acc
+        so.with_context(force_confirm_sale_order=True).action_confirm()
+        self._do_picking(so.picking_ids, fields.Datetime.now())
+        # Do not create invoices to force discrepancy
+        so.action_done()
+        # we check all the journals are balanced by product
+        ji_s1 = self.env["account.move.line"].search(
+            [
+                ("sale_order_id", "=", so.id),
+                ("product_id", "=", self.product_to_reconcile.id),
+                ("account_id", "=", self.account_gdni.id),
+            ]
+        )
+        ji_s2 = self.env["account.move.line"].search(
+            [
+                ("sale_order_id", "=", so.id),
+                ("product_id", "=", self.product_to_reconcile2.id),
+                ("account_id", "=", self.account_gdni.id),
+            ]
+        )
+        self.assertEqual(sum(ji_s1.mapped("balance")), 0.0)
+        self.assertEqual(sum(ji_s2.mapped("balance")), 0.0)
