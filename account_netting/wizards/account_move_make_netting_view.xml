@@ -13,10 +13,13 @@
         <field name="name">Compensate entries</field>
         <field name="model">account.move.make.netting</field>
         <field name="arch" type="xml">
-            <form string="Compensate entries">
+            <form>
                 <p
-                >This operation will generate journal entries that are counterpart of the receivable/payable accounts selected, and reconcile each other, letting this balance in the partner.</p>
+                >This operation will generate a journal entry whose lines are counterpart of the receivable/payable accounts selected, and reconcile each other, letting this balance in the partner.</p>
                 <group>
+                    <field name="company_id" invisible="1" />
+                    <field name="company_currency_id" invisible="1" />
+                    <field name="partner_id" />
                     <field name="balance" />
                     <field
                         name="balance_type"
