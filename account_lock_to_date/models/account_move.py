@@ -10,8 +10,8 @@ class AccountMove(models.Model):
     def _check_lock_to_dates(self):
         """Prevent moves that are on or after lock to date.
 
-        Advisors have more freedom then other users and are only constrained
-        by the ficalyear_lock_to_date.
+        Advisors have more freedom than other users and are only constrained
+        by the fiscalyear_lock_to_date.
         Other users will also be restricted by the period_lock_to_date.
         """
         is_advisor = self.user_has_groups("account.group_account_manager")
@@ -31,14 +31,14 @@ class AccountMove(models.Model):
                     message = _(
                         "You cannot add/modify entries after and "
                         "inclusive of the lock to date %s"
-                    ) % (lock_to_date)
+                    ) % (lock_to_date,)
                 else:
                     message = _(
                         "You cannot add/modify entries after and "
                         "inclusive of the lock to date %s. "
                         "Check the company settings or ask someone "
                         "with the 'Adviser' role"
-                    ) % (lock_to_date)
+                    ) % (lock_to_date,)
                 raise ValidationError(message)
 
     def action_post(self):

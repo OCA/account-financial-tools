@@ -47,16 +47,12 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: account_lock_to_date
-#: model:ir.model.fields,field_description:account_lock_to_date.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__display_name
-#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: account_lock_to_date
-#: model:ir.model.fields,field_description:account_lock_to_date.field_account_move__id
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__id
-#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__id
 msgid "ID"
 msgstr "ID"
 
@@ -66,9 +62,7 @@ msgid "Journal Entry"
 msgstr "Pièce comptable"
 
 #. module: account_lock_to_date
-#: model:ir.model.fields,field_description:account_lock_to_date.field_account_move____last_update
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date____last_update
-#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company____last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
@@ -117,15 +111,14 @@ msgstr ""
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__period_lock_to_date
 msgid ""
 "Only users with the 'Adviser' role can edit accounts after and inclusive of "
-"this date. Use it for period locking inside an open fiscal year, for "
-"example."
+"this date. Use it for period locking inside an open fiscal year, for example."
 msgstr ""
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_res_company__period_lock_to_date
 msgid ""
-"Only users with the 'Adviser' role can edit accounts after this date. Use it"
-" for period locking inside an open fiscal year, for example."
+"Only users with the 'Adviser' role can edit accounts after this date. Use it "
+"for period locking inside an open fiscal year, for example."
 msgstr ""
 
 #. module: account_lock_to_date
@@ -146,8 +139,8 @@ msgstr ""
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid ""
-"There are still unposted entries in the period to date you want to lock. You"
-" should either post or delete them."
+"There are still unposted entries in the period to date you want to lock. You "
+"should either post or delete them."
 msgstr ""
 
 #. module: account_lock_to_date
@@ -191,8 +184,8 @@ msgstr ""
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid ""
-"You cannot define stricter conditions on advisors than on users. Please make"
-" sure that the lock date on advisor is set after the lock date for users."
+"You cannot define stricter conditions on advisors than on users. Please make "
+"sure that the lock date on advisor is set after the lock date for users."
 msgstr ""
 "Il n'est pas permis de définir des conditions plus strictes pour les "
 "conseillers que les autres utilisateurs. Veuillez vous assurer que la date "
@@ -203,8 +196,8 @@ msgstr ""
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid ""
-"You cannot lock a period that is not finished yet. Please make sure that the"
-" lock date for advisors is set at or after the last day of the next month."
+"You cannot lock a period that is not finished yet. Please make sure that the "
+"lock date for advisors is set at or after the last day of the next month."
 msgstr ""
 "Vous ne pouvez pas verrouiller une période qui n'est pas encore finie. "
 "Veuille vous assurer que la date pour les conseillers est après le dernier "
