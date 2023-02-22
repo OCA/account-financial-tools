@@ -24,6 +24,8 @@
                 "database"),
     "version": "8.0.1.0.0",
     "author": "Therp BV,Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools"
+               "10.0/account_reset_chart",
     "category": 'Accounting & Finance',
     "depends": [
         'account',

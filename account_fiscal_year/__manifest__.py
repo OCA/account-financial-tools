@@ -8,7 +8,7 @@
     'category': 'Accounting',
     'author': 'Camptocamp SA,'
               'Odoo Community Association (OCA)',
-    'website': 'http://www.camptocamp.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'depends': [
         'account',
         'date_range'

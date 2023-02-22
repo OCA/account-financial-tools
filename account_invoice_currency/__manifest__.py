@@ -13,7 +13,7 @@
               "Joaquín Gutierrez, "
               "Tecnativa, "
               "Odoo Community Association (OCA) ",
-    'website': "https://odoo-community.org/",
+    'website': "https://github.com/OCA/account-financial-tools",
     'category': "Accounting",
     'license': "AGPL-3",
     'depends': ["account"],

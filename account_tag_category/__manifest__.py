@@ -6,7 +6,7 @@
     "summary": "Group account tags by categories",
     "version": "10.0.1.0.0",
     "category": "Accounting & Finance",
-    "website": "https://www.camptocamp.com/",
+    "website": "https://github.com/OCA/account-financial-tools",
     "author": "Camptocamp SA,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": [

@@ -6,7 +6,7 @@
     'name': "Tax required in invoice",
     'version': "10.0.1.0.2",
     "author": "Camptocamp,Tecnativa,Odoo Community Association (OCA)",
-    'website': "http://www.camptocamp.com",
+    'website': "https://github.com/OCA/account-financial-tools",
     'category': "Localisation / Accounting",
     'license': "AGPL-3",
     'depends': ["account"],

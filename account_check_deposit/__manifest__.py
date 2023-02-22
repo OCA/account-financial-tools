@@ -12,7 +12,7 @@
     'license': 'AGPL-3',
     'summary': 'Manage deposit of checks to the bank',
     'author': "Akretion,Odoo Community Association (OCA)",
-    'website': 'http://www.akretion.com/',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'depends': [
         'account_accountant',
     ],

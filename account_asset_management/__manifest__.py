@@ -11,7 +11,7 @@
     ],
     'conflicts': ['account_asset'],
     'author': "Noviat,Odoo Community Association (OCA)",
-    'website': 'http://www.noviat.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Accounting & Finance',
     'sequence': 32,
     'data': [

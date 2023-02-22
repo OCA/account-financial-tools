@@ -58,7 +58,7 @@ Summary of constraints are:
   * Stéphane Bidoul <stephane.bidoul@acsone.eu>
 
     """,
-    'website': 'http://www.camptocamp.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'data': [
         'view/account_journal.xml',
         'view/account_bank_statement.xml',

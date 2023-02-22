@@ -10,7 +10,7 @@
     'license': 'AGPL-3',
     'summary': "Adds a menu entry for Account Types",
     'author': "Akretion,Odoo Community Association (OCA)",
-    'website': 'http://www.akretion.com/',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'depends': ['account'],
     'data': ['views/account_type.xml'],
     'installable': True,

@@ -46,7 +46,7 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com>
 for any help or question about this module.
     """,
     'author': "Akretion,Odoo Community Association (OCA)",
-    'website': 'http://www.akretion.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'depends': ['account'],
     'data': [],
     'installable': False,

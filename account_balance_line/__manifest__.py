@@ -7,7 +7,7 @@
     'summary': 'Display balance totals in move line view',
     'version': '10.0.1.0.0',
     'category': 'Accounting',
-    'website': 'http://www.tecnativa.com,',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'author': "Camptocamp,"
               "Tecnativa,"
               "Odoo Community Association (OCA)",

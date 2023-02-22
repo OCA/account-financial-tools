@@ -25,7 +25,7 @@
               "ACSONE SA/NV,"
               "Odoo Community Association (OCA)",
     'license': 'AGPL-3',
-    'website': 'http://www.camptocamp.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'data': ['account_view.xml',
              'invoice_view.xml',
              'res_config_view.xml',

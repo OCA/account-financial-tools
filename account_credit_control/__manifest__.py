@@ -12,7 +12,7 @@
      'account',
      'mail',
  ],
- 'website': 'https://www.camptocamp.com',
+ 'website': 'https://github.com/OCA/account-financial-tools',
  'data': [
      "security/res_groups.xml",
      # Reports

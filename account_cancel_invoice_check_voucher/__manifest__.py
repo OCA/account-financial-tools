@@ -29,7 +29,7 @@
 Constraint forbidding to cancel an invoice already
 imported in bank statement with a voucher.
     """,
-    'website': 'http://www.camptocamp.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'license': 'AGPL-3',
     'date': [],
     'installable': False,

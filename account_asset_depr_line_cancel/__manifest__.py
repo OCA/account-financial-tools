@@ -8,7 +8,7 @@
     'version': '10.0.1.0.0',
     'author': "Tecnativa, "
               "Odoo Community Association (OCA)",
-    'website': 'http://www.serviciosbaeza.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Accounting & Finance',
     'test': [
     ],

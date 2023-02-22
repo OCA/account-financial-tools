@@ -9,7 +9,7 @@
     'license': 'AGPL-3',
     'author': 'Tecnativa, '
               'Odoo Community Association (OCA)',
-    'website': 'https://github.com/OCA/account-invoicing',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'depends': [
         'account',
     ],
