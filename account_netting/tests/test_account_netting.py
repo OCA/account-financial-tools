@@ -6,15 +6,16 @@
 from datetime import datetime
 
 import odoo.tests.common as common
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 from odoo.tests import Form, tagged
 
 
-@tagged("post_install")
+@tagged("post_install", "-at_install")
 class TestAccountNetting(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         res_users_account_manager = cls.env.ref("account.group_account_manager")
         partner_manager = cls.env.ref("base.group_partner_manager")
         cls.env.user.write(
@@ -23,19 +24,25 @@ class TestAccountNetting(common.TransactionCase):
         cls.company = cls.env.ref("base.main_company")
         # only adviser can create an account
         cls.aa_model = cls.env["account.account"]
-        cls.account_receivable = cls._get_account(cls, "receivable")
-        cls.account_payable = cls._get_account(cls, "payable")
-        cls.account_revenue = cls._get_account(cls, "revenue")
-        cls.account_expense = cls._get_account(cls, "expenses")
+        cls.account_receivable = cls._get_account(cls, "asset_receivable")
+        cls.account_payable = cls._get_account(cls, "liability_payable")
+        cls.account_revenue = cls._get_account(cls, "income")
+        cls.account_expense = cls._get_account(cls, "expense")
         cls.partner_model = cls.env["res.partner"]
-        cls.partner = cls._create_partner(cls, "Supplier/Customer")
         cls.partner1 = cls._create_partner(cls, "Supplier/Customer 1")
+        cls.partner2 = cls._create_partner(cls, "Supplier/Customer 2")
         cls.miscellaneous_journal = cls.env["account.journal"].search(
-            [("type", "=", "general")], limit=1
+            [("type", "=", "general"), ("company_id", "=", cls.company.id)], limit=1
         )
         # We need a product with taxes at 0 so that the amounts are as expected.
         cls.account_tax = cls.env["account.tax"].create(
-            {"name": "0%", "amount_type": "fixed", "type_tax_use": "sale", "amount": 0}
+            {
+                "name": "0%",
+                "amount_type": "fixed",
+                "type_tax_use": "sale",
+                "amount": 0,
+                "company_id": cls.company.id,
+            }
         )
         cls.product = cls.env["product.product"].create(
             {
@@ -44,40 +51,39 @@ class TestAccountNetting(common.TransactionCase):
                 "taxes_id": [(6, 0, [cls.account_tax.id])],
             }
         )
-        out_invoice_partner = cls._create_move(cls, "out_invoice", cls.partner, 100)
-        out_invoice_partner.action_post()
-        cls.move_line_1 = out_invoice_partner.line_ids.filtered(
+        out_invoice_partner1 = cls._create_move(cls, "out_invoice", cls.partner1, 100)
+        out_invoice_partner1.action_post()
+        cls.move_line_1 = out_invoice_partner1.line_ids.filtered(
             lambda x: x.account_id == cls.account_receivable
         )
-        in_invoice_partner = cls._create_move(cls, "in_invoice", cls.partner, 1200)
-        in_invoice_partner.action_post()
-        cls.move_line_2 = in_invoice_partner.line_ids.filtered(
+        in_invoice_partner1 = cls._create_move(cls, "in_invoice", cls.partner1, 1200)
+        in_invoice_partner1.action_post()
+        cls.move_line_2 = in_invoice_partner1.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable
         )
-        cls.move_line_3 = in_invoice_partner.line_ids.filtered(
+        cls.move_line_3 = in_invoice_partner1.line_ids.filtered(
             lambda x: x.account_id == cls.account_expense
         )
-        in_invoice_partner1 = cls._create_move(cls, "in_invoice", cls.partner1, 200)
-        in_invoice_partner1.action_post()
-        cls.move_line_4 = in_invoice_partner1.line_ids.filtered(
+        in_invoice_partner2 = cls._create_move(cls, "in_invoice", cls.partner2, 200)
+        in_invoice_partner2.action_post()
+        cls.move_line_4 = in_invoice_partner2.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable
         )
-        in_refund_partner1 = cls._create_move(cls, "in_refund", cls.partner1, 200)
-        in_refund_partner1.action_post()
-        cls.move_line_5 = in_refund_partner1.line_ids.filtered(
+        in_refund_partner2 = cls._create_move(cls, "in_refund", cls.partner2, 200)
+        in_refund_partner2.action_post()
+        cls.move_line_5 = in_refund_partner2.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable
         )
-        in_refund_partner1 = cls._create_move(cls, "in_refund", cls.partner1, 200)
-        in_refund_partner1.action_post()
-        cls.move_line_6 = in_refund_partner1.line_ids.filtered(
+        in_refund_partner2 = cls._create_move(cls, "in_refund", cls.partner2, 200)
+        in_refund_partner2.action_post()
+        cls.move_line_6 = in_refund_partner2.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable
         )
 
-    def _get_account(self, user_type):
-        user_type_ref = "account.data_account_type_%s" % user_type
+    def _get_account(self, account_type):
         return self.aa_model.search(
             [
-                ("user_type_id", "=", self.env.ref(user_type_ref).id),
+                ("account_type", "=", account_type),
                 ("company_id", "=", self.company.id),
             ],
             limit=1,
@@ -94,7 +100,9 @@ class TestAccountNetting(common.TransactionCase):
 
     def _create_move(self, move_type, partner, price):
         move_form = Form(
-            self.env["account.move"].with_context(
+            self.env["account.move"]
+            .with_company(self.company.id)
+            .with_context(
                 default_move_type=move_type,
             )
         )
@@ -106,22 +114,22 @@ class TestAccountNetting(common.TransactionCase):
         return move_form.save()
 
     def test_compensation(self):
-        # Test exception line 33 from account_move_make_netting
+        # Test raise if 1 account.move.line selected
         obj = self.env["account.move.make.netting"].with_context(
             active_ids=[self.move_line_1.id]
         )
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             wizard = obj.create(
                 {
                     "move_line_ids": [(6, 0, [self.move_line_1.id])],
                     "journal_id": self.miscellaneous_journal.id,
                 }
             )
-        # Test exception line 39 from account_move_make_netting
+        # Test raise if not all accounts are payable/receivable
         obj = self.env["account.move.make.netting"].with_context(
             active_ids=[self.move_line_1.id, self.move_line_3.id]
         )
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             wizard = obj.create(
                 {
                     "move_line_ids": [
@@ -130,11 +138,11 @@ class TestAccountNetting(common.TransactionCase):
                     "journal_id": self.miscellaneous_journal.id,
                 }
             )
-        # Test exception line 45 from account_move_make_netting
+        # Test raise if same account
         obj = self.env["account.move.make.netting"].with_context(
             active_ids=[self.move_line_4.id, self.move_line_5.id]
         )
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             wizard = obj.create(
                 {
                     "move_line_ids": [
@@ -143,7 +151,7 @@ class TestAccountNetting(common.TransactionCase):
                     "journal_id": self.miscellaneous_journal.id,
                 }
             )
-        # Test exception line 42 from account_move_make_netting
+        # Test raise if reconciled lines
         moves = self.env["account.move.line"].browse(
             [self.move_line_4.id, self.move_line_5.id]
         )
@@ -151,7 +159,7 @@ class TestAccountNetting(common.TransactionCase):
         obj = self.env["account.move.make.netting"].with_context(
             active_ids=[self.move_line_4.id, self.move_line_5.id]
         )
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             wizard = obj.create(
                 {
                     "move_line_ids": [
@@ -160,11 +168,11 @@ class TestAccountNetting(common.TransactionCase):
                     "journal_id": self.miscellaneous_journal.id,
                 }
             )
-        # Test exception line 52 from account_move_make_netting
+        # Test raise if different partners
         obj = self.env["account.move.make.netting"].with_context(
             active_ids=[self.move_line_1.id, self.move_line_6.id]
         )
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             wizard = obj.create(
                 {
                     "move_line_ids": [
@@ -182,6 +190,8 @@ class TestAccountNetting(common.TransactionCase):
                 "journal_id": self.miscellaneous_journal.id,
             }
         )
+        self.assertEqual(wizard.partner_id, self.partner1)
+        self.assertEqual(wizard.company_id, self.company)
         res = wizard.button_compensate()
         move = self.env["account.move"].browse(res["res_id"])
         self.assertEqual(
