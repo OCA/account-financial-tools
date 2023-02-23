@@ -50,7 +50,7 @@ addon | version | maintainers | summary
 [account_move_template](account_move_template/) | 15.0.1.0.0 |  | Templates for recurring Journal Entries
 [account_move_total_by_account_internal_group](account_move_total_by_account_internal_group/) | 15.0.1.0.0 |  | Adds Totals by Account Internal Group in Journal Entries
 [account_netting](account_netting/) | 15.0.1.0.0 |  | Compensate AR/AP accounts from the same partner
-[account_usability](account_usability/) | 15.0.1.0.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module and adds the option to enable Saxon Accounting
+[account_usability](account_usability/) | 15.0.1.0.1 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module and adds the option to enable Saxon Accounting
 [base_vat_optional_vies](base_vat_optional_vies/) | 15.0.1.0.3 |  | Optional validation of VAT via VIES
 [product_category_tax](product_category_tax/) | 15.0.1.1.0 |  | Configure taxes in the product category
 
