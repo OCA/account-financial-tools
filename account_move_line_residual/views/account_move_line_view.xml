@@ -43,12 +43,12 @@
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account.view_account_move_line_filter" />
         <field name="arch" type="xml">
-            <filter name="unreconciled" position="replace">
-                <filter
-                    name="unreconciled"
-                    string="Unreconciled"
-                    domain="[('reconciled','=',False), ('balance', '!=', 0), ('account_id.reconcile', '=', True)]"
-                />
+            <filter name="unreconciled" position="attributes">
+                <attribute
+                    name="domain"
+                >[('reconciled', '=', False), ('balance', '!=', 0), ('account_id.reconcile', '=', True)]</attribute>
+            </filter>
+            <filter name="unreconciled" position="after">
                 <filter
                     name="partial_reconciled"
                     string="Partial reconciled"
