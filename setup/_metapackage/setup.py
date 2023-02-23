@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo-addon-account_move_force_removal>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_menu>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_purchase_info>=15.0dev,<15.1dev',
+        'odoo-addon-account_move_line_residual>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_sale_info>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_tax_editable>=15.0dev,<15.1dev',
         'odoo-addon-account_move_name_sequence>=15.0dev,<15.1dev',
