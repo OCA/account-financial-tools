@@ -50,7 +50,5 @@ msgstr "Total importe residual"
 msgid "Total Residual Amount in Currency"
 msgstr "Total importe residual en divisa"
 
-#. module: account_move_line_residual
-#: model_terms:ir.ui.view,arch_db:account_move_line_residual.view_account_move_line_filter
-msgid "Unreconciled"
-msgstr "No conciliado"
+#~ msgid "Unreconciled"
+#~ msgstr "No conciliado"
