@@ -75,7 +75,7 @@
         id="account_cost_center_menu"
         parent="account.menu_analytic_accounting"
         action="account_cost_center_action"
-        groups="account.group_account_invoice"
+        groups="account.group_account_invoice,account.group_account_readonly"
         sequence="40"
     />
 

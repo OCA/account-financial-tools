@@ -1,4 +1,4 @@
-# Copyright 2017-2020 Onestein (<http://www.onestein.eu>)
+# Copyright 2017-2023 Onestein (<http://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests import Form, tagged
@@ -11,13 +11,6 @@ class TestAccountCostCenter(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
-        cls.expenses_account = cls.env["account.account"].create(
-            {
-                "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
-                "code": "EXPTEST",
-                "name": "Test expense account",
-            }
-        )
 
         cls.costcenter = cls.env["account.cost.center"].create(
             {
@@ -73,7 +66,6 @@ class TestAccountCostCenter(AccountTestInvoicingCommon):
             line.name = "Test line2"
             line.quantity = 2.0
             line.price_unit = 200.0
-            line.account_id = self.expenses_account
         self.invoice1 = invoice_form.save()
 
         invoice_lines = self.invoice1.invoice_line_ids
@@ -114,7 +106,6 @@ class TestAccountCostCenter(AccountTestInvoicingCommon):
             line.name = "Test line1"
             line.quantity = 1.0
             line.price_unit = 100.0
-            line.account_id = self.expenses_account
         invoice_form.save()
         self.assertEqual(len(invoice.invoice_line_ids), 1)
         self.assertFalse(invoice.invoice_line_ids.cost_center_id)
@@ -128,7 +119,6 @@ class TestAccountCostCenter(AccountTestInvoicingCommon):
             line.name = "Test line2"
             line.quantity = 2.0
             line.price_unit = 200.0
-            line.account_id = self.expenses_account
         invoice_form.save()
         self.assertEqual(len(invoice.invoice_line_ids), 2)
 
