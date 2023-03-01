@@ -19,6 +19,11 @@
             <field name="ref" position="after">
                 <field name="cost_center_id" />
             </field>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute name="context" operation="update">{
+                    "default_cost_center_id": cost_center_id,
+                }</attribute>
+            </field>
         </field>
     </record>
 </odoo>

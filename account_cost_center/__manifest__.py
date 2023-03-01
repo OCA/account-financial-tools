@@ -9,7 +9,7 @@
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting",
     "version": "15.0.1.0.0",
-    "depends": ["account"],
+    "depends": ["account", "base_view_inheritance_extension"],
     "data": [
         "security/ir.model.access.csv",
         "security/account_cost_center_security.xml",
