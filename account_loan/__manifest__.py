@@ -20,7 +20,7 @@
     ],
     "installable": True,
     "external_dependencies": {
-        "python": ["numpy==1.15", "numpy-financial<=1.0.0"],
+        "python": ["numpy>=1.15", "numpy-financial<=1.0.0"],
         "deb": ["libatlas-base-dev"],
     },
 }
