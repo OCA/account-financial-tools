@@ -12,6 +12,9 @@
                 <field name="company_id" />
                 <field name="is_leasing" />
                 <field name="state" />
+                <field name="loan_amount" optional="hide" />
+                <field name="periods" optional="hide" />
+                <field name="start_date" optional="hide" />
             </tree>
         </field>
     </record>
