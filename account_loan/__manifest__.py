@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Account Loan management",
-    "version": "14.0.1.0.5",
+    "version": "14.0.1.0.6",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
@@ -20,7 +20,7 @@
     ],
     "installable": True,
     "external_dependencies": {
-        "python": ["numpy==1.15", "numpy-financial<=1.0.0"],
+        "python": ["numpy>=1.15", "numpy-financial<=1.0.0"],
         "deb": ["libatlas-base-dev"],
     },
 }
