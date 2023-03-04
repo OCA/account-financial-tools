@@ -8,7 +8,6 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     check_number = fields.Char(
-        string="Check Number",
         compute="_compute_check_number",
         store=True,
         readonly=False,
