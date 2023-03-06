@@ -98,21 +98,6 @@ class Product(models.Model):
                 "You cannot rebuild quantities from pickings moves in product.\n "
                 "You need to try from the product template."))
 
-            # quants = self.env['stock.quant'].sudo()._gather(product, location, strict=False)
-            # for quant in quants:
-            #     try:
-            #         with self._cr.savepoint():
-            #             self._cr.execute("SELECT 1 FROM stock_quant WHERE id = %s FOR UPDATE NOWAIT", [quant.id],
-            #                              log_exceptions=False)
-            #             quant.unlink()
-            #             break
-            #     except OperationalError as e:
-            #         if e.pgcode == '55P03':  # could not obtain the lock
-            #             continue
-            #         else:
-            #             raise
-            # moves.force_rebuild_moves()
-
     @api.multi
     def action_get_account_move_lines(self):
         self.ensure_one()
@@ -519,11 +504,18 @@ class ProductTemplate(models.Model):
             for move in moves.sorted(lambda r: r.date):
                 if move.quantity_done == 0:
                     continue
-                move.landed_cost_value = 0.0
-                move.remaining_value = 0.0
-                move.remaining_qty = 0.0
-                move.value = 0.0
-                move.price_unit = 0.0
+                move.write({
+                    'landed_cost_value': 0.0,
+                    'remaining_value': 0.0,
+                    'remaining_qty': 0.0,
+                    'value': 0.0,
+                    'price_unit': 0.0,
+                })
+                # move.landed_cost_value = 0.0
+                # move.remaining_value = 0.0
+                # move.remaining_qty = 0.0
+                # move.value = 0.0
+                # move.price_unit = 0.0
 
             # start rebuild all stock moves and account moves
             date_move = False

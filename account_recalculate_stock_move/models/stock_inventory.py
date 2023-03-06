@@ -152,6 +152,7 @@ class InventoryLine(models.Model):
         help="Technical field used to record the product cost set by the user during a inventory confirmation (when costing "
             "method used is 'average price' or 'real'). Value given in company currency and in product uom.",
         copy=False)  # as it's a technical field, we intentionally don't provide the digits attribute
+    manual_price_unit = fields.Boolean('Set manual price unit')
 
     def _get_move_values(self, qty, location_id, location_dest_id, out):
         res = super()._get_move_values(qty, location_id, location_dest_id, out)
@@ -159,3 +160,9 @@ class InventoryLine(models.Model):
             res['price_unit'] = self.price_unit
         res['only_quantity'] = self.only_quantity
         return res
+
+    @api.onchange('price_unit')
+    def onchange_price_unit(self):
+        for record in self:
+            if record.price_unit != 0.0:
+                record.manual_price_unit = True

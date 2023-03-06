@@ -68,6 +68,7 @@
                 -->
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='product_id']" position="after">
                     <field name="price_unit"/>
+                    <field name="manual_price_unit"/>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="Account Journal Items" groups="account.group_account_invoice">
@@ -151,6 +152,7 @@
             <field name="arch" type="xml">
                 <field name="product_uom_id" position="after">
                     <field name="price_unit"/>
+                    <field name="manual_price_unit"/>
                 </field>
             </field>
         </record>
@@ -161,6 +163,7 @@
             <field name="arch" type="xml">
                 <field name="product_uom_id" position="after">
                     <field name="price_unit"/>
+                    <field name="manual_price_unit"/>
                 </field>
             </field>
         </record>
@@ -169,6 +172,9 @@
             <field name="model">stock.move</field>
             <field name="inherit_id" ref="stock.view_move_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_cancel" string="Cancel" groups="base.group_user" type="object"/>
+                </xpath>
                 <xpath expr="//div[@name='button_box']" position="inside">
                     <field name="has_account_move" invisible="1"/>
                     <button name="rebuild_account_move"
