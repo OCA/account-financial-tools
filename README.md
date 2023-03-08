@@ -37,6 +37,7 @@ addon | version | maintainers | summary
 [account_journal_general_sequence](account_journal_general_sequence/) | 15.0.1.0.5 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Add configurable sequence to account moves, per journal
 [account_journal_lock_date](account_journal_lock_date/) | 15.0.1.0.1 |  | Lock each journal independently
 [account_lock_date_update](account_lock_date_update/) | 15.0.1.0.1 |  | Allow an Account adviser to update locking date without having access to all technical settings
+[account_lock_to_date](account_lock_to_date/) | 15.0.1.0.0 |  | Allows to set an account lock date in the future.
 [account_maturity_date_default](account_maturity_date_default/) | 15.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Maturity Date Default
 [account_move_budget](account_move_budget/) | 15.0.1.0.0 |  | Create Accounting Budgets
 [account_move_fiscal_year](account_move_fiscal_year/) | 15.0.1.0.1 |  | Display the fiscal year on journal entries/item
