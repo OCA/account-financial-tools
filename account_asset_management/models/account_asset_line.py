@@ -27,23 +27,28 @@ class AccountAssetLine(models.Model):
         readonly=True,
     )
     parent_state = fields.Selection(
-        related="asset_id.state", string="State of Asset", readonly=True
+        related="asset_id.state",
+        string="State of Asset",
     )
-    depreciation_base = fields.Float(
-        related="asset_id.depreciation_base", string="Depreciation Base", readonly=True
+    depreciation_base = fields.Monetary(
+        related="asset_id.depreciation_base",
+        string="Depreciation Base",
+        currency_field="company_currency_id",
     )
-    amount = fields.Float(string="Amount", digits="Account", required=True)
-    remaining_value = fields.Float(
+    amount = fields.Monetary(
+        string="Amount", required=True, currency_field="company_currency_id"
+    )
+    remaining_value = fields.Monetary(
         compute="_compute_values",
-        digits="Account",
         string="Next Period Depreciation",
         store=True,
+        currency_field="company_currency_id",
     )
-    depreciated_value = fields.Float(
+    depreciated_value = fields.Monetary(
         compute="_compute_values",
-        digits="Account",
         string="Amount Already Depreciated",
         store=True,
+        currency_field="company_currency_id",
     )
     line_date = fields.Date(string="Date", required=True)
     line_days = fields.Integer(string="Days", readonly=True)
@@ -70,11 +75,9 @@ class AccountAssetLine(models.Model):
         help="Set this flag for entries of previous fiscal years "
         "for which Odoo has not generated accounting entries.",
     )
-    company_id = fields.Many2one(
-        "res.company",
-        store=True,
-        readonly=True,
-        related="asset_id.company_id",
+    company_id = fields.Many2one(related="asset_id.company_id", store=True)
+    company_currency_id = fields.Many2one(
+        related="asset_id.company_id.currency_id", store=True, string="Company Currency"
     )
 
     @api.depends("amount", "previous_id", "type")
@@ -229,15 +232,17 @@ class AccountAssetLine(models.Model):
     def _setup_move_line_data(self, depreciation_date, account, ml_type, move):
         """Prepare data to be propagated to account.move.line"""
         asset = self.asset_id
+        currency = asset.company_id.currency_id
         amount = self.amount
+        amount_comp = currency.compare_amounts(amount, 0)
         analytic_id = False
         analytic_tags = self.env["account.analytic.tag"]
         if ml_type == "depreciation":
-            debit = amount < 0 and -amount or 0.0
-            credit = amount > 0 and amount or 0.0
+            debit = amount_comp < 0 and -amount or 0.0
+            credit = amount_comp > 0 and amount or 0.0
         elif ml_type == "expense":
-            debit = amount > 0 and amount or 0.0
-            credit = amount < 0 and -amount or 0.0
+            debit = amount_comp > 0 and amount or 0.0
+            credit = amount_comp < 0 and -amount or 0.0
             analytic_id = asset.account_analytic_id.id
             analytic_tags = asset.analytic_tag_ids
         move_line_data = {
