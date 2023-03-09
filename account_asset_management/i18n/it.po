@@ -14,8 +14,8 @@ msgstr ""
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
 "PO-Revision-Date: 2022-05-18 10:05+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/it/)\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -396,6 +396,8 @@ msgstr "Azienda"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__company_currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__company_currency_id
 msgid "Company Currency"
 msgstr ""
 

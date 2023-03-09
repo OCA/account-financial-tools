@@ -30,8 +30,8 @@ msgstr ""
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
 "PO-Revision-Date: 2022-12-09 22:44+0000\n"
 "Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -425,6 +425,8 @@ msgstr "Empresa"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__company_currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__company_currency_id
 msgid "Company Currency"
 msgstr "Moeda da Empresa"
 
