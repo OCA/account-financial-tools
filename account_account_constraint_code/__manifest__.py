@@ -4,7 +4,7 @@
 {
     "name": "Account Account Constraint Code",
     "summary": "Forbid modification of code when account move line linked to the account",
-    "version": "14.0.1.0.0",
+    "version": "15.0.0.1.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",

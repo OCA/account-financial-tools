@@ -4,10 +4,10 @@
 
 from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestAccountAccount(SavepointCase):
+class TestAccountAccount(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
