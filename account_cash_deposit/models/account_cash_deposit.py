@@ -276,8 +276,8 @@ class AccountCashDeposit(models.Model):
     def _del_empty_lines(self, raise_if_empty=True):
         self.ensure_one()
         self.line_ids.filtered(lambda x: x.qty == 0).unlink()
-        if raise_if_empty and not self.line_ids:
-            raise UserError(_("There are no non-zero lines on %s!") % self.display_name)
+        if raise_if_empty and self.currency_id.is_zero(self.total_amount):
+            raise UserError(_("The total amount of %s is zero.") % self.display_name)
 
     def _prepare_account_move(self, vals):
         self.ensure_one()
