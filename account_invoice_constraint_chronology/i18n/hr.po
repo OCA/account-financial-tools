@@ -26,7 +26,6 @@ msgid "Check Chronology"
 msgstr "Provjeri kronologiju"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/.src/account-financial-tools/account_invoice_constraint_chronology/model/account_move.py:0
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, fuzzy, python-format
 msgid ""
@@ -37,7 +36,6 @@ msgstr ""
 "pokušajte ponovo."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/.src/account-financial-tools/account_invoice_constraint_chronology/model/account_move.py:0
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, fuzzy, python-format
 msgid ""
@@ -47,7 +45,6 @@ msgstr ""
 "Kronološka greška. Postoji najmanje jedan račun sa datum iza {date_invoice}."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/.src/account-financial-tools/account_invoice_constraint_chronology/model/account_move.py:0
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, fuzzy, python-format
 msgid ""

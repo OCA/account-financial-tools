@@ -26,7 +26,6 @@ msgid "Check Chronology"
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/.src/account-financial-tools/account_invoice_constraint_chronology/model/account_move.py:0
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
@@ -35,7 +34,6 @@ msgid ""
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/.src/account-financial-tools/account_invoice_constraint_chronology/model/account_move.py:0
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
@@ -44,7 +42,6 @@ msgid ""
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/.src/account-financial-tools/account_invoice_constraint_chronology/model/account_move.py:0
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
