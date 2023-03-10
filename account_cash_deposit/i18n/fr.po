@@ -626,16 +626,16 @@ msgid "The quantity must be positive or null."
 msgstr "La quantité doit être positive ou nulle."
 
 #. module: account_cash_deposit
-#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_value_positive
-msgid "The value must be strictly positive."
-msgstr "La valeur doit être strictement positive."
-
-#. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
-msgid "There are no non-zero lines on %s!"
-msgstr "Il n'y a aucune ligne non nulle sur %s !"
+msgid "The total amount of %s is zero."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_value_positive
+msgid "The value must be strictly positive."
+msgstr "La valeur doit être strictement positive."
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__cash_type
@@ -710,6 +710,10 @@ msgstr ""
 #, python-format
 msgid "You must delete cash lines that are linked to a currency other than %s."
 msgstr "Vous devez supprimer les lignes liées à une devise autre que %s."
+
+#, python-format
+#~ msgid "There are no non-zero lines on %s!"
+#~ msgstr "Il n'y a aucune ligne non nulle sur %s !"
 
 #, python-format
 #~ msgid "Missing Outstanding Payments Account on bank journal '%s'."
