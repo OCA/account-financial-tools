@@ -614,15 +614,15 @@ msgid "The quantity must be positive or null."
 msgstr ""
 
 #. module: account_cash_deposit
-#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_value_positive
-msgid "The value must be strictly positive."
-msgstr ""
-
-#. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
-msgid "There are no non-zero lines on %s!"
+msgid "The total amount of %s is zero."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_value_positive
+msgid "The value must be strictly positive."
 msgstr ""
 
 #. module: account_cash_deposit
