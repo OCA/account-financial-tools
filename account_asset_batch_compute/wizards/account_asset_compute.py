@@ -13,11 +13,11 @@ class AccountAssetCompute(models.TransientModel):
     def asset_compute(self):
         self.ensure_one()
         if not self.batch_processing:
-            return super(AccountAssetCompute, self).asset_compute()
+            return super().asset_compute()
         if not self.env.context.get("job_uuid") and not self.env.context.get(
             "test_queue_job_no_delay"
         ):
-            description = _("Creating jobs to create moves for assets to %s") % (
+            description = _("Creating jobs to create moves for assets to {}").format(
                 self.date_end,
             )
             job = self.with_delay(description=description).asset_compute()
