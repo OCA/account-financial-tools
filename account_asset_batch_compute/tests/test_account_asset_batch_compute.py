@@ -12,38 +12,35 @@ from odoo.addons.queue_job.job import Job
 
 
 class TestAccountAssetBatchCompute(TransactionCase):
-    def setUp(self):
-        super(TestAccountAssetBatchCompute, self).setUp()
-        self.wiz_obj = self.env["account.asset.compute"]
-        self.asset_model = self.env["account.asset"]
-        self.asset_profile_model = self.env["account.asset.profile"]
-        self.account_account_type_model = self.env["account.account.type"]
-        self.account_type_regular = self.account_account_type_model.create(
-            {"name": "Test Regular", "type": "other", "internal_group": "liability"}
-        )
-        self.account = self.env["account.account"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.wiz_obj = cls.env["account.asset.compute"]
+        cls.asset_model = cls.env["account.asset"]
+        cls.asset_profile_model = cls.env["account.asset.profile"]
+        cls.account = cls.env["account.account"].create(
             {
                 "name": "Test account",
                 "code": "TAC",
-                "user_type_id": self.account_type_regular.id,
+                "account_type": "liability_payable",
             }
         )
-        self.journal = self.env["account.journal"].create(
+        cls.journal = cls.env["account.journal"].create(
             {"name": "Test Journal", "code": "TJ", "type": "general"}
         )
-        self.profile = self.asset_profile_model.create(
+        cls.profile = cls.asset_profile_model.create(
             {
-                "account_expense_depreciation_id": self.account.id,
-                "account_asset_id": self.account.id,
-                "account_depreciation_id": self.account.id,
-                "journal_id": self.journal.id,
+                "account_expense_depreciation_id": cls.account.id,
+                "account_asset_id": cls.account.id,
+                "account_depreciation_id": cls.account.id,
+                "journal_id": cls.journal.id,
                 "name": "Test",
             }
         )
-        self.asset01 = self.asset_model.create(
+        cls.asset01 = cls.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.profile.id,
+                "profile_id": cls.profile.id,
                 "purchase_value": 1000,
                 "salvage_value": 0,
                 "date_start": time.strftime("2003-01-01"),
@@ -55,8 +52,8 @@ class TestAccountAssetBatchCompute(TransactionCase):
         )
         today = date.today()
         first_day_of_month = date(today.year, today.month, 1)
-        self.nextmonth = first_day_of_month + relativedelta.relativedelta(months=1)
-        self.asset01.date_start = first_day_of_month
+        cls.nextmonth = first_day_of_month + relativedelta.relativedelta(months=1)
+        cls.asset01.date_start = first_day_of_month
 
     def test_no_batch_processing(self):
         wiz = self.wiz_obj.create(

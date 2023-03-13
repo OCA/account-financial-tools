@@ -16,44 +16,44 @@ msgstr ""
 #. module: account_asset_batch_compute
 #: model:ir.model,name:account_asset_batch_compute.model_account_asset
 msgid "Asset"
-msgstr ""
+msgstr "Activo"
 
 #. module: account_asset_batch_compute
 #: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset_compute__batch_processing
 msgid "Batch Processing"
-msgstr ""
+msgstr "Procesamiento por lotes"
 
 #. module: account_asset_batch_compute
 #: model:ir.model,name:account_asset_batch_compute.model_account_asset_compute
 msgid "Compute Assets"
-msgstr ""
+msgstr "Calcular activos"
 
 #. module: account_asset_batch_compute
 #: code:addons/account_asset_batch_compute/wizards/account_asset_compute.py:0
 #, python-format
 msgid "Creating jobs to create moves for assets to {}"
-msgstr ""
+msgstr "Creando trabajos para crear movimientos de activos a {}"
 
 #. module: account_asset_batch_compute
 #: code:addons/account_asset_batch_compute/models/account_asset.py:0
 #, python-format
 msgid "Creating move for asset with id {rec_id} to {date_end}"
-msgstr ""
+msgstr "Creando movimiento de activo con id {rec_id} a {date_end}"
 
 #. module: account_asset_batch_compute
 #: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset__display_name
 #: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset_compute__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre a mostrar"
 
 #. module: account_asset_batch_compute
 #: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset__id
 #: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset_compute__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_asset_batch_compute
 #: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset____last_update
 #: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset_compute____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"

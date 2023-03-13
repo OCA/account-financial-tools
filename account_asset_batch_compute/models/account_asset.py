@@ -15,9 +15,11 @@ class AccountAsset(models.Model):
             results = []
             log_error = ""
             for record in self:
-                description = _("Creating move for asset with id %s to %s") % (
-                    record.id,
-                    date_end,
+                description = _(
+                    "Creating move for asset with id {rec_id} to {date_end}"
+                ).format(
+                    rec_id=record.id,
+                    date_end=date_end,
                 )
                 record.with_delay(description=description)._compute_entries(
                     date_end, check_triggers=check_triggers
