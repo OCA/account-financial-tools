@@ -34,6 +34,9 @@ class AccountJournal(models.Model):
     )
     # Redefine the default to True as <=v13.0
     refund_sequence = fields.Boolean(default=True)
+    # has_sequence_holes is not relevant anymore (since based on sequence_prefix/number)
+    # -> compute=False to improve perf and to avoid displaying warning
+    has_sequence_holes = fields.Boolean(compute=False)
 
     @api.constrains("refund_sequence_id", "sequence_id")
     def _check_journal_sequence(self):

@@ -29,8 +29,8 @@ msgstr ""
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
 msgid ""
-"Check this box if you don't want to share the same sequence for invoices and"
-" credit notes made from this journal"
+"Check this box if you don't want to share the same sequence for invoices and "
+"credit notes made from this journal"
 msgstr ""
 "Označite ovu kućicu ako ne želite dijeliti istu sekvencu za račune i "
 "odobrenja/storna napravljena iz ovog dnevnika"
@@ -51,6 +51,11 @@ msgid "Entry Sequence"
 msgstr "Ulazna sekvenca"
 
 #. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__has_sequence_holes
+msgid "Has Sequence Holes"
+msgstr ""
+
+#. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
@@ -68,6 +73,13 @@ msgid "Journal Entry"
 msgstr "Stavka dnevnika"
 
 #. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__made_sequence_hole
+msgid "Made Sequence Hole"
+msgstr ""
+
+#. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__name
@@ -79,8 +91,8 @@ msgstr "Broj"
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid ""
-"On journal '%s', the same sequence is used as Entry Sequence and Credit Note"
-" Entry Sequence."
+"On journal '%s', the same sequence is used as Entry Sequence and Credit Note "
+"Entry Sequence."
 msgstr ""
 "Na dnevniku '%s', ista sekvenca se koristi za regularna i storno knjiženja."
 
@@ -146,4 +158,5 @@ msgstr ""
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
 msgid "This sequence will be used to generate the journal entry number."
-msgstr "Ova sekvenca će biti korištena za generiranje broja knjiženja dnevnika."
+msgstr ""
+"Ova sekvenca će biti korištena za generiranje broja knjiženja dnevnika."
