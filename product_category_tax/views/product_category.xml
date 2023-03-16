@@ -7,13 +7,16 @@
         <field name="arch" type="xml">
             <group name="account_property">
                 <group name="taxes" string="Taxes">
-                    <button
-                        name="update_product_taxes"
-                        class="oe_link"
-                        type="object"
-                        string="-> Apply to Products"
-                        confirm="This will apply to all products in the category"
-                    />
+                    <label for="taxes_id" string="" class="oe_inline d-none" />
+                    <div class="o_row o_row_readonly">
+                        <button
+                            name="update_product_taxes"
+                            class="oe_link"
+                            type="object"
+                            string="-> Apply to Products"
+                            confirm="This will apply to all products in the category"
+                        />
+                    </div>
                     <field name="taxes_id" widget="many2many_tags" />
                     <field
                         name="supplier_taxes_id"
