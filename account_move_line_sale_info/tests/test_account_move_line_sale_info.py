@@ -10,7 +10,6 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         self.sale_line_model = self.env["sale.order.line"]
         self.product_model = self.env["product.product"]
         self.product_ctg_model = self.env["product.category"]
-        self.acc_type_model = self.env["account.account.type"]
         self.account_model = self.env["account.account"]
         self.aml_model = self.env["account.move.line"]
         self.res_users_model = self.env["res.users"]
@@ -23,18 +22,18 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         self.group_account_manager = self.env.ref("account.group_account_manager")
 
         # Create account for Goods Received Not Invoiced
-        acc_type = self._create_account_type("equity", "other")
+        acc_type = "equity"
         name = "Goods Received Not Invoiced"
         code = "grni"
         self.account_grni = self._create_account(acc_type, name, code, self.company)
 
         # Create account for Cost of Goods Sold
-        acc_type = self._create_account_type("expense", "other")
+        acc_type = "expense"
         name = "Cost of Goods Sold"
         code = "cogs"
         self.account_cogs = self._create_account(acc_type, name, code, self.company)
         # Create account for Inventory
-        acc_type = self._create_account_type("asset", "other")
+        acc_type = "asset_current"
         name = "Inventory"
         code = "inventory"
         self.account_inventory = self._create_account(
@@ -81,19 +80,13 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         )
         return user.id
 
-    def _create_account_type(self, name, atype):
-        acc_type = self.acc_type_model.create(
-            {"name": name, "type": atype, "internal_group": name}
-        )
-        return acc_type
-
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
         account = self.account_model.create(
             {
                 "name": name,
                 "code": code,
-                "user_type_id": acc_type.id,
+                "account_type": acc_type,
                 "company_id": company.id,
             }
         )
@@ -189,7 +182,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             break
         sale.action_confirm()
         picking = sale.picking_ids[0]
-        picking.move_lines.write({"quantity_done": 1.0})
+        picking.move_ids.write({"quantity_done": 1.0})
         picking.button_validate()
 
         expected_balance = -1.0
@@ -260,7 +253,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             break
         sale.action_confirm()
         picking = sale.picking_ids[0]
-        picking.move_lines.write({"quantity_done": 1.0})
+        picking.move_ids.write({"quantity_done": 1.0})
         picking.button_validate()
         sale._create_invoices()
         invoice = sale.invoice_ids[0]
