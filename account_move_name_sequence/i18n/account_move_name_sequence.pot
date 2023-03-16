@@ -43,6 +43,11 @@ msgid "Entry Sequence"
 msgstr ""
 
 #. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__has_sequence_holes
+msgid "Has Sequence Holes"
+msgstr ""
+
+#. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
@@ -57,6 +62,13 @@ msgstr ""
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_move
 msgid "Journal Entry"
+msgstr ""
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__made_sequence_hole
+msgid "Made Sequence Hole"
 msgstr ""
 
 #. module: account_move_name_sequence
