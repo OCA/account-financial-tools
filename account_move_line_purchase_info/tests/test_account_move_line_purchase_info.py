@@ -14,7 +14,6 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         cls.purchase_line_model = cls.env["purchase.order.line"]
         cls.product_model = cls.env["product.product"]
         cls.product_ctg_model = cls.env["product.category"]
-        cls.acc_type_model = cls.env["account.account.type"]
         cls.account_model = cls.env["account.account"]
         cls.am_model = cls.env["account.move"]
         cls.aml_model = cls.env["account.move.line"]
@@ -28,18 +27,18 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         cls.group_account_manager = cls.env.ref("account.group_account_manager")
 
         # Create account for Goods Received Not Invoiced
-        acc_type = cls._create_account_type(cls, "equity", "other")
+        acc_type = "equity"
         name = "Goods Received Not Invoiced"
         code = "grni"
         cls.account_grni = cls._create_account(cls, acc_type, name, code, cls.company)
 
         # Create account for Cost of Goods Sold
-        acc_type = cls._create_account_type(cls, "expense", "other")
+        acc_type = "expense"
         name = "Cost of Goods Sold"
         code = "cogs"
         cls.account_cogs = cls._create_account(cls, acc_type, name, code, cls.company)
         # Create account for Inventory
-        acc_type = cls._create_account_type(cls, "asset", "other")
+        acc_type = "asset_current"
         name = "Inventory"
         code = "inventory"
         cls.account_inventory = cls._create_account(
@@ -78,19 +77,13 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         )
         return user.id
 
-    def _create_account_type(self, name, a_type):
-        acc_type = self.acc_type_model.create(
-            {"name": name, "type": a_type, "internal_group": name}
-        )
-        return acc_type
-
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
         account = self.account_model.create(
             {
                 "name": name,
                 "code": code,
-                "user_type_id": acc_type.id,
+                "account_type": acc_type,
                 "company_id": company.id,
                 "reconcile": True,
             }
@@ -183,7 +176,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         purchase.button_confirm()
         picking = purchase.picking_ids[0]
         picking.action_confirm()
-        picking.move_lines.write({"quantity_done": 1.0})
+        picking.move_ids.write({"quantity_done": 1.0})
         picking.button_validate()
 
         expected_balance = 1.0
@@ -193,12 +186,13 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             expected_balance=expected_balance,
         )
 
-        f = Form(self.am_model.with_context(default_type="in_invoice"))
+        f = Form(self.am_model.with_context(default_move_type="in_invoice"))
         f.partner_id = purchase.partner_id
-        f.purchase_id = purchase
+        f.invoice_date = fields.Date().today()
+        f.purchase_vendor_bill_id = self.env["purchase.bill.union"].browse(-purchase.id)
         invoice = f.save()
-        invoice._post()
-        purchase.flush()
+        invoice.action_post()
+        purchase.flush_model()
 
         for aml in invoice.invoice_line_ids:
             if aml.product_id == po_line.product_id and aml.move_id:
