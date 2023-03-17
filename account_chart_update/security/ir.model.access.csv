@@ -7,3 +7,5 @@ access_wizard_account_matching,wizard.account.matching,model_wizard_account_matc
 access_wizard_update_charts_accounts_tax,wizard.update.charts.accounts.tax,model_wizard_update_charts_accounts_tax,base.group_erp_manager,1,1,1,1
 access_wizard_matching,wizard.matching,model_wizard_matching,base.group_erp_manager,1,1,1,1
 access_wizard_update_charts_accounts_fiscal_position,wizard.update.charts.accounts.fiscal.position,model_wizard_update_charts_accounts_fiscal_position,base.group_erp_manager,1,1,1,1
+access_wizard_account_groupo_matching,wizard.account.group.matching,model_wizard_account_group_matching,base.group_erp_manager,1,1,1,1
+access_wizard_update_charts_accounts_account_group,wizard.update.charts.accounts.account.group,model_wizard_update_charts_accounts_account_group,base.group_erp_manager,1,1,1,1

@@ -49,6 +49,7 @@
                             <group string="Update records?">
                                 <field name="update_tax" />
                                 <field name="update_account" />
+                                <field name="update_account_group" />
                                 <field name="update_fiscal_position" />
                             </group>
                             <group
@@ -78,6 +79,7 @@
                           ('update_tax', '=', False),
                           ('update_account', '=', False),
                           ('update_fiscal_position', '=', False),
+                          ('update_account_group', '=', False),
                       ]}"
                     >
                         <h3>
@@ -120,6 +122,17 @@
                                 />
                             </page>
                             <page
+                                string="Account groups"
+                                name="page_fields_account_groups"
+                                attrs="{'invisible': [('update_account_group', '=', False)]}"
+                            >
+                                <field
+                                    name="account_group_field_ids"
+                                    widget="many2many_checkboxes"
+                                    context="{'account_chart_update': True}"
+                                />
+                            </page>
+                            <page
                                 string="Fiscal positions"
                                 name="page_fields_fps"
                                 attrs="{'invisible': [('update_fiscal_position', '=', False)]}"
@@ -138,6 +151,7 @@
                           ('update_tax', '=', False),
                           ('update_account', '=', False),
                           ('update_fiscal_position', '=', False),
+                          ('update_account_group', '=', False),
                       ]}"
                     >
                         <h3>
@@ -169,6 +183,25 @@
                                 attrs="{'invisible': [('update_account', '=', False)]}"
                             >
                                 <field name="account_matching_ids">
+                                    <tree
+                                        create="false"
+                                        edit="false"
+                                        default_order="sequence"
+                                    >
+                                        <field name="sequence" widget="handle" />
+                                        <field name="matching_value" />
+                                    </tree>
+                                    <form>
+                                        <field name="matching_value" readonly="1" />
+                                    </form>
+                                </field>
+                            </page>
+                            <page
+                                string="Account groups"
+                                name="page_matching_account_groups"
+                                attrs="{'invisible': [('update_account_group', '=', False)]}"
+                            >
+                                <field name="account_group_matching_ids">
                                     <tree
                                         create="false"
                                         edit="false"
@@ -276,6 +309,39 @@
                             </field>
                         </page>
                         <page
+                            string="Account groups"
+                            attrs="{'invisible': [('update_account_group', '=', False)]}"
+                        >
+                            <field name="account_group_ids" nolabel="1">
+                                <tree decoration-danger="type=='updated'">
+                                    <field name="account_group_id" />
+                                    <field name="update_account_group_id" />
+                                    <field name="notes" />
+                                    <field name="type" />
+                                </tree>
+                                <form>
+                                    <group col="2">
+                                        <group>
+                                            <field
+                                                name="recreate_xml_ids"
+                                                invisible="1"
+                                            />
+                                            <field name="account_group_id" />
+                                            <field
+                                                name="type"
+                                                attrs="{'readonly': [('recreate_xml_ids','=', False)]}"
+                                            />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field name="update_account_group_id" />
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page
                             string="Fiscal positions"
                             attrs="{'invisible': [('update_fiscal_position', '=', False)]}"
                         >
@@ -324,6 +390,7 @@
                         <separator colspan="4" string="Summary of created objects" />
                         <field name="new_taxes" />
                         <field name="new_accounts" />
+                        <field name="new_account_groups" />
                         <field name="new_fps" />
                     </group>
                     <group colspan="4">
@@ -331,6 +398,7 @@
                         <field name="updated_taxes" />
                         <field name="deleted_taxes" />
                         <field name="updated_accounts" />
+                        <field name="updated_account_groups" />
                         <field name="updated_fps" />
                     </group>
                 </group>
