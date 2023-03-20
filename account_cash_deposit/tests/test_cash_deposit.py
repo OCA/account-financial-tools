@@ -129,3 +129,49 @@ class TestAccountCashDeposit(TransactionCase):
         self.assertEqual(deposit.move_id.date, deposit.date)
         self.assertEqual(deposit.move_id.journal_id, deposit.cash_journal_id)
         self.assertEqual(deposit.move_id.ref, deposit.display_name)
+
+    def test_get_value_label(self):
+        self.symbol_position = self.currency.position
+        self.symbol = self.currency.symbol
+        cash_unit = self.env["cash.unit"].create(
+            {
+                "currency_id": self.currency.id,
+                "cash_type": "note",
+                "value": 50.00,
+                "auto_create": "deposit",
+            }
+        )
+        self.value = cash_unit.value
+        account_cash_deposit = self.env["account.cash.deposit"].create(
+            {
+                "operation_type": "deposit",
+                "cash_journal_id": self.cash_journal.id,
+                "bank_journal_id": self.cash_journal.id,
+                "line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "cash_unit_id": cash_unit.id,
+                            "qty": 5,
+                            "subtotal": 250.00,
+                        },
+                    ),
+                ],
+            }
+        )
+        self.assertEqual(
+            account_cash_deposit.line_ids.cash_unit_id.currency_id.symbol,
+            self.symbol,
+            "Symbol must be $.",
+        )
+        self.assertEqual(
+            account_cash_deposit.line_ids.cash_unit_id.currency_id.position,
+            self.symbol_position,
+            "postion must be before",
+        )
+        self.assertEqual(
+            account_cash_deposit.line_ids.cash_unit_id.value,
+            self.value,
+        )
+        cash_unit._get_value_label(self.value)

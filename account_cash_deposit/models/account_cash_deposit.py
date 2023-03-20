@@ -22,7 +22,6 @@ class AccountCashDeposit(models.Model):
             ("order", "Cash Order"),
         ],
         required=True,
-        string="Operation Type",
         readonly=True,
     )
     line_ids = fields.One2many(
@@ -38,7 +37,6 @@ class AccountCashDeposit(models.Model):
         states={"draft": [("readonly", "=", False)]},
     )
     date = fields.Date(
-        string="Date",
         states={"done": [("readonly", "=", True)]},
         tracking=True,
         copy=False,
@@ -110,7 +108,6 @@ class AccountCashDeposit(models.Model):
     )
     total_amount = fields.Monetary(
         compute="_compute_total_amount",
-        string="Total Amount",
         store=True,
         currency_field="currency_id",
         tracking=True,
@@ -381,7 +378,7 @@ class AccountCashDeposit(models.Model):
 
     def get_report(self):
         report = self.env.ref("account_cash_deposit.report_account_cash_deposit")
-        action = report.with_context({"discard_logo_check": True}).report_action(self)
+        action = report.with_context(**{"discard_logo_check": True}).report_action(self)
         return action
 
 
