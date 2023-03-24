@@ -14,18 +14,18 @@ No Default Account
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/14.0/account_no_default
+    :target: https://github.com/OCA/account-financial-tools/tree/16.0/account_no_default
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-14-0/account-financial-tools-14-0-account_no_default
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_no_default
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/92/14.0
+    :target: https://runbot.odoo-community.org/runbot/92/16.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-In previous versions of Odoo, the system did not require a default expense account. We would like to investigate the feasibility of a simple solution of just making this field not-required once again in v14.
+In previous versions of Odoo, the system did not require a default expense account. We would like to investigate the feasibility of a simple solution of just making this field not-required once again in v16.
 
 **Table of contents**
 
@@ -77,6 +77,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-dreispt| 
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/14.0/account_no_default>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/16.0/account_no_default>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

@@ -1,9 +1,9 @@
-# Copyright (C) 2020 Open Source Integrators
+# Copyright (C) 2023 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "No Default Account",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "development_status": "Beta",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "maintainers": ["dreispt"],

@@ -4,9 +4,11 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='default_account_id'][4]" position="attributes">
-                <attribute name="attrs">{'required': False}</attribute>
-            </xpath>
+            <field name="default_account_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'required': ['|', '&amp;', ('id', '!=', False), ('type', 'in', ('bank', 'cash')), ('type', 'in', ('sale'))],'invisible': [('type', '=', False)]}</attribute>
+            </field>
         </field>
     </record>
 </odoo>
