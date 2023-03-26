@@ -2,7 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     "name": "Re-booking The Stock Move",
-    "version": "11.0.2.1.0",
+    "version": "11.0.3.0.0",
     "depends": [
         "account",
         "account_documents",

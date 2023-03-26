@@ -47,6 +47,7 @@ class ScanningDocumentWizard(models.TransientModel):
         if res:
             for record in self:
                 self.env['scanners.action'].scan_image(res,
+                                                       scanning_scanner_id=record.scanning_scanner_id,
                                                        scanner_depth=record.scanner_depth,
                                                        scanner_color_mode=record.scanner_color_mode,
                                                        scanner_source_mode=record.scanner_source_mode)
