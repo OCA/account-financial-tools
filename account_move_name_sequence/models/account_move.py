@@ -59,3 +59,10 @@ class AccountMove(models.Model):
     def _post(self, soft=True):
         self.flush()
         return super()._post(soft=soft)
+
+    def _compute_name(self):
+        """Overwrite account module method in order to
+        avoid side effect if legacy code call it directly
+        like when creating entry from email.
+        """
+        return self._compute_name_by_sequence()
