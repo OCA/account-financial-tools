@@ -82,6 +82,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         default=True,
         help="Existing accounts are updated. Accounts are searched by code.",
     )
+    update_account_group = fields.Boolean(
+        string="Update account groups",
+        default=True,
+        help="Existing account groups are updated. "
+        "Account groups are searched by prefix_code_start.",
+    )
     update_fiscal_position = fields.Boolean(
         string="Update fiscal positions",
         default=True,
@@ -105,6 +111,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         inverse_name="update_chart_wizard_id",
         string="Accounts",
     )
+    account_group_ids = fields.One2many(
+        comodel_name="wizard.update.charts.accounts.account.group",
+        inverse_name="update_chart_wizard_id",
+        string="Account Groups",
+    )
     fiscal_position_ids = fields.One2many(
         comodel_name="wizard.update.charts.accounts.fiscal.position",
         inverse_name="update_chart_wizard_id",
@@ -113,6 +124,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     new_taxes = fields.Integer(string="New taxes", compute="_compute_new_taxes_count")
     new_accounts = fields.Integer(
         string="New accounts", compute="_compute_new_accounts_count"
+    )
+    new_account_groups = fields.Integer(
+        string="New account groups", compute="_compute_new_account_groups_count"
     )
     rejected_new_account_number = fields.Integer()
     new_fps = fields.Integer(
@@ -124,6 +138,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     rejected_updated_account_number = fields.Integer()
     updated_accounts = fields.Integer(
         string="Updated accounts", compute="_compute_updated_accounts_count"
+    )
+    updated_account_groups = fields.Integer(
+        string="Updated accounts", compute="_compute_updated_account_groups_count"
     )
     updated_fps = fields.Integer(
         string="Updated fiscal positions", compute="_compute_updated_fps_count"
@@ -146,6 +163,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         domain=lambda self: self._domain_account_field_ids(),
         default=lambda self: self._default_account_field_ids(),
     )
+    account_group_field_ids = fields.Many2many(
+        comodel_name="ir.model.fields",
+        relation="wizard_update_charts_account_group_fields_rel",
+        string="Account fields",
+        domain=lambda self: self._domain_account_group_field_ids(),
+        default=lambda self: self._default_account_group_field_ids(),
+    )
     fp_field_ids = fields.Many2many(
         comodel_name="ir.model.fields",
         relation="wizard_update_charts_fp_fields_rel",
@@ -164,6 +188,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         inverse_name="update_chart_wizard_id",
         string="Accounts matching",
         default=lambda self: self._default_account_matching_ids(),
+    )
+    account_group_matching_ids = fields.One2many(
+        comodel_name="wizard.account.group.matching",
+        inverse_name="update_chart_wizard_id",
+        string="Account groups matching",
+        default=lambda self: self._default_account_group_matching_ids(),
     )
     fp_matching_ids = fields.One2many(
         comodel_name="wizard.fp.matching",
@@ -184,6 +214,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _domain_account_field_ids(self):
         return self._domain_per_name("account.account.template")
 
+    def _domain_account_group_field_ids(self):
+        return self._domain_per_name("account.group.template")
+
     def _domain_fp_field_ids(self):
         return self._domain_per_name("account.fiscal.position.template")
 
@@ -201,6 +234,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             )
         ]
 
+    def _default_account_group_field_ids(self):
+        return [
+            (4, x.id)
+            for x in self.env["ir.model.fields"].search(
+                self._domain_account_group_field_ids()
+            )
+        ]
+
     def _default_fp_field_ids(self):
         return [
             (4, x.id)
@@ -211,14 +252,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         vals = []
         for seq, opt in enumerate(ordered_opts, 1):
             vals.append((0, False, {"sequence": seq, "matching_value": opt}))
-
         all_options = self.env[model_name]._get_matching_selection()
         all_options = map(lambda x: x[0], all_options)
         all_options = list(set(all_options) - set(ordered_opts))
 
         for seq, opt in enumerate(all_options, len(ordered_opts) + 1):
             vals.append((0, False, {"sequence": seq, "matching_value": opt}))
-
         return vals
 
     def _default_fp_matching_ids(self):
@@ -232,6 +271,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _default_account_matching_ids(self):
         ordered_opts = ["xml_id", "code", "name"]
         return self._get_matching_ids("wizard.account.matching", ordered_opts)
+
+    def _default_account_group_matching_ids(self):
+        ordered_opts = ["xml_id", "code_prefix_start"]
+        return self._get_matching_ids("wizard.account.group.matching", ordered_opts)
 
     @api.model
     def _get_lang_selection_options(self):
@@ -255,6 +298,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             - self.rejected_new_account_number
         )
 
+    @api.depends("account_group_ids")
+    def _compute_new_account_groups_count(self):
+        self.new_account_groups = len(
+            self.account_group_ids.filtered(lambda x: x.type == "new")
+        )
+
     @api.depends("fiscal_position_ids")
     def _compute_new_fps_count(self):
         self.new_fps = len(self.fiscal_position_ids.filtered(lambda x: x.type == "new"))
@@ -268,6 +317,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.updated_accounts = (
             len(self.account_ids.filtered(lambda x: x.type == "updated"))
             - self.rejected_updated_account_number
+        )
+
+    @api.depends("account_group_ids")
+    def _compute_updated_account_groups_count(self):
+        self.updated_account_groups = len(
+            self.account_group_ids.filtered(lambda x: x.type == "updated")
         )
 
     @api.depends("fiscal_position_ids")
@@ -320,6 +375,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             self._find_taxes()
         if self.update_account:
             self._find_accounts()
+        if self.update_account_group:
+            self._find_account_groups()
         if self.update_fiscal_position:
             self._find_fiscal_positions()
         # Write the results, and go to the next step.
@@ -377,6 +434,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             # Clear this cache for avoiding incorrect account hits (as it was
             # queried before account creation)
             self.find_account_by_templates.clear_cache(self)
+            if self.update_account_group and perform_rest:
+                self._update_account_groups()
             if self.update_tax and perform_rest:
                 self._update_taxes_pending_for_accounts(todo_dict)
             if self.update_fiscal_position and perform_rest:
@@ -533,6 +592,39 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         real |= self.env.ref(self._get_real_xml_name(template))
                     except BaseException:
                         pass
+                if not real:
+                    continue
+                criteria = ("id", "in", real.ids)
+            elif matching.matching_value == "code":
+                codes = templates.mapped("code")
+                if not codes:
+                    continue
+                criteria = ("code", "in", list(map(self.padded_code, codes)))
+            else:
+                field_name = matching.matching_value
+                field_values = templates.mapped(field_name)
+                if not field_values:
+                    continue
+                criteria = (field_name, "in", field_values)
+            result = account_model.search(
+                [criteria, ("company_id", "=", self.company_id.id)]
+            )
+            if result:
+                return result.id
+        return False
+
+    @tools.ormcache("templates")
+    def find_account_group_by_templates(self, templates):
+        """Find an account that matches the template."""
+        account_model = self.env["account.group"]
+        for matching in self.account_group_matching_ids.sorted("sequence"):
+            if matching.matching_value == "xml_id":
+                real = self.env["account.group"]
+                for template in templates:
+                    try:
+                        real |= self.env.ref(self._get_real_xml_name(template))
+                    except BaseException:
+                        pass
 
                 if not real:
                     continue
@@ -669,6 +761,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "account.tax.template": {"chart_template_id", "children_tax_ids"},
             "account.account.template": {"chart_template_id", "root_id", "nocreate"},
             "account.fiscal.position.template": {"chart_template_id"},
+            "account.group.template": {
+                "chart_template_id",
+                "parent_id",
+                "code_prefix_end",
+            },
         }
         specials = {
             "display_name",
@@ -695,6 +792,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "account.tax.template": self.tax_field_ids,
             "account.account.template": self.account_field_ids,
             "account.fiscal.position.template": self.fp_field_ids,
+            "account.group.template": self.account_group_field_ids,
         }
         to_include = template_field_mapping[template._name].mapped("name")
         for key, field in template._fields.items():
@@ -878,6 +976,57 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             "update_chart_wizard_id": self.id,
                             "type": "updated",
                             "update_account_id": account_id,
+                            "notes": notes,
+                        }
+                    )
+
+    def _find_account_groups(self):
+        """Load account templates to create/update."""
+        self.account_group_ids.unlink()
+        for template in self.env["account.group.template"].search(
+            [("chart_template_id", "in", self.chart_template_ids.ids)]
+        ):
+            # Search for a real account that matches the template
+            account_group_id = self.find_account_group_by_templates(template)
+            if not account_group_id:
+                # Account to be created
+                self.account_group_ids.create(
+                    {
+                        "account_group_id": template.id,
+                        "update_chart_wizard_id": self.id,
+                        "type": "new",
+                        "notes": _("No account found with this code."),
+                    }
+                )
+            else:
+                # Check the account for changes
+                account_group = self.env["account.group"].browse(account_group_id)
+                notes = self.diff_notes(template, account_group)
+                code_prefix_end = (
+                    template.code_prefix_end
+                    if template.code_prefix_end
+                    and template.code_prefix_end < template.code_prefix_start
+                    else template.code_prefix_start
+                )
+                if code_prefix_end != account_group.code_prefix_end:
+                    notes += (notes and "\n" or "") + _(
+                        "Differences in these fields: %s."
+                    ) % template._fields["code_prefix_end"].get_description(self.env)[
+                        "string"
+                    ]
+                if self.recreate_xml_ids and self.missing_xml_id(
+                    template, account_group
+                ):
+                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+
+                if notes:
+                    # Account to be updated
+                    self.account_group_ids.create(
+                        {
+                            "account_group_id": template.id,
+                            "update_chart_wizard_id": self.id,
+                            "type": "updated",
+                            "update_account_group_id": account_group_id,
                             "notes": notes,
                         }
                     )
@@ -1144,6 +1293,52 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "account_ids": [(0, 0, x) for x in account_mapping],
         }
 
+    def _prepare_account_group_vals(self, template):
+        return {
+            "name": template.name,
+            "code_prefix_start": template.code_prefix_start,
+            "code_prefix_end": template.code_prefix_end,
+            "company_id": self.company_id.id,
+        }
+
+    def _update_account_groups(self):
+        """Process fiscal position templates to create/update."""
+        for wiz_account_group in self.account_group_ids:
+            account_group, template = (
+                wiz_account_group.update_account_group_id,
+                wiz_account_group.account_group_id,
+            )
+            if wiz_account_group.type == "new":
+                # Create a new fiscal position
+                self.chart_template_id.create_record_with_xmlid(
+                    self.company_id,
+                    template,
+                    "account.group",
+                    self._prepare_account_group_vals(template),
+                )
+                _logger.info(_("Created account group %s."), "'%s'" % template.name)
+            else:
+                for key, value in self.diff_fields(template, account_group).items():
+                    account_group[key] = value
+                    _logger.info(_("Updated account group %s."), "'%s'" % template.name)
+                code_prefix_end = (
+                    template.code_prefix_end
+                    if template.code_prefix_end
+                    and template.code_prefix_end < template.code_prefix_start
+                    else template.code_prefix_start
+                )
+                if code_prefix_end != account_group.code_prefix_end:
+                    account_group.code_prefix_end = code_prefix_end
+                    _logger.info(_("Updated account group %s."), "'%s'" % template.name)
+                if self.recreate_xml_ids and self.missing_xml_id(
+                    template, account_group
+                ):
+                    self.recreate_xml_id(template, account_group)
+                    _logger.info(
+                        _("Updated account group %s. (Recreated XML-ID)"),
+                        "'%s'" % template.name,
+                    )
+
     def _update_fiscal_positions(self):
         """Process fiscal position templates to create/update."""
         for wiz_fp in self.fiscal_position_ids:
@@ -1337,3 +1532,51 @@ class WizardFpMatching(models.TransientModel):
         vals = super(WizardFpMatching, self)._get_matching_selection()
         vals += self._selection_from_files("account.fiscal.position.template", ["name"])
         return vals
+
+
+class WizardAccountGroupMatching(models.TransientModel):
+    _name = "wizard.account.group.matching"
+    _description = "Wizard Account Group Matching"
+    _inherit = "wizard.matching"
+
+    def _get_matching_selection(self):
+        vals = super()._get_matching_selection()
+        vals += self._selection_from_files(
+            "account.group.template", ["code_prefix_start"]
+        )
+        return vals
+
+
+class WizardUpdateChartsAccountsAccountGroup(models.TransientModel):
+    _name = "wizard.update.charts.accounts.account.group"
+    _description = (
+        "Account group that needs to be updated (new or updated in the template)."
+    )
+
+    account_group_id = fields.Many2one(
+        comodel_name="account.group.template",
+        string="Account group template",
+        required=True,
+    )
+    update_chart_wizard_id = fields.Many2one(
+        comodel_name="wizard.update.charts.accounts",
+        string="Update chart wizard",
+        required=True,
+        ondelete="cascade",
+    )
+    type = fields.Selection(
+        selection=[("new", "New template"), ("updated", "Updated template")],
+        string="Type",
+        readonly=False,
+    )
+    update_account_group_id = fields.Many2one(
+        comodel_name="account.group",
+        string="Account group to update",
+        required=False,
+        ondelete="set null",
+    )
+    notes = fields.Text("Notes", readonly=True)
+    recreate_xml_ids = fields.Boolean(
+        string="Recreate missing XML-IDs",
+        related="update_chart_wizard_id.recreate_xml_ids",
+    )
