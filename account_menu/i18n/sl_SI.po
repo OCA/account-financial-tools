@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-02-28 18:27+0000\n"
-"Last-Translator: laznikd <laznik@mentis.si>\n"
+"PO-Revision-Date: 2023-03-30 12:22+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
 "%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_group
@@ -152,7 +152,7 @@ msgstr ""
 #. module: account_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Sequence"
-msgstr ""
+msgstr "Zaporedje"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_tax_group
@@ -163,7 +163,7 @@ msgstr "Skupina Davkov"
 #: model:ir.actions.act_window,name:account_menu.action_account_tax_group
 #: model:ir.ui.menu,name:account_menu.account_tax_group_menu
 msgid "Tax Groups"
-msgstr ""
+msgstr "Skupina Davkov"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_account_tax_template
