@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-03-30 12:22+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,107 +15,108 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
 "%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_fiscal_year
 #: model_terms:ir.actions.act_window,help:account_fiscal_year.actions_account_fiscal_year
 msgid "Click here to create a new fiscal year."
-msgstr ""
+msgstr "Ustvari novo fiskalno leto."
 
 #. module: account_fiscal_year
 #: model:ir.model,name:account_fiscal_year.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Družbe"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__company_id
 msgid "Company"
-msgstr ""
+msgstr "Družba"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__display_name
 #: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_to
 msgid "End Date"
-msgstr ""
+msgstr "Končni datum"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_to
 msgid "Ending Date, included in the fiscal year."
-msgstr ""
+msgstr "Končni datum v sklopu fiskalnega leta."
 
 #. module: account_fiscal_year
 #: model:date.range.type,name:account_fiscal_year.fiscalyear
 #: model:ir.model,name:account_fiscal_year.model_account_fiscal_year
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Fiskalno leto"
 
 #. module: account_fiscal_year
 #: model_terms:ir.ui.view,arch_db:account_fiscal_year.account_fiscal_year_form_view
 msgid "Fiscal Year 2020"
-msgstr ""
+msgstr "Fiskalno leto 2020"
 
 #. module: account_fiscal_year
 #: model:ir.actions.act_window,name:account_fiscal_year.actions_account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_actions_account_fiscal_year
 msgid "Fiscal Years"
-msgstr ""
+msgstr "Fiskalna leta"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__id
 #: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
 #: model:ir.model.fields,field_description:account_fiscal_year.field_res_company____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnjič spremenjeno"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_from
 msgid "Start Date"
-msgstr ""
+msgstr "Začetni datum"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_from
 msgid "Start Date, included in the fiscal year."
-msgstr ""
+msgstr "Začetni datum v sklopu fiskalnega leta."
 
 #. module: account_fiscal_year
 #: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
 #, python-format
 msgid "The ending date must not be prior to the starting date."
-msgstr ""
+msgstr "Končni datum ne more biti pred začetnim."
 
 #. module: account_fiscal_year
 #: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
@@ -123,3 +125,5 @@ msgid ""
 "This fiscal year '{fy}' overlaps with '{overlapping_fy}'.\n"
 "Please correct the start and/or end dates of your fiscal years."
 msgstr ""
+"Fiskalno leto '{fy}' se prekriva z '{overlapping_fy}'.\n"
+"Popravite začetne in/ali končne datume v svojih fiskalnih letih."
