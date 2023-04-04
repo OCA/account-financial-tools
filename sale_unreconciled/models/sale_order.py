@@ -27,7 +27,7 @@ class SaleOrder(models.Model):
         included_accounts = (
             (
                 self.env["product.category"]
-                .with_context(force_company=self.company_id.id)
+                .with_company(self.company_id.id)
                 .search([("property_valuation", "=", "real_time")])
             )
             .mapped("property_stock_account_output_categ_id")
@@ -127,6 +127,7 @@ class SaleOrder(models.Model):
         moves_to_reconcile = self.env["account.move.line"]
         products_considered = self.env["product.product"]
         main_product = self.env["product.product"]
+        res = {}
         for group in reconciling_groups:
             account_id = group["account_id"][0]
             product_id = group["product_id"][0] if group["product_id"] else False
@@ -155,8 +156,8 @@ class SaleOrder(models.Model):
                     product_id = main_product.id
                 writeoff_vals = self._get_sale_writeoff_vals(sale_line_id, product_id)
                 if unreconciled_items_group:
-                    writeoff_to_reconcile = unreconciled_items_group._create_writeoff(
-                        [writeoff_vals]
+                    writeoff_to_reconcile = (
+                        unreconciled_items_group._create_so_writeoff(writeoff_vals)
                     )
                     all_writeoffs |= writeoff_to_reconcile
                     # add writeoff line to reconcile algorithm and finish the reconciliation
@@ -204,7 +205,8 @@ class SaleOrder(models.Model):
             "journal_id": self.company_id.sale_reconcile_journal_id.id,
             "sale_order_id": self.id,
             "sale_line_id": sale_line_id or False,
-            "product_id": product_id,
+            "product_id": product_id or False,
+            "currency_id": self.currency_id.id,
         }
 
     def reconcile_criteria(self):
