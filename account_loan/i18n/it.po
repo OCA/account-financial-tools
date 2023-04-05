@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2023-04-04 15:26+0000\n"
+"PO-Revision-Date: 2023-04-05 09:20+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -263,17 +263,17 @@ msgstr "Capitale fisso"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_follower_ids
 msgid "Followers"
-msgstr "Followers"
+msgstr "Seguito da"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_channel_ids
 msgid "Followers (Channels)"
-msgstr "Followers (Canali)"
+msgstr "Seguito da (canali)"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Followers (Partner)"
+msgstr "Seguito da (partner)"
 
 #. module: account_loan
 #: model:ir.ui.menu,name:account_loan.account_loan_generate_wizard_menu
