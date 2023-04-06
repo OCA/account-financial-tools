@@ -10,29 +10,30 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-17 23:22+0000\n"
-"PO-Revision-Date: 2017-02-17 23:22+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"PO-Revision-Date: 2023-04-06 14:23+0000\n"
+"Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_cost_center
 msgid "Account Cost Center"
-msgstr "Kostenstelle"
+msgstr "Kostenträger"
 
 #. module: account_cost_center
 #: model:ir.actions.act_window,help:account_cost_center.account_cost_center_action
 msgid "Click to add a new cost center."
-msgstr ""
+msgstr "Klicken, um einen neuen Kostenträger zu erstellen."
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_code
 msgid "Code"
-msgstr "Schlüssel"
+msgstr "Code"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_company_id
@@ -46,18 +47,18 @@ msgstr "Unternehmen"
 #: model:ir.model.fields,field_description:account_cost_center.field_account_move_line_cost_center_id
 #: model:ir.ui.view,arch_db:account_cost_center.view_account_invoice_report_search
 msgid "Cost Center"
-msgstr "Kostenstelle"
+msgstr "Kostenträger"
 
 #. module: account_cost_center
 #: model:ir.actions.act_window,name:account_cost_center.account_cost_center_action
 #: model:ir.ui.menu,name:account_cost_center.cost_center_menu
 msgid "Cost Centers"
-msgstr "Kostenstellen"
+msgstr "Kostenträger"
 
 #. module: account_cost_center
 #: model:ir.actions.act_window,help:account_cost_center.account_cost_center_action
 msgid "Cost centers provide an extra analytic dimension"
-msgstr ""
+msgstr "Kostenträger bieten eine weitere Dimension zur Kostenanalyse."
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_create_uid
@@ -72,7 +73,7 @@ msgstr "Erstellt am"
 #. module: account_cost_center
 #: model:ir.model.fields,help:account_cost_center.field_account_invoice_cost_center_id
 msgid "Default Cost Center"
-msgstr "Vorschlags-Kostenstelle"
+msgstr "Standard-Kostenträger"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_display_name
@@ -101,9 +102,8 @@ msgstr "Rechnungsauswertungen"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move_line
-#, fuzzy
 msgid "Journal Item"
-msgstr "Buchungsjournale"
+msgstr "Buchungszeile"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center___last_update
@@ -123,7 +123,7 @@ msgstr "Zuletzt geändert am"
 #. module: account_cost_center
 #: model:ir.ui.view,arch_db:account_cost_center.account_cost_center_view_search
 msgid "Name/Code"
-msgstr "Bez./Schlüssel"
+msgstr "Name/Code"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_name
