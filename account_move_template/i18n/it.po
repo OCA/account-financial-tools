@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2023-04-03 22:41+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-04-07 16:34+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
 "Language: it\n"
@@ -293,7 +293,7 @@ msgstr "Imposta"
 #: field:account.move.template.line,template_id:0
 #: field:wizard.select.move.template.line,template_id:0
 msgid "Template"
-msgstr "Template"
+msgstr "Modello"
 
 #. module: account_move_template
 #: field:account.move.template,template_line_ids:0
