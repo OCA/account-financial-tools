@@ -20,8 +20,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_subsequence_fiscal_year.view_res_config_settings_form
 msgid "<span class=\"o_form_label\">Accounting Subsequences Method</span>"
 msgstr ""
-"<span class=\"o_form_label\">Méthode pour les sous-séquences comptables</"
-"span>"
+"<span class=\"o_form_label\">Méthode pour les sous-séquences "
+"comptables</span>"
 
 #. module: account_subsequence_fiscal_year
 #: model:ir.model.fields,field_description:account_subsequence_fiscal_year.field_res_company__account_subsequence_method
@@ -30,17 +30,12 @@ msgid "Accounting Subsequences Method"
 msgstr "Méthode pour les sous-séquences comptables"
 
 #. module: account_subsequence_fiscal_year
-#: model:ir.model,name:account_subsequence_fiscal_year.model_account_bank_statement
-msgid "Bank Statement"
-msgstr "Relevé bancaire"
-
-#. module: account_subsequence_fiscal_year
-#: selection:res.company,account_subsequence_method:0
+#: model:ir.model.fields.selection,name:account_subsequence_fiscal_year.selection__res_company__account_subsequence_method__company_setting
 msgid "Based on Company Settings"
 msgstr "Basé sur les paramètres de la société"
 
 #. module: account_subsequence_fiscal_year
-#: selection:res.company,account_subsequence_method:0
+#: model:ir.model.fields.selection,name:account_subsequence_fiscal_year.selection__res_company__account_subsequence_method__fiscal_year_setting
 msgid "Based on Fiscal Years Settings"
 msgstr "Basés sur les exercices comptables"
 
@@ -52,7 +47,7 @@ msgstr "Sociétés"
 #. module: account_subsequence_fiscal_year
 #: model:ir.model,name:account_subsequence_fiscal_year.model_res_config_settings
 msgid "Config Settings"
-msgstr "Paramètres de config"
+msgstr "Paramètres de configuration"
 
 #. module: account_subsequence_fiscal_year
 #: model_terms:ir.ui.view,arch_db:account_subsequence_fiscal_year.view_res_config_settings_form
@@ -66,8 +61,8 @@ msgstr "Méthode de génération"
 
 #. module: account_subsequence_fiscal_year
 #: model:ir.model,name:account_subsequence_fiscal_year.model_account_move
-msgid "Journal Entries"
-msgstr "Pièces comptables"
+msgid "Journal Entry"
+msgstr "Pièce comptable"
 
 #. module: account_subsequence_fiscal_year
 #: model:ir.model,name:account_subsequence_fiscal_year.model_ir_sequence
@@ -75,7 +70,8 @@ msgid "Sequence"
 msgstr "Séquence"
 
 #. module: account_subsequence_fiscal_year
-#: code:addons/account_subsequence_fiscal_year/models/ir_sequence.py:45
+#. odoo-python
+#: code:addons/account_subsequence_fiscal_year/models/ir_sequence.py:0
 #, python-format
 msgid ""
 "You can not post an accounting entry for the date %s because there is no "

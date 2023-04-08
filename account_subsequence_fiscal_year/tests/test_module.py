@@ -12,14 +12,11 @@ class TestModule(TransactionCase):
         super().setUp()
         self.AccountFiscalYear = self.env["account.fiscal.year"]
         self.company = self.env.ref("base.main_company")
-        self.account_type_receivable = self.env["account.account.type"].create(
-            {"name": "Test Receivable", "type": "receivable"}
-        )
         self.account_receivable = self.env["account.account"].create(
             {
+                "code": "TEST.AR",
                 "name": "Test Receivable",
-                "code": "TEST_AR",
-                "user_type_id": self.account_type_receivable.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -72,7 +69,7 @@ class TestModule(TransactionCase):
         """Non Regression Test"""
         self.company.account_subsequence_method = False
         self.account_move.date = "2100-06-01"
-        self.account_move.post()
+        self.account_move.action_post()
         new_subsequences = self._get_new_subsequence()
         self.assertEqual(len(new_subsequences), 1)
         self.assertEqual(new_subsequences[0].date_from, date(2100, 1, 1))
@@ -81,9 +78,9 @@ class TestModule(TransactionCase):
     def test_method_company_setting_before(self):
         self.company.account_subsequence_method = "company_setting"
         self.company.fiscalyear_last_day = 31
-        self.company.fiscalyear_last_month = 3
+        self.company.fiscalyear_last_month = "3"
         self.account_move.date = "2100-03-15"
-        self.account_move.post()
+        self.account_move.action_post()
 
         new_subsequences = self._get_new_subsequence()
         self.assertEqual(len(new_subsequences), 1)
@@ -93,9 +90,9 @@ class TestModule(TransactionCase):
     def test_method_company_setting_after(self):
         self.company.account_subsequence_method = "company_setting"
         self.company.fiscalyear_last_day = 31
-        self.company.fiscalyear_last_month = 3
+        self.company.fiscalyear_last_month = "3"
         self.account_move.date = "2100-05-15"
-        self.account_move.post()
+        self.account_move.action_post()
 
         new_subsequences = self._get_new_subsequence()
         self.assertEqual(len(new_subsequences), 1)
@@ -106,7 +103,7 @@ class TestModule(TransactionCase):
         self.company.account_subsequence_method = "fiscal_year_setting"
         with self.assertRaises(ValidationError):
             self.account_move.date = "2100-06-01"
-            self.account_move.post()
+            self.account_move.action_post()
 
         # create a Fiscal Year
         self.AccountFiscalYear.create(
@@ -121,15 +118,15 @@ class TestModule(TransactionCase):
         # Try to post out the date range
         with self.assertRaises(ValidationError):
             self.account_move.date = "2100-03-31"
-            self.account_move.post()
+            self.account_move.action_post()
 
         with self.assertRaises(ValidationError):
             self.account_move.date = "2101-04-01"
-            self.account_move.post()
+            self.account_move.action_post()
 
         # Post in the range should succeed
         self.account_move.date = "2100-06-01"
-        self.account_move.post()
+        self.account_move.action_post()
         new_subsequences = self._get_new_subsequence()
         self.assertEqual(len(new_subsequences), 1)
         self.assertEqual(new_subsequences[0].date_from, date(2100, 4, 1))
