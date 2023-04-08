@@ -9,6 +9,6 @@ class AccountMove(models.Model):
 
     @api.multi
     def post(self, invoice=False):
-        return super(
-            AccountMove, self.with_context(account_sequence=True)
-        ).post(invoice=invoice)
+        return super(AccountMove, self.with_context(account_sequence=True)).post(
+            invoice=invoice
+        )
