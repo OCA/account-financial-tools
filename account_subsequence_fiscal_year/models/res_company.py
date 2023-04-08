@@ -13,4 +13,5 @@ class ResCompany(models.Model):
         selection=[
             ("company_setting", "Based on Company Settings"),
             ("fiscal_year_setting", "Based on Fiscal Years Settings"),
-        ])
+        ],
+    )
