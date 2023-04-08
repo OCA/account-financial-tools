@@ -6,14 +6,15 @@
     "name": "Accounting Subsequences per Fiscal Years",
     "summary": "Allow to create sub sequences for account moves number, based"
     " on the fiscal years settings",
-    "version": "12.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Accounting",
     "author": "GRAP,Odoo Community Association (OCA)",
     "maintainers": ["legalsylvain"],
     "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
     "depends": [
-        "account",
+        "account_move_name_sequence",
+        "account_fiscal_year",
     ],
     "data": [
         "views/view_res_config_settings.xml",
