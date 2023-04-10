@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2023-04-05 12:23+0000\n"
+"PO-Revision-Date: 2023-04-10 16:32+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -705,7 +705,7 @@ msgstr "Ultima modifica il"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove_write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Ultimo aggiornamento di"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute_write_date
