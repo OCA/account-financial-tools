@@ -1,0 +1,163 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_name_sequence
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-13 12:33+0000\n"
+"Last-Translator: gelo joga Rodríguez <gelo.joga@factorlibre.com>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
+
+#. module: account_move_name_sequence
+#: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
+msgid ""
+"A move can not be posted with name \"/\" or empty value\n"
+"Check the journal sequence, please"
+msgstr ""
+"Un asiento no puede ser publicado con el nombre \"/\" o vacío \n"
+"Comprueba la secuencia de diario, por favor"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
+msgid ""
+"Check this box if you don't want to share the same sequence for invoices and"
+" credit notes made from this journal"
+msgstr ""
+"Marca esta casilla si no quieres compartir la misma secuencia para las "
+"facturas y facturas rectificativas hechas en este diario"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence_id
+msgid "Credit Note Entry Sequence"
+msgstr "Secuencia de facturas rectificativas"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence
+msgid "Dedicated Credit Note Sequence"
+msgstr "Secuencia de facturas rectificativas dedicada"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__sequence_id
+msgid "Entry Sequence"
+msgstr "Secuencia de asiento"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__has_sequence_holes
+msgid "Has Sequence Holes"
+msgstr "Hay agujeros en la secuencia"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
+msgid "Highest Name"
+msgstr "Número más alto"
+
+#. module: account_move_name_sequence
+#: model:ir.model,name:account_move_name_sequence.model_account_journal
+msgid "Journal"
+msgstr "Dario"
+
+#. module: account_move_name_sequence
+#: model:ir.model,name:account_move_name_sequence.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__made_sequence_hole
+msgid "Made Sequence Hole"
+msgstr "Creado agujero en secuencia"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__name
+msgid "Number"
+msgstr "Número"
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"On journal '%s', the same sequence is used as Entry Sequence and Credit Note"
+" Entry Sequence."
+msgstr ""
+"En el diario '%s', se ha usado la misma secuencia para la Secuencia de "
+"asiento y la Secuencia de facturas rectificativas."
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid "Refund"
+msgstr "Rectificativa"
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#: model:ir.model,name:account_move_name_sequence.model_ir_sequence
+#, python-format
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
+msgid "Sequence Number"
+msgstr "Número de secuencia"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
+msgid "Sequence Prefix"
+msgstr "Prefijo de la secuencia"
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"The company is not set on sequence '%(sequence)s' configured as credit note "
+"sequence of journal '%(journal)s'."
+msgstr ""
+"La compañía no tiene establecida la secuencia '%(sequence)s' configurada "
+"como secuencia de facturas rectificativas del diario '%(journal)s'."
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"The company is not set on sequence '%(sequence)s' configured on journal "
+"'%(journal)s'."
+msgstr ""
+"La compañía no tiene establecida la secuencia '%(sequence)s' configurada en "
+"el diario '%(journal)s'."
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence_id
+msgid ""
+"This sequence will be used to generate the journal entry number for refunds."
+msgstr ""
+"Esta secuencia se utilizará para generar el número de asientos para "
+"rectificaciones."
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
+msgid "This sequence will be used to generate the journal entry number."
+msgstr ""
+"Esta secuencia se usará para establecer para generar el número de asiento "
+"contable."
