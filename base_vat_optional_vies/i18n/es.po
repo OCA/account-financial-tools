@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2019-11-10 17:34+0000\n"
-"Last-Translator: Galoperd <jvcsan@gmail.com>\n"
+"PO-Revision-Date: 2023-04-17 10:18+0000\n"
+"Last-Translator: gelo joga Rodríguez <gelo.joga@factorlibre.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.8\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: base_vat_optional_vies
 #: model:ir.model,name:base_vat_optional_vies.model_res_partner
@@ -30,6 +30,8 @@ msgid ""
 "valid. \n"
 "Note: the expected format is %(expected_format)s"
 msgstr ""
+"El NIF [%(wrong_vat)s] para %(record_label)s parece no ser válido. \n"
+"Nota: El formato esperado es %(expected_format)s"
 
 #. module: base_vat_optional_vies
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__vies_passed
