@@ -17,23 +17,20 @@ class TestAccountMoveFiscalYear(TransactionCase):
             [("type", "=", "bank")], limit=1
         )
 
-        self.account_type_recv = self.env.ref("account.data_account_type_receivable")
-        self.account_type_rev = self.env.ref("account.data_account_type_revenue")
-
         self.account_recv = self.AccountObj.create(
             {
-                "code": "RECV_DR",
+                "code": "RECV.DR",
                 "name": "Receivable (test)",
                 "reconcile": True,
-                "user_type_id": self.account_type_recv.id,
+                "account_type": "asset_receivable",
             }
         )
         self.account_sale = self.AccountObj.create(
             {
-                "code": "SALE_DR",
+                "code": "SALE.DR",
                 "name": "Receivable (sale)",
                 "reconcile": True,
-                "user_type_id": self.account_type_rev.id,
+                "account_type": "income",
             }
         )
 
