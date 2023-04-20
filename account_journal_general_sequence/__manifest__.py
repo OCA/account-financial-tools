@@ -8,7 +8,6 @@
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Moduon, Odoo Community Association (OCA)",
     "license": "LGPL-3",
-    "external_dependencies": {"python": ["freezegun"]},
     "maintainers": ["yajo"],
     "depends": [
         "account",

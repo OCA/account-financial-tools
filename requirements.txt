@@ -1,5 +1,4 @@
 # generated from manifests external_dependencies
-freezegun
 numpy-financial<=1.0.0
 numpy>=1.15
 vatnumber
