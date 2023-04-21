@@ -1,3 +1,4 @@
 server-ux
 reporting-engine
+server-tools
 stock-logistics-warehouse
