@@ -8,7 +8,7 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     sequence_option = fields.Boolean(
-        compute="_compute_name",
+        compute="_compute_sequence_option",
         default=False,
         copy=False,
         store=True,
@@ -16,8 +16,13 @@ class AccountMove(models.Model):
     )
 
     @api.depends("posted_before", "state", "journal_id", "date")
+    def _compute_sequence_option(self):
+        if hasattr(self.env["account.journal"], "sequence_id"):
+            return
+        return self._compute_name()
+
+    @api.depends("posted_before", "state", "journal_id", "date")
     def _compute_name(self):
-        #
         options = self.env["ir.sequence.option.line"].get_model_options(self._name)
         # On post, get the sequence option
         if options:
@@ -32,7 +37,7 @@ class AccountMove(models.Model):
                     rec.sequence_option = True
 
         # Call super()
-        super()._compute_name()
+        res = super()._compute_name()
         if options:
             for rec in self:
                 # On create new, odoo may suggest the 1st new number, remove it.
@@ -50,6 +55,7 @@ class AccountMove(models.Model):
                     and not rec.sequence_option
                 ):
                     rec.name = "/"
+        return res
 
     # Bypass constrains if sequence is defined
     def _constrains_date_sequence(self):
