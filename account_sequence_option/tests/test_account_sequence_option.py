@@ -36,7 +36,7 @@ class TestAccountSequenceOption(TransactionCase):
             "default_partner_type": partner_type,
             "default_move_journal_types": ("bank", "cash"),
         }
-        move_form = Form(self.env["account.payment"].with_context(ctx))
+        move_form = Form(self.env["account.payment"].with_context(**ctx))
         move_form.payment_type = payment_type
         move_form.partner_type = partner_type
         move_form.partner_id = self.partner_id
@@ -53,27 +53,34 @@ class TestAccountSequenceOption(TransactionCase):
         # 1. Customer Invoice
         self.invoice = self._create_invoice("out_invoice")
         self.invoice.action_post()
-        self.assertIn("CINV", self.invoice.name)
+        self.invoice._compute_name()
+        name = hasattr(self.env["account.journal"], "sequence_id") and "INV" or "CINV"
+        self.assertIn(name, self.invoice.name)
         # 2. Vendor Bill
         self.invoice = self._create_invoice("in_invoice")
         self.invoice.action_post()
-        self.assertIn("VBIL", self.invoice.name)
+        name = hasattr(self.env["account.journal"], "sequence_id") and "BILL" or "VBIL"
+        self.assertIn(name, self.invoice.name)
         # 3. Customer Refund
         self.invoice = self._create_invoice("out_refund")
         self.invoice.action_post()
-        self.assertIn("CREF", self.invoice.name)
+        name = hasattr(self.env["account.journal"], "sequence_id") and "RINV" or "CREF"
+        self.assertIn(name, self.invoice.name)
         # 4. Vendor Refund
         self.invoice = self._create_invoice("in_refund")
         self.invoice.action_post()
-        self.assertIn("VREF", self.invoice.name)
+        name = hasattr(self.env["account.journal"], "sequence_id") and "RBILL" or "VREF"
+        self.assertIn(name, self.invoice.name)
         # 5. Customer Payment
         self.payment = self._create_payment("inbound", "customer")
         self.payment.action_post()
-        self.assertIn("CPAY", self.payment.name)
+        name = hasattr(self.env["account.journal"], "sequence_id") and "BNK1" or "CPAY"
+        self.assertIn(name, self.payment.name)
         # 6. Vendor Payment
         self.payment = self._create_payment("outbound", "supplier")
         self.payment.action_post()
-        self.assertIn("VPAY", self.payment.name)
+        name = hasattr(self.env["account.journal"], "sequence_id") and "BNK1" or "VPAY"
+        self.assertIn(name, self.payment.name)
         # 7. Create out invoice, post invoice, reset invoice to Draft
         #       Change Date, post invoice.
         self.invoice = self._create_invoice("out_invoice")
@@ -85,3 +92,6 @@ class TestAccountSequenceOption(TransactionCase):
         )
         self.invoice.action_post()
         self.assertEqual(old_name, self.invoice.name)
+
+    def test_constrains_date_sequence_true(self):
+        self.assertTrue(self.env["account.move"]._constrains_date_sequence())
