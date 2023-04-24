@@ -78,6 +78,7 @@ class AccountMoveRenumberWizard(models.TransientModel):
         current_range.sudo().number_next = self.starting_number
         self.sequence_id.sudo().number_next = self.starting_number
         # Renumber the moves
+        moves = moves.with_context(skip_invoice_sync=True)
         moves.entry_number = False
         moves.flush_recordset(["entry_number"])
         moves._compute_entry_number()
