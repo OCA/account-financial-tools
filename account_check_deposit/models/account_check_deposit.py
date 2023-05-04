@@ -17,7 +17,9 @@ class AccountCheckDeposit(models.Model):
     _order = "deposit_date desc"
     _check_company_auto = True
 
-    name = fields.Char(size=64, readonly=True, default="/", copy=False)
+    name = fields.Char(
+        size=64, readonly=True, default=lambda self: _("New"), copy=False
+    )
     check_payment_ids = fields.One2many(
         comodel_name="account.move.line",
         inverse_name="check_deposit_id",
@@ -48,6 +50,10 @@ class AccountCheckDeposit(models.Model):
     )
     currency_id = fields.Many2one(
         comodel_name="res.currency",
+        compute="_compute_currency_id",
+        store=True,
+        precompute=True,
+        readonly=False,
         required=True,
         states={"done": [("readonly", "=", True)]},
         tracking=True,
@@ -142,6 +148,12 @@ class AccountCheckDeposit(models.Model):
             deposit.check_count = count
 
     @api.depends("journal_id")
+    def _compute_currency_id(self):
+        for deposit in self:
+            company = deposit.company_id
+            deposit.currency_id = deposit.journal_id.currency_id or company.currency_id
+
+    @api.depends("journal_id")
     def _compute_in_hand_check_account_id(self):
         for rec in self:
             account = rec.journal_id.inbound_payment_method_line_ids.filtered(
@@ -172,10 +184,9 @@ class AccountCheckDeposit(models.Model):
                 if line.currency_id != deposit_currency:
                     raise ValidationError(
                         _(
-                            "The check with amount {amount} and reference '{ref}' "
-                            "is in currency {check_currency} but the deposit is in "
-                            "currency {deposit_currency}."
-                        ).format(
+                            "The check with amount %(amount)s and reference '%(ref)s' "
+                            "is in currency %(check_currency)s but the deposit is in "
+                            "currency %(deposit_currency)s.",
                             amount=line.debit,
                             ref=line.ref or "",
                             check_currency=line.currency_id.name,
@@ -219,10 +230,10 @@ class AccountCheckDeposit(models.Model):
         for vals in vals_list:
             if "company_id" in vals:
                 self = self.with_company(vals["company_id"])
-            if vals.get("name", "/") == "/":
+            if vals.get("name", _("New")) == _("New"):
                 vals["name"] = self.env["ir.sequence"].next_by_code(
                     "account.check.deposit", vals.get("deposit_date")
-                )
+                ) or _("New")
         return super().create(vals_list)
 
     def _prepare_move_vals(self):
@@ -294,26 +305,6 @@ class AccountCheckDeposit(models.Model):
             lines_to_rec.reconcile()
             deposit.write({"state": "done", "move_id": move.id})
 
-    @api.onchange("company_id")
-    def onchange_company_id(self):
-        if self.company_id:
-            self.bank_journal_id = self.env["account.journal"].search(
-                [
-                    ("company_id", "=", self.company_id.id),
-                    ("type", "=", "bank"),
-                    ("bank_account_id", "!=", False),
-                ],
-                limit=1,
-            )
-        else:
-            self.bank_journal_id = False
-
-    @api.onchange("journal_id")
-    def onchange_journal_id(self):
-        self.currency_id = (
-            self.journal_id.currency_id or self.journal_id.company_id.currency_id
-        )
-
     def get_report(self):
         report = self.env.ref("account_check_deposit.report_account_check_deposit")
         action = report.with_context(discard_logo_check=True).report_action(self)
@@ -321,6 +312,16 @@ class AccountCheckDeposit(models.Model):
 
     def get_all_checks(self):
         self.ensure_one()
+        if not self.in_hand_check_account_id:
+            raise UserError(
+                _(
+                    "In the configuration of journal '%s', "
+                    "in the 'Incoming Payments' tab, you must configure an "
+                    "Outstanding Receipts Account for the payment method "
+                    "'Manual (inbound)'."
+                )
+                % self.journal_id.display_name
+            )
         all_pending_checks = self.env["account.move.line"].search(
             [
                 ("company_id", "=", self.company_id.id),
@@ -338,9 +339,8 @@ class AccountCheckDeposit(models.Model):
         else:
             raise UserError(
                 _(
-                    "There are no received checks in account '{account}' in currency "
-                    "'{currency}' that are not already in this check deposit."
-                ).format(
+                    "There are no received checks in account '%(account)s' in currency "
+                    "'%(currency)s' that are not already in this check deposit.",
                     account=self.in_hand_check_account_id.display_name,
                     currency=self.currency_id.display_name,
                 )
