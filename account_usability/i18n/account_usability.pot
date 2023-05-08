@@ -37,7 +37,6 @@ msgstr ""
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_form
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
 msgid "Account Tax Group"
 msgstr ""
 
