@@ -41,7 +41,6 @@ msgstr "Boekhoudingslabels"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_form
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_tax_group_search
 msgid "Account Tax Group"
 msgstr "BTW-groep"
 
@@ -100,34 +99,10 @@ msgid "Config Settings"
 msgstr ""
 
 #. module: account_usability
-#: model:ir.model.fields,field_description:account_usability.field_account_account_tag__display_name
-#: model:ir.model.fields,field_description:account_usability.field_account_group__display_name
-#: model:ir.model.fields,field_description:account_usability.field_account_tax_group__display_name
-#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__display_name
-msgid "Display Name"
-msgstr "Weergavenaam"
-
-#. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_usability.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
 msgstr "Fiscale positie sjabloon"
-
-#. module: account_usability
-#: model:ir.model.fields,field_description:account_usability.field_account_account_tag__id
-#: model:ir.model.fields,field_description:account_usability.field_account_group__id
-#: model:ir.model.fields,field_description:account_usability.field_account_tax_group__id
-#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__id
-msgid "ID"
-msgstr "ID"
-
-#. module: account_usability
-#: model:ir.model.fields,field_description:account_usability.field_account_account_tag____last_update
-#: model:ir.model.fields,field_description:account_usability.field_account_group____last_update
-#: model:ir.model.fields,field_description:account_usability.field_account_tax_group____last_update
-#: model:ir.model.fields,field_description:account_usability.field_res_config_settings____last_update
-msgid "Last Modified on"
-msgstr "Laatst bijgewerkt op"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
@@ -169,3 +144,12 @@ msgstr "Sjablonen"
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
 msgstr ""
+
+#~ msgid "Display Name"
+#~ msgstr "Weergavenaam"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst bijgewerkt op"
