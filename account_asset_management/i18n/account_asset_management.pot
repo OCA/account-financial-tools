@@ -116,6 +116,12 @@ msgid "Analytic"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Analytic Information"
 msgstr ""
