@@ -21,16 +21,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-03 23:22+0000\n"
-"PO-Revision-Date: 2021-05-26 12:47+0000\n"
-"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/fr/)\n"
+"PO-Revision-Date: 2023-05-10 13:02+0000\n"
+"Last-Translator: Sandrine (ACSONE) <sandrine.ravet@acsone.eu>\n"
+"Language-Team: French (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -40,12 +40,12 @@ msgid ""
 "Error while processing asset '%s': %s"
 msgstr ""
 "\n"
-"Erreur lors du traitement de l'immobilisation '%s': %s"
+"Erreur lors du traitement de l'immobilisation '%s' : %s"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
 msgid "<span class=\"o_stat_text\"> Asset(s)</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\"> Immobilisation(s)</span>"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -218,7 +218,7 @@ msgstr "Lignes d'amortissement"
 #: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 #: model:ir.cron,name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
-msgstr "Gestion des immobilisations: Générer des immobilisations"
+msgstr "Gestion des immobilisations : Générer des immobilisations"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__name
@@ -715,7 +715,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Erreur lors du traitement de l'immobilisation '%s': \n"
+"Erreur lors du traitement de l'immobilisation '%s' : \n"
 "\n"
 "%s"
 
@@ -1272,8 +1272,8 @@ msgstr ""
 "Politique de sortie\n"
 "  * Valeur résiduelle : la valeur non amortie sera comptabilisée dans le "
 "compte 'Compte de valeur résiduelle' \n"
-"  * Gain / Perte sur la vente: Le gain ou la perte sera comptabilisé dans le "
-"'Compte de plus-value' ou le 'Compte de moins-value' "
+"  * Gain / Perte sur la vente : Le gain ou la perte sera comptabilisé dans "
+"le 'Compte de plus-value' ou le 'Compte de moins-value' "
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__date_remove
@@ -1448,7 +1448,7 @@ msgstr ""
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
-msgstr "Le champ 'compte' est obligatoire dans la liste '_xls_%s_fields'  !"
+msgstr "Le champ 'compte' est obligatoire dans la liste '_xls_%s_fields' !"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_account.py:0
@@ -1523,7 +1523,7 @@ msgid ""
 "Purchase Value - Salvage Value."
 msgstr ""
 "Ce montant représente la valeur initiale de l'immobilisation.\n"
-"La base d'amortissement est calculée comme suit:\n"
+"La base d'amortissement est calculée comme suit :\n"
 "Valeur d'achat - Valeur de revente."
 
 #. module: account_asset_management
@@ -1635,12 +1635,12 @@ msgid ""
 "When the removal entries are generated, the asset goes into the 'Removed' "
 "status."
 msgstr ""
-"Quand une immobilisation est créée, son statut est  'Brouillon'.\n"
+"Quand une immobilisation est créée, son statut est 'Brouillon'.\n"
 "Quand l'immobilisation est confirmée, le statut devient 'En cours' et les "
 "amortissements peuvent être comptabilisés.\n"
 "Si la dernière ligne d'amortissement est comptabiliée, le satut devient "
 "'Clôturé'.\n"
-"Quand l'immobilisation est sortie, son statut prend la valeur  'Sortie'."
+"Quand l'immobilisation est sortie, son statut prend la valeur 'Sortie'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
