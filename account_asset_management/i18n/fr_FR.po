@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2021-04-10 15:46+0000\n"
-"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
-"Language-Team: French (France) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/fr_FR/)\n"
+"PO-Revision-Date: 2023-05-10 13:02+0000\n"
+"Last-Translator: Sandrine (ACSONE) <sandrine.ravet@acsone.eu>\n"
+"Language-Team: French (France) (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/fr_FR/)\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -27,12 +27,12 @@ msgid ""
 "Error while processing asset '%s': %s"
 msgstr ""
 "\n"
-"Erreur lors du traitement de l'immobilisation '%s': %s"
+"Erreur lors du traitement de l'immobilisation '%s' : %s"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
 msgid "<span class=\"o_stat_text\"> Asset(s)</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\"> Immobilisation(s)</span>"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -49,12 +49,12 @@ msgstr "Compte d'actif"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__carry_forward_missed_depreciations
 msgid "Accumulate missed depreciations"
-msgstr ""
+msgstr "Cumuler les amortissements manquants"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Action nécessaire"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
@@ -66,27 +66,27 @@ msgstr "Actif"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Active Assets"
-msgstr ""
+msgstr "Immobilisations actives"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Activités"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Décoration de l'activité d'exception"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Statut de l'activité"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icône du type d'activité"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -103,7 +103,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__allow_reversal
 msgid "Allow Reversal of journal entries"
-msgstr ""
+msgstr "Autoriser l'extourne de pièces comptables"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
@@ -131,7 +131,7 @@ msgstr "Compte analytique"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
 msgid "Analytic tags"
-msgstr ""
+msgstr "Etiquettes analytiques"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -139,7 +139,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Archived"
-msgstr ""
+msgstr "Archivé"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -170,7 +170,7 @@ msgstr "Compte d'immobilisation"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move__asset_count
 #: model:ir.model.fields,field_description:account_asset_management.field_account_payment__asset_count
 msgid "Asset Count"
-msgstr ""
+msgstr "Nombre d'immobilisation"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_group
@@ -205,7 +205,7 @@ msgstr "Lignes d'amortissement"
 #: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 #: model:ir.cron,name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
-msgstr ""
+msgstr "Gestion des immobilisations : Générer les immobilisations"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__name
@@ -261,6 +261,7 @@ msgstr "Ligne du tableau d'amortissement"
 #, python-format
 msgid "Asset name must be set in the label of the line."
 msgstr ""
+"Le nom de l'immobilisation doit être indiqué dans le libellé de la ligne."
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
@@ -292,12 +293,12 @@ msgstr "Immobilisations"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
-msgstr ""
+msgstr "Immobilisations à corriger"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Nombre de pièce jointe"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
@@ -338,7 +339,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__child_ids
 msgid "Child Asset Groups"
-msgstr ""
+msgstr "Groupes d'immobilisation enfant"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
@@ -350,6 +351,11 @@ msgid ""
 "  * Number of Depreciations: Fix the number of depreciation lines and the "
 "time between 2 depreciations.\n"
 msgstr ""
+"Choisi la méthode à utiliser pour générer les dates et le nombre de lignes "
+"d'amortissement.\n"
+"  * Nombre d'années : Indiquer le nombre d'années pour l'amortissement.\n"
+"  * Nombre d'amortissements : Indiquer le nombre de d'amortissements et la "
+"durée entre 2 amortissements.\n"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
@@ -389,7 +395,7 @@ msgstr "Clôturer"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
@@ -416,7 +422,7 @@ msgstr "Date de fin"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Comput. Method"
-msgstr ""
+msgstr "Méthode de calcul"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
@@ -464,7 +470,7 @@ msgstr "Résultats du calcul des amortissements"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -572,7 +578,7 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Delete/Reverse Move"
-msgstr ""
+msgstr "Annuler/Extourner la pièce"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_expense_depreciation_id
@@ -667,17 +673,17 @@ msgstr "Brouillon"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Duplicate reporting entries"
-msgstr ""
+msgstr "Copier les pièces"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_report_account_asset_management_asset_report_xls
 msgid "Dynamic XLS asset report generator"
-msgstr ""
+msgstr "Générateur dynamique du rapport XLS des immobilisations"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__date_to
 msgid "End Date"
-msgstr ""
+msgstr "Date de fin"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_end
@@ -697,14 +703,14 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Erreur lors du traitement de l'immobilisation '%s': \n"
+"Erreur lors du traitement de l'immobilisation '%s' : \n"
 "\n"
 "%s"
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
 msgid "Financial Assets"
-msgstr ""
+msgstr "Immobilisations financières"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.wiz_account_asset_report_action
@@ -712,27 +718,27 @@ msgstr ""
 #: model:ir.ui.menu,name:account_asset_management.wiz_account_asset_report_menu
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Financial Assets report"
-msgstr ""
+msgstr "Rapport des immobilisations financières"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Abonnés"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Abonnés (canaux)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Abonnés (Contacts)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icône Font awesome e.g. fa-tasks"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
@@ -764,7 +770,7 @@ msgstr "Générer la pièces comptable de sortie"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Generate Report"
-msgstr ""
+msgstr "Générer le rapport"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
@@ -796,24 +802,24 @@ msgstr "ID"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icône"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icône pour indiquer une activité d'exception."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_unread
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Si coché, de nouveaux messages demandent votre attention."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Si coché, certains messages ont une erreur d'envoi."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__carry_forward_missed_depreciations
@@ -824,11 +830,16 @@ msgid ""
 "        carried forward to the first depreciation line of the current open\n"
 "        period."
 msgstr ""
+"Si on crée une immobilisation dans une période fiscale qui est fermée\n"
+"           le montant cumulé d'amortissements qui ne peuvent pas être "
+"comptabilisés sera\n"
+"           reporté à la première ligne d'amortissement\n"
+"           de la période ouverte."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_wiz_asset_move_reverse__journal_id
 msgid "If empty, uses the journal of the journal entry to be reversed."
-msgstr ""
+msgstr "Si vide, il utilise le journal de la pièce comptable à extourner."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__use_leap_years
@@ -841,6 +852,13 @@ msgid ""
 "amount to depreciate per year will be calculated as depreciation base / "
 "(depreciation end date - start date + 1) * days in the current year."
 msgstr ""
+"Si pas défini, le système distribuera uniformément sur les années le montant "
+"à amortir, basé sur le nombre d'années. Donc, le montant par année sera le "
+"montant à amortir / nombre d'années.\n"
+"Si défini, le système vérifiera si l'année en cours est une année "
+"bissextile. Le montant à amortir par année sera calculé de cette façon : "
+"montant à amortir / (date de fin d'amortissement - date de début + 1) * "
+"jours dans l'année en cours."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__allow_reversal
@@ -849,6 +867,9 @@ msgid ""
 "depreciation line will prompt the option to reverse the journal entry, "
 "instead of deleting them."
 msgstr ""
+"Si défini, lorsqu'on presse le bouton annuler/extourner la pièce sur une "
+"ligne d'amortissement comptabilisée, le système choisira l'option "
+"d'extourner la pièce au lieu de la supprimer."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -859,7 +880,7 @@ msgstr "Valeur illégale %s dans asset.method."
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__draft
 msgid "Include draft assets"
-msgstr ""
+msgstr "Inclus immobilisations brouillon"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -868,6 +889,8 @@ msgid ""
 "Inconsistent reporting structure.\n"
 "Please correct Asset Group '%s' (id %s)"
 msgstr ""
+"Structure du rapport incohérente.\n"
+"Merci de corriger le groupe d'immobilisation '%s' (id %s)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
@@ -893,7 +916,7 @@ msgstr "Ligne de balance initiale"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Est abonné"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__journal_id
@@ -983,17 +1006,17 @@ msgstr "Linéaire jusqu'à la valeur de revente"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Pièce jointe principale"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Message d'erreur d'envoi"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
@@ -1005,7 +1028,7 @@ msgstr "Compte de moins-value"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Missing depreciation table"
-msgstr ""
+msgstr "Tableau d'amortissements manquant"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
@@ -1016,7 +1039,7 @@ msgstr "Mois"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "L'échéance de mon activité"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -1030,22 +1053,22 @@ msgstr "Nom"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "New Acquisitions"
-msgstr ""
+msgstr "Nouvelles aquisitions"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "L'échéance de la prochaine activité"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Résumé de la prochaine activité"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Type de la prochaine activité"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__remaining_value
@@ -1056,7 +1079,7 @@ msgstr "Période d'amortissement suivante"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__note
@@ -1076,13 +1099,13 @@ msgstr "Commentaires"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Nombre d'actions"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Depreciations"
-msgstr ""
+msgstr "Nombre d'amortissements"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -1101,22 +1124,22 @@ msgstr "Nombre d'années ou date de fin"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Nombre d'erreurs"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Nombre de messages qui demandent une action"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Nombre de messages avec une erreur d'envoi"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "Nombre de messages non lus"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__open
@@ -1147,13 +1170,13 @@ msgstr "Partenaire"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period Depreciation"
-msgstr ""
+msgstr "Période d'amortissement"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period End Value"
-msgstr ""
+msgstr "Valeur de fin de période"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_period
@@ -1165,7 +1188,7 @@ msgstr "Durée de la période"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period Start Value"
-msgstr ""
+msgstr "Valeur de début de période"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_period
@@ -1247,8 +1270,8 @@ msgstr ""
 "Politique de sortie\n"
 "  * Valeur résiduelle : la valeur non amortie sera comptabilisée dans le "
 "compte 'Compte de valeur résiduelle' \n"
-"  * Gain / Perte sur la vente: Le gain ou la perte sera comptabilisé dans le "
-"'Compte de plus-value' ou le 'Compte de moins-value' "
+"  * Gain / Perte sur la vente : Le gain ou la perte sera comptabilisé dans "
+"le 'Compte de plus-value' ou le 'Compte de moins-value' "
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__date_remove
@@ -1279,7 +1302,7 @@ msgstr "Sortie"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Removed Assets"
-msgstr ""
+msgstr "Immobilisations sorties"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
@@ -1297,7 +1320,7 @@ msgstr "Compte de valeur résiduelle"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Utilisateur responsable"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
@@ -1307,23 +1330,23 @@ msgstr "Résultats :"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__date_reversal
 msgid "Reversal date"
-msgstr ""
+msgstr "Date d'extourne"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
 msgid "Reverse Journal Entry"
-msgstr ""
+msgstr "Extourne pièce comptable"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "Reverse Move"
-msgstr ""
+msgstr "Extourne pièce"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_wiz_asset_move_reverse
 msgid "Reverse posted journal entry on depreciation line"
-msgstr ""
+msgstr "Extourne la pièce comptabilisée sur la ligne d'amortissement"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__open
@@ -1334,7 +1357,7 @@ msgstr "En cours"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "Erreur d'envoi de SMS"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
@@ -1380,7 +1403,7 @@ msgstr "Sauter l'état brouillon"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__date_from
 msgid "Start Date"
-msgstr ""
+msgstr "Date de début"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__state
@@ -1408,6 +1431,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Statut basé sur les activités\n"
+"En retard : La date d'échéance est déjà passée\n"
+"Aujourd'hui : La date d'activité est aujourd'hui\n"
+"Planifié : Activités futures."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -1424,6 +1451,7 @@ msgstr ""
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
 msgstr ""
+"Le champ 'compte' est un champ obligatoire de la liste '_xls_%s_fields' !"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_account.py:0
@@ -1498,14 +1526,14 @@ msgid ""
 "Purchase Value - Salvage Value."
 msgstr ""
 "Ce montant représente la valeur initla de l'immobilisation.\n"
-"La base d'amortisement est calculée comme suit:\n"
+"La base d'amortisement est calculée comme suit :\n"
 "Valeur d'achat - Valeur de revente."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "This invoice created the asset(s): %s"
-msgstr ""
+msgstr "Cette facture a créé l'immobilisation : %s"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
@@ -1517,7 +1545,7 @@ msgstr "Méthode de temps"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Tot. Depreciation"
-msgstr ""
+msgstr "Total amorti"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1528,7 +1556,7 @@ msgstr "jours total"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Totals"
-msgstr ""
+msgstr "Totaux"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_trigger
@@ -1543,28 +1571,28 @@ msgstr "Type"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Type de l'activité d'exception sur l'élément."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Undetermined error"
-msgstr ""
+msgstr "Erreur indéterminée"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Messages non lus"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Compteur de messages non lus"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
 msgid "Use Specific Journal"
-msgstr ""
+msgstr "Utilisez un journal spécifique"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
@@ -1591,12 +1619,12 @@ msgstr "Afficher la pièce comptable"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messages du site internet"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historique de communication du site internet"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__state
@@ -1610,12 +1638,12 @@ msgid ""
 "When the removal entries are generated, the asset goes into the 'Removed' "
 "status."
 msgstr ""
-"Quand une immobilisation est créée, son statut est  'Brouillon'.\n"
+"Quand une immobilisation est créée, son statut est 'Brouillon'.\n"
 "Quand l'immobilisation est confirmée, le statut devient 'En cours' et les "
 "amortissements peuvent être comptabilisés.\n"
 "Si la dernière ligne d'amortissement est comptabiliée, le satut devient "
 "'Clôturé'.\n"
-"Quand l'immobilisation est sortie, son statut prend la valeur  'Sortie'."
+"Quand l'immobilisation est sortie, son statut prend la valeur 'Sortie'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
@@ -1762,12 +1790,12 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 msgid "account_analytic_id"
-msgstr ""
+msgstr "account_analytic_id"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
-msgstr ""
+msgstr "Ou"
 
 #~ msgid "Delete Move"
 #~ msgstr "Supprimer la pièce"
