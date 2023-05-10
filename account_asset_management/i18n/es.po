@@ -35,14 +35,13 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
 "\n"
-"Error while processing asset '%s': %s"
+"Error while processing asset '{ref}': {exception}"
 msgstr ""
-"\n"
-"Error al procesar el activo '%s': %s"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -50,6 +49,7 @@ msgid "<span class=\"o_stat_text\"> Asset(s)</span>"
 msgstr "<span class=\"o_stat_text\"> Activo(s)</span>"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model,name:account_asset_management.model_account_account
 #, python-format
@@ -78,6 +78,7 @@ msgid "Active"
 msgstr "Activado"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Active Assets"
@@ -131,22 +132,27 @@ msgid "Amount Already Depreciated"
 msgstr "Importe ya amortizado"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
+msgid "Analytic"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Analytic Information"
 msgstr "Información analítica"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_analytic_id
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Analytic account"
-msgstr "Cuenta analítica"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_tag_ids
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_tag_ids
-msgid "Analytic tags"
-msgstr "Etiquetas analíticas"
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_precision
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_precision
+msgid "Analytic Precision"
+msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -170,6 +176,7 @@ msgid "Asset"
 msgstr "Activo"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
@@ -192,7 +199,6 @@ msgstr "Número de activos"
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__asset_group_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
 msgid "Asset Group"
 msgstr "Grupo de activo"
 
@@ -211,14 +217,8 @@ msgid "Asset Line"
 msgstr "Línea de activo"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Asset Lines"
-msgstr "Líneas de activo"
-
-#. module: account_asset_management
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
 #: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
-#: model:ir.cron,name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
 msgstr "Gestión de activos: generar activos"
 
@@ -247,6 +247,7 @@ msgid "Asset Removal"
 msgstr "Eliminación de activo"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_remove
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__date_remove
@@ -260,6 +261,7 @@ msgid "Asset Sale Account"
 msgstr "Cuenta de venta del activo"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_start
 #, python-format
@@ -272,6 +274,7 @@ msgid "Asset depreciation table line"
 msgstr "Línea de amortización del activo"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "Asset name must be set in the label of the line."
@@ -280,7 +283,6 @@ msgstr "El nombre del activo debe establecerse en la etiqueta de la línea."
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
 msgid "Asset profile"
 msgstr "Categoría del activo"
 
@@ -299,11 +301,11 @@ msgstr "Lanzadores de recálculo de la tabla del activo"
 #: model:ir.ui.menu,name:account_asset_management.account_asset_menu
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_assets
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_config_assets
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_tree
 msgid "Assets"
 msgstr "Activos"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
@@ -424,7 +426,9 @@ msgid "Company"
 msgstr "Compañía"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__currency_id
 msgid "Company Currency"
 msgstr "Moneda la compañía"
 
@@ -434,6 +438,7 @@ msgid "Completion Date"
 msgstr "Fecha de terminación"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Comput. Method"
@@ -466,12 +471,14 @@ msgid "Compute Assets"
 msgstr "Calcular amortizaciones"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:0
 #, python-format
 msgid "Compute Assets errors"
 msgstr "Calcular errores en los activos"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:0
 #, python-format
 msgid "Compute Assets result"
@@ -503,6 +510,7 @@ msgid "Create an asset by product item"
 msgstr "Crear un activo por artículo de producto"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:0
 #, python-format
 msgid "Created Asset Moves"
@@ -558,12 +566,14 @@ msgstr ""
 "cuenta."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive"
 msgstr "Decreciente"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive  up to Salvage Value"
@@ -576,12 +586,14 @@ msgid "Degressive Factor"
 msgstr "Factor decreciente"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear"
 msgstr "Decreciente-Lineal"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
@@ -614,6 +626,7 @@ msgid "Depreciation Account"
 msgstr "Cuenta de amortización"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
@@ -655,7 +668,6 @@ msgid "Depreciation Name"
 msgstr "Nombre de la amortización"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_account__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__display_name
@@ -663,9 +675,6 @@ msgstr "Nombre de la amortización"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__display_name
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__display_name
-#: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__display_name
 msgid "Display Name"
@@ -683,6 +692,7 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Duplicate reporting entries"
@@ -709,16 +719,14 @@ msgid "Entries"
 msgstr "Asientos"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
-"Error while processing asset '%s': \n"
+"Error while processing asset '{ref}': \n"
 "\n"
-"%s"
+"{tb}"
 msgstr ""
-"Error mientras se procesaba activo '%s': \n"
-"\n"
-"%s"
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
@@ -739,11 +747,6 @@ msgid "Followers"
 msgstr "Seguidores"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Seguidores (Canales)"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Seguidores (Empresas)"
@@ -759,6 +762,7 @@ msgid "Force accounting date"
 msgstr "Forzar fecha contable"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Gain/Loss on Sale"
@@ -770,6 +774,7 @@ msgid "General"
 msgstr "General"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "Generate Asset Removal entries"
@@ -786,6 +791,11 @@ msgid "Generate Report"
 msgstr "Generar informe"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
 msgid "Has accounting entries"
 msgstr "Tiene asientos contables"
@@ -796,7 +806,6 @@ msgid "History"
 msgstr "Historial"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_account__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__id
@@ -804,9 +813,6 @@ msgstr "Historial"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move__id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__id
-#: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__id
 msgid "ID"
@@ -824,7 +830,6 @@ msgstr "Icono para indicar una actividad de excepción."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
 
@@ -884,6 +889,7 @@ msgstr ""
 "asiento en lugar de borrarlo."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "Illegal value %s in asset.method."
@@ -895,14 +901,13 @@ msgid "Include draft assets"
 msgstr "Incluir activos en borrador"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid ""
 "Inconsistent reporting structure.\n"
-"Please correct Asset Group '%s' (id %s)"
+"Please correct Asset Group '{group}' (id {id})"
 msgstr ""
-"Estructura inconsistente del informe.\n"
-"Por favor, corrija el grupo del activo '%s' (id %s)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
@@ -936,6 +941,7 @@ msgid "Journal"
 msgstr "Diario"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
@@ -943,6 +949,7 @@ msgid "Journal Entries"
 msgstr "Asientos contables"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #: model:ir.model,name:account_asset_management.model_account_move
 #, python-format
@@ -956,12 +963,10 @@ msgstr "Apunte contable"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.act_entries_open
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Items"
 msgstr "Apuntes contables"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_account____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
@@ -969,9 +974,6 @@ msgstr "Apuntes contables"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
 msgid "Last Modified on"
@@ -1004,12 +1006,14 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Linear"
 msgstr "Lineal"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Linear up to Salvage Value"
@@ -1037,12 +1041,14 @@ msgid "Min-Value Account"
 msgstr "Cuenta para pérdida de valor"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Missing depreciation table"
 msgstr "Falta la tabla de amortización"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Month"
@@ -1054,6 +1060,7 @@ msgid "My Activity Deadline"
 msgstr "Fecha límite de mi actividad"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__name
@@ -1062,6 +1069,7 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "New Acquisitions"
@@ -1088,6 +1096,7 @@ msgid "Next Period Depreciation"
 msgstr "Amortización del siguiente período"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "No"
@@ -1114,12 +1123,14 @@ msgid "Number of Actions"
 msgstr "Número de acciones"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Depreciations"
 msgstr "Número de depreciaciones"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_number
@@ -1128,6 +1139,7 @@ msgid "Number of Years"
 msgstr "Número de años"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Years or end date"
@@ -1147,11 +1159,6 @@ msgstr "Número de mensajes que requieren una acción"
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "Número de mensajes con error de entrega"
-
-#. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_unread_counter
-msgid "Number of unread messages"
-msgstr "Número de mensajes sin leer"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__open
@@ -1179,12 +1186,14 @@ msgid "Partner"
 msgstr "Empresa"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period Depreciation"
 msgstr "Periodo de amortización"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period End Value"
@@ -1197,6 +1206,7 @@ msgid "Period Length"
 msgstr "Longitud del periodo"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period Start Value"
@@ -1230,6 +1240,7 @@ msgid "Profile"
 msgstr "Perfil"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__prorata
@@ -1238,6 +1249,7 @@ msgid "Prorata Temporis"
 msgstr "Tiempo prorrateado"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__purchase_value
 #, python-format
@@ -1245,12 +1257,14 @@ msgid "Purchase Value"
 msgstr "Valor de compra"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Quarter"
 msgstr "Trimestre"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__reason
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__reason
@@ -1259,6 +1273,7 @@ msgid "Reason"
 msgstr "Razón"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__code
 #, python-format
@@ -1311,12 +1326,14 @@ msgid "Removed"
 msgstr "Eliminado"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Removed Assets"
 msgstr "Activos eliminados"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__value_residual
 #, python-format
@@ -1350,6 +1367,7 @@ msgid "Reverse Journal Entry"
 msgstr "Revertir asiento"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "Reverse Move"
@@ -1377,6 +1395,7 @@ msgid "Sale Value"
 msgstr "Valor de venta"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__salvage_value
 #, python-format
@@ -1428,6 +1447,7 @@ msgid "State of Asset"
 msgstr "Estado del activo"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
@@ -1449,6 +1469,7 @@ msgstr ""
 "Planificada: futuras actividades."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
@@ -1459,6 +1480,7 @@ msgstr ""
 "'Número de años'."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
@@ -1466,6 +1488,7 @@ msgstr ""
 "El campo 'cuenta' es una entrada obligatoria en la lista '_xls_%s_fields'."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_account.py:0
 #, python-format
 msgid ""
@@ -1475,12 +1498,14 @@ msgstr ""
 "cuenta."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The Sale Value must be positive!"
 msgstr "El valor de venta debe ser positivo."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #: code:addons/account_asset_management/wizard/wiz_account_asset_report.py:0
 #, python-format
@@ -1488,6 +1513,7 @@ msgid "The Start Date must precede the Ending Date."
 msgstr "La fecha de inicio debe ser anterior a la fecha de finalización."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
@@ -1515,6 +1541,7 @@ msgid "The number of years needed to depreciate your asset"
 msgstr "El número de años necesario para amortizar su activo"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The removal date must be after the last depreciation date."
@@ -1543,6 +1570,7 @@ msgstr ""
 "Valor de compra - valor de rescate."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "This invoice created the asset(s): %s"
@@ -1555,6 +1583,7 @@ msgid "Time Method"
 msgstr "Método de tiempo"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Tot. Depreciation"
@@ -1566,6 +1595,7 @@ msgid "Total Days"
 msgstr "Días totales"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Totals"
@@ -1587,31 +1617,22 @@ msgid "Type of the exception activity on record."
 msgstr "Tipo de actividad de excepción registrada."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Undetermined error"
 msgstr "Error indeterminado"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread
-msgid "Unread Messages"
-msgstr "Mensajes no leídos"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "Número de mensajes no leídos"
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
+msgid "Use Leap Years"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
 msgid "Use Specific Journal"
 msgstr "Utilizar diario específico"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
-msgid "Use leap years"
-msgstr "Use años bisiestos"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
@@ -1660,12 +1681,14 @@ msgstr ""
 "'Eliminado'."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Year"
 msgstr "Año"
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
@@ -1676,6 +1699,7 @@ msgstr ""
 "Debe generar los asientos desde el activo."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
@@ -1687,12 +1711,14 @@ msgstr ""
 "Debe eliminarlo desde  el activo."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You can only delete assets in draft state."
 msgstr "Sólo puede eliminar activos en estado borrador."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid ""
@@ -1703,6 +1729,7 @@ msgstr ""
 "líneas de amortización para los periodos previos no están generados."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid ""
@@ -1711,6 +1738,7 @@ msgstr ""
 "No puede cambiar una línea de amortización con un asiento contable asociado."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
@@ -1720,6 +1748,7 @@ msgstr ""
 "un activo."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
@@ -1729,12 +1758,14 @@ msgstr ""
 "activo."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr "No puede cambiar la categoría de un activo con asientos contables."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid ""
@@ -1742,6 +1773,7 @@ msgid ""
 msgstr "No puede eliminar una línea de amortización con un asiento enlazado."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
@@ -1749,6 +1781,7 @@ msgstr ""
 "No puede eliminar un activo que contenga líneas de amortización asentadas."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
@@ -1756,6 +1789,7 @@ msgstr ""
 "No puede eliminar una linea de amortización de tipo 'Base Amortización'."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid ""
@@ -1766,6 +1800,7 @@ msgstr ""
 "amortización con asientos anteriores ya generados."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
@@ -1774,6 +1809,7 @@ msgstr ""
 "contabilizadas."
 
 #. module: account_asset_management
+#. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid ""
@@ -1795,14 +1831,62 @@ msgstr ""
 "diferente de la fecha para la cual se deben generar asientos contables."
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-msgid "account_analytic_id"
-msgstr "account_analytic_id"
-
-#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "o"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "Error while processing asset '%s': %s"
+#~ msgstr ""
+#~ "\n"
+#~ "Error al procesar el activo '%s': %s"
+
+#~ msgid "Analytic account"
+#~ msgstr "Cuenta analítica"
+
+#~ msgid "Analytic tags"
+#~ msgstr "Etiquetas analíticas"
+
+#~ msgid "Asset Lines"
+#~ msgstr "Líneas de activo"
+
+#, python-format
+#~ msgid ""
+#~ "Error while processing asset '%s': \n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Error mientras se procesaba activo '%s': \n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Seguidores (Canales)"
+
+#, python-format
+#~ msgid ""
+#~ "Inconsistent reporting structure.\n"
+#~ "Please correct Asset Group '%s' (id %s)"
+#~ msgstr ""
+#~ "Estructura inconsistente del informe.\n"
+#~ "Por favor, corrija el grupo del activo '%s' (id %s)"
+
+#~ msgid "Number of unread messages"
+#~ msgstr "Número de mensajes sin leer"
+
+#~ msgid "Unread Messages"
+#~ msgstr "Mensajes no leídos"
+
+#~ msgid "Unread Messages Counter"
+#~ msgstr "Número de mensajes no leídos"
+
+#~ msgid "Use leap years"
+#~ msgstr "Use años bisiestos"
+
+#~ msgid "account_analytic_id"
+#~ msgstr "account_analytic_id"
 
 #~ msgid "Delete Move"
 #~ msgstr "Borrar asiento"
