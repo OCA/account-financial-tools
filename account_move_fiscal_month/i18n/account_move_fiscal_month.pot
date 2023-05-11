@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_fiscal_month
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_fiscal_month
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_fiscal_month
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_bank_statement_line__date_range_fm_id
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move__date_range_fm_id
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move_line__date_range_fm_id
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_payment__date_range_fm_id
+msgid "Fiscal month"
+msgstr ""
+
+#. module: account_move_fiscal_month
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move__id
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move_line__id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_fiscal_month
+#: model:ir.model,name:account_move_fiscal_month.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_move_fiscal_month
+#: model:ir.model,name:account_move_fiscal_month.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_move_fiscal_month
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move_line____last_update
+msgid "Last Modified on"
+msgstr ""
