@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo-addon-account_chart_update_l10n_eu_oss_oca>=15.0dev,<15.1dev',
         'odoo-addon-account_check_deposit>=15.0dev,<15.1dev',
         'odoo-addon-account_cost_center>=15.0dev,<15.1dev',
+        'odoo-addon-account_fiscal_month>=15.0dev,<15.1dev',
         'odoo-addon-account_fiscal_position_vat_check>=15.0dev,<15.1dev',
         'odoo-addon-account_fiscal_year>=15.0dev,<15.1dev',
         'odoo-addon-account_invoice_constraint_chronology>=15.0dev,<15.1dev',
