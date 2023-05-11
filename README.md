@@ -41,6 +41,7 @@ addon | version | maintainers | summary
 [account_lock_to_date](account_lock_to_date/) | 15.0.1.0.0 |  | Allows to set an account lock date in the future.
 [account_maturity_date_default](account_maturity_date_default/) | 15.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Maturity Date Default
 [account_move_budget](account_move_budget/) | 15.0.1.0.0 |  | Create Accounting Budgets
+[account_move_fiscal_month](account_move_fiscal_month/) | 15.0.1.0.0 |  | Display the fiscal month on journal entries/item
 [account_move_fiscal_year](account_move_fiscal_year/) | 15.0.1.0.1 |  | Display the fiscal year on journal entries/item
 [account_move_force_removal](account_move_force_removal/) | 15.0.1.1.0 |  | Allow force removal account moves
 [account_move_line_menu](account_move_line_menu/) | 15.0.1.0.0 |  | Adds a Journal Items menu
