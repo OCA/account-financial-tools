@@ -10,7 +10,6 @@
     "depends": ["account", "report_xlsx_helper"],
     "excludes": ["account_asset"],
     "development_status": "Mature",
-    "external_dependencies": {"python": ["python-dateutil"]},
     "author": "Noviat, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting & Finance",
