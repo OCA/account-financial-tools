@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2023-02-24 18:22+0000\n"
+"PO-Revision-Date: 2023-05-12 13:34+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -179,7 +179,7 @@ msgstr "Ultima modifica il"
 #. module: currency_rate_update
 #: field:currency.rate.update.service,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Ultimo aggiornamento di"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,write_date:0
