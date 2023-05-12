@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2023-04-21 11:11+0000\n"
+"PO-Revision-Date: 2023-05-12 13:34+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -729,7 +729,7 @@ msgstr "Ultima modifica il"
 #: field:credit.control.printer,write_uid:0
 #: field:credit.control.run,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Ultimo aggiornamento di"
 
 #. module: account_credit_control
 #: field:credit.control.communication,write_date:0
@@ -742,7 +742,7 @@ msgstr "Last Updated by"
 #: field:credit.control.printer,write_date:0
 #: field:credit.control.run,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
