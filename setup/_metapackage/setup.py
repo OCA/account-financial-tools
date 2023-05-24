@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo-addon-account_invoice_constraint_chronology>=16.0dev,<16.1dev',
         'odoo-addon-account_journal_general_sequence>=16.0dev,<16.1dev',
         'odoo-addon-account_lock_date_update>=16.0dev,<16.1dev',
+        'odoo-addon-account_move_line_tax_editable>=16.0dev,<16.1dev',
         'odoo-addon-account_move_name_sequence>=16.0dev,<16.1dev',
         'odoo-addon-account_move_print>=16.0dev,<16.1dev',
         'odoo-addon-account_template_active>=16.0dev,<16.1dev',
