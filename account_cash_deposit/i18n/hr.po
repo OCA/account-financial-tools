@@ -1,0 +1,713 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_cash_deposit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-05-25 15:09+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
+"Language-Team: none\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "%s has already been credited/debited on the bank account."
+msgstr "%s je već zadužen/razdužen na bankovnom računu."
+
+#. module: account_cash_deposit
+#: model:ir.actions.report,print_report_name:account_cash_deposit.report_account_cash_deposit
+msgid ""
+"'%s%s' % (object.display_name.replace(' ', '_'), object.state == 'draft' and"
+" '-draft' or '')"
+msgstr ""
+"'%s%s' % (object.display_name.replace(' ', '_'), object.state == 'draft' and "
+"'-nacrt' or '')"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Currency:</strong>"
+msgstr "<strong>Valuta:</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Datum:</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Loose Coins:</strong>"
+msgstr "<strong>Kovanice:</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Order Date:</strong>"
+msgstr "<strong>Datum naloga:</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Total:</strong>"
+msgstr "<strong>Ukupno:</strong>"
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_name_company_unique
+msgid ""
+"A cash deposit/order with this reference already exists in this company."
+msgstr "Gotovinska stavka sa ovom referencom već postoji unutar ove tvrke."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_line_cash_unit_unique
+msgid "A line already exists for this cash unit."
+msgstr "Stavka već postoji za ovu gotovinsku jedinicu."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_needaction
+msgid "Action Needed"
+msgstr "Potrebna radnja"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__active
+msgid "Active"
+msgstr "Aktivan"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_ids
+msgid "Activities"
+msgstr "Aktivnosti"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Dekoracija izuzetka aktivnosti"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_state
+msgid "Activity State"
+msgstr "Status aktivnosti"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Ikona tipa aktivnosti"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.cash_unit_form
+msgid "Archived"
+msgstr "Arhivirano"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_attachment_count
+msgid "Attachment Count"
+msgstr "Broj priloga"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__auto_create
+msgid "Auto Create"
+msgstr "Automatski kreiraj"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Back to Draft"
+msgstr "Nazad u nacrt"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__bank_journal_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Bank Account"
+msgstr "Bankovni račun"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank Account Number to Credit:"
+msgstr "Broj bankovnog računa za potraživanje:"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank Account Number to Debit:"
+msgstr "Broj bankovnog računa za dugovanje:"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank:"
+msgstr "Banka:"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__both
+msgid "Both"
+msgstr "Oboje"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_order_reception_form
+msgid "Cancel"
+msgstr "Otkaži"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__cash_journal_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Cash Box"
+msgstr "Gotovinska blagajna"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__operation_type__deposit
+msgid "Cash Deposit"
+msgstr "Polog gotovine"
+
+#. module: account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_account_cash_deposit_line
+msgid "Cash Deposit Lines"
+msgstr "Stavke pologa gotovine"
+
+#. module: account_cash_deposit
+#: model:ir.actions.report,name:account_cash_deposit.report_account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_account_cash_deposit
+msgid "Cash Deposit/Order"
+msgstr "Nalog za gotovinsku Uplatu/Isplatu"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_deposit_action
+#: model:ir.ui.menu,name:account_cash_deposit.account_cash_deposit_menu
+msgid "Cash Deposits"
+msgstr "Gotovinske uplate"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__order_id
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__operation_type__order
+msgid "Cash Order"
+msgstr "Gotovinski nalog"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_order_reception_action
+#: model:ir.model,name:account_cash_deposit.model_account_cash_order_reception
+msgid "Cash Order Reception"
+msgstr "Zaprimanje gotovine"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_order_action
+#: model:ir.ui.menu,name:account_cash_deposit.account_cash_order_menu
+msgid "Cash Orders"
+msgstr "Gotovinski nalozi"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Cash Received"
+msgstr "Gotovina zaprimljena"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__date
+msgid "Cash Reception Date"
+msgstr "Datum zaprimanja gotovine"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.cash_unit_action
+#: model:ir.model,name:account_cash_deposit.model_cash_unit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__cash_unit_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Cash Unit"
+msgstr "Gotovinska jedinica"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency__cash_unit_ids
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.view_currency_form
+msgid "Cash Units"
+msgstr "Gotovinske jedinice"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/wizards/account_cash_order_reception.py:0
+#, python-format
+msgid "Cash reception confirmed on %s."
+msgstr "Zaprimanje gotovine potvrđeno %s."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__coin
+msgid "Coin"
+msgstr "Kovanica"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__coinroll_qty
+msgid "Coin Quantity"
+msgstr "Količina kovanica"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__coinroll
+msgid "Coin Roll"
+msgstr "Rola kovanica"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__company_id
+msgid "Company"
+msgstr "Tvrtka"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_order_reception_form
+msgid "Confirm Cash Reception"
+msgstr "Potvrdi zaprimanje gotovine"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Confirm Order"
+msgstr "Potvrdi nalog"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__confirmed
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Confirmed"
+msgstr "Potvrđeno"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__create_uid
+msgid "Created by"
+msgstr "Kreirao"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__create_date
+msgid "Created on"
+msgstr "Kreirano"
+
+#. module: account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_res_currency
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__currency_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__date
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Date"
+msgstr "Datum"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__deposit
+msgid "Deposit"
+msgstr "Polog"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__display_name
+msgid "Display Name"
+msgstr "Prikazani naziv"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__done
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Done"
+msgstr "Gotovo"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__draft
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Draft"
+msgstr "Nacrt"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_follower_ids
+msgid "Followers"
+msgstr "Pratitelji"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Pratitelji (Partneri)"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/cash_unit.py:0
+#, python-format
+msgid "For a coin roll, the coin quantity must be strictly positive."
+msgstr "Za rolu kovanica količina mora biti striktno pozitivna."
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Group By"
+msgstr "Grupiraj po"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__has_message
+msgid "Has Message"
+msgstr "Ima poruka"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_exception_icon
+msgid "Icon"
+msgstr "Ikona"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Ikona za označavanje izuzetka pri aktivnosti."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Ukoliko je označeno nove poruke traže vašu pozornost."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_error
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Ukoliko je označeno, neke poruke imaju greške pri isporuci."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__auto_create
+msgid ""
+"If set, a line for this cash unit will be created by default on a new cash "
+"deposit or a new cash order or both."
+msgstr ""
+"Ako je označeno, stavka za ovu gotovinsku jedinicu će biti kreirana pri "
+"novom polaganju ili podizanju gotovine."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__coin_amount
+msgid ""
+"If your bank has a coin counting machine, enter the total amount of coins "
+"counted by the machine instead of creating a line for each type of coin."
+msgstr ""
+"Ako vaša banka ima automat za brojenje kovanica, unesite ukupni iznos "
+"kovanica izbrojen na automatu umjesto kreiranja stavke za svaki kovanice."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_is_follower
+msgid "Is Follower"
+msgstr "Je pratitelj"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__move_id
+msgid "Journal Entry"
+msgstr "Stavka dnevnika"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit____last_update
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line____last_update
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception____last_update
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit____last_update
+msgid "Last Modified on"
+msgstr "Zadnje modificirano"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__write_uid
+msgid "Last Updated by"
+msgstr "Zadnje ažurirano"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__write_date
+msgid "Last Updated on"
+msgstr "Zadnje ažuriranje"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__line_ids
+msgid "Lines"
+msgstr "Stavke"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__coin_amount
+msgid "Loose Coin Amount"
+msgstr "Iznos gubitka kovanica"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Glavni prilog"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_error
+msgid "Message Delivery error"
+msgstr "Greška pri isporuci poruke"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_ids
+msgid "Messages"
+msgstr "Poruke"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Krajnji rok moje aktivnosti"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Krajnji rok sljedeće aktivnosti"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_summary
+msgid "Next Activity Summary"
+msgstr "Sažetak sljedeće aktivnosti"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tip sljedeće aktivnosti"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__note
+msgid "Note"
+msgstr "Napomena"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__notes
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Notes"
+msgstr "Napomene"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Broj radnji"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_error_counter
+msgid "Number of errors"
+msgstr "Broj grešaka"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Broj poruka koje traže vašu pozornost"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Broj poruka sa greškom pri isporuci"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid ""
+"On {deposit}, the cash journal {cash_journal} is not in the selected "
+"currency {currency}."
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__operation_type
+msgid "Operation Type"
+msgstr "Tip operacije"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__order
+msgid "Order"
+msgstr "Nalog"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__order_date
+msgid "Order Date"
+msgstr "Datum naloga"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__parent_id
+msgid "Parent"
+msgstr "Nadređeni"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Print"
+msgstr "Ispis"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__qty
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Quantity"
+msgstr "Količina"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__is_reconcile
+msgid "Reconciled"
+msgstr "Zatvoreno"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__name
+msgid "Reference"
+msgstr "Referenca"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_user_id
+msgid "Responsible User"
+msgstr "Odgovorni korisnik"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "State"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__state
+msgid "Status"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Status baziran na aktivnostima:\n"
+"Prekoračeno: Krajnji rok je već prošao\n"
+"Danas: Dana je datum aktivnosti\n"
+"U Planu: Buduće aktivnosti."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__subtotal
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Subtotal"
+msgstr "Podzbroj"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "The %s is not in draft state, so you cannot delete it."
+msgstr "%s nije u stanju Nacrta, dakle nije moguće brisanje."
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "The Inter-Banks Transfer Account is not configured."
+msgstr "Prelazni bankovni konto nije definiran."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_coinroll_qty_positive
+msgid "The coin quantity must be positive."
+msgstr "Količina kovanica mora biti pozitivna."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_coin_amount_positive
+msgid "The loose coin amount must be positive or null."
+msgstr "Količina izgubljenih kovanica mora biti pozitivna ili nula."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_line_qty_positive
+msgid "The quantity must be positive or null."
+msgstr "Količina mora biti pozitivna ili nula."
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid "The total amount of %s is zero."
+msgstr "Ukupni iznos %s je nula."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_value_positive
+msgid "The value must be strictly positive."
+msgstr "Vrijednost mora striktno biti pozitina."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__cash_type
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__coinroll_qty
+msgid "This field should never be modified."
+msgstr "Ovo polje nikada nebi smjelo biti uređivano."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__value
+msgid ""
+"This field should never be modified. For a coin roll, you must enter the "
+"value of the coin."
+msgstr "biti uređivano. Za rolu kovanica, morate upisati vrijednost kovanice."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__total_amount
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__total_amount
+msgid "Total Amount"
+msgstr "Ukupni iznos"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__total_value
+msgid "Total Value"
+msgstr "Ukupna vrijednost"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__tree_order
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__tree_order
+msgid "Tree Order"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__cash_type
+msgid "Type"
+msgstr "Tip"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tip izuzetka aktivnosti na zapisu."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__date
+msgid "Used as date for the journal entry."
+msgstr "Korišteno kao datum za stavku dnevnika."
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Validate"
+msgstr "Ovjeri"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__value
+msgid "Value"
+msgstr "Vrijednost"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+#, python-format
+msgid ""
+"You must delete cash lines that are linked to a currency other than %s."
+msgstr ""
