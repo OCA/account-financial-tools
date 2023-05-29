@@ -798,6 +798,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
                     "date": fields.Date.today(),
                     "reason": "no reason",
                     "refund_method": "refund",
+                    "journal_id": self.vendor_bill.journal_id.id,
                 }
             )
         )
