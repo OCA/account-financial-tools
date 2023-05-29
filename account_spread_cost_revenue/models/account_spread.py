@@ -520,7 +520,7 @@ class AccountSpread(models.Model):
                 "<a href=# data-oe-model=account.move "
                 "data-oe-id=%d>%s</a>" % (spread.invoice_id.id, _("Invoice"))
             )
-            msg_body = _("Unlinked invoice line '%s' (view %s).") % (
+            msg_body = _("Unlinked invoice line '{}' (view {}).").format(
                 spread.invoice_line_id.name,
                 inv_link,
             )
@@ -529,7 +529,7 @@ class AccountSpread(models.Model):
                 "<a href=# data-oe-model=account.spread "
                 "data-oe-id=%d>%s</a>" % (spread.id, _("Spread"))
             )
-            msg_body = _("Unlinked '%s' (invoice line %s).") % (
+            msg_body = _("Unlinked '{}' (invoice line {}).").format(
                 spread_link,
                 spread.invoice_line_id.name,
             )
@@ -578,7 +578,7 @@ class AccountSpread(models.Model):
             return
         ctx = dict(self.env.context, skip_unique_sequence_number=True)
         if self.company_id.force_move_auto_post or self.move_line_auto_post:
-            moves.with_context(ctx).action_post()
+            moves.with_context(**ctx).action_post()
 
     @api.depends("debit_account_id.deprecated", "credit_account_id.deprecated")
     def _compute_deprecated_accounts(self):

@@ -1,7 +1,7 @@
 Define Spread Costs/Revenues Board
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under Invoicing -> Adviser -> Accounting Entries -> Spread Costs/Revenues, create a new spread board.
+Under Invoicing -> Accounting -> Miscellaneous -> Spread Costs/Revenues, create a new spread board.
 
 Complete the definition of the spreading criteria, by setting the the fields:
 
@@ -16,7 +16,7 @@ Complete the definition of the spreading criteria, by setting the the fields:
 .. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_spread_cost_revenue/static/description/spread.png
    :alt: Create a new spread board
 
-Click on the button on the top-left to calculate the spread lines.
+Click on the "Recalculate unposted lines" button on the top-left to calculate the spread lines.
 
 .. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_spread_cost_revenue/static/description/create_spread.png
    :alt: The spreading board is defined
