@@ -8,8 +8,7 @@
     "version": "15.0.1.2.0",
     "development_status": "Production/Stable",
     "category": "Accounting",
-    "website": "https://github.com/OCA/account-financial-tools"
-    "14.0/account_fiscal_year",
+    "website": "https://github.com/OCA/account-financial-tools",
     "author": "Agile Business Group, Camptocamp SA, "
     "Odoo Community Association (OCA)",
     "maintainers": ["eLBati"],
