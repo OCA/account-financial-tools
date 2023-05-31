@@ -103,7 +103,7 @@ class AccountAssetTransfer(models.TransientModel):
             balance = rec.from_asset_value - rec.to_asset_value
             rec.balance = balance if balance > 0 else 0
 
-    def _check_amount_trasnfer(self):
+    def _check_amount_transfer(self):
         self.ensure_one()
         if float_compare(self.from_asset_value, self.to_asset_value, 2) != 0:
             raise UserError(_("Total values of new assets must equal to source assets"))
@@ -120,7 +120,7 @@ class AccountAssetTransfer(models.TransientModel):
     def transfer(self):
         self.ensure_one()
         self.from_asset_ids._check_can_transfer()
-        self._check_amount_trasnfer()
+        self._check_amount_transfer()
         # Create transfer journal entry
         move_vals = self._get_new_move_transfer()
         move = self.env["account.move"].create(move_vals)
@@ -132,6 +132,8 @@ class AccountAssetTransfer(models.TransientModel):
         self.from_asset_ids.write(
             {"state": "removed", "date_remove": self.date_transfer}
         )
+        # Set all assets is transfer document
+        move.line_ids.mapped("asset_id").write({"is_transfer": True})
         return {
             "name": _("Asset Transfer Journal Entry"),
             "view_mode": "tree,form",

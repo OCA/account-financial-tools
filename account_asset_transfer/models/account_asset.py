@@ -13,6 +13,9 @@ class AccountAsset(models.Model):
         search="_search_can_transfer",
         help="Allow transfer AUC (running) to Asset",
     )
+    is_transfer = fields.Boolean(
+        help="flag indicating if the asset has been transferred from/to another asset."
+    )
 
     def _compute_can_transfer(self):
         for asset in self:
@@ -55,4 +58,37 @@ class AccountAsset(models.Model):
             "target": "new",
             "type": "ir.actions.act_window",
             "context": ctx,
+        }
+
+    def open_assets(self):
+        self.ensure_one()
+        moves = self.account_move_line_ids.mapped("move_id")
+        assets = self.env["account.asset"]
+        asset_from = self._context.get("asset_from")
+        asset_to = self._context.get("asset_to")
+        for move in moves:
+            # Source Assets, we check from move that create this asset
+            if (
+                asset_from
+                and self.id
+                not in move.line_ids.filtered(lambda l: l.credit).mapped("asset_id").ids
+            ):
+                assets = move.line_ids.filtered(lambda l: l.credit).mapped("asset_id")
+                break
+            # Destination Assets, we check from move that create destination asset
+            elif (
+                asset_to
+                and self.id
+                in move.line_ids.filtered(lambda l: l.credit).mapped("asset_id").ids
+            ):
+                assets = move.line_ids.filtered(lambda l: l.debit).mapped("asset_id")
+                break
+        return {
+            "name": _("Assets"),
+            "view_mode": "tree,form",
+            "res_model": "account.asset",
+            "view_id": False,
+            "type": "ir.actions.act_window",
+            "context": self._context,
+            "domain": [("id", "in", assets.ids)],
         }
