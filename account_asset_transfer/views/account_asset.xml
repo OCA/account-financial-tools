@@ -1,6 +1,6 @@
 <odoo>
 
-    <record model="ir.ui.view" id="account_asset_view_form">
+    <record id="account_asset_view_form" model="ir.ui.view">
         <field name="name">account.asset.form</field>
         <field name="model">account.asset</field>
         <field
@@ -10,6 +10,7 @@
         <field name="arch" type="xml">
             <button name="remove" position="after">
                 <field name="can_transfer" invisible="1" />
+                <field name="is_transfer" invisible="1" />
                 <button
                     name="transfer"
                     string="Transfer"
@@ -24,10 +25,33 @@
                     class="alert alert-warning"
                     role="alert"
                     style="margin-bottom:0px;"
-                    attrs="{'invisible': ['|', ('can_transfer', '=', 'False'), ('account_move_line_ids', '!=', [])]}"
+                    attrs="{'invisible': ['|', ('can_transfer', '=', False), ('account_move_line_ids', '!=', [])]}"
                 >
                     There are no journal entries on current asset(s), asset transfer will use account settings from the asset/asset profile instead.
                 </div>
+            </xpath>
+            <xpath
+                expr="//div[@name='button_box']/button[@name='open_entries']"
+                position="before"
+            >
+                <button
+                    name="open_assets"
+                    string="Asset From"
+                    type="object"
+                    class="oe_stat_button"
+                    context="{'asset_from': 1}"
+                    attrs="{'invisible': [('is_transfer', '=', False)]}"
+                    icon="fa-bars"
+                />
+                <button
+                    name="open_assets"
+                    string="Asset To"
+                    type="object"
+                    class="oe_stat_button"
+                    context="{'asset_to': 1}"
+                    attrs="{'invisible': [('is_transfer', '=', False)]}"
+                    icon="fa-bars"
+                />
             </xpath>
         </field>
     </record>
