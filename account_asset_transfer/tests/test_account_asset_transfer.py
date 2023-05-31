@@ -101,7 +101,9 @@ class TestAccountAssetTransfer(TestAssetManagement):
         assets.invalidate_cache()
         # can_transfer = True after validate
         self.assertTrue(list(set(assets.mapped("can_transfer")))[0])
-
+        self.assertEqual(list(set(assets.mapped("is_transfer"))), [False])
+        # Keep source asset
+        source_assets = assets
         # Create Asset Transfer
         transfer_form = Form(
             self.env["account.asset.transfer"].with_context(active_ids=assets.ids)
@@ -130,3 +132,11 @@ class TestAccountAssetTransfer(TestAssetManagement):
         # 2 new assets created, and value equal to original assets
         new_assets = assets.filtered(lambda l: l.state == "draft")
         self.assertEqual(sum(new_assets.mapped("purchase_value")), 23000)
+        # All asset transfer will change to is_transfer
+        self.assertEqual(list(set(assets.mapped("is_transfer"))), [True])
+        # Check source asset from new asset
+        result = new_assets[0].with_context(asset_from=1).open_assets()
+        self.assertEqual(sorted(result["domain"][0][2]), source_assets.ids)
+        # Check dest asset from source asset
+        result = source_assets[0].with_context(asset_to=1).open_assets()
+        self.assertEqual(result["domain"][0][2], new_assets.ids)
