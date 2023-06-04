@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-12-26 11:44+0000\n"
-"Last-Translator: Pierre Verkest <pierreverkest84@gmail.com>\n"
+"PO-Revision-Date: 2023-06-04 08:08+0000\n"
+"Last-Translator: Claude R Perrin <claude@perrin.it>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_name_sequence
 #: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
@@ -69,7 +69,7 @@ msgstr "Nom le plus haut"
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__id
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_ir_sequence__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_journal
