@@ -28,23 +28,21 @@ class TestAccountLockToDateUpdate(TransactionCase):
                 "company_id": self.company.id,
             }
         )
-        self.account_type_recv = self.env.ref("account.data_account_type_receivable")
-        self.account_type_rev = self.env.ref("account.data_account_type_revenue")
 
         self.account_recv = self.AccountObj.create(
             {
-                "code": "RECV_DR",
+                "code": "RECVDR",
                 "name": "Receivable (test)",
                 "reconcile": True,
-                "user_type_id": self.account_type_recv.id,
+                "account_type": "asset_receivable",
             }
         )
         self.account_sale = self.AccountObj.create(
             {
-                "code": "SALE_DR",
+                "code": "SALEDR",
                 "name": "Receivable (sale)",
                 "reconcile": True,
-                "user_type_id": self.account_type_rev.id,
+                "account_type": "expense_direct_cost",
             }
         )
 
@@ -116,6 +114,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
         self.company.period_lock_to_date = "2900-01-01"
         self.company.fiscalyear_lock_to_date = "2900-02-01"
         move = self.create_account_move("2900-01-01")
+        self.demo_user.write({"groups_id": [(3, self.adviser_group.id)]})
         with self.assertRaises(ValidationError):
             move.with_user(self.demo_user.id).action_post()
 
