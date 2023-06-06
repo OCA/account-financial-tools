@@ -24,3 +24,4 @@ Module Contributors
 * `Ecosoft <http://ecosoft.co.th>`_:
 
   * Kitti U. <kittiu@ecosoft.co.th> (Add context overwrite)
+* Abraham Anes <abrahamanes@gmail.com>
