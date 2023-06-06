@@ -51,9 +51,8 @@ msgstr "Yevmiye"
 
 #. module: account_journal_lock_date
 #: model:ir.model,name:account_journal_lock_date.model_account_move
-#, fuzzy
-msgid "Journal Entries"
-msgstr "Yevmiye"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard____last_update
@@ -71,14 +70,12 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_bank_statement_import_journal_creation__fiscalyear_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__fiscalyear_lock_date
 msgid "Lock Date"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_bank_statement_import_journal_creation__period_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__period_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__period_lock_date
 msgid "Lock Date for Non-Advisers"
@@ -90,7 +87,6 @@ msgid "Mass Update Journal Lock Dates Wizard"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,help:account_journal_lock_date.field_account_bank_statement_import_journal_creation__fiscalyear_lock_date
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
 msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
@@ -99,7 +95,6 @@ msgid ""
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,help:account_journal_lock_date.field_account_bank_statement_import_journal_creation__period_lock_date
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__period_lock_date
 msgid ""
 "Only users with the 'Adviser' role can edit accounts prior to and inclusive "
@@ -118,24 +113,31 @@ msgid "Update journals lock dates"
 msgstr ""
 
 #. module: account_journal_lock_date
+#. odoo-python
 #: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
 msgstr ""
 
 #. module: account_journal_lock_date
+#. odoo-python
 #: code:addons/account_journal_lock_date/models/account_move.py:0
 #, python-format
 msgid ""
-"You cannot add/modify entries for the journal '%s' prior to and inclusive of "
-"the lock date %s"
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s"
 msgstr ""
 
 #. module: account_journal_lock_date
+#. odoo-python
 #: code:addons/account_journal_lock_date/models/account_move.py:0
 #, python-format
 msgid ""
-"You cannot add/modify entries for the journal '%s' prior to and inclusive of "
-"the lock date %s. Check the Journal settings or ask someone with the "
-"'Adviser' role"
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s. Check the Journal settings or "
+"ask someone with the 'Adviser' role"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Journal Entries"
+#~ msgstr "Yevmiye"
