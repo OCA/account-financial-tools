@@ -52,8 +52,7 @@ Valid dictionary to overwrite template lines:
             "move_line_type": tmpl_line.move_line_type,
             "tax_line_id": tmpl_line.tax_line_id.id,
             "tax_ids": [Command.set(tmpl_line.tax_ids.ids)],
-            "analytic_account_id": tmpl_line.analytic_account_id.id,
-            "analytic_tag_ids": [Command.set(tmpl_line.analytic_tag_ids.ids)],
+            "analytic_distribution": tmpl_line.analytic_distribution,
             "note": tmpl_line.note,
             "payment_term_id": tmpl_line.payment_term_id.id or False,
             "is_refund": tmpl_line.is_refund,
@@ -220,7 +219,6 @@ Valid dictionary to overwrite template lines:
         debit = line.move_line_type == "dr"
         values = {
             "name": line.name,
-            "analytic_account_id": line.analytic_account_id.id,
             "account_id": line.account_id.id,
             "credit": not debit and amount or 0.0,
             "debit": debit and amount or 0.0,
@@ -228,8 +226,8 @@ Valid dictionary to overwrite template lines:
             "date_maturity": date_maturity or self.date,
             "tax_repartition_line_id": line.tax_repartition_line_id.id or False,
         }
-        if line.analytic_tag_ids:
-            values["analytic_tag_ids"] = [Command.set(line.analytic_tag_ids.ids)]
+        if line.analytic_distribution:
+            values["analytic_distribution"] = line.analytic_distribution
         if line.tax_ids:
             values["tax_ids"] = [Command.set(line.tax_ids.ids)]
             tax_repartition = "refund_tax_id" if line.is_refund else "invoice_tax_id"
@@ -275,10 +273,7 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     sequence = fields.Integer(required=True)
     name = fields.Char(readonly=True)
     account_id = fields.Many2one("account.account", required=True, readonly=True)
-    analytic_account_id = fields.Many2one("account.analytic.account", readonly=True)
-    analytic_tag_ids = fields.Many2many(
-        "account.analytic.tag", string="Analytic Tags", readonly=True
-    )
+    analytic_distribution = fields.Json(string="New Analytic Distribution")
     tax_ids = fields.Many2many("account.tax", string="Taxes", readonly=True)
     tax_line_id = fields.Many2one(
         "account.tax", string="Originator Tax", ondelete="restrict", readonly=True

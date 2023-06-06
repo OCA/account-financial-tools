@@ -123,10 +123,7 @@ class AccountMoveTemplateLine(models.Model):
         string="Partner",
         domain=["|", ("parent_id", "=", False), ("is_company", "=", True)],
     )
-    analytic_account_id = fields.Many2one(
-        "account.analytic.account", string="Analytic Account"
-    )
-    analytic_tag_ids = fields.Many2many("account.analytic.tag", string="Analytic Tags")
+    analytic_distribution = fields.Json(string="New Analytic Distribution")
     tax_ids = fields.Many2many("account.tax", string="Taxes")
     tax_line_id = fields.Many2one(
         "account.tax", string="Originator Tax", ondelete="restrict"

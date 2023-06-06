@@ -14,13 +14,9 @@
                 <field name="partner_id" />
                 <field name="name" />
                 <field
-                    name="analytic_account_id"
+                    name="analytic_distribution"
+                    widget="analytic_distribution"
                     groups="analytic.group_analytic_accounting"
-                />
-                <field
-                    name="analytic_tag_ids"
-                    widget="many2many_tags"
-                    groups="analytic.group_analytic_tags"
                 />
                 <field name="move_line_type" />
                 <field name="type" />
@@ -65,13 +61,9 @@
                             name="analytic"
                         >
                             <field
-                                name="analytic_account_id"
-                                domain="[('company_id','=',company_id)]"
-                            />
-                            <field
-                                name="analytic_tag_ids"
-                                widget="many2many_tags"
-                                groups="analytic.group_analytic_tags"
+                                name="analytic_distribution"
+                                widget="analytic_distribution"
+                                groups="analytic.group_analytic_accounting"
                             />
                         </group>
                         <group name="amount" string="Amount">
@@ -128,18 +120,6 @@
                         class="btn-primary"
                         type="object"
                     />
-                    <button
-                        type="object"
-                        name="toggle_active"
-                        string="Archive"
-                        attrs="{'invisible': [('active', '=', False)]}"
-                    />
-                    <button
-                        type="object"
-                        name="toggle_active"
-                        string="Restore"
-                        attrs="{'invisible': [('active', '=', True)]}"
-                    />
                 </header>
                 <sheet>
                     <widget
@@ -157,6 +137,7 @@
                     </div>
                     <group name="main">
                         <group name="main-left">
+                            <field name="company_id" invisible="1" />
                             <field
                                 name="company_id"
                                 widget="selection"
@@ -176,6 +157,7 @@
                             name="line_ids"
                             nolabel="1"
                             context="{'default_company_id': company_id}"
+                            colspan="2"
                         />
                     </group>
                 </sheet>

@@ -76,12 +76,10 @@ class TestAccountMoveTemplate(TransactionCase):
             )
         )
 
-        self.user_type = self.env.ref("account.data_account_type_liquidity")
-
         self.chart = self.env["account.chart.template"].search([], limit=1)
         self._chart_of_accounts_create(self.company, self.chart)
         account_template = self.env["account.account.template"].create(
-            {"name": "Test 1", "code": "Code_test", "user_type_id": self.user_type.id}
+            {"name": "Test 1", "code": "Code_test", "account_type": "asset_cash"}
         )
         self.env["ir.model.data"].create(
             {
@@ -126,15 +124,12 @@ class TestAccountMoveTemplate(TransactionCase):
         self.partner2 = self.env["res.partner"].create(
             {"name": "Test partner 2", "company_id": False}
         )
-        self.account_type = self.env["account.account.type"].create(
-            {"name": "Test Tax Account Type"}
-        )
 
         self.tax_account_id = self.env["account.account"].create(
             {
                 "name": "tax account",
                 "code": "TAX",
-                "user_type_id": self.account_type.id,
+                "account_type": "income_other",
                 "company_id": self.company.id,
             }
         )

@@ -6,51 +6,52 @@ from odoo.tests.common import Form, TransactionCase
 
 
 class TestAccountMoveTemplateEnhanced(TransactionCase):
-    def setUp(self):
-        super(TestAccountMoveTemplateEnhanced, self).setUp()
-        self.Move = self.env["account.move"]
-        self.Journal = self.env["account.journal"]
-        self.Account = self.env["account.account"]
-        self.Template = self.env["account.move.template"]
-        self.Partner = self.env["res.partner"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.Move = cls.env["account.move"]
+        cls.Journal = cls.env["account.journal"]
+        cls.Account = cls.env["account.account"]
+        cls.Template = cls.env["account.move.template"]
+        cls.Partner = cls.env["res.partner"]
 
-        self.journal = self.Journal.search([("type", "=", "general")], limit=1)
-        self.ar_account_id = self.Account.search(
-            [("user_type_id.type", "=", "receivable")], limit=1
+        cls.journal = cls.Journal.search([("type", "=", "general")], limit=1)
+        cls.ar_account_id = cls.Account.search(
+            [("account_type", "=", "asset_receivable")], limit=1
         )
-        self.ap_account_id = self.Account.search(
-            [("user_type_id.type", "=", "payable")], limit=1
+        cls.ap_account_id = cls.Account.search(
+            [("account_type", "=", "liability_payable")], limit=1
         )
-        self.income_account_id = self.Account.search(
+        cls.income_account_id = cls.Account.search(
             [
-                ("user_type_id.type", "=", "other"),
-                ("user_type_id.internal_group", "=", "income"),
+                ("account_type", "=", "income_other"),
+                ("internal_group", "=", "income"),
             ],
             limit=1,
         )
-        self.expense_account_id = self.Account.search(
+        cls.expense_account_id = cls.Account.search(
             [
-                ("user_type_id.type", "=", "other"),
-                ("user_type_id.internal_group", "=", "expense"),
+                ("account_type", "=", "expense"),
+                ("internal_group", "=", "expense"),
             ],
             limit=1,
         )
-        self.partners = self.Partner.search([], limit=3)
+        cls.partners = cls.Partner.search([], limit=3)
 
         # Create a simple move tempalte
         ar_line = {
             "sequence": 0,
             "name": "AR Line 1",
-            "account_id": self.ar_account_id.id,
-            "opt_account_id": self.ap_account_id.id,
+            "account_id": cls.ar_account_id.id,
+            "opt_account_id": cls.ap_account_id.id,
             "move_line_type": "dr",
             "type": "input",
         }
         income_line1 = {
             "sequence": 1,
             "name": "Income Line 2",
-            "account_id": self.income_account_id.id,
-            "opt_account_id": self.expense_account_id.id,
+            "account_id": cls.income_account_id.id,
+            "opt_account_id": cls.expense_account_id.id,
             "move_line_type": "cr",
             "type": "computed",
             "python_code": "L0*1/3",
@@ -58,17 +59,17 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
         income_line2 = {
             "sequence": 2,
             "name": "Income Line 2",
-            "account_id": self.income_account_id.id,
-            "opt_account_id": self.expense_account_id.id,
+            "account_id": cls.income_account_id.id,
+            "opt_account_id": cls.expense_account_id.id,
             "move_line_type": "cr",
             "type": "computed",
             "python_code": "L0*2/3",
         }
 
-        self.move_template = self.Template.create(
+        cls.move_template = cls.Template.create(
             {
                 "name": "Test Template",
-                "journal_id": self.journal.id,
+                "journal_id": cls.journal.id,
                 "line_ids": [
                     Command.create(ar_line),
                     Command.create(income_line1),

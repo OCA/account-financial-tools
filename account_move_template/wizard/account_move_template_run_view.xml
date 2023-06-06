@@ -16,22 +16,9 @@
                         name="overwrite"
                         widget="ace"
                         options="{'mode': 'python'}"
-                        invisible="1"
+                        attrs="{'invisible': [('state', '=', 'set_lines')]}"
                     />
-                    <!-- Initial invisibility status of the overwrite field:
-                         attrs="{'invisible': [('state', '=', 'set_lines')]}"
-
-                         The overwrite option is useful when generating
-the move via code, but I think it's not a good idea to display it to
-the user. We can't expect users to write a python dict to enter data
-via the web interface for their daily usage of Odoo. Of course, most
-users will just leave the field empty and use the module as normal, but
-it complexifies the interface for everybody, and many users will wonder
-what they should enter in this "Overwrite" field and wait for help. So
-let's make that field invisible, and you can un-hide it for specific
-project where you have an accountant that is good at writing python
-dicts and finding IDs of partners!
-                    -->
+                    <field name="company_id" invisible="1" />
                     <field name="company_id" groups="base.group_multi_company" />
                     <field name="date" states="set_lines" />
                     <field name="journal_id" states="set_lines" />
@@ -39,7 +26,7 @@ dicts and finding IDs of partners!
                     <field name="partner_id" states="set_lines" />
                 </group>
                 <group name="lines" states="set_lines">
-                    <field name="line_ids" nolabel="1">
+                    <field name="line_ids" nolabel="1" colspan="2">
                         <tree editable="bottom">
                             <field name="sequence" invisible="1" />
                             <field name="name" />
@@ -49,14 +36,9 @@ dicts and finding IDs of partners!
                             />
                             <field name="partner_id" />
                             <field
-                                name="analytic_account_id"
-                                domain="[('company_id','=',company_id)]"
+                                name="analytic_distribution"
+                                widget="analytic_distribution"
                                 groups="analytic.group_analytic_accounting"
-                            />
-                            <field
-                                name="analytic_tag_ids"
-                                widget="many2many_tags"
-                                groups="analytic.group_analytic_tags"
                             />
                             <field
                                 name="tax_line_id"
