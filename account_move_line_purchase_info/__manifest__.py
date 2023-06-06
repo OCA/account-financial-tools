@@ -9,7 +9,7 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Generic",
-    "depends": ["purchase_stock"],
+    "depends": ["purchase_stock", "base_view_inheritance_extension"],
     "license": "AGPL-3",
     "data": [
         "security/account_security.xml",
