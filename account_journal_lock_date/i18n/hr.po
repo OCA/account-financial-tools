@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2022-05-18 15:16+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -86,8 +87,8 @@ msgstr ""
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
 msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
-"this date for this journal. Use it for fiscal year locking for this journal,"
-" for example."
+"this date for this journal. Use it for fiscal year locking for this journal, "
+"for example."
 msgstr ""
 
 #. module: account_journal_lock_date
@@ -109,22 +110,25 @@ msgid "Update journals lock dates"
 msgstr ""
 
 #. module: account_journal_lock_date
+#. odoo-python
 #: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
 msgstr ""
 
 #. module: account_journal_lock_date
+#. odoo-python
 #: code:addons/account_journal_lock_date/models/account_move.py:0
 #, python-format
 msgid ""
 "You cannot add/modify entries for the journal '%(journal)s' prior to and "
 "inclusive of the lock date %(journal_date)s"
 msgstr ""
-"Ne možete dodati/izmijeniti unose za dnevnik '%(journal)s' prije i uključujući "
-"datum zaključavanja %(journal_date)s"
+"Ne možete dodati/izmijeniti unose za dnevnik '%(journal)s' prije i "
+"uključujući datum zaključavanja %(journal_date)s"
 
 #. module: account_journal_lock_date
+#. odoo-python
 #: code:addons/account_journal_lock_date/models/account_move.py:0
 #, python-format
 msgid ""
