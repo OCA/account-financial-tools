@@ -1,0 +1,141 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_journal_lock_date
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-30 00:47+0000\n"
+"PO-Revision-Date: 2017-05-30 00:47+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Spanish (Mexico) (https://www.transifex.com/oca/teams/23907/"
+"es_MX/)\n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_journal_lock_date
+#: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_move
+#, fuzzy
+msgid "Journal Entries"
+msgstr "Diario"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_bank_statement_import_journal_creation__fiscalyear_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__fiscalyear_lock_date
+msgid "Lock Date"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_bank_statement_import_journal_creation__period_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__period_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__period_lock_date
+msgid "Lock Date for Non-Advisers"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_update_journal_lock_dates_wizard
+msgid "Mass Update Journal Lock Dates Wizard"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_bank_statement_import_journal_creation__fiscalyear_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date for this journal. Use it for fiscal year locking for this journal, "
+"for example."
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_bank_statement_import_journal_creation__period_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__period_lock_date
+msgid ""
+"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
+"of this date for this journal. Use it for period locking inside an open "
+"fiscal year for this journal, for example."
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
+msgid "Update"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.actions.act_window,name:account_journal_lock_date.update_journal_lock_dates_wizard_action
+msgid "Update journals lock dates"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
+#, python-format
+msgid "You are not allowed to execute this action."
+msgstr ""
+
+#. module: account_journal_lock_date
+#: code:addons/account_journal_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot add/modify entries for the journal '%s' prior to and inclusive of "
+"the lock date %s"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: code:addons/account_journal_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot add/modify entries for the journal '%s' prior to and inclusive of "
+"the lock date %s. Check the Journal settings or ask someone with the "
+"'Adviser' role"
+msgstr ""
