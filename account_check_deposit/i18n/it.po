@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 00:40+0000\n"
 "PO-Revision-Date: 2023-06-06 11:08+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -25,6 +25,8 @@ msgid ""
 "'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or "
 "'')"
 msgstr ""
+"'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or "
+"'')"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -55,11 +57,12 @@ msgstr "<b>Data Trasferimento:</b>"
 #: model:ir.model.constraint,message:account_check_deposit.constraint_account_check_deposit_name_company_unique
 msgid "A check deposit with this reference already exists in this company."
 msgstr ""
+"Un deposito assegni con questo riferimento esiste già per quest'azienda."
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_check_deposit
 msgid "Account Check Deposit"
-msgstr "Conto Deposito Assegno"
+msgstr "Conto deposito assegno"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction
@@ -122,18 +125,18 @@ msgstr "Beneficiario:"
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__check_deposit_id
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Deposit"
-msgstr "Deposito Assegno"
+msgstr "Deposito assegno"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid "Check Deposit %s"
-msgstr "Deposito Assegno %s"
+msgstr "Deposito assegno %s"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Check Deposit n°"
-msgstr "Deposito Assegno n°"
+msgstr "Deposito assegno n°"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
@@ -150,13 +153,13 @@ msgstr "Rif. Assegno%s"
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Checks Deposit"
-msgstr "Deposito Assegni"
+msgstr "Deposito assegni"
 
 #. module: account_check_deposit
 #: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
 #: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
 msgid "Checks Deposits"
-msgstr "Depositi Assegni"
+msgstr "Depositi assegni"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__company_id
