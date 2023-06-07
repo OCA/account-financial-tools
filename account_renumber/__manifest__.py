@@ -7,7 +7,7 @@
 
 {
     "name": "Account Renumber Wizard",
-    "version": "12.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "Pexego," "Tecnativa," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting & Finance",
@@ -16,6 +16,7 @@
         "account",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "wizard/wizard_renumber_view.xml",
     ],
     "installable": True,

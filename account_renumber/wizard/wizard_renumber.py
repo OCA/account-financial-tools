@@ -5,6 +5,8 @@
 import logging
 from datetime import date
 
+from psycopg2 import DatabaseError
+
 from odoo import _, api, exceptions, fields, models
 
 _logger = logging.getLogger(__name__)
@@ -52,15 +54,13 @@ class WizardRenumber(models.TransientModel):
         """Today by default."""
         return fields.Date.from_string(fields.Date.context_today(self))
 
-    @api.multi
     def renumber(self):
         """Renumber all the posted moves on the given journal and periods.
 
         :return dict:
             Window action to open the renumbered moves, to review them.
         """
-        reset_sequences = self.env["ir.sequence"]
-        reset_ranges = self.env["ir.sequence.date_range"]
+        sequence_mixin = self.env["sequence.mixin"]
 
         _logger.debug("Searching for account moves to renumber.")
         move_ids = self.env["account.move"].search(
@@ -76,27 +76,29 @@ class WizardRenumber(models.TransientModel):
             raise exceptions.MissingError(_("No records found for your selection!"))
 
         _logger.debug("Renumbering %d account moves.", len(move_ids))
+        seq_num = self.number_next
         for move in move_ids:
-            sequence = move.journal_id.sequence_id
-            if sequence not in reset_sequences:
-                if sequence.use_date_range:
-                    date_range = self.env["ir.sequence.date_range"].search(
-                        [
-                            ("sequence_id", "=", sequence.id),
-                            ("date_from", "<=", move.date),
-                            ("date_to", ">=", move.date),
-                        ]
-                    )
-                    if date_range and date_range not in reset_ranges:
-                        date_range.sudo().number_next = self.number_next
-                        reset_ranges |= date_range
-                else:
-                    sequence.sudo().number_next = self.number_next
-                    reset_sequences |= sequence
-
-            # Generate (using our own get_id) and write the new move number
-            move.name = sequence.with_context(ir_sequence_date=move.date).next_by_id()
-
+            sequence = move._get_starting_sequence()
+            format_string, format_values = sequence_mixin._get_sequence_format_param(
+                sequence
+            )
+            format_values["seq"] = seq_num
+            format_values["year"] = move[sequence_mixin._sequence_date_field].year % (
+                10 ** format_values["year_length"]
+            )
+            format_values["month"] = move[sequence_mixin._sequence_date_field].month
+            sequence = format_string.format(**format_values)
+            try:
+                move[sequence_mixin._sequence_field] = sequence
+                move.flush_recordset([sequence_mixin._sequence_field])
+            except DatabaseError as e:
+                # 23P01 ExclusionViolation
+                # 23505 UniqueViolation
+                if e.pgcode not in ("23P01", "23505"):
+                    raise e
+            sequence_mixin._compute_split_sequence()
+            move.flush_recordset(["sequence_prefix", "sequence_number"])
+            seq_num += 1
         _logger.debug("%d account moves renumbered.", len(move_ids))
 
         return {
@@ -104,7 +106,6 @@ class WizardRenumber(models.TransientModel):
             "name": _("Renumbered account moves"),
             "res_model": "account.move",
             "domain": [("id", "in", move_ids.ids)],
-            "view_type": "form",
             "view_mode": "tree",
             "context": self.env.context,
             "target": "current",
