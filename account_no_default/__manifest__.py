@@ -3,7 +3,7 @@
 
 {
     "name": "No Default Account",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "development_status": "Beta",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "maintainers": ["dreispt"],
