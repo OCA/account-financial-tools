@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:55+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/it/)\n"
+"PO-Revision-Date: 2023-06-07 17:08+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_tax_analysis
 #: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
@@ -118,7 +119,7 @@ msgstr "Last Updated on"
 #. module: account_tax_analysis
 #: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Ultimo aggiornamento di"
 
 #. module: account_tax_analysis
 #: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_write_date
