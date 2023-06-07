@@ -4,6 +4,7 @@
 
 import logging
 from datetime import date
+
 from odoo import _, api, exceptions, fields, models
 
 _logger = logging.getLogger(__name__)
@@ -26,16 +27,16 @@ class WizardRenumber(models.TransientModel):
         help="Finish renumbering in this date, inclusive.",
     )
     journal_ids = fields.Many2many(
-        comodel_name='account.journal',
-        relation='account_journal_wzd_renumber_rel',
-        column1='wizard_id',
-        column2='journal_id',
+        comodel_name="account.journal",
+        relation="account_journal_wzd_renumber_rel",
+        column1="wizard_id",
+        column2="journal_id",
         string="Journals",
         required=True,
         help="Journals to renumber",
     )
     number_next = fields.Integer(
-        string='First Number',
+        string="First Number",
         default=1,
         required=True,
         help="Journal sequences will start counting on this number",
@@ -62,15 +63,17 @@ class WizardRenumber(models.TransientModel):
         reset_ranges = self.env["ir.sequence.date_range"]
 
         _logger.debug("Searching for account moves to renumber.")
-        move_ids = self.env['account.move'].search(
-            [('journal_id', 'in', self.journal_ids.ids),
-             ('date', '>=', self.date_from),
-             ('date', '<=', self.date_to),
-             ('state', '=', 'posted')],
-            order='date, id')
+        move_ids = self.env["account.move"].search(
+            [
+                ("journal_id", "in", self.journal_ids.ids),
+                ("date", ">=", self.date_from),
+                ("date", "<=", self.date_to),
+                ("state", "=", "posted"),
+            ],
+            order="date, id",
+        )
         if not move_ids:
-            raise exceptions.MissingError(
-                _('No records found for your selection!'))
+            raise exceptions.MissingError(_("No records found for your selection!"))
 
         _logger.debug("Renumbering %d account moves.", len(move_ids))
         for move in move_ids:
@@ -78,9 +81,11 @@ class WizardRenumber(models.TransientModel):
             if sequence not in reset_sequences:
                 if sequence.use_date_range:
                     date_range = self.env["ir.sequence.date_range"].search(
-                        [("sequence_id", "=", sequence.id),
-                         ("date_from", "<=", move.date),
-                         ("date_to", ">=", move.date)]
+                        [
+                            ("sequence_id", "=", sequence.id),
+                            ("date_from", "<=", move.date),
+                            ("date_to", ">=", move.date),
+                        ]
                     )
                     if date_range and date_range not in reset_ranges:
                         date_range.sudo().number_next = self.number_next
@@ -90,18 +95,17 @@ class WizardRenumber(models.TransientModel):
                     reset_sequences |= sequence
 
             # Generate (using our own get_id) and write the new move number
-            move.name = (sequence.with_context(ir_sequence_date=move.date)
-                         .next_by_id())
+            move.name = sequence.with_context(ir_sequence_date=move.date).next_by_id()
 
         _logger.debug("%d account moves renumbered.", len(move_ids))
 
         return {
-            'type': 'ir.actions.act_window',
-            'name': _("Renumbered account moves"),
-            'res_model': 'account.move',
-            'domain': [("id", "in", move_ids.ids)],
-            'view_type': 'form',
-            'view_mode': 'tree',
-            'context': self.env.context,
-            'target': 'current',
+            "type": "ir.actions.act_window",
+            "name": _("Renumbered account moves"),
+            "res_model": "account.move",
+            "domain": [("id", "in", move_ids.ids)],
+            "view_type": "form",
+            "view_mode": "tree",
+            "context": self.env.context,
+            "target": "current",
         }
