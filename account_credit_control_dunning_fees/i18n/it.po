@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2023-06-07 11:08+0000\n"
+"PO-Revision-Date: 2023-06-08 12:08+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -119,7 +119,7 @@ msgstr "Ultimo aggiornamento di"
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_credit_control_dunning_fees
 #: view:credit.control.policy:account_credit_control_dunning_fees.add_dunning_fees_on_policy
