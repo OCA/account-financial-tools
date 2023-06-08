@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-04-04 13:23+0000\n"
-"Last-Translator: Rémi <remi@le-filament.com>\n"
+"PO-Revision-Date: 2023-06-09 00:10+0000\n"
+"Last-Translator: Alexis de Lattre <alexis@via.ecp.fr>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_name_sequence
 #: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Une pièce comptable ne peut pas être comptabilisé car elle n'a pas de numéro "
 "attribué.\n"
-"Vérifier la configuration de la séquence sur le journal concerné."
+"Vérifiez la configuration de la séquence sur le journal concerné."
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
@@ -43,12 +43,12 @@ msgstr "Séquence pour les avoirs"
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence
 msgid "Dedicated Credit Note Sequence"
-msgstr "Séquence des avoirs dédiée"
+msgstr "Séquence dédiée pour les avoirs"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__sequence_id
 msgid "Entry Sequence"
-msgstr "Séquence de la pièce comptable"
+msgstr "Séquence des pièces comptables"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__has_sequence_holes
@@ -94,8 +94,8 @@ msgid ""
 "On journal '%s', the same sequence is used as Entry Sequence and Credit Note"
 " Entry Sequence."
 msgstr ""
-"Pour le journal '%s', la même séquence est utilisée pour les pièces de "
-"factures et d'avoirs."
+"Pour le journal '%s', la même séquence est utilisée pour les factures et les "
+"avoirs."
 
 #. module: account_move_name_sequence
 #. odoo-python
@@ -152,12 +152,10 @@ msgstr ""
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence_id
 msgid ""
 "This sequence will be used to generate the journal entry number for refunds."
-msgstr ""
-"Cette séquence sera utilisée pour générer les références de pièce comptable "
-"pour les avoirs."
+msgstr "Cette séquence sera utilisée pour générer les numéros des avoirs."
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
 msgid "This sequence will be used to generate the journal entry number."
 msgstr ""
-"Cette séquence sera utilisée pour générer les références de pièce comptable."
+"Cette séquence sera utilisée pour générer les numéros des pièces comptables."
