@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2023-06-07 11:08+0000\n"
+"PO-Revision-Date: 2023-06-08 09:13+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -260,7 +260,7 @@ msgstr "Ultimo aggiornamento di"
 #. module: account_move_line_import
 #: field:aml.import,write_date:0
 msgid "Last Updated on"
-msgstr "Data ultimo aggiornamento"
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_move_line_import
 #: field:aml.import,note:0
