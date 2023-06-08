@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2023-05-31 15:08+0000\n"
+"PO-Revision-Date: 2023-06-08 11:08+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -698,7 +698,7 @@ msgstr "Ultimo aggiornamento di"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_write_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
