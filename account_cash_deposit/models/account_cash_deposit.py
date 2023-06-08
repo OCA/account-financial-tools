@@ -142,13 +142,14 @@ class AccountCashDeposit(models.Model):
                 ):
                     raise ValidationError(
                         _(
-                            "On {deposit}, the cash journal {cash_journal} is not "
-                            "in the selected currency {currency}."
-                        ).format(
-                            deposit=rec.display_name,
-                            cash_journal=rec.cash_journal_id.display_name,
-                            currency=rec.currency_id.name,
+                            "On %(deposit)s, the cash journal %(cash_journal)s is not "
+                            "in the selected currency %(currency)s."
                         )
+                        % {
+                            "deposit": rec.display_name,
+                            "cash_journal": rec.cash_journal_id.display_name,
+                            "currency": rec.currency_id.name,
+                        }
                     )
 
     @api.model
