@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:34+0000\n"
-"PO-Revision-Date: 2023-06-07 11:08+0000\n"
+"PO-Revision-Date: 2023-06-08 12:08+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -129,7 +129,7 @@ msgstr "Ultimo aggiornamento di"
 #. module: account_reversal
 #: field:account.move.reverse,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_reversal
 #: help:account.move.reverse,move_prefix:0
