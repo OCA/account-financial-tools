@@ -504,8 +504,8 @@ msgstr ""
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid ""
-"On {deposit}, the cash journal {cash_journal} is not in the selected "
-"currency {currency}."
+"On %(deposit)s, the cash journal %(cash_journal)s is not in the selected "
+"currency %(currency)s."
 msgstr ""
 
 #. module: account_cash_deposit
