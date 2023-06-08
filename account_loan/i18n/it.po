@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2023-05-30 09:08+0000\n"
+"PO-Revision-Date: 2023-06-08 11:08+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -345,7 +345,7 @@ msgstr "Ultimo aggiornamento di"
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_write_date
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_leased_asset_account_id
