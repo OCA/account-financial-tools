@@ -9,6 +9,7 @@ from odoo.tools.safe_eval import safe_eval
 class AccountMoveTemplate(models.Model):
     _name = "account.move.template"
     _description = "Journal Entry Template"
+    _check_company_auto = True
 
     name = fields.Char(required=True)
     company_id = fields.Many2one(
@@ -18,7 +19,13 @@ class AccountMoveTemplate(models.Model):
         ondelete="cascade",
         default=lambda self: self.env.company,
     )
-    journal_id = fields.Many2one("account.journal", string="Journal", required=True)
+    journal_id = fields.Many2one(
+        "account.journal",
+        string="Journal",
+        required=True,
+        check_company=True,
+        domain="[('company_id', '=', company_id)]",
+    )
     ref = fields.Char(string="Reference", copy=False)
     line_ids = fields.One2many(
         "account.move.template.line", inverse_name="template_id", string="Lines"
@@ -106,27 +113,29 @@ class AccountMoveTemplateLine(models.Model):
     _name = "account.move.template.line"
     _description = "Journal Item Template"
     _order = "sequence, id"
+    _inherit = "analytic.mixin"
+    _check_company_auto = True
 
     template_id = fields.Many2one(
         "account.move.template", string="Move Template", ondelete="cascade"
     )
-    name = fields.Char(string="Label", required=True)
+    name = fields.Char(string="Label")
     sequence = fields.Integer(required=True)
     account_id = fields.Many2one(
         "account.account",
         string="Account",
         required=True,
-        domain=[("deprecated", "=", False)],
+        domain="[('company_id', '=', company_id), ('deprecated', '=', False)]",
+        check_company=True,
     )
     partner_id = fields.Many2one(
         "res.partner",
         string="Partner",
         domain=["|", ("parent_id", "=", False), ("is_company", "=", True)],
     )
-    analytic_distribution = fields.Json(string="New Analytic Distribution")
-    tax_ids = fields.Many2many("account.tax", string="Taxes")
+    tax_ids = fields.Many2many("account.tax", string="Taxes", check_company=True)
     tax_line_id = fields.Many2one(
-        "account.tax", string="Originator Tax", ondelete="restrict"
+        "account.tax", string="Originator Tax", ondelete="restrict", check_company=True
     )
     company_id = fields.Many2one(related="template_id.company_id", store=True)
     company_currency_id = fields.Many2one(
@@ -136,11 +145,14 @@ class AccountMoveTemplateLine(models.Model):
     )
     note = fields.Char()
     type = fields.Selection(
-        [("computed", "Computed"), ("input", "User input")],
+        [
+            ("input", "User input"),
+            ("computed", "Computed"),
+        ],
         required=True,
         default="input",
     )
-    python_code = fields.Text()
+    python_code = fields.Text(string="Formula")
     move_line_type = fields.Selection(
         [("cr", "Credit"), ("dr", "Debit")], required=True, string="Direction"
     )
@@ -158,12 +170,12 @@ class AccountMoveTemplateLine(models.Model):
         string="Tax Repartition Line",
         compute="_compute_tax_repartition_line_id",
         store=True,
-        readonly=True,
     )
     opt_account_id = fields.Many2one(
         "account.account",
         string="Account Opt.",
-        domain=[("deprecated", "=", False)],
+        domain="[('company_id', '=', company_id), ('deprecated', '=', False)]",
+        check_company=True,
         help="When amount is negative, use this account instead",
     )
 
@@ -181,6 +193,23 @@ class AccountMoveTemplateLine(models.Model):
                 limit=1,
             )
 
+    @api.depends("account_id", "partner_id")
+    def _compute_analytic_distribution(self):
+        for line in self:
+            distribution = self.env[
+                "account.analytic.distribution.model"
+            ]._get_distribution(
+                {
+                    "partner_id": line.partner_id.id,
+                    "partner_category_id": line.partner_id.category_id.ids,
+                    "product_id": False,
+                    "product_categ_id": False,
+                    "account_prefix": line.account_id.code,
+                    "company_id": line.template_id.company_id.id,
+                }
+            )
+            line.analytic_distribution = distribution or line.analytic_distribution
+
     _sql_constraints = [
         (
             "sequence_template_uniq",
@@ -194,6 +223,6 @@ class AccountMoveTemplateLine(models.Model):
         for line in self:
             if line.type == "computed" and not line.python_code:
                 raise ValidationError(
-                    _("Python Code must be set for computed line with " "sequence %d.")
+                    _("Python Code must be set for computed line with sequence %d.")
                     % line.sequence
                 )
