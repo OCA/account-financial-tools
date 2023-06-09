@@ -9,8 +9,14 @@ from odoo.exceptions import UserError, ValidationError
 class AccountMoveTemplateRun(models.TransientModel):
     _name = "account.move.template.run"
     _description = "Wizard to generate move from template"
+    _check_company_auto = True
 
-    template_id = fields.Many2one("account.move.template", required=True)
+    template_id = fields.Many2one(
+        "account.move.template",
+        required=True,
+        check_company=True,
+        domain="[('company_id', '=', company_id)]",
+    )
     company_id = fields.Many2one(
         "res.company",
         required=True,
@@ -66,16 +72,6 @@ Valid dictionary to overwrite template lines:
         # Verify and get overwrite dict
         overwrite_vals = self._get_overwrite_vals()
         amtlro = self.env["account.move.template.line.run"]
-        if self.company_id != self.template_id.company_id:
-            raise UserError(
-                _(
-                    "The selected template (%(template)s) is not in the same company "
-                    "(%(company)s) as the current user (%(user_company)s).",
-                    template=self.template_id.name,
-                    company=self.template_id.company_id.display_name,
-                    user_company=self.company_id.display_name,
-                )
-            )
         tmpl_lines = self.template_id.line_ids
         for tmpl_line in tmpl_lines.filtered(lambda l: l.type == "input"):
             vals = self._prepare_wizard_line(tmpl_line)
@@ -89,8 +85,9 @@ Valid dictionary to overwrite template lines:
         )
         if not self.line_ids:
             return self.generate_move()
-        action = self.env.ref("account_move_template.account_move_template_run_action")
-        result = action.sudo().read()[0]
+        result = self.env["ir.actions.actions"]._for_xml_id(
+            "account_move_template.account_move_template_run_action"
+        )
         result.update({"res_id": self.id, "context": self.env.context})
 
         # Overwrite self.line_ids to show overwrite values
@@ -98,9 +95,7 @@ Valid dictionary to overwrite template lines:
         # Pass context furtner to generate_move function, only readonly field
         for key in overwrite_vals.keys():
             overwrite_vals[key].pop("amount", None)
-        context = result.get("context", {}).copy()
-        context.update({"overwrite": overwrite_vals})
-        result["context"] = context
+        result["context"] = dict(result.get("context", {}), overwrite=overwrite_vals)
         return result
 
     def _get_valid_keys(self):
@@ -187,8 +182,9 @@ Valid dictionary to overwrite template lines:
                     Command.create(self._prepare_move_line(line, amount))
                 )
         move = self.env["account.move"].create(move_vals)
-        action = self.env.ref("account.action_move_journal_line")
-        result = action.sudo().read()[0]
+        result = self.env["ir.actions.actions"]._for_xml_id(
+            "account.action_move_journal_line"
+        )
         result.update(
             {
                 "name": _("Entry from template %s") % self.template_id.name,
@@ -225,9 +221,8 @@ Valid dictionary to overwrite template lines:
             "partner_id": self.partner_id.id or line.partner_id.id,
             "date_maturity": date_maturity or self.date,
             "tax_repartition_line_id": line.tax_repartition_line_id.id or False,
+            "analytic_distribution": line.analytic_distribution,
         }
-        if line.analytic_distribution:
-            values["analytic_distribution"] = line.analytic_distribution
         if line.tax_ids:
             values["tax_ids"] = [Command.set(line.tax_ids.ids)]
             tax_repartition = "refund_tax_id" if line.is_refund else "invoice_tax_id"
@@ -264,6 +259,7 @@ Valid dictionary to overwrite template lines:
 class AccountMoveTemplateLineRun(models.TransientModel):
     _name = "account.move.template.line.run"
     _description = "Wizard Lines to generate move from template"
+    _inherit = "analytic.mixin"
 
     wizard_id = fields.Many2one("account.move.template.run", ondelete="cascade")
     company_id = fields.Many2one(related="wizard_id.company_id")
@@ -273,7 +269,6 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     sequence = fields.Integer(required=True)
     name = fields.Char(readonly=True)
     account_id = fields.Many2one("account.account", required=True, readonly=True)
-    analytic_distribution = fields.Json(string="New Analytic Distribution")
     tax_ids = fields.Many2many("account.tax", string="Taxes", readonly=True)
     tax_line_id = fields.Many2one(
         "account.tax", string="Originator Tax", ondelete="restrict", readonly=True
