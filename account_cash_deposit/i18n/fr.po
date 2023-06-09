@@ -519,11 +519,9 @@ msgstr "Nombre de messages en échec d'envoi"
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid ""
-"On {deposit}, the cash journal {cash_journal} is not in the selected "
-"currency {currency}."
+"On %(deposit)s, the cash journal %(cash_journal)s is not in the selected "
+"currency %(currency)s."
 msgstr ""
-"Sur {deposit}, la caisse {cash_journal} n'est pas dans la devise "
-"sélectionnée {currency}."
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__operation_type
@@ -720,6 +718,14 @@ msgstr "Historique des échanges sur le site Web"
 #, python-format
 msgid "You must delete cash lines that are linked to a currency other than %s."
 msgstr "Vous devez supprimer les lignes liées à une devise autre que %s."
+
+#, python-format
+#~ msgid ""
+#~ "On {deposit}, the cash journal {cash_journal} is not in the selected "
+#~ "currency {currency}."
+#~ msgstr ""
+#~ "Sur {deposit}, la caisse {cash_journal} n'est pas dans la devise "
+#~ "sélectionnée {currency}."
 
 #, python-format
 #~ msgid "There are no non-zero lines on %s!"
