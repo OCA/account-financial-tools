@@ -84,8 +84,8 @@ class AccountMove(models.Model):
             "date_start": self.date,
         }
 
-    def action_post(self):
-        ret_val = super().action_post()
+    def _post(self, soft=True):
+        ret_val = super()._post(soft=soft)
         for move in self:
             for aml in move.line_ids.filtered(
                 lambda line: line.asset_profile_id and not line.tax_line_id
@@ -180,6 +180,7 @@ class AccountMoveLine(models.Model):
         string="Asset",
         ondelete="restrict",
         check_company=True,
+        copy=False,
     )
 
     @api.depends("account_id", "asset_id")
