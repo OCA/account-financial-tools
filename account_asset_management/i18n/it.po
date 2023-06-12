@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2023-06-08 12:08+0000\n"
+"PO-Revision-Date: 2023-06-12 16:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -643,7 +643,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_search
 msgid "Extended Filters..."
-msgstr "Filtri Estesi..."
+msgstr "Filtri estesi..."
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_fiscalyear
