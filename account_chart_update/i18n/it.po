@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-10 23:22+0000\n"
-"PO-Revision-Date: 2023-06-08 12:08+0000\n"
+"PO-Revision-Date: 2023-06-13 16:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -911,7 +911,7 @@ msgstr ""
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0
 msgid "Warning"
-msgstr "Warning"
+msgstr "Attenzione"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
