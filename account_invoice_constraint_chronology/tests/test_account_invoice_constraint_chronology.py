@@ -159,3 +159,69 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
         self.invoice_1_5.invoice_date = self.yesterday
         with self.assertRaises(UserError):
             self.invoice_1_5.action_post()
+
+    def test_modify_invoice_date_validated_past_invoice(self):
+        # INV5 YYYYMM20 posted
+        # INV4 YYYYMM15 posted
+        # INV3 YYYYMM10 posted
+        # INV2 YYYYMM05 posted
+        # INV1 YYYYMM01 posted
+        # if we pass INV3 to draft and change the date to YYYYYMM15 or YYYYYMM05
+        # it should be able to validate, but if we change the date
+        # higher than YYYYYMM15 or lower than YYYYYMM05
+        # it should not be able to validate.
+        after_5_days = self.today + timedelta(days=5)
+        after_10_days = self.today + timedelta(days=10)
+        after_15_days = self.today + timedelta(days=15)
+        after_20_days = self.today + timedelta(days=20)
+        after_25_days = self.today + timedelta(days=25)
+
+        self.invoice_1.action_post()
+
+        self.invoice_1_a_5 = self.invoice_1.copy()
+        self.invoice_1_a_5.invoice_date = after_5_days
+        self.invoice_1_a_5.action_post()
+        self.invoice_1_a_10 = self.invoice_1.copy()
+        self.invoice_1_a_10.invoice_date = after_10_days
+        self.invoice_1_a_10.action_post()
+        self.invoice_1_a_15 = self.invoice_1.copy()
+        self.invoice_1_a_15.invoice_date = after_15_days
+        self.invoice_1_a_15.action_post()
+        self.invoice_1_a_20 = self.invoice_1.copy()
+        self.invoice_1_a_20.invoice_date = after_20_days
+        self.invoice_1_a_20.action_post()
+        self.invoice_1_a_25 = self.invoice_1.copy()
+        self.invoice_1_a_25.invoice_date = after_25_days
+        self.invoice_1_a_25.action_post()
+
+        self.invoice_1_a_15.button_cancel()
+        self.invoice_1_a_15.button_draft()
+        self.invoice_1_a_15.invoice_date = after_10_days
+        self.invoice_1_a_15.action_post()
+
+        self.invoice_1_a_15.button_cancel()
+        self.invoice_1_a_15.button_draft()
+        self.invoice_1_a_15.invoice_date = after_10_days - timedelta(days=1)
+        with self.assertRaisesRegex(
+            UserError,
+            "Chronology conflict: Invoice {} cannot be before invoice {}.".format(
+                self.invoice_1_a_15.name, self.invoice_1_a_10.name
+            ),
+        ):
+            self.invoice_1_a_15.action_post()
+
+        self.invoice_1_a_15.button_cancel()
+        self.invoice_1_a_15.button_draft()
+        self.invoice_1_a_15.invoice_date = after_20_days
+        self.invoice_1_a_15.action_post()
+
+        self.invoice_1_a_15.button_cancel()
+        self.invoice_1_a_15.button_draft()
+        self.invoice_1_a_15.invoice_date = after_20_days + timedelta(days=1)
+        with self.assertRaisesRegex(
+            UserError,
+            "Chronology conflict: Invoice {} cannot be after invoice {}.".format(
+                self.invoice_1_a_15.name, self.invoice_1_a_20.name
+            ),
+        ):
+            self.invoice_1_a_15.action_post()
