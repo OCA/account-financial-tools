@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-10 12:39+0000\n"
-"PO-Revision-Date: 2023-05-10 13:02+0000\n"
-"Last-Translator: Sandrine (ACSONE) <sandrine.ravet@acsone.eu>\n"
+"PO-Revision-Date: 2023-06-20 16:09+0000\n"
+"Last-Translator: Alexis de Lattre <alexis@via.ecp.fr>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_group
@@ -43,7 +43,7 @@ msgstr "Étiquettes de compte"
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Account Template"
-msgstr "Modèles de comptes"
+msgstr "Modèle de compte"
 
 #. module: account_usability
 #: model:ir.actions.act_window,name:account_usability.account_account_template_action
@@ -54,7 +54,7 @@ msgstr "Modèles de compte"
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
 msgid "Account Type"
-msgstr "Type comptable"
+msgstr "Type de compte"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
@@ -87,12 +87,12 @@ msgstr "Registres de caisse"
 #: model:ir.actions.act_window,name:account_usability.action_account_chart_template_form
 #: model:ir.ui.menu,name:account_usability.menu_account_chart_template
 msgid "Chart of Accounts Templates"
-msgstr "Modèle de plan comptable"
+msgstr "Modèles de plans comptables"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_res_config_settings
 msgid "Config Settings"
-msgstr "Paramètres de config"
+msgstr "Configuration"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
@@ -103,7 +103,7 @@ msgstr "Taxes par défaut"
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Expense Account"
-msgstr "Compte de dépense"
+msgstr "Compte de charge"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
@@ -114,13 +114,13 @@ msgstr "Configuration complémentaire"
 #: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_usability.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
-msgstr "Modèle de position fiscale"
+msgstr "Modèles de position fiscale"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
 msgid "Group By"
-msgstr "Rgrouper par"
+msgstr "Grouper par"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
@@ -130,7 +130,7 @@ msgstr "Compte de revenu"
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
 msgid "Internal notes..."
-msgstr "Notes internes ..."
+msgstr "Notes internes..."
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
@@ -165,7 +165,7 @@ msgid ""
 "recording the cost as soon\n"
 "                                as the product is received in stock)."
 msgstr ""
-"Enregistre le coût de la marchandise comme une dépense quand elle est \n"
+"Enregistre le coût de la marchandise comme une charge quand elle est \n"
 "                                facturée au client final (au lieu de "
 "l'enregistrer au moment\n"
 "                                 de son entrée en stock)."
@@ -176,7 +176,7 @@ msgid ""
 "Record the cost of a good as an expense when this good is invoiced to a "
 "final customer."
 msgstr ""
-"Enregistre le coût de la marchandise comme une dépense quand elle est "
+"Enregistre le coût de la marchandise comme une charge quand elle est "
 "facturée au client final."
 
 #. module: account_usability
@@ -197,7 +197,7 @@ msgstr "Taxes"
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_account_coa_settings
 msgid "Templates"
-msgstr "Modèle"
+msgstr "Modèles"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
