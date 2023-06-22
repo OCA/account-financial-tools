@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2023-06-22 10:09+0000\n"
+"PO-Revision-Date: 2023-06-22 15:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -1116,7 +1116,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
 msgid "Set to Draft"
-msgstr "Imposta come Bozza"
+msgstr "Imposta a bozza"
 
 #. module: account_asset_management
 #: field:account.asset.category,open_asset:0
