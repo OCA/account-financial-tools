@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2023-06-08 12:08+0000\n"
+"PO-Revision-Date: 2023-06-22 10:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -114,7 +114,7 @@ msgstr ""
 #: field:wiz.account.asset.report,fiscalyear_id:0
 #, python-format
 msgid "Fiscal Year"
-msgstr "Anno Fiscale"
+msgstr "Anno fiscale"
 
 #. module: account_asset_management_xls
 #: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
