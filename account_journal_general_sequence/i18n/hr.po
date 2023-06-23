@@ -77,7 +77,7 @@ msgstr ""
 
 #. module: account_journal_general_sequence
 #: model:ir.model.constraint,message:account_journal_general_sequence.constraint_account_move_entry_number_unique
-msgid "Entry number must be unique per company."
+msgid "Entry number must be unique per journal."
 msgstr ""
 
 #. module: account_journal_general_sequence
@@ -168,8 +168,7 @@ msgstr ""
 #. module: account_journal_general_sequence
 #: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_renumber_wizard__sequence_id
 msgid ""
-"Sequence to use for renumbering. Affects all journals that use this "
-"sequence."
+"Sequence to use for renumbering. Affects all journals that use this sequence."
 msgstr ""
 
 #. module: account_journal_general_sequence
