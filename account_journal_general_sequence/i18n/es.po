@@ -79,8 +79,8 @@ msgstr "Número de asiento"
 
 #. module: account_journal_general_sequence
 #: model:ir.model.constraint,message:account_journal_general_sequence.constraint_account_move_entry_number_unique
-msgid "Entry number must be unique per company."
-msgstr "El número de asiento debe ser único por compañía."
+msgid "Entry number must be unique per journal."
+msgstr "El número de asiento debe ser único por diario."
 
 #. module: account_journal_general_sequence
 #: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__id
