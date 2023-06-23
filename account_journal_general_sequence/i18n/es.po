@@ -18,6 +18,7 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. module: account_journal_general_sequence
+#. odoo-python
 #: code:addons/account_journal_general_sequence/models/account_journal.py:0
 #, python-format
 msgid "Account entry default numbering"
@@ -62,9 +63,6 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: account_journal_general_sequence
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__display_name
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
@@ -79,13 +77,10 @@ msgstr "Número de asiento"
 
 #. module: account_journal_general_sequence
 #: model:ir.model.constraint,message:account_journal_general_sequence.constraint_account_move_entry_number_unique
-msgid "Entry number must be unique per company."
-msgstr "El número de asiento debe ser único por compañía."
+msgid "Entry number must be unique per journal."
+msgstr "El número de asiento debe ser único por diario."
 
 #. module: account_journal_general_sequence
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__id
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move__id
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line__id
 #: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__id
 msgid "ID"
 msgstr "ID"
@@ -115,9 +110,6 @@ msgid "Journal Item"
 msgstr "Apunte contable"
 
 #. module: account_journal_general_sequence
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal____last_update
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line____last_update
 #: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
@@ -133,6 +125,7 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: account_journal_general_sequence
+#. odoo-python
 #: code:addons/account_journal_general_sequence/wizards/account_move_renumber_wizard.py:0
 #, python-format
 msgid "No account moves found."
