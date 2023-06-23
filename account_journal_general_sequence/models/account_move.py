@@ -15,8 +15,8 @@ class AccountMove(models.Model):
     _sql_constraints = [
         (
             "entry_number_unique",
-            "UNIQUE(entry_number, company_id)",
-            "Entry number must be unique per company.",
+            "UNIQUE(entry_number, journal_id)",
+            "Entry number must be unique per journal.",
         ),
     ]
 

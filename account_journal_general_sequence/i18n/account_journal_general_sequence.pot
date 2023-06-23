@@ -73,7 +73,7 @@ msgstr ""
 
 #. module: account_journal_general_sequence
 #: model:ir.model.constraint,message:account_journal_general_sequence.constraint_account_move_entry_number_unique
-msgid "Entry number must be unique per company."
+msgid "Entry number must be unique per journal."
 msgstr ""
 
 #. module: account_journal_general_sequence
