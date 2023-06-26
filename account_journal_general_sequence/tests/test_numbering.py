@@ -42,12 +42,15 @@ class RenumberCase(TestAccountReconciliationCommon):
         next_year_invoice = self._create_invoice(
             date_invoice="2023-12-31", auto_validate=True
         )
+        next_year_invoice.flush(["entry_number"], next_year_invoice)
         new_invoice = self._create_invoice(
             date_invoice="2022-05-10", auto_validate=True
         )
+        new_invoice.flush(["entry_number"], new_invoice)
         old_invoice = self._create_invoice(
             date_invoice="2022-04-30", auto_validate=True
         )
+        old_invoice.flush(["entry_number"], old_invoice)
         self.assertLess(new_invoice.entry_number, old_invoice.entry_number)
         # Fix entry number order with wizard; default values are OK
         wiz_f = Form(self.env["account.move.renumber.wizard"])
