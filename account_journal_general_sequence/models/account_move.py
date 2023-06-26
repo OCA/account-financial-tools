@@ -23,7 +23,6 @@ class AccountMove(models.Model):
     entry_number = fields.Char(
         index=True,
         readonly=True,
-        tracking=True,
         store=True,
         compute="_compute_entry_number",
         help="Automatic numbering, based on journal configuration.",
@@ -59,9 +58,16 @@ class AccountMove(models.Model):
         chosen = self.filtered_domain(
             [("state", "=", "posted"), ("entry_number", "=", False)]
         )
+        # Cache all the new numbers to avoid wasting recomputations, caused by
+        # searches done by _next() in the loop below
+        chosen_map = {}
         for move in chosen.sorted(lambda one: (one.date, one.name, one.id)):
-            move.entry_number = move.journal_id.entry_number_sequence_id._next(
+            chosen_map[move.id] = move.journal_id.entry_number_sequence_id._next(
                 move.date
             )
+        # Write all the new numbers in the chosen moves
+        for move_id, new_number in chosen_map.items():
+            self.browse(move_id).entry_number = new_number
         if chosen:
-            _logger.info("Added entry_number to %r", chosen)
+            _logger.info("Added entry_number to %d account moves", len(chosen))
+            _logger.debug("Added entry_number to %r", chosen)
