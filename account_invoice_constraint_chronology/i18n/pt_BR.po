@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2019-01-30 16:31+0000\n"
 "PO-Revision-Date: 2023-06-12 16:08+0000\n"
 "Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,6 +56,14 @@ msgid ""
 msgstr ""
 "Conflito de cronologia: existe uma fatura com um número maior {highest_name} "
 "com data anterior a {date_invoice}."
+
+#. module: account_invoice_constraint_chronology
+#. odoo-python
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
+#, python-format
+msgid ""
+"Chronology conflict: Invoice {name} cannot be {time} invoice {inv_name}."
+msgstr ""
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
