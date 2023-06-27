@@ -51,6 +51,14 @@ msgid ""
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
+#. odoo-python
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
+#, python-format
+msgid ""
+"Chronology conflict: Invoice {name} cannot be {time} invoice {inv_name}."
+msgstr ""
+
+#. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
 msgstr "Journaal"
