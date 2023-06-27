@@ -91,6 +91,64 @@ class AccountMove(models.Model):
             )
         )
 
+    def _conflicting_inv_after_sequence_before_inv_date_domain(self):
+        return expression.AND(
+            [
+                (
+                    ("name", ">", self.name),
+                    ("invoice_date", "<", self.invoice_date),
+                )
+            ]
+        )
+
+    def _conflicting_inv_before_sequence_after_inv_date_domain(self):
+        return expression.AND(
+            [
+                (
+                    ("name", "<", self.name),
+                    ("invoice_date", ">", self.invoice_date),
+                )
+            ]
+        )
+
+    def _get_sequence_order_conflicting_previously_validated(self):
+        self.ensure_one()
+        return expression.AND(
+            [
+                self._get_conflicting_invoices_domain(),
+                expression.OR(
+                    [
+                        self._conflicting_inv_after_sequence_before_inv_date_domain(),
+                        self._conflicting_inv_before_sequence_after_inv_date_domain(),
+                    ]
+                ),
+            ]
+        )
+
+    def _raise_sequence_order_conflicting_previously_validated(self):
+        self.ensure_one()
+        before_inv = self.search(
+            self._conflicting_inv_after_sequence_before_inv_date_domain(), limit=1
+        )
+        after_inv = self.search(
+            self._conflicting_inv_before_sequence_after_inv_date_domain(), limit=1
+        )
+        if after_inv:
+            time = "before"
+        else:
+            time = "after"
+        raise UserError(
+            _(
+                "Chronology conflict: Invoice {name} cannot be {time} "
+                "invoice {inv_name}."
+            ).format(
+                name=self.name,
+                time=time,
+                inv_name=after_inv.name if after_inv else before_inv.name,
+                date_invoice=format_date(self.env, self.invoice_date),
+            )
+        )
+
     def write(self, vals):
         if vals.get("state") != "posted":
             return super().write(vals)
@@ -105,6 +163,10 @@ class AccountMove(models.Model):
             if self.search(move._get_older_conflicting_invoices_domain(), limit=1):
                 move._raise_older_conflicting_invoices()
             if move in previously_validated:
+                if self.search(
+                    move._get_sequence_order_conflicting_previously_validated(), limit=1
+                ):
+                    move._raise_sequence_order_conflicting_previously_validated()
                 continue
             if self.search(move._get_newer_conflicting_invoices_domain(), limit=1):
                 move._raise_newer_conflicting_invoices()
