@@ -270,6 +270,48 @@
             </form>
         </field>
     </record>
+    <record model="ir.ui.view" id="account_asset_line_view_form">
+        <field name="name">account.asset.line.form</field>
+        <field name="model">account.asset.line</field>
+        <field name="arch" type="xml">
+            <form string="Asset Line" create="0" delete="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id" readonly="1" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="parent_state" />
+                            <field name="depreciation_base" invisible="1" />
+                            <field name="currency_id" invisible="1" />
+                            <field name="type" />
+                            <field name="name" />
+                            <field
+                                name="amount"
+                                attrs="{'readonly': ['|',('parent_state', 'in', ['open', 'close', 'removed']),('move_check', '=', True)]}"
+                            />
+                            <field
+                                name="init_entry"
+                                attrs="{'readonly': ['|', '|',('parent_state', 'in', ['open', 'close', 'removed']), ('move_check', '=', True), ('type', '=', 'create')]}"
+                            />
+                            <field name="move_id" />
+                            <field name="move_check" />
+                        </group>
+                        <group>
+                            <field
+                                name="line_date"
+                                attrs="{'readonly': ['|',('parent_state', 'in', ['open', 'close', 'removed']), ('move_check', '=', True)]}"
+                            />
+                            <field name="depreciated_value" readonly="1" />
+                            <field name="remaining_value" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
     <record model="ir.ui.view" id="account_asset_view_tree">
         <field name="name">account.asset.tree</field>
         <field name="model">account.asset</field>
@@ -298,6 +340,45 @@
                     decoration-warning="state == 'removed'"
                     decoration-info="state == 'draft'"
                     decoration-muted="state == 'close'"
+                />
+                <field name="currency_id" invisible="1" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="account_asset_line_view_tree">
+        <field name="name">account.asset.line.tree</field>
+        <field name="model">account.asset.line</field>
+        <field name="arch" type="xml">
+            <tree
+                create="0"
+                edit="0"
+                delete="0"
+                decoration-info="(move_check == False) and (init_entry == False)"
+            >
+                <field name="asset_id" />
+                <field name="name" />
+                <field name="line_date" />
+                <field name="line_days" optional="hide" />
+                <field name="init_entry" />
+                <field name="depreciation_base" optional="hide" />
+                <field name="amount" />
+                <field name="remaining_value" optional="hide" />
+                <field name="depreciated_value" optional="hide" />
+                <field name="move_id" optional="hide" />
+                <field name="move_check" optional="hide" />
+                <field name="type" optional="hide" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="show"
+                />
+                <field
+                    name="parent_state"
+                    widget="badge"
+                    decoration-success="parent_state == 'open'"
+                    decoration-warning="parent_state == 'removed'"
+                    decoration-info="parent_state == 'draft'"
+                    decoration-muted="parent_state == 'close'"
                 />
                 <field name="currency_id" invisible="1" />
             </tree>
@@ -366,6 +447,80 @@
                 </group>
             </search>
         </field>
+    </record>
+    <record id="account_asset_line_view_search" model="ir.ui.view">
+        <field name="name">account.asset.line.search</field>
+        <field name="model">account.asset.line</field>
+        <field name="arch" type="xml">
+            <search string="Account Asset Line">
+                <filter
+                    string="Draft"
+                    name="draft"
+                    domain="[('parent_state', '=', 'draft')]"
+                />
+                <filter
+                    string="Running"
+                    name="running"
+                    domain="[('parent_state', '=', 'open')]"
+                />
+                <filter
+                    string="Close"
+                    name="close"
+                    domain="[('parent_state', '=', 'close')]"
+                />
+                <filter
+                    string="Removed"
+                    name="removed"
+                    domain="[('parent_state', '=', 'removed')]"
+                />
+                <separator />
+                <filter
+                    string="Posted"
+                    name="posted"
+                    domain="[('move_check', '=', True)]"
+                />
+                <filter
+                    string="Unposted"
+                    name="unposted"
+                    domain="[('move_check', '=', False)]"
+                />
+                <separator />
+                <filter
+                    string="Initial Balance Entry"
+                    name="initial"
+                    domain="[('init_entry', '=', True)]"
+                />
+                <filter
+                    string="Regular Entry"
+                    name="regular"
+                    domain="[('init_entry', '=', False)]"
+                />
+                <separator />
+                <field name="name" />
+                <field name="asset_id" />
+                <field name="line_date" />
+                <field name="move_id" />
+                <group name="groupby">
+                    <filter
+                        string="Asset"
+                        name="asset"
+                        domain=""
+                        context="{'group_by': 'asset_id'}"
+                    />
+                    <filter
+                        string="Type"
+                        name="type"
+                        domain=""
+                        context="{'group_by': 'type'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="account_asset_line_action" model="ir.actions.act_window">
+        <field name="name">Asset Lines</field>
+        <field name="res_model">account.asset.line</field>
+        <field name="view_mode">tree,form</field>
     </record>
     <record id="account_asset_action" model="ir.actions.act_window">
         <field name="name">Assets</field>
