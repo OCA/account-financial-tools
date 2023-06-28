@@ -40,6 +40,20 @@
                 />
             </xpath>
             <xpath
+                expr="//field[@name='invoice_line_ids']/form/sheet/group/field[@name='quantity']"
+                position="before"
+            >
+                <field
+                    name="asset_profile_id"
+                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('in_invoice', 'in_refund'))]}"
+                />
+                <field
+                    name="asset_id"
+                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                    groups="account.group_account_manager"
+                />
+            </xpath>
+            <xpath
                 expr="//notebook//field[@name='line_ids']/tree/field[@name='date_maturity']"
                 position="after"
             >
