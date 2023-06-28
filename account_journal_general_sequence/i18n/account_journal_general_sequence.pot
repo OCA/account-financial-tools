@@ -17,7 +17,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_journal_general_sequence/models/account_journal.py:0
 #, python-format
-msgid "Account entry default numbering"
+msgid "Account entry default numbering (%s)"
 msgstr ""
 
 #. module: account_journal_general_sequence
@@ -154,6 +154,11 @@ msgstr ""
 #. module: account_journal_general_sequence
 #: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__sequence_id
 msgid "Sequence"
+msgstr ""
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__entry_number_sequence_id_name
+msgid "Sequence Code"
 msgstr ""
 
 #. module: account_journal_general_sequence
