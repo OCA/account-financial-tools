@@ -21,8 +21,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_journal_general_sequence/models/account_journal.py:0
 #, python-format
-msgid "Account entry default numbering"
-msgstr "Numeración por defecto de asientos contables"
+msgid "Account entry default numbering (%s)"
+msgstr ""
 
 #. module: account_journal_general_sequence
 #: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__entry_number_sequence_id
@@ -163,6 +163,11 @@ msgid "Sequence"
 msgstr "Secuencia"
 
 #. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__entry_number_sequence_id_name
+msgid "Sequence Code"
+msgstr ""
+
+#. module: account_journal_general_sequence
 #: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_renumber_wizard__sequence_id
 msgid ""
 "Sequence to use for renumbering. Affects all journals that use this sequence."
@@ -184,3 +189,7 @@ msgstr "Fecha de inicio"
 #: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__starting_number
 msgid "Starting Number"
 msgstr "Número inicial"
+
+#, python-format
+#~ msgid "Account entry default numbering"
+#~ msgstr "Numeración por defecto de asientos contables"
