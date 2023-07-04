@@ -46,6 +46,7 @@ setuptools.setup(
         'odoo14-addon-account_move_print',
         'odoo14-addon-account_move_reversal_choose_method',
         'odoo14-addon-account_move_template',
+        'odoo14-addon-account_move_transfer_partner',
         'odoo14-addon-account_netting',
         'odoo14-addon-account_no_default',
         'odoo14-addon-account_reconcile_show_boolean',
