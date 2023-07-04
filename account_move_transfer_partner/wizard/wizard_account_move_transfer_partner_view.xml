@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="wizard_account_move_transfer_partner_view_form" model="ir.ui.view">
+            <field name="name">wizard_account_move_transfer_partner_view_form</field>
+            <field name="model">wizard.account.move.transfer.partner</field>
+            <field name="arch" type="xml">
+                <form string="wizard_account_move_transfer_partner_form">
+                    <div
+                        class="alert alert-info"
+                        role="alert"
+                        style="margin-bottom:0px;"
+                        attrs="{'invisible': [('allow_edit_amount_to_transfer', '=', True)]}"
+                    >
+                        <span>You can edit <strong
+                            >Amount to transfer</strong> only when you apply this on one move</span>
+                    </div>
+                    <div
+                        class="alert alert-warning"
+                        role="alert"
+                        style="margin-bottom:0px;"
+                        attrs="{'invisible': [('move_ids', '!=', [])]}"
+                    >
+                        <span
+                        >You only can perform this operation on invoice/refund documents</span>
+                    </div>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field
+                                    name="origin_partner_ids"
+                                    widget="many2many_tags"
+                                />
+                                <field
+                                    name="destination_partner_id"
+                                    domain="[('id', 'not in', origin_partner_ids), ('parent_id', 'not in', origin_partner_ids)]"
+                                    options="{'no_create': True}"
+                                />
+                                <field
+                                    name="currency_id"
+                                    options="{'no_create': True}"
+                                />
+                            </group>
+                            <group>
+                                <field name="account_date" />
+                                <field
+                                    name="journal_id"
+                                    options="{'no_create': True}"
+                                />
+                                <field name="total_amount_due" force_save="1" />
+                                <field
+                                    name="amount_to_transfer"
+                                    force_save="1"
+                                    attrs="{'readonly': [('allow_edit_amount_to_transfer', '!=', True)]}"
+                                />
+                            </group>
+                        </group>
+                        <field
+                            name="move_ids"
+                            invisible="1"
+                            widget="many2many_tags"
+                            force_save="1"
+                        />
+                        <field name="allow_edit_amount_to_transfer" invisible="1" />
+                        <field name="no_invoice_documents" invisible="1" />
+                    </sheet>
+                    <footer>
+                        <button
+                            string="Continue"
+                            name="action_create_move"
+                            type="object"
+                            class="btn-primary"
+                        />
+                        <button
+                            string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"
+                        />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record
+            id="wizard_account_move_transfer_partner_view_form_action"
+            model="ir.actions.act_window"
+        >
+            <field name="name">Transfer amount due to another partner</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.account.move.transfer.partner</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="account.model_account_move" />
+        </record>
+
+        <record
+            id="wizard_account_payment_transfer_partner_view_form_action"
+            model="ir.actions.act_window"
+        >
+            <field name="name">Transfer amount due to another partner</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.account.move.transfer.partner</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="account.model_account_payment" />
+        </record>
+
+    </data>
+</odoo>
