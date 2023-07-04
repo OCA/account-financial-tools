@@ -49,6 +49,7 @@ addon | version | maintainers | summary
 [account_move_fiscal_year](account_move_fiscal_year/) | 14.0.1.0.1 |  | Display the fiscal year on journal entries/item
 [account_move_force_removal](account_move_force_removal/) | 14.0.1.0.1 |  | Allow force removal account moves
 [account_move_line_check_number](account_move_line_check_number/) | 14.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add the check number in the journal items
+[account_move_line_landed_cost_info](account_move_line_landed_cost_info/) | 14.0.1.0.0 |  | Introduces the landed cost adjustment lines to the journal items
 [account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 |  | Adds a Journal Items menu
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 14.0.1.0.3 |  | Introduces the purchase order line to the journal items
 [account_move_line_repair_info](account_move_line_repair_info/) | 14.0.1.0.0 |  | Introduces the repair order to the journal items
