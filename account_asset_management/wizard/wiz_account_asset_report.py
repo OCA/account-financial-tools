@@ -36,7 +36,7 @@ class WizAccountAssetReport(models.TransientModel):
 
     @api.model
     def _default_company_id(self):
-        return self.env.user.company_id
+        return self.env.company
 
     @api.onchange("company_id")
     def _onchange_company_id(self):
