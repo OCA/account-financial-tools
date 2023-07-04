@@ -12,7 +12,20 @@ def post_init_hook(cr, registry):
         FROM account_move_line aml2
         INNER JOIN stock_move sm ON
         aml2.stock_move_id = sm.id
-        WHERE aml.id = aml2.id;
+        WHERE aml.id = aml2.id
+        AND sm.sale_line_id IS NOT NULL;
+    """
+    )
+    cr.execute(
+        """
+        UPDATE account_move_line aml SET sale_line_id = sm.sale_line_id
+        FROM account_move_line aml2
+        INNER JOIN account_move am
+        ON am.id = aml2.move_id
+        INNER JOIN stock_move sm ON
+        am.stock_move_id = sm.id
+        WHERE aml.id = aml2.id
+        AND sm.sale_line_id IS NOT NULL;
     """
     )
     # FOR invoices
