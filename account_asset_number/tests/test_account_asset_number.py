@@ -49,7 +49,7 @@ class TestAssetNumber(TestAssetManagement):
             }
         )
         asset.compute_depreciation_board()
-        asset.refresh()
+        self.env.invalidate_all()
         # check number in the asset
         self.assertFalse(asset.number)
         asset.validate()
