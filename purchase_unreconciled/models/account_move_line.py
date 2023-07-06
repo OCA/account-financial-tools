@@ -50,7 +50,7 @@ class AccountMoveLine(models.Model):
             "partner_id": len(partners) == 1 and partners.id or False,
             "account_id": writeoff_vals["account_id"],
             "journal_id": writeoff_vals["journal_id"],
-            "currency_id": writeoff_vals["currency_id"],
+            "currency_id": writeoff_vals.get("currency_id", False),
             "product_id": writeoff_vals["product_id"],
             "purchase_line_id": writeoff_vals["purchase_line_id"],
         }
@@ -67,7 +67,7 @@ class AccountMoveLine(models.Model):
             {
                 "date": datetime.now(),
                 "journal_id": writeoff_vals["journal_id"],
-                "currency_id": writeoff_vals["currency_id"],
+                "currency_id": writeoff_vals.get("currency_id", False),
                 "line_ids": [(0, 0, write_off_vals), (0, 0, counter_part)],
             }
         )
