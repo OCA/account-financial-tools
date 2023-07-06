@@ -1,12 +1,15 @@
 # Copyright 2020 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from odoo.tools import float_is_zero
+
 from odoo.addons.stock_account.models.account_move import AccountMove
 
 
 def post_load_hook():
     def new_stock_account_prepare_anglo_saxon_out_lines_vals(self):
         lines_vals_list = []
+        price_unit_prec = self.env["decimal.precision"].precision_get("Product Price")
         for move in self:
             # Make the loop multi-company safe when accessing models like product.product
             move = move.with_company(move.company_id)
@@ -34,6 +37,15 @@ def post_load_hook():
                     accounts["expense"] or move.journal_id.default_account_id
                 )
                 if not debit_interim_account or not credit_expense_account:
+                    continue
+                # Compute accounting fields.
+                sign = -1 if move.move_type == "out_refund" else 1
+                price_unit = line._stock_account_get_anglo_saxon_price_unit()
+                balance = sign * line.quantity * price_unit
+
+                if move.currency_id.is_zero(balance) or float_is_zero(
+                    price_unit, precision_digits=price_unit_prec
+                ):
                     continue
                 # Add interim account line.
                 # SECOND HOOK STARTS
