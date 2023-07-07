@@ -32,9 +32,45 @@ msgid "<span class=\"o_form_label\">Update Chart Template</span>"
 msgstr "<span class=\"o_form_label\">Ažuriraj predložak kontnog plana</span>"
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_ids
+msgid "Account Groups"
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
 msgid "Account fields"
 msgstr "Polja konta"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__account_group_id
+msgid "Account group template"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account_group
+msgid ""
+"Account group that needs to be updated (new or updated in the template)."
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_account_group_id
+msgid "Account group to update"
+msgstr ""
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Account groups"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_field_ids
+msgid "Account groups fields"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_matching_ids
+msgid "Account groups matching"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__account_id
@@ -110,12 +146,14 @@ msgid "Created account %s."
 msgstr "Kreoran konto %s."
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__create_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__create_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__create_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__create_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__create_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__create_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__create_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__create_uid
 msgid "Created by"
@@ -129,12 +167,14 @@ msgid "Created fiscal position %s."
 msgstr "Kreirana fiskalna pozicija %s."
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__create_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__create_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__create_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__create_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__create_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__create_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__create_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__create_date
 msgid "Created on"
@@ -177,12 +217,14 @@ msgid "Differences in these fields: %s."
 msgstr "Poteškoće sa sljedećim poljima: %s."
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__display_name
 msgid "Display Name"
@@ -201,6 +243,13 @@ msgstr "Iznimka pri kreiranju konta %s."
 #, python-format
 msgid "Exception writing account %s."
 msgstr "Iznimka pri zapisivanju izmjena na konto %s."
+
+#. module: account_chart_update
+#: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account_group
+msgid ""
+"Existing account groups are updated. Account groups are searched by "
+"prefix_code_start."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account
@@ -292,12 +341,14 @@ msgid "Here you can set the matching order."
 msgstr "Ovjde možete postaviti redosljed usklađivanja."
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__id
 msgid "ID"
@@ -338,36 +389,42 @@ msgid "Language"
 msgstr "Jezik"
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account____last_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position____last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax____last_update
 msgid "Last Modified on"
 msgstr "Zadnja izmjena dana"
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__write_uid
 msgid "Last Updated by"
 msgstr "Zadnji ažurirao"
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__write_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__write_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__write_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__write_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__write_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__write_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__write_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__write_date
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__write_date
 msgid "Last Updated on"
@@ -384,6 +441,7 @@ msgid "Matching"
 msgstr "Usklađeni"
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__matching_value
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__matching_value
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__matching_value
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__matching_value
@@ -411,6 +469,11 @@ msgid "Name or description not found."
 msgstr "Ime ili opis nisu pronađeni."
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_account_groups
+msgid "New Account Groups"
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
 msgid "New Accounts"
 msgstr "Nova konta"
@@ -427,6 +490,7 @@ msgstr "Nove fiskalne pozicije"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__new
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__new
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__new
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__new
 msgid "New template"
@@ -470,6 +534,7 @@ msgstr "Napomena: Samo promijenjena polja su ažurirana."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__notes
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__notes
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__notes
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__notes
 msgid "Notes"
@@ -513,6 +578,7 @@ msgstr "Zapisi za kreiranje/ažuriranje"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__recreate_xml_ids
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__recreate_xml_ids
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__recreate_xml_ids
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__recreate_xml_ids
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__recreate_xml_ids
 msgid "Recreate missing XML-IDs"
@@ -534,6 +600,7 @@ msgid "Select records to update"
 msgstr "Odaberi zapise za ažuriranje"
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__sequence
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__sequence
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__sequence
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__sequence
@@ -626,6 +693,7 @@ msgstr "Za deaktivirati: nije u predlošku"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__type
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__type
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__type
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type
 msgid "Type"
@@ -652,6 +720,11 @@ msgid "Update Taxes, fiscal positions or chart of accounts."
 msgstr "Ažuriraj poreze, fiskalne pozicije ili kontni plan."
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
+msgid "Update account groups"
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
 msgid "Update account_id field on existing Tax repartition lines"
 msgstr "Ažuriraj account_id polje na postojećim redcima raspodjele poreza"
@@ -672,11 +745,13 @@ msgid "Update chart template"
 msgstr "Ažuriraj predložak kontnog plana"
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_chart_wizard_id
 msgid "Update chart wizard"
@@ -703,6 +778,11 @@ msgid "Update taxes"
 msgstr "Ažuriraj poreze"
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_account_groups
+msgid "Updated Account Groups"
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
 msgid "Updated Accounts"
 msgstr "Ažuriranih konta"
@@ -725,6 +805,20 @@ msgstr "Ažuriran konto %s."
 #, python-format
 msgid "Updated account %s. (Recreated XML-ID)"
 msgstr "Ažuriran konto %s. (XML-ID ponovo kreiran)"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+#, python-format
+msgid "Updated account group %s."
+msgstr ""
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+#, python-format
+msgid "Updated account group %s. (Recreated XML-ID)"
+msgstr ""
 
 #. module: account_chart_update
 #. odoo-python
@@ -761,10 +855,16 @@ msgstr "Ažuriran porez %s. (Ponovo kreiran XML-ID)"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__updated
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__updated
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__updated
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__updated
 msgid "Updated template"
 msgstr "Ažuriran predložak"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_account_group_matching
+msgid "Wizard Account Group Matching"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_matching
