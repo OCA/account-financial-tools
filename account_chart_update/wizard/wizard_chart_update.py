@@ -159,7 +159,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     account_group_field_ids = fields.Many2many(
         comodel_name="ir.model.fields",
         relation="wizard_update_charts_account_group_fields_rel",
-        string="Account fields",
+        string="Account groups fields",
         domain=lambda self: self._domain_account_group_field_ids(),
         default=lambda self: self._default_account_group_field_ids(),
     )
@@ -623,7 +623,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     @tools.ormcache("templates")
     def find_account_group_by_templates(self, templates):
-        """Find an account that matches the template."""
+        """Find an account groups that matches the template."""
         account_model = self.env["account.group"]
         for matching in self.account_group_matching_ids.sorted("sequence"):
             if matching.matching_value == "xml_id":
@@ -1324,21 +1324,17 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         }
 
     def _update_account_groups(self):
-        """Process fiscal position templates to create/update."""
+        """Process account groups templates to create/update."""
+        new_groups = []
         for wiz_account_group in self.account_group_ids:
             account_group, template = (
                 wiz_account_group.update_account_group_id,
                 wiz_account_group.account_group_id,
             )
             if wiz_account_group.type == "new":
-                # Create a new fiscal position
-                self.chart_template_id.create_record_with_xmlid(
-                    self.company_id,
-                    template,
-                    "account.group",
-                    self._prepare_account_group_vals(template),
+                new_groups.append(
+                    (template, self._prepare_account_group_vals(template))
                 )
-                _logger.info(_("Created account group %s."), "'%s'" % template.name)
             else:
                 for key, value in self.diff_fields(template, account_group).items():
                     account_group[key] = value
@@ -1360,6 +1356,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         _("Updated account group %s. (Recreated XML-ID)"),
                         "'%s'" % template.name,
                     )
+        if new_groups:
+            self.chart_template_id._create_records_with_xmlid(
+                "account.group", new_groups, self.company_id
+            )
 
     def _update_fiscal_positions(self):
         """Process fiscal position templates to create/update."""
