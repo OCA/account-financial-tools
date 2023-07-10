@@ -298,6 +298,7 @@ class TestPaymentReversal(SavepointCase):
         self.assertTrue(move_reconcile)
         self.assertTrue(reversed_move_reconcile)
         self.assertEqual(move_reconcile, reversed_move_reconcile)
+        self.assertFalse(bank_stmt_line.journal_entry_ids)
 
     def test_bank_statement_cancel_reversal_02(self):
         """ Tests that I can create a bank statement line and reconcile it
@@ -358,6 +359,7 @@ class TestPaymentReversal(SavepointCase):
         self.assertTrue(move_reconcile)
         self.assertTrue(reversed_move_reconcile)
         self.assertEqual(move_reconcile, reversed_move_reconcile)
+        self.assertFalse(bank_stmt_line.journal_entry_ids)
 
     def test_bank_statement_cancel_exception(self):
         """ Tests on exception case, if statement is already validated, but
