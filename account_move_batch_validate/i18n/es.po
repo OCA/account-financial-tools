@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-29 09:00+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/es/)\n"
+"PO-Revision-Date: 2023-07-11 14:09+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move
@@ -26,46 +27,49 @@ msgstr "Asiento contable"
 #. module: account_move_batch_validate
 #: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_action
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #. module: account_move_batch_validate
 #: model:ir.model.fields,help:account_move_batch_validate.field_account_move_to_post
 msgid "Check this box to mark the move for batch posting"
 msgstr ""
+"Marque esta casilla para marcar el movimiento para la contabilización por "
+"lotes"
 
 #. module: account_move_batch_validate
 #: code:addons/account_move_batch_validate/models/account_move.py:31
 #, python-format
 msgid "Nothing to do because the record has been deleted"
-msgstr ""
+msgstr "Nada que hacer porque el registro ha sido borrado"
 
 #. module: account_move_batch_validate
 #: model:ir.model.fields,field_description:account_move_batch_validate.field_account_move_to_post
 msgid "Posting requested"
-msgstr ""
+msgstr "Publicación solicitada"
 
 #. module: account_move_batch_validate
 #: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_eta
 msgid "Seconds to wait before starting the jobs"
-msgstr ""
+msgstr "Segundos de espera antes de iniciar los trabajos"
 
 #. module: account_move_batch_validate
 #: code:addons/account_move_batch_validate/models/account_move.py:75
 #, python-format
 msgid "Task set to Done because the user unmarked the move."
 msgstr ""
+"Tarea configurada como Terminada porque el usuario desmarcó el movimiento."
 
 #. module: account_move_batch_validate
 #: model:ir.model.fields,field_description:account_move_batch_validate.field_account_move_post_job_uuid
 msgid "UUID of the Job to approve this move"
-msgstr ""
+msgstr "UUID del trabajo para aprobar este movimiento"
 
 #. module: account_move_batch_validate
 #: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_asynchronous
 msgid "Use asynchronous validation"
-msgstr ""
+msgstr "Usar validación asíncrona"
 
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_validate_account_move
 msgid "Validate Account Move"
-msgstr ""
+msgstr "Validar movimiento de cuenta"
