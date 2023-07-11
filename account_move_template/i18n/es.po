@@ -9,20 +9,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2023-07-11 11:10+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_account_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_account_id
 msgid "Account id"
-msgstr ""
+msgstr "Id. de la cuenta"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_amount
@@ -32,7 +33,7 @@ msgstr "Importe"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_analytic_account_id
 msgid "Analytic account id"
-msgstr ""
+msgstr "Identificador de cuenta analítica"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
@@ -43,24 +44,24 @@ msgstr "Cancelar"
 #: code:addons/account_move_template/models/account_document_template.py:57
 #, python-format
 msgid "Code \"%s\" refers to non existing line"
-msgstr ""
+msgstr "El código \"%s\" se refiere a una línea no existente"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_company_id
 msgid "Company id"
-msgstr ""
+msgstr "Identificación de la compañía"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "Computed"
-msgstr ""
+msgstr "Computado"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
 #: model:ir.ui.menu,name:account_move_template.menu_action_wizard_select_template
 msgid "Create Move from Template"
-msgstr ""
+msgstr "Crear movimiento a partir de la plantilla"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_create_uid
@@ -86,13 +87,13 @@ msgstr "Creado en"
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Credit"
-msgstr ""
+msgstr "Crédito"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
-msgstr ""
+msgstr "Débito"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_display_name
@@ -119,13 +120,13 @@ msgstr "ID"
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_search
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_tree
 msgid "Journal Entry Template"
-msgstr ""
+msgstr "Plantilla de entrada en el diario"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_tree
 msgid "Journal Entry Template Line"
-msgstr ""
+msgstr "Línea de plantilla de entrada de diario"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_journal_id
@@ -166,45 +167,45 @@ msgstr "Última actualización en"
 #: code:addons/account_move_template/models/account_document_template.py:47
 #, python-format
 msgid "Line %s can't refer to itself"
-msgstr ""
+msgstr "La línea %s no se puede referir a sí misma"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_ids
 msgid "Line ids"
-msgstr ""
+msgstr "Identificadores de línea"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Load"
-msgstr ""
+msgstr "Cargar"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Modify the lines before create them or edit them after creation."
-msgstr ""
+msgstr "Modifica las líneas antes de crearlas o edítalas después de crearlas."
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Move Template"
-msgstr ""
+msgstr "Plantilla de movimiento"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template_line
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template_line_tree
 msgid "Move Template Line"
-msgstr ""
+msgstr "Mover la línea de plantilla"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_move_template_form
 #: model:ir.ui.menu,name:account_move_template.menu_action_move_template_form
 msgid "Move Templates"
-msgstr ""
+msgstr "Mover plantillas"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_move_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_move_line_type
 msgid "Move line type"
-msgstr ""
+msgstr "Tipo de línea de movimiento"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_name
@@ -218,7 +219,7 @@ msgstr "Nombre"
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
 msgid "Next"
-msgstr ""
+msgstr "siguiente"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_partner_id
@@ -228,62 +229,62 @@ msgstr "Empresa"
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
 msgid "Python Code"
-msgstr ""
+msgstr "Código Python"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_python_code
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_python_code
 msgid "Python code"
-msgstr ""
+msgstr "Código Python"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template
 msgid "Select Move Template"
-msgstr ""
+msgstr "Seleccione la plantilla de movimiento"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_sequence
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_sequence
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_sequence
 msgid "Sequence"
-msgstr ""
+msgstr "secuencia"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_state
 msgid "State"
-msgstr ""
+msgstr "estado"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
 msgid "Template Lines"
-msgstr ""
+msgstr "Líneas de plantilla"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_template_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_template_id
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_template_id
 msgid "Template id"
-msgstr ""
+msgstr "identificador de plantilla"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_template_line_ids
 msgid "Template line ids"
-msgstr ""
+msgstr "Identificadores de línea de plantilla"
 
 #. module: account_move_template
 #: selection:wizard.select.move.template,state:0
 msgid "Template selected"
-msgstr ""
+msgstr "Plantilla seleccionada"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_form
 msgid "Test template"
-msgstr ""
+msgstr "Prueba de plantilla"
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
 msgid "The sequence of the line must be unique per template !"
-msgstr ""
+msgstr "¡La secuencia de la línea debe ser única por plantilla !"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_type
@@ -295,7 +296,7 @@ msgstr "Tipo"
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "User input"
-msgstr ""
+msgstr "Entrada del usuario"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_document_template.py:64
@@ -305,6 +306,10 @@ msgid ""
 "create the move normally and then edit the created move. Inconsistent "
 "between input lines and  filled lines for template %s"
 msgstr ""
+"No puede añadir un número diferente de líneas en este asistente, debe "
+"intentar crear el movimiento normalmente y luego editar el movimiento "
+"creado. Inconsistencia entre las líneas de entrada y las líneas rellenadas "
+"para la plantilla %s"
 
 #. module: account_move_template
 #: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
@@ -315,28 +320,34 @@ msgid ""
 "'L(1)\n"
 "                            + L(2) + L(3)'; '1250'"
 msgstr ""
+"Puede hacer referencia a otras líneas utilizando su\n"
+"                        número de secuencia (por ejemplo, 'L(1)' para la "
+"primera línea).\n"
+"                        Ejemplos de código: 'L(1) * 0,2'; 'L(2) - L(1)'; "
+"'L(1)\n"
+"                            + L(2) + L(3)'; '1250'"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_document_template
 msgid "account.document.template"
-msgstr ""
+msgstr "cuenta.documento.plantilla"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_document_template_line
 msgid "account.document.template.line"
-msgstr ""
+msgstr "cuenta.documento.plantilla.línea"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
 msgid "account.move.template"
-msgstr ""
+msgstr "cuenta. movimiento. plantilla"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "account.move.template.line"
-msgstr ""
+msgstr "cuenta. movimiento. plantilla.línea"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_wizard_select_move_template
 msgid "wizard.select.move.template"
-msgstr ""
+msgstr "asistente.seleccionar.movimiento.plantilla"
