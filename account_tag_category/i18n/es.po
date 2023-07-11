@@ -9,76 +9,77 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2023-07-11 11:10+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_tag_category
 #: model:ir.model,name:account_tag_category.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "cuenta"
 
 #. module: account_tag_category
 #: model:ir.model,name:account_tag_category.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "Etiqueta de cuenta"
 
 #. module: account_tag_category
 #: model:ir.actions.act_window,name:account_tag_category.account_tag_category_action
 #: model:ir.ui.menu,name:account_tag_category.account_tag_category_menu
 msgid "Account Tag Categories"
-msgstr ""
+msgstr "Categorías de etiquetas de la cuenta"
 
 #. module: account_tag_category
 #: model:ir.model,name:account_tag_category.model_account_account_tag_category
 msgid "Account Tag Category"
-msgstr ""
+msgstr "Categoría de la etiqueta de cuenta"
 
 #. module: account_tag_category
 #: model:res.groups,name:account_tag_category.group_account_tag_category
 msgid "Account tag categories"
-msgstr ""
+msgstr "Categoría de la etiqueta de cuenta"
 
 #. module: account_tag_category
 #: model:ir.ui.view,arch_db:account_tag_category.account_tag_tree
 msgid "Account tags"
-msgstr ""
+msgstr "Etiquetas de la cuenta"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,applicability:0
 msgid "Accounts"
-msgstr ""
+msgstr "cuentas"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_applicability
 msgid "Applicability"
-msgstr ""
+msgstr "Aplicabilidad"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Aquamarine"
-msgstr ""
+msgstr "Aguamarina"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Blue"
-msgstr ""
+msgstr "Azul"
 
 #. module: account_tag_category
 #: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_update_tags_form
 msgid "Close"
-msgstr ""
+msgstr "cerrar"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color_5305
 msgid "Color Index"
-msgstr ""
+msgstr "Índice de color"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_create_uid
@@ -95,7 +96,7 @@ msgstr "Creado en"
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Cyan"
-msgstr ""
+msgstr "Cian"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_display_name
@@ -106,7 +107,7 @@ msgstr "Nombre mostrado"
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_enforce_policy
 msgid "Enforce policy"
-msgstr ""
+msgstr "Aplicar la política"
 
 #. module: account_tag_category
 #: code:addons/account_tag_category/models/account.py:131
@@ -116,6 +117,9 @@ msgid ""
 "categories : \n"
 " %s"
 msgstr ""
+"Las siguientes categorías de etiquetas son necesarias, pero no hay ninguna "
+"etiqueta de estas categorías : \n"
+" %s"
 
 #. module: account_tag_category
 #: code:addons/account_tag_category/wizard/update_tags_wizard.py:39
@@ -124,16 +128,19 @@ msgid ""
 "Following tags are already defined on another tag category : \n"
 " %s"
 msgstr ""
+"Las siguientes etiquetas ya están definidas en otra categoría de etiquetas : "
+"\n"
+" %s"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Green"
-msgstr ""
+msgstr "Verde"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Grey"
-msgstr ""
+msgstr "Gris"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_id
@@ -147,6 +154,9 @@ msgid ""
 "If required, this option enforces the use of a tag from this category. If "
 "optional, the user is not required to use a tag from this category."
 msgstr ""
+"Si es obligatoria, esta opción obliga a utilizar una etiqueta de esta "
+"categoría. Si es opcional, el usuario no está obligado a utilizar una "
+"etiqueta de esta categoría."
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category___last_update
@@ -174,95 +184,97 @@ msgstr "Nombre"
 #. module: account_tag_category
 #: selection:account.account.tag.category,enforce_policy:0
 msgid "Optional"
-msgstr ""
+msgstr "opcional"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Orange"
-msgstr ""
+msgstr "naranja"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Pink"
-msgstr ""
+msgstr "rosa"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Purple"
-msgstr ""
+msgstr "morado"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Red"
-msgstr ""
+msgstr "rojo"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,enforce_policy:0
 msgid "Required"
-msgstr ""
+msgstr "Requerido"
 
 #. module: account_tag_category
 #: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_update_tags_form
 msgid "Save tags"
-msgstr ""
+msgstr "Guardar etiquetas"
 
 #. module: account_tag_category
 #: code:addons/account_tag_category/models/account.py:85
 #, python-format
 msgid "Selected tag must be applicable on the same model as this category (%s)"
 msgstr ""
+"La etiqueta seleccionada debe ser aplicable en el mismo modelo que esta "
+"categoría (%s)"
 
 #. module: account_tag_category
 #: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_tree
 msgid "Tag Categories"
-msgstr ""
+msgstr "Categorías de etiquetas"
 
 #. module: account_tag_category
 #: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_form
 msgid "Tag Category"
-msgstr ""
+msgstr "categoría de etiqueta"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_tag_category_id
 #: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_tag_category_id
 msgid "Tag category"
-msgstr ""
+msgstr "categoría de etiqueta"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_tag_ids
 #: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_tag_ids
 #: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_update_tags_form
 msgid "Tags"
-msgstr ""
+msgstr "etiquetas"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color_picker
 msgid "Tags Color"
-msgstr ""
+msgstr "color de etiquetas"
 
 #. module: account_tag_category
 #: code:addons/account_tag_category/models/account.py:112
 #, python-format
 msgid "There is more than one tag from the same category which is used"
-msgstr ""
+msgstr "Se utiliza más de una etiqueta de la misma categoría"
 
 #. module: account_tag_category
 #: model:ir.actions.act_window,name:account_tag_category.action_update_tags_on_category
 #: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_form
 msgid "Update Tags"
-msgstr ""
+msgstr "actualizar etiquetas"
 
 #. module: account_tag_category
 #: model:ir.model,name:account_tag_category.model_account_tag_category_update_tags
 msgid "Update account tags on account tag category"
-msgstr ""
+msgstr "Actualizar etiquetas de cuenta en la categoría de etiquetas de cuenta"
 
 #. module: account_tag_category
 #: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_update_tags_form
 msgid "Update tags"
-msgstr ""
+msgstr "actualizar etiquetas"
 
 #. module: account_tag_category
 #: selection:account.account.tag.category,color_picker:0
 msgid "Yellow"
-msgstr ""
+msgstr "Amarillo"
