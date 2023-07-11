@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2023-06-28 18:10+0000\n"
+"PO-Revision-Date: 2023-07-11 11:10+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/es/)\n"
@@ -151,16 +151,14 @@ msgstr "Nombre de activo"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_line_asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line_asset_profile_id
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-#, fuzzy
 msgid "Asset Profile"
-msgstr "Línea de activo"
+msgstr "Perfil de activo"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_profile_menu
-#, fuzzy
 msgid "Asset Profiles"
-msgstr "Líneas de activo"
+msgstr "Perfiles de activo"
 
 #. module: account_asset_management
 #: selection:account.asset.line,type:0
