@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2023-07-12 15:12+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-07-13 22:13+0000\n"
+"Last-Translator: Sergio Zanchetta <primes2h@gmail.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -30,8 +30,8 @@ msgid ""
 msgstr ""
 "\n"
 "Dizionario valido per sovrascrivere le righe del modello:\n"
-"{'L1': {'partner_id': 1, 'importo': 100, 'nom': 'alcune etichette'},\n"
-" 'L2': {'partner_id': 2, 'importo': 200, 'nom': 'alcune etichette 2'}, }\n"
+"{'L1': {'partner_id': 1, 'importo': 100, 'nome': 'alcune etichette'},\n"
+" 'L2': {'partner_id': 2, 'importo': 200, 'nome': 'alcune etichette 2'}, }\n"
 "        "
 
 #. module: account_move_template
@@ -82,7 +82,7 @@ msgstr "Conto analitico"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
-msgstr "Tag analitici"
+msgstr "Etichette analitiche"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
@@ -128,12 +128,12 @@ msgstr "Calcolato"
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_run_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_run_menu
 msgid "Create Entry from Template"
-msgstr "Crea Registrazione da Modello"
+msgstr "Crea registrazione da modello"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Create Journal Entry"
-msgstr "Crea Registrazione Contabile"
+msgstr "Crea registrazione contabile"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_uid
@@ -192,12 +192,12 @@ msgstr "Nome visualizzato"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Entry from template %s"
-msgstr "Record da Modello %s"
+msgstr "Voce dal modello %s"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Generate Journal Entry"
-msgstr "Genera Registrazione Contabile"
+msgstr "Genera registrazione contabile"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__id
@@ -215,9 +215,9 @@ msgid ""
 "Check that the lines used in the formula really exists and have a lower "
 "sequence than the current line."
 msgstr ""
-"Impossibile calcolare la formula della riga con sequenza %s ( Formula: %s). "
-"Controlla che le righe usate nella formula esistano veramente e abbiano una "
-"sequenza inferiore alla riga corrente."
+"Impossibile calcolare la formula della riga con sequenza %s (formula: %s). "
+"Controllare che le righe usate nella formula esistano veramente e abbiano "
+"una sequenza inferiore alla riga corrente."
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -243,7 +243,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__is_refund
 msgid "Is a refund?"
-msgstr "É un Reso?"
+msgstr "È un rimborso?"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__journal_id
@@ -258,23 +258,23 @@ msgstr "Registro"
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal Entry Template"
-msgstr "Modello Registrazione Contabile"
+msgstr "Modello registrazione contabile"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Journal Entry Template Line"
-msgstr "Riga Modello Registrazione Contabile"
+msgstr "Riga modello registrazione contabile"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_menu
 msgid "Journal Entry Templates"
-msgstr "Configurazione Registrazioni Contabili"
+msgstr "Modelli registrazione contabile"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "Journal Item Template"
-msgstr "Modello Oggetto Registro"
+msgstr "Modello movimento contabile"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
