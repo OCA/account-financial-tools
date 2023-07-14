@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2023-07-13 22:13+0000\n"
+"PO-Revision-Date: 2023-07-14 11:10+0000\n"
 "Last-Translator: Sergio Zanchetta <primes2h@gmail.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -117,7 +117,7 @@ msgstr "Valuta aziendale"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Compute Formula"
-msgstr "Calcola formula"
+msgstr "Formula di calcolo"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__computed
@@ -133,7 +133,7 @@ msgstr "Crea registrazione da modello"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Create Journal Entry"
-msgstr "Crea registrazione contabile"
+msgstr "Crea registrazione"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_uid
@@ -192,12 +192,12 @@ msgstr "Nome visualizzato"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Entry from template %s"
-msgstr "Voce dal modello %s"
+msgstr "Registrazione dal modello %s"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Generate Journal Entry"
-msgstr "Genera registrazione contabile"
+msgstr "Genera registrazione"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__id
@@ -280,7 +280,7 @@ msgstr "Modello movimento contabile"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Keys must be line sequence, i..e, L1, L2, ..."
-msgstr "I tasti devono essere in sequenza di riga, i..e, L1, L2, ..."
+msgstr "Le chiavi devono essere una sequenza di riga, ovvero L1, L2..."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -335,7 +335,7 @@ msgstr "Righe"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__template_id
 msgid "Move Template"
-msgstr "Sposta Modello"
+msgstr "Modello movimento"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__name
@@ -346,7 +346,7 @@ msgstr "Nome"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Next"
-msgstr "Prossimo"
+msgstr "Successivo"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__note
@@ -358,23 +358,23 @@ msgstr "Nota"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_line_id
 msgid "Originator Tax"
-msgstr "Imposta Originale"
+msgstr "Creata dall'imposta"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
 msgid "Override Partner"
-msgstr "Sostituisci Partner"
+msgstr "Sostituzione partner"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__overwrite
 msgid "Overwrite"
-msgstr "Sovrascivi"
+msgstr "Sovrascrittura"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Overwrite value must be a valid python dict"
-msgstr "Il valore di sovrascrittura deve essere un dict Python valido"
+msgstr "Il valore di sovrascrittura deve essere un dizionario Python valido"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__partner_id
@@ -398,7 +398,7 @@ msgstr "Codice Python"
 #, python-format
 msgid "Python Code must be set for computed line with sequence %d."
 msgstr ""
-"Il Codice Python deve essere impostato per la riga calcolata con sequenza %d."
+"Per la riga calcolata con sequenza %d deve essere impostato codice Python."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
@@ -409,12 +409,12 @@ msgstr "Riferimento"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Restore"
-msgstr "Ristabilire"
+msgstr "Ripristina"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
 msgid "Select Template"
-msgstr "Seleziona Modello"
+msgstr "Seleziona modello"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__sequence
@@ -425,7 +425,7 @@ msgstr "Sequenza"
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__set_lines
 msgid "Set Lines"
-msgstr "Imposta Righe"
+msgstr "Imposta righe"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
@@ -436,7 +436,7 @@ msgstr "Stato"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_repartition_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_repartition_line_id
 msgid "Tax Repartition Line"
-msgstr "Riga di ripartizione fiscale"
+msgstr "Riga ripartizione imposta"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_ids
@@ -457,18 +457,18 @@ msgid ""
 "The selected template (%s) is not in the same company (%s) as the current "
 "user (%s)."
 msgstr ""
-"Il modello selezionato (%s) non è nella stessa azienda (%s) dell'utente "
-"corrente (%s)."
+"Il modello selezionato (%s) non si trova nella stessa azienda (%s) "
+"dell'utente corrente (%s)."
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_line_sequence_template_uniq
 msgid "The sequence of the line must be unique per template!"
-msgstr "La sequenza della riga deve essere unica per modello!"
+msgstr "La sequenza della riga deve essere univoca per modello."
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_name_company_unique
 msgid "This name is already used by another template!"
-msgstr "Questo nome è già utilizzato da un altro modello!"
+msgstr "Questo nome è già utilizzato da un altro modello."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__type
@@ -478,12 +478,12 @@ msgstr "Tipo"
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__payment_term_id
 msgid "Used to compute the due date of the journal item."
-msgstr "Utilizzato per calcolare la data di scadenza dell'articolo di registro."
+msgstr "Utilizzato per calcolare la scadenza del movimento contabile."
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
 msgid "User input"
-msgstr "Input Utente"
+msgstr "Inserimento utente"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -494,7 +494,7 @@ msgstr "I campi validi da sovrascrivere sono %s"
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
 msgid "When amount is negative, use this account instead"
-msgstr "Quando l'importo è negativo, usa invece questo account"
+msgstr "Quando l'importo è negativo, utilizzare invece questo conto"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
@@ -504,12 +504,12 @@ msgstr "Procedura guidata"
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line_run
 msgid "Wizard Lines to generate move from template"
-msgstr "Righe Wizard per generare movimenti dal modello"
+msgstr "Righe procedura guidata per generare un movimento dal modello"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_run
 msgid "Wizard to generate move from template"
-msgstr "Procedura guidata per generare movimenti dal Template"
+msgstr "Procedura guidata per generare un movimento dal modello"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -519,9 +519,9 @@ msgid ""
 "update the template or modify the journal entry that will be generated by "
 "this wizard."
 msgstr ""
-"Hai aggiunto una riga nella procedura guidata. questo non è permesso: è "
-"necessario aggiornare il modello o modificare la registrazione contabile che "
-"verrà generata da questa procedura guidata."
+"Nella procedura guidata è stata aggiunta una riga. Questo non è consentito: "
+"deve essere aggiornato il modello oppure modificata la registrazione che "
+"viene generata da questa procedura guidata."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -529,8 +529,8 @@ msgid ""
 "You can refer to other lines using their sequence number e.g. <i>L1</i> for "
 "line with sequence = 1. Examples:"
 msgstr ""
-"Puoi fare riferimento ad altre righe usando il loro numero di sequenza es. "
-"<i>L1</i> per riga con sequenza = 1. Esempio:"
+"Per fare riferimento ad altre righe è possibile utilizzare il loro numero di "
+"sequenza, es. <i>L1</i> per la riga con sequenza = 1. Esempi:"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -540,6 +540,6 @@ msgid ""
 "update the template or modify the journal entry that will be generated by "
 "this wizard."
 msgstr ""
-"Hai eliminato una riga nella procedura guidata. questo non è permesso: è "
-"necessario aggiornare il modello o modificare la registrazione contabile che "
-"verrà generata da questa procedura guidata."
+"Nella procedura guidata è stata eliminata una riga. Questo non è consentito: "
+"deve essere aggiornato il modello oppure modificata la registrazione che "
+"viene generata da questa procedura guidata."
