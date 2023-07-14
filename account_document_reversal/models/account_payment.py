@@ -26,12 +26,11 @@ class AccountPayment(models.Model):
     def action_document_reversal(self, date=None, journal_id=None):
         """ Reverse all moves related to this payment + set state to cancel """
         # Check document readiness
-        valid_state = (
-            len(self.mapped("state")) == 1
-            and list(set(self.mapped("state")))[0] == "posted"
-        )
-        if not valid_state:
-            raise UserError(_("Only validated document can be cancelled (reversal)"))
+        for payment in self:
+            if payment.state not in ["sent", "posted"]:
+                raise UserError(
+                    _("Only validated document can be cancelled (reversal)")
+                )
         # Find moves to get reversed
         move_lines = self.mapped("move_line_ids").filtered(
             lambda x: x.journal_id == self.mapped("journal_id")[0]

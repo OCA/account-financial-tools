@@ -24,35 +24,19 @@ class AccountPayment(models.Model):
         """ Reverse all moves related to this statement + delete payment """
         # This part is from button_cancel_reconciliation()
         aml_to_unbind = self.env["account.move.line"]
-        aml_to_cancel = self.env["account.move.line"]
-        payment_to_unreconcile = self.env["account.payment"]
-        payment_to_cancel = self.env["account.payment"]
+        payments_to_revert = self.env["account.payment"]
         for st_line in self:
             aml_to_unbind |= st_line.journal_entry_ids
             for line in st_line.journal_entry_ids:
-                payment_to_unreconcile |= line.payment_id
                 if (
                     st_line.move_name
                     and line.payment_id.payment_reference == st_line.move_name
                 ):
-                    # there can be several moves linked to a statement line
-                    # but maximum one created by the line itself
-                    aml_to_cancel |= line
-                    payment_to_cancel |= line.payment_id
-        aml_to_unbind = aml_to_unbind - aml_to_cancel
-
+                    payments_to_revert |= line.payment_id
+        aml_to_unbind = aml_to_unbind
         if aml_to_unbind:
             aml_to_unbind.write({"statement_line_id": False})
-
-        payment_to_unreconcile = payment_to_unreconcile - payment_to_cancel
-        if payment_to_unreconcile:
-            payment_to_unreconcile.unreconcile()
-        # --
-
-        # Find account moves to cancel reversal
-        moves = aml_to_cancel.mapped("move_id")
-        # Create reverse entries
-        moves._cancel_reversal(journal_id)
-        # Set cancel related payments
-        payment_to_cancel.write({"state": "cancelled"})
+        for payment in payments_to_revert:
+            payment.unreconcile()
+            payment.action_document_reversal(date=date, journal_id=journal_id)
         return True
