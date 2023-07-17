@@ -10,7 +10,9 @@ class SaleUnreconciledExceededWiz(models.TransientModel):
     )
     exception_msg = fields.Text(readonly=True)
     origin_reference = fields.Reference(
-        lambda self: [(m.model, m.name) for m in self.env["ir.model"].search([])],
+        lambda self: [
+            (m.model, m.name) for m in self.env["ir.model"].sudo().search([])
+        ],
         string="Object",
     )
     continue_method = fields.Char()
