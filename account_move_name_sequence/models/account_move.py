@@ -22,7 +22,6 @@ class AccountMove(models.Model):
             if move.state == 'posted' and move.name in ['', '/']:
                 raise UserError('A move can not be posted with name "/" or empty value\n'
             "Check the journal sequence, please",)
-        return
 
     @api.depends("state", "journal_id", "date")
     def _compute_name_by_sequence(self):
