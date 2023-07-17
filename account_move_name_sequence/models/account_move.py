@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class AccountMove(models.Model):
@@ -15,14 +16,13 @@ class AccountMove(models.Model):
     sequence_prefix = fields.Char(compute=False)
     sequence_number = fields.Integer(compute=False)
 
-    _sql_constraints = [
-        (
-            "name_state_diagonal",
-            "CHECK(COALESCE(name, '') NOT IN ('/', '') OR state!='posted')",
-            'A move can not be posted with name "/" or empty value\n'
-            "Check the journal sequence, please",
-        ),
-    ]
+    @api.constrains('name', 'state')
+    def _check_name_state_diagonal(self):
+        for move in self:
+            if move.state == 'posted' and move.name in ['', '/']:
+                raise UserError('A move can not be posted with name "/" or empty value\n'
+            "Check the journal sequence, please",)
+        return
 
     @api.depends("state", "journal_id", "date")
     def _compute_name_by_sequence(self):
