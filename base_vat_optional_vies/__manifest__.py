@@ -9,7 +9,12 @@
     "category": "Accounting",
     "version": "14.0.1.0.3",
     "depends": ["base_vat"],
-    "external_dependencies": {"python": ["vatnumber"]},
+    "external_dependencies": {
+        "python": [
+            "vatnumber",
+            "setuptools",
+        ],
+    },
     "data": ["views/res_partner_view.xml"],
     "author": "Tecnativa," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
