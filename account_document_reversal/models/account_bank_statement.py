@@ -39,4 +39,5 @@ class AccountPayment(models.Model):
         for payment in payments_to_revert:
             payment.unreconcile()
             payment.action_document_reversal(date=date, journal_id=journal_id)
+        self.write({"move_name": False})
         return True
