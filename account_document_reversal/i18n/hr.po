@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_document_reversal
+# 	* account_document_reversal
 #
 msgid ""
 msgstr ""
@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: account_document_reversal
@@ -28,14 +28,53 @@ msgid "Account Document Reversal"
 msgstr "Reverzija dokumenata računovodstva"
 
 #. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_reconciliation_widget
+msgid "Account Reconciliation widget"
+msgstr ""
+
+#. module: account_document_reversal
 #: model:ir.model,name:account_document_reversal.model_account_bank_statement_line
 msgid "Bank Statement Line"
 msgstr "Stavka izvoda"
 
 #. module: account_document_reversal
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_account_payment_form
+msgid "Cancel"
+msgstr ""
+
+#. module: account_document_reversal
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_move_form
+msgid "Cancel Entry"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__cancel_method
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__cancel_method
 msgid "Cancel Method"
 msgstr "Metoda otkaza"
+
+#. module: account_document_reversal
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_account_journal_form
+msgid "Cancel Option"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_move__cancel_reversal
+msgid "Cancel Reversal"
+msgstr ""
+
+#. module: account_document_reversal
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_account_invoice_filter
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_move_form
+msgid "Cancelled"
+msgstr ""
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_move.py:0
+#: code:addons/account_document_reversal/models/account_payment.py:0
+#, python-format
+msgid "Cannot set to draft!"
+msgstr ""
 
 #. module: account_document_reversal
 #: model:ir.model.fields,help:account_document_reversal.field_reverse_account_document__use_different_journal
@@ -48,6 +87,12 @@ msgid "Confirm"
 msgstr "Potvrdi"
 
 #. module: account_document_reversal
+#: code:addons/account_document_reversal/models/reconciliation_widget.py:0
+#, python-format
+msgid "Could not implement the restriction to remove reversed payments: %s"
+msgstr ""
+
+#. module: account_document_reversal
 #: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__create_uid
 msgid "Created by"
 msgstr "Kreirao"
@@ -58,6 +103,7 @@ msgid "Created on"
 msgstr "Kreirano"
 
 #. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__reversal_journal_id
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__reversal_journal_id
 msgid "Default Reversal Journal"
 msgstr "Zadani dnevnik otkazivanja"
@@ -86,6 +132,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__use_different_journal
 #: model:ir.model.fields,help:account_document_reversal.field_account_journal__use_different_journal
 msgid "If checked, reversal wizard will show field Reversal Journal"
 msgstr ""
@@ -94,11 +141,6 @@ msgstr ""
 #: model:ir.model.fields,help:account_document_reversal.field_reverse_account_document__journal_id
 msgid "If empty, uses the journal of the journal entry to be reversed."
 msgstr ""
-
-#. module: account_document_reversal
-#: model:ir.model,name:account_document_reversal.model_account_invoice
-msgid "Invoice"
-msgstr "Račun"
 
 #. module: account_document_reversal
 #: model:ir.model,name:account_document_reversal.model_account_journal
@@ -111,6 +153,12 @@ msgid "Journal Entries"
 msgstr "Stavke dnevnika"
 
 #. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__reversal_journal_id
 #: model:ir.model.fields,help:account_document_reversal.field_account_journal__reversal_journal_id
 msgid "Journal in this field will show in reversal wizard as default"
 msgstr ""
@@ -132,21 +180,34 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_document_reversal
-#: selection:account.journal,cancel_method:0
-msgid "Normal (delete journal entries if exists)"
+#: model:ir.model.fields.selection,name:account_document_reversal.selection__account_journal__cancel_method__normal
+msgid "Normal (remove journal entries)"
 msgstr ""
 
 #. module: account_document_reversal
-#: code:addons/account_document_reversal/models/account_invoice.py:24
+#: code:addons/account_document_reversal/models/account_move.py:0
 #, python-format
-msgid "Only fully unpaid invoice can be cancelled.\n"
+msgid ""
+"Only fully unpaid invoice can be cancelled.\n"
 "To cancel this invoice, make sure all payment(s) are also cancelled."
 msgstr ""
 
 #. module: account_document_reversal
-#: code:addons/account_document_reversal/models/account_bank_statement.py:20
+#: code:addons/account_document_reversal/models/account_bank_statement.py:0
 #, python-format
 msgid "Only new bank statement can be cancelled"
+msgstr ""
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_move.py:0
+#, python-format
+msgid "Only posted document can be cancelled (reversal)"
+msgstr ""
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_payment.py:0
+#, python-format
+msgid "Only validated document can be cancelled (reversal)"
 msgstr ""
 
 #. module: account_document_reversal
@@ -155,7 +216,24 @@ msgid "Payments"
 msgstr ""
 
 #. module: account_document_reversal
-#: selection:account.journal,cancel_method:0
+#: code:addons/account_document_reversal/models/account_move.py:0
+#, python-format
+msgid "Please use button_cancel_reversal()"
+msgstr ""
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_payment.py:0
+#, python-format
+msgid "Please use cancel_reversal()"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields.selection,name:account_document_reversal.selection__account_journal__cancel_method__reversal
 msgid "Reversal (create reversed journal entries)"
 msgstr ""
 
@@ -170,33 +248,55 @@ msgid "Reversal date"
 msgstr ""
 
 #. module: account_document_reversal
-#: code:addons/account_document_reversal/models/account_move.py:22
-#, python-format
-msgid "This action is not allowed for cancel with reversal.\n"
-"Please use Reverse Entry."
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_move__reverse_entry_id
+msgid "Reversed by"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_move__reverse_entry_id
+msgid "The move that reverse this move (opposite of reversed_entry_id)"
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_move__cancel_reversal
+msgid "This document is being cancelled by using reversal method"
+msgstr ""
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_move.py:0
+#, python-format
+msgid ""
+"This document was cancelled and freozen,\n"
+"unreconcilation not allowed."
+msgstr ""
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__is_cancel_reversal
 #: model:ir.model.fields,help:account_document_reversal.field_account_journal__is_cancel_reversal
-#: model:ir.model.fields,help:account_document_reversal.field_account_move__is_cancel_reversal
 msgid "True, when journal allow cancel entries with method is reversal"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__is_cancel_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_line__is_cancel_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_document_reversal__is_cancel_reversal
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__is_cancel_reversal
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_move__is_cancel_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_payment__is_cancel_reversal
 msgid "Use Cancel Reversal"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__use_different_journal
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__use_different_journal
 #: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__use_different_journal
 msgid "Use different journal for reversal"
 msgstr ""
 
-#. module: account_document_reversal
-#: code:addons/account_document_reversal/models/account_invoice.py:36
-#: code:addons/account_document_reversal/models/account_payment.py:27
-#, python-format
-msgid "You are trying to cancel the cancelled document"
-msgstr ""
+#~ msgid "Invoice"
+#~ msgstr "Račun"
