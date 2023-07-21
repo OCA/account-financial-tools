@@ -141,7 +141,7 @@ msgstr "Remise de chèque n°"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
 msgid "Check Journal"
-msgstr ""
+msgstr "Journal de chèques"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
