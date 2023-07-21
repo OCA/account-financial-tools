@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
 "PO-Revision-Date: 2023-07-21 13:10+0000\n"
-"Last-Translator: MayteGLC <mayte.gonzalez@factorlibre.com>\n"
+"Last-Translator: Rodrigo <rodrigo.bonilla@factorlibre.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgstr ""
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:81
 #, python-format
 msgid "Amount cannot be bigger than debt"
-msgstr ""
+msgstr "El importe no puede ser mayor que debito"
 
 #. module: account_loan
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:83
