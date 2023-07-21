@@ -20,6 +20,7 @@ class TestPaymentReversal(SavepointCase):
         cls.account_move_line_model = cls.env["account.move.line"]
         cls.invoice_line_model = cls.env["account.move.line"]
         cls.payment_model = cls.env["account.payment"]
+        cls.reconciliation_widget = cls.env["account.reconciliation.widget"]
         # Records
         cls.account_type_bank = cls.account_account_type_model.create(
             {"name": "Test Bank", "type": "liquidity", "internal_group": "asset"}
@@ -306,6 +307,7 @@ class TestPaymentReversal(SavepointCase):
         statement line. I expect:
         - Reversal journal entry is created, and reconciled with original entry
         - The line in the statement is ready to reconcile again
+        - If I try to reconcile again this line, the original payment is not listed again
         """
         # Test journal
         self.bank_journal.write({"cancel_method": "reversal"})
@@ -360,6 +362,25 @@ class TestPaymentReversal(SavepointCase):
         self.assertTrue(reversed_move_reconcile)
         self.assertEqual(move_reconcile, reversed_move_reconcile)
         self.assertFalse(bank_stmt_line.journal_entry_ids)
+        mv_lines_rec = self.env[
+            "account.reconciliation.widget"
+        ].get_move_lines_for_bank_statement_line(
+            bank_stmt_line.id,
+            partner_id=False,
+            excluded_ids=[],
+            search_str=False,
+            mode="rp",
+        )
+        mv_lines_ids = [l["id"] for l in mv_lines_rec]
+        bank_accounts = (
+            self.bank_journal.default_credit_account_id
+            | self.bank_journal.default_debit_account_id
+        )
+        bank_moves = original_move_lines.filtered(
+            lambda l: l.account_id in bank_accounts
+        )
+        self.assertTrue(bank_moves)
+        self.assertNotIn(bank_moves[0].id, mv_lines_ids)
 
     def test_bank_statement_cancel_exception(self):
         """ Tests on exception case, if statement is already validated, but
