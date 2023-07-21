@@ -24,6 +24,11 @@ msgid "Account Document Reversal"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_reconciliation_widget
+msgid "Account Reconciliation widget"
+msgstr ""
+
+#. module: account_document_reversal
 #: model:ir.model,name:account_document_reversal.model_account_bank_statement_line
 msgid "Bank Statement Line"
 msgstr ""
@@ -75,6 +80,12 @@ msgstr ""
 #. module: account_document_reversal
 #: model_terms:ir.ui.view,arch_db:account_document_reversal.view_reverse_account_document
 msgid "Confirm"
+msgstr ""
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/reconciliation_widget.py:0
+#, python-format
+msgid "Could not implement the restriction to remove reversed payments: %s"
 msgstr ""
 
 #. module: account_document_reversal
