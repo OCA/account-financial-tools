@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2023-06-15 08:10+0000\n"
+"PO-Revision-Date: 2023-07-24 13:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -617,7 +617,7 @@ msgstr "E-mail"
 #. module: account_credit_control
 #: field:credit.control.policy.level,email_template_id:0
 msgid "Email Template"
-msgstr "Email Template"
+msgstr "Modello e-mail"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
