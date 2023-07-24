@@ -282,7 +282,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__in_hand_check_account_id
 msgid "In Hand Check Account"
-msgstr ""
+msgstr "Compte chèque utilisé"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_is_follower
