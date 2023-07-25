@@ -32,7 +32,7 @@ addon | version | maintainers | summary
 [account_asset_transfer](account_asset_transfer/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Asset Transfer from AUC to Asset
 [account_balance_line](account_balance_line/) | 14.0.1.1.0 |  | Display balance totals in move line view
 [account_cash_deposit](account_cash_deposit/) | 14.0.1.2.0 |  | Manage cash deposits and cash orders
-[account_chart_update](account_chart_update/) | 14.0.2.1.0 |  | Wizard to update a company's account chart from a template
+[account_chart_update](account_chart_update/) | 14.0.2.1.1 |  | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 14.0.1.2.0 |  | Manage deposit of checks to the bank
 [account_fiscal_month](account_fiscal_month/) | 14.0.1.0.0 |  | Provide a fiscal month date range type
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.2.0 |  | Check VAT on invoice validation
@@ -68,7 +68,7 @@ addon | version | maintainers | summary
 [account_spread_cost_revenue](account_spread_cost_revenue/) | 14.0.1.0.0 | [![astirpe](https://github.com/astirpe.png?size=30px)](https://github.com/astirpe) | Spread costs and revenues over a custom period
 [account_spread_cost_revenue_enhanced](account_spread_cost_revenue_enhanced/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Extra feature for account spread cost/revenue
 [account_template_active](account_template_active/) | 14.0.1.0.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Allow to disable / enable account template items (tax, fiscal position, account)
-[base_vat_optional_vies](base_vat_optional_vies/) | 14.0.1.0.3 |  | Optional validation of VAT via VIES
+[base_vat_optional_vies](base_vat_optional_vies/) | 14.0.2.0.0 |  | Optional validation of VAT via VIES
 [product_category_tax](product_category_tax/) | 14.0.1.1.0 |  | Configure taxes in the product category
 [stock_account_prepare_anglo_saxon_out_lines_hook](stock_account_prepare_anglo_saxon_out_lines_hook/) | 14.0.1.0.5 |  | Modify when and how anglo saxon journal items are created
 
