@@ -7,7 +7,7 @@
         <field name="name">account.loan.tree</field>
         <field name="model">account.loan</field>
         <field name="arch" type="xml">
-            <tree string="Loans">
+            <tree>
                 <field name="name" />
                 <field name="company_id" />
                 <field name="is_leasing" />
@@ -26,7 +26,7 @@
                 <header>
                     <button name="compute_lines" type="object" string="Compute items" />
                     <button
-                        name="%(account_loan_post_action)d"
+                        name="%(account_loan.account_loan_post_action)d"
                         states="draft"
                         type="action"
                         string="Post"
@@ -34,7 +34,7 @@
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
-                    <div class="oe_button_box">
+                    <div class="oe_button_box" name="button_box">
                         <button
                             name="view_account_moves"
                             class="oe_stat_button"
@@ -153,7 +153,7 @@
         <field name="name">account.loan.line.tree</field>
         <field name="model">account.loan.line</field>
         <field name="arch" type="xml">
-            <tree string="Loan items" create="0">
+            <tree create="0">
                 <field name="sequence" />
                 <field name="date" />
                 <field name="rate" />
@@ -197,24 +197,26 @@
         <field name="model">account.loan.line</field>
         <field name="arch" type="xml">
             <form>
-                <group>
-                    <field name="sequence" />
-                    <field name="rate" />
-                    <field name="date" />
-                </group>
-                <group>
+                <sheet>
                     <group>
-                        <field name="pending_principal_amount" />
-                        <field name="payment_amount" />
-                        <field name="principal_amount" />
-                        <field name="interests_amount" />
-                        <field name="final_pending_principal_amount" />
+                        <field name="sequence" />
+                        <field name="rate" />
+                        <field name="date" />
                     </group>
                     <group>
-                        <field name="long_term_pending_principal_amount" />
-                        <field name="long_term_principal_amount" />
+                        <group>
+                            <field name="pending_principal_amount" />
+                            <field name="payment_amount" />
+                            <field name="principal_amount" />
+                            <field name="interests_amount" />
+                            <field name="final_pending_principal_amount" />
+                        </group>
+                        <group>
+                            <field name="long_term_pending_principal_amount" />
+                            <field name="long_term_principal_amount" />
+                        </group>
                     </group>
-                </group>
+                </sheet>
             </form>
         </field>
     </record>

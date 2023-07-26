@@ -26,11 +26,7 @@ class AccountLoanPost(models.TransientModel):
                     loan.company_id
                 ).property_account_receivable_id.id
 
-    loan_id = fields.Many2one(
-        "account.loan",
-        required=True,
-        readonly=True,
-    )
+    loan_id = fields.Many2one("account.loan", required=True, readonly=True)
     journal_id = fields.Many2one(
         "account.journal", required=True, default=lambda r: r._default_journal_id()
     )

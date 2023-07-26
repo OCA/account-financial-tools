@@ -9,21 +9,14 @@ class AccountLoan(models.TransientModel):
     _name = "account.loan.pay.amount"
     _description = "Loan pay amount"
 
-    loan_id = fields.Many2one(
-        "account.loan",
-        required=True,
-        readonly=True,
-    )
+    loan_id = fields.Many2one("account.loan", required=True, readonly=True)
     currency_id = fields.Many2one(
         "res.currency", related="loan_id.currency_id", readonly=True
     )
-    cancel_loan = fields.Boolean(
-        default=False,
-    )
+    cancel_loan = fields.Boolean(default=False)
     date = fields.Date(required=True, default=fields.Date.today())
     amount = fields.Monetary(
-        currency_field="currency_id",
-        string="Amount to reduce from Principal",
+        currency_field="currency_id", string="Amount to reduce from Principal"
     )
     fees = fields.Monetary(currency_field="currency_id", string="Bank fees")
 
@@ -69,7 +62,7 @@ class AccountLoan(models.TransientModel):
         sequence = min(lines.mapped("sequence"))
         for line in lines:
             line.sequence += 1
-            line.flush()
+            line.flush_model()
         old_line = lines.filtered(lambda r: r.sequence == sequence + 1)
         pending = old_line.pending_principal_amount
         if self.loan_id.currency_id.compare_amounts(self.amount, pending) == 1:

@@ -58,10 +58,7 @@ class AccountLoan(models.Model):
         default="draft",
     )
     line_ids = fields.One2many(
-        "account.loan.line",
-        readonly=True,
-        inverse_name="loan_id",
-        copy=False,
+        "account.loan.line", readonly=True, inverse_name="loan_id", copy=False
     )
     periods = fields.Integer(
         required=True,
@@ -117,20 +114,12 @@ class AccountLoan(models.Model):
         default="fixed-annuity",
     )
     fixed_amount = fields.Monetary(
-        currency_field="currency_id",
-        compute="_compute_fixed_amount",
+        currency_field="currency_id", compute="_compute_fixed_amount"
     )
     fixed_loan_amount = fields.Monetary(
-        currency_field="currency_id",
-        readonly=True,
-        copy=False,
-        default=0,
+        currency_field="currency_id", readonly=True, copy=False, default=0
     )
-    fixed_periods = fields.Integer(
-        readonly=True,
-        copy=False,
-        default=0,
-    )
+    fixed_periods = fields.Integer(readonly=True, copy=False, default=0)
     loan_amount = fields.Monetary(
         currency_field="currency_id",
         required=True,
@@ -161,9 +150,7 @@ class AccountLoan(models.Model):
         help="When checked, the first payment will be on start date",
     )
     currency_id = fields.Many2one(
-        "res.currency",
-        compute="_compute_currency",
-        readonly=True,
+        "res.currency", compute="_compute_currency", readonly=True
     )
     journal_type = fields.Char(compute="_compute_journal_type")
     journal_id = fields.Many2one(
@@ -200,9 +187,7 @@ class AccountLoan(models.Model):
         states={"draft": [("readonly", False)]},
     )
     is_leasing = fields.Boolean(
-        default=False,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        default=False, readonly=True, states={"draft": [("readonly", False)]}
     )
     leased_asset_account_id = fields.Many2one(
         "account.account",
@@ -224,8 +209,7 @@ class AccountLoan(models.Model):
     )
     move_ids = fields.One2many("account.move", copy=False, inverse_name="loan_id")
     pending_principal_amount = fields.Monetary(
-        currency_field="currency_id",
-        compute="_compute_total_amounts",
+        currency_field="currency_id", compute="_compute_total_amounts"
     )
     payment_amount = fields.Monetary(
         currency_field="currency_id",
@@ -242,7 +226,7 @@ class AccountLoan(models.Model):
     )
 
     _sql_constraints = [
-        ("name_uniq", "unique(name, company_id)", "Loan name must be unique"),
+        ("name_uniq", "unique(name, company_id)", "Loan name must be unique")
     ]
 
     @api.depends("line_ids", "currency_id", "loan_amount")
@@ -348,11 +332,12 @@ class AccountLoan(models.Model):
     def get_default_name(self, vals):
         return self.env["ir.sequence"].next_by_code("account.loan") or "/"
 
-    @api.model
-    def create(self, vals):
-        if vals.get("name", "/") == "/":
-            vals["name"] = self.get_default_name(vals)
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("name", "/") == "/":
+                vals["name"] = self.get_default_name(vals)
+        return super().create(vals_list)
 
     def post(self):
         self.ensure_one()
