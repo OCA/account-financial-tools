@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[account_asset_batch_compute](account_asset_batch_compute/) | 15.0.1.0.0 |  | Add the possibility to compute assets in batch
 [account_asset_low_value](account_asset_low_value/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Assets Management - Low Value Asset
 [account_asset_management](account_asset_management/) | 15.0.1.0.4 |  | Assets Management
 [account_asset_management_menu](account_asset_management_menu/) | 15.0.1.0.0 |  | Assets Management Menu
