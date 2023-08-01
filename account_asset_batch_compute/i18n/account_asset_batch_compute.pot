@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_batch_compute
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_asset_batch_compute
+#: model:ir.model,name:account_asset_batch_compute.model_account_asset
+msgid "Asset"
+msgstr ""
+
+#. module: account_asset_batch_compute
+#: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset_compute__batch_processing
+msgid "Batch Processing"
+msgstr ""
+
+#. module: account_asset_batch_compute
+#: model:ir.model,name:account_asset_batch_compute.model_account_asset_compute
+msgid "Compute Assets"
+msgstr ""
+
+#. module: account_asset_batch_compute
+#: code:addons/account_asset_batch_compute/wizards/account_asset_compute.py:0
+#, python-format
+msgid "Creating jobs to create moves for assets to %s"
+msgstr ""
+
+#. module: account_asset_batch_compute
+#: code:addons/account_asset_batch_compute/models/account_asset.py:0
+#, python-format
+msgid "Creating move for asset with id %s to %s"
+msgstr ""
+
+#. module: account_asset_batch_compute
+#: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset__display_name
+#: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset_compute__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_asset_batch_compute
+#: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset__id
+#: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset_compute__id
+msgid "ID"
+msgstr ""
+
+#. module: account_asset_batch_compute
+#: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset____last_update
+#: model:ir.model.fields,field_description:account_asset_batch_compute.field_account_asset_compute____last_update
+msgid "Last Modified on"
+msgstr ""
