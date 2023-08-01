@@ -204,7 +204,7 @@ class AccountCheckDeposit(models.Model):
                 for line in deposit.check_payment_ids:
                     if line.reconciled:
                         line.remove_move_reconcile()
-                move.unlink()
+                move.with_context(force_delete=True).unlink()
             deposit.write({"state": "draft"})
         return True
 
