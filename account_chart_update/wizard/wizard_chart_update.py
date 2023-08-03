@@ -1226,7 +1226,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         when the referenced accounts are still not available).
         """
         done = self.env["account.tax"]
-        for k, v in todo_dict["account_dict"]["account.tax"].items():
+        for tax, v in todo_dict["account_dict"]["account.tax"].items():
             vals = {}
             for fld in [
                 "cash_basis_transition_account_id",
@@ -1243,7 +1243,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             % v[fld].id
                         )
             if vals:
-                tax = self.env["account.tax"].browse(k)
                 tax.write(vals)
                 done |= tax
 
