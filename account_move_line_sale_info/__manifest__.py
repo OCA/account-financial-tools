@@ -1,10 +1,10 @@
-# Copyright 2020 ForgeFlow S.L.
+# Copyright 2020-23 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Account Move Line Sale Info",
     "summary": "Introduces the purchase order line to the journal items",
-    "version": "15.0.1.0.3",
+    "version": "16.0.1.0.0",
     "author": "ForgeFlow S.L., " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Generic",
