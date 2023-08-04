@@ -6,38 +6,36 @@ from odoo.tests.common import TransactionCase
 
 
 class TestAccountMoveFiscalYear(TransactionCase):
-    def setUp(self):
-        super(TestAccountMoveFiscalYear, self).setUp()
-        self.AccountObj = self.env["account.account"]
-        self.AccountJournalObj = self.env["account.journal"]
-        self.AccountMoveObj = self.env["account.move"]
-        self.DateRangeObj = self.env["account.fiscal.year"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.AccountObj = cls.env["account.account"]
+        cls.AccountJournalObj = cls.env["account.journal"]
+        cls.AccountMoveObj = cls.env["account.move"]
+        cls.DateRangeObj = cls.env["account.fiscal.year"]
 
-        self.bank_journal = self.AccountJournalObj.search(
+        cls.bank_journal = cls.AccountJournalObj.search(
             [("type", "=", "bank")], limit=1
         )
 
-        self.account_type_recv = self.env.ref("account.data_account_type_receivable")
-        self.account_type_rev = self.env.ref("account.data_account_type_revenue")
-
-        self.account_recv = self.AccountObj.create(
+        cls.account_recv = cls.AccountObj.create(
             {
-                "code": "RECV_DR",
+                "code": "RECVDR",
                 "name": "Receivable (test)",
                 "reconcile": True,
-                "user_type_id": self.account_type_recv.id,
+                "account_type": "asset_receivable",
             }
         )
-        self.account_sale = self.AccountObj.create(
+        cls.account_sale = cls.AccountObj.create(
             {
-                "code": "SALE_DR",
+                "code": "SALEDR",
                 "name": "Receivable (sale)",
                 "reconcile": True,
-                "user_type_id": self.account_type_rev.id,
+                "account_type": "income",
             }
         )
 
-        self.date_range_2017 = self.DateRangeObj.create(
+        cls.date_range_2017 = cls.DateRangeObj.create(
             {
                 "name": "2017",
                 "date_from": "2017-01-01",
@@ -45,7 +43,7 @@ class TestAccountMoveFiscalYear(TransactionCase):
             }
         )
 
-        self.date_range_2018 = self.DateRangeObj.create(
+        cls.date_range_2018 = cls.DateRangeObj.create(
             {
                 "name": "2018",
                 "date_from": "2018-01-01",
