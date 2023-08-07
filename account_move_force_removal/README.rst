@@ -33,10 +33,16 @@ You must care yourself about the numbering sequence doing this.
 .. contents::
    :local:
 
+Configuration
+=============
+
+Populate the Group "Accounting" / "Allow to delete invoices/journal entries".
+
 Usage
 =====
 
-#. Go to Invoicing > Customers > Invoices and enter an invoice.
+#. Add your User to the Group "Accounting" / "Allow to delete invoices/journal entries"
+#. Go to Invoicing > Customers > Invoices and enter an invoice
 #. Click on "Reset to draft"
 #. Click on "Cancel entry
 #. Try to delete invoice
@@ -67,6 +73,9 @@ Contributors
   * Víctor Martínez
   * Pedro M. Baeza
 * Alex Comba <alex.comba@agilebg.com>
+* `TAKOBI <https://takobi.online>`_:
+
+  * Simone Rubino <sir@takobi.online>
 
 Maintainers
 ~~~~~~~~~~~
