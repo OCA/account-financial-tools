@@ -2,6 +2,7 @@
 # Copyright 2017 Tecnativa - David Vidal
 # Copyright 2019 FactorLibre - Rodrigo Bonilla
 # Copyright 2022 Moduon - Eduardo de Miguel
+# Copyright 2023 Moduon - Emilio Pascual
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, fields, models
 
@@ -21,7 +22,7 @@ class ResPartner(models.Model):
         )
         partner = self.env.context.get("vat_partner")
         if partner:
-            partner.update({"vies_passed": False})
+            partner.update({"vies_passed": self.parent_id.vies_passed or False})
         return res
 
     @api.model
