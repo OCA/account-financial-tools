@@ -18,21 +18,40 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: base_vat_optional_vies
+#: code:addons/base_vat_optional_vies/models/res_config_settings.py:0
+#, python-format
+msgid "<br/>Vies passed calculated in %s partners"
+msgstr ""
+
+#. module: base_vat_optional_vies
+#: model_terms:ir.ui.view,arch_db:base_vat_optional_vies.res_config_settings_view_form
+msgid "Compute check vies"
+msgstr ""
+
+#. module: base_vat_optional_vies
+#: model:ir.model,name:base_vat_optional_vies.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: base_vat_optional_vies
 #: model:ir.model,name:base_vat_optional_vies.model_res_partner
 msgid "Contact"
 msgstr "Kontakt"
 
 #. module: base_vat_optional_vies
+#: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Prikazani naziv"
 
 #. module: base_vat_optional_vies
+#: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_config_settings__id
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__id
 msgid "ID"
 msgstr "ID"
 
 #. module: base_vat_optional_vies
+#: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_config_settings____last_update
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "Zadnje modificirano"
@@ -46,6 +65,13 @@ msgid ""
 msgstr ""
 "Porezni broj [%(vat)s] za partnera [%(name)s] se čini neispravan.\n"
 "Napomena: očekivani format je %(format)s"
+
+#. module: base_vat_optional_vies
+#: model_terms:ir.ui.view,arch_db:base_vat_optional_vies.res_config_settings_view_form
+msgid ""
+"This process can take a long time. Are you sure you want to start the "
+"process?"
+msgstr ""
 
 #. module: base_vat_optional_vies
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__vies_passed
