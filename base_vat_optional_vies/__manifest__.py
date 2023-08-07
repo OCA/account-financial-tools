@@ -8,7 +8,7 @@
 {
     "name": "Optional validation of VAT via VIES",
     "category": "Accounting",
-    "version": "14.0.2.0.0",
+    "version": "14.0.2.1.0",
     "depends": ["base_vat"],
     "data": [
         "views/res_partner_view.xml",
