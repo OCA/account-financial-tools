@@ -1,20 +1,20 @@
+# Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import common, tagged
 from odoo.tools import mute_logger
 
 _logger = logging.getLogger(__name__)
 
 
-class TestAccountChartUpdate(common.HttpCase):
-    at_install = False
-    post_install = True
-
-    def _create_xml_id(self, record):
-        return self.env["ir.model.data"].create(
+@tagged("-at_install", "post_install")
+class TestAccountChartUpdate(common.TransactionCase):
+    @classmethod
+    def _create_xml_id(cls, record):
+        return cls.env["ir.model.data"].create(
             {
                 "module": "account_chart_update",
                 "name": "{}-{}".format(record._table, record.id),
@@ -23,8 +23,9 @@ class TestAccountChartUpdate(common.HttpCase):
             }
         )
 
-    def _create_account_tmpl(self, name, code, account_type, chart_template):
-        record = self.env["account.account.template"].create(
+    @classmethod
+    def _create_account_tmpl(cls, name, code, account_type, chart_template):
+        record = cls.env["account.account.template"].create(
             {
                 "name": name,
                 "code": code,
@@ -32,16 +33,17 @@ class TestAccountChartUpdate(common.HttpCase):
                 "chart_template_id": chart_template and chart_template.id,
             }
         )
-        self._create_xml_id(record)
+        cls._create_xml_id(record)
         return record
 
-    def _create_tax_tmpl(self, name, chart_template):
-        record = self.env["account.tax.template"].create(
+    @classmethod
+    def _create_tax_tmpl(cls, name, chart_template):
+        record = cls.env["account.tax.template"].create(
             {
                 "name": name,
                 "amount": 0,
                 "chart_template_id": chart_template.id,
-                "tax_group_id": self.env.ref("account.tax_group_taxes").id,
+                "tax_group_id": cls.env.ref("account.tax_group_taxes").id,
                 "refund_repartition_line_ids": [
                     (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
                     (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
@@ -54,7 +56,7 @@ class TestAccountChartUpdate(common.HttpCase):
                 ],
             }
         )
-        self._create_xml_id(record)
+        cls._create_xml_id(record)
         return record
 
     def _create_tax_template_with_account(self, name, chart_template, account):
@@ -93,11 +95,12 @@ class TestAccountChartUpdate(common.HttpCase):
         self._create_xml_id(record)
         return record
 
-    def _create_fp_tmpl(self, name, chart_template):
-        record = self.env["account.fiscal.position.template"].create(
+    @classmethod
+    def _create_fp_tmpl(cls, name, chart_template):
+        record = cls.env["account.fiscal.position.template"].create(
             {"name": name, "chart_template_id": chart_template.id}
         )
-        self._create_xml_id(record)
+        cls._create_xml_id(record)
         return record
 
     def _get_model_data(self, record):
@@ -105,97 +108,95 @@ class TestAccountChartUpdate(common.HttpCase):
             [("model", "=", record._name), ("res_id", "=", record.id)]
         )
 
-    def setUp(self):
-        super(TestAccountChartUpdate, self).setUp()
-        self.env.user.lang = "en_US"
-        self.env.user.write(
-            {
-                "groups_id": [
-                    (6, 0, self.env.user.groups_id.ids),
-                    (4, self.env.ref("account.group_account_user").id),
-                    (4, self.env.ref("account.group_account_invoice").id),
-                    (4, self.env.ref("base.group_multi_company").id),
-                ]
-            }
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                mail_create_nolog=True,
+                mail_create_nosubscribe=True,
+                mail_notrack=True,
+                no_reset_password=True,
+                tracking_disable=True,
+            )
         )
-        self.account_template = self._create_account_tmpl(
+        cls.account_template = cls._create_account_tmpl(
             "Test", "100000", "income", False
         )
-        self.chart_template = self.env.ref(
-            "l10n_generic_coa.configurable_chart_template"
+        cls.chart_template = cls.env["account.chart.template"].create(
+            {
+                "name": "Test account_chart_update chart",
+                "currency_id": cls.env.ref("base.EUR").id,
+                "code_digits": 6,
+                "cash_account_code_prefix": "570",
+                "bank_account_code_prefix": "572",
+                "transfer_account_code_prefix": "100000",
+                "property_account_receivable_id": cls.account_template.id,
+                "property_account_payable_id": cls.account_template.id,
+                "property_account_expense_categ_id": cls.account_template.id,
+                "property_account_income_categ_id": cls.account_template.id,
+            }
         )
-        # Avoid re-creating taxes.
-        # If false, the taxes that are created will be overwrited.
-        self.account_template.chart_template_id = self.chart_template.id
-        self.account_template_pl = self._create_account_tmpl(
+        cls.account_template.chart_template_id = cls.chart_template.id
+        cls.account_template_pl = cls._create_account_tmpl(
             "Undistributed Profits/Losses",
             "999999",
             "equity",
-            self.chart_template,
+            cls.chart_template,
         )
-        self.tax_template = self._create_tax_tmpl("Test tax", self.chart_template)
-        self.fp_template = self._create_fp_tmpl("Test fp", self.chart_template)
-        self.fp_template_tax = self.env["account.fiscal.position.tax.template"].create(
-            {"tax_src_id": self.tax_template.id, "position_id": self.fp_template.id}
+        cls.tax_template = cls._create_tax_tmpl("Test tax", cls.chart_template)
+        cls.fp_template = cls._create_fp_tmpl("Test fp", cls.chart_template)
+        cls.fp_template_tax = cls.env["account.fiscal.position.tax.template"].create(
+            {"tax_src_id": cls.tax_template.id, "position_id": cls.fp_template.id}
         )
-        self._create_xml_id(self.fp_template_tax)
-        self.fp_template_account = self.env[
+        cls._create_xml_id(cls.fp_template_tax)
+        cls.fp_template_account = cls.env[
             "account.fiscal.position.account.template"
         ].create(
             {
-                "account_src_id": self.account_template.id,
-                "account_dest_id": self.account_template.id,
-                "position_id": self.fp_template.id,
+                "account_src_id": cls.account_template.id,
+                "account_dest_id": cls.account_template.id,
+                "position_id": cls.fp_template.id,
             }
         )
-        self._create_xml_id(self.fp_template_account)
-        self.tax_group = self.env["account.tax.group"].create(
-            {"name": "Test tax group"}
-        )
-        self.account_tag_1 = self.env["account.account.tag"].create(
+        cls._create_xml_id(cls.fp_template_account)
+        cls.tax_group = cls.env["account.tax.group"].create({"name": "Test tax group"})
+        cls.account_tag_1 = cls.env["account.account.tag"].create(
             {"name": "Test account tag 1"}
         )
-        self.account_tag_2 = self.env["account.account.tag"].create(
+        cls.account_tag_2 = cls.env["account.account.tag"].create(
             {"name": "Test account tag 2"}
         )
-        self.company = self.env["res.company"].create(
+        cls.company = cls.env["res.company"].create(
             {
                 "name": "Test account_chart_update company",
-                "currency_id": self.chart_template.currency_id.id,
-                "country_id": self.env.ref("base.es").id,
+                "currency_id": cls.chart_template.currency_id.id,
+                "country_id": cls.env.ref("base.es").id,
             }
         )
-        self.env.user.write(
-            {
-                "company_ids": [
-                    (6, 0, self.env.user.company_ids.ids),
-                    (4, self.company.id),
-                ],
-                "company_id": self.company.id,
-            }
-        )
-        chart_by_company_user = self.chart_template.with_user(self.env.user)
+        chart_by_company_user = cls.chart_template.with_company(cls.company)
         chart_by_company_user.try_loading()
-        self.tax = self.env["account.tax"].search(
+        cls.tax = cls.env["account.tax"].search(
             [
-                ("name", "=", self.tax_template.name),
-                ("company_id", "=", self.company.id),
+                ("name", "=", cls.tax_template.name),
+                ("company_id", "=", cls.company.id),
             ]
         )
-        self.account = self.env["account.account"].search(
+        cls.account = cls.env["account.account"].search(
             [
-                ("code", "=", self.account_template.code),
-                ("company_id", "=", self.company.id),
+                ("code", "=", cls.account_template.code),
+                ("company_id", "=", cls.company.id),
             ]
         )
-        self.fp = self.env["account.fiscal.position"].search(
-            [("name", "=", self.fp_template.name), ("company_id", "=", self.company.id)]
+        cls.fp = cls.env["account.fiscal.position"].search(
+            [("name", "=", cls.fp_template.name), ("company_id", "=", cls.company.id)]
         )
         # Prepare wizard values
-        self.wizard_obj = self.env["wizard.update.charts.accounts"]
-        self.wizard_vals = {
-            "company_id": self.company.id,
-            "chart_template_id": self.chart_template.id,
+        cls.wizard_obj = cls.env["wizard.update.charts.accounts"]
+        cls.wizard_vals = {
+            "company_id": cls.company.id,
+            "chart_template_id": cls.chart_template.id,
             "code_digits": 6,
             "lang": "en_US",
         }
@@ -515,9 +516,10 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(1, wizard.updated_account_groups)
         self.assertEqual(1, wizard.new_account_groups)
         self.assertEqual("TESTZ", group_1.code_prefix_end)
-        self.assertTrue(list(group_1.get_xml_id().values())[0])
+        self.assertTrue(list(group_1.get_external_id().values())[0])
 
-    def test_matching(self):
+    # Put it to be executed in first place for avoiding DB cursor glitches
+    def test_00_matching(self):
         # Test XML-ID matching
         self.tax_template.name = "Test 1 tax name changed"
         self.tax_template.description = "Test tax 1 description changed"
