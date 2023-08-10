@@ -10,7 +10,7 @@
     "version": "16.0.2.0.1",
     "author": "Tecnativa, BCIM, Okia, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
-    "depends": ["account", "l10n_generic_coa"],
+    "depends": ["account"],
     "category": "Accounting",
     "license": "AGPL-3",
     "data": [
