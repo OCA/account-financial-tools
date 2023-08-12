@@ -93,6 +93,7 @@ Contributors
 * Alexandre Díaz <alexandre.diaz@tecnativa.com>
 * Harald Panten <harald.panten@sygel.es>
 * Eduardo de Miguel <edu@moduon.team>
+* Emilio Pascual <emilio@moduon.team>
 
 Maintainers
 ~~~~~~~~~~~
