@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-08-07 12:10+0000\n"
+"PO-Revision-Date: 2023-09-02 21:55+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -625,30 +625,30 @@ msgstr "La cantidad de monedas debe ser positiva."
 #. module: account_cash_deposit
 #: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_coin_amount_positive
 msgid "The loose coin amount must be positive or null."
-msgstr ""
+msgstr "La cantidad de monedas sueltas debe ser positiva o nula."
 
 #. module: account_cash_deposit
 #: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_line_qty_positive
 msgid "The quantity must be positive or null."
-msgstr ""
+msgstr "La cantidad debe ser positiva o nula."
 
 #. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 #, python-format
 msgid "The total amount of %s is zero."
-msgstr ""
+msgstr "La cantidad total de %s es cero."
 
 #. module: account_cash_deposit
 #: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_value_positive
 msgid "The value must be strictly positive."
-msgstr ""
+msgstr "El valor debe ser estrictamente positivo."
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__cash_type
 #: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__coinroll_qty
 msgid "This field should never be modified."
-msgstr ""
+msgstr "Este campo no debe modificarse nunca."
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__value
@@ -656,58 +656,60 @@ msgid ""
 "This field should never be modified. For a coin roll, you must enter the "
 "value of the coin."
 msgstr ""
+"Este campo no debe modificarse nunca. Para una tirada de moneda, debe "
+"introducir el valor de la moneda."
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__total_amount
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__total_amount
 msgid "Total Amount"
-msgstr ""
+msgstr "Importe Total"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__total_value
 msgid "Total Value"
-msgstr ""
+msgstr "Valor total"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__tree_order
 #: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__tree_order
 msgid "Tree Order"
-msgstr ""
+msgstr "Orden del árbol"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__cash_type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo (o clase) de actividad excepcional registrada."
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__date
 msgid "Used as date for the journal entry."
-msgstr ""
+msgstr "Se utiliza como fecha para la entrada diaria."
 
 #. module: account_cash_deposit
 #: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
 msgid "Validate"
-msgstr ""
+msgstr "Validar"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__value
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Mensajes de la página web"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historial de la comunicación en la página web"
 
 #. module: account_cash_deposit
 #. odoo-python
@@ -716,3 +718,5 @@ msgstr ""
 msgid ""
 "You must delete cash lines that are linked to a currency other than %s."
 msgstr ""
+"Debe eliminar las líneas de caja que estén vinculadas a una divisa distinta "
+"de %s."
