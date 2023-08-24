@@ -101,6 +101,10 @@ class AccountJournal(models.Model):
     @api.model
     def _create_sequence(self, vals, refund=False):
         seq_vals = self._prepare_sequence(vals, refund=refund)
+        domain = [(key, "=", value) for key, value in seq_vals.items()]
+        existing = self.env["ir.sequence"].search(domain, limit=1)
+        if existing:
+            return existing
         return self.env["ir.sequence"].sudo().create(seq_vals)
 
     def _prepare_sequence_current_moves(self, refund=False):
