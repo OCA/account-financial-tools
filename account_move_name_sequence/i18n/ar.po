@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-09-02 21:55+0000\n"
+"Last-Translator: Hussain Hammad <hussain.hammad@greeenboard.com>\n"
 "Language-Team: none\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -14,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_name_sequence
 #: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
@@ -21,6 +23,8 @@ msgid ""
 "A move can not be posted with name \"/\" or empty value\n"
 "Check the journal sequence, please"
 msgstr ""
+"لا يمكن ترحيل قيد و اسمه \"/\" او فارغ\n"
+"الرجاء التأكد من تسلسل اليومية"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
@@ -28,43 +32,45 @@ msgid ""
 "Check this box if you don't want to share the same sequence for invoices and"
 " credit notes made from this journal"
 msgstr ""
+"استخدم هذه الخاصية ان كنت لا ترغب باستخدام نفس التسلسل للفواتير و اشعارات "
+"الدائن"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence_id
 msgid "Credit Note Entry Sequence"
-msgstr ""
+msgstr "تسلسل ادخال اشعار دائن"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence
 msgid "Dedicated Credit Note Sequence"
-msgstr ""
+msgstr "تسلسل خاص باشعار دائن"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__sequence_id
 msgid "Entry Sequence"
-msgstr ""
+msgstr "تسلسل ادخال"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__has_sequence_holes
 msgid "Has Sequence Holes"
-msgstr ""
+msgstr "التسلسل يحتوي على فراغات"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
 msgid "Highest Name"
-msgstr ""
+msgstr "ارفع اسم"
 
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "يومية"
 
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "ادخال يومية"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
@@ -78,7 +84,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__name
 msgid "Number"
-msgstr ""
+msgstr "رقم"
 
 #. module: account_move_name_sequence
 #. odoo-python
@@ -94,7 +100,7 @@ msgstr ""
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid "Refund"
-msgstr ""
+msgstr "مرتجع"
 
 #. module: account_move_name_sequence
 #. odoo-python
@@ -102,21 +108,21 @@ msgstr ""
 #: model:ir.model,name:account_move_name_sequence.model_ir_sequence
 #, python-format
 msgid "Sequence"
-msgstr ""
+msgstr "تسلسل"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
 msgid "Sequence Number"
-msgstr ""
+msgstr "رقم التسلسل"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
 msgid "Sequence Prefix"
-msgstr ""
+msgstr "قبل التسلسل"
 
 #. module: account_move_name_sequence
 #. odoo-python
