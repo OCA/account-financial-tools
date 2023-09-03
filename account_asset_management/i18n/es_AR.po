@@ -1172,8 +1172,8 @@ msgstr "Número de errores"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "Número de mensajes que requieren una acción"
+msgid "Number of messages requiring action"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
@@ -1852,6 +1852,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "o"
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "Número de mensajes que requieren una acción"
 
 #, python-format
 #~ msgid ""
