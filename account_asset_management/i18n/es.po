@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-20 01:10+0100\n"
-"PO-Revision-Date: 2023-09-04 18:36+0000\n"
+"PO-Revision-Date: 2023-09-20 18:12+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -754,7 +754,7 @@ msgstr "Seguidores"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Seguidores (Empresas)"
+msgstr "Seguidores (Socios)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
