@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-22 00:38+0000\n"
-"PO-Revision-Date: 2023-06-08 12:09+0000\n"
+"PO-Revision-Date: 2023-09-20 17:51+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -305,7 +305,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_total_amount
 msgid "Total Amount"
-msgstr "Importo Totale"
+msgstr "Importo totale"
 
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
