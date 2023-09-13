@@ -169,9 +169,7 @@ class AccountSpreadTemplate(models.Model):
             )
         if results:
             raise UserError(
-                _("Followings are duplicated combinations,\n\n{}").format(
-                    "\n".join(results)
-                )
+                _("Followings are duplicated combinations,\n\n%s") % "\n".join(results)
             )
 
 
