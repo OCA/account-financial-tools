@@ -23,8 +23,8 @@ msgstr ""
 "POT-Creation-Date: 2017-03-03 23:22+0000\n"
 "PO-Revision-Date: 2022-10-28 09:57+0000\n"
 "Last-Translator: Vincent Hatakeyama <vincent+github@hatakeyama.fr>\n"
-"Language-Team: French (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -386,17 +386,17 @@ msgid ""
 "is equal to the asset value."
 msgstr ""
 "Choisir la méthode utilisée pour calculer les lignes d'amortissements.\n"
-"  * Linéaire : Calcul sur la base de valeur de base / nombre d’"
-"amortissement. Valeur de base = Valeur d’achat - Valeur de revente.\n"
+"  * Linéaire : Calcul sur la base de valeur de base / nombre "
+"d’amortissement. Valeur de base = Valeur d’achat - Valeur de revente.\n"
 "  * Linéaire-Limite : Linéaire jusqu’à la valeur de revente. Valeur de base "
 "= Valeur d’achat.\n"
-"  * Dégressif : Calcul sur la base de valeur résiduelle × facteur dégressif."
-"\n"
+"  * Dégressif : Calcul sur la base de valeur résiduelle × facteur "
+"dégressif.\n"
 "  * Dégressif–linéaire (uniquement pour la méthode de temps en année) : "
-"Dégressif devient linéaire quand l’amortissement linéaire annuel surpasse l’"
-"amortissement dégressif annuel.\n"
-"  * Dégressif–limite : Dégressif jusqu’à la valeur de revente. La base d’"
-"amortissement est égale à la valeur de l’immobilisation."
+"Dégressif devient linéaire quand l’amortissement linéaire annuel surpasse "
+"l’amortissement dégressif annuel.\n"
+"  * Dégressif–limite : Dégressif jusqu’à la valeur de revente. La base "
+"d’amortissement est égale à la valeur de l’immobilisation."
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__close
@@ -422,6 +422,8 @@ msgstr "Société"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__company_currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__company_currency_id
 msgid "Company Currency"
 msgstr "Devise de la société"
 
@@ -911,8 +913,8 @@ msgid ""
 "from the depreciation start date instead of the first day of the fiscal year."
 msgstr ""
 "Indique que la première valeur de cette immobilisation doit être calculée "
-"depuis la date de début de l’immobilisation et non le premier jour de l’"
-"exercice fiscal."
+"depuis la date de début de l’immobilisation et non le premier jour de "
+"l’exercice fiscal."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1510,7 +1512,8 @@ msgstr ""
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_number
 msgid "The number of years needed to depreciate your asset"
-msgstr "Le nombre d’années nécessaires pour l’amortissement de l’immobilisation"
+msgstr ""
+"Le nombre d’années nécessaires pour l’amortissement de l’immobilisation"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
@@ -1525,8 +1528,8 @@ msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value)."
 msgstr ""
-"Ce montant représente la base d’amortissement de l’immobilisation (valeur d’"
-"achat − valeur de revente)."
+"Ce montant représente la base d’amortissement de l’immobilisation (valeur "
+"d’achat − valeur de revente)."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__purchase_value
@@ -1651,8 +1654,8 @@ msgstr ""
 "Quand une immobilisation est créée, son statut est « Brouillon ».\n"
 "Quand l’immobilisation est confirmée, le statut devient « En cours » et les "
 "amortissements peuvent être comptabilisés.\n"
-"Si la dernière ligne d’amortissement est comptabilisée, le statut devient « "
-"Clôturé ».\n"
+"Si la dernière ligne d’amortissement est comptabilisée, le statut devient "
+"« Clôturé ».\n"
 "Quand l’immobilisation est sortie, son statut prend la valeur « Sortie »."
 
 #. module: account_asset_management
@@ -1696,8 +1699,8 @@ msgid ""
 "You can't make an early removal if all the depreciation lines for previous "
 "periods are not posted."
 msgstr ""
-"Vous ne pouvez pas procéder à une sortie anticipée si les lignes d’"
-"amortissement pour les périodes antérieures ne sont pas comptabilisées."
+"Vous ne pouvez pas procéder à une sortie anticipée si les lignes "
+"d’amortissement pour les périodes antérieures ne sont pas comptabilisées."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
@@ -1748,8 +1751,8 @@ msgstr ""
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr ""
-"Vous ne pouvez pas supprimer une immobilisation qui contient des lignes d’"
-"amortissement comptabilisées."
+"Vous ne pouvez pas supprimer une immobilisation qui contient des lignes "
+"d’amortissement comptabilisées."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0

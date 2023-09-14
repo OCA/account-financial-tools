@@ -399,6 +399,66 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(wizard.new_accounts, 0)
         wizard.unlink()
 
+    def test_chart_update_groups(self):
+        self.wizard_vals.update(
+            {
+                "update_account": False,
+                "update_tax": False,
+                "update_fiscal_position": False,
+                "recreate_xml_ids": True,
+            }
+        )
+        template_1 = self.env["account.group.template"].create(
+            {
+                "name": "TEST",
+                "code_prefix_start": "TESTZ",
+                "chart_template_id": self.chart_template.id,
+            }
+        )
+        self._create_xml_id(template_1)
+        template_2 = self.env["account.group.template"].create(
+            {
+                "name": "TEST",
+                "code_prefix_start": "TESTY",
+                "chart_template_id": self.chart_template.id,
+            }
+        )
+        self._create_xml_id(template_2)
+        group_1 = self.env["account.group"].create(
+            {
+                "name": "TEST",
+                "code_prefix_start": "TESTZ",
+                "code_prefix_end": "TESZZ",
+                "company_id": self.company.id,
+            }
+        )
+        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard.action_find_records()
+        self.assertEqual(2, len(wizard.account_group_ids))
+        self.assertEqual(
+            template_1,
+            wizard.account_group_ids.filtered(
+                lambda r: r.type == "updated"
+            ).account_group_id,
+        )
+        self.assertEqual(
+            group_1,
+            wizard.account_group_ids.filtered(
+                lambda r: r.type == "updated"
+            ).update_account_group_id,
+        )
+        self.assertEqual(
+            template_2,
+            wizard.account_group_ids.filtered(
+                lambda r: r.type == "new"
+            ).account_group_id,
+        )
+        wizard.action_update_records()
+        self.assertEqual(1, wizard.updated_account_groups)
+        self.assertEqual(1, wizard.new_account_groups)
+        self.assertEqual("TESTZ", group_1.code_prefix_end)
+        self.assertTrue(list(group_1.get_xml_id().values())[0])
+
     def test_matching(self):
         # Test XML-ID matching
         self.tax_template.name = "Test 1 tax name changed"

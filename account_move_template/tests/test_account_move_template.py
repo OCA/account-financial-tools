@@ -22,7 +22,7 @@ class TestAccountMoveTemplate(TransactionCase):
         self.env.user.write(
             {"company_ids": [(4, company.id)], "company_id": company.id}
         )
-        self.with_context(company_id=company.id, force_company=company.id)
+        self.with_company(company.id).with_context(company_id=company.id)
         wizard = self.env["wizard.multi.charts.accounts"].create(
             {
                 "company_id": company.id,

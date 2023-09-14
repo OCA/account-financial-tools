@@ -33,13 +33,12 @@ class AccountMove(models.Model):
     asset_count = fields.Integer(compute="_compute_asset_count")
 
     def _compute_asset_count(self):
-        for rec in self:
-            assets = (
-                self.env["account.asset.line"]
-                .search([("move_id", "=", rec.id)])
-                .mapped("asset_id")
-            )
-            rec.asset_count = len(assets)
+        rg_res = self.env["account.asset.line"].read_group(
+            [("move_id", "in", self.ids)], ["move_id"], ["move_id"]
+        )
+        mapped_data = {x["move_id"][0]: x["move_id_count"] for x in rg_res}
+        for move in self:
+            move.asset_count = mapped_data.get(move.id, 0)
 
     def unlink(self):
         # for move in self:
@@ -180,6 +179,7 @@ class AccountMoveLine(models.Model):
         comodel_name="account.asset",
         string="Asset",
         ondelete="restrict",
+        check_company=True,
     )
 
     @api.depends("account_id", "asset_id")
