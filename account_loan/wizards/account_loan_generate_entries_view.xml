@@ -37,6 +37,6 @@
         id="account_loan_generate_wizard_menu"
         parent="account.menu_finance_entries_generate_entries"
         sequence="111"
-        groups="base.group_no_one"
+        groups="account.group_account_manager"
     />
 </odoo>

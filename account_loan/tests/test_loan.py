@@ -18,42 +18,37 @@ except (ImportError, IOError) as err:
 
 @tagged("post_install", "-at_install")
 class TestLoan(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.company = self.browse_ref("base.main_company")
-        self.company_02 = self.env["res.company"].create({"name": "Auxiliar company"})
-        self.journal = self.env["account.journal"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.company = cls.env.ref("base.main_company")
+        cls.company_02 = cls.env["res.company"].create({"name": "Auxiliar company"})
+        cls.journal = cls.env["account.journal"].create(
             {
-                "company_id": self.company.id,
+                "company_id": cls.company.id,
                 "type": "purchase",
                 "name": "Debts",
                 "code": "DBT",
             }
         )
-        self.loan_account = self.create_account(
+        cls.loan_account = cls.create_account(
             "DEP",
             "depreciation",
-            self.browse_ref("account.data_account_type_current_liabilities").id,
+            "liability_current",
         )
-        self.payable_account = self.create_account(
-            "PAY", "payable", self.browse_ref("account.data_account_type_payable").id
-        )
-        self.asset_account = self.create_account(
-            "ASSET", "asset", self.browse_ref("account.data_account_type_payable").id
-        )
-        self.interests_account = self.create_account(
-            "FEE", "Fees", self.browse_ref("account.data_account_type_expenses").id
-        )
-        self.lt_loan_account = self.create_account(
+        cls.payable_account = cls.create_account("PAY", "payable", "liability_payable")
+        cls.asset_account = cls.create_account("ASSET", "asset", "liability_payable")
+        cls.interests_account = cls.create_account("FEE", "Fees", "expense")
+        cls.lt_loan_account = cls.create_account(
             "LTD",
             "Long term depreciation",
-            self.browse_ref("account.data_account_type_non_current_liabilities").id,
+            "liability_non_current",
         )
-        self.partner = self.env["res.partner"].create({"name": "Bank"})
-        self.product = self.env["product.product"].create(
+        cls.partner = cls.env["res.partner"].create({"name": "Bank"})
+        cls.product = cls.env["product.product"].create(
             {"name": "Payment", "type": "service"}
         )
-        self.interests_product = self.env["product.product"].create(
+        cls.interests_product = cls.env["product.product"].create(
             {"name": "Bank fee", "type": "service"}
         )
 
@@ -281,8 +276,10 @@ class TestLoan(TransactionCase):
         )
         self.assertTrue(line.has_invoices)
         self.assertTrue(line.has_moves)
-        self.assertIn(line.move_ids.id, action["domain"][0][2])
-        loan.refresh()
+        self.assertEqual(
+            line.move_ids, self.env[action["res_model"]].search(action["domain"])
+        )
+        loan.invalidate_recordset()
         with self.assertRaises(UserError):
             self.env["account.loan.pay.amount"].create(
                 {
@@ -303,18 +300,22 @@ class TestLoan(TransactionCase):
                 }
             ).run()
         self.assertTrue(line.move_ids)
-        self.assertEqual(line.move_ids.state, "draft")
+        self.assertTrue(line.move_ids.filtered(lambda r: r.is_invoice()))
+        self.assertTrue(line.move_ids.filtered(lambda r: not r.is_invoice()))
+        self.assertTrue(all([m.state == "draft" for m in line.move_ids]))
         self.assertTrue(line.has_moves)
         line.move_ids.action_post()
-        self.assertEqual(line.move_ids.state, "posted")
-        self.assertIn(
-            line.move_ids.id,
-            self.env["account.move"].search(loan.view_account_moves()["domain"]).ids,
-        )
-        self.assertEqual(
-            line.move_ids.id,
-            self.env["account.move"].search(loan.view_account_invoices()["domain"]).id,
-        )
+        self.assertTrue(all([m.state == "posted" for m in line.move_ids]))
+        for move in line.move_ids:
+            self.assertIn(
+                move,
+                self.env["account.move"].search(loan.view_account_moves()["domain"]),
+            )
+        for move in line.move_ids.filtered(lambda r: r.is_invoice()):
+            self.assertIn(
+                move,
+                self.env["account.move"].search(loan.view_account_invoices()["domain"]),
+            )
         with self.assertRaises(UserError):
             self.env["account.loan.pay.amount"].create(
                 {
@@ -398,7 +399,7 @@ class TestLoan(TransactionCase):
             self.assertTrue(line.move_ids)
             self.assertEqual(line.move_ids.state, "posted")
         self.assertEqual(loan.state, "closed")
-        loan.refresh()
+        loan.invalidate_recordset()
         self.assertEqual(loan.payment_amount - loan.interests_amount, amount)
         self.assertEqual(loan.pending_principal_amount, 0)
 
@@ -432,13 +433,14 @@ class TestLoan(TransactionCase):
         with self.assertRaises(UserError):
             post.run()
 
-    def create_account(self, code, name, type_id):
-        return self.env["account.account"].create(
+    @classmethod
+    def create_account(cls, code, name, account_type):
+        return cls.env["account.account"].create(
             {
-                "company_id": self.company.id,
+                "company_id": cls.company.id,
                 "name": name,
                 "code": code,
-                "user_type_id": type_id,
+                "account_type": account_type,
                 "reconcile": True,
             }
         )

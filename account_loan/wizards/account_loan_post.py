@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -81,7 +81,7 @@ class AccountLoanPost(models.TransientModel):
             "date": self.loan_id.start_date,
             "ref": self.loan_id.name,
             "journal_id": self.journal_id.id,
-            "line_ids": [(0, 0, vals) for vals in self.move_line_vals()],
+            "line_ids": [Command.create(vals) for vals in self.move_line_vals()],
         }
 
     def run(self):
