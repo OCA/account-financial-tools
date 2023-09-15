@@ -17,6 +17,7 @@
         "wizards/account_loan_post_view.xml",
         "views/account_loan_view.xml",
         "views/account_move_view.xml",
+        "views/res_partner.xml",
     ],
     "installable": True,
     "maintainers": ["etobella"],
