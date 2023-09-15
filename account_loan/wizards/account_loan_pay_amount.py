@@ -69,7 +69,7 @@ class AccountLoan(models.TransientModel):
         sequence = min(lines.mapped("sequence"))
         for line in lines:
             line.sequence += 1
-            line.flush()
+            line.flush_recordset()
         old_line = lines.filtered(lambda r: r.sequence == sequence + 1)
         pending = old_line.pending_principal_amount
         if self.loan_id.currency_id.compare_amounts(self.amount, pending) == 1:
@@ -91,10 +91,10 @@ class AccountLoan(models.TransientModel):
                 line.pending_principal_amount = amount
                 if line.sequence != sequence:
                     line.rate = self.loan_id.rate_period
-                    line.check_amount()
+                    line._check_amount()
                 amount -= line.payment_amount - line.interests_amount
         if self.loan_id.long_term_loan_account_id:
-            self.loan_id.check_long_term_principal_amount()
+            self.loan_id._check_long_term_principal_amount()
         if self.loan_id.currency_id.compare_amounts(pending, self.amount) == 0:
             self.loan_id.write({"state": "cancelled"})
         return new_line.view_process_values()
