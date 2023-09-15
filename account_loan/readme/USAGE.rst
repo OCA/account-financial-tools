@@ -1,6 +1,6 @@
 To use this module, you need to:
 
-#. Go to `Invoicing / Accounting > Adviser > Loans`
+#. Go to `Invoicing / Accounting > Accounting > Loans`
 #. Configure a loan selecting the company, loan type, amount, rate and accounts
 #. Post the loan, it will automatically create an account move with the
    expected amounts
