@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo-addon-account_journal_general_sequence>=16.0dev,<16.1dev',
         'odoo-addon-account_journal_lock_date>=16.0dev,<16.1dev',
         'odoo-addon-account_lock_date_update>=16.0dev,<16.1dev',
+        'odoo-addon-account_move_fiscal_year>=16.0dev,<16.1dev',
         'odoo-addon-account_move_line_purchase_info>=16.0dev,<16.1dev',
         'odoo-addon-account_move_line_sale_info>=16.0dev,<16.1dev',
         'odoo-addon-account_move_line_tax_editable>=16.0dev,<16.1dev',
