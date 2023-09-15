@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,6 +34,7 @@ msgid "Is fiscal month?"
 msgstr ""
 
 #. module: account_fiscal_month
+#. odoo-python
 #: code:addons/account_fiscal_month/models/date_range_type.py:0
 #, python-format
 msgid "You can't delete date range type: Fiscal month"
