@@ -103,6 +103,52 @@ class TestLoan(TransactionCase):
         self.assertEqual(line_1.principal_amount, 0)
         self.assertEqual(line_end.principal_amount, 500000)
 
+    def test_increase_amount_validation(self):
+        amount = 10000
+        periods = 24
+        loan = self.create_loan("fixed-annuity", amount, 1, periods)
+        self.assertTrue(loan.line_ids)
+        self.assertEqual(len(loan.line_ids), periods)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertAlmostEqual(
+            -numpy_financial.pmt(1 / 100 / 12, 24, 10000), line.payment_amount, 2
+        )
+        self.assertEqual(line.long_term_principal_amount, 0)
+        loan.long_term_loan_account_id = self.lt_loan_account
+        loan.compute_lines()
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertGreater(line.long_term_principal_amount, 0)
+        self.post(loan)
+        self.assertTrue(loan.start_date)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertTrue(line)
+        self.assertFalse(line.move_ids)
+        wzd = self.env["account.loan.generate.wizard"].create({})
+        action = wzd.run()
+        self.assertTrue(action)
+        self.assertFalse(wzd.run())
+        self.assertTrue(line.move_ids)
+        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        self.assertTrue(line.move_ids)
+        self.assertEqual(line.move_ids.state, "posted")
+        with self.assertRaises(UserError):
+            self.env["account.loan.increase.amount"].with_context(
+                default_loan_id=loan.id
+            ).create(
+                {
+                    "amount": (amount - amount / periods) / 2,
+                    "date": line.date + relativedelta(months=-1),
+                }
+            ).run()
+        with self.assertRaises(UserError):
+            self.env["account.loan.increase.amount"].with_context(
+                default_loan_id=loan.id
+            ).create({"amount": 0, "date": line.date}).run()
+        with self.assertRaises(UserError):
+            self.env["account.loan.increase.amount"].with_context(
+                default_loan_id=loan.id
+            ).create({"amount": -100, "date": line.date}).run()
+
     def test_pay_amount_validation(self):
         amount = 10000
         periods = 24
@@ -132,26 +178,125 @@ class TestLoan(TransactionCase):
         self.assertTrue(line.move_ids)
         self.assertEqual(line.move_ids.state, "posted")
         with self.assertRaises(UserError):
-            self.env["account.loan.pay.amount"].create(
+            self.env["account.loan.pay.amount"].with_context(
+                default_loan_id=loan.id
+            ).create(
                 {
-                    "loan_id": loan.id,
                     "amount": (amount - amount / periods) / 2,
                     "fees": 100,
                     "date": line.date + relativedelta(months=-1),
                 }
             ).run()
         with self.assertRaises(UserError):
-            self.env["account.loan.pay.amount"].create(
-                {"loan_id": loan.id, "amount": amount, "fees": 100, "date": line.date}
-            ).run()
+            self.env["account.loan.pay.amount"].with_context(
+                default_loan_id=loan.id
+            ).create({"amount": amount, "fees": 100, "date": line.date}).run()
         with self.assertRaises(UserError):
-            self.env["account.loan.pay.amount"].create(
-                {"loan_id": loan.id, "amount": 0, "fees": 100, "date": line.date}
-            ).run()
+            self.env["account.loan.pay.amount"].with_context(
+                default_loan_id=loan.id
+            ).create({"amount": 0, "fees": 100, "date": line.date}).run()
         with self.assertRaises(UserError):
-            self.env["account.loan.pay.amount"].create(
-                {"loan_id": loan.id, "amount": -100, "fees": 100, "date": line.date}
-            ).run()
+            self.env["account.loan.pay.amount"].with_context(
+                default_loan_id=loan.id
+            ).create({"amount": -100, "fees": 100, "date": line.date}).run()
+
+    def test_increase_amount_loan(self):
+        amount = 10000
+        periods = 24
+        loan = self.create_loan("fixed-annuity", amount, 1, periods)
+        self.assertTrue(loan.line_ids)
+        self.assertEqual(len(loan.line_ids), periods)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertAlmostEqual(
+            -numpy_financial.pmt(1 / 100 / 12, 24, 10000), line.payment_amount, 2
+        )
+        self.assertEqual(line.long_term_principal_amount, 0)
+        loan.long_term_loan_account_id = self.lt_loan_account
+        loan.compute_lines()
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertGreater(line.long_term_principal_amount, 0)
+        self.post(loan)
+        self.assertTrue(loan.start_date)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertTrue(line)
+        self.assertFalse(line.move_ids)
+        wzd = self.env["account.loan.generate.wizard"].create({})
+        action = wzd.run()
+        self.assertTrue(action)
+        self.assertFalse(wzd.run())
+        self.assertTrue(line.move_ids)
+        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        self.assertTrue(line.move_ids)
+        self.assertEqual(line.move_ids.state, "posted")
+        pending_principal_amount = loan.pending_principal_amount
+        action = (
+            self.env["account.loan.increase.amount"]
+            .with_context(default_loan_id=loan.id)
+            .create(
+                {
+                    "amount": 1000,
+                    "date": line.date,
+                }
+            )
+            .run()
+        )
+        new_move = self.env[action["res_model"]].search(action["domain"])
+        new_move.ensure_one()
+        self.assertFalse(new_move.is_invoice())
+        self.assertEqual(loan, new_move.loan_id)
+        self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
+
+    def test_increase_amount_leasing(self):
+        amount = 10000
+        periods = 24
+        loan = self.create_loan("fixed-annuity", amount, 1, periods)
+        self.assertTrue(loan.line_ids)
+        self.assertEqual(len(loan.line_ids), periods)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertAlmostEqual(
+            -numpy_financial.pmt(1 / 100 / 12, 24, 10000), line.payment_amount, 2
+        )
+        self.assertEqual(line.long_term_principal_amount, 0)
+        loan.is_leasing = True
+        loan.long_term_loan_account_id = self.lt_loan_account
+        loan.compute_lines()
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertGreater(line.long_term_principal_amount, 0)
+        self.post(loan)
+        self.assertTrue(loan.start_date)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertTrue(line)
+        self.assertFalse(line.move_ids)
+        wzd = self.env["account.loan.generate.wizard"].create(
+            {
+                "date": fields.date.today() + relativedelta(days=1),
+                "loan_type": "leasing",
+            }
+        )
+        action = wzd.run()
+        self.assertTrue(action)
+        self.assertFalse(wzd.run())
+        self.assertTrue(line.move_ids)
+        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        self.assertTrue(line.move_ids)
+        self.assertEqual(line.move_ids.state, "posted")
+        pending_principal_amount = loan.pending_principal_amount
+        action = (
+            self.env["account.loan.increase.amount"]
+            .with_context(default_loan_id=loan.id)
+            .create(
+                {
+                    "amount": 1000,
+                    "date": line.date,
+                }
+            )
+            .run()
+        )
+        new_move = self.env[action["res_model"]].search(action["domain"])
+        new_move.ensure_one()
+        self.assertFalse(new_move.is_invoice())
+        self.assertEqual(loan, new_move.loan_id)
+        self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
 
     def test_fixed_annuity_begin_loan(self):
         amount = 10000

@@ -1,14 +1,38 @@
-# Copyright 2018 Creu Blanca
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2023 Dixmit
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
-class AccountLoan(models.TransientModel):
-    _name = "account.loan.pay.amount"
-    _description = "Loan pay amount"
+class AccountLoanIncreaseAmount(models.TransientModel):
+    _name = "account.loan.increase.amount"
+    _description = "Increase the debt of a loan"
 
+    @api.model
+    def _default_journal_id(self):
+        loan_id = self.env.context.get("default_loan_id")
+        if loan_id:
+            return self.env["account.loan"].browse(loan_id).journal_id.id
+
+    @api.model
+    def _default_account_id(self):
+        loan_id = self.env.context.get("default_loan_id")
+        if loan_id:
+            loan = self.env["account.loan"].browse(loan_id)
+            if loan.is_leasing:
+                return loan.leased_asset_account_id.id
+            else:
+                return loan.partner_id.with_company(
+                    loan.company_id
+                ).property_account_receivable_id.id
+
+    journal_id = fields.Many2one(
+        "account.journal", required=True, default=lambda r: r._default_journal_id()
+    )
+    account_id = fields.Many2one(
+        "account.account", required=True, default=lambda r: r._default_account_id()
+    )
     loan_id = fields.Many2one(
         "account.loan",
         required=True,
@@ -17,32 +41,19 @@ class AccountLoan(models.TransientModel):
     currency_id = fields.Many2one(
         "res.currency", related="loan_id.currency_id", readonly=True
     )
-    cancel_loan = fields.Boolean(
-        default=False,
-    )
     date = fields.Date(required=True, default=fields.Date.today())
     amount = fields.Monetary(
         currency_field="currency_id",
         string="Amount to reduce from Principal",
     )
-    fees = fields.Monetary(currency_field="currency_id", string="Bank fees")
-
-    @api.onchange("cancel_loan")
-    def _onchange_cancel_loan(self):
-        if self.cancel_loan:
-            self.amount = max(
-                self.loan_id.line_ids.filtered(lambda r: not r.move_ids).mapped(
-                    "pending_principal_amount"
-                )
-            )
 
     def new_line_vals(self, sequence):
         return {
             "loan_id": self.loan_id.id,
             "sequence": sequence,
-            "payment_amount": self.amount + self.fees,
+            "payment_amount": -self.amount,
             "rate": 0,
-            "interests_amount": self.fees,
+            "interests_amount": 0,
             "date": self.date,
         }
 
@@ -75,8 +86,6 @@ class AccountLoan(models.TransientModel):
             line.flush_recordset()
         old_line = lines.filtered(lambda r: r.sequence == sequence + 1)
         pending = old_line.pending_principal_amount
-        if self.loan_id.currency_id.compare_amounts(self.amount, pending) == 1:
-            raise UserError(_("Amount cannot be bigger than debt"))
         if self.loan_id.currency_id.compare_amounts(self.amount, 0) <= 0:
             raise UserError(_("Amount cannot be less than zero"))
         self.loan_id.periods += 1
@@ -100,4 +109,5 @@ class AccountLoan(models.TransientModel):
             self.loan_id._check_long_term_principal_amount()
         if self.loan_id.currency_id.compare_amounts(pending, self.amount) == 0:
             self.loan_id.write({"state": "cancelled"})
-        return new_line.view_process_values()
+        new_line._generate_move(journal=self.journal_id, account=self.account_id)
+        return new_line.view_account_values()
