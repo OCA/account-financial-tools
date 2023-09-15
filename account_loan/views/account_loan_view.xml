@@ -66,12 +66,29 @@
                         <button
                             name="%(account_loan_pay_amount_action)d"
                             class="oe_stat_button"
-                            icon="fa-usd"
+                            icon="fa-arrow-down"
                             attrs="{'invisible': [('state', '!=', 'posted')]}"
                             type="action"
-                            string="Pay amount"
                             groups="account.group_account_manager"
-                        />
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Deduct</span>
+                                <span class="o_stat_text">Debt</span>
+                            </div>
+                        </button>
+                        <button
+                            name="%(account_loan_increase_amount_act_window)d"
+                            class="oe_stat_button"
+                            icon="fa-arrow-up"
+                            attrs="{'invisible': [('state', '!=', 'posted')]}"
+                            type="action"
+                            groups="account.group_account_manager"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Increase</span>
+                                <span class="o_stat_text">Debt</span>
+                            </div>
+                        </button>
                     </div>
                     <h1>
                         <field name="name" />
