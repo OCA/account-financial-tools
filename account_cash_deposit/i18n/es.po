@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-04 18:36+0000\n"
+"PO-Revision-Date: 2023-09-20 17:47+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -82,7 +82,7 @@ msgstr "Activo"
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_ids
 msgid "Activities"
-msgstr "Avtividades"
+msgstr "Actividades"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_exception_decoration
