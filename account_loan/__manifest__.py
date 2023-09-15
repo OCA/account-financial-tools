@@ -9,6 +9,7 @@
     "category": "Accounting",
     "depends": ["account"],
     "data": [
+        "wizards/account_loan_increase_amount.xml",
         "data/ir_sequence_data.xml",
         "security/ir.model.access.csv",
         "security/account_loan_security.xml",
