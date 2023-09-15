@@ -238,34 +238,38 @@ class AccountLoanLine(models.Model):
             + self.interests_amount
         )
 
-    def _move_vals(self):
+    def _move_vals(self, journal=False, account=False):
         return {
             "loan_line_id": self.id,
             "loan_id": self.loan_id.id,
             "date": self.date,
             "ref": self.name,
-            "journal_id": self.loan_id.journal_id.id,
-            "line_ids": [Command.create(vals) for vals in self._move_line_vals()],
+            "journal_id": (journal and journal.id) or self.loan_id.journal_id.id,
+            "line_ids": [
+                Command.create(vals) for vals in self._move_line_vals(account=account)
+            ],
         }
 
-    def _move_line_vals(self):
+    def _move_line_vals(self, account=False):
         vals = []
         partner = self.loan_id.partner_id.with_company(self.loan_id.company_id)
         vals.append(
             {
-                "account_id": partner.property_account_payable_id.id,
+                "account_id": (account and account.id)
+                or partner.property_account_payable_id.id,
                 "partner_id": partner.id,
                 "credit": self.payment_amount,
                 "debit": 0,
             }
         )
-        vals.append(
-            {
-                "account_id": self.loan_id.interest_expenses_account_id.id,
-                "credit": 0,
-                "debit": self.interests_amount,
-            }
-        )
+        if self.interests_amount:
+            vals.append(
+                {
+                    "account_id": self.loan_id.interest_expenses_account_id.id,
+                    "credit": 0,
+                    "debit": self.interests_amount,
+                }
+            )
         vals.append(
             {
                 "account_id": self.loan_id.short_term_loan_account_id.id,
@@ -326,7 +330,7 @@ class AccountLoanLine(models.Model):
         )
         return vals
 
-    def _generate_move(self):
+    def _generate_move(self, journal=False, account=False):
         """
         Computes and post the moves of loans
         :return: list of account.move generated
@@ -338,7 +342,9 @@ class AccountLoanLine(models.Model):
                     lambda r: r.date < record.date and not r.move_ids
                 ):
                     raise UserError(_("Some moves must be created first"))
-                move = self.env["account.move"].create(record._move_vals())
+                move = self.env["account.move"].create(
+                    record._move_vals(journal=journal, account=account)
+                )
                 move.action_post()
                 res.append(move.id)
         return res
@@ -372,6 +378,9 @@ class AccountLoanLine(models.Model):
                 for line in invoice.invoice_line_ids:
                     line.tax_ids = line._get_computed_taxes()
                 invoice.flush_recordset()
+                invoice.filtered(
+                    lambda m: m.currency_id.round(m.amount_total) < 0
+                ).action_switch_invoice_into_refund_credit_note()
                 if record.loan_id.post_invoice:
                     invoice.action_post()
                 if (
