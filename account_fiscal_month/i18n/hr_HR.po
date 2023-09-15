@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_fiscal_month
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:23+0000\n"
+"PO-Revision-Date: 2017-11-28 23:23+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Croatian (Croatia) (https://www.transifex.com/oca/teams/23907/"
+"hr_HR/)\n"
+"Language: hr_HR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. module: account_fiscal_month
+#: model:ir.model,name:account_fiscal_month.model_res_company
+msgid "Companies"
+msgstr "Poduzeća"
+
+#. module: account_fiscal_month
+#: model:ir.model,name:account_fiscal_month.model_date_range_type
+#, fuzzy
+msgid "Date Range Type"
+msgstr "date.range.type"
+
+#. module: account_fiscal_month
+#: model:date.range.type,name:account_fiscal_month.date_range_fiscal_month
+msgid "Fiscal month"
+msgstr ""
+
+#. module: account_fiscal_month
+#: model:ir.model.fields,field_description:account_fiscal_month.field_date_range_type__fiscal_month
+msgid "Is fiscal month?"
+msgstr ""
+
+#. module: account_fiscal_month
+#: code:addons/account_fiscal_month/models/date_range_type.py:0
+#, python-format
+msgid "You can't delete date range type: Fiscal month"
+msgstr ""
