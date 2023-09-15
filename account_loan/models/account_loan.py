@@ -267,7 +267,7 @@ class AccountLoan(models.Model):
             if record.loan_type == "fixed-annuity":
                 record.fixed_amount = -record.currency_id.round(
                     numpy_financial.pmt(
-                        record.loan_rate() / 100,
+                        record._loan_rate() / 100,
                         record.fixed_periods,
                         record.fixed_loan_amount,
                         -record.residual_amount,
@@ -276,7 +276,7 @@ class AccountLoan(models.Model):
             elif record.loan_type == "fixed-annuity-begin":
                 record.fixed_amount = -record.currency_id.round(
                     numpy_financial.pmt(
-                        record.loan_rate() / 100,
+                        record._loan_rate() / 100,
                         record.fixed_periods,
                         record.fixed_loan_amount,
                         -record.residual_amount,
@@ -292,7 +292,7 @@ class AccountLoan(models.Model):
                 record.fixed_amount = 0.0
 
     @api.model
-    def compute_rate(self, rate, rate_type, method_period):
+    def _compute_rate(self, rate, rate_type, method_period):
         """
         Returns the real rate
         :param rate: Rate
@@ -309,10 +309,10 @@ class AccountLoan(models.Model):
     @api.depends("rate", "method_period", "rate_type")
     def _compute_rate_period(self):
         for record in self:
-            record.rate_period = record.loan_rate()
+            record.rate_period = record._loan_rate()
 
-    def loan_rate(self):
-        return self.compute_rate(self.rate, self.rate_type, self.method_period)
+    def _loan_rate(self):
+        return self._compute_rate(self.rate, self.rate_type, self.method_period)
 
     @api.depends("journal_id", "company_id")
     def _compute_currency(self):
@@ -345,20 +345,21 @@ class AccountLoan(models.Model):
             self.short_term_loan_account_id
         ) = self.long_term_loan_account_id = False
 
-    def get_default_name(self, vals):
+    def _get_default_name(self, vals):
         return self.env["ir.sequence"].next_by_code("account.loan") or "/"
 
-    @api.model
-    def create(self, vals):
-        if vals.get("name", "/") == "/":
-            vals["name"] = self.get_default_name(vals)
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("name", "/") == "/":
+                vals["name"] = self._get_default_name(vals)
+        return super().create(vals_list)
 
     def post(self):
         self.ensure_one()
         if not self.start_date:
             self.start_date = fields.Date.today()
-        self.compute_draft_lines()
+        self._compute_draft_lines()
         self.write({"state": "posted"})
 
     def close(self):
@@ -367,10 +368,10 @@ class AccountLoan(models.Model):
     def compute_lines(self):
         self.ensure_one()
         if self.state == "draft":
-            return self.compute_draft_lines()
-        return self.compute_posted_lines()
+            return self._compute_draft_lines()
+        return self._compute_posted_lines()
 
-    def compute_posted_lines(self):
+    def _compute_posted_lines(self):
         """
         Recompute the amounts of not finished lines. Useful if rate is changed
         """
@@ -381,12 +382,12 @@ class AccountLoan(models.Model):
             else:
                 line.rate = self.rate_period
                 line.pending_principal_amount = amount
-                line.check_amount()
+                line._check_amount()
                 amount -= line.payment_amount - line.interests_amount
         if self.long_term_loan_account_id:
-            self.check_long_term_principal_amount()
+            self._check_long_term_principal_amount()
 
-    def check_long_term_principal_amount(self):
+    def _check_long_term_principal_amount(self):
         """
         Recomputes the long term pending principal of unfinished lines.
         """
@@ -408,7 +409,7 @@ class AccountLoan(models.Model):
             )
             amount = line.long_term_pending_principal_amount
 
-    def new_line_vals(self, sequence, date, amount):
+    def _new_line_vals(self, sequence, date, amount):
         return {
             "loan_id": self.id,
             "sequence": sequence,
@@ -417,7 +418,7 @@ class AccountLoan(models.Model):
             "rate": self.rate_period,
         }
 
-    def compute_draft_lines(self):
+    def _compute_draft_lines(self):
         self.ensure_one()
         self.fixed_periods = self.periods
         self.fixed_loan_amount = self.loan_amount
@@ -432,13 +433,13 @@ class AccountLoan(models.Model):
             date += delta
         for i in range(1, self.periods + 1):
             line = self.env["account.loan.line"].create(
-                self.new_line_vals(i, date, amount)
+                self._new_line_vals(i, date, amount)
             )
-            line.check_amount()
+            line._check_amount()
             date += delta
             amount -= line.payment_amount - line.interests_amount
         if self.long_term_loan_account_id:
-            self.check_long_term_principal_amount()
+            self._check_long_term_principal_amount()
 
     def view_account_moves(self):
         self.ensure_one()
@@ -457,7 +458,7 @@ class AccountLoan(models.Model):
         return result
 
     @api.model
-    def generate_loan_entries(self, date):
+    def _generate_loan_entries(self, date):
         """
         Generate the moves of unfinished loans before date
         :param date:
@@ -470,16 +471,16 @@ class AccountLoan(models.Model):
             lines = record.line_ids.filtered(
                 lambda r: r.date <= date and not r.move_ids
             )
-            res += lines.generate_move()
+            res += lines._generate_move()
         return res
 
     @api.model
-    def generate_leasing_entries(self, date):
+    def _generate_leasing_entries(self, date):
         res = []
         for record in self.search(
             [("state", "=", "posted"), ("is_leasing", "=", True)]
         ):
             res += record.line_ids.filtered(
                 lambda r: r.date <= date and not r.move_ids
-            ).generate_invoice()
+            )._generate_invoice()
         return res
