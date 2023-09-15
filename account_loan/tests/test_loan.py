@@ -77,6 +77,13 @@ class TestLoan(TransactionCase):
         loan._onchange_company()
         self.assertFalse(loan.interest_expenses_account_id)
 
+    def test_partner_loans(self):
+        self.assertFalse(self.partner.lended_loan_count)
+        loan = self.create_loan("fixed-annuity", 500000, 1, 60)
+        self.assertEqual(1, self.partner.lended_loan_count)
+        action = self.partner.action_view_partner_lended_loans()
+        self.assertEqual(loan, self.env[action["res_model"]].search(action["domain"]))
+
     def test_round_on_end(self):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
         loan.round_on_end = True
