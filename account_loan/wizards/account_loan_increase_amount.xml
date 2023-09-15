@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_loan_increase_amount_form_view">
+        <field name="name">account.loan.increase.amount.form (in account_loan)</field>
+        <field name="model">account.loan.increase.amount</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="loan_id" readonly="True" />
+                    <field name="date" />
+                    <field name="amount" />
+                    <field name="currency_id" />
+                </group>
+                <footer>
+                    <button
+                        name="run"
+                        string="Run"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="account_loan_increase_amount_act_window">
+        <field name="name">Increase Amount</field>
+        <field name="res_model">account.loan.increase.amount</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_loan_id': active_id}</field>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>
