@@ -9,15 +9,13 @@ class ResConfigSettings(models.TransientModel):
 
     def execute_update_check_vies(self):
         # Only parent partners, children are synced from parent
-        count_partners = self.env["res.partner"].search_count(
-            [("parent_id", "=", False)]
-        )
-        self.env["res.partner"].search([("parent_id", "=", False)]).check_vat()
+        count_partners = self.env["res.partner"].search_count([])
+        self.env["res.partner"].search([]).check_vat()
         return {
             "effect": {
                 "fadeout": "slow",
                 "message": _("Vies passed calculated in %s partners") % count_partners,
-                "img_url": "/web/static/src/img/smile.svg",
+                "img_url": "/web/static/img/smile.svg",
                 "type": "rainbow_man",
             }
         }
