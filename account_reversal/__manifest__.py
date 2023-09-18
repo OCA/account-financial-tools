@@ -10,16 +10,14 @@
     "category": "Accounting & Finance",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Akretion,"
-              "Camptocamp,"
-              "ACSONE SA/NV,"
-              "Tecnativa,"
-              "Odoo Community Association (OCA)",
+    "Camptocamp,"
+    "ACSONE SA/NV,"
+    "Tecnativa,"
+    "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "account"
-    ],
+    "depends": ["account"],
     "data": [
         "wizard/account_move_reverse_view.xml",
         "views/account_move_view.xml",
