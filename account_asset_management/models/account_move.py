@@ -132,7 +132,7 @@ class AccountMove(models.Model):
         if move_vals["move_type"] not in ("out_invoice", "out_refund"):
             for line_command in move_vals.get("line_ids", []):
                 line_vals = line_command[2]  # (0, 0, {...})
-                asset = self.env["account.asset"].browse(line_vals["asset_id"])
+                asset = self.env["account.asset"].browse(line_vals.get("asset_id"))
                 # We remove the asset if we recognize that we are reversing
                 # the asset creation
                 if asset:
