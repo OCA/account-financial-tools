@@ -113,6 +113,11 @@ msgstr ""
 
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
+msgid "Expand Asset"
+msgstr ""
+
+#. module: account_asset_transfer
+#: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
 msgid "From"
 msgstr ""
 
@@ -173,6 +178,11 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_asset_transfer
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__quantity
+msgid "Quantity"
+msgstr ""
+
+#. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_view_form
 msgid ""
 "There are no journal entries on current asset(s), asset transfer will use "
@@ -214,6 +224,7 @@ msgid "Transfer AUC to Asset & Create Transfer Journal Entry"
 msgstr ""
 
 #. module: account_asset_transfer
+#: model:ir.actions.act_window,name:account_asset_transfer.action_account_asset_transfer
 #: model:ir.actions.server,name:account_asset_transfer.action_asset_transfer_from_list
 #: model:ir.model,name:account_asset_transfer.model_account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
@@ -249,6 +260,11 @@ msgstr ""
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_view_search
 msgid "Transferable"
+msgstr ""
+
+#. module: account_asset_transfer
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__price_unit
+msgid "Unit Price"
 msgstr ""
 
 #. module: account_asset_transfer
