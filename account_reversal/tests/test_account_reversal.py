@@ -4,42 +4,40 @@
 
 import random
 
-from odoo.tests.common import TransactionCase
+from odoo.tests import Form
+from odoo.tests.common import SavepointCase
 
 
-class TestAccountReversal(TransactionCase):
-    def setUp(self):
-        super(TestAccountReversal, self).setUp()
-        self.move_obj = self.env["account.move"]
-        self.move_line_obj = self.env["account.move.line"]
-        self.company_id = self.env.ref("base.main_company").id
-        self.partner = self.env["res.partner"].create(
+class TestAccountReversal(SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.move_obj = cls.env["account.move"]
+        cls.move_line_obj = cls.env["account.move.line"]
+        cls.reversal_obj = cls.env["account.move.reversal"]
+        cls.company_id = cls.env.ref("base.main_company").id
+        cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Test partner",
             }
         )
-        self.journal = self.env["account.journal"].create(
+        cls.journal = cls.env["account.journal"].create(
             {
                 "name": "Test journal",
                 "code": "COD",
                 "type": "sale",
-                "company_id": self.company_id,
+                "company_id": cls.company_id,
             }
         )
-        type_revenue = self.env.ref("account.data_account_type_revenue")
-        type_payable = self.env.ref("account.data_account_type_payable")
-        self.account_sale = self.env["account.account"].create(
-            {
-                "name": "Test sale",
-                "code": "XX_700",
-                "user_type_id": type_revenue.id,
-            }
+
+        cls.account_sale = cls.env["account.account"].create(
+            {"name": "Test sale", "code": "700", "account_type": "income"}
         )
-        self.account_customer = self.env["account.account"].create(
+        cls.account_customer = cls.env["account.account"].create(
             {
                 "name": "Test customer",
-                "code": "XX_430",
-                "user_type_id": type_payable.id,
+                "code": "430",
+                "account_type": "expense",
                 "reconcile": True,
             }
         )
@@ -92,24 +90,30 @@ class TestAccountReversal(TransactionCase):
     def test_reverse(self):
         move = self._create_move()
         self.assertEqual(self._move_str(move), "0.00100.00:SALE_100.000.00:CUSTOMER_")
-        move_prefix = "REV_TEST_MOVE:"
-        line_prefix = "REV_TEST_LINE:"
-        wizard = (
-            self.env["account.move.reverse"]
-            .with_context(active_ids=move.ids)
-            .create({"move_prefix": move_prefix, "line_prefix": line_prefix})
+        move.to_be_reversed = True
+        move._post()
+
+        line_reason = "REV_TEST_LINE"
+
+        with Form(
+            self.reversal_obj.with_context(
+                active_ids=move.ids, active_model="account.move"
+            )
+        ) as wizard_form:
+            wizard_form.line_reason = line_reason
+        wizard = wizard_form.save()
+        action = wizard.reverse_moves()
+        reversal_move = self.move_obj.browse(action.get("res_id"))
+        self.assertEqual(len(reversal_move), 1)
+        self.assertEqual(reversal_move.state, "posted")
+        self.assertEqual(
+            self._move_str(reversal_move), "100.000.00:SALE_0.00100.00:CUSTOMER_"
         )
-        self.assertEqual(wizard.date, move.date)
-        res = wizard.action_reverse()
-        rev = self.env["account.move"].browse(res["res_id"])
-        self.assertEqual(len(rev), 1)
-        self.assertEqual(rev.state, "posted")
-        self.assertEqual(self._move_str(rev), "100.000.00:SALE_0.00100.00:CUSTOMER_")
-        self.assertEqual(rev.ref[0 : len(move_prefix)], move_prefix)
-        for line in rev.line_ids:
-            self.assertEqual(line.name[0 : len(line_prefix)], line_prefix)
+        for line in reversal_move.line_ids:
+            self.assertEqual(line.name[0 : len(line_reason)], line_reason)
             if line.account_id.reconcile:
                 self.assertTrue(line.reconciled)
+        self.assertFalse(move.to_be_reversed)
 
     def test_reverse_huge_move(self):
 
@@ -146,14 +150,17 @@ class TestAccountReversal(TransactionCase):
                     ]
                 }
             )
+        move._post()
         self.assertEqual(len(move.line_ids), 200)
 
-        move_prefix = "REV_TEST_MOVE:"
-        line_prefix = "REV_TEST_LINE:"
-
-        rev = move.create_reversals(
-            move_prefix=move_prefix, line_prefix=line_prefix, reconcile=True
+        wizard_form = Form(
+            self.reversal_obj.with_context(
+                active_ids=move.ids, active_model="account.move"
+            )
         )
+        wizard = wizard_form.save()
+        action = wizard.reverse_moves()
+        reversal_move = self.move_obj.browse(action.get("res_id"))
 
-        self.assertEqual(len(rev.line_ids), 200)
-        self.assertEqual(rev.state, "posted")
+        self.assertEqual(len(reversal_move.line_ids), 200)
+        self.assertEqual(reversal_move.state, "posted")

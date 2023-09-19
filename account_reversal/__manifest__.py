@@ -6,7 +6,7 @@
 {
     "name": "Account Reversal",
     "summary": "Wizard for creating a reversal account move",
-    "version": "11.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Akretion,"
@@ -15,11 +15,9 @@
     "Tecnativa,"
     "Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "application": False,
-    "installable": True,
     "depends": ["account"],
     "data": [
-        "wizard/account_move_reverse_view.xml",
         "views/account_move_view.xml",
+        "wizards/account_move_reversal.xml",
     ],
 }
