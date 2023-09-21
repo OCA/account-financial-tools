@@ -31,6 +31,7 @@
                         states="done"
                         string="Back to Draft"
                         type="object"
+                        confirm="Are you sure you want to go back to draft?"
                     />
                     <button name="get_report" string="Print" type="object" />
                     <field
@@ -213,7 +214,7 @@
     <menuitem
         action="action_check_deposit_tree"
         id="menu_check_deposit_tree"
-        parent="account.menu_finance_entries_accounting_miscellaneous"
-        sequence="30"
+        parent="account.menu_finance_receivables"
+        sequence="20"
     />
 </odoo>
