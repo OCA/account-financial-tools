@@ -3,7 +3,7 @@ invoice and click on the button *Register Payment* and select the
 *Checks Received* journal as *Journal*.
 
 When you want to deposit checks to the bank, go to the menu
-*Invoicing > Accounting > Miscellaneous > Check Deposit*, create a new check deposit and set the
+*Invoicing > Customers > Checks Deposits*, create a new check deposit and set the
 journal *Checks Received* and select the bank account on which you want to
 credit the checks.
 
