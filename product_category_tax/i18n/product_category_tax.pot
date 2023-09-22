@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_category_tax
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_category_tax
+#: model_terms:ir.ui.view,arch_db:product_category_tax.product_category_form_view
+msgid "-> Apply to Products"
+msgstr ""
+
+#. module: product_category_tax
+#: model:ir.model.fields,field_description:product_category_tax.field_product_category__taxes_id
+msgid "Customer Taxes"
+msgstr ""
+
+#. module: product_category_tax
+#: model:ir.model.fields,help:product_category_tax.field_product_category__supplier_taxes_id
+msgid "Default taxes used when buying the product."
+msgstr ""
+
+#. module: product_category_tax
+#: model:ir.model.fields,help:product_category_tax.field_product_category__taxes_id
+msgid "Default taxes used when selling the product."
+msgstr ""
+
+#. module: product_category_tax
+#: model:ir.model,name:product_category_tax.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: product_category_tax
+#: model:ir.model,name:product_category_tax.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: product_category_tax
+#: model:ir.model,name:product_category_tax.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: product_category_tax
+#: model_terms:ir.ui.view,arch_db:product_category_tax.product_category_form_view
+msgid "Taxes"
+msgstr ""
+
+#. module: product_category_tax
+#: model:ir.model.fields,field_description:product_category_tax.field_product_product__taxes_updeatable_from_category
+#: model:ir.model.fields,field_description:product_category_tax.field_product_template__taxes_updeatable_from_category
+msgid "Taxes Updeatable From Category"
+msgstr ""
+
+#. module: product_category_tax
+#: model_terms:ir.ui.view,arch_db:product_category_tax.product_category_form_view
+msgid "This will apply to all products in the category"
+msgstr ""
+
+#. module: product_category_tax
+#: model:ir.model.fields,field_description:product_category_tax.field_product_category__supplier_taxes_id
+msgid "Vendor Taxes"
+msgstr ""
