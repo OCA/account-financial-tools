@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-06-26 13:09+0000\n"
+"PO-Revision-Date: 2023-10-09 03:11+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -31,7 +31,7 @@ msgstr "Nome visualizzato"
 #: model:ir.model.fields,field_description:account_sequence_option.field_account_move__id
 #: model:ir.model.fields,field_description:account_sequence_option.field_ir_sequence_option__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_sequence_option
 #: model:ir.model,name:account_sequence_option.model_account_move
