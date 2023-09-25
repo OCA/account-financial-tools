@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-17 02:57+0000\n"
-"PO-Revision-Date: 2023-05-10 14:34+0000\n"
+"PO-Revision-Date: 2023-10-09 09:08+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: partner_report_open_invoices
 #: model:ir.model,name:partner_report_open_invoices.model_res_company
@@ -114,4 +114,4 @@ msgstr "Non c'è alcuna fattura aperta verso questo cliente."
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "There is no open invoice for this supplier."
-msgstr ""
+msgstr "Non c'è alcuna fattura aperta di questo fornitore."
