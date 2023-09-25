@@ -20,10 +20,13 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
+                <field name="partner_id" optional="hide" />
                 <field name="company_id" />
                 <field name="is_leasing" />
                 <field name="state" />
+                <field name="rate" optional="hide" />
                 <field name="loan_amount" optional="hide" />
+                <field name="pending_principal_amount" optional="hide" />
                 <field name="periods" optional="hide" />
                 <field name="start_date" optional="hide" />
             </tree>
