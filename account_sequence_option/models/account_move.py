@@ -46,7 +46,7 @@ class AccountMove(models.Model):
                 if (
                     rec.create_date
                     and rec.state in ("draft", "cancel")
-                    and rec.name not in (False, "/")
+                    and rec.name in (False, "/")
                     and not rec.sequence_option
                 ):
                     rec.name = "/"
