@@ -7,7 +7,11 @@
         <field name="inherit_id" ref="hr_expense.hr_expense_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='account_id']" position="after">
-                <field name="asset_profile_id" groups="account.group_account_user" />
+                <field
+                    name="asset_profile_id"
+                    attrs="{'readonly': [('is_editable', '=', False)]}"
+                    groups="account.group_account_user"
+                />
             </xpath>
         </field>
     </record>

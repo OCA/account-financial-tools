@@ -25,6 +25,7 @@ class HrExpense(models.Model):
 
     def _expense_expand_asset_line(self, line):
         self.ensure_one()
+        amount = self.total_amount
         quantity = 1
         name = self.name
         company = self.company_id
@@ -34,8 +35,12 @@ class HrExpense(models.Model):
             or self.date
             or fields.Date.context_today(self)
         )
+        # Support when select product has cost
+        if self.product_has_cost:
+            amount = self.unit_amount
+            quantity = self.quantity
         taxes = self.tax_ids.with_context(round=True).compute_all(
-            self.unit_amount, currency, quantity, self.product_id
+            amount, currency, quantity, self.product_id
         )
         amount_currency = taxes["total_excluded"]
         balance = currency._convert(
