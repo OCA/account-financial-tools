@@ -77,8 +77,13 @@ class TestAccountAssetFromExpense(AccountTestInvoicingCommon):
         self.assertEqual(
             expense.account_id, self.company_data["default_account_assets"]
         )
-        sheet_dict = expense.action_submit_expenses()
-        sheet = self.expense_sheet_model.search([("id", "=", sheet_dict["res_id"])])
+        sheet = self.expense_sheet_model.create(
+            {
+                "name": "Expense test",
+                "employee_id": self.employee.id,
+                "expense_line_ids": [(6, 0, expense.id)],
+            }
+        )
         sheet.action_submit_sheet()
         sheet.approve_expense_sheets()
         sheet.action_sheet_move_create()
