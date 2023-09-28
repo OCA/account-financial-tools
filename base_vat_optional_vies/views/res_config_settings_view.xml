@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Moduon Team S.L.
+     License Other proprietary
+ -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.account</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_vat.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@id='vies_service_setting']/div[hasclass('o_setting_right_pane')]"
+                position="inside"
+            >
+                <button
+                    type="object"
+                    name="execute_update_check_vies"
+                    string="Compute check vies"
+                    class="oe_link"
+                    icon="fa-arrow-right"
+                    confirm="This process can take a long time. Are you sure you want to start the process?"
+                    attrs="{'invisible': [('vat_check_vies', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

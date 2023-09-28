@@ -2,6 +2,7 @@
 # Copyright 2017 Tecnativa - David Vidal
 # Copyright 2019 FactorLibre - Rodrigo Bonilla
 # Copyright 2022 Moduon - Eduardo de Miguel
+# Copyright 2023 Moduon - Emilio Pascual
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, fields, models
 
