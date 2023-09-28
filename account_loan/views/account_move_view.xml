@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
+     Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">Add to_be_reversed and reversal_id fields</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field
+                    name="loan_line_id"
+                    attrs="{'invisible': [('loan_line_id', '=', False)]}"
+                    readonly="True"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
