@@ -1,4 +1,5 @@
 # Copyright 2019 ForgeFlow S.L.
+# Copyright 2023 Simone Rubino - Aion Tech
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from datetime import datetime
@@ -28,23 +29,23 @@ class TestAccountLockToDateUpdate(TransactionCase):
                 "company_id": self.company.id,
             }
         )
-        self.account_type_recv = self.env.ref("account.data_account_type_receivable")
-        self.account_type_rev = self.env.ref("account.data_account_type_revenue")
+        self.account_type_recv = "asset_receivable"
+        self.account_type_rev = "income"
 
         self.account_recv = self.AccountObj.create(
             {
-                "code": "RECV_DR",
+                "code": "RECVDR",
                 "name": "Receivable (test)",
                 "reconcile": True,
-                "user_type_id": self.account_type_recv.id,
+                "account_type": self.account_type_recv,
             }
         )
         self.account_sale = self.AccountObj.create(
             {
-                "code": "SALE_DR",
+                "code": "SALEDR",
                 "name": "Receivable (sale)",
                 "reconcile": True,
-                "user_type_id": self.account_type_rev.id,
+                "account_type": self.account_type_rev,
             }
         )
 
@@ -115,9 +116,16 @@ class TestAccountLockToDateUpdate(TransactionCase):
         locked date"""
         self.company.period_lock_to_date = "2900-01-01"
         self.company.fiscalyear_lock_to_date = "2900-02-01"
+        user = self.demo_user
+        adviser_group = self.adviser_group
+        self.assertTrue(user in adviser_group.users)
+        user.groups_id -= adviser_group
+        # pre-condition
+        self.assertFalse(user in adviser_group.users)
+
         move = self.create_account_move("2900-01-01")
         with self.assertRaises(ValidationError):
-            move.with_user(self.demo_user.id).action_post()
+            move.with_user(user.id).action_post()
 
     def test_04_create_move_inside_period(self):
         """We test that we can successfully create a journal entry
