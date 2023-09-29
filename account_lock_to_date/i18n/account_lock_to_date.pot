@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -115,12 +115,14 @@ msgid ""
 msgstr ""
 
 #. module: account_lock_to_date
+#. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid "The lock date for advisors is irreversible and can't be removed."
 msgstr ""
 
 #. module: account_lock_to_date
+#. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid ""
@@ -129,6 +131,7 @@ msgid ""
 msgstr ""
 
 #. module: account_lock_to_date
+#. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid ""
@@ -148,12 +151,14 @@ msgid "Update accounting lock to dates"
 msgstr ""
 
 #. module: account_lock_to_date
+#. odoo-python
 #: code:addons/account_lock_to_date/wizards/account_update_lock_to_date.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
 msgstr ""
 
 #. module: account_lock_to_date
+#. odoo-python
 #: code:addons/account_lock_to_date/models/account_move.py:0
 #, python-format
 msgid ""
@@ -161,6 +166,7 @@ msgid ""
 msgstr ""
 
 #. module: account_lock_to_date
+#. odoo-python
 #: code:addons/account_lock_to_date/models/account_move.py:0
 #, python-format
 msgid ""
@@ -169,6 +175,7 @@ msgid ""
 msgstr ""
 
 #. module: account_lock_to_date
+#. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid ""
@@ -177,6 +184,7 @@ msgid ""
 msgstr ""
 
 #. module: account_lock_to_date
+#. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid ""
