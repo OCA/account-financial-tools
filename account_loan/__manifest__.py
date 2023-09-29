@@ -17,6 +17,7 @@
         "wizard/account_loan_post_view.xml",
         "views/account_loan_view.xml",
         "views/account_move_view.xml",
+        "views/account_loan_lines_view.xml",
     ],
     "installable": True,
     "external_dependencies": {
