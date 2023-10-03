@@ -37,7 +37,6 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
         string="Account date", required=True, default=fields.Date.today()
     )
     total_amount_due = fields.Monetary(
-        string="Total Amount Due",
         readonly=True,
         currency_field="currency_id",
     )
@@ -124,9 +123,13 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
         ):
             raise ValidationError(
                 _(
-                    "Amount to transfer %s should be equal or lower than total amount due %s"
+                    "Amount to transfer %(amount_to_transfer)s should be equal or lower "
+                    "than total amount due %(total_amount_due)s"
                 )
-                % (self.amount_to_transfer, self.total_amount_due)
+                % {
+                    "amount_to_transfer": self.amount_to_transfer,
+                    "total_amount_due": self.total_amount_due,
+                }
             )
         new_moves = am_model.browse()
         for move in self.move_ids:
@@ -140,7 +143,7 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
                 }
             )
             reconcilable_account = move.line_ids.mapped("account_id").filtered(
-                lambda x: x.user_type_id.type in ("receivable", "payable")
+                lambda x: x.account_type in ("asset_receivable", "liability_payable")
             )
             if move.payment_id:
                 (
@@ -170,9 +173,7 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
             for line in lines:
                 amount = min(amount_to_apply, abs(line.amount_residual))
                 amount_to_apply -= amount
-                amount_currency = (
-                    move.currency_id.id != self.currency_id.id and amount or 0.0
-                )
+
                 amount = self.currency_id.with_context(date=self.account_date).compute(
                     amount, move.currency_id
                 )
@@ -193,7 +194,6 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
                         and self.destination_partner_id.id,
                         "credit": amount,
                         "debit": 0.0,
-                        "amount_currency": -amount_currency,
                         "date_maturity": line.date_maturity,
                     }
                 )
@@ -205,7 +205,6 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
                         and partner.id,
                         "credit": 0.0,
                         "debit": amount,
-                        "amount_currency": amount_currency,
                         "date_maturity": line.date_maturity,
                     }
                 )
