@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,13 +42,16 @@ msgid "Amount to transfer"
 msgstr ""
 
 #. module: account_move_transfer_partner
+#. odoo-python
 #: code:addons/account_move_transfer_partner/wizard/wizard_account_move_transfer_partner.py:0
 #, python-format
 msgid ""
-"Amount to transfer %s should be equal or lower than total amount due %s"
+"Amount to transfer %(amount_to_transfer)s should be equal or lower than "
+"total amount due %(total_amount_due)s"
 msgstr ""
 
 #. module: account_move_transfer_partner
+#. odoo-python
 #: code:addons/account_move_transfer_partner/wizard/wizard_account_move_transfer_partner.py:0
 #, python-format
 msgid "Amount to transfer should be bigger than zero"
@@ -120,6 +123,7 @@ msgid "Moves Selected"
 msgstr ""
 
 #. module: account_move_transfer_partner
+#. odoo-python
 #: code:addons/account_move_transfer_partner/tests/test_account_move_transfer_partner.py:0
 #, python-format
 msgid "No Chart of Account Template has been defined !"
@@ -141,6 +145,7 @@ msgid "Total Amount Due"
 msgstr ""
 
 #. module: account_move_transfer_partner
+#. odoo-python
 #: code:addons/account_move_transfer_partner/wizard/wizard_account_move_transfer_partner.py:0
 #, python-format
 msgid "Transfer amount due from %s"
@@ -153,6 +158,7 @@ msgid "Transfer amount due to another partner"
 msgstr ""
 
 #. module: account_move_transfer_partner
+#. odoo-python
 #: code:addons/account_move_transfer_partner/wizard/wizard_account_move_transfer_partner.py:0
 #, python-format
 msgid "Transfer due amount from %s"
