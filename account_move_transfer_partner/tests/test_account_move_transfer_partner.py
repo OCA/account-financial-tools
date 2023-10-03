@@ -42,7 +42,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
 
         self.ProductProduct = self.env["product.product"]
         self.product = self.ProductProduct.create(
-            {"name": "Product", "price": 100.0, "standard_price": 100.0}
+            {"name": "Product", "lst_price": 100.0, "standard_price": 100.0}
         )
         charts = self.env["account.chart.template"].search([])
         if charts:
@@ -55,7 +55,6 @@ class TestAccountMoveTransferPartner(TransactionCase):
         ) as invoice_form:
             invoice_form.invoice_date = self.today
             invoice_form.partner_id = self.partner_2
-            invoice_form.journal_id = self.sale_journal
             with invoice_form.invoice_line_ids.new() as line_form:
                 line_form.product_id = self.product
             self.invoice_1 = invoice_form.save()
@@ -73,7 +72,6 @@ class TestAccountMoveTransferPartner(TransactionCase):
         ) as invoice_form:
             invoice_form.invoice_date = self.today
             invoice_form.partner_id = self.partner_1
-            invoice_form.journal_id = self.purchase_journal
             with invoice_form.invoice_line_ids.new() as line_form:
                 line_form.product_id = self.product
             self.in_invoice = invoice_form.save()
@@ -84,7 +82,6 @@ class TestAccountMoveTransferPartner(TransactionCase):
         ) as invoice_form:
             invoice_form.invoice_date = self.today
             invoice_form.partner_id = self.partner_1
-            invoice_form.journal_id = self.sale_journal
             with invoice_form.invoice_line_ids.new() as line_form:
                 line_form.product_id = self.product
             self.out_refund = invoice_form.save()
@@ -94,7 +91,6 @@ class TestAccountMoveTransferPartner(TransactionCase):
         ) as invoice_form:
             invoice_form.invoice_date = self.today
             invoice_form.partner_id = self.partner_1
-            invoice_form.journal_id = self.purchase_journal
             with invoice_form.invoice_line_ids.new() as line_form:
                 line_form.product_id = self.product
             self.in_refund = invoice_form.save()
@@ -112,7 +108,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
                             "debit": 100.0,
                             "credit": 0,
                             "account_id": self.env["account.account"]
-                            .search([("user_type_id.type", "=", "other")], limit=1)
+                            .search([("account_type", "=", "income_other")], limit=1)
                             .id,
                         },
                     ),
@@ -123,7 +119,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
                             "debit": 0.0,
                             "credit": 100.0,
                             "account_id": self.env["account.account"]
-                            .search([("user_type_id.type", "=", "other")], limit=1)
+                            .search([("account_type", "=", "income_other")], limit=1)
                             .id,
                         },
                     ),
@@ -182,7 +178,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
         total_residual = sum(i.amount_residual for i in all_invoices)
         wizard_form = Form(
             self.wizard_model.with_context(
-                {"active_ids": self.invoice_1.ids, "active_model": "account.move"}
+                **{"active_ids": self.invoice_1.ids, "active_model": "account.move"}
             )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
@@ -200,7 +196,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
             wizard.action_create_move()
         wizard_form = Form(
             self.wizard_model.with_context(
-                {"active_ids": all_invoices.ids, "active_model": "account.move"}
+                **{"active_ids": all_invoices.ids, "active_model": "account.move"}
             )
         )
         with self.assertRaises(AssertionError):
@@ -225,7 +221,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
     def test_02_account_move_transfer_partner(self):
         wizard_form = Form(
             self.wizard_model.with_context(
-                {"active_ids": self.in_invoice.ids, "active_model": "account.move"}
+                **{"active_ids": self.in_invoice.ids, "active_model": "account.move"}
             )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
@@ -252,7 +248,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
     def test_03_account_move_transfer_partner(self):
         wizard_form = Form(
             self.wizard_model.with_context(
-                {"active_ids": self.out_refund.ids, "active_model": "account.move"}
+                **{"active_ids": self.out_refund.ids, "active_model": "account.move"}
             )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
@@ -264,7 +260,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
     def test_04_account_move_transfer_partner(self):
         wizard_form = Form(
             self.wizard_model.with_context(
-                {"active_ids": self.in_refund.ids, "active_model": "account.move"}
+                **{"active_ids": self.in_refund.ids, "active_model": "account.move"}
             )
         )
         self.assertTrue(wizard_form.allow_edit_amount_to_transfer)
@@ -276,7 +272,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
     def test_05_account_move_transfer_partner(self):
         wizard_form = Form(
             self.wizard_model.with_context(
-                {"active_ids": self.general_move.ids, "active_model": "account.move"}
+                **{"active_ids": self.general_move.ids, "active_model": "account.move"}
             )
         )
         self.assertFalse(wizard_form.allow_edit_amount_to_transfer)
@@ -292,7 +288,6 @@ class TestAccountMoveTransferPartner(TransactionCase):
         ) as invoice_form:
             invoice_form.invoice_date = self.today
             invoice_form.partner_id = self.partner_2
-            invoice_form.journal_id = self.sale_journal
             invoice_form.currency_id = self.currency_2
             with invoice_form.invoice_line_ids.new() as line_form:
                 line_form.product_id = self.product
@@ -300,7 +295,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
         self.invoice_with_payment_term.action_post()
         wizard_form = Form(
             self.wizard_model.with_context(
-                {
+                **{
                     "active_ids": self.invoice_with_payment_term.ids,
                     "active_model": "account.move",
                 }
@@ -327,7 +322,6 @@ class TestAccountMoveTransferPartner(TransactionCase):
         ) as invoice_form:
             invoice_form.invoice_date = self.today
             invoice_form.partner_id = self.partner_2
-            invoice_form.journal_id = self.sale_journal
             invoice_form.invoice_payment_term_id = self.payment_term
             with invoice_form.invoice_line_ids.new() as line_form:
                 line_form.product_id = self.product
@@ -335,7 +329,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
         self.invoice_with_payment_term.action_post()
         wizard_form = Form(
             self.wizard_model.with_context(
-                {
+                **{
                     "active_ids": self.invoice_with_payment_term.ids,
                     "active_model": "account.move",
                 }
