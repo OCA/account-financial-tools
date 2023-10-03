@@ -31,11 +31,13 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__short_term_loan_account_id
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__short_term_loan_account_id
 msgid "Account that will contain the pending amount on short term"
 msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__interest_expenses_account_id
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__interest_expenses_account_id
 msgid "Account where the interests will be assigned to"
 msgstr ""
 
@@ -153,11 +155,13 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__company_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__company_id
 msgid "Company"
 msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__partner_id
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__partner_id
 msgid "Company or individual that lends the money at an interest rate."
 msgstr ""
 
@@ -228,6 +232,11 @@ msgid "EAR"
 msgstr ""
 
 #. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_lines_view
+msgid "Edit"
+msgstr ""
+
+#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__final_pending_principal_amount
 msgid "Final Pending Principal Amount"
 msgstr ""
@@ -294,6 +303,11 @@ msgid "Generate moves"
 msgstr ""
 
 #. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.view_account_loan_lines_search
+msgid "Group by..."
+msgstr ""
+
+#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__has_invoices
 msgid "Has Invoices"
 msgstr ""
@@ -347,6 +361,7 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__interest_expenses_account_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__interest_expenses_account_id
 msgid "Interests account"
 msgstr ""
 
@@ -378,6 +393,7 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__journal_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__journal_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post__journal_id
 msgid "Journal"
 msgstr ""
@@ -437,6 +453,7 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__partner_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__partner_id
 msgid "Lender"
 msgstr ""
 
@@ -454,12 +471,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_move__loan_id
 #: model:ir.model.fields,field_description:account_loan.field_account_payment__loan_id
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+#: model_terms:ir.ui.view,arch_db:account_loan.view_account_loan_lines_search
 msgid "Loan"
 msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__loan_amount
 msgid "Loan Amount"
+msgstr ""
+
+#. module: account_loan
+#: model:ir.actions.act_window,name:account_loan.account_loan_lines_action
+#: model:ir.ui.menu,name:account_loan.account_loan_lines_menu
+msgid "Loan Items"
 msgstr ""
 
 #. module: account_loan
@@ -510,6 +534,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_loan.account_loan_action
 #: model:ir.model.fields.selection,name:account_loan.selection__account_loan_generate_wizard__loan_type__loan
 #: model:ir.ui.menu,name:account_loan.account_loan_menu
+#: model:ir.ui.menu,name:account_loan.loan_menu
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_tree
 msgid "Loans"
 msgstr ""
@@ -806,6 +831,7 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__short_term_loan_account_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__short_term_loan_account_id
 msgid "Short term account"
 msgstr ""
 
