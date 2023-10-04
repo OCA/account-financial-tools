@@ -20,10 +20,13 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
+                <field name="partner_id" optional="hide" />
                 <field name="company_id" />
                 <field name="is_leasing" />
                 <field name="state" />
+                <field name="rate" optional="hide" />
                 <field name="loan_amount" optional="hide" />
+                <field name="pending_principal_amount" optional="hide" />
                 <field name="periods" optional="hide" />
                 <field name="start_date" optional="hide" />
             </tree>
@@ -252,10 +255,18 @@
         <field name="name">Loans</field>
         <field name="res_model">account.loan</field>
     </record>
+
+    <menuitem
+        id="loan_menu"
+        name="Loans"
+        parent="account.menu_finance_entries"
+        sequence="75"
+    />
+
     <menuitem
         id="account_loan_menu"
-        parent="account.menu_finance_entries"
-        sequence="80"
+        parent="loan_menu"
+        sequence="10"
         name="Loans"
         action="account_loan_action"
     />

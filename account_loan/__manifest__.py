@@ -19,6 +19,7 @@
         "views/account_loan_view.xml",
         "views/account_move_view.xml",
         "views/res_partner.xml",
+        "views/account_loan_lines_view.xml",
     ],
     "installable": True,
     "maintainers": ["etobella"],
