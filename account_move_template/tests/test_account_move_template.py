@@ -37,7 +37,7 @@ class TestAccountMoveTemplate(TransactionCase):
         return True
 
     def setUp(self):
-        super(TestAccountMoveTemplate, self).setUp()
+        super().setUp()
         employees_group = self.env.ref("base.group_user")
         multi_company_group = self.env.ref("base.group_multi_company")
         account_user_group = self.env.ref("account.group_account_user")

@@ -71,7 +71,7 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
-msgid "Analytic"
+msgid "Analytic Distribution"
 msgstr ""
 
 #. module: account_move_template
@@ -297,14 +297,6 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__name
 msgid "Label"
-msgstr ""
-
-#. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: account_move_template

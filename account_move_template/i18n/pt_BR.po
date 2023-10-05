@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
 "PO-Revision-Date: 2023-11-22 16:36+0000\n"
 "Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,8 +76,8 @@ msgstr "Valor"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
-msgid "Analytic"
-msgstr "Analítico"
+msgid "Analytic Distribution"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
@@ -311,14 +311,6 @@ msgid "Label"
 msgstr "Rótulo"
 
 #. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
-msgid "Last Modified on"
-msgstr "Última atualização em"
-
-#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_uid
@@ -535,6 +527,12 @@ msgstr ""
 "Você excluiu uma linha no assistente. Isto não é permitido: você deve "
 "atualizar o modelo ou modificar o lançamento contábil manual que será gerado "
 "por este assistente."
+
+#~ msgid "Analytic"
+#~ msgstr "Analítico"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última atualização em"
 
 #~ msgid "Account Opt."
 #~ msgstr "Conta Opc."

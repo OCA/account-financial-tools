@@ -73,7 +73,7 @@ Valid dictionary to overwrite template lines:
         overwrite_vals = self._get_overwrite_vals()
         amtlro = self.env["account.move.template.line.run"]
         tmpl_lines = self.template_id.line_ids
-        for tmpl_line in tmpl_lines.filtered(lambda l: l.type == "input"):
+        for tmpl_line in tmpl_lines.filtered(lambda line: line.type == "input"):
             vals = self._prepare_wizard_line(tmpl_line)
             amtlro.create(vals)
         self.write(

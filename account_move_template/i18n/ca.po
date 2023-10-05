@@ -75,8 +75,8 @@ msgstr "Quantitat"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
-msgid "Analytic"
-msgstr "Analític"
+msgid "Analytic Distribution"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
@@ -310,14 +310,6 @@ msgid "Label"
 msgstr "Etiqueta"
 
 #. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
-msgid "Last Modified on"
-msgstr "Darrera modificació el"
-
-#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_uid
@@ -532,3 +524,9 @@ msgid ""
 msgstr ""
 "Heu suprimit una línia del wizard. Això no està permès: haureu d'actualitzar "
 "la plantilla o modificar l'entrada del diari que generarà aquest wizard."
+
+#~ msgid "Analytic"
+#~ msgstr "Analític"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Darrera modificació el"
