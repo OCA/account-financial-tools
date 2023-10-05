@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo-addon-account_asset_management>=16.0dev,<16.1dev',
         'odoo-addon-account_cash_deposit>=16.0dev,<16.1dev',
         'odoo-addon-account_chart_update>=16.0dev,<16.1dev',
+        'odoo-addon-account_chart_update_l10n_eu_oss_oca>=16.0dev,<16.1dev',
         'odoo-addon-account_fiscal_month>=16.0dev,<16.1dev',
         'odoo-addon-account_fiscal_position_vat_check>=16.0dev,<16.1dev',
         'odoo-addon-account_fiscal_year>=16.0dev,<16.1dev',
