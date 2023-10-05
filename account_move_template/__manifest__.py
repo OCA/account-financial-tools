@@ -5,8 +5,8 @@
 
 {
     "name": "Account Move Template",
-    "version": "16.0.1.0.0",
-    "category": "Accounting",
+    "version": "17.0.1.0.0",
+    "category": "Accounting/Accounting",
     "summary": "Templates for recurring Journal Entries",
     "author": "Agile Business Group, Aurium Technologies, Vauxoo, ForgeFlow, "
     "Akretion, Odoo Community Association (OCA)",

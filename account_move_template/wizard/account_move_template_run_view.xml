@@ -9,22 +9,22 @@
                     <field
                         name="template_id"
                         widget="selection"
-                        attrs="{'readonly': [('state', '=', 'set_lines')]}"
+                        readonly="state == 'set_lines'"
                     />
                     <field
                         name="overwrite"
                         widget="ace"
                         options="{'mode': 'python'}"
-                        attrs="{'invisible': [('state', '=', 'set_lines')]}"
+                        invisible="state == 'set_lines'"
                     />
                     <field name="company_id" invisible="1" />
                     <field name="company_id" groups="base.group_multi_company" />
-                    <field name="date" states="set_lines" />
-                    <field name="journal_id" states="set_lines" />
-                    <field name="ref" states="set_lines" />
-                    <field name="partner_id" states="set_lines" />
+                    <field name="date" invisible="state != 'set_lines'" />
+                    <field name="journal_id" invisible="state != 'set_lines'" />
+                    <field name="ref" invisible="state != 'set_lines'" />
+                    <field name="partner_id" invisible="state != 'set_lines'" />
                 </group>
-                <group name="lines" states="set_lines">
+                <group name="lines" invisible="state != 'set_lines'">
                     <field name="line_ids" nolabel="1" colspan="2">
                         <tree editable="bottom">
                             <field name="sequence" invisible="1" />
@@ -39,14 +39,11 @@
                                 widget="analytic_distribution"
                                 groups="analytic.group_analytic_accounting"
                             />
-                            <field
-                                name="tax_line_id"
-                                attrs="{'invisible': [('tax_line_id','=',False)]}"
-                            />
+                            <field name="tax_line_id" invisible="not tax_line_id" />
                             <field
                                 name="tax_ids"
                                 widget="many2many_tags"
-                                attrs="{'invisible': [('tax_ids','=',[])]}"
+                                invisible="not tax_ids"
                             />
                             <field name="move_line_type" />
                             <field name="amount" />
@@ -63,14 +60,14 @@
                         class="btn-primary"
                         string="Next"
                         type="object"
-                        states="select_template"
+                        invisible="state != 'select_template'"
                     />
                     <button
                         name="generate_move"
                         class="btn-primary"
                         string="Create Journal Entry"
                         type="object"
-                        states="set_lines"
+                        invisible="state != 'set_lines'"
                     />
                     <button special="cancel" string="Cancel" class="btn-default" />
                 </footer>
