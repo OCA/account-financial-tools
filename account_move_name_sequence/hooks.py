@@ -8,8 +8,12 @@
 from odoo import SUPERUSER_ID, api
 
 
-def create_journal_sequences(cr, registry):
+def post_init_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
+    create_journal_sequences(env)
+
+
+def create_journal_sequences(env):
     journals = (
         env["account.journal"]
         .with_context(active_test=False)

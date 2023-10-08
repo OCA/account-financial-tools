@@ -1,2 +1,2 @@
-from .post_install import create_journal_sequences
+from .hooks import post_init_hook
 from . import models
