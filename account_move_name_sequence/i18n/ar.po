@@ -29,8 +29,8 @@ msgstr ""
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
 msgid ""
-"Check this box if you don't want to share the same sequence for invoices and"
-" credit notes made from this journal"
+"Check this box if you don't want to share the same sequence for invoices and "
+"credit notes made from this journal"
 msgstr ""
 "استخدم هذه الخاصية ان كنت لا ترغب باستخدام نفس التسلسل للفواتير و اشعارات "
 "الدائن"
@@ -91,8 +91,8 @@ msgstr "رقم"
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid ""
-"On journal '%s', the same sequence is used as Entry Sequence and Credit Note"
-" Entry Sequence."
+"On journal '%s', the same sequence is used as Entry Sequence and Credit Note "
+"Entry Sequence."
 msgstr ""
 
 #. module: account_move_name_sequence

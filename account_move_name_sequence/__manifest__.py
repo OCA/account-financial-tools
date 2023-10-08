@@ -7,12 +7,12 @@
 
 {
     "name": "Account Move Number Sequence",
-    "version": "16.0.1.1.4",
+    "version": "16.0.1.1.5",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Generate journal entry number from sequence",
     "author": "Akretion,Vauxoo,Odoo Community Association (OCA)",
-    "maintainers": ["alexis-via", "moylop260", "frahikLV"],
+    "maintainers": ["alexis-via", "moylop260", "frahikLV", "luisg123v"],
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": [
         "account",
@@ -22,6 +22,6 @@
         "views/account_move.xml",
         "security/ir.model.access.csv",
     ],
-    "post_init_hook": "create_journal_sequences",
+    "post_init_hook": "post_init_hook",
     "installable": True,
 }
