@@ -36,11 +36,15 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__display_name
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__id
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_move__id
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__id
 msgid "ID"
 msgstr ""
@@ -52,11 +56,12 @@ msgstr "Dziennik"
 
 #. module: account_journal_lock_date
 #: model:ir.model,name:account_journal_lock_date.model_account_move
-#, fuzzy
-msgid "Journal Entries"
-msgstr "Dziennik"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal____last_update
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_move____last_update
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -72,14 +77,12 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_bank_statement_import_journal_creation__fiscalyear_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__fiscalyear_lock_date
 msgid "Lock Date"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_bank_statement_import_journal_creation__period_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__period_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__period_lock_date
 msgid "Lock Date for Non-Advisers"
@@ -91,7 +94,6 @@ msgid "Mass Update Journal Lock Dates Wizard"
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,help:account_journal_lock_date.field_account_bank_statement_import_journal_creation__fiscalyear_lock_date
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
 msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
@@ -100,7 +102,6 @@ msgid ""
 msgstr ""
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,help:account_journal_lock_date.field_account_bank_statement_import_journal_creation__period_lock_date
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__period_lock_date
 msgid ""
 "Only users with the 'Adviser' role can edit accounts prior to and inclusive "
@@ -140,3 +141,7 @@ msgid ""
 "the lock date %s. Check the Journal settings or ask someone with the "
 "'Adviser' role"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Journal Entries"
+#~ msgstr "Dziennik"
