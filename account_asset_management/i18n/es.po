@@ -840,7 +840,6 @@ msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si está marcado, algunos mensajes tienen error de envío."
 
@@ -1392,11 +1391,6 @@ msgid "Running"
 msgstr "En ejecución"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Error en la entrega del SMS"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
 msgid "Sale Value"
 msgstr "Valor de venta"
@@ -1841,6 +1835,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "o"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error en la entrega del SMS"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Número de mensajes que requieren una acción"
