@@ -370,8 +370,8 @@ msgstr ""
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget_line__balance
 msgid ""
-"Technical field holding the debit - credit in order to open meaningful graph"
-" views from reports"
+"Technical field holding the debit - credit in order to open meaningful graph "
+"views from reports"
 msgstr ""
 "Campo técnico que contiene el débito - crédito para abrir vistas gráficas "
 "significativas de los informes"
