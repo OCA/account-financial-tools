@@ -408,7 +408,8 @@ msgstr "Tipo"
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__payment_term_id
 msgid "Used to compute the due date of the journal item."
-msgstr "Utilizzato per calcolare la data di scadenza dell'articolo di registro."
+msgstr ""
+"Utilizzato per calcolare la data di scadenza dell'articolo di registro."
 
 #. module: account_move_template
 #: selection:account.move.template.line,type:0

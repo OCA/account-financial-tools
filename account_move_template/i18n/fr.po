@@ -189,8 +189,8 @@ msgid ""
 "Check that the lines used in the formula really exists and have a lower "
 "sequence than the current line."
 msgstr ""
-"Impossible de calculer la formule de la ligne avec le numéro de séquence %s ("
-"Formule : %s). Vérifiez que les lignes utilisées dans la formule existent "
+"Impossible de calculer la formule de la ligne avec le numéro de séquence %s "
+"(Formule : %s). Vérifiez que les lignes utilisées dans la formule existent "
 "réellement et ont un numéro de séquence inférieur à cette ligne."
 
 #. module: account_move_template
