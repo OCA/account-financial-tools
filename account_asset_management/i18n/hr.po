@@ -830,7 +830,6 @@ msgstr "Ako je označeno, nove poruke traže vašu pozornost."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Ako je označeno, neke poruke imaju greške pri isporuci."
 
@@ -1365,11 +1364,6 @@ msgid "Running"
 msgstr "U tijeku"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Greška pri isporuci SMSa"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
 msgid "Sale Value"
 msgstr "Prodajna vrednost"
@@ -1790,6 +1784,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "ili"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Greška pri isporuci SMSa"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Broj poruka koje traže dodatnu radnju"
