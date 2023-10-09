@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_document_reversal
+# 	* account_document_reversal
 #
 msgid ""
 msgstr ""
@@ -145,7 +145,8 @@ msgstr "Normal (slet journalposter, hvis de findes)"
 #. module: account_document_reversal
 #: code:addons/account_document_reversal/models/account_invoice.py:24
 #, python-format
-msgid "Only fully unpaid invoice can be cancelled.\n"
+msgid ""
+"Only fully unpaid invoice can be cancelled.\n"
 "To cancel this invoice, make sure all payment(s) are also cancelled."
 msgstr ""
 "Kun fuldt ubetalte faktura kan annulleres.\n"
@@ -181,7 +182,8 @@ msgstr "Tilbageførselsdato"
 #. module: account_document_reversal
 #: code:addons/account_document_reversal/models/account_move.py:22
 #, python-format
-msgid "This action is not allowed for cancel with reversal.\n"
+msgid ""
+"This action is not allowed for cancel with reversal.\n"
 "Please use Reverse Entry."
 msgstr ""
 "Denne handling er ikke tilladt for annullering med tilbageførsel.\n"
