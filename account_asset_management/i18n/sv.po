@@ -61,7 +61,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"Error while processing asset '%s': %s"
+"Error while processing asset '{ref}': {exception}"
 msgstr ""
 
 #. module: account_asset_management
@@ -210,7 +210,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__asset_group_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
 #, fuzzy
 msgid "Asset Group"
 msgstr "Tillgångskonto"
@@ -228,11 +227,6 @@ msgstr "Tillgångskategori"
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__line_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset Line"
-msgstr ""
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-msgid "Asset Lines"
 msgstr ""
 
 #. module: account_asset_management
@@ -303,7 +297,6 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
 #, fuzzy
 msgid "Asset profile"
 msgstr "Tillgångskategori"
@@ -323,7 +316,6 @@ msgstr ""
 #: model:ir.ui.menu,name:account_asset_management.account_asset_menu
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_assets
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_config_assets
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_tree
 msgid "Assets"
 msgstr "Tillgångar"
 
@@ -658,7 +650,6 @@ msgid "Depreciation Name"
 msgstr "Avskrivningsnamn"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_account__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__display_name
@@ -666,9 +657,6 @@ msgstr "Avskrivningsnamn"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__display_name
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__display_name
-#: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__display_name
 msgid "Display Name"
@@ -715,9 +703,9 @@ msgstr "Poster"
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
-"Error while processing asset '%s': \n"
+"Error while processing asset '{ref}': \n"
 "\n"
-"%s"
+"{tb}"
 msgstr ""
 
 #. module: account_asset_management
@@ -736,11 +724,6 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
 msgid "Followers"
-msgstr ""
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_channel_ids
-msgid "Followers (Channels)"
 msgstr ""
 
 #. module: account_asset_management
@@ -786,6 +769,11 @@ msgid "Generate Report"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
 msgid "Has accounting entries"
 msgstr ""
@@ -796,7 +784,6 @@ msgid "History"
 msgstr "Historik"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_account__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__id
@@ -804,9 +791,6 @@ msgstr "Historik"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move__id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__id
-#: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__id
 msgid "ID"
@@ -885,7 +869,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Inconsistent reporting structure.\n"
-"Please correct Asset Group '%s' (id %s)"
+"Please correct Asset Group '{group}' (id {id})"
 msgstr ""
 
 #. module: account_asset_management
@@ -937,12 +921,10 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.act_entries_open
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Items"
 msgstr "Transaktioner"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_account____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
@@ -950,9 +932,6 @@ msgstr "Transaktioner"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
 msgid "Last Modified on"
@@ -1559,14 +1538,14 @@ msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
-msgid "Use Specific Journal"
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
+msgid "Use Leap Years"
 msgstr ""
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
-msgid "Use leap years"
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
+msgid "Use Specific Journal"
 msgstr ""
 
 #. module: account_asset_management
