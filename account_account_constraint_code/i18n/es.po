@@ -40,4 +40,5 @@ msgstr "Última modificación el"
 #: code:addons/account_account_constraint_code/models/account_account.py:0
 #, python-format
 msgid "You cannot change the code of account which contains journal items."
-msgstr "No se puede modificar el código de la cuenta que contiene los asientos."
+msgstr ""
+"No se puede modificar el código de la cuenta que contiene los asientos."
