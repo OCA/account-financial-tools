@@ -220,8 +220,8 @@ msgid ""
 "Check that the lines used in the formula really exists and have a lower "
 "sequence than the current line."
 msgstr ""
-"Impossible calcular la fórmula de la línia amb la seqüència %s (fórmula: %s)"
-". Comproveu que les línies utilitzades a la fórmula existeixen realment i "
+"Impossible calcular la fórmula de la línia amb la seqüència %s (fórmula: "
+"%s). Comproveu que les línies utilitzades a la fórmula existeixen realment i "
 "tenen una seqüència inferior a la línia actual."
 
 #. module: account_move_template
@@ -231,8 +231,8 @@ msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s): "
 "the syntax of the formula is wrong."
 msgstr ""
-"Impossible calcular la fórmula de la línia amb la seqüència %s (formula: %s):"
-" la sintaxi de la fórmula és incorrecta."
+"Impossible calcular la fórmula de la línia amb la seqüència %s (formula: "
+"%s): la sintaxi de la fórmula és incorrecta."
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
