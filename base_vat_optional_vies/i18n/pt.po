@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* base_vat_optional_vies
+# 	* base_vat_optional_vies
 #
 msgid ""
 msgstr ""
