@@ -132,13 +132,10 @@ msgstr ""
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid ""
-"This operation will generate account entries that are counterpart of the "
+"This operation will generate journal entries that are counterpart of the "
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner."
 msgstr ""
-"Cette opération va générer des écritures comptables qui vont compenses les "
-"compte payables / recevables sélectionnés, et les lettrer afin d'aafcter le "
-"solde au partenaire."
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
@@ -160,3 +157,12 @@ msgstr "Assistant pour générer des opérations comptables de compensation"
 #, python-format
 msgid "You should compensate at least 2 journal entries."
 msgstr "Vous devez compenser au moins deux écritures."
+
+#~ msgid ""
+#~ "This operation will generate account entries that are counterpart of the "
+#~ "receivable/payable accounts selected, and reconcile each other, letting "
+#~ "this balance in the partner."
+#~ msgstr ""
+#~ "Cette opération va générer des écritures comptables qui vont compenses "
+#~ "les compte payables / recevables sélectionnés, et les lettrer afin "
+#~ "d'aafcter le solde au partenaire."

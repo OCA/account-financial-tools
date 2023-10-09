@@ -129,7 +129,7 @@ msgstr ""
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid ""
-"This operation will generate account entries that are counterpart of the "
+"This operation will generate journal entries that are counterpart of the "
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner."
 msgstr ""
