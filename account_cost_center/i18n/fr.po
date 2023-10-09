@@ -59,7 +59,8 @@ msgstr "Centres de Coût"
 #. module: account_cost_center
 #: model_terms:ir.actions.act_window,help:account_cost_center.account_cost_center_action
 msgid "Cost centers provide an extra analytic dimension"
-msgstr "Les centres de coût fournissent une dimension analytique supplémentaire"
+msgstr ""
+"Les centres de coût fournissent une dimension analytique supplémentaire"
 
 #. module: account_cost_center
 #: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_uid
