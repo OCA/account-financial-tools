@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_clearance_plan
+# 	* account_clearance_plan
 #
 msgid ""
 msgstr ""
@@ -111,7 +111,9 @@ msgstr "Nombre de línea de movimiento del plan de liquidación predeterminado"
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_res_company__clearance_plan_move_line_name
 #: model:ir.model.fields,help:account_clearance_plan.field_res_config_settings__clearance_plan_move_line_name
-msgid "Default name that will be given to new open move lines created by clearance plans"
+msgid ""
+"Default name that will be given to new open move lines created by clearance "
+"plans"
 msgstr ""
 "Nombre predeterminado que se le dará a las nuevas líneas de movimiento "
 "abiertas creadas por los planes de limpieza"
@@ -212,7 +214,9 @@ msgstr "Seleccione artículos de exactamente un contacto."
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:75
 #, python-format
-msgid "Programming error: wizard action executed with 'active_model' different from 'account.move.line' in context."
+msgid ""
+"Programming error: wizard action executed with 'active_model' different from "
+"'account.move.line' in context."
 msgstr ""
 "Error de programación: la acción del asistente se ejecutó con 'active_model' "
 "diferente de 'account.move.line' en contexto."
