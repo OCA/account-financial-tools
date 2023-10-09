@@ -26,31 +26,46 @@ msgid "Check Chronology"
 msgstr "Verificar Cronologia"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
-"Chronology Error. Please confirm older draft invoices before {date_invoice} "
-"and try again."
+"Chronology conflict: A conflicting draft invoice dated before {date_invoice} "
+"exists, please validate it first."
 msgstr ""
-"Erro cronológico. Confirme as faturas de rascunho mais antigas antes de "
-"{date_invoice} e tente novamente."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:82
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
 #, python-format
 msgid ""
-"Chronology Error. There exist at least one invoice with a later date to "
-"{date_invoice}."
+"Chronology conflict: A conflicting validated invoice dated after "
+"{date_invoice} exists."
 msgstr ""
-"Erro cronológico. Existe pelo menos uma fatura com uma data posterior para "
-"{date_invoice}."
-
-#. module: account_invoice_constraint_chronology
-#: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
-msgid "Invoice"
-msgstr "Fatura"
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
 msgstr "Diário"
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#, python-format
+#~ msgid ""
+#~ "Chronology Error. Please confirm older draft invoices before "
+#~ "{date_invoice} and try again."
+#~ msgstr ""
+#~ "Erro cronológico. Confirme as faturas de rascunho mais antigas antes de "
+#~ "{date_invoice} e tente novamente."
+
+#, python-format
+#~ msgid ""
+#~ "Chronology Error. There exist at least one invoice with a later date to "
+#~ "{date_invoice}."
+#~ msgstr ""
+#~ "Erro cronológico. Existe pelo menos uma fatura com uma data posterior "
+#~ "para {date_invoice}."
+
+#~ msgid "Invoice"
+#~ msgstr "Fatura"

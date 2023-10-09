@@ -26,31 +26,46 @@ msgid "Check Chronology"
 msgstr "Vérifier la chronologie"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
-#, fuzzy, python-format
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
+#, python-format
 msgid ""
-"Chronology Error. Please confirm older draft invoices before {date_invoice} "
-"and try again."
+"Chronology conflict: A conflicting draft invoice dated before {date_invoice} "
+"exists, please validate it first."
 msgstr ""
-"Erreur de chronologie. Veuillez confirmer les anciennes factures brouillon "
-"avant le {date_invoice} et réessayer."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:82
-#, fuzzy, python-format
+#: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
+#, python-format
 msgid ""
-"Chronology Error. There exist at least one invoice with a later date to "
-"{date_invoice}."
+"Chronology conflict: A conflicting validated invoice dated after "
+"{date_invoice} exists."
 msgstr ""
-"Erreur de chronologie. Il existe au moins une facture avec une date "
-"ultérieure au {date_invoice}."
-
-#. module: account_invoice_constraint_chronology
-#: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
-msgid "Invoice"
-msgstr "Facture"
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
 msgstr "Journal"
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#, fuzzy, python-format
+#~ msgid ""
+#~ "Chronology Error. Please confirm older draft invoices before "
+#~ "{date_invoice} and try again."
+#~ msgstr ""
+#~ "Erreur de chronologie. Veuillez confirmer les anciennes factures "
+#~ "brouillon avant le {date_invoice} et réessayer."
+
+#, fuzzy, python-format
+#~ msgid ""
+#~ "Chronology Error. There exist at least one invoice with a later date to "
+#~ "{date_invoice}."
+#~ msgstr ""
+#~ "Erreur de chronologie. Il existe au moins une facture avec une date "
+#~ "ultérieure au {date_invoice}."
+
+#~ msgid "Invoice"
+#~ msgstr "Facture"
