@@ -47,7 +47,8 @@ msgstr "Modèle de compte"
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
 msgid "Account that needs to be updated (new or updated in the template)."
-msgstr "Compte qui doit être mis à jour (nouveau ou mis à jour dans le modèle)."
+msgstr ""
+"Compte qui doit être mis à jour (nouveau ou mis à jour dans le modèle)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_account_id
