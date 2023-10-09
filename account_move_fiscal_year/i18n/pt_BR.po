@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-12-22 03:41+0000\n"
 "PO-Revision-Date: 2022-09-23 00:07+0000\n"
 "Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,20 +26,46 @@ msgid "Companies"
 msgstr "Empresas"
 
 #. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_res_company__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_bank_statement_line__date_range_fy_id
 #: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__date_range_fy_id
 #: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_payment__date_range_fy_id
 msgid "Fiscal year"
 msgstr "Ano Fiscal"
 
 #. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_res_company__id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move
-msgid "Journal Entries"
-msgstr "Lançamentos de Diário"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move_line
 msgid "Journal Item"
 msgstr "Item do Diário"
+
+#. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_res_company____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#~ msgid "Journal Entries"
+#~ msgstr "Lançamentos de Diário"
 
 #~ msgid "Account Entry"
 #~ msgstr "Entrada de conta"
