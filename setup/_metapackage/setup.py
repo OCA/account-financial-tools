@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo-addon-account_invoice_constraint_chronology>=16.0dev,<16.1dev',
         'odoo-addon-account_journal_general_sequence>=16.0dev,<16.1dev',
         'odoo-addon-account_journal_lock_date>=16.0dev,<16.1dev',
+        'odoo-addon-account_journal_restrict_mode>=16.0dev,<16.1dev',
         'odoo-addon-account_loan>=16.0dev,<16.1dev',
         'odoo-addon-account_lock_date_update>=16.0dev,<16.1dev',
         'odoo-addon-account_move_fiscal_year>=16.0dev,<16.1dev',
