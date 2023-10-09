@@ -132,15 +132,11 @@ msgstr ""
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
-#, fuzzy
 msgid ""
-"This operation will generate account entries that are counterpart of the "
+"This operation will generate journal entries that are counterpart of the "
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner."
 msgstr ""
-"Dieser Vorgang wird Gegenbuchungen zu den ausgewählten kreditorische/"
-"debitorischen Konten erzeugen, die sich dann gegenseitig saldieren. Beim "
-"Partner ergibt sich folgender Saldo:"
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
@@ -162,6 +158,16 @@ msgstr ""
 #, python-format
 msgid "You should compensate at least 2 journal entries."
 msgstr "Sie müssen mindestens 2 Journalposten kompensieren."
+
+#, fuzzy
+#~ msgid ""
+#~ "This operation will generate account entries that are counterpart of the "
+#~ "receivable/payable accounts selected, and reconcile each other, letting "
+#~ "this balance in the partner."
+#~ msgstr ""
+#~ "Dieser Vorgang wird Gegenbuchungen zu den ausgewählten kreditorische/"
+#~ "debitorischen Konten erzeugen, die sich dann gegenseitig saldieren. Beim "
+#~ "Partner ergibt sich folgender Saldo:"
 
 #~ msgid "Select the journal where storing the journal entries"
 #~ msgstr "Wählen Sie das Journal zur Aufnahme der Posten"

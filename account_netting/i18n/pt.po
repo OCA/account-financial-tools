@@ -134,13 +134,10 @@ msgstr ""
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid ""
-"This operation will generate account entries that are counterpart of the "
+"This operation will generate journal entries that are counterpart of the "
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner."
 msgstr ""
-"Esta operação gerará itens de diário que são contrapartida das contas a "
-"receber/a pagar selecionadas e realizará a reconciliação, deixando este "
-"saldo no parceiro."
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
@@ -162,6 +159,15 @@ msgstr "Assistente para gerar lançamentos de encontros de contas"
 #, python-format
 msgid "You should compensate at least 2 journal entries."
 msgstr "Deve compensar pelos menos 2 itens de diário."
+
+#~ msgid ""
+#~ "This operation will generate account entries that are counterpart of the "
+#~ "receivable/payable accounts selected, and reconcile each other, letting "
+#~ "this balance in the partner."
+#~ msgstr ""
+#~ "Esta operação gerará itens de diário que são contrapartida das contas a "
+#~ "receber/a pagar selecionadas e realizará a reconciliação, deixando este "
+#~ "saldo no parceiro."
 
 #~ msgid "Select the journal where storing the journal entries"
 #~ msgstr "Selecione o Diário onde guardar os lançamentos"
