@@ -318,7 +318,8 @@ msgstr "Si está marcado, los mensajes nuevos requieren su atención."
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Si está marcado, algunos mensajes han tenido errores al ser entregados."
+msgstr ""
+"Si está marcado, algunos mensajes han tenido errores al ser entregados."
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__interests_product_id
