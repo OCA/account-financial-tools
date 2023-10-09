@@ -26,20 +26,25 @@ msgid "Companies"
 msgstr "Unternehmen"
 
 #. module: account_move_fiscal_year
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_bank_statement_line__date_range_fy_id
 #: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__date_range_fy_id
 #: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_payment__date_range_fy_id
 msgid "Fiscal year"
 msgstr "Steuerjahr"
 
 #. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move
-msgid "Journal Entries"
-msgstr "Journal-Buchungen"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move_line
 msgid "Journal Item"
 msgstr "Journalbuchung"
+
+#~ msgid "Journal Entries"
+#~ msgstr "Journal-Buchungen"
 
 #~ msgid "Account Entry"
 #~ msgstr "Kontobuchung"
