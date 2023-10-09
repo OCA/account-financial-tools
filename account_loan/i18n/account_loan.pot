@@ -385,7 +385,6 @@ msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error
-#: model:ir.model.fields,help:account_loan.field_account_loan__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -867,11 +866,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "Run"
-msgstr ""
-
-#. module: account_loan
-#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_loan
