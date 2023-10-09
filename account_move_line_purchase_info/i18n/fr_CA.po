@@ -20,13 +20,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_move_line_purchase_info
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_purchase_order__display_name
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_purchase_order_line__display_name
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_stock_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_line_purchase_info
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_purchase_order__id
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_purchase_order_line__id
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_line_purchase_info
 #: model:ir.model,name:account_move_line_purchase_info.model_account_move_line
 msgid "Journal Item"
 msgstr ""
 
 #. module: account_move_line_purchase_info
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_purchase_order____last_update
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_purchase_order_line____last_update
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_line_purchase_info
 #: model:ir.model,name:account_move_line_purchase_info.model_purchase_order
-#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__purchase_id
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__purchase_order_id
 #: model_terms:ir.ui.view,arch_db:account_move_line_purchase_info.view_account_move_line_filter
 msgid "Purchase Order"
 msgstr ""
