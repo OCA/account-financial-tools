@@ -31,27 +31,9 @@ msgid "Contact"
 msgstr "Stik"
 
 #. module: account_fiscal_position_vat_check
-#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner__display_name
-msgid "Display Name"
-msgstr "Prikazani naziv"
-
-#. module: account_fiscal_position_vat_check
-#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_account_move__id
-#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner__id
-msgid "ID"
-msgstr "ID"
-
-#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_move
 msgid "Journal Entry"
 msgstr "Dnevniški vnos"
-
-#. module: account_fiscal_position_vat_check
-#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner____last_update
-msgid "Last Modified on"
-msgstr "Zadnjič spremenjeno"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner__show_warning_vat_required
@@ -60,22 +42,41 @@ msgid "Show Warning Vat Required"
 msgstr "Prikaži opozorilo, da je davčna številka obvezna"
 
 #. module: account_fiscal_position_vat_check
+#. odoo-python
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
 #, python-format
 msgid ""
 "You are trying to validate a customer invoice/refund with the fiscal "
-"position '%s' that require the customer to have a VAT number. But the "
-"Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
-"of this Customer in Odoo and try to validate again."
+"position '%(fp)s' that require the customer to have a VAT number. But the "
+"Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+"number of this Customer in Odoo and try to validate again."
 msgstr ""
-"Poskušate potrditi izdani račun/dobropis s fiskalno pozicijo '%s', ki "
-"zahteva, da ima kupec ID za DDV. A kupec '%s' v Odoo nima ID za DDV. Dodajte "
-"davčno številko za tega kupca v Odoo in poskusite ponovno potrditi."
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
 msgid "that require to know the VAT number of the partner."
 msgstr "ki zahteva vpisano davčno številko partnerja."
+
+#~ msgid "Display Name"
+#~ msgstr "Prikazani naziv"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnjič spremenjeno"
+
+#, python-format
+#~ msgid ""
+#~ "You are trying to validate a customer invoice/refund with the fiscal "
+#~ "position '%s' that require the customer to have a VAT number. But the "
+#~ "Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT "
+#~ "number of this Customer in Odoo and try to validate again."
+#~ msgstr ""
+#~ "Poskušate potrditi izdani račun/dobropis s fiskalno pozicijo '%s', ki "
+#~ "zahteva, da ima kupec ID za DDV. A kupec '%s' v Odoo nima ID za DDV. "
+#~ "Dodajte davčno številko za tega kupca v Odoo in poskusite ponovno "
+#~ "potrditi."
 
 #~ msgid "Invoice"
 #~ msgstr "Račun"
