@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_move_line_tax_editable
+# 	* account_move_line_tax_editable
 #
 msgid ""
 msgstr ""
