@@ -1,7 +1,7 @@
 Define Spread Costs/Revenues Board
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under Invoicing -> Accounting -> Miscellaneous -> Spread Costs/Revenues, create a new spread board.
+Under Invoicing -> Accounting -> Journals -> Spread Costs/Revenues, create a new spread board.
 
 Complete the definition of the spreading criteria, by setting the the fields:
 
@@ -13,17 +13,17 @@ Complete the definition of the spreading criteria, by setting the the fields:
 * *Start date*
 * *Journal*
 
-.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_spread_cost_revenue/static/description/spread.png
+.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_spread_cost_revenue/static/description/spread.png
    :alt: Create a new spread board
 
 Click on the "Recalculate unposted lines" button on the top-left to calculate the spread lines.
 
-.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_spread_cost_revenue/static/description/create_spread.png
+.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_spread_cost_revenue/static/description/create_spread.png
    :alt: The spreading board is defined
 
 A cron job will automatically create the accounting moves for all the lines having date previous that the current day (today).
 
-.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_spread_cost_revenue/static/description/update_spread.png
+.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_spread_cost_revenue/static/description/update_spread.png
    :alt: The spreading board is updated by the cron job
 
 By default, the status of the created accounting moves is posted.
@@ -38,7 +38,7 @@ Link Invoice to Spread Costs/Revenues Board
 
 Create an invoice or vendor bill in draft. On its lines, the spreading right-arrow icon are displayed in dark-grey color.
 
-.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_spread_cost_revenue/static/description/invoice_line_1.png
+.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_spread_cost_revenue/static/description/invoice_line_1.png
    :alt: On the invoice line the spreading icon is displayed
 
 Click on the spreading right-arrow icon. A wizard prompts to enter a *Spread Action Type*:
@@ -53,11 +53,11 @@ the selected Spread Board will be automatically displayed.
 Go back to the draft invoice/bill. The spreading functionality is now enabled on the invoice line:
 the spreading right-arrow icon is now displayed in green color.
 
-.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_spread_cost_revenue/static/description/invoice_line_2.png
+.. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_spread_cost_revenue/static/description/invoice_line_2.png
    :alt: On the invoice line the spreading icon is displayed in green color
 
 Validate the invoice/bill. Click on the spreading (green) right-arrow icon to open the spread board, then click
-on the smart button *Reconciled entries*: the moves of the spread lines are reconciled with the move of the invoice line.
+on the smart button *Posted entries* to see the moves of the spread lines together with the move of the invoice line.
 
 In case the Subtotal Price of the invoice line is different than the *Estimated Amount* of the spread board, the spread
 lines (not yet posted) will be recalculated when validating the invoice/bill.

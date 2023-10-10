@@ -64,16 +64,10 @@ class AccountInvoiceSpreadLine(models.Model):
 
         spread_date = self.env.context.get("spread_date") or self.date
         spread = self.spread_id
-        analytic = spread.account_analytic_id
-        analytic_tags = []
-        if self.env["account.analytic.tag"].check_access_rights(
-            "read", raise_exception=False
-        ):
-            analytic_tags = [(6, 0, spread.analytic_tag_ids.ids)]
+        analytic_distribution = spread.analytic_distribution
 
         company_currency = spread.company_id.currency_id
         current_currency = spread.currency_id
-        not_same_curr = company_currency != current_currency
         amount = current_currency._convert(
             self.amount, company_currency, spread.company_id, spread_date
         )
@@ -92,10 +86,9 @@ class AccountInvoiceSpreadLine(models.Model):
                     "debit": amount if amount > 0.0 else 0.0,
                     "credit": -amount if amount < 0.0 else 0.0,
                     "partner_id": self.spread_id.invoice_id.partner_id.id,
-                    "analytic_account_id": analytic.id,
-                    "analytic_tag_ids": analytic_tags,
-                    "currency_id": not_same_curr and current_currency.id or False,
-                    "amount_currency": not_same_curr and -1.0 * self.amount or 0.0,
+                    "journal_id": self.spread_id.journal_id.id,
+                    "analytic_distribution": analytic_distribution,
+                    "date": self.date,
                 },
             ),
             (
@@ -109,10 +102,9 @@ class AccountInvoiceSpreadLine(models.Model):
                     "credit": amount if amount > 0.0 else 0.0,
                     "debit": -amount if amount < 0.0 else 0.0,
                     "partner_id": self.spread_id.invoice_id.partner_id.id,
-                    "analytic_account_id": analytic.id,
-                    "analytic_tag_ids": analytic_tags,
-                    "currency_id": not_same_curr and current_currency.id or False,
-                    "amount_currency": not_same_curr and self.amount or 0.0,
+                    "journal_id": self.spread_id.journal_id.id,
+                    "analytic_distribution": analytic_distribution,
+                    "date": self.date,
                 },
             ),
         ]

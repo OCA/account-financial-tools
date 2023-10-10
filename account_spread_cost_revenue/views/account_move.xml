@@ -10,8 +10,45 @@
             >
                 <field
                     name="spread_check"
-                    widget="spread_line_widget"
+                    invisible="1"
                     groups="account.group_account_user,account.group_account_manager"
+                />
+                <button
+                    name="spread_details"
+                    type="object"
+                    class="btn btn-link"
+                    icon="fa-arrow-circle-right"
+                    title="Not linked to any spread board"
+                    attrs="{'invisible': [('spread_check', '!=', 'unlinked')]}"
+                    groups="account.group_account_user,account.group_account_manager"
+                />
+                <button
+                    name="spread_details"
+                    type="object"
+                    class="btn btn-success"
+                    icon="fa-arrow-circle-right"
+                    title="Linked to spread board"
+                    attrs="{'invisible': [('spread_check', '!=', 'linked')]}"
+                    groups="account.group_account_user,account.group_account_manager"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='line_ids']/tree//button[@name='action_automatic_entry']"
+                position="after"
+            >
+                <field
+                    name="spread_check"
+                    invisible="1"
+                    groups="account.group_account_user,account.group_account_manager"
+                />
+                <button
+                    name="spread_details"
+                    type="object"
+                    class="btn btn-success"
+                    icon="fa-arrow-circle-right"
+                    title="Linked to spread board"
+                    groups="account.group_account_user,account.group_account_manager"
+                    attrs="{'invisible': [('spread_check', '!=', 'linked')], 'column_invisible': ['|', ('parent.move_type', '=', 'entry'), ('parent.state', '!=', 'posted')]}"
                 />
             </xpath>
         </field>
@@ -25,7 +62,7 @@
         <field
             name="domain"
         >[('display_type', 'not in', ('line_section', 'line_note'))]</field>
-        <field name="view_id" ref="account.view_move_line_tree_grouped" />
+        <field name="view_id" ref="account.view_move_line_tree" />
         <field name="view_mode">tree,pivot,graph,form,kanban</field>
     </record>
 </odoo>

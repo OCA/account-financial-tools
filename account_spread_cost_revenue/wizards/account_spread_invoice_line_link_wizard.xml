@@ -37,19 +37,18 @@
                         <field
                             name="spread_account_id"
                             attrs="{'invisible': [('spread_action_type', '!=', 'new')],'required': [('spread_action_type', '=', 'new')]}"
-                            domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
+                            domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                             options="{'no_create': True}"
                         />
                         <field
                             name="exp_rev_account_id"
                             attrs="{'invisible': ['|', ('use_invoice_line_account', '=', False), ('spread_action_type', '!=', 'new')], 'required': [('use_invoice_line_account', '=', True)]}"
-                            domain="[('company_id', '=', company_id), ('deprecated', '=', False)]"
+                            domain="[('deprecated', '=', False)]"
                             options="{'no_create': True}"
                         />
                         <field
                             name="spread_journal_id"
                             attrs="{'invisible': [('spread_action_type', '!=', 'new')],'required': [('spread_action_type', '=', 'new')]}"
-                            domain="[('company_id', '=', company_id)]"
                             options="{'no_create': True}"
                         />
                     </group>
