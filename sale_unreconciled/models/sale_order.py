@@ -150,8 +150,8 @@ class SaleOrder(models.Model):
                     product_id = main_product.id
                 writeoff_vals = self._get_sale_writeoff_vals(sale_line_id, product_id)
                 if unreconciled_items_group:
-                    writeoff_to_reconcile = unreconciled_items_group._create_writeoff(
-                        [writeoff_vals]
+                    writeoff_to_reconcile = (
+                        unreconciled_items_group._create_so_writeoff([writeoff_vals])
                     )
                     all_writeoffs |= writeoff_to_reconcile
                     # add writeoff line to reconcile algorithm and finish the reconciliation
