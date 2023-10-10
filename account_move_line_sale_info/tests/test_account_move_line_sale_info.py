@@ -264,7 +264,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         picking.button_validate()
         sale._create_invoices()
         invoice = sale.invoice_ids[0]
-        invoice.post()
+        invoice._post()
         reversal_wizard = self.move_reversal_wiz(invoice)
         credit_note = self.env["account.move"].browse(
             reversal_wizard.reverse_moves()["res_id"]
