@@ -46,6 +46,7 @@ setuptools.setup(
         'odoo-addon-account_usability>=15.0dev,<15.1dev',
         'odoo-addon-base_vat_optional_vies>=15.0dev,<15.1dev',
         'odoo-addon-product_category_tax>=15.0dev,<15.1dev',
+        'odoo-addon-stock_account_no_auto_reconcile>=15.0dev,<15.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
