@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_fiscal_year
+# 	* account_fiscal_year
 #
 msgid ""
 msgstr ""
