@@ -26,7 +26,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         cls.partner = cls.partner_obj.create({"name": "Test Vendor"})
         # Create standard product:
         cls.product = cls.product_obj.create(
-            {"name": "saled Product", "type": "product"}
+            {"name": "Sold Product", "type": "product"}
         )
         # Create product that uses a reconcilable stock input account.
         cls.stock_journal = cls.env["account.journal"].create(
@@ -81,10 +81,18 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         )
         cls.product_to_reconcile = cls.product_obj.create(
             {
-                "name": "saled Product (To reconcile)",
+                "name": "sold Product (To reconcile)",
                 "type": "product",
                 "standard_price": 100,
                 "valuation": "real_time",
+                "categ_id": cls.product_categ.id,
+            }
+        )
+        cls.product_to_reconcile2 = cls.product_obj.create(
+            {
+                "name": "Purchased Product 2 (To reconcile)",
+                "type": "product",
+                "standard_price": 100.0,
                 "categ_id": cls.product_categ.id,
             }
         )
@@ -406,7 +414,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
             sum(aml_output.mapped("credit")), 150, "GDNI missing or mismatching"
         )
         # Now checking that the stock entries for the finished product are
-        # created and not the component (decide if that is derisable)
+        # created and not the component (decide if that is desirable)
         self.assertNotEqual(
             aml.filtered(
                 lambda ml: ml.product_id == self.finished_product
@@ -436,19 +444,19 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         so.with_context(force_confirm_sale_order=True).action_confirm()
         self._do_picking(so.picking_ids, fields.Datetime.now())
         self.assertTrue(so.unreconciled)
-        # as long stock_dropshipping is not dependency, I force the SO to be in
-        # the journal items of the incoming
+        # stock_dropshipping is not a dependency, forcing the SO to be in the
+        # journal items of the incoming
         incoming_name = incoming.name
         incoming_ji = self.env["account.move.line"].search(
             [("move_id.ref", "=", incoming_name)]
         )
         incoming_ji.write({"sale_line_id": so.order_line[0], "sale_order_id": so.id})
-        # then I lock the so to force reconciliation
+        # Lock the SO to force reconciliation
         so.action_done()
         so._compute_unreconciled()
         self.assertFalse(so.unreconciled)
-        # the SO is reconciled and the stock interim deliverd account is not
-        # reconciled yet
+        # The SO is reconciled and the stock interim deliverd account is still
+        # not reconciled
         for jii in incoming_ji:
             self.assertFalse(jii.reconciled)
 
@@ -486,7 +494,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         so.action_done()
         so._compute_unreconciled()
         self.assertFalse(so.unreconciled)
-        # we check all the journals for the so have the same company
+        # check all the journals for the so have the same company
         ji = self.env["account.move.line"].search(
             [("sale_order_id", "=", so.id), ("move_id", "!=", invoice.id)]
         )
@@ -504,7 +512,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         self._do_picking(so.picking_ids, fields.Datetime.now())
         # Do not create invoices to force discrepancy
         so.action_done()
-        # we check all the journals are balanced by product
+        # Check if all the journals are balanced by product
         ji_s1 = self.env["account.move.line"].search(
             [
                 ("sale_order_id", "=", so.id),

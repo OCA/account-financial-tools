@@ -107,8 +107,8 @@ class SaleOrder(models.Model):
             )
         self.ensure_one()
         acc_item = self.env["account.move.line"]
-        domain = self.with_context(
-            force_company=self.company_id.id
+        domain = self.with_company(
+            self.company_id.id
         )._get_sale_unreconciled_base_domain()
         domain_account = self._get_account_domain()
         unreconciled_domain = expression.AND([domain, domain_account])
@@ -206,7 +206,7 @@ class SaleOrder(models.Model):
             "sale_order_id": self.id,
             "sale_line_id": sale_line_id or False,
             "product_id": product_id or False,
-            "currency_id": self.currency_id.id,
+            "currency_id": self.currency_id.id or self.env.company_id.currency_id.id,
         }
 
     def reconcile_criteria(self):
