@@ -3,7 +3,7 @@
 
 import datetime
 
-from psycopg2 import IntegrityError
+from psycopg2.errors import NotNullViolation
 
 from odoo.exceptions import ValidationError
 from odoo.tests import Form, common
@@ -22,16 +22,11 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             {"name": "Vendor Bills - Test", "code": "TEST2", "type": "purchase"}
         )
 
-        type_receivable = self.env.ref("account.data_account_type_receivable")
-        type_expenses = self.env.ref("account.data_account_type_expenses")
-        type_payable = self.env.ref("account.data_account_type_payable")
-        type_revenue = self.env.ref("account.data_account_type_revenue")
-
         self.credit_account = self.env["account.account"].create(
             {
                 "name": "test_account_receivable",
                 "code": "123",
-                "user_type_id": type_receivable.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -40,7 +35,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             {
                 "name": "test account_expenses",
                 "code": "765",
-                "user_type_id": type_expenses.id,
+                "account_type": "expense",
                 "reconcile": True,
             }
         )
@@ -49,7 +44,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             {
                 "name": "test_account_payable",
                 "code": "321",
-                "user_type_id": type_payable.id,
+                "account_type": "liability_payable",
                 "reconcile": True,
             }
         )
@@ -58,7 +53,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             {
                 "name": "test_account_revenue",
                 "code": "864",
-                "user_type_id": type_revenue.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -85,8 +80,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertFalse(spread.invoice_line_ids)
         self.assertFalse(spread.invoice_line_id)
         self.assertFalse(spread.invoice_id)
-        self.assertFalse(spread.account_analytic_id)
-        self.assertFalse(spread.analytic_tag_ids)
+        self.assertFalse(spread.analytic_distribution)
         self.assertTrue(spread.move_line_auto_post)
         self.assertEqual(spread.name, "test")
         self.assertEqual(spread.invoice_type, "out_invoice")
@@ -116,14 +110,29 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
 
     @mute_logger("odoo.sql_db")
     def test_03_no_defaults(self):
-        with self.assertRaises(IntegrityError):
+        with self.assertRaises(NotNullViolation):
             self.env["account.spread"].create({"name": "test"})
+        with self.assertRaises(NotNullViolation):
+            self.env["account.spread"].create(
+                {"name": "test", "invoice_type": "out_invoice"}
+            )
 
     @mute_logger("odoo.sql_db")
     def test_04_no_defaults(self):
-        with self.assertRaises(IntegrityError):
+        with self.assertRaises(NotNullViolation):
             self.env["account.spread"].create(
-                {"name": "test", "invoice_type": "out_invoice"}
+                {
+                    "name": "test",
+                    "debit_account_id": self.debit_account.id,
+                    "credit_account_id": self.credit_account.id,
+                }
+            )
+        with self.assertRaises(NotNullViolation):
+            self.env["account.spread"].create(
+                {
+                    "name": "test",
+                    "credit_account_id": self.credit_account.id,
+                }
             )
 
     def test_05_config_settings(self):
@@ -137,6 +146,8 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertTrue(self.env.company.default_spread_revenue_journal_id)
         self.assertTrue(self.env.company.default_spread_expense_journal_id)
 
+        self.env.user.groups_id += self.env.ref("base.group_multi_company")
+
         spread_form = Form(self.env["account.spread"])
         spread_form.name = "test"
         spread_form.invoice_type = "in_invoice"
@@ -149,8 +160,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertFalse(spread.invoice_line_ids)
         self.assertFalse(spread.invoice_line_id)
         self.assertFalse(spread.invoice_id)
-        self.assertFalse(spread.account_analytic_id)
-        self.assertFalse(spread.analytic_tag_ids)
+        self.assertFalse(spread.analytic_distribution)
         self.assertTrue(spread.move_line_auto_post)
 
         defaults = self.env["account.spread"].default_get(["company_id", "currency_id"])

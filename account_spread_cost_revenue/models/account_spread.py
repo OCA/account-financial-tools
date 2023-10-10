@@ -3,7 +3,6 @@
 
 import calendar
 import time
-from datetime import timedelta
 
 from dateutil.relativedelta import relativedelta
 
@@ -15,7 +14,8 @@ from odoo.tools import float_is_zero
 class AccountSpread(models.Model):
     _name = "account.spread"
     _description = "Account Spread"
-    _inherit = ["mail.thread"]
+    _inherit = ["mail.thread", "analytic.mixin"]
+    _check_company_auto = True
 
     name = fields.Char(required=True)
     template_id = fields.Many2one("account.spread.template", string="Spread Template")
@@ -96,8 +96,15 @@ class AccountSpread(models.Model):
         "account.journal",
         compute="_compute_journal_id",
         readonly=False,
+        precompute=True,
         store=True,
         required=True,
+        check_company=True,
+        domain="[('id', 'in', suitable_journal_ids)]",
+    )
+    suitable_journal_ids = fields.Many2many(
+        "account.journal",
+        compute="_compute_suitable_journal_ids",
     )
     invoice_line_ids = fields.One2many(
         "account.move.line", "spread_id", copy=False, string="Invoice Lines"
@@ -123,10 +130,6 @@ class AccountSpread(models.Model):
         required=True,
         default=lambda self: self.env.company.currency_id.id,
     )
-    account_analytic_id = fields.Many2one(
-        "account.analytic.account", string="Analytic Account"
-    )
-    analytic_tag_ids = fields.Many2many("account.analytic.tag", string="Analytic Tags")
     move_line_auto_post = fields.Boolean("Auto-post lines", default=True)
     display_create_all_moves = fields.Boolean(
         compute="_compute_display_create_all_moves",
@@ -154,6 +157,12 @@ class AccountSpread(models.Model):
             if default_journal:
                 res["journal_id"] = default_journal.id
         return res
+
+    @api.depends("company_id")
+    def _compute_suitable_journal_ids(self):
+        for spread in self:
+            domain = [("company_id", "=", spread.company_id.id)]
+            spread.suitable_journal_ids = self.env["account.journal"].search(domain)
 
     @api.depends("invoice_type")
     def _compute_spread_type(self):
@@ -248,6 +257,8 @@ class AccountSpread(models.Model):
                 self.period_type = self.template_id.period_type
             if self.template_id.start_date:
                 self.spread_date = self.template_id.start_date
+            if self.template_id.analytic_distribution:
+                self.analytic_distribution = self.template_id.analytic_distribution
             self.days_calc = self.template_id.days_calc
 
     @api.depends("invoice_type", "company_id")
@@ -444,7 +455,7 @@ class AccountSpread(models.Model):
             spread_end_date = spread_start_date + relativedelta(years=number_of_periods)
         # calculate by days and not first day of month should compute residual day only
         if self.days_calc and spread_end_date.day != 1:
-            spread_end_date = spread_end_date - timedelta(days=1)
+            spread_end_date = spread_end_date - relativedelta(days=1)
         else:
             spread_end_date = self._get_last_day_of_month(spread_end_date)
         return spread_end_date
@@ -564,6 +575,8 @@ class AccountSpread(models.Model):
         if mls_to_reconcile:
             do_reconcile = mls_to_reconcile + self.invoice_line_id
             do_reconcile.remove_move_reconcile()
+            for line in do_reconcile:
+                line.reconciled = False
             # ensure to reconcile only posted items
             do_reconcile = do_reconcile.filtered(lambda l: l.move_id.state == "posted")
             do_reconcile._check_spread_reconcile_validity()
@@ -588,12 +601,13 @@ class AccountSpread(models.Model):
             spread.is_debit_account_deprecated = spread.debit_account_id.deprecated
             spread.is_credit_account_deprecated = spread.credit_account_id.deprecated
 
-    def open_reconcile_view(self):
+    def open_posted_view(self):
         action_name = "account_spread_cost_revenue.action_account_moves_all_spread"
-        [action] = self.env.ref(action_name).read()
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_name)
         action["domain"] = [("id", "in", [])]
         spread_mls = self.line_ids.mapped("move_id.line_ids")
-        spread_mls = spread_mls.filtered(lambda m: m.reconciled)
+        if self.env.context.get("show_reconciled_only"):
+            spread_mls = spread_mls.filtered(lambda m: m.reconciled)
         if spread_mls:
             domain = [("id", "in", spread_mls.ids + [self.invoice_line_id.id])]
             action["domain"] = domain
