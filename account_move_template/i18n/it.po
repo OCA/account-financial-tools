@@ -211,33 +211,26 @@ msgstr "ID"
 #: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid ""
-"Impossible to compute the formula of line with sequence %s (formula: %s). "
-"Check that the lines used in the formula really exists and have a lower "
-"sequence than the current line."
+"Impossible to compute the formula of line with sequence %(sequence)s "
+"(formula: %(code)s). Check that the lines used in the formula really exists "
+"and have a lower sequence than the current line."
 msgstr ""
-"Impossibile calcolare la formula della riga con sequenza %s ( Formula: %s). "
-"Controlla che le righe usate nella formula esistano veramente e abbiano una "
-"sequenza inferiore alla riga corrente."
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid ""
-"Impossible to compute the formula of line with sequence %s (formula: %s): "
-"the syntax of the formula is wrong."
+"Impossible to compute the formula of line with sequence %(sequence)s "
+"(formula: %(code)s): the syntax of the formula is wrong."
 msgstr ""
-"Impossibile calcolare la formula della riga con sequenza %s (formula: %s): "
-"la sintassi della formula è sbagliata."
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid ""
-"Invalid dictionary: {}\n"
-"{}"
+"Invalid dictionary: %(exception)s\n"
+"%(msg)s"
 msgstr ""
-"Dizionario non valido: {}\n"
-"{}"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
@@ -454,11 +447,9 @@ msgstr "Modello"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid ""
-"The selected template (%s) is not in the same company (%s) as the current "
-"user (%s)."
+"The selected template (%(template)s) is not in the same company "
+"(%(company)s) as the current user (%(user_company)s)."
 msgstr ""
-"Il modello selezionato (%s) non è nella stessa azienda (%s) dell'utente "
-"corrente (%s)."
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_line_sequence_template_uniq
@@ -478,7 +469,8 @@ msgstr "Tipo"
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__payment_term_id
 msgid "Used to compute the due date of the journal item."
-msgstr "Utilizzato per calcolare la data di scadenza dell'articolo di registro."
+msgstr ""
+"Utilizzato per calcolare la data di scadenza dell'articolo di registro."
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
@@ -543,3 +535,37 @@ msgstr ""
 "Hai eliminato una riga nella procedura guidata. questo non è permesso: è "
 "necessario aggiornare il modello o modificare la registrazione contabile che "
 "verrà generata da questa procedura guidata."
+
+#, python-format
+#~ msgid ""
+#~ "Impossible to compute the formula of line with sequence %s (formula: %s). "
+#~ "Check that the lines used in the formula really exists and have a lower "
+#~ "sequence than the current line."
+#~ msgstr ""
+#~ "Impossibile calcolare la formula della riga con sequenza %s ( Formula: "
+#~ "%s). Controlla che le righe usate nella formula esistano veramente e "
+#~ "abbiano una sequenza inferiore alla riga corrente."
+
+#, python-format
+#~ msgid ""
+#~ "Impossible to compute the formula of line with sequence %s (formula: %s): "
+#~ "the syntax of the formula is wrong."
+#~ msgstr ""
+#~ "Impossibile calcolare la formula della riga con sequenza %s (formula: "
+#~ "%s): la sintassi della formula è sbagliata."
+
+#, python-format
+#~ msgid ""
+#~ "Invalid dictionary: {}\n"
+#~ "{}"
+#~ msgstr ""
+#~ "Dizionario non valido: {}\n"
+#~ "{}"
+
+#, python-format
+#~ msgid ""
+#~ "The selected template (%s) is not in the same company (%s) as the current "
+#~ "user (%s)."
+#~ msgstr ""
+#~ "Il modello selezionato (%s) non è nella stessa azienda (%s) dell'utente "
+#~ "corrente (%s)."
