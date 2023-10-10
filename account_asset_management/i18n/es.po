@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-20 01:10+0100\n"
-"PO-Revision-Date: 2023-09-20 18:13+0000\n"
+"PO-Revision-Date: 2023-10-10 11:49+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -41,6 +41,8 @@ msgid ""
 "\n"
 "Error while processing asset '{ref}': {exception}"
 msgstr ""
+"\n"
+"Error mientras se procesa el activo '{ref}': {exception}"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -702,6 +704,9 @@ msgid ""
 "\n"
 "{tb}"
 msgstr ""
+"Error al procesar el activo '{ref}': \n"
+"\n"
+"{tb}"
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
@@ -766,7 +771,7 @@ msgstr "Generar informe"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Tiene mensaje"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
@@ -880,6 +885,8 @@ msgid ""
 "Inconsistent reporting structure.\n"
 "Please correct Asset Group '{group}' (id {id})"
 msgstr ""
+"Estructura de informes inconsistente.\n"
+"Corrija el grupo de activos '{group}' (id {id})"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
@@ -1435,7 +1442,7 @@ msgstr ""
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
 msgstr ""
-"El campo 'cuenta' es una entrada obligatoria en la lista '_xls_%s_fields'."
+"¡El campo 'cuenta' es una entrada obligatoria en la lista '_xls_%s_fields'!"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_account.py:0
@@ -1450,7 +1457,7 @@ msgstr ""
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The Sale Value must be positive!"
-msgstr "El valor de venta debe ser positivo."
+msgstr "¡El valor de venta debe ser positivo!"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -1578,7 +1585,7 @@ msgstr "Número de mensajes no leídos"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
 msgid "Use Leap Years"
-msgstr ""
+msgstr "Usar años bisiestos"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
@@ -1656,7 +1663,7 @@ msgid ""
 "You should remove such entries from the asset."
 msgstr ""
 "No está autorizado a eliminar un asiento contable enlazado a un activo.\n"
-"Debe eliminarlo desde  el activo."
+"Debe eliminarlo desde el activo."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
