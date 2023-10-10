@@ -58,7 +58,6 @@ class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
                 ],
             }
         )
-        template2._check_auto_spread_ids_unique()
 
         self.assertFalse(self.vendor_bill_line.spread_id)
         with self.assertRaises(UserError):  # too many auto_spread_ids matched
