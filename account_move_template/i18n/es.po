@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2023-05-25 12:12+0000\n"
-"Last-Translator: pere-aquarian <pere@aquarian.tech>\n"
+"PO-Revision-Date: 2023-10-10 19:36+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid "%s (copy)"
-msgstr "%s (copy)"
+msgstr "%s(copia)"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -215,6 +215,9 @@ msgid ""
 "(formula: %(code)s). Check that the lines used in the formula really exists "
 "and have a lower sequence than the current line."
 msgstr ""
+"Imposible calcular la fórmula de la línea con la secuencia %(sequence)s "
+"(fórmula: %(code)s). Compruebe que las líneas utilizadas en la fórmula "
+"realmente existan y tengan una secuencia inferior a la línea actual."
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -223,6 +226,8 @@ msgid ""
 "Impossible to compute the formula of line with sequence %(sequence)s "
 "(formula: %(code)s): the syntax of the formula is wrong."
 msgstr ""
+"Imposible calcular la fórmula de línea con secuencia %(sequence)s (fórmula: "
+"%(code)s): la sintaxis de la fórmula es incorrecta."
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
@@ -231,6 +236,8 @@ msgid ""
 "Invalid dictionary: %(exception)s\n"
 "%(msg)s"
 msgstr ""
+"Diccionario inválido: %(exception)s\n"
+"%(msg)s"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
@@ -273,7 +280,7 @@ msgstr "Plantilla de asiento"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Keys must be line sequence, i..e, L1, L2, ..."
-msgstr "Las claves deben ser una línea de secuencia, p.e.:  L1, L2, ..."
+msgstr "Las claves deben ser una línea de secuencia, p.e.: L1, L2, ..."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -451,6 +458,8 @@ msgid ""
 "The selected template (%(template)s) is not in the same company "
 "(%(company)s) as the current user (%(user_company)s)."
 msgstr ""
+"La plantilla seleccionada (%(template)s) no está en la misma empresa "
+"(%(company)s) que el usuario actual (%(user_company)s)."
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_line_sequence_template_uniq
