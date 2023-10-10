@@ -13,7 +13,7 @@ class AccountMove(models.Model):
         res = super().action_post()
         spreads = self.mapped("invoice_line_ids.spread_id")
         spreads.compute_spread_board()
-        # On posting of spread moves. Find their related spreads to creconcile
+        # On posting of spread moves. Find their related spreads to reconcile
         move_spreads = self.env["account.spread"].search(
             [("line_ids.move_id", "in", self.ids)]
         )

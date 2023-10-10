@@ -37,11 +37,11 @@
                 <sheet>
                     <div name="button_box" class="oe_button_box">
                         <button
-                            name="open_reconcile_view"
+                            name="open_posted_view"
                             class="oe_stat_button"
                             icon="fa-bars"
                             type="object"
-                            string="Reconciled entries"
+                            string="Posted entries"
                         >
                         </button>
                     </div>
@@ -91,7 +91,7 @@
                             />
                             <div
                                 attrs="{'invisible': [('use_invoice_line_account', '=', True)]}"
-                                colspan="2"
+                                colspan="3"
                             >
                                 <span
                                     class="help-block"
@@ -112,7 +112,7 @@
                             </div>
                             <div
                                 attrs="{'invisible': [('use_invoice_line_account', '!=', True)]}"
-                                colspan="2"
+                                colspan="3"
                             >
                                 <span
                                     class="help-block"
@@ -134,7 +134,7 @@
                             <field
                                 name="debit_account_id"
                                 required="1"
-                                domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
+                                domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                                 attrs="{'readonly':[('invoice_line_id','!=',False)]}"
                             />
                             <span
@@ -161,7 +161,7 @@
                             />
                             <div
                                 attrs="{'invisible': [('use_invoice_line_account', '=', True)]}"
-                                colspan="2"
+                                colspan="3"
                             >
                                 <span
                                     class="help-block"
@@ -182,7 +182,7 @@
                             </div>
                             <div
                                 attrs="{'invisible': [('use_invoice_line_account', '!=', True)]}"
-                                colspan="2"
+                                colspan="3"
                             >
                                 <span
                                     class="help-block"
@@ -204,7 +204,7 @@
                             <field
                                 name="credit_account_id"
                                 required="1"
-                                domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
+                                domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                                 attrs="{'readonly':[('invoice_line_id','!=',False)]}"
                             />
                             <span
@@ -244,12 +244,9 @@
                             <field name="period_number" />
                             <field name="period_type" />
                             <field name="spread_date" />
-                            <field
-                                name="journal_id"
-                                domain="[('company_id', '=', company_id)]"
-                                widget="selection"
-                            />
                             <field name="days_calc" />
+                            <field name="suitable_journal_ids" invisible="1" />
+                            <field name="journal_id" widget="selection" />
                         </group>
                     </group>
                     <notebook name="notebook">
@@ -303,6 +300,7 @@
                                         string="Create All Moves"
                                         type="object"
                                         icon="fa-play"
+                                        colspan="2"
                                         attrs="{'invisible':[('display_create_all_moves','!=',True)]}"
                                     />
                                     <field
@@ -335,15 +333,9 @@
                                 </group>
                                 <group>
                                     <field
-                                        name="account_analytic_id"
-                                        domain="[('company_id', '=', company_id)]"
+                                        name="analytic_distribution"
                                         groups="analytic.group_analytic_accounting"
-                                        options="{'no_create': True}"
-                                    />
-                                    <field
-                                        name="analytic_tag_ids"
-                                        groups="analytic.group_analytic_accounting"
-                                        widget="many2many_tags"
+                                        widget="analytic_distribution"
                                     />
                                 </group>
                             </group>
@@ -355,22 +347,6 @@
                     <field name="message_ids" widget="mail_thread" />
                 </div>
             </form>
-        </field>
-    </record>
-    <record id="view_account_spread_account_manager" model="ir.ui.view">
-        <field name="model">account.spread</field>
-        <field name="inherit_id" ref="view_account_spread" />
-        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]" />
-        <field name="arch" type="xml">
-            <tree position="attributes">
-                <attribute name="editable">1</attribute>
-            </tree>
-            <field name="amount" position="attributes">
-                <attribute name="readonly" />
-            </field>
-            <field name="line_ids" position="attributes">
-                <attribute name="readonly" />
-            </field>
         </field>
     </record>
     <record id="view_account_spread_tree" model="ir.ui.view">
