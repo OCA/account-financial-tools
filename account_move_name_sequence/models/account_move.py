@@ -54,6 +54,7 @@ class AccountMove(models.Model):
                 # which applies on ir.sequence.date_range selection AND prefix
                 name = seq.with_context(ir_sequence_date=move.date).next_by_id()
             move.name = name
+        self._inverse_name()
 
     # We must by-pass this constraint of sequence.mixin
     def _constrains_date_sequence(self):
