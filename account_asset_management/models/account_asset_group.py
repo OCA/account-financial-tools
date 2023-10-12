@@ -20,7 +20,6 @@ class AccountAssetGroup(models.Model):
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
-        required=True,
         default=lambda self: self._default_company_id(),
     )
     parent_id = fields.Many2one(
