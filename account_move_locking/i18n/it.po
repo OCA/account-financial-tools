@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-27 22:29+0000\n"
-"PO-Revision-Date: 2023-06-07 11:08+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-10-13 12:39+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
 "Language: it\n"
@@ -57,7 +57,7 @@ msgstr "ID"
 #. module: account_move_locking
 #: field:lock.account.move,journal_ids:0
 msgid "Journal"
-msgstr "Sezionale"
+msgstr "Registro"
 
 #. module: account_move_locking
 #: field:lock.account.move,__last_update:0
