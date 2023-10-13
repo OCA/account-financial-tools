@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    @api.onchange("fiscal_position_id")
+    @api.onchange("partner_id", "fiscal_position_id")
     def _onchange_fiscal_position_allowed_journal(self):
         self.ensure_one()
         journal_domain = [
@@ -49,6 +49,6 @@ class AccountMove(models.Model):
                     )
                 )
 
-    def post(self):
+    def action_post(self):
         self._check_journal_allowed_fiscal_position()
-        return super().post()
+        return super().action_post()
