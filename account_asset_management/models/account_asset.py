@@ -283,6 +283,7 @@ class AccountAsset(models.Model):
         carried forward to the first depreciation line of the current open
         period.""",
     )
+    force_depreciation_in_open_period = fields.Boolean()
 
     @api.model
     def _default_company_id(self):
@@ -960,6 +961,8 @@ class AccountAsset(models.Model):
             line_date = start_date + relativedelta(month=m, day=31)
         elif self.method_period == "year":
             line_date = table[0]["date_stop"]
+        if self.force_depreciation_in_open_period:
+            line_date = self._check_date_vs_lock_date(line_date)
 
         i = 1
         while line_date < stop_date:
@@ -971,6 +974,8 @@ class AccountAsset(models.Model):
             elif self.method_period == "year":
                 line_date = table[i]["date_stop"]
                 i += 1
+            if self.force_depreciation_in_open_period:
+                line_date = self._check_date_vs_lock_date(line_date)
 
         # last entry
         if not (self.method_time == "number" and len(line_dates) == self.method_number):
@@ -1170,11 +1175,15 @@ class AccountAsset(models.Model):
         fy_date_start = asset_date_start
         while fy_date_start <= depreciation_stop_date:
             fy_info = self._get_fy_info(fy_date_start)
+            if self.force_depreciation_in_open_period:
+                date_stop = self._check_date_vs_lock_date(fy_info["date_to"])
+            else:
+                date_stop = fy_info["date_to"]
             table.append(
                 {
                     "fy": fy_info["record"],
                     "date_start": fy_info["date_from"],
-                    "date_stop": fy_info["date_to"],
+                    "date_stop": date_stop,
                 }
             )
             fy_date_start = fy_info["date_to"] + relativedelta(days=1)
@@ -1337,3 +1346,12 @@ class AccountAsset(models.Model):
 
         """
         return {}
+
+    def _check_date_vs_lock_date(self, line_date):
+        fiscalyear_lock_date = (
+            self.company_id.fiscalyear_lock_date or fields.Date.to_date("1901-01-01")
+        )
+        if line_date > fiscalyear_lock_date:
+            return line_date
+        else:
+            return fiscalyear_lock_date + relativedelta(days=1)

@@ -141,6 +141,7 @@
                                         name="use_leap_years"
                                         attrs="{'invisible': [('days_calc', '=', True)]}"
                                     />
+                                    <field name="force_depreciation_in_open_period" />
                                 </group>
                                 <group>
                                     <separator
