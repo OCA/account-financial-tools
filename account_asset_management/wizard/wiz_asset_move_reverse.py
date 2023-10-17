@@ -43,7 +43,7 @@ class WizAssetMoveReverse(models.TransientModel):
             .with_context(active_model="account.move", active_ids=move.ids)
             .create(
                 {
-                    "date": fields.Date.today(),
+                    "date": self.date_reversal,
                     "reason": self.reason,
                     "refund_method": "refund",
                     "journal_id": self.journal_id.id,
