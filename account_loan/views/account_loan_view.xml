@@ -130,7 +130,10 @@
                     </group>
                     <notebook>
                         <page string="Items" id="items">
-                            <field name="line_ids" />
+                            <field
+                                name="line_ids"
+                                context="{'tree_view_ref': 'account_loan.account_loan_line_tree'}"
+                            />
                         </page>
                         <page string="Accounts" id="accounting">
                             <group>
@@ -182,75 +185,7 @@
             </form>
         </field>
     </record>
-    <record id="account_loan_line_tree" model="ir.ui.view">
-        <field name="name">account.loan.line.tree</field>
-        <field name="model">account.loan.line</field>
-        <field name="arch" type="xml">
-            <tree create="0">
-                <field name="sequence" />
-                <field name="date" />
-                <field name="rate" />
-                <field name="pending_principal_amount" />
-                <field name="payment_amount" sum="Total payments" />
-                <field name="principal_amount" />
-                <field name="interests_amount" sum="Total interests" />
-                <field
-                    name="long_term_pending_principal_amount"
-                    attrs="{'invisible': [('long_term_loan_account_id', '=', False)]}"
-                />
-                <field
-                    name="long_term_principal_amount"
-                    attrs="{'invisible': [('long_term_loan_account_id', '=', False)]}"
-                />
-                <field name="long_term_loan_account_id" invisible="1" />
-                <field name="loan_state" invisible="1" />
-                <field name="is_leasing" invisible="1" />
-                <field name="has_invoices" invisible="1" />
-                <field name="has_moves" invisible="1" />
-                <field name="currency_id" invisible="1" />
-                <button
-                    name="view_account_values"
-                    string="Values"
-                    type="object"
-                    icon="fa-eye"
-                    attrs="{'invisible': [('has_moves', '=', False),  ('has_invoices', '=', False)]}"
-                />
-                <button
-                    name="view_process_values"
-                    string="Process"
-                    type="object"
-                    icon="fa-cogs"
-                    attrs="{'invisible': ['|', '|', ('has_moves', '=', True),  ('has_invoices', '=', True), ('loan_state', '!=', 'posted')]}"
-                />
-            </tree>
-        </field>
-    </record>
-    <record id="account_loan_line_form" model="ir.ui.view">
-        <field name="name">account.loan.line.form</field>
-        <field name="model">account.loan.line</field>
-        <field name="arch" type="xml">
-            <form>
-                <group>
-                    <field name="sequence" />
-                    <field name="rate" />
-                    <field name="date" />
-                </group>
-                <group>
-                    <group>
-                        <field name="pending_principal_amount" />
-                        <field name="payment_amount" />
-                        <field name="principal_amount" />
-                        <field name="interests_amount" />
-                        <field name="final_pending_principal_amount" />
-                    </group>
-                    <group>
-                        <field name="long_term_pending_principal_amount" />
-                        <field name="long_term_principal_amount" />
-                    </group>
-                </group>
-            </form>
-        </field>
-    </record>
+
     <record id="account_loan_action" model="ir.actions.act_window">
         <field name="name">Loans</field>
         <field name="res_model">account.loan</field>
