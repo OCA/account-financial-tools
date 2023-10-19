@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo-addon-account_journal_restrict_mode>=16.0dev,<16.1dev',
         'odoo-addon-account_loan>=16.0dev,<16.1dev',
         'odoo-addon-account_lock_date_update>=16.0dev,<16.1dev',
+        'odoo-addon-account_move_budget>=16.0dev,<16.1dev',
         'odoo-addon-account_move_fiscal_month>=16.0dev,<16.1dev',
         'odoo-addon-account_move_fiscal_year>=16.0dev,<16.1dev',
         'odoo-addon-account_move_line_purchase_info>=16.0dev,<16.1dev',
