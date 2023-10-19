@@ -135,6 +135,10 @@ class AccountMoveLine(models.Model):
                 return False
             return True
 
+        # Skip create new template when create move on spread lines
+        if self.env.context.get("skip_create_template"):
+            return
+
         for line in self:
             if line.spread_check == "linked":
                 continue
