@@ -40,7 +40,9 @@ class AccountInvoiceSpreadLine(models.Model):
     def create_move(self):
         """Button to manually create a move from a spread line entry."""
         self.ensure_one()
-        self.create_and_reconcile_moves()
+        self.with_context(
+            skip_create_template=True,
+        ).create_and_reconcile_moves()
 
     def _create_moves(self):
         if self.filtered(lambda l: l.move_id):
