@@ -19,3 +19,6 @@
 * `ForgeFlow <https://www.forgeflow.com>`_:
 
   * Jordi Ballester <jordi.ballester@forgeflow.com>
+* `XCG Consulting <https://xcg-consulting.fr>`_:
+
+  * Vincent Hatakeyama
