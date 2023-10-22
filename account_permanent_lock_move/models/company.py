@@ -9,4 +9,7 @@ class ResCompany(models.Model):
     permanent_lock_date = fields.Date(
         string="Permanent Lock Date",
         help="Non-revertible closing of accounts prior to and inclusive of "
-        "this date. Use it for fiscal year locking instead of ""Lock Date"".")
+        "this date. Use it for fiscal year locking instead of "
+        "Lock Date"
+        ".",
+    )

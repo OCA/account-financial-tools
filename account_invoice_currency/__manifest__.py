@@ -6,19 +6,17 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': "Company currency in invoices",
-    'version': "11.0.1.0.0",
-    'author': "Zikzakmedia SL, "
-              "Joaquín Gutierrez, "
-              "Tecnativa, "
-              "Softdil S.L, "
-              "Odoo Community Association (OCA) ",
-    'website': "https://odoo-community.org/",
-    'category': "Accounting",
-    'license': "AGPL-3",
-    'depends': ["account"],
-    'data': [
-        "views/account_invoice.xml"
-    ],
-    'installable': True,
+    "name": "Company currency in invoices",
+    "version": "11.0.1.0.0",
+    "author": "Zikzakmedia SL, "
+    "Joaquín Gutierrez, "
+    "Tecnativa, "
+    "Softdil S.L, "
+    "Odoo Community Association (OCA) ",
+    "website": "https://github.com/OCA/account-financial-tools",
+    "category": "Accounting",
+    "license": "AGPL-3",
+    "depends": ["account"],
+    "data": ["views/account_invoice.xml"],
+    "installable": True,
 }

@@ -4,18 +4,19 @@
 
 import logging
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 
 _logger = logging.getLogger(__name__)
 
 try:
-    from odoo.addons.queue_job.job import job, Job
+    from odoo.addons.queue_job.job import Job, job
 except ImportError:
-    _logger.debug('Can not `import queue_job`.')
+    _logger.debug("Can not `import queue_job`.")
     import functools
 
     def empty_decorator_factory(*argv, **kwargs):
         return functools.partial
+
     job = empty_decorator_factory
 
 
@@ -24,15 +25,17 @@ BLOCK_SIZE = 1000
 
 class AccountMove(models.Model):
 
-    _inherit = 'account.move'
+    _inherit = "account.move"
 
     to_post = fields.Boolean(
-        string="Posting requested", readonly=True,
-        help="Check this box to mark the move for batch posting")
+        string="Posting requested",
+        readonly=True,
+        help="Check this box to mark the move for batch posting",
+    )
     post_job_uuid = fields.Char(string="UUID of the Job to approve this move")
 
     @api.multi
-    @job(default_channel='root.account_move_batch_validate')
+    @job(default_channel="root.account_move_batch_validate")
     def validate_one_move(self):
         if self.exists():
             self.post()
@@ -46,15 +49,16 @@ class AccountMove(models.Model):
         Create a job for every move marked for posting.
         If some moves already have a job, they are skipped.
         """
-        moves = self.search([
-            ('to_post', '=', True),
-            ('post_job_uuid', '=', False),
-            ('state', '=', 'draft'),
-        ])
+        moves = self.search(
+            [
+                ("to_post", "=", True),
+                ("post_job_uuid", "=", False),
+                ("state", "=", "draft"),
+            ]
+        )
 
         moves_job_mapping = []
-        _logger.info(
-            "Creating %s jobs for posting moves.", len(moves))
+        _logger.info("Creating %s jobs for posting moves.", len(moves))
 
         for move in moves:
             job = move.with_delay(eta=eta).validate_one_move()
@@ -77,18 +81,20 @@ class AccountMove(models.Model):
         Find moves where the mark has been removed and cancel the jobs.
         For the moves that are posted already it's too late: we skip them.
         """
-        moves = self.search([
-            ('to_post', '=', False),
-            ('post_job_uuid', '!=', False),
-            ('state', '=', 'draft'),
-        ])
+        moves = self.search(
+            [
+                ("to_post", "=", False),
+                ("post_job_uuid", "!=", False),
+                ("state", "=", "draft"),
+            ]
+        )
 
         for move in moves:
             job_rec = Job.load(self.env, move.post_job_uuid)
-            if job_rec.state in ('pending', 'enqueued'):
+            if job_rec.state in ("pending", "enqueued"):
                 job_rec.set_done(
-                    result=_("Task set to Done because the "
-                             "user unmarked the move."))
+                    result=_("Task set to Done because the " "user unmarked the move.")
+                )
                 job_rec.store()
 
     @api.multi
@@ -101,10 +107,10 @@ class AccountMove(models.Model):
         moves_count = len(self)
         _logger.info("%s moves marked for posting.", moves_count)
 
-        self.write({'to_post': True})
+        self.write({"to_post": True})
         self._delay_post_marked(eta=eta)
 
     @api.multi
     def unmark_for_posting(self):
-        self.write({'to_post': False})
+        self.write({"to_post": False})
         self._cancel_post_jobs()

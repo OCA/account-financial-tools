@@ -2,13 +2,14 @@
 # Copyright 2017 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields
+from odoo import fields, models
 
 
 class AccountAssetCategory(models.Model):
     _inherit = "account.asset.category"
 
     account_loss_id = fields.Many2one(
-        comodel_name="account.account", string="Loss Account",
-        oldname='loss_account_id',
+        comodel_name="account.account",
+        string="Loss Account",
+        oldname="loss_account_id",
     )

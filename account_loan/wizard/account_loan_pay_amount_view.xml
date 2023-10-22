@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
      Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
@@ -11,18 +11,22 @@
         <field name="arch" type="xml">
             <form string="Pay amount">
                 <group>
-                    <field name="loan_id" readonly="True"/>
-                    <field name="date"/>
-                    <field name="cancel_loan"/>
-                    <field name="amount"/>
-                    <field name="fees"/>
-                    <field name="currency_id"/>
+                    <field name="loan_id" readonly="True" />
+                    <field name="date" />
+                    <field name="cancel_loan" />
+                    <field name="amount" />
+                    <field name="fees" />
+                    <field name="currency_id" />
                 </group>
                 <footer>
-                    <button name="run" string="Run"
-                            type="object" class="oe_highlight"/>
+                    <button
+                        name="run"
+                        string="Run"
+                        type="object"
+                        class="oe_highlight"
+                    />
                     or
-                    <button string="Cancel" class="oe_link" special="cancel"/>
+                    <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
             </form>
         </field>

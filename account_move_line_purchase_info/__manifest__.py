@@ -6,9 +6,8 @@
     "name": "Account Move Line Purchase Info",
     "summary": "Introduces the purchase order line to the journal items",
     "version": "11.0.2.0.0",
-    "author": "Eficent, "
-              "Odoo Community Association (OCA)",
-    "website": "http://www.github.com/OCA/account-financial-tools",
+    "author": "Eficent, " "Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools",
     "category": "Generic",
     "depends": ["account", "purchase"],
     "license": "AGPL-3",
@@ -16,5 +15,5 @@
         "security/account_security.xml",
         "views/account_move_view.xml",
     ],
-    'installable': True,
+    "installable": True,
 }

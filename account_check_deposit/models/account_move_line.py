@@ -13,7 +13,7 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     check_deposit_id = fields.Many2one(
-        'account.check.deposit',
-        string='Check Deposit',
+        "account.check.deposit",
+        string="Check Deposit",
         copy=False,
     )

@@ -9,11 +9,8 @@
     "license": "AGPL-3",
     "summary": "Check VAT on invoice validation",
     "author": "Akretion, Odoo Community Association (OCA)",
-    "website": "http://www.akretion.com",
-    "depends": [
-        "account",
-        "base_vat"
-    ],
+    "website": "https://github.com/OCA/account-financial-tools",
+    "depends": ["account", "base_vat"],
     "data": [
         "views/account_fiscal_position.xml",
     ],

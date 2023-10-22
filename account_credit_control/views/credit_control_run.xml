@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="credit_control_run_tree" model="ir.ui.view">
         <field name="name">credit.control.run.tree</field>
         <field name="model">credit.control.run</field>
         <field name="arch" type="xml">
             <tree string="Credit control run">
-                <field name="date"/>
-                <field name="state"/>
+                <field name="date" />
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -17,43 +17,70 @@
         <field name="arch" type="xml">
             <form string="Credit control run">
                 <header>
-                    <button name="generate_credit_lines"
-                            string="Compute Credit Control Lines"
-                            class="oe_highlight"
-                            type="object" icon="fa-cogs"
-                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                    <button name="set_to_ready_lines" type="object"
-                            string="Set to ready all"
-                            confirm="Are you sure you want to set all Draft lines as Ready To Send?"
-                            attrs="{'invisible': ['|', ('hide_change_state_button', '=', True), ('state', '=', 'draft')]}"/>
-                    <button name="run_channel_action" type="object"
-                            string="Run channel action"
-                            confirm="Are you sure you want to run all ready lines channel action?"
-                            attrs="{'invisible': [('state', '=', 'draft')]}"/>
-                    <field name="state" widget="statusbar"
-                           statusbar_visible="draft,done"/>
+                    <button
+                        name="generate_credit_lines"
+                        string="Compute Credit Control Lines"
+                        class="oe_highlight"
+                        type="object"
+                        icon="fa-cogs"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="set_to_ready_lines"
+                        type="object"
+                        string="Set to ready all"
+                        confirm="Are you sure you want to set all Draft lines as Ready To Send?"
+                        attrs="{'invisible': ['|', ('hide_change_state_button', '=', True), ('state', '=', 'draft')]}"
+                    />
+                    <button
+                        name="run_channel_action"
+                        type="object"
+                        string="Run channel action"
+                        confirm="Are you sure you want to run all ready lines channel action?"
+                        attrs="{'invisible': [('state', '=', 'draft')]}"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,done"
+                    />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button class="oe_stat_button" type="object" name="open_credit_lines"
-                                icon="fa-tasks" attrs="{'invisible': [('state', '=', 'draft')]}">
-                            <field string="Control Lines" name="credit_control_count" widget="statinfo"/>
+                        <button
+                            class="oe_stat_button"
+                            type="object"
+                            name="open_credit_lines"
+                            icon="fa-tasks"
+                            attrs="{'invisible': [('state', '=', 'draft')]}"
+                        >
+                            <field
+                                string="Control Lines"
+                                name="credit_control_count"
+                                widget="statinfo"
+                            />
                         </button>
                     </div>
                     <group>
-                        <field name="date"/>
-                        <field name="hide_change_state_button" invisible="1"/>
+                        <field name="date" />
+                        <field name="hide_change_state_button" invisible="1" />
                     </group>
                     <notebook>
                         <page string="Policies">
-                            <field name="policy_ids" colspan="4" nolabel="1"/>
-                            <separator string="Report"
-                                       attrs="{'invisible': [('report', '=', False)]}"/>
-                            <field name="report" colspan="4" nolabel="1"
-                                   attrs="{'invisible': [('report', '=', False)]}"/>
+                            <field name="policy_ids" colspan="4" nolabel="1" />
+                            <separator
+                                string="Report"
+                                attrs="{'invisible': [('report', '=', False)]}"
+                            />
+                            <field
+                                name="report"
+                                colspan="4"
+                                nolabel="1"
+                                attrs="{'invisible': [('report', '=', False)]}"
+                            />
                         </page>
                         <page string="Manual Lines" groups="base.group_no_one">
-                            <field name="manual_ids" colspan="4" nolabel="1"/>
+                            <field name="manual_ids" colspan="4" nolabel="1" />
                         </page>
                     </notebook>
                 </sheet>
@@ -66,19 +93,20 @@
         <field name="name">Credit Control Run</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.run</field>
-        <field name="domain"></field>
+        <field name="domain" />
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="credit_control_run_tree"/>
+        <field name="view_id" ref="credit_control_run_tree" />
     </record>
 
 
     <menuitem
-            name="Credit Control Run"
-            parent="base_credit_control_menu"
-            action="credit_control_run"
-            sequence="10"
-            id="credit_control_run_menu"
-            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
+        name="Credit Control Run"
+        parent="base_credit_control_menu"
+        action="credit_control_run"
+        sequence="10"
+        id="credit_control_run_menu"
+        groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+    />
 
 </odoo>

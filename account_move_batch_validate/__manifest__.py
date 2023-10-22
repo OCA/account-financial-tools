@@ -2,19 +2,19 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    'name': "Account Move Batch Validate",
-    'version': '11.0.1.0.2',
-    'author': "Camptocamp, Odoo Community Association (OCA)",
-    'website': 'https://github.com/OCA/account-financial-tools',
-    'category': 'Finance',
-    'complexity': 'normal',
-    'depends': [
-        'account',
-        'queue_job',
+    "name": "Account Move Batch Validate",
+    "version": "11.0.1.0.2",
+    "author": "Camptocamp, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools",
+    "category": "Finance",
+    "complexity": "normal",
+    "depends": [
+        "account",
+        "queue_job",
     ],
-    'data': [
-        'views/account_move.xml',
-        'wizard/account_move_validate.xml',
+    "data": [
+        "views/account_move.xml",
+        "wizard/account_move_validate.xml",
     ],
-    'license': 'AGPL-3',
+    "license": "AGPL-3",
 }

@@ -10,11 +10,16 @@ class AccountMove(models.Model):
     @api.multi
     def _check_lock_date(self):
         for move in self:
-            if move.company_id.permanent_lock_date \
-                    and move.date <= move.company_id.permanent_lock_date:
-                raise UserError(_(
-                    "You cannot add/modify entries prior to and inclusive "
-                    "of the permanent lock date."))
+            if (
+                move.company_id.permanent_lock_date
+                and move.date <= move.company_id.permanent_lock_date
+            ):
+                raise UserError(
+                    _(
+                        "You cannot add/modify entries prior to and inclusive "
+                        "of the permanent lock date."
+                    )
+                )
         return super(AccountMove, self)._check_lock_date()
 
     @api.multi
