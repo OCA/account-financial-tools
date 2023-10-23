@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-09 08:15+0000\n"
-"PO-Revision-Date: 2023-06-22 13:09+0000\n"
+"PO-Revision-Date: 2023-10-29 08:28+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -60,7 +60,7 @@ msgstr "Data di chiusura, inclusa nell'anno fiscale."
 #. module: account_fiscal_year
 #: model:ir.model,name:account_fiscal_year.model_account_fiscal_year
 msgid "Fiscal Year"
-msgstr "Anno fiscali"
+msgstr "Anno fiscale"
 
 #. module: account_fiscal_year
 #: model_terms:ir.ui.view,arch_db:account_fiscal_year.account_fiscal_year_form_view
