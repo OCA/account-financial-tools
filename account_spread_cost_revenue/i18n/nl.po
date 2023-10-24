@@ -123,7 +123,7 @@ msgstr "Grootboekrekening Spreiding Regels"
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread_template
 msgid "Account Spread Template"
-msgstr "Transitorische Spreiding Template"
+msgstr "Transitorische Spreidingsjabloon"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_needaction
@@ -255,7 +255,7 @@ msgstr "Maak mutatie"
 #, fuzzy, python-format
 #| msgid "Spread Template"
 msgid "Create from spread template"
-msgstr "Spreiding Template"
+msgstr "Spreidingsjabloon"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:14
@@ -789,18 +789,18 @@ msgstr "Boekingsregels Spreiding"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__template_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__template_id
 msgid "Spread Template"
-msgstr "Spreiding Template"
+msgstr "Spreidingsjabloon"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_template
 msgid "Spread Template Name"
-msgstr "Spreiding Template Naam"
+msgstr "Spreidingsjabloon Naam"
 
 #. module: account_spread_cost_revenue
 #: model:ir.actions.act_window,name:account_spread_cost_revenue.action_account_spread_template_form
 #: model:ir.ui.menu,name:account_spread_cost_revenue.menu_action_account_spread_template_form
 msgid "Spread Templates"
-msgstr "Spreiding Templates"
+msgstr "Spreidingsjablonen"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__spread_type
@@ -851,7 +851,7 @@ msgstr "De dagboek komt niet overeen met de boekingsregels."
 msgid ""
 "The Spread Template (Purchases) is not compatible with selected invoice type"
 msgstr ""
-"De Spreiding Template (Inkoop) is not compatibel met geselecteerde factuur "
+"De Spreidingsjabloon (Inkoop) is not compatibel met geselecteerde factuur "
 "type"
 
 #. module: account_spread_cost_revenue
@@ -860,7 +860,7 @@ msgstr ""
 msgid ""
 "The Spread Template (Sales) is not compatible with selected invoice type"
 msgstr ""
-"De Spreiding Template (Verkoop) is not compatibel met geselecteerde factuur "
+"De Spreidingsjabloon (Verkoop) is not compatibel met geselecteerde factuur "
 "type"
 
 #. module: account_spread_cost_revenue
