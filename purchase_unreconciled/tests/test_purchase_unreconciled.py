@@ -398,7 +398,7 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         with move_form.invoice_line_ids.edit(0) as line_form:
             line_form.price_unit = 99
         invoice = move_form.save()
-        invoice.post()
+        invoice._post()
         # The bill is different price so this is unreconciled
         po._compute_unreconciled()
         self.assertTrue(po.unreconciled)
@@ -408,14 +408,14 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         # we check all the journals are balanced by product
         ji_p1 = self.env["account.move.line"].search(
             [
-                ("purchase_id", "=", po.id),
+                ("purchase_order_id", "=", po.id),
                 ("product_id", "=", self.product_to_reconcile.id),
                 ("account_id", "=", self.account_grni.id),
             ]
         )
         ji_p2 = self.env["account.move.line"].search(
             [
-                ("purchase_id", "=", po.id),
+                ("purchase_order_id", "=", po.id),
                 ("product_id", "=", self.product_to_reconcile2.id),
                 ("account_id", "=", self.account_grni.id),
             ]

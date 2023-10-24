@@ -179,6 +179,7 @@ class PurchaseOrder(models.Model):
             "purchase_id": self.id,
             "purchase_line_id": purchase_line_id or False,
             "product_id": product_id,
+            "currency_id": self.currency_id.id or self.env.company_id.currency_id.id,
         }
 
     def reconcile_criteria(self):
