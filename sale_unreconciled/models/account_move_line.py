@@ -42,6 +42,7 @@ class AccountMoveLine(models.Model):
         if not amount_writeoff:
             return self.env["account.move.line"]
         partners = self.mapped("partner_id")
+        move_date = writeoff_vals.get("date", datetime.now())
         write_off_vals = {
             "name": _("Automatic writeoff"),
             "amount_currency": same_curr and amount_writeoff_curr or amount_writeoff,
@@ -49,6 +50,7 @@ class AccountMoveLine(models.Model):
             "credit": amount_writeoff < 0.0 and -amount_writeoff or 0.0,
             "partner_id": len(partners) == 1 and partners.id or False,
             "account_id": writeoff_vals["account_id"],
+            "date": move_date,
             "sale_order_id": writeoff_vals["sale_order_id"],
             "journal_id": writeoff_vals["journal_id"],
             "currency_id": writeoff_vals["currency_id"],
@@ -66,7 +68,7 @@ class AccountMoveLine(models.Model):
 
         move = self.env["account.move"].create(
             {
-                "date": datetime.now(),
+                "date": move_date,
                 "journal_id": writeoff_vals["journal_id"],
                 "currency_id": writeoff_vals["currency_id"],
                 "line_ids": [(0, 0, write_off_vals), (0, 0, counter_part)],
