@@ -77,3 +77,9 @@ class AccountMove(models.Model):
 
     def _get_last_sequence(self, relaxed=False, with_prefix=None, lock=True):
         return super()._get_last_sequence(relaxed, None, lock)
+
+    @api.onchange("journal_id")
+    def _onchange_journal_id(self):
+        if not self.quick_edit_mode:
+            self.name = "/"
+            self._compute_name_by_sequence()
