@@ -8,40 +8,34 @@ class AccountMove(models.Model):
 
     _inherit = "account.move"
 
-    def _prepare_interim_account_line_vals(self, line, move, debit_interim_account):
-        res = super()._prepare_interim_account_line_vals(
-            line, move, debit_interim_account
-        )
-        if len(line.repair_line_ids) == 1:
-            res.update(
-                {
-                    "repair_order_id": line.repair_line_ids.repair_id.id,
-                }
+    def _stock_account_prepare_anglo_saxon_out_lines_vals(self):
+        res = super()._stock_account_prepare_anglo_saxon_out_lines_vals()
+        for i, vals in enumerate(res):
+            if (
+                not vals.get("move_id", False)
+                or not vals.get("product_id", False)
+                or not vals.get("quantity", False)
+            ):
+                continue
+            am = self.env["account.move"].browse(vals["move_id"])
+            repair_line = am.invoice_line_ids.filtered(
+                lambda il: il.product_id.id == vals["product_id"]
+                and il.quantity == vals["quantity"]
             )
-        if len(line.repair_fee_ids) == 1:
-            res.update(
-                {
-                    "repair_order_id": line.repair_fee_ids.repair_id.id,
-                }
-            )
-        return res
-
-    def _prepare_expense_account_line_vals(self, line, move, debit_interim_account):
-        res = super()._prepare_expense_account_line_vals(
-            line, move, debit_interim_account
-        )
-        if len(line.repair_line_ids) == 1:
-            res.update(
-                {
-                    "repair_order_id": line.repair_line_ids.repair_id.id,
-                }
-            )
-        if len(line.repair_fee_ids) == 1:
-            res.update(
-                {
-                    "repair_order_id": line.repair_fee_ids.repair_id.id,
-                }
-            )
+            repair_order = repair_line.repair_fee_ids.mapped("repair_id")
+            if len(repair_order) == 1:
+                res[i].update(
+                    {
+                        "repair_order_id": repair_line.repair_fee_ids.repair_id.id,
+                    }
+                )
+            repair_order = repair_line.repair_line_ids.mapped("repair_id")
+            if len(repair_order) == 1:
+                res[i].update(
+                    {
+                        "repair_order_id": repair_line.repair_line_ids.repair_id.id,
+                    }
+                )
         return res
 
     @api.model_create_multi
