@@ -27,7 +27,7 @@ class TestAccountMoveLineRepairInfo(TransactionCase):
             {
                 "name": "Test stock valuation",
                 "code": "tv",
-                "user_type_id": self.env["account.account.type"].search([], limit=1).id,
+                "account_type": "asset_cash",
                 "reconcile": True,
                 "company_id": self.env.ref("base.main_company").id,
             }
@@ -36,9 +36,7 @@ class TestAccountMoveLineRepairInfo(TransactionCase):
             {
                 "name": "Test Payable",
                 "code": "tpayable",
-                "user_type_id": self.env["account.account.type"]
-                .search([("type", "=", "payable")], limit=1)
-                .id,
+                "account_type": "liability_payable",
                 "reconcile": True,
                 "company_id": self.env.ref("base.main_company").id,
             }
@@ -47,9 +45,7 @@ class TestAccountMoveLineRepairInfo(TransactionCase):
             {
                 "name": "Test Receivable",
                 "code": "treceivable",
-                "user_type_id": self.env["account.account.type"]
-                .search([("type", "=", "receivable")], limit=1)
-                .id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
                 "company_id": self.env.ref("base.main_company").id,
             }
@@ -59,7 +55,7 @@ class TestAccountMoveLineRepairInfo(TransactionCase):
             {
                 "name": "Test stock input",
                 "code": "tsti",
-                "user_type_id": self.env["account.account.type"].search([], limit=1).id,
+                "account_type": "income",
                 "reconcile": True,
                 "company_id": self.env.ref("base.main_company").id,
             }
@@ -68,7 +64,7 @@ class TestAccountMoveLineRepairInfo(TransactionCase):
             {
                 "name": "Test stock output",
                 "code": "tout",
-                "user_type_id": self.env["account.account.type"].search([], limit=1).id,
+                "account_type": "equity",
                 "reconcile": True,
                 "company_id": self.env.ref("base.main_company").id,
             }
@@ -77,9 +73,7 @@ class TestAccountMoveLineRepairInfo(TransactionCase):
             {
                 "name": "Test stock income",
                 "code": "tincome",
-                "user_type_id": self.env["account.account.type"]
-                .search([("internal_group", "=", "income")], limit=1)
-                .id,
+                "account_type": "income",
                 "reconcile": True,
                 "company_id": self.env.ref("base.main_company").id,
             }
@@ -88,9 +82,7 @@ class TestAccountMoveLineRepairInfo(TransactionCase):
             {
                 "name": "Test stock outcome",
                 "code": "texpense",
-                "user_type_id": self.env["account.account.type"]
-                .search([("internal_group", "=", "expense")], limit=1)
-                .id,
+                "account_type": "expense",
                 "reconcile": True,
                 "company_id": self.env.ref("base.main_company").id,
             }
@@ -375,7 +367,7 @@ class TestAccountMoveLineRepairInfo(TransactionCase):
             "active_model": "repair.order",
             "active_ids": repairs.ids,
         }
-        res = make_invoice.with_context(context).make_invoices()
+        res = make_invoice.with_context(context=context).make_invoices()
         invoices = res.get("domain", []) and self.am_model.browse(
             res.get("domain", [])[0][2]
         )
