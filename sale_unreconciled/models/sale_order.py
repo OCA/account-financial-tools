@@ -200,14 +200,19 @@ class SaleOrder(models.Model):
         return products, sale_line.product_id
 
     def _get_sale_writeoff_vals(self, sale_line_id, product_id):
-        return {
+        writeoff_date = self.env.context.get("writeoff_date", False)
+        res = {
             "account_id": self.company_id.sale_reconcile_account_id.id,
             "journal_id": self.company_id.sale_reconcile_journal_id.id,
             "sale_order_id": self.id,
             "sale_line_id": sale_line_id or False,
             "product_id": product_id or False,
-            "currency_id": self.currency_id.id or self.env.company_id.currency_id.id,
+            "currency_id": self.currency_id.id or self.env.company.currency_id.id,
         }
+        # hook for custom date:
+        if writeoff_date:
+            res.update({"date": writeoff_date})
+        return res
 
     def reconcile_criteria(self):
         """Gets the criteria where SOs are locked or not, by default uses the company
