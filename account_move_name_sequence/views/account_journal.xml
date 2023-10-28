@@ -16,7 +16,14 @@
                 <field
                     name="sequence_id"
                     required="1"
-                    context="{'default_name': name, 'default_company_id': company_id, 'default_implementation': 'no_gap', 'default_padding': 4, 'default_use_date_range': True, 'default_prefix': (code or 'UNKNOWN') + '/%%(range_year)s/'}"
+                    context="{
+                        'default_name': name,
+                        'default_company_id': company_id,
+                        'default_implementation': 'no_gap',
+                        'default_padding': 4,
+                        'default_use_date_range': True,
+                        'default_prefix': (code or 'UNKNOWN') + '/%%(range_year)s/'
+                    }"
                 />
             </field>
             <field name="refund_sequence" position="after">
@@ -24,7 +31,14 @@
                     name="refund_sequence_id"
                     invisible="type not in ('sale', 'purchase') or not refund_sequence"
                     required="type in ('sale', 'purchase') and refund_sequence"
-                    context="{'default_name': name, 'default_company_id': company_id, 'default_implementation': 'no_gap', 'default_padding': 4, 'default_use_date_range': True, 'default_prefix': 'R' + (code or 'UNKNOWN') + '/%%(range_year)s/'}"
+                    context="{
+                        'default_name': name,
+                        'default_company_id': company_id,
+                        'default_implementation': 'no_gap',
+                        'default_padding': 4,
+                        'default_use_date_range': True,
+                        'default_prefix': 'R' + (code or 'UNKNOWN') + '/%%(range_year)s/'
+                    }"
                 />
             </field>
         </field>
