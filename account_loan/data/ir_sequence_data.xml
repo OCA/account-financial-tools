@@ -10,5 +10,6 @@
         <field name="code">account.loan</field>
         <field name="prefix">ACL</field>
         <field name="padding">6</field>
+        <field name="company_id" eval="False" />
     </record>
 </odoo>
