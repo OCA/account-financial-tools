@@ -21,10 +21,10 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-03 23:22+0000\n"
-"PO-Revision-Date: 2023-06-01 17:09+0000\n"
-"Last-Translator: \"Sandrine (ACSONE)\" <sandrine.ravet@acsone.eu>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/fr/)\n"
+"PO-Revision-Date: 2023-11-03 02:41+0000\n"
+"Last-Translator: Alexis de Lattre <alexis@via.ecp.fr>\n"
+"Language-Team: French (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgid ""
 "Error while processing asset '{ref}': {exception}"
 msgstr ""
 "\n"
-"Erreur durant le processus de l'immobilisation '{ref}' : {exception}"
+"Erreur pendant le traitement de l'immobilisation '{ref}' : {exception}"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -64,12 +64,12 @@ msgstr "Compte d'actif"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__carry_forward_missed_depreciations
 msgid "Accumulate missed depreciations"
-msgstr ""
+msgstr "Cumuler les amortissements manqués"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction
 msgid "Action Needed"
-msgstr "Action nécessaire"
+msgstr "Action requise"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
@@ -92,22 +92,22 @@ msgstr "Activités"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Décoration de l'activité d'exception"
+msgstr "Style d'affichage de l'activité-alerte"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_state
 msgid "Activity State"
-msgstr "Statut de l'activité"
+msgstr "État de l'activité"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_icon
 msgid "Activity Type Icon"
-msgstr "Icône du type d'activité"
+msgstr "Îcone du type d'activité"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Add an internal note here..."
-msgstr "Ajouter une note interne ici…"
+msgstr "Ajoutez une note interne ici..."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_compute__date_end
@@ -220,7 +220,7 @@ msgstr "Ligne d'amortissement"
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
 #: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
-msgstr "Gestion des immobilisations : Générer des immobilisations"
+msgstr "Gestion des immobilisations : générer des immobilisations"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__name
@@ -258,7 +258,7 @@ msgstr "Date de la sortie de l'immobilisation"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_sale_id
 msgid "Asset Sale Account"
-msgstr "Compte de vente de l'immobilisation"
+msgstr "Compte de cession de l'immobilisation"
 
 #. module: account_asset_management
 #. odoo-python
@@ -278,7 +278,8 @@ msgstr "Ligne du tableau d'amortissement"
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "Asset name must be set in the label of the line."
-msgstr "Le nom de l'actif doit être défini dans l'étiquette de la ligne."
+msgstr ""
+"Le nom de l'immobilisation doit être défini dans le libellé de la ligne."
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
@@ -294,7 +295,7 @@ msgstr "Sortie d'immobilisation."
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_recompute_trigger
 msgid "Asset table recompute triggers"
-msgstr "Déclencheurs du calcul du tableau d'amortissements"
+msgstr "Déclencheurs du re-calcul du tableau d'amortissements"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_action
@@ -355,7 +356,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__child_ids
 msgid "Child Asset Groups"
-msgstr "Groupes d'actifs enfants"
+msgstr "Groupes d'immobilisations enfant"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
@@ -369,7 +370,7 @@ msgid ""
 msgstr ""
 "Choisissez la méthode à utiliser pour calculer les dates et le nombre de "
 "lignes d'amortissement.\n"
-"  * Nombre d'années : Indiquez le nombre d'années pour l'amortissement.\n"
+"  * Nombre d'années : indiquez la durée de l'amortissement en années.\n"
 "  * Nombre d'amortissements : Fixe le nombre de lignes d'amortissement et le "
 "temps entre 2 amortissements.\n"
 
@@ -390,15 +391,15 @@ msgid ""
 "is equal to the asset value."
 msgstr ""
 "Choisir la méthode utilisée pour calculer les lignes d'amortissements.\n"
-"  * Linéaire : Calculer sur la base : Valeur de base / Nombre "
+"  * Linéaire : Calculé sur la base de : Valeur de base / Nombre "
 "d'amortissement. Valeur de base = Valeur d'achat - Valeur de revente.\n"
 "  * Linéaire-Limite : Linéaire jusqu'à la valeur de revente. Valeur de base "
 "= Valeur d'achat.\n"
-"  * Dégressif : Calculer sur la base : Valeur résiduelle * Facteur "
+"  * Dégressif : Calculé sur la base de : Valeur résiduelle * Facteur "
 "dégressif.\n"
-"  * Dégressif-Linéaire (uniquement pour la méthode de temps = Année) : "
-"Dégressif devient linéaire quand l'amortissement linéaire annuel surpasse "
-"l'amortissement dégressif annuel.\n"
+"  * Dégressif-Linéaire (uniquement pour la méthode de temps = Année) : Passe "
+"de dégressif à linéaire quand le montant annuel amorti en méthode linéaire "
+"dépasse le montant annuel amorti en méthode dégressif.\n"
 "  * Dégressif-Limite : Dégressif jusqu'à la valeur de revente. La base "
 "d'amortissement est égale à la valeur de l'immobilisation."
 
@@ -406,7 +407,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__close
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Close"
-msgstr "Clôturer"
+msgstr "Clôturé"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
@@ -467,7 +468,7 @@ msgstr "Calcul des amortissements"
 #: model:ir.model,name:account_asset_management.model_account_asset_compute
 #: model:ir.ui.menu,name:account_asset_management.account_asset_compute_menu
 msgid "Compute Assets"
-msgstr "Calculer les amortissements"
+msgstr "Calcul des amortissements"
 
 #. module: account_asset_management
 #. odoo-python
@@ -501,7 +502,7 @@ msgstr "Confirmer l'immobilisation"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Create Move"
-msgstr "Créer la pièce comptable"
+msgstr "Générer la pièce comptable"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__asset_product_item
@@ -526,7 +527,7 @@ msgstr "Écritures d'amortissement créées"
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__create_uid
 msgid "Created by"
-msgstr "Créer par"
+msgstr "Créé par"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__create_date
@@ -539,7 +540,7 @@ msgstr "Créer par"
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__create_date
 msgid "Created on"
-msgstr "Créer le"
+msgstr "Créé le"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__date_end
@@ -551,7 +552,8 @@ msgstr "Date"
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger__date_trigger
 msgid "Date of the event triggering the need to recompute the Asset Tables."
 msgstr ""
-"Date de l'événement déclencheur du calcul du tableau des amortissements."
+"Date de l'évênement qui a déclenché le re-calcul du tableau des "
+"amortissements."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_days
@@ -563,7 +565,7 @@ msgstr "Jours"
 msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr ""
 "Catégorie d'immobilisation par défaut lors de la création de lignes de "
-"facture sur ce compte."
+"facture liées à ce compte."
 
 #. module: account_asset_management
 #. odoo-python
@@ -577,7 +579,7 @@ msgstr "Dégressif"
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive  up to Salvage Value"
-msgstr "Dégressif  jusqu'à la valeur de revente"
+msgstr "Dégressif jusqu'à la valeur de revente"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_progress_factor
@@ -598,8 +600,7 @@ msgstr "Dégressif-Linéaire"
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
-msgstr ""
-"Dégressif-Linéaire n'est pris en charge que pour la méthode de temp = Année."
+msgstr "Dégressif-Linéaire n'est supporté qu'avec la méthode de temps 'Année'."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -650,7 +651,7 @@ msgstr "Dates d'amortissement"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__move_id
 msgid "Depreciation Entry"
-msgstr "Ecriture d'amortissement"
+msgstr "Écriture d'amortissement"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_line_ids
@@ -666,7 +667,7 @@ msgstr "Méthode d'amortissement"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__name
 msgid "Depreciation Name"
-msgstr "Nom de l'amortissement"
+msgstr "Libellé de l'amortissement"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__display_name
@@ -679,7 +680,7 @@ msgstr "Nom de l'amortissement"
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__display_name
 msgid "Display Name"
-msgstr "Nom à afficher"
+msgstr "Nom affiché"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__done
@@ -728,7 +729,7 @@ msgid ""
 "\n"
 "{tb}"
 msgstr ""
-"Erreur lors du traitement de l'immobilisation'{ref}' :\n"
+"Erreur lors du traitement de l'immobilisation '{ref}' :\n"
 "\n"
 " {tb}"
 
@@ -743,7 +744,7 @@ msgstr "Immobilisations"
 #: model:ir.ui.menu,name:account_asset_management.wiz_account_asset_report_menu
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Financial Assets report"
-msgstr "Etat des immobilisations"
+msgstr "État des immobilisations"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
@@ -753,12 +754,12 @@ msgstr "Abonnés"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Abonnés (Partenaires)"
+msgstr "Abonnés (partenaires)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr "Font awesome icon e.g. fa-tasks"
+msgstr "Îcone font-awesome, par exemple fa-task"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
@@ -770,7 +771,7 @@ msgstr "Forcer la date comptable"
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Gain/Loss on Sale"
-msgstr "Gain/ Perte sur vente"
+msgstr "Gain/Perte sur cession"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -802,7 +803,7 @@ msgstr "A un message"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
 msgid "Has accounting entries"
-msgstr "Lié à une pièce comptable"
+msgstr "Lié à des pièces comptables"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -825,22 +826,22 @@ msgstr "ID"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_icon
 msgid "Icon"
-msgstr "Icône"
+msgstr "Îcone"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr "Icône pour indiquer une activité d'exception."
+msgstr "Îcone pour indiquer une activité-alerte"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "Si coché, de nouveaux messages demandent votre attention."
+msgstr "Si activé, de nouveaux messages nécessitent votre attention."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Si coché, certains messages ont une erreur d'envoi."
+msgstr "Si activé, des messages ont une erreur d'envoi."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__carry_forward_missed_depreciations
@@ -851,7 +852,7 @@ msgid ""
 "        carried forward to the first depreciation line of the current open\n"
 "        period."
 msgstr ""
-"Si on crée une immobilisation dans une période fiscale qui est fermée\n"
+"Si on crée une immobilisation dans une période comptable qui est fermée\n"
 "                    le montant cumulé des amortissements qui ne peuvent pas "
 "être comptabilisés sera\n"
 "                    reporté sur le premier amortissement de la période\n"
@@ -873,13 +874,13 @@ msgid ""
 "amount to depreciate per year will be calculated as depreciation base / "
 "(depreciation end date - start date + 1) * days in the current year."
 msgstr ""
-"S'il n'est pas défini, le système répartira uniformément le montant à "
-"amortir entre les années, en fonction du nombre d'années. Le montant par an "
-"sera donc la base d'amortissement / le nombre d'années.\n"
-" S'il est défini, le système considérera si l'année en cours est une année "
-"bissextile. Le montant à amortir par an sera calculé comme base "
-"d'amortissement / (date de fin d'amortissement - date de début + 1) * jours "
-"de l'année en cours."
+"Si cette option n'est pas activée, le système répartira uniformément le "
+"montant à amortir entre les années, en fonction du nombre d'années. Le "
+"montant par an sera donc la base d'amortissement / le nombre d'années.\n"
+" Si cette option est activée, le système considérera si l'année en cours est "
+"une année bissextile. Le montant à amortir par an sera calculé comme base "
+"d'amortissement / (date de fin d'amortissement - date de début + 1) * nombre "
+"de jours de l'année en cours."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__allow_reversal
@@ -888,6 +889,9 @@ msgid ""
 "depreciation line will prompt the option to reverse the journal entry, "
 "instead of deleting them."
 msgstr ""
+"Si cette option est activée, lorsque l'on appuie sur le bouton Supprimer/"
+"Annuler l'écriture dans une ligne d'amortissement comptabilisée, l'option "
+"d'extourner la pièce comptable est proposée au lieu de la supprimer."
 
 #. module: account_asset_management
 #. odoo-python
@@ -909,6 +913,8 @@ msgid ""
 "Inconsistent reporting structure.\n"
 "Please correct Asset Group '{group}' (id {id})"
 msgstr ""
+"Structure de rapport incohérente.\n"
+"Veuillez corriger le groupe d'immobilisations \"{group}\" (id {id})"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
@@ -917,9 +923,9 @@ msgid ""
 "Indicates that the first depreciation entry for this asset has to be done "
 "from the depreciation start date instead of the first day of the fiscal year."
 msgstr ""
-"Indique que la première valeur de cette immobilisation doit être calculée "
-"depuis la date de début de l'immobilisation et non le premier jour de "
-"l'exercice fiscal."
+"Indique que la première line d'amortissement de cette immobilisation doit "
+"être calculée à partir de la date de début de l'immobilisation et non à "
+"partir du premier jour de l'exercice fiscal."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -929,12 +935,12 @@ msgstr "Init"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__init_entry
 msgid "Initial Balance Entry"
-msgstr "Ligne de balance initiale"
+msgstr "Ligne de solde initial"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Est abonné"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__journal_id
@@ -955,7 +961,7 @@ msgstr "Pièces comptables"
 #: model:ir.model,name:account_asset_management.model_account_move
 #, python-format
 msgid "Journal Entry"
-msgstr "Pièce Comptable"
+msgstr "Pièce comptable"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
@@ -1004,7 +1010,7 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__write_date
 msgid "Last Updated on"
-msgstr "Dernière mis à jour le"
+msgstr "Dernière mise à jour le"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1023,17 +1029,17 @@ msgstr "Linéaire jusqu'à la valeur de revente"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Pièce jointe principale"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Erreur d'envoi du message"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
@@ -1058,7 +1064,7 @@ msgstr "Mois"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Date butoir de l'activité"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1079,17 +1085,17 @@ msgstr "Nouvelles acquisitions"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Date butoir de l'activité suivante"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Résumé de l'activité suivante"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Type de l'activité suivante"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__remaining_value
@@ -1108,7 +1114,7 @@ msgstr "Non"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__note
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__note
 msgid "Note"
-msgstr "Remarque"
+msgstr "Note"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__note
@@ -1116,12 +1122,12 @@ msgstr "Remarque"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Notes"
-msgstr "Commentaires"
+msgstr "Notes"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Nombre d'actions"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1149,17 +1155,17 @@ msgstr "Nombre d'années ou date de fin"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Nombre d'erreurs"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Nombre de messages nécessitant une action"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Nombre de messages en échec d'envoi"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__open
@@ -1298,7 +1304,7 @@ msgstr ""
 "Politique de sortie\n"
 "  * Valeur résiduelle : la valeur non amortie sera comptabilisée dans le "
 "compte 'Compte de valeur résiduelle' \n"
-"  * Gain / Perte sur la vente : Le gain ou la perte sera comptabilisé dans "
+"  * Gain/perte sur la cession : le gain ou la perte sera comptabilisé dans "
 "le 'Compte de plus-value' ou le 'Compte de moins-value' "
 
 #. module: account_asset_management
@@ -1306,8 +1312,8 @@ msgstr ""
 msgid ""
 "Removal date must be after the last posted entry in case of early removal"
 msgstr ""
-"La date de sortie doit succéder à la dernière pièce comptabilisée dans le "
-"cas d'une sortie anticipée"
+"La date de sortie doit être postérieure à la dernière pièce comptabilisée "
+"dans le cas d'une sortie anticipée"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1350,7 +1356,7 @@ msgstr "Compte de valeur résiduelle"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Utilisateur responsable"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
@@ -1360,24 +1366,24 @@ msgstr "Résultats :"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__date_reversal
 msgid "Reversal date"
-msgstr ""
+msgstr "Date d'extourne"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
 msgid "Reverse Journal Entry"
-msgstr ""
+msgstr "Pièce comptable d'extourne"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "Reverse Move"
-msgstr ""
+msgstr "Pièce comptable d'extourne"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_wiz_asset_move_reverse
 msgid "Reverse posted journal entry on depreciation line"
-msgstr ""
+msgstr "Extourne d'une pièce comptable sur la ligne d'amortissement"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__open
@@ -1388,7 +1394,7 @@ msgstr "En cours"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
 msgid "Sale Value"
-msgstr "Valeur de vente"
+msgstr "Valeur de cession"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1440,7 +1446,7 @@ msgstr "État"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__parent_state
 msgid "State of Asset"
-msgstr "Statut de l'immobilisation"
+msgstr "État de l'immobilisation"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1459,6 +1465,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Statut basé sur les activités\n"
+"En retard : La date d'échéance est déjà dépassée\n"
+"Aujourd'hui : La date de l'activité est aujourd'hui\n"
+"Planifié : Activités futures."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1492,7 +1502,7 @@ msgstr ""
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The Sale Value must be positive!"
-msgstr "La valeur de la vente doit être positive !"
+msgstr "La valeur de cession doit être positive !"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1520,8 +1530,8 @@ msgid ""
 "its useful life.\n"
 "This value is used to determine the depreciation amounts."
 msgstr ""
-"La valeur estimée qu'atteindra une immobilisation lors de sa vente à la fin "
-"de sa durée de vie utile.\n"
+"La valeur estimée qu'atteindra une immobilisation lors de sa cession à la "
+"fin de sa durée de vie utile.\n"
 "Cette valeur détermine les montants d'amortissement."
 
 #. module: account_asset_management
@@ -1536,7 +1546,8 @@ msgstr ""
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The removal date must be after the last depreciation date."
-msgstr "La date de sortie doit succéder à la dernière date d'amortissement."
+msgstr ""
+"La date de sortie doit être postérieure à la dernière date d'amortissement."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
@@ -1564,7 +1575,7 @@ msgstr ""
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "This invoice created the asset(s): %s"
-msgstr "Cette facture a créé le ou les actifs:%s"
+msgstr "Cette facture a créé le(s) immobilisation(s) suivante(s) : %s"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
@@ -1604,7 +1615,7 @@ msgstr "Type"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Type de l'activité-alerte sur l'enregistrement."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1617,12 +1628,12 @@ msgstr "Erreur inconnue"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
 msgid "Use Leap Years"
-msgstr ""
+msgstr "Utiliser les années bissextiles"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
 msgid "Use Specific Journal"
-msgstr ""
+msgstr "Utiliser un journal spécifique"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
@@ -1643,12 +1654,12 @@ msgstr "Afficher la pièce comptable"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messages du site Web"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historique des échanges sur le site Web"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__state
@@ -1663,11 +1674,11 @@ msgid ""
 "status."
 msgstr ""
 "Quand une immobilisation est créée, son statut est 'Brouillon'.\n"
-"Quand l'immobilisation est confirmée, le statut devient 'En cours' et les "
+"Quand l'immobilisation est confirmée, son statut passe à 'En cours' et les "
 "amortissements peuvent être comptabilisés.\n"
-"Si la dernière ligne d'amortissement est comptabiliée, le satut devient "
+"Si sa dernière ligne d'amortissement est comptabiliée, son statut devient "
 "'Clôturé'.\n"
-"Quand l'immobilisation est sortie, son statut prend la valeur 'Sortie'."
+"Quand l'immobilisation est sortie, son statut devient 'Sorti'."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1685,7 +1696,7 @@ msgid ""
 "You should generate such entries from the asset."
 msgstr ""
 "Vous n'avez pas le droit de lier une pièce comptable à une immobilisation.\n"
-"Vous devez générer ces pièces depuis l'immobilisation."
+"Vous devez générer ces pièces comptables depuis l'immobilisation."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1696,16 +1707,16 @@ msgid ""
 "You are not allowed to remove an accounting entry linked to an asset.\n"
 "You should remove such entries from the asset."
 msgstr ""
-"Vous n'avez pas le droit de supprimer une pièce comptable à une "
+"Vous n'avez pas le droit de supprimer une pièce comptable liée à une "
 "immobilisation.\n"
-"Vous devez générer ces pièces depuis l'immobilisation."
+"Vous devez supprimer ces pièces comptables depuis l'immobilisation."
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You can only delete assets in draft state."
-msgstr "Vous ne pouvez supprimer que des immobilisations 'Brouillon'."
+msgstr "Vous ne pouvez supprimer que des immobilisations à l'état 'Brouillon'."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1754,8 +1765,8 @@ msgstr ""
 #, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
-"Vous ne pouvez pas modifier la catégorie d'une immobilisation qui contient "
-"des lignes d'amortissement comptabilisées."
+"Vous ne pouvez pas modifier la catégorie d'une immobilisation dont certaines "
+"lignes d'amortissement sont déjà comptabilisées."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1792,7 +1803,7 @@ msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
 "prior posted entries."
 msgstr ""
-"Vous ne pouvez pas cocher \"Balance initiale\" sur une ligne d'amortissement "
+"Vous ne pouvez pas cocher \"Solde initial\" sur une ligne d'amortissement "
 "avec des pièces comptabilisées antérieures."
 
 #. module: account_asset_management
@@ -1801,8 +1812,8 @@ msgstr ""
 #, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr ""
-"Vous ne pouvez pas ajuster la date de début de l'immobilisation après des "
-"pièces déjà comptabilisées."
+"Vous ne pouvez pas configurer la date de début de l'immobilisation après la "
+"date de pièces déjà comptabilisées."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1812,8 +1823,8 @@ msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
 "entries."
 msgstr ""
-"Vous ne pouvez pas ajuster la date sur une ligne d'amortissement qui "
-"précéderait des pièces comptabiliées."
+"Vous ne pouvez pas dater une ligne d'amortissement avant la date de pièces "
+"comptabiliées."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__date_start
@@ -1823,8 +1834,8 @@ msgid ""
 "date for which accounting entries need to be generated."
 msgstr ""
 "Vous devez ajouter manuellement les lignes d'amortissement correspondant aux "
-"exercices fiscaux précédents si la date de début de l'immobilisation diffère "
-"de la date à laquelle des pièces comptables doivent être générées."
+"exercices comptables antérieurs si la date de début de l'immobilisation "
+"diffère de la date à laquelle des pièces comptables doivent être générées."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
