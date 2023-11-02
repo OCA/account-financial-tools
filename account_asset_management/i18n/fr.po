@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-03 23:22+0000\n"
-"PO-Revision-Date: 2023-11-02 01:54+0000\n"
+"PO-Revision-Date: 2023-11-03 02:41+0000\n"
 "Last-Translator: Alexis de Lattre <alexis@via.ecp.fr>\n"
 "Language-Team: French (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/fr/)\n"
@@ -914,7 +914,7 @@ msgid ""
 "Please correct Asset Group '{group}' (id {id})"
 msgstr ""
 "Structure de rapport incohérente.\n"
-"Veuillez corriger le groupe d'immobilisations \"{groupe}\" (id {id})"
+"Veuillez corriger le groupe d'immobilisations \"{group}\" (id {id})"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
