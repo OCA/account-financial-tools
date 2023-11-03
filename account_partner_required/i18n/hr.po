@@ -25,12 +25,7 @@ msgid "Account"
 msgstr "Konto"
 
 #. module: account_partner_required
-#: model:ir.model,name:account_partner_required.model_account_account_type
-msgid "Account Type"
-msgstr "Vrsta konta"
-
-#. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__always
 msgid "Always"
 msgstr "Uvjek"
 
@@ -40,51 +35,82 @@ msgid "Journal Item"
 msgstr "Stavka dnevnika"
 
 #. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__never
 msgid "Never"
 msgstr "Nikad"
 
 #. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__optional
 msgid "Optional"
 msgstr "Opcija"
 
 #. module: account_partner_required
-#: code:addons/account_partner_required/models/account.py:55
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account__partner_policy
+#: model_terms:ir.ui.view,arch_db:account_partner_required.view_account_search
+msgid "Partner Policy"
+msgstr ""
+
+#. module: account_partner_required
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
 #, python-format
 msgid ""
-"Partner policy is set to 'Always' with account '%s' but the partner is "
-"missing in the account move line with label '%s'."
+"Partner policy is set to 'Always' on account '%(account)s' but the partner "
+"is missing on the journal item '%(move_line)s'."
 msgstr ""
-"Pravilo partnera je postavljeno na 'Uvjek' za konto '%s' ali partner "
-"nedostaje na stavci temeljnice sa nazivom '%s'."
 
 #. module: account_partner_required
-#: code:addons/account_partner_required/models/account.py:61
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
 #, python-format
 msgid ""
-"Partner policy is set to 'Never' with account '%s' but the account move line "
-"with label '%s' has a partner '%s'."
+"Partner policy is set to 'Never' on account '%(account)s' but the journal "
+"item '%(move_line)s' has a partner '%(partner)s'."
 msgstr ""
-"Pravilo partnera je postavljeno na 'Nikad' za konto '%s' ali stavka "
-"temeljnice sa nazivom '%s' ima dodijeljenog partnera '%s'."
 
 #. module: account_partner_required
-#: model:ir.model.fields,field_description:account_partner_required.field_account_account_type__partner_policy
-msgid "Policy for Partner Field"
-msgstr "Pravilo za partnera"
-
-#. module: account_partner_required
-#: model:ir.model.fields,help:account_partner_required.field_account_account_type__partner_policy
+#: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
 msgid ""
-"Set the policy for the partner field : if you select 'Optional', the "
-"accountant is free to put a partner on an account move line with this type "
-"of account ; if you select 'Always', the accountant will get an error "
-"message if there is no partner ; if you select 'Never', the accountant will "
-"get an error message if a partner is present."
+"Set the policy for the partner field:\n"
+"if you select 'Optional', the accountant is free to put a partner on an "
+"account move line with this account ;\n"
+"if you select 'Always', the accountant will get an error message if there is "
+"no partner ;\n"
+"if you select 'Never', the accountant will get an error message if a partner "
+"is present."
 msgstr ""
-"Postavite pravilo za polje partner: ako odaberete 'Opcija', knjigovođi je "
-"odobreno da postavi partnera na stavku temeljnice sa ovim tipom konta; ako "
-"odaberete 'Uvjek', knjigovođa će dobiti poruku greške ako partner nedostaje; "
-"ako odaberete 'Nikad' knjigovođa će dobiti poruku greške ako je partner "
-"dodijeljen."
+
+#~ msgid "Account Type"
+#~ msgstr "Vrsta konta"
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Always' with account '%s' but the partner is "
+#~ "missing in the account move line with label '%s'."
+#~ msgstr ""
+#~ "Pravilo partnera je postavljeno na 'Uvjek' za konto '%s' ali partner "
+#~ "nedostaje na stavci temeljnice sa nazivom '%s'."
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Never' with account '%s' but the account move "
+#~ "line with label '%s' has a partner '%s'."
+#~ msgstr ""
+#~ "Pravilo partnera je postavljeno na 'Nikad' za konto '%s' ali stavka "
+#~ "temeljnice sa nazivom '%s' ima dodijeljenog partnera '%s'."
+
+#~ msgid "Policy for Partner Field"
+#~ msgstr "Pravilo za partnera"
+
+#~ msgid ""
+#~ "Set the policy for the partner field : if you select 'Optional', the "
+#~ "accountant is free to put a partner on an account move line with this "
+#~ "type of account ; if you select 'Always', the accountant will get an "
+#~ "error message if there is no partner ; if you select 'Never', the "
+#~ "accountant will get an error message if a partner is present."
+#~ msgstr ""
+#~ "Postavite pravilo za polje partner: ako odaberete 'Opcija', knjigovođi je "
+#~ "odobreno da postavi partnera na stavku temeljnice sa ovim tipom konta; "
+#~ "ako odaberete 'Uvjek', knjigovođa će dobiti poruku greške ako partner "
+#~ "nedostaje; ako odaberete 'Nikad' knjigovođa će dobiti poruku greške ako "
+#~ "je partner dodijeljen."
