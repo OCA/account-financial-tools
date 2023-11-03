@@ -44,7 +44,7 @@
                             <span t-field="o.currency_id.name" />
                         </p>
                         <p>
-                            <b>Transfer Date:</b>
+                            <b>Date:</b>
                             <span t-field="o.deposit_date" />
                         </p>
                         <p>
