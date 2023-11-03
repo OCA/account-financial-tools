@@ -243,7 +243,7 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
             f.template_id = self.move_template
             f.overwrite = str({"P0": {"amount": 100}})
             template_run = f.save()
-        msg_error = "Keys must be line sequence, i..e, L1, L2, ..."
+        msg_error = "Keys must be line sequence i.e. L1, L2, ..."
         with self.assertRaisesRegex(ValidationError, msg_error):
             template_run.load_lines()
 

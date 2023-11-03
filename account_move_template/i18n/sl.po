@@ -56,7 +56,7 @@ msgstr "Znesek"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
-msgid "Account Opt."
+msgid "Account if Negative"
 msgstr ""
 
 #. module: account_move_template
@@ -277,7 +277,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
-msgid "Keys must be line sequence, i..e, L1, L2, ..."
+msgid "Keys must be line sequence i.e. L1, L2, ..."
 msgstr ""
 
 #. module: account_move_template

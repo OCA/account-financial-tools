@@ -120,7 +120,7 @@ Valid dictionary to overwrite template lines:
         # First level keys must be L1, L2, ...
         keys = overwrite_vals.keys()
         if list(filter(lambda x: x[:1] != "L" or not x[1:].isdigit(), keys)):
-            raise ValidationError(_("Keys must be line sequence, i..e, L1, L2, ..."))
+            raise ValidationError(_("Keys must be line sequence i.e. L1, L2, ..."))
         # Second level keys must be a valid keys
         try:
             if dict(

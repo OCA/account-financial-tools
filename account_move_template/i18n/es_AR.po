@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2023-11-02 01:55+0000\n"
+"PO-Revision-Date: 2023-11-06 00:45+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
 "Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/"
 "23907/es_AR/)\n"
@@ -60,8 +60,8 @@ msgstr "Cuenta"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
-msgid "Account Opt."
-msgstr "Cuenta Opt."
+msgid "Account if Negative"
+msgstr "Cuenta si es Negativo"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
@@ -287,8 +287,8 @@ msgstr "Plantilla de Apunte Contable"
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
-msgid "Keys must be line sequence, i..e, L1, L2, ..."
-msgstr "Las Llaves deben tener una secuencia única, por ejemplo, L1, L2, ..."
+msgid "Keys must be line sequence i.e. L1, L2, ..."
+msgstr "Las llaves deben ser líneas de secuencia por ejemplo L1, L2, ..."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -536,6 +536,14 @@ msgstr ""
 "Borró una línea en el asistente. Esto no está permitido: debe actualizar la "
 "plantilla o modificar el asiento contable que será generado por este "
 "asistente."
+
+#~ msgid "Account Opt."
+#~ msgstr "Cuenta Opt."
+
+#, python-format
+#~ msgid "Keys must be line sequence, i..e, L1, L2, ..."
+#~ msgstr ""
+#~ "Las Llaves deben tener una secuencia única, por ejemplo, L1, L2, ..."
 
 #~ msgid "Analytic Account"
 #~ msgstr "Cuenta Analítica"
