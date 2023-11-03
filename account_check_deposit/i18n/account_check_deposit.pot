@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-03 15:39+0000\n"
+"PO-Revision-Date: 2023-11-03 15:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -86,6 +88,11 @@ msgid "Amount"
 msgstr ""
 
 #. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Are you sure you want to go back to draft?"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
@@ -119,6 +126,7 @@ msgid "Check Deposit"
 msgstr ""
 
 #. module: account_check_deposit
+#. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid "Check Deposit %s"
@@ -138,12 +146,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Payments"
-msgstr ""
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
-msgid "Check Ref. %s"
 msgstr ""
 
 #. module: account_check_deposit
@@ -189,6 +191,13 @@ msgid "Debtor"
 msgstr ""
 
 #. module: account_check_deposit
+#. odoo-python
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "Deposit '%s' has already been credited on the bank account."
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Deposit Date"
@@ -227,6 +236,7 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: account_check_deposit
+#. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 #, python-format
@@ -260,19 +270,27 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction
-#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error
-#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__in_hand_check_account_id
 msgid "In Hand Check Account"
+msgstr ""
+
+#. module: account_check_deposit
+#. odoo-python
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid ""
+"In the configuration of journal '%s', in the 'Incoming Payments' tab, you "
+"must configure an Outstanding Receipts Account for the payment method "
+"'Manual (inbound)'."
 msgstr ""
 
 #. module: account_check_deposit
@@ -336,6 +354,7 @@ msgid "Messages"
 msgstr ""
 
 #. module: account_check_deposit
+#. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid "Missing 'Outstanding Receipts Account' on the company '%s'."
@@ -349,6 +368,21 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__name
 msgid "Name"
+msgstr ""
+
+#. module: account_check_deposit
+#. odoo-python
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
 msgstr ""
 
 #. module: account_check_deposit
@@ -383,17 +417,12 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_unread_counter
-msgid "Number of unread messages"
 msgstr ""
 
 #. module: account_check_deposit
@@ -412,11 +441,6 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__state
 msgid "Status"
 msgstr ""
@@ -431,14 +455,16 @@ msgid ""
 msgstr ""
 
 #. module: account_check_deposit
+#. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
-"The check with amount {amount} and reference '{ref}' is in currency "
-"{check_currency} but the deposit is in currency {deposit_currency}."
+"The check with amount %(amount)s and reference '%(ref)s' is in currency "
+"%(check_currency)s but the deposit is in currency %(deposit_currency)s."
 msgstr ""
 
 #. module: account_check_deposit
+#. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
@@ -447,11 +473,12 @@ msgid ""
 msgstr ""
 
 #. module: account_check_deposit
+#. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid ""
-"There are no received checks in account '{account}' in currency '{currency}'"
-" that are not already in this check deposit."
+"There are no received checks in account '%(account)s' in currency "
+"'%(currency)s' that are not already in this check deposit."
 msgstr ""
 
 #. module: account_check_deposit
@@ -462,16 +489,6 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_unread_counter
-msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: account_check_deposit
