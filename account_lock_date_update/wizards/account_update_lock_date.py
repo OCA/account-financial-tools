@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 
 class AccountUpdateLockDate(models.TransientModel):
     _name = "account.update.lock_date"
-    _description = "Account Update Lock_date"
+    _description = "Wizard to Update Accounting Lock Dates"
 
     company_id = fields.Many2one(comodel_name="res.company", required=True)
     period_lock_date = fields.Date(
