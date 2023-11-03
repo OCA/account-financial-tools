@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2021-08-03 18:49+0000\n"
-"Last-Translator: Pascal GOUHIER <pascal.gouhier@copagex.fr>\n"
+"PO-Revision-Date: 2023-11-03 14:36+0000\n"
+"Last-Translator: Alexis de Lattre <alexis@via.ecp.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account
@@ -48,7 +48,7 @@ msgstr "Optionnel"
 #: model:ir.model.fields,field_description:account_partner_required.field_account_account__partner_policy
 #: model_terms:ir.ui.view,arch_db:account_partner_required.view_account_search
 msgid "Partner Policy"
-msgstr ""
+msgstr "Politique des partenaires"
 
 #. module: account_partner_required
 #. odoo-python
@@ -58,6 +58,9 @@ msgid ""
 "Partner policy is set to 'Always' on account '%(account)s' but the partner "
 "is missing on the journal item '%(move_line)s'."
 msgstr ""
+"La politique des partenaires est définie sur \"Toujours\" pour le compte \""
+"%(account)s\", mais le partenaire est absent de l'écriture comptable \""
+"%(move_line)s\"."
 
 #. module: account_partner_required
 #. odoo-python
@@ -67,6 +70,9 @@ msgid ""
 "Partner policy is set to 'Never' on account '%(account)s' but the journal "
 "item '%(move_line)s' has a partner '%(partner)s'."
 msgstr ""
+"La politique des partenaires est définie sur \"Jamais\" pour le compte \""
+"%(account)s\", mais l'écriture comptable \"%(move_line)s\" a un partenaire \""
+"%(partner)s\"."
 
 #. module: account_partner_required
 #: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
@@ -79,6 +85,13 @@ msgid ""
 "if you select 'Never', the accountant will get an error message if a partner "
 "is present."
 msgstr ""
+"Définit la politique pour le champ partenaire :\n"
+"si vous sélectionnez \"Optionnel\", le comptable est libre de mettre un "
+"partenaire sur une écriture comptable avec ce compte ;\n"
+"si vous sélectionnez \"Toujours\", le comptable aura un message d'erreur "
+"s'il n'y a pas de partenaire ;\n"
+"si vous sélectionnez \"Jamais\", le comptable aura un message d'erreur si un "
+"partenaire est présent."
 
 #~ msgid "Account Type"
 #~ msgstr "Type de compte"
