@@ -315,9 +315,7 @@
                             attrs="{'invisible': [('update_account_group', '=', False)]}"
                         >
                             <field name="account_group_ids" nolabel="1">
-                                <tree
-                                    decoration-danger="type=='updated'"
-                                >
+                                <tree decoration-danger="type=='updated'">
                                     <field name="account_group_id" />
                                     <field name="update_account_group_id" />
                                     <field name="notes" />
@@ -350,9 +348,7 @@
                             attrs="{'invisible': [('update_fiscal_position', '=', False)]}"
                         >
                             <field name="fiscal_position_ids" nolabel="1">
-                                <tree
-                                    decoration-danger="type=='updated'"
-                                >
+                                <tree decoration-danger="type=='updated'">
                                     <field name="fiscal_position_id" />
                                     <field name="update_fiscal_position_id" />
                                     <field name="notes" />
