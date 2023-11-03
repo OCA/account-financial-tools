@@ -19,7 +19,7 @@ class AccountAccount(models.Model):
         ],
         help="Set the policy for the partner field:\nif you select "
         "'Optional', the accountant is free to put a partner "
-        "on an account move line with this account ;\n"
+        "on journal items with this account ;\n"
         "if you select 'Always', the accountant will get an error "
         "message if there is no partner ;\nif you select 'Never', "
         "the accountant will get an error message if a partner "
