@@ -28,7 +28,7 @@ class AccountMoveLine(models.Model):
             elif policy == "never" and line.partner_id:
                 return _(
                     "Partner policy is set to 'Never' on account '%(account)s' but "
-                    "the journal item '%(move_line)s' has a partner '%(partner)s'."
+                    "the journal item '%(move_line)s' has the partner '%(partner)s'."
                 ) % {
                     "account": line.account_id.display_name,
                     "move_line": line.display_name,
