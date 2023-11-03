@@ -26,26 +26,17 @@
                 <sheet>
                     <group>
                         <group>
-                            <field
-                                name="origin_partner_ids"
-                                widget="many2many_tags"
-                            />
+                            <field name="origin_partner_ids" widget="many2many_tags" />
                             <field
                                 name="destination_partner_id"
                                 domain="[('id', 'not in', origin_partner_ids), ('parent_id', 'not in', origin_partner_ids)]"
                                 options="{'no_create': True}"
                             />
-                            <field
-                                name="currency_id"
-                                options="{'no_create': True}"
-                            />
+                            <field name="currency_id" options="{'no_create': True}" />
                         </group>
                         <group>
                             <field name="account_date" />
-                            <field
-                                name="journal_id"
-                                options="{'no_create': True}"
-                            />
+                            <field name="journal_id" options="{'no_create': True}" />
                             <field name="total_amount_due" force_save="1" />
                             <field
                                 name="amount_to_transfer"
@@ -70,11 +61,7 @@
                         type="object"
                         class="btn-primary"
                     />
-                    <button
-                        string="Cancel"
-                        class="btn-secondary"
-                        special="cancel"
-                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
         </field>

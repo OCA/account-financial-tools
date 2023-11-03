@@ -3,9 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record model="ir.ui.view" id="view_account_journal_form">
-        <field
-            name="name"
-        >account.journal.form (in account_journal_lock_date)</field>
+        <field name="name">account.journal.form (in account_journal_lock_date)</field>
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form" />
         <field name="arch" type="xml">
@@ -16,9 +14,7 @@
         </field>
     </record>
     <record model="ir.ui.view" id="view_account_journal_tree">
-        <field
-            name="name"
-        >account.journal.tree (in account_journal_lock_date)</field>
+        <field name="name">account.journal.tree (in account_journal_lock_date)</field>
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_tree" />
         <field name="arch" type="xml">
