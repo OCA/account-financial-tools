@@ -31,7 +31,7 @@
                         <h3>Beneficiary:</h3>
                         <div
                             t-field="o.company_id.partner_id"
-                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'
+                            t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'
                         />
                         <p>
                             <b>Bank Account Number to Credit:</b>
@@ -79,7 +79,7 @@
                                             >
                                                 <span
                                                     t-field="move_line.debit"
-                                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                                    t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
                                                 />
                                             </t>
                                             <t
@@ -87,7 +87,7 @@
                                             >
                                                 <span
                                                     t-field="move_line.amount_currency"
-                                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                                    t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
                                                 />
                                             </t>
                                         </td>
@@ -103,7 +103,7 @@
                                         <b>
                                             <span
                                                 t-field="o.total_amount"
-                                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                                t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
                                             />
                                         </b>
                                     </td>
