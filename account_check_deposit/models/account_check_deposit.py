@@ -12,7 +12,7 @@ from odoo.exceptions import UserError, ValidationError
 
 class AccountCheckDeposit(models.Model):
     _name = "account.check.deposit"
-    _description = "Account Check Deposit"
+    _description = "Check Deposit"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "deposit_date desc"
     _check_company_auto = True
