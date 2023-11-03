@@ -26,12 +26,7 @@ msgid "Account"
 msgstr "الحساب"
 
 #. module: account_partner_required
-#: model:ir.model,name:account_partner_required.model_account_account_type
-msgid "Account Type"
-msgstr "نوع الحساب"
-
-#. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__always
 msgid "Always"
 msgstr "دائماً"
 
@@ -41,46 +36,69 @@ msgid "Journal Item"
 msgstr "عنصر اليومية"
 
 #. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__never
 msgid "Never"
 msgstr "ممنوع"
 
 #. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__optional
 msgid "Optional"
 msgstr "إختياري"
 
 #. module: account_partner_required
-#: code:addons/account_partner_required/models/account.py:55
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account__partner_policy
+#: model_terms:ir.ui.view,arch_db:account_partner_required.view_account_search
+msgid "Partner Policy"
+msgstr ""
+
+#. module: account_partner_required
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
 #, python-format
 msgid ""
-"Partner policy is set to 'Always' with account '%s' but the partner is "
-"missing in the account move line with label '%s'."
+"Partner policy is set to 'Always' on account '%(account)s' but the partner "
+"is missing on the journal item '%(move_line)s'."
 msgstr ""
-"سياسة خانة الشريك هي 'دائماً' للحساب '%s' ولكن خانة الشريك فارغة في عنصر "
-"اليومية باسم '%s'."
 
 #. module: account_partner_required
-#: code:addons/account_partner_required/models/account.py:61
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
 #, python-format
 msgid ""
-"Partner policy is set to 'Never' with account '%s' but the account move line "
-"with label '%s' has a partner '%s'."
+"Partner policy is set to 'Never' on account '%(account)s' but the journal "
+"item '%(move_line)s' has a partner '%(partner)s'."
 msgstr ""
-"سياسة خانة الشريك هي 'ممنوع' للحساب '%s' ولكن في عنصر اليومية باسم '%s' تم "
-"إدخال الشريك '%s'."
 
 #. module: account_partner_required
-#: model:ir.model.fields,field_description:account_partner_required.field_account_account_type__partner_policy
-msgid "Policy for Partner Field"
-msgstr "سياسة خانة الشريك"
-
-#. module: account_partner_required
-#: model:ir.model.fields,help:account_partner_required.field_account_account_type__partner_policy
+#: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
 msgid ""
-"Set the policy for the partner field : if you select 'Optional', the "
-"accountant is free to put a partner on an account move line with this type "
-"of account ; if you select 'Always', the accountant will get an error "
-"message if there is no partner ; if you select 'Never', the accountant will "
-"get an error message if a partner is present."
+"Set the policy for the partner field:\n"
+"if you select 'Optional', the accountant is free to put a partner on an "
+"account move line with this account ;\n"
+"if you select 'Always', the accountant will get an error message if there is "
+"no partner ;\n"
+"if you select 'Never', the accountant will get an error message if a partner "
+"is present."
 msgstr ""
+
+#~ msgid "Account Type"
+#~ msgstr "نوع الحساب"
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Always' with account '%s' but the partner is "
+#~ "missing in the account move line with label '%s'."
+#~ msgstr ""
+#~ "سياسة خانة الشريك هي 'دائماً' للحساب '%s' ولكن خانة الشريك فارغة في عنصر "
+#~ "اليومية باسم '%s'."
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Never' with account '%s' but the account move "
+#~ "line with label '%s' has a partner '%s'."
+#~ msgstr ""
+#~ "سياسة خانة الشريك هي 'ممنوع' للحساب '%s' ولكن في عنصر اليومية باسم '%s' "
+#~ "تم إدخال الشريك '%s'."
+
+#~ msgid "Policy for Partner Field"
+#~ msgstr "سياسة خانة الشريك"
