@@ -77,6 +77,11 @@ msgid "Journal"
 msgstr ""
 
 #. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
+msgid "Journal Items to Compensate"
+msgstr ""
+
+#. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -122,11 +127,6 @@ msgid "Line '%s' is not posted."
 msgstr ""
 
 #. module: account_netting
-#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
-msgid "Move Line"
-msgstr ""
-
-#. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__partner_id
 msgid "Partner"
 msgstr ""
@@ -137,8 +137,8 @@ msgstr ""
 #, python-format
 msgid ""
 "The 'Compensate' function is intended to balance operations on different "
-"accounts for the same partner. In this case all selected entries belong to "
-"the same account '%s'. Use the 'Reconcile' function instead."
+"accounts for the same partner. The selected journal items have the same "
+"account '%s', so you should use the 'Reconcile' function instead."
 msgstr ""
 
 #. module: account_netting
@@ -146,8 +146,8 @@ msgstr ""
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid ""
-"The selected journal items have different partners: %s. The partner must be "
-"the same for all the selected journal items."
+"The selected journal items have different partners: %s. All the selected "
+"journal items must have the same partner."
 msgstr ""
 
 #. module: account_netting
@@ -177,5 +177,5 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
-msgid "You should compensate at least 2 journal items."
+msgid "You should select at least 2 journal items."
 msgstr ""

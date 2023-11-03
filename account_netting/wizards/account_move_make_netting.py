@@ -21,6 +21,7 @@ class AccountMoveMakeNetting(models.TransientModel):
     move_line_ids = fields.Many2many(
         comodel_name="account.move.line",
         check_company=True,
+        string="Journal Items to Compensate",
     )
     partner_id = fields.Many2one("res.partner", readonly=True)
     company_currency_id = fields.Many2one(related="company_id.currency_id")
@@ -33,7 +34,7 @@ class AccountMoveMakeNetting(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         if len(self.env.context.get("active_ids", [])) < 2:
-            raise UserError(_("You should compensate at least 2 journal items."))
+            raise UserError(_("You should select at least 2 journal items."))
         move_lines = self.env["account.move.line"].browse(
             self.env.context["active_ids"]
         )
@@ -70,8 +71,8 @@ class AccountMoveMakeNetting(models.TransientModel):
                 _(
                     "The 'Compensate' function is intended to balance "
                     "operations on different accounts for the same partner. "
-                    "In this case all selected entries belong to the same "
-                    "account '%s'. Use the 'Reconcile' function instead."
+                    "The selected journal items have the same "
+                    "account '%s', so you should use the 'Reconcile' function instead."
                 )
                 % move_lines.account_id.display_name
             )
@@ -79,7 +80,7 @@ class AccountMoveMakeNetting(models.TransientModel):
             raise UserError(
                 _(
                     "The selected journal items have different partners: %s. "
-                    "The partner must be the same for all the selected journal items."
+                    "All the selected journal items must have the same partner."
                 )
                 % ", ".join([p.display_name for p in partners])
             )
