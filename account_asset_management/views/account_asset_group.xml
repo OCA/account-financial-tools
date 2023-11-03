@@ -25,7 +25,7 @@
             <field name="name">account.asset.group.tree</field>
             <field name="model">account.asset.group</field>
             <field name="arch" type="xml">
-                <tree string="Asset Group" editable="bottom">
+                <tree editable="bottom">
                     <field name="name" />
                     <field name="code" optional="show" />
                     <field name="parent_id" />
