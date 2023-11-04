@@ -5,7 +5,6 @@ from odoo import models
 
 
 class ResCompany(models.Model):
-
     _inherit = "res.company"
 
     def find_daterange_fm(self, date_str):
