@@ -534,7 +534,6 @@ msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_has_error
-#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "indien aangevinkt hebben sommige leveringen een fout."
 
@@ -813,11 +812,6 @@ msgstr "Omzet Spreiding Dagboek"
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Revenue account"
 msgstr "Omzet grootboekrekening"
-
-#. module: account_spread_cost_revenue
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
