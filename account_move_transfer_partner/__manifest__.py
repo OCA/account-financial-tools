@@ -4,7 +4,7 @@
 {
     "name": "Account Move Transfer Partner",
     "summary": "Automation to translate amount due from many partners to one partner",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "ForgeFlow S.L., " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Generic",

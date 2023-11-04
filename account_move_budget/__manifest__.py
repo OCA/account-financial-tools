@@ -4,7 +4,7 @@
 {
     "name": "Account Move Budget",
     "summary": "Create Accounting Budgets",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Accounting & Finance",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "ForgeFlow, " "Odoo Community Association (OCA)",
