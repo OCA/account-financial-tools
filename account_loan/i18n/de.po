@@ -356,7 +356,6 @@ msgstr "Wenn es gesetzt ist, erfordern neue Nachrichten Ihre Aufmerksamkeit."
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error
-#: model:ir.model.fields,help:account_loan.field_account_loan__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 "Wenn es gesetzt ist, gibt es einige Nachrichten mit einem Übertragungsfehler."
@@ -518,11 +517,6 @@ msgid "Loan generate wizard"
 msgstr "Assistent für Darlehensgenerierung"
 
 #. module: account_loan
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
-msgid "Loan items"
-msgstr "Darlehenspositionen"
-
-#. module: account_loan
 #: model:ir.model.constraint,message:account_loan.constraint_account_loan_name_uniq
 msgid "Loan name must be unique"
 msgstr "Die Bezeichnung des Darlehens muss eindeutig sein."
@@ -549,7 +543,6 @@ msgstr "Leihprodukt"
 #: model:ir.model.fields.selection,name:account_loan.selection__account_loan_generate_wizard__loan_type__loan
 #: model:ir.ui.menu,name:account_loan.account_loan_menu
 #: model:ir.ui.menu,name:account_loan.loan_menu
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_tree
 msgid "Loans"
 msgstr "Darlehen"
 
@@ -833,11 +826,6 @@ msgid "Run"
 msgstr "Lauf"
 
 #. module: account_loan
-#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__sequence
 msgid "Sequence"
 msgstr "Reihenfolge"
@@ -995,6 +983,9 @@ msgstr "Wenn angehakt, erfolgt die erste Zahlung am Anfangsdatum"
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "oder"
+
+#~ msgid "Loan items"
+#~ msgstr "Darlehenspositionen"
 
 #~ msgid "If checked new messages require your attention."
 #~ msgstr ""

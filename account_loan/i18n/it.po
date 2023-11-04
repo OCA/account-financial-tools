@@ -355,7 +355,6 @@ msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error
-#: model:ir.model.fields,help:account_loan.field_account_loan__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
@@ -516,11 +515,6 @@ msgid "Loan generate wizard"
 msgstr "Procedura guidata per la generazione del prestito"
 
 #. module: account_loan
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
-msgid "Loan items"
-msgstr "Righe prestito"
-
-#. module: account_loan
 #: model:ir.model.constraint,message:account_loan.constraint_account_loan_name_uniq
 msgid "Loan name must be unique"
 msgstr "Il Nome del prestito deve essere univoco"
@@ -545,7 +539,6 @@ msgstr "Prodotto prestito"
 #: model:ir.model.fields.selection,name:account_loan.selection__account_loan_generate_wizard__loan_type__loan
 #: model:ir.ui.menu,name:account_loan.account_loan_menu
 #: model:ir.ui.menu,name:account_loan.loan_menu
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_tree
 msgid "Loans"
 msgstr "Prestiti"
 
@@ -831,11 +824,6 @@ msgid "Run"
 msgstr "Esecuzione"
 
 #. module: account_loan
-#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Errore consegna SMS"
-
-#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__sequence
 msgid "Sequence"
 msgstr "Sequenza"
@@ -996,6 +984,12 @@ msgstr "Quando spuntato, il primo pagamento sarà alla data inizio"
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "o"
+
+#~ msgid "Loan items"
+#~ msgstr "Righe prestito"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Errore consegna SMS"
 
 #~ msgid "If checked new messages require your attention."
 #~ msgstr "Se selezionata, nuovi messaggi richiedono attenzione."

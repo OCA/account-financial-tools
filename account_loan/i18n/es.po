@@ -354,7 +354,6 @@ msgstr "Si está marcado, los mensajes nuevos requieren su atención."
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error
-#: model:ir.model.fields,help:account_loan.field_account_loan__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 "Si está marcado, algunos mensajes han tenido errores al ser entregados."
@@ -516,11 +515,6 @@ msgid "Loan generate wizard"
 msgstr "Asistente para generar préstamos"
 
 #. module: account_loan
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
-msgid "Loan items"
-msgstr "Elementos de préstamos"
-
-#. module: account_loan
 #: model:ir.model.constraint,message:account_loan.constraint_account_loan_name_uniq
 msgid "Loan name must be unique"
 msgstr "El nombre de un préstamo debe ser único"
@@ -545,7 +539,6 @@ msgstr "Importe de préstamo"
 #: model:ir.model.fields.selection,name:account_loan.selection__account_loan_generate_wizard__loan_type__loan
 #: model:ir.ui.menu,name:account_loan.account_loan_menu
 #: model:ir.ui.menu,name:account_loan.loan_menu
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_tree
 msgid "Loans"
 msgstr "Préstamos"
 
@@ -833,11 +826,6 @@ msgid "Run"
 msgstr "Generar"
 
 #. module: account_loan
-#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__sequence
 msgid "Sequence"
 msgstr "Secuencia"
@@ -998,6 +986,9 @@ msgstr "Cuando se marque, el primero pago será en la fecha de inicio"
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "o"
+
+#~ msgid "Loan items"
+#~ msgstr "Elementos de préstamos"
 
 #~ msgid "If checked new messages require your attention."
 #~ msgstr "Si está marcado los mensajes nuevos requieren su atención."
