@@ -58,7 +58,6 @@ msgstr ""
 #: code:addons/account_asset_compute_batch/wizard/account_asset_compute.py:0
 #: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.search_account_asset_compute_batch_filter
 #: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
-#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_tree
 #, python-format
 msgid "Asset Compute Batch"
 msgstr ""
@@ -314,7 +313,6 @@ msgstr ""
 
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_has_error
-#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -457,11 +455,6 @@ msgstr ""
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_user_id
 msgid "Responsible User"
-msgstr ""
-
-#. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_asset_compute_batch
