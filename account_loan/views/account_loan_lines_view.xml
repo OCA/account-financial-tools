@@ -6,7 +6,7 @@
         <field name="model">account.loan.line</field>
         <field name="priority">99</field>
         <field name="arch" type="xml">
-            <tree string="Loan items" create="0">
+            <tree create="0">
                 <field name="sequence" />
                 <field name="date" />
                 <field name="rate" />

@@ -132,7 +132,7 @@ msgid ""
 "You cannot add/modify entries for the journal '%s' prior to and inclusive of "
 "the lock date %s"
 msgstr ""
-"Nije moguće unositi/uređivati stavke prije i uključivo sa datum "
+"Nije moguće unositi/uređivati stavke prije i '%s' uključivo sa datum "
 "zaključavanja dnevnika %s"
 
 #. module: account_journal_lock_date
@@ -143,7 +143,7 @@ msgid ""
 "the lock date %s. Check the Journal settings or ask someone with the "
 "'Adviser' role"
 msgstr ""
-"Nije moguće unositi/uređivati stavke prije i uključivo sa datum "
+"Nije moguće unositi/uređivati stavke prije '%s' i uključivo sa datum "
 "zaključavanja dnevnika %s"
 
 #, fuzzy
