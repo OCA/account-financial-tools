@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_form_view">
+        <field name="name">account.move.form (in account_reversal_usability)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="reversed_entry_id" position="before">
+                <field
+                    name="to_be_reversed"
+                    attrs="{'invisible': [('move_type', '!=', 'entry')]}"
+                />
+            </field>
+            <field name="reversed_entry_id" position="after">
+                <field
+                    name="reversal_id"
+                    attrs="{'invisible': [('move_type', '!=', 'entry')]}"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_move_search_view">
+        <field name="name">account.move.search (in account_reversal_usability)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter" />
+        <field name="arch" type="xml">
+            <filter name="reversed" position="after">
+                <filter
+                    string="To Be Reversed"
+                    name="to_be_reversed"
+                    domain="[('to_be_reversed', '=', True)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+</odoo>
