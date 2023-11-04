@@ -505,11 +505,6 @@ msgid "Loan generate wizard"
 msgstr ""
 
 #. module: account_loan
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
-msgid "Loan items"
-msgstr ""
-
-#. module: account_loan
 #: model:ir.model.constraint,message:account_loan.constraint_account_loan_name_uniq
 msgid "Loan name must be unique"
 msgstr ""
@@ -534,7 +529,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_loan.selection__account_loan_generate_wizard__loan_type__loan
 #: model:ir.ui.menu,name:account_loan.account_loan_menu
 #: model:ir.ui.menu,name:account_loan.loan_menu
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_tree
 msgid "Loans"
 msgstr ""
 
