@@ -6,5 +6,6 @@
         <field name="name">Fiscal month</field>
         <field name="allow_overlap" eval="False" />
         <field name="fiscal_month" eval="True" />
+        <field name="company_id" eval="False" />
     </record>
 </odoo>
