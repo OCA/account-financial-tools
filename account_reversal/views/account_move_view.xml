@@ -25,6 +25,10 @@
                 position="after"
             >
                 <field name="to_be_reversed" />
+                <field
+                    name="reversal_id"
+                    attrs="{'invisible': [('move_type', '!=', 'entry')]}"
+                />
             </xpath>
         </field>
     </record>
@@ -38,7 +42,7 @@
                 <filter
                     name="to_be_reversed"
                     string="To Be Reversed"
-                    domain="[('to_be_reversed', '=', True), ('reversed_entry_id', '=', False)]"
+                    domain="[('to_be_reversed', '=', True)]"
                     help="Journal Entries to be Reversed"
                 />
             </filter>

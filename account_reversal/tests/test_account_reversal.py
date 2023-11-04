@@ -5,10 +5,14 @@
 import random
 
 from odoo.tests import Form
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
+
+from odoo.addons.account_reversal.models.account_move import (
+    MoveAlreadyReversedValidationError,
+)
 
 
-class TestAccountReversal(SavepointCase):
+class TestAccountReversal(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -164,3 +168,18 @@ class TestAccountReversal(SavepointCase):
 
         self.assertEqual(len(reversal_move.line_ids), 200)
         self.assertEqual(reversal_move.state, "posted")
+
+    def test_already_reversed_constraint(self):
+        account_move = self._create_move()
+        account_move.action_post()
+        account_move.to_be_reversed = True
+        reversed_account_move = account_move._reverse_moves()
+        self.assertEqual(account_move.reversal_id, reversed_account_move)
+        self.assertFalse(account_move.to_be_reversed)
+        with self.assertRaises(MoveAlreadyReversedValidationError), self.cr.savepoint():
+            account_move.to_be_reversed = True
+        # Cancelled reverse moves are not taken into account in reversal_id and the constraint
+        # on to_be_reversed.
+        reversed_account_move.button_cancel()
+        self.assertFalse(account_move.reversal_id)
+        account_move.to_be_reversed = True
