@@ -272,7 +272,6 @@ msgstr "Se selecionado, há novas mensagens que requerem a sua atenção."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error
-#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se selecionado, algumas mensagens tem um erro de entrega."
 
@@ -440,11 +439,6 @@ msgid "Responsible User"
 msgstr "Utilizador Responsável"
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Erro de Envio de SMS"
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__state
 msgid "Status"
 msgstr "Estado"
@@ -525,6 +519,9 @@ msgstr "Mensagens do Website"
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr "Histórico de Comunicação do Website"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Erro de Envio de SMS"
 
 #~ msgid "Check Deposit - Ref. Check %s"
 #~ msgstr "Depósito de Cheque - Ref. do Cheque %s"
