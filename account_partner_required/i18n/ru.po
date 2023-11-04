@@ -67,15 +67,15 @@ msgstr ""
 #, python-format
 msgid ""
 "Partner policy is set to 'Never' on account '%(account)s' but the journal "
-"item '%(move_line)s' has a partner '%(partner)s'."
+"item '%(move_line)s' has the partner '%(partner)s'."
 msgstr ""
 
 #. module: account_partner_required
 #: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
 msgid ""
 "Set the policy for the partner field:\n"
-"if you select 'Optional', the accountant is free to put a partner on an "
-"account move line with this account ;\n"
+"if you select 'Optional', the accountant is free to put a partner on journal "
+"items with this account ;\n"
 "if you select 'Always', the accountant will get an error message if there is "
 "no partner ;\n"
 "if you select 'Never', the accountant will get an error message if a partner "
