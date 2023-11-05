@@ -55,8 +55,8 @@ msgstr "Conta"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
-msgid "Account Opt."
-msgstr "Conta Opc."
+msgid "Account if Negative"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
@@ -275,8 +275,8 @@ msgstr "Modelo de Item de Diário"
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
-msgid "Keys must be line sequence, i..e, L1, L2, ..."
-msgstr "As chaves devem ser sequência de linhas, i.e., L1, L2, ..."
+msgid "Keys must be line sequence i.e. L1, L2, ..."
+msgstr ""
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -523,6 +523,13 @@ msgstr ""
 "Apagou uma linha no assistente. Não é permitido: deve em alternativa "
 "atualizar o modelo ou modificar o movimento de diário que será gerado pelo "
 "assistente."
+
+#~ msgid "Account Opt."
+#~ msgstr "Conta Opc."
+
+#, python-format
+#~ msgid "Keys must be line sequence, i..e, L1, L2, ..."
+#~ msgstr "As chaves devem ser sequência de linhas, i.e., L1, L2, ..."
 
 #~ msgid "Analytic Account"
 #~ msgstr "Conta Analítica"
