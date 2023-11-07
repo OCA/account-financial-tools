@@ -38,7 +38,7 @@ class TestAccountSequenceOption(TransactionCase):
         }
         move_form = Form(self.env["account.payment"].with_context(**ctx))
         move_form.payment_type = payment_type
-        move_form.partner_type = partner_type
+        # move_form.partner_type = partner_type
         move_form.partner_id = self.partner_id
         payment = move_form.save()
         return payment
