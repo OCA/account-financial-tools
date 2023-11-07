@@ -226,7 +226,6 @@ msgstr "Si está marcada, nuevos mensajes requieren su atención."
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_error
-#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "si está marcada, algunos mensajes tienen un error de entrega."
 
@@ -340,11 +339,6 @@ msgid "Responsible User"
 msgstr "Usuario Responsable"
 
 #. module: account_move_budget
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Error en la entrega de SMS"
-
-#. module: account_move_budget
 #: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
 msgid "Set draft"
 msgstr "Establecer a borrador"
@@ -416,3 +410,6 @@ msgstr "Mensajes de la página web"
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__website_message_ids
 msgid "Website communication history"
 msgstr "Historial de la comunicación en la página web"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error en la entrega de SMS"

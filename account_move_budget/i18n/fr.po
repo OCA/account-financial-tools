@@ -226,7 +226,6 @@ msgstr "Si coché, de nouveaux messages requièrent votre attention."
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_error
-#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si coché, des messages ont un problème de livraison."
 
@@ -340,11 +339,6 @@ msgid "Responsible User"
 msgstr "Utilisateur responsable"
 
 #. module: account_move_budget
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Erreur de livraison de minimessage"
-
-#. module: account_move_budget
 #: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
 msgid "Set draft"
 msgstr "Mettre en brouillon"
@@ -416,6 +410,9 @@ msgstr "Messages du site web"
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__website_message_ids
 msgid "Website communication history"
 msgstr "Historique de la communication du site web"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Erreur de livraison de minimessage"
 
 #~ msgid "Followers (Channels)"
 #~ msgstr "Abonnés (canaux)"
