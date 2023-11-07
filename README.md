@@ -23,7 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_asset_batch_compute](account_asset_batch_compute/) | 15.0.1.0.0 |  | Add the possibility to compute assets in batch
 [account_asset_low_value](account_asset_low_value/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Assets Management - Low Value Asset
-[account_asset_management](account_asset_management/) | 15.0.1.1.1 |  | Assets Management
+[account_asset_management](account_asset_management/) | 15.0.1.1.2 |  | Assets Management
 [account_asset_management_menu](account_asset_management_menu/) | 15.0.1.0.0 |  | Assets Management Menu
 [account_asset_number](account_asset_number/) | 15.0.1.0.0 |  | Assets Number
 [account_asset_transfer](account_asset_transfer/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Asset Transfer from AUC to Asset
@@ -31,7 +31,7 @@ addon | version | maintainers | summary
 [account_chart_update](account_chart_update/) | 15.0.1.3.1 |  | Wizard to update a company's account chart from a template
 [account_chart_update_l10n_eu_oss](account_chart_update_l10n_eu_oss/) | 15.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Account Chart update OSS
 [account_chart_update_l10n_eu_oss_oca](account_chart_update_l10n_eu_oss_oca/) | 15.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Account Chart update OSS OCA
-[account_check_deposit](account_check_deposit/) | 15.0.1.0.0 |  | Manage deposit of checks to the bank
+[account_check_deposit](account_check_deposit/) | 15.0.1.0.1 |  | Manage deposit of checks to the bank
 [account_cost_center](account_cost_center/) | 15.0.1.0.0 |  | Cost center information for invoice lines
 [account_fiscal_month](account_fiscal_month/) | 15.0.1.0.0 |  | Provide a fiscal month date range type
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 15.0.1.0.1 |  | Check VAT on invoice validation
@@ -42,7 +42,7 @@ addon | version | maintainers | summary
 [account_lock_date_update](account_lock_date_update/) | 15.0.1.0.2 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_lock_to_date](account_lock_to_date/) | 15.0.1.0.0 |  | Allows to set an account lock date in the future.
 [account_maturity_date_default](account_maturity_date_default/) | 15.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Maturity Date Default
-[account_move_budget](account_move_budget/) | 15.0.1.0.0 |  | Create Accounting Budgets
+[account_move_budget](account_move_budget/) | 15.0.1.0.1 |  | Create Accounting Budgets
 [account_move_fiscal_month](account_move_fiscal_month/) | 15.0.1.0.0 |  | Display the fiscal month on journal entries/item
 [account_move_fiscal_year](account_move_fiscal_year/) | 15.0.1.0.1 |  | Display the fiscal year on journal entries/item
 [account_move_force_removal](account_move_force_removal/) | 15.0.1.1.1 |  | Allow force removal account moves
