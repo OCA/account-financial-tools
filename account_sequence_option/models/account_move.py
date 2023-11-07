@@ -32,7 +32,7 @@ class AccountMove(models.Model):
                     rec.sequence_option = True
 
         # Call super()
-        super()._compute_name()
+        res = super()._compute_name()
         if options:
             for rec in self:
                 # On create new, odoo may suggest the 1st new number, remove it.
@@ -50,6 +50,7 @@ class AccountMove(models.Model):
                     and not rec.sequence_option
                 ):
                     rec.name = "/"
+        return res
 
     # Bypass constrains if sequence is defined
     def _constrains_date_sequence(self):
