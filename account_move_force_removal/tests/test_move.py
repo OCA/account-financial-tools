@@ -37,10 +37,9 @@ class TestMove(TransactionCase):
         )
         cls.company = cls.env.company
         cls.company.currency_id.active = True
-        account_type = cls.env.ref("account.data_account_type_other_income")
         cls.income_account = cls.env["account.account"].search(
             [
-                ("user_type_id", "=", account_type.id),
+                ("account_type", "=", "income"),
                 ("company_id", "=", cls.company.id),
             ],
             limit=1,
@@ -51,11 +50,11 @@ class TestMove(TransactionCase):
                 default_type="out_invoice", default_company_id=cls.env.company.id
             )
         )
-        invoice.partner_id = cls.partner
+        # invoice.partner_id = cls.partner
         invoice.journal_id = cls.journal
         with invoice.invoice_line_ids.new() as line_form:
             line_form.name = cls.product.name
-            line_form.product_id = cls.product
+            line_form.product_id = cls.product.id
             line_form.quantity = 1.0
             line_form.price_unit = 10
             line_form.account_id = cls.income_account
