@@ -37,10 +37,9 @@ class TestMove(TransactionCase):
         )
         cls.company = cls.env.company
         cls.company.currency_id.active = True
-        account_type = cls.env.ref("account.data_account_type_other_income")
         cls.income_account = cls.env["account.account"].search(
             [
-                ("user_type_id", "=", account_type.id),
+                ("account_type", "=", "income"),
                 ("company_id", "=", cls.company.id),
             ],
             limit=1,
