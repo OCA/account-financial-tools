@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-17 18:36+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-11-10 12:39+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Gruppi di Conti"
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_account_tag
 msgid "Account Tag"
-msgstr "Tag Conto"
+msgstr "Etichetta conto"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_account_tag_action
