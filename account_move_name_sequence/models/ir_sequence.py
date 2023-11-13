@@ -11,7 +11,7 @@ class IrSequence(models.Model):
         # https://github.com/odoo/odoo/pull/91019
         date_obj = fields.Date.from_string(date)
         sequence_range = self.env["ir.sequence.date_range"]
-        prefix_suffix = "%s %s" % (self.prefix, self.suffix)
+        prefix_suffix = f"{self.prefix} {self.suffix}"
         if "%(range_day)s" in prefix_suffix:
             date_from = date_obj
             date_to = date_obj
