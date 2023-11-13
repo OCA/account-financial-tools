@@ -1,0 +1,7 @@
+- [Akretion](https://www.akretion.com):
+  - Alexis de Lattre \<<alexis.delattre@akretion.com>\>
+- [Vauxoo](https://www.vauxoo.com):
+  - Moisés López \<<moylop260@vauxoo.com>\>
+  - Francisco Luna \<<fluna@vauxoo.com>\>
+- [Factor Libre](https://www.factorlibre.com):
+  - Rodrigo Bonilla Martinez \<<rodrigo.bonilla@factorlibre.com>\>
