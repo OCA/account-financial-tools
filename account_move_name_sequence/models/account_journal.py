@@ -86,10 +86,11 @@ class AccountJournal(models.Model):
     @api.model
     def _prepare_sequence(self, vals, refund=False):
         code = vals.get("code") and vals["code"].upper() or ""
-        prefix = "%s%s/%%(range_year)s/" % (refund and "R" or "", code)
+        prefix = "{}{}/%(range_year)s/".format(refund and "R" or "", code)
         seq_vals = {
-            "name": "%s%s"
-            % (vals.get("name", _("Sequence")), refund and " " + _("Refund") or ""),
+            "name": "{}{}".format(
+                vals.get("name", _("Sequence")), refund and " " + _("Refund") or ""
+            ),
             "company_id": vals.get("company_id") or self.env.company.id,
             "implementation": "no_gap",
             "prefix": prefix,
@@ -124,8 +125,8 @@ class AccountJournal(models.Model):
             move_domain, limit=1, order="id DESC"
         )
         msg_err = (
-            "Journal %s could not get sequence %s values based on current moves. "
-            "Using default values." % (self.id, refund and "refund" or "")
+            "Journal {} could not get sequence {} values based on current moves. "
+            "Using default values.".format(self.id, refund and "refund" or "")
         )
         if not last_move:
             _logger.warning("%s %s", msg_err, "No moves found")
@@ -168,7 +169,7 @@ class AccountJournal(models.Model):
                 if month:
                     prefix += "%(range_month)s"
                 prefix3 = seq_format_values.get("prefix3") or ""
-                where_name_value = "%s%s%s%s%s%%" % (
+                where_name_value = "{}{}{}{}{}%".format(
                     prefix1,
                     "_" * seq_format_values["year_length"],
                     prefix2,
@@ -177,31 +178,27 @@ class AccountJournal(models.Model):
                 )
                 prefixes = prefix1 + prefix2
                 select_year = (
-                    "split_part(name, '%s', %d)" % (prefix2, prefixes.count(prefix2))
+                    f"split_part(name, '{prefix2}', {prefixes.count(prefix2)})"
                     if prefix2
                     else "''"
                 )
                 prefixes += prefix3
                 select_month = (
-                    "split_part(name, '%s', %d)" % (prefix3, prefixes.count(prefix3))
+                    f"split_part(name, '{prefix3}', {prefixes.count(prefix3)})"
                     if prefix3
                     else "''"
                 )
                 select_max_number = (
-                    "MAX(split_part(name, '%s', %d)::INTEGER) AS max_number"
-                    % (
+                    "MAX(split_part(name, '{}', {})::INTEGER) AS max_number".format(
                         prefixes[-1],
                         prefixes.count(prefixes[-1]) + 1,
                     )
                 )
                 query = (
-                    "SELECT %s, %s, %s FROM account_move "
-                    "WHERE name LIKE %%s AND journal_id=%%s GROUP BY 1,2"
-                ) % (
-                    select_year,
-                    select_month,
-                    select_max_number,
-                )
+                    "SELECT {}, {}, {} FROM account_move "
+                    "WHERE name LIKE %s AND journal_id=%s GROUP BY 1,2"
+                ).format(select_year, select_month, select_max_number)
+
                 # It is not using user input
                 # pylint: disable=sql-injection
                 self.env.cr.execute(query, (where_name_value, self.id))
@@ -231,11 +228,11 @@ class AccountJournal(models.Model):
                         else:
                             year = "20" + year
                     if month:
-                        date_from = fields.Date.to_date("%s-%s-1" % (year, month))
+                        date_from = fields.Date.to_date(f"{year}-{month}-1")
                         date_to = fields.Date.end_of(date_from, "month")
                     else:
-                        date_from = fields.Date.to_date("%s-1-1" % year)
-                        date_to = fields.Date.to_date("%s-12-31" % year)
+                        date_from = fields.Date.to_date(f"{year}-1-1")
+                        date_to = fields.Date.to_date(f"{year}-12-31")
                     seq_vals["date_range_ids"].append(
                         (
                             0,
