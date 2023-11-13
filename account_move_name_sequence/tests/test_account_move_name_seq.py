@@ -72,7 +72,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         self.assertEqual(move.name, "/")
         move.action_post()
         seq = self.misc_journal.sequence_id
-        move_name = "%s%s" % (seq.prefix, "1".zfill(seq.padding))
+        move_name = "{}{}".format(seq.prefix, "1".zfill(seq.padding))
         move_name = move_name.replace("%(range_year)s", str(self.date.year))
         self.assertEqual(move.name, move_name)
         self.assertTrue(seq.date_range_ids)
@@ -170,22 +170,6 @@ class TestAccountMoveNameSequence(TransactionCase):
         self.assertEqual(in_invoice.name, "/")
         in_invoice.action_post()
 
-        move_reversal = (
-            self.env["account.move.reversal"]
-            .with_context(active_model="account.move", active_ids=in_invoice.ids)
-            .create(
-                {
-                    "journal_id": in_invoice.journal_id.id,
-                    "reason": "no reason",
-                    "refund_method": "cancel",
-                }
-            )
-        )
-        reversal = move_reversal.reverse_moves()
-        reversed_move = self.env["account.move"].browse(reversal["res_id"])
-        self.assertTrue(reversed_move)
-        self.assertEqual(reversed_move.state, "posted")
-
         in_invoice = in_invoice.copy(
             {
                 "invoice_date": self.date,
@@ -193,18 +177,14 @@ class TestAccountMoveNameSequence(TransactionCase):
         )
         in_invoice.action_post()
 
-        move_reversal = (
-            self.env["account.move.reversal"]
-            .with_context(active_model="account.move", active_ids=in_invoice.ids)
-            .create(
-                {
-                    "journal_id": in_invoice.journal_id.id,
-                    "reason": "no reason",
-                    "refund_method": "modify",
-                }
-            )
+        move_reversal = self.env["account.move.reversal"].create(
+            {
+                "move_ids": in_invoice.ids,
+                "journal_id": in_invoice.journal_id.id,
+                "reason": "no reason",
+            }
         )
-        reversal = move_reversal.reverse_moves()
+        reversal = move_reversal.modify_moves()
         draft_invoice = self.env["account.move"].browse(reversal["res_id"])
         self.assertTrue(draft_invoice)
         self.assertEqual(draft_invoice.state, "draft")
@@ -217,18 +197,14 @@ class TestAccountMoveNameSequence(TransactionCase):
         )
         in_invoice.action_post()
 
-        move_reversal = (
-            self.env["account.move.reversal"]
-            .with_context(active_model="account.move", active_ids=in_invoice.ids)
-            .create(
-                {
-                    "journal_id": in_invoice.journal_id.id,
-                    "reason": "no reason",
-                    "refund_method": "refund",
-                }
-            )
+        move_reversal = self.env["account.move.reversal"].create(
+            {
+                "move_ids": in_invoice.ids,
+                "journal_id": in_invoice.journal_id.id,
+                "reason": "no reason",
+            }
         )
-        reversal = move_reversal.reverse_moves()
+        reversal = move_reversal.refund_moves()
         draft_reversed_move = self.env["account.move"].browse(reversal["res_id"])
         self.assertTrue(draft_reversed_move)
         self.assertEqual(draft_reversed_move.state, "draft")
@@ -257,7 +233,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         self.assertEqual(in_refund_invoice.name, "/")
         in_refund_invoice.action_post()
         seq = self.purchase_journal.refund_sequence_id
-        move_name = "%s%s" % (seq.prefix, "1".zfill(seq.padding))
+        move_name = "{}{}".format(seq.prefix, "1".zfill(seq.padding))
         move_name = move_name.replace("%(range_year)s", str(self.date.year))
         self.assertEqual(in_refund_invoice.name, move_name)
         in_refund_invoice.button_draft()
@@ -277,7 +253,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         )
         self.assertEqual(invoice.name, "/")
         invoice.action_post()
-        error_msg = "You cannot delete an item linked to a posted entry."
+        error_msg = "You can't delete a posted journal item. Don’t play games with your accounting records; reset the journal entry to draft before deleting it."
         with self.assertRaisesRegex(UserError, error_msg):
             invoice.unlink()
         invoice.button_draft()
@@ -309,7 +285,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         )
         self.assertEqual(in_refund_invoice.name, "/")
         in_refund_invoice.action_post()
-        error_msg = "You cannot delete an item linked to a posted entry."
+        error_msg = "You can't delete a posted journal item. Don’t play games with your accounting records; reset the journal entry to draft before deleting it."
         with self.assertRaisesRegex(UserError, error_msg):
             in_refund_invoice.unlink()
         in_refund_invoice.button_draft()

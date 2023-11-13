@@ -75,5 +75,5 @@ class AccountMove(models.Model):
             self.flush_model(["name", "journal_id", "move_type", "state"])
         return super()._fetch_duplicate_supplier_reference(only_posted=only_posted)
 
-    def _get_last_sequence(self, relaxed=False, with_prefix=None, lock=True):
-        return super()._get_last_sequence(relaxed, None, lock)
+    def _get_last_sequence(self, relaxed=False, with_prefix=None):
+        return super()._get_last_sequence(relaxed, None)
