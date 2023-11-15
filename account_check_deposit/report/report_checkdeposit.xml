@@ -79,7 +79,7 @@
                                             >
                                                 <span
                                                     t-field="move_line.debit"
-                                                    t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                                 />
                                             </t>
                                             <t
@@ -87,10 +87,10 @@
                                             >
                                                 <span
                                                     t-field="move_line.amount_currency"
-                                                    t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                                 />
                                             </t>
-                                        </td>
+                                        </td>:
                                     </tr>
                                 </t>
                                 <tr>
@@ -103,7 +103,7 @@
                                         <b>
                                             <span
                                                 t-field="o.total_amount"
-                                                t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                             />
                                         </b>
                                     </td>
