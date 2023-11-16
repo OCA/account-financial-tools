@@ -77,8 +77,8 @@ class TestAccountCostCenter(AccountTestInvoicingCommon):
         self.invoice1 = invoice_form.save()
 
         invoice_lines = self.invoice1.invoice_line_ids
-        self.assertFalse(any(line.cost_center_id for line in invoice_lines))
-        self.assertTrue(any(not line.cost_center_id for line in invoice_lines))
+        self.assertTrue(any(line.cost_center_id for line in invoice_lines))
+        self.assertFalse(any(not line.cost_center_id for line in invoice_lines))
 
     def test_03_confirm_invoice(self):
         invoice_lines = self.invoice2.invoice_line_ids
@@ -96,3 +96,52 @@ class TestAccountCostCenter(AccountTestInvoicingCommon):
         self.assertTrue(result)
         self.assertEqual(result[0], expected_cost_center.id)
         self.assertEqual(result[1], expected_cost_center.name)
+
+    def test_05_default_cost_center_on_lines(self):
+        """The default cost center is selected when creating invoice lines"""
+        # Create an invoice: no default cost center is set
+        invoice = self.env["account.move"].create(
+            {
+                "partner_id": self.env.ref("base.res_partner_2").id,
+                "move_type": "in_invoice",
+            }
+        )
+        self.assertFalse(invoice.cost_center_id)
+
+        # Create an invoice line: no cost center is set
+        invoice_form = Form(invoice)
+        with invoice_form.invoice_line_ids.new() as line:
+            line.name = "Test line1"
+            line.quantity = 1.0
+            line.price_unit = 100.0
+            line.account_id = self.expenses_account
+        invoice_form.save()
+        self.assertEqual(len(invoice.invoice_line_ids), 1)
+        self.assertFalse(invoice.invoice_line_ids.cost_center_id)
+
+        # Set a default cost center on invoice
+        invoice_form = Form(invoice)
+        invoice_form.cost_center_id = self.costcenter
+
+        # Create an invoice line
+        with invoice_form.invoice_line_ids.new() as line:
+            line.name = "Test line2"
+            line.quantity = 2.0
+            line.price_unit = 200.0
+            line.account_id = self.expenses_account
+        invoice_form.save()
+        self.assertEqual(len(invoice.invoice_line_ids), 2)
+
+        # Default cost center is set for new line
+        line_with_cost_center = invoice.invoice_line_ids.filtered(
+            lambda l: l.cost_center_id
+        )
+        self.assertTrue(line_with_cost_center)
+        self.assertEqual(line_with_cost_center.cost_center_id, self.costcenter)
+
+        # Default cost center stays not set for old line
+        line_no_cost_center = invoice.invoice_line_ids.filtered(
+            lambda l: not l.cost_center_id
+        )
+        self.assertTrue(line_no_cost_center)
+        self.assertFalse(line_no_cost_center.cost_center_id)
