@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-21 15:50+0000\n"
+"PO-Revision-Date: 2023-11-21 18:35+0000\n"
 "Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
 "Language-Team: none\n"
 "Language: nl\n"
@@ -28,7 +28,6 @@ msgstr "Configuratie instellingen"
 
 #. module: base_vat_optional_vies
 #: model:ir.model,name:base_vat_optional_vies.model_res_partner
-#, fuzzy
 msgid "Contact"
 msgstr "Contact"
 
