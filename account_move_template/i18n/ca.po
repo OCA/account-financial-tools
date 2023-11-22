@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2023-11-22 13:36+0000\n"
+"Last-Translator: BrunoBailo <bruno.bailo@qubiq.es>\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
@@ -27,68 +28,73 @@ msgid ""
 " 'L2': {'partner_id': 2, 'amount': 200, 'name': 'some label 2'}, }\n"
 "        "
 msgstr ""
+"\n"
+"Diccionari vàlid per sobreescriure les línies de plantilla:\n"
+"{'L1': {'partner_id': 1, 'import': 100, 'name': 'alguna etiqueta'},\n"
+"  'L2': {'partner_id': 2, 'import': 200, 'name': 'alguna etiqueta 2'}, }\n"
+"        "
 
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (copiat)"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "&gt;"
-msgstr ""
+msgstr "&gt;"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "1250"
-msgstr ""
+msgstr "1250"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
 msgid "Account"
-msgstr ""
+msgstr "Compte"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
 msgid "Account if Negative"
-msgstr ""
+msgstr "Compte en cas Negatiu"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
 msgid "Amount"
-msgstr ""
+msgstr "Quantitat"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
 msgid "Analytic"
-msgstr ""
+msgstr "Analític"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution_search
 msgid "Analytic Distribution Search"
-msgstr ""
+msgstr "Cerca de Distribució Analítica"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_precision
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_precision
 msgid "Analytic Precision"
-msgstr ""
+msgstr "Precisió Analítica"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Archived"
-msgstr ""
+msgstr "Arxivat"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -101,30 +107,29 @@ msgstr "Cancel·la"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__company_id
 msgid "Company"
-msgstr ""
+msgstr "Companyia"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_currency_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Moneda de la Companyia"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__computed
 msgid "Computed"
-msgstr ""
+msgstr "Calculat"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_run_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_run_menu
 msgid "Create Entry from Template"
-msgstr ""
+msgstr "Crear Entrada des de Plantilla"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
-#, fuzzy
 msgid "Create Journal Entry"
-msgstr "Creat el"
+msgstr "Creeu Entrada de Diari"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_uid
@@ -146,31 +151,31 @@ msgstr "Creat el"
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__cr
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__cr
 msgid "Credit"
-msgstr ""
+msgstr "Crèdit"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__date
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__dr
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__dr
 msgid "Debit"
-msgstr ""
+msgstr "Dèbit"
 
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Debit and credit of all lines are null."
-msgstr ""
+msgstr "El dèbit i crèdit de totes les línies estàn buits."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__move_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__move_line_type
 msgid "Direction"
-msgstr ""
+msgstr "Direcció"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__display_name
@@ -185,17 +190,17 @@ msgstr "Veure el nom"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Entry from template %s"
-msgstr ""
+msgstr "Entrada des de plantilla %s"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__python_code
 msgid "Formula"
-msgstr ""
+msgstr "Fòrmula"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Generate Journal Entry"
-msgstr ""
+msgstr "Generar Entrada de Diari"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__id
@@ -214,6 +219,9 @@ msgid ""
 "(formula: %(code)s). Check that the lines used in the formula really exists "
 "and have a lower sequence than the current line."
 msgstr ""
+"Impossible calcular la fórmula de la línia amb la seqüència %(sequence)s "
+"(fórmula: %(code)s). Comproveu que les línies utilitzades a la fórmula "
+"existeixen realment i tenen una seqüència inferior a la línia actual."
 
 #. module: account_move_template
 #. odoo-python
@@ -223,6 +231,8 @@ msgid ""
 "Impossible to compute the formula of line with sequence %(sequence)s "
 "(formula: %(code)s): the syntax of the formula is wrong."
 msgstr ""
+"Impossible calcular la fórmula de la línia amb la seqüència %(sequence)s "
+"(fórmula: %(code)s): la sintaxi de la fórmula és incorrecta."
 
 #. module: account_move_template
 #. odoo-python
@@ -232,19 +242,21 @@ msgid ""
 "Invalid dictionary: %(exception)s\n"
 "%(msg)s"
 msgstr ""
+"Diccionari invàlid: %(exception)s\n"
+"%(msg)s"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__is_refund
 msgid "Is a refund?"
-msgstr ""
+msgstr "És un reemborsament?"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__journal_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__journal_id
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal"
-msgstr ""
+msgstr "Diari"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
@@ -252,50 +264,50 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal Entry Template"
-msgstr ""
+msgstr "Plantilla d'Entrada de Diari"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Journal Entry Template Line"
-msgstr ""
+msgstr "Línia de Plantilla d'Entrada del Diari"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_menu
 msgid "Journal Entry Templates"
-msgstr ""
+msgstr "Plantilles d'Entrada de Diari"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "Journal Item Template"
-msgstr ""
+msgstr "Plantilla d'Element de Diari"
 
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Keys must be line sequence i.e. L1, L2, ..."
-msgstr ""
+msgstr "Les claus han de ser seqüències lineals, és a dir: L1, L2, ..."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L1 * 0.2"
-msgstr ""
+msgstr "L1 * 0.2"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L1 + L2 + L3"
-msgstr ""
+msgstr "L1 + L2 + L3"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L2 - L1"
-msgstr ""
+msgstr "L2 - L1"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__name
 msgid "Label"
-msgstr ""
+msgstr "Etiqueta"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
@@ -325,65 +337,64 @@ msgstr "Darrera Actualització el"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__line_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__line_ids
 msgid "Lines"
-msgstr ""
+msgstr "Línies"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__template_id
 msgid "Move Template"
-msgstr ""
+msgstr "Mou la Plantilla"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__name
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Next"
-msgstr ""
+msgstr "Següent"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__note
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__note
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_line_id
 msgid "Originator Tax"
-msgstr ""
+msgstr "Originador d'Impost"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
-#, fuzzy
 msgid "Override Partner"
-msgstr "Empresa"
+msgstr "Anul·lació de Partner"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__overwrite
 msgid "Overwrite"
-msgstr ""
+msgstr "Sobreescriure"
 
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Overwrite value must be a valid python dict"
-msgstr ""
+msgstr "El valor sobreescrit ha de ser un dictat de Python vàlid"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__partner_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__partner_id
 msgid "Partner"
-msgstr "Empresa"
+msgstr "Soci"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__payment_term_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__payment_term_id
 msgid "Payment Terms"
-msgstr ""
+msgstr "Terminis de pagament"
 
 #. module: account_move_template
 #. odoo-python
@@ -391,60 +402,61 @@ msgstr ""
 #, python-format
 msgid "Python Code must be set for computed line with sequence %d."
 msgstr ""
+"El codi Python s'ha d'establir per a la línia calculada amb la seqüència %d."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
 msgid "Reference"
-msgstr ""
+msgstr "Referència"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
 msgid "Select Template"
-msgstr ""
+msgstr "Seleccioneu la Plantilla"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__sequence
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Seqüència"
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__set_lines
 msgid "Set Lines"
-msgstr ""
+msgstr "Creeu Línies"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
 msgid "State"
-msgstr ""
+msgstr "Estat"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_repartition_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_repartition_line_id
 msgid "Tax Repartition Line"
-msgstr ""
+msgstr "Línia de repartiment d'Impostos"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "Impostos"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__template_id
 msgid "Template"
-msgstr ""
+msgstr "Plantilla"
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_line_sequence_template_uniq
 msgid "The sequence of the line must be unique per template!"
-msgstr ""
+msgstr "La seqüència de la línia ha de ser única per plantilla!"
 
 #. module: account_move_template
 #: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_name_company_unique
 msgid "This name is already used by another template!"
-msgstr ""
+msgstr "Aquest nom ja s'utilitza en una altra plantilla!"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__type
@@ -454,39 +466,39 @@ msgstr "Tipus"
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__payment_term_id
 msgid "Used to compute the due date of the journal item."
-msgstr ""
+msgstr "S'utilitza per calcular la data de venciment de l'element del diari."
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
 msgid "User input"
-msgstr ""
+msgstr "Entrada de l'usuari"
 
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Valid fields to overwrite are %s"
-msgstr ""
+msgstr "Els camps vàlids per sobreescriure són %s"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
 msgid "When amount is negative, use this account instead"
-msgstr ""
+msgstr "Quan l'import sigui negatiu, utilitzeu aquest compte"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
 msgid "Wizard"
-msgstr ""
+msgstr "Wizard"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line_run
 msgid "Wizard Lines to generate move from template"
-msgstr ""
+msgstr "Línies del Wizard per generar moviment des de la plantilla"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_run
 msgid "Wizard to generate move from template"
-msgstr ""
+msgstr "Wizard per generar moviment des de la plantilla"
 
 #. module: account_move_template
 #. odoo-python
@@ -497,6 +509,8 @@ msgid ""
 "update the template or modify the journal entry that will be generated by "
 "this wizard."
 msgstr ""
+"Heu afegit una línia al wizard. Això no està permès: haureu d'actualitzar la "
+"plantilla o modificar l'entrada del diari que generarà aquest wizard."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -504,6 +518,8 @@ msgid ""
 "You can refer to other lines using their sequence number e.g. <i>L1</i> for "
 "line with sequence = 1. Examples:"
 msgstr ""
+"Podeu fer referència a altres línies utilitzant el seu número de seqüència, "
+"p. <i>L1</i> per a línia amb seqüència = 1. Exemples:"
 
 #. module: account_move_template
 #. odoo-python
@@ -514,3 +530,5 @@ msgid ""
 "update the template or modify the journal entry that will be generated by "
 "this wizard."
 msgstr ""
+"Heu suprimit una línia del wizard. Això no està permès: haureu d'actualitzar "
+"la plantilla o modificar l'entrada del diari que generarà aquest wizard."
