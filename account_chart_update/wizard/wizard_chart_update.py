@@ -490,7 +490,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     limit=1,
                 )
                 if result:
-                    return result.id
+                    return result
 
         return False
 
