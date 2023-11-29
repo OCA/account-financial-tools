@@ -43,6 +43,7 @@ setuptools.setup(
         'odoo-addon-account_move_template>=15.0dev,<15.1dev',
         'odoo-addon-account_move_total_by_account_internal_group>=15.0dev,<15.1dev',
         'odoo-addon-account_netting>=15.0dev,<15.1dev',
+        'odoo-addon-account_spread_cost_revenue>=15.0dev,<15.1dev',
         'odoo-addon-account_usability>=15.0dev,<15.1dev',
         'odoo-addon-base_vat_optional_vies>=15.0dev,<15.1dev',
         'odoo-addon-product_category_tax>=15.0dev,<15.1dev',
