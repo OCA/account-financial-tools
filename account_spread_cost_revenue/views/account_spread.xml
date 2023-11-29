@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_spread" model="ir.ui.view">
+        <field name="model">account.spread</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="compute_spread_board"
+                        type="object"
+                        string="Recalculate unposted lines"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|',('debit_account_id', '=', False),('display_recompute_buttons', '=', False)]}"
+                    />
+                    <button
+                        name="action_recalculate_spread"
+                        type="object"
+                        string="Recalculate entire spread"
+                        attrs="{'invisible': ['|',('debit_account_id', '=', False),('display_recompute_buttons', '=', False)]}"
+                        groups="account.group_account_manager"
+                    />
+                    <button
+                        name="action_undo_spread"
+                        type="object"
+                        string="Undo spread"
+                        attrs="{'invisible': [('line_ids', '=', [])]}"
+                        groups="account.group_account_manager"
+                    />
+                    <button
+                        name="action_unlink_invoice_line"
+                        type="object"
+                        string="Unlink Invoice Line"
+                        attrs="{'invisible': [('invoice_line_id', '=', False)]}"
+                        groups="account.group_account_manager"
+                    />
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                            name="open_reconcile_view"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            type="object"
+                            string="Reconciled entries"
+                        >
+                        </button>
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <div class="oe_title">
+                        <label for="name" string="Spread Board Name" />
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="e.g. One year offices cleaning contract"
+                            />
+                        </h1>
+                    </div>
+                    <group name="header_info">
+                        <group name="spread_definitions">
+                            <field name="template_id" />
+                            <field
+                                name="invoice_type"
+                                attrs="{'readonly':[('invoice_line_id','!=',False)]}"
+                            />
+                            <field name="display_recompute_buttons" invisible="1" />
+                            <field name="display_move_line_auto_post" invisible="1" />
+                            <field name="all_posted" invisible="1" />
+                            <field name="active" invisible="1" />
+                            <field name="use_invoice_line_account" invisible="1" />
+                        </group>
+                    </group>
+                    <group name="accounts">
+                        <group name="debits">
+                            <field name="is_debit_account_deprecated" invisible="1" />
+                            <label
+                                for="debit_account_id"
+                                colspan="3"
+                                string="Balance sheet account / Spread account"
+                                attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                            />
+                            <label
+                                for="debit_account_id"
+                                colspan="3"
+                                string="Expense account"
+                                attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                            />
+                            <div
+                                attrs="{'invisible': [('use_invoice_line_account', '=', True)]}"
+                                colspan="2"
+                            >
+                                <span
+                                    class="help-block"
+                                    colspan="2"
+                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                >
+                                      The Balance Sheet account used for the spreading.<br
+                                    />This account is the counterpart of the account in the invoice line.
+                                </span>
+                                <span
+                                    class="help-block"
+                                    colspan="2"
+                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                >
+                                      The Expense account in the vendor bill line.<br
+                                    />Usually the same account of the vendor bill line.
+                                </span>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('use_invoice_line_account', '!=', True)]}"
+                                colspan="2"
+                            >
+                                <span
+                                    class="help-block"
+                                    colspan="2"
+                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                >
+                                      The Balance Sheet account.<br
+                                    />This is the account in the invoice line.
+                                </span>
+                                <span
+                                    class="help-block"
+                                    colspan="2"
+                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                >
+                                      The Expense account used for the spreading.<br
+                                    />This account is the counterpart of the account of the vendor bill line.
+                                </span>
+                            </div>
+                            <field
+                                name="debit_account_id"
+                                required="1"
+                                domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
+                                attrs="{'readonly':[('invoice_line_id','!=',False)]}"
+                            />
+                            <span
+                                class="help-block text-danger"
+                                colspan="2"
+                                attrs="{'invisible':[('is_debit_account_deprecated','!=',True)]}"
+                            >
+                                  This account in deprecated! The reconciliation will be NOT possible.
+                            </span>
+                        </group>
+                        <group name="credits">
+                            <field name="is_credit_account_deprecated" invisible="1" />
+                            <label
+                                for="credit_account_id"
+                                colspan="3"
+                                string="Revenue account"
+                                attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                            />
+                            <label
+                                for="credit_account_id"
+                                colspan="3"
+                                string="Balance sheet account / Spread account"
+                                attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                            />
+                            <div
+                                attrs="{'invisible': [('use_invoice_line_account', '=', True)]}"
+                                colspan="2"
+                            >
+                                <span
+                                    class="help-block"
+                                    colspan="2"
+                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                >
+                                      The Revenue account in the invoice line.<br
+                                    />Usually the same account of the invoice line.
+                                </span>
+                                <span
+                                    class="help-block"
+                                    colspan="2"
+                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                >
+                                      The Balance Sheet account used for the spreading.<br
+                                    />This account is the counterpart of the account in the vendor bill line.
+                                </span>
+                            </div>
+                            <div
+                                attrs="{'invisible': [('use_invoice_line_account', '!=', True)]}"
+                                colspan="2"
+                            >
+                                <span
+                                    class="help-block"
+                                    colspan="2"
+                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                >
+                                      The Revenue account used for the spreading.<br
+                                    />This account is the counterpart of the account of the invoice line.
+                                </span>
+                                <span
+                                    class="help-block"
+                                    colspan="2"
+                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                >
+                                      The Balance Sheet account.<br
+                                    />This is the account in the vendor bill line.
+                                </span>
+                            </div>
+                            <field
+                                name="credit_account_id"
+                                required="1"
+                                domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
+                                attrs="{'readonly':[('invoice_line_id','!=',False)]}"
+                            />
+                            <span
+                                class="help-block text-danger"
+                                colspan="2"
+                                attrs="{'invisible':[('is_credit_account_deprecated','!=',True)]}"
+                            >
+                                  This account in deprecated! The reconciliation will be NOT possible.
+                            </span>
+                        </group>
+                    </group>
+                    <group name="main_info">
+                        <group>
+                            <field
+                                name="invoice_id"
+                                attrs="{'invisible':[('invoice_id','=',False)]}"
+                            />
+                            <field
+                                name="invoice_line_id"
+                                readonly="1"
+                                attrs="{'invisible':[('invoice_line_id','=',False)]}"
+                            />
+                            <field
+                                name="estimated_amount"
+                                attrs="{'readonly':[('invoice_line_id','!=',False)],'invisible':[('estimated_amount','=',0.0),('invoice_line_id','!=',False)]}"
+                            />
+                            <field
+                                name="total_amount"
+                                attrs="{'invisible':[('invoice_line_id','=',False)]}"
+                            />
+                            <field
+                                name="move_line_auto_post"
+                                attrs="{'invisible':[('display_move_line_auto_post','=',False)]}"
+                            />
+                        </group>
+                        <group>
+                            <field name="period_number" />
+                            <field name="period_type" />
+                            <field name="spread_date" />
+                            <field
+                                name="journal_id"
+                                domain="[('company_id', '=', company_id)]"
+                                widget="selection"
+                            />
+                            <field name="days_calc" />
+                        </group>
+                    </group>
+                    <notebook name="notebook">
+                        <page name="spread_lines" string="Spread lines">
+                            <field name="line_ids" readonly="1">
+                                <tree>
+                                    <field name="name" readonly="1" />
+                                    <field
+                                        name="amount"
+                                        attrs="{'readonly':[('move_id','!=',False)]}"
+                                        sum="Total"
+                                    />
+                                    <field name="date" readonly="1" />
+                                    <field name="move_id" readonly="1" />
+                                    <button
+                                        name="create_move"
+                                        icon="fa-play"
+                                        string="Create Move"
+                                        type="object"
+                                        groups="account.group_account_manager"
+                                        attrs="{'invisible':[('move_id','!=',False)]}"
+                                    />
+                                    <button
+                                        name="open_move"
+                                        icon="fa-plus-square-o"
+                                        string="View Move"
+                                        type="object"
+                                        attrs="{'invisible':[('move_id','=',False)]}"
+                                    />
+                                    <button
+                                        name="unlink_move"
+                                        icon="fa-times"
+                                        string="Delete Move"
+                                        type="object"
+                                        confirm="This will delete the move. Are you sure ?"
+                                        groups="account.group_account_manager"
+                                        attrs="{'invisible':[('move_id','=',False)]}"
+                                    />
+                                </tree>
+                            </field>
+                            <group name="extension">
+                                <group name="extension_left">
+                                </group>
+                                <group name="extension_right">
+                                    <field
+                                        name="display_create_all_moves"
+                                        invisible="1"
+                                    />
+                                    <button
+                                        name="create_all_moves"
+                                        string="Create All Moves"
+                                        type="object"
+                                        icon="fa-play"
+                                        attrs="{'invisible':[('display_create_all_moves','!=',True)]}"
+                                    />
+                                    <field
+                                        name="unspread_amount"
+                                        attrs="{'invisible': [('unspread_amount', '=', 0)]}"
+                                    />
+                                    <field
+                                        name="unposted_amount"
+                                        attrs="{'invisible': [('unposted_amount', '=', 0)]}"
+                                    />
+                                    <field
+                                        name="posted_amount"
+                                        attrs="{'invisible': [('posted_amount', '=', 0)]}"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="details" string="Details">
+                            <group name="extra_details">
+                                <group>
+                                    <field
+                                        name="company_id"
+                                        groups="base.group_multi_company"
+                                        options="{'no_create': True}"
+                                    />
+                                    <field
+                                        name="currency_id"
+                                        groups="base.group_multi_currency"
+                                    />
+                                </group>
+                                <group>
+                                    <field
+                                        name="account_analytic_id"
+                                        domain="[('company_id', '=', company_id)]"
+                                        groups="analytic.group_analytic_accounting"
+                                        options="{'no_create': True}"
+                                    />
+                                    <field
+                                        name="analytic_tag_ids"
+                                        groups="analytic.group_analytic_accounting"
+                                        widget="many2many_tags"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_account_spread_account_manager" model="ir.ui.view">
+        <field name="model">account.spread</field>
+        <field name="inherit_id" ref="view_account_spread" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]" />
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="editable">1</attribute>
+            </tree>
+            <field name="amount" position="attributes">
+                <attribute name="readonly" />
+            </field>
+            <field name="line_ids" position="attributes">
+                <attribute name="readonly" />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_spread_tree" model="ir.ui.view">
+        <field name="model">account.spread</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_account_spread_search" model="ir.ui.view">
+        <field name="model">account.spread</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Spread" />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="action_account_spread_form" model="ir.actions.act_window">
+        <field name="name">Spread Costs/Revenues</field>
+        <field name="res_model">account.spread</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_account_spread_tree" />
+    </record>
+    <menuitem
+        id="menu_action_account_spread_form"
+        parent="account.menu_finance_entries_accounting_miscellaneous"
+        action="action_account_spread_form"
+        groups="account.group_account_user,account.group_account_manager"
+    />
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="ir_cron_spread_create_entries" forcecreate="True" model="ir.cron">
+        <field name="name">Cost/revenue Spread: Create Entries</field>
+        <field name="active" eval="True" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="model_id" ref="model_account_spread_line" />
+        <field name="state">code</field>
+        <field name="code">model._create_entries()</field>
+    </record>
+</odoo>
