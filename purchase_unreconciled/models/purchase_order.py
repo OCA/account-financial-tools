@@ -39,9 +39,9 @@ class PurchaseOrder(models.Model):
             ("account_id.internal_type", "not in", ["receivable", "payable"]),
             ("move_id.state", "=", "posted"),
             ("company_id", "in", self.env.companies.ids),
-            # for some reason when amount_residual is zero
-            # is marked as reconciled, this is better check
+            # same condition than Odoo Unreconciled filter
             ("full_reconcile_id", "=", False),
+            ("balance", "!=", 0.0),
         ]
         return unreconciled_domain
 
