@@ -24,6 +24,9 @@ class AccountLoan(models.Model):
     def _default_company(self):
         return self.env.company
 
+    def _get_default_currency_id(self):
+        return self.env.company.currency_id.id
+
     name = fields.Char(
         copy=False,
         required=True,
@@ -161,9 +164,7 @@ class AccountLoan(models.Model):
         help="When checked, the first payment will be on start date",
     )
     currency_id = fields.Many2one(
-        "res.currency",
-        compute="_compute_currency",
-        readonly=True,
+        "res.currency", required=True, default=_get_default_currency_id
     )
     journal_type = fields.Char(compute="_compute_journal_type")
     journal_id = fields.Many2one(
@@ -313,11 +314,6 @@ class AccountLoan(models.Model):
 
     def loan_rate(self):
         return self.compute_rate(self.rate, self.rate_type, self.method_period)
-
-    @api.depends("journal_id", "company_id")
-    def _compute_currency(self):
-        for rec in self:
-            rec.currency_id = rec.journal_id.currency_id or rec.company_id.currency_id
 
     @api.depends("is_leasing")
     def _compute_journal_type(self):
