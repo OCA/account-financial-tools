@@ -9,13 +9,13 @@
                     <group id="links">
                         <label
                             for="account_ids"
-                            attrs="{'invisible':[('applicability','!=', 'accounts')]}"
+                            invisible="applicability != 'accounts'"
                         />
                         <field
                             name="account_ids"
                             widget="many2many_tags"
                             nolabel="1"
-                            attrs="{'invisible':[('applicability','!=', 'accounts')]}"
+                            invisible="applicability != 'accounts'"
                             options="{'no_create_edit': True}"
                         />
                     </group>
