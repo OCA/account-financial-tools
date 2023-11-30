@@ -738,9 +738,8 @@ class AccountAsset(models.Model):
                         line = table[table_i_start]["lines"][line_i_start]
                         line["days"] = 0
                         line["amount"] = amount_diff
-                    # compensate in first depreciation entry
-                    # after last posting
-                    line = table[table_i_start]["lines"][line_i_start]
+                    # compensate in last depreciation entry
+                    line = table[-1]["lines"][-1]
                     line["amount"] -= amount_diff
 
             else:  # no posted lines
