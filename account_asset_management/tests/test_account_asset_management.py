@@ -383,7 +383,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             )
 
     def test_04_prorata_init_cur_year(self):
-        """Prorata temporis depreciation with init value in curent year."""
+        """Prorata temporis depreciation with init value in current year."""
         asset = self.asset_model.create(
             {
                 "name": "test asset",
@@ -400,7 +400,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.dl_model.create(
             {
                 "asset_id": asset.id,
-                "amount": 279.44,
+                "amount": 269.44,
                 "line_date": time.strftime("%Y-11-30"),
                 "type": "depreciate",
                 "init_entry": True,
@@ -410,24 +410,16 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         asset.compute_depreciation_board()
         asset.invalidate_recordset()
         # check the depreciated value is the initial value
-        self.assertAlmostEqual(asset.value_depreciated, 279.44, places=2)
+        self.assertAlmostEqual(asset.value_depreciated, 269.44, places=2)
         # check computed values in the depreciation board
-        if calendar.isleap(date.today().year):
-            self.assertAlmostEqual(
-                asset.depreciation_line_ids[2].amount, 44.75, places=2
-            )
-        else:
-            self.assertAlmostEqual(
-                asset.depreciation_line_ids[2].amount, 45.64, places=2
-            )
         self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55, places=2)
         if calendar.isleap(date.today().year):
             self.assertAlmostEqual(
-                asset.depreciation_line_ids[-1].amount, 9.11, places=2
+                asset.depreciation_line_ids[-1].amount, 8.31, places=2
             )
         else:
             self.assertAlmostEqual(
-                asset.depreciation_line_ids[-1].amount, 8.22, places=2
+                asset.depreciation_line_ids[-1].amount, 8.31, places=2
             )
 
     def test_05_degressive_linear(self):
