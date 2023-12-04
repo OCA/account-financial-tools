@@ -1248,15 +1248,14 @@ class AccountAsset(models.Model):
             try:
                 with self.env.cr.savepoint():
                     result += depreciation.create_move()
-            except Exception:
-                e = exc_info()[0]
+            except Exception as e:
                 tb = "".join(format_exception(*exc_info()))
                 asset_ref = depreciation.asset_id.name
                 if depreciation.asset_id.code:
                     asset_ref = "[{}] {}".format(depreciation.asset_id.code, asset_ref)
                 error_log += _("\nError while processing asset '%s': %s") % (
                     asset_ref,
-                    str(e),
+                    repr(e),
                 )
                 error_msg = _("Error while processing asset '%s': \n\n%s") % (
                     asset_ref,
