@@ -26,6 +26,7 @@ class TestAccountPartnerRequired(common.TransactionCase):
             }
         )
         liq_acc_type = self.env.ref("account.data_account_type_liquidity")
+        liq_acc_type.partner_policy = "optional"
         self.account1 = self.account_obj.create(
             {
                 "code": "124242",
@@ -38,6 +39,7 @@ class TestAccountPartnerRequired(common.TransactionCase):
                 "name": "acc type test",
                 "type": "other",
                 "partner_policy": "optional",
+                "internal_group": "asset",
             }
         )
         self.account2 = self.account_obj.create(
