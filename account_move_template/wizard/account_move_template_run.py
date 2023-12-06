@@ -160,7 +160,7 @@ Valid dictionary to overwrite template lines:
     def _overwrite_line(self, overwrite_vals):
         self.ensure_one()
         for line in self.line_ids:
-            vals = overwrite_vals.get("L{}".format(line.sequence), {})
+            vals = overwrite_vals.get(f"L{line.sequence}", {})
             safe_vals = self._safe_vals(line._name, vals)
             line.write(safe_vals)
 
@@ -239,7 +239,7 @@ Valid dictionary to overwrite template lines:
             ]
         # With overwrite options
         overwrite = self._context.get("overwrite", {})
-        move_line_vals = overwrite.get("L{}".format(line.sequence), {})
+        move_line_vals = overwrite.get(f"L{line.sequence}", {})
         values.update(move_line_vals)
         # Use optional account, when amount is negative
         self._update_account_on_negative(line, values)

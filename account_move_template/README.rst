@@ -17,46 +17,50 @@ Account Move Template
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/16.0/account_move_template
+    :target: https://github.com/OCA/account-financial-tools/tree/17.0/account_move_template
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_move_template
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-17-0/account-financial-tools-17-0-account_move_template
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-The user can configure journal entries templates, useful for recurring entries.
-The amount of each template line can be computed (through python code)
-or kept as user input.
+The user can configure journal entries templates, useful for recurring
+entries. The amount of each template line can be computed (through
+python code) or kept as user input.
 
-If user input, when using the template, user has to fill
-the amount of every input lines.
+If user input, when using the template, user has to fill the amount of
+every input lines.
 
-The journal entry form allows lo load, through a wizard,
-the template to use and the amounts to fill.
+The journal entry form allows lo load, through a wizard, the template to
+use and the amounts to fill.
 
 **Notable features:**
 
-This module enhance the capability of module account_move_template with following features,
+This module enhance the capability of module account_move_template with
+following features,
 
-#. Optional account for negative amount.
+1. Optional account for negative amount.
 
-    When the Journal entry is created, and credit/debit is negative value, change debit/credit
-    side and use the opt_account_id
+      When the Journal entry is created, and credit/debit is negative
+      value, change debit/credit side and use the opt_account_id
 
-#. Allow overwrite move line values with overwrite dict.
+2. Allow overwrite move line values with overwrite dict.
 
-    Normally, the journal items created by the template will require user input on wizard.
-    This feature allow passing the overwrite values with a dictionary.
-    This is particularly useful when the wizard is called by code.
+      Normally, the journal items created by the template will require
+      user input on wizard. This feature allow passing the overwrite
+      values with a dictionary. This is particularly useful when the
+      wizard is called by code.
 
-    Sample of dictionary to overwrite move lines::
+      Sample of dictionary to overwrite move lines:
 
-      {'L1': {'partner_id': 1, 'amount': 100, 'name': 'some label'},
-       'L2': {'partner_id': 2, 'amount': 200, 'name': 'some label 2'}, }
+      ::
+
+         {'L1': {'partner_id': 1, 'amount': 100, 'name': 'some label'},
+          'L2': {'partner_id': 2, 'amount': 200, 'name': 'some label 2'}, }
 
 **Table of contents**
 
@@ -68,17 +72,19 @@ Usage
 
 To create new templates:
 
-#. Make sure that you have flagged *Show Full Accounting Features* on your
-   user, and that the user belongs to the *Billing Manager* group.
-#. Go to *Invoicing / Configuration / Accounting / Journal Entry Templates* and
-   define there your templates. You can choose to complete a line using a
-   defined formula, based on other lines, or by requiring user input.
+1. Make sure that you have flagged *Show Full Accounting Features* on
+   your user, and that the user belongs to the *Billing Manager* group.
+2. Go to *Invoicing / Configuration / Accounting / Journal Entry
+   Templates* and define there your templates. You can choose to
+   complete a line using a defined formula, based on other lines, or by
+   requiring user input.
 
 To use an existing template:
 
-#. Go to *Invoicing / Accounting / Actions / Create Entry from Template*
-#. Select one of the available templates.
-#. Complete the entries according to the template and click on the button *Generate Journal Entry*.
+1. Go to *Invoicing / Accounting / Actions / Create Entry from Template*
+2. Select one of the available templates.
+3. Complete the entries according to the template and click on the
+   button *Generate Journal Entry*.
 
 Bug Tracker
 ===========
@@ -86,7 +92,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_move_template%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_move_template%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -94,7 +100,7 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Agile Business Group
 * Aurium Technologies
@@ -103,38 +109,40 @@ Authors
 * Akretion
 
 Contributors
-~~~~~~~~~~~~
+------------
 
 Module Authors
---------------
+~~~~~~~~~~~~~~
 
-* Davide Corio <davide.corio@agilebg.com>
-* Lorenzo Battistini <lorenzo.battistini@agilebg.com>
-* Paolo Chiara <p.chiara@isa.it>
-* Franco Tampieri <franco.tampieri@agilebg.com>
-* Alexis de Lattre <alexis.delattre@akretion.com> (full re-write for v12)
+-  Davide Corio <davide.corio@agilebg.com>
+-  Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+-  Paolo Chiara <p.chiara@isa.it>
+-  Franco Tampieri <franco.tampieri@agilebg.com>
+-  Alexis de Lattre <alexis.delattre@akretion.com> (full re-write for
+   v12)
 
 Module Contributors
--------------------
+~~~~~~~~~~~~~~~~~~~
 
-* Jalal ZAHID <j.zahid@auriumtechnologies.com>  (port to v10)
-* Alex Comba <alex.comba@agilebg.com> (Port to V8)
-* Guewen Baconnier <guewen.baconnier@camptocamp.com>
-* Raf Ven <raf.ven@dynapps.be>  (port to v11)
-* Jordi Ballester <jordi.ballester@forgeflow.com> (ForgeFlow)
-* `Sygel <https://www.sygel.es>`_:
+-  Jalal ZAHID <j.zahid@auriumtechnologies.com> (port to v10)
+-  Alex Comba <alex.comba@agilebg.com> (Port to V8)
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  Raf Ven <raf.ven@dynapps.be> (port to v11)
+-  Jordi Ballester <jordi.ballester@forgeflow.com> (ForgeFlow)
+-  `Sygel <https://www.sygel.es>`__:
 
-  * Harald Panten <harald.panten@sygel.es>
-  * Valentin Vinagre <valentin.vinagre@sygel.es>
-  * Manuel Regidor <manuel.regidor@sygel.es>
+   -  Harald Panten <harald.panten@sygel.es>
+   -  Valentin Vinagre <valentin.vinagre@sygel.es>
+   -  Manuel Regidor <manuel.regidor@sygel.es>
 
-* `Ecosoft <http://ecosoft.co.th>`_:
+-  `Ecosoft <http://ecosoft.co.th>`__:
 
-  * Kitti U. <kittiu@ecosoft.co.th> (Add context overwrite)
-* Abraham Anes <abrahamanes@gmail.com>
+   -  Kitti U. <kittiu@ecosoft.co.th> (Add context overwrite)
+
+-  Abraham Anes <abrahamanes@gmail.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -146,6 +154,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/16.0/account_move_template>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/17.0/account_move_template>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
