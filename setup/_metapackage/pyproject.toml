@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-account-financial-tools"
-version = "17.0.20231205.0"
+version = "17.0.20231207.0"
 dependencies = [
     "odoo-addon-account_move_print>=17.0dev,<17.1dev",
+    "odoo-addon-account_move_template>=17.0dev,<17.1dev",
 ]
 classifiers=[
     "Programming Language :: Python",
