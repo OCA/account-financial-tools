@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2022-05-18 20:05+0000\n"
+"PO-Revision-Date: 2023-12-10 16:34+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
-"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
-"teams/23907/es_AR/)\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/"
+"23907/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
@@ -33,7 +33,7 @@ msgstr "<span class=\"o_form_label\">Actualizar Plantilla de Gráfico</span>"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_ids
 msgid "Account Groups"
-msgstr ""
+msgstr "Grupos de Cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
@@ -43,33 +43,35 @@ msgstr "Campos de contabilidad"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__account_group_id
 msgid "Account group template"
-msgstr ""
+msgstr "Plantilla de grupo de cuentas"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account_group
 msgid ""
 "Account group that needs to be updated (new or updated in the template)."
 msgstr ""
+"Grupo de cuentas que necesita ser actualizado (nuevo o actualizado en la "
+"plantilla)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_account_group_id
 msgid "Account group to update"
-msgstr ""
+msgstr "Grupo de cuentas a actualizar"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Account groups"
-msgstr ""
+msgstr "Grupos de cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_field_ids
 msgid "Account groups fields"
-msgstr ""
+msgstr "Campos de grupos de cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_matching_ids
 msgid "Account groups matching"
-msgstr ""
+msgstr "Coincidencia de grupos de cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__account_id
@@ -131,7 +133,7 @@ msgstr "Configuración"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__continue_on_errors
 msgid "Continue On Errors"
-msgstr ""
+msgstr "Continuar Con Errores"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -250,6 +252,8 @@ msgid ""
 "Existing account groups are updated. Account groups are searched by "
 "prefix_code_start."
 msgstr ""
+"Los grupos de cuentas existentes se actualizan. Los grupos de cuentas se "
+"buscan por prefix_code_start."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account
@@ -477,17 +481,17 @@ msgstr "Nombre o descripción no encontrada."
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_account_groups
 msgid "New Account Groups"
-msgstr ""
+msgstr "Nuevos Grupos de Cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
 msgid "New Accounts"
-msgstr ""
+msgstr "Nuevas Cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
 msgid "New Taxes"
-msgstr ""
+msgstr "Nuevos Impuestos"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_fps
@@ -729,7 +733,7 @@ msgstr "Actualizar Impuestos, posiciones fiscales o gráficos de cuentas."
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
 msgid "Update account groups"
-msgstr ""
+msgstr "Actualizar grupos de cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
@@ -790,17 +794,17 @@ msgstr "Actualizar impuestos"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_account_groups
 msgid "Updated Account Groups"
-msgstr ""
+msgstr "Grupos de Cuentas Actualizados"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
 msgid "Updated Accounts"
-msgstr ""
+msgstr "Cuentas Actualizadas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
 msgid "Updated Taxes"
-msgstr ""
+msgstr "Impuestos Actualizados"
 
 #. module: account_chart_update
 #. odoo-python
@@ -821,14 +825,14 @@ msgstr "Cuenta %s actualizada. (XML-ID Recreado)"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account group %s."
-msgstr ""
+msgstr "Grupo de cuentas actualizado %s."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account group %s. (Recreated XML-ID)"
-msgstr ""
+msgstr "Grupo de cuentas actualizado %s. (XML-ID Recreado)"
 
 #. module: account_chart_update
 #. odoo-python
@@ -874,7 +878,7 @@ msgstr "Plantilla actualizada"
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_group_matching
 msgid "Wizard Account Group Matching"
-msgstr ""
+msgstr "Asistente de Coincidencias de Grupo de Cuentas"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_matching
