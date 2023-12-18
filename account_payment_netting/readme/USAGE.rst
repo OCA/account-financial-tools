@@ -6,4 +6,4 @@ and user decide to make payment on the diff.
 - Click on action "Register Payment", the wizard will show the diff amount
 - Make payment as normal
 
-This create Customer Payment if AR > AP, Supplier Payment otherwise.
+This create Customer Payment if AR > AP, Vendor Payment otherwise.

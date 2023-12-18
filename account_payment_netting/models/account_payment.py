@@ -1,108 +1,148 @@
 # Copyright 2019 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
-
-
-class AccountAbstractPayment(models.AbstractModel):
-    _inherit = "account.abstract.payment"
-
-    netting = fields.Boolean(
-        string="Netting",
-        help="Technical field, as user select invoice that are both AR and AP",
-    )
-
-    @api.model
-    def default_get(self, fields):
-        rec = super().default_get(fields)
-        if not rec.get("multi"):
-            return rec
-        active_ids = self._context.get("active_ids")
-        invoices = self.env["account.invoice"].browse(active_ids)
-        types = invoices.mapped("type")
-        ap = any({"in_invoice", "in_refund"}.intersection(types))
-        ar = any({"out_invoice", "out_refund"}.intersection(types))
-        if ap and ar:  # Both AP and AR -> Netting
-            rec.update(
-                {
-                    "netting": True,
-                    "multi": False,  # With netting, allow edit amount
-                    "communication": ", ".join(invoices.mapped("number")),
-                }
-            )
-        return rec
-
-    def _compute_journal_domain_and_types(self):
-        if not self.netting:
-            return super()._compute_journal_domain_and_types()
-        # For case netting, it is possible to have net amount = 0.0
-        # without forcing new journal type and payment diff handling
-        domain = []
-        if self.payment_type == "inbound":
-            domain.append(("at_least_one_inbound", "=", True))
-        else:
-            domain.append(("at_least_one_outbound", "=", True))
-        return {"domain": domain, "journal_types": {"bank", "cash"}}
-
-
-class AccountRegisterPayments(models.TransientModel):
-    _inherit = "account.register.payments"
-
-    @api.multi
-    def get_payments_vals(self):
-        """When doing netting, combine all invoices"""
-        if self.netting:
-            return [self._prepare_payment_vals(self.invoice_ids)]
-        return super().get_payments_vals()
-
-    @api.multi
-    def _prepare_payment_vals(self, invoices):
-        """When doing netting, partner_type follow payment type"""
-        values = super()._prepare_payment_vals(invoices)
-        if self.netting:
-            values["netting"] = self.netting
-            values["communication"] = self.communication
-            if self.payment_type == "inbound":
-                values["partner_type"] = "customer"
-            elif self.payment_type == "outbound":
-                values["partner_type"] = "supplier"
-        return values
-
-    @api.multi
-    def create_payments(self):
-        if self.netting:
-            self._validate_invoice_netting(self.invoice_ids)
-        return super().create_payments()
-
-    @api.model
-    def _validate_invoice_netting(self, invoices):
-        """Ensure valid selection of invoice for netting process"""
-        # All invoice must be of the same partner
-        if len(invoices.mapped("commercial_partner_id")) > 1:
-            raise UserError(_("All invoices must belong to same partner"))
-        # All invoice must have residual
-        paid_invoices = invoices.filtered(lambda l: not l.residual)
-        if paid_invoices:
-            raise UserError(
-                _("Some selected invoices are already paid: %s")
-                % paid_invoices.mapped("number")
-            )
+from odoo import fields, models
 
 
 class AccountPayments(models.Model):
     _inherit = "account.payment"
 
-    @api.one
-    @api.depends("invoice_ids", "payment_type", "partner_type", "partner_id")
-    def _compute_destination_account_id(self):
-        super()._compute_destination_account_id()
-        if self.netting:
-            if self.partner_type == "customer":
-                self.destination_account_id = (
-                    self.partner_id.property_account_receivable_id.id
+    netting = fields.Boolean(
+        readonly=True,
+        help="Technical field, as user select invoice that are both AR and AP",
+    )
+
+    def _synchronize_from_moves(self, changed_fields):
+        if self.env.context.get("netting"):
+            self = self.with_context(skip_account_move_synchronization=1)
+        return super()._synchronize_from_moves(changed_fields)
+
+    def _get_move_line_vals_netting(
+        self, name, date, remaining_amount_currency, currency, account
+    ):
+        return [
+            {
+                "name": name,
+                "date_maturity": date,
+                "amount_currency": remaining_amount_currency,
+                "currency_id": currency.id,
+                "partner_id": self.partner_id.id,
+                "account_id": account.id,
+            }
+        ]
+
+    def _prepare_move_line_default_vals(self, write_off_line_vals=None):
+        self.ensure_one()
+        if self.env.context.get("netting"):
+            domain = [
+                ("move_id", "in", self.env.context.get("active_ids", [])),
+                ("account_type", "in", ["asset_receivable", "liability_payable"]),
+                ("reconciled", "=", False),
+            ]
+            # Sort by amount
+            # Inbound: AR > AP; loop AP first
+            # Outbound: AP > AR; loop AR first
+            ml_reconciled = self.env["account.move.line"].search(domain)
+            if self.payment_type == "inbound":
+                move_lines = sorted(
+                    ml_reconciled, key=lambda k: (k.move_type, k.amount_residual)
                 )
             else:
-                self.destination_account_id = (
-                    self.partner_id.property_account_payable_id.id
+                move_lines = sorted(
+                    ml_reconciled,
+                    key=lambda k: (k.move_type, -abs(k.amount_residual)),
+                    reverse=True,
                 )
+
+            line_vals_list = []
+            liquidity_amount_currency = self.amount
+            remaining_amount_currency = 0.0
+            current_move_type = False
+
+            # Write-off
+            write_off_line_vals = write_off_line_vals or []
+
+            for i, line in enumerate(move_lines):
+                # AR > AP but line is AP, change sign to positive
+                sign = (
+                    1
+                    if self.payment_type == "outbound"
+                    and line.move_type == "in_invoice"
+                    else -1
+                )
+                amount_residual_currency = line.amount_residual_currency
+                # Last line
+                if (
+                    liquidity_amount_currency
+                    and i == len(move_lines) - 1
+                    and not write_off_line_vals
+                ):
+                    # For case netting with 1 move type
+                    if (
+                        liquidity_amount_currency > abs(amount_residual_currency)
+                        and remaining_amount_currency <= amount_residual_currency
+                    ):
+                        amount_total_currency = abs(amount_residual_currency)
+                    else:
+                        amount_total_currency = liquidity_amount_currency + abs(
+                            remaining_amount_currency
+                        )
+                    line_vals_list += self._get_move_line_vals_netting(
+                        line.move_id.name,
+                        self.date,
+                        sign * amount_total_currency,
+                        line.currency_id,
+                        line.account_id,
+                    )
+                    break
+                # Check if move_type is changed
+                if current_move_type and current_move_type != line.move_type:
+                    # Get min amount from remaining_amount_currency and amount_residual_currency
+                    if not write_off_line_vals:
+                        amount_remaining = min(
+                            abs(remaining_amount_currency),
+                            abs(amount_residual_currency),
+                        )
+                    else:
+                        amount_remaining = abs(amount_residual_currency)
+
+                    # No create lines if amount_remaining is 0
+                    if not amount_remaining:
+                        continue
+
+                    # AR > AP but line is AP, change sign to positive
+                    line_vals_list += self._get_move_line_vals_netting(
+                        line.move_id.name,
+                        self.date,
+                        sign * amount_remaining,
+                        line.currency_id,
+                        line.account_id,
+                    )
+                    remaining_amount_currency = abs(remaining_amount_currency) - abs(
+                        amount_remaining
+                    )
+                # First line or same move_type
+                else:
+                    current_move_type = line.move_type
+                    line_vals_list += self._get_move_line_vals_netting(
+                        line.move_id.name,
+                        self.date,
+                        -1 * amount_residual_currency,
+                        line.currency_id,
+                        line.account_id,
+                    )
+                    remaining_amount_currency += amount_residual_currency
+
+            # Liquidity line.
+            if liquidity_amount_currency:
+                line_vals_list += self._get_move_line_vals_netting(
+                    self.ref,
+                    self.date,
+                    liquidity_amount_currency
+                    if self.payment_type == "inbound"
+                    else -liquidity_amount_currency,
+                    self.currency_id,
+                    self.outstanding_account_id,
+                )
+            return line_vals_list + write_off_line_vals
+        return super()._prepare_move_line_default_vals(write_off_line_vals)
