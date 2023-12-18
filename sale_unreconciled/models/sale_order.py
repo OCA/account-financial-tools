@@ -233,6 +233,19 @@ class SaleOrder(models.Model):
             else:
                 return super(SaleOrder, rec).action_done()
 
+    def action_cancel(self):
+        for rec in self:
+            if rec.reconcile_criteria():
+                exception_msg = rec.unreconciled_exception_msg()
+                if exception_msg:
+                    res = rec.sale_unreconciled_exception(exception_msg)
+                    return res
+                else:
+                    rec.action_reconcile()
+                    return super(SaleOrder, rec).action_cancel()
+            else:
+                return super(SaleOrder, rec).action_cancel()
+
     def sale_unreconciled_exception(self, exception_msg=None):
         """This mean to be run when the SO cannot be reconciled because it is over
         tolerance"""

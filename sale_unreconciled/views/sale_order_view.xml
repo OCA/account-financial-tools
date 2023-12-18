@@ -34,11 +34,28 @@
         </field>
     </record>
     <record id="sale_order_view_search_inherit_sale" model="ir.ui.view">
-        <field name="name">sale.quotation.select - sale_unreconciled</field>
+        <field name="name">sale.order.select - sale_unreconciled</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale" />
         <field name="arch" type="xml">
             <filter name="my_sale_orders_filter" position="after">
+                <filter
+                    name="unreconciled"
+                    string="Unreconciled"
+                    domain="[('unreconciled','=', True)]"
+                    groups="account.group_account_manager"
+                    help="sale orders with unreconciled journal items."
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="sale_order_view_search_unreconciled" model="ir.ui.view">
+        <field name="name">sale.quotation.select - sale_unreconciled</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation" />
+        <field name="arch" type="xml">
+            <filter name="sales" position="after">
                 <filter
                     name="unreconciled"
                     string="Unreconciled"
