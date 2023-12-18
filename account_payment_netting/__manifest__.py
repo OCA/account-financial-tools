@@ -3,18 +3,17 @@
 
 {
     "name": "Account Payment Netting",
-    "version": "12.0.1.0.1",
+    "version": "16.0.1.0.0",
     "summary": "Net Payment on AR/AP invoice from the same partner",
     "category": "Accounting & Finance",
-    "author": "Ecosoft, " "Odoo Community Association (OCA)",
+    "author": "Ecosoft, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-financial-tools",
-    "depends": [
-        "account",
-    ],
+    "depends": ["account"],
     "data": [
-        "views/account_invoice_view.xml",
+        "views/account_move_view.xml",
         "views/account_payment_view.xml",
+        "wizards/account_payment_register_views.xml",
     ],
     "installable": True,
     "development_status": "Beta",
