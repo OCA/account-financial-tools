@@ -530,3 +530,26 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         )
         self.assertEqual(sum(ji_s1.mapped("balance")), 0.0)
         self.assertEqual(sum(ji_s2.mapped("balance")), 0.0)
+
+    def test_09_reconcile_when_cancelled(self):
+        """
+        Create a write-off when cancelled
+        """
+        self.product_to_reconcile.write({"invoice_policy": "order"})
+        so = self._create_sale([(self.product_to_reconcile, 1)])
+        so.company_id.sale_reconcile_account_id = self.writeoff_acc
+        so.with_context(force_confirm_sale_order=True).action_confirm()
+        # Create invoices to force discrepancy
+        so._create_invoices()
+        so.invoice_ids.action_post()
+        # cancel, it should reconcile
+        so.action_cancel()
+        # Check if all the journals are balanced by product
+        ji_s1 = self.env["account.move.line"].search(
+            [
+                ("sale_order_id", "=", so.id),
+                ("product_id", "=", self.product_to_reconcile.id),
+                ("account_id", "=", self.account_gdni.id),
+            ]
+        )
+        self.assertEqual(sum(ji_s1.mapped("balance")), 0.0)
