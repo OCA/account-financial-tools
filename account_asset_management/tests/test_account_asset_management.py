@@ -955,3 +955,34 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         last_line.create_move()
         self.assertEqual(asset.value_residual, 0)
         self.assertEqual(asset.state, "close")
+
+    def test_21_import_depreciated_value(self):
+        """
+        Create Asset whereby value already depreciated outside Odoo is added to the
+        first init entry via parameters import_depreciated_value and
+        import_depreciated_value.
+        """
+        # Create an asset in current year
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": self.ict3Y.id,
+                "purchase_value": 3000,
+                "salvage_value": 0,
+                "date_start": "%d-07-01" % (datetime.now().year - 2),
+                "import_depreciated_value": 1500,
+                "import_depreciated_date": "%d-12-31" % (datetime.now().year - 1),
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "month",
+                "prorata": True,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        lines = asset.depreciation_line_ids.filtered(lambda r: r.type == "depreciate")
+        self.assertEqual(len(lines), 19)
+        # only 1 init line has been created with import_depreciated_value
+        init_line = lines.filtered(lambda r: r.init_entry)
+        self.assertEqual(len(init_line), 1)
+        self.assertEqual(asset.value_depreciated, 1500)

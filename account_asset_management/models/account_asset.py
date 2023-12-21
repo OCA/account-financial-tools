@@ -71,6 +71,19 @@ class AccountAsset(models.Model):
         "its sale at the end of its useful life.\n"
         "This value is used to determine the depreciation amounts.",
     )
+    import_depreciated_value = fields.Monetary(
+        states=READONLY_STATES,
+        help="Enter here the amount that has already been depreciated "
+        "before the import.\n"
+        "Assume You have an asset of 5000 EUR, depreciated over 5 years "
+        "whereby 700 EUR has already been depreciated previous fiscal year.\n"
+        "If you set import_depreciated_value to 700 and import_date to the last "
+        "day of your previous fiscal year in the import file the depreciation table "
+        "will be calculated as from the beginning of the current fiscal year and "
+        "a single 'init' entry will be created on the last day of "
+        "the previous fiscal year.",
+    )
+    import_depreciated_date = fields.Date(states=READONLY_STATES)
     depreciation_base = fields.Monetary(
         compute="_compute_depreciation_base",
         store=True,
@@ -648,24 +661,37 @@ class AccountAsset(models.Model):
             domain = [
                 ("asset_id", "=", asset.id),
                 ("type", "=", "depreciate"),
+            ]
+            domain_posted = domain + [
                 "|",
                 ("move_check", "=", True),
                 ("init_entry", "=", True),
             ]
-            posted_lines = line_obj.search(domain, order="line_date desc")
-            if posted_lines:
-                last_line = posted_lines[0]
-            else:
-                last_line = line_obj
-            domain = [
-                ("asset_id", "=", asset.id),
-                ("type", "=", "depreciate"),
+            posted_lines = line_obj.search(domain_posted, order="line_date desc")
+            last_line = posted_lines and posted_lines[0] or line_obj
+            domain_old_lines = domain + [
                 ("move_id", "=", False),
                 ("init_entry", "=", False),
             ]
-            old_lines = line_obj.search(domain)
+            old_lines = line_obj.search(domain_old_lines)
             if old_lines:
                 old_lines.unlink()
+
+            domain_init = domain + [("init_entry", "=", True)]
+            if (
+                asset.import_depreciated_value
+                and not line_obj._search(domain_init, limit=1)._result
+            ):
+                vals = {
+                    "amount": currency.round(asset.import_depreciated_value),
+                    "asset_id": asset.id,
+                    "name": self._get_depreciation_entry_name(1),
+                    "line_date": asset.import_depreciated_date,
+                    "line_days": (asset.import_depreciated_date - asset.date_start).days
+                    + 1,
+                    "init_entry": True,
+                }
+                last_line = posted_lines = self.env["account.asset.line"].create(vals)
 
             table = asset._compute_depreciation_table()
             if not table:
