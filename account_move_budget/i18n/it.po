@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-05-12 12:54+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-12-24 18:41+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_budget
 #: code:addons/account_move_budget/models/account_move_budget.py:0
@@ -116,9 +116,8 @@ msgstr "Azienda"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__company_currency_id
-#, fuzzy
 msgid "Company Currency"
-msgstr "Valuta aziendale"
+msgstr "Valuta azienda"
 
 #. module: account_move_budget
 #: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
@@ -249,7 +248,6 @@ msgstr "Ultima modifica il"
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__write_uid
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__write_uid
-#, fuzzy
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
 
