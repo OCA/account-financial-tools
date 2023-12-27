@@ -61,7 +61,7 @@ class PurchaseOrder(models.Model):
             rec.amount_unreconciled = sum(unreconciled_items.mapped("amount_residual"))
 
     def _search_unreconciled(self, operator, value):
-        if operator != "=" or not isinstance(value, bool):
+        if operator not in ("=", "!=") or not isinstance(value, bool):
             raise ValueError(_("Unsupported search operator"))
         acc_item = self.env["account.move.line"]
         domain = self._get_purchase_unreconciled_base_domain()
