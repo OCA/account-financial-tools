@@ -1,13 +1,14 @@
 # Copyright 2020 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
 
 class AccountAssetTransfer(models.TransientModel):
     _name = "account.asset.transfer"
+    _inherit = "analytic.mixin"
     _description = "Transfer Asset"
     _check_company_auto = True
 
@@ -60,14 +61,6 @@ class AccountAssetTransfer(models.TransientModel):
         comodel_name="res.partner",
         string="Partner",
     )
-    analytic_account_id = fields.Many2one(
-        comodel_name="account.analytic.account",
-        string="Analytic account",
-    )
-    analytic_tag_ids = fields.Many2many(
-        comodel_name="account.analytic.tag",
-        string="Analytic tags",
-    )
 
     @api.model
     def default_get(self, field_list):
@@ -79,20 +72,22 @@ class AccountAssetTransfer(models.TransientModel):
         company.ensure_one()
         journals = assets.mapped("profile_id.transfer_journal_id")
         partners = assets.mapped("partner_id")
-        analytics = assets.mapped("account_analytic_id")
-        tags = assets[:1].analytic_tag_ids
-        for asset in assets:
-            if asset.analytic_tag_ids != tags:
-                # When not all tags are the same, no default
-                tags = self.env["account.analytic.tag"]
-                break
+        analytics = assets.mapped("analytic_distribution")
+        # Combine analytic to dict
+        analytic_dict = {}
+        unique_elements = set()
+        for analytic in analytics:
+            if analytic is not False:
+                for key, value in analytic.items():
+                    if key not in analytic_dict and key not in unique_elements:
+                        analytic_dict[key] = value
+                        unique_elements.add(key)
         # Assign values
         res["company_id"] = company.id
         res["partner_id"] = partners[0].id if len(partners) == 1 else False
         res["from_asset_ids"] = [(4, asset_id) for asset_id in assets.ids]
         res["transfer_journal_id"] = journals[:1].id
-        res["analytic_account_id"] = analytics[0].id if len(analytics) == 1 else False
-        res["analytic_tag_ids"] = [(4, tag_id) for tag_id in tags.ids]
+        res["analytic_distribution"] = analytic_dict
         return res
 
     @api.depends("from_asset_ids", "to_asset_ids")
@@ -152,8 +147,7 @@ class AccountAssetTransfer(models.TransientModel):
             return {
                 "name": move_line.name,
                 "account_id": move_line.account_id.id,
-                "analytic_account_id": move_line.analytic_account_id.id or False,
-                "analytic_tag_ids": [(4, tag.id) for tag in move_line.analytic_tag_ids],
+                "analytic_distribution": move_line.analytic_distribution or {},
                 "debit": move_line.credit,
                 "credit": move_line.debit,
                 "partner_id": move_line.partner_id.id,
@@ -164,8 +158,7 @@ class AccountAssetTransfer(models.TransientModel):
             return {
                 "name": asset.name,
                 "account_id": asset.profile_id.account_asset_id.id,
-                "analytic_account_id": asset.account_analytic_id.id,
-                "analytic_tag_ids": [(4, tag.id) for tag in asset.analytic_tag_ids],
+                "analytic_distribution": asset.analytic_distribution or {},
                 "debit": 0.0,
                 "credit": asset.purchase_value or 0.0,
                 "partner_id": asset.partner_id.id,
@@ -176,8 +169,7 @@ class AccountAssetTransfer(models.TransientModel):
         return {
             "name": to_asset.asset_name,
             "account_id": to_asset.asset_profile_id.account_asset_id.id,
-            "analytic_account_id": to_asset.analytic_account_id.id,
-            "analytic_tag_ids": [(4, tag.id) for tag in to_asset.analytic_tag_ids],
+            "analytic_distribution": to_asset.analytic_distribution or {},
             "debit": to_asset.asset_value,
             "credit": 0.0,
             "partner_id": to_asset.partner_id.id,
@@ -186,15 +178,14 @@ class AccountAssetTransfer(models.TransientModel):
         }
 
     def _get_transfer_data(self):
-        move_lines = []
         # Create lines from assets
-        move_lines += [
-            (0, 0, self._get_move_line_from_asset(from_asset))
+        move_lines = [
+            Command.create(self._get_move_line_from_asset(from_asset))
             for from_asset in self.from_asset_ids
         ]
         # Create lines for new assets
         move_lines += [
-            (0, 0, self._get_move_line_to_asset(to_asset))
+            Command.create(self._get_move_line_to_asset(to_asset))
             for to_asset in self.to_asset_ids
         ]
         return move_lines
@@ -212,6 +203,7 @@ class AccountAssetTransfer(models.TransientModel):
 
 class AccountAssetTransferLine(models.TransientModel):
     _name = "account.asset.transfer.line"
+    _inherit = "analytic.mixin"
     _description = "Transfer To Asset"
 
     transfer_id = fields.Many2one(
@@ -242,14 +234,6 @@ class AccountAssetTransferLine(models.TransientModel):
     partner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Partner",
-    )
-    analytic_account_id = fields.Many2one(
-        comodel_name="account.analytic.account",
-        string="Analytic account",
-    )
-    analytic_tag_ids = fields.Many2many(
-        comodel_name="account.analytic.tag",
-        string="Analytic tags",
     )
 
     @api.depends("quantity", "price_unit")

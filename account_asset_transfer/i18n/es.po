@@ -22,16 +22,22 @@ msgid "Allow transfer AUC (running) to Asset"
 msgstr "Permitir transferencia AUC (en curso) a Activo"
 
 #. module: account_asset_transfer
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_account_id
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_account_id
-msgid "Analytic account"
-msgstr "Cuenta Analítica"
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_distribution
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_distribution
+msgid "Analytic"
+msgstr ""
 
 #. module: account_asset_transfer
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_tag_ids
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_tag_ids
-msgid "Analytic tags"
-msgstr "Etiquetas analíticas"
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_distribution_search
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr ""
+
+#. module: account_asset_transfer
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_precision
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_precision
+msgid "Analytic Precision"
+msgstr ""
 
 #. module: account_asset_transfer
 #: model:ir.model,name:account_asset_transfer.model_account_asset
@@ -59,6 +65,7 @@ msgid "Asset To"
 msgstr "Activo a"
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
 #, python-format
 msgid "Asset Transfer Journal Entry"
@@ -75,6 +82,7 @@ msgid "Asset profile"
 msgstr "Perfil del activo"
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
 #, python-format
 msgid "Assets"
@@ -184,10 +192,12 @@ msgid "Notes"
 msgstr "Notas"
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
 #, python-format
 msgid "Only running assets without depreciation (AUC) can transfer"
-msgstr "Sólo pueden transferirse los activos circulantes sin amortización (AUC)"
+msgstr ""
+"Sólo pueden transferirse los activos circulantes sin amortización (AUC)"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__partner_id
@@ -225,6 +235,7 @@ msgid "To Value"
 msgstr "Para valorar"
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
 #, python-format
 msgid "Total values of new assets must equal to source assets"
@@ -240,6 +251,7 @@ msgid "Transfer"
 msgstr "Transferencia"
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
 #, python-format
 msgid "Transfer AUC to Asset & Create Transfer Journal Entry"
@@ -290,6 +302,7 @@ msgid "Unit Price"
 msgstr "Precio Unitario"
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
 #, python-format
 msgid "Value of new asset must greater than 0.0"
@@ -300,3 +313,9 @@ msgstr "El valor del nuevo activo debe ser superior a 0,0"
 msgid ""
 "flag indicating if the asset has been transferred from/to another asset."
 msgstr "que indica si el activo ha sido transferido de/a otro activo."
+
+#~ msgid "Analytic account"
+#~ msgstr "Cuenta Analítica"
+
+#~ msgid "Analytic tags"
+#~ msgstr "Etiquetas analíticas"

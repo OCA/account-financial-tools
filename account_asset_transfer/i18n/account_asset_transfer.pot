@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,15 +19,21 @@ msgid "Allow transfer AUC (running) to Asset"
 msgstr ""
 
 #. module: account_asset_transfer
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_account_id
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_account_id
-msgid "Analytic account"
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_distribution
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_distribution
+msgid "Analytic"
 msgstr ""
 
 #. module: account_asset_transfer
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_tag_ids
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_tag_ids
-msgid "Analytic tags"
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_distribution_search
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr ""
+
+#. module: account_asset_transfer
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_precision
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_precision
+msgid "Analytic Precision"
 msgstr ""
 
 #. module: account_asset_transfer
@@ -56,6 +62,7 @@ msgid "Asset To"
 msgstr ""
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
 #, python-format
 msgid "Asset Transfer Journal Entry"
@@ -72,6 +79,7 @@ msgid "Asset profile"
 msgstr ""
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
 #, python-format
 msgid "Assets"
@@ -181,6 +189,7 @@ msgid "Notes"
 msgstr ""
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
 #, python-format
 msgid "Only running assets without depreciation (AUC) can transfer"
@@ -220,6 +229,7 @@ msgid "To Value"
 msgstr ""
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
 #, python-format
 msgid "Total values of new assets must equal to source assets"
@@ -233,6 +243,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
 #, python-format
 msgid "Transfer AUC to Asset & Create Transfer Journal Entry"
@@ -283,6 +294,7 @@ msgid "Unit Price"
 msgstr ""
 
 #. module: account_asset_transfer
+#. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
 #, python-format
 msgid "Value of new asset must greater than 0.0"
