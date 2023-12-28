@@ -1,7 +1,7 @@
 # Copyright 2021 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import _, models
 
 
 class AssetReportXlsx(models.AbstractModel):
@@ -12,7 +12,7 @@ class AssetReportXlsx(models.AbstractModel):
         res.update(
             {
                 "number": {
-                    "header": {"type": "string", "value": self._("Number")},
+                    "header": {"type": "string", "value": _("Number")},
                     "asset": {
                         "type": "string",
                         "value": self._render("asset.number or ''"),

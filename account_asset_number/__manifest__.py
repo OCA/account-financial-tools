@@ -3,7 +3,7 @@
 
 {
     "name": "Assets Number",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["account_asset_management"],
     "author": "Ecosoft, Odoo Community Association (OCA)",
