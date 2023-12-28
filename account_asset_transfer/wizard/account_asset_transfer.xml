@@ -9,6 +9,7 @@
                     <group>
                         <field name="date_transfer" />
                         <field name="company_id" groups="base.group_multi_company" />
+                        <field name="company_id" invisible="1" />
                         <field name="currency_id" invisible="1" />
                         <field name="from_asset_value" />
                         <field name="to_asset_value" />
@@ -17,8 +18,7 @@
                     <group>
                         <field name="transfer_journal_id" />
                         <field name="partner_id" invisible="1" />
-                        <field name="analytic_account_id" invisible="1" />
-                        <field name="analytic_tag_ids" invisible="1" />
+                        <field name="analytic_distribution" invisible="1" />
                     </group>
                 </group>
                 <notebook>
@@ -36,8 +36,7 @@
                             context="{
                                 'default_asset_value': balance,
                                 'default_partner_id': partner_id,
-                                'default_analytic_account_id': analytic_account_id,
-                                'default_analytic_tag_ids': analytic_tag_ids,
+                                'default_analytic_distribution': analytic_distribution,
                             }"
                         >
                             <tree editable="bottom">
@@ -48,13 +47,8 @@
                                 <field name="asset_value" />
                                 <field name="partner_id" />
                                 <field
-                                    name="analytic_account_id"
+                                    name="analytic_distribution"
                                     groups="analytic.group_analytic_accounting"
-                                />
-                                <field
-                                    name="analytic_tag_ids"
-                                    groups="analytic.group_analytic_accounting"
-                                    widget="many2many_tags"
                                 />
                             </tree>
                         </field>

@@ -98,7 +98,7 @@ class TestAccountAssetTransfer(TestAssetManagement):
         assets += asset_auc
         self.assertFalse(list(set(assets.mapped("can_transfer")))[0])
         assets.validate()
-        assets.invalidate_cache()
+        assets.invalidate_model()
         # can_transfer = True after validate
         self.assertTrue(list(set(assets.mapped("can_transfer")))[0])
         self.assertEqual(list(set(assets.mapped("is_transfer"))), [False])
