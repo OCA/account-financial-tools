@@ -140,11 +140,17 @@ class SaleOrder(models.Model):
             else:
                 products = self.env["product.product"]
             products_considered |= products
-            unreconciled_items_group = unreconciled_items.filtered(
-                lambda l: (
-                    l.account_id.id == account_id and l.product_id.id in products.ids
+            if not products:
+                unreconciled_items_group = unreconciled_items.filtered(
+                    lambda l: (l.account_id.id == account_id and not l.product_id)
                 )
-            )
+            else:
+                unreconciled_items_group = unreconciled_items.filtered(
+                    lambda l: (
+                        l.account_id.id == account_id
+                        and l.product_id.id in products.ids
+                    )
+                )
             if float_is_zero(
                 sum(unreconciled_items_group.mapped("amount_residual")),
                 precision_rounding=self.company_id.currency_id.rounding,
