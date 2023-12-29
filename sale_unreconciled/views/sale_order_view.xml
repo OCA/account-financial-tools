@@ -66,4 +66,16 @@
             </filter>
         </field>
     </record>
+
+    <record id="view_order_tree_inherited_amount_unreconciled" model="ir.ui.view">
+        <field name="name">sale.order.tree.amount.unreconciled</field>
+        <field name="model">sale.order</field>
+        <field eval="100" name="priority" />
+        <field name="inherit_id" ref="sale.view_order_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="amount_unreconciled" sum="sum_ar" optional="hide" />
+            </xpath>
+        </field>
+    </record>
 </odoo>
