@@ -1,0 +1,213 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_usability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-17 10:18+0000\n"
+"Last-Translator: gelo joga Rodríguez <gelo.joga@factorlibre.com>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
+
+#. module: account_usability
+#: model:ir.model,name:account_usability.model_account_group
+msgid "Account Group"
+msgstr "Grupo de cuenta"
+
+#. module: account_usability
+#: model:ir.actions.act_window,name:account_usability.account_group_action
+#: model:ir.ui.menu,name:account_usability.account_group_menu
+msgid "Account Groups"
+msgstr "Grupos de cuentas"
+
+#. module: account_usability
+#: model:ir.model,name:account_usability.model_account_account_tag
+msgid "Account Tag"
+msgstr "Etiqueta de cuenta"
+
+#. module: account_usability
+#: model:ir.actions.act_window,name:account_usability.account_account_tag_action
+#: model:ir.ui.menu,name:account_usability.account_tag_menu
+msgid "Account Tags"
+msgstr "Etiquetas de cuenta"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Account Template"
+msgstr "Plantilla Contable"
+
+#. module: account_usability
+#: model:ir.actions.act_window,name:account_usability.account_account_template_action
+#: model:ir.ui.menu,name:account_usability.menu_account_account_template
+msgid "Account Templates"
+msgstr "Plantillas de cuentas"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+msgid "Account Type"
+msgstr "Tipo de cuenta"
+
+#. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
+#: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_group_form
+msgid "Accounts"
+msgstr "Cuentas"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
+msgid "Anglo-Saxon Accounting"
+msgstr "Contabilidad anglo-sajona"
+
+#. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_accounting_statement_bank
+msgid "Bank Statements"
+msgstr "Extractos bancarios"
+
+#. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_accounting_bank_and_cash
+msgid "Bank and Cash"
+msgstr "Banco y caja"
+
+#. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_accounting_statement_cash
+msgid "Cash Registers"
+msgstr "Registros de caja"
+
+#. module: account_usability
+#: model:ir.actions.act_window,name:account_usability.action_account_chart_template_form
+#: model:ir.ui.menu,name:account_usability.menu_account_chart_template
+msgid "Chart of Accounts Templates"
+msgstr "Plantillas de planes contables"
+
+#. module: account_usability
+#: model:ir.model,name:account_usability.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
+msgid "Default Taxes"
+msgstr "Impuestos por defecto"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Expense Account"
+msgstr "Cuenta de gasto"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
+msgid "Extra configuration"
+msgstr "Configuración adicional"
+
+#. module: account_usability
+#: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
+#: model:ir.ui.menu,name:account_usability.menu_account_fiscal_position_template
+msgid "Fiscal Position Templates"
+msgstr "Plantillas de posición fiscal"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Income Account"
+msgstr "Cuenta de ingreso"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+msgid "Internal notes..."
+msgstr "Notas internas..."
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
+msgid "Note"
+msgstr "Nota"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
+msgid "Notes"
+msgstr "Notas"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Payable Account"
+msgstr "Cuenta a pagar"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
+msgid "Properties"
+msgstr "Propiedades"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
+msgid "Receivable Account"
+msgstr "Cuenta a cobrar"
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
+msgid ""
+"Record the cost of a good as an expense when this good is\n"
+"                                invoiced to a final customer (instead of "
+"recording the cost as soon\n"
+"                                as the product is received in stock)."
+msgstr ""
+"Registra el coste de un producto como un gasto cuando el producto se\n"
+"                                factura a un cliente final (en vez de "
+"registrar el coste tan pronto\n"
+"                                el producto se recibe en inventario)."
+
+#. module: account_usability
+#: model:ir.model.fields,help:account_usability.field_res_config_settings__anglo_saxon_accounting
+msgid ""
+"Record the cost of a good as an expense when this good is invoiced to a "
+"final customer."
+msgstr ""
+"Registra el coste de un producto como un gasto cuando dicho producto se "
+"factura a un cliente final."
+
+#. module: account_usability
+#: model:ir.model,name:account_usability.model_account_tax_group
+msgid "Tax Group"
+msgstr "Grupo de impuestos"
+
+#. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_account_tax_template
+msgid "Tax Templates"
+msgstr "Plantillas de impuestos"
+
+#. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_account_tax_group__tax_ids
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_account_coa_settings
+msgid "Templates"
+msgstr "Plantillas"
+
+#. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
+msgid "Use anglo-saxon accounting"
+msgstr "Utilizar contabilidad anglo-sajona"
+
+#~ msgid "Account Tax Group"
+#~ msgstr "Grupo de impuestos"
+
+#~ msgid "Account Tax Groups"
+#~ msgstr "Grupos de impuestos"
+
+#~ msgid "Account Types"
+#~ msgstr "Tipos de cuentas"

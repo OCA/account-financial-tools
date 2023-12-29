@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2019 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Rename groups to fit with EE naming 'Billing' -> 'Accounting' -->
+    <record id="account.menu_finance" model="ir.ui.menu">
+        <field name="name">Accounting</field>
+    </record>
+
+    <menuitem
+        id="menu_accounting_bank_and_cash"
+        name="Bank and Cash"
+        parent="account.menu_finance_entries"
+        sequence="15"
+    />
+    <menuitem
+        id="menu_account_coa_settings"
+        sequence="200"
+        name="Templates"
+        parent="account.menu_finance_configuration"
+        groups="base.group_no_one"
+    />
+</odoo>
