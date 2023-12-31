@@ -1,4 +1,4 @@
-# Copyright 2019-2020 ForgeFlow S.L.
+# Copyright 2019-2022 ForgeFlow S.L.
 #   (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -13,4 +13,5 @@
     "license": "AGPL-3",
     "data": ["security/account_security.xml", "views/account_move_view.xml"],
     "installable": True,
+    "post_init_hook": "post_init_hook",
 }
