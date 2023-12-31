@@ -53,7 +53,7 @@ addon | version | maintainers | summary
 [account_move_line_check_number](account_move_line_check_number/) | 14.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add the check number in the journal items
 [account_move_line_landed_cost_info](account_move_line_landed_cost_info/) | 14.0.1.0.0 |  | Introduces the landed cost adjustment lines to the journal items
 [account_move_line_menu](account_move_line_menu/) | 14.0.1.0.0 |  | Adds a Journal Items menu
-[account_move_line_purchase_info](account_move_line_purchase_info/) | 14.0.1.0.3 |  | Introduces the purchase order line to the journal items
+[account_move_line_purchase_info](account_move_line_purchase_info/) | 14.0.1.1.0 |  | Introduces the purchase order line to the journal items
 [account_move_line_repair_info](account_move_line_repair_info/) | 14.0.1.0.0 |  | Introduces the repair order to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 14.0.1.0.4 |  | Introduces the purchase order line to the journal items
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 14.0.2.0.0 |  | Allows to edit taxes on non-posted account move lines
