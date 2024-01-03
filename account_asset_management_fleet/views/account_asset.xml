@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_asset_form_view">
+        <field
+            name="name"
+        >account.asset.form (in account_asset_management_fleet)</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[@name='button_box']" position="inside">
+                <field name='vehicle_id' invisible="1" />
+                <button
+                    class="oe_stat_button"
+                    string="Vehicle"
+                    name="action_open_vehicle"
+                    type="object"
+                    icon="fa-car"
+                    attrs="{'invisible': [('vehicle_id', '=', False)]}"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='account_move_line_ids']//field[@name='account_id']"
+                position="after"
+            >
+                <field name='vehicle_id' optional='hide' />
+            </xpath>
+            <notebook position="inside">
+                <page string="Fleet">
+                    <field name="vehicle_id" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>
