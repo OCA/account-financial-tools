@@ -151,8 +151,21 @@ class SaleOrder(models.Model):
                         and l.product_id.id in products.ids
                     )
                 )
+            # Check which type of force reconciling we are doing:
+            # - Force reconciling amount_residual
+            # - Force reconciling amount_residual_currency
+            amount_residual_currency_reconcile = any(
+                unreconciled_items_group.filtered(
+                    lambda l: l.amount_residual_currency != 0.0
+                    and l.account_id.id == account_id
+                )
+            )
+            if amount_residual_currency_reconcile:
+                residual_field = "amount_residual_currency"
+            else:
+                residual_field = "amount_residual"                
             if float_is_zero(
-                sum(unreconciled_items_group.mapped("amount_residual")),
+                sum(unreconciled_items_group.mapped(residual_field)),
                 precision_rounding=self.company_id.currency_id.rounding,
             ):
                 moves_to_reconcile = unreconciled_items_group
@@ -160,8 +173,10 @@ class SaleOrder(models.Model):
                 if main_product:
                     # If kit, use the product of the kit
                     product_id = main_product.id
-                writeoff_vals = self._get_sale_writeoff_vals(sale_line_id, product_id)
                 if unreconciled_items_group:
+                    writeoff_vals = self._get_sale_writeoff_vals(
+                        unreconciled_items_group, sale_line_id, product_id
+                    )
                     writeoff_to_reconcile = (
                         unreconciled_items_group._create_so_writeoff(writeoff_vals)
                     )
@@ -205,8 +220,9 @@ class SaleOrder(models.Model):
             products |= sale_line.product_id
         return products, sale_line.product_id
 
-    def _get_sale_writeoff_vals(self, sale_line_id, product_id):
+    def _get_sale_writeoff_vals(self, amls, sale_line_id, product_id):
         writeoff_date = self.env.context.get("writeoff_date", False)
+        aml_date = max(amls.mapped("move_id.date"))
         res = {
             "account_id": self.company_id.sale_reconcile_account_id.id,
             "journal_id": self.company_id.sale_reconcile_journal_id.id,
@@ -214,6 +230,7 @@ class SaleOrder(models.Model):
             "sale_line_id": sale_line_id or False,
             "product_id": product_id or False,
             "currency_id": self.currency_id.id or self.env.company.currency_id.id,
+            "date": aml_date,
         }
         # hook for custom date:
         if writeoff_date:
