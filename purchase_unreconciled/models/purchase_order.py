@@ -139,14 +139,27 @@ class PurchaseOrder(models.Model):
                     l.account_id.id == account_id and l.product_id.id == product_id
                 )
             )
+            # Check which type of force reconciling we are doing:
+            # - Force reconciling amount_residual
+            # - Force reconciling amount_residual_currency
+            amount_residual_currency_reconcile = any(
+                unreconciled_items_group.filtered(
+                    lambda l: l.amount_residual_currency != 0.0
+                    and l.account_id.id == account_id
+                )
+            )
+            if amount_residual_currency_reconcile:
+                residual_field = "amount_residual_currency"
+            else:
+                residual_field = "amount_residual"
             if float_is_zero(
-                sum(unreconciled_items_group.mapped("amount_residual")),
+                sum(unreconciled_items_group.mapped(residual_field)),
                 precision_rounding=self.company_id.currency_id.rounding,
             ):
                 moves_to_reconcile = unreconciled_items_group
             else:
                 writeoff_vals = self._get_purchase_writeoff_vals(
-                    purchase_line_id, product_id
+                    unreconciled_items_group, purchase_line_id, product_id
                 )
                 writeoff_to_reconcile = unreconciled_items_group._create_writeoff(
                     writeoff_vals
@@ -172,8 +185,9 @@ class PurchaseOrder(models.Model):
             self.button_done()
         return res
 
-    def _get_purchase_writeoff_vals(self, purchase_line_id, product_id):
+    def _get_purchase_writeoff_vals(self, amls, purchase_line_id, product_id):
         writeoff_date = self.env.context.get("writeoff_date", False)
+        aml_date = max(amls.mapped("move_id.date"))
         res = {
             "account_id": self.company_id.purchase_reconcile_account_id.id,
             "journal_id": self.company_id.purchase_reconcile_journal_id.id,
@@ -181,6 +195,7 @@ class PurchaseOrder(models.Model):
             "purchase_line_id": purchase_line_id or False,
             "product_id": product_id,
             "currency_id": self.currency_id.id or self.env.company.currency_id.id,
+            "date": aml_date,
         }
         # hook for custom date:
         if writeoff_date:
@@ -217,7 +232,7 @@ class PurchaseOrder(models.Model):
                 .create(
                     {
                         "exception_msg": exception_msg,
-                        "purchase_order_id": self.id,
+                        "purchase_id": self.id,
                         "origin_reference": "{},{}".format("purchase.order", self.id),
                         "continue_method": "action_reconcile",
                     }
