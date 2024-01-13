@@ -1,0 +1,129 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_cost_center
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Carlos Hormigo, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-02 00:55+0000\n"
+"PO-Revision-Date: 2017-12-02 00:55+0000\n"
+"Last-Translator: Carlos Hormigo, 2018\n"
+"Language-Team: Catalan (Spain) (https://www.transifex.com/oca/teams/23907/"
+"ca_ES/)\n"
+"Language: ca_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_cost_center
+msgid "Account Cost Center"
+msgstr ""
+
+#. module: account_cost_center
+#: model_terms:ir.actions.act_window,help:account_cost_center.account_cost_center_action
+msgid "Click to add a new cost center."
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__code
+msgid "Code"
+msgstr "Codi"
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__company_id
+msgid "Company"
+msgstr "Companyia"
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_bank_statement_line__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_report__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_move__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_move_line__cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_payment__cost_center_id
+#: model_terms:ir.ui.view,arch_db:account_cost_center.view_account_invoice_report_search
+msgid "Cost Center"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.actions.act_window,name:account_cost_center.account_cost_center_action
+#: model:ir.ui.menu,name:account_cost_center.account_cost_center_menu
+msgid "Cost Centers"
+msgstr ""
+
+#. module: account_cost_center
+#: model_terms:ir.actions.act_window,help:account_cost_center.account_cost_center_action
+msgid "Cost centers provide an extra analytic dimension"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_uid
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__create_date
+msgid "Created on"
+msgstr "Creat a"
+
+#. module: account_cost_center
+#: model:ir.model.fields,help:account_cost_center.field_account_bank_statement_line__cost_center_id
+#: model:ir.model.fields,help:account_cost_center.field_account_move__cost_center_id
+#: model:ir.model.fields,help:account_cost_center.field_account_payment__cost_center_id
+msgid "Default Cost Center"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__display_name
+msgid "Display Name"
+msgstr "Nom visible"
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__id
+msgid "ID"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_invoice_report
+msgid "Invoices Statistics"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center____last_update
+msgid "Last Modified on"
+msgstr "Darrera modificació en"
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__write_uid
+msgid "Last Updated by"
+msgstr "Darrera actualització per"
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__write_date
+msgid "Last Updated on"
+msgstr "Darrera actualització el"
+
+#. module: account_cost_center
+#: model_terms:ir.ui.view,arch_db:account_cost_center.account_cost_center_view_search
+msgid "Name/Code"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center__name
+msgid "Title"
+msgstr ""
