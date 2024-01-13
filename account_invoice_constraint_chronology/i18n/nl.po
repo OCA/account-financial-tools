@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 16:31+0000\n"
-"PO-Revision-Date: 2024-01-13 12:52+0000\n"
+"PO-Revision-Date: 2024-01-13 12:53+0000\n"
 "Last-Translator: \"Stéphane Bidoul (ACSONE)\" <stephane.bidoul@acsone.eu>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/nl/)\n"
@@ -64,7 +64,7 @@ msgstr ""
 msgid ""
 "Chronology conflict: Invoice {name} cannot be {time} invoice {inv_name}."
 msgstr ""
-"Chronologieconflict: Factuur {name} kan niet {tijd} factuur {inv_name} zijn."
+"Chronologieconflict: Factuur {name} kan niet {time} factuur {inv_name} zijn."
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
