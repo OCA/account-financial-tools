@@ -685,7 +685,7 @@ class AccountAsset(models.Model):
                 vals = {
                     "amount": currency.round(asset.import_depreciated_value),
                     "asset_id": asset.id,
-                    "name": self._get_depreciation_entry_name(1),
+                    "name": asset._get_depreciation_entry_name(1),
                     "line_date": asset.import_depreciated_date,
                     "line_days": (asset.import_depreciated_date - asset.date_start).days
                     + 1,
@@ -710,7 +710,7 @@ class AccountAsset(models.Model):
                 # If the number of lines in the table is the same as the depreciation
                 # lines, we will not show an error even if the dates are the same.
                 if last_line.remaining_value and (
-                    asset.asset_value(last_date_in_table < last_depreciation_date)
+                    (last_date_in_table < last_depreciation_date)
                     or (
                         last_date_in_table == last_depreciation_date
                         and total_table_lines != len(move_check_lines)
