@@ -709,9 +709,12 @@ class AccountAsset(models.Model):
                 last_date_in_table = table[-1]["lines"][-1]["date"]
                 # If the number of lines in the table is the same as the depreciation
                 # lines, we will not show an error even if the dates are the same.
-                if (last_date_in_table < last_depreciation_date) or (
-                    last_date_in_table == last_depreciation_date
-                    and total_table_lines != len(move_check_lines)
+                if last_line.remaining_value and (
+                    asset.asset_value(last_date_in_table < last_depreciation_date)
+                    or (
+                        last_date_in_table == last_depreciation_date
+                        and total_table_lines != len(move_check_lines)
+                    )
                 ):
                     raise UserError(
                         _(
