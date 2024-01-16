@@ -7,6 +7,8 @@
     'version': '10.0.1.0.1',
     'license': 'AGPL-3',
     'author': "Noviat,Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools"
+               "10.0/account_asset_management_xls",
     'category': 'Accounting & Finance',
     'depends': ['account_asset_management', 'report_xlsx_helper'],
     'data': [

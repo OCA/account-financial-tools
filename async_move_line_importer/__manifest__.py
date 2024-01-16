@@ -51,7 +51,7 @@ and you will be able to continue your work.
 When the import is finished you will received a notification and an
 import report will be available on the record
 """,
- 'website': 'http://www.camptocamp.com',
+ 'website': 'https://github.com/OCA/account-financial-tools',
  'data': ['data.xml',
           'view/move_line_importer_view.xml',
           'security/ir.model.access.csv',

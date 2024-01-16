@@ -10,7 +10,7 @@
     'name': "Account Renumber Wizard",
     'version': "10.0.1.0.1",
     'author': "Pexego,Tecnativa,Odoo Community Association (OCA)",
-    'website': "http://www.pexego.es",
+    'website': "https://github.com/OCA/account-financial-tools",
     'category': "Accounting & Finance",
     "license": "AGPL-3",
     "depends": [

@@ -6,7 +6,7 @@
     "version": "10.0.1.0.1",
     "depends": ["account"],
     "author": "Camptocamp,Odoo Community Association (OCA)",
-    "website": "http://www.camptocamp.com/",
+    "website": "https://github.com/OCA/account-financial-tools",
     "category": "Finance",
     "data": [
         "views/res_config_view.xml",

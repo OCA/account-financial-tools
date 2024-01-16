@@ -25,6 +25,8 @@
     'version': '8.0.0.6.0',
     'license': 'AGPL-3',
     'author': 'Noviat, Odoo Community Association (OCA)',
+    "website": "https://github.com/OCA/account-financial-tools"
+               "10.0/account_move_line_search_extension",
     'category': 'Accounting & Finance',
     'depends': ['account'],
     'data': [

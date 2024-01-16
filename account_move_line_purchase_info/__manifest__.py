@@ -8,7 +8,7 @@
     "version": "10.0.1.0.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
-    "website": "http://www.github.com/OCA/account-financial-tools",
+    "website": "https://github.com/OCA/account-financial-tools",
     "category": "Generic",
     "depends": ["account_accountant", "purchase"],
     "license": "AGPL-3",

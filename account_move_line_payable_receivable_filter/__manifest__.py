@@ -8,7 +8,7 @@
     'summary': """
         Filter your Journal Items per payable and receivable account""",
     'author': "ACSONE SA/NV,Odoo Community Association (OCA)",
-    'website': "http://acsone.eu",
+    'website': "https://github.com/OCA/account-financial-tools",
     'category': 'Accounting & Finance',
     'version': '10.0.1.0.0',
     'license': 'AGPL-3',

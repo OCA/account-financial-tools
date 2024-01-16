@@ -23,6 +23,8 @@
     "name": "Update tax wizard",
     "version": "1.0.44",
     "author": "Therp BV, Camptocamp SA,Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools"
+               "10.0/account_tax_update",
     "category": 'Base',
     'complexity': "normal",
     "description": """

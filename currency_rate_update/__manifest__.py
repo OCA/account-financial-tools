@@ -5,7 +5,7 @@
     "name": "Currency Rate Update",
     "version": "10.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
-    "website": "http://camptocamp.com",
+    "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
     "category": "Financial Management/Configuration",
     "depends": [

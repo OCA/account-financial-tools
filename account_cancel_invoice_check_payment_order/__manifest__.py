@@ -28,7 +28,7 @@
 Prevents to cancel an invoice which has already been imported in a
 payment order.
     """,
-    'website': 'http://www.camptocamp.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'license': 'AGPL-3',
     'data': [],
     'installable': False,

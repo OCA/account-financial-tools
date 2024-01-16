@@ -13,7 +13,7 @@
     ],
     "author": "Camptocamp SA, ACSONE SA/NV, Odoo Community Association (OCA)",
     "category": 'Accounting & Finance',
-    "website": "http://www.camptocamp.com",
+    "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
     "data": [
         "wizard/account_tax_analysis_view.xml",

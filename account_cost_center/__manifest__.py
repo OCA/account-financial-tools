@@ -7,7 +7,7 @@
     'summary': 'Cost center information for invoice lines',
     'author': 'Onestein, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
-    'website': 'https://github.com/OCA/account-financial-tools/',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Accounting',
     'version': '10.0.1.0.0',
     'depends': [
