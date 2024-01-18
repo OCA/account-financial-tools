@@ -1,0 +1,1 @@
+odoo-addon-purchase_unreconciled@git+https://github.com/ForgeFlow/account-financial-tools.git@15.0-purchase_unreconciled#subdirectory=setup/purchase_unreconciled
