@@ -22,7 +22,7 @@ class AccountMove(models.Model):
             lambda mv: mv.name not in (False, "/") and mv.state == "posted"
         )
         if not options or not move_to_update_name:
-            return super()._compute_name
+            return super()._compute_name()
         no_sequence_found = False
         for move in move_to_update_name:
             if not move.sequence_option:
