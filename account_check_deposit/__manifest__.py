@@ -7,7 +7,7 @@
 
 {
     "name": "Account Check Deposit",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Manage deposit of checks to the bank",
@@ -19,10 +19,10 @@
         "security/ir.model.access.csv",
         "security/check_deposit_security.xml",
         "data/sequence.xml",
-        "views/account_check_deposit_view.xml",
-        "views/account_move_line_view.xml",
         "report/report.xml",
         "report/report_checkdeposit.xml",
+        "views/account_check_deposit_view.xml",
+        "views/account_move_line_view.xml",
     ],
     "installable": True,
 }

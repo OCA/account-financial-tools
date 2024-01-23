@@ -13,7 +13,7 @@
                 <field
                     name="check_deposit_id"
                     readonly="True"
-                    attrs="{'invisible': [('check_deposit_id', '=', False)]}"
+                    invisible="not check_deposit_id"
                 />
             </field>
         </field>
