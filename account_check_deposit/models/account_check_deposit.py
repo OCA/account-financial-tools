@@ -18,17 +18,15 @@ class AccountCheckDeposit(models.Model):
     _check_company_auto = True
 
     name = fields.Char(
-        size=64, readonly=True, default=lambda self: _("New"), copy=False
+        readonly=True, default=lambda self: _("New"), copy=False
     )
     check_payment_ids = fields.One2many(
         comodel_name="account.move.line",
         inverse_name="check_deposit_id",
         string="Check Payments",
-        states={"done": [("readonly", "=", True)]},
     )
     deposit_date = fields.Date(
         required=True,
-        states={"done": [("readonly", "=", True)]},
         default=fields.Date.context_today,
         tracking=True,
         copy=False,
@@ -40,7 +38,6 @@ class AccountCheckDeposit(models.Model):
         "('bank_account_id', '=', False)]",
         required=True,
         check_company=True,
-        states={"done": [("readonly", "=", True)]},
         tracking=True,
     )
     in_hand_check_account_id = fields.Many2one(
@@ -55,7 +52,6 @@ class AccountCheckDeposit(models.Model):
         precompute=True,
         readonly=False,
         required=True,
-        states={"done": [("readonly", "=", True)]},
         tracking=True,
     )
     state = fields.Selection(
@@ -78,7 +74,6 @@ class AccountCheckDeposit(models.Model):
         domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
         "('bank_account_id', '!=', False)]",
         check_company=True,
-        states={"done": [("readonly", "=", True)]},
         tracking=True,
     )
     line_ids = fields.One2many(
@@ -89,7 +84,6 @@ class AccountCheckDeposit(models.Model):
     company_id = fields.Many2one(
         comodel_name="res.company",
         required=True,
-        states={"done": [("readonly", "=", True)]},
         default=lambda self: self.env.company,
         tracking=True,
     )
@@ -122,18 +116,18 @@ class AccountCheckDeposit(models.Model):
         "move_id.line_ids.reconciled",
     )
     def _compute_check_deposit(self):
-        rg_res = self.env["account.move.line"].read_group(
+        rg_res = self.env["account.move.line"]._read_group(
             [("check_deposit_id", "in", self.ids)],
-            ["check_deposit_id", "amount_currency:sum", "debit:sum"],
-            ["check_deposit_id"],
+            groupby=["check_deposit_id"],
+            aggregates=["amount_currency:sum", "debit:sum", "id:count"],
         )
         mapped_data = {
-            x["check_deposit_id"][0]: {
-                "debit": x["debit"],
-                "amount_currency": x["amount_currency"],
-                "count": x["check_deposit_id_count"],
+            deposit.id: {
+                "debit": total_debit,
+                "amount_currency": total_amount_currency,
+                "count": line_count,
             }
-            for x in rg_res
+            for (deposit, total_amount_currency, total_debit, line_count) in rg_res
         }
 
         for deposit in self:
@@ -206,20 +200,23 @@ class AccountCheckDeposit(models.Model):
         return super().unlink()
 
     def backtodraft(self):
+        amlo = self.env["account.move.line"]
         for deposit in self:
             if deposit.move_id:
                 move = deposit.move_id
-                counterpart_move_line = move.line_ids.filtered(
-                    lambda x: x.account_id.id != deposit.in_hand_check_account_id.id
-                )
+                check_move_lines = amlo
+                counterpart_move_line = amlo
+                for move_line in move.line_ids:
+                    if move_line.account_id.id == deposit.in_hand_check_account_id.id:
+                        check_move_lines |= move_line
+                    else:
+                        counterpart_move_line |= move_line
                 if counterpart_move_line.reconciled:
                     raise UserError(
                         _("Deposit '%s' has already been credited on the bank account.")
                         % deposit.display_name
                     )
-                move.line_ids.filtered(
-                    lambda x: x.account_id.id == deposit.in_hand_check_account_id.id
-                ).remove_move_reconcile()
+                check_move_lines.remove_move_reconcile()
                 if move.state == "posted":
                     move.button_cancel()
                 move.with_context(force_delete=True).unlink()
@@ -304,11 +301,6 @@ class AccountCheckDeposit(models.Model):
             )
             lines_to_rec.reconcile()
             deposit.write({"state": "done", "move_id": move.id})
-
-    def get_report(self):
-        report = self.env.ref("account_check_deposit.report_account_check_deposit")
-        action = report.with_context(discard_logo_check=True).report_action(self)
-        return action
 
     def get_all_checks(self):
         self.ensure_one()

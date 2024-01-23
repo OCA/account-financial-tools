@@ -14,26 +14,30 @@
                 <header>
                     <button
                         name="get_all_checks"
-                        states="draft"
+                        invisible="state != 'draft'"
                         type="object"
                         class="btn-primary"
                         string="Get All Received Checks"
                     />
                     <button
                         name="validate_deposit"
-                        states="draft"
+                        invisible="state != 'draft'"
                         string="Validate"
                         type="object"
                         class="btn-primary"
                     />
                     <button
                         name="backtodraft"
-                        states="done"
+                        invisible="state != 'done'"
                         string="Back to Draft"
                         type="object"
                         confirm="Are you sure you want to go back to draft?"
                     />
-                    <button name="get_report" string="Print" type="object" />
+                    <button
+                        name="%(report_account_check_deposit)d"
+                        string="Print"
+                        type="action"
+                    />
                     <field
                         name="state"
                         widget="statusbar"
@@ -52,16 +56,23 @@
                             <field
                                 name="deposit_date"
                                 options="{'datepicker': {'warn_future': true}}"
+                                readonly="state == 'done'"
                             />
-                            <field name="journal_id" options="{'no_create': True}" />
+                            <field
+                                name="journal_id"
+                                options="{'no_create': True}"
+                                readonly="state == 'done'"
+                            />
                             <field
                                 name="currency_id"
                                 groups="base.group_multi_currency"
                                 options="{'no_open': True, 'no_create': True}"
+                                readonly="state == 'done'"
                             />
                             <field
                                 name="bank_journal_id"
                                 options="{'no_create': True}"
+                                readonly="state == 'done'"
                             />
                             <field name="currency_id" invisible="1" />
                         </group>
@@ -73,6 +84,7 @@
                                 name="company_id"
                                 groups="base.group_multi_company"
                                 options="{'no_open': True, 'no_create': True}"
+                                readonly="state == 'done'"
                             />
                             <field name="move_id" />
                             <field name="company_id" invisible="1" />
@@ -92,6 +104,7 @@
                                 ('company_id', '=', company_id),
                                 ('parent_state', '=', 'posted'),
                                 ]"
+                            readonly="state == 'done'"
                             context="{'currency': currency_id,
                                         'journal_id': journal_id}"
                         >
@@ -165,6 +178,8 @@
                     name="bank_journal_id"
                     domain="[('type', '=', 'bank'), ('bank_account_id', '!=', False)]"
                 />
+                <filter string="Deposit Date" name="deposit_date" date="deposit_date" />
+                <separator />
                 <filter
                     name="draft"
                     string="Draft"
@@ -179,18 +194,13 @@
                     />
                     <filter
                         name="journal_groupby"
-                        string="Journal"
+                        string="Check Journal"
                         context="{'group_by': 'journal_id'}"
                     />
                     <filter
                         name="bank_journal_id_groupby"
                         string="Bank Account"
                         context="{'group_by': 'bank_journal_id'}"
-                    />
-                    <filter
-                        name="currency_groupby"
-                        string="Currency"
-                        context="{'group_by': 'currency_id'}"
                     />
                 </group>
             </search>
