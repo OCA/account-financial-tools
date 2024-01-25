@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
+     Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_loan_tree" model="ir.ui.view">
+        <field name="name">account.loan.tree</field>
+        <field name="model">account.loan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="company_id" />
+                <field name="is_leasing" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record id="account_loan_form" model="ir.ui.view">
+        <field name="name">account.loan.form</field>
+        <field name="model">account.loan</field>
+        <field name="arch" type="xml">
+            <form string="Loan">
+                <header>
+                    <button name="compute_lines" type="object" string="Compute items" />
+                    <button
+                        name="%(account_loan_post_action)d"
+                        states="draft"
+                        type="action"
+                        string="Post"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box">
+                        <button
+                            name="view_account_moves"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            attrs="{'invisible': [('state', '=', 'draft')]}"
+                            type="object"
+                            string="Moves"
+                        />
+                        <button
+                            name="view_account_invoices"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': ['|', ('state', '=', 'draft'), ('is_leasing', '=', False)]}"
+                            type="object"
+                            string="Invoices"
+                        />
+                        <button
+                            name="%(account_loan_pay_amount_action)d"
+                            class="oe_stat_button"
+                            icon="fa-usd"
+                            attrs="{'invisible': [('state', '!=', 'posted')]}"
+                            type="action"
+                            string="Pay amount"
+                        />
+                    </div>
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="company_id" options="{'no_create': True}" />
+                            <field name="loan_type" />
+                            <field name="loan_amount" />
+                        </group>
+                        <group>
+                            <field name="rate_type" />
+                            <field name="rate" />
+                            <field name="rate_period" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="start_date" />
+                            <field name="periods" />
+                            <field name="method_period" />
+                        </group>
+                        <group>
+                            <field name="is_leasing" />
+                            <field name="round_on_end" />
+                            <field name="payment_on_first_period" />
+                        </group>
+                    </group>
+                    <group attrs="{'invisible':[('state', '=', 'draft')]}">
+                        <group>
+                            <field name="pending_principal_amount" />
+                            <field name="payment_amount" />
+                            <field name="interests_amount" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Items" id="items">
+                            <field name="line_ids" />
+                        </page>
+                        <page string="Accounts" id="accounting">
+                            <group>
+                                <group>
+                                    <field name="journal_id" />
+                                    <field name="short_term_loan_account_id" />
+                                    <field name="journal_type" invisible="1" />
+                                </group>
+                                <group>
+                                    <field name="long_term_loan_account_id" />
+                                    <field name="interest_expenses_account_id" />
+                                    <field name="currency_id" invisible="1" />
+                                </group>
+                            </group>
+                        </page>
+                        <page
+                            string="Leasing"
+                            id="leasing"
+                            attrs="{'invisible': [('is_leasing', '=', False)]}"
+                        >
+                            <group>
+                                <group>
+                                    <field
+                                        name="leased_asset_account_id"
+                                        attrs="{'required': [('is_leasing', '=', True)]}"
+                                    />
+                                    <field name="residual_amount" />
+                                </group>
+                                <group>
+                                    <field
+                                        name="product_id"
+                                        attrs="{'required': [('is_leasing', '=', True)]}"
+                                    />
+                                    <field
+                                        name="interests_product_id"
+                                        attrs="{'required': [('is_leasing', '=', True)]}"
+                                    />
+                                    <field name="post_invoice" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="account_loan_line_tree" model="ir.ui.view">
+        <field name="name">account.loan.line.tree</field>
+        <field name="model">account.loan.line</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="sequence" />
+                <field name="date" />
+                <field name="rate" />
+                <field name="pending_principal_amount" />
+                <field name="payment_amount" sum="Total payments" />
+                <field name="principal_amount" />
+                <field name="interests_amount" sum="Total interests" />
+                <field
+                    name="long_term_pending_principal_amount"
+                    attrs="{'invisible': [('long_term_loan_account_id', '=', False)]}"
+                />
+                <field
+                    name="long_term_principal_amount"
+                    attrs="{'invisible': [('long_term_loan_account_id', '=', False)]}"
+                />
+                <field name="long_term_loan_account_id" invisible="1" />
+                <field name="loan_state" invisible="1" />
+                <field name="is_leasing" invisible="1" />
+                <field name="has_invoices" invisible="1" />
+                <field name="has_moves" invisible="1" />
+                <field name="currency_id" invisible="1" />
+                <button
+                    name="view_account_values"
+                    string="Values"
+                    type="object"
+                    icon="fa-eye"
+                    attrs="{'invisible': [('has_moves', '=', False),  ('has_invoices', '=', False)]}"
+                />
+                <button
+                    name="view_process_values"
+                    string="Process"
+                    type="object"
+                    icon="fa-cogs"
+                    attrs="{'invisible': ['|', '|', ('has_moves', '=', True),  ('has_invoices', '=', True), ('loan_state', '!=', 'posted')]}"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="account_loan_line_form" model="ir.ui.view">
+        <field name="name">account.loan.line.form</field>
+        <field name="model">account.loan.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="sequence" />
+                    <field name="rate" />
+                    <field name="date" />
+                </group>
+                <group>
+                    <group>
+                        <field name="pending_principal_amount" />
+                        <field name="payment_amount" />
+                        <field name="principal_amount" />
+                        <field name="interests_amount" />
+                        <field name="final_pending_principal_amount" />
+                    </group>
+                    <group>
+                        <field name="long_term_pending_principal_amount" />
+                        <field name="long_term_principal_amount" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="account_loan_action" model="ir.actions.act_window">
+        <field name="name">Loans</field>
+        <field name="res_model">account.loan</field>
+    </record>
+    <menuitem
+        id="account_loan_menu"
+        parent="account.menu_finance_entries"
+        sequence="80"
+        name="Loans"
+        action="account_loan_action"
+    />
+</odoo>
