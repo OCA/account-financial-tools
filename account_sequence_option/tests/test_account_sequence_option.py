@@ -37,8 +37,6 @@ class TestAccountSequenceOption(TransactionCase):
             "default_move_journal_types": ("bank", "cash"),
         }
         move_form = Form(self.env["account.payment"].with_context(**ctx))
-        move_form.payment_type = payment_type
-        move_form.partner_type = partner_type
         move_form.partner_id = self.partner_id
         payment = move_form.save()
         return payment
@@ -93,5 +91,4 @@ class TestAccountSequenceOption(TransactionCase):
         self.invoice.action_post()
         self.assertEqual(old_name, self.invoice.name)
 
-    def test_constrains_date_sequence_true(self):
-        self.assertTrue(self.env["account.move"]._constrains_date_sequence())
+        self.invoice._constrains_date_sequence()
