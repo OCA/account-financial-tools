@@ -1,371 +1,193 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record model="ir.ui.view" id="account_asset_view_form">
+    <record id="account_asset_view_form" model="ir.ui.view">
         <field name="name">account.asset.form</field>
         <field name="model">account.asset</field>
         <field name="arch" type="xml">
             <form string="Asset">
                 <header>
-                    <button
-                        name="validate"
-                        string="Confirm Asset"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
-                    />
-                    <button
-                        name="set_to_draft"
-                        states="open,close"
-                        string="Set to Draft"
-                        type="object"
-                        groups="account.group_account_manager"
-                    />
-                    <button
-                        name="remove"
-                        string="Remove"
-                        type="object"
-                        groups="account.group_account_manager"
-                        attrs="{'invisible':[('state', 'not in', ['open', 'close'])]}"
-                        help="Asset removal."
-                    />
-                    <field
-                        name="state"
-                        widget="statusbar"
-                        statusbar_visible="draft,open,close,removed"
-                    />
+                    <button class="oe_highlight" invisible="state != 'draft'" name="validate" string="Confirm Asset" type="object"/>
+                    <button groups="account.group_account_manager" invisible="state not in ['open','close']" name="set_to_draft" string="Set to Draft" type="object"/>
+                    <button groups="account.group_account_manager" help="Asset removal." invisible="state not in ['open', 'close']" name="remove" string="Remove" type="object"/>
+                    <field name="state" statusbar_visible="draft,open,close,removed" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <widget
-                        name="web_ribbon"
-                        title="Archived"
-                        bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
-                    />
+                    <widget bg_color="bg-danger" invisible="active == True" name="web_ribbon" title="Archived"/>
                     <div class="oe_button_box" name="button_box">
-                        <button
-                            name="open_entries"
-                            string="Journal Entries"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-bars"
-                        />
+                        <button class="oe_stat_button" icon="fa-bars" name="open_entries" string="Journal Entries" type="object"/>
                     </div>
                     <div class="oe_title">
-                        <label for="name" class="oe_edit_only" />
+                        <label class="oe_edit_only" for="name"/>
                         <h1>
-                            <field name="name" class="oe_inline" />
+                            <field class="oe_inline" name="name"/>
                         </h1>
                     </div>
                     <group>
                         <group id="header_left_group">
-                            <field name="company_id" invisible="1" />
-                            <field name="code" />
-                            <field
-                                name="company_id"
-                                widget="selection"
-                                groups="base.group_multi_company"
-                            />
-                            <field
-                                name="currency_id"
-                                groups="base.group_multi_currency"
-                                invisible="1"
-                            />
-                            <field name="move_line_check" invisible="1" />
+                            <field invisible="1" name="company_id"/>
+                            <field name="code"/>
+                            <field groups="base.group_multi_company" name="company_id" widget="selection"/>
+                            <field groups="base.group_multi_currency" invisible="1" name="currency_id"/>
+                            <field invisible="1" name="move_line_check"/>
                         </group>
                         <group id="header_right_group">
-                            <field name="depreciation_base" />
-                            <field name="value_depreciated" />
-                            <field name="value_residual" />
-                            <field name="active" invisible="1" />
+                            <field name="depreciation_base"/>
+                            <field name="value_depreciated"/>
+                            <field name="value_residual"/>
+                            <field invisible="1" name="active"/>
                         </group>
                     </group>
                     <notebook colspan="4">
                         <page string="General">
                             <group>
                                 <group>
-                                    <field
-                                        name="purchase_value"
-                                        attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"
-                                    />
-                                    <field
-                                        name="date_start"
-                                        attrs="{'readonly': [('state', '!=', 'draft')]}"
-                                    />
+                                    <field name="purchase_value" readonly="move_line_check == True or state != 'draft'"/>
+                                    <field name="date_start" readonly="state != 'draft'"/>
                                 </group>
                                 <group>
-                                    <field
-                                        name="salvage_value"
-                                        attrs="{'readonly': [('state', '!=', 'draft')]}"
-                                    />
-                                    <field name="date_remove" />
+                                    <field name="salvage_value" readonly="state != 'draft'"/>
+                                    <field name="date_remove"/>
                                 </group>
                             </group>
                             <group string="Other Information">
                                 <group>
-                                    <field name="profile_id" />
-                                    <field name="group_ids" widget="many2many_tags" />
+                                    <field name="profile_id"/>
+                                    <field name="group_ids" widget="many2many_tags"/>
                                 </group>
                                 <group>
-                                    <field name="partner_id" />
-                                    <field
-                                        name="analytic_distribution"
-                                        groups="analytic.group_analytic_accounting"
-                                        widget="analytic_distribution"
-                                    />
+                                    <field name="partner_id"/>
+                                    <field groups="analytic.group_analytic_accounting" name="analytic_distribution" widget="analytic_distribution"/>
                                 </group>
                             </group>
                             <group>
                                 <group string="Depreciation Dates">
-                                    <field name="method_time" required="1" />
-                                    <field
-                                        name="method_number"
-                                        attrs="{'invisible': [('method_time', 'not in', ['number', 'year'])], 'required': [('method_time', 'in', ['number', 'year'])]}"
-                                    />
-                                    <field name="method_period" required="1" />
-                                    <field
-                                        name="method_end"
-                                        attrs="{'required': [('method_time', '=', 'end')], 'invisible': [('method_time', 'in', ['number'])]}"
-                                    />
-                                    <field name="days_calc" />
-                                    <field
-                                        name="use_leap_years"
-                                        attrs="{'invisible': [('days_calc', '=', True)]}"
-                                    />
+                                    <field name="method_time" required="1"/>
+                                    <field invisible="method_time not in ['number', 'year']" name="method_number" required="method_time in ['number', 'year']"/>
+                                    <field name="method_period" required="1"/>
+                                    <field invisible="method_time in ['number']" name="method_end" required="method_time == 'end'"/>
+                                    <field name="days_calc"/>
+                                    <field invisible="days_calc == True" name="use_leap_years"/>
                                 </group>
                                 <group string="Depreciation Method">
-                                    <field name="method" required="1" />
-                                    <field
-                                        name="method_progress_factor"
-                                        attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
-                                    />
-                                    <field
-                                        name="prorata"
-                                        attrs="{'readonly': [('method_time', '!=', 'year')]}"
-                                    />
-                                    <field name="carry_forward_missed_depreciations" />
+                                    <field name="method" required="1"/>
+                                    <field invisible="method in ['linear', 'linear-limit']" name="method_progress_factor" required="method in ['degressive', 'degr-linear', 'degr-limit']"/>
+                                    <field name="prorata" readonly="method_time != 'year'"/>
+                                    <field name="carry_forward_missed_depreciations"/>
                                 </group>
                             </group>
                         </page>
                         <page string="Depreciation Board">
                             <div>
-                                <button
-                                    type="object"
-                                    name="compute_depreciation_board"
-                                    string="Compute"
-                                    icon="fa-gears"
-                                    attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"
-                                />
+                                <button icon="fa-gears" invisible="state in ['close', 'removed']" name="compute_depreciation_board" string="Compute" type="object"/>
                             </div>
-                            <field
-                                name="depreciation_line_ids"
-                                mode="tree"
-                                options="{'reload_on_button': true}"
-                            >
-                                <tree
-                                    decoration-info="(move_check == False) and (init_entry == False)"
-                                    create="false"
-                                >
-                                    <field name="type" />
-                                    <field name="line_date" />
-                                    <field name="line_days" sum="Total Days" />
-                                    <field name="depreciated_value" readonly="1" />
-                                    <field name="amount" />
-                                    <field name="remaining_value" readonly="1" />
-                                    <field name="init_entry" string="Init" />
-                                    <field name="move_check" />
-                                    <field name="parent_state" invisible="1" />
-                                    <field name="currency_id" invisible="1" />
-                                    <button
-                                        name="create_move"
-                                        icon="fa-cog"
-                                        string="Create Move"
-                                        type="object"
-                                        attrs="{'invisible': ['|', '|', ('init_entry', '=', True), ('move_check', '!=', False), ('parent_state', '!=', 'open')]}"
-                                    />
-                                    <button
-                                        name="open_move"
-                                        icon="fa-folder-open-o"
-                                        string="View Move"
-                                        type="object"
-                                        attrs="{'invisible': [('move_check', '!=', True)]}"
-                                    />
-                                    <button
-                                        name="unlink_move"
-                                        icon="fa-times"
-                                        string="Delete/Reverse Move"
-                                        type="object"
-                                        confirm="Are you sure ?"
-                                        groups="account.group_account_manager"
-                                        attrs="{'invisible': [('move_check', '!=', True)]}"
-                                    />
+                            <field mode="tree" name="depreciation_line_ids" options="{'reload_on_button': true}">
+                                <tree create="false" decoration-info="(move_check == False) and (init_entry == False)">
+                                    <field name="type"/>
+                                    <field name="line_date"/>
+                                    <field name="line_days" sum="Total Days"/>
+                                    <field name="depreciated_value" readonly="1"/>
+                                    <field name="amount"/>
+                                    <field name="remaining_value" readonly="1"/>
+                                    <field name="init_entry" string="Init"/>
+                                    <field name="move_check"/>
+                                    <field invisible="1" name="parent_state"/>
+                                    <field invisible="1" name="currency_id"/>
+                                    <button icon="fa-cog" invisible="init_entry == True or move_check != False or parent_state != 'open'" name="create_move" string="Create Move" type="object"/>
+                                    <button icon="fa-folder-open-o" invisible="move_check != True" name="open_move" string="View Move" type="object"/>
+                                    <button confirm="Are you sure ?" groups="account.group_account_manager" icon="fa-times" invisible="move_check != True" name="unlink_move" string="Delete/Reverse Move" type="object"/>
                                 </tree>
                                 <form string="Asset Line">
                                     <group>
                                         <group>
-                                            <field name="parent_state" invisible="1" />
-                                            <field
-                                                name="depreciation_base"
-                                                invisible="1"
-                                            />
-                                            <field name="currency_id" invisible="1" />
-                                            <field name="type" />
-                                            <field name="name" />
-                                            <field
-                                                name="amount"
-                                                attrs="{'readonly': [('move_check', '=', True)]}"
-                                            />
-                                            <field
-                                                name="init_entry"
-                                                attrs="{'readonly': ['|', ('move_check', '=', True), ('type', '=', 'create')]}"
-                                            />
-                                            <field name="move_id" />
-                                            <field name="move_check" />
+                                            <field invisible="1" name="parent_state"/>
+                                            <field invisible="1" name="depreciation_base"/>
+                                            <field invisible="1" name="currency_id"/>
+                                            <field name="type"/>
+                                            <field name="name"/>
+                                            <field name="amount" readonly="move_check == True"/>
+                                            <field name="init_entry" readonly="move_check == True or type == 'create'"/>
+                                            <field name="move_id"/>
+                                            <field name="move_check"/>
                                         </group>
                                         <group>
-                                            <field
-                                                name="line_date"
-                                                attrs="{'readonly': [('move_check', '=', True)]}"
-                                            />
-                                            <field
-                                                name="depreciated_value"
-                                                readonly="1"
-                                            />
-                                            <field
-                                                name="remaining_value"
-                                                readonly="1"
-                                            />
+                                            <field name="line_date" readonly="move_check == True"/>
+                                            <field name="depreciated_value" readonly="1"/>
+                                            <field name="remaining_value" readonly="1"/>
                                         </group>
                                     </group>
-                                </form>
-                            </field>
+                                </form></field>
                         </page>
                         <page string="History">
                             <field name="account_move_line_ids" readonly="1">
                                 <tree>
-                                    <field name="date" />
-                                    <field name="move_id" />
-                                    <field name="journal_id" optional="show" />
-                                    <field name="account_id" />
-                                    <field name="partner_id" optional="show" />
-                                    <field name="ref" />
-                                    <field name="name" optional="hide" />
-                                    <field name="debit" sum="1" />
-                                    <field name="credit" sum="1" />
-                                </tree>
-                            </field>
+                                    <field name="date"/>
+                                    <field name="move_id"/>
+                                    <field name="journal_id" optional="show"/>
+                                    <field name="account_id"/>
+                                    <field name="partner_id" optional="show"/>
+                                    <field name="ref"/>
+                                    <field name="name" optional="hide"/>
+                                    <field name="debit" sum="1"/>
+                                    <field name="credit" sum="1"/>
+                                </tree></field>
                         </page>
                         <page string="Notes">
-                            <field
-                                name="note"
-                                placeholder="Add an internal note here..."
-                            />
+                            <field name="note" placeholder="Add an internal note here..."/>
                         </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
                 </div>
-            </form>
-        </field>
+            </form></field>
     </record>
-    <record model="ir.ui.view" id="account_asset_view_tree">
+    <record id="account_asset_view_tree" model="ir.ui.view">
         <field name="name">account.asset.tree</field>
         <field name="model">account.asset</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name" />
-                <field name="code" optional="show" />
-                <field name="depreciation_base" optional="show" />
-                <field name="value_depreciated" optional="show" />
-                <field name="value_residual" optional="show" />
-                <field name="date_start" optional="show" />
-                <field name="date_remove" optional="show" />
-                <field name="profile_id" optional="show" />
-                <field name="method" optional="hide" />
-                <field name="prorata" optional="hide" />
-                <field name="group_ids" widget="many2many_tags" optional="hide" />
-                <field
-                    name="company_id"
-                    groups="base.group_multi_company"
-                    optional="show"
-                />
-                <field
-                    name="state"
-                    widget="badge"
-                    decoration-success="state == 'open'"
-                    decoration-warning="state == 'removed'"
-                    decoration-info="state == 'draft'"
-                    decoration-muted="state == 'close'"
-                />
-                <field name="currency_id" invisible="1" />
-            </tree>
-        </field>
+                <field name="name"/>
+                <field name="code" optional="show"/>
+                <field name="depreciation_base" optional="show"/>
+                <field name="value_depreciated" optional="show"/>
+                <field name="value_residual" optional="show"/>
+                <field name="date_start" optional="show"/>
+                <field name="date_remove" optional="show"/>
+                <field name="profile_id" optional="show"/>
+                <field name="method" optional="hide"/>
+                <field name="prorata" optional="hide"/>
+                <field name="group_ids" optional="hide" widget="many2many_tags"/>
+                <field groups="base.group_multi_company" name="company_id" optional="show"/>
+                <field decoration-info="state == 'draft'" decoration-muted="state == 'close'" decoration-success="state == 'open'" decoration-warning="state == 'removed'" name="state" widget="badge"/>
+                <field invisible="1" name="currency_id"/>
+            </tree></field>
     </record>
     <record id="account_asset_view_search" model="ir.ui.view">
         <field name="name">account.asset.search</field>
         <field name="model">account.asset</field>
         <field name="arch" type="xml">
             <search string="Account Asset">
-                <filter
-                    string="Draft"
-                    name="draft"
-                    domain="[('state', '=', 'draft')]"
-                />
-                <filter
-                    string="Running"
-                    name="running"
-                    domain="[('state', '=', 'open')]"
-                />
-                <filter
-                    string="Close"
-                    name="close"
-                    domain="[('state', '=', 'close')]"
-                />
-                <filter
-                    string="Removed"
-                    name="removed"
-                    domain="[('state', '=', 'removed')]"
-                />
-                <separator />
-                <filter
-                    string="Archived"
-                    name="inactive"
-                    domain="[('active', '=', False)]"
-                />
-                <separator />
-                <field name="name" />
-                <field name="code" />
-                <field name="date_start" />
-                <field name="profile_id" />
-                <field name="group_ids" />
-                <field
-                    name="partner_id"
-                    filter_domain="[('partner_id', 'child_of', self)]"
-                />
+                <filter domain="[('state', '=', 'draft')]" name="draft" string="Draft"/>
+                <filter domain="[('state', '=', 'open')]" name="running" string="Running"/>
+                <filter domain="[('state', '=', 'close')]" name="close" string="Close"/>
+                <filter domain="[('state', '=', 'removed')]" name="removed" string="Removed"/>
+                <separator/>
+                <filter domain="[('active', '=', False)]" name="inactive" string="Archived"/>
+                <separator/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="date_start"/>
+                <field name="profile_id"/>
+                <field name="group_ids"/>
+                <field filter_domain="[('partner_id', 'child_of', self)]" name="partner_id"/>
                 <group name="groupby">
-                    <filter
-                        string="Profile"
-                        name="profile"
-                        domain=""
-                        context="{'group_by': 'profile_id'}"
-                    />
-                    <filter
-                        string="Status"
-                        name="state_groupby"
-                        domain=""
-                        context="{'group_by': 'state'}"
-                    />
-                    <filter
-                        string="Computation Method"
-                        name="method_groupby"
-                        domain=""
-                        context="{'group_by': 'method'}"
-                    />
+                    <filter context="{'group_by': 'profile_id'}" domain="" name="profile" string="Profile"/>
+                    <filter context="{'group_by': 'state'}" domain="" name="state_groupby" string="Status"/>
+                    <filter context="{'group_by': 'method'}" domain="" name="method_groupby" string="Computation Method"/>
                 </group>
-            </search>
-        </field>
+            </search></field>
     </record>
     <record id="account_asset_action" model="ir.actions.act_window">
         <field name="name">Assets</field>
@@ -374,11 +196,9 @@
     </record>
     <record id="act_entries_open" model="ir.actions.act_window">
         <field name="name">Journal Items</field>
-        <field name="binding_model_id" ref="model_account_asset" />
+        <field name="binding_model_id" ref="model_account_asset"/>
         <field name="binding_view_types">form</field>
         <field name="res_model">account.move.line</field>
-        <field
-            name="domain"
-        >['|',('asset_id','in',context.get('active_ids')),('asset_id','=','active_id')]</field>
+        <field name="domain">['|',('asset_id','in',context.get('active_ids')),('asset_id','=','active_id')]</field>
     </record>
 </odoo>

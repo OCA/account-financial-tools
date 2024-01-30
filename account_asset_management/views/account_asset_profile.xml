@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="account_asset_profile_view_form" model="ir.ui.view">
         <field name="name">account.asset.profile.form</field>
@@ -6,127 +6,85 @@
         <field name="arch" type="xml">
             <form string="Asset profile">
                 <sheet>
-                    <widget
-                        name="web_ribbon"
-                        title="Archived"
-                        bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
-                    />
+                    <widget bg_color="bg-danger" invisible="active == True" name="web_ribbon" title="Archived"/>
                     <div class="oe_title">
-                        <label for="name" class="oe_edit_only" />
+                        <label class="oe_edit_only" for="name"/>
                         <h1>
-                                <field name="name" />
+                            <field name="name"/>
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="company_id" invisible="1" />
-                            <field name="group_ids" widget="many2many_tags" />
-                            <field name="asset_product_item" />
-                            <field name="active" invisible="1" />
-                            <field
-                                name="company_id"
-                                widget="selection"
-                                groups="base.group_multi_company"
-                            />
+                            <field invisible="1" name="company_id"/>
+                            <field name="group_ids" widget="many2many_tags"/>
+                            <field name="asset_product_item"/>
+                            <field invisible="1" name="active"/>
+                            <field groups="base.group_multi_company" name="company_id" widget="selection"/>
                         </group>
                         <group>
-                            <field name="journal_id" />
-                            <field name="account_asset_id" />
-                            <field name="account_depreciation_id" />
-                            <field name="account_expense_depreciation_id" />
-                            <field name="account_plus_value_id" />
-                            <field name="account_min_value_id" />
-                            <field name="account_residual_value_id" />
-                            <field name="allow_reversal" />
+                            <field name="journal_id"/>
+                            <field name="account_asset_id"/>
+                            <field name="account_depreciation_id"/>
+                            <field name="account_expense_depreciation_id"/>
+                            <field name="account_plus_value_id"/>
+                            <field name="account_min_value_id"/>
+                            <field name="account_residual_value_id"/>
+                            <field name="allow_reversal"/>
                         </group>
                         <group string="Depreciation Dates">
-                            <field name="method_time" />
-                            <field
-                                name="method_number"
-                                attrs="{'invisible': [('method_time', 'not in', ['number', 'year'])], 'required': [('method_time', 'in', ['number', 'year'])]}"
-                            />
-                            <field name="method_period" />
-                            <field name="days_calc" />
-                            <field
-                                name="use_leap_years"
-                                attrs="{'invisible': [('days_calc', '=', True)]}"
-                            />
+                            <field name="method_time"/>
+                            <field invisible="method_time not in ['number', 'year']" name="method_number" required="method_time in ['number', 'year']"/>
+                            <field name="method_period"/>
+                            <field name="days_calc"/>
+                            <field invisible="days_calc == True" name="use_leap_years"/>
                         </group>
                         <group string="Depreciation Method">
-                            <field name="method" />
-                            <field
-                                name="method_progress_factor"
-                                attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
-                            />
-                            <field
-                                name="prorata"
-                                attrs="{'readonly':[('method_time','!=','year')]}"
-                            />
-                            <field name="open_asset" />
+                            <field name="method"/>
+                            <field invisible="method in ['linear', 'linear-limit']" name="method_progress_factor" required="method in ['degressive', 'degr-linear', 'degr-limit']"/>
+                            <field name="prorata" readonly="method_time != 'year'"/>
+                            <field name="open_asset"/>
                         </group>
-                        <group
-                            groups="analytic.group_analytic_accounting"
-                            string="Analytic Information"
-                        >
-                            <field
-                                name="analytic_distribution"
-                                widget="analytic_distribution"
-                            />
+                        <group groups="analytic.group_analytic_accounting" string="Analytic Information">
+                            <field name="analytic_distribution" widget="analytic_distribution"/>
                         </group>
                     </group>
-                    <separator string="Notes" />
-                    <field name="note" />
+                    <separator string="Notes"/>
+                    <field name="note"/>
                 </sheet>
-            </form>
-        </field>
+            </form></field>
     </record>
     <record id="account_asset_profile_view_tree" model="ir.ui.view">
         <field name="name">account.asset.profile.tree</field>
         <field name="model">account.asset.profile</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name" />
-                <field name="method_number" optional="hide" />
-                <field name="method_period" optional="hide" />
-                <field name="journal_id" optional="show" />
-                <field name="account_asset_id" optional="hide" />
-                <field name="account_depreciation_id" optional="hide" />
-                <field name="account_expense_depreciation_id" optional="hide" />
-                <field name="account_plus_value_id" optional="hide" />
-                <field name="account_min_value_id" optional="hide" />
-                <field name="method" optional="show" />
-                <field name="prorata" optional="hide" />
-                <field
-                    name="company_id"
-                    groups="base.group_multi_company"
-                    optional="show"
-                />
-            </tree>
-        </field>
+                <field name="name"/>
+                <field name="method_number" optional="hide"/>
+                <field name="method_period" optional="hide"/>
+                <field name="journal_id" optional="show"/>
+                <field name="account_asset_id" optional="hide"/>
+                <field name="account_depreciation_id" optional="hide"/>
+                <field name="account_expense_depreciation_id" optional="hide"/>
+                <field name="account_plus_value_id" optional="hide"/>
+                <field name="account_min_value_id" optional="hide"/>
+                <field name="method" optional="show"/>
+                <field name="prorata" optional="hide"/>
+                <field groups="base.group_multi_company" name="company_id" optional="show"/>
+            </tree></field>
     </record>
     <record id="account_asset_profile_view_search" model="ir.ui.view">
         <field name="name">account.asset.profile.search</field>
         <field name="model">account.asset.profile</field>
         <field name="arch" type="xml">
             <search string="Search Asset Profile">
-                <field name="name" string="Asset Profile" />
-                <field name="journal_id" />
-                <separator />
-                <filter
-                    string="Archived"
-                    name="inactive"
-                    domain="[('active', '=', False)]"
-                />
+                <field name="name" string="Asset Profile"/>
+                <field name="journal_id"/>
+                <separator/>
+                <filter domain="[('active', '=', False)]" name="inactive" string="Archived"/>
                 <group name="groupby">
-                    <filter
-                        name="method_groupby"
-                        string="Computation Method"
-                        context="{'group_by': 'method'}"
-                    />
+                    <filter context="{'group_by': 'method'}" name="method_groupby" string="Computation Method"/>
                 </group>
-            </search>
-        </field>
+            </search></field>
     </record>
     <record id="account_asset_profile_action" model="ir.actions.act_window">
         <field name="name">Asset Profiles</field>
