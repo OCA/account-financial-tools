@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_order_unreconciled_queue" model="ir.ui.view">
+        <field name="name">purchase.order.form - purchase_unreconciled queue</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_unreconciled.purchase_order_form" />
+        <field name="arch" type="xml">
+            <field name="unreconciled" position="after">
+                <field name="reconcile_job_pending" invisible="1" />
+            </field>
+            <button name="action_view_unreconciled" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':['|',('unreconciled', '=', False), ('reconcile_job_pending', '=', True)]}</attribute>
+            </button>
+            <button name="action_reconcile" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':['|', '|',('unreconciled', '=', False), ('state', '!=', 'done'), ('reconcile_job_pending', '=', True)]}</attribute>
+            </button>
+        </field>
+    </record>
+</odoo>

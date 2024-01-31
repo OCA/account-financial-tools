@@ -11,5 +11,6 @@
     "license": "AGPL-3",
     "installable": True,
     "development_status": "Alpha",
+    "data": ["views/purchase_order_view.xml"],
     "maintainers": ["AaronHForgeFlow"],
 }
