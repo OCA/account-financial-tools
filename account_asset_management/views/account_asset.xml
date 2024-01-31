@@ -25,7 +25,7 @@
                     <group>
                         <group id="header_left_group">
                             <field invisible="1" name="company_id"/>
-                            <field name="code"/>
+                            <field name="code" readonly="state in ['open', 'close', 'removed']"/>
                             <field groups="base.group_multi_company" name="company_id" widget="selection"/>
                             <field groups="base.group_multi_currency" invisible="1" name="currency_id"/>
                             <field invisible="1" name="move_line_check"/>
@@ -51,11 +51,11 @@
                             </group>
                             <group string="Other Information">
                                 <group>
-                                    <field name="profile_id"/>
+                                    <field name="profile_id" readonly="state in ['open', 'close', 'removed']"/>
                                     <field name="group_ids" widget="many2many_tags"/>
                                 </group>
                                 <group>
-                                    <field name="partner_id"/>
+                                    <field name="partner_id" readonly="state in ['open', 'close', 'removed']"/>
                                     <field groups="analytic.group_analytic_accounting" name="analytic_distribution" widget="analytic_distribution"/>
                                 </group>
                             </group>
@@ -63,13 +63,13 @@
                                 <group string="Depreciation Dates">
                                     <field name="method_time" required="1"/>
                                     <field invisible="method_time not in ['number', 'year']" name="method_number" required="method_time in ['number', 'year']"/>
-                                    <field name="method_period" required="1"/>
+                                    <field name="method_period" readonly="state in ['open', 'close', 'removed']" required="1"/>
                                     <field invisible="method_time in ['number']" name="method_end" required="method_time == 'end'"/>
                                     <field name="days_calc"/>
                                     <field invisible="days_calc == True" name="use_leap_years"/>
                                 </group>
                                 <group string="Depreciation Method">
-                                    <field name="method" required="1"/>
+                                    <field name="method" readonly="state in ['open', 'close', 'removed']" required="1"/>
                                     <field invisible="method in ['linear', 'linear-limit']" name="method_progress_factor" required="method in ['degressive', 'degr-linear', 'degr-limit']"/>
                                     <field name="prorata" readonly="method_time != 'year'"/>
                                     <field name="carry_forward_missed_depreciations"/>
@@ -148,15 +148,15 @@
         <field name="model">account.asset</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
-                <field name="code" optional="show"/>
+                <field name="name" readonly="state in ['open', 'close', 'removed']"/>
+                <field name="code" readonly="state in ['open', 'close', 'removed']" optional="show"/>
                 <field name="depreciation_base" optional="show"/>
                 <field name="value_depreciated" optional="show"/>
                 <field name="value_residual" optional="show"/>
-                <field name="date_start" optional="show"/>
+                <field name="date_start" readonly="state in ['open', 'close', 'removed']" optional="show"/>
                 <field name="date_remove" optional="show"/>
-                <field name="profile_id" optional="show"/>
-                <field name="method" optional="hide"/>
+                <field name="profile_id" readonly="state in ['open', 'close', 'removed']" optional="show"/>
+                <field name="method" readonly="state in ['open', 'close', 'removed']" optional="hide"/>
                 <field name="prorata" optional="hide"/>
                 <field name="group_ids" optional="hide" widget="many2many_tags"/>
                 <field groups="base.group_multi_company" name="company_id" optional="show"/>
