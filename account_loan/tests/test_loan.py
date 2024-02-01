@@ -184,6 +184,7 @@ class TestLoan(TransactionCase):
         loan.rate = 2
         loan.compute_lines()
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+
         self.assertAlmostEqual(
             -numpy_financial.pmt(1 / 100 / 12, periods, amount, when="begin"),
             line.payment_amount,
