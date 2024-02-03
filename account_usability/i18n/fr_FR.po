@@ -39,23 +39,6 @@ msgid "Account Tags"
 msgstr "Etiquettes du compte"
 
 #. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Account Template"
-msgstr "Modèle de compte"
-
-#. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.account_account_template_action
-#: model:ir.ui.menu,name:account_usability.menu_account_account_template
-msgid "Account Templates"
-msgstr "Modèles de compte"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
-msgid "Account Type"
-msgstr "Type de compte"
-
-#. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_group_form
@@ -83,78 +66,9 @@ msgid "Cash Registers"
 msgstr "Caisses"
 
 #. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.action_account_chart_template_form
-#: model:ir.ui.menu,name:account_usability.menu_account_chart_template
-msgid "Chart of Accounts Templates"
-msgstr "Modèles de plan comptable"
-
-#. module: account_usability
 #: model:ir.model,name:account_usability.model_res_config_settings
 msgid "Config Settings"
 msgstr "Paramètres"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
-msgid "Default Taxes"
-msgstr "Taxes par défaut"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Expense Account"
-msgstr "Compte de dépenses"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
-msgid "Extra configuration"
-msgstr "Configuration supplémentaire"
-
-#. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
-#: model:ir.ui.menu,name:account_usability.menu_account_fiscal_position_template
-msgid "Fiscal Position Templates"
-msgstr "Modèles de position fiscale"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Group By"
-msgstr "Grouper par"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Income Account"
-msgstr "Compte de revenus"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
-msgid "Internal notes..."
-msgstr "Notes internes..."
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
-msgid "Note"
-msgstr "Note"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
-msgid "Notes"
-msgstr "Notes"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Payable Account"
-msgstr "Compte de dettes"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
-msgid "Properties"
-msgstr "Propriétés"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Receivable Account"
-msgstr "Compte de créances"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
@@ -186,11 +100,6 @@ msgid "Tax Group"
 msgstr "Groupe de taxe"
 
 #. module: account_usability
-#: model:ir.ui.menu,name:account_usability.menu_account_tax_template
-msgid "Tax Templates"
-msgstr "Modèles de taxe"
-
-#. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_tax_group__tax_ids
 msgid "Taxes"
 msgstr "Taxes"
@@ -204,3 +113,54 @@ msgstr "Modèles"
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
 msgstr "Utiliser la comptabilité anglo-saxonne"
+
+#~ msgid "Account Template"
+#~ msgstr "Modèle de compte"
+
+#~ msgid "Account Templates"
+#~ msgstr "Modèles de compte"
+
+#~ msgid "Account Type"
+#~ msgstr "Type de compte"
+
+#~ msgid "Chart of Accounts Templates"
+#~ msgstr "Modèles de plan comptable"
+
+#~ msgid "Default Taxes"
+#~ msgstr "Taxes par défaut"
+
+#~ msgid "Expense Account"
+#~ msgstr "Compte de dépenses"
+
+#~ msgid "Extra configuration"
+#~ msgstr "Configuration supplémentaire"
+
+#~ msgid "Fiscal Position Templates"
+#~ msgstr "Modèles de position fiscale"
+
+#~ msgid "Group By"
+#~ msgstr "Grouper par"
+
+#~ msgid "Income Account"
+#~ msgstr "Compte de revenus"
+
+#~ msgid "Internal notes..."
+#~ msgstr "Notes internes..."
+
+#~ msgid "Note"
+#~ msgstr "Note"
+
+#~ msgid "Notes"
+#~ msgstr "Notes"
+
+#~ msgid "Payable Account"
+#~ msgstr "Compte de dettes"
+
+#~ msgid "Properties"
+#~ msgstr "Propriétés"
+
+#~ msgid "Receivable Account"
+#~ msgstr "Compte de créances"
+
+#~ msgid "Tax Templates"
+#~ msgstr "Modèles de taxe"
