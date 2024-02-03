@@ -259,14 +259,6 @@ class AccountAsset(models.Model):
         states=READONLY_STATES,
         check_company=True,
     )
-    depreciation_line_manual_ids = fields.One2many(
-        comodel_name="account.asset.line",
-        inverse_name="asset_id",
-        string="Depreciation Lines (manual)",
-        copy=False,
-        states=READONLY_STATES,
-        check_company=True,
-    )
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
