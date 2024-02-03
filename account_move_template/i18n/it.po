@@ -75,8 +75,8 @@ msgstr "Importo"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
-msgid "Analytic"
-msgstr "Analitico"
+msgid "Analytic Distribution"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
@@ -303,14 +303,6 @@ msgid "Label"
 msgstr "Etichetta"
 
 #. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_uid
@@ -528,6 +520,12 @@ msgstr ""
 "Hai eliminato una riga nella procedura guidata. questo non è permesso: è "
 "necessario aggiornare il modello o modificare la registrazione contabile che "
 "verrà generata da questa procedura guidata."
+
+#~ msgid "Analytic"
+#~ msgstr "Analitico"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
 
 #~ msgid "Account Opt."
 #~ msgstr "Conto opz."

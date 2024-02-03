@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
 "PO-Revision-Date: 2023-11-06 00:45+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
-"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/"
-"23907/es_AR/)\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
+"teams/23907/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,8 +76,8 @@ msgstr "Monto"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
-msgid "Analytic"
-msgstr "Analítico"
+msgid "Analytic Distribution"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
@@ -311,14 +311,6 @@ msgid "Label"
 msgstr "Etiqueta"
 
 #. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
-
-#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_uid
@@ -536,6 +528,12 @@ msgstr ""
 "Borró una línea en el asistente. Esto no está permitido: debe actualizar la "
 "plantilla o modificar el asiento contable que será generado por este "
 "asistente."
+
+#~ msgid "Analytic"
+#~ msgstr "Analítico"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
 
 #~ msgid "Account Opt."
 #~ msgstr "Cuenta Opt."

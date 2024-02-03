@@ -75,8 +75,8 @@ msgstr "Montant"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
-msgid "Analytic"
-msgstr "Analytique"
+msgid "Analytic Distribution"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
@@ -311,14 +311,6 @@ msgid "Label"
 msgstr "Libellé"
 
 #. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
-
-#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_uid
@@ -538,6 +530,12 @@ msgstr ""
 "Vous avez supprimé une ligne dans l'assistant. Ceci n'est pas autorisé : "
 "vous devez soit mettre à jour le modèle, soit modifier la pièce comptable "
 "qui sera générée par l'assistant."
+
+#~ msgid "Analytic"
+#~ msgstr "Analytique"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
 
 #~ msgid "Account Opt."
 #~ msgstr "Compte si négatif"
