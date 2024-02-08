@@ -26,7 +26,10 @@ class AccountLoanLine(models.Model):
         ondelete="cascade",
     )
     company_id = fields.Many2one(
-        "res.company", readonly=True, related="loan_id.company_id"
+        "res.company",
+        readonly=True,
+        related="loan_id.company_id",
+        store=True,
     )
     partner_id = fields.Many2one(
         "res.partner", readonly=True, related="loan_id.partner_id"
