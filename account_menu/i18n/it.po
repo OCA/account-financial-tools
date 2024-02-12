@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-10 12:39+0000\n"
+"PO-Revision-Date: 2024-02-12 11:39+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,13 +19,13 @@ msgstr ""
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_group
 msgid "Account Group"
-msgstr "Gruppo di Conti"
+msgstr "Gruppo contabile"
 
 #. module: account_menu
 #: model:ir.actions.act_window,name:account_menu.account_group_action
 #: model:ir.ui.menu,name:account_menu.account_group_menu
 msgid "Account Groups"
-msgstr "Gruppi di Conti"
+msgstr "Gruppi contabili"
 
 #. module: account_menu
 #: model:ir.model,name:account_menu.model_account_account_tag
@@ -74,7 +74,7 @@ msgstr "Contabilità Anglosassone"
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_statement_bank
 msgid "Bank Statements"
-msgstr "Estratti Conto Bancari"
+msgstr "Estratti conto bancari"
 
 #. module: account_menu
 #: model:ir.ui.menu,name:account_menu.menu_accounting_bank_and_cash
