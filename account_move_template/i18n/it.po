@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2023-12-18 10:36+0000\n"
+"PO-Revision-Date: 2024-02-12 11:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -189,9 +189,9 @@ msgid ""
 "Check that the lines used in the formula really exists and have a lower "
 "sequence than the current line."
 msgstr ""
-"Impossibile calcolare la formula della riga con sequenza %s ( Formula: %s). "
-"Controlla che le righe usate nella formula esistano veramente e abbiano una "
-"sequenza inferiore alla riga corrente."
+"Impossibile calcolare la formula della riga con sequenza %s (formula: %s). "
+"Controllare che le righe usate nella formula esistano veramente e abbiano "
+"una sequenza inferiore alla riga corrente."
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:53
@@ -310,7 +310,7 @@ msgstr "Nota"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_line_id
 msgid "Originator Tax"
-msgstr "Imposta Originale"
+msgstr "Imposta di origine"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
