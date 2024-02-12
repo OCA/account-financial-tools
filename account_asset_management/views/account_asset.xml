@@ -61,6 +61,14 @@
                             <field name="company_id" invisible="1" />
                             <field name="code" />
                             <field
+                                name="import_depreciated_value"
+                                attrs="{'readonly': [('state', '!=', 'draft')]}"
+                            />
+                            <field
+                                name="import_depreciated_date"
+                                attrs="{'invisible': [('import_depreciated_value', '=', 0)], 'required': [('import_depreciated_value', '!=', 0)]}"
+                            />
+                            <field
                                 name="company_id"
                                 widget="selection"
                                 groups="base.group_multi_company"
