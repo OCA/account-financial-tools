@@ -40,7 +40,8 @@ class AccountAssetGroup(models.Model):
     def _default_company_id(self):
         return self.env.company
 
-    def name_get(self):
+    @api.depends("code", "name")
+    def _compute_display_name(self):
         result = []
         params = self.env.context.get("params")
         list_view = params and params.get("view_type") == "list"
@@ -59,12 +60,19 @@ class AccountAssetGroup(models.Model):
                 name = short_name
             else:
                 name = full_name
+            rec.display_name = name
             result.append((rec.id, name))
         return result
 
     @api.model
     def _name_search(
-        self, name, args=None, operator="ilike", limit=100, name_get_uid=None
+        self,
+        name,
+        args=None,
+        operator="ilike",
+        limit=100,
+        name_get_uid=None,
+        order=None,
     ):
         args = args or []
         domain = []
@@ -77,5 +85,8 @@ class AccountAssetGroup(models.Model):
             if operator in expression.NEGATIVE_TERM_OPERATORS:
                 domain = ["&", "!"] + domain[1:]
         return self._search(
-            expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid
+            expression.AND([domain, args]),
+            limit=limit,
+            access_rights_uid=name_get_uid,
+            order=order,
         )
