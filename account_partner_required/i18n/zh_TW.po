@@ -29,8 +29,22 @@ msgid "Account Type"
 msgstr ""
 
 #. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account_type__partner_policy__always
 msgid "Always"
+msgstr ""
+
+#. module: account_partner_required
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account__display_name
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account_type__display_name
+#: model:ir.model.fields,field_description:account_partner_required.field_account_move_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_partner_required
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account__id
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account_type__id
+#: model:ir.model.fields,field_description:account_partner_required.field_account_move_line__id
+msgid "ID"
 msgstr ""
 
 #. module: account_partner_required
@@ -40,17 +54,24 @@ msgid "Journal Item"
 msgstr "帳簿項目"
 
 #. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account____last_update
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account_type____last_update
+#: model:ir.model.fields,field_description:account_partner_required.field_account_move_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account_type__partner_policy__never
 msgid "Never"
 msgstr ""
 
 #. module: account_partner_required
-#: selection:account.account.type,partner_policy:0
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account_type__partner_policy__optional
 msgid "Optional"
 msgstr ""
 
 #. module: account_partner_required
-#: code:addons/account_partner_required/models/account.py:55
+#: code:addons/account_partner_required/models/account.py:0
 #, python-format
 msgid ""
 "Partner policy is set to 'Always' with account '%s' but the partner is "
@@ -58,7 +79,7 @@ msgid ""
 msgstr ""
 
 #. module: account_partner_required
-#: code:addons/account_partner_required/models/account.py:61
+#: code:addons/account_partner_required/models/account.py:0
 #, python-format
 msgid ""
 "Partner policy is set to 'Never' with account '%s' but the account move line "
