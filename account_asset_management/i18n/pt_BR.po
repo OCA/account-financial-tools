@@ -30,8 +30,8 @@ msgstr ""
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
 "PO-Revision-Date: 2023-12-28 22:35+0000\n"
 "Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,6 +49,13 @@ msgid ""
 msgstr ""
 "\n"
 "Erro ao processar o recurso '{ref}': {exception}"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+msgid ""
+"<span class=\"o_form_label oe_inline\" attrs=\"{'invisible':"
+"[('salvage_type','!=','percent')]}\">%</span>"
+msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -752,6 +759,11 @@ msgid "Financial Assets report"
 msgstr "Relatório de Ativos financeiros"
 
 #. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__fixed
+msgid "Fixed"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
 msgid "Followers"
 msgstr "Seguidores"
@@ -1195,6 +1207,11 @@ msgid "Partner"
 msgstr "Parceiro"
 
 #. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__percent
+msgid "Percentage of Price"
+msgstr ""
+
+#. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
@@ -1399,9 +1416,15 @@ msgid "Sale Value"
 msgstr "Valor de Venda"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
+msgid "Salvage Type"
+msgstr ""
+
+#. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__salvage_value
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_value
 #, python-format
 msgid "Salvage Value"
 msgstr "Valor Residual"
@@ -1522,6 +1545,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__salvage_value
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__salvage_value
 msgid ""
 "The estimated value that an asset will realize upon its sale at the end of "
 "its useful life.\n"

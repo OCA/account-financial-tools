@@ -23,8 +23,8 @@ msgstr ""
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
 "PO-Revision-Date: 2023-11-21 12:35+0000\n"
 "Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
-"Language-Team: Dutch (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/nl/)\n"
+"Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,6 +42,13 @@ msgid ""
 msgstr ""
 "\n"
 "Fout bij verwerken activa '{ref}': {exception}"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+msgid ""
+"<span class=\"o_form_label oe_inline\" attrs=\"{'invisible':"
+"[('salvage_type','!=','percent')]}\">%</span>"
+msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -389,8 +396,8 @@ msgid ""
 "   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base "
 "is equal to the asset value."
 msgstr ""
-"Kies de methode die je wilt gebruiken om de afschrijvingsregels te berekenen."
-"\n"
+"Kies de methode die je wilt gebruiken om de afschrijvingsregels te "
+"berekenen.\n"
 "  * Lineair: Berekend op basis van: Afschrijvingsbasis / Aantal "
 "afschrijvingen. Afschrijvingsbasis = Aanschafwaarde - Restwaarde.\n"
 "  * Lineair-Limiet: Lineair tot de restwaarde. Afschrijvingsbasis = "
@@ -743,6 +750,11 @@ msgid "Financial Assets report"
 msgstr "Financiële activa report"
 
 #. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__fixed
+msgid "Fixed"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
 msgid "Followers"
 msgstr "Volgers"
@@ -839,7 +851,8 @@ msgstr "Als deze optie is ingeschakeld, vereisen nieuwe berichten uw aandacht."
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Als deze optie is aangevinkt, hebben sommige berichten een afleverfout."
+msgstr ""
+"Als deze optie is aangevinkt, hebben sommige berichten een afleverfout."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__carry_forward_missed_depreciations
@@ -1194,6 +1207,11 @@ msgid "Partner"
 msgstr "Relatie"
 
 #. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__percent
+msgid "Percentage of Price"
+msgstr ""
+
+#. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
@@ -1398,9 +1416,15 @@ msgid "Sale Value"
 msgstr "Verkoopwaarde"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
+msgid "Salvage Type"
+msgstr ""
+
+#. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__salvage_value
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_value
 #, python-format
 msgid "Salvage Value"
 msgstr "Restwaarde"
@@ -1527,6 +1551,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__salvage_value
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__salvage_value
 msgid ""
 "The estimated value that an asset will realize upon its sale at the end of "
 "its useful life.\n"
@@ -1556,8 +1581,8 @@ msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value)."
 msgstr ""
-"Dit bedrag vertegenwoordigt de afschrijvingsbasis van het activum ("
-"aankoopwaarde - restwaarde)."
+"Dit bedrag vertegenwoordigt de afschrijvingsbasis van het activum "
+"(aankoopwaarde - restwaarde)."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__purchase_value
