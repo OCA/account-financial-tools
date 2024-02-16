@@ -955,3 +955,30 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         last_line.create_move()
         self.assertEqual(asset.value_residual, 0)
         self.assertEqual(asset.state, "close")
+
+    def test_21_asset_profile_salvage_value(self):
+        """Compute salvage value from asset profile."""
+        # Case percent
+        self.car5y.salvage_type = "percent"
+        self.car5y.salvage_value = 5
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": 1000,
+                "date_start": time.strftime("%Y-07-07"),
+            }
+        )
+        self.assertEqual(asset.salvage_value, 50)
+        # Case fixed amount
+        self.car5y.salvage_type = "fixed"
+        self.car5y.salvage_value = 5
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": 1000,
+                "date_start": time.strftime("%Y-07-07"),
+            }
+        )
+        self.assertEqual(asset.salvage_value, 5)
