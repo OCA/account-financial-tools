@@ -65,6 +65,7 @@ addon | version | maintainers | summary
 [account_move_transfer_partner](account_move_transfer_partner/) | 14.0.1.0.1 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Automation to translate amount due from many partners to one partner
 [account_netting](account_netting/) | 14.0.1.0.1 |  | Compensate AR/AP accounts from the same partner
 [account_no_default](account_no_default/) | 14.0.1.0.0 | [![dreispt](https://github.com/dreispt.png?size=30px)](https://github.com/dreispt) | Remove default expense account for vendor bills journal
+[account_partner_required](account_partner_required/) | 14.0.1.0.0 |  | Adds an option 'partner policy' on account types
 [account_reconcile_show_boolean](account_reconcile_show_boolean/) | 14.0.1.0.0 | [![remi-filament](https://github.com/remi-filament.png?size=30px)](https://github.com/remi-filament) | Allows to create reconciliable accounts by showing boolean on form view
 [account_sequence_option](account_sequence_option/) | 14.0.1.0.2 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Manage sequence options for account.move, i.e., invoice, bill, entry
 [account_spread_cost_revenue](account_spread_cost_revenue/) | 14.0.1.0.1 | [![astirpe](https://github.com/astirpe.png?size=30px)](https://github.com/astirpe) | Spread costs and revenues over a custom period

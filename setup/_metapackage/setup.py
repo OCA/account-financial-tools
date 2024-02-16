@@ -52,6 +52,7 @@ setuptools.setup(
         'odoo14-addon-account_move_transfer_partner',
         'odoo14-addon-account_netting',
         'odoo14-addon-account_no_default',
+        'odoo14-addon-account_partner_required',
         'odoo14-addon-account_reconcile_show_boolean',
         'odoo14-addon-account_sequence_option',
         'odoo14-addon-account_spread_cost_revenue',
