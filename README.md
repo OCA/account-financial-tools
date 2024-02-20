@@ -50,7 +50,7 @@ addon | version | maintainers | summary
 [account_lock_date_update](account_lock_date_update/) | 13.0.1.0.0 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_lock_to_date](account_lock_to_date/) | 13.0.1.0.1 |  | Allows to set an account lock date in the future.
 [account_maturity_date_default](account_maturity_date_default/) | 13.0.2.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Maturity Date Default
-[account_menu](account_menu/) | 13.0.1.0.0 |  | Adds missing menu entries for Account module
+[account_menu](account_menu/) | 13.0.1.0.1 |  | Adds missing menu entries for Account module
 [account_move_budget](account_move_budget/) | 13.0.1.0.0 |  | Create Accounting Budgets
 [account_move_force_removal](account_move_force_removal/) | 13.0.1.0.0 |  | Allow force removal account moves
 [account_move_line_cumulated_balance](account_move_line_cumulated_balance/) | 13.0.1.0.1 |  | Show cumulated balances on the interactive journal ledgers
