@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-02-20 18:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_transfer_partner
 #: model_terms:ir.ui.view,arch_db:account_move_transfer_partner.wizard_account_move_transfer_partner_view_form
@@ -20,27 +22,31 @@ msgid ""
 "<span>You can edit <strong>Amount to transfer</strong> only when you apply "
 "this on one move</span>"
 msgstr ""
+"<span>Sólo puedes editar <strong>Importe a transferir</strong> cuando lo "
+"aplicas en un movimiento</span>"
 
 #. module: account_move_transfer_partner
 #: model_terms:ir.ui.view,arch_db:account_move_transfer_partner.wizard_account_move_transfer_partner_view_form
 msgid ""
 "<span>You only can perform this operation on invoice/refund documents</span>"
 msgstr ""
+"<span>Sólo puede realizar esta operación en documentos de factura/"
+"devolución</span>"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__account_date
 msgid "Account date"
-msgstr ""
+msgstr "fecha de cuenta"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__allow_edit_amount_to_transfer
 msgid "Allow edit amount to transfer?"
-msgstr ""
+msgstr "¿Permitir editar el importe a transferir?"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__amount_to_transfer
 msgid "Amount to transfer"
-msgstr ""
+msgstr "Importe a transferir"
 
 #. module: account_move_transfer_partner
 #: code:addons/account_move_transfer_partner/wizard/wizard_account_move_transfer_partner.py:0
@@ -48,123 +54,125 @@ msgstr ""
 msgid ""
 "Amount to transfer %s should be equal or lower than total amount due %s"
 msgstr ""
+"El importe a transferir %s debe ser igual o inferior al importe total "
+"adeudado %s"
 
 #. module: account_move_transfer_partner
 #: code:addons/account_move_transfer_partner/wizard/wizard_account_move_transfer_partner.py:0
 #, python-format
 msgid "Amount to transfer should be bigger than zero"
-msgstr ""
+msgstr "El importe a transferir debe ser superior a cero"
 
 #. module: account_move_transfer_partner
 #: model_terms:ir.ui.view,arch_db:account_move_transfer_partner.wizard_account_move_transfer_partner_view_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: account_move_transfer_partner
 #: model_terms:ir.ui.view,arch_db:account_move_transfer_partner.wizard_account_move_transfer_partner_view_form
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Divisa"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__destination_partner_id
 msgid "Destination partner"
-msgstr ""
+msgstr "Socio de destino"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__move_ids
 msgid "Moves Selected"
-msgstr ""
+msgstr "Movimientos Seleccionados"
 
 #. module: account_move_transfer_partner
 #: code:addons/account_move_transfer_partner/tests/test_account_move_transfer_partner.py:0
 #, python-format
 msgid "No Chart of Account Template has been defined !"
-msgstr ""
+msgstr "¡No se ha Definido una Plantilla de Plan Contable!"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__no_invoice_documents
 msgid "No invoice documents?"
-msgstr ""
+msgstr "¿No hay documentos de facturación?"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__origin_partner_ids
 msgid "Origin Partner"
-msgstr ""
+msgstr "Socio de Origen"
 
 #. module: account_move_transfer_partner
 #: model:ir.model.fields,field_description:account_move_transfer_partner.field_wizard_account_move_transfer_partner__total_amount_due
 msgid "Total Amount Due"
-msgstr ""
+msgstr "Importe Total Adeudado"
 
 #. module: account_move_transfer_partner
 #: code:addons/account_move_transfer_partner/wizard/wizard_account_move_transfer_partner.py:0
 #, python-format
 msgid "Transfer amount due from %s"
-msgstr ""
+msgstr "Importe de la transferencia adeudado por %s"
 
 #. module: account_move_transfer_partner
 #: model:ir.actions.act_window,name:account_move_transfer_partner.wizard_account_move_transfer_partner_view_form_action
 #: model:ir.actions.act_window,name:account_move_transfer_partner.wizard_account_payment_transfer_partner_view_form_action
 msgid "Transfer amount due to another partner"
-msgstr ""
+msgstr "Importe de transferencia debido a otro socio"
 
 #. module: account_move_transfer_partner
 #: code:addons/account_move_transfer_partner/wizard/wizard_account_move_transfer_partner.py:0
 #, python-format
 msgid "Transfer due amount from %s"
-msgstr ""
+msgstr "Transferir importe adeudado desde %s"
 
 #. module: account_move_transfer_partner
 #: model:ir.model,name:account_move_transfer_partner.model_wizard_account_move_transfer_partner
 msgid "Wizard to transfer due amount to another partner"
-msgstr ""
+msgstr "Asistente para transferir el importe adeudado a otro socio"
 
 #. module: account_move_transfer_partner
 #: model_terms:ir.ui.view,arch_db:account_move_transfer_partner.wizard_account_move_transfer_partner_view_form
 msgid "wizard_account_move_transfer_partner_form"
-msgstr ""
+msgstr "wizard_account_move_transfer_partner_form"
