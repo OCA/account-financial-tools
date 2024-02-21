@@ -6,87 +6,89 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-02-21 18:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: product_category_tax
 #: model_terms:ir.ui.view,arch_db:product_category_tax.product_category_form_view
 msgid "-> Apply to Products"
-msgstr ""
+msgstr "-> Aplicar a productos"
 
 #. module: product_category_tax
 #: model:ir.model.fields,field_description:product_category_tax.field_product_category__taxes_id
 msgid "Customer Taxes"
-msgstr ""
+msgstr "Impuestos de cliente"
 
 #. module: product_category_tax
 #: model:ir.model.fields,help:product_category_tax.field_product_category__supplier_taxes_id
 msgid "Default taxes used when buying the product."
-msgstr ""
+msgstr "Impuestos por defecto utilizados al comprar el producto."
 
 #. module: product_category_tax
 #: model:ir.model.fields,help:product_category_tax.field_product_category__taxes_id
 msgid "Default taxes used when selling the product."
-msgstr ""
+msgstr "Impuestos por defecto utilizados al vender el producto."
 
 #. module: product_category_tax
 #: model:ir.model.fields,field_description:product_category_tax.field_product_category__display_name
 #: model:ir.model.fields,field_description:product_category_tax.field_product_product__display_name
 #: model:ir.model.fields,field_description:product_category_tax.field_product_template__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: product_category_tax
 #: model:ir.model.fields,field_description:product_category_tax.field_product_category__id
 #: model:ir.model.fields,field_description:product_category_tax.field_product_product__id
 #: model:ir.model.fields,field_description:product_category_tax.field_product_template__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: product_category_tax
 #: model:ir.model.fields,field_description:product_category_tax.field_product_category____last_update
 #: model:ir.model.fields,field_description:product_category_tax.field_product_product____last_update
 #: model:ir.model.fields,field_description:product_category_tax.field_product_template____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: product_category_tax
 #: model:ir.model,name:product_category_tax.model_product_product
 msgid "Product"
-msgstr ""
+msgstr "Producto"
 
 #. module: product_category_tax
 #: model:ir.model,name:product_category_tax.model_product_category
 msgid "Product Category"
-msgstr ""
+msgstr "Categoría de Producto"
 
 #. module: product_category_tax
 #: model:ir.model,name:product_category_tax.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Plantilla de Producto"
 
 #. module: product_category_tax
 #: model_terms:ir.ui.view,arch_db:product_category_tax.product_category_form_view
 msgid "Taxes"
-msgstr ""
+msgstr "Impuestos"
 
 #. module: product_category_tax
 #: model:ir.model.fields,field_description:product_category_tax.field_product_product__taxes_updeatable_from_category
 #: model:ir.model.fields,field_description:product_category_tax.field_product_template__taxes_updeatable_from_category
 msgid "Taxes Updeatable From Category"
-msgstr ""
+msgstr "Impuestos Actualizables Desde la Categoría"
 
 #. module: product_category_tax
 #: model_terms:ir.ui.view,arch_db:product_category_tax.product_category_form_view
 msgid "This will apply to all products in the category"
-msgstr ""
+msgstr "Se aplicará a todos los productos de la categoría"
 
 #. module: product_category_tax
 #: model:ir.model.fields,field_description:product_category_tax.field_product_category__supplier_taxes_id
 msgid "Vendor Taxes"
-msgstr ""
+msgstr "Impuestos del Vendedor"
