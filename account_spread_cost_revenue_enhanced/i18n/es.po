@@ -6,23 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-02-21 18:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model,name:account_spread_cost_revenue_enhanced.model_account_spread
 msgid "Account Spread"
-msgstr ""
+msgstr "Diferencial de la Cuenta"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model,name:account_spread_cost_revenue_enhanced.model_account_spread_line
 msgid "Account Spread Lines"
-msgstr ""
+msgstr "Líneas de Separación de Cuentas"
 
 #. module: account_spread_cost_revenue_enhanced
 #: code:addons/account_spread_cost_revenue_enhanced/wizards/account_spread_link_move_line.py:0
@@ -30,94 +32,97 @@ msgstr ""
 msgid ""
 "Already linked with a journal item, please unlink the existing one first."
 msgstr ""
+"Ya está vinculado con un artículo del diario, por favor, desvincule primero "
+"el existente."
 
 #. module: account_spread_cost_revenue_enhanced
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue_enhanced.view_account_spread_link_move_line_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread__create_move_type
 msgid "Create Entry As"
-msgstr ""
+msgstr "Crear Entrada Como"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields.selection,name:account_spread_cost_revenue_enhanced.selection__account_spread__create_move_type__out_refund
 msgid "Customer Credit Note"
-msgstr ""
+msgstr "Nota de Crédito Cliente"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields.selection,name:account_spread_cost_revenue_enhanced.selection__account_spread__create_move_type__out_invoice
 msgid "Customer Invoice"
-msgstr ""
+msgstr "Factura Cliente"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread__display_name
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_line__display_name
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread__id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_line__id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line__move_id
 #: model:ir.model.fields.selection,name:account_spread_cost_revenue_enhanced.selection__account_spread__create_move_type__entry
 msgid "Journal Entry"
-msgstr ""
+msgstr "Entrada de Diario"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line__move_line_id
 msgid "Journal Item"
-msgstr ""
+msgstr "Artículo del Diario"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread____last_update
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_line____last_update
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields,field_description:account_spread_cost_revenue_enhanced.field_account_spread_link_move_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue_enhanced.view_account_spread_link_move_line_form
 msgid "Link Spread Cost/Revenue With Journal Item"
-msgstr ""
+msgstr "Vincular el Coste/Ingreso Diferenciado con el Artículo del Diario"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model,name:account_spread_cost_revenue_enhanced.model_account_spread_link_move_line
 msgid "Link spread cost/revenue sheet with journal item"
 msgstr ""
+"Vincular la hoja de cálculo de costes/ingresos con la partida del diario"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.actions.act_window,name:account_spread_cost_revenue_enhanced.action_account_spread_link_move_line
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue_enhanced.view_account_spread_link_move_line_form
 msgid "Link with Journal Item"
-msgstr ""
+msgstr "Enlace con el Artículo del Diario"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue_enhanced.view_account_spread_link_move_line_form
@@ -125,16 +130,18 @@ msgid ""
 "Please choose the Journal Entry, and then the <b>Journal Item</b> you want "
 "to link with this spread costs/revenues sheet."
 msgstr ""
+"Seleccione la Entrada de Diario y, a continuación, la <b>Partida de Diario</"
+"b> que desea vincular con esta hoja de costes/ingresos de propagación."
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields.selection,name:account_spread_cost_revenue_enhanced.selection__account_spread__create_move_type__in_invoice
 msgid "Vendor Bill"
-msgstr ""
+msgstr "Factura de Vendedor"
 
 #. module: account_spread_cost_revenue_enhanced
 #: model:ir.model.fields.selection,name:account_spread_cost_revenue_enhanced.selection__account_spread__create_move_type__in_refund
 msgid "Vendor Credit Note"
-msgstr ""
+msgstr "Nota de Crédito de Vendedor"
 
 #. module: account_spread_cost_revenue_enhanced
 #: code:addons/account_spread_cost_revenue_enhanced/models/account_spread.py:0
@@ -143,3 +150,5 @@ msgid ""
 "When choose to create move type other than journal entry, debit/credit "
 "account must be same"
 msgstr ""
+"Cuando se elige crear un tipo de movimiento distinto de la entrada de "
+"diario, la cuenta de débito/crédito debe ser la misma"
