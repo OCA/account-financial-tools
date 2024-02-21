@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2023-07-20 10:16+0000\n"
+"PO-Revision-Date: 2024-02-21 21:34+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
@@ -28,6 +28,11 @@ msgid ""
 " 'L2': {'partner_id': 2, 'amount': 200, 'name': 'some label 2'}, }\n"
 "        "
 msgstr ""
+"\n"
+"Validar diccionario para sobreescribir líneas:\n"
+"{'L1': {'partner_id': 1, 'amount': 100, 'name': 'some label'},\n"
+" 'L2': {'partner_id': 2, 'amount': 200, 'name': 'some label 2'}, }\n"
+"        "
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
@@ -330,7 +335,7 @@ msgstr "Líneas"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__template_id
 msgid "Move Template"
-msgstr ""
+msgstr "Plantilla de Movimiento"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__name
@@ -506,7 +511,7 @@ msgstr "Asistente líneas para generar movimiento desde plantilla"
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_run
 msgid "Wizard to generate move from template"
-msgstr ""
+msgstr "Asistente para generar un asiento a partir de una plantilla"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
