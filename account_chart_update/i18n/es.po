@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 00:20+0000\n"
-"PO-Revision-Date: 2022-05-18 17:05+0000\n"
-"Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
+"PO-Revision-Date: 2024-02-21 18:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
@@ -36,7 +36,7 @@ msgstr "<span states=\"init,ready\"> o </span>"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_ids
 msgid "Account Groups"
-msgstr ""
+msgstr "Grupos de Cuenta"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
@@ -47,28 +47,29 @@ msgstr "Campos de cuenta"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__account_group_id
 msgid "Account group template"
-msgstr ""
+msgstr "Plantilla de grupo de cuenta"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account_group
 msgid ""
 "Account group that needs to be updated (new or updated in the template)."
 msgstr ""
+"Grupo de cuenta que debe actualizarse (nuevo o actualizado en la plantilla)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_account_group_id
 msgid "Account group to update"
-msgstr ""
+msgstr "Grupo de cuenta a actualizar"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Account groups"
-msgstr ""
+msgstr "Grupos de cuenta"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_matching_ids
 msgid "Account groups matching"
-msgstr ""
+msgstr "Correspondencia de grupos de cuenta"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__account_id
@@ -147,7 +148,7 @@ msgstr "Se ha creado la cuenta %s."
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Created account group %s."
-msgstr ""
+msgstr "Creado grupo de cuenta %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_uid
@@ -249,6 +250,8 @@ msgid ""
 "Existing account groups are updated. Account groups are searched by "
 "prefix_code_start."
 msgstr ""
+"Se actualizan los grupos de cuentas existentes. Los grupos de cuentas se "
+"buscan por prefix_code_start."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account
@@ -297,7 +300,7 @@ msgid ""
 "Fiscal position that needs to be updated (new or updated in the template)."
 msgstr ""
 "Posición fiscal que necesita ser actualizada (nuevo o modificada en la "
-"plantilla)"
+"plantilla)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__update_fiscal_position_id
@@ -475,7 +478,7 @@ msgstr "Nombre o descripción no encontrada."
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_account_groups
 msgid "New account groups"
-msgstr ""
+msgstr "Nuevos grupos de cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
@@ -562,7 +565,7 @@ msgstr "Otras opciones"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Post-updated account fields for taxes with IDs %s."
-msgstr ""
+msgstr "Campos de cuenta publicados-actualizados para impuestos con IDs %s."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -715,12 +718,12 @@ msgstr "Actualizar etiquetas de impuestos"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Update Taxes, fiscal positions or chart of accounts."
-msgstr "Actualizar impuestos, posiciones fiscales o el plan contable"
+msgstr "Actualizar impuestos, posiciones fiscales o plan de cuentas."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
 msgid "Update account groups"
-msgstr ""
+msgstr "Actualizar grupos de cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
@@ -795,13 +798,13 @@ msgstr "Cuenta %s actualizada. (XML-ID creado de nuevo)"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account group %s."
-msgstr ""
+msgstr "Grupo de cuentas %s actualizado."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account group %s. (Recreated XML-ID)"
-msgstr ""
+msgstr "Actualizado grupo de cuentas %s. (XML-ID recreado)"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_account_groups
@@ -854,7 +857,7 @@ msgstr "Plantilla actualizada"
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_group_matching
 msgid "Wizard Account Group Matching"
-msgstr ""
+msgstr "Asistente de Correspondencia de Grupos de Cuentas"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_matching
@@ -888,15 +891,15 @@ msgstr "Asistente completado"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You have at least one parent tax template (%s) whose children taxes are not "
 "going to be created. Aborting as this will provoke an infinite loop. Please "
 "check if children have been matched, but not the parent one."
 msgstr ""
-"Existe al menos una plantilla (%s) de impuesto padre cuyos impuestos hijos "
-"no se crearán. Abortando, ya que esto provocaría un bucle infinito. Por "
-"favor, compruebe si los hijos corresponden pero no el padre."
+"Tiene al menos una plantilla de impuestos matriz (%s) cuyos impuestos hijos "
+"no se van a crear. Abortar esto provocará un bucle infinito. Por favor, "
+"compruebe si los hijos se han emparejado, pero no la matriz."
 
 #~ msgid "Post-updated tax %s."
 #~ msgstr "Impuesto %s post-actualizado."
