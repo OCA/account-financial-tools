@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2024-02-12 11:37+0000\n"
+"PO-Revision-Date: 2024-02-22 11:38+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -44,7 +44,7 @@ msgstr "%s (copia)"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "&gt;"
-msgstr ""
+msgstr "&gt;"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -60,7 +60,7 @@ msgstr "Conto"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
 msgid "Account if Negative"
-msgstr ""
+msgstr "Conto se negativo"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__active
@@ -82,13 +82,13 @@ msgstr "Analitico"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution_search
 msgid "Analytic Distribution Search"
-msgstr ""
+msgstr "Ricerca distribuzione analitica"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_precision
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_precision
 msgid "Analytic Precision"
-msgstr ""
+msgstr "Precisione analitica"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
@@ -195,7 +195,7 @@ msgstr "Record da Modello %s"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__python_code
 msgid "Formula"
-msgstr ""
+msgstr "Formula"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
@@ -219,6 +219,9 @@ msgid ""
 "(formula: %(code)s). Check that the lines used in the formula really exists "
 "and have a lower sequence than the current line."
 msgstr ""
+"Impossibile calcolare la formula della riga con sequenza %(sequence)s "
+"(formula: %(code)s). Controllare che le righe usate nella formula esistano "
+"veramente e abbiano una sequenza inferiore alla riga corrente."
 
 #. module: account_move_template
 #. odoo-python
@@ -228,6 +231,8 @@ msgid ""
 "Impossible to compute the formula of line with sequence %(sequence)s "
 "(formula: %(code)s): the syntax of the formula is wrong."
 msgstr ""
+"Impossibile calcolare la formula della riga con sequenza %(sequence)s "
+"(formula: %(code)s): la sintassi della formula è sbagliata."
 
 #. module: account_move_template
 #. odoo-python
@@ -237,6 +242,8 @@ msgid ""
 "Invalid dictionary: %(exception)s\n"
 "%(msg)s"
 msgstr ""
+"Dizionaro non valido: %(exception)s\n"
+"%(msg)s"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
@@ -280,7 +287,7 @@ msgstr "Modello Oggetto Registro"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Keys must be line sequence i.e. L1, L2, ..."
-msgstr ""
+msgstr "Le chiavi devono essere una sequenza di riga, ovvero L1, L2..."
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
