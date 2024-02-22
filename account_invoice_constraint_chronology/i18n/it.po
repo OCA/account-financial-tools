@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 16:31+0000\n"
-"PO-Revision-Date: 2023-10-13 12:41+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2024-02-22 10:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
 "Language: it\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. module: account_invoice_constraint_chronology
 #: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal__check_chronology
 msgid "Check Chronology"
-msgstr ""
+msgstr "Controllo cronologia"
 
 #. module: account_invoice_constraint_chronology
 #. odoo-python
@@ -32,6 +32,8 @@ msgid ""
 "Chronology conflict: A conflicting draft invoice dated before {date_invoice} "
 "exists, please validate it first."
 msgstr ""
+"Conflitto cronologia: esiste un conflitto con una bozza fattura con data "
+"antecedente {date_invoice}, validare prima questa."
 
 #. module: account_invoice_constraint_chronology
 #. odoo-python
@@ -41,6 +43,8 @@ msgid ""
 "Chronology conflict: A conflicting validated invoice dated after "
 "{date_invoice} exists."
 msgstr ""
+"Conflitto cronologia: esiste un conflitto con una fattura validata con data "
+"posterire a {date_invoice}."
 
 #. module: account_invoice_constraint_chronology
 #. odoo-python
@@ -50,6 +54,8 @@ msgid ""
 "Chronology conflict: An invoice with a higher number {highest_name} dated "
 "before {date_invoice} exists."
 msgstr ""
+"Conflitto cronologia: esiste una fattura con numero {highest_name} superiore "
+"con data antecedente a {date_invoice}."
 
 #. module: account_invoice_constraint_chronology
 #. odoo-python
@@ -58,6 +64,8 @@ msgstr ""
 msgid ""
 "Chronology conflict: Invoice {name} cannot be {time} invoice {inv_name}."
 msgstr ""
+"Conflitto cronologia: la fattura {name} non può essere {time} fattura "
+"{inv_name}."
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
@@ -67,7 +75,7 @@ msgstr "Registro"
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Registrazione contabile"
 
 #~ msgid "Invoice"
 #~ msgstr "Fattura"
