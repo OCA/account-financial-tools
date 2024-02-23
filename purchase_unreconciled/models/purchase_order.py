@@ -210,14 +210,17 @@ class PurchaseOrder(models.Model):
 
     def button_done(self):
         for rec in self:
-            if rec.unreconciled:
-                exception_msg = rec.unreconciled_exception_msg()
-                if exception_msg:
-                    res = rec.purchase_unreconciled_exception(exception_msg)
-                    return res
-                else:
-                    if rec.reconcile_criteria():
+            criteria = rec.reconcile_criteria()
+            if criteria:
+                if rec.unreconciled:
+                    exception_msg = rec.unreconciled_exception_msg()
+                    if exception_msg:
+                        res = rec.purchase_unreconciled_exception(exception_msg)
+                        return res
+                    else:
                         rec.action_reconcile()
+                        return super(PurchaseOrder, rec).button_done()
+                else:
                     return super(PurchaseOrder, rec).button_done()
             else:
                 return super(PurchaseOrder, rec).button_done()
