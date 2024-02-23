@@ -163,7 +163,7 @@ class SaleOrder(models.Model):
             if amount_residual_currency_reconcile:
                 residual_field = "amount_residual_currency"
             else:
-                residual_field = "amount_residual"                
+                residual_field = "amount_residual"
             if float_is_zero(
                 sum(unreconciled_items_group.mapped(residual_field)),
                 precision_rounding=self.company_id.currency_id.rounding,
@@ -245,13 +245,17 @@ class SaleOrder(models.Model):
 
     def action_done(self):
         for rec in self:
-            if rec.reconcile_criteria():
-                exception_msg = rec.unreconciled_exception_msg()
-                if exception_msg:
-                    res = rec.sale_unreconciled_exception(exception_msg)
-                    return res
+            criteria = rec.reconcile_criteria()
+            if criteria:
+                if rec.unreconciled:
+                    exception_msg = rec.unreconciled_exception_msg()
+                    if exception_msg:
+                        res = rec.sale_unreconciled_exception(exception_msg)
+                        return res
+                    else:
+                        rec.action_reconcile()
+                        return super(SaleOrder, rec).action_done()
                 else:
-                    rec.action_reconcile()
                     return super(SaleOrder, rec).action_done()
             else:
                 return super(SaleOrder, rec).action_done()
