@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-06-07 11:13+0000\n"
+"PO-Revision-Date: 2024-02-23 14:40+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -86,7 +86,7 @@ msgstr "Blocca alla data futura"
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__period_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__period_lock_to_date
 msgid "Lock To Date for Non-Advisers"
-msgstr "Data di blocco per non \"consulenti\""
+msgstr "Blocco alla data per non consulenti"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
@@ -169,7 +169,7 @@ msgstr "Aggiornare date di blocco per contabilità"
 #: code:addons/account_lock_to_date/wizards/account_update_lock_to_date.py:43
 #, python-format
 msgid "You are not allowed to execute this action."
-msgstr "Non hai il permesso di eseguire questa azione."
+msgstr "Non si ha l'autorizzazione di eseguire questa azione."
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/account_move.py:21
