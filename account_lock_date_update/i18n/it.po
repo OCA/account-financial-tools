@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2024-01-18 11:36+0000\n"
+"PO-Revision-Date: 2024-02-23 14:39+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -77,7 +77,7 @@ msgstr "Data blocco nel passato"
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
 msgid "Lock Date for Non-Advisers"
-msgstr "Data blocco nel passato per non consulenti"
+msgstr "Data blocco per non consulenti"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
@@ -85,9 +85,8 @@ msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
 "this date. Use it for fiscal year locking for example."
 msgstr ""
-"Nessun utente, inclusi i consulenti, può modificare i movimenti contabili "
-"prima di, e incluso, questa data. Usarla per esempio per bloccare l'anno "
-"fiscale."
+"Nessun utente, inclusi i consulenti, può modificare i conti prima di, e "
+"incluso, questa data. Usarla per esempio per bloccare l'anno fiscale."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__period_lock_date
@@ -115,4 +114,4 @@ msgstr "Aggiornare date di blocco contabilità nel passato"
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:42
 #, python-format
 msgid "You are not allowed to execute this action."
-msgstr "Non sei autorizzato a eseguire questa azione."
+msgstr "Non si ha l'autorizzazione di eseguire questa azione."
