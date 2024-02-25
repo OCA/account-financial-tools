@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-20 01:10+0100\n"
-"PO-Revision-Date: 2023-10-10 11:49+0000\n"
+"PO-Revision-Date: 2024-02-25 22:33+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -50,6 +50,8 @@ msgid ""
 "<span class=\"o_form_label oe_inline\" attrs=\"{'invisible':"
 "[('salvage_type','!=','percent')]}\">%</span>"
 msgstr ""
+"<span class=\"o_form_label oe_inline\" attrs=\""
+"{'invisible':[('salvage_type','!=','percent')]}\">%</span>"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -731,7 +733,7 @@ msgstr "Informe de Activos Financieros"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__fixed
 msgid "Fixed"
-msgstr ""
+msgstr "Fijado"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
@@ -1171,7 +1173,7 @@ msgstr "Empresa"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__percent
 msgid "Percentage of Price"
-msgstr ""
+msgstr "Porcentaje del Precio"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
@@ -1369,7 +1371,7 @@ msgstr "Valor de venta"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
 msgid "Salvage Type"
-msgstr ""
+msgstr "Tipo de Rescate"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
