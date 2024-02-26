@@ -17,9 +17,7 @@ class AccountCheckDeposit(models.Model):
     _order = "deposit_date desc"
     _check_company_auto = True
 
-    name = fields.Char(
-        readonly=True, default=lambda self: _("New"), copy=False
-    )
+    name = fields.Char(readonly=True, default=lambda self: _("New"), copy=False)
     check_payment_ids = fields.One2many(
         comodel_name="account.move.line",
         inverse_name="check_deposit_id",
