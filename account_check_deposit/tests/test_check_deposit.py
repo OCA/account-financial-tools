@@ -3,10 +3,10 @@
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests import tagged
 from odoo import Command
-from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.tests import tagged
 
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
 @tagged("post_install", "-at_install")
@@ -27,7 +27,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
                 "company_id": cls.company.id,
             }
         )
-        cls.product = cls.env['product.product'].create({'name': 'Test Product'})
+        cls.product = cls.env["product.product"].create({"name": "Test Product"})
         cls.account_model = cls.env["account.account"]
         cls.partner = cls.env["res.partner"].create({"name": "Test partner"})
         cls.currency = cls.company.currency_id
@@ -51,14 +51,18 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
                         0,
                         0,
                         {
-                            "payment_method_id": cls.env.ref("account.account_payment_method_manual_in").id,
+                            "payment_method_id": cls.env.ref(
+                                "account.account_payment_method_manual_in"
+                            ).id,
                             "payment_account_id": cls.received_check_account.id,
                         },
                     )
                 ],
             }
         )
-        cls.fr_test_company['default_journal_bank'].bank_account_id = cls.env["res.partner.bank"].create(
+        cls.fr_test_company["default_journal_bank"].bank_account_id = cls.env[
+            "res.partner.bank"
+        ].create(
             {
                 "acc_number": "SI56 1910 0000 0123 438 584",
                 "partner_id": cls.company.partner_id.id,
@@ -94,7 +98,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
             {
                 "company_id": self.company.id,
                 "journal_id": self.check_journal.id,
-                "bank_journal_id": self.fr_test_company['default_journal_bank'].id,
+                "bank_journal_id": self.fr_test_company["default_journal_bank"].id,
                 "currency_id": self.currency.id,
             }
         )
@@ -120,7 +124,9 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
         self.assertAlmostEqual(payment.amount, 300)
         self.assertEqual(payment.state, "posted")
         check_deposit = self.create_check_deposit()
-        self.assertEqual(check_deposit.in_hand_check_account_id, self.received_check_account)
+        self.assertEqual(
+            check_deposit.in_hand_check_account_id, self.received_check_account
+        )
         liquidity_aml = check_deposit.move_id.line_ids.filtered(
             lambda r: r.account_id != check_deposit.in_hand_check_account_id
         )
