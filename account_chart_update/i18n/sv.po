@@ -9,111 +9,112 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2024-02-27 12:34+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
 msgid "# of Digits"
-msgstr ""
+msgstr "# Antal siffror"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Update Chart Template</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Uppdatera diagrammall</span>"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_ids
 msgid "Account Groups"
-msgstr ""
+msgstr "Kontogrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
 msgid "Account fields"
-msgstr ""
+msgstr "Kontofält"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__account_group_id
 msgid "Account group template"
-msgstr ""
+msgstr "Mall för kontogrupp"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account_group
 msgid ""
 "Account group that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Kontogrupp som behöver uppdateras (ny eller uppdaterad i mallen)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_account_group_id
 msgid "Account group to update"
-msgstr ""
+msgstr "Kontogrupp att uppdatera"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Account groups"
-msgstr ""
+msgstr "Kontogrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_field_ids
 msgid "Account groups fields"
-msgstr ""
+msgstr "Fält för kontogrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_matching_ids
 msgid "Account groups matching"
-msgstr ""
+msgstr "Matchning av kontogrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__account_id
 msgid "Account template"
-msgstr ""
+msgstr "Kontomall"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
 msgid "Account that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Konto som behöver uppdateras (nytt eller uppdaterat i mallen)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_account_id
 msgid "Account to update"
-msgstr ""
+msgstr "Konto att uppdatera"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Accounts"
-msgstr ""
+msgstr "Konton"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
 msgid "Accounts matching"
-msgstr ""
+msgstr "Kontomatchning"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template_id
 msgid "Chart Template"
-msgstr ""
+msgstr "Mall för diagram"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template_ids
 msgid "Chart Templates"
-msgstr ""
+msgstr "Mallar för diagram"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Chart of Accounts"
-msgstr ""
+msgstr "Kontoplan"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Close"
-msgstr ""
+msgstr "Stänga"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__company_id
@@ -123,24 +124,24 @@ msgstr "Bolag"
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__init
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguration"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__continue_on_errors
 msgid "Continue On Errors"
-msgstr ""
+msgstr "Fortsätt på fel"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Create/Update"
-msgstr ""
+msgstr "Skapa/Uppdatera"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Created account %s."
-msgstr ""
+msgstr "Skapat konto %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_uid
@@ -161,7 +162,7 @@ msgstr "Skapad av"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Created fiscal position %s."
-msgstr ""
+msgstr "Skapade skatteposition %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_date
@@ -182,19 +183,19 @@ msgstr "Skapad den"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Created tax %s."
-msgstr ""
+msgstr "Skapad skatt %s."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Deactivated tax %s."
-msgstr ""
+msgstr "Avaktiverad skatt %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__deleted_taxes
 msgid "Deactivated taxes"
-msgstr ""
+msgstr "Avaktiverade skatter"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
@@ -202,13 +203,15 @@ msgid ""
 "Determines where the tax is selectable. Note : 'None' means a tax can't be "
 "used by itself, however it can still be used in a group."
 msgstr ""
+"Bestämmer var skatten är valbar. Notera: 'Ingen' innebär att en skatt inte "
+"kan användas för sig själv, men den kan fortfarande användas i en grupp."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Differences in these fields: %s."
-msgstr ""
+msgstr "Skillnader i dessa fält: %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__display_name
@@ -222,21 +225,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__display_name
 msgid "Display Name"
-msgstr "Visa namn"
+msgstr "Visningsnamn"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Exception creating account %s."
-msgstr ""
+msgstr "Undantag vid skapande av konto %s."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Exception writing account %s."
-msgstr ""
+msgstr "Undantag vid skrivning av konto %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account_group
@@ -244,64 +247,68 @@ msgid ""
 "Existing account groups are updated. Account groups are searched by "
 "prefix_code_start."
 msgstr ""
+"Befintliga kontogrupper uppdateras. Kontogrupper söks efter "
+"prefix_code_start."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account
 msgid "Existing accounts are updated. Accounts are searched by code."
-msgstr ""
+msgstr "Befintliga konton uppdateras. Konton söks efter kod."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
 msgid ""
 "Existing fiscal positions are updated. Fiscal positions are searched by name."
 msgstr ""
+"Befintliga finansiella positioner uppdateras. Finanspositioner söks efter "
+"namn."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax
 msgid "Existing taxes are updated. Taxes are searched by name."
-msgstr ""
+msgstr "Befintliga skatter uppdateras. Skatter kan sökas efter namn."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Field options"
-msgstr ""
+msgstr "Alternativ för fält"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_ir_model_fields
 msgid "Fields"
-msgstr ""
+msgstr "Fält"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_field_ids
 msgid "Fiscal position fields"
-msgstr ""
+msgstr "Fält för finansiell ställning"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__fiscal_position_id
 msgid "Fiscal position template"
-msgstr ""
+msgstr "Mall för finanspolitisk ställning"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
 msgid ""
 "Fiscal position that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Skatteposition som behöver uppdateras (ny eller uppdaterad i mallen)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__update_fiscal_position_id
 msgid "Fiscal position to update"
-msgstr ""
+msgstr "Finanspolitisk position att uppdatera"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fiscal_position_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Fiscal positions"
-msgstr ""
+msgstr "Finanspolitiska ställningstaganden"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_matching_ids
 msgid "Fiscal positions matching"
-msgstr ""
+msgstr "Matchning av finanspolitiska positioner"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__lang
@@ -309,11 +316,13 @@ msgid ""
 "For records searched by name (taxes, fiscal positions), the template name "
 "will be matched against the record name on this language."
 msgstr ""
+"För poster som söks efter namn (skatter, skatteområde) kommer mallnamnet att "
+"matchas mot postnamnet på detta språk."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "General options"
-msgstr ""
+msgstr "Allmänna alternativ"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -321,11 +330,13 @@ msgid ""
 "Here you can select the fields you want to check if\n"
 "                            they have been updated in the templates."
 msgstr ""
+"Här kan du välja de fält som du vill kontrollera om\n"
+"                            de har uppdaterats i mallarna."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Here you can set the matching order."
-msgstr ""
+msgstr "Här kan du ställa in den matchande ordningen."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__id
@@ -347,6 +358,8 @@ msgid ""
 "If set, the wizard will continue to the next step even if there are minor "
 "errors."
 msgstr ""
+"Om detta är inställt kommer guiden att fortsätta till nästa steg även om det "
+"finns mindre fel."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -357,16 +370,21 @@ msgid ""
 "                                records with changes (i.e. different tax "
 "amount)"
 msgstr ""
+"Om du låter dessa alternativ vara inställda kommer guiden att\n"
+"                                inte bara skapa nya poster, utan även "
+"uppdatera\n"
+"                                poster med ändringar (t.ex. annat "
+"skattebelopp)"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__chart_template_ids
 msgid "Includes all chart templates."
-msgstr ""
+msgstr "Innehåller alla diagrammallar."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__lang
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching____last_update
@@ -413,12 +431,12 @@ msgstr "Senast uppdaterad"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Log"
-msgstr ""
+msgstr "Logg"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Matching"
-msgstr ""
+msgstr "Matchande"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__matching_value
@@ -427,46 +445,46 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__matching_value
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__matching_value
 msgid "Matching Value"
-msgstr ""
+msgstr "Matchande värde"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__log
 msgid "Messages and Errors"
-msgstr ""
+msgstr "Meddelanden och fel"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Missing XML-ID."
-msgstr ""
+msgstr "Saknar XML-ID."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Name or description not found."
-msgstr ""
+msgstr "Namn eller beskrivning hittades inte."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_account_groups
 msgid "New Account Groups"
-msgstr ""
+msgstr "Nya kontogrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
 msgid "New Accounts"
-msgstr ""
+msgstr "Nya konton"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
 msgid "New Taxes"
-msgstr ""
+msgstr "Nya skatter"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_fps
 msgid "New fiscal positions"
-msgstr ""
+msgstr "Nya skatteområden"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__new
@@ -474,43 +492,43 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__new
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__new
 msgid "New template"
-msgstr ""
+msgstr "Ny mall"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Next"
-msgstr ""
+msgstr "Nästa"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "No account found with this code."
-msgstr ""
+msgstr "Inget konto hittades med denna kod."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "No fiscal position found with this name."
-msgstr ""
+msgstr "Ingen skatteområde hittades med detta namn."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "No real account found for template account with ID %s"
-msgstr ""
+msgstr "Inget riktigt konto hittades för mallkonto med ID %s"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__code_digits
 msgid "No. of Digits to use for account code"
-msgstr ""
+msgstr "Antal siffror att använda för kontokod"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Note: Only the changed fields are updated."
-msgstr ""
+msgstr "Observera: Endast de ändrade fälten uppdateras."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__notes
@@ -518,7 +536,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__notes
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__notes
 msgid "Notes"
-msgstr ""
+msgstr "Anteckningar"
 
 #. module: account_chart_update
 #. odoo-python
@@ -529,28 +547,31 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Ett eller flera fel har upptäckts!\n"
+"\n"
+"%s"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Other options"
-msgstr ""
+msgstr "Andra alternativ"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Post-updated account fields for taxes with IDs %s."
-msgstr ""
+msgstr "Efteruppdaterade kontofält för skatter med ID %s."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Previous"
-msgstr ""
+msgstr "Tidigare"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Records to create/update"
-msgstr ""
+msgstr "Poster att skapa/uppdatera"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__recreate_xml_ids
@@ -559,22 +580,22 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__recreate_xml_ids
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__recreate_xml_ids
 msgid "Recreate missing XML-IDs"
-msgstr ""
+msgstr "Återskapa saknade XML-ID:n"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__rejected_new_account_number
 msgid "Rejected New Account Number"
-msgstr ""
+msgstr "Avvisat nytt kontonummer"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__rejected_updated_account_number
 msgid "Rejected Updated Account Number"
-msgstr ""
+msgstr "Avvisad Uppdaterat kontonummer"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__ready
 msgid "Select records to update"
-msgstr ""
+msgstr "Välj poster att uppdatera"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__sequence
@@ -583,70 +604,70 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__sequence
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sekvens"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__state
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Summary of created objects"
-msgstr ""
+msgstr "Sammanfattning av skapade objekt"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Summary of updated objects"
-msgstr ""
+msgstr "Sammanfattning av uppdaterade objekt"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
 msgid "Tax Type"
-msgstr ""
+msgstr "Typ av skatt"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_field_ids
 msgid "Tax fields"
-msgstr ""
+msgstr "Skattefält"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Tax is disabled."
-msgstr ""
+msgstr "Skatt är inaktiverat."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__tax_id
 msgid "Tax template"
-msgstr ""
+msgstr "Skattemall"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
 msgid "Tax that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Skatt som behöver uppdateras (ny eller uppdaterad i mallen)."
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__deleted
 msgid "Tax to deactivate"
-msgstr ""
+msgstr "Skatt för att avaktivera"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_tax_id
 msgid "Tax to update"
-msgstr ""
+msgstr "Skatt att uppdatera"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Taxes"
-msgstr ""
+msgstr "Skatter"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_matching_ids
 msgid "Taxes matching"
-msgstr ""
+msgstr "Matchning av skatter"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -656,13 +677,16 @@ msgid ""
 "chart\n"
 "                            template"
 msgstr ""
+"Denna guide uppdaterar dina konton, skatter och\n"
+"                            skatteområde enligt den valda diagrammallen\n"
+"                            mall"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "To deactivate: not in the template"
-msgstr ""
+msgstr "Att avaktivera: inte i mallen"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__type
@@ -675,47 +699,47 @@ msgstr "Typ"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Update Chart Template"
-msgstr ""
+msgstr "Mall för uppdateringsdiagram"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
 msgid "Update Tax Accounts"
-msgstr ""
+msgstr "Uppdatera skattekonton"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_tags
 msgid "Update Tax Tags"
-msgstr ""
+msgstr "Uppdatera skattemärken"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Update Taxes, fiscal positions or chart of accounts."
-msgstr ""
+msgstr "Uppdatera skatter, skatteområde eller kontoplan."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
 msgid "Update account groups"
-msgstr ""
+msgstr "Uppdatera kontogrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
 msgid "Update account_id field on existing Tax repartition lines"
-msgstr ""
+msgstr "Uppdatera fältet account_id på befintliga skattefördelningsrader"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account
 msgid "Update accounts"
-msgstr ""
+msgstr "Uppdatera konton"
 
 #. module: account_chart_update
 #: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
 msgid "Update chart of accounts"
-msgstr ""
+msgstr "Uppdatera kontoplanen"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Update chart template"
-msgstr ""
+msgstr "Mall för uppdateringsdiagram"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__update_chart_wizard_id
@@ -728,103 +752,103 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_chart_wizard_id
 msgid "Update chart wizard"
-msgstr ""
+msgstr "Uppdatera diagramguiden"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
 msgid "Update fiscal positions"
-msgstr ""
+msgstr "Uppdatera skatteområde"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Update records?"
-msgstr ""
+msgstr "Uppdatera register?"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_tags
 msgid "Update tag_ids field on existing Tax repartition lines"
-msgstr ""
+msgstr "Uppdatera fältet tag_ids på befintliga skattefördelningslinjer"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax
 msgid "Update taxes"
-msgstr ""
+msgstr "Uppdatera skatter"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_account_groups
 msgid "Updated Account Groups"
-msgstr ""
+msgstr "Uppdaterade kontogrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
 msgid "Updated Accounts"
-msgstr ""
+msgstr "Uppdaterade konton"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
 msgid "Updated Taxes"
-msgstr ""
+msgstr "Uppdaterade skatter"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account %s."
-msgstr ""
+msgstr "Uppdaterat konto %s."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account %s. (Recreated XML-ID)"
-msgstr ""
+msgstr "Uppdaterat konto %s. (Återskapat XML-ID)"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account group %s."
-msgstr ""
+msgstr "Uppdaterad kontogrupp %s."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account group %s. (Recreated XML-ID)"
-msgstr ""
+msgstr "Uppdaterad kontogrupp %s. (Återskapat XML-ID)"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated fiscal position %s."
-msgstr ""
+msgstr "Uppdaterad skatteområdesposition %s."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated fiscal position %s. (Recreated XML-ID)"
-msgstr ""
+msgstr "Uppdaterad skatteområde %s. (Återskapat XML-ID)"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_fps
 msgid "Updated fiscal positions"
-msgstr ""
+msgstr "Uppdaterade skatteområden"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated tax %s."
-msgstr ""
+msgstr "Uppdaterad skatt %s."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated tax %s. (Recreated XML-IDs)"
-msgstr ""
+msgstr "Uppdaterad skatt %s. (Återskapade XML-ID:n)"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__updated
@@ -832,42 +856,42 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__updated
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__updated
 msgid "Updated template"
-msgstr ""
+msgstr "Uppdaterad mall"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_group_matching
 msgid "Wizard Account Group Matching"
-msgstr ""
+msgstr "Guiden för kontogruppmatchning"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_matching
 msgid "Wizard Account Matching"
-msgstr ""
+msgstr "Guiden för kontomatchning"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_fp_matching
 msgid "Wizard Fiscal Position Matching"
-msgstr ""
+msgstr "Guide för matchning av skatteområden"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_matching
 msgid "Wizard Matching"
-msgstr ""
+msgstr "Guide för matchning"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_tax_matching
 msgid "Wizard Tax Matching"
-msgstr ""
+msgstr "Guide för skattejämkning"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
 msgid "Wizard Update Charts Accounts"
-msgstr ""
+msgstr "Guiden för att uppdatera diagrammallar"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__done
 msgid "Wizard completed"
-msgstr ""
+msgstr "Guiden slutförd"
 
 #. module: account_chart_update
 #. odoo-python
@@ -878,3 +902,6 @@ msgid ""
 "going to be created. Aborting as this will provoke an infinite loop. Please "
 "check if children have been matched, but not the parent one."
 msgstr ""
+"Du har minst en överordnad skattemall (%s) vars underordnade skatter inte "
+"kommer att skapas. Avbryts eftersom detta kommer att orsaka en oändlig loop. "
+"Kontrollera om underordnade poster har matchats, men inte den överordnade."
