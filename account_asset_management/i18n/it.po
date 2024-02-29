@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2023-06-22 15:09+0000\n"
+"PO-Revision-Date: 2024-02-29 13:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -120,7 +120,7 @@ msgstr ""
 #: field:asset.asset.report,asset_id:0
 #: model:ir.model,name:account_asset_management.model_account_asset_asset
 msgid "Asset"
-msgstr "Immobilizzazione"
+msgstr "Cespite"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:349
@@ -405,13 +405,13 @@ msgstr "Calcola"
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:account_asset_management.view_asset_depreciation_confirmation_wizard
 msgid "Compute Asset"
-msgstr "Calcola Ammortamenti"
+msgstr "Calcola ammortamento"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_asset_depreciation_confirmation_wizard
 #: model:ir.ui.menu,name:account_asset_management.menu_asset_depreciation_confirmation_wizard
 msgid "Compute Assets"
-msgstr "Calcola Ammortamenti"
+msgstr "Calcola ammortamenti"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
