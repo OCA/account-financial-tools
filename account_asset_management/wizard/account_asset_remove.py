@@ -254,6 +254,9 @@ class AccountAssetRemove(models.TransientModel):
         if not dlines:
             asset.compute_depreciation_board()
             dlines = _dlines(asset)
+        residual_value = asset.value_residual
+        if not dlines:
+            return residual_value
         first_to_depreciate_dl = dlines[0]
 
         first_date = first_to_depreciate_dl.line_date

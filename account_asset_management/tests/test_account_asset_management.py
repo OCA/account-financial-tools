@@ -901,3 +901,38 @@ class TestAssetManagement(SavepointCase):
         last_line.create_move()
         self.assertEqual(asset.value_residual, 0)
         self.assertEqual(asset.state, "close")
+
+    def test_21_asset_removal_with_no_depreciations(self):
+        """Art is an asset that will never depreciate. But we may need to
+        remove it as well"""
+        asset = self.asset_model.create(
+            {
+                "name": "test asset removal art",
+                "profile_id": self.ref(
+                    "account_asset_management.account_asset_profile_art"
+                ),
+                "purchase_value": 1000,
+                "salvage_value": 0,
+                "date_start": "2019-01-01",
+                "method_time": "number",
+                "method_number": 0,
+                "method_period": "month",
+                "prorata": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.validate()
+        wiz_ctx = {"active_id": asset.id, "early_removal": True}
+        wiz = self.remove_model.with_context(wiz_ctx).create(
+            {
+                "date_remove": "2019-01-31",
+                "sale_value": 0.0,
+                "posting_regime": "gain_loss_on_sale",
+                "account_plus_value_id": self.ref("account.a_sale"),
+                "account_min_value_id": self.ref("account.a_expense"),
+            }
+        )
+        wiz.remove()
+        asset.refresh()
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 1000, places=2)
+        self.assertEquals(asset.state, "removed")
