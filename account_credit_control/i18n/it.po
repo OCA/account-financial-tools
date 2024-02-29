@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2024-02-22 14:35+0000\n"
+"PO-Revision-Date: 2024-02-29 17:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -591,7 +591,7 @@ msgstr "Totale dovuto tasse incluse"
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date"
-msgstr "Data scadenza"
+msgstr "Scadenza"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
@@ -606,7 +606,7 @@ msgstr "Saldo dovuto"
 #. module: account_credit_control
 #: field:credit.control.line,date_due:0
 msgid "Due date"
-msgstr "Data scadenza"
+msgstr "Scadenza"
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
