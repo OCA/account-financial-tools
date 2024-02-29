@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-17 02:57+0000\n"
-"PO-Revision-Date: 2023-10-09 09:08+0000\n"
+"PO-Revision-Date: 2024-02-29 17:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -72,7 +72,7 @@ msgstr "Documento: estratto conto cliente"
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Due Date"
-msgstr "Data scadenza"
+msgstr "Scadenza"
 
 #. module: partner_report_open_invoices
 #: field:report.partner_report_open_invoices.report_open_invoices,id:0
