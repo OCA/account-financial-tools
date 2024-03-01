@@ -13,8 +13,6 @@ class PurchaseOrderLine(models.Model):
         for line in self:
             name = orig_name[line.id]
             if self.env.context.get("po_line_info", False):
-                name = "[{}] {} ({})".format(
-                    line.order_id.name, name, line.order_id.state
-                )
+                name = f"[{line.order_id.name}] {name} ({line.order_id.state})"
             result.append((line.id, name))
         return result
