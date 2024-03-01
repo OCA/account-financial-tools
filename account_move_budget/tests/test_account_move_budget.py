@@ -83,7 +83,6 @@ class TestAccountMoveBudget(TransactionCase):
         self.assertTrue(move_form.save())
 
     def test_03_copy_account_move_budget(self):
-
         move_form = Form(self.env["account.move.budget"])
         move_form.name = "Budget Test 03"
         move_form.description = "Description"
@@ -92,7 +91,6 @@ class TestAccountMoveBudget(TransactionCase):
         self.assertTrue(move_form.save().copy())
 
     def test_04_actions_account_move_budget(self):
-
         values = {
             "name": "Budget Test 04",
             "description": "Description",
