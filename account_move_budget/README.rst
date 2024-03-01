@@ -49,8 +49,8 @@ expenses report.
 Usage
 =====
 
-In order to set up the budget items go to *Invoicing / Accounting /
-Miscellaneous / Account Move Budgets*.
+In order to set up the budget items go to *Accounting / Accounting /
+Journals / Account Move Budgets*.
 
 Bug Tracker
 ===========
