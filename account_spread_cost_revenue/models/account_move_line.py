@@ -120,7 +120,7 @@ class AccountMoveLine(models.Model):
                 return False
             if (
                 aline.analytic_account_id
-                and iline.account_analytic_id != aline.analytic_account_id
+                and iline.analytic_account_id != aline.analytic_account_id
             ):
                 return False
             return True
