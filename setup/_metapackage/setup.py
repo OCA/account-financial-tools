@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-account_asset_batch_compute>=15.0dev,<15.1dev',
+        'odoo-addon-account_asset_compute_batch>=15.0dev,<15.1dev',
         'odoo-addon-account_asset_low_value>=15.0dev,<15.1dev',
         'odoo-addon-account_asset_management>=15.0dev,<15.1dev',
         'odoo-addon-account_asset_management_menu>=15.0dev,<15.1dev',
