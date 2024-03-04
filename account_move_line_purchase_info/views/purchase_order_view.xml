@@ -10,7 +10,7 @@
                     name="action_view_journal_entries"
                     class="oe_stat_button"
                     icon="fa-list-ul"
-                    attrs="{'invisible':['|', ('journal_entries_count', '=', 0), ('state', 'in', ('draft','sent','to approve'))]}"
+                    invisible="journal_entries_count == 0 or state in ('draft', 'sent', 'to approve')"
                     groups="account.group_account_user"
                 >
                     <field
