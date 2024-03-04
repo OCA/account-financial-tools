@@ -29,7 +29,6 @@ class TestAccountTaxRepartitionLineTaxGroupAccount(common.TransactionCase):
         )
 
     def test_default_account(self):
-
         tax = self.env["account.tax"].create(
             {
                 "name": "sales tax",
