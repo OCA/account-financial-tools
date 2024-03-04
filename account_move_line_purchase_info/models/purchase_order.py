@@ -38,7 +38,7 @@ class PurchaseOrder(models.Model):
         immediately.
         """
         if not invoices:
-            self.sudo()._read(["journal_entry_ids"])
+            self.sudo().read(["journal_entry_ids"])
             invoices = self.journal_entry_ids
 
         result = self.env["ir.actions.act_window"]._for_xml_id(

@@ -9,7 +9,7 @@ from odoo.tests import Form, common
 class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestAccountMoveLinePurchaseInfo, cls).setUpClass()
+        super().setUpClass()
         cls.purchase_model = cls.env["purchase.order"]
         cls.purchase_line_model = cls.env["purchase.order.line"]
         cls.product_model = cls.env["product.product"]
@@ -160,8 +160,9 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             self.assertEqual(
                 balance,
                 expected_balance,
-                "Balance is not %s for Purchase Line %s."
-                % (str(expected_balance), purchase_line.name),
+                "Balance is not {} for Purchase Line {}.".format(
+                    str(expected_balance), purchase_line.name
+                ),
             )
 
     def test_purchase_invoice(self):
@@ -176,7 +177,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         purchase.button_confirm()
         picking = purchase.picking_ids[0]
         picking.action_confirm()
-        picking.move_ids.write({"quantity_done": 1.0})
+        picking.move_ids.write({"quantity": 1.0})
         picking.button_validate()
 
         expected_balance = 1.0
@@ -203,7 +204,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                     "from the invoice to the account move line.",
                 )
 
-    def test_name_get(self):
+    def test_display_name(self):
         purchase = self._create_purchase([(self.product, 1)])
         po_line = purchase.order_line[0]
         name_get = po_line.with_context(**{"po_line_info": True}).name_get()
@@ -212,8 +213,9 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             [
                 (
                     po_line.id,
-                    "[%s] %s (%s)"
-                    % (po_line.order_id.name, po_line.name, po_line.order_id.state),
+                    "[{}] {} ({})".format(
+                        po_line.order_id.name, po_line.name, po_line.order_id.state
+                    ),
                 )
             ],
         )
@@ -229,7 +231,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         self.assertEqual(purchase.invoice_ids.id, False)
         self.assertEqual(purchase.journal_entries_count, 0)
         self.assertEqual(purchase.invoice_count, 0)
-        purchase.picking_ids.move_ids_without_package.quantity_done = 1
+        purchase.picking_ids.move_ids_without_package.quantity = 1
         purchase.picking_ids.button_validate()
         self.assertEqual(purchase.journal_entries_count, 1)
         self.assertEqual(purchase.invoice_count, 0)

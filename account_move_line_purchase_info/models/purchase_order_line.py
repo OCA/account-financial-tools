@@ -9,7 +9,7 @@ class PurchaseOrderLine(models.Model):
 
     def name_get(self):
         result = []
-        orig_name = dict(super(PurchaseOrderLine, self).name_get())
+        orig_name = dict(super().name_get())
         for line in self:
             name = orig_name[line.id]
             if self.env.context.get("po_line_info", False):
