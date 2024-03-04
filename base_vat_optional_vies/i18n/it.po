@@ -6,28 +6,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-03-04 16:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: base_vat_optional_vies
 #: model_terms:ir.ui.view,arch_db:base_vat_optional_vies.res_config_settings_view_form
 msgid "Compute check vies"
-msgstr ""
+msgstr "Calcolo controllo VIES"
 
 #. module: base_vat_optional_vies
 #: model:ir.model,name:base_vat_optional_vies.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: base_vat_optional_vies
 #: model:ir.model,name:base_vat_optional_vies.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: base_vat_optional_vies
 #. odoo-python
@@ -37,6 +39,9 @@ msgid ""
 "The VAT number [%(wrong_vat)s] for %(record_label)s does not seem to be valid. \n"
 "Note: the expected format is %(expected_format)s"
 msgstr ""
+"La partita IVA [%(wrong_vat)s] per %(record_label)s non sembra essere "
+"valida. \n"
+"Nota: il formato atteso è %(expected_format)s"
 
 #. module: base_vat_optional_vies
 #: model_terms:ir.ui.view,arch_db:base_vat_optional_vies.res_config_settings_view_form
@@ -44,16 +49,17 @@ msgid ""
 "This process can take a long time. Are you sure you want to start the "
 "process?"
 msgstr ""
+"Questo processo può richiedere molto tempo. Sei sicuro di volerlo lanciare?"
 
 #. module: base_vat_optional_vies
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner__vies_passed
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_users__vies_passed
 msgid "VIES validation"
-msgstr ""
+msgstr "Validazione VIES"
 
 #. module: base_vat_optional_vies
 #. odoo-python
 #: code:addons/base_vat_optional_vies/models/res_config_settings.py:0
 #, python-format
 msgid "Vies passed calculated in %s partners"
-msgstr ""
+msgstr "VIES validato calcolato per %s partner"
