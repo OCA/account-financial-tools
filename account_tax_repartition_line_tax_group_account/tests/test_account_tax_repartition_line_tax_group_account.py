@@ -13,11 +13,9 @@ class TestAccountTaxRepartitionLineTaxGroupAccount(common.TransactionCase):
         )
         self.sales_tax_account = self.env["account.account"].create(
             {
-                "code": "sales_tax",
+                "code": "salestax",
                 "name": "sales_tax",
-                "user_type_id": self.env.ref(
-                    "account.data_account_type_current_liabilities"
-                ).id,
+                "account_type": "liability_current",
                 "reconcile": False,
             }
         )

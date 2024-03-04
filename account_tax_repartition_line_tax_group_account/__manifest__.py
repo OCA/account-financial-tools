@@ -3,7 +3,7 @@
 {
     "name": "Account Tax Repartition Line Tax Group Account",
     "summary": "Set a default account from tax group to tax repartition lines",
-    "version": "13.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "ForgeFlow," "Odoo Community Association (OCA)",

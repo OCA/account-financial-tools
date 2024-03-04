@@ -5,7 +5,7 @@
         <field name="model">account.tax.group</field>
         <field name="inherit_id" ref="account.view_tax_group_tree" />
         <field name="arch" type="xml">
-            <field name="property_advance_tax_payment_account_id" position="after">
+            <field name="advance_tax_payment_account_id" position="after">
                 <field name="property_repartition_line_account_id" />
             </field>
         </field>
