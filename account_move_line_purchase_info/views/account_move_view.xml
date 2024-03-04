@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_line_form" model="ir.ui.view">
+        <field name="name">account.move.line.form</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_form" />
+        <field name="arch" type="xml">
+            <field name="quantity" position="before">
+                <field
+                    name="purchase_order_id"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+                <field
+                    name="purchase_line_id"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field
+                    name="purchase_order_id"
+                    optional="show"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+                <field
+                    name="purchase_line_id"
+                    optional="hide"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_move_line_filter" model="ir.ui.view">
+        <field name="name">Journal Items</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field
+                    name="purchase_order_id"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+                <field
+                    name="purchase_line_id"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+            </field>
+            <filter name="group_by_partner" position="after">
+                <filter
+                    name="group_by_purchase_order"
+                    string="Purchase Order"
+                    domain="[]"
+                    context="{'group_by':'purchase_order_id'}"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+                <filter
+                    name="group_by_purchase_order_line"
+                    string="Purchase Order Line"
+                    domain="[]"
+                    context="{'group_by':'purchase_line_id','po_line_info':True}"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='line_ids']/tree//field[@name='partner_id']"
+                position="after"
+            >
+                <field
+                    name="purchase_line_id"
+                    optional="hide"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+                <field
+                    name="purchase_order_id"
+                    optional="show"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='line_ids']/form//field[@name='partner_id']"
+                position="after"
+            >
+                <field
+                    name="purchase_line_id"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+                <field
+                    name="purchase_order_id"
+                    groups="account_move_line_purchase_info.group_account_move_purchase_info"
+                />
+            </xpath>
+            <field name="line_ids" position="attributes">
+                <attribute name="context" operation="update">{
+                    "po_line_info": True,
+                }</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
