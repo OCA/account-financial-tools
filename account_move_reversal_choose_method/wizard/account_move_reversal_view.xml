@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ForgeFlow S.L. (http://www.forgeflow.com)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_account_move_reversal" model="ir.ui.view">
+        <field name="name">account.move.reversal.form (choose method)</field>
+        <field name="model">account.move.reversal</field>
+        <field name="inherit_id" ref="account.view_account_move_reversal" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='refund_method']/.." position="attributes">
+                <attribute name="attrs">{'invisible': False}</attribute>
+            </xpath>
+            <field name="refund_method" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('residual', '=', 0), ('move_type', 'in', ('out_invoice', 'in_invoice'))]}</attribute>
+            </field>
+            <xpath
+                expr="//field[@name='refund_method']/../../group[2]"
+                position="after"
+            >
+                <group
+                    attrs="{'invisible': [('move_type', 'in', ('out_invoice', 'in_invoice'))]}"
+                >
+                    <div
+                        attrs="{'invisible':[('refund_method', '!=', 'refund')]}"
+                        class="oe_grey"
+                        colspan="4"
+                    >
+                       The credit note is created in draft and can be edited before being issued.
+                    </div>
+                    <div
+                        attrs="{'invisible':[('refund_method', '!=', 'cancel')]}"
+                        class="oe_grey"
+                        colspan="4"
+                    >
+                       The credit note is auto-validated and reconciled with the journal entry.
+                    </div>
+                    <div
+                        attrs="{'invisible':[('refund_method', '!=', 'modify')]}"
+                        class="oe_grey"
+                        colspan="4"
+                    >
+                       The credit note is auto-validated and reconciled with the journal entry.
+                       The original journal entry is duplicated as a new draft.
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
