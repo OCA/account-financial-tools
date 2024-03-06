@@ -36,6 +36,7 @@ setuptools.setup(
         'odoo-addon-account_move_template>=16.0dev,<16.1dev',
         'odoo-addon-account_netting>=16.0dev,<16.1dev',
         'odoo-addon-account_partner_required>=16.0dev,<16.1dev',
+        'odoo-addon-account_spread_cost_revenue>=16.0dev,<16.1dev',
         'odoo-addon-account_template_active>=16.0dev,<16.1dev',
         'odoo-addon-account_usability>=16.0dev,<16.1dev',
         'odoo-addon-base_vat_optional_vies>=16.0dev,<16.1dev',
