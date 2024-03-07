@@ -1,0 +1,165 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_renumber
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Cezar <cezar.santanna@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-10 02:45+0000\n"
+"PO-Revision-Date: 2020-06-14 04:19+0000\n"
+"Last-Translator: Maurício Liell <mauricio@liell.com.br>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
+
+#. module: account_renumber
+#: model:ir.model,name:account_renumber.model_wizard_renumber
+msgid "Account renumber wizard"
+msgstr "Assistente de renumeração de contas"
+
+#. module: account_renumber
+#: model_terms:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: account_renumber
+#: model_terms:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "Date ranges"
+msgstr "Períodos"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__date_to
+msgid "Finish date"
+msgstr "Data de término"
+
+#. module: account_renumber
+#: model:ir.model.fields,help:account_renumber.field_wizard_renumber__date_to
+msgid "Finish renumbering in this date, inclusive."
+msgstr "Termine a renumeração nesta data, inclusive."
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__number_next
+msgid "First Number"
+msgstr "Primeiro número"
+
+#. module: account_renumber
+#: model_terms:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "General Data"
+msgstr "Dados gerais"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_renumber
+#: model:ir.model.fields,help:account_renumber.field_wizard_renumber__number_next
+msgid "Journal sequences will start counting on this number"
+msgstr "As seqüências de diário começarão a contar com esse número"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__journal_ids
+msgid "Journals"
+msgstr "Diários"
+
+#. module: account_renumber
+#: model_terms:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "Journals to consider"
+msgstr "Diários a considerar"
+
+#. module: account_renumber
+#: model:ir.model.fields,help:account_renumber.field_wizard_renumber__journal_ids
+msgid "Journals to renumber"
+msgstr "Diários para renumerar"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber____last_update
+msgid "Last Modified on"
+msgstr "Última modificação em"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:73
+#, python-format
+msgid "No records found for your selection!"
+msgstr "Nenhum registro encontrado para sua seleção!"
+
+#. module: account_renumber
+#: model_terms:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid ""
+"Posted moves from those journals will be sorted by date and then assigned "
+"sequential numbers using their journal sequence."
+msgstr ""
+"Os movimentos publicados desses diários serão classificados por data e, em "
+"seguida, serão atribuídos números sequenciais usando a sequência do diário."
+
+#. module: account_renumber
+#: model_terms:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "Renumber"
+msgstr "Renumerar"
+
+#. module: account_renumber
+#: model_terms:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "Renumber Account Moves"
+msgstr "Renumerar movimentos de conta"
+
+#. module: account_renumber
+#: model:ir.actions.act_window,name:account_renumber.action_account_renumber
+#: model:ir.ui.menu,name:account_renumber.menu_account_renumber
+msgid "Renumber Journal Entries"
+msgstr "Renumerar lançamentos contábeis manuais"
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:100
+#, python-format
+msgid "Renumbered account moves"
+msgstr "Movimentos renumerados da conta"
+
+#. module: account_renumber
+#: model:ir.model.fields,help:account_renumber.field_wizard_renumber__date_from
+msgid "Start renumbering in this date, inclusive."
+msgstr "Comece a numerar nesta data, inclusive."
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber__date_from
+msgid "Starting date"
+msgstr "Data de início"
+
+#. module: account_renumber
+#: model_terms:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "This wizard will help you renumber entries in one or more journals."
+msgstr ""
+"Este assistente o ajudará a renumerar as entradas em um ou mais diários."
