@@ -6,6 +6,36 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
         <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']"
+                position="before"
+            >
+                <field
+                    name="asset_profile_id"
+                    domain="[('company_id','=', parent.company_id)]"
+                    attrs="{'column_invisible': [('parent.type', 'not in', ('in_invoice', 'in_refund'))]}"
+                    optional="show"
+                />
+            </xpath>
+            <xpath
+                expr="//notebook//field[@name='line_ids']/tree/field[@name='date_maturity']"
+                position="after"
+            >
+                <field
+                    name="asset_profile_id"
+                    domain="[('company_id','=', parent.company_id)]"
+                    optional="show"
+                />
+            </xpath>
+        </field>
+    </record>
+    <!--    Split view to avoid unnecessary compute asset_count (attrs is evaluated although groups is set -->
+    <record id="view_move_form_managers" model="ir.ui.view">
+        <field name="name">account.move.form.account.asset.management.managers</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account_asset_management.view_move_form" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]" />
+        <field name="arch" type="xml">
             <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
                 <button
                     name="action_view_assets"
@@ -23,31 +53,20 @@
                 </button>
             </xpath>
             <xpath
-                expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']"
-                position="before"
+                expr="//field[@name='invoice_line_ids']/tree/field[@name='asset_profile_id']"
+                position="after"
             >
-                <field
-                    name="asset_profile_id"
-                    domain="[('company_id','=', parent.company_id)]"
-                    attrs="{'column_invisible': [('parent.type', 'not in', ('in_invoice', 'in_refund'))]}"
-                    optional="show"
-                />
                 <field
                     name="asset_id"
                     attrs="{'column_invisible': [('parent.type', 'not in', ('out_invoice', 'out_refund'))]}"
-                    groups="account.group_account_manager"
                     optional="show"
                 />
             </xpath>
             <xpath
-                expr="//notebook//field[@name='line_ids']/tree/field[@name='date_maturity']"
+                expr="//notebook//field[@name='line_ids']/tree/field[@name='asset_profile_id']"
                 position="after"
             >
-                <field
-                    name="asset_profile_id"
-                    domain="[('company_id','=', parent.company_id)]"
-                />
-                <field name="asset_id" groups="account.group_account_manager" />
+                <field name="asset_id" optional="show" />
             </xpath>
         </field>
     </record>

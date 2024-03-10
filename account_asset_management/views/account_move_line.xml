@@ -9,8 +9,9 @@
                 <field
                     name="asset_profile_id"
                     domain="[('company_id','=', parent.company_id)]"
+                    optional="show"
                 />
-                <field name="asset_id" />
+                <field name="asset_id" optional="show" />
             </field>
         </field>
     </record>
