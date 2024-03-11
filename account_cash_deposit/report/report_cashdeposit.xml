@@ -72,10 +72,7 @@
                                             <span t-field="line.qty" />
                                         </td>
                                         <td class="text-right">
-                                            <span
-                                                t-field="line.subtotal"
-                                                t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                            />
+                                            <span t-field="line.subtotal" />
                                         </td>
                                     </tr>
                                 </t>
@@ -85,10 +82,7 @@
                                         <strong>Total:</strong>
                                     </td>
                                     <td class="text-right">
-                                            <span
-                                            t-field="o.total_amount"
-                                            t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                        />
+                                            <span t-field="o.total_amount" />
                                     </td>
                                 </tr>
                             </tbody>
