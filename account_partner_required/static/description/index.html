@@ -369,7 +369,7 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:75b53dc07b1b6ed19bbeb311cdbe042e86feef1d9c1dab87ec5cf4dbedc93af9
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-financial-tools/tree/16.0/account_partner_required"><img alt="OCA/account-financial-tools" src="https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_partner_required"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-financial-tools/tree/17.0/account_partner_required"><img alt="OCA/account-financial-tools" src="https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-financial-tools-17-0/account-financial-tools-17-0-account_partner_required"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>This module adds an option <em>Partner policy</em> on account types.</p>
 <p>You have the choice between 3 policies:</p>
 <ul class="simple">
@@ -379,7 +379,9 @@ ul.auto-toc {
 </ul>
 <p>This module is useful to enforce a partner on account move lines on
 customer and supplier accounts.</p>
-<p>This module is very similar to the module <em>account_analytic_required</em> available in the OCA project <a class="reference external" href="https://github.com/OCA/account-analytic">account-analytic</a>.</p>
+<p>This module is very similar to the module <em>account_analytic_required</em>
+available in the OCA project
+<a class="reference external" href="https://github.com/OCA/account-analytic">account-analytic</a>.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -398,20 +400,26 @@ customer and supplier accounts.</p>
 <h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
 <p>To configure this module, you need to:</p>
 <ol class="arabic simple">
-<li>Go to the menu <em>Invoicing &gt; Configuration &gt; Accounting &gt; Account Types</em> and edit each account types to configure the correct <em>Partner policy</em>.</li>
+<li>Go to the menu <em>Invoicing &gt; Configuration &gt; Accounting &gt; Account
+Types</em> and edit each account types to configure the correct <em>Partner
+policy</em>.</li>
 </ol>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
-<p>If you put a partner on an account move line with an account whose type is configured with <em>Partner policy</em> = <em>never</em>, you will get an error message.</p>
-<p>If you don’t put a partner on an account move line with an account whose type is configured with <em>Partner policy</em> = <em>always</em>, you will get an error message.</p>
+<p>If you put a partner on an account move line with an account whose type
+is configured with <em>Partner policy</em> = <em>never</em>, you will get an error
+message.</p>
+<p>If you don’t put a partner on an account move line with an account whose
+type is configured with <em>Partner policy</em> = <em>always</em>, you will get an
+error message.</p>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-3">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/account-financial-tools/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_partner_required%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_partner_required%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -440,7 +448,7 @@ mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
 <p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
 <p><a class="reference external image-reference" href="https://github.com/alexis-via"><img alt="alexis-via" src="https://github.com/alexis-via.png?size=40px" /></a></p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-financial-tools/tree/16.0/account_partner_required">OCA/account-financial-tools</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-financial-tools/tree/17.0/account_partner_required">OCA/account-financial-tools</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
