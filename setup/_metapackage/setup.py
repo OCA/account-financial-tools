@@ -32,6 +32,7 @@ setuptools.setup(
         'odoo-addon-account_move_line_sale_info>=16.0dev,<16.1dev',
         'odoo-addon-account_move_line_tax_editable>=16.0dev,<16.1dev',
         'odoo-addon-account_move_name_sequence>=16.0dev,<16.1dev',
+        'odoo-addon-account_move_post_date_user>=16.0dev,<16.1dev',
         'odoo-addon-account_move_print>=16.0dev,<16.1dev',
         'odoo-addon-account_move_template>=16.0dev,<16.1dev',
         'odoo-addon-account_netting>=16.0dev,<16.1dev',
