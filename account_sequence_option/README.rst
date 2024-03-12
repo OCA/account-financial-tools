@@ -93,6 +93,10 @@ Contributors
 
    -  Ángel García de la Chica Herrera
 
+-  `Komit <https://komit-comsulting.com>`__:
+
+   -  Le Dinh Tien <tien-ld@komit-consulting.com>
+
 Maintainers
 -----------
 

@@ -10,7 +10,7 @@ from odoo.tests.common import Form, TransactionCase, tagged
 @tagged("post_install", "-at_install")
 class TestAccountSequenceOption(TransactionCase):
     def setUp(self):
-        super(TestAccountSequenceOption, self).setUp()
+        super().setUp()
         self.AccountMove = self.env["account.move"]
         self.AccountMoveLine = self.env["account.move.line"]
         self.partner_id = self.env.ref("base.res_partner_1")

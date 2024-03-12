@@ -1,3 +1,5 @@
 - Kitti U. \<<kittiu@ecosoft.co.th>\>
 - [Sygel](https://www.sygel.es):
   - Ángel García de la Chica Herrera
+- [Komit](https://komit-comsulting.com):
+  - Le Dinh Tien \<<tien-ld@komit-consulting.com>\>

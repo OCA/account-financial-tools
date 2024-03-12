@@ -22,7 +22,7 @@ class AccountMove(models.Model):
         # On post, get the sequence option
         if options:
             for rec in self.filtered(
-                lambda l: l.name in (False, "/") and l.state == "posted"
+                lambda move: move.name in (False, "/") and move.state == "posted"
             ):
                 sequence = self.env["ir.sequence.option.line"].get_sequence(
                     rec, options=options
@@ -54,7 +54,7 @@ class AccountMove(models.Model):
     # Bypass constrains if sequence is defined
     def _constrains_date_sequence(self):
         records = self.filtered(
-            lambda l: self.env["ir.sequence.option.line"].get_sequence(l)
+            lambda move: self.env["ir.sequence.option.line"].get_sequence(move)
         )
         return super(AccountMove, self - records)._constrains_date_sequence()
 
