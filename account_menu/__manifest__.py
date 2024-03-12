@@ -20,6 +20,7 @@
     'data': [
         'views/menu.xml',
         'views/view_account_bank_statement.xml',
+        'views/view_account_move_line.xml',
     ],
     'demo': [
         'demo/res_groups.xml',
