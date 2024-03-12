@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2023-11-09 10:38+0000\n"
+"PO-Revision-Date: 2024-03-12 13:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -24,17 +24,17 @@ msgstr ""
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "AR/AP netting"
-msgstr ""
+msgstr "Compensazione AR/AP"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance_type
 msgid "Balance Type"
-msgstr ""
+msgstr "Tipo saldo"
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -44,13 +44,13 @@ msgstr "Annulla"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__company_id
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: account_netting
 #: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate"
-msgstr ""
+msgstr "Compensa"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_uid
@@ -65,7 +65,7 @@ msgstr "Creato il"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__company_currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__display_name
@@ -80,12 +80,12 @@ msgstr "ID"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Registro"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
 msgid "Journal Items to Compensate"
-msgstr ""
+msgstr "Registrazioni contabili da compensare"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
@@ -110,32 +110,34 @@ msgid ""
 "Line '%(line)s' has account '%(account)s' which is not a payable nor a "
 "receivable account."
 msgstr ""
+"La riga '%(line)s' ha il conto '%(account)s' che non è ne pagabile ne "
+"esigibile."
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "Line '%s' doesn't have a partner."
-msgstr ""
+msgstr "La riga '%s' non ha un partner."
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "Line '%s' is already reconciled."
-msgstr ""
+msgstr "La riga '%s' è già riconciliata."
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "Line '%s' is not posted."
-msgstr ""
+msgstr "La riga '%s' non è inserita."
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: account_netting
 #. odoo-python
@@ -146,6 +148,10 @@ msgid ""
 "accounts for the same partner. The selected journal items have the same "
 "account '%s', so you should use the 'Reconcile' function instead."
 msgstr ""
+"La funzione \"Compensazione\" ha lo scopo di bilanciare le operazioni su "
+"conti diversi per lo stesso partner. Le registrazioni contabili selezionate "
+"hanno lo stesso conto '%s', quindi si dovrebbe utilizzare invece la funzione "
+"'Riconcilia'."
 
 #. module: account_netting
 #. odoo-python
@@ -155,6 +161,8 @@ msgid ""
 "The selected journal items have different partners: %s. All the selected "
 "journal items must have the same partner."
 msgstr ""
+"Le registrazioni contabili selezionate hanno partner diversi: %s. Tutte le "
+"registrazioni contabili selezionate devono avere lo stesso partner."
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -163,25 +171,29 @@ msgid ""
 "the receivable/payable accounts selected, and reconcile each other, letting "
 "this balance in the partner."
 msgstr ""
+"Questa operazione genererà una registrazione contabile le cui righe sono "
+"contropartita dei conti clienti/debiti selezionati, e si riconcilieranno tra "
+"loro, lasciando questo saldo nel partner."
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
 msgid "To pay"
-msgstr ""
+msgstr "Da pagare"
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
 msgid "To receive"
-msgstr ""
+msgstr "Da ricevere"
 
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "Wizard to generate account moves for netting"
 msgstr ""
+"Procedura guidata per la generazione movimenti contabili per la compensazione"
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "You should select at least 2 journal items."
-msgstr ""
+msgstr "Bisogna selezionare almeno due registrazioni contabili."
