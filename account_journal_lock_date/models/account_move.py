@@ -7,7 +7,6 @@ from odoo.tools.misc import format_date
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     def _check_fiscalyear_lock_date(self):
