@@ -15,7 +15,6 @@ class AccountInvoice(models.Model):
         fiscal position"""
         for invoice in self:
             if (
-                    invoice.type in ('out_invoice', 'out_refund') and
                     invoice.fiscal_position_id.vat_required and
                     not invoice.partner_id.vat):
                 raise UserError(_(
