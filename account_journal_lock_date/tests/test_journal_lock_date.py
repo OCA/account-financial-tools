@@ -12,7 +12,7 @@ from odoo.addons.account.tests import common
 @tagged("post_install", "-at_install")
 class TestJournalLockDate(common.AccountTestInvoicingCommon):
     def setUp(self):
-        super(TestJournalLockDate, self).setUp()
+        super().setUp()
         self.account_move_obj = self.env["account.move"]
         self.account_move_line_obj = self.env["account.move.line"]
         self.company_id = self.ref("base.main_company")

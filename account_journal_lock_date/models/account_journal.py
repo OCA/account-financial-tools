@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class AccountJournal(models.Model):
-
     _inherit = "account.journal"
 
     fiscalyear_lock_date = fields.Date(
