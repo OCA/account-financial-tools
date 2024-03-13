@@ -40,23 +40,6 @@ msgid "Account Tags"
 msgstr "Oznake konta"
 
 #. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Account Template"
-msgstr "Predložak konta"
-
-#. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.account_account_template_action
-#: model:ir.ui.menu,name:account_usability.menu_account_account_template
-msgid "Account Templates"
-msgstr "Predlošci konta"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
-msgid "Account Type"
-msgstr "Vrsta konta"
-
-#. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_group_form
@@ -84,78 +67,9 @@ msgid "Cash Registers"
 msgstr "Blagajne"
 
 #. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.action_account_chart_template_form
-#: model:ir.ui.menu,name:account_usability.menu_account_chart_template
-msgid "Chart of Accounts Templates"
-msgstr "Predlošci kontnih planova"
-
-#. module: account_usability
 #: model:ir.model,name:account_usability.model_res_config_settings
 msgid "Config Settings"
 msgstr "Postavke"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
-msgid "Default Taxes"
-msgstr "Zadani porezi"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Expense Account"
-msgstr "Konto troška"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
-msgid "Extra configuration"
-msgstr "Dodatne postavke"
-
-#. module: account_usability
-#: model:ir.actions.act_window,name:account_usability.account_fiscal_position_template_action
-#: model:ir.ui.menu,name:account_usability.menu_account_fiscal_position_template
-msgid "Fiscal Position Templates"
-msgstr "Predlošci fiskalnih pozicija"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_search
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Group By"
-msgstr "Grupiraj po"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Income Account"
-msgstr "Konto dobiti"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
-msgid "Internal notes..."
-msgstr "Interne bilješke..."
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_fiscal_position_template_form
-msgid "Note"
-msgstr "Bilješka"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_account_template_form
-msgid "Notes"
-msgstr "Bilješke"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Payable Account"
-msgstr "Potražni konto"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_form
-msgid "Properties"
-msgstr "Svojstva"
-
-#. module: account_usability
-#: model_terms:ir.ui.view,arch_db:account_usability.view_account_chart_template_seacrh
-msgid "Receivable Account"
-msgstr "Potražni konto"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
@@ -179,11 +93,6 @@ msgid "Tax Group"
 msgstr "Grupa poreza"
 
 #. module: account_usability
-#: model:ir.ui.menu,name:account_usability.menu_account_tax_template
-msgid "Tax Templates"
-msgstr "Predlošci poreza"
-
-#. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_tax_group__tax_ids
 msgid "Taxes"
 msgstr "Porezi"
@@ -197,3 +106,54 @@ msgstr "Predlošci"
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
 msgstr ""
+
+#~ msgid "Account Template"
+#~ msgstr "Predložak konta"
+
+#~ msgid "Account Templates"
+#~ msgstr "Predlošci konta"
+
+#~ msgid "Account Type"
+#~ msgstr "Vrsta konta"
+
+#~ msgid "Chart of Accounts Templates"
+#~ msgstr "Predlošci kontnih planova"
+
+#~ msgid "Default Taxes"
+#~ msgstr "Zadani porezi"
+
+#~ msgid "Expense Account"
+#~ msgstr "Konto troška"
+
+#~ msgid "Extra configuration"
+#~ msgstr "Dodatne postavke"
+
+#~ msgid "Fiscal Position Templates"
+#~ msgstr "Predlošci fiskalnih pozicija"
+
+#~ msgid "Group By"
+#~ msgstr "Grupiraj po"
+
+#~ msgid "Income Account"
+#~ msgstr "Konto dobiti"
+
+#~ msgid "Internal notes..."
+#~ msgstr "Interne bilješke..."
+
+#~ msgid "Note"
+#~ msgstr "Bilješka"
+
+#~ msgid "Notes"
+#~ msgstr "Bilješke"
+
+#~ msgid "Payable Account"
+#~ msgstr "Potražni konto"
+
+#~ msgid "Properties"
+#~ msgstr "Svojstva"
+
+#~ msgid "Receivable Account"
+#~ msgstr "Potražni konto"
+
+#~ msgid "Tax Templates"
+#~ msgstr "Predlošci poreza"

@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_move_line_journal_entries_form" model="ir.ui.view">
+        <field name="name">purchase.order.form.journal.entry</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <button name="action_view_invoice" position="after">
+                <button
+                    type="object"
+                    name="action_view_journal_entries"
+                    class="oe_stat_button"
+                    icon="fa-list-ul"
+                    invisible="journal_entries_count == 0 or state in ('draft', 'sent', 'to approve')"
+                    groups="account.group_account_user"
+                >
+                    <field
+                        name="journal_entries_count"
+                        widget="statinfo"
+                        string="Journal Entries"
+                    />
+                    <field name='journal_entry_ids' invisible="1" />
+                </button>
+            </button>
+        </field>
+    </record>
+
+</odoo>
