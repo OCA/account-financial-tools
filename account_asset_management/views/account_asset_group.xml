@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- pylint:disable=duplicate-xml-fields -->
+<odoo>
+    <record id="account_asset_group_view_form" model="ir.ui.view">
+        <field name="name">account.asset.group.form</field>
+        <field name="model">account.asset.group</field>
+        <field name="arch" type="xml">
+            <form string="Asset Group">
+                <group>
+                    <group>
+                        <field name="company_id" invisible="1" />
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="parent_id" />
+                        <field
+                            name="company_id"
+                            widget="selection"
+                            groups="base.group_multi_company"
+                        />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="account_asset_group_view_tree" model="ir.ui.view">
+        <field name="name">account.asset.group.tree</field>
+        <field name="model">account.asset.group</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="company_id" column_invisible="1" />
+                <field name="name" />
+                <field name="code" optional="show" />
+                <field name="parent_id" />
+                <field
+                    name="company_id"
+                    options="{'no_create': True}"
+                    groups="base.group_multi_company"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="account_asset_group_view_search" model="ir.ui.view">
+        <field name="name">account.asset.group.search</field>
+        <field name="model">account.asset.group</field>
+        <field name="arch" type="xml">
+            <search string="Search Asset Group">
+                <field name="name" string="Asset Group" />
+                <field name="code" />
+                <field name="parent_id" />
+            </search>
+        </field>
+    </record>
+    <record id="account_asset_group_action" model="ir.actions.act_window">
+        <field name="name">Asset Groups</field>
+        <field name="res_model">account.asset.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
