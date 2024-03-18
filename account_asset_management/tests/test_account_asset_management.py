@@ -748,7 +748,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             self.env["account.asset.group"]
             .with_context(params={"view_type": "list"})
             .name_search("FA"),
-            [(group_fa.id, "FA")],
+            [(group_fa.id, "FA Fixed Assets")],
         )
         self.assertEqual(
             self.env["account.asset.group"].name_search("TFA"),
