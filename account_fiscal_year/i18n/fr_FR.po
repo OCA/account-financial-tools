@@ -78,11 +78,6 @@ msgid "ID"
 msgstr ""
 
 #. module: account_fiscal_year
-#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
-
-#. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
@@ -124,3 +119,6 @@ msgid ""
 msgstr ""
 "L'exercice '{fy}' chevauche avec '{overlapping_fy}'.\n"
 "Veuillez modifier les dates de début et de fin."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
