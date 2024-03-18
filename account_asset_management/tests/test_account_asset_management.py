@@ -85,9 +85,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         # analytic configuration
         cls.env.user.groups_id += cls.env.ref("analytic.group_analytic_accounting")
 
-        cls.default_plan = cls.env["account.analytic.plan"].create(
-            {"name": "Default"}
-        )
+        cls.default_plan = cls.env["account.analytic.plan"].create({"name": "Default"})
         cls.analytic_account = cls.env["account.analytic.account"].create(
             {"name": "test_analytic_account", "plan_id": cls.default_plan.id}
         )
