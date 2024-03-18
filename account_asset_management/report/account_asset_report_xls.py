@@ -30,7 +30,6 @@ class AssetReportXlsx(models.AbstractModel):
         return [s1, s2, s3]
 
     def _get_asset_template(self):
-
         asset_template = {
             "account": {
                 "header": {"type": "string", "value": _("Account")},
@@ -296,7 +295,6 @@ class AssetReportXlsx(models.AbstractModel):
         return asset_template
 
     def _get_acquisition_ws_params(self, wb, data, wiz):
-
         acquisition_template = self._get_asset_template()
         acquisition_template.update(
             self.env["account.asset"]._xls_acquisition_template()
@@ -316,7 +314,6 @@ class AssetReportXlsx(models.AbstractModel):
         }
 
     def _get_active_ws_params(self, wb, data, wiz):
-
         active_template = self._get_asset_template()
         active_template.update(self.env["account.asset"]._xls_active_template())
         wl_act = self.env["account.asset"]._xls_active_fields()
@@ -334,7 +331,6 @@ class AssetReportXlsx(models.AbstractModel):
         }
 
     def _get_removal_ws_params(self, wb, data, wiz):
-
         removal_template = self._get_asset_template()
         removal_template.update(self.env["account.asset"]._xls_removal_template())
         wl_dsp = self.env["account.asset"]._xls_removal_fields()
@@ -352,8 +348,7 @@ class AssetReportXlsx(models.AbstractModel):
         }
 
     def _get_title(self, wiz, report, frmt="normal"):
-
-        prefix = "{} - {}".format(wiz.date_from, wiz.date_to)
+        prefix = f"{wiz.date_from} - {wiz.date_to}"
         if report == "acquisition":
             if frmt == "normal":
                 title = prefix + " : " + _("New Acquisitions")
@@ -461,7 +456,7 @@ class AssetReportXlsx(models.AbstractModel):
         report = ws_params["report_type"]
 
         def asset_filter(asset):
-            filt = getattr(self, "{}_filter".format(report))
+            filt = getattr(self, f"{report}_filter")
             return filt(wiz, asset)
 
         def _has_assets(group, group_val):
@@ -560,7 +555,7 @@ class AssetReportXlsx(models.AbstractModel):
         row_pos = self._report_title(ws, row_pos, ws_params, data, wiz)
 
         def asset_filter(asset):
-            filt = getattr(self, "{}_filter".format(report))
+            filt = getattr(self, f"{report}_filter")
             return filt(wiz, asset)
 
         assets = data["assets"].filtered(asset_filter)
@@ -618,7 +613,6 @@ class AssetReportXlsx(models.AbstractModel):
 
         processed = []
         for entry in entries:
-
             period_start_value_cell = period_start_value_pos and self._rowcol_to_cell(
                 row_pos, period_start_value_pos
             )

@@ -64,7 +64,13 @@ class AccountAssetGroup(models.Model):
 
     @api.model
     def _name_search(
-        self, name, args=None, operator="ilike", limit=100, name_get_uid=None, order=None
+        self,
+        name,
+        args=None,
+        operator="ilike",
+        limit=100,
+        name_get_uid=None,
+        order=None,
     ):
         args = args or []
         domain = []
@@ -77,5 +83,8 @@ class AccountAssetGroup(models.Model):
             if operator in expression.NEGATIVE_TERM_OPERATORS:
                 domain = ["&", "!"] + domain[1:]
         return self._search(
-            expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid, order=order
+            expression.AND([domain, args]),
+            limit=limit,
+            access_rights_uid=name_get_uid,
+            order=order,
         )

@@ -95,7 +95,9 @@ class AccountAssetLine(models.Model):
         asset_ids = dlines.mapped("asset_id")
         grouped_dlines = []
         for asset in asset_ids:
-            grouped_dlines.append(dlines.filtered(lambda line, asset=asset: line.asset_id.id == asset.id))
+            grouped_dlines.append(
+                dlines.filtered(lambda line, asset=asset: line.asset_id.id == asset.id)
+            )
         for dlines in grouped_dlines:
             for i, dl in enumerate(dlines):
                 if i == 0:

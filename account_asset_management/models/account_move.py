@@ -110,7 +110,9 @@ class AccountMove(models.Model):
                     allow_asset=True, allow_asset_removal=True
                 ).asset_id = asset.id
             refs = [
-                "<a href=# data-oe-model=account.asset data-oe-id={}>{}</a>".format(*tuple(name_get))
+                "<a href=# data-oe-model=account.asset data-oe-id={}>{}</a>".format(
+                    *tuple(name_get)
+                )
                 for name_get in move.line_ids.filtered(
                     "asset_profile_id"
                 ).asset_id.name_get()

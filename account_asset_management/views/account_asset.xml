@@ -53,13 +53,20 @@
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
                         <h1>
-                            <field name="name" class="oe_inline" readonly="state in ('open', 'close', 'remove')" />
+                            <field
+                                name="name"
+                                class="oe_inline"
+                                readonly="state in ('open', 'close', 'remove')"
+                            />
                         </h1>
                     </div>
                     <group>
                         <group id="header_left_group">
                             <field name="company_id" invisible="1" />
-                            <field name="code" readonly="state in ('open', 'close', 'remove')"/>
+                            <field
+                                name="code"
+                                readonly="state in ('open', 'close', 'remove')"
+                            />
                             <field
                                 name="company_id"
                                 widget="selection"
@@ -102,11 +109,21 @@
                             </group>
                             <group string="Other Information">
                                 <group>
-                                    <field name="profile_id" readonly="state != 'draft'" />
-                                    <field name="group_ids" readonly="state != 'draft'" widget="many2many_tags" />
+                                    <field
+                                        name="profile_id"
+                                        readonly="state != 'draft'"
+                                    />
+                                    <field
+                                        name="group_ids"
+                                        readonly="state != 'draft'"
+                                        widget="many2many_tags"
+                                    />
                                 </group>
                                 <group>
-                                    <field name="partner_id" readonly="state != 'draft'" />
+                                    <field
+                                        name="partner_id"
+                                        readonly="state != 'draft'"
+                                    />
                                     <field
                                         name="analytic_distribution"
                                         groups="analytic.group_analytic_accounting"
@@ -116,14 +133,22 @@
                             </group>
                             <group>
                                 <group string="Depreciation Dates">
-                                    <field name="method_time" required="1" readonly="state != 'draft'" />
+                                    <field
+                                        name="method_time"
+                                        required="1"
+                                        readonly="state != 'draft'"
+                                    />
                                     <field
                                         name="method_number"
                                         invisible="method_time not in ('number', 'year')"
                                         required="method_time in ('number', 'year')"
                                         readonly="state != 'draft'"
                                     />
-                                    <field name="method_period" readonly="state != 'draft'" required="1" />
+                                    <field
+                                        name="method_period"
+                                        readonly="state != 'draft'"
+                                        required="1"
+                                    />
                                     <field
                                         name="method_end"
                                         required="method_time == 'end'"
@@ -137,7 +162,11 @@
                                     />
                                 </group>
                                 <group string="Depreciation Method">
-                                    <field name="method" required="1" readonly="state != 'draft'" />
+                                    <field
+                                        name="method"
+                                        required="1"
+                                        readonly="state != 'draft'"
+                                    />
                                     <field
                                         name="method_progress_factor"
                                         invisible="method in ('linear', 'linear-limit')"
@@ -253,7 +282,7 @@
                                     <field name="move_id" />
                                     <field name="journal_id" optional="show" />
                                     <field name="account_id" />
-                                    <field name="partner_id" optional="show"/>
+                                    <field name="partner_id" optional="show" />
                                     <field name="ref" />
                                     <field name="name" optional="hide" />
                                     <field name="debit" sum="1" />
@@ -287,10 +316,10 @@
                 <field name="depreciation_base" optional="show" />
                 <field name="value_depreciated" optional="show" />
                 <field name="value_residual" optional="show" />
-                <field name="date_start" optional="show"  readonly="state != 'draft'"/>
+                <field name="date_start" optional="show" readonly="state != 'draft'" />
                 <field name="date_remove" optional="show" />
                 <field name="profile_id" optional="show" readonly="state != 'draft'" />
-                <field name="method" optional="hide" readonly="state != 'draft'"/>
+                <field name="method" optional="hide" readonly="state != 'draft'" />
                 <field name="prorata" optional="hide" readonly="state != 'drafy'" />
                 <field name="group_ids" widget="many2many_tags" optional="hide" />
                 <field
@@ -343,13 +372,14 @@
                 />
                 <separator />
                 <field name="state" invisible="1" />
-                <field name="name" readonly="state != 'draft'"/>
-                <field name="code" readonly="state != 'draft'"/>
+                <field name="name" readonly="state != 'draft'" />
+                <field name="code" readonly="state != 'draft'" />
                 <field name="date_start" readonly="state != 'draft'" />
                 <field name="profile_id" readonly="state != 'draft'" />
-                <field name="group_ids" readonly="state != 'draft'"/>
+                <field name="group_ids" readonly="state != 'draft'" />
                 <field
-                    name="partner_id" readonly="state != 'draft'"
+                    name="partner_id"
+                    readonly="state != 'draft'"
                     filter_domain="[('partner_id', 'child_of', self)]"
                 />
                 <group name="groupby">

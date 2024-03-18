@@ -65,10 +65,7 @@
                             />
                             <field name="method_period" />
                             <field name="days_calc" />
-                            <field
-                                name="use_leap_years"
-                                invisible="days_calc"
-                            />
+                            <field name="use_leap_years" invisible="days_calc" />
                         </group>
                         <group string="Depreciation Method">
                             <field name="method" />
@@ -77,10 +74,7 @@
                                 invisible="method in ('linear', 'linear-limit')"
                                 required="method in ('degressive', 'degr-linear', 'degr-limit')"
                             />
-                            <field
-                                name="prorata"
-                                readonly="method_time != 'year'"
-                            />
+                            <field name="prorata" readonly="method_time != 'year'" />
                             <field name="open_asset" />
                         </group>
                         <group

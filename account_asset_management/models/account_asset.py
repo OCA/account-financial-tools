@@ -18,7 +18,7 @@ from odoo.osv import expression
 _logger = logging.getLogger(__name__)
 
 
-class DummyFy(object):
+class DummyFy:
     def __init__(self, *args, **argv):
         for key, arg in argv.items():
             setattr(self, key, arg)
@@ -626,7 +626,6 @@ class AccountAsset(models.Model):
             line_i_start = 0
 
     def compute_depreciation_board(self):
-
         line_obj = self.env["account.asset.line"]
 
         for asset in self:
@@ -1027,7 +1026,6 @@ class AccountAsset(models.Model):
     def _compute_depreciation_table_lines(
         self, table, depreciation_start_date, depreciation_stop_date, line_dates
     ):
-
         self.ensure_one()
         currency = self.company_id.currency_id
         asset_sign = 1 if self.depreciation_base >= 0 else -1
@@ -1040,7 +1038,6 @@ class AccountAsset(models.Model):
         )
 
         for i, entry in enumerate(table):
-
             lines = []
             fy_amount_check = 0.0
             fy_amount = entry["fy_amount"]
@@ -1218,7 +1215,7 @@ class AccountAsset(models.Model):
                 tb = "".join(format_exception(*exc_info()))
                 asset_ref = depreciation.asset_id.name
                 if depreciation.asset_id.code:
-                    asset_ref = "[{}] {}".format(depreciation.asset_id.code, asset_ref)
+                    asset_ref = f"[{depreciation.asset_id.code}] {asset_ref}"
                 error_log += _(
                     "\nError while processing asset '{ref}': {exception}"
                 ).format(ref=asset_ref, exception=repr(e))
