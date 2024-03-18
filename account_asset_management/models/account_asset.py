@@ -295,8 +295,8 @@ class AccountAsset(models.Model):
     def _compute_depreciation(self):
         for asset in self:
             lines = asset.depreciation_line_ids.filtered(
-                lambda l: l.type in ("depreciate", "remove")
-                and (l.init_entry or l.move_check)
+                lambda line: line.type in ("depreciate", "remove")
+                and (line.init_entry or line.move_check)
             )
             value_depreciated = sum(line.amount for line in lines)
             residual = asset.depreciation_base - value_depreciated

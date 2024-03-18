@@ -95,7 +95,7 @@ class AccountAssetLine(models.Model):
         asset_ids = dlines.mapped("asset_id")
         grouped_dlines = []
         for asset in asset_ids:
-            grouped_dlines.append(dlines.filtered(lambda l: l.asset_id.id == asset.id))
+            grouped_dlines.append(dlines.filtered(lambda line, asset=asset: line.asset_id.id == asset.id))
         for dlines in grouped_dlines:
             for i, dl in enumerate(dlines):
                 if i == 0:
@@ -151,9 +151,9 @@ class AccountAssetLine(models.Model):
                 )
             elif vals.get("init_entry"):
                 check = asset_lines.filtered(
-                    lambda l: l.move_check
-                    and l.type == "depreciate"
-                    and l.line_date <= line_date
+                    lambda line, line_date=line_date: line.move_check
+                    and line.type == "depreciate"
+                    and line.line_date <= line_date
                 )
                 if check:
                     raise UserError(
@@ -166,9 +166,9 @@ class AccountAssetLine(models.Model):
             elif vals.get("line_date"):
                 if dl.type == "create":
                     check = asset_lines.filtered(
-                        lambda l: l.type != "create"
-                        and (l.init_entry or l.move_check)
-                        and l.line_date < fields.Date.to_date(vals["line_date"])
+                        lambda line: line.type != "create"
+                        and (line.init_entry or line.move_check)
+                        and line.line_date < fields.Date.to_date(vals["line_date"])
                     )
                     if check:
                         raise UserError(
@@ -179,7 +179,7 @@ class AccountAssetLine(models.Model):
                         )
                 else:
                     check = asset_lines.filtered(
-                        lambda al: al != dl
+                        lambda al, dl=dl: al != dl
                         and (al.init_entry or al.move_check)
                         and al.line_date > fields.Date.to_date(vals["line_date"])
                     )
@@ -207,7 +207,7 @@ class AccountAssetLine(models.Model):
                 )
             previous = dl.previous_id
             next_line = dl.asset_id.depreciation_line_ids.filtered(
-                lambda l: l.previous_id == dl and l not in self
+                lambda line, dl=dl: line.previous_id == dl and line not in self
             )
             if next_line:
                 next_line.previous_id = previous
@@ -219,7 +219,7 @@ class AccountAssetLine(models.Model):
         asset = self.asset_id
         move_data = {
             "date": depreciation_date,
-            "ref": "{} - {}".format(asset.name, self.name),
+            "ref": f"{asset.name} - {self.name}",
             "journal_id": asset.profile_id.journal_id.id,
         }
         return move_data
