@@ -1,0 +1,30 @@
+<odoo>
+    <record id="action_billing_all_tree" model="ir.actions.act_window">
+        <field name="name">Billing for Netting</field>
+        <field name="res_model">account.billing</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="domain"
+        >[('state', '=', 'billed'), ('payment_paid_all', "!=", True)]</field>
+        <field
+            name="context"
+        >{'default_bill_type': 'out_invoice', 'netting': 1, 'billing_netting': 1}</field>
+        <field name="search_view_id" ref="account_billing.view_billing_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Click to register a new billing.
+          </p>
+            <p>
+            Enter the customer the invoices expect to be paid by the customer for this
+            bill period. By default the pending invoices will be listed, automatically.
+          </p>
+        </field>
+    </record>
+
+    <menuitem
+        action="action_billing_all_tree"
+        id="menu_action_billing_all_tree"
+        parent="account.menu_finance_entries"
+        sequence="55"
+    />
+</odoo>
