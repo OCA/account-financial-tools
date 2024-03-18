@@ -83,9 +83,9 @@ class AccountAssetLine(models.Model):
         if self.env.context.get("no_compute_asset_line_ids"):
             # skip compute for lines in unlink
             exclude_ids = self.env.context["no_compute_asset_line_ids"]
-            dlines = self.filtered(lambda l: l.id not in exclude_ids)
-        dlines = dlines.filtered(lambda l: l.type == "depreciate")
-        dlines = dlines.sorted(key=lambda l: l.line_date)
+            dlines = self.filtered(lambda line: line.id not in exclude_ids)
+        dlines = dlines.filtered(lambda line: line.type == "depreciate")
+        dlines = dlines.sorted(key=lambda line: line.line_date)
         # Give value 0 to the lines that are not going to be calculated
         # to avoid cache miss error
         all_excluded_lines = self - dlines

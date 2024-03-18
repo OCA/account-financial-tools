@@ -27,7 +27,7 @@ class WizAssetMoveReverse(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(WizAssetMoveReverse, self).default_get(fields)
+        res = super().default_get(fields)
         line_ids = (
             self.env["account.asset.line"].browse(self.env.context["active_ids"])
             if self.env.context.get("active_model") == "account.asset.line"

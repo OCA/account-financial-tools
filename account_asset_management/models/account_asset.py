@@ -502,7 +502,7 @@ class AccountAsset(models.Model):
             else:
                 asset.state = "open"
                 if not asset.depreciation_line_ids.filtered(
-                    lambda l: l.type != "create"
+                    lambda line: line.type != "create"
                 ):
                     asset.compute_depreciation_board()
         return True
