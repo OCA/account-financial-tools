@@ -13,15 +13,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-24 00:46+0000\n"
-"PO-Revision-Date: 2016-10-04 09:42+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/de/)\n"
+"PO-Revision-Date: 2024-03-18 17:34+0000\n"
+"Last-Translator: David Brühlmeier <david@bruehlmeier.com>\n"
+"Language-Team: German (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1081
@@ -1110,13 +1111,11 @@ msgstr "Dieser Betrag stellt den Anfangswert der Anlage dar."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_purchase_value
-#, fuzzy
 msgid ""
 "This amount represent the initial value of the asset.\n"
 "The Depreciation Base is calculated as follows:\n"
 "Purchase Value - Salvage Value."
 msgstr ""
-"\n"
 "Der Anlagenbuchwert wird wie folgt berechnet:\n"
 "Anschaffungspreis - Bezugskosten."
 
