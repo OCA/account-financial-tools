@@ -505,7 +505,7 @@ class AssetReportXlsx(models.AbstractModel):
             dls_all = asset.depreciation_line_ids.filtered(
                 lambda r: r.type == "depreciate"
             )
-            dls_all = dls_all.sorted(key=lambda r: r.line_date)
+            dls_all = dls_all.sorted(key=lambda r: (r.line_date, r.id))
             if not dls_all:
                 error_dict["no_table"] += asset
             # period_start_value
