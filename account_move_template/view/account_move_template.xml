@@ -166,6 +166,11 @@
                                 name="journal_id"
                                 options="{'no_open': True, 'no_create': True}"
                             />
+                            <field
+                                name="currency_id"
+                                options="{'no_open': True, 'no_create': True}"
+                                groups="base.group_multi_currency"
+                            />
                         </group>
                         <group name="main-right">
                             <field name="ref" />

@@ -19,6 +19,13 @@ class AccountMoveTemplate(models.Model):
         default=lambda self: self.env.company,
     )
     journal_id = fields.Many2one("account.journal", string="Journal", required=True)
+    currency_id = fields.Many2one(
+        comodel_name="res.currency",
+        readonly=True,
+        required=True,
+        string="Currency",
+        default=lambda self: self.env.company.currency_id,
+    )
     ref = fields.Char(string="Reference", copy=False)
     line_ids = fields.One2many(
         "account.move.template.line", inverse_name="template_id", string="Lines"
@@ -65,7 +72,7 @@ class AccountMoveTemplate(models.Model):
             )
 
     def compute_lines(self, sequence2amount):
-        company_cur = self.company_id.currency_id
+        currency = self.currency_id
         input_sequence2amount = sequence2amount.copy()
         for line in self.line_ids.filtered(lambda x: x.type == "input"):
             if line.sequence not in sequence2amount:
@@ -87,7 +94,7 @@ class AccountMoveTemplate(models.Model):
             )
         for line in self.line_ids.filtered(lambda x: x.type == "computed"):
             self.eval_computed_line(line, sequence2amount)
-            sequence2amount[line.sequence] = company_cur.round(
+            sequence2amount[line.sequence] = currency.round(
                 sequence2amount[line.sequence]
             )
         return sequence2amount
@@ -98,6 +105,13 @@ class AccountMoveTemplate(models.Model):
         wiz = self.env["account.move.template.run"].create({"template_id": self.id})
         action = wiz.load_lines()
         return action
+
+    @api.onchange("journal_id")
+    def _onchange_journal(self):
+        if self.journal_id and self.journal_id.currency_id:
+            new_currency = self.journal_id.currency_id
+            if new_currency != self.currency_id:
+                self.currency_id = new_currency
 
 
 class AccountMoveTemplateLine(models.Model):
@@ -133,6 +147,11 @@ class AccountMoveTemplateLine(models.Model):
     company_currency_id = fields.Many2one(
         related="template_id.company_id.currency_id",
         string="Company Currency",
+        store=True,
+    )
+    currency_id = fields.Many2one(
+        related="template_id.currency_id",
+        string="Currency",
         store=True,
     )
     note = fields.Char()
