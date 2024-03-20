@@ -99,6 +99,8 @@
                             <group col="4" string="Other Information">
                                 <field name="profile_id" />
                                 <field name="group_ids" widget="many2many_tags" />
+                                <field name="manual_lines" widget="boolean_toggle" />
+                                <field name="editable_lines" widget="boolean_toggle" />
                                 <field name="partner_id" />
                                 <field
                                     name="account_analytic_id"
@@ -110,7 +112,12 @@
                                     widget="many2many_tags"
                                 />
                             </group>
-                            <group>
+
+                            <group
+                                name='depreciation_auto'
+                                colspan="4"
+                                attrs="{'invisible':[('manual_lines', '=', True)]}"
+                            >
                                 <group string="Depreciation Dates">
                                     <field name="method_time" required="1" />
                                     <field
@@ -149,17 +156,17 @@
                                     name="compute_depreciation_board"
                                     string="Compute"
                                     icon="fa-gears"
-                                    attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"
+                                    attrs="{'invisible': ['|', ('state', 'in', ['close', 'removed']), ('manual_lines', '=', True)]}"
                                 />
                             </div>
                             <field
                                 name="depreciation_line_ids"
+                                attrs="{'readonly':[('editable_lines', '=', False)]}"
                                 mode="tree"
                                 options="{'reload_on_button': true}"
                             >
                                 <tree
                                     decoration-info="(move_check == False) and (init_entry == False)"
-                                    create="false"
                                 >
                                     <field name="type" />
                                     <field name="line_date" />
@@ -195,7 +202,7 @@
                                         attrs="{'invisible': [('move_check', '!=', True)]}"
                                     />
                                 </tree>
-                                <form string="Asset Line">
+                                <form string="Asset Line" edit="false">
                                     <group>
                                         <group>
                                             <field name="parent_state" invisible="1" />
