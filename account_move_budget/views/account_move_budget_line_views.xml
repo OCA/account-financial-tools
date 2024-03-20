@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ForgeFlow S.L. (http://www.forgeflow.com)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_account_move_budget_line_tree" model="ir.ui.view">
+        <field name="name">Account Move Budget Line tree</field>
+        <field name="model">account.move.budget.line</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="account_id" />
+                <field name="date" />
+                <field name="debit" />
+                <field name="credit" />
+                <field name="balance" />
+                <field
+                    name="analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <field name="partner_id" />
+                <field name="name" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="account_move_budget_line_act_window">
+        <field name="name">Budget Items</field>
+        <field name="res_model">account.move.budget.line</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('budget_id', '=', active_id)]</field>
+        <field name="context">{'default_budget_id': active_id}</field>
+    </record>
+</odoo>
