@@ -6,7 +6,7 @@
     "summary": "Manage sequence options for account.move, i.e., invoice, bill, entry",
     "version": "14.0.1.0.2",
     "author": "Ecosoft, Odoo Community Association (OCA)",
-    "development_status": "Alpha",
+    "development_status": "Beta",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting",
     "depends": ["account", "base_sequence_option"],
