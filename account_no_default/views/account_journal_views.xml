@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_account_journal_form_inherit" model="ir.ui.view">
+        <field name="name">view.account.journal.form.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <field name="default_account_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'required': ['|', '&amp;', ('id', '!=', False), ('type', 'in', ('bank', 'cash')), ('type', 'in', ('sale'))],'invisible': [('type', '=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
