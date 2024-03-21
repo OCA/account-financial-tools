@@ -670,19 +670,14 @@ class AccountAsset(models.Model):
                 ("init_entry", "=", True),
             ]
             posted_lines = line_obj.search(domain, order="line_date desc")
-            if posted_lines:
-                last_line = posted_lines[0]
-            else:
-                last_line = line_obj
+            last_line = posted_lines and posted_lines[0] or line_obj
             domain = [
                 ("asset_id", "=", asset.id),
                 ("type", "=", "depreciate"),
                 ("move_id", "=", False),
                 ("init_entry", "=", False),
             ]
-            old_lines = line_obj.search(domain)
-            if old_lines:
-                old_lines.unlink()
+            line_obj.search(domain).unlink()
 
             table = asset._compute_depreciation_table()
             if not table:
@@ -766,8 +761,10 @@ class AccountAsset(models.Model):
                     # after last posting
                     else:
                         for entry in table[table_i_start:]:
-                            for line in entry["lines"]:
-                                line["amount"] -= amount_diff
+                            [
+                                line.update({"amount": line["amount"] - amount_diff})
+                                for line in entry["lines"]
+                            ]
 
             else:  # no posted lines
                 table_i_start = 0
