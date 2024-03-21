@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record forcecreate="True" id="ir_cron_assets_generator" model="ir.cron">
+        <field name="name">Asset Management: Generate assets</field>
+        <field name="model_id" ref="model_account_asset_compute" />
+        <field name="state">code</field>
+        <field name="code">model.create({}).asset_compute()</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="False" />
+        <field name="doall" eval="False" />
+    </record>
+</odoo>
