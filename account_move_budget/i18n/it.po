@@ -6,30 +6,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-03-21 12:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_move_budget
 #. odoo-python
 #: code:addons/account_move_budget/models/account_move_budget.py:0
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (copia)"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__account_id
 msgid "Account"
-msgstr ""
+msgstr "Conto"
 
 #. module: account_move_budget
 #: model:ir.model,name:account_move_budget.model_account_move_budget
 msgid "Account Move Budget"
-msgstr ""
+msgstr "Budget movimento conto"
 
 #. module: account_move_budget
 #: model:ir.model,name:account_move_budget.model_account_move_budget_line
