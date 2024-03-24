@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ForgeFlow, S.L.
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="view_move_line_form" model="ir.ui.view">
+        <field name="name">account.move.line.form</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_form" />
+        <field name="arch" type="xml">
+            <field name="amount_currency" position="after">
+                <field name="amount_used_currency" />
+                <field name="used_currency_id" />
+            </field>
+        </field>
+    </record>
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="company_currency_id" position="after">
+                <field
+                    name="amount_used_currency"
+                    groups="base.group_multi_currency"
+                    optional="hide"
+                />
+                <field
+                    name="used_currency_id"
+                    groups="base.group_multi_currency"
+                    optional="hide"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
