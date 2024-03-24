@@ -3,6 +3,7 @@
 
 import calendar
 import time
+from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
@@ -92,6 +93,18 @@ class AccountSpread(models.Model):
     spread_date = fields.Date(
         string="Start Date", default=time.strftime("%Y-01-01"), required=True
     )
+    spread_end_date = fields.Date(
+        string="End Date",
+        compute="_compute_spread_end_date",
+        store=True,
+        readonly=False,
+    )
+    period_number_actual = fields.Float(
+        string="Adjusted Number of Repetitions",
+        compute="_compute_period_number_actual",
+        store=True,
+        help="Actual period number in floating points, when end date exceed its full month",
+    )
     journal_id = fields.Many2one(
         "account.journal",
         compute="_compute_journal_id",
@@ -176,12 +189,105 @@ class AccountSpread(models.Model):
     def _compute_invoice_line(self):
         for spread in self:
             invoice_lines = spread.invoice_line_ids
-            spread.invoice_line_id = invoice_lines and invoice_lines[0] or False
+            spread.invoice_line_id = invoice_lines and invoice_lines[-1:] or False
 
     def _inverse_invoice_line(self):
         for spread in self:
             invoice_line = spread.invoice_line_id
             spread.write({"invoice_line_ids": [(6, 0, [invoice_line.id])]})
+
+    @api.depends("period_number", "period_type", "spread_date")
+    def _compute_spread_end_date(self):
+        for rec in self:
+            rec.spread_end_date = rec.with_context(recompute=True)._get_spread_end_date(
+                rec.period_type, rec.period_number, rec.spread_date
+            )
+
+    @api.depends("spread_end_date")
+    def _compute_period_number_actual(self):
+        for rec in self:
+            if not rec.spread_end_date:
+                continue
+            # Finding end date
+            diff_dates = 0
+            if rec.period_type == "month":
+                diff_dates = relativedelta(months=rec.period_number, days=-1)
+            if rec.period_type == "year":
+                diff_dates = relativedelta(years=rec.period_number, days=-1)
+            end_date = rec.spread_date + diff_dates
+            if rec.spread_end_date < end_date:
+                raise ValidationError(
+                    _("New end date should be later than start date (%s)") % end_date
+                )
+
+            # Initial Period
+            r = relativedelta(end_date, rec.spread_date)
+            periods = 1
+            if rec.period_type == "month":
+                periods += r.months + (12 * r.years)
+            if rec.period_type == "year":
+                periods += r.years
+
+            # No change
+            if rec.spread_end_date == end_date:
+                rec.period_number_actual = rec.period_number
+                continue
+
+            # Period type = month
+            if rec.period_type == "month":
+                if rec.spread_end_date.month == end_date.month:
+                    month_days = calendar.monthrange(end_date.year, end_date.month)[1]
+                    diff_days = (rec.spread_end_date - end_date).days
+                    rec.period_number_actual = periods + diff_days / month_days
+                else:  # End over to another period (months, quarter, year)
+                    # 1st half
+                    month_days_1st = calendar.monthrange(end_date.year, end_date.month)[
+                        1
+                    ]
+                    end_of_month = datetime(
+                        end_date.year, end_date.month, month_days_1st
+                    ).date()
+                    diff_days_1st = (end_of_month - end_date).days
+                    # 2nd half
+                    month_days_2nd = calendar.monthrange(
+                        rec.spread_end_date.year, rec.spread_end_date.month
+                    )[1]
+                    diff_days_2nd = (rec.spread_end_date - end_of_month).days
+                    rec.period_number_actual = (
+                        periods
+                        + diff_days_1st / month_days_1st
+                        + diff_days_2nd / month_days_2nd
+                    )
+
+            # Period type = year
+            # TODO: Calulation by year is not correct.
+            if rec.period_type == "year":
+                if rec.spread_end_date.year == end_date.year:
+                    year_days = 366 if calendar.isleap(end_date.year) else 365
+                    diff_days = (rec.spread_end_date - end_date).days
+                    rec.period_number_actual = periods + (diff_days / year_days)
+                else:  # End over to another period (months, quarter, year)
+                    # 1st half
+                    month_days_1st = calendar.monthrange(end_date.year, end_date.month)[
+                        1
+                    ]
+                    end_of_month = datetime(
+                        end_date.year, end_date.month, month_days_1st
+                    ).date()
+                    diff_days_1st = (end_of_month - end_date).days
+                    # 2nd half
+                    month_days_2nd = calendar.monthrange(
+                        rec.spread_end_date.year, rec.spread_end_date.month
+                    )[1]
+                    diff_days_2nd = (rec.spread_end_date - end_of_month).days
+                    rec.period_number_actual = (
+                        periods
+                        + diff_days_1st / month_days_1st
+                        + diff_days_2nd / month_days_2nd
+                    )
+
+            # if rec.period_number_actual >= rec.period_number + 1:
+            #     raise ValidationError(_("End date adjustment cannot exceed 1 period, please adjust number of repetition instead"))
 
     @api.depends(
         "estimated_amount",
@@ -415,7 +521,20 @@ class AccountSpread(models.Model):
     def _get_number_of_periods(self, month_day):
         """Calculates the number of spread lines."""
         self.ensure_one()
-        return self.period_number + 1 if month_day != 1 else self.period_number
+        number_of_periods = (
+            self.period_number + 1 if month_day != 1 else self.period_number
+        )
+        if self.period_number != self.period_number_actual:
+            # If end date is adjusted, it is possible to fall into another month
+            end_date = self.with_context(recompute=True)._get_spread_end_date(
+                self.period_type, self.period_number, self.spread_date
+            )
+            end_date_actual = self.with_context(recompute=False)._get_spread_end_date(
+                self.period_type, self.period_number, self.spread_date
+            )
+            if end_date.month != end_date_actual.month:
+                number_of_periods += 1
+        return number_of_periods
 
     @staticmethod
     def _get_first_day_of_month(spread_date):
@@ -440,6 +559,8 @@ class AccountSpread(models.Model):
 
     def _get_spread_end_date(self, period_type, period_number, spread_start_date):
         self.ensure_one()
+        if not self.env.context.get("recompute"):
+            return self.spread_end_date
         spread_end_date = spread_start_date
         number_of_periods = (
             period_number if spread_start_date.day != 1 else period_number - 1
@@ -454,7 +575,8 @@ class AccountSpread(models.Model):
         elif period_type == "year":
             spread_end_date = spread_start_date + relativedelta(years=number_of_periods)
         # calculate by days and not first day of month should compute residual day only
-        if self.days_calc and spread_end_date.day != 1:
+        if spread_end_date.day != 1:
+            # if self.days_calc and spread_end_date.day != 1:
             spread_end_date = spread_end_date - relativedelta(days=1)
         else:
             spread_end_date = self._get_last_day_of_month(spread_end_date)
@@ -475,7 +597,8 @@ class AccountSpread(models.Model):
         """Calculates the amount for the spread lines."""
         self.ensure_one()
         amount_to_spread = self.total_amount
-        period = self.period_number
+        # period = self.period_number
+        period = self.period_number_actual
         if sequence != number_of_periods:
             amount = amount_to_spread / period
             if sequence == 1:
@@ -573,7 +696,7 @@ class AccountSpread(models.Model):
         mls_to_reconcile = spread_mls.filtered(lambda l: l.account_id == account)
 
         if mls_to_reconcile:
-            do_reconcile = mls_to_reconcile + self.invoice_line_id
+            do_reconcile = mls_to_reconcile + self.invoice_line_ids
             do_reconcile.remove_move_reconcile()
             for line in do_reconcile:
                 line.reconciled = False
