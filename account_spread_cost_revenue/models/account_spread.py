@@ -176,7 +176,7 @@ class AccountSpread(models.Model):
     def _compute_invoice_line(self):
         for spread in self:
             invoice_lines = spread.invoice_line_ids
-            spread.invoice_line_id = invoice_lines and invoice_lines[0] or False
+            spread.invoice_line_id = invoice_lines and invoice_lines[-1:] or False
 
     def _inverse_invoice_line(self):
         for spread in self:
@@ -573,7 +573,7 @@ class AccountSpread(models.Model):
         mls_to_reconcile = spread_mls.filtered(lambda l: l.account_id == account)
 
         if mls_to_reconcile:
-            do_reconcile = mls_to_reconcile + self.invoice_line_id
+            do_reconcile = mls_to_reconcile + self.invoice_line_ids
             do_reconcile.remove_move_reconcile()
             for line in do_reconcile:
                 line.reconciled = False
