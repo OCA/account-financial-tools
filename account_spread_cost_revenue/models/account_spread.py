@@ -92,6 +92,13 @@ class AccountSpread(models.Model):
     spread_date = fields.Date(
         string="Start Date", default=time.strftime("%Y-01-01"), required=True
     )
+    spread_end_date = fields.Date(
+        string="Adjust End Date",
+        compute="_compute_spread_end_date",
+        store=True,
+        readonly=False,
+        help="End date can be adjusted within the same month of with the last period",
+    )
     journal_id = fields.Many2one(
         "account.journal",
         compute="_compute_journal_id",
@@ -171,6 +178,13 @@ class AccountSpread(models.Model):
                 spread.spread_type = "sale"
             else:
                 spread.spread_type = "purchase"
+
+    @api.depends("period_number", "period_type", "spread_date", "days_calc")
+    def _compute_spread_end_date(self):
+        for rec in self:
+            rec.spread_end_date = rec.with_context(
+                field_compute=True
+            )._get_spread_end_date(rec.period_type, rec.period_number, rec.spread_date)
 
     @api.depends("invoice_line_ids", "invoice_line_ids.move_id")
     def _compute_invoice_line(self):
@@ -366,6 +380,15 @@ class AccountSpread(models.Model):
         """
         self.ensure_one()
 
+        # Validate adjusted end date must be withing the same month of last period
+        end_date = self.with_context(field_compute=True)._get_spread_end_date(
+            self.period_type, self.period_number, self.spread_date
+        )
+        if end_date.month != self.spread_end_date.month:
+            raise ValidationError(
+                _("Adjusted end date must be within the same month with last period")
+            )
+
         posted_line_ids = self.line_ids.filtered(
             lambda x: x.move_id.state == "posted"
         ).sorted(key=lambda l: l.date)
@@ -440,6 +463,8 @@ class AccountSpread(models.Model):
 
     def _get_spread_end_date(self, period_type, period_number, spread_start_date):
         self.ensure_one()
+        if not self.env.context.get("field_compute"):
+            return self.spread_end_date
         spread_end_date = spread_start_date
         number_of_periods = (
             period_number if spread_start_date.day != 1 else period_number - 1
@@ -454,7 +479,7 @@ class AccountSpread(models.Model):
         elif period_type == "year":
             spread_end_date = spread_start_date + relativedelta(years=number_of_periods)
         # calculate by days and not first day of month should compute residual day only
-        if self.days_calc and spread_end_date.day != 1:
+        if spread_end_date.day != 1:
             spread_end_date = spread_end_date - relativedelta(days=1)
         else:
             spread_end_date = self._get_last_day_of_month(spread_end_date)
