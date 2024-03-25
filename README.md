@@ -50,7 +50,7 @@ addon | version | maintainers | summary
 [account_move_template](account_move_template/) | 16.0.1.0.0 |  | Templates for recurring Journal Entries
 [account_netting](account_netting/) | 16.0.1.0.0 |  | Compensate AR/AP accounts from the same partner
 [account_partner_required](account_partner_required/) | 16.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Adds an option 'partner policy' on accounts
-[account_spread_cost_revenue](account_spread_cost_revenue/) | 16.0.1.0.0 |  | Spread costs and revenues over a custom period
+[account_spread_cost_revenue](account_spread_cost_revenue/) | 16.0.1.0.1 |  | Spread costs and revenues over a custom period
 [account_template_active](account_template_active/) | 16.0.1.0.1 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Allow to disable / enable account template items (tax, fiscal position, account)
 [account_usability](account_usability/) | 16.0.1.0.3 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module and adds the option to enable Saxon Accounting
 [base_vat_optional_vies](base_vat_optional_vies/) | 16.0.1.1.0 |  | Optional validation of VAT via VIES
