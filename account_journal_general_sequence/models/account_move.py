@@ -61,7 +61,9 @@ class AccountMove(models.Model):
         # Cache all the new numbers to avoid wasting recomputations, caused by
         # searches done by _next() in the loop below
         chosen_map = {}
-        for move in chosen.sorted(lambda one: (one.date, one.name, one.id)):
+        for move in chosen.sorted(
+            lambda one: (one.date or "", one.name or "", one.id or 0)
+        ):
             chosen_map[move.id] = move.journal_id.entry_number_sequence_id._next(
                 move.date
             )
