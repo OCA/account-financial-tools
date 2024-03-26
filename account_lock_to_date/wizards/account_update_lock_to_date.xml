@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- # Copyright 2019 ForgeFlow S.L.
+     # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).-->
+<odoo>
+    <record model="ir.ui.view" id="account_update_lock_to_date_form_view">
+        <field name="name">account.update.lock_to_date.form</field>
+        <field name="model">account.update.lock_to_date</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <group>
+                        <field
+                            name="company_id"
+                            options="{'no_create': True}"
+                            groups="base.group_multi_company"
+                        />
+                        <field name="period_lock_to_date" />
+                        <field name="fiscalyear_lock_to_date" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        string="Update"
+                        name="execute"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="account_update_lock_to_date_act_window">
+        <field name="name">Update accounting lock to dates</field>
+        <field name="res_model">account.update.lock_to_date</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record model="ir.ui.menu" id="account_update_lock_to_date_menu">
+        <field name="name">Update accounting lock to dates</field>
+        <field name="parent_id" ref="account.menu_finance_entries_actions" />
+        <field name="action" ref="account_update_lock_to_date_act_window" />
+        <field
+            name="groups_id"
+            eval="[(6, 0, [ref('account.group_account_manager')])]"
+        />
+        <field name="sequence" eval="70" />
+    </record>
+</odoo>
