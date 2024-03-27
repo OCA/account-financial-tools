@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_number
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-08-22 21:07+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
+"Language-Team: none\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_asset_number
+#: model:ir.actions.report,print_report_name:account_asset_number.report_account_asset_number
+msgid "'Asset Number - %s' % (object.name)"
+msgstr "'Broj sredstva - %s' % (object.name)"
+
+#. module: account_asset_number
+#: model_terms:ir.ui.view,arch_db:account_asset_number.report_simple_asset_number
+msgid "<span class=\"text-muted\">No number available</span>"
+msgstr "<span class=\"text-muted\">Nema raspoloživih brojeva</span>"
+
+#. module: account_asset_number
+#: model:ir.model,name:account_asset_number.model_account_asset
+msgid "Asset"
+msgstr "Sredstvo"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset__number
+msgid "Asset Number"
+msgstr "Broj sredstva"
+
+#. module: account_asset_number
+#: model:ir.actions.report,name:account_asset_number.report_account_asset_number
+msgid "Asset Number (PDF)"
+msgstr "Broj sredstva (PDF)"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__sequence_id
+msgid "Asset Number Sequence"
+msgstr "Brojevni krug sredstava"
+
+#. module: account_asset_number
+#: model:ir.model,name:account_asset_number.model_account_asset_profile
+msgid "Asset profile"
+msgstr "Profil sredstva"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset__use_sequence
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__use_sequence
+msgid "Auto Asset Number by Sequence"
+msgstr ""
+
+#. module: account_asset_number
+#: model_terms:ir.ui.view,arch_db:account_asset_number.report_simple_asset_number
+msgid "Barcode"
+msgstr "Barkod"
+
+#. module: account_asset_number
+#: model:ir.model,name:account_asset_number.model_report_account_asset_management_asset_report_xls
+msgid "Dynamic XLS asset report generator"
+msgstr ""
+
+#. module: account_asset_number
+#: model:ir.model.fields,help:account_asset_number.field_account_asset__use_sequence
+#: model:ir.model.fields,help:account_asset_number.field_account_asset_profile__use_sequence
+msgid "If check, asset number auto run by sequence."
+msgstr ""
+
+#. module: account_asset_number
+#: code:addons/account_asset_number/report/account_asset_report_xls.py:0
+#, python-format
+msgid "Number"
+msgstr "Broj"
+
+#~ msgid "Display Name"
+#~ msgstr "Prikazani naziv"
+
+#~ msgid "ID"
+#~ msgstr "ID"
