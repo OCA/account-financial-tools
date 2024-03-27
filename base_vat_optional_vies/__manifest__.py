@@ -11,7 +11,7 @@
         'base_vat',
     ],
     'external_dependencies': {
-        'python': ['vatnumber'],
+        'python': ['stdnum'],
     },
     'data': [
         'views/res_partner_view.xml',
