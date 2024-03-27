@@ -1,0 +1,116 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_partner_required
+#
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-22 23:21+0000\n"
+"PO-Revision-Date: 2020-05-06 13:19+0000\n"
+"Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_account
+msgid "Account"
+msgstr "Konto"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__always
+msgid "Always"
+msgstr "Immer"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_move_line
+msgid "Journal Item"
+msgstr "Journalbuchung"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__never
+msgid "Never"
+msgstr "Niemals"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__optional
+msgid "Optional"
+msgstr "Wahlweise"
+
+#. module: account_partner_required
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account__partner_policy
+#: model_terms:ir.ui.view,arch_db:account_partner_required.view_account_search
+msgid "Partner Policy"
+msgstr ""
+
+#. module: account_partner_required
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
+#, python-format
+msgid ""
+"Partner policy is set to 'Always' on account '%(account)s' but the partner "
+"is missing on the journal item '%(move_line)s'."
+msgstr ""
+
+#. module: account_partner_required
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
+#, python-format
+msgid ""
+"Partner policy is set to 'Never' on account '%(account)s' but the journal "
+"item '%(move_line)s' has the partner '%(partner)s'."
+msgstr ""
+
+#. module: account_partner_required
+#: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
+msgid ""
+"Set the policy for the partner field:\n"
+"if you select 'Optional', the accountant is free to put a partner on journal "
+"items with this account ;\n"
+"if you select 'Always', the accountant will get an error message if there is "
+"no partner ;\n"
+"if you select 'Never', the accountant will get an error message if a partner "
+"is present."
+msgstr ""
+
+#~ msgid "Account Type"
+#~ msgstr "Kontoart"
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Always' with account '%s' but the partner is "
+#~ "missing in the account move line with label '%s'."
+#~ msgstr ""
+#~ "Partner-Regel ist auf 'Immer' mit Konto '%s' gesetzt, aber der Partner "
+#~ "fehlt in der Buchungsposition mit Kennung '%s'."
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Never' with account '%s' but the account move "
+#~ "line with label '%s' has a partner '%s'."
+#~ msgstr ""
+#~ "Partner-Regel ist auf 'Niemals' mit Konto '%s' gesetzt, aber in der "
+#~ "Buchungsposition mit Kennung '%s' ist ein Partner '%s' eingetragen."
+
+#~ msgid "Policy for Partner Field"
+#~ msgstr "Regel zum Partnerfeld"
+
+#~ msgid ""
+#~ "Set the policy for the partner field : if you select 'Optional', the "
+#~ "accountant is free to put a partner on an account move line with this "
+#~ "type of account ; if you select 'Always', the accountant will get an "
+#~ "error message if there is no partner ; if you select 'Never', the "
+#~ "accountant will get an error message if a partner is present."
+#~ msgstr ""
+#~ "Setzen Sie die Regel zum Partnerfeld: Wenn Sie 'Wahlweise' wählen, steht "
+#~ "es dem Buchhalter frei bei dieser Kontoart einen Partner in "
+#~ "Buchungspositionen einzutragen; wählen Sie 'Immer', erhält der Buchhalter "
+#~ "bei fehlendem Partner eine Fehlermeldung; wählen Sie 'Niemals', erhält "
+#~ "der Buchhalter eine Fehlermeldung, wenn ein Partner eingetragen ist."
