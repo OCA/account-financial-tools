@@ -14,24 +14,22 @@ class TestResPartner(common.TransactionCase):
         self.partner = self.env['res.partner'].create({
             'name': 'Test partner',
         })
-        self.vatnumber_path = (
-            'odoo.addons.base_vat.models.res_partner.vatnumber'
-        )
+        self.stdnum_path = "odoo.addons.base_vat.models.res_partner.stdnum"
 
     def test_validate_vat_vies(self):
-        with mock.patch(self.vatnumber_path) as mock_vatnumber:
+        with mock.patch(self.stdnum_path) as mock_vatnumber:
             mock_vatnumber.check_vies.return_value = True
             self.partner.vat = 'ESB87530432'
             self.assertEqual(self.partner.vies_passed, True)
 
     def test_exception_vat_vies(self):
-        with mock.patch(self.vatnumber_path) as mock_vatnumber:
+        with mock.patch(self.stdnum_path) as mock_vatnumber:
             mock_vatnumber.check_vies.side_effect = Exception()
             self.partner.vat = 'ESB87530432'
             self.assertEqual(self.partner.vies_passed, False)
 
     def test_no_validate_vat(self):
-        with mock.patch(self.vatnumber_path) as mock_vatnumber:
+        with mock.patch(self.stdnum_path) as mock_vatnumber:
             mock_vatnumber.check_vies.return_value = False
             self.partner.vat = 'ESB87530432'
             self.assertEqual(self.partner.vies_passed, False)
