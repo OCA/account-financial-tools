@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_line_repair_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_line_repair_info
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_repair_order__display_name
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_stock_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_line_repair_info
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_account_move__id
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_repair_order__id
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_line_repair_info
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_repair_order__account_move_line_ids
+msgid "Journal Entries"
+msgstr ""
+
+#. module: account_move_line_repair_info
+#: model:ir.model,name:account_move_line_repair_info.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_move_line_repair_info
+#: model:ir.model,name:account_move_line_repair_info.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_move_line_repair_info
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_repair_order____last_update
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_line_repair_info
+#: model:ir.model,name:account_move_line_repair_info.model_repair_order
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_account_move_line__repair_order_id
+#: model_terms:ir.ui.view,arch_db:account_move_line_repair_info.view_account_move_line_filter
+msgid "Repair Order"
+msgstr ""
+
+#. module: account_move_line_repair_info
+#: model:res.groups,name:account_move_line_repair_info.group_account_move_repair_order_info
+msgid "Repair Order info in Journal Items"
+msgstr ""
+
+#. module: account_move_line_repair_info
+#: model:ir.model,name:account_move_line_repair_info.model_stock_move
+msgid "Stock Move"
+msgstr ""
