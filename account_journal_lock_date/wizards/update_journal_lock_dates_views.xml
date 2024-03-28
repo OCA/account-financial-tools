@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Tecnativa - Ernesto Tejeda
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="update_journal_lock_dates_wizard_action" model="ir.actions.act_window">
+        <field name="name">Update journals lock dates</field>
+        <field name="res_model">update.journal.lock.dates.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_journal" />
+    </record>
+
+    <record id="update_journal_lock_dates_wizard_view_form" model="ir.ui.view">
+        <field name="name">update.journal.lock.dates.wizard.form</field>
+        <field name="model">update.journal.lock.dates.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="fiscalyear_lock_date" />
+                    </group>
+                    <group>
+                        <field name="period_lock_date" />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="action_update_lock_dates"
+                        string="Update"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

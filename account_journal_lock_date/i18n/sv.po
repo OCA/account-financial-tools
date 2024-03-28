@@ -1,0 +1,154 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_journal_lock_date
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-30 00:47+0000\n"
+"PO-Revision-Date: 2024-02-27 12:34+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
+"Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_journal_lock_date
+#: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
+msgid "Cancel"
+msgstr "Avbryt"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_date
+msgid "Created on"
+msgstr "Skapad på"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_move
+msgid "Journal Entry"
+msgstr "Verifikat"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard____last_update
+msgid "Last Modified on"
+msgstr "Senast ändrad den"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__fiscalyear_lock_date
+msgid "Lock Date"
+msgstr "Låsdatum"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__period_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__period_lock_date
+msgid "Lock Date for Non-Advisers"
+msgstr "Spärrdatum för icke rådgivare"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_update_journal_lock_dates_wizard
+msgid "Mass Update Journal Lock Dates Wizard"
+msgstr "Guide för massuppdatering Journal Lås datum"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date for this journal. Use it for fiscal year locking for this journal, "
+"for example."
+msgstr ""
+"Inga användare, inklusive rådgivare, kan redigera konton före och inklusive "
+"detta datum för denna journal. Använd det till exempel för låsning av "
+"räkenskapsår för denna journal."
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__period_lock_date
+msgid ""
+"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
+"of this date for this journal. Use it for period locking inside an open "
+"fiscal year for this journal, for example."
+msgstr ""
+"Endast användare med rollen 'Rådgivare' kan redigera konton före och "
+"inklusive detta datum för denna journal. Använd den t.ex. för periodlåsning "
+"inom ett öppet räkenskapsår för denna journal."
+
+#. module: account_journal_lock_date
+#: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
+msgid "Update"
+msgstr "Uppdatering"
+
+#. module: account_journal_lock_date
+#: model:ir.actions.act_window,name:account_journal_lock_date.update_journal_lock_dates_wizard_action
+msgid "Update journals lock dates"
+msgstr "Uppdatera datum för låsning av journaler"
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
+#, python-format
+msgid "You are not allowed to execute this action."
+msgstr "Du får inte utföra denna åtgärd."
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s"
+msgstr ""
+"Du kan inte lägga till/ändra poster för journalen '%(journal)s' före och "
+"inklusive låsdatumet %(journal_date)s"
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s. Check the Journal settings or "
+"ask someone with the 'Adviser' role"
+msgstr ""
+"Du kan inte lägga till/ändra poster för journalen '%(journal)s' före och "
+"inklusive låsdatumet %(journal_date)s. Kontrollera journalinställningarna "
+"eller fråga någon med rollen 'Rådgivare'"
+
+#, fuzzy
+#~ msgid "Journal Entries"
+#~ msgstr "Journal"
