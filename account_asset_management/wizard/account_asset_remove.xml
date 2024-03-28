@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_asset_remove_view_form" model="ir.ui.view">
+        <field name="name">account.asset.remove.form</field>
+        <field name="model">account.asset.remove</field>
+        <field name="arch" type="xml">
+            <form string="Remove Asset">
+                <group>
+                    <group>
+                        <field invisible="1" name="company_id"/>
+                        <field groups="base.group_multi_company" name="company_id"/>
+                        <field name="date_remove"/>
+                        <field name="force_date"/>
+                        <field name="sale_value"/>
+                        <field invisible="sale_value == 0.0" name="account_sale_id" required="sale_value > 0.0"/>
+                    </group>
+                    <group>
+                        <field invisible="posting_regime == 'residual_value'" name="account_plus_value_id" required="posting_regime != 'residual_value'"/>
+                        <field invisible="posting_regime == 'residual_value'" name="account_min_value_id" required="posting_regime != 'residual_value'"/>
+                        <field invisible="posting_regime != 'residual_value'" name="account_residual_value_id" required="posting_regime == 'residual_value'"/>
+                    </group>
+                    <group>
+                        <field name="posting_regime"/>
+                    </group>
+                    <separator colspan="4" string="Notes"/>
+                    <field colspan="4" name="note" nolabel="1"/>
+                </group>
+                <newline/>
+                <separator colspan="4"/>
+                <footer>
+                    <button class="oe_highlight" name="remove" string="Generate Removal entries" type="object"/>
+                    <button class="oe_link" special="cancel" string="Cancel"/>
+                </footer>
+            </form></field>
+    </record>
+</odoo>
