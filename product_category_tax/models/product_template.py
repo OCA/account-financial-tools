@@ -14,7 +14,8 @@ class ProductTemplate(models.Model):
     @api.onchange("categ_id")
     def _onchange_categ_id_set_taxes(self):
         if self.categ_id:
-            self.set_tax_from_category()
+            self.taxes_id = [(6, 0, self.categ_id.taxes_id.ids)]
+            self.supplier_taxes_id = [(6, 0, self.categ_id.supplier_taxes_id.ids)]
 
     def set_tax_from_category(self):
         records_by_categ = defaultdict(lambda: self.browse())
