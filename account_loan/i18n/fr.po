@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-06 02:40+0000\n"
-"PO-Revision-Date: 2018-04-06 02:40+0000\n"
-"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
+"PO-Revision-Date: 2024-03-28 22:37+0000\n"
+"Last-Translator: Pierre-François Teyssier <pierre-francois@scalizer.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -25,6 +26,8 @@ msgid ""
 "<span class=\"o_stat_text\">Deduct</span>\n"
 "                                <span class=\"o_stat_text\">Debt</span>"
 msgstr ""
+"<span class=\"o_stat_text\">Déduire</span>\n"
+"                                <span class=\"o_stat_text\">Dette</span>"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -32,11 +35,13 @@ msgid ""
 "<span class=\"o_stat_text\">Increase</span>\n"
 "                                <span class=\"o_stat_text\">Debt</span>"
 msgstr ""
+"<span class=\"o_stat_text\">Augmenter</span>\n"
+"                                <span class=\"o_stat_text\">Dette</span>"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.res_partner_form_view
 msgid "<span class=\"o_stat_text\">Loans</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Emprunts</span>"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__account_id
@@ -75,12 +80,12 @@ msgstr "Comptes"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Action requise"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Activités"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_exception_decoration
@@ -90,12 +95,12 @@ msgstr ""
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "État de l'activité"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icône du type d'activité"
 
 #. module: account_loan
 #. odoo-python
@@ -118,21 +123,24 @@ msgstr "Le montant ne peut pas être inférieur à zéro"
 #, python-format
 msgid "Amount cannot be recomputed if moves or invoices exists already"
 msgstr ""
+"Le montant ne peut pas être recalculé si des écritures ou les factures "
+"existent déjà"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__interests_amount
 msgid "Amount of the payment that will be assigned to interests"
-msgstr ""
+msgstr "Le montant du paiement qui sera affecté aux intérêts"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__principal_amount
 msgid "Amount of the payment that will reduce the pending loan amount"
-msgstr ""
+msgstr "Le montant du payment qui réduira le montant de l'emprunt en attente"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__long_term_principal_amount
 msgid "Amount that will reduce the pending loan amount on long term"
 msgstr ""
+"Le montant qui réduira le montant de l'emprunt en attente sur le long terme"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__amount
@@ -452,7 +460,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__journal_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post__journal_id
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_move
