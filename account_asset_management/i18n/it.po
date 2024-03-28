@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2024-02-29 13:35+0000\n"
+"PO-Revision-Date: 2024-03-29 01:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -692,7 +692,7 @@ msgstr ""
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
 #: field:account.asset.asset,history_ids:0
 msgid "History"
-msgstr "Storico"
+msgstr "Cronologia"
 
 #. module: account_asset_management
 #: field:account.asset.history,name:0
