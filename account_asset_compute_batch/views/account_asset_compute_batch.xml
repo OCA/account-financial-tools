@@ -53,11 +53,7 @@
                                 name="company_id"
                                 groups="base.group_multi_company"
                             />
-                            <field name="profile_ids" widget="many2many_tags">
-                                <tree>
-                                    <field name="name" />
-                                </tree>
-                            </field>
+                            <field name="profile_ids" widget="many2many_tags" />
                         </group>
                     </group>
                     <notebook>
@@ -71,14 +67,8 @@
                             </field>
                             <group class="oe_subtotal_footer oe_right">
                                 <field name="currency_id" invisible="1" />
-                                <div class="oe_subtotal_footer_separator oe_inline">
-                                    <label for="depre_amount" />
-                                </div>
-                                <field
-                                    name="depre_amount"
-                                    nolabel="1"
-                                    class="oe_subtotal_footer_separator"
-                                />
+                                <label for="depre_amount" />
+                                <field name="depre_amount" nolabel="1" />
                             </group>
                         </page>
                         <page string="Exception" name="exception" states="exception">

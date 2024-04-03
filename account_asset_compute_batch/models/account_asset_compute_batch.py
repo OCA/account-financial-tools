@@ -215,7 +215,7 @@ class AccountAssetComputeBatchProfileReport(models.Model):
                 min(ml.id) as id,
                 compute_batch_id,
                 p.id as profile_id,
-                currency_id,
+                a.currency_id,
                 sum(debit) as amount
         """
 
@@ -240,5 +240,5 @@ class AccountAssetComputeBatchProfileReport(models.Model):
             GROUP BY
                 compute_batch_id,
                 p.id,
-                currency_id
+                a.currency_id
         """

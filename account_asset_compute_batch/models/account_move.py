@@ -9,7 +9,7 @@ class AccountMove(models.Model):
 
     def action_post(self):
         if self.env.context.get("delay_post"):
-            self.write({"auto_post": True})
+            self.write({"auto_post": "at_date"})
             return False
         return super().action_post()
 

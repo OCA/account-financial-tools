@@ -62,11 +62,11 @@ class TestAssetComputeBatch(TestAssetManagement):
 
     def _create_compute_wizard(self, use_batch=False, delay_compute=False):
         with Form(self.env["account.asset.compute"]) as f:
+            f.use_batch = use_batch
             f.batch_name = "Test Batch"
             f.description = "Compute asset with 2 profiles"
             f.profile_ids.add(self.ict3Y)
             f.profile_ids.add(self.car5y)
-            f.use_batch = use_batch
             f.delay_compute = delay_compute
         wiz = f.save()
         return wiz
@@ -87,7 +87,7 @@ class TestAssetComputeBatch(TestAssetManagement):
         self.assertEqual(batch.state, "computed")
         self.assertEqual(batch.depre_amount, 3200)
         # Test summary amount by profile
-        batch.invalidate_cache()
+        batch.invalidate_recordset()
         self.assertEqual(
             {x.profile_id: x.amount for x in batch.profile_report},
             {self.ict3Y: 1200, self.car5y: 2000},
