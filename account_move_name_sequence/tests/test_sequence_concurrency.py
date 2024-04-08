@@ -24,6 +24,9 @@ class ThreadRaiseJoin(threading.Thread):
 
     def join(self, *args, **kwargs):
         res = super().join(*args, **kwargs)
+        # Wait for the thread finishes
+        while self.is_alive():
+            pass
         # raise exception in the join
         # to raise it in the main thread
         if self.exc:
@@ -94,32 +97,31 @@ class TestSequenceConcurrency(TransactionCase):
     def _create_invoice_payment(
         self, deadlock_timeout, payment_first=False, ir_sequence_standard=False
     ):
-        with odoo.api.Environment.manage():
-            odoo.registry(self.env.cr.dbname)
-            with self._new_cr() as cr, cr.savepoint():
-                env = api.Environment(cr, SUPERUSER_ID, {})
-                cr_pid = cr.connection.get_backend_pid()
-                # Avoid waiting for a long time and it needs to be less than deadlock
-                cr.execute("SET LOCAL statement_timeout = '%ss'", (deadlock_timeout + 10,))
-                if payment_first:
-                    _logger.info("Creating payment cr %s", cr_pid)
-                    self._create_payment_form(
-                        env, ir_sequence_standard=ir_sequence_standard
-                    )
-                    _logger.info("Creating invoice cr %s", cr_pid)
-                    self._create_invoice_form(env)
-                else:
-                    _logger.info("Creating invoice cr %s", cr_pid)
-                    self._create_invoice_form(env)
-                    _logger.info("Creating payment cr %s", cr_pid)
-                    self._create_payment_form(
-                        env, ir_sequence_standard=ir_sequence_standard
-                    )
-                # sleep in order to avoid release the locks too faster
-                # It could be many methods called after creating these
-                # kind of records e.g. reconcile
-                _logger.info("Finishing waiting %s" % (deadlock_timeout + 12))
-                time.sleep(deadlock_timeout + 12)
+        odoo.registry(self.env.cr.dbname)
+        with self._new_cr() as cr, cr.savepoint():
+            env = api.Environment(cr, SUPERUSER_ID, {})
+            cr_pid = cr.connection.get_backend_pid()
+            # Avoid waiting for a long time and it needs to be less than deadlock
+            cr.execute("SET LOCAL statement_timeout = '%ss'", (deadlock_timeout + 10,))
+            if payment_first:
+                _logger.info("Creating payment cr %s", cr_pid)
+                self._create_payment_form(
+                    env, ir_sequence_standard=ir_sequence_standard
+                )
+                _logger.info("Creating invoice cr %s", cr_pid)
+                self._create_invoice_form(env)
+            else:
+                _logger.info("Creating invoice cr %s", cr_pid)
+                self._create_invoice_form(env)
+                _logger.info("Creating payment cr %s", cr_pid)
+                self._create_payment_form(
+                    env, ir_sequence_standard=ir_sequence_standard
+                )
+            # sleep in order to avoid release the locks too faster
+            # It could be many methods called after creating these
+            # kind of records e.g. reconcile
+            _logger.info("Finishing waiting %s" % (deadlock_timeout + 12))
+            time.sleep(deadlock_timeout + 12)
 
     def test_sequence_concurrency_10_draft_invoices(self):
         """Creating 2 DRAFT invoices not should raises errors"""
@@ -290,6 +292,7 @@ class TestSequenceConcurrency(TransactionCase):
                 "You need to configure PG parameter deadlock_timeout='1s'",
             )
             deadlock_timeout = int(deadlock_timeout / 1000)  # s
+
             try:
                 t_pay_inv = ThreadRaiseJoin(
                     target=self._create_invoice_payment,
