@@ -23,11 +23,12 @@ class ThreadRaiseJoin(threading.Thread):
             self.exc = e
 
     def join(self, *args, **kwargs):
-        super().join(*args, **kwargs)
+        res = super().join(*args, **kwargs)
         # raise exception in the join
         # to raise it in the main thread
         if self.exc:
             raise self.exc
+        return res
 
 
 @tagged("post_install", "-at_install", "test_move_sequence")
@@ -99,9 +100,7 @@ class TestSequenceConcurrency(TransactionCase):
                 env = api.Environment(cr, SUPERUSER_ID, {})
                 cr_pid = cr.connection.get_backend_pid()
                 # Avoid waiting for a long time and it needs to be less than deadlock
-                cr.execute(
-                    "SET LOCAL statement_timeout = '%ss'", (deadlock_timeout + 10,)
-                )
+                cr.execute("SET LOCAL statement_timeout = '%ss'", (deadlock_timeout + 10,))
                 if payment_first:
                     _logger.info("Creating payment cr %s", cr_pid)
                     self._create_payment_form(
