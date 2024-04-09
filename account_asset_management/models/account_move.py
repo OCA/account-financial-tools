@@ -250,12 +250,17 @@ class AccountMoveLine(models.Model):
 
     def _expand_asset_line(self):
         self.ensure_one()
-        if self.asset_profile_id and self.quantity > 1.0:
-            profile = self.asset_profile_id
-            if profile.asset_product_item:
-                aml = self.with_context(check_move_validity=False)
-                qty = self.quantity
-                name = self.name
-                aml.write({"quantity": 1, "name": "{} {}".format(name, 1)})
-                for i in range(1, int(qty)):
-                    aml.copy({"name": "{} {}".format(name, i + 1)})
+        if self.quantity > 1.0 and self.asset_profile_id.asset_product_item:
+            aml = self.with_context(check_move_validity=False)
+            qty = self.quantity
+            name = self.name
+            aml.write(
+                {
+                    "quantity": 1,
+                    "name": "{} {}".format(name, 1),
+                    # Make sure the price is not changed, like with account_invoice_pricelist
+                    "price_unit": self.price_unit,
+                }
+            )
+            for i in range(1, int(qty)):
+                aml.copy({"name": "{} {}".format(name, i + 1)})

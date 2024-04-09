@@ -599,8 +599,13 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         line = invoice.invoice_line_ids[0]
         self.assertTrue(line.price_unit > 0.0)
         line.quantity = 2
+        line_price = 670
+        line.price_unit = line_price
         line.asset_profile_id = asset_profile
         self.assertEqual(len(invoice.invoice_line_ids), 2)
+        self.assertTrue(
+            all([line.price_unit == line_price for line in invoice.invoice_line_ids])
+        )
         invoice.action_post()
         # get all asset after invoice validation
         current_asset = self.env["account.asset"].search([])
