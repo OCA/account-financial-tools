@@ -65,7 +65,7 @@ addon | version | maintainers | summary
 [account_template_active](account_template_active/) | 12.0.1.0.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Allow to disable / enable account template items (tax, fiscal position, account)
 [account_type_menu](account_type_menu/) | 12.0.1.0.0 |  | Adds a menu entry for Account Types
 [account_voucher_print](account_voucher_print/) | 12.0.1.0.0 |  | Enable printing in sale and purchase receipts
-[base_vat_optional_vies](base_vat_optional_vies/) | 12.0.1.0.1 |  | Optional validation of VAT via VIES
+[base_vat_optional_vies](base_vat_optional_vies/) | 12.0.1.0.2 |  | Optional validation of VAT via VIES
 
 [//]: # (end addons)
 
