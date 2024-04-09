@@ -4,6 +4,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import mock
 from odoo.tests import common
+from odoo.tools import mute_logger
+
+MOCK_PATH = "odoo.addons.base_vat.models.res_partner.check_vies"
 
 
 class TestResPartner(common.TransactionCase):
@@ -11,27 +14,28 @@ class TestResPartner(common.TransactionCase):
         super(TestResPartner, self).setUp()
         self.company = self.env.user.company_id
         self.company.vat_check_vies = True
-        self.partner = self.env['res.partner'].create({
-            'name': 'Test partner',
-        })
-        self.vatnumber_path = (
-            'odoo.addons.base_vat.models.res_partner.vatnumber'
+        self.partner = self.env["res.partner"].create(
+            {
+                "name": "Test partner",
+                "country_id": self.ref("base.es"),
+            }
         )
 
     def test_validate_vat_vies(self):
-        with mock.patch(self.vatnumber_path) as mock_vatnumber:
-            mock_vatnumber.check_vies.return_value = True
-            self.partner.vat = 'ESB87530432'
+        with mock.patch(MOCK_PATH, return_value={"valid": True}) as mocker:
+            self.partner.write({"vat": "ESB87530432"})
             self.assertEqual(self.partner.vies_passed, True)
+            mocker.assert_called_once_with("ESB87530432")
 
+    @mute_logger("odoo.addons.base_vat.models.res_partner")
     def test_exception_vat_vies(self):
-        with mock.patch(self.vatnumber_path) as mock_vatnumber:
-            mock_vatnumber.check_vies.side_effect = Exception()
-            self.partner.vat = 'ESB87530432'
+        with mock.patch(MOCK_PATH, side_effect=Exception) as mocker:
+            self.partner.write({"vat": "ESB87530432"})
             self.assertEqual(self.partner.vies_passed, False)
+            mocker.assert_called_once_with("ESB87530432")
 
     def test_no_validate_vat(self):
-        with mock.patch(self.vatnumber_path) as mock_vatnumber:
-            mock_vatnumber.check_vies.return_value = False
-            self.partner.vat = 'ESB87530432'
+        with mock.patch(MOCK_PATH, return_value={"valid": False}) as mocker:
+            self.partner.write({"vat": "ESB87530432"})
             self.assertEqual(self.partner.vies_passed, False)
+            mocker.assert_called_once_with("ESB87530432")
