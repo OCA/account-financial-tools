@@ -236,6 +236,12 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertEqual(ict0.value_residual, 1000)
         vehicle0.validate()
         created_move_ids = vehicle0.depreciation_line_ids[1].create_move()
+        self.assertTrue(
+            all(
+                m.state == "posted"
+                for m in self.env["account.move"].browse(created_move_ids)
+            )
+        )
         for move_id in created_move_ids:
             move = self.env["account.move"].browse(move_id)
             expense_line = move.line_ids.filtered(
@@ -826,7 +832,13 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         ict0.refresh()
         # post the first depreciation line
         ict0.validate()
-        ict0.depreciation_line_ids[1].create_move()
+        created_move_ids = ict0.depreciation_line_ids[1].create_move()
+        self.assertTrue(
+            all(
+                m.state == "posted"
+                for m in self.env["account.move"].browse(created_move_ids)
+            )
+        )
         original_move = ict0.depreciation_line_ids[1].move_id
         ict0.refresh()
         self.assertEqual(ict0.state, "open")
@@ -919,3 +931,34 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         last_line.create_move()
         self.assertEqual(asset.value_residual, 0)
         self.assertEqual(asset.state, "close")
+
+    def test_no_auto_validate_move(self):
+        """Ensure new account move are not automatically posted, depending on configuration"""
+        # Disable the auto-validate
+        self.env.company.write({"asset_move_auto_validate": False})
+        ict0 = self.asset_model.create(
+            {
+                "state": "draft",
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "year",
+                "name": "Laptop",
+                "code": "PI00101",
+                "purchase_value": 1500.0,
+                "profile_id": self.ict3Y.id,
+                "date_start": time.strftime("%Y-01-01"),
+            }
+        )
+        ict0.profile_id.allow_reversal = True
+        # compute the depreciation boards
+        ict0.compute_depreciation_board()
+        ict0.refresh()
+        # post the first depreciation line
+        ict0.validate()
+        created_move_ids = ict0.depreciation_line_ids[1].create_move()
+        self.assertTrue(
+            all(
+                m.state != "posted"
+                for m in self.env["account.move"].browse(created_move_ids)
+            )
+        )

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="priority" eval="90" />
+        <field name="arch" type="xml">
+            <div data-key="account" position="inside">
+                <h2>Assets</h2>
+                <div
+                    class="row mt16 o_settings_container"
+                    name="main_assets_setting_container"
+                >
+                    <div class="col-12 col-lg-6 o_setting_box" id="main_currency">
+                        <div class="o_setting_left_pane">
+                            <field name="asset_move_auto_validate" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label
+                                string="Auto-post move for assets"
+                                for="asset_move_auto_validate"
+                            />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                role="img"
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                            />
+                            <div class="text-muted">
+                                Determine if the Account Move created (automatically or not) should be posted by default.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

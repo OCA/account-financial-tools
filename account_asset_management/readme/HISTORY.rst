@@ -1,3 +1,8 @@
+14.0.3.1.2 (2024-04-10)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Add option to auto-post account move created by assets (True by default for backward compatibility)
+
 14.0.1.0.0 (2021-01-08)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

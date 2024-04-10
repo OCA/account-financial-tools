@@ -24,6 +24,7 @@
         "views/account_asset_profile.xml",
         "views/account_move.xml",
         "views/account_move_line.xml",
+        "views/res_config_settings.xml",
         "views/menuitem.xml",
         "data/cron.xml",
         "wizard/wiz_account_asset_report.xml",
