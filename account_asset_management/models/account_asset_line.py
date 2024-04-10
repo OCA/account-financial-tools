@@ -280,7 +280,9 @@ class AccountAssetLine(models.Model):
                 depreciation_date, exp_acc, "expense", move
             )
             self.env["account.move.line"].with_context(ctx).create(aml_e_vals)
-            move.action_post()
+            company = move.company_id or self.env.company
+            if company.asset_move_auto_validate:
+                move.action_post()
             line.with_context(allow_asset_line_update=True).write({"move_id": move.id})
             created_move_ids.append(move.id)
             asset_ids.add(asset.id)
