@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2024-04-04 11:38+0000\n"
+"PO-Revision-Date: 2024-04-15 09:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -156,7 +156,7 @@ msgstr "Categorie Immobilizzazioni"
 #: field:account.move.line,asset_category_id:0
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_search
 msgid "Asset Category"
-msgstr "Categoria Immobilizzazione"
+msgstr "Categoria cespite"
 
 #. module: account_asset_management
 #: view:asset.modify:account_asset_management.asset_modify_form
@@ -228,7 +228,7 @@ msgstr ""
 #: field:asset.asset.report,asset_category_id:0
 #: model:ir.model,name:account_asset_management.model_account_asset_category
 msgid "Asset category"
-msgstr "Categoria immobilizzazione"
+msgstr "Categoria cespite"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_depreciation_line
@@ -260,7 +260,7 @@ msgstr ""
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_assets
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_config_assets
 msgid "Assets"
-msgstr "Immobilizzazioni"
+msgstr "Cespiti"
 
 #. module: account_asset_management
 #: view:asset.asset.report:account_asset_management.action_account_asset_report_graph
