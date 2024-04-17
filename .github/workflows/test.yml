@@ -43,10 +43,17 @@ jobs:
             name: test with OCB
             makepot: "true"
           - container: ghcr.io/oca/oca-ci/py3.10-odoo16.0:latest
-            exclude: "account_journal_restrict_mode"
+            include: "account_move_name_sequence"
             name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.10-ocb16.0:latest
-            exclude: "account_journal_restrict_mode"
+            include: "account_move_name_sequence"
+            name: test with OCB
+            makepot: "true"
+          - container: ghcr.io/oca/oca-ci/py3.10-odoo16.0:latest
+            exclude: "account_journal_restrict_mode,account_move_name_sequence"
+            name: test with Odoo
+          - container: ghcr.io/oca/oca-ci/py3.10-ocb16.0:latest
+            exclude: "account_journal_restrict_mode,account_move_name_sequence"
             name: test with OCB
             makepot: "true"
     services:
