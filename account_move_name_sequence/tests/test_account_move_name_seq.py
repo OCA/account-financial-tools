@@ -11,7 +11,7 @@ from freezegun import freeze_time
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import tagged
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 @tagged("post_install", "-at_install")
@@ -19,12 +19,34 @@ class TestAccountMoveNameSequence(TransactionCase):
     def setUp(self):
         super().setUp()
         self.company = self.env.ref("base.main_company")
+        self.partner = self.env.ref("base.res_partner_3")
         self.misc_journal = self.env["account.journal"].create(
             {
                 "name": "Test Journal Move name seq",
                 "code": "ADLM",
                 "type": "general",
                 "company_id": self.company.id,
+            }
+        )
+        self.sales_seq = self.env["ir.sequence"].create(
+            {
+                "name": "TB2C",
+                "implementation": "no_gap",
+                "prefix": "TB2CSEQ/%(range_year)s/",
+                "use_date_range": True,
+                "number_increment": 1,
+                "padding": 4,
+                "company_id": self.company.id,
+            }
+        )
+        self.sales_journal = self.env["account.journal"].create(
+            {
+                "name": "TB2C",
+                "code": "TB2C",
+                "type": "sale",
+                "company_id": self.company.id,
+                "refund_sequence": True,
+                "sequence_id": self.sales_seq.id,
             }
         )
         self.purchase_journal = self.env["account.journal"].create(
@@ -334,3 +356,19 @@ class TestAccountMoveNameSequence(TransactionCase):
 
     def test_constrains_date_sequence_true(self):
         self.assertTrue(self.env["account.move"]._constrains_date_sequence())
+
+    def test_prefix_move_name_journal_onchange(self):
+        product = self.env["product.product"].create({"name": "Product"})
+        with Form(
+            self.env["account.move"].with_context(default_move_type="out_invoice")
+        ) as invoice_form:
+            invoice_form.invoice_date = fields.Date.today()
+            invoice_form.partner_id = self.partner
+            with invoice_form.invoice_line_ids.new() as line_form:
+                line_form.product_id = product
+            invoice = invoice_form.save()
+            self.assertEqual(invoice.name, "/")
+        invoice.journal_id = self.sales_journal
+        self.assertEqual(invoice.name, "/", "name based on journal instead of sequence")
+        invoice.action_post()
+        self.assertIn("TB2CSEQ/", invoice.name, "name was not based on sequence")
