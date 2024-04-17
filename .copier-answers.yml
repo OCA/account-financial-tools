@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.19
+_commit: v1.20
 _src_path: gh:oca/oca-addons-repo-template
 additional_ruff_rules: []
 ci: GitHub
@@ -16,7 +16,8 @@ odoo_test_flavor: Both
 odoo_version: 17.0
 org_name: Odoo Community Association (OCA)
 org_slug: OCA
-rebel_module_groups: []
+rebel_module_groups:
+- account_move_name_sequence
 repo_description: 'TODO: add repo description.'
 repo_name: account-financial-tools
 repo_slug: account-financial-tools
