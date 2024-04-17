@@ -27,6 +27,10 @@ class AccountMove(models.Model):
         ),
     ]
 
+    def _compute_name(self):
+        moves_to_compute = self.filtered(lambda m: m.quick_edit_mode)
+        return super(AccountMove, moves_to_compute)._compute_name()
+
     @api.depends("state", "journal_id", "date")
     def _compute_name_by_sequence(self):
         for move in self:
