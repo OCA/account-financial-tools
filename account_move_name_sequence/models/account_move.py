@@ -85,7 +85,7 @@ class AccountMove(models.Model):
             self._compute_name_by_sequence()
 
     def _post(self, soft=True):
-        self.flush()
+        self.flush_recordset()
         return super()._post(soft=soft)
 
     def _compute_name(self):
