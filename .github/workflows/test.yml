@@ -36,17 +36,17 @@ jobs:
       matrix:
         include:
           - container: ghcr.io/oca/oca-ci/py3.10-odoo16.0:latest
-            include: "account_journal_restrict_mode"
+            include: "account_journal_restrict_mode,base_vat_optional_vies"
             name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.10-ocb16.0:latest
-            include: "account_journal_restrict_mode"
+            include: "account_journal_restrict_mode,base_vat_optional_vies"
             name: test with OCB
             makepot: "true"
           - container: ghcr.io/oca/oca-ci/py3.10-odoo16.0:latest
-            exclude: "account_journal_restrict_mode"
+            exclude: "account_journal_restrict_mode,base_vat_optional_vies"
             name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.10-ocb16.0:latest
-            exclude: "account_journal_restrict_mode"
+            exclude: "account_journal_restrict_mode,base_vat_optional_vies"
             name: test with OCB
             makepot: "true"
     services:
