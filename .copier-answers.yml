@@ -1,7 +1,8 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.17.2
+_commit: v1.20
 _src_path: gh:oca/oca-addons-repo-template
 ci: GitHub
+convert_readme_fragments_to_markdown: false
 generate_requirements_txt: true
 github_check_license: true
 github_ci_extra_env: {}
@@ -16,8 +17,11 @@ org_name: Odoo Community Association (OCA)
 org_slug: OCA
 rebel_module_groups:
 - account_journal_restrict_mode
+- account_move_name_sequence
 repo_description: 'TODO: add repo description.'
 repo_name: account-financial-tools
 repo_slug: account-financial-tools
 repo_website: https://github.com/OCA/account-financial-tools
+use_pyproject_toml: false
+use_ruff: false
 
