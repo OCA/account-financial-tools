@@ -71,3 +71,10 @@ class AccountMove(models.Model):
 
     def _get_last_sequence(self, relaxed=False, with_prefix=None, lock=True):
         return super()._get_last_sequence(relaxed, None, lock)
+
+    def _compute_name(self):
+        """Overwrite account module method in order to
+        avoid side effect if legacy code call it directly
+        like when creating entry from email.
+        """
+        return self._compute_name_by_sequence()

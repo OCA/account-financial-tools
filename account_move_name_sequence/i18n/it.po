@@ -4,12 +4,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-21 18:34+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2023-10-17 18:36+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
-"Language: es\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,46 +22,42 @@ msgid ""
 "A move can not be posted with name \"/\" or empty value\n"
 "Check the journal sequence, please"
 msgstr ""
-"Un asiento no puede ser publicado con el nombre \"/\" o vacío \n"
-"Comprueba la secuencia de diario, por favor"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
 msgid ""
-"Check this box if you don't want to share the same sequence for invoices and"
-" credit notes made from this journal"
+"Check this box if you don't want to share the same sequence for invoices and "
+"credit notes made from this journal"
 msgstr ""
-"Marca esta casilla si no quieres compartir la misma secuencia para las "
-"facturas y facturas rectificativas hechas en este diario"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence_id
 msgid "Credit Note Entry Sequence"
-msgstr "Secuencia de Entrada de Notas de Crédito"
+msgstr ""
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence
 msgid "Dedicated Credit Note Sequence"
-msgstr "Secuencia de Notas de Crédito Especializadas"
+msgstr ""
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__display_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_ir_sequence__display_name
 msgid "Display Name"
-msgstr "Mostrar Nombre"
+msgstr "Nome visualizzato"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__sequence_id
 msgid "Entry Sequence"
-msgstr "Secuencia de Entrada"
+msgstr ""
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
 msgid "Highest Name"
-msgstr "Nombre Máximo"
+msgstr ""
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__id
@@ -73,95 +69,83 @@ msgstr "ID"
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_journal
 msgid "Journal"
-msgstr "Diario"
+msgstr "Registro"
 
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_move
 msgid "Journal Entry"
-msgstr "Entrada de Diario"
+msgstr "Registrazione contabile"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal____last_update
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move____last_update
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_ir_sequence____last_update
 msgid "Last Modified on"
-msgstr "Última Modificación el"
+msgstr "Ultima modifica il"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__name
 msgid "Number"
-msgstr "Número"
+msgstr "Numero"
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid ""
-"On journal '%s', the same sequence is used as Entry Sequence and Credit Note"
-" Entry Sequence."
+"On journal '%s', the same sequence is used as Entry Sequence and Credit Note "
+"Entry Sequence."
 msgstr ""
-"En el diario '%s', se ha usado la misma secuencia para la Secuencia de "
-"asiento y la Secuencia de facturas rectificativas."
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid "Refund"
-msgstr "Devolución"
+msgstr ""
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #: model:ir.model,name:account_move_name_sequence.model_ir_sequence
 #, python-format
 msgid "Sequence"
-msgstr "Secuencia"
+msgstr "Sequenza"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
 msgid "Sequence Number"
-msgstr "Número de Secuencia"
+msgstr ""
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
 msgid "Sequence Prefix"
-msgstr "Prefijo de la Secuencia"
+msgstr ""
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid ""
-"The company is not set on sequence '%(sequence)s' configured as credit note "
-"sequence of journal '%(journal)s'."
+"The company is not set on sequence '%s' configured as credit note sequence "
+"of journal '%s'."
 msgstr ""
-"La compañía no tiene establecida la secuencia '%(sequence)s' configurada "
-"como secuencia de facturas rectificativas del diario '%(journal)s'."
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
-msgid ""
-"The company is not set on sequence '%(sequence)s' configured on journal "
-"'%(journal)s'."
+msgid "The company is not set on sequence '%s' configured on journal '%s'."
 msgstr ""
-"La compañía no tiene establecida la secuencia '%(sequence)s' configurada en "
-"el diario '%(journal)s'."
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence_id
 msgid ""
 "This sequence will be used to generate the journal entry number for refunds."
 msgstr ""
-"Esta secuencia se utilizará para generar el número de asiento de diario para "
-"reembolsos."
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
 msgid "This sequence will be used to generate the journal entry number."
 msgstr ""
-"Esta secuencia se usará para establecer para generar el número de asiento "
-"contable."
