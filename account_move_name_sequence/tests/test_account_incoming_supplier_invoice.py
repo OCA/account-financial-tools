@@ -59,10 +59,8 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon):
         message_parsed = {
             "message_id": "message-id-dead-beef",
             "subject": "Incoming bill",
-            "from": "%s <%s>"
-            % (self.supplier_partner.name, self.supplier_partner.email),
-            "to": "%s@%s"
-            % (self.journal.alias_id.alias_name, self.journal.alias_id.alias_domain),
+            "from": f"{self.supplier_partner.name} <{self.supplier_partner.email}>",
+            "to": f"{self.journal.alias_id.alias_name}@{self.journal.alias_id.alias_domain}",
             "body": "You know, that thing that you bought.",
             "attachments": [b"Hello, invoice"],
         }
