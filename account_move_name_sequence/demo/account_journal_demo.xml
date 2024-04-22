@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="journal_sale_std_demo" model="account.journal">
+        <field name="name">Standard Sale Journal Demo</field>
+        <field name="code">SSJD</field>
+        <field name="type">sale</field>
+        <field name="refund_sequence">True</field>
+        <field name="company_id" ref="base.main_company" />
+        <field name="sequence_id" ref="seq_sale_std_demo" />
+    </record>
+    <record id="journal_cash_std_demo" model="account.journal">
+        <field name="name">Standard Cash Journal Demo</field>
+        <field name="code">SCJD</field>
+        <field name="type">cash</field>
+        <field name="refund_sequence">True</field>
+        <field name="company_id" ref="base.main_company" />
+        <field name="sequence_id" ref="seq_cash_std_demo" />
+    </record>
+</odoo>
