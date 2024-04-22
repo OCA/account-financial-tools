@@ -40,15 +40,27 @@ class TestSequenceConcurrency(TransactionCase):
         super().setUp()
         self.product = self.env.ref("product.product_delivery_01")
         self.partner = self.env.ref("base.res_partner_12")
+        self.partner2 = self.env.ref("base.res_partner_1")
         self.date = fields.Date.to_date("1985-04-14")
+        self.journal_sale_std = self.env.ref(
+            "account_move_name_sequence.journal_sale_std_demo"
+        )
+        self.journal_cash_std = self.env.ref(
+            "account_move_name_sequence.journal_cash_std_demo"
+        )
 
     def _new_cr(self):
         return self.env.registry.cursor()
 
-    def _create_invoice_form(self, env, post=True):
+    def _create_invoice_form(
+        self, env, post=True, partner=None, ir_sequence_standard=False
+    ):
+        if partner is None:
+            # Use another partner to bypass "increase_rank" lock error
+            partner = self.partner
         ctx = {"default_move_type": "out_invoice"}
         with Form(env["account.move"].with_context(**ctx)) as invoice_form:
-            invoice_form.partner_id = self.partner
+            invoice_form.partner_id = partner
             invoice_form.invoice_date = self.date
 
             with invoice_form.invoice_line_ids.new() as line_form:
@@ -56,6 +68,8 @@ class TestSequenceConcurrency(TransactionCase):
                 line_form.price_unit = 100.0
                 line_form.tax_ids.clear()
             invoice = invoice_form.save()
+        if ir_sequence_standard:
+            invoice.journal_id = self.journal_sale_std
         if post:
             invoice.action_post()
         return invoice
@@ -74,9 +88,7 @@ class TestSequenceConcurrency(TransactionCase):
 
             payment = payment_form.save()
         if ir_sequence_standard:
-            payment.move_id.journal_id.sequence_id = self.env.ref(
-                "account_move_name_sequence.ir_sequence_demo"
-            )
+            payment.move_id.journal_id = self.journal_cash_std
         payment.action_post()
         return payment
 
@@ -109,10 +121,14 @@ class TestSequenceConcurrency(TransactionCase):
                     env, ir_sequence_standard=ir_sequence_standard
                 )
                 _logger.info("Creating invoice cr %s", cr_pid)
-                self._create_invoice_form(env)
+                self._create_invoice_form(
+                    env, ir_sequence_standard=ir_sequence_standard
+                )
             else:
                 _logger.info("Creating invoice cr %s", cr_pid)
-                self._create_invoice_form(env)
+                self._create_invoice_form(
+                    env, ir_sequence_standard=ir_sequence_standard
+                )
                 _logger.info("Creating payment cr %s", cr_pid)
                 self._create_payment_form(
                     env, ir_sequence_standard=ir_sequence_standard
@@ -262,8 +278,29 @@ class TestSequenceConcurrency(TransactionCase):
             self.addCleanup(self._clean_moves, payment_move_ids)
             env0.cr.commit()
             with env1.cr.savepoint(), env2.cr.savepoint():
-                self._create_payment_form(env1)
-                self._create_payment_form(env2)
+                self._create_payment_form(env1, ir_sequence_standard=True)
+                self._create_payment_form(env2, ir_sequence_standard=True)
+
+    def test_sequence_concurrency_92_invoices(self):
+        """Creating concurrent invoices should not raises errors"""
+        with self._new_cr() as cr0, self._new_cr() as cr1, self._new_cr() as cr2:
+            env0 = api.Environment(cr0, SUPERUSER_ID, {})
+            env1 = api.Environment(cr1, SUPERUSER_ID, {})
+            env2 = api.Environment(cr2, SUPERUSER_ID, {})
+            for cr in [cr0, cr1, cr2]:
+                # Set 10s timeout in order to avoid waiting for release locks a long time
+                cr.execute("SET LOCAL statement_timeout = '10s'")
+
+            # Create "last move" to lock
+            invoice = self._create_invoice_form(env0, ir_sequence_standard=True)
+            self.addCleanup(self._clean_moves, invoice.ids)
+            env0.cr.commit()
+            with env1.cr.savepoint(), env2.cr.savepoint():
+                self._create_invoice_form(env1, ir_sequence_standard=True)
+                # Using another partner to bypass "increase_rank" lock error
+                self._create_invoice_form(
+                    env2, partner=self.partner2, ir_sequence_standard=True
+                )
 
     @tools.mute_logger("odoo.sql_db")
     def test_sequence_concurrency_95_pay2inv_inv2pay(self):
