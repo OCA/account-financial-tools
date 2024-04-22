@@ -116,11 +116,11 @@ class TestSequenceConcurrency(TransactionCase):
                     self._create_payment_form(
                         env, ir_sequence_standard=ir_sequence_standard
                     )
-                # sleep in order to avoid release the locks too faster
-                # It could be many methods called after creating these
-                # kind of records e.g. reconcile
-                _logger.info("Finishing waiting %s" % (deadlock_timeout + 12))
-                time.sleep(deadlock_timeout + 12)
+        # sleep in order to avoid release the locks too faster
+        # It could be many methods called after creating these
+        # kind of records e.g. reconcile
+        _logger.info("Finishing waiting %s", (deadlock_timeout + 12))
+        time.sleep(deadlock_timeout + 12)
 
     def test_sequence_concurrency_10_draft_invoices(self):
         """Creating 2 DRAFT invoices not should raises errors"""
@@ -291,32 +291,37 @@ class TestSequenceConcurrency(TransactionCase):
                 "You need to configure PG parameter deadlock_timeout='1s'",
             )
             deadlock_timeout = int(deadlock_timeout / 1000)  # s
-            try:
-                t_pay_inv = ThreadRaiseJoin(
-                    target=self._create_invoice_payment,
-                    args=(deadlock_timeout, True, True),
-                    name="Thread payment invoice",
-                )
-                t_inv_pay = ThreadRaiseJoin(
-                    target=self._create_invoice_payment,
-                    args=(deadlock_timeout, False, True),
-                    name="Thread invoice payment",
-                )
-                t_pay_inv.start()
-                t_inv_pay.start()
-                # the thread could raise the error before to wait for it so disable coverage
-                t_pay_inv.join(timeout=deadlock_timeout + 15)  # pragma: no cover
-                t_inv_pay.join(timeout=deadlock_timeout + 15)  # pragma: no cover
-            except psycopg2.OperationalError as e:
-                if e.pgcode in [
-                    psycopg2.errorcodes.SERIALIZATION_FAILURE,
-                    psycopg2.errorcodes.LOCK_NOT_AVAILABLE,
-                ]:  # pragma: no cover
-                    # Concurrency error is expected but not deadlock so ok
-                    pass
-                elif (
-                    e.pgcode == psycopg2.errorcodes.DEADLOCK_DETECTED
-                ):  # pragma: no cover
-                    self.assertFalse(True, "Deadlock detected.")
-                else:  # pragma: no cover
-                    raise
+            t_pay_inv = ThreadRaiseJoin(
+                target=self._create_invoice_payment,
+                args=(deadlock_timeout, True, True),
+                name="Thread payment invoice",
+            )
+            t_inv_pay = ThreadRaiseJoin(
+                target=self._create_invoice_payment,
+                args=(deadlock_timeout, False, True),
+                name="Thread invoice payment",
+            )
+            t_pay_inv.start()
+            t_inv_pay.start()
+            # the thread could raise the error before to wait for it so disable coverage
+            self._thread_join(t_pay_inv, deadlock_timeout + 15)
+            self._thread_join(t_inv_pay, deadlock_timeout + 15)
+
+    def _thread_join(self, thread_obj, timeout):
+        try:
+            thread_obj.join(timeout=timeout)  # pragma: no cover
+            self.assertFalse(
+                thread_obj.is_alive(),
+                "The thread wait is over. but the cursor may still be in use!",
+            )
+        except psycopg2.OperationalError as e:
+            if e.pgcode in [
+                psycopg2.errorcodes.SERIALIZATION_FAILURE,
+                psycopg2.errorcodes.LOCK_NOT_AVAILABLE,
+            ]:  # pragma: no cover
+                # Concurrency error is expected but not deadlock so ok
+                pass
+            elif e.pgcode == psycopg2.errorcodes.DEADLOCK_DETECTED:  # pragma: no cover
+                self.assertFalse(True, "Deadlock detected.")
+            else:  # pragma: no cover
+                raise
