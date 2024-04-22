@@ -19,6 +19,7 @@
     ],
     "demo": [
         "demo/ir_sequence_demo.xml",
+        "demo/account_journal_demo.xml",
     ],
     "data": [
         "views/account_journal.xml",
