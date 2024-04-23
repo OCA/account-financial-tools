@@ -127,6 +127,16 @@ msgid "Sequence Prefix"
 msgstr "Préfixe de la séquence"
 
 #. module: account_move_name_sequence
+#: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
+msgid "Standard Cash Journal Demo"
+msgstr ""
+
+#. module: account_move_name_sequence
+#: model:account.journal,name:account_move_name_sequence.journal_sale_std_demo
+msgid "Standard Sale Journal Demo"
+msgstr ""
+
+#. module: account_move_name_sequence
 #. odoo-python
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
