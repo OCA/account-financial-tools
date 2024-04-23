@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-02 10:36+0000\n"
+"PO-Revision-Date: 2024-04-23 08:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -128,12 +128,12 @@ msgstr "Prefisso sequenza"
 #. module: account_move_name_sequence
 #: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
 msgid "Standard Cash Journal Demo"
-msgstr ""
+msgstr "Demo registro contanti standard"
 
 #. module: account_move_name_sequence
 #: model:account.journal,name:account_move_name_sequence.journal_sale_std_demo
 msgid "Standard Sale Journal Demo"
-msgstr ""
+msgstr "Demo registro vendite standard"
 
 #. module: account_move_name_sequence
 #. odoo-python
