@@ -8,4 +8,4 @@ from odoo import fields, models
 class AccountFiscalPositionTemplate(models.Model):
     _inherit = "account.fiscal.position.template"
 
-    active = fields.Boolean("Active", default=True)
+    active = fields.Boolean(default=True)
