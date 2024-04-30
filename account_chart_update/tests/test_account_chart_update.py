@@ -17,7 +17,7 @@ class TestAccountChartUpdate(common.TransactionCase):
         return cls.env["ir.model.data"].create(
             {
                 "module": "account_chart_update",
-                "name": "{}-{}".format(record._table, record.id),
+                "name": f"{record._table}-{record.id}",
                 "model": record._name,
                 "res_id": record.id,
             }
@@ -209,12 +209,10 @@ class TestAccountChartUpdate(common.TransactionCase):
         field = wizard.fp_field_ids[:1]
         name = field.with_context(account_chart_update=True).name_get()[0]
         self.assertEqual(name[0], field.id)
-        self.assertEqual(name[1], "{} ({})".format(field.field_description, field.name))
+        self.assertEqual(name[1], f"{field.field_description} ({field.name})")
         name = field.name_get()[0]
         self.assertEqual(name[0], field.id)
-        self.assertEqual(
-            name[1], "{} ({})".format(field.field_description, field.model)
-        )
+        self.assertEqual(name[1], f"{field.field_description} ({field.model})")
         # Test no changes
         self.assertEqual(wizard.state, "ready")
         self.assertFalse(wizard.tax_ids)
