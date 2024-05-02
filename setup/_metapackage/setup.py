@@ -34,6 +34,7 @@ setuptools.setup(
         'odoo14-addon-account_lock_to_date',
         'odoo14-addon-account_menu',
         'odoo14-addon-account_move_budget',
+        'odoo14-addon-account_move_default_journal',
         'odoo14-addon-account_move_fiscal_month',
         'odoo14-addon-account_move_fiscal_year',
         'odoo14-addon-account_move_force_removal',
