@@ -202,10 +202,9 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                 date_invoice = date_invoice or fields.Date.today()
                 spread_vals["spread_date"] = date_invoice
 
-                spread_vals["name"] = ("%s %s") % (
-                    spread_vals["name"],
-                    self.invoice_line_id.name,
-                )
+                spread_vals[
+                    "name"
+                ] = f"({spread_vals['name']} { self.invoice_line_id.name})"
 
                 if spread_vals["invoice_type"] == "out_invoice":
                     spread_vals["credit_account_id"] = account.id
