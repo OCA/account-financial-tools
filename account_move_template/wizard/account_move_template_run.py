@@ -233,9 +233,9 @@ Valid dictionary to overwrite template lines:
                     ("repartition_type", "=", "base"),
                 ]
             )
-            values["tag_ids"] = [(6, 0, atrl_ids.mapped("tag_ids").ids)]
+            values["tax_tag_ids"] = [(6, 0, atrl_ids.mapped("tag_ids").ids)]
         if line.tax_repartition_line_id:
-            values["tag_ids"] = [(6, 0, line.tax_repartition_line_id.tag_ids.ids)]
+            values["tax_tag_ids"] = [(6, 0, line.tax_repartition_line_id.tag_ids.ids)]
         # With overwrite options
         overwrite = self._context.get("overwrite", {})
         move_line_vals = overwrite.get("L{}".format(line.sequence), {})
