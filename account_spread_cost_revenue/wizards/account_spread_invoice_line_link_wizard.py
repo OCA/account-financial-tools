@@ -27,9 +27,9 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         return "link"
 
     invoice_line_id = fields.Many2one(
-        "account.move.line", readonly=True, required=True, ondelete="cascade"
+        "account.move.line", required=True, ondelete="cascade"
     )
-    invoice_id = fields.Many2one(related="invoice_line_id.move_id", readonly=True)
+    invoice_id = fields.Many2one(related="invoice_line_id.move_id")
     invoice_type = fields.Selection(
         [
             ("out_invoice", "Customer Invoice"),

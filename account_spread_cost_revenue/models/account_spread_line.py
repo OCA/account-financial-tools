@@ -10,11 +10,11 @@ class AccountInvoiceSpreadLine(models.Model):
     _description = "Account Spread Lines"
     _order = "date"
 
-    name = fields.Char("Description", readonly=True)
+    name = fields.Char("Description")
     amount = fields.Float(digits="Account", required=True)
     date = fields.Date(required=True)
     spread_id = fields.Many2one("account.spread", ondelete="cascade")
-    move_id = fields.Many2one("account.move", string="Journal Entry", readonly=True)
+    move_id = fields.Many2one("account.move", string="Journal Entry")
 
     def create_and_reconcile_moves(self):
         grouped_lines = {}

@@ -10,7 +10,7 @@
             >
                 <field
                     name="spread_check"
-                    invisible="1"
+                    column_invisible="1"
                     groups="account.group_account_user,account.group_account_manager"
                 />
                 <button
@@ -19,7 +19,7 @@
                     class="btn btn-link"
                     icon="fa-arrow-circle-right"
                     title="Not linked to any spread board"
-                    attrs="{'invisible': [('spread_check', '!=', 'unlinked')]}"
+                    invisible="spread_check != 'unlinked'"
                     groups="account.group_account_user,account.group_account_manager"
                 />
                 <button
@@ -28,7 +28,7 @@
                     class="btn btn-success"
                     icon="fa-arrow-circle-right"
                     title="Linked to spread board"
-                    attrs="{'invisible': [('spread_check', '!=', 'linked')]}"
+                    invisible="spread_check != 'linked'"
                     groups="account.group_account_user,account.group_account_manager"
                 />
             </xpath>
@@ -38,7 +38,7 @@
             >
                 <field
                     name="spread_check"
-                    invisible="1"
+                    column_invisible="1"
                     groups="account.group_account_user,account.group_account_manager"
                 />
                 <button
@@ -48,7 +48,8 @@
                     icon="fa-arrow-circle-right"
                     title="Linked to spread board"
                     groups="account.group_account_user,account.group_account_manager"
-                    attrs="{'invisible': [('spread_check', '!=', 'linked')], 'column_invisible': ['|', ('parent.move_type', '=', 'entry'), ('parent.state', '!=', 'posted')]}"
+                    invisible="spread_check != 'linked'"
+                    column_invisible="parent.move_type == 'entry' or parent.state != 'posted'"
                 />
             </xpath>
         </field>

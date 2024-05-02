@@ -9,6 +9,7 @@ from odoo.tests import Form, common
 
 
 class TestAccountInvoiceSpread(common.TransactionCase):
+    @classmethod
     def create_account_invoice(self, invoice_type, quantity=1.0, price_unit=1000.0):
         """Create an invoice as in a view by triggering its onchange methods"""
 
@@ -25,18 +26,19 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         return invoice_form.save()
 
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
         # Define minimal accounting data to run
-        a_expense = self.env["account.account"].create(
+        a_expense = cls.env["account.account"].create(
             {
                 "code": "X2120",
                 "name": "Expenses - (test)",
                 "account_type": "expense",
             }
         )
-        a_sale = self.env["account.account"].create(
+        a_sale = cls.env["account.account"].create(
             {
                 "code": "X2020",
                 "name": "Product Sales - (test)",
@@ -44,7 +46,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             }
         )
 
-        self.expenses_journal = self.env["account.journal"].create(
+        cls.expenses_journal = cls.env["account.journal"].create(
             {
                 "name": "Vendor Bills - Test",
                 "code": "TEXJ",
@@ -53,7 +55,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
                 "refund_sequence": True,
             }
         )
-        self.sales_journal = self.env["account.journal"].create(
+        cls.sales_journal = cls.env["account.journal"].create(
             {
                 "name": "Customer Invoices - Test",
                 "code": "TINV",
@@ -63,7 +65,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             }
         )
 
-        self.account_payable = self.env["account.account"].create(
+        cls.account_payable = cls.env["account.account"].create(
             {
                 "name": "Test account payable",
                 "code": "321spread",
@@ -72,7 +74,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             }
         )
 
-        self.account_receivable = self.env["account.account"].create(
+        cls.account_receivable = cls.env["account.account"].create(
             {
                 "name": "Test account receivable",
                 "code": "322spread",
@@ -81,7 +83,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             }
         )
 
-        spread_account_payable = self.env["account.account"].create(
+        spread_account_payable = cls.env["account.account"].create(
             {
                 "name": "test spread account_payable",
                 "code": "765spread",
@@ -90,7 +92,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             }
         )
 
-        spread_account_receivable = self.env["account.account"].create(
+        spread_account_receivable = cls.env["account.account"].create(
             {
                 "name": "test spread account_receivable",
                 "code": "766spread",
@@ -101,47 +103,45 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         # Invoices
 
-        self.vendor_bill = self.create_account_invoice("in_invoice")
-        self.vendor_bill.invoice_date = fields.Date.today()
-        self.sale_invoice = self.create_account_invoice("out_invoice")
-        self.sale_invoice.invoice_date = fields.Date.today()
-        self.vendor_bill_line = self.vendor_bill.invoice_line_ids[0]
-        self.invoice_line = self.sale_invoice.invoice_line_ids[0]
+        cls.vendor_bill = cls.create_account_invoice(invoice_type="in_invoice")
+        cls.vendor_bill.invoice_date = fields.Date.today()
+        cls.sale_invoice = cls.create_account_invoice(invoice_type="out_invoice")
+        cls.sale_invoice.invoice_date = fields.Date.today()
+        cls.vendor_bill_line = cls.vendor_bill.invoice_line_ids[0]
+        cls.invoice_line = cls.sale_invoice.invoice_line_ids[0]
 
         # Set accounts to reconcilable
-        self.vendor_bill_line.account_id.reconcile = True
-        self.invoice_line.account_id.reconcile = True
+        cls.vendor_bill_line.account_id.reconcile = True
+        cls.invoice_line.account_id.reconcile = True
 
-        analytic_plan = self.env["account.analytic.plan"].create(
-            {"name": "Plan Test", "company_id": False}
-        )
-        self.analytic_account = self.env["account.analytic.account"].create(
+        analytic_plan = cls.env["account.analytic.plan"].create({"name": "Plan Test"})
+        cls.analytic_account = cls.env["account.analytic.account"].create(
             {"name": "test account", "plan_id": analytic_plan.id}
         )
-        self.distribution = self.env["account.analytic.distribution.model"].create(
+        cls.distribution = cls.env["account.analytic.distribution.model"].create(
             {
-                "partner_id": self.vendor_bill.partner_id.id,
-                "analytic_distribution": {self.analytic_account.id: 100},
+                "partner_id": cls.vendor_bill.partner_id.id,
+                "analytic_distribution": {cls.analytic_account.id: 100},
             }
         )
-        self.spread = (
-            self.env["account.spread"]
+        cls.spread = (
+            cls.env["account.spread"]
             .with_context(mail_create_nosubscribe=True)
             .create(
                 [
                     {
                         "name": "test",
                         "debit_account_id": spread_account_payable.id,
-                        "credit_account_id": self.account_payable.id,
+                        "credit_account_id": cls.account_payable.id,
                         "period_number": 12,
                         "period_type": "month",
                         "spread_date": datetime.date(2017, 2, 1),
                         "estimated_amount": 1000.0,
-                        "journal_id": self.vendor_bill.journal_id.id,
+                        "journal_id": cls.vendor_bill.journal_id.id,
                         "invoice_type": "in_invoice",
-                        "analytic_distribution": self.distribution._get_distribution(
+                        "analytic_distribution": cls.distribution._get_distribution(
                             {
-                                "partner_id": self.vendor_bill.partner_id.id,
+                                "partner_id": cls.vendor_bill.partner_id.id,
                             }
                         ),
                     }
@@ -149,17 +149,17 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             )
         )
 
-        self.spread2 = self.env["account.spread"].create(
+        cls.spread2 = cls.env["account.spread"].create(
             [
                 {
                     "name": "test2",
                     "debit_account_id": spread_account_receivable.id,
-                    "credit_account_id": self.account_receivable.id,
+                    "credit_account_id": cls.account_receivable.id,
                     "period_number": 12,
                     "period_type": "month",
                     "spread_date": datetime.date(2017, 2, 1),
                     "estimated_amount": 1000.0,
-                    "journal_id": self.sale_invoice.journal_id.id,
+                    "journal_id": cls.sale_invoice.journal_id.id,
                     "invoice_type": "out_invoice",
                 }
             ]
@@ -790,7 +790,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
                 {
                     "date": fields.Date.today(),
                     "reason": "no reason",
-                    "refund_method": "refund",
                     "journal_id": self.vendor_bill.journal_id.id,
                 }
             )

@@ -1,7 +1,7 @@
 # Copyright 2016-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import models
 
 
 class AccountMove(models.Model):
@@ -33,7 +33,6 @@ class AccountMove(models.Model):
         res = super().button_cancel()
         return res
 
-    @api.constrains("name", "journal_id", "state")
-    def _check_unique_sequence_number(self):
+    def _get_unbalanced_moves(self, container):
         if not self.env.context.get("skip_unique_sequence_number"):
-            return super()._check_unique_sequence_number()
+            return super()._get_unbalanced_moves(container)
