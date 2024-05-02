@@ -118,7 +118,6 @@ class AccountSpread(models.Model):
     )
     invoice_id = fields.Many2one(
         related="invoice_line_id.move_id",
-        readonly=True,
         store=True,
     )
     estimated_amount = fields.Float(digits="Account")

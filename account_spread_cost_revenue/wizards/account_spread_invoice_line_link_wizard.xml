@@ -20,35 +20,40 @@
                         <field name="spread_action_type" widget="radio" />
                         <field
                             name="spread_id"
-                            attrs="{'invisible': [('spread_action_type', '!=', 'link')],'required': [('spread_action_type', '=', 'link')]}"
+                            invisible="spread_action_type != 'link'"
+                            required="spread_action_type == 'link'"
                             domain="[('invoice_type', '=', invoice_type)]"
                             options="{'no_create': True}"
                         />
                         <field
                             name="template_id"
-                            attrs="{'invisible': [('spread_action_type', '!=', 'template')],'required': [('spread_action_type', '=', 'template')]}"
+                            invisible="spread_action_type != 'template'"
+                            required="spread_action_type == 'template'"
                             domain="[('spread_type', '=', spread_type)]"
                             options="{'no_create': True}"
                         />
                         <field
                             name="use_invoice_line_account"
-                            attrs="{'invisible': [('spread_action_type', '!=', 'new')]}"
+                            invisible="spread_action_type != 'new'"
                         />
                         <field
                             name="spread_account_id"
-                            attrs="{'invisible': [('spread_action_type', '!=', 'new')],'required': [('spread_action_type', '=', 'new')]}"
+                            invisible="spread_action_type != 'new'"
+                            required="spread_action_type ==  'new'"
                             domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                             options="{'no_create': True}"
                         />
                         <field
                             name="exp_rev_account_id"
-                            attrs="{'invisible': ['|', ('use_invoice_line_account', '=', False), ('spread_action_type', '!=', 'new')], 'required': [('use_invoice_line_account', '=', True)]}"
+                            invisible="not use_invoice_line_account or spread_action_type != 'new'"
+                            required="use_invoice_line_account"
                             domain="[('deprecated', '=', False)]"
                             options="{'no_create': True}"
                         />
                         <field
                             name="spread_journal_id"
-                            attrs="{'invisible': [('spread_action_type', '!=', 'new')],'required': [('spread_action_type', '=', 'new')]}"
+                            invisible="spread_action_type != 'new'"
+                            required="spread_action_type == 'new'"
                             options="{'no_create': True}"
                         />
                     </group>

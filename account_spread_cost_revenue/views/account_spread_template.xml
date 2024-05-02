@@ -34,11 +34,13 @@
                                 name="spread_account_id"
                                 domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                                 options="{'no_create': True}"
-                                attrs="{'required': [('use_invoice_line_account', '!=', True)], 'invisible': [('use_invoice_line_account', '=', True)]}"
+                                required="not use_invoice_line_account"
+                                invisible="use_invoice_line_account"
                             />
                             <field
                                 name="exp_rev_account_id"
-                                attrs="{'invisible': [('use_invoice_line_account', '=', False)], 'required': [('use_invoice_line_account', '=', True)]}"
+                                invisible="not use_invoice_line_account"
+                                required="use_invoice_line_account"
                                 domain="[('deprecated', '=', False)]"
                                 options="{'no_create': True}"
                             />
@@ -54,12 +56,12 @@
                         <field name="auto_spread" />
                         <label for="auto_spread" />
                     </div>
-                    <p attrs="{'invisible': [('auto_spread', '!=', True)]}">
+                    <p invisible="not auto_spread">
                         Automatically use this spread template on invoice validation for invoice lines using below product and/or account and/or analytic,
                     </p>
                     <field
                         name="auto_spread_ids"
-                        attrs="{'invisible': [('auto_spread', '!=', True)]}"
+                        invisible="not auto_spread"
                         nolabel="1"
                     >
                         <tree editable="bottom">

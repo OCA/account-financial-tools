@@ -4,7 +4,7 @@
 {
     "name": "Cost-Revenue Spread",
     "summary": "Spread costs and revenues over a custom period",
-    "version": "16.0.1.0.1",
+    "version": "17.0.1.0.0",
     "development_status": "Beta",
     "author": "Onestein,Odoo Community Association (OCA)",
     "license": "AGPL-3",
