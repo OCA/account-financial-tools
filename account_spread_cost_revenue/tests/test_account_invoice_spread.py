@@ -246,7 +246,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertTrue(wizard2.spread_invoice_type_domain_ids)
 
     def test_03_link_invoice_line_with_spread_sheet(self):
-
         self.env.user.write(
             {
                 "groups_id": [
@@ -295,7 +294,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertTrue(self.spread.invoice_line_id)
 
     def test_04_new_spread_sheet(self):
-
         Wizard = self.env["account.spread.invoice.line.link.wizard"]
 
         spread_journal_id = self.expenses_journal
@@ -364,7 +362,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             self.assertTrue(line.move_id)
 
     def test_05_new_spread_sheet_from_template(self):
-
         Wizard = self.env["account.spread.invoice.line.link.wizard"]
 
         spread_account = self.account_payable
@@ -433,14 +430,12 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             self.assertTrue(line.move_id)
 
     def test_06_open_wizard(self):
-
         res_action = self.vendor_bill_line.spread_details()
         self.assertTrue(isinstance(res_action, dict))
         self.assertFalse(res_action.get("res_id"))
         self.assertTrue(res_action.get("context"))
 
     def test_07_unlink_invoice_line_and_spread_sheet(self):
-
         self.assertFalse(self.spread.invoice_line_id)
 
         self.vendor_bill_line.spread_id = self.spread
@@ -492,7 +487,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         )
 
     def test_09_no_link_invoice(self):
-
         balance_sheet = self.spread.credit_account_id
 
         # Validate invoice
@@ -637,7 +631,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertTrue(action_spread_details.get("res_id"))
 
     def test_12_link_invoice_line_with_spread_sheet_full_reconcile(self):
-
         # Validate invoice
         self.sale_invoice.action_post()
 
@@ -692,7 +685,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertTrue(action_spread_details.get("res_id"))
 
     def test_13_link_invoice_line_with_spread_sheet_partial_reconcile(self):
-
         self.spread2.write(
             {
                 "estimated_amount": 1000.0,
@@ -784,7 +776,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             self.spread.unlink()
 
     def test_15_invoice_refund(self):
-
         self.vendor_bill_line.spread_id = self.spread
 
         # Validate invoice

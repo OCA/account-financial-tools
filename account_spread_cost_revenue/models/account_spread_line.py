@@ -45,7 +45,7 @@ class AccountInvoiceSpreadLine(models.Model):
         ).create_and_reconcile_moves()
 
     def _create_moves(self):
-        if self.filtered(lambda l: l.move_id):
+        if self.filtered(lambda x: x.move_id):
             raise UserError(
                 _(
                     "This spread line is already linked to a "

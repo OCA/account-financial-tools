@@ -194,9 +194,9 @@ class AccountSpread(models.Model):
     )
     def _compute_amounts(self):
         for spread in self:
-            lines_move = spread.line_ids.filtered(lambda l: l.move_id)
+            lines_move = spread.line_ids.filtered(lambda x: x.move_id)
             moves_amount = sum(spread_line.amount for spread_line in lines_move)
-            lines_posted = lines_move.filtered(lambda l: l.move_id.state == "posted")
+            lines_posted = lines_move.filtered(lambda x: x.move_id.state == "posted")
             posted_amount = sum(spread_line.amount for spread_line in lines_posted)
             total_amount = spread.estimated_amount
             if spread.invoice_line_id:
@@ -368,7 +368,7 @@ class AccountSpread(models.Model):
 
         posted_line_ids = self.line_ids.filtered(
             lambda x: x.move_id.state == "posted"
-        ).sorted(key=lambda l: l.date)
+        ).sorted(key=lambda x: x.date)
         unposted_line_ids = self.line_ids.filtered(
             lambda x: not x.move_id.state == "posted"
         )
@@ -570,7 +570,7 @@ class AccountSpread(models.Model):
             spread_mls |= created_moves.mapped("line_ids")
 
         account = self.invoice_line_id.account_id
-        mls_to_reconcile = spread_mls.filtered(lambda l: l.account_id == account)
+        mls_to_reconcile = spread_mls.filtered(lambda x: x.account_id == account)
 
         if mls_to_reconcile:
             do_reconcile = mls_to_reconcile + self.invoice_line_ids
@@ -578,17 +578,17 @@ class AccountSpread(models.Model):
             for line in do_reconcile:
                 line.reconciled = False
             # ensure to reconcile only posted items
-            do_reconcile = do_reconcile.filtered(lambda l: l.move_id.state == "posted")
+            do_reconcile = do_reconcile.filtered(lambda x: x.move_id.state == "posted")
             do_reconcile._check_spread_reconcile_validity()
             do_reconcile.reconcile()
 
     def create_all_moves(self):
-        for line in self.mapped("line_ids").filtered(lambda l: not l.move_id):
+        for line in self.mapped("line_ids").filtered(lambda x: not x.move_id):
             line.create_move()
 
     def _post_spread_moves(self, moves):
         self.ensure_one()
-        moves = moves.filtered(lambda l: l.state != "posted")
+        moves = moves.filtered(lambda x: x.state != "posted")
         if not moves:
             return
         ctx = dict(self.env.context, skip_unique_sequence_number=True)
