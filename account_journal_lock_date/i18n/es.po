@@ -1,0 +1,148 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_journal_lock_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-18 15:07+0000\n"
+"PO-Revision-Date: 2023-06-07 19:09+0000\n"
+"Last-Translator: gelo joga Rodríguez <gelo.joga@factorlibre.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_journal_lock_date
+#: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_journal
+msgid "Journal"
+msgstr "Libro diario"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__fiscalyear_lock_date
+msgid "Lock Date"
+msgstr "Fecha de bloqueo"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__period_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__period_lock_date
+msgid "Lock Date for Non-Advisers"
+msgstr "Fecha de bloqueo para no asesores"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_update_journal_lock_dates_wizard
+msgid "Mass Update Journal Lock Dates Wizard"
+msgstr "Asistente para la actualización masiva de fechas de bloqueo"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date for this journal. Use it for fiscal year locking for this journal, "
+"for example."
+msgstr ""
+"Ningún usuario, incluyendo Asesores, pueden editar cuentas antes de y en "
+"esta fecha para este diario. Utilícela, por ejemplo, para bloquear un año "
+"fiscal para este Diario."
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__period_lock_date
+msgid ""
+"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
+"of this date for this journal. Use it for period locking inside an open "
+"fiscal year for this journal, for example."
+msgstr ""
+"Sólo los usuarios con el rol 'Asesor' pueden editar cuentas antes de y en "
+"esta fecha para este Diario. Utilícelo para bloquear un período dentro de un "
+"año fiscal abierto para este diario, por ejemplo."
+
+#. module: account_journal_lock_date
+#: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
+msgid "Update"
+msgstr "Actualizar"
+
+#. module: account_journal_lock_date
+#: model:ir.actions.act_window,name:account_journal_lock_date.update_journal_lock_dates_wizard_action
+msgid "Update journals lock dates"
+msgstr "Actualizar fechas de bloqueo"
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
+#, python-format
+msgid "You are not allowed to execute this action."
+msgstr "No está autorizado a realizar esta acción."
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s"
+msgstr ""
+"No puede añadir/modificar asientos para el diario '%(journal)s' con "
+"anterioridad y hasta la fecha de bloqueo %(journal_date)s"
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s. Check the Journal settings or "
+"ask someone with the 'Adviser' role"
+msgstr ""
+"No puede añadir/modificar asientos para el Diario '%(journal)s' con "
+"anterioridad y hasta la fecha de bloqueo %(journal_date)s. Compruebe la "
+"configuración del Diario o pregunte a alguien con el grupo de acceso 'Asesor'"
