@@ -4,10 +4,10 @@
 {
     "name": "Account Account Tag Code",
     "summary": "Add a code field to the accounts tags",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "ForgeFlow,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
-    "depends": ["account"],
+    "depends": ["account", "account_usability"],
     "data": ["views/account_account_tag_views.xml"],
 }
