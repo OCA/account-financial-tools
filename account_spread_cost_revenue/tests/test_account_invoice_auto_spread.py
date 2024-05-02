@@ -8,7 +8,6 @@ from .test_account_invoice_spread import TestAccountInvoiceSpread
 
 class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
     def test_01_no_auto_spread_sheet(self):
-
         self.env["account.spread.template"].create(
             {
                 "name": "test",
@@ -29,7 +28,6 @@ class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
         self.assertFalse(self.vendor_bill_line.spread_id)
 
     def test_02_new_auto_spread_sheet_purchase(self):
-
         self.env["account.spread.template"].create(
             {
                 "name": "test 1",
@@ -75,7 +73,6 @@ class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
             self.assertTrue(line.move_id)
 
     def test_03_new_auto_spread_sheet_sale(self):
-
         self.env["account.spread.template"].create(
             {
                 "name": "test",
