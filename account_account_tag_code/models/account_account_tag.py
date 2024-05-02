@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AccountAccountTag(models.Model):
@@ -6,10 +6,10 @@ class AccountAccountTag(models.Model):
 
     code = fields.Char()
 
-    def name_get(self):
-        res = super().name_get()
-        name_mapping = dict(res)
+    @api.depends("code")
+    def _compute_display_name(self):
         for tag in self:
             if tag.code:
-                name_mapping[tag.id] = "[" + tag.code + "] " + name_mapping[tag.id]
-        return list(name_mapping.items())
+                tag.display_name = f"[{tag.code}] {tag.name}"
+            else:
+                tag.display_name = tag.name
