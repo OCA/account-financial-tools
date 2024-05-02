@@ -11,18 +11,19 @@ from odoo.tools import mute_logger
 
 
 class TestAccountSpreadCostRevenue(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.sales_journal = self.env["account.journal"].create(
+        cls.sales_journal = cls.env["account.journal"].create(
             {"name": "Customer Invoices - Test", "code": "TEST1", "type": "sale"}
         )
 
-        self.expenses_journal = self.env["account.journal"].create(
+        cls.expenses_journal = cls.env["account.journal"].create(
             {"name": "Vendor Bills - Test", "code": "TEST2", "type": "purchase"}
         )
 
-        self.credit_account = self.env["account.account"].create(
+        cls.credit_account = cls.env["account.account"].create(
             {
                 "name": "test_account_receivable",
                 "code": "123",
@@ -31,7 +32,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             }
         )
 
-        self.debit_account = self.env["account.account"].create(
+        cls.debit_account = cls.env["account.account"].create(
             {
                 "name": "test account_expenses",
                 "code": "765",
@@ -40,7 +41,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             }
         )
 
-        self.account_payable = self.env["account.account"].create(
+        cls.account_payable = cls.env["account.account"].create(
             {
                 "name": "test_account_payable",
                 "code": "321",
@@ -49,7 +50,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             }
         )
 
-        self.account_revenue = self.env["account.account"].create(
+        cls.account_revenue = cls.env["account.account"].create(
             {
                 "name": "test_account_revenue",
                 "code": "864",

@@ -10,27 +10,27 @@
                         type="object"
                         string="Recalculate unposted lines"
                         class="oe_highlight"
-                        attrs="{'invisible': ['|',('debit_account_id', '=', False),('display_recompute_buttons', '=', False)]}"
+                        invisible="not debit_account_id or not display_recompute_buttons"
                     />
                     <button
                         name="action_recalculate_spread"
                         type="object"
                         string="Recalculate entire spread"
-                        attrs="{'invisible': ['|',('debit_account_id', '=', False),('display_recompute_buttons', '=', False)]}"
+                        invisible="not debit_account_id or not display_recompute_buttons"
                         groups="account.group_account_manager"
                     />
                     <button
                         name="action_undo_spread"
                         type="object"
                         string="Undo spread"
-                        attrs="{'invisible': [('line_ids', '=', [])]}"
+                        invisible="not line_ids"
                         groups="account.group_account_manager"
                     />
                     <button
                         name="action_unlink_invoice_line"
                         type="object"
                         string="Unlink Invoice Line"
-                        attrs="{'invisible': [('invoice_line_id', '=', False)]}"
+                        invisible="not invoice_line_id"
                         groups="account.group_account_manager"
                     />
                 </header>
@@ -49,7 +49,7 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <div class="oe_title">
                         <label for="name" string="Spread Board Name" />
@@ -63,10 +63,7 @@
                     <group name="header_info">
                         <group name="spread_definitions">
                             <field name="template_id" />
-                            <field
-                                name="invoice_type"
-                                attrs="{'readonly':[('invoice_line_id','!=',False)]}"
-                            />
+                            <field name="invoice_type" readonly="invoice_line_id" />
                             <field name="display_recompute_buttons" invisible="1" />
                             <field name="display_move_line_auto_post" invisible="1" />
                             <field name="all_posted" invisible="1" />
@@ -81,22 +78,19 @@
                                 for="debit_account_id"
                                 colspan="3"
                                 string="Balance sheet account / Spread account"
-                                attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                invisible="invoice_type not in ['out_invoice','in_refund']"
                             />
                             <label
                                 for="debit_account_id"
                                 colspan="3"
                                 string="Expense account"
-                                attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                invisible="invoice_type not in ['in_invoice','out_refund']"
                             />
-                            <div
-                                attrs="{'invisible': [('use_invoice_line_account', '=', True)]}"
-                                colspan="3"
-                            >
+                            <div invisible="use_invoice_line_account" colspan="3">
                                 <span
                                     class="help-block"
                                     colspan="2"
-                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                    invisible="invoice_type not in ['out_invoice','in_refund']"
                                 >
                                       The Balance Sheet account used for the spreading.<br
                                     />This account is the counterpart of the account in the invoice line.
@@ -104,20 +98,17 @@
                                 <span
                                     class="help-block"
                                     colspan="2"
-                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                    invisible="invoice_type not in ['in_invoice','out_refund']"
                                 >
                                       The Expense account in the vendor bill line.<br
                                     />Usually the same account of the vendor bill line.
                                 </span>
                             </div>
-                            <div
-                                attrs="{'invisible': [('use_invoice_line_account', '!=', True)]}"
-                                colspan="3"
-                            >
+                            <div invisible="not use_invoice_line_account" colspan="3">
                                 <span
                                     class="help-block"
                                     colspan="2"
-                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                    invisible="invoice_type not in ['out_invoice','in_refund']"
                                 >
                                       The Balance Sheet account.<br
                                     />This is the account in the invoice line.
@@ -125,7 +116,7 @@
                                 <span
                                     class="help-block"
                                     colspan="2"
-                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                    invisible="invoice_type not in ['in_invoice','out_refund']"
                                 >
                                       The Expense account used for the spreading.<br
                                     />This account is the counterpart of the account of the vendor bill line.
@@ -135,12 +126,12 @@
                                 name="debit_account_id"
                                 required="1"
                                 domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
-                                attrs="{'readonly':[('invoice_line_id','!=',False)]}"
+                                readonly="invoice_line_id"
                             />
                             <span
                                 class="help-block text-danger"
                                 colspan="2"
-                                attrs="{'invisible':[('is_debit_account_deprecated','!=',True)]}"
+                                invisible="not is_debit_account_deprecated"
                             >
                                   This account in deprecated! The reconciliation will be NOT possible.
                             </span>
@@ -151,22 +142,19 @@
                                 for="credit_account_id"
                                 colspan="3"
                                 string="Revenue account"
-                                attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                invisible="invoice_type not in ['out_invoice','in_refund']"
                             />
                             <label
                                 for="credit_account_id"
                                 colspan="3"
                                 string="Balance sheet account / Spread account"
-                                attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                invisible="invoice_type not in ['in_invoice','out_refund']"
                             />
-                            <div
-                                attrs="{'invisible': [('use_invoice_line_account', '=', True)]}"
-                                colspan="3"
-                            >
+                            <div invisible="use_invoice_line_account" colspan="3">
                                 <span
                                     class="help-block"
                                     colspan="2"
-                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                    invisible="invoice_type not in ['out_invoice','in_refund']"
                                 >
                                       The Revenue account in the invoice line.<br
                                     />Usually the same account of the invoice line.
@@ -174,20 +162,17 @@
                                 <span
                                     class="help-block"
                                     colspan="2"
-                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                    invisible="invoice_type not in ['in_invoice','out_refund']"
                                 >
                                       The Balance Sheet account used for the spreading.<br
                                     />This account is the counterpart of the account in the vendor bill line.
                                 </span>
                             </div>
-                            <div
-                                attrs="{'invisible': [('use_invoice_line_account', '!=', True)]}"
-                                colspan="3"
-                            >
+                            <div invisible="not use_invoice_line_account" colspan="3">
                                 <span
                                     class="help-block"
                                     colspan="2"
-                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"
+                                    invisible="invoice_type not in ['out_invoice','in_refund']"
                                 >
                                       The Revenue account used for the spreading.<br
                                     />This account is the counterpart of the account of the invoice line.
@@ -195,7 +180,7 @@
                                 <span
                                     class="help-block"
                                     colspan="2"
-                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"
+                                    invisible="invoice_type not in ['in_invoice','out_refund']"
                                 >
                                       The Balance Sheet account.<br
                                     />This is the account in the vendor bill line.
@@ -205,12 +190,12 @@
                                 name="credit_account_id"
                                 required="1"
                                 domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
-                                attrs="{'readonly':[('invoice_line_id','!=',False)]}"
+                                readonly="invoice_line_id"
                             />
                             <span
                                 class="help-block text-danger"
                                 colspan="2"
-                                attrs="{'invisible':[('is_credit_account_deprecated','!=',True)]}"
+                                invisible="not is_credit_account_deprecated"
                             >
                                   This account in deprecated! The reconciliation will be NOT possible.
                             </span>
@@ -220,24 +205,26 @@
                         <group>
                             <field
                                 name="invoice_id"
-                                attrs="{'invisible':[('invoice_id','=',False)]}"
+                                invisible="not invoice_id"
+                                readonly="1"
                             />
                             <field
                                 name="invoice_line_id"
                                 readonly="1"
-                                attrs="{'invisible':[('invoice_line_id','=',False)]}"
+                                invisible="not invoice_line_id"
                             />
                             <field
                                 name="estimated_amount"
-                                attrs="{'readonly':[('invoice_line_id','!=',False)],'invisible':[('estimated_amount','=',0.0),('invoice_line_id','!=',False)]}"
+                                readonly="invoice_line_id"
+                                invisible="estimated_amount == 0.0 and invoice_line_id"
                             />
                             <field
                                 name="total_amount"
-                                attrs="{'invisible':[('invoice_line_id','=',False)]}"
+                                invisible="not invoice_line_id"
                             />
                             <field
                                 name="move_line_auto_post"
-                                attrs="{'invisible':[('display_move_line_auto_post','=',False)]}"
+                                invisible="not display_move_line_auto_post"
                             />
                         </group>
                         <group>
@@ -246,7 +233,11 @@
                             <field name="spread_date" />
                             <field name="days_calc" />
                             <field name="suitable_journal_ids" invisible="1" />
-                            <field name="journal_id" widget="selection" />
+                            <field
+                                name="journal_id"
+                                widget="selection"
+                                groups="base.group_multi_company"
+                            />
                         </group>
                     </group>
                     <notebook name="notebook">
@@ -256,7 +247,7 @@
                                     <field name="name" readonly="1" />
                                     <field
                                         name="amount"
-                                        attrs="{'readonly':[('move_id','!=',False)]}"
+                                        readonly="move_id"
                                         sum="Total"
                                     />
                                     <field name="date" readonly="1" />
@@ -267,14 +258,14 @@
                                         string="Create Move"
                                         type="object"
                                         groups="account.group_account_manager"
-                                        attrs="{'invisible':[('move_id','!=',False)]}"
+                                        invisible="move_id"
                                     />
                                     <button
                                         name="open_move"
                                         icon="fa-plus-square-o"
                                         string="View Move"
                                         type="object"
-                                        attrs="{'invisible':[('move_id','=',False)]}"
+                                        invisible="not move_id"
                                     />
                                     <button
                                         name="unlink_move"
@@ -283,7 +274,7 @@
                                         type="object"
                                         confirm="This will delete the move. Are you sure ?"
                                         groups="account.group_account_manager"
-                                        attrs="{'invisible':[('move_id','=',False)]}"
+                                        invisible="not move_id"
                                     />
                                 </tree>
                             </field>
@@ -301,19 +292,19 @@
                                         type="object"
                                         icon="fa-play"
                                         colspan="2"
-                                        attrs="{'invisible':[('display_create_all_moves','!=',True)]}"
+                                        invisible="not display_create_all_moves"
                                     />
                                     <field
                                         name="unspread_amount"
-                                        attrs="{'invisible': [('unspread_amount', '=', 0)]}"
+                                        invisible="unspread_amount == 0"
                                     />
                                     <field
                                         name="unposted_amount"
-                                        attrs="{'invisible': [('unposted_amount', '=', 0)]}"
+                                        invisible="unposted_amount == 0"
                                     />
                                     <field
                                         name="posted_amount"
-                                        attrs="{'invisible': [('posted_amount', '=', 0)]}"
+                                        invisible="posted_amount == 0"
                                     />
                                 </group>
                             </group>

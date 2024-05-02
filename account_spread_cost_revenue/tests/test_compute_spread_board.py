@@ -8,14 +8,15 @@ from odoo.tests import Form, common
 
 
 class TestComputeSpreadBoard(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        journal = self.env["account.journal"].create(
+        journal = cls.env["account.journal"].create(
             {"name": "Test", "type": "general", "code": "test"}
         )
 
-        self.receivable_account = self.env["account.account"].create(
+        cls.receivable_account = cls.env["account.account"].create(
             {
                 "name": "test_account_receivable",
                 "code": "123",
@@ -24,7 +25,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
             }
         )
 
-        self.expense_account = self.env["account.account"].create(
+        cls.expense_account = cls.env["account.account"].create(
             {
                 "name": "test account_expenses",
                 "code": "765",
@@ -33,7 +34,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
             }
         )
 
-        self.spread_account = self.env["account.account"].create(
+        cls.spread_account = cls.env["account.account"].create(
             {
                 "name": "test spread account_expenses",
                 "code": "321",
@@ -42,11 +43,11 @@ class TestComputeSpreadBoard(common.TransactionCase):
             }
         )
 
-        self.spread = self.env["account.spread"].create(
+        cls.spread = cls.env["account.spread"].create(
             {
                 "name": "test",
-                "debit_account_id": self.spread_account.id,
-                "credit_account_id": self.expense_account.id,
+                "debit_account_id": cls.spread_account.id,
+                "credit_account_id": cls.expense_account.id,
                 "period_number": 12,
                 "period_type": "month",
                 "spread_date": "2017-02-01",
@@ -56,11 +57,11 @@ class TestComputeSpreadBoard(common.TransactionCase):
             }
         )
 
-        self.spread2 = self.env["account.spread"].create(
+        cls.spread2 = cls.env["account.spread"].create(
             {
                 "name": "test2",
-                "debit_account_id": self.spread_account.id,
-                "credit_account_id": self.expense_account.id,
+                "debit_account_id": cls.spread_account.id,
+                "credit_account_id": cls.expense_account.id,
                 "period_number": 12,
                 "period_type": "month",
                 "spread_date": "2017-02-01",
@@ -70,11 +71,11 @@ class TestComputeSpreadBoard(common.TransactionCase):
             }
         )
 
-        self.spread3 = self.env["account.spread"].create(
+        cls.spread3 = cls.env["account.spread"].create(
             {
                 "name": "test by cal days",
-                "debit_account_id": self.spread_account.id,
-                "credit_account_id": self.expense_account.id,
+                "debit_account_id": cls.spread_account.id,
+                "credit_account_id": cls.expense_account.id,
                 "period_number": 12,
                 "period_type": "month",
                 "spread_date": "2017-02-01",
@@ -85,14 +86,14 @@ class TestComputeSpreadBoard(common.TransactionCase):
             }
         )
 
-        self.template = self.env["account.spread.template"].create(
+        cls.template = cls.env["account.spread.template"].create(
             {
                 "name": "test",
                 "spread_type": "purchase",
                 "period_number": 5,
                 "period_type": "month",
                 "start_date": "2017-01-01",
-                "spread_account_id": self.spread_account.id,
+                "spread_account_id": cls.spread_account.id,
                 "spread_journal_id": journal.id,
                 "days_calc": True,
             }
