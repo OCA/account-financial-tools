@@ -55,11 +55,6 @@ msgid "Journal Entry"
 msgstr "Boeking"
 
 #. module: account_journal_lock_date
-#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard____last_update
-msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
-
-#. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_uid
 msgid "Last Updated by"
 msgstr "Laatst bijgewerkt door"
@@ -149,6 +144,9 @@ msgstr ""
 "voorafgaand aan en inclusief de slotdatum %(journal_date)s. Controleer de "
 "dagboek instellingen of vraag dit aan iemand met de rol "
 "'Facturatiebeheerder'."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst gewijzigd op"
 
 #, fuzzy
 #~ msgid "Journal Entries"
