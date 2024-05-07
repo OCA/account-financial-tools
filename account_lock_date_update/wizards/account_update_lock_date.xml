@@ -12,17 +12,14 @@
                 <sheet>
                     <group id="main">
                         <field name="company_id" invisible="1" />
-                        <field
-                            name="tax_lock_date"
-                            options="{'datepicker': {'warn_future': true}}"
-                        />
+                        <field name="tax_lock_date" options="{'warn_future': true}" />
                         <field
                             name="period_lock_date"
-                            options="{'datepicker': {'warn_future': true}}"
+                            options="{'warn_future': true}"
                         />
                         <field
                             name="fiscalyear_lock_date"
-                            options="{'datepicker': {'warn_future': true}}"
+                            options="{'warn_future': true}"
                         />
                     </group>
                 </sheet>
