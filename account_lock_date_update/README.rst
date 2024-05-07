@@ -69,6 +69,9 @@ Contributors
 -  Fekete Mihai <feketemihai@gmail.com>
 -  Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
 -  Andrea Stirpe <a.stirpe@onestein.nl>
+-  `Komit <https://komit-consulting.com>`__:
+
+   -  Vang Nguyen Phu
 
 Maintainers
 -----------
