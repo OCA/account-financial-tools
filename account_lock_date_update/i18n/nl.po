@@ -1,0 +1,139 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_lock_date_update
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2024-01-30 12:58+0000\n"
+"Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
+"Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_lock_date_update
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__company_id
+msgid "Company"
+msgstr "Bedrijf"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__display_name
+msgid "Display Name"
+msgstr "Te tonen naam"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date____last_update
+msgid "Last Modified on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
+msgid "Lock Date for All Users"
+msgstr "Blokkeerdatum voor alle gebruikers"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
+msgid "Lock Date for Non-Advisers"
+msgstr "Blokkeerdatum voor Niet-Financieel Managers gebruikers"
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid ""
+"No users can edit journal entries related to a tax prior and inclusive of "
+"this date."
+msgstr ""
+"Geen enkele gebruiker kan journaalposten bewerken die verband houden met een "
+"belasting vóór en inclusief deze datum."
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date. Use it for fiscal year locking for example."
+msgstr ""
+"Geen enkele gebruikers, inclusief Financiële Managers, kunnen nog de "
+"boekhouding wijzigen voor en op deze datum. Gebruik het bijvoorbeeld voor "
+"het definitief afsluiten van het fiscale jaar."
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__period_lock_date
+msgid ""
+"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
+"of this date. Use it for period locking inside an open fiscal year, for "
+"example."
+msgstr ""
+"Alleen gebruiker met Financiële Managers rechten, kunnen de boekhouding "
+"wijzigen voor en op deze datum. Gebruik het bijvoorbeeld voor het "
+"dichtzetten van een periode binnen een open fiscaal jaar."
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid "Tax Lock Date"
+msgstr "Datum belastingvergrendeling"
+
+#. module: account_lock_date_update
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+msgid "Update"
+msgstr "Bijwerken"
+
+#. module: account_lock_date_update
+#: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
+#: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
+msgid "Update Lock Dates"
+msgstr "Update vergrendelingsdatums"
+
+#. module: account_lock_date_update
+#: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
+msgid "Wizard to Update Accounting Lock Dates"
+msgstr "Wizard om boekhoudkundige vergrendelingsdatums bij te werken"
+
+#. module: account_lock_date_update
+#. odoo-python
+#: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
+#, python-format
+msgid "You are not allowed to execute this action."
+msgstr "U bent niet bevoegd om deze actie uit te voeren."
+
+#~ msgid "Lock Date"
+#~ msgstr "Blokkeerdatum"
+
+#~ msgid "Update accounting lock dates"
+#~ msgstr "Werk de blokkeerdatum bij"
