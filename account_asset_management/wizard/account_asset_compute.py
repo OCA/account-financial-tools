@@ -1,7 +1,7 @@
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 
 
 class AccountAssetCompute(models.TransientModel):
@@ -16,9 +16,23 @@ class AccountAssetCompute(models.TransientModel):
         " posted",
     )
     note = fields.Text()
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        string="Company",
+        readonly=True,
+        required=True,
+        default=lambda self: self._default_company_id(),
+    )
+
+    @api.model
+    def _default_company_id(self):
+        return self.env.company.id
 
     def asset_compute(self):
-        assets = self.env["account.asset"].search([("state", "=", "open")])
+        self.ensure_one()
+        assets = self.env["account.asset"].search(
+            [("state", "=", "open"), ("company_id", "=", self.company_id.id)]
+        )
         created_move_ids, error_log = assets._compute_entries(
             self.date_end, check_triggers=True
         )
