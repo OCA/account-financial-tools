@@ -22,3 +22,7 @@
 * `XCG Consulting <https://xcg-consulting.fr>`_:
 
   * Vincent Hatakeyama
+
+* `XCG Consulting <https://xcg-consulting.fr>`_:
+
+  * Oury Balde <oury.balde@xcg-consulting.fr>
