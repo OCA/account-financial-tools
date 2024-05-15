@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -369,14 +368,14 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:49b705c28fc29caf2d9f95fbf90eda34e6903b1c817112e31500a765ca66eda1
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-financial-tools/tree/16.0/account_netting"><img alt="OCA/account-financial-tools" src="https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_netting"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module allows to compensate the balance of a receivable account with the
-balance of a payable account for the same partner, creating a journal item
-that reflects this operation.</p>
-<p><strong>WARNING</strong>: This operation can be forbidden in your country by the accounting
-regulations, so you should check current laws before using it. For example, in
-Spain, this is not allowed at first instance, unless you document well the
-operation from both parties.</p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-financial-tools/tree/17.0/account_netting"><img alt="OCA/account-financial-tools" src="https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-financial-tools-17-0/account-financial-tools-17-0-account_netting"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module allows to compensate the balance of a receivable account
+with the balance of a payable account for the same partner, creating a
+journal item that reflects this operation.</p>
+<p><strong>WARNING</strong>: This operation can be forbidden in your country by the
+accounting regulations, so you should check current laws before using
+it. For example, in Spain, this is not allowed at first instance, unless
+you document well the operation from both parties.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -396,20 +395,21 @@ operation from both parties.</p>
 <ul class="simple">
 <li>Accounting/Journal Entries/Journal Items</li>
 </ul>
-<p>select all the lines that corresponds to both AR/AP operations from the same
-partner. Click on <em>Action &gt; Compensate</em>. If the items don’t correspond to the
-same partner or they aren’t AR/AP accounts, you will get an error.</p>
-<p>On contrary, a dialog box will be presented with the result of the operation
-and a selection of the journal to register the operation. When you click on the
-<em>Compensate</em> button, a journal entry is created with the corresponding
-counterparts of the AR/AP operations.</p>
+<p>select all the lines that corresponds to both AR/AP operations from the
+same partner. Click on <em>Action &gt; Compensate</em>. If the items don’t
+correspond to the same partner or they aren’t AR/AP accounts, you will
+get an error.</p>
+<p>On contrary, a dialog box will be presented with the result of the
+operation and a selection of the journal to register the operation. When
+you click on the <em>Compensate</em> button, a journal entry is created with
+the corresponding counterparts of the AR/AP operations.</p>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/account-financial-tools/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_netting%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_netting%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -438,7 +438,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-financial-tools/tree/16.0/account_netting">OCA/account-financial-tools</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-financial-tools/tree/17.0/account_netting">OCA/account-financial-tools</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
