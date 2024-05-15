@@ -79,9 +79,7 @@
                                         name="tb_analytic_account"
                                         groups="analytic.group_analytic_accounting"
                                     >
-                    <span
-                                            t-out="', '.join(line.analytic_line_ids.mapped('account_id.name'))"
-                                        />
+                    <span t-out="line.analytic_accounts" />
                   </td>
                   <td name='tb_amount_currency' groups="base.group_multi_currency">
                     <t t-if="line.currency_id">
