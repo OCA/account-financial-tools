@@ -85,6 +85,7 @@ Contributors
    -  Pedro M. Baeza
    -  Vicent Cubells
    -  Víctor Martínez
+   -  Marwan Behillil
 
 Maintainers
 -----------
