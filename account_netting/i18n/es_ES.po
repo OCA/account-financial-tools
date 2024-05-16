@@ -88,11 +88,6 @@ msgid "Journal Items to Compensate"
 msgstr ""
 
 #. module: account_netting
-#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
 msgid "Last Updated by"
 msgstr "Última actualización por"

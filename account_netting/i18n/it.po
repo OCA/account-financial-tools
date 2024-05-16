@@ -88,11 +88,6 @@ msgid "Journal Items to Compensate"
 msgstr "Registrazioni contabili da compensare"
 
 #. module: account_netting
-#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
@@ -197,3 +192,6 @@ msgstr ""
 #, python-format
 msgid "You should select at least 2 journal items."
 msgstr "Bisogna selezionare almeno due registrazioni contabili."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"

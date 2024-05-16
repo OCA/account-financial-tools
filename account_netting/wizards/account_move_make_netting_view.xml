@@ -21,10 +21,7 @@
                     <field name="company_currency_id" invisible="1" />
                     <field name="partner_id" />
                     <field name="balance" />
-                    <field
-                        name="balance_type"
-                        attrs="{'invisible': [('balance', '=', 0)]}"
-                    />
+                    <field name="balance_type" invisible="balance == 0" />
                     <field name="journal_id" />
                 </group>
                 <footer>
