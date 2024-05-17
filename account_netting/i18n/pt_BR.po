@@ -9,16 +9,17 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2019-07-09 01:43+0000\n"
-"Last-Translator: Eduardo Aparicio <eduardo.caparica@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2024-05-17 20:36+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
@@ -138,6 +139,8 @@ msgid ""
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner."
 msgstr ""
+"Conflito de cronologia: a fatura {nome} não pode ser a fatura {time} "
+"{inv_name}."
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
