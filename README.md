@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_asset_batch_compute](account_asset_batch_compute/) | 12.0.1.0.0 |  | Add the possibility to compute assets in batch
-[account_asset_management](account_asset_management/) | 12.0.3.2.0 |  | Assets Management
+[account_asset_management](account_asset_management/) | 12.0.3.3.0 |  | Assets Management
 [account_balance_line](account_balance_line/) | 12.0.1.0.0 |  | Display balance totals in move line view
 [account_bank_statement_chatter](account_bank_statement_chatter/) | 12.0.1.0.0 | [![cubells](https://github.com/cubells.png?size=30px)](https://github.com/cubells) | Chatter on bank statements
 [account_cash_basis_group_base_line](account_cash_basis_group_base_line/) | 12.0.0.0.1 |  | Tax Cash Basis Group Base Lines
