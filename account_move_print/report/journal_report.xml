@@ -79,7 +79,16 @@
                                         name="tb_analytic_account"
                                         groups="analytic.group_analytic_accounting"
                                     >
-                    <span t-out="line.analytic_accounts" />
+                     <span
+                                            t-out="', '.join(set([
+          analytic_line[field].display_name
+          for analytic_line in line.analytic_line_ids
+          for field in [
+              field_name for field_name in analytic_line._fields.keys()
+              if field_name.startswith('x_plan')
+          ] + ['account_id'] if analytic_line[field]
+      ]))"
+                                        />
                   </td>
                   <td name='tb_amount_currency' groups="base.group_multi_currency">
                     <t t-if="line.currency_id">
