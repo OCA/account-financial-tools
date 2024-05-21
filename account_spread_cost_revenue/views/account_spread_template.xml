@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_spread_template" model="ir.ui.view">
+        <field name="model">account.spread.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Spread Template Name" />
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="e.g. Template cleaning contract"
+                            />
+                        </h1>
+                    </div>
+                    <group name="main_info">
+                        <group>
+                            <field name="spread_type" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="period_number" />
+                            <field name="period_type" />
+                            <field name="start_date" />
+                            <field name="days_calc" />
+                        </group>
+                        <group>
+                            <field name="use_invoice_line_account" />
+                            <field
+                                name="spread_account_id"
+                                domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
+                                options="{'no_create': True}"
+                                required="not use_invoice_line_account"
+                                invisible="use_invoice_line_account"
+                            />
+                            <field
+                                name="exp_rev_account_id"
+                                invisible="not use_invoice_line_account"
+                                required="use_invoice_line_account"
+                                domain="[('deprecated', '=', False)]"
+                                options="{'no_create': True}"
+                            />
+                            <field name="spread_journal_id" widget="selection" />
+                            <field
+                                name="analytic_distribution"
+                                groups="analytic.group_analytic_accounting"
+                                widget="analytic_distribution"
+                            />
+                        </group>
+                    </group>
+                    <div>
+                        <field name="auto_spread" />
+                        <label for="auto_spread" />
+                    </div>
+                    <p invisible="not auto_spread">
+                        Automatically use this spread template on invoice validation for invoice lines using below product and/or account and/or analytic,
+                    </p>
+                    <field
+                        name="auto_spread_ids"
+                        invisible="not auto_spread"
+                        nolabel="1"
+                    >
+                        <tree editable="bottom">
+                            <field name="name" />
+                            <field name="product_id" />
+                            <field name="account_id" />
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_account_spread_template_tree" model="ir.ui.view">
+        <field name="model">account.spread.template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="spread_account_id" />
+                <field name="spread_journal_id" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_account_spread_template_form" model="ir.actions.act_window">
+        <field name="name">Spread Templates</field>
+        <field name="res_model">account.spread.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_account_spread_template_tree" />
+    </record>
+    <menuitem
+        id="menu_action_account_spread_template_form"
+        parent="account.account_account_menu"
+        action="action_account_spread_template_form"
+        groups="account.group_account_manager"
+    />
+</odoo>

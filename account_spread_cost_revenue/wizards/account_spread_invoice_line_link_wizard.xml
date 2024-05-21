@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_spread_invoice_line_link_wizard" model="ir.ui.view">
+        <field name="model">account.spread.invoice.line.link.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="main_info">
+                    <group>
+                        <field
+                            name="company_id"
+                            readonly="1"
+                            groups="base.group_multi_company"
+                        />
+                        <field name="invoice_type" readonly="1" />
+                        <field name="spread_type" invisible="1" />
+                        <field name="invoice_id" readonly="1" />
+                        <field name="invoice_line_id" readonly="1" />
+                    </group>
+                    <group>
+                        <field name="spread_action_type" widget="radio" />
+                        <field
+                            name="spread_id"
+                            invisible="spread_action_type != 'link'"
+                            required="spread_action_type == 'link'"
+                            domain="[('invoice_type', '=', invoice_type)]"
+                            options="{'no_create': True}"
+                        />
+                        <field
+                            name="template_id"
+                            invisible="spread_action_type != 'template'"
+                            required="spread_action_type == 'template'"
+                            domain="[('spread_type', '=', spread_type)]"
+                            options="{'no_create': True}"
+                        />
+                        <field
+                            name="use_invoice_line_account"
+                            invisible="spread_action_type != 'new'"
+                        />
+                        <field
+                            name="spread_account_id"
+                            invisible="spread_action_type != 'new'"
+                            required="spread_action_type ==  'new'"
+                            domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
+                            options="{'no_create': True}"
+                        />
+                        <field
+                            name="exp_rev_account_id"
+                            invisible="not use_invoice_line_account or spread_action_type != 'new'"
+                            required="use_invoice_line_account"
+                            domain="[('deprecated', '=', False)]"
+                            options="{'no_create': True}"
+                        />
+                        <field
+                            name="spread_journal_id"
+                            invisible="spread_action_type != 'new'"
+                            required="spread_action_type == 'new'"
+                            options="{'no_create': True}"
+                        />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        string="Confirm"
+                        type="object"
+                        name="confirm"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
