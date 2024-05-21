@@ -17,5 +17,8 @@ class AccountMoveReversal(models.TransientModel):
         res = super().reverse_moves()
         if self.line_reason:
             for line in self.new_move_ids.line_ids:
-                line.name = " : ".join([self.line_reason, line.name])
+                if line.name:
+                    line.name = " : ".join([self.line_reason, line.name])
+                else:
+                    line.name = self.line_reason
         return res
