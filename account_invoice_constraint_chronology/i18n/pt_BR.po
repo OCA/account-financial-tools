@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 16:31+0000\n"
-"PO-Revision-Date: 2024-05-17 20:34+0000\n"
+"PO-Revision-Date: 2024-05-21 20:37+0000\n"
 "Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
 "translation.odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
@@ -65,7 +65,7 @@ msgstr ""
 msgid ""
 "Chronology conflict: Invoice {name} cannot be {time} invoice {inv_name}."
 msgstr ""
-"Conflito de cronologia: a fatura {nome} não pode ser a fatura {time} "
+"Conflito de cronologia: a fatura {nome} não pode ser a {time} fatura "
 "{inv_name}."
 
 #. module: account_invoice_constraint_chronology
@@ -76,7 +76,7 @@ msgstr "Diário"
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_move
 msgid "Journal Entry"
-msgstr "Entrada Diário"
+msgstr "Entrada Diária"
 
 #, python-format
 #~ msgid ""
