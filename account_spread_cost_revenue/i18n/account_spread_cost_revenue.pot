@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':[('is_credit_account_deprecated','!=',True)]}\">\n"
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not is_credit_account_deprecated\">\n"
 "                                  This account in deprecated! The reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
@@ -24,7 +24,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':[('is_debit_account_deprecated','!=',True)]}\">\n"
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not is_debit_account_deprecated\">\n"
 "                                  This account in deprecated! The reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
@@ -32,10 +32,10 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
 "                                      The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the invoice line.\n"
 "                                </span>\n"
-"                                <span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
 "                                      The Expense account in the vendor bill line.<br/>Usually the same account of the vendor bill line.\n"
 "                                </span>"
 msgstr ""
@@ -43,10 +43,10 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
 "                                      The Balance Sheet account.<br/>This is the account in the invoice line.\n"
 "                                </span>\n"
-"                                <span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
 "                                      The Expense account used for the spreading.<br/>This account is the counterpart of the account of the vendor bill line.\n"
 "                                </span>"
 msgstr ""
@@ -54,10 +54,10 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
 "                                      The Revenue account in the invoice line.<br/>Usually the same account of the invoice line.\n"
 "                                </span>\n"
-"                                <span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
 "                                      The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the vendor bill line.\n"
 "                                </span>"
 msgstr ""
@@ -65,10 +65,10 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
 "                                      The Revenue account used for the spreading.<br/>This account is the counterpart of the account of the invoice line.\n"
 "                                </span>\n"
-"                                <span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
 "                                      The Balance Sheet account.<br/>This is the account in the vendor bill line.\n"
 "                                </span>"
 msgstr ""
@@ -128,7 +128,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__analytic_distribution
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__analytic_distribution
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_distribution
-msgid "Analytic"
+msgid "Analytic Distribution"
 msgstr ""
 
 #. module: account_spread_cost_revenue
@@ -258,7 +258,6 @@ msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.actions.server,name:account_spread_cost_revenue.ir_cron_spread_create_entries_ir_actions_server
-#: model:ir.cron,cron_name:account_spread_cost_revenue.ir_cron_spread_create_entries
 msgid "Cost/revenue Spread: Create Entries"
 msgstr ""
 
@@ -501,6 +500,7 @@ msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_has_error
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -580,15 +580,6 @@ msgid "Journal Items"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread____last_update
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard____last_update
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line____last_update
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template____last_update
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__write_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__write_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__write_uid
@@ -628,11 +619,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_invoice_spread
 msgid "Linked to spread board"
-msgstr ""
-
-#. module: account_spread_cost_revenue
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: account_spread_cost_revenue
@@ -772,6 +758,11 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Revenue account"
+msgstr ""
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_spread_cost_revenue
