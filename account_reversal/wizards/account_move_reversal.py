@@ -8,9 +8,9 @@ class AccountMoveReversal(models.TransientModel):
     _inherit = "account.move.reversal"
 
     line_reason = fields.Char(
-        help="Prefix that will be added to the 'Name' of the reversal account "
-        "entry items. If empty, Odoo uses the same name of the move "
-        "line to reverse. (NOTE: A space is added after the prefix)."
+        help="Prefix that will be added to the Label of the reversal "
+        "entry items. If empty, Odoo uses the same label as the reversed "
+        "item. (NOTE: a space and a colon added after the prefix)."
     )
 
     def reverse_moves(self):

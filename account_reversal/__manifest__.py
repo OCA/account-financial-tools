@@ -5,7 +5,7 @@
 
 {
     "name": "Account Reversal",
-    "summary": "Wizard for creating a reversal account move",
+    "summary": "Account reversal usability improvements",
     "version": "16.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "https://github.com/OCA/account-financial-tools",
