@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [account_move_name_sequence](account_move_name_sequence/) | 17.0.1.0.5 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) [![moylop260](https://github.com/moylop260.png?size=30px)](https://github.com/moylop260) [![luisg123v](https://github.com/luisg123v.png?size=30px)](https://github.com/luisg123v) | Generate journal entry number from sequence
 [account_move_print](account_move_print/) | 17.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds the option to print Journal Entries
 [account_move_template](account_move_template/) | 17.0.1.0.0 |  | Templates for recurring Journal Entries
+[account_spread_cost_revenue](account_spread_cost_revenue/) | 17.0.1.0.0 |  | Spread costs and revenues over a custom period
 [account_tax_repartition_line_tax_group_account](account_tax_repartition_line_tax_group_account/) | 17.0.1.0.0 |  | Set a default account from tax group to tax repartition lines
 [account_usability](account_usability/) | 17.0.1.0.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module and adds the option to enable Saxon Accounting
 
