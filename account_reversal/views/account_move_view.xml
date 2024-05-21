@@ -22,7 +22,7 @@
         <field name="arch" type="xml">
             <xpath
                 expr="//page[@name='other_info']//field[@name='reversed_entry_id']"
-                position="after"
+                position="before"
             >
                 <field name="to_be_reversed" />
                 <field
