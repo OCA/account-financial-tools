@@ -50,8 +50,9 @@ class TestMove(TransactionCase):
                 default_type="out_invoice", default_company_id=cls.env.company.id
             )
         ) as invoice:
-            # invoice.save()
+            invoice.save()
             # invoice.partner_id = cls.partner
+            invoice.
             invoice.journal_id = cls.journal
             with invoice.invoice_line_ids.new() as line_form:
                 line_form.name = cls.product.name
