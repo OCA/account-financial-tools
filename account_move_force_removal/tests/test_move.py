@@ -44,16 +44,25 @@ class TestMove(TransactionCase):
             ],
             limit=1,
         )
-
-        with Form(
-            cls.env["account.move"].with_context(
-                default_type="out_invoice", default_company_id=cls.env.company.id
-            )
-        ) as invoice:
-            invoice.save()
-            # invoice.partner_id = cls.partner
-            invoice.journal_id = cls.journal
-            invoice.save()
+        cls.invoice = cls.env["account.move"].create(
+            {
+                "type": "out_invoice",
+                "partner_id": cls.partner.id,
+                "company_id": cls.env.company.id,
+                "journal_id": cls.journal,
+            }
+        )
+        # invoice = Form(
+        #     cls.env["account.move"].with_context(
+        #         default_type="out_invoice",
+        #         default_company_id=cls.env.company.id,
+        #     ),
+        #     cls.env.ref("account.view_move_form"),
+        # )
+        # # invoice.save()
+        # invoice.partner_id = cls.partner
+        # invoice.journal_id = cls.journal
+        with Form(cls.invoice) as invoice:
             with invoice.invoice_line_ids.new() as line_form:
                 line_form.name = cls.product.name
                 line_form.product_id = cls.product.id
