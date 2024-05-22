@@ -27,7 +27,7 @@ class AccountMove(models.Model):
                 move.state in states
                 and (
                     hasattr(move_journal, "sequence_id")
-                    or hasattr(move_journal,"refund_sequence_id")
+                    or hasattr(move_journal, "refund_sequence_id")
                 )
                 and (move_journal.sequence_id or move_journal.refund_sequence_id)
             ):
