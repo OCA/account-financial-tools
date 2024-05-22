@@ -17,6 +17,7 @@ class AccountMove(models.Model):
                 move_journal = move.journal_id
                 if (
                     move.state == "posted"
+                    and move.name != "/"
                     and (
                         hasattr("sequence_id", move_journal)
                         or hasattr("refund_sequence_id", move_journal)
