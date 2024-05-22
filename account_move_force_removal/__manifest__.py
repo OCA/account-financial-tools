@@ -9,6 +9,8 @@
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Tecnativa, Odoo Community Association (OCA)",
-    "depends": ["account", "base_sequence_option"],
+    "depends": [
+        "account",
+    ],
     "data": ["security/account_move_force_removal_security.xml"],
 }
