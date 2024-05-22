@@ -13,31 +13,27 @@ class AccountMove(models.Model):
         if self.env.user.has_group(
             "account_move_force_removal.group_account_move_force_removal"
         ):
-            self._check_can_be_deleted(states=["posted"], check_name=True)
+            self._check_can_be_deleted(states=["posted"], check_grop=False)
             cancelled_moves = self.filtered(lambda m: m.state == "cancel")
             super(AccountMove, cancelled_moves.with_context(force_delete=True)).unlink()
         else:
             self._check_can_be_deleted(states=["cancel"])
         return super(AccountMove, self - cancelled_moves).unlink()
 
-    def _check_can_be_deleted(self, states, check_name=False):
+    def _check_can_be_deleted(self, states, check_group=True):
+
         for move in self:
             move_journal = move.journal_id
+            move_has_old_sequence = hasattr(move_journal, "sequence_id") or hasattr(
+                move_journal, "refund_sequence_id"
+            )
             if (
                 move.state in states
-                and (
-                    hasattr(move_journal, "sequence_id")
-                    or hasattr(move_journal, "refund_sequence_id")
-                )
+                and move_has_old_sequence
+                and (check_group or move.name != "/")
                 and (move_journal.sequence_id or move_journal.refund_sequence_id)
             ):
-                if not check_name:
-                    raise UserError(
-                        _("You cannot delete an entry which has been posted once.")
-                    )
-                else:
-                    if move.name != "/":
-                        raise UserError(
-                            _("You cannot delete an entry which has been posted once.")
-                        )
+                raise UserError(
+                    _("You cannot delete an entry which has been posted once.")
+                )
         return True
