@@ -45,29 +45,27 @@ class TestMove(TransactionCase):
             limit=1,
         )
 
-        invoice = Form(
-            self.env["account.move"].with_context(
-                default_type="out_invoice",
-                default_company_id=cls.env.company.id,
-            ),
-            self.env.ref("account.view_move_form"),
-        )
-        # invoice.save()
-        invoice.partner_id = cls.partner
-        invoice.journal_id = cls.journal
-        with invoice.invoice_line_ids.new() as line_form:
-            line_form.name = cls.product.name
-            line_form.product_id = cls.product.id
-            line_form.quantity = 1.0
-            line_form.price_unit = 10
-            line_form.account_id = cls.income_account
-        invoice = invoice.save()
-        invoice.action_post()
-        cls.invoice = invoice
-        cls.invoice2 = cls.invoice.copy()
-        cls.invoice2.action_post()
-        cls.invoice3 = cls.invoice.copy()
-        cls.invoice3.action_post()
+        with Form(
+            cls.env["account.move"].with_context(
+                default_type="out_invoice", default_company_id=cls.env.company.id
+            )
+        ) as invoice:
+            # invoice.save()
+            invoice.partner_id = cls.partner
+            invoice.journal_id = cls.journal
+            with invoice.invoice_line_ids.new() as line_form:
+                line_form.name = cls.product.name
+                line_form.product_id = cls.product.id
+                line_form.quantity = 1.0
+                line_form.price_unit = 10
+                line_form.account_id = cls.income_account
+            invoice = invoice.save()
+            invoice.action_post()
+            cls.invoice = invoice
+            cls.invoice2 = cls.invoice.copy()
+            cls.invoice2.action_post()
+            cls.invoice3 = cls.invoice.copy()
+            cls.invoice3.action_post()
 
     def test_remove_invoice_error(self):
         # Delete invoice while name isn't / and
