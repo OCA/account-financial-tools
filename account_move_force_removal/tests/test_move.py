@@ -65,7 +65,7 @@ class TestMove(TransactionCase):
         # Form(cls.invoice) as invoice:
         with invoice.invoice_line_ids.new() as line_form:
             line_form.name = cls.product.name
-            line_form.product_id = cls.product.id
+            line_form.product_id = cls.product
             line_form.quantity = 1.0
             line_form.price_unit = 10
             line_form.account_id = cls.income_account
