@@ -49,7 +49,8 @@ class TestMove(TransactionCase):
             cls.env["account.move"].with_context(
                 default_type="out_invoice",
                 default_company_id=cls.env.company.id,
-            )
+            ),
+            cls.env.ref("account.view_move_form"),
         )
         invoice.save()
         # invoice.partner_id = cls.partner
