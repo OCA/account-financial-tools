@@ -13,7 +13,7 @@ class AccountMove(models.Model):
         if self.env.user.has_group(
             "account_move_force_removal.group_account_move_force_removal"
         ):
-            self._check_can_be_deleted(states=["posted"], check_grop=False)
+            self._check_can_be_deleted(states=["posted"], check_group=False)
             cancelled_moves = self.filtered(lambda m: m.state == "cancel")
             super(AccountMove, cancelled_moves.with_context(force_delete=True)).unlink()
         else:
