@@ -52,7 +52,7 @@ class TestMove(TransactionCase):
             ),
             self.env.ref("account.view_move_form"),
         )
-        #invoice.save()
+        # invoice.save()
         invoice.partner_id = self.partner
         invoice.journal_id = self.journal
         with invoice.invoice_line_ids.new() as line_form:
