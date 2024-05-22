@@ -13,20 +13,31 @@ class AccountMove(models.Model):
         if self.env.user.has_group(
             "account_move_force_removal.group_account_move_force_removal"
         ):
-            for move in self:
-                move_journal = move.journal_id
-                if (
-                    move.state == "posted"
-                    and move.name != "/"
-                    and (
-                        hasattr("sequence_id", move_journal)
-                        or hasattr("refund_sequence_id", move_journal)
-                    )
-                    and (move_journal.sequence_id or move_journal.refund_sequence_id)
-                ):
+            self._check_can_be_deleted(states=["posted"], check_name=True)
+            cancelled_moves = self.filtered(lambda m: m.state == "cancel")
+            super(AccountMove, cancelled_moves.with_context(force_delete=True)).unlink()
+        else:
+            self._check_can_be_deleted(states=["cancel"])
+        return super(AccountMove, self - cancelled_moves).unlink()
+
+    def _check_can_be_deleted(self, states, check_name=False):
+        for move in self:
+            move_journal = move.journal_id
+            if (
+                move.state in states
+                and (
+                    hasattr("sequence_id", move_journal)
+                    or hasattr("refund_sequence_id", move_journal)
+                )
+                and (move_journal.sequence_id or move_journal.refund_sequence_id)
+            ):
+                if not check_name:
                     raise UserError(
                         _("You cannot delete an entry which has been posted once.")
                     )
-            cancelled_moves = self.filtered(lambda m: m.state == "cancel")
-            super(AccountMove, cancelled_moves.with_context(force_delete=True)).unlink()
-        return super(AccountMove, self - cancelled_moves).unlink()
+                else:
+                    if move.name != "/":
+                        raise UserError(
+                            _("You cannot delete an entry which has been posted once.")
+                        )
+        return True
