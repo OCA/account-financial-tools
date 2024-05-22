@@ -14,10 +14,14 @@ class AccountMove(models.Model):
             "account_move_force_removal.group_account_move_force_removal"
         ):
             for move in self:
+                move_journal = move.journal_id
                 if (
                     move.state == "posted"
-                    and move.journal_id.sequence_id
-                    or move.journal_id.refund_sequence_id
+                    and (
+                        hasattr("sequence_id", move_journal)
+                        or hasattr("refund_sequence_id", move_journal)
+                    )
+                    and (move_journal.sequence_id or move_journal.refund_sequence_id)
                 ):
                     raise UserError(
                         _("You cannot delete an entry which has been posted once.")
