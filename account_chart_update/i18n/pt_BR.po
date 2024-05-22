@@ -9,8 +9,9 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2023-12-28 22:35+0000\n"
-"Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
+"PO-Revision-Date: 2024-05-23 01:20+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
 "23907/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -60,7 +61,7 @@ msgstr "Grupo de contas a ser atualizado"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Account groups"
-msgstr ""
+msgstr "Grupos de Contas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_field_ids
@@ -96,7 +97,7 @@ msgstr "Contas"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
 msgid "Accounts matching"
-msgstr ""
+msgstr "Correspondência de contas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template_id
@@ -335,6 +336,9 @@ msgid ""
 "Here you can select the fields you want to check if\n"
 "                            they have been updated in the templates."
 msgstr ""
+"Aqui você pode selecionar os campos que deseja verificar se\n"
+"                                                              eles foram "
+"atualizados nos modelos."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -670,7 +674,7 @@ msgstr "Impostos"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_matching_ids
 msgid "Taxes matching"
-msgstr ""
+msgstr "Correspondência de Taxas"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -703,12 +707,12 @@ msgstr "Tipo"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Update Chart Template"
-msgstr ""
+msgstr "Atualizar modelo de gráfico"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_account
 msgid "Update Tax Accounts"
-msgstr ""
+msgstr "Atualizar contas de taxas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_repartition_line_tags
@@ -799,14 +803,14 @@ msgstr "Impostos Atualizados"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account %s."
-msgstr ""
+msgstr "Conta atualizada %s."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 #, python-format
 msgid "Updated account %s. (Recreated XML-ID)"
-msgstr ""
+msgstr "Conta atualizada %s. (ID XML recriado)"
 
 #. module: account_chart_update
 #. odoo-python
