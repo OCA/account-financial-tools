@@ -26,8 +26,8 @@ class AccountMove(models.Model):
             if (
                 move.state in states
                 and (
-                    hasattr("sequence_id", move_journal)
-                    or hasattr("refund_sequence_id", move_journal)
+                    hasattr(move_journal, "sequence_id")
+                    or hasattr(move_journal,"refund_sequence_id")
                 )
                 and (move_journal.sequence_id or move_journal.refund_sequence_id)
             ):
