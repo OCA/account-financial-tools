@@ -51,7 +51,7 @@ class TestMove(TransactionCase):
             )
         ) as invoice:
             # invoice.save()
-            invoice.partner_id = cls.partner
+            # invoice.partner_id = cls.partner
             invoice.journal_id = cls.journal
             with invoice.invoice_line_ids.new() as line_form:
                 line_form.name = cls.product.name
