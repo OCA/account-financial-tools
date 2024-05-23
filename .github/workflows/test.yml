@@ -38,15 +38,22 @@ jobs:
           - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
             include: "account_move_name_sequence"
             name: test with Odoo
+          - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
+            include: "account_journal_restrict_mode"
+            name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
             include: "account_move_name_sequence"
             name: test with OCB
             makepot: "true"
+          - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
+            include: "account_journal_restrict_mode"
+            name: test with OCB
+            makepot: "true"
           - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
-            exclude: "account_move_name_sequence"
+            exclude: "account_move_name_sequence,account_journal_restrict_mode"
             name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
-            exclude: "account_move_name_sequence"
+            exclude: "account_move_name_sequence,account_journal_restrict_mode"
             name: test with OCB
             makepot: "true"
     services:
