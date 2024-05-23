@@ -14,18 +14,30 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
         cls.Account = cls.env["account.account"]
         cls.Template = cls.env["account.move.template"]
         cls.Partner = cls.env["res.partner"]
+        cls.company = cls.env.company
 
-        cls.journal = cls.Journal.search([("type", "=", "general")], limit=1)
+        cls.journal = cls.Journal.search(
+            [("type", "=", "general"), ("company_id", "=", cls.company.id)], limit=1
+        )
         cls.ar_account_id = cls.Account.search(
-            [("account_type", "=", "asset_receivable")], limit=1
+            [
+                ("account_type", "=", "asset_receivable"),
+                ("company_id", "=", cls.company.id),
+            ],
+            limit=1,
         )
         cls.ap_account_id = cls.Account.search(
-            [("account_type", "=", "liability_payable")], limit=1
+            [
+                ("account_type", "=", "liability_payable"),
+                ("company_id", "=", cls.company.id),
+            ],
+            limit=1,
         )
         cls.income_account_id = cls.Account.search(
             [
                 ("account_type", "=", "income_other"),
                 ("internal_group", "=", "income"),
+                ("company_id", "=", cls.company.id),
             ],
             limit=1,
         )
@@ -33,6 +45,7 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
             [
                 ("account_type", "=", "expense"),
                 ("internal_group", "=", "expense"),
+                ("company_id", "=", cls.company.id),
             ],
             limit=1,
         )
