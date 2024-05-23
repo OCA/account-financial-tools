@@ -10,7 +10,7 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 @tagged("post_install", "-at_install")
 class TestAccountMovePostDateUser(AccountTestInvoicingCommon):
     def setUp(self):
-        super(TestAccountMovePostDateUser, self).setUp()
+        super().setUp()
         self.account_move_obj = self.env["account.move"]
         self.partner = self.browse_ref("base.res_partner_12")
         self.account = self.company_data["default_account_revenue"]
