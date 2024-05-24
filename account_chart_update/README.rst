@@ -105,6 +105,8 @@ Contributors
 
    -  Luis J. Salvatierra
 
+-  Daniel Reis (dreis@opensourceintegrators.com)
+
 Maintainers
 -----------
 

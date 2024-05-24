@@ -9,3 +9,4 @@
 - Jairo Llopis (<https://www.moduon.team/>)
 - [Factor Libre](https://factorlibre.com):
   - Luis J. Salvatierra
+- Daniel Reis (dreis@opensourceintegrators.com)
