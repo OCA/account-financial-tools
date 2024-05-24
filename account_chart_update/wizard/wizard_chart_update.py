@@ -528,7 +528,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             tags += tpl.tag_ids
             existing = self.env["account.tax.repartition.line"]
             existing_candidates = current_repartition.filtered(
-                lambda r: r.factor_percent == factor_percent
+                lambda r,
+                factor_percent,
+                repartition_type,
+                existing_ids: r.factor_percent == factor_percent
                 and r.repartition_type == repartition_type
                 and r.id not in existing_ids
             )
@@ -1524,7 +1527,7 @@ class WizardTaxMatching(models.TransientModel):
     _inherit = "wizard.matching"
 
     def _get_matching_selection(self):
-        vals = super(WizardTaxMatching, self)._get_matching_selection()
+        vals = super()._get_matching_selection()
         vals += self._selection_from_files(
             "account.tax.template", ["description", "name"]
         )
@@ -1537,7 +1540,7 @@ class WizardAccountMatching(models.TransientModel):
     _inherit = "wizard.matching"
 
     def _get_matching_selection(self):
-        vals = super(WizardAccountMatching, self)._get_matching_selection()
+        vals = super()._get_matching_selection()
         vals += self._selection_from_files("account.account.template", ["code", "name"])
         return vals
 
@@ -1548,7 +1551,7 @@ class WizardFpMatching(models.TransientModel):
     _inherit = "wizard.matching"
 
     def _get_matching_selection(self):
-        vals = super(WizardFpMatching, self)._get_matching_selection()
+        vals = super()._get_matching_selection()
         vals += self._selection_from_files("account.fiscal.position.template", ["name"])
         return vals
 
