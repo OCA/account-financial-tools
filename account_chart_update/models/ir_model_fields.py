@@ -14,4 +14,4 @@ class IrModelFields(models.Model):
             for record in self:
                 res.append((record.id, f"{record.field_description} ({record.name})"))
             return res
-        return super(IrModelFields, self).name_get()
+        return super().name_get()
