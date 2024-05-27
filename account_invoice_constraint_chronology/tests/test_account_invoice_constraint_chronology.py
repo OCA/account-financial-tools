@@ -99,7 +99,6 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
                 {
                     "date": self.today,
                     "reason": "no reason",
-                    "refund_method": "refund",
                     "journal_id": self.invoice_1.journal_id.id,
                 }
             )
@@ -121,7 +120,6 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
                 {
                     "date": self.today,
                     "reason": "no reason",
-                    "refund_method": "refund",
                     "journal_id": self.invoice_1.journal_id.id,
                 }
             )

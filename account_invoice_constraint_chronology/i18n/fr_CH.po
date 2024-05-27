@@ -22,7 +22,7 @@ msgstr ""
 #. module: account_invoice_constraint_chronology
 #: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal__check_chronology
 msgid "Check Chronology"
-msgstr ""
+msgstr "Vérifier la chronologie"
 
 #. module: account_invoice_constraint_chronology
 #. odoo-python
@@ -32,6 +32,9 @@ msgid ""
 "Chronology conflict: A conflicting draft invoice dated before {date_invoice} "
 "exists, please validate it first."
 msgstr ""
+"Conflit de chronologie : Il existe une facture brouillon portant une date "
+"antérieur au {date_invoice}, veuillez d'abord valider la facture brouillon "
+"antérieur à celle-ci."
 
 #. module: account_invoice_constraint_chronology
 #. odoo-python
@@ -41,6 +44,9 @@ msgid ""
 "Chronology conflict: A conflicting validated invoice dated after "
 "{date_invoice} exists."
 msgstr ""
+"Conflit de chronologie : Il existe une ou des facture(s) validée(s) datée(s) "
+"après {date_invoice}. La date de cette facture doit être postérieur à la "
+"dernière facture."
 
 #. module: account_invoice_constraint_chronology
 #. odoo-python
@@ -50,6 +56,8 @@ msgid ""
 "Chronology conflict: An invoice with a higher number {highest_name} dated "
 "before {date_invoice} exists."
 msgstr ""
+"Conflit de chronologie : Une facture portant un numéro supérieur "
+"{highest_name} et datée avant {date_invoice} existe."
 
 #. module: account_invoice_constraint_chronology
 #. odoo-python
@@ -58,16 +66,18 @@ msgstr ""
 msgid ""
 "Chronology conflict: Invoice {name} cannot be {time} invoice {inv_name}."
 msgstr ""
+"Conflit de chronologie : La facture {name} ne peut pas être validé à la date "
+"du {time} de la facture {inv_name}."
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Ecriture Comptable"
 
 #~ msgid "Invoice"
 #~ msgstr "Facture"

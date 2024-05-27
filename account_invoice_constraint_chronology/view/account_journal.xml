@@ -15,7 +15,7 @@
             <field name="code" position="after">
                 <field
                     name="check_chronology"
-                    attrs="{'invisible': [('type', 'not in', ['sale', 'purchase'])]}"
+                    invisible="type not in ['sale', 'purchase']"
                 />
             </field>
         </field>
