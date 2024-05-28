@@ -9,39 +9,40 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-30 00:47+0000\n"
-"PO-Revision-Date: 2017-05-30 00:47+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2024-05-28 16:38+0000\n"
+"Last-Translator: Santiago Payà <santiagopim@gmail.com>\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_journal_lock_date
 #: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·lar"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creat el"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom a mostrar"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_journal_lock_date
 #: model:ir.model,name:account_journal_lock_date.model_account_journal
@@ -51,34 +52,34 @@ msgstr "Diari"
 #. module: account_journal_lock_date
 #: model:ir.model,name:account_journal_lock_date.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Assentament"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualització per"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualització el"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__fiscalyear_lock_date
 msgid "Lock Date"
-msgstr ""
+msgstr "Data de bloqueig"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__period_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__period_lock_date
 msgid "Lock Date for Non-Advisers"
-msgstr ""
+msgstr "Data de bloqueig per a no assessors"
 
 #. module: account_journal_lock_date
 #: model:ir.model,name:account_journal_lock_date.model_update_journal_lock_dates_wizard
 msgid "Mass Update Journal Lock Dates Wizard"
-msgstr ""
+msgstr "Assistent per l'actualització massiva de dates de bloqueig"
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
@@ -87,6 +88,9 @@ msgid ""
 "this date for this journal. Use it for fiscal year locking for this journal, "
 "for example."
 msgstr ""
+"Cap usuari, inclosos els Assessors, no pot editar comptes en aquesta data o "
+"anterior per aquest diari. Useu-la per bloquejar un any fiscal per aquest "
+"diari, per exemple."
 
 #. module: account_journal_lock_date
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__period_lock_date
@@ -95,23 +99,26 @@ msgid ""
 "of this date for this journal. Use it for period locking inside an open "
 "fiscal year for this journal, for example."
 msgstr ""
+"Només els usuaris amb rol 'Assessor' poden editar comptes en aquesta data o "
+"anterior per aquest diari. Useu-lo per bloquejar un període dins d'un any "
+"fiscal obert per aquest diari, per exemple."
 
 #. module: account_journal_lock_date
 #: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
 msgid "Update"
-msgstr ""
+msgstr "Actualitzar"
 
 #. module: account_journal_lock_date
 #: model:ir.actions.act_window,name:account_journal_lock_date.update_journal_lock_dates_wizard_action
 msgid "Update journals lock dates"
-msgstr ""
+msgstr "Actualitzar dates de bloqueig"
 
 #. module: account_journal_lock_date
 #. odoo-python
 #: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
-msgstr ""
+msgstr "No esteu autoritzat per executar aquesta acció."
 
 #. module: account_journal_lock_date
 #. odoo-python
@@ -121,6 +128,8 @@ msgid ""
 "You cannot add/modify entries for the journal '%(journal)s' prior to and "
 "inclusive of the lock date %(journal_date)s"
 msgstr ""
+"No podeu afegir/modificar assentaments pel diari '%(journal)s' fins després "
+"de la data de bloqueig %(journal_date)s"
 
 #. module: account_journal_lock_date
 #. odoo-python
@@ -131,6 +140,9 @@ msgid ""
 "inclusive of the lock date %(journal_date)s. Check the Journal settings or "
 "ask someone with the 'Adviser' role"
 msgstr ""
+"No podeu afegir/modificar assentaments pel diari '%(journal)s' fins després "
+"de la data de bloqueig %(journal_date)s. Comproveu la configuració del diari "
+"o pregunteu a algú amb rol 'Assessor'"
 
 #, fuzzy
 #~ msgid "Journal Entries"
