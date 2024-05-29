@@ -15,7 +15,7 @@ class TestAssetManagementXls(AccountTestInvoicingCommon):
         super(TestAssetManagementXls, cls).setUpClass()
 
         module = __name__.split("addons.")[1].split(".")[0]
-        cls.xls_report_name = "{}.asset_report_xls".format(module)
+        cls.xls_report_name = f"{module}.asset_report_xls"
         cls.wiz_model = cls.env["wiz.account.asset.report"]
         cls.company = cls.env.ref("base.main_company")
         # Ensure we have something to report on
