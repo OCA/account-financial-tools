@@ -5,6 +5,8 @@
 
 import logging
 
+from markupsafe import Markup
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tests.common import Form
@@ -90,13 +92,13 @@ class AccountMove(models.Model):
             for aml in move.line_ids.filtered(
                 lambda line: line.asset_profile_id and not line.tax_line_id
             ):
-                vals = move._prepare_asset_vals(aml)
                 if not aml.name:
                     raise UserError(
                         _("Asset name must be set in the label of the line.")
                     )
                 if aml.asset_id:
                     continue
+                vals = move._prepare_asset_vals(aml)
                 asset_form = Form(
                     self.env["account.asset"]
                     .with_company(move.company_id)
@@ -109,15 +111,17 @@ class AccountMove(models.Model):
                 aml.with_context(
                     allow_asset=True, allow_asset_removal=True
                 ).asset_id = asset.id
-            refs = [
-                "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"
-                % tuple(name_get)
-                for name_get in move.line_ids.filtered(
-                    "asset_profile_id"
-                ).asset_id.name_get()
-            ]
-            if refs:
-                message = _("This invoice created the asset(s): %s") % ", ".join(refs)
+            new_name_get = []
+            for asset in move.line_ids.filtered("asset_profile_id").asset_id:
+                new_name_get = [asset.id, asset.display_name]
+            if new_name_get:
+                message = _(
+                    "This invoice created the asset(s): %s",
+                    Markup(
+                        """<a href=# data-oe-model=account.asset data-oe-id={}"""
+                        """>{}</a>""".format(new_name_get[0], new_name_get[1])
+                    ),
+                )
                 move.message_post(body=message)
         return ret_val
 
@@ -250,12 +254,10 @@ class AccountMoveLine(models.Model):
 
     def _expand_asset_line(self):
         self.ensure_one()
-        if self.asset_profile_id and self.quantity > 1.0:
-            profile = self.asset_profile_id
-            if profile.asset_product_item:
-                aml = self.with_context(check_move_validity=False)
-                qty = self.quantity
-                name = self.name
-                aml.write({"quantity": 1, "name": f"{name} {1}"})
-                for i in range(1, int(qty)):
-                    aml.copy({"name": f"{name} {i + 1}"})
+        if self.asset_profile_id.asset_product_item and self.quantity > 1.0:
+            aml = self.with_context(check_move_validity=False)
+            qty = self.quantity
+            name = self.name
+            aml.write({"quantity": 1, "name": f"{name} {1}"})
+            for i in range(1, int(qty)):
+                aml.copy({"name": f"{name} {i + 1}"})
