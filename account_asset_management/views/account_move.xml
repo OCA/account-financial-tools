@@ -11,7 +11,7 @@
                     type="object"
                     class="oe_stat_button"
                     icon="fa-cube"
-                    attrs="{'invisible': [('asset_count', '=', 0)]}"
+                    invisible="asset_count == 0"
                     groups="account.group_account_invoice"
                 >
                     <div class="o_field_widget o_stat_info">
@@ -28,13 +28,13 @@
             >
                 <field
                     name="asset_profile_id"
-                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('in_invoice', 'in_refund'))]}"
+                    column_invisible="parent.move_type not in ('in_invoice', 'in_refund')"
                     optional="show"
                     groups="account.group_account_invoice"
                 />
                 <field
                     name="asset_id"
-                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund')"
                     groups="account.group_account_manager,account.group_account_invoice"
                     optional="show"
                 />
@@ -45,11 +45,11 @@
             >
                 <field
                     name="asset_profile_id"
-                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('in_invoice', 'in_refund'))]}"
+                    invisible="parent.move_type not in ('in_invoice', 'in_refund')"
                 />
                 <field
                     name="asset_id"
-                    attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                    invisible="parent.move_type not in ('out_invoice', 'out_refund')"
                     groups="account.group_account_manager"
                 />
             </xpath>

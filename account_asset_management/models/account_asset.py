@@ -13,15 +13,8 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.osv import expression
 
 _logger = logging.getLogger(__name__)
-
-READONLY_STATES = {
-    "open": [("readonly", True)],
-    "close": [("readonly", True)],
-    "removed": [("readonly", True)],
-}
 
 
 class DummyFy:
@@ -36,6 +29,7 @@ class AccountAsset(models.Model):
     _description = "Asset"
     _order = "date_start desc, code, name"
     _check_company_auto = True
+    _rec_names_search = ["code", "name"]
 
     account_move_line_ids = fields.One2many(
         comodel_name="account.move.line",
@@ -51,22 +45,18 @@ class AccountAsset(models.Model):
     name = fields.Char(
         string="Asset Name",
         required=True,
-        states=READONLY_STATES,
     )
     code = fields.Char(
         string="Reference",
         size=32,
-        states=READONLY_STATES,
     )
     purchase_value = fields.Monetary(
         required=True,
-        states=READONLY_STATES,
         help="This amount represent the initial value of the asset."
         "\nThe Depreciation Base is calculated as follows:"
         "\nPurchase Value - Salvage Value.",
     )
     salvage_value = fields.Monetary(
-        states=READONLY_STATES,
         help="The estimated value that an asset will realize upon "
         "its sale at the end of its useful life.\n"
         "This value is used to determine the depreciation amounts.",
@@ -93,7 +83,6 @@ class AccountAsset(models.Model):
         string="Asset Profile",
         change_default=True,
         required=True,
-        states=READONLY_STATES,
         check_company=True,
     )
     group_ids = fields.Many2many(
@@ -109,7 +98,6 @@ class AccountAsset(models.Model):
     date_start = fields.Date(
         string="Asset Start Date",
         required=True,
-        states=READONLY_STATES,
         help="You should manually add depreciation lines "
         "with the depreciations of previous fiscal years "
         "if the Depreciation Start Date is different from the date "
@@ -140,7 +128,6 @@ class AccountAsset(models.Model):
     partner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Partner",
-        states=READONLY_STATES,
     )
     method = fields.Selection(
         selection=lambda self: self.env["account.asset.profile"]._selection_method(),
@@ -148,7 +135,6 @@ class AccountAsset(models.Model):
         compute="_compute_method",
         readonly=False,
         store=True,
-        states=READONLY_STATES,
         help="Choose the method to use to compute the depreciation lines.\n"
         "  * Linear: Calculated on basis of: "
         "Depreciation Base / Number of Depreciations. "
@@ -168,7 +154,6 @@ class AccountAsset(models.Model):
         compute="_compute_method_number",
         readonly=False,
         store=True,
-        states=READONLY_STATES,
         help="The number of years needed to depreciate your asset",
     )
     method_period = fields.Selection(
@@ -179,7 +164,6 @@ class AccountAsset(models.Model):
         compute="_compute_method_period",
         readonly=False,
         store=True,
-        states=READONLY_STATES,
         help="Period length for the depreciation accounting entries",
     )
     method_end = fields.Date(
@@ -187,14 +171,12 @@ class AccountAsset(models.Model):
         compute="_compute_method_end",
         readonly=False,
         store=True,
-        states=READONLY_STATES,
     )
     method_progress_factor = fields.Float(
         string="Degressive Factor",
         compute="_compute_method_progress_factor",
         readonly=False,
         store=True,
-        states=READONLY_STATES,
     )
     method_time = fields.Selection(
         selection=lambda self: self.env[
@@ -204,7 +186,6 @@ class AccountAsset(models.Model):
         compute="_compute_method_time",
         readonly=False,
         store=True,
-        states=READONLY_STATES,
         help="Choose the method to use to compute the dates and "
         "number of depreciation lines.\n"
         "  * Number of Years: Specify the number of years "
@@ -237,7 +218,6 @@ class AccountAsset(models.Model):
         compute="_compute_prorrata",
         readonly=False,
         store=True,
-        states=READONLY_STATES,
         help="Indicates that the first depreciation entry for this asset "
         "has to be done from the depreciation start date instead of "
         "the first day of the fiscal year.",
@@ -247,7 +227,6 @@ class AccountAsset(models.Model):
         inverse_name="asset_id",
         string="Depreciation Lines",
         copy=False,
-        states=READONLY_STATES,
         check_company=True,
     )
     company_id = fields.Many2one(
@@ -301,8 +280,8 @@ class AccountAsset(models.Model):
     def _compute_depreciation(self):
         for asset in self:
             lines = asset.depreciation_line_ids.filtered(
-                lambda l: l.type in ("depreciate", "remove")
-                and (l.init_entry or l.move_check)
+                lambda line: line.type in ("depreciate", "remove")
+                and (line.init_entry or line.move_check)
             )
             value_depreciated = sum(line.amount for line in lines)
             residual = asset.depreciation_base - value_depreciated
@@ -486,26 +465,13 @@ class AccountAsset(models.Model):
         amls.write({"asset_id": False})
         return super().unlink()
 
-    @api.model
-    def name_search(self, name, args=None, operator="ilike", limit=100):
-        args = args or []
-        domain = []
-        if name:
-            domain = ["|", ("code", "=ilike", name + "%"), ("name", operator, name)]
-            if operator in expression.NEGATIVE_TERM_OPERATORS:
-                domain = ["&", "!"] + domain[1:]
-        assets = self.search(domain + args, limit=limit)
-        return assets.name_get()
-
     @api.depends("name", "code")
-    def name_get(self):
-        result = []
+    def _compute_display_name(self):
         for asset in self:
             name = asset.name
             if asset.code:
                 name = " - ".join([asset.code, name])
-            result.append((asset.id, name))
-        return result
+            asset.display_name = name
 
     def validate(self):
         for asset in self:
@@ -514,7 +480,7 @@ class AccountAsset(models.Model):
             else:
                 asset.state = "open"
                 if not asset.depreciation_line_ids.filtered(
-                    lambda l: l.type != "create"
+                    lambda line: line.type != "create"
                 ):
                     asset.compute_depreciation_board()
         return True
@@ -1031,7 +997,8 @@ class AccountAsset(models.Model):
                 fy_residual_amount -= fy_amount
                 if currency.is_zero(fy_residual_amount):
                     break
-        i_max = i
+        if table:
+            i_max = i
         table = table[: i_max + 1]
         return table
 
