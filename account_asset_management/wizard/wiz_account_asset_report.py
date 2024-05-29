@@ -60,7 +60,7 @@ class WizAccountAssetReport(models.TransientModel):
                 .decode("ascii")
             )
             prefix = "".join(x for x in prefix if x.isalnum())
-            report_file = "{}_asset_report".format(prefix)
+            report_file = f"{prefix}_asset_report"
         else:
             report_file = "asset_report"
         report = {
