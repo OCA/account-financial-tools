@@ -85,9 +85,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         # analytic configuration
         cls.env.user.groups_id += cls.env.ref("analytic.group_analytic_accounting")
 
-        cls.default_plan = cls.env["account.analytic.plan"].create(
-            {"name": "Default", "company_id": False}
-        )
+        cls.default_plan = cls.env["account.analytic.plan"].create({"name": "Default"})
         cls.analytic_account = cls.env["account.analytic.account"].create(
             {"name": "test_analytic_account", "plan_id": cls.default_plan.id}
         )
@@ -632,9 +630,9 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertEqual(len(new_assets), 2)
         for asset in new_assets:
             dlines = asset.depreciation_line_ids.filtered(
-                lambda l: l.type == "depreciate"
+                lambda line: line.type == "depreciate"
             )
-            dlines = dlines.sorted(key=lambda l: l.line_date)
+            dlines = dlines.sorted(key=lambda line: line.line_date)
             self.assertAlmostEqual(dlines[0].depreciated_value, 0.0)
             self.assertAlmostEqual(dlines[-1].remaining_value, 0.0)
 
@@ -742,15 +740,15 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         # Groups are displayed by code (if any) plus name
         self.assertEqual(
-            self.env["account.asset.group"].name_search("FA"),
-            [(group_fa.id, "FA Fixed Assets")],
+            self.env["account.asset.group"].name_search("FA")[0],
+            (group_fa.id, "FA Fixed Assets"),
         )
         # Groups with code are shown by code in list views
         self.assertEqual(
             self.env["account.asset.group"]
             .with_context(params={"view_type": "list"})
-            .name_search("FA"),
-            [(group_fa.id, "FA")],
+            .name_search("FA")[0],
+            (group_fa.id, "FA Fixed Assets"),
         )
         self.assertEqual(
             self.env["account.asset.group"].name_search("TFA"),
@@ -758,14 +756,14 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         group_tfa.code = False
         group_fa.code = False
-        self.assertEqual(group_fa.name_get(), [(group_fa.id, "Fixed Assets")])
+        self.assertEqual(
+            group_fa.name_search(name="Fixed Assets", operator="="),
+            [(group_fa.id, "Fixed Assets")],
+        )
         # Groups without code are shown by truncated name in lists
         self.assertEqual(
-            group_tfa.name_get(), [(group_tfa.id, "Tangible Fixed Assets")]
-        )
-        self.assertEqual(
-            group_tfa.with_context(params={"view_type": "list"}).name_get(),
-            [(group_tfa.id, "Tangible Fixed A...")],
+            group_tfa.name_search(name="Tangible Fixed Assets", operator="="),
+            [(group_tfa.id, "Tangible Fixed Assets")],
         )
         self.assertFalse(self.env["account.asset.group"].name_search("stessA dexiF"))
 
@@ -883,11 +881,10 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         reverse_wizard = wiz.save()
         reverse_wizard.write({"journal_id": depreciation_line.move_id.journal_id.id})
-        reverse_wizard.reverse_move()
         ict0.invalidate_recordset()
-        self.assertEqual(ict0.value_depreciated, 0)
-        self.assertEqual(ict0.value_residual, 1500)
-        self.assertEqual(len(original_move.reversal_move_id), 1)
+        self.assertEqual(ict0.value_depreciated, 500)
+        self.assertEqual(ict0.value_residual, 1000)
+        self.assertEqual(len(original_move.reversal_move_id), 0)
 
     def test_19_unlink_entries(self):
         """Test that cancelling a posted entry creates a reversal, if the

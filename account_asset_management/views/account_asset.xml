@@ -11,11 +11,11 @@
                         string="Confirm Asset"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="set_to_draft"
-                        states="open,close"
+                        invisible="state not in ['open','close']"
                         string="Set to Draft"
                         type="object"
                         groups="account.group_account_manager"
@@ -25,7 +25,7 @@
                         string="Remove"
                         type="object"
                         groups="account.group_account_manager"
-                        attrs="{'invisible':[('state', 'not in', ['open', 'close'])]}"
+                        invisible="state not in ['open', 'close']"
                         help="Asset removal."
                     />
                     <field
@@ -39,7 +39,7 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <div class="oe_button_box" name="button_box">
                         <button
@@ -53,13 +53,20 @@
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
                         <h1>
-                            <field name="name" class="oe_inline" />
+                            <field
+                                name="name"
+                                class="oe_inline"
+                                readonly="state in ['open', 'close', 'removed']"
+                            />
                         </h1>
                     </div>
                     <group>
                         <group id="header_left_group">
                             <field name="company_id" invisible="1" />
-                            <field name="code" />
+                            <field
+                                name="code"
+                                readonly="state in ['open', 'close', 'removed']"
+                            />
                             <field
                                 name="company_id"
                                 widget="selection"
@@ -85,28 +92,34 @@
                                 <group>
                                     <field
                                         name="purchase_value"
-                                        attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"
+                                        readonly="move_line_check or state != 'draft'"
                                     />
                                     <field
                                         name="date_start"
-                                        attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                        readonly="state != 'draft'"
                                     />
                                 </group>
                                 <group>
                                     <field
                                         name="salvage_value"
-                                        attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                        readonly="state != 'draft'"
                                     />
                                     <field name="date_remove" />
                                 </group>
                             </group>
                             <group string="Other Information">
                                 <group>
-                                    <field name="profile_id" />
+                                    <field
+                                        name="profile_id"
+                                        readonly="state in ['open', 'close', 'removed']"
+                                    />
                                     <field name="group_ids" widget="many2many_tags" />
                                 </group>
                                 <group>
-                                    <field name="partner_id" />
+                                    <field
+                                        name="partner_id"
+                                        readonly="state in ['open', 'close', 'removed']"
+                                    />
                                     <field
                                         name="analytic_distribution"
                                         groups="analytic.group_analytic_accounting"
@@ -116,31 +129,49 @@
                             </group>
                             <group>
                                 <group string="Depreciation Dates">
-                                    <field name="method_time" required="1" />
+                                    <field
+                                        name="method_time"
+                                        required="1"
+                                        readonly="state in ['open', 'close', 'removed']"
+                                    />
                                     <field
                                         name="method_number"
-                                        attrs="{'invisible': [('method_time', 'not in', ['number', 'year'])], 'required': [('method_time', 'in', ['number', 'year'])]}"
+                                        invisible="method_time not in ['number', 'year']"
+                                        required="method_time in ['number', 'year']"
+                                        readonly="state in ['open', 'close', 'removed']"
                                     />
-                                    <field name="method_period" required="1" />
+                                    <field
+                                        name="method_period"
+                                        required="1"
+                                        readonly="state in ['open', 'close', 'removed']"
+                                    />
                                     <field
                                         name="method_end"
-                                        attrs="{'required': [('method_time', '=', 'end')], 'invisible': [('method_time', 'in', ['number'])]}"
+                                        invisible="method_time in ['number']"
+                                        required="method_time == 'end'"
+                                        readonly="state in ['open', 'close', 'removed']"
                                     />
                                     <field name="days_calc" />
                                     <field
                                         name="use_leap_years"
-                                        attrs="{'invisible': [('days_calc', '=', True)]}"
+                                        invisible="days_calc"
                                     />
                                 </group>
                                 <group string="Depreciation Method">
-                                    <field name="method" required="1" />
+                                    <field
+                                        name="method"
+                                        required="1"
+                                        readonly="state in ['open', 'close', 'removed']"
+                                    />
                                     <field
                                         name="method_progress_factor"
-                                        attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
+                                        invisible="method in ['linear', 'linear-limit']"
+                                        required="method in ['degressive', 'degr-linear', 'degr-limit']"
+                                        readonly="state in ['open', 'close', 'removed']"
                                     />
                                     <field
                                         name="prorata"
-                                        attrs="{'readonly': [('method_time', '!=', 'year')]}"
+                                        readonly="method_time != 'year' or state in ['open', 'close', 'removed']"
                                     />
                                     <field name="carry_forward_missed_depreciations" />
                                 </group>
@@ -153,13 +184,14 @@
                                     name="compute_depreciation_board"
                                     string="Compute"
                                     icon="fa-gears"
-                                    attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"
+                                    invisible="state in ['close', 'removed']"
                                 />
                             </div>
                             <field
                                 name="depreciation_line_ids"
                                 mode="tree"
                                 options="{'reload_on_button': true}"
+                                readonly="state in ['open', 'close', 'removed']"
                             >
                                 <tree
                                     decoration-info="(move_check == False) and (init_entry == False)"
@@ -173,21 +205,21 @@
                                     <field name="remaining_value" readonly="1" />
                                     <field name="init_entry" string="Init" />
                                     <field name="move_check" />
-                                    <field name="parent_state" invisible="1" />
-                                    <field name="currency_id" invisible="1" />
+                                    <field name="parent_state" column_invisible="1" />
+                                    <field name="currency_id" column_invisible="1" />
                                     <button
                                         name="create_move"
                                         icon="fa-cog"
                                         string="Create Move"
                                         type="object"
-                                        attrs="{'invisible': ['|', '|', ('init_entry', '=', True), ('move_check', '!=', False), ('parent_state', '!=', 'open')]}"
+                                        invisible="init_entry or move_check or parent_state != 'open'"
                                     />
                                     <button
                                         name="open_move"
                                         icon="fa-folder-open-o"
                                         string="View Move"
                                         type="object"
-                                        attrs="{'invisible': [('move_check', '!=', True)]}"
+                                        invisible="not move_check"
                                     />
                                     <button
                                         name="unlink_move"
@@ -196,7 +228,7 @@
                                         type="object"
                                         confirm="Are you sure ?"
                                         groups="account.group_account_manager"
-                                        attrs="{'invisible': [('move_check', '!=', True)]}"
+                                        invisible="not move_check"
                                     />
                                 </tree>
                                 <form string="Asset Line">
@@ -212,11 +244,11 @@
                                             <field name="name" />
                                             <field
                                                 name="amount"
-                                                attrs="{'readonly': [('move_check', '=', True)]}"
+                                                readonly="move_check"
                                             />
                                             <field
                                                 name="init_entry"
-                                                attrs="{'readonly': ['|', ('move_check', '=', True), ('type', '=', 'create')]}"
+                                                readonly="move_check or type == 'create'"
                                             />
                                             <field name="move_id" />
                                             <field name="move_check" />
@@ -224,7 +256,7 @@
                                         <group>
                                             <field
                                                 name="line_date"
-                                                attrs="{'readonly': [('move_check', '=', True)]}"
+                                                readonly="move_check"
                                             />
                                             <field
                                                 name="depreciated_value"
@@ -299,7 +331,7 @@
                     decoration-info="state == 'draft'"
                     decoration-muted="state == 'close'"
                 />
-                <field name="currency_id" invisible="1" />
+                <field name="currency_id" column_invisible="1" />
             </tree>
         </field>
     </record>
@@ -379,6 +411,6 @@
         <field name="res_model">account.move.line</field>
         <field
             name="domain"
-        >['|',('asset_id','in',context.get('active_ids')),('asset_id','=','active_id')]</field>
+        >['|',('asset_id','in',context.get('active_ids')),('asset_id','=','id')]</field>
     </record>
 </odoo>

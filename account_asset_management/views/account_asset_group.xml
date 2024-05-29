@@ -27,7 +27,7 @@
         <field name="model">account.asset.group</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
-                <field name="company_id" invisible="1" />
+                <field name="company_id" column_invisible="1" />
                 <field name="name" />
                 <field name="code" optional="show" />
                 <field name="parent_id" />

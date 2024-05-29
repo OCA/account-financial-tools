@@ -83,9 +83,9 @@ class AccountAssetLine(models.Model):
         if self.env.context.get("no_compute_asset_line_ids"):
             # skip compute for lines in unlink
             exclude_ids = self.env.context["no_compute_asset_line_ids"]
-            dlines = self.filtered(lambda l: l.id not in exclude_ids)
-        dlines = dlines.filtered(lambda l: l.type == "depreciate")
-        dlines = dlines.sorted(key=lambda l: l.line_date)
+            dlines = self.filtered(lambda line: line.id not in exclude_ids)
+        dlines = dlines.filtered(lambda line: line.type == "depreciate")
+        dlines = dlines.sorted(key=lambda line: line.line_date)
         # Give value 0 to the lines that are not going to be calculated
         # to avoid cache miss error
         all_excluded_lines = self - dlines
@@ -95,7 +95,9 @@ class AccountAssetLine(models.Model):
         asset_ids = dlines.mapped("asset_id")
         grouped_dlines = []
         for asset in asset_ids:
-            grouped_dlines.append(dlines.filtered(lambda l: l.asset_id.id == asset.id))
+            grouped_dlines.append(
+                dlines.filtered(lambda line, asset=asset: line.asset_id.id == asset.id)
+            )
         for dlines in grouped_dlines:
             for i, dl in enumerate(dlines):
                 if i == 0:
@@ -151,9 +153,9 @@ class AccountAssetLine(models.Model):
                 )
             elif vals.get("init_entry"):
                 check = asset_lines.filtered(
-                    lambda l: l.move_check
-                    and l.type == "depreciate"
-                    and l.line_date <= line_date
+                    lambda line, line_date=line_date: line.move_check
+                    and line.type == "depreciate"
+                    and line.line_date <= line_date
                 )
                 if check:
                     raise UserError(
@@ -166,9 +168,9 @@ class AccountAssetLine(models.Model):
             elif vals.get("line_date"):
                 if dl.type == "create":
                     check = asset_lines.filtered(
-                        lambda l: l.type != "create"
-                        and (l.init_entry or l.move_check)
-                        and l.line_date < fields.Date.to_date(vals["line_date"])
+                        lambda line: line.type != "create"
+                        and (line.init_entry or line.move_check)
+                        and line.line_date < fields.Date.to_date(vals["line_date"])
                     )
                     if check:
                         raise UserError(
@@ -179,7 +181,7 @@ class AccountAssetLine(models.Model):
                         )
                 else:
                     check = asset_lines.filtered(
-                        lambda al: al != dl
+                        lambda al, dl=dl: al != dl
                         and (al.init_entry or al.move_check)
                         and al.line_date > fields.Date.to_date(vals["line_date"])
                     )
@@ -196,7 +198,7 @@ class AccountAssetLine(models.Model):
         for dl in self:
             if dl.type == "create" and dl.amount:
                 raise UserError(
-                    _("You cannot remove an asset line " "of type 'Depreciation Base'.")
+                    _("You cannot remove an asset line of type 'Depreciation Base'.")
                 )
             elif dl.move_id:
                 raise UserError(
@@ -207,7 +209,7 @@ class AccountAssetLine(models.Model):
                 )
             previous = dl.previous_id
             next_line = dl.asset_id.depreciation_line_ids.filtered(
-                lambda l: l.previous_id == dl and l not in self
+                lambda line, dl=dl: line.previous_id == dl and line not in self
             )
             if next_line:
                 next_line.previous_id = previous
