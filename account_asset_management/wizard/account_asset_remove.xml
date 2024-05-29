@@ -14,21 +14,25 @@
                         <field name="sale_value" />
                         <field
                             name="account_sale_id"
-                            attrs="{'invisible': [('sale_value', '=', 0.0)], 'required': [('sale_value', '>', 0.0)]}"
+                            invisible="sale_value == 0.0"
+                            required="sale_value > 0.0"
                         />
                     </group>
                     <group>
                         <field
                             name="account_plus_value_id"
-                            attrs="{'invisible': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"
+                            invisible="posting_regime == 'residual_value'"
+                            required="posting_regime != 'residual_value'"
                         />
                         <field
                             name="account_min_value_id"
-                            attrs="{'invisible': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"
+                            invisible="posting_regime == 'residual_value'"
+                            required="posting_regime != 'residual_value'"
                         />
                         <field
                             name="account_residual_value_id"
-                            attrs="{'invisible': [('posting_regime', '!=', 'residual_value')], 'required': [('posting_regime', '=', 'residual_value')]}"
+                            invisible="posting_regime != 'residual_value'"
+                            required="posting_regime == 'residual_value'"
                         />
                     </group>
                     <group>

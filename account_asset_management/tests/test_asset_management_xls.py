@@ -12,7 +12,7 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 class TestAssetManagementXls(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
-        super(TestAssetManagementXls, cls).setUpClass()
+        super().setUpClass()
 
         module = __name__.split("addons.")[1].split(".")[0]
         cls.xls_report_name = f"{module}.asset_report_xls"

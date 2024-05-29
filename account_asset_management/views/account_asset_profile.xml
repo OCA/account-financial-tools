@@ -10,7 +10,7 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
@@ -44,25 +44,21 @@
                             <field name="method_time" />
                             <field
                                 name="method_number"
-                                attrs="{'invisible': [('method_time', 'not in', ['number', 'year'])], 'required': [('method_time', 'in', ['number', 'year'])]}"
+                                invisible="method_time not in ['number', 'year']"
+                                required="method_time in ['number', 'year']"
                             />
                             <field name="method_period" />
                             <field name="days_calc" />
-                            <field
-                                name="use_leap_years"
-                                attrs="{'invisible': [('days_calc', '=', True)]}"
-                            />
+                            <field name="use_leap_years" invisible="days_calc" />
                         </group>
                         <group string="Depreciation Method">
                             <field name="method" />
                             <field
                                 name="method_progress_factor"
-                                attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
+                                invisible="method in ['linear', 'linear-limit']"
+                                required="method in ['degressive', 'degr-linear', 'degr-limit']"
                             />
-                            <field
-                                name="prorata"
-                                attrs="{'readonly':[('method_time','!=','year')]}"
-                            />
+                            <field name="prorata" readonly="method_time != 'year'" />
                             <field name="open_asset" />
                         </group>
                         <group
