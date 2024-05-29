@@ -219,7 +219,7 @@ class AccountAssetLine(models.Model):
         asset = self.asset_id
         move_data = {
             "date": depreciation_date,
-            "ref": "{} - {}".format(asset.name, self.name),
+            "ref": f"{asset.name} - {self.name}",
             "journal_id": asset.profile_id.journal_id.id,
         }
         return move_data

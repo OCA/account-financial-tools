@@ -25,9 +25,7 @@ class AccountAssetCompute(models.TransientModel):
 
         if error_log:
             module = __name__.split("addons.")[1].split(".")[0]
-            result_view = self.env.ref(
-                "{}.{}_view_form_result".format(module, self._table)
-            )
+            result_view = self.env.ref(f"{module}.{self._table}_view_form_result")
             self.note = _("Compute Assets errors") + ":\n" + error_log
             return {
                 "name": _("Compute Assets result"),
