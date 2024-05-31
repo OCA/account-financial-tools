@@ -132,7 +132,7 @@ msgstr "已计提折旧金额"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
-msgid "Analytic"
+msgid "Analytic Distribution"
 msgstr ""
 
 #. module: account_asset_management
@@ -216,7 +216,6 @@ msgstr "折旧明细"
 
 #. module: account_asset_management
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
-#: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
 msgstr "固定资产管理：计提折旧"
 
@@ -813,6 +812,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -927,19 +927,6 @@ msgid "Journal Items"
 msgstr "会计凭证"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
-msgid "Last Modified on"
-msgstr "最后修改时间"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_uid
@@ -978,11 +965,6 @@ msgstr "线性"
 #, fuzzy, python-format
 msgid "Linear up to Salvage Value"
 msgstr "细分值"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
@@ -1338,6 +1320,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "运行中"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
@@ -1735,6 +1722,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "或"
+
+#~ msgid "Last Modified on"
+#~ msgstr "最后修改时间"
 
 #~ msgid "Analytic account"
 #~ msgstr "辅助核算项"
