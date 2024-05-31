@@ -128,7 +128,7 @@ msgstr "Iznos je već amortiziran"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
-msgid "Analytic"
+msgid "Analytic Distribution"
 msgstr ""
 
 #. module: account_asset_management
@@ -214,7 +214,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
-#: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
 msgstr ""
 
@@ -814,6 +813,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -928,19 +928,6 @@ msgid "Journal Items"
 msgstr "Stavke dnevnika"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
-msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_uid
@@ -979,11 +966,6 @@ msgstr "Linearno"
 #, fuzzy, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Vrijednost likvidacije"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
@@ -1339,6 +1321,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "U toku"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
@@ -1737,6 +1724,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "or"
 msgstr "ili"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnje mijenjano"
 
 #~ msgid "Analytic account"
 #~ msgstr "Analitički konto"
