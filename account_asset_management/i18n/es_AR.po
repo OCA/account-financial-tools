@@ -39,8 +39,8 @@ msgstr ""
 "POT-Creation-Date: 2017-01-12 03:43+0000\n"
 "PO-Revision-Date: 2023-11-06 00:44+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
-"Language-Team: Spanish (Argentina) (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/es_AR/)\n"
+"Language-Team: Spanish (Argentina) (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,8 +150,8 @@ msgstr "Monto ya depreciado"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
-msgid "Analytic"
-msgstr "Analítico"
+msgid "Analytic Distribution"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
@@ -234,7 +234,6 @@ msgstr "Linea de Activo"
 
 #. module: account_asset_management
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
-#: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
 msgstr "Gestión de Activo: Generar activos"
 
@@ -857,6 +856,7 @@ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si está marcado, algunos mensajes tienen error de entrega."
 
@@ -993,19 +993,6 @@ msgid "Journal Items"
 msgstr "Apuntes Contables"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_uid
@@ -1044,11 +1031,6 @@ msgstr "Lineal"
 #, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Lineal hasta el Valor de Salvamento"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Adjunto Principal"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
@@ -1409,6 +1391,11 @@ msgstr "Revertir asiente contable publicado en la línea de depreciación"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "En ejecución"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega de SMS"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
@@ -1854,8 +1841,14 @@ msgstr ""
 msgid "or"
 msgstr "o"
 
-#~ msgid "SMS Delivery error"
-#~ msgstr "Error de entrega de SMS"
+#~ msgid "Analytic"
+#~ msgstr "Analítico"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Adjunto Principal"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Número de mensajes que requieren una acción"
