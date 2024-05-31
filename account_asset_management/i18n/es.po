@@ -136,8 +136,8 @@ msgstr "Importe ya amortizado"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
-msgid "Analytic"
-msgstr "Analítica"
+msgid "Analytic Distribution"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
@@ -220,7 +220,6 @@ msgstr "Línea de activo"
 
 #. module: account_asset_management
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
-#: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
 msgstr "Gestión de activos: generar activos"
 
@@ -840,6 +839,7 @@ msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si está marcado, algunos mensajes tienen error de envío."
 
@@ -973,19 +973,6 @@ msgid "Journal Items"
 msgstr "Apuntes contables"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_uid
@@ -1024,11 +1011,6 @@ msgstr "Lineal"
 #, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Lineal hasta Valor de rescate"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Adjunto principal"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
@@ -1389,6 +1371,11 @@ msgstr "Revertir asiento publicado en la línea de amortización"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "En ejecución"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error en la entrega del SMS"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
@@ -1836,8 +1823,14 @@ msgstr ""
 msgid "or"
 msgstr "o"
 
-#~ msgid "SMS Delivery error"
-#~ msgstr "Error en la entrega del SMS"
+#~ msgid "Analytic"
+#~ msgstr "Analítica"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Adjunto principal"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Número de mensajes que requieren una acción"
