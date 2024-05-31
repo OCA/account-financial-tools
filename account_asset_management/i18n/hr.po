@@ -143,8 +143,8 @@ msgstr "Iznos je već amortiziran"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
-msgid "Analytic"
-msgstr "Analitika"
+msgid "Analytic Distribution"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
@@ -227,7 +227,6 @@ msgstr "Stavka sredstva"
 
 #. module: account_asset_management
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
-#: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
 msgstr "Upravljanje sredstvima: Generiaj sredstvo"
 
@@ -830,6 +829,7 @@ msgstr "Ako je označeno, nove poruke traže vašu pozornost."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Ako je označeno, neke poruke imaju greške pri isporuci."
 
@@ -951,19 +951,6 @@ msgid "Journal Items"
 msgstr "Stavke dnevnika"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report____last_update
-#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse____last_update
-msgid "Last Modified on"
-msgstr "Zadnja izmjena"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_uid
@@ -1002,11 +989,6 @@ msgstr "Linearno"
 #, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Linearno do vrijednosti otpisa"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Glavni prilog"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
@@ -1362,6 +1344,11 @@ msgstr "Storniraj knjiženu stavku amortizacije"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "U tijeku"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Greška pri isporuci SMSa"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
@@ -1785,8 +1772,14 @@ msgstr ""
 msgid "or"
 msgstr "ili"
 
-#~ msgid "SMS Delivery error"
-#~ msgstr "Greška pri isporuci SMSa"
+#~ msgid "Analytic"
+#~ msgstr "Analitika"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnja izmjena"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Glavni prilog"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Broj poruka koje traže dodatnu radnju"
