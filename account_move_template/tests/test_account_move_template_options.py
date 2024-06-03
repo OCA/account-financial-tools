@@ -104,6 +104,40 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
             ],
         )
 
+    def test_move_template_normal_taxes_and_payment_term(self):
+        """Test normal case, input amount 300"""
+        payment_term = self.env["account.payment.term"].search(
+            [("nb_days", "=", 30)], limit=1
+        )
+        taxes = self.env["account.tax"].search(
+            [("type_tax_use", "=", "purchase")], limit=1
+        )
+        with Form(self.env["account.move.template.run"]) as f:
+            f.template_id = self.move_template
+        template_run = f.save()
+        template_run.load_lines()
+        template_run.line_ids[0].amount = 300
+        template_run.line_ids[0].payment_term_id = payment_term.id
+        template_run.line_ids[0].taxes_id = taxes.id
+        res = template_run.generate_move()
+        move = self.Move.browse(res["res_id"])
+        self.assertRecordValues(
+            move.line_ids.sorted("credit"),
+            [
+                {"account_id": self.ar_account_id.id, "credit": 0.0, "debit": 300.0},
+                {
+                    "account_id": self.income_account_id.id,
+                    "credit": 100.0,
+                    "debit": 0.0,
+                },
+                {
+                    "account_id": self.income_account_id.id,
+                    "credit": 200.0,
+                    "debit": 0.0,
+                },
+            ],
+        )
+
     def test_move_template_optional(self):
         """Test optional case, input amount -300, expect optional account"""
         with Form(self.env["account.move.template.run"]) as f:
