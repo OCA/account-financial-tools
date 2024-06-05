@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-22 11:43+0000\n"
+"PO-Revision-Date: 2024-06-05 17:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -205,7 +205,7 @@ msgstr "Ricerca distribuzione analitica"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__analytic_precision
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_precision
 msgid "Analytic Precision"
-msgstr "Procisione analitica"
+msgstr "Precisione analitica"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
