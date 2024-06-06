@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2024-06-06 10:42+0000\n"
+"PO-Revision-Date: 2024-06-06 13:40+0000\n"
 "Last-Translator: Metin GÜLSOY <metin.gulsoy@kitayazilim.com>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
@@ -125,19 +125,19 @@ msgstr "'%s' satırının İş Ortağı yok."
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "Line '%s' is already reconciled."
-msgstr ""
+msgstr "'%s' satırının uzlaştırması zaten yapıldı."
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "Line '%s' is not posted."
-msgstr ""
+msgstr "'%s' satırı onaylanamadı."
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "İş Ortağı"
 
 #. module: account_netting
 #. odoo-python
@@ -148,6 +148,9 @@ msgid ""
 "accounts for the same partner. The selected journal items have the same "
 "account '%s', so you should use the 'Reconcile' function instead."
 msgstr ""
+"'Virman' işlevi, aynı İş Ortağı için farklı hesaplardaki işlemleri "
+"dengelemeyi amaçlamaktadır. Seçilen yevmiye kalemleri aynı '%s' hesabına "
+"sahip, dolayısıyla bunun yerine 'Virman' işlevini kullanmalısınız."
 
 #. module: account_netting
 #. odoo-python
@@ -157,6 +160,8 @@ msgid ""
 "The selected journal items have different partners: %s. All the selected "
 "journal items must have the same partner."
 msgstr ""
+"Yevmiye öğelerinin farklı İş Ortakları var: %s. Seçilen yevmiye kayıtlarının "
+"tümü aynı İş Ortağa sahip olmalıdır."
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -165,25 +170,28 @@ msgid ""
 "the receivable/payable accounts selected, and reconcile each other, letting "
 "this balance in the partner."
 msgstr ""
+"Bu işlem, satırları seçilen alacak/borç hesaplarının karşılığı olan bir "
+"yevmiye kaydı oluşturacak ve bu bakiyeyi İş Ortakta bırakarak birbirini "
+"mutabakata varacaktır."
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
 msgid "To pay"
-msgstr ""
+msgstr "Yapılan Ödeme"
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
 msgid "To receive"
-msgstr ""
+msgstr "Alınan Ödeme"
 
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "Wizard to generate account moves for netting"
-msgstr ""
+msgstr "Netleştirme için hesap hareketleri oluşturma sihirbazı"
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "You should select at least 2 journal items."
-msgstr ""
+msgstr "En az 2 yevmiye kaydı seçmelisiniz."
