@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2024-06-05 17:34+0000\n"
+"PO-Revision-Date: 2024-06-06 11:16+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -346,7 +346,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__child_ids
 msgid "Child Asset Groups"
-msgstr ""
+msgstr "Gruppi cespite figlio"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
@@ -358,6 +358,11 @@ msgid ""
 "  * Number of Depreciations: Fix the number of depreciation lines and the "
 "time between 2 depreciations.\n"
 msgstr ""
+"Scegliere il metodo per calcolare le date e i numeri delle righe "
+"ammortamento.\n"
+"  * Numero di anni: indica il numero di anni dell'ammortamento.\n"
+"  * Numero di ammortamenti: fissa il numero delle righe ammortamento e il "
+"tempo tra due ammortamenti.\n"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
@@ -375,6 +380,18 @@ msgid ""
 "   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base "
 "is equal to the asset value."
 msgstr ""
+"Scegliere il metodo utilizzato per calcolare le righe ammortamento.\n"
+"  * Lineare: Calcolate in base a a imponibile ammortamento / numero di "
+"ammortamenti. Imponibile ammortamento = valore di acquisto - valore di "
+"realizzo.\n"
+"  * Limite lineare: lineare al valore residuo. Imponibile ammortamento = "
+"valore di acquisto.\n"
+"  * Decrescente: calcolato in base a valore residuo * fattore decrescente.\n"
+"  * Decrescente lineare (solo per metodo temporale = anno): la digressione "
+"diventa lineare quando l'ammortamento lineare annuale eccede l'ammortamento "
+"decrescente annuale.\n"
+"  * Limite decrescente: decrescente fino al valore di realizzo. L'imponibile "
+"ammortamento è uguale al valore del cespite."
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__close
@@ -385,7 +402,7 @@ msgstr "Chiudi"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
 msgid "Code"
-msgstr ""
+msgstr "Codice"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
@@ -403,12 +420,12 @@ msgstr "Azienda"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__currency_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Valuta azienda"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_completed
 msgid "Completion Date"
-msgstr ""
+msgstr "Data di completamento"
 
 #. module: account_asset_management
 #. odoo-python
@@ -526,16 +543,19 @@ msgstr "Data"
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger__date_trigger
 msgid "Date of the event triggering the need to recompute the Asset Tables."
 msgstr ""
+"Data dell'evento che attiva la necessità di ricalcolare le tabelle cespite."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_days
 msgid "Days"
-msgstr ""
+msgstr "Giorni"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_account__asset_profile_id
 msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr ""
+"Profilo cespite predefinito alla creazione delle righe fattura con questo "
+"conto."
 
 #. module: account_asset_management
 #. odoo-python
@@ -549,7 +569,7 @@ msgstr "Regressivo"
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive  up to Salvage Value"
-msgstr ""
+msgstr "Decrescente fino al valore di realizzo"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_progress_factor
@@ -562,7 +582,7 @@ msgstr "Tasso Degressivo"
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear"
-msgstr ""
+msgstr "Lineare decrescente"
 
 #. module: account_asset_management
 #. odoo-python
@@ -570,12 +590,12 @@ msgstr ""
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
-msgstr ""
+msgstr "Lineare descrescete è supportato solo per il metodo temporale = anno."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Delete/Reverse Move"
-msgstr ""
+msgstr "Cancella/inverti movimento"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_expense_depreciation_id
@@ -585,12 +605,12 @@ msgstr "Conto Ammortamento"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__value_depreciated
 msgid "Depreciated Value"
-msgstr ""
+msgstr "Valore ammortizzato"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__depreciate
 msgid "Depreciation"
-msgstr ""
+msgstr "Ammortamento"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_depreciation_id
@@ -603,9 +623,9 @@ msgstr "F.do Ammortamento"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__create
-#, fuzzy, python-format
+#, python-format
 msgid "Depreciation Base"
-msgstr "Data Ammortamento"
+msgstr "Imponibile ammortamento"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -668,17 +688,17 @@ msgstr "Bozza"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Duplicate reporting entries"
-msgstr ""
+msgstr "Duplica compilazioni reportistica"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_report_account_asset_management_asset_report_xls
 msgid "Dynamic XLS asset report generator"
-msgstr ""
+msgstr "Generatore resoconto XLS cespite dinamico"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__date_to
 msgid "End Date"
-msgstr ""
+msgstr "Data finale"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_end
