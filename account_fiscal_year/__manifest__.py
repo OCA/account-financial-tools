@@ -5,7 +5,7 @@
     'name': 'Account Fiscal Year',
     'version': '11.0.1.0.0',
     'category': 'Accounting',
-    'author': 'Camptocamp SA,'
+    'author': 'Camptocamp,'
               'Odoo Community Association (OCA)',
     'website': 'http://www.camptocamp.com',
     'depends': [
