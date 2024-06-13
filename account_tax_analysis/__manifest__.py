@@ -11,7 +11,7 @@
         "base",
         "account",
     ],
-    "author": "Camptocamp SA, ACSONE SA/NV, Odoo Community Association (OCA)",
+    "author": "Camptocamp, ACSONE SA/NV, Odoo Community Association (OCA)",
     "category": 'Accounting & Finance',
     "website": "http://www.camptocamp.com",
     "license": "AGPL-3",

@@ -7,7 +7,7 @@
     "version": "10.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "https://www.camptocamp.com/",
-    "author": "Camptocamp SA,Odoo Community Association (OCA)",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": [
         "account",
