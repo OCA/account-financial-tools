@@ -30,7 +30,7 @@ class AccountMove(models.Model):
     def _check_can_be_deleted(self, states, check_group=True):
         for move in self:
             move_journal = move.journal_id
-            move_has_old_sequence = hasattr(move_journal, "sequence_id") or hasattr(
+            move_has_old_sequence = hasattr(move_journal, "name") or hasattr(
                 move_journal, "refund_sequence_id"
             )
             if (
