@@ -20,14 +20,13 @@ class AccountMove(models.Model):
         else:
             # self._check_can_be_deleted(states=["cancel", "posted"])
             raise UserError(
-                "You cannot delete an entry which has been posted once, You haven't the correct right"
+                _(
+                    "You cannot delete an entry which has been posted once, You haven't the correct right"
+                )
             )
         return super(AccountMove, self - cancelled_moves).unlink()
 
     def _check_can_be_deleted(self, states, check_group=True):
-        # import pdb
-        #
-        # pdb.set_trace()
         for move in self:
             move_journal = move.journal_id
             move_has_old_sequence = hasattr(move_journal, "sequence_id") or hasattr(
@@ -42,7 +41,5 @@ class AccountMove(models.Model):
                 raise UserError(
                     _("You cannot delete an entry which has been posted once.")
                 )
-        import pdb
 
-        pdb.set_trace()
         return True
