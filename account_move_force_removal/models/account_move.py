@@ -21,7 +21,8 @@ class AccountMove(models.Model):
             # self._check_can_be_deleted(states=["cancel", "posted"])
             raise UserError(
                 _(
-                    "You cannot delete an entry which has been posted once, You haven't the correct right"
+                    "You cannot delete an entry which has been posted once, "
+                    "You haven't the correct right"
                 )
             )
         return super(AccountMove, self - cancelled_moves).unlink()
