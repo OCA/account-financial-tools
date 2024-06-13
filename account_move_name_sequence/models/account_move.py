@@ -9,11 +9,6 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     name = fields.Char(compute="_compute_name_by_sequence")
-    # highest_name, sequence_prefix and sequence_number are not needed any more
-    # -> compute=False to improve perf
-    highest_name = fields.Char(compute=False)
-    sequence_prefix = fields.Char(compute=False)
-    sequence_number = fields.Integer(compute=False)
 
     _sql_constraints = [
         (
