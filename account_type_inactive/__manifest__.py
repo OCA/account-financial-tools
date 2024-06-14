@@ -7,7 +7,7 @@
     'category': 'Accounting',
     'license': 'AGPL-3',
     'summary': "Allows to set account type to inactive",
-    'author': "Camptocamp SA,Odoo Community Association (OCA)",
+    'author': "Camptocamp,Odoo Community Association (OCA)",
     'website': 'http://www.camptocamp.com/',
     'depends': ['account_type_menu'],
     'data': ['views/account_type.xml'],

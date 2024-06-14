@@ -22,7 +22,7 @@
 {
     "name": "Update tax wizard",
     "version": "1.0.44",
-    "author": "Therp BV, Camptocamp SA,Odoo Community Association (OCA)",
+    "author": "Therp BV, Camptocamp,Odoo Community Association (OCA)",
     "category": 'Base',
     'complexity': "normal",
     "description": """
