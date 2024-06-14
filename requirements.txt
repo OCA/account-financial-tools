@@ -1,3 +1,4 @@
 # generated from manifests external_dependencies
 numpy-financial<=1.0.0
 numpy>=1.15
+zeep
