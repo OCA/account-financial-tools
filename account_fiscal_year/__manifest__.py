@@ -8,7 +8,7 @@
     "development_status": "Production/Stable",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools",
-    "author": "Agile Business Group, Camptocamp SA, "
+    "author": "Agile Business Group, Camptocamp, "
               "Odoo Community Association (OCA)",
     "maintainers": ["eLBati"],
     "license": "AGPL-3",
