@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
+"PO-Revision-Date: 2024-06-18 11:55+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account
@@ -48,7 +49,7 @@ msgstr "Opcija"
 #: model:ir.model.fields,field_description:account_partner_required.field_account_account__partner_policy
 #: model_terms:ir.ui.view,arch_db:account_partner_required.view_account_search
 msgid "Partner Policy"
-msgstr ""
+msgstr "Pravila partnera"
 
 #. module: account_partner_required
 #. odoo-python
