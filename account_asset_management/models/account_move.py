@@ -42,8 +42,12 @@ class AccountMove(models.Model):
 
     def unlink(self):
         # for move in self:
-        deprs = self.env["account.asset.line"].search(
-            [("move_id", "in", self.ids), ("type", "in", ["depreciate", "remove"])]
+        deprs = (
+            self.env["account.asset.line"]
+            .sudo()
+            .search(
+                [("move_id", "in", self.ids), ("type", "in", ["depreciate", "remove"])]
+            )
         )
         if deprs and not self.env.context.get("unlink_from_asset"):
             raise UserError(
