@@ -4,7 +4,7 @@
 
 {
     'name': 'Account - Missing Menus',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'category': 'Accounting',
     'license': 'AGPL-3',
     'summary': "Adds missing menu entries for Account module",

@@ -43,7 +43,7 @@ addon | version | maintainers | summary
 [account_loan](account_loan/) | 12.0.1.1.0 |  | Account Loan management
 [account_lock_date_update](account_lock_date_update/) | 12.0.1.0.0 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_lock_to_date](account_lock_to_date/) | 12.0.1.0.0 |  | Allows to set an account lock date in the future.
-[account_menu](account_menu/) | 12.0.1.0.0 |  | Adds missing menu entries for Account module
+[account_menu](account_menu/) | 12.0.1.0.1 |  | Adds missing menu entries for Account module
 [account_move_batch_validate](account_move_batch_validate/) | 12.0.1.0.0 |  | Account Move Batch Validate
 [account_move_budget](account_move_budget/) | 12.0.1.0.0 |  | Create Accounting Budgets
 [account_move_chatter](account_move_chatter/) | 12.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Chatter on journal entries
