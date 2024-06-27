@@ -6,8 +6,12 @@
 # Copyright 2018-2021 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+
+logger = logging.getLogger(__name__)
 
 
 class AccountCheckDeposit(models.Model):
@@ -121,10 +125,11 @@ class AccountCheckDeposit(models.Model):
             ["check_deposit_id", "debit", "amount_currency"],
             ["check_deposit_id"],
         )
+        logger.info(rg_res)
         mapped_data = {
             x["check_deposit_id"][0]: {
                 "debit": x["debit"],
-                "amount_currency": x["amount_currency"],
+                "amount_currency": x.get("amount_currency", 0),
                 "count": x["check_deposit_id_count"],
             }
             for x in rg_res

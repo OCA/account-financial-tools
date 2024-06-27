@@ -12,3 +12,7 @@
 * `Ecosoft <http://ecosoft.co.th>`__:
 
   * Pimolnat Suntian <pimolnats@ecosoft.co.th>
+
+* `OpenFire <https://openfire.fr>`__:
+
+  * François Le Gal <fl@openfire.fr>
