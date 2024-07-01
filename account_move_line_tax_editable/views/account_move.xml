@@ -12,16 +12,14 @@
                 expr="//field[@name='line_ids']/tree/field[@name='tax_line_id']"
                 position="before"
             >
-                <field name="is_tax_editable" invisible="1" />
+                <field name="is_tax_editable" column_invisible="True" />
             </xpath>
             <xpath
                 expr="//field[@name='line_ids']/tree/field[@name='tax_line_id']"
                 position="attributes"
             >
-                <attribute name="invisible">0</attribute>
-                <attribute
-                    name="attrs"
-                >{'readonly': [('is_tax_editable', '=', False)]}</attribute>
+                <attribute name="column_invisible">False</attribute>
+                <attribute name="readonly">not is_tax_editable</attribute>
                 <attribute name="optional">hide</attribute>
             </xpath>
             <xpath

@@ -61,6 +61,7 @@ Contributors
 -  `Tecnativa <https://www.tecnativa.com>`__:
 
    -  Ernesto Tejeda
+   -  Carlos Roca
 
 -  `Sygel <https://www.sygel.es>`__:
 
