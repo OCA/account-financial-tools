@@ -31,7 +31,7 @@ class TestAccountMoveLineTaxEditable(AccountTestInvoicingCommon):
         cls.account_expense = cls.company_data["default_account_expense"]
         cls.account_tax_sale = cls.company_data["default_account_tax_sale"]
         cls.tax_sale = cls.company_data["default_tax_sale"]
-        cls.tax_sale_copy = cls.tax_sale.copy()
+        cls.tax_sale_copy = cls.tax_sale.copy({"name": "Test sale tax"})
         cls.test_move = cls.env["account.move"].create(
             {
                 "move_type": "entry",

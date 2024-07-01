@@ -28,19 +28,23 @@ class AccountMoveLine(models.Model):
             else:
                 repartition_lines = rec.tax_line_id.invoice_repartition_line_ids
             lines = repartition_lines.filtered(
-                lambda rl: rl.repartition_type == repartition_type
+                lambda rl,
+                repartition_type=repartition_type,
+                factor_percent=factor_percent: rl.repartition_type == repartition_type
                 and rl.factor_percent == factor_percent
             )
             if len(lines) > 1:
                 lines = (
                     lines.filtered(
-                        lambda rl: rl.repartition_type == "base"
+                        lambda rl, has_account=has_account: rl.repartition_type
+                        == "base"
                         or has_account is bool(rl.account_id)
                     )[:1]
                     or lines[:1]
                 )
             elif not lines:
                 lines = repartition_lines.filtered(
-                    lambda rl: rl.repartition_type == repartition_type
+                    lambda rl, repartition_type=repartition_type: rl.repartition_type
+                    == repartition_type
                 )[:1]
             rec.tax_repartition_line_id = lines

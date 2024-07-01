@@ -2,6 +2,7 @@
 - Benjamin Willig \<<benjamin.willig@acsone.eu>\>
 - [Tecnativa](https://www.tecnativa.com):
   - Ernesto Tejeda
+  - Carlos Roca
 - [Sygel](https://www.sygel.es):
   - Manuel Regidor
 - [Factor Libre](https://factorlibre.com):
