@@ -35,7 +35,7 @@ class ResPartner(models.Model):
             return super()._check_vies(vat)
         except InvalidComponent:
             raise InvalidComponent from None
-        except Exception:
+        except Exception as e:
             self.vies_unavailable = True
             raise
 
@@ -43,5 +43,11 @@ class ResPartner(models.Model):
     def vies_vat_check(self, country_code, vat_number):
         res = super().vies_vat_check(country_code, vat_number)
         if res and self.vies_unavailable:
-            return self.simple_vat_check(country_code, vat_number)
+            # leave the possibility to strictly check vies and not fallback on
+            # simple vat check, in case the service is unavailable... This way it is
+            # considered as invalid.
+            if self.env.context.get("strict_vies"):
+                return False
+            else:
+                return self.simple_vat_check(country_code, vat_number)
         return res
