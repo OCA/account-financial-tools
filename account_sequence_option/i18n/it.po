@@ -22,27 +22,9 @@ msgid "Apply On Model"
 msgstr "Applica sul modello"
 
 #. module: account_sequence_option
-#: model:ir.model.fields,field_description:account_sequence_option.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_sequence_option.field_ir_sequence_option__display_name
-msgid "Display Name"
-msgstr "Nome visualizzato"
-
-#. module: account_sequence_option
-#: model:ir.model.fields,field_description:account_sequence_option.field_account_move__id
-#: model:ir.model.fields,field_description:account_sequence_option.field_ir_sequence_option__id
-msgid "ID"
-msgstr "ID"
-
-#. module: account_sequence_option
 #: model:ir.model,name:account_sequence_option.model_account_move
 msgid "Journal Entry"
 msgstr "Registrazione contabile"
-
-#. module: account_sequence_option
-#: model:ir.model.fields,field_description:account_sequence_option.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_sequence_option.field_ir_sequence_option____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
 
 #. module: account_sequence_option
 #: model:ir.model.fields,field_description:account_sequence_option.field_account_bank_statement_line__sequence_option
@@ -60,3 +42,12 @@ msgstr "Sequenza modello base opzione"
 #: model:ir.model.fields.selection,name:account_sequence_option.selection__ir_sequence_option__model__account_move
 msgid "account.move"
 msgstr "Registrazione contabile (account.move)"
+
+#~ msgid "Display Name"
+#~ msgstr "Nome visualizzato"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
