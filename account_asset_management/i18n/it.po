@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2024-07-08 14:58+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2024-07-08 20:58+0000\n"
+"Last-Translator: Giacomo Grasso <giacomo.grasso.82@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
 "Language: it\n"
@@ -1054,7 +1054,7 @@ msgstr "Messaggi"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_min_value_id
 msgid "Min-Value Account"
-msgstr "Conto si minusvalore"
+msgstr "Conto di minusvalenza"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1243,7 +1243,7 @@ msgstr "Durata per le scritture contabili di ammortamento"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_plus_value_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_plus_value_id
 msgid "Plus-Value Account"
-msgstr "Conto di plusvalore"
+msgstr "Conto di plusvalenza"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__move_check
