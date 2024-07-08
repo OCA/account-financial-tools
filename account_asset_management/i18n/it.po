@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2024-07-08 08:59+0000\n"
-"Last-Translator: Giacomo Grasso <giacomo.grasso.82@gmail.com>\n"
+"PO-Revision-Date: 2024-07-08 10:42+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
 "Language: it\n"
@@ -92,7 +92,7 @@ msgstr "Attività"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Decorazione attività d'eccezione"
+msgstr "Decorazione eccezione attività"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_state
@@ -768,7 +768,7 @@ msgstr "Followers (Contatti)"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr "Icona font awesome e.g. fa-tasks"
+msgstr "Icona Font Awesome es. fa-tasks"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
@@ -840,17 +840,17 @@ msgstr "Icona"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr "Ina per indicare un'attivita d'eccezione."
+msgstr "Icona per indicare un'attività eccezione."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "Se flaggato, il nuovo messaggio richiede la tua attenzione."
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Se flaggato, alcuni messaggi hanno un errore di spedizione."
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__carry_forward_missed_depreciations
@@ -949,7 +949,7 @@ msgstr "Scrittura di saldo iniziale"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_is_follower
 msgid "Is Follower"
-msgstr "E' follower"
+msgstr "Segue"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__journal_id
@@ -1099,12 +1099,12 @@ msgstr "Scadenza prossima attività"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_summary
 msgid "Next Activity Summary"
-msgstr "Sommario prossima attività"
+msgstr "Riepilogo prossima attività"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_id
 msgid "Next Activity Type"
-msgstr "Tipo nuova attività"
+msgstr "Tipo prossima attività"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__remaining_value
@@ -1174,7 +1174,7 @@ msgstr "Numero di messaggi che richiedono un'azione"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr "Numero di messaggi con errore spedizione"
+msgstr "Numero di messaggi con errore di consegna"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__open
@@ -1487,8 +1487,8 @@ msgid ""
 "Planned: Future activities."
 msgstr ""
 "Stato in base alle attività\n"
-"In ritardo: la data di scadenza è già passata\n"
-"Oggi: la data dell'attività è oggi\n"
+"Scaduto: la data richiesta è trascorsa\n"
+"Oggi: la data attività è oggi\n"
 "Pianificato: attività future."
 
 #. module: account_asset_management
@@ -1638,7 +1638,7 @@ msgstr "Tipo"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr "Tipo di attività d'eccezione sul record."
+msgstr "Tipo di attività eccezione sul record."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1677,12 +1677,12 @@ msgstr "Vedi movimenti"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
 msgid "Website Messages"
-msgstr "Messaggi sito"
+msgstr "Messaggi sito web"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__website_message_ids
 msgid "Website communication history"
-msgstr "Storia communicazione sito web"
+msgstr "Cronologia comunicazioni sito web"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__state
