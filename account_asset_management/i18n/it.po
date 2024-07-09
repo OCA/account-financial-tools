@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2024-07-08 20:58+0000\n"
-"Last-Translator: Giacomo Grasso <giacomo.grasso.82@gmail.com>\n"
+"PO-Revision-Date: 2024-07-09 09:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
 "Language: it\n"
@@ -807,7 +807,7 @@ msgstr "Genera report"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
 msgid "Has Message"
-msgstr "Ha messaggio"
+msgstr "Ha un messaggio"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
@@ -970,7 +970,7 @@ msgstr "Scritture contabili"
 #: model:ir.model,name:account_asset_management.model_account_move
 #, python-format
 msgid "Journal Entry"
-msgstr "Scrittura contabile"
+msgstr "Registrazione contabile"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
