@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [account_account_tag_code](account_account_tag_code/) | 17.0.1.0.0 |  | Add a code field to the accounts tags
 [account_asset_management](account_asset_management/) | 17.0.1.0.1 |  | Assets Management
 [account_journal_lock_date](account_journal_lock_date/) | 17.0.1.0.0 |  | Lock each journal independently
+[account_journal_restrict_mode](account_journal_restrict_mode/) | 17.0.1.0.0 |  | Lock All Posted Entries of Journals.
 [account_lock_date_update](account_lock_date_update/) | 17.0.1.0.1 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_move_budget](account_move_budget/) | 17.0.1.0.0 |  | Create Accounting Budgets
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 17.0.1.0.0 |  | Introduces the purchase order line to the journal items
