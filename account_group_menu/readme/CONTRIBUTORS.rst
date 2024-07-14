@@ -1,0 +1,3 @@
+* Fekete Mihai <feketemihai@gmail.com>
+* Raf Ven <raf.ven@dynapps.be>
+* Jose M Monsalve Diaz <josemonsalve2@gmail.com>

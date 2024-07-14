@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Groups -->
+    <record id="demo_account_group_root" model="account.group">
+        <field name="name">All Company</field>
+    </record>
+    <record id="demo_account_group_1" model="account.group">
+        <field name="name">Class 1</field>
+        <field name="code_prefix">T1</field>
+        <field name="parent_id" ref="demo_account_group_root"/>
+    </record>
+    <record id="demo_account_group_11" model="account.group">
+        <field name="name">Class 11</field>
+        <field name="code_prefix">T11</field>
+        <field name="parent_id" ref="demo_account_group_1"/>
+    </record>
+    <record id="demo_account_group_2" model="account.group">
+        <field name="name">Class 2</field>
+        <field name="code_prefix">T2</field>
+        <field name="parent_id" ref="demo_account_group_root"/>
+    </record>
+    <!-- Accounts -->
+    <record id="demo_account_105" model="account.account">
+        <field name="name">Account 105</field>
+        <field name="code">T105</field>
+        <field name="group_id" ref="demo_account_group_1"/>
+        <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+    </record>
+    <record id="demo_account_110" model="account.account">
+        <field name="name">Account 110</field>
+        <field name="code">T110</field>
+        <field name="group_id" ref="demo_account_group_1"/>
+        <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+    </record>
+    <record id="demo_account_111" model="account.account">
+        <field name="name">Account 111</field>
+        <field name="code">T111</field>
+        <field name="group_id" ref="demo_account_group_1"/>
+        <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+    </record>
+    <record id="demo_account_112" model="account.account">
+        <field name="name">Account 112</field>
+        <field name="code">T112</field>
+        <field name="group_id" ref="demo_account_group_1"/>
+        <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+    </record>
+    <record id="demo_account_130" model="account.account">
+        <field name="name">Account 130</field>
+        <field name="code">T130</field>
+        <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+    </record>
+</odoo>
