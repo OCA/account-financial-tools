@@ -5,9 +5,8 @@ from odoo import fields, models
 
 
 class AccountGroup(models.Model):
-    _inherit = 'account.group'
+    _inherit = "account.group"
 
     account_ids = fields.One2many(
-        'account.account', 'group_id',
-        string='Accounts',
-        help="Assigned accounts.")
+        "account.account", "group_id", string="Accounts", help="Assigned accounts."
+    )
