@@ -22,9 +22,16 @@
         </field>
     </record>
 
+    <record id="action_account_group_tree" model="ir.actions.act_window">
+        <field name="name">Account groups</field>
+        <field name="res_model">account.group</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="account.view_account_group_search" />
+    </record>
+
     <menuitem
         id="account_group_menu"
-        action="account.action_account_group_tree"
+        action="action_account_group_tree"
         sequence="50"
         parent="account.account_account_menu"
     />
