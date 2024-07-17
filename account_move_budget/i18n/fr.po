@@ -240,12 +240,6 @@ msgid "Label"
 msgstr "Libellé"
 
 #. module: account_move_budget
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget____last_update
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
-
-#. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__write_uid
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__write_uid
 msgid "Last Updated by"
@@ -261,11 +255,6 @@ msgstr "Dernière mise à jour le"
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__line_ids
 msgid "Line"
 msgstr "Ligne"
-
-#. module: account_move_budget
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Pièce jointe principale"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_error
@@ -396,6 +385,12 @@ msgstr "Messages du site web"
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__website_message_ids
 msgid "Website communication history"
 msgstr "Historique de la communication du site web"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Pièce jointe principale"
 
 #~ msgid "Followers (Channels)"
 #~ msgstr "Abonnés (canaux)"
