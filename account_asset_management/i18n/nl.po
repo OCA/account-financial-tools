@@ -837,7 +837,6 @@ msgstr "Als deze optie is ingeschakeld, vereisen nieuwe berichten uw aandacht."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 "Als deze optie is aangevinkt, hebben sommige berichten een afleverfout."
@@ -1374,11 +1373,6 @@ msgstr "Draai geboekte journaalpost op afschrijvingsregel om"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "Actief"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
