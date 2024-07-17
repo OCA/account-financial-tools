@@ -79,11 +79,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_fiscal_year
-#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
@@ -125,3 +120,6 @@ msgid ""
 msgstr ""
 "Questo anno fiscale '{fy}' si sovrappone a '{overlapping_fy}'.\n"
 "Correggere le relative date di inizio e/o di fine."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
