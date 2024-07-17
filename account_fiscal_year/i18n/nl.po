@@ -78,11 +78,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_fiscal_year
-#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
-msgid "Last Modified on"
-msgstr "Laatst bijgewerkt op"
-
-#. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_uid
 msgid "Last Updated by"
 msgstr "Laatst bijgewerkt door"
@@ -124,3 +119,6 @@ msgid ""
 msgstr ""
 "Dit fiscale jaar '{fy}' overlap met '{overlapping_fy}'.\n"
 "Corrigeer de begin en/of eind data van de fiscale jaren."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst bijgewerkt op"
