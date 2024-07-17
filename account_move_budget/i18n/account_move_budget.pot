@@ -223,7 +223,6 @@ msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_error
-#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -318,11 +317,6 @@ msgstr ""
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_user_id
 msgid "Responsible User"
-msgstr ""
-
-#. module: account_move_budget
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_move_budget
