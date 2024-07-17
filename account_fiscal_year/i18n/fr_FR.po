@@ -1,0 +1,126 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_fiscal_year
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-04-15 18:46+0000\n"
+"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
+"Language-Team: none\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_fiscal_year
+#: model_terms:ir.actions.act_window,help:account_fiscal_year.actions_account_fiscal_year
+msgid "Click here to create a new fiscal year."
+msgstr "Cliquez ici pour créer un nouvel exercice."
+
+#. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_to
+msgid "End Date"
+msgstr "Date de fin"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_to
+msgid "Ending Date, included in the fiscal year."
+msgstr "Date de fin, incluse dans l'exercice."
+
+#. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_account_fiscal_year
+msgid "Fiscal Year"
+msgstr "Exercice"
+
+#. module: account_fiscal_year
+#: model_terms:ir.ui.view,arch_db:account_fiscal_year.account_fiscal_year_form_view
+msgid "Fiscal Year 2020"
+msgstr "Exercice 2020"
+
+#. module: account_fiscal_year
+#: model:ir.actions.act_window,name:account_fiscal_year.actions_account_fiscal_year
+#: model:ir.ui.menu,name:account_fiscal_year.menu_actions_account_fiscal_year
+msgid "Fiscal Years"
+msgstr "Exercices"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__id
+msgid "ID"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_from
+msgid "Start Date"
+msgstr "Date de début"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_from
+msgid "Start Date, included in the fiscal year."
+msgstr "Date de début, incluse dans l'exercice."
+
+#. module: account_fiscal_year
+#. odoo-python
+#: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
+#, python-format
+msgid "The ending date must not be prior to the starting date."
+msgstr "La date de début doit précéder la date de fin."
+
+#. module: account_fiscal_year
+#. odoo-python
+#: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
+#, python-format
+msgid ""
+"This fiscal year '{fy}' overlaps with '{overlapping_fy}'.\n"
+"Please correct the start and/or end dates of your fiscal years."
+msgstr ""
+"L'exercice '{fy}' chevauche avec '{overlapping_fy}'.\n"
+"Veuillez modifier les dates de début et de fin."
