@@ -240,12 +240,6 @@ msgid "Label"
 msgstr "Etichetta"
 
 #. module: account_move_budget
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget____last_update
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__write_uid
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__write_uid
 msgid "Last Updated by"
@@ -261,11 +255,6 @@ msgstr "Ultimo aggiornamento il"
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__line_ids
 msgid "Line"
 msgstr "Riga"
-
-#. module: account_move_budget
-#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Allegato principale"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_error
@@ -359,8 +348,8 @@ msgstr ""
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget_line__balance
 msgid ""
-"Technical field holding the debit - credit in order to open meaningful graph"
-" views from reports"
+"Technical field holding the debit - credit in order to open meaningful graph "
+"views from reports"
 msgstr ""
 "Campo tecnico che contiene il debito - credito in modo da aprire una chiara "
 "vista grafica dai resoconti"
@@ -396,3 +385,9 @@ msgstr "Messaggi sito web"
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__website_message_ids
 msgid "Website communication history"
 msgstr "Cronologia comunicazioni sito web"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Allegato principale"
