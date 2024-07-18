@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-05 17:34+0000\n"
+"PO-Revision-Date: 2024-07-18 06:32+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -25,6 +25,11 @@ msgid ""
 "reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
+"is_credit_account_deprecated\">\n"
+"                                  Questo conto è deprecato! La "
+"riconciliazione NON sarà possibile.\n"
+"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -35,6 +40,11 @@ msgid ""
 "reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
+"is_debit_account_deprecated\">\n"
+"                                  Questo conto è deprecato! La "
+"riconciliazione NON sarà possibile.\n"
+"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -51,6 +61,17 @@ msgid ""
 "line.<br/>Usually the same account of the vendor bill line.\n"
 "                                </span>"
 msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      Il conto del bilancio utilizzato per "
+"la distribuzione.<br/>Questo è il conto di contropartita del conto nella "
+"riga fattura.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      Il conto spese nella riga fattura "
+"fornitore.<br/>Normalmente lo stesso conto della riga fattura fornitore.\n"
+"                                </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -67,6 +88,17 @@ msgid ""
 "bill line.\n"
 "                                </span>"
 msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      Il conto di bilancio.<br/>Questo è il "
+"conto nella riga fattura.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      Il conto spese utilizzato per la "
+"distribuzione.<br/>Questo è il conto di contropartita del conto nella riga "
+"fattura fornitore.\n"
+"                                </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -83,6 +115,17 @@ msgid ""
 "bill line.\n"
 "                                </span>"
 msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      Il conto ricavi nella riga fattura.<br/"
+">Normalmente lo stesso conto della riga fattura.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      Il conto di bilancio utilizzato per la "
+"distribuzione.<br/>Questo conto è la contropartita del conto nella riga "
+"fattura fornitore.\n"
+"                                </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -99,6 +142,17 @@ msgid ""
 "the account in the vendor bill line.\n"
 "                                </span>"
 msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      Il conto ricavi utilizzato per la "
+"distribuzione.<br/>Questo conto è la contropartita del conto nella riga "
+"fattura.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      Il conto di bilancio.<br/>Questo è il "
+"conto nella riga fattura fornitore.\n"
+"                                </span>"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__account_id
@@ -156,7 +210,7 @@ msgstr "Importo"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__analytic_distribution
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_distribution
 msgid "Analytic Distribution"
-msgstr ""
+msgstr "Distribuzione analitica"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__analytic_distribution_search
