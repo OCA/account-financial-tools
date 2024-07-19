@@ -1100,14 +1100,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         ir_model_data.search(
             [("model", "=", real_obj._name), ("res_id", "=", real_obj.id)]
         ).unlink()
-        template_xmlid.copy(
+        new_rec = template_xmlid.copy(
             {
                 "model": real_obj._name,
                 "res_id": real_obj.id,
-                "name": new_xml_id,
                 "noupdate": True,
             }
         )
+        new_rec.name = new_xml_id
 
     def _update_taxes(self):
         """Process taxes to create/update/deactivate."""

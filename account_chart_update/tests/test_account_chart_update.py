@@ -543,6 +543,14 @@ class TestAccountChartUpdate(common.TransactionCase):
         self.assertEqual(self.tax.description, self.tax_template.description)
         self.assertEqual(self.account.code, self.account_template.code)
         self.assertEqual(self.fp.name, self.fp_template.name)
+        fp_id = wizard.find_fp_by_templates(self.fp_template)
+        fp_rec = self.env["account.fiscal.position"].browse(fp_id)
+        expected_xmlid = "{}.{}_{}".format(
+            "account_chart_update",
+            wizard.company_id.id,
+            "account_fiscal_position_template-{}".format(self.fp_template.id),
+        )
+        self.assertEqual(fp_rec.get_external_id().get(fp_id), expected_xmlid)
         wizard.unlink()
 
         # Test match by another field, there is no match by XML-ID
@@ -613,6 +621,7 @@ class TestAccountChartUpdate(common.TransactionCase):
         self.assertTrue(list(self.tax.get_external_id().values())[0])
         self.assertTrue(list(self.account.get_external_id().values())[0])
         self.assertTrue(list(self.fp.get_external_id().values())[0])
+        self.assertEqual(fp_rec.get_external_id().get(fp_id), expected_xmlid)
         wizard.unlink()
 
         # Test 2 recreate XML-ID
@@ -642,4 +651,5 @@ class TestAccountChartUpdate(common.TransactionCase):
         self.assertTrue(list(self.tax.get_external_id().values())[0])
         self.assertTrue(list(self.account.get_external_id().values())[0])
         self.assertTrue(list(self.fp.get_external_id().values())[0])
+        self.assertEqual(fp_rec.get_external_id().get(fp_id), expected_xmlid)
         wizard.unlink()
