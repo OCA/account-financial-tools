@@ -76,6 +76,7 @@ msgstr ""
 "secuencia."
 
 #. module: account_asset_number
+#. odoo-python
 #: code:addons/account_asset_number/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Number"
