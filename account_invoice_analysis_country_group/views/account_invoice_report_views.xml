@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_invoice_report_search_country_group" model="ir.ui.view">
+        <field name="model">account.invoice.report</field>
+        <field name="name">account.invoice.report.country.group</field>
+        <field name="inherit_id" ref="account.view_account_invoice_report_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/filter[@name='company']" position="after">
+                <filter
+                    string="Country Group"
+                    name="country_group_id"
+                    context="{'group_by':'country_group_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="filter_invoice_country_group" model="ir.filters">
+        <field name="name">By Country Group</field>
+        <field name="model_id">account.invoice.report</field>
+        <field name="domain">[]</field>
+        <field name="user_id" eval="False" />
+        <field
+            name="context"
+        >{'group_by': ['invoice_date:month', 'country_group_id']}</field>
+    </record>
+</odoo>
