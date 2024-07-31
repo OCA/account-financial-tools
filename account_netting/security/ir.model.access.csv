@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_make_netting,Full access on account.move.make.netting to accountant grp,model_account_move_make_netting,account.group_account_user,1,1,1,1
+access_account_move_make_netting_manager,Full access on account.move.make.netting to accountant manager grp,model_account_move_make_netting,account.group_account_manager,1,1,1,1
