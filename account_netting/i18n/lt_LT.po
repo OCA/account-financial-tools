@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: account_netting
 #. odoo-python
@@ -86,11 +86,6 @@ msgstr ""
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
 msgid "Journal Items to Compensate"
-msgstr ""
-
-#. module: account_netting
-#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: account_netting

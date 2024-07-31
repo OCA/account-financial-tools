@@ -89,11 +89,6 @@ msgid "Journal Items to Compensate"
 msgstr ""
 
 #. module: account_netting
-#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
-msgid "Last Modified on"
-msgstr "Última atualização em"
-
-#. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
 msgid "Last Updated by"
 msgstr "Última atualização por"
@@ -186,6 +181,9 @@ msgstr "Assistente para geração de transações compensatórias"
 #, python-format
 msgid "You should select at least 2 journal items."
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última atualização em"
 
 #, python-format
 #~ msgid "All entries must have a receivable or payable account"

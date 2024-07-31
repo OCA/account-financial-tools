@@ -88,11 +88,6 @@ msgid "Journal Items to Compensate"
 msgstr "Journalposter att kompensera"
 
 #. module: account_netting
-#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
-msgid "Last Modified on"
-msgstr "Senast redigerad"
-
-#. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
 msgid "Last Updated by"
 msgstr "Senast uppdaterad av"
@@ -195,3 +190,6 @@ msgstr "Guide för att generera kontoflyttningar för nettning"
 #, python-format
 msgid "You should select at least 2 journal items."
 msgstr "Du bör välja minst 2 journalrader."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Senast redigerad"
