@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2024-07-30 16:58+0000\n"
+"PO-Revision-Date: 2024-07-31 15:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -141,7 +141,7 @@ msgstr "Analitica"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution_search
 msgid "Analytic Distribution Search"
-msgstr "Cerca distribuzione analitica"
+msgstr "Ricerca distribuzione analitica"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
