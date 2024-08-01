@@ -21,8 +21,11 @@ class ResCompany(models.Model):
         self.ensure_one()
         date_str = current_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
 
+        # Add permissions to the fiscal year model.
+        fy_obj = self.env["account.fiscal.year"].sudo()
+
         # Search a fiscal year record containing the date.
-        fiscalyear = self.env["account.fiscal.year"].search(
+        fiscalyear = fy_obj.search(
             [
                 ("company_id", "=", self.id),
                 ("date_from", "<=", date_str),
@@ -53,7 +56,7 @@ class ResCompany(models.Model):
         # The period 2017-02-02 - 2017-02-30 is not covered by a fiscal year record.
 
         date_from_str = date_from.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        fiscalyear_from = self.env["account.fiscal.year"].search(
+        fiscalyear_from = fy_obj.search(
             [
                 ("company_id", "=", self.id),
                 ("date_from", "<=", date_from_str),
@@ -65,7 +68,7 @@ class ResCompany(models.Model):
             date_from = fiscalyear_from.date_to + timedelta(days=1)
 
         date_to_str = date_to.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        fiscalyear_to = self.env["account.fiscal.year"].search(
+        fiscalyear_to = fy_obj.search(
             [
                 ("company_id", "=", self.id),
                 ("date_from", "<=", date_to_str),
