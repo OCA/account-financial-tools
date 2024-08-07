@@ -93,6 +93,10 @@ Contributors
 
    -  Ángel García de la Chica Herrera
 
+-  `APSL-Nagarro <https://apsl.tech>`__:
+
+   -  Antoni Marroig <amarroig@apsl.net>
+
 Maintainers
 -----------
 

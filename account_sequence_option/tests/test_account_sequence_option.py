@@ -9,16 +9,18 @@ from odoo.tests.common import Form, TransactionCase, tagged
 
 @tagged("post_install", "-at_install")
 class TestAccountSequenceOption(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.AccountMove = self.env["account.move"]
-        self.AccountMoveLine = self.env["account.move.line"]
-        self.partner_id = self.env.ref("base.res_partner_1")
-        self.product_id_1 = self.env.ref("product.product_product_6")
-        self.account_seq_opt1 = self.env.ref("account_sequence_option.account_sequence")
-        self.pay_in = self.env.ref("account.account_payment_method_manual_in")
-        self.pay_out = self.env.ref("account.account_payment_method_manual_out")
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.AccountMove = cls.env["account.move"]
+        cls.AccountMoveLine = cls.env["account.move.line"]
+        cls.partner_id = cls.env.ref("base.res_partner_1")
+        cls.product_id_1 = cls.env.ref("product.product_product_6")
+        cls.account_seq_opt1 = cls.env.ref("account_sequence_option.account_sequence")
+        cls.pay_in = cls.env.ref("account.account_payment_method_manual_in")
+        cls.pay_out = cls.env.ref("account.account_payment_method_manual_out")
 
+    @classmethod
     def _create_invoice(self, move_type):
         move_form = Form(
             self.env["account.move"].with_context(default_move_type=move_type)
@@ -30,6 +32,7 @@ class TestAccountSequenceOption(TransactionCase):
         invoice = move_form.save()
         return invoice
 
+    @classmethod
     def _create_payment(self, payment_type, partner_type):
         ctx = {
             "default_payment_type": payment_type,
