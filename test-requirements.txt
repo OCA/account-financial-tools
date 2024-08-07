@@ -1,0 +1,1 @@
+odoo-addon-base_sequence_option @ git+https://github.com/OCA/server-tools.git@refs/pull/3009/head#subdirectory=base_sequence_option
