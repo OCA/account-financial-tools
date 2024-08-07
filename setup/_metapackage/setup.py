@@ -45,6 +45,7 @@ setuptools.setup(
         'odoo-addon-account_template_active>=16.0dev,<16.1dev',
         'odoo-addon-account_usability>=16.0dev,<16.1dev',
         'odoo-addon-base_vat_optional_vies>=16.0dev,<16.1dev',
+        'odoo-addon-stock_account_anglo_saxon_cogs_kit>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
