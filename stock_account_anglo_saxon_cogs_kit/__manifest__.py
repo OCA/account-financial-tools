@@ -4,7 +4,7 @@
     "name": "Stock Account Anglo Saxon COGS Kit",
     "category": "Accounting",
     "version": "16.0.1.0.0",
-    "depends": ["sale_mrp"],
+    "depends": ["sale_mrp", "purchase_mrp"],
     "data": [],
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",

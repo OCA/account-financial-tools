@@ -17,31 +17,21 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
         cls.ProductCategory = cls.env["product.category"]
         cls.categ_unit = cls.env.ref("uom.product_uom_categ_unit")
 
-    def test_01_sale_mrp_anglo_saxon(self):
-        """Test sale order for kit, deliver and invoice and ensure
-        COGS is hit
-        """
-        self.env.company.currency_id = self.env.ref("base.USD")
-        self.uom_unit = self.UoM.create(
+        cls.env.company.currency_id = cls.env.ref("base.USD")
+        cls.uom_unit = cls.UoM.create(
             {
                 "name": "Test-Unit",
-                "category_id": self.categ_unit.id,
+                "category_id": cls.categ_unit.id,
                 "factor": 1,
                 "uom_type": "bigger",
                 "rounding": 1.0,
             }
         )
-        self.company = self.env.ref("base.main_company")
-        self.company.anglo_saxon_accounting = True
-        self.partner = self.env.ref("base.res_partner_1")
-        self.category = self.env.ref("product.product_category_1").copy(
-            {
-                "name": "Test category",
-                "property_valuation": "real_time",
-                "property_cost_method": "fifo",
-            }
-        )
-        account_receiv = self.env["account.account"].create(
+        # Configure company
+        cls.company = cls.env.ref("base.main_company")
+        cls.company.anglo_saxon_accounting = True
+        # Create accounts
+        cls.account_receiv = cls.env["account.account"].create(
             {
                 "name": "Receivable",
                 "code": "RCV00",
@@ -49,7 +39,7 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
                 "reconcile": True,
             }
         )
-        account_expense = self.env["account.account"].create(
+        cls.account_expense = cls.env["account.account"].create(
             {
                 "name": "Expense",
                 "code": "EXP00",
@@ -57,7 +47,7 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
                 "reconcile": True,
             }
         )
-        account_input = self.env["account.account"].create(
+        cls.account_input = cls.env["account.account"].create(
             {
                 "name": "Input",
                 "code": "IN00",
@@ -65,7 +55,7 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
                 "reconcile": True,
             }
         )
-        account_output = self.env["account.account"].create(
+        cls.account_output = cls.env["account.account"].create(
             {
                 "name": "Output",
                 "code": "OUT00",
@@ -73,7 +63,7 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
                 "reconcile": True,
             }
         )
-        account_valuation = self.env["account.account"].create(
+        cls.account_valuation = cls.env["account.account"].create(
             {
                 "name": "Valuation",
                 "code": "STV00",
@@ -81,43 +71,78 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
                 "reconcile": True,
             }
         )
-        self.partner.property_account_receivable_id = account_receiv
-        self.category.property_stock_account_input_categ_id = account_input
-        self.category.property_stock_account_output_categ_id = account_output
-        self.category.property_stock_valuation_account_id = account_valuation
-        self.category.property_account_expense_categ_id = account_expense
-        self.category.property_stock_journal = self.env["account.journal"].create(
+        # Configure partner and products
+        cls.partner = cls.env.ref("base.res_partner_1")
+        cls.category = cls.env.ref("product.product_category_1").copy(
+            {
+                "name": "Test category",
+                "property_valuation": "real_time",
+                "property_cost_method": "fifo",
+            }
+        )
+        cls.partner.property_account_receivable_id = cls.account_receiv
+        cls.category.property_stock_account_input_categ_id = cls.account_input
+        cls.category.property_stock_account_output_categ_id = cls.account_output
+        cls.category.property_stock_valuation_account_id = cls.account_valuation
+        cls.category.property_account_expense_categ_id = cls.account_expense
+        cls.category.property_stock_journal = cls.env["account.journal"].create(
             {"name": "Stock journal", "type": "sale", "code": "STK00"}
         )
-
-        Product = self.env["product.product"]
-        self.finished_product = Product.create(
+        Product = cls.env["product.product"]
+        cls.finished_product = Product.create(
             {
                 "name": "KIT product",
                 "type": "consu",
-                "uom_id": self.uom_unit.id,
+                "uom_id": cls.uom_unit.id,
                 "invoice_policy": "delivery",
-                "categ_id": self.category.id,
+                "categ_id": cls.category.id,
             }
         )
-        self.component1 = Product.create(
+        cls.component1 = Product.create(
             {
                 "name": "Component 1",
                 "type": "product",
-                "uom_id": self.uom_unit.id,
-                "categ_id": self.category.id,
+                "uom_id": cls.uom_unit.id,
+                "categ_id": cls.category.id,
                 "standard_price": 20,
             }
         )
-        self.component2 = Product.create(
+        cls.component2 = Product.create(
             {
                 "name": "Component 2",
                 "type": "product",
-                "uom_id": self.uom_unit.id,
-                "categ_id": self.category.id,
+                "uom_id": cls.uom_unit.id,
+                "categ_id": cls.category.id,
                 "standard_price": 10,
             }
         )
+        kit = cls.env["mrp.bom"].create(
+            {
+                "product_tmpl_id": cls.finished_product.product_tmpl_id.id,
+                "product_qty": 1.0,
+                "type": "phantom",
+            }
+        )
+        BomLine = cls.env["mrp.bom.line"]
+        BomLine.create(
+            {
+                "product_id": cls.component1.id,
+                "product_qty": 2.0,
+                "bom_id": kit.id,
+            }
+        )
+        BomLine.create(
+            {
+                "product_id": cls.component2.id,
+                "product_qty": 1.0,
+                "bom_id": kit.id,
+            }
+        )
+
+    def test_01_sale_mrp_anglo_saxon(self):
+        """Test sale order for kit, deliver and invoice and ensure
+        COGS is hit
+        """
         self.env["stock.quant"].create(
             {
                 "product_id": self.component1.id,
@@ -130,28 +155,6 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
                 "product_id": self.component2.id,
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "quantity": 3.0,
-            }
-        )
-        kit = self.env["mrp.bom"].create(
-            {
-                "product_tmpl_id": self.finished_product.product_tmpl_id.id,
-                "product_qty": 1.0,
-                "type": "phantom",
-            }
-        )
-        BomLine = self.env["mrp.bom.line"]
-        BomLine.create(
-            {
-                "product_id": self.component1.id,
-                "product_qty": 2.0,
-                "bom_id": kit.id,
-            }
-        )
-        BomLine.create(
-            {
-                "product_id": self.component2.id,
-                "product_qty": 1.0,
-                "bom_id": kit.id,
             }
         )
 
@@ -200,8 +203,8 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
         self.invoice = move_form.save()
         self.invoice.action_post()
         aml = self.invoice.line_ids
-        aml_expense = aml.filtered(lambda l: l.account_id == account_expense)
-        aml_output = aml.filtered(lambda l: l.account_id == account_output)
+        aml_expense = aml.filtered(lambda l: l.account_id == self.account_expense)
+        aml_output = aml.filtered(lambda l: l.account_id == self.account_output)
         # Check that the cost of Good Sold entries are equal to:
         # 2* (2 * 20 + 1 * 10) = 100
         self.assertEqual(
@@ -217,14 +220,65 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
         self.assertNotEqual(
             aml.filtered(
                 lambda ml: ml.product_id == self.finished_product
-                and ml.account_id == account_expense
+                and ml.account_id == self.account_expense
             ),
             self.env["account.move.line"],
         )
         self.assertEqual(
             aml.filtered(
                 lambda ml: ml.product_id == self.component1
-                and ml.account_id == account_expense
+                and ml.account_id == self.account_expense
             ),
             self.env["account.move.line"],
+        )
+
+    def test_02_purchase_mrp_anglo_saxon(self):
+        """Test purchase order for kit, receive and invoice and ensure
+        stock input account is hit
+        """
+        # Create a PO for a specific partner for three units of the
+        # finished product
+        po_vals = {
+            "partner_id": self.partner.id,
+            "order_line": [
+                (
+                    0,
+                    0,
+                    {
+                        "name": self.finished_product.name,
+                        "product_id": self.finished_product.id,
+                        "product_qty": 3,
+                        "product_uom": self.finished_product.uom_id.id,
+                        "price_unit": 100,
+                    },
+                )
+            ],
+            "company_id": self.company.id,
+        }
+        self.po = self.env["purchase.order"].create(po_vals)
+        # Validate the PO
+        self.po.button_confirm()
+        # Receive the three finished products
+        pick = self.po.picking_ids
+        # To check the products on the picking
+        self.assertEqual(
+            pick.move_line_ids.mapped("product_id"), self.component1 | self.component2
+        )
+        for ml in pick.move_line_ids:
+            ml.qty_done = ml.reserved_uom_qty
+        pick._action_done()
+        # Create the invoice
+        action = self.po.action_create_invoice()
+        self.invoice = self.env["account.move"].browse(action["res_id"])
+        self.invoice.invoice_date = self.invoice.date
+        self.invoice.action_post()
+        aml = self.invoice.line_ids
+        aml_expense = aml.filtered(lambda l: l.account_id == self.account_expense)
+        aml_input = aml.filtered(lambda l: l.account_id == self.account_input)
+        # No line with expense account
+        self.assertFalse(aml_expense)
+        # Check that there is line with stock input account and amount:
+        # 3*100 = 300
+        self.assertEqual(
+            sum(aml_input.mapped("debit")), 300, "GDNI missing or mismatching"
         )
