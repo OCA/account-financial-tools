@@ -12,3 +12,9 @@ class AccountMoveLine(models.Model):
             p.type == "product" and p.valuation == "real_time"
             for p in self.sale_line_ids.mapped("move_ids.product_id")
         )
+
+    def _can_use_stock_accounts(self):
+        return super()._can_use_stock_accounts() or any(
+            p.type == "product" and p.valuation == "real_time"
+            for p in self.purchase_line_id.mapped("move_ids.product_id")
+        )
