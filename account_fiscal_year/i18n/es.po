@@ -52,6 +52,11 @@ msgid "End Date"
 msgstr "Fecha final"
 
 #. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__fiscal_year_date_to
+msgid "End Date of the Fiscal Year"
+msgstr ""
+
+#. module: account_fiscal_year
 #: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_to
 msgid "Ending Date, included in the fiscal year."
 msgstr "Fecha de finalización, incluida en el año fiscal."
@@ -101,6 +106,11 @@ msgstr "Nombre"
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_from
 msgid "Start Date"
 msgstr "Fecha inicial"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__fiscal_year_date_from
+msgid "Start Date of the Fiscal Year"
+msgstr ""
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_from
