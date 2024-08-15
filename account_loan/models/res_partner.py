@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
-
     _inherit = "res.partner"
 
     lended_loan_ids = fields.One2many("account.loan", inverse_name="partner_id")
@@ -20,7 +19,6 @@ class ResPartner(models.Model):
             record.lended_loan_count = len(record.lended_loan_ids)
 
     def action_view_partner_lended_loans(self):
-
         self.ensure_one()
         action = self.env["ir.actions.actions"]._for_xml_id(
             "account_loan.account_loan_action"
