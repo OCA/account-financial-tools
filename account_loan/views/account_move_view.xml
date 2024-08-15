@@ -11,7 +11,7 @@
             <field name="date" position="after">
                 <field
                     name="loan_line_id"
-                    attrs="{'invisible': [('loan_line_id', '=', False)]}"
+                    invisible="loan_line_id == False"
                     readonly="True"
                 />
             </field>

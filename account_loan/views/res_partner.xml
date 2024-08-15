@@ -15,8 +15,8 @@
                     icon="fa-money"
                     name="action_view_partner_lended_loans"
                     groups="account.group_account_user"
-                    context="{'default_partner_id': active_id}"
-                    attrs="{'invisible': [('lended_loan_count','=', 0)]}"
+                    context="{'default_partner_id': id}"
+                    invisible="lended_loan_count == 0"
                 >
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value">
