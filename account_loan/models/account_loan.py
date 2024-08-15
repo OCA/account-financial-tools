@@ -29,7 +29,6 @@ class AccountLoan(models.Model):
         required=True,
         readonly=True,
         default="/",
-        states={"draft": [("readonly", False)]},
     )
     partner_id = fields.Many2one(
         "res.partner",
@@ -37,14 +36,12 @@ class AccountLoan(models.Model):
         string="Lender",
         help="Company or individual that lends the money at an interest rate.",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_id = fields.Many2one(
         "res.company",
         required=True,
         default=_default_company,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     state = fields.Selection(
         [
@@ -66,7 +63,6 @@ class AccountLoan(models.Model):
     periods = fields.Integer(
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Number of periods that the loan will last",
     )
     method_period = fields.Integer(
@@ -75,12 +71,10 @@ class AccountLoan(models.Model):
         help="State here the time between 2 depreciations, in months",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     start_date = fields.Date(
         help="Start of the moves",
         readonly=True,
-        states={"draft": [("readonly", False)]},
         copy=False,
     )
     rate = fields.Float(
@@ -101,7 +95,6 @@ class AccountLoan(models.Model):
         help="Method of computation of the applied rate",
         default="napr",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     loan_type = fields.Selection(
         [
@@ -113,7 +106,6 @@ class AccountLoan(models.Model):
         required=True,
         help="Method of computation of the period annuity",
         readonly=True,
-        states={"draft": [("readonly", False)]},
         default="fixed-annuity",
     )
     fixed_amount = fields.Monetary(
@@ -135,14 +127,12 @@ class AccountLoan(models.Model):
         currency_field="currency_id",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     residual_amount = fields.Monetary(
         currency_field="currency_id",
         default=0.0,
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Residual amount of the lease that must be payed on the end in "
         "order to acquire the asset",
     )
@@ -152,12 +142,10 @@ class AccountLoan(models.Model):
         ", if it is unchecked, the annuity will be recalculated on each "
         "period.",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     payment_on_first_period = fields.Boolean(
         default=False,
         readonly=True,
-        states={"draft": [("readonly", False)]},
         help="When checked, the first payment will be on start date",
     )
     currency_id = fields.Many2one(
@@ -171,7 +159,6 @@ class AccountLoan(models.Model):
         domain="[('company_id', '=', company_id),('type', '=', journal_type)]",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     short_term_loan_account_id = fields.Many2one(
         "account.account",
@@ -180,7 +167,6 @@ class AccountLoan(models.Model):
         help="Account that will contain the pending amount on short term",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     long_term_loan_account_id = fields.Many2one(
         "account.account",
@@ -188,7 +174,6 @@ class AccountLoan(models.Model):
         help="Account that will contain the pending amount on Long term",
         domain="[('company_id', '=', company_id)]",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     interest_expenses_account_id = fields.Many2one(
         "account.account",
@@ -197,18 +182,15 @@ class AccountLoan(models.Model):
         help="Account where the interests will be assigned to",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     is_leasing = fields.Boolean(
         default=False,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     leased_asset_account_id = fields.Many2one(
         "account.account",
         domain="[('company_id', '=', company_id)]",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     product_id = fields.Many2one(
         "product.product",
@@ -400,7 +382,7 @@ class AccountLoan(models.Model):
             date = line.date + relativedelta(months=12)
             if self.state == "draft" or line.sequence != final_sequence:
                 line.long_term_pending_principal_amount = sum(
-                    self.line_ids.filtered(lambda r: r.date >= date).mapped(
+                    self.line_ids.filtered(lambda r, date=date: r.date >= date).mapped(
                         "principal_amount"
                     )
                 )
@@ -452,7 +434,7 @@ class AccountLoan(models.Model):
     def view_account_invoices(self):
         self.ensure_one()
         result = self.env["ir.actions.act_window"]._for_xml_id(
-            "account.action_move_out_invoice_type"
+            "account.action_move_in_invoice_type"
         )
         result["domain"] = [("loan_id", "=", self.id), ("move_type", "=", "in_invoice")]
         return result
