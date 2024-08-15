@@ -363,7 +363,7 @@ class AccountLoanLine(models.Model):
         for record in self:
             if not record.move_ids:
                 if record.loan_id.line_ids.filtered(
-                    lambda r: r.date < record.date and not r.move_ids
+                    lambda r, record=record: r.date < record.date and not r.move_ids
                 ):
                     raise UserError(_("Some moves must be created first"))
                 move = self.env["account.move"].create(
@@ -394,7 +394,7 @@ class AccountLoanLine(models.Model):
         for record in self:
             if not record.move_ids:
                 if record.loan_id.line_ids.filtered(
-                    lambda r: r.date < record.date and not r.move_ids
+                    lambda r, record=record: r.date < record.date and not r.move_ids
                 ):
                     raise UserError(_("Some invoices must be created first"))
                 invoice = self.env["account.move"].create(record._invoice_vals())
@@ -404,7 +404,7 @@ class AccountLoanLine(models.Model):
                 invoice.flush_recordset()
                 invoice.filtered(
                     lambda m: m.currency_id.round(m.amount_total) < 0
-                ).action_switch_invoice_into_refund_credit_note()
+                ).action_switch_move_type()
                 if record.loan_id.post_invoice:
                     invoice.action_post()
                 if (
