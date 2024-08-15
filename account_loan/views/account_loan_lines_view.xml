@@ -16,31 +16,31 @@
                 <field name="interests_amount" sum="Total interests" />
                 <field
                     name="long_term_pending_principal_amount"
-                    attrs="{'invisible': [('long_term_loan_account_id', '=', False)]}"
+                    column_invisible="not parent.long_term_loan_account_id"
                 />
                 <field
                     name="long_term_principal_amount"
-                    attrs="{'invisible': [('long_term_loan_account_id', '=', False)]}"
+                    column_invisible="not parent.long_term_loan_account_id"
                 />
-                <field name="long_term_loan_account_id" invisible="1" />
-                <field name="loan_state" invisible="1" />
-                <field name="is_leasing" invisible="1" />
-                <field name="has_invoices" invisible="1" />
-                <field name="has_moves" invisible="1" />
-                <field name="currency_id" invisible="1" />
+                <field name="long_term_loan_account_id" column_invisible="True" />
+                <field name="loan_state" column_invisible="True" />
+                <field name="is_leasing" column_invisible="True" />
+                <field name="has_invoices" column_invisible="True" />
+                <field name="has_moves" column_invisible="True" />
+                <field name="currency_id" column_invisible="True" />
                 <button
                     name="view_account_values"
                     string="Values"
                     type="object"
                     icon="fa-eye"
-                    attrs="{'invisible': [('has_moves', '=', False),  ('has_invoices', '=', False)]}"
+                    invisible="has_moves == False and has_invoices == False"
                 />
                 <button
                     name="view_process_values"
                     string="Process"
                     type="object"
                     icon="fa-cogs"
-                    attrs="{'invisible': ['|', '|', ('has_moves', '=', True),  ('has_invoices', '=', True), ('loan_state', '!=', 'posted')]}"
+                    invisible="has_moves == True or has_invoices == True or loan_state != 'posted'"
                 />
             </tree>
         </field>
