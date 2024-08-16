@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-09 08:15+0000\n"
-"PO-Revision-Date: 2023-06-22 10:10+0000\n"
+"PO-Revision-Date: 2024-08-16 09:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_fiscal_year
 #: model_terms:ir.actions.act_window,help:account_fiscal_year.actions_account_fiscal_year
@@ -55,7 +55,7 @@ msgstr "Data fine"
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__fiscal_year_date_to
 msgid "End Date of the Fiscal Year"
-msgstr ""
+msgstr "Data finale dell'anno fiscale"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_to
@@ -111,7 +111,7 @@ msgstr "Data inizio"
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__fiscal_year_date_from
 msgid "Start Date of the Fiscal Year"
-msgstr ""
+msgstr "Data iniziale dell'anno fiscale"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_from
