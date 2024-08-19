@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2024-08-01 15:58+0000\n"
+"PO-Revision-Date: 2024-08-19 09:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -25,6 +25,8 @@ msgid ""
 "<span class=\"o_stat_text\">Deduct</span>\n"
 "                                <span class=\"o_stat_text\">Debt</span>"
 msgstr ""
+"<span class=\"o_stat_text\">Deduzione</span>\n"
+"                                <span class=\"o_stat_text\">Debito</span>"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -32,11 +34,13 @@ msgid ""
 "<span class=\"o_stat_text\">Increase</span>\n"
 "                                <span class=\"o_stat_text\">Debt</span>"
 msgstr ""
+"<span class=\"o_stat_text\">Incremento</span>\n"
+"                                <span class=\"o_stat_text\">Debito</span>"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.res_partner_form_view
 msgid "<span class=\"o_stat_text\">Loans</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Prestiti</span>"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__account_id
@@ -85,7 +89,7 @@ msgstr "Attività"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Decorazione eccezione attività"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_state
@@ -95,7 +99,7 @@ msgstr "Stato attività"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icona tipo attività"
 
 #. module: account_loan
 #. odoo-python
@@ -209,7 +213,7 @@ msgstr "Calcola prestito"
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__create_uid
@@ -279,7 +283,7 @@ msgstr "TAN"
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_lines_view
 msgid "Edit"
-msgstr ""
+msgstr "Modifica"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__final_pending_principal_amount
@@ -329,7 +333,7 @@ msgstr "Seguito da (partner)"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icona Font Awesome es. fa-tasks"
 
 #. module: account_loan
 #: model:ir.ui.menu,name:account_loan.account_loan_generate_wizard_menu
@@ -345,7 +349,7 @@ msgstr "Genera movimenti"
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.view_account_loan_lines_search
 msgid "Group by..."
-msgstr ""
+msgstr "Raggruppa per..."
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__has_invoices
@@ -355,7 +359,7 @@ msgstr "Ha fatture"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha un messaggio"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__has_moves
@@ -366,7 +370,7 @@ msgstr "Ha movimenti"
 #: model:ir.model.fields,help:account_loan.field_res_partner__lended_loan_count
 #: model:ir.model.fields,help:account_loan.field_res_users__lended_loan_count
 msgid "How many Loans this partner lended to us ?"
-msgstr ""
+msgstr "Quanti prestiti ci ha concesso questo partner?"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__id
@@ -381,12 +385,12 @@ msgstr "ID"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icona per indicare un'attività eccezione."
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_needaction
@@ -401,12 +405,12 @@ msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 #. module: account_loan
 #: model:ir.actions.act_window,name:account_loan.account_loan_increase_amount_act_window
 msgid "Increase Amount"
-msgstr ""
+msgstr "Aumenta valore"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_increase_amount
 msgid "Increase the debt of a loan"
-msgstr ""
+msgstr "Aumenta il debito di un prestito"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__interests_product_id
@@ -461,7 +465,7 @@ msgstr "Registro"
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Registrazione contabile"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__journal_type
@@ -517,13 +521,13 @@ msgstr "Leasing"
 #: model:ir.model.fields,field_description:account_loan.field_res_partner__lended_loan_ids
 #: model:ir.model.fields,field_description:account_loan.field_res_users__lended_loan_ids
 msgid "Lended Loan"
-msgstr ""
+msgstr "Prestito concesso"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_res_partner__lended_loan_count
 #: model:ir.model.fields,field_description:account_loan.field_res_users__lended_loan_count
 msgid "Lended Loan Count"
-msgstr ""
+msgstr "Conteggio prestiti concessi"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__partner_id
@@ -558,7 +562,7 @@ msgstr "Importo prestito"
 #: model:ir.actions.act_window,name:account_loan.account_loan_lines_action
 #: model:ir.ui.menu,name:account_loan.account_loan_lines_menu
 msgid "Loan Items"
-msgstr ""
+msgstr "Righe prestito"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_bank_statement_line__loan_line_id
@@ -663,7 +667,7 @@ msgstr "Movimenti"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Scadenza mia attività"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__name
@@ -699,12 +703,12 @@ msgstr "Numero di azioni"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Numero di errori"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Numero di messaggi che richiedono un'azione"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error_counter
@@ -1008,7 +1012,7 @@ msgstr "Totale Pagamenti"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo di attività eccezione sul record."
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
