@@ -20,5 +20,6 @@
         "security/ir.model.access.csv",
         "security/account_fiscal_year_rule.xml",
         "views/account_fiscal_year_views.xml",
+        "views/res_company_views.xml",
     ],
 }
