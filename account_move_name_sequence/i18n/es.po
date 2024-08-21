@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-21 18:34+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2024-08-21 12:03+0000\n"
+"Last-Translator: Eduardo Ruiz <eduardo@readylan.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_move_name_sequence
 #: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
@@ -37,12 +37,12 @@ msgstr ""
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence_id
 msgid "Credit Note Entry Sequence"
-msgstr "Secuencia de Entrada de Notas de Crédito"
+msgstr "Secuencia de Facturas Rectificativas"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence
 msgid "Dedicated Credit Note Sequence"
-msgstr "Secuencia de Notas de Crédito Especializadas"
+msgstr "Secuencia dedicada para rectificativas"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__display_name
@@ -139,7 +139,7 @@ msgid ""
 "of journal '%s'."
 msgstr ""
 "La compañía no está establecida en la secuencia '%s' configurada como "
-"secuencia de notas de crédito del diario '%s'."
+"secuencia de rectificativas del diario '%s'."
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
