@@ -21,25 +21,23 @@ class AccountAsset(models.Model):
 
     @api.depends("profile_id", "method_number")
     def _compute_low_value(self):
-        expense_account = self.env.ref("account.data_account_type_expenses")
         for asset in self:
             asset.low_value = (
-                asset.profile_id.account_asset_id.user_type_id == expense_account
+                asset.profile_id.account_asset_id.account_type == "expense"
                 and asset.method_number == 0
             )
 
     @api.model
     def _search_low_value(self, operator, value):
-        expense_account = self.env.ref("account.data_account_type_expenses")
         if operator == "=":
             return [
-                ("profile_id.account_asset_id.user_type_id", "=", expense_account.id),
+                ("profile_id.account_asset_id.account_type", "=", "expense"),
                 ("method_number", "=", 0),
             ]
         if operator == "!=":
             return [
                 "|",
-                ("profile_id.account_asset_id.user_type_id", "!=", expense_account.id),
+                ("profile_id.account_asset_id.account_type", "!=", "expense"),
                 ("method_number", "!=", 0),
             ]
 
