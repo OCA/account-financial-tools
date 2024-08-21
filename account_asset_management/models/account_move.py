@@ -253,6 +253,11 @@ class AccountMoveLine(models.Model):
                 record._expand_asset_line()
         return True
 
+    def split_price_expense(self, qty):
+        """Check expense_id and split price if needed."""
+        if hasattr(self, "expense_id") and self.expense_id:
+            self.update({"debit": self.debit / qty})
+
     def _expand_asset_line(self):
         self.ensure_one()
         if self.asset_profile_id and self.quantity > 1.0:
@@ -261,6 +266,7 @@ class AccountMoveLine(models.Model):
                 aml = self.with_context(check_move_validity=False)
                 qty = self.quantity
                 name = self.name
+                aml.split_price_expense(qty)
                 aml.write({"quantity": 1, "name": "{} {}".format(name, 1)})
                 aml._onchange_price_subtotal()
                 for i in range(1, int(qty)):
