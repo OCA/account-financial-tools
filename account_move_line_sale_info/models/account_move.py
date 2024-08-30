@@ -12,8 +12,8 @@ class AccountMove(models.Model):
         for i, vals in enumerate(res):
             am = self.env["account.move"].browse(vals["move_id"])
             sale_line_id = am.invoice_line_ids.filtered(
-                lambda il: il.product_id.id == vals["product_id"]
-                and il.quantity == vals["quantity"]
+                lambda il, vs=vals: il.product_id.id == vs["product_id"]
+                and il.quantity == vs["quantity"]
             ).mapped("sale_line_ids")
             if sale_line_id and len(sale_line_id) == 1:
                 res[i]["sale_line_id"] = sale_line_id.id
@@ -21,7 +21,6 @@ class AccountMove(models.Model):
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = "account.move.line"
 
     sale_line_id = fields.Many2one(
@@ -44,6 +43,6 @@ class AccountMoveLine(models.Model):
 
     def _copy_data_extend_business_fields(self, values):
         # Same way Odoo standard does for purchase_line_id field
-        res = super(AccountMoveLine, self)._copy_data_extend_business_fields(values)
+        res = super()._copy_data_extend_business_fields(values)
         values["sale_line_id"] = self.sale_line_id.id
         return res
