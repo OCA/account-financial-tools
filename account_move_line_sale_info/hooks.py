@@ -2,11 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-def post_init_hook(cr, registry):
-
+def post_init_hook(env):
     """INIT sale references in account move line"""
     # FOR stock moves
-    cr.execute(
+    env.cr.execute(
         """
         UPDATE account_move_line aml SET sale_line_id = sm.sale_line_id
         FROM account_move_line aml2
@@ -16,7 +15,7 @@ def post_init_hook(cr, registry):
     """
     )
     # FOR invoices
-    cr.execute(
+    env.cr.execute(
         """
         UPDATE account_move_line aml SET sale_line_id = sol.id
         FROM account_move_line aml2
@@ -32,7 +31,7 @@ def post_init_hook(cr, registry):
     )
 
     # NOW we can fill the SO
-    cr.execute(
+    env.cr.execute(
         """
         UPDATE account_move_line aml
         SET sale_order_id = sol.order_id
@@ -45,7 +44,7 @@ def post_init_hook(cr, registry):
     # NOW we can fill the lines without invoice_id (Odoo put it very
     # complicated)
 
-    cr.execute(
+    env.cr.execute(
         """
         UPDATE account_move_line aml
         SET sale_order_id = so.id
@@ -56,7 +55,7 @@ def post_init_hook(cr, registry):
     """
     )
 
-    cr.execute(
+    env.cr.execute(
         """
         update account_move_line aml set sale_line_id = sol.id
         FROM account_move_line aml2

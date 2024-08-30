@@ -30,9 +30,8 @@ Account Move Line Sale Info
 
 This module will add the sale order line to journal items.
 
-The ultimate goal is to establish the purchase order line as one of the
-key fields to reconcile the Goods Delivered Not Invoiced accrual
-account.
+The ultimate goal is to establish the sale order line as one of the key
+fields to reconcile the Goods Delivered Not Invoiced accrual account.
 
 **Table of contents**
 
@@ -44,7 +43,7 @@ Usage
 
 The sale order line will be automatically copied to the journal items.
 
--  When a supplier invoice is created referencing sales orders, the sale
+-  When a customer invoice is created referencing sales orders, the sale
    order line will be copied to the corresponding journal item.
 -  When a stock move is validated and generates a journal entry, the
    sale order line is copied to the account move line.
@@ -71,6 +70,9 @@ Contributors
 ------------
 
 -  Aaron Henriquez <ahenriquez@forgeflow.com>
+-  `360ERP <https://www.360erp.com>`__:
+
+   -  Andrea Stirpe
 
 Maintainers
 -----------

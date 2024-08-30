@@ -5,7 +5,7 @@ from odoo.tests import common
 
 class TestAccountMoveLineSaleInfo(common.TransactionCase):
     def setUp(self):
-        super(TestAccountMoveLineSaleInfo, self).setUp()
+        super().setUp()
         self.sale_model = self.env["sale.order"]
         self.sale_line_model = self.env["sale.order.line"]
         self.product_model = self.env["product.product"]
@@ -159,8 +159,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             self.assertEqual(
                 balance,
                 expected_balance,
-                "Balance is not %s for sale Line %s."
-                % (str(expected_balance), sale_line.name),
+                f"Balance is not {str(expected_balance)} for sale Line {sale_line.name}.",
             )
 
     def move_reversal_wiz(self, move):
@@ -182,7 +181,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             break
         sale.action_confirm()
         picking = sale.picking_ids[0]
-        picking.move_ids.write({"quantity_done": 1.0})
+        picking.move_ids.write({"quantity": 1.0, "picked": True})
         picking.button_validate()
 
         expected_balance = -1.0
@@ -218,30 +217,23 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
     def test_02_name_get(self):
         sale = self._create_sale([(self.product, 1)])
         so_line = sale.order_line[0]
-        name_get = so_line.with_context(**{"so_line_info": True}).name_get()
+        name_get = so_line.with_context(**{"so_line_info": True}).display_name
         self.assertEqual(
             name_get,
-            [
-                (
-                    so_line.id,
-                    "[%s] %s - (%s)"
-                    % (
-                        so_line.order_id.name,
-                        so_line.product_id.name,
-                        so_line.order_id.state,
-                    ),
-                )
-            ],
+            "[{}] {} - ({})".format(
+                so_line.order_id.name,
+                so_line.product_id.name,
+                so_line.order_id.state,
+            ),
         )
-        name_get_no_ctx = so_line.with_context(**{}).name_get()
+        name_get_no_ctx = so_line.with_context(**{}).display_name
         self.assertEqual(
             name_get_no_ctx,
-            [
-                (
-                    so_line.id,
-                    "{} - {}".format(so_line.order_id.name, so_line.product_id.name),
-                )
-            ],
+            "{} - {} {}".format(
+                so_line.order_id.name,
+                so_line.product_id.name,
+                so_line._additional_name_per_id()[so_line.id],
+            ),
         )
 
     def test_03_credit_note(self):
@@ -253,7 +245,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             break
         sale.action_confirm()
         picking = sale.picking_ids[0]
-        picking.move_ids.write({"quantity_done": 1.0})
+        picking.move_ids.write({"quantity": 1.0, "picked": True})
         picking.button_validate()
         sale._create_invoices()
         invoice = sale.invoice_ids[0]
