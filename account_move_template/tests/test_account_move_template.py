@@ -186,7 +186,7 @@ class TestAccountMoveTemplate(TransactionCase):
         self.assertEqual(template.company_id, self.user.company_id)
 
         template_2 = template.copy()
-        self.assertEqual(template_2.name, "%s (copy)" % template.name)
+        self.assertEqual(template_2.name, f"{template.name} (copy)")
 
         wiz = (
             self.env["wizard.select.move.template"]
