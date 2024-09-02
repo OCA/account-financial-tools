@@ -210,8 +210,12 @@ Valid dictionary to overwrite template lines:
     def _prepare_move_line(self, line, amount):
         date_maturity = False
         if line.payment_term_id:
-            pterm_list = line.payment_term_id.compute(value=1, date_ref=self.date)
-            date_maturity = max(line[0] for line in pterm_list)
+            date_maturity = max(
+                [
+                    line._get_due_date(self.date)
+                    for line in line.payment_term_id.line_ids
+                ]
+            )
         debit = line.move_line_type == "dr"
         values = {
             "name": line.name,
@@ -225,10 +229,11 @@ Valid dictionary to overwrite template lines:
         }
         if line.tax_ids:
             values["tax_ids"] = [Command.set(line.tax_ids.ids)]
-            tax_repartition = "refund_tax_id" if line.is_refund else "invoice_tax_id"
+            document_type = "refund" if line.is_refund else "invoice"
             atrl_ids = self.env["account.tax.repartition.line"].search(
                 [
-                    (tax_repartition, "in", line.tax_ids.ids),
+                    ("tax_id", "in", line.tax_ids.ids),
+                    ("document_type", "=", document_type),
                     ("repartition_type", "=", "base"),
                 ]
             )

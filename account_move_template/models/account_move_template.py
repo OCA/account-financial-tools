@@ -182,7 +182,7 @@ class AccountMoveTemplateLine(models.Model):
     @api.depends("is_refund", "account_id", "tax_line_id")
     def _compute_tax_repartition_line_id(self):
         for record in self.filtered(lambda x: x.account_id and x.tax_line_id):
-            tax_repartition = "refund_tax_id" if record.is_refund else "invoice_tax_id"
+            tax_repartition = "tax_id"
             record.tax_repartition_line_id = self.env[
                 "account.tax.repartition.line"
             ].search(
