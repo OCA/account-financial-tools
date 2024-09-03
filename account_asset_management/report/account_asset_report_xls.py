@@ -296,6 +296,14 @@ class AssetReportXlsx(models.AbstractModel):
                 },
                 "width": 8,
             },
+            "company": {
+                "header": {"type": "string", "value": self._("Company")},
+                "asset": {
+                    "type": "string",
+                    "value": self._render("asset.company_id.name or ''"),
+                },
+                "width": 20,
+            },
         }
         asset_template.update(self.env["account.asset"]._xls_asset_template())
 
@@ -423,6 +431,8 @@ class AssetReportXlsx(models.AbstractModel):
 
         if not wiz.draft:
             dom.append(("state", "!=", "draft"))
+        if wiz.company_ids:
+            dom.append(("company_id", "in", wiz.company_ids.ids))
         assets = self.env["account.asset"].search(dom)
         grouped_assets = {}
         self._group_assets(assets, parent_group, grouped_assets)

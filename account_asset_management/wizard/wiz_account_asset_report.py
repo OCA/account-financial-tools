@@ -16,14 +16,21 @@ class WizAccountAssetReport(models.TransientModel):
         string="Asset Group",
         default=lambda self: self._default_asset_group_id(),
     )
-    date_from = fields.Date(string="Start Date", required=True)
-    date_to = fields.Date(string="End Date", required=True)
-    draft = fields.Boolean(string="Include draft assets")
-    company_id = fields.Many2one(
-        comodel_name="res.company",
-        string="Company",
+    date_from = fields.Date(
+        string="Start Date",
         required=True,
-        default=lambda self: self._default_company_id(),
+        default=lambda self: self._default_fy_dates()["date_from"],
+    )
+    date_to = fields.Date(
+        string="End Date",
+        required=True,
+        default=lambda self: self._default_fy_dates()["date_to"],
+    )
+    draft = fields.Boolean(string="Include draft assets")
+    company_ids = fields.Many2many(
+        comodel_name="res.company",
+        string="Companies",
+        domain=lambda self: [("id", "in", self.env.user.company_ids.ids)],
     )
 
     @api.model
@@ -35,14 +42,9 @@ class WizAccountAssetReport(models.TransientModel):
         )
 
     @api.model
-    def _default_company_id(self):
-        return self.env.company
-
-    @api.onchange("company_id")
-    def _onchange_company_id(self):
-        fy_dates = self.company_id.compute_fiscalyear_dates(fields.date.today())
-        self.date_from = fy_dates["date_from"]
-        self.date_to = fy_dates["date_to"]
+    def _default_fy_dates(self):
+        fy_dates = self.env.company.compute_fiscalyear_dates(fields.date.today())
+        return fy_dates
 
     @api.constrains("date_from", "date_to")
     def _check_dates(self):

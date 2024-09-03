@@ -1276,7 +1276,7 @@ class AccountAsset(models.Model):
         """
         Update list in custom module to add/drop columns or change order
         """
-        return [
+        acquisition_fields = [
             "account",
             "name",
             "code",
@@ -1285,13 +1285,16 @@ class AccountAsset(models.Model):
             "depreciation_base",
             "salvage_value",
         ]
+        if self.env.user.has_group("base.group_multi_company"):
+            acquisition_fields = acquisition_fields + ["company"]
+        return acquisition_fields
 
     @api.model
     def _xls_active_fields(self):
         """
         Update list in custom module to add/drop columns or change order
         """
-        return [
+        active_fields = [
             "account",
             "name",
             "code",
@@ -1308,13 +1311,16 @@ class AccountAsset(models.Model):
             "prorata",
             "state",
         ]
+        if self.env.user.has_group("base.group_multi_company"):
+            active_fields = active_fields + ["company"]
+        return active_fields
 
     @api.model
     def _xls_removal_fields(self):
         """
         Update list in custom module to add/drop columns or change order
         """
-        return [
+        removal_fields = [
             "account",
             "name",
             "code",
@@ -1323,6 +1329,9 @@ class AccountAsset(models.Model):
             "depreciation_base",
             "salvage_value",
         ]
+        if self.env.user.has_group("base.group_multi_company"):
+            removal_fields = removal_fields + ["company"]
+        return removal_fields
 
     @api.model
     def _xls_asset_template(self):
