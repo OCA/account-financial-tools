@@ -28,7 +28,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
-"PO-Revision-Date: 2024-08-07 01:58+0000\n"
+"PO-Revision-Date: 2024-09-03 16:06+0000\n"
 "Last-Translator: Rodrigo Sottomaior Macedo "
 "<sottomaiormacedotec@sottomaiormacedo.tech>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
@@ -1400,12 +1400,12 @@ msgstr "Lançamento de diário reverso"
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "Reverse Move"
-msgstr ""
+msgstr "Movimento reverso"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_wiz_asset_move_reverse
 msgid "Reverse posted journal entry on depreciation line"
-msgstr ""
+msgstr "Lançamento contábil reverso na linha de depreciação"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__open
@@ -1421,7 +1421,7 @@ msgstr "Valor de Venda"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
 msgid "Salvage Type"
-msgstr ""
+msgstr "Tipo de salvamento"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1464,7 +1464,7 @@ msgstr "Pular a Situação Provisório"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__date_from
 msgid "Start Date"
-msgstr ""
+msgstr "Data de Início"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__state
@@ -1493,11 +1493,15 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Status baseado em atividades\n"
+"Atrasado: Data definida já passou\n"
+"Hoje: Data de atividade é hoje\n"
+"Planejado: Atividades futuras."
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years'."
@@ -1510,7 +1514,7 @@ msgstr ""
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
-msgstr ""
+msgstr "O campo 'account' é uma entrada obrigatória da lista '_xls_%s_fields'!"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1574,7 +1578,6 @@ msgstr "A data de remoção deve ser posterior à última data de depreciação.
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__depreciation_base
-#, fuzzy
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value)."
@@ -1598,7 +1601,7 @@ msgstr ""
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "This invoice created the asset(s): %s"
-msgstr ""
+msgstr "Esta fatura criou o(s) ativo(s): %s"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
@@ -1611,7 +1614,7 @@ msgstr "Método Temporal"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Tot. Depreciation"
-msgstr ""
+msgstr "Depreciação Total"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1623,7 +1626,7 @@ msgstr "Dias Totais"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Totals"
-msgstr ""
+msgstr "Totais"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_trigger
@@ -1638,25 +1641,25 @@ msgstr "Tipo"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo de atividade de exceção registrada."
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Undetermined error"
-msgstr ""
+msgstr "Erro indeterminado"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
 msgid "Use Leap Years"
-msgstr ""
+msgstr "Use anos bissextos"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
 msgid "Use Specific Journal"
-msgstr ""
+msgstr "Use um diário específico"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
