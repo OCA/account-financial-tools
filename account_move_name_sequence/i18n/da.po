@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-09-04 16:06+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: none\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_move_name_sequence
 #: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
@@ -27,45 +29,48 @@ msgid ""
 "Check this box if you don't want to share the same sequence for invoices and"
 " credit notes made from this journal"
 msgstr ""
+"Marker dette felt, hvis du ikke ønsker at dele den samme nummerserie for "
+"fakturaer og kreditnotaer lavet fra denne kladde"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence_id
 msgid "Credit Note Entry Sequence"
-msgstr ""
+msgstr "Kreditnota nummerserie"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence
 msgid "Dedicated Credit Note Sequence"
-msgstr ""
+msgstr "Dedikeret kreditnota nummerserie"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__sequence_id
 msgid "Entry Sequence"
-msgstr ""
+msgstr "Nummerserie"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
 msgid "Highest Name"
-msgstr ""
+msgstr "Højeste nummer"
 
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Postering"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__name
+#, fuzzy
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
@@ -79,28 +84,28 @@ msgstr ""
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid "Refund"
-msgstr ""
+msgstr "Returnering"
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #: model:ir.model,name:account_move_name_sequence.model_ir_sequence
 #, python-format
 msgid "Sequence"
-msgstr ""
+msgstr "Sekvens"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
 msgid "Sequence Number"
-msgstr ""
+msgstr "Sekvens nummer"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
 msgid "Sequence Prefix"
-msgstr ""
+msgstr "Sekvens prefix"
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
@@ -123,8 +128,10 @@ msgstr ""
 msgid ""
 "This sequence will be used to generate the journal entry number for refunds."
 msgstr ""
+"Denne sekvens vil blive brugt til at generere journalpostnummeret for "
+"refusioner."
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
 msgid "This sequence will be used to generate the journal entry number."
-msgstr ""
+msgstr "Denne sekvens vil blive brugt til at generere journalpostnummeret."
