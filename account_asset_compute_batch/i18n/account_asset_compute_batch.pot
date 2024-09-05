@@ -1,0 +1,496 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_compute_batch
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__date_end
+msgid "All depreciation lines prior to this date will be computed"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report__amount
+msgid "Amount"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model,name:account_asset_compute_batch.model_account_asset
+msgid "Asset"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: code:addons/account_asset_compute_batch/wizard/account_asset_compute.py:0
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.search_account_asset_compute_batch_filter
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
+#, python-format
+msgid "Asset Compute Batch"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.actions.server,name:account_asset_compute_batch.ir_cron_auto_compute_draft_batch_ir_actions_server
+#: model:ir.cron,cron_name:account_asset_compute_batch.ir_cron_auto_compute_draft_batch
+#: model:ir.cron,name:account_asset_compute_batch.ir_cron_auto_compute_draft_batch
+msgid ""
+"Asset Compute Batch; Post draft batches with auto_compute set to True up to "
+"today"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report__profile_id
+msgid "Asset Profile"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model,name:account_asset_compute_batch.model_account_asset_line
+msgid "Asset depreciation table line"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__auto_compute
+msgid "Auto Compute"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__auto_compute
+msgid "Auto compute draft batches with 'Date' up to today, by cron job"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute__batch_name
+msgid "Batch Name"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.search_account_asset_compute_batch_filter
+msgid "Batch Number"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.constraint,message:account_asset_compute_batch.constraint_account_asset_compute_batch_name_uniq
+msgid "Batch name must be unique!"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
+msgid "Compute"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.actions.act_window,name:account_asset_compute_batch.account_asset_compute_batch_action
+#: model:ir.ui.menu,name:account_asset_compute_batch.account_asset_compute_batch_menu
+msgid "Compute Asset Batch"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model,name:account_asset_compute_batch.model_account_asset_compute
+msgid "Compute Assets"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
+#, python-format
+msgid "Compute Assets errors"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report__compute_batch_id
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_move_line__compute_batch_id
+msgid "Compute Batch"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model,name:account_asset_compute_batch.model_account_asset_compute_batch
+msgid "Compute Depreciation Batch"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields.selection,name:account_asset_compute_batch.selection__account_asset_compute_batch__state__computed
+msgid "Computed"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute__use_batch
+msgid "Create Batch"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__currency_id
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__delay_post
+msgid ""
+"Dalay account posting of newly created journaly entries, by setting "
+"auto_post=True, to be posted by cron job"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__date_end
+msgid "Date"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute__delay_compute
+msgid "Delay Compute Asset"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__delay_post
+msgid "Delay Posting"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__depre_amount
+msgid "Depreciation Amount"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model,name:account_asset_compute_batch.model_account_asset_compute_batch_profile_report
+msgid "Depreciation Amount by Profile"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
+msgid "Depreciation By Profile"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
+msgid "Depreciations"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute__description
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__description
+msgid "Description"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__display_name
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields.selection,name:account_asset_compute_batch.selection__account_asset_compute_batch__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
+#, python-format
+msgid ""
+"Error while processing batches %(batch_ref)s: \n"
+"\n"
+"%(tb)s"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields.selection,name:account_asset_compute_batch.selection__account_asset_compute_batch__state__exception
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
+msgid "Exception"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__note
+msgid "Exception Error"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__id
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report__id
+msgid "ID"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute__batch_name
+msgid "If batch name is specified, computation will be tracked by a batch"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_needaction
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
+#, python-format
+msgid "Journal Entries"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model,name:account_asset_compute_batch.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model,name:account_asset_compute_batch.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
+#, python-format
+msgid "Journal Items"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch____last_update
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__move_line_ids
+msgid "Move Line"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__name
+msgid "Name"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
+#, python-format
+msgid "Only draft batch can be deleted!"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__profile_report
+msgid "Profile Report"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute__profile_ids
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__profile_ids
+msgid "Profiles"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__profile_ids
+msgid "Selected asset to run depreciation. Run all profiles if left blank."
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__state
+msgid "State"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_tree
+msgid "Total"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute__use_batch
+msgid "Use batch opton"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__website_message_ids
+msgid "Website communication history"
+msgstr ""
