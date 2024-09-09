@@ -6,10 +6,9 @@ from odoo.tests import common
 
 
 class TestAccountJournalRestrictMode(common.TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super(TestAccountJournalRestrictMode, cls).setUpClass()
-        cls.account_journal_obj = cls.env["account.journal"]
+    def setUp(self):
+        super(TestAccountJournalRestrictMode, self).setUp()
+        self.account_journal_obj = self.env["account.journal"]
 
     def test_journal_default_lock_entries(self):
         journal = self.account_journal_obj.create(

@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 class AccountJournal(models.Model):
     _inherit = "account.journal"
 
-    restrict_mode_hash_table = fields.Boolean(default=True)
+    restrict_mode_hash_table = fields.Boolean(default=True, readonly=True)
 
     @api.constrains("restrict_mode_hash_table")
     def _check_journal_restrict_mode(self):
