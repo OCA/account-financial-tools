@@ -145,12 +145,6 @@ msgid "Check Payments"
 msgstr "Pagamentos do Cheque"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
-msgid "Check Ref. %s"
-msgstr "Refª Cheque %s"
-
-#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Checks Deposit"
 msgstr "Depósito de Cheques"
@@ -191,6 +185,12 @@ msgstr "Data"
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Debtor"
 msgstr "Devedor"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "Deposit '%s' has already been credited on the bank account."
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
@@ -355,8 +355,8 @@ msgstr "Mensagens"
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
-msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
-msgstr "Falta 'Conta de Recibos Pendentes' no diário do banco '%s'."
+msgid "Missing 'Outstanding Receipts Account' on the journal '%s'."
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
@@ -519,6 +519,14 @@ msgstr "Mensagens do Website"
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr "Histórico de Comunicação do Website"
+
+#, python-format
+#~ msgid "Check Ref. %s"
+#~ msgstr "Refª Cheque %s"
+
+#, python-format
+#~ msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
+#~ msgstr "Falta 'Conta de Recibos Pendentes' no diário do banco '%s'."
 
 #~ msgid "SMS Delivery error"
 #~ msgstr "Erro de Envio de SMS"

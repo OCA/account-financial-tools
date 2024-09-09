@@ -145,12 +145,6 @@ msgid "Check Payments"
 msgstr "Pagamenti assegno"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
-msgid "Check Ref. %s"
-msgstr "Rif. assegno %s"
-
-#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Checks Deposit"
 msgstr "Versamento assegni"
@@ -191,6 +185,12 @@ msgstr "Data"
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Debtor"
 msgstr "Debitore"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "Deposit '%s' has already been credited on the bank account."
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
@@ -355,8 +355,8 @@ msgstr "Messaggi"
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
-msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
-msgstr "\"Conto ricevute in sospeso\" mancante nel registro banca \"%s\"."
+msgid "Missing 'Outstanding Receipts Account' on the journal '%s'."
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
@@ -518,6 +518,14 @@ msgstr "Messaggi sito web"
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr "Cronologia comunicazioni sito web"
+
+#, python-format
+#~ msgid "Check Ref. %s"
+#~ msgstr "Rif. assegno %s"
+
+#, python-format
+#~ msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
+#~ msgstr "\"Conto ricevute in sospeso\" mancante nel registro banca \"%s\"."
 
 #~ msgid "SMS Delivery error"
 #~ msgstr "Errore consegna SMS"

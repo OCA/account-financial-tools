@@ -145,12 +145,6 @@ msgid "Check Payments"
 msgstr "Paiements par Chèque"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
-msgid "Check Ref. %s"
-msgstr "Chèque Ref. %s"
-
-#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Checks Deposit"
 msgstr "Remise de Chèques"
@@ -191,6 +185,12 @@ msgstr "Date"
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Debtor"
 msgstr "Débiteur"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "Deposit '%s' has already been credited on the bank account."
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
@@ -356,7 +356,7 @@ msgstr ""
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
-msgid "Missing 'Outstanding Receipts Account' on the bank journal '%s'."
+msgid "Missing 'Outstanding Receipts Account' on the journal '%s'."
 msgstr ""
 
 #. module: account_check_deposit
@@ -516,6 +516,10 @@ msgstr ""
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr ""
+
+#, python-format
+#~ msgid "Check Ref. %s"
+#~ msgstr "Chèque Ref. %s"
 
 #~ msgid "Check Deposit - Ref. Check %s"
 #~ msgstr "Remise - Ref. Cheque %s"
