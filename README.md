@@ -34,7 +34,7 @@ addon | version | maintainers | summary
 [account_balance_line](account_balance_line/) | 14.0.1.1.0 |  | Display balance totals in move line view
 [account_cash_deposit](account_cash_deposit/) | 14.0.1.3.0 |  | Manage cash deposits and cash orders
 [account_chart_update](account_chart_update/) | 14.0.2.1.2 |  | Wizard to update a company's account chart from a template
-[account_check_deposit](account_check_deposit/) | 14.0.1.3.0 |  | Manage deposit of checks to the bank
+[account_check_deposit](account_check_deposit/) | 14.0.1.4.0 |  | Manage deposit of checks to the bank
 [account_cost_center](account_cost_center/) | 14.0.1.0.0 |  | Cost center information for invoice lines
 [account_fiscal_month](account_fiscal_month/) | 14.0.1.0.0 |  | Provide a fiscal month date range type
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.2.0 |  | Check VAT on invoice validation
