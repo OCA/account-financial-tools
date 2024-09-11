@@ -28,8 +28,8 @@ msgstr ""
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
 msgid ""
-"Check this box if you don't want to share the same sequence for invoices and"
-" credit notes made from this journal"
+"Check this box if you don't want to share the same sequence for invoices and "
+"credit notes made from this journal"
 msgstr ""
 "Marca esta casilla si no quieres compartir la misma secuencia para las "
 "facturas y facturas rectificativas hechas en este diario"
@@ -55,13 +55,6 @@ msgstr "Mostrar Nombre"
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__sequence_id
 msgid "Entry Sequence"
 msgstr "Secuencia de Entrada"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
-msgid "Highest Name"
-msgstr "Nombre Máximo"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__id
@@ -98,8 +91,8 @@ msgstr "Número"
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid ""
-"On journal '%s', the same sequence is used as Entry Sequence and Credit Note"
-" Entry Sequence."
+"On journal '%s', the same sequence is used as Entry Sequence and Credit Note "
+"Entry Sequence."
 msgstr ""
 "En el diario '%s', se ha usado la misma secuencia para la Secuencia de "
 "asiento y la Secuencia de facturas rectificativas."
@@ -116,20 +109,6 @@ msgstr "Devolución"
 #, python-format
 msgid "Sequence"
 msgstr "Secuencia"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
-msgid "Sequence Number"
-msgstr "Número de Secuencia"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
-msgid "Sequence Prefix"
-msgstr "Prefijo de la Secuencia"
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
@@ -163,3 +142,12 @@ msgid "This sequence will be used to generate the journal entry number."
 msgstr ""
 "Esta secuencia se usará para establecer para generar el número de asiento "
 "contable."
+
+#~ msgid "Highest Name"
+#~ msgstr "Nombre Máximo"
+
+#~ msgid "Sequence Number"
+#~ msgstr "Número de Secuencia"
+
+#~ msgid "Sequence Prefix"
+#~ msgstr "Prefijo de la Secuencia"

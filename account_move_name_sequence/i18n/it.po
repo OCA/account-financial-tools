@@ -53,13 +53,6 @@ msgid "Entry Sequence"
 msgstr ""
 
 #. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
-msgid "Highest Name"
-msgstr ""
-
-#. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__id
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__id
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_ir_sequence__id
@@ -110,20 +103,6 @@ msgstr ""
 #, python-format
 msgid "Sequence"
 msgstr "Sequenza"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
-msgid "Sequence Number"
-msgstr ""
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
-msgid "Sequence Prefix"
-msgstr ""
 
 #. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0

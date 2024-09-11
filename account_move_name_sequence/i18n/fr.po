@@ -58,13 +58,6 @@ msgid "Entry Sequence"
 msgstr "Séquence de la pièce comptable"
 
 #. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
-msgid "Highest Name"
-msgstr "Nom le plus haut"
-
-#. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__id
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__id
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_ir_sequence__id
@@ -119,20 +112,6 @@ msgid "Sequence"
 msgstr "Séquence"
 
 #. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
-msgid "Sequence Number"
-msgstr "Nombre de la séquence"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
-msgid "Sequence Prefix"
-msgstr "Préfixe de la séquence"
-
-#. module: account_move_name_sequence
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #, python-format
 msgid ""
@@ -164,3 +143,12 @@ msgid "This sequence will be used to generate the journal entry number."
 msgstr ""
 "Cette séquence sera utilisée pour générer le numéro de pièce comptable (des "
 "factures)."
+
+#~ msgid "Highest Name"
+#~ msgstr "Nom le plus haut"
+
+#~ msgid "Sequence Number"
+#~ msgstr "Nombre de la séquence"
+
+#~ msgid "Sequence Prefix"
+#~ msgstr "Préfixe de la séquence"
