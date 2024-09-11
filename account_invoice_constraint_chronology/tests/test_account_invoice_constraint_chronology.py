@@ -225,3 +225,12 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
             ),
         ):
             self.invoice_1_a_15.action_post()
+
+    def test_post_invoice_with_name(self):
+        # invoice 1 has a number (not /)
+        assert self.invoice_1.state == "draft"
+        assert self.invoice_1.name > "/"
+        # invoice 2 is dated after invoice 1 and is named '/'
+        invoice2 = self.invoice_1.copy()
+        invoice2.invoice_date = self.invoice_1.invoice_date + timedelta(days=1)
+        self.invoice_1.action_post()

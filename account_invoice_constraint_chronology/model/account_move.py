@@ -96,6 +96,7 @@ class AccountMove(models.Model):
             [
                 (
                     ("name", ">", self.name),
+                    ("name", "!=", "/"),
                     ("invoice_date", "<", self.invoice_date),
                 )
             ]
@@ -106,6 +107,7 @@ class AccountMove(models.Model):
             [
                 (
                     ("name", "<", self.name),
+                    ("name", "!=", "/"),
                     ("invoice_date", ">", self.invoice_date),
                 )
             ]
