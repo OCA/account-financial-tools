@@ -20,7 +20,6 @@ class PurchaseOrder(models.Model):
     amount_unreconciled = fields.Float(compute="_compute_unreconciled")
 
     def _get_account_domain(self):
-        self.ensure_one()
         included_accounts = (
             (
                 self.env["product.category"]
@@ -36,11 +35,10 @@ class PurchaseOrder(models.Model):
     def _get_purchase_unreconciled_base_domain(self):
         unreconciled_domain = [
             ("account_id.reconcile", "=", True),
-            ("account_id.internal_type", "not in", ["receivable", "payable"]),
             ("move_id.state", "=", "posted"),
             ("company_id", "in", self.env.companies.ids),
             # same condition than Odoo Unreconciled filter
-            ("full_reconcile_id", "=", False),
+            ("amount_residual", "!=", 0.0),
             ("balance", "!=", 0.0),
         ]
         return unreconciled_domain
@@ -65,18 +63,15 @@ class PurchaseOrder(models.Model):
             raise ValueError(_("Unsupported search operator"))
         acc_item = self.env["account.move.line"]
         domain = self._get_purchase_unreconciled_base_domain()
-        unreconciled_domain = expression.AND(
-            [domain, [("purchase_order_id", "!=", False)]]
-        )
-        unreconciled_domain = expression.AND(
-            [unreconciled_domain, [("company_id", "in", self.env.companies.ids)]]
-        )
-        unreconciled_items = acc_item.search(unreconciled_domain)
-        unreconciled_pos = unreconciled_items.mapped("purchase_order_id")
+        domain = expression.AND([domain, [("purchase_order_id", "!=", False)]])
+        domain_account = self._get_account_domain()
+        domain = expression.AND([domain_account, domain])
+        acc_items = acc_item.search(domain)
+        unreconciled_pos_ids = acc_items.mapped("purchase_order_id").ids
         if value:
-            return [("id", "in", unreconciled_pos.ids)]
+            return [("id", "in", unreconciled_pos_ids)]
         else:
-            return [("id", "not in", unreconciled_pos.ids)]
+            return [("id", "not in", unreconciled_pos_ids)]
 
     def action_view_unreconciled(self):
         self.ensure_one()
@@ -89,7 +84,7 @@ class PurchaseOrder(models.Model):
         unreconciled_domain = expression.AND(
             [unreconciled_domain, [("purchase_order_id", "=", self.id)]]
         )
-        unreconciled_domain.remove(("full_reconcile_id", "=", False))
+        unreconciled_domain.remove(("amount_residual", "!=", 0.0))
         unreconciled_domain.remove("&")
         unreconciled_items = acc_item.search(unreconciled_domain)
         action = self.env.ref("account.action_account_moves_all")
@@ -104,7 +99,7 @@ class PurchaseOrder(models.Model):
         ):
             raise exceptions.ValidationError(
                 _(
-                    "The write-off account and jounral for purchases is missing. An "
+                    "The write-off account and journal for purchases is missing. An "
                     "accountant must fill that information"
                 )
             )

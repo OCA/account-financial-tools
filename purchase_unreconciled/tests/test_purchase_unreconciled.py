@@ -17,12 +17,12 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         cls.category_obj = cls.env["product.category"]
         cls.partner_obj = cls.env["res.partner"]
         cls.acc_obj = cls.env["account.account"]
-        cls.invoice_obj = cls.env["account.move"]
+        cls.account_move_obj = cls.env["account.move"]
         cls.company = cls.env.ref("base.main_company")
         cls.company.anglo_saxon_accounting = True
-        assets = cls.env.ref("account.data_account_type_current_assets")
-        expenses = cls.env.ref("account.data_account_type_expenses")
-        equity = cls.env.ref("account.data_account_type_equity")
+        expense_type = "expense"
+        equity_type = "equity"
+        asset_type = "asset_current"
         # Create partner:
         cls.partner = cls.partner_obj.create({"name": "Test Vendor"})
         # Create product that uses a reconcilable stock input account.
@@ -30,7 +30,7 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
             {
                 "name": "Test stock input account",
                 "code": 9999,
-                "user_type_id": assets.id,
+                "account_type": asset_type,
                 "reconcile": True,
                 "company_id": cls.company.id,
             }
@@ -39,7 +39,7 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
             {
                 "name": "Write-offf account",
                 "code": 8888,
-                "user_type_id": expenses.id,
+                "account_type": expense_type,
                 "reconcile": True,
                 "company_id": cls.company.id,
             }
@@ -50,26 +50,26 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         # Create account for Goods Received Not Invoiced
         name = "Goods Received Not Invoiced"
         code = "grni"
-        acc_type = equity
+        acc_type = equity_type
         cls.account_grni = cls._create_account(
             acc_type, name, code, cls.company, reconcile=True
         )
         # Create account for Cost of Goods Sold
         name = "Cost of Goods Sold"
         code = "cogs"
-        acc_type = expenses
+        acc_type = expense_type
         cls.account_cogs = cls._create_account(acc_type, name, code, cls.company)
         # Create account for Goods Delivered Not Invoiced
         name = "Goods Delivered Not Invoiced"
         code = "gdni"
-        acc_type = expenses
+        acc_type = expense_type
         cls.account_gdni = cls._create_account(
             acc_type, name, code, cls.company, reconcile=True
         )
         # Create account for Inventory
         name = "Inventory"
         code = "inventory"
-        acc_type = assets
+        acc_type = asset_type
         cls.account_inventory = cls._create_account(acc_type, name, code, cls.company)
         cls.product_categ = cls.category_obj.create(
             {
@@ -150,7 +150,7 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
             {
                 "name": name,
                 "code": code,
-                "user_type_id": acc_type.id,
+                "account_type": acc_type,
                 "company_id": company.id,
                 "reconcile": reconcile,
             }
@@ -169,7 +169,7 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
                 "picking_type_id": self.env.ref("stock.picking_type_out").id,
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
-                "move_lines": [
+                "move_ids": [
                     (
                         0,
                         0,
@@ -194,11 +194,10 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
     def _do_picking(self, picking, date):
         """Do picking with only one move on the given date."""
         picking.action_confirm()
-        for ml in picking.move_lines:
-            ml.quantity_done = ml.product_uom_qty
-        picking._action_done()
-        for move in picking.move_lines:
+        for move in picking.move_ids:
+            move.quantity_done = move.product_uom_qty
             move.date = date
+        picking._action_done()
 
     def test_01_nothing_to_reconcile(self):
         po = self.po
@@ -327,15 +326,16 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         po.button_confirm()
         self._do_picking(po.picking_ids, fields.Datetime.now())
         # Invoice created and validated:
-        move_form = Form(self.invoice_obj.with_context(default_type="in_invoice"))
-        move_form.partner_id = self.partner
-        move_form.purchase_id = po
-        invoice = move_form.save()
+        f = Form(self.account_move_obj.with_context(default_move_type="in_invoice"))
+        f.partner_id = po.partner_id
+        f.invoice_date = fields.Date().today()
+        f.purchase_vendor_bill_id = self.env["purchase.bill.union"].browse(-po.id)
+        invoice = f.save()
         chicago_journal = self.env["account.journal"].create(
             {
                 "name": "chicago",
                 "code": "ref",
-                "type": "sale",
+                "type": "purchase",
                 "company_id": self.ref("stock.res_company_1"),
             }
         )
@@ -389,15 +389,17 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         po.button_confirm()
         self._do_picking(po.picking_ids, fields.Datetime.now())
         # Invoice created and validated:
-        move_form = Form(self.invoice_obj.with_context(default_type="in_invoice"))
-        move_form.partner_id = self.partner
-        move_form.purchase_id = po
+        f = Form(self.account_move_obj.with_context(default_move_type="in_invoice"))
+        f.partner_id = po.partner_id
+        f.invoice_date = fields.Date().today()
+        f.purchase_vendor_bill_id = self.env["purchase.bill.union"].browse(-po.id)
+        invoice = f.save()
         # force discrepancies
-        with move_form.invoice_line_ids.edit(0) as line_form:
+        with f.invoice_line_ids.edit(0) as line_form:
             line_form.price_unit = 99
-        with move_form.invoice_line_ids.edit(0) as line_form:
+        with f.invoice_line_ids.edit(0) as line_form:
             line_form.price_unit = 99
-        invoice = move_form.save()
+        invoice = f.save()
         invoice._post()
         # The bill is different price so this is unreconciled
         po._compute_unreconciled()
