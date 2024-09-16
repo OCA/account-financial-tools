@@ -1,0 +1,5 @@
+- Kitti U. \<<kittiu@ecosoft.co.th>\>
+- [Sygel](https://www.sygel.es):
+  - Ángel García de la Chica Herrera
+- [APSL-Nagarro](<https://apsl.tech>):
+  - Antoni Marroig \<<amarroig@apsl.net>\>
