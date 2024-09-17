@@ -23,7 +23,6 @@ class SaleOrder(models.Model):
     )
 
     def _get_account_domain(self):
-        self.ensure_one()
         included_accounts = (
             (
                 self.env["product.category"]
@@ -39,10 +38,10 @@ class SaleOrder(models.Model):
     def _get_sale_unreconciled_base_domain(self):
         unreconciled_domain = [
             ("account_id.reconcile", "=", True),
-            ("account_id.internal_type", "not in", ["receivable", "payable"]),
             ("move_id.state", "=", "posted"),
+            ("company_id", "in", self.env.companies.ids),
             # same condition than Odoo Unreconciled filter
-            ("full_reconcile_id", "=", False),
+            ("amount_residual", "!=", 0.0),
             ("balance", "!=", 0.0),
         ]
         return unreconciled_domain
@@ -65,15 +64,17 @@ class SaleOrder(models.Model):
     def _search_unreconciled(self, operator, value):
         if operator not in ("=", "!=") or not isinstance(value, bool):
             raise ValueError(_("Unsupported search operator"))
-        acc_item = self.env["account.move.line"]
         domain = self._get_sale_unreconciled_base_domain()
-        unreconciled_domain = expression.AND([domain, [("sale_order_id", "!=", False)]])
-        unreconciled_items = acc_item.search(unreconciled_domain)
-        unreconciled_sos = unreconciled_items.mapped("sale_order_id")
+        domain = expression.AND([domain, [("sale_order_id", "!=", False)]])
+        domain_account = self._get_account_domain()
+        domain = expression.AND([domain_account, domain])
+        acc_item = self.env["account.move.line"]
+        unreconciled_items = acc_item.search(domain)
+        unreconciled_sos_ids = unreconciled_items.mapped("sale_order_id").ids
         if value:
-            return [("id", "in", unreconciled_sos.ids)]
+            return [("id", "in", unreconciled_sos_ids)]
         else:
-            return [("id", "not in", unreconciled_sos.ids)]
+            return [("id", "not in", unreconciled_sos_ids)]
 
     def action_view_unreconciled(self):
         self.ensure_one()
@@ -86,7 +87,7 @@ class SaleOrder(models.Model):
         unreconciled_domain = expression.AND(
             [unreconciled_domain, [("sale_order_id", "=", self.id)]]
         )
-        unreconciled_domain.remove(("full_reconcile_id", "=", False))
+        unreconciled_domain.remove(("amount_residual", "!=", 0.0))
         unreconciled_domain.remove("&")
         unreconciled_items = acc_item.search(unreconciled_domain)
         action = self.env.ref("account.action_account_moves_all")

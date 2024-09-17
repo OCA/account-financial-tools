@@ -16,10 +16,10 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         cls.partner_obj = cls.env["res.partner"]
         cls.acc_obj = cls.env["account.account"]
         cls.categ_unit = cls.env.ref("uom.product_uom_categ_unit")
-        assets = cls.env.ref("account.data_account_type_current_assets")
-        expenses = cls.env.ref("account.data_account_type_expenses")
-        equity = cls.env.ref("account.data_account_type_equity")
-        revenue = cls.env.ref("account.data_account_type_other_income")
+        expense_type = "expense"
+        equity_type = "equity"
+        asset_type = "asset_current"
+        revenue = "income"
         cls.company = cls.env.ref("base.main_company")
 
         # Create partner:
@@ -38,32 +38,31 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         # Create account for Goods Received Not Invoiced
         name = "Goods Received Not Invoiced"
         code = "grni"
-        acc_type = equity
+        acc_type = equity_type
         cls.account_grni = cls._create_account(
             acc_type, name, code, cls.company, reconcile=True
         )
         # Create account for Cost of Goods Sold
         name = "Cost of Goods Sold"
         code = "cogs"
-        acc_type = expenses
+        acc_type = expense_type
         cls.account_cogs = cls._create_account(acc_type, name, code, cls.company)
         # Create account for Goods Delivered Not Invoiced
         name = "Goods Delivered Not Invoiced"
         code = "gdni"
-        acc_type = expenses
         cls.account_gdni = cls._create_account(
             acc_type, name, code, cls.company, reconcile=True
         )
         # Create account for Inventory
         name = "Inventory"
         code = "inventory"
-        acc_type = assets
+        acc_type = asset_type
         cls.account_inventory = cls._create_account(acc_type, name, code, cls.company)
         cls.writeoff_acc = cls.acc_obj.create(
             {
                 "name": "Write-offf account",
                 "code": 8888,
-                "user_type_id": expenses.id,
+                "account_type": acc_type,
                 "reconcile": True,
             }
         )
@@ -100,7 +99,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
             {
                 "name": "Test revenue account 2",
                 "code": 1017,
-                "user_type_id": revenue.id,
+                "account_type": revenue,
                 "reconcile": False,
                 "company_id": cls.company.id,
             }
@@ -109,7 +108,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
             {
                 "name": "Dummy acccount",
                 "code": 7991,
-                "user_type_id": expenses.id,
+                "account_type": expense_type,
                 "reconcile": False,
                 "company_id": cls.company.id,
             }
@@ -126,7 +125,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
             {
                 "name": name,
                 "code": code,
-                "user_type_id": acc_type.id,
+                "account_type": acc_type,
                 "company_id": company.id,
                 "reconcile": reconcile,
             }
@@ -145,7 +144,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
                 "picking_type_id": self.env.ref("stock.picking_type_in").id,
                 "location_dest_id": self.env.ref("stock.stock_location_stock").id,
                 "location_id": self.env.ref("stock.stock_location_suppliers").id,
-                "move_lines": [
+                "move_ids": [
                     (
                         0,
                         0,
@@ -187,9 +186,9 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
     def _do_picking(self, picking, date):
         """Do picking with only one move on the given date."""
         picking.action_confirm()
-        for ml in picking.move_lines:
-            ml.quantity_done = ml.product_uom_qty
-            ml.date = date
+        for move in picking.move_ids:
+            move.quantity_done = move.product_uom_qty
+            move.date = date
         picking._action_done()
 
     def test_01_nothing_to_reconcile(self):
@@ -251,22 +250,19 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
                 "property_cost_method": "fifo",
             }
         )
-        account_type = self.env["account.account.type"].create(
-            {"name": "RCV type", "type": "other", "internal_group": "asset"}
-        )
-        self.account_receiv = self.env["account.account"].create(
-            {
-                "name": "Receivable",
-                "code": "RCV00",
-                "user_type_id": account_type.id,
-                "reconcile": True,
-            }
-        )
         account_expense = self.env["account.account"].create(
             {
                 "name": "Expense",
                 "code": "EXP00",
-                "user_type_id": account_type.id,
+                "account_type": "expense",
+                "reconcile": True,
+            }
+        )
+        account_input = self.env["account.account"].create(
+            {
+                "name": "Input",
+                "code": "IN001",
+                "account_type": "liability_current",
                 "reconcile": True,
             }
         )
@@ -274,7 +270,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
             {
                 "name": "Output",
                 "code": "OUT00",
-                "user_type_id": account_type.id,
+                "account_type": "asset_current",
                 "reconcile": True,
             }
         )
@@ -282,14 +278,13 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
             {
                 "name": "Valuation",
                 "code": "STV00",
-                "user_type_id": account_type.id,
+                "account_type": "asset_current",
                 "reconcile": True,
             }
         )
-        self.partner.property_account_receivable_id = self.account_receiv
-        self.category.property_account_income_categ_id = self.account_receiv
+        self.category.property_account_income_categ_id = self.account_revenue2
         self.category.property_account_expense_categ_id = account_expense
-        self.category.property_stock_account_input_categ_id = self.account_receiv
+        self.category.property_stock_account_input_categ_id = account_input
         self.category.property_stock_account_output_categ_id = account_output
         self.category.property_stock_valuation_account_id = account_valuation
         self.category.property_stock_journal = self.env["account.journal"].create(
@@ -391,7 +386,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         pick = self.so.picking_ids
         # To check the products on the picking
         self.assertEqual(
-            pick.move_lines.mapped("product_id"), self.component1 | self.component2
+            pick.move_line_ids.mapped("product_id"), self.component1 | self.component2
         )
         self._do_picking(
             pick.filtered(lambda p: p.state != "done"), fields.Datetime.now()
