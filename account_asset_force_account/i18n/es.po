@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_force_accounts
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-18 09:43+0000\n"
+"PO-Revision-Date: 2024-09-18 09:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_asset_force_accounts
+#: model:ir.model,name:account_asset_force_accounts.model_account_asset
+msgid "Asset"
+msgstr "Activo"
+
+#. module: account_asset_force_accounts
+#: model:ir.model.fields,field_description:account_asset_force_accounts.field_account_asset__account_asset_id
+msgid "Asset Account"
+msgstr "Cuenta de activo"
+
+#. module: account_asset_force_accounts
+#: model:ir.model.fields,field_description:account_asset_force_accounts.field_account_asset__account_depreciation_id
+msgid "Depreciation Account"
+msgstr "Cuenta de amortización"
+
+#. module: account_asset_force_accounts
+#: model:ir.model.fields,field_description:account_asset_force_accounts.field_account_asset__account_expense_depreciation_id
+msgid "Depreciation Expense Account"
+msgstr "Cuenta de gastos de amortización"
+
+#. module: account_asset_force_accounts
+#: model:ir.model.fields,help:account_asset_force_accounts.field_account_asset__account_depreciation_id
+msgid "The account used to record depreciation for the asset."
+msgstr "La cuenta utilizada para registrar la depreciación del activo."
+
+#. module: account_asset_force_accounts
+#: model:ir.model.fields,help:account_asset_force_accounts.field_account_asset__account_expense_depreciation_id
+msgid "The account used to record the expense of the depreciation."
+msgstr "La cuenta utilizada para registrar el gasto por depreciación."
+
+#. module: account_asset_force_accounts
+#: model:ir.model.fields,help:account_asset_force_accounts.field_account_asset__account_asset_id
+msgid "The account used to record the value of the asset."
+msgstr "La cuenta utilizada para registrar el valor del activo."
