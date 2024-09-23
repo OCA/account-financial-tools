@@ -153,6 +153,10 @@ Contributors
 
   * Manuel Regidor <manuel.regidor@sygel.es>
 
+* `Moduon <https://www.moduon.team>`_:
+
+  * Eduardo de Miguel
+
 Maintainers
 ~~~~~~~~~~~
 

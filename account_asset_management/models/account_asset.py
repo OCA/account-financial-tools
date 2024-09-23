@@ -383,11 +383,6 @@ class AccountAsset(models.Model):
                 asset.prorata = asset.profile_id.prorata
 
     @api.depends("profile_id")
-    def _compute_account_analytic_id(self):
-        for asset in self:
-            asset.account_analytic_id = asset.profile_id.account_analytic_id
-
-    @api.depends("profile_id")
     def _compute_analytic_distribution(self):
         for asset in self:
             asset.analytic_distribution = asset.profile_id.analytic_distribution
