@@ -24,3 +24,7 @@
 * `Sygel <https://www.sygel.es>`_:
 
   * Manuel Regidor <manuel.regidor@sygel.es>
+
+* `Moduon <https://www.moduon.team>`_:
+
+  * Eduardo de Miguel
