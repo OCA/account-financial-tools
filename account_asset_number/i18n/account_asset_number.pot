@@ -55,13 +55,34 @@ msgid "Auto Asset Number by Sequence"
 msgstr ""
 
 #. module: account_asset_number
+#: model:ir.model.fields.selection,name:account_asset_number.selection__account_asset_profile__barcode_type__barcode
 #: model_terms:ir.ui.view,arch_db:account_asset_number.report_simple_asset_number
 msgid "Barcode"
 msgstr ""
 
 #. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_height
+msgid "Barcode Height"
+msgstr ""
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_type
+msgid "Barcode Type"
+msgstr ""
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_width
+msgid "Barcode Width"
+msgstr ""
+
+#. module: account_asset_number
 #: model:ir.model,name:account_asset_number.model_report_account_asset_management_asset_report_xls
 msgid "Dynamic XLS asset report generator"
+msgstr ""
+
+#. module: account_asset_number
+#: model:ir.model.fields,help:account_asset_number.field_account_asset_profile__barcode_height
+msgid "Height (in px) of the barcode or the QR code"
 msgstr ""
 
 #. module: account_asset_number
@@ -75,4 +96,24 @@ msgstr ""
 #: code:addons/account_asset_number/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Number"
+msgstr ""
+
+#. module: account_asset_number
+#: model:ir.model.fields.selection,name:account_asset_number.selection__account_asset_profile__barcode_type__qr
+msgid "QR"
+msgstr ""
+
+#. module: account_asset_number
+#: model_terms:ir.ui.view,arch_db:account_asset_number.account_asset_profile_view_form
+msgid "QR/Barcode Configuration"
+msgstr ""
+
+#. module: account_asset_number
+#: model_terms:ir.ui.view,arch_db:account_asset_number.report_simple_asset_number
+msgid "QRcode"
+msgstr ""
+
+#. module: account_asset_number
+#: model:ir.model.fields,help:account_asset_number.field_account_asset_profile__barcode_width
+msgid "Width (in px) of the barcode or the QR code"
 msgstr ""
