@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_account_tag_code](account_account_tag_code/) | 17.0.1.0.0 |  | Add a code field to the accounts tags
+[account_asset_force_account](account_asset_force_account/) | 17.0.1.0.0 | [![BernatObrador](https://github.com/BernatObrador.png?size=30px)](https://github.com/BernatObrador) | This module allows you to enforce specific accounts for assets, including depreciation and expense accounts, through asset profiles and forms.
 [account_asset_management](account_asset_management/) | 17.0.1.0.1 |  | Assets Management
 [account_fiscal_year](account_fiscal_year/) | 17.0.1.1.0 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Create Account Fiscal Year
 [account_journal_lock_date](account_journal_lock_date/) | 17.0.1.0.0 |  | Lock each journal independently
