@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2024-09-17 11:06+0000\n"
+"PO-Revision-Date: 2024-09-27 08:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -185,7 +185,7 @@ msgstr "Scrittura Rimozione Asset '%s'"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
 msgid "Asset Account"
-msgstr "Conto cespiti"
+msgstr "Conto cespite"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_bank_statement_line__asset_count
@@ -271,7 +271,7 @@ msgstr "Data inizio cespite"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_line
 msgid "Asset depreciation table line"
-msgstr "Riga ammortamento cespite"
+msgstr "Riga tabella ammortamenti cespite"
 
 #. module: account_asset_management
 #. odoo-python
@@ -629,7 +629,7 @@ msgstr "Ammortamento"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_depreciation_id
 msgid "Depreciation Account"
-msgstr "F.do Ammortamento"
+msgstr "Fondo amm.to"
 
 #. module: account_asset_management
 #. odoo-python
