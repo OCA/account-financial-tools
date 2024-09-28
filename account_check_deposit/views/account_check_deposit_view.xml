@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2012-2022 Akretion France (http://www.akretion.com/)
+  @author: Benoît GUILLOT <benoit.guillot@akretion.com>
+  @author: Chafique DELLI <chafique.delli@akretion.com>
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  Copyright 2018-2022 Tecnativa - Pedro M. Baeza
+-->
+<odoo>
+    <record id="account_check_deposit_view_form" model="ir.ui.view">
+        <field name="model">account.check.deposit</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="get_all_checks"
+                        invisible="state != 'draft'"
+                        type="object"
+                        class="btn-primary"
+                        string="Get All Received Checks"
+                    />
+                    <button
+                        name="validate_deposit"
+                        invisible="state != 'draft'"
+                        string="Validate"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button
+                        name="backtodraft"
+                        invisible="state != 'done'"
+                        string="Back to Draft"
+                        type="object"
+                        confirm="Are you sure you want to go back to draft?"
+                    />
+                    <button
+                        name="%(report_account_check_deposit)d"
+                        string="Print"
+                        type="action"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label string="Check Deposit" for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group name="left">
+                            <field
+                                name="deposit_date"
+                                options="{'datepicker': {'warn_future': true}}"
+                                readonly="state == 'done'"
+                            />
+                            <field
+                                name="journal_id"
+                                options="{'no_create': True}"
+                                readonly="state == 'done'"
+                            />
+                            <field
+                                name="currency_id"
+                                groups="base.group_multi_currency"
+                                options="{'no_open': True, 'no_create': True}"
+                                readonly="state == 'done'"
+                            />
+                            <field
+                                name="bank_journal_id"
+                                options="{'no_create': True}"
+                                readonly="state == 'done'"
+                            />
+                            <field name="currency_id" invisible="1" />
+                        </group>
+                        <group name="right">
+                            <field name="check_count" />
+                            <field name="total_amount" />
+                            <field name="in_hand_check_account_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_open': True, 'no_create': True}"
+                                readonly="state == 'done'"
+                            />
+                            <field name="move_id" />
+                            <field name="company_id" invisible="1" />
+                        </group>
+                    </group>
+                    <group string="Check Payments" name="check_payments">
+                        <field
+                            name="check_payment_ids"
+                            nolabel="1"
+                            colspan="2"
+                            widget="many2many"
+                            domain="[('reconciled', '=', False),
+                                        ('debit', '>', 0),
+                                        ('check_deposit_id', '=', False),
+                                        ('currency_id', '=', currency_id),
+                                ('account_id', '=', in_hand_check_account_id),
+                                ('company_id', '=', company_id),
+                                ('parent_state', '=', 'posted'),
+                                ]"
+                            readonly="state == 'done'"
+                            context="{'currency': currency_id,
+                                        'journal_id': journal_id}"
+                        >
+                            <tree>
+                                <field name="date" />
+                                <field name="date_maturity" optional="hide" />
+                                <field name="journal_id" optional="hide" />
+                                <field name="move_id" />
+                                <field name="ref" optional="show" />
+                                <field name="partner_id" />
+                                <field name="name" optional="show" />
+                                <field name="balance" sum="1" optional="show" />
+                                <field
+                                    name="amount_currency"
+                                    groups="base.group_multi_currency"
+                                    sum="1"
+                                    optional="hide"
+                                />
+                                <field name="currency_id" invisible="1" />
+                                <field name="company_currency_id" invisible="1" />
+                                <field name="full_reconcile_id" optional="show" />
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="account_check_deposit_view_tree" model="ir.ui.view">
+        <field name="name">account.check.deposit.tree</field>
+        <field name="model">account.check.deposit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" decoration-bf="1" />
+                <field name="deposit_date" />
+                <field name="journal_id" />
+                <field name="bank_journal_id" />
+                <field name="check_count" />
+                <field name="total_amount" decoration-bf="1" />
+                <field
+                    name="currency_id"
+                    groups="base.group_multi_currency"
+                    optional="show"
+                />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="show"
+                />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'done'"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="view_check_deposit_search" model="ir.ui.view">
+        <field name="name">account.check.deposit.search</field>
+        <field name="model">account.check.deposit</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Checks Deposit" />
+                <field
+                    name="bank_journal_id"
+                    domain="[('type', '=', 'bank'), ('bank_account_id', '!=', False)]"
+                />
+                <filter string="Deposit Date" name="deposit_date" date="deposit_date" />
+                <separator />
+                <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
+                <group string="Group By" name="groupby">
+                    <filter
+                        name="date_groupby"
+                        string="Deposit Date"
+                        context="{'group_by': 'deposit_date'}"
+                    />
+                    <filter
+                        name="journal_groupby"
+                        string="Check Journal"
+                        context="{'group_by': 'journal_id'}"
+                    />
+                    <filter
+                        name="bank_journal_id_groupby"
+                        string="Bank Account"
+                        context="{'group_by': 'bank_journal_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="check_deposit_pivot" model="ir.ui.view">
+        <field name="model">account.check.deposit</field>
+        <field name="arch" type="xml">
+                <pivot>
+                    <field name="deposit_date" interval="month" type="row" />
+                    <field name="bank_journal_id" type="col" />
+                    <field name="check_count" type="measure" />
+                </pivot>
+        </field>
+    </record>
+    <record id="action_check_deposit_tree" model="ir.actions.act_window">
+        <field name="name">Checks Deposits</field>
+        <field name="res_model">account.check.deposit</field>
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
+    <menuitem
+        action="action_check_deposit_tree"
+        id="menu_check_deposit_tree"
+        parent="account.menu_finance_receivables"
+        sequence="20"
+    />
+</odoo>
