@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_journal_restrict_mode
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-02-16 21:35+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_journal_restrict_mode
+#: model:ir.model.fields,help:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
+msgid ""
+"If ticked, the accounting entry or invoice receives a hash as soon as it is "
+"posted and cannot be modified anymore."
+msgstr ""
+"Si está marcada, la entrada contable o la factura recibe un hash en cuanto "
+"se contabiliza y ya no puede modificarse."
+
+#. module: account_journal_restrict_mode
+#: model:ir.model,name:account_journal_restrict_mode.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_journal_restrict_mode
+#. odoo-python
+#: code:addons/account_journal_restrict_mode/models/account_journal.py:0
+#, python-format
+msgid "Journal %s must have Lock Posted Entries enabled."
+msgstr "El diario %s debe tener Activado el Bloqueo de Asientos."
+
+#. module: account_journal_restrict_mode
+#: model:ir.model.fields,field_description:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
+msgid "Lock Posted Entries with Hash"
+msgstr "Bloquear Entradas Publicadas con Hash"
