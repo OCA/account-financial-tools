@@ -37,6 +37,11 @@ msgstr "<b>Devise des chèques :</b>"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Date:</b>"
+msgstr "<b>Date :</b>"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Number of checks:</b>"
 msgstr "<b>Nombre de chèques :</b>"
 
@@ -46,20 +51,10 @@ msgid "<b>Total:</b>"
 msgstr "<b>Total :</b>"
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "<b>Date:</b>"
-msgstr "<b>Date :</b>"
-
-#. module: account_check_deposit
 #: model:ir.model.constraint,message:account_check_deposit.constraint_account_check_deposit_name_company_unique
 msgid "A check deposit with this reference already exists in this company."
 msgstr ""
 "Une remise de chèques avec cette référence existe déjà pour cette société."
-
-#. module: account_check_deposit
-#: model:ir.model,name:account_check_deposit.model_account_check_deposit
-msgid "Account Check Deposit"
-msgstr "Remise de Chèque"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction
@@ -124,6 +119,7 @@ msgstr "Bénéficiaire :"
 
 #. module: account_check_deposit
 #: model:ir.actions.report,name:account_check_deposit.report_account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__check_deposit_id
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Deposit"
@@ -143,6 +139,7 @@ msgstr "Remise de chèque n°"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Check Journal"
 msgstr "Journal de chèque"
 
@@ -180,7 +177,6 @@ msgstr "Créé le"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__currency_id
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Currency"
 msgstr "Devise"
 
@@ -306,11 +302,6 @@ msgid "Is Follower"
 msgstr "Est abonné"
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
-msgid "Journal"
-msgstr "Journal"
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
 msgid "Journal Entry"
 msgstr "Pièce comptable"
@@ -319,11 +310,6 @@ msgstr "Pièce comptable"
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Item"
 msgstr "Écriture comptable"
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_uid
@@ -346,11 +332,6 @@ msgid "List of checks:"
 msgstr "Liste des chèques :"
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Pièce jointe principale"
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error
 msgid "Message Delivery error"
 msgstr "Erreur d'envoi du message"
@@ -365,7 +346,9 @@ msgstr "Messages"
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid "Missing 'Outstanding Receipts Account' on the company '%s'."
-msgstr "Le 'Compte de paiements entrants en suspens' n'est pas configuré sur la société '%s'."
+msgstr ""
+"Le 'Compte de paiements entrants en suspens' n'est pas configuré sur la "
+"société '%s'."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
@@ -383,11 +366,6 @@ msgstr "Nom"
 #, python-format
 msgid "New"
 msgstr "Nouveau"
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
-msgstr "Prochaine activité du calendrier"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_date_deadline
@@ -519,3 +497,18 @@ msgstr "Messages du site Web"
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr "Historique des échanges sur le site Web"
+
+#~ msgid "Account Check Deposit"
+#~ msgstr "Remise de Chèque"
+
+#~ msgid "Journal"
+#~ msgstr "Journal"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Pièce jointe principale"
+
+#~ msgid "Next Activity Calendar Event"
+#~ msgstr "Prochaine activité du calendrier"
