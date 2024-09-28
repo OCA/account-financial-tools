@@ -15,12 +15,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.fr_test_company = cls.setup_company_data(
-            "Chq deposit test company",
-            chart_template=chart_template_ref,
-            country_id=cls.env.ref("base.fr").id,
-        )
-        cls.company = cls.fr_test_company["company"]
+        cls.company = cls.company_data["company"]
         cls.user.write(
             {
                 "company_ids": [Command.link(cls.company.id)],
@@ -60,7 +55,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
                 ],
             }
         )
-        cls.fr_test_company["default_journal_bank"].bank_account_id = cls.env[
+        cls.company_data["default_journal_bank"].bank_account_id = cls.env[
             "res.partner.bank"
         ].create(
             {
@@ -98,7 +93,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
             {
                 "company_id": self.company.id,
                 "journal_id": self.check_journal.id,
-                "bank_journal_id": self.fr_test_company["default_journal_bank"].id,
+                "bank_journal_id": self.company_data["default_journal_bank"].id,
                 "currency_id": self.currency.id,
             }
         )
