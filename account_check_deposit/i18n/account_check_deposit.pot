@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-03 15:39+0000\n"
-"PO-Revision-Date: 2023-11-03 15:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -34,6 +32,11 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Date:</b>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Number of checks:</b>"
 msgstr ""
 
@@ -43,18 +46,8 @@ msgid "<b>Total:</b>"
 msgstr ""
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
-msgid "<b>Transfer Date:</b>"
-msgstr ""
-
-#. module: account_check_deposit
 #: model:ir.model.constraint,message:account_check_deposit.constraint_account_check_deposit_name_company_unique
 msgid "A check deposit with this reference already exists in this company."
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model,name:account_check_deposit.model_account_check_deposit
-msgid "Account Check Deposit"
 msgstr ""
 
 #. module: account_check_deposit
@@ -120,6 +113,7 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.actions.report,name:account_check_deposit.report_account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__check_deposit_id
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Deposit"
@@ -139,6 +133,7 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Check Journal"
 msgstr ""
 
@@ -176,7 +171,6 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__currency_id
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Currency"
 msgstr ""
 
@@ -299,11 +293,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
-msgid "Journal"
-msgstr ""
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
 msgid "Journal Entry"
 msgstr ""
@@ -311,11 +300,6 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Item"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: account_check_deposit
@@ -336,11 +320,6 @@ msgstr ""
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "List of checks:"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: account_check_deposit
@@ -378,11 +357,6 @@ msgstr ""
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #, python-format
 msgid "New"
-msgstr ""
-
-#. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
 msgstr ""
 
 #. module: account_check_deposit
