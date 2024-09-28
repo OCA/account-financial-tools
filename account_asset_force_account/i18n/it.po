@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-09-27 08:06+0000\n"
+"PO-Revision-Date: 2024-09-28 17:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -34,7 +34,7 @@ msgstr "Riga tabella ammortamenti cespite"
 #. module: account_asset_force_account
 #: model:ir.model.fields,field_description:account_asset_force_account.field_account_asset__account_depreciation_id
 msgid "Depreciation Account"
-msgstr "Fondo amm.to"
+msgstr "Conto amm.to"
 
 #. module: account_asset_force_account
 #: model:ir.model.fields,field_description:account_asset_force_account.field_account_asset__account_expense_depreciation_id
