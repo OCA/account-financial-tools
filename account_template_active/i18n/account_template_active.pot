@@ -1,0 +1,74 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_template_active
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_template_active
+#: model:ir.model,name:account_template_active.model_account_fiscal_position_account_template
+msgid "Accounts Mapping Template of Fiscal Position"
+msgstr ""
+
+#. module: account_template_active
+#: model:ir.model.fields,field_description:account_template_active.field_account_account_template__active
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_account_template__active
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_tax_template__active
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_template__active
+msgid "Active"
+msgstr ""
+
+#. module: account_template_active
+#: model:ir.model.fields,field_description:account_template_active.field_account_account_template__display_name
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_account_template__display_name
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_tax_template__display_name
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_template__display_name
+#: model:ir.model.fields,field_description:account_template_active.field_account_tax_template__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_template_active
+#: model:ir.model.fields,field_description:account_template_active.field_account_account_template__id
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_account_template__id
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_tax_template__id
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_template__id
+#: model:ir.model.fields,field_description:account_template_active.field_account_tax_template__id
+msgid "ID"
+msgstr ""
+
+#. module: account_template_active
+#: model:ir.model.fields,field_description:account_template_active.field_account_account_template____last_update
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_account_template____last_update
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_tax_template____last_update
+#: model:ir.model.fields,field_description:account_template_active.field_account_fiscal_position_template____last_update
+#: model:ir.model.fields,field_description:account_template_active.field_account_tax_template____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_template_active
+#: model:ir.model,name:account_template_active.model_account_fiscal_position_tax_template
+msgid "Tax Mapping Template of Fiscal Position"
+msgstr ""
+
+#. module: account_template_active
+#: model:ir.model,name:account_template_active.model_account_fiscal_position_template
+msgid "Template for Fiscal Position"
+msgstr ""
+
+#. module: account_template_active
+#: model:ir.model,name:account_template_active.model_account_account_template
+msgid "Templates for Accounts"
+msgstr ""
+
+#. module: account_template_active
+#: model:ir.model,name:account_template_active.model_account_tax_template
+msgid "Templates for Taxes"
+msgstr ""
