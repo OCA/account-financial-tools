@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2024-09-29 18:06+0000\n"
+"PO-Revision-Date: 2024-10-03 09:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -284,7 +284,7 @@ msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__in_hand_check_account_id
 msgid "In Hand Check Account"
-msgstr ""
+msgstr "Conto assegni incassati"
 
 #. module: account_check_deposit
 #. odoo-python
@@ -307,12 +307,12 @@ msgstr "E' un follower"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
 msgid "Journal Entry"
-msgstr "Registrazione Contabile"
+msgstr "Registrazione contabile"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Item"
-msgstr "Oggetto Giornale"
+msgstr "Movimento contabile"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_uid
