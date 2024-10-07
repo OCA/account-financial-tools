@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="account_loan_form_view">
+        <field name="name">account.loan.form (in account_loan_analytic_account)</field>
+        <field name="model">account.loan</field>
+        <field name="inherit_id" ref="account_loan.account_loan_form" />
+        <field name="arch" type="xml">
+            <field name="payment_on_first_period" position="after">
+                <field
+                    name="analytic_distribution"
+                    widget="analytic_distribution"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
