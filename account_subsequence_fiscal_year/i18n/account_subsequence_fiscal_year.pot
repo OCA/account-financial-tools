@@ -1,0 +1,76 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * account_subsequence_fiscal_year
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-09 13:42+0000\n"
+"PO-Revision-Date: 2023-04-09 13:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_subsequence_fiscal_year
+#: model_terms:ir.ui.view,arch_db:account_subsequence_fiscal_year.view_res_config_settings_form
+msgid "<span class=\"o_form_label\">Accounting Subsequences Method</span>"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model:ir.model.fields,field_description:account_subsequence_fiscal_year.field_res_company__account_subsequence_method
+#: model:ir.model.fields,field_description:account_subsequence_fiscal_year.field_res_config_settings__account_subsequence_method
+msgid "Accounting Subsequences Method"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model:ir.model.fields.selection,name:account_subsequence_fiscal_year.selection__res_company__account_subsequence_method__company_setting
+msgid "Based on Company Settings"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model:ir.model.fields.selection,name:account_subsequence_fiscal_year.selection__res_company__account_subsequence_method__fiscal_year_setting
+msgid "Based on Fiscal Years Settings"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model:ir.model,name:account_subsequence_fiscal_year.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model:ir.model,name:account_subsequence_fiscal_year.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model_terms:ir.ui.view,arch_db:account_subsequence_fiscal_year.view_res_config_settings_form
+msgid "Define how accounting subsequences are generated"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model_terms:ir.ui.view,arch_db:account_subsequence_fiscal_year.view_res_config_settings_form
+msgid "Generation Method"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model:ir.model,name:account_subsequence_fiscal_year.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#: model:ir.model,name:account_subsequence_fiscal_year.model_ir_sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: account_subsequence_fiscal_year
+#. odoo-python
+#: code:addons/account_subsequence_fiscal_year/models/ir_sequence.py:0
+#, python-format
+msgid ""
+"You can not post an accounting entry for the date %s because there is no "
+"fiscal year defined at this date."
+msgstr ""
