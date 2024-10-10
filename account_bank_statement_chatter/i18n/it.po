@@ -1,0 +1,179 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_bank_statement_chatter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model,name:account_bank_statement_chatter.model_account_bank_statement
+msgid "Bank Statement"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,field_description:account_bank_statement_chatter.field_account_bank_statement__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_bank_statement_chatter
+#: model:ir.model.fields,help:account_bank_statement_chatter.field_account_bank_statement__website_message_ids
+msgid "Website communication history"
+msgstr ""
