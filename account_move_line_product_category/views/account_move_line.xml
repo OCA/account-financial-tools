@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+     Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_line_form_view">
+        <field
+            name="name"
+        >account.move.line.form (in account_move_line_product_category)</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_form" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="categ_id" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_move_line_search_view">
+        <field
+            name="name"
+        >account.move.line.search (in account_move_line_product_category)</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/filter[last()]" position="after">
+                <filter
+                    string="Category"
+                    name="categ_id"
+                    domain="[]"
+                    context="{'group_by':'categ_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
