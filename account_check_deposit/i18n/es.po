@@ -1,0 +1,508 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_check_deposit
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:23+0000\n"
+"PO-Revision-Date: 2023-08-09 15:10+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_check_deposit
+#: model:ir.actions.report,print_report_name:account_check_deposit.report_account_check_deposit
+msgid ""
+"'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or "
+"'')"
+msgstr ""
+"'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or "
+"'')"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Bank Account Number to Credit:</b>"
+msgstr "<b>Número de cuenta bancaria a crédito:</b>"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Check Currency:</b>"
+msgstr "<b>Comprobar divisa:</b>"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Number of checks:</b>"
+msgstr "<b>Número de comprobaciones:</b>"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Total:</b>"
+msgstr "<b>Total:</b>"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Transfer Date:</b>"
+msgstr "<b>Fecha de la transferencia:</b>"
+
+#. module: account_check_deposit
+#: model:ir.model.constraint,message:account_check_deposit.constraint_account_check_deposit_name_company_unique
+msgid "A check deposit with this reference already exists in this company."
+msgstr "En esta empresa ya existe un depósito de cheques con esta referencia."
+
+#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_check_deposit
+msgid "Account Check Deposit"
+msgstr "Depósito de cheques en cuenta"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction
+msgid "Action Needed"
+msgstr "Necesita acción"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoración de actividad de excepción"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icono para el tipo de actividad"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Amount"
+msgstr "Importe"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteo de Archivos Adjuntos"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Back to Draft"
+msgstr "Devolver a borrador"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__bank_journal_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Bank Account"
+msgstr "Cuenta Bancaria"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Bank:"
+msgstr "Banco:"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Beneficiary:"
+msgstr "Beneficiario:"
+
+#. module: account_check_deposit
+#: model:ir.actions.report,name:account_check_deposit.report_account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__check_deposit_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Check Deposit"
+msgstr "Depósito de cheque"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "Check Deposit %s"
+msgstr "Depósito con cheque%s"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Check Deposit n°"
+msgstr "Cheque Depósito n°"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
+msgid "Check Journal"
+msgstr "Cheque Diario"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Check Payments"
+msgstr "Pagos con cheque"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "Check Ref. %s"
+msgstr "Cheque Ref.%s"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Checks Deposit"
+msgstr "Depósito de cheques"
+
+#. module: account_check_deposit
+#: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
+#: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
+msgid "Checks Deposits"
+msgstr "Depósitos de cheques"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__currency_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Currency"
+msgstr "Divisa"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Date"
+msgstr "Fecha"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Debtor"
+msgstr "Deudor"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Deposit Date"
+msgstr "Fecha del depósito"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: account_check_deposit
+#: model:ir.model.fields.selection,name:account_check_deposit.selection__account_check_deposit__state__done
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Done"
+msgstr "Completado"
+
+#. module: account_check_deposit
+#: model:ir.model.fields.selection,name:account_check_deposit.selection__account_check_deposit__state__draft
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores/as"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Socios)"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icono de fuente impresionante, por ejemplo fa-tasks"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+#, python-format
+msgid "Get All Received Checks"
+msgstr "Obtener todos los cheques recibidos"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Group By"
+msgstr "Agrupado por"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__has_message
+msgid "Has Message"
+msgstr "Tiene mensaje"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad por excepción."
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcada, nuevos mensajes requieren su atención."
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcada, algunos mensajes tienen un error de entrega."
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__in_hand_check_account_id
+msgid "In Hand Check Account"
+msgstr "Cuenta de cheques en mano"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_is_follower
+msgid "Is Follower"
+msgstr "Es Seguidor/a"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_move_line
+msgid "Journal Item"
+msgstr "Artículo Diario"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__line_ids
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "List of checks:"
+msgstr "Lista de cheques:"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Archivo adjunto principal"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error
+msgid "Message Delivery error"
+msgstr "Error en entrega de mensaje"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid "Missing 'Outstanding Receipts Account' on the company '%s'."
+msgstr "Falta la 'Cuenta de recibos pendientes' en la compañía '%s'."
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Fecha límite de mi actividad"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Fecha Límite para la siguiente Actividad"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la Siguiente Actividad"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo de la Siguiente Actividad"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_count
+msgid "Number of Checks"
+msgstr "Número de cheques"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leídos"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario Responsable"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado en base a las actividades\n"
+"Atrasada: La fecha de vencimiento ya ha pasado\n"
+"Hoy: La fecha de la actividad es hoy\n"
+"Planificada: Actividades futuras."
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid ""
+"The check with amount {amount} and reference '{ref}' is in currency "
+"{check_currency} but the deposit is in currency {deposit_currency}."
+msgstr ""
+"El cheque con importe {amount} y referencia '{ref}' está en divisa "
+"{check_currency} pero el depósito está en divisa {deposit_currency}."
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid ""
+"The deposit '%s' is in valid state, so you must cancel it before deleting it."
+msgstr ""
+"El depósito '%s' está en estado válido, por lo que debe cancelarlo antes de "
+"borrarlo."
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_check_deposit.py:0
+#, python-format
+msgid ""
+"There are no received checks in account '{account}' in currency '{currency}' "
+"that are not already in this check deposit."
+msgstr ""
+"No hay cheques recibidos en la cuenta '{account}' en la divisa '{currency}' "
+"que no estén ya en este depósito de cheques."
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount
+msgid "Total Amount"
+msgstr "Importe Total"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo (o clase) de actividad excepcional registrada."
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes no leídos"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de mensajes no leídos"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Validate"
+msgstr "Validar"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes de la página web"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de la comunicación en la página web"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error en la entrega de SMS"
+
+#~ msgid "Reconcile"
+#~ msgstr "Conciliación"
