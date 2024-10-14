@@ -1,0 +1,41 @@
+<odoo>
+    <record model="ir.ui.view" id="account_asset_view_form">
+        <field name="name">account.asset.form</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="value_residual" position="after">
+                <field
+                    name="low_value"
+                    attrs="{'invisible': [('low_value', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="account_asset_view_search" model="ir.ui.view">
+        <field name="name">account.asset.search</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_search"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='removed']" position="after">
+                <separator />
+                <filter
+                    string="Normal Asset"
+                    name="normal"
+                    domain="[('low_value', '!=', True)]"
+                />
+                <filter
+                    string="Low Value Asset"
+                    name="low_value"
+                    domain="[('low_value', '=', True)]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
