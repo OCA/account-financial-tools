@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="fleet_vehicle_form_view">
+        <field
+            name="name"
+        >fleet.vehicle.form (in account_asset_management_fleet)</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+            <field name="net_car_value" position="before">
+                <field name="asset_id" />
+            </field>
+            <field name="net_car_value" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('asset_id', '!=', False)]}</attribute>
+            </field>
+            <field name="residual_value" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('asset_id', '!=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="fleet_vehicle_search_view">
+        <field name="name">fleet.vehicle.search (in account_asset_fleet)</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_search" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="asset_code" />
+            </field>
+            <filter name="inactive" position="after">
+                <separator />
+                <filter
+                    string="With Asset"
+                    name="asset"
+                    domain="[('asset_id', '!=', False)]"
+                />
+                <filter
+                    string="No Asset"
+                    name="asset"
+                    domain="[('asset_id', '=', False)]"
+                />
+            </filter>
+        </field>
+   </record>
+
+    <record model="ir.ui.view" id="fleet_vehicle_tree_view">
+        <field
+            name="name"
+        >fleet.vehicle.tree (in account_asset_management_fleet)</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree" />
+        <field name="arch" type="xml">
+            <field name="acquisition_date" position="after">
+                <field name="asset_code" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
