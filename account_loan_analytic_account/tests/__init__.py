@@ -1,0 +1,1 @@
+from . import test_account_loan_analytic_account
