@@ -45,6 +45,7 @@ class AccountLoanPost(models.TransientModel):
         res.append(
             {
                 "account_id": self.account_id.id,
+                "name": self.loan_id.name,
                 "partner_id": partner.id,
                 "credit": 0,
                 "debit": line.pending_principal_amount,
