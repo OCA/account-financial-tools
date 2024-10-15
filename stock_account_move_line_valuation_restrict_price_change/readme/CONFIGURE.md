@@ -1,0 +1,2 @@
+- Go to Inventory > Configuration > Settings > Valuation
+- Check the 'Restrict Account Move Line Change After Valuation' box if you want to.
