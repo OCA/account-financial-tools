@@ -202,7 +202,7 @@
     <menuitem
         action="action_check_deposit_tree"
         id="menu_check_deposit_tree"
-        parent="account.menu_finance_entries_accounting_miscellaneous"
-        sequence="30"
+        parent="account.menu_finance_receivables"
+        sequence="19"
     />
 </odoo>
