@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="account_loan_line_tree" model="ir.ui.view">
+        <field name="name">account.loan.line.tree</field>
+        <field name="model">account.loan.line</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="sequence" />
+                <field name="date" />
+                <field name="rate" />
+                <field name="pending_principal_amount" />
+                <field name="payment_amount" sum="Total payments" />
+                <field name="principal_amount" />
+                <field name="interests_amount" sum="Total interests" />
+                <field
+                    name="long_term_pending_principal_amount"
+                    column_invisible="not parent.long_term_loan_account_id"
+                />
+                <field
+                    name="long_term_principal_amount"
+                    column_invisible="not parent.long_term_loan_account_id"
+                />
+                <field name="long_term_loan_account_id" column_invisible="True" />
+                <field name="loan_state" column_invisible="True" />
+                <field name="is_leasing" column_invisible="True" />
+                <field name="has_invoices" column_invisible="True" />
+                <field name="has_moves" column_invisible="True" />
+                <field name="currency_id" column_invisible="True" />
+                <button
+                    name="view_account_values"
+                    string="Values"
+                    type="object"
+                    icon="fa-eye"
+                    invisible="has_moves == False and has_invoices == False"
+                />
+                <button
+                    name="view_process_values"
+                    string="Process"
+                    type="object"
+                    icon="fa-cogs"
+                    invisible="has_moves == True or has_invoices == True or loan_state != 'posted'"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="account_loan_line_form" model="ir.ui.view">
+        <field name="name">account.loan.line.form</field>
+        <field name="model">account.loan.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="sequence" />
+                    <field name="rate" />
+                    <field name="date" />
+                </group>
+                <group>
+                    <group>
+                        <field name="pending_principal_amount" />
+                        <field name="payment_amount" />
+                        <field name="principal_amount" />
+                        <field name="interests_amount" />
+                        <field name="final_pending_principal_amount" />
+                    </group>
+                    <group>
+                        <field name="long_term_pending_principal_amount" />
+                        <field name="long_term_principal_amount" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="account_loan_lines_view" model="ir.ui.view">
+        <field name="name">account.loan.lines.view</field>
+        <field name="model">account.loan.line</field>
+        <field name="arch" type="xml">
+            <tree create="0" import="0">
+                <field name="sequence" />
+                <field name="loan_id" />
+                <field name="date" />
+                <field name="rate" />
+                <field name="pending_principal_amount" />
+                <field name="payment_amount" />
+                <field name="principal_amount" />
+                <field name="interests_amount" />
+                <field name="long_term_pending_principal_amount" />
+                <field name="long_term_principal_amount" />
+                <field name="company_id" optional="hide" />
+                <field name="partner_id" optional="hide" />
+                <field name="journal_id" optional="hide" />
+                <field name="short_term_loan_account_id" optional="hide" />
+                <field name="long_term_loan_account_id" optional="hide" />
+                <field name="interest_expenses_account_id" optional="hide" />
+                <groupby name="loan_id">
+                    <button name="edit" type="edit" icon="fa-edit" title="Edit" />
+                </groupby>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_loan_lines_search" model="ir.ui.view">
+        <field name="name">Loan Items</field>
+        <field name="model">account.loan.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="loan_id" />
+                <field name="partner_id" />
+                <group expand='0' string='Group by...'>
+                    <filter
+                        string='Loan'
+                        name="group_by_loan_id"
+                        context="{'group_by': 'loan_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="account_loan_lines_action" model="ir.actions.act_window">
+        <field name="name">Loan Items</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.loan.line</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="view_id" ref="account_loan_lines_view" />
+        <field name="context">{'search_default_group_by_loan_id': 1}</field>
+    </record>
+
+    <menuitem
+        id="account_loan_lines_menu"
+        parent="loan_menu"
+        sequence="20"
+        name="Loan Items"
+        action="account_loan_lines_action"
+    />
+</odoo>
