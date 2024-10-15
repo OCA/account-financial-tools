@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="can_bypass_draft_button" model="res.groups">
+        <field name="name">Account Moves - Show Draft Button</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="users" eval="[(4, ref('base.user_root'))]" />
+        <field
+            name="comment"
+        >This group should be given to users that have the right to bypass the draft button visibility.</field>
+    </record>
+</odoo>

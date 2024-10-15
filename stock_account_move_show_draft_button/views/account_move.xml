@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     Copyright 2024 ADHOC SA
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_form_view">
+        <field name="name">account.move.form (in account_move_allow_draft)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <button name="button_draft" position="after">
+                <field name="allow_draft_button_bypass" invisible="1" />
+                <button
+                    name="action_button_draft_bypass"
+                    string="Reset to Draft (Bypass)"
+                    attrs="{'invisible':['|',('allow_draft_button_bypass','=',False),('state','=','draft')]}"
+                    type="object"
+                    groups="stock_account_move_show_draft_button.can_bypass_draft_button"
+                    data-hotkey="r"
+                    confirm="You are about to reset the account move to 'draft' state. This accounting entry is related to an inventory valuation. Please note that when you reset to draft, it will not be deleted. That is, if you re-validate the invoice, the valuation will be duplicated.
+                    &#10;&#10;Recommendation: In developer mode, go to the Inventory/Reports/Valuation menu, group by 'Product', display the product to be adjusted and through the '+' you can generate a manual valuation entry to make the corresponding adjustment. Do you really to do it?"
+                />
+
+            </button>
+        </field>
+    </record>
+
+</odoo>
