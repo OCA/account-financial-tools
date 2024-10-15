@@ -4,9 +4,15 @@
 # Copyright 2022 Moduon - Eduardo de Miguel
 # Copyright 2023 Moduon - Emilio Pascual
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, api, fields, models
+import logging
+
+from zeep.exceptions import Fault
+
+from odoo import _, api, fields, models, tools
 
 from odoo.addons.base_vat.models.res_partner import _ref_vat
+
+_logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
@@ -56,3 +62,19 @@ class ResPartner(models.Model):
                 country_code, "'CC##' (CC=Country Code, ##=VAT Number)"
             ),
         )
+
+    @api.model
+    @tools.ormcache("vat")
+    def _check_vies(self, vat):
+        # Check for error of connection
+        try:
+            return super()._check_vies(vat)
+        except Fault as error:
+            if error.args[0] == "MS_MAX_CONCURRENT_REQ":
+                logging.info(
+                    "VIES VAT check not available at this moment as max concurrency "
+                    "requests has been reached."
+                )
+            if error.args[0] == "MS_UNAVAILABLE":
+                logging.info("VIES VAT check not available at this moment.")
+            return False

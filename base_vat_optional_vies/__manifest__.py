@@ -10,6 +10,7 @@
     "category": "Accounting",
     "version": "14.0.2.1.0",
     "depends": ["base_vat"],
+    "external_dependencies": {"python": ["zeep"]},
     "data": [
         "views/res_partner_view.xml",
         "views/res_config_settings_views.xml",
