@@ -135,3 +135,13 @@ class TestAccountLockToDateUpdate(TransactionCase):
         with self.assertRaises(ValidationError):
             self.company.period_lock_to_date = "2900-01-01"
             self.company.fiscalyear_lock_to_date = "2900-02-01"
+
+    def test_06_lock_period_with_bypass(self):
+        """We test that journal entries can be posted after the locked date
+        when the bypass option is enabled."""
+        self.company.period_lock_to_date = "2900-01-01"
+        self.company.fiscalyear_lock_to_date = "2900-02-01"
+        move = self.create_account_move("2900-01-01").with_context(
+            bypass_account_lock_to_date=True
+        )
+        move.with_user(self.demo_user.id).action_post()
