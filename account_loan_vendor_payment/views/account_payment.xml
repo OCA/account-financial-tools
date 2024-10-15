@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_payment_loans_smart_button" model="ir.ui.view">
+        <field name="name">account.payment.loans.view</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <field name="loans_count" invisible="1" />
+                <button
+                    attrs="{'invisible': [('loans_count','=', 0)]}"
+                    class="oe_stat_button"
+                    type="object"
+                    name="get_loans"
+                    icon="fa-star"
+                >
+                    <span>Loan(s)</span>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
