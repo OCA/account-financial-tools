@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form - purchase_unreconciled</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <field name="invoice_status" position="after">
+                <field name="unreconciled" />
+            </field>
+            <div name="button_box" position="inside">
+                <button
+                    type="object"
+                    string="Unreconciled Journal Items"
+                    name="action_view_unreconciled"
+                    groups="account.group_account_manager"
+                    class="oe_stat_button"
+                    icon="fa-gears"
+                    invisible="not unreconciled"
+                >
+                </button>
+                <button
+                    type="object"
+                    string="Reconcile"
+                    name="action_reconcile"
+                    groups="account.group_account_manager"
+                    class="oe_stat_button"
+                    icon="fa-link"
+                    invisible="not unreconciled or state != 'done'"
+                >
+                </button>
+            </div>
+        </field>
+    </record>
+    <record id="purchase_order_view_search" model="ir.ui.view">
+        <field name="name">Custom Purchase Unreconciled Search</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search" />
+        <field name="arch" type="xml">
+            <filter name="order_date" position="after">
+                <filter
+                    name="unreconciled"
+                    string="Unreconciled"
+                    domain="[('unreconciled','=', True)]"
+                    groups="account.group_account_manager"
+                    help="Purchase orders with unreconciled journal items."
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="unreconciled_amount_purchase_order_view_tree" model="ir.ui.view">
+        <field name="name">unreconciled.amount.purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+        <field name="arch" type="xml">
+            <field name="invoice_status" position="after">
+                <field name="amount_unreconciled" sum="sum_ar" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>
