@@ -1,0 +1,248 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_unreconciled
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_order__amount_unreconciled
+msgid "Amount Unreconciled"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.purchase_unreconciled_exceeded_wizard
+msgid "Amount Unreconciled exceeded"
+msgstr ""
+
+#. module: purchase_unreconciled
+#. odoo-python
+#: code:addons/purchase_unreconciled/models/account_move_line.py:0
+#, python-format
+msgid "Automatic writeoff"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.purchase_unreconciled_exceeded_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: purchase_unreconciled
+#. odoo-python
+#: code:addons/purchase_unreconciled/models/account_move_line.py:0
+#, python-format
+msgid "Cannot write-off more than one account"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model,name:purchase_unreconciled.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model,name:purchase_unreconciled.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__continue_method
+msgid "Continue Method"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__exception_msg
+msgid "Exception Msg"
+msgstr ""
+
+#. module: purchase_unreconciled
+#. odoo-python
+#: code:addons/purchase_unreconciled/models/purchase_order.py:0
+#, python-format
+msgid ""
+"Finance Warning: \n"
+"Unreconciled amount is too high. Total unreconciled amount: %(amount_unreconciled)s Maximum unreconciled amount accepted: %(amount_allowed)s "
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__id
+msgid "ID"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,help:purchase_unreconciled.field_purchase_order__unreconciled
+msgid ""
+"Indicates that a Purchase Order has related Journal items not reconciled.\n"
+"Note that if it is false it can be either that everything is reconciled or that the related accounts do not allow reconciliation"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model,name:purchase_unreconciled.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.purchase_unreconciled_exceeded_wizard
+msgid "Lock and Reconcile"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__origin_reference
+msgid "Object"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_unreconciled_exceeded_wiz__purchase_id
+msgid "Order Number"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,help:purchase_unreconciled.field_res_company__purchase_reconcile_tolerance
+#: model:ir.model.fields,help:purchase_unreconciled.field_res_config_settings__purchase_reconcile_tolerance
+msgid ""
+"Percentage of tolerance of residual amount vs total amount of the Purchase "
+"Order. Leave zero to accept all discrepancies"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_res_company__purchase_lock_auto_reconcile
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_res_config_settings__purchase_lock_auto_reconcile
+msgid "Purchase Lock Auto Reconcile"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model,name:purchase_unreconciled.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_res_company__purchase_reconcile_tolerance
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_res_config_settings__purchase_reconcile_tolerance
+msgid "Purchase Reconcile Tolerance (%)"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.res_config_settings_view_form
+msgid "Purchase Reconciling"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model,name:purchase_unreconciled.model_purchase_unreconciled_exceeded_wiz
+msgid "Purchase Unreconciled Exceeded Wizard"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.purchase_order_view_search
+msgid "Purchase orders with unreconciled journal items."
+msgstr ""
+
+#. module: purchase_unreconciled
+#. odoo-python
+#: code:addons/purchase_unreconciled/wizards/purchase_unreconciled_exceeded.py:0
+#, python-format
+msgid "Purchase unreconciled exceeded"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.purchase_order_form
+msgid "Reconcile"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.res_config_settings_view_form
+msgid "Reconcile PO upon locking"
+msgstr ""
+
+#. module: purchase_unreconciled
+#. odoo-python
+#: code:addons/purchase_unreconciled/models/purchase_order.py:0
+#, python-format
+msgid "Reconciled journal items"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.purchase_unreconciled_exceeded_wizard
+msgid "The order has exceeded its amount unreconciled"
+msgstr ""
+
+#. module: purchase_unreconciled
+#. odoo-python
+#: code:addons/purchase_unreconciled/models/purchase_order.py:0
+#, python-format
+msgid ""
+"The write-off account and journal for purchases is missing. An accountant "
+"must fill that information"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_purchase_order__unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.purchase_order_view_search
+msgid "Unreconciled"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.purchase_order_form
+msgid "Unreconciled Journal Items"
+msgstr ""
+
+#. module: purchase_unreconciled
+#. odoo-python
+#: code:addons/purchase_unreconciled/models/purchase_order.py:0
+#, python-format
+msgid "Unsupported search operator"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_res_company__purchase_reconcile_account_id
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_res_config_settings__purchase_reconcile_account_id
+msgid "Write-Off Account On Purchases"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,help:purchase_unreconciled.field_res_company__purchase_reconcile_account_id
+#: model:ir.model.fields,help:purchase_unreconciled.field_res_config_settings__purchase_reconcile_account_id
+msgid "Write-off account to reconcile Unreconciled Purchase Orders"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_res_company__purchase_reconcile_journal_id
+#: model:ir.model.fields,field_description:purchase_unreconciled.field_res_config_settings__purchase_reconcile_journal_id
+msgid "WriteOff Journal for Purchases"
+msgstr ""
+
+#. module: purchase_unreconciled
+#: model_terms:ir.ui.view,arch_db:purchase_unreconciled.unreconciled_amount_purchase_order_view_tree
+msgid "sum_ar"
+msgstr ""
