@@ -194,10 +194,11 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
     def _do_picking(self, picking, date):
         """Do picking with only one move on the given date."""
         picking.action_confirm()
+        picking.action_assign()
         for move in picking.move_ids:
-            move.quantity_done = move.product_uom_qty
+            move.quantity = move.product_uom_qty
             move.date = date
-        picking._action_done()
+        picking.button_validate()
 
     def test_01_nothing_to_reconcile(self):
         po = self.po

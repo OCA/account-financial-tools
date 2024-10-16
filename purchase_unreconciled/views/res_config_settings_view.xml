@@ -5,61 +5,25 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="account.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[@id='bank_cash']" position="after">
-                <h2>Purchase Reconciling</h2>
-                <div
-                    class="row mt16 o_settings_container"
-                    id="account_purchase_unreconciled"
-                >
-                    <div
-                        class="col-xs-12 col-md-6 o_setting_box"
-                        id="purchase_reconcile_account"
+            <xpath expr="//block[@id='bank_cash']/.." position="after">
+                <block title="Purchase Reconciling" id="purchase_reconcile">
+                    <setting
+                        id="purchase_lock_auto_reconcile"
+                        help="Reconcile PO upon locking"
+                        company_dependent="1"
                     >
-
-                        <div>
-                            <div class="o_setting_left_pane">
-                                <field name="purchase_lock_auto_reconcile" />
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="purchase_lock_auto_reconcile" />
-                                <span
-                                    class="fa fa-lg fa-building-o"
-                                    title="Values set here are company-specific."
-                                    role="img"
-                                    aria-label="Values set here are company-specific."
-                                    groups="base.group_multi_company"
-                                />
-                                <div class="text-muted">
-                                    Reconcile PO upon locking
-                                </div>
-                            </div>
-                        <br />
-                        </div>
-                        <div class="o_setting_right_pane">
-                            <label for="purchase_reconcile_account_id" />
-                            <div class="content-group">
-                                <field
-                                    name="purchase_reconcile_account_id"
-                                    class="o_light_label mt16"
-                                />
-                            </div>
-                            <label for="purchase_reconcile_journal_id" />
-                            <div class="content-group">
-                                <field
-                                    name="purchase_reconcile_journal_id"
-                                    class="o_light_label mt16"
-                                />
-                            </div>
-                            <label for="purchase_reconcile_tolerance" />
-                            <div class="content-group">
-                                <field
-                                    name="purchase_reconcile_tolerance"
-                                    class="o_light_label mt16"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <field name="purchase_lock_auto_reconcile" />
+                    </setting>
+                    <setting id="purchase_reconcile_account_id">
+                        <field name="purchase_reconcile_account_id" />
+                    </setting>
+                    <setting id="purchase_reconcile_journal_id">
+                        <field name="purchase_reconcile_journal_id" />
+                    </setting>
+                    <setting id="purchase_reconcile_tolerance">
+                        <field name="purchase_reconcile_tolerance" />
+                    </setting>
+                </block>
             </xpath>
         </field>
     </record>
