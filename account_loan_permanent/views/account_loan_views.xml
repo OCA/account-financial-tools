@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_loan_permanent_form" model="ir.ui.view">
+        <field name="name">account.loan.permanent.form</field>
+        <field name="model">account.loan</field>
+        <field name="inherit_id" ref="account_loan.account_loan_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='periods']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('is_permanent', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='periods']" position="after">
+                <field
+                    name="is_permanent"
+                    attrs="{'invisible': [('loan_type', '!=', 'interest')]}"
+                />
+                <field
+                    name="min_periods"
+                    groups="base.group_system"
+                    attrs="{'invisible': [('is_permanent', '=', False)], 'required': [('is_permanent', '=', True)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

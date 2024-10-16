@@ -1,0 +1,74 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_loan_permanent
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-08 09:28+0000\n"
+"PO-Revision-Date: 2024-10-08 11:32+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. module: account_loan_permanent
+#: model:ir.model,name:account_loan_permanent.model_account_loan_line
+msgid "Annuity"
+msgstr "Anualidad"
+
+#. module: account_loan_permanent
+#: model:ir.model.fields,help:account_loan_permanent.field_account_loan__is_permanent
+msgid ""
+"If checked, this loan will be treated as a permanent loan. Permanent loans "
+"are only allowed for 'Only interest' type loans and will continue generating "
+"new periods indefinitely."
+msgstr ""
+"Si se comprueba, este préstamo se tratará como un préstamo permanente. Los "
+"préstamos permanentes solo están permitidos para préstamos de tipo “solo "
+"interés” y continuarán generando nuevos períodos indefinidamente."
+
+#. module: account_loan_permanent
+#. odoo-python
+#: code:addons/account_loan_permanent/models/account_loan.py:0
+#, python-format
+msgid "Invalid Loan Type"
+msgstr "Tipo De Préstamo No Válido"
+
+#. module: account_loan_permanent
+#: model:ir.model.fields,field_description:account_loan_permanent.field_account_loan__is_permanent
+msgid "Is Permanent"
+msgstr "Es permanente"
+
+#. module: account_loan_permanent
+#: model:ir.model,name:account_loan_permanent.model_account_loan
+msgid "Loan"
+msgstr "Préstamo"
+
+#. module: account_loan_permanent
+#: model:ir.model.fields,field_description:account_loan_permanent.field_account_loan__min_periods
+msgid "Minimum Periods"
+msgstr "Períodos Mínimos"
+
+#. module: account_loan_permanent
+#. odoo-python
+#: code:addons/account_loan_permanent/models/account_loan.py:0
+#, python-format
+msgid "Permanent loans can only be of type 'Only interest'"
+msgstr "Los préstamos permanentes solo pueden ser del tipo “Solo intereses”"
+
+#. module: account_loan_permanent
+#: model:ir.model.fields,help:account_loan_permanent.field_account_loan__min_periods
+msgid ""
+"The minimum number of periods for a permanent loan. This ensures that the "
+"loan will have at least this many periods before potentially generating new "
+"ones."
+msgstr ""
+"El número mínimo de períodos para un préstamo permanente. Esto asegura que "
+"el préstamo tenga al menos estos períodos antes de generar potencialmente "
+"otros nuevos."
