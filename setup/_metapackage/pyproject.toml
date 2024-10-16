@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-account-financial-tools"
-version = "17.0.20241002.0"
+version = "17.0.20241016.0"
 dependencies = [
     "odoo-addon-account_account_tag_code>=17.0dev,<17.1dev",
     "odoo-addon-account_asset_force_account>=17.0dev,<17.1dev",
@@ -24,6 +24,7 @@ dependencies = [
     "odoo-addon-account_tax_repartition_line_tax_group_account>=17.0dev,<17.1dev",
     "odoo-addon-account_usability>=17.0dev,<17.1dev",
     "odoo-addon-mail_template_substitute_account_move>=17.0dev,<17.1dev",
+    "odoo-addon-purchase_unreconciled>=17.0dev,<17.1dev",
 ]
 classifiers=[
     "Programming Language :: Python",
