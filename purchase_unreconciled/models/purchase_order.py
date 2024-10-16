@@ -130,8 +130,9 @@ class PurchaseOrder(models.Model):
                 group["purchase_line_id"][0] if group["purchase_line_id"] else False
             )
             unreconciled_items_group = unreconciled_items.filtered(
-                lambda l: (
-                    l.account_id.id == account_id and l.product_id.id == product_id
+                lambda line, account_id=account_id, product_id=product_id: (
+                    line.account_id.id == account_id
+                    and line.product_id.id == product_id
                 )
             )
             # Check which type of force reconciling we are doing:
@@ -139,8 +140,9 @@ class PurchaseOrder(models.Model):
             # - Force reconciling amount_residual_currency
             amount_residual_currency_reconcile = any(
                 unreconciled_items_group.filtered(
-                    lambda l: l.amount_residual_currency != 0.0
-                    and l.account_id.id == account_id
+                    lambda item_group,
+                    account_id=account_id: item_group.amount_residual_currency != 0.0
+                    and item_group.account_id.id == account_id
                 )
             )
             if amount_residual_currency_reconcile:
@@ -165,7 +167,9 @@ class PurchaseOrder(models.Model):
             # Check if reconciliation is total or needs an exchange rate entry to be
             # created
             if moves_to_reconcile:
-                moves_to_reconcile.filtered(lambda l: not l.reconciled).reconcile()
+                moves_to_reconcile.filtered(
+                    lambda move: not move.reconciled
+                ).reconcile()
             reconciled_ids = unreconciled_items | all_writeoffs
             res = {
                 "name": _("Reconciled journal items"),

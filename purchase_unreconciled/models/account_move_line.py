@@ -86,5 +86,5 @@ class AccountMoveLine(models.Model):
             )
         move.action_post()
         return move.line_ids.filtered(
-            lambda l: l.account_id.id == counterpart_account.id
+            lambda line: line.account_id.id == counterpart_account.id
         )
