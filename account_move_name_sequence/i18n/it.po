@@ -1,0 +1,173 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_name_sequence
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-04-23 08:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_move_name_sequence
+#: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
+msgid ""
+"A move can not be posted with name \"/\" or empty value\n"
+"Check the journal sequence, please"
+msgstr ""
+"Un movimento non può essere inserito conconem \"/\" o un valore vuoto\n"
+"Controllare la sequenza del registro"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
+msgid ""
+"Check this box if you don't want to share the same sequence for invoices and "
+"credit notes made from this journal"
+msgstr ""
+"Spuntare questa opzione se non si vuole condividere la stessa sequenza per "
+"le fatture e le note di credito fatte per questo registro"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence_id
+msgid "Credit Note Entry Sequence"
+msgstr "Sequenza registrazione nota di credito"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence
+msgid "Dedicated Credit Note Sequence"
+msgstr "Sequenza nota di credito dedicata"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__sequence_id
+msgid "Entry Sequence"
+msgstr "Sequenza registrazione"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__has_sequence_holes
+msgid "Has Sequence Holes"
+msgstr "Ha mancanze nella sequenza"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
+msgid "Highest Name"
+msgstr "Primo nome"
+
+#. module: account_move_name_sequence
+#: model:ir.model,name:account_move_name_sequence.model_account_journal
+msgid "Journal"
+msgstr "Registro"
+
+#. module: account_move_name_sequence
+#: model:ir.model,name:account_move_name_sequence.model_account_move
+msgid "Journal Entry"
+msgstr "Registrazione contabile"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__made_sequence_hole
+msgid "Made Sequence Hole"
+msgstr "Generata discontinuità nella sequenza"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__name
+msgid "Number"
+msgstr "Numero"
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"On journal '%s', the same sequence is used as Entry Sequence and Credit Note "
+"Entry Sequence."
+msgstr ""
+"Nel registro '%s', la stessa sequenza è utilizzata come sequenza di "
+"registrazione e sequenza di registrazione nota di credito."
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid "Refund"
+msgstr "Rimborso"
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#: model:ir.model,name:account_move_name_sequence.model_ir_sequence
+#, python-format
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
+msgid "Sequence Number"
+msgstr "Numero sequenza"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
+msgid "Sequence Prefix"
+msgstr "Prefisso sequenza"
+
+#. module: account_move_name_sequence
+#: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
+msgid "Standard Cash Journal Demo"
+msgstr "Demo registro contanti standard"
+
+#. module: account_move_name_sequence
+#: model:account.journal,name:account_move_name_sequence.journal_sale_std_demo
+msgid "Standard Sale Journal Demo"
+msgstr "Demo registro vendite standard"
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"The company is not set on sequence '%(sequence)s' configured as credit note "
+"sequence of journal '%(journal)s'."
+msgstr ""
+"L'azienda non è impostata per la sequenza '%(sequence)s' configurata come "
+"sequenza nota di credito del registro '%(journal)s'."
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"The company is not set on sequence '%(sequence)s' configured on journal "
+"'%(journal)s'."
+msgstr ""
+"L'azienda non è impostata per la sequenza '%(sequence)s' configurata nel "
+"registro '%(journal)s'."
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence_id
+msgid ""
+"This sequence will be used to generate the journal entry number for refunds."
+msgstr ""
+"Questa sequenza verrà utilizzata per generare il numero della registrazione "
+"contabile per i rimborsi."
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
+msgid "This sequence will be used to generate the journal entry number."
+msgstr ""
+"Questa sequenza verrà utilizzata per generare il numero della registrazione "
+"contabile."
