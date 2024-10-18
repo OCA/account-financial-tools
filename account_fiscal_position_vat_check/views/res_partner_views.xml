@@ -1,0 +1,31 @@
+<!--
+  Copyright 2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <!-- Inherited the contact view to show warning -->
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <group name="sale" position="inside">
+                <field name="show_warning_vat_required" invisible="1" />
+            </group>
+            <div role="alert" position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    groups="account.group_account_invoice,account.group_account_readonly"
+                    invisible="not show_warning_vat_required"
+                >
+                    <b>Missing VAT number</b>: this partner has the fiscal position
+                    <em>
+                        <field name="property_account_position_id" readonly="1" />
+                    </em>
+                    that require to know the VAT number of the partner.
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
