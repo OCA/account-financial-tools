@@ -274,6 +274,14 @@ class AccountAsset(models.Model):
         period.""",
     )
 
+    @api.returns("self", lambda value: value.id)
+    def copy(self, default=None):
+        self.ensure_one()
+        default = dict(default or {})
+        if "name" not in default:
+            default["name"] = _("%s (copy)", self.name)
+        return super().copy(default=default)
+
     @api.model
     def _default_company_id(self):
         return self.env.company
@@ -657,19 +665,14 @@ class AccountAsset(models.Model):
                 ("init_entry", "=", True),
             ]
             posted_lines = line_obj.search(domain, order="line_date desc")
-            if posted_lines:
-                last_line = posted_lines[0]
-            else:
-                last_line = line_obj
+            last_line = posted_lines and posted_lines[0] or line_obj
             domain = [
                 ("asset_id", "=", asset.id),
                 ("type", "=", "depreciate"),
                 ("move_id", "=", False),
                 ("init_entry", "=", False),
             ]
-            old_lines = line_obj.search(domain)
-            if old_lines:
-                old_lines.unlink()
+            line_obj.search(domain).unlink()
 
             table = asset._compute_depreciation_table()
             if not table:
@@ -730,12 +733,19 @@ class AccountAsset(models.Model):
                 )
                 residual_amount = asset.depreciation_base - depreciated_value
                 amount_diff = currency.round(residual_amount_table - residual_amount)
+                amount_diff = amount_diff / (
+                    (total_table_lines - len(move_check_lines)) or 1
+                )
                 if amount_diff:
                     # We will auto-create a new line because the number of lines in
                     # the tables are the same as the posted depreciations and there
                     # is still a residual value. Only in this case we will need to
                     # add a new line to the table with the amount of the difference.
                     if len(move_check_lines) == total_table_lines:
+                        # In periods set to years it has been found that table_i_start
+                        # is not set correctly
+                        if asset.method_period == "year":
+                            table_i_start -= 1
                         table[table_i_start]["lines"].append(
                             table[table_i_start]["lines"][line_i_start - 1]
                         )
@@ -744,8 +754,12 @@ class AccountAsset(models.Model):
                         line["amount"] = amount_diff
                     # compensate in first depreciation entry
                     # after last posting
-                    line = table[table_i_start]["lines"][line_i_start]
-                    line["amount"] -= amount_diff
+                    else:
+                        for entry in table[table_i_start:]:
+                            [
+                                line.update({"amount": line["amount"] - amount_diff})
+                                for line in entry["lines"]
+                            ]
 
             else:  # no posted lines
                 table_i_start = 0
