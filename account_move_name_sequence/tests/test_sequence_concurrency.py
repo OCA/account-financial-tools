@@ -4,10 +4,10 @@ import time
 
 import psycopg2
 
-import odoo
 from odoo import SUPERUSER_ID, api, fields, tools
-from odoo.tests import tagged
-from odoo.tests.common import Form, TransactionCase
+from odoo.modules.registry import Registry
+from odoo.tests import Form, tagged
+from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
 
@@ -109,7 +109,7 @@ class TestSequenceConcurrency(TransactionCase):
     def _create_invoice_payment(
         self, deadlock_timeout, payment_first=False, ir_sequence_standard=False
     ):
-        odoo.registry(self.env.cr.dbname)
+        Registry(self.env.cr.dbname)
         with self._new_cr() as cr, cr.savepoint():
             env = api.Environment(cr, SUPERUSER_ID, {})
             cr_pid = cr.connection.get_backend_pid()
@@ -146,7 +146,8 @@ class TestSequenceConcurrency(TransactionCase):
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             env2 = api.Environment(cr2, SUPERUSER_ID, {})
             for cr in [cr0, cr1, cr2]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set 10s timeout in order to avoid
+                # waiting for release locks a long time
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -166,7 +167,8 @@ class TestSequenceConcurrency(TransactionCase):
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             for cr in [cr0, cr1]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set 10s timeout in order to avoid
+                # waiting for release locks a long time
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -187,7 +189,8 @@ class TestSequenceConcurrency(TransactionCase):
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             for cr in [cr0, cr1]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set 10s timeout in order to avoid
+                # waiting for release locks a long time
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -209,7 +212,8 @@ class TestSequenceConcurrency(TransactionCase):
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             for cr in [cr0, cr1]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set 10s timeout in order to avoid
+                # waiting for release locks a long time
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -241,7 +245,8 @@ class TestSequenceConcurrency(TransactionCase):
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             for cr in [cr0, cr1]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set 10s timeout in order to avoid
+                # waiting for release locks a long time
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -273,7 +278,8 @@ class TestSequenceConcurrency(TransactionCase):
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             env2 = api.Environment(cr2, SUPERUSER_ID, {})
             for cr in [cr0, cr1, cr2]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set 10s timeout in order to avoid
+                # waiting for release locks a long time
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -292,7 +298,8 @@ class TestSequenceConcurrency(TransactionCase):
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             env2 = api.Environment(cr2, SUPERUSER_ID, {})
             for cr in [cr0, cr1, cr2]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set 10s timeout in order to avoid
+                # waiting for release locks a long time
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -344,6 +351,7 @@ class TestSequenceConcurrency(TransactionCase):
                 args=(deadlock_timeout, False, True),
                 name="Thread invoice payment",
             )
+            self.registry._lock_release()
             t_pay_inv.start()
             t_inv_pay.start()
             # the thread could raise the error before to wait for it so disable coverage

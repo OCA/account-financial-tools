@@ -30,7 +30,8 @@ class AccountJournal(models.Model):
         copy=False,
         check_company=True,
         domain="[('company_id', '=', company_id)]",
-        help="This sequence will be used to generate the journal entry number for refunds.",
+        help="This sequence will be used to generate "
+        "the journal entry number for refunds.",
     )
     # Redefine the default to True as <=v13.0
     refund_sequence = fields.Boolean(default=True)
@@ -188,10 +189,15 @@ class AccountJournal(models.Model):
                     if prefix3
                     else "''"
                 )
-                select_max_number = f"MAX(split_part(name, '{prefixes[-1]}', {prefixes.count(prefixes[-1]) + 1})::INTEGER) AS max_number"
+                select_max_number = (
+                    f"MAX(split_part(name, '{prefixes[-1]}', "
+                    f"{prefixes.count(prefixes[-1]) + 1}):"
+                    f":INTEGER) AS max_number"
+                )
                 query = (
-                    f"SELECT {select_year}, {select_month}, {select_max_number} FROM account_move "
-                    "WHERE name LIKE %s AND journal_id=%s GROUP BY 1,2"
+                    f"SELECT {select_year}, {select_month}, "
+                    f"{select_max_number} FROM account_move "
+                    f"WHERE name LIKE %s AND journal_id=%s GROUP BY 1,2"
                 )
 
                 # It is not using user input
