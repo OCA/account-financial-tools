@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="seq_sale_std_demo" model="ir.sequence">
+        <field name="name">Standard Sale Sequence Demo</field>
+        <field name="prefix">SSS_demo/%(range_year)s/</field>
+        <field name="use_date_range" eval="True" />
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id" ref="base.main_company" />
+        <field name="implementation">standard</field>
+    </record>
+    <record id="seq_cash_std_demo" model="ir.sequence">
+        <field name="name">Standard Cash Sequence Demo</field>
+        <field name="prefix">SCS_demo/%(range_year)s/</field>
+        <field name="use_date_range" eval="True" />
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id" ref="base.main_company" />
+        <field name="implementation">standard</field>
+    </record>
+</odoo>

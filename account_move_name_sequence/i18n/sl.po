@@ -1,0 +1,185 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_name_sequence
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-03-30 12:22+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
+"Language-Team: none\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 4.14.1\n"
+
+#. module: account_move_name_sequence
+#: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
+msgid ""
+"A move can not be posted with name \"/\" or empty value\n"
+"Check the journal sequence, please"
+msgstr ""
+"Temeljnice ni mogoče knjižiti z nazivom \"/\" ali prazno vrednostjo\n"
+"Prosimo, da preverite zaporedje v dnevniku"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence
+msgid ""
+"Check this box if you don't want to share the same sequence for invoices and "
+"credit notes made from this journal"
+msgstr ""
+"Označite, če želite v tem dnevniku uporabljati isto zaporedje za račune in "
+"dobropise"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence_id
+msgid "Credit Note Entry Sequence"
+msgstr "Zaporedje za dobropise"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__refund_sequence
+msgid "Dedicated Credit Note Sequence"
+msgstr "Ločeno zaporedje za dobropise"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__sequence_id
+msgid "Entry Sequence"
+msgstr "Zaporedje vnosa"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__has_sequence_holes
+msgid "Has Sequence Holes"
+msgstr ""
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
+msgid "Highest Name"
+msgstr "Najvišji naziv"
+
+#. module: account_move_name_sequence
+#: model:ir.model,name:account_move_name_sequence.model_account_journal
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: account_move_name_sequence
+#: model:ir.model,name:account_move_name_sequence.model_account_move
+msgid "Journal Entry"
+msgstr "Dnevniški vnos"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_hole
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__made_sequence_hole
+msgid "Made Sequence Hole"
+msgstr ""
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__name
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__name
+msgid "Number"
+msgstr "Številka"
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"On journal '%s', the same sequence is used as Entry Sequence and Credit Note "
+"Entry Sequence."
+msgstr "V dnevniku '%s' se uporablja isto zaporedje za vnose in dobropise."
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid "Refund"
+msgstr "Povračilo"
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#: model:ir.model,name:account_move_name_sequence.model_ir_sequence
+#, python-format
+msgid "Sequence"
+msgstr "Zaporedje"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
+msgid "Sequence Number"
+msgstr "Številka zaporedja"
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
+msgid "Sequence Prefix"
+msgstr "Predpona zaporedja"
+
+#. module: account_move_name_sequence
+#: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
+msgid "Standard Cash Journal Demo"
+msgstr ""
+
+#. module: account_move_name_sequence
+#: model:account.journal,name:account_move_name_sequence.journal_sale_std_demo
+msgid "Standard Sale Journal Demo"
+msgstr ""
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"The company is not set on sequence '%(sequence)s' configured as credit note "
+"sequence of journal '%(journal)s'."
+msgstr ""
+
+#. module: account_move_name_sequence
+#. odoo-python
+#: code:addons/account_move_name_sequence/models/account_journal.py:0
+#, python-format
+msgid ""
+"The company is not set on sequence '%(sequence)s' configured on journal "
+"'%(journal)s'."
+msgstr ""
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence_id
+msgid ""
+"This sequence will be used to generate the journal entry number for refunds."
+msgstr "To zaporedje bo v rabi za knjigovodske vnose dobropisov."
+
+#. module: account_move_name_sequence
+#: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
+msgid "This sequence will be used to generate the journal entry number."
+msgstr "To zaporedje bo v rabi za knjigovodske vnose dobropisov."
+
+#~ msgid "Display Name"
+#~ msgstr "Prikazani naziv"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnjič spremenjeno"
+
+#, python-format
+#~ msgid ""
+#~ "The company is not set on sequence '%s' configured as credit note "
+#~ "sequence of journal '%s'."
+#~ msgstr ""
+#~ "Pri zaporedju '%s' za dobropise v dnevniku '%s' ni nastavljena družba."
+
+#, python-format
+#~ msgid "The company is not set on sequence '%s' configured on journal '%s'."
+#~ msgstr ""
+#~ "Pri zaporedju '%s' nastavljenem v dnevniku '%s' ni nastavljena družba."
