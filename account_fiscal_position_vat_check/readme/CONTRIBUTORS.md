@@ -1,0 +1,3 @@
+- Alexis de Lattre \<<alexis.delattre@akretion.com>\>
+- Christian Mahlich \<<christian.mahlich@source-werbeartikel.com>\>
+- Aktiv Software \<<odoo@aktivsoftware.com>\>
