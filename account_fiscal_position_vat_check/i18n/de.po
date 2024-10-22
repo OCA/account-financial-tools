@@ -1,0 +1,78 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_fiscal_position_vat_check
+#
+# Translators:
+# Niki Waibel <niki.waibel@gmail.com>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-01 18:55+0000\n"
+"PO-Revision-Date: 2020-05-06 13:19+0000\n"
+"Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
+
+#. module: account_fiscal_position_vat_check
+#: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
+msgid "<b>Missing VAT number</b>: this partner has the fiscal position"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
+#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_partner__show_warning_vat_required
+#: model:ir.model.fields,field_description:account_fiscal_position_vat_check.field_res_users__show_warning_vat_required
+msgid "Show Warning Vat Required"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
+#. odoo-python
+#: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
+#, python-format
+msgid ""
+"You are trying to validate a customer invoice/refund with the fiscal "
+"position '%(fp)s' that require the customer to have a VAT number. But the "
+"Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+"number of this Customer in Odoo and try to validate again."
+msgstr ""
+"Sie versuchen, eine Ausgangsrechnung/-gutschrift mit der Steuerzuordnung "
+"'%(fp)s' zu genehmigen, für die der Kunde eine Umsatzsteuernummer benötigt. "
+"Der Kunde '%(rp)s' hat aber keine USt-ID in Odoo. Bitte geben Sie die USt-ID "
+"des Kunden in Odoo an und starten Sie die Prüfung erneut."
+
+#. module: account_fiscal_position_vat_check
+#: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
+msgid "that require to know the VAT number of the partner."
+msgstr ""
+
+#~ msgid "Invoice"
+#~ msgstr "Rechnung"
+
+#~ msgid "Missing VAT number:"
+#~ msgstr "Fehlende USt-Nummer:"
+
+#~ msgid ""
+#~ "You have set the fiscal position '%s' that require the customer to have a "
+#~ "VAT number, but the VAT number is missing."
+#~ msgstr ""
+#~ "Sie haben die Steuerzuordnung '%s' so festgelegt, dass der Kunde eine "
+#~ "Umsatzsteuernummer haben muss. Diese fehlt jedoch."
+
+#~ msgid "Partner"
+#~ msgstr "Partner"
