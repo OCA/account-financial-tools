@@ -1,0 +1,93 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_print
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-15 15:25+0000\n"
+"PO-Revision-Date: 2023-11-15 15:36+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "<strong>Accounting Date:</strong>"
+msgstr "<strong>Fecha contable:</strong>"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "<strong>Company:</strong>"
+msgstr "<strong>Compañía:</strong>"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "<strong>Journal:</strong>"
+msgstr "<strong>Diarios:</strong>"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "<strong>Partner:</strong>"
+msgstr "<strong>Socio:</strong>"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "<strong>Reference:</strong>"
+msgstr "<strong>Referencia:</strong>"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Amount in Currency"
+msgstr "Importe en divisas"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Analytic Account"
+msgstr "Cuenta analítica"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Credit"
+msgstr "Haber"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Debit"
+msgstr "Debe"
+
+#. module: account_move_print
+#: model:ir.actions.report,name:account_move_print.journal_entries_move_print_id
+msgid "Journal Entries"
+msgstr "Asientos contables"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Label"
+msgstr "Etiqueta"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Originator Tax"
+msgstr "Origen de impuestos"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: account_move_print
+#: model_terms:ir.ui.view,arch_db:account_move_print.journal_entries_report_id
+msgid "Taxes"
+msgstr "Impuestos"
