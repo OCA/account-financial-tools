@@ -1,0 +1,9 @@
+<odoo noupdate="1">
+
+    <record id="account_sequence" model="ir.sequence.option">
+        <field name="name">Invoice / Bill / Refund / Payment</field>
+        <field name="model">account.move</field>
+        <field name="use_sequence_option" eval="False" />
+    </record>
+
+</odoo>
