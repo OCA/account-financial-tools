@@ -190,6 +190,8 @@ class AccountMoveLine(models.Model):
     @api.depends("account_id", "asset_id")
     def _compute_asset_profile(self):
         for rec in self:
+            if rec.move_id.tax_cash_basis_origin_move_id:
+                continue
             if rec.account_id.asset_profile_id and not rec.asset_id:
                 rec.asset_profile_id = rec.account_id.asset_profile_id
             elif rec.asset_id:
