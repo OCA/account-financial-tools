@@ -965,7 +965,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _find_accounts(self):
         """Load account templates to create/update."""
         self.account_ids.unlink()
-        for template in self.chart_template_ids.mapped("account_ids"):
+        for template in self.chart_template_ids.mapped("account_ids").filtered(
+            lambda acc: not acc.nocreate
+        ):
+            # Do not create accounts when updating if nocreate=True
             # Search for a real account that matches the template
             account_id = self.find_account_by_templates(template)
             if not account_id:
