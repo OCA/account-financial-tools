@@ -390,7 +390,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "profile_id": self.car5y.id,
                 "purchase_value": 3333,
                 "salvage_value": 0,
-                "date_start": time.strftime("%Y-07-07"),
+                "date_start": time.strftime("%Y-11-07"),
                 "method_time": "year",
                 "method_number": 5,
                 "method_period": "month",
@@ -412,23 +412,13 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         # check the depreciated value is the initial value
         self.assertAlmostEqual(asset.value_depreciated, 279.44, places=2)
         # check computed values in the depreciation board
-        if calendar.isleap(date.today().year):
-            self.assertAlmostEqual(
-                asset.depreciation_line_ids[2].amount, 44.75, places=2
-            )
-        else:
-            self.assertAlmostEqual(
-                asset.depreciation_line_ids[2].amount, 45.64, places=2
-            )
-        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55, places=2)
-        if calendar.isleap(date.today().year):
-            self.assertAlmostEqual(
-                asset.depreciation_line_ids[-1].amount, 9.11, places=2
-            )
-        else:
-            self.assertAlmostEqual(
-                asset.depreciation_line_ids[-1].amount, 8.22, places=2
-            )
+        year_is_leap = calendar.isleap(date.today().year)
+        amount = 51.7 if year_is_leap else 51.71
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, amount, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, amount, places=2)
+        amount = 3.26 if year_is_leap else 2.67
+        self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, amount, places=2)
+        self.assertEqual(asset.depreciation_line_ids[-1].remaining_value, 0)
 
     def test_05_degressive_linear(self):
         """Degressive-Linear with annual and quarterly depreciation."""
@@ -987,3 +977,57 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_reduce_assets_same_number_of_periods_already_confirmed(self):
+        """Reduce in assets to the same number of periods already confirmed"""
+        asset = self.asset_model.create(
+            {
+                "name": "test asset removal",
+                "profile_id": self.car5y.id,
+                "purchase_value": 1200,
+                "salvage_value": 0,
+                "date_start": time.strftime("%Y-06-01"),
+                "method_time": "number",
+                "method_number": 12,
+                "method_period": "year",
+                "prorata": True,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.validate()
+        lines = asset.depreciation_line_ids.filtered(lambda x: not x.init_entry)
+        total_amount_move = 0
+        self.assertEqual(len(lines), 12)
+        for asset_line in lines[:4]:
+            asset_line.create_move()
+            total_amount_move += asset_line.amount
+        asset.set_to_draft()
+        asset.method_number = 4
+        asset.compute_depreciation_board()
+        self.assertEqual(
+            asset.depreciation_line_ids[-1].line_date,
+            asset.depreciation_line_ids[-2].line_date,
+        )
+        self.assertEqual(
+            asset.depreciation_line_ids[-1].amount,
+            asset.purchase_value - total_amount_move,
+        )
+        self.assertEqual(asset.depreciation_line_ids[-1].remaining_value, 0)
+
+    def test_23_asset_copy(self):
+        """Asset copy"""
+        asset = self.asset_model.create(
+            {
+                "name": "test asset removal",
+                "profile_id": self.car5y.id,
+                "purchase_value": 1200,
+                "salvage_value": 0,
+                "date_start": time.strftime("%Y-06-01"),
+                "method_time": "number",
+                "method_number": 12,
+                "method_period": "year",
+                "prorata": True,
+            }
+        )
+        asset_copy = asset.copy()
+        self.assertEqual(asset_copy.name, asset.name + " (copy)")
