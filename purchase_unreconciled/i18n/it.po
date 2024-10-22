@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-10-21 09:06+0000\n"
+"PO-Revision-Date: 2024-10-22 10:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -243,21 +243,21 @@ msgstr "Operatore di ricerca non supportato"
 #: model:ir.model.fields,field_description:purchase_unreconciled.field_res_company__purchase_reconcile_account_id
 #: model:ir.model.fields,field_description:purchase_unreconciled.field_res_config_settings__purchase_reconcile_account_id
 msgid "Write-Off Account On Purchases"
-msgstr ""
+msgstr "Conto storno vendite"
 
 #. module: purchase_unreconciled
 #: model:ir.model.fields,help:purchase_unreconciled.field_res_company__purchase_reconcile_account_id
 #: model:ir.model.fields,help:purchase_unreconciled.field_res_config_settings__purchase_reconcile_account_id
 msgid "Write-off account to reconcile Unreconciled Purchase Orders"
-msgstr ""
+msgstr "Conto storno per riconciliare ordini di acquisto non riconciliati"
 
 #. module: purchase_unreconciled
 #: model:ir.model.fields,field_description:purchase_unreconciled.field_res_company__purchase_reconcile_journal_id
 #: model:ir.model.fields,field_description:purchase_unreconciled.field_res_config_settings__purchase_reconcile_journal_id
 msgid "WriteOff Journal for Purchases"
-msgstr ""
+msgstr "Registro storno per acquisti"
 
 #. module: purchase_unreconciled
 #: model_terms:ir.ui.view,arch_db:purchase_unreconciled.unreconciled_amount_purchase_order_view_tree
 msgid "sum_ar"
-msgstr ""
+msgstr "sum_ar"
