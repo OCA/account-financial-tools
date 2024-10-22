@@ -1,0 +1,1 @@
+odoo-addon-attachment_preview @ git+https://github.com/OCA/knowledge.git@refs/pull/434/head#subdirectory=setup/attachment_preview
