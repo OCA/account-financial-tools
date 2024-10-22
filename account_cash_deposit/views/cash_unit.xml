@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+        <record id="cash_unit_form" model="ir.ui.view">
+            <field name="model">cash.unit</field>
+            <field name="arch" type="xml">
+                    <form>
+                            <widget
+                    name="web_ribbon"
+                    title="Archived"
+                    bg_color="bg-danger"
+                    attrs="{'invisible': [('active', '=', True)]}"
+                />
+                            <group name="main">
+                                    <field name="currency_id" />
+                                    <field name="active" invisible="1" />
+                                    <field name="cash_type" />
+                                    <field
+                        name="coinroll_qty"
+                        attrs="{'invisible': [('cash_type', '!=', 'coinroll')], 'required': [('cash_type', '=', 'coinroll')]}"
+                    />
+                                    <field name="value" />
+                                    <field
+                        name="total_value"
+                        attrs="{'invisible': [('cash_type', '!=', 'coinroll')]}"
+                    />
+                                    <field name="auto_create" />
+                            </group>
+                    </form>
+            </field>
+    </record>
+
+    <record id="cash_unit_tree" model="ir.ui.view">
+            <field name="model">cash.unit</field>
+            <field name="arch" type="xml">
+                    <tree>
+                            <field
+                    name="currency_id"
+                    invisible="not context.get('cash_unit_main_view')"
+                />
+                            <field
+                    name="cash_type"
+                    widget="badge"
+                    decoration-success="cash_type == 'note'"
+                    decoration-muted="cash_type == 'coin'"
+                    decoration-info="cash_type == 'coinroll'"
+                />
+                            <field name="value" />
+                            <field
+                    name="coinroll_qty"
+                    attrs="{'invisible': [('cash_type', '!=', 'coinroll')]}"
+                />
+                            <field name="total_value" />
+                            <field name="auto_create" optional="show" />
+                    </tree>
+                </field>
+
+        </record>
+
+        <record id="cash_unit_action" model="ir.actions.act_window">
+                <field name="name">Cash Unit</field>
+                <field name="res_model">cash.unit</field>
+                <field name="view_mode">tree,form</field>
+                <field name="context">{'cash_unit_main_view': True}</field>
+        </record>
+
+</odoo>

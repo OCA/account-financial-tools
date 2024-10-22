@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+
+    <record id="usd_note_100" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">note</field>
+        <field name="value">100</field>
+    </record>
+    <record id="usd_note_50" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">note</field>
+        <field name="value">50</field>
+        <field name="auto_create">deposit</field>
+    </record>
+    <record id="usd_note_20" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">note</field>
+        <field name="value">20</field>
+        <field name="auto_create">deposit</field>
+    </record>
+    <record id="usd_note_10" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">note</field>
+        <field name="value">10</field>
+        <field name="auto_create">deposit</field>
+    </record>
+    <record id="usd_note_5" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">note</field>
+        <field name="value">5</field>
+        <field name="auto_create">deposit</field>
+</record>
+    <record id="usd_note_2" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">note</field>
+        <field name="value">2</field>
+        <field name="auto_create">deposit</field>
+</record>
+    <record id="usd_note_1" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">note</field>
+        <field name="value">1</field>
+        <field name="auto_create">deposit</field>
+</record>
+
+
+
+    <record id="usd_coin_1" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coin</field>
+        <field name="value">1</field>
+    </record>
+    <record id="usd_coin_cents_50" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coin</field>
+        <field name="value">0.5</field>
+    </record>
+    <record id="usd_coin_cents_25" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coin</field>
+        <field name="value">0.25</field>
+    </record>
+    <record id="usd_coin_cents_10" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coin</field>
+        <field name="value">0.1</field>
+    </record>
+    <record id="usd_coin_cents_5" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coin</field>
+        <field name="value">0.05</field>
+    </record>
+    <record id="usd_coin_cents_1" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coin</field>
+        <field name="value">0.01</field>
+    </record>
+    <!-- Info source for coin rolls:
+    https://en.wikipedia.org/wiki/Coin_wrapper#United_States  -->
+    <record id="usd_coinroll_1x25" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coinroll</field>
+        <field name="value">1</field>
+        <field name="coinroll_qty">25</field>
+    </record>
+    <record id="usd_coinroll_cents_50x20" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coinroll</field>
+        <field name="value">0.5</field>
+        <field name="coinroll_qty">20</field>
+    </record>
+    <record id="usd_coinroll_cents_25x40" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coinroll</field>
+        <field name="value">0.25</field>
+        <field name="coinroll_qty">40</field>
+    </record>
+    <record id="usd_coinroll_cents_10x50" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coinroll</field>
+        <field name="value">0.1</field>
+        <field name="coinroll_qty">50</field>
+    </record>
+    <record id="usd_coinroll_cents_5x40" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coinroll</field>
+        <field name="value">0.05</field>
+        <field name="coinroll_qty">40</field>
+    </record>
+    <record id="usd_coinroll_cents_1x50" model="cash.unit">
+        <field name="currency_id" ref="base.USD" />
+        <field name="cash_type">coinroll</field>
+        <field name="value">0.01</field>
+        <field name="coinroll_qty">50</field>
+    </record>
+
+</odoo>

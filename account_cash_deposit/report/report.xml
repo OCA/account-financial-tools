@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+        <record id="report_account_cash_deposit" model="ir.actions.report">
+            <field name="name">Cash Deposit/Order</field>
+            <field name="model">account.cash.deposit</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">account_cash_deposit.report_cashdeposit</field>
+            <field name="report_file">account_cash_deposit.report_cashdeposit</field>
+            <field
+            name="print_report_name"
+        >'%s%s' % (object.display_name.replace(' ', '_'), object.state == 'draft' and '-draft' or '')</field>
+            <field name="binding_model_id" ref="model_account_cash_deposit" />
+            <field name="binding_type">report</field>
+        </record>
+</odoo>
