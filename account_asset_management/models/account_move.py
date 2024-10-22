@@ -90,6 +90,10 @@ class AccountMove(models.Model):
 
     def _post(self, soft=True):
         ret_val = super()._post(soft=soft)
+        # Skip asset creation if we are reversing the move
+        if self.env.context.get("move_reverse_cancel"):
+            return ret_val
+
         for move in self:
             for aml in move.line_ids.filtered(
                 lambda line: line.asset_profile_id and not line.tax_line_id
