@@ -1,0 +1,1 @@
+In previous versions of Odoo, the system did not require a default expense account. We would like to investigate the feasibility of a simple solution of just making this field not-required once again in v14.
