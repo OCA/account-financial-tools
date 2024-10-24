@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2024-05-29 09:35+0000\n"
+"PO-Revision-Date: 2024-10-24 17:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -33,7 +33,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -84,7 +84,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
 msgid "10 days last reminder"
-msgstr "10 giorni ultimo richiamo"
+msgstr "10 giorni da ultimo promemoria"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_1
@@ -100,7 +100,7 @@ msgstr "30 giorni fine mese"
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.2_time_2
 msgid "60 days last reminder"
-msgstr "60 giorni ultimo richiamo"
+msgstr "60 giorni da ultimo promemoria"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
@@ -219,9 +219,7 @@ msgstr "Livello del controllo credito"
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
-msgstr ""
-"Un controllo di credito automatico e' gia' in funzione, prego provare piu' "
-"tardi."
+msgstr "Un controllo di credito automatico è già in corso, riprovare più tardi."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:86
