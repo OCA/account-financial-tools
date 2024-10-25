@@ -784,6 +784,22 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         return set(models.MAGIC_COLUMNS) | specials
 
     @api.model
+    @tools.ormcache("name")
+    def fields_to_include(self, name):
+        """Get fields that will be used when checking differences.
+
+        :param str name: The name of the template model.
+        :return set: Fields to include in diff.
+        """
+        template_field_mapping = {
+            "account.tax.template": self.tax_field_ids,
+            "account.account.template": self.account_field_ids,
+            "account.fiscal.position.template": self.fp_field_ids,
+            "account.group.template": self.account_group_field_ids,
+        }
+        return template_field_mapping[name].mapped("name")
+
+    @api.model
     def diff_fields(self, template, real):  # noqa: C901
         """Get fields that are different in template and real records.
 
@@ -797,13 +813,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         result = dict()
         ignore = self.fields_to_ignore(template._name)
-        template_field_mapping = {
-            "account.tax.template": self.tax_field_ids,
-            "account.account.template": self.account_field_ids,
-            "account.fiscal.position.template": self.fp_field_ids,
-            "account.group.template": self.account_group_field_ids,
-        }
-        to_include = template_field_mapping[template._name].mapped("name")
+        to_include = self.fields_to_include(template._name)
         for key, field in template._fields.items():
             if key in ignore or key not in to_include or not hasattr(real, key):
                 continue
