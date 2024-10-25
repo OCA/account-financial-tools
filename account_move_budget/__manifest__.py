@@ -14,6 +14,7 @@
     "depends": ["account", "date_range"],
     "data": [
         "security/ir.model.access.csv",
+        "security/account_move_budget.xml",
         "views/account_move_budget_line_views.xml",
         "views/account_move_budget_views.xml",
         "views/res_partner_view.xml",
