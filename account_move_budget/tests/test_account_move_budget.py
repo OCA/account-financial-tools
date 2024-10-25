@@ -56,6 +56,46 @@ class TestAccountMoveBudget(TransactionCase):
             }
         )
 
+        cls.partner = cls.env["res.partner"].create(
+            {"name": "Test Partner", "company_id": cls.env.company.id}
+        )
+
+        cls.budget1 = cls.env["account.move.budget"].create(
+            {
+                "name": "Budget 1",
+                "company_id": cls.env.company.id,
+                "date_from": "2023-01-01",
+                "date_to": "2023-12-31",
+            }
+        )
+        cls.budget2 = cls.env["account.move.budget"].create(
+            {
+                "name": "Budget 2",
+                "company_id": False,
+                "date_from": "2024-01-01",
+                "date_to": "2024-12-31",
+            }
+        )
+
+        cls.budget_line1 = cls.env["account.move.budget.line"].create(
+            {
+                "partner_id": cls.partner.id,
+                "company_id": cls.env.company.id,
+                "budget_id": cls.budget1.id,
+                "date": "2023-01-01",
+                "account_id": cls.account.id,
+            }
+        )
+        cls.budget_line2 = cls.env["account.move.budget.line"].create(
+            {
+                "partner_id": cls.partner.id,
+                "company_id": False,
+                "budget_id": cls.budget2.id,
+                "date": "2024-01-01",
+                "account_id": cls.account.id,
+            }
+        )
+
     def test_01_create_account_move_budget(self):
         move_form = Form(self.env["account.move.budget"])
         move_form.name = "Budget Test 01"
@@ -135,3 +175,19 @@ class TestAccountMoveBudget(TransactionCase):
         move_line_form.account_id = self.account
         with self.assertRaises(ValidationError):
             move_line_form.save()
+
+    def test_07_compute_budget_info(self):
+        self.partner._compute_budget_count()
+        self.assertEqual(self.partner.budget_count, 2)
+
+        budget_ids = self.partner._get_budget_ids()
+        expected_ids = {self.budget1.id, self.budget2.id}
+        self.assertEqual(set(budget_ids), expected_ids)
+
+    def test_08_action_view_budget(self):
+        action = self.partner.action_view_budget()
+
+        budget_ids = self.partner._get_budget_ids()
+        expected_domain = [("id", "in", budget_ids)]
+
+        self.assertEqual(action["domain"], expected_domain)
