@@ -1159,7 +1159,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             if wiz_account.type == "new":
                 # Create the account
                 tax_template_ref = {
-                    tax: self.find_tax_by_templates(tax) for tax in template.tax_ids
+                    tax: self.env["account.tax"].browse(self.find_tax_by_templates(tax))
+                    for tax in template.tax_ids
                 }
                 vals = self.chart_template_id._get_account_vals(
                     self.company_id,
