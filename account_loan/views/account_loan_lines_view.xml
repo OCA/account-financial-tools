@@ -33,14 +33,14 @@
                     string="Values"
                     type="object"
                     icon="fa-eye"
-                    invisible="has_moves == False and has_invoices == False"
+                    invisible="not has_moves and not has_invoices"
                 />
                 <button
                     name="view_process_values"
                     string="Process"
                     type="object"
                     icon="fa-cogs"
-                    invisible="has_moves == True or has_invoices == True or loan_state != 'posted'"
+                    invisible="has_moves or has_invoices or loan_state != 'posted'"
                 />
             </tree>
         </field>
@@ -86,7 +86,11 @@
                 <field name="interests_amount" />
                 <field name="long_term_pending_principal_amount" />
                 <field name="long_term_principal_amount" />
-                <field name="company_id" optional="hide" />
+                <field
+                    name="company_id"
+                    optional="hide"
+                    groups="base.group_multi_company"
+                />
                 <field name="partner_id" optional="hide" />
                 <field name="journal_id" optional="hide" />
                 <field name="short_term_loan_account_id" optional="hide" />

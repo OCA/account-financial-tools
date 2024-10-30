@@ -21,7 +21,7 @@
             <tree>
                 <field name="name" />
                 <field name="partner_id" optional="hide" />
-                <field name="company_id" />
+                <field name="company_id" groups="base.group_multi_company" />
                 <field name="is_leasing" />
                 <field name="state" />
                 <field name="rate" optional="hide" />
@@ -62,7 +62,7 @@
                             name="view_account_invoices"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o"
-                            invisible="state == 'draft' or is_leasing == False"
+                            invisible="state == 'draft' or not is_leasing"
                             type="object"
                             string="Invoices"
                         />
@@ -98,10 +98,12 @@
                     </h1>
                     <group>
                         <group>
+                            <field name="company_id" invisible="1" />
                             <field
                                 name="company_id"
                                 options="{'no_create': True}"
                                 readonly="state != 'draft'"
+                                groups="base.group_multi_company"
                             />
                             <field name="loan_type" readonly="state != 'draft'" />
                             <field name="loan_amount" readonly="state != 'draft'" />
@@ -168,16 +170,12 @@
                                 </group>
                             </group>
                         </page>
-                        <page
-                            string="Leasing"
-                            id="leasing"
-                            invisible="is_leasing == False"
-                        >
+                        <page string="Leasing" id="leasing" invisible="not is_leasing">
                             <group>
                                 <group>
                                     <field
                                         name="leased_asset_account_id"
-                                        required="is_leasing == True"
+                                        required="is_leasing"
                                         readonly="state != 'draft'"
                                     />
                                     <field
@@ -186,13 +184,10 @@
                                     />
                                 </group>
                                 <group>
-                                    <field
-                                        name="product_id"
-                                        required="is_leasing == True"
-                                    />
+                                    <field name="product_id" required="is_leasing" />
                                     <field
                                         name="interests_product_id"
-                                        required="is_leasing == True"
+                                        required="is_leasing"
                                     />
                                     <field name="post_invoice" />
                                 </group>
