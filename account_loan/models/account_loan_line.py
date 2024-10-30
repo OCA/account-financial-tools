@@ -9,7 +9,7 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 try:
     import numpy_financial
-except (ImportError, IOError) as err:
+except (OSError, ImportError) as err:
     _logger.error(err)
 
 
