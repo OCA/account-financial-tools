@@ -7,7 +7,10 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import fields
 from odoo.exceptions import UserError
-from odoo.tests import TransactionCase, tagged
+from odoo.tests import Form, tagged
+from odoo.tools import mute_logger
+
+from odoo.addons.base.tests.common import BaseCommon
 
 _logger = logging.getLogger(__name__)
 try:
@@ -17,7 +20,7 @@ except (OSError, ImportError) as err:
 
 
 @tagged("post_install", "-at_install")
-class TestLoan(TransactionCase):
+class TestLoan(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -53,7 +56,7 @@ class TestLoan(TransactionCase):
         )
 
     def test_onchange(self):
-        loan = self.env["account.loan"].new(
+        loan = self.env["account.loan"].create(
             {
                 "name": "LOAN",
                 "company_id": self.company.id,
@@ -69,13 +72,11 @@ class TestLoan(TransactionCase):
                 "partner_id": self.partner.id,
             }
         )
-        journal = loan.journal_id.id
-        loan.is_leasing = True
-        loan._onchange_is_leasing()
-        self.assertNotEqual(journal, loan.journal_id.id)
-        loan.company_id = self.company_02
-        loan._onchange_company()
-        self.assertFalse(loan.interest_expenses_account_id)
+        loan_form = Form(loan)
+        loan_form.is_leasing = True
+        self.assertNotEqual(loan.journal_id, loan_form.journal_id)
+        loan_form.company_id = self.company_02
+        self.assertFalse(loan_form.interest_expenses_account_id)
 
     def test_partner_loans(self):
         self.assertFalse(self.partner.lended_loan_count)
@@ -84,6 +85,7 @@ class TestLoan(TransactionCase):
         action = self.partner.action_view_partner_lended_loans()
         self.assertEqual(loan, self.env[action["res_model"]].search(action["domain"]))
 
+    @mute_logger("odoo.models.unlink")
     def test_round_on_end(self):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
         loan.round_on_end = True
@@ -103,6 +105,7 @@ class TestLoan(TransactionCase):
         self.assertEqual(line_1.principal_amount, 0)
         self.assertEqual(line_end.principal_amount, 500000)
 
+    @mute_logger("odoo.models.unlink")
     def test_increase_amount_validation(self):
         amount = 10000
         periods = 24
@@ -149,6 +152,7 @@ class TestLoan(TransactionCase):
                 default_loan_id=loan.id
             ).create({"amount": -100, "date": line.date}).run()
 
+    @mute_logger("odoo.models.unlink")
     def test_pay_amount_validation(self):
         amount = 10000
         periods = 24
@@ -200,6 +204,7 @@ class TestLoan(TransactionCase):
                 default_loan_id=loan.id
             ).create({"amount": -100, "fees": 100, "date": line.date}).run()
 
+    @mute_logger("odoo.models.unlink")
     def test_increase_amount_loan(self):
         amount = 10000
         periods = 24
@@ -246,6 +251,7 @@ class TestLoan(TransactionCase):
         self.assertEqual(loan, new_move.loan_id)
         self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
 
+    @mute_logger("odoo.models.unlink")
     def test_increase_amount_leasing(self):
         amount = 10000
         periods = 24
@@ -298,6 +304,7 @@ class TestLoan(TransactionCase):
         self.assertEqual(loan, new_move.loan_id)
         self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
 
+    @mute_logger("odoo.models.unlink")
     def test_fixed_annuity_begin_loan(self):
         amount = 10000
         periods = 24
@@ -348,6 +355,7 @@ class TestLoan(TransactionCase):
         with self.assertRaises(UserError):
             line.view_process_values()
 
+    @mute_logger("odoo.models.unlink")
     def test_fixed_annuity_loan(self):
         amount = 10000
         periods = 24
@@ -394,6 +402,7 @@ class TestLoan(TransactionCase):
         with self.assertRaises(UserError):
             line.view_process_values()
 
+    @mute_logger("odoo.models.unlink")
     def test_fixed_principal_loan_leasing(self):
         amount = 24000
         periods = 24
@@ -498,6 +507,7 @@ class TestLoan(TransactionCase):
         with self.assertRaises(UserError):
             line.view_process_values()
 
+    @mute_logger("odoo.models.unlink")
     def test_fixed_principal_loan_auto_post_leasing(self):
         amount = 24000
         periods = 24
@@ -525,6 +535,7 @@ class TestLoan(TransactionCase):
         self.assertTrue(line.has_invoices)
         self.assertTrue(line.has_moves)
 
+    @mute_logger("odoo.models.unlink")
     def test_interests_on_end_loan(self):
         amount = 10000
         periods = 10
@@ -555,6 +566,7 @@ class TestLoan(TransactionCase):
         self.assertEqual(loan.payment_amount - loan.interests_amount, amount)
         self.assertEqual(loan.pending_principal_amount, 0)
 
+    @mute_logger("odoo.models.unlink")
     def test_cancel_loan(self):
         amount = 10000
         periods = 10
