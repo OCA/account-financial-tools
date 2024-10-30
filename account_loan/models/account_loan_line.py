@@ -27,35 +27,27 @@ class AccountLoanLine(models.Model):
     )
     company_id = fields.Many2one(
         "res.company",
-        readonly=True,
         related="loan_id.company_id",
         store=True,
     )
-    partner_id = fields.Many2one(
-        "res.partner", readonly=True, related="loan_id.partner_id"
-    )
+    partner_id = fields.Many2one("res.partner", related="loan_id.partner_id")
     is_leasing = fields.Boolean(
         related="loan_id.is_leasing",
-        readonly=True,
     )
     journal_id = fields.Many2one(
         "account.journal",
-        readonly=True,
         related="loan_id.journal_id",
     )
     short_term_loan_account_id = fields.Many2one(
         "account.account",
-        readonly=True,
         related="loan_id.short_term_loan_account_id",
     )
     interest_expenses_account_id = fields.Many2one(
         "account.account",
-        readonly=True,
         related="loan_id.interest_expenses_account_id",
     )
     loan_type = fields.Selection(
         related="loan_id.loan_type",
-        readonly=True,
     )
     loan_state = fields.Selection(
         related="loan_id.state",
@@ -70,7 +62,6 @@ class AccountLoanLine(models.Model):
     )
     long_term_loan_account_id = fields.Many2one(
         "account.account",
-        readonly=True,
         related="loan_id.long_term_loan_account_id",
     )
     currency_id = fields.Many2one(

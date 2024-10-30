@@ -1032,15 +1032,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "ali"
-
-#~ msgid "Invoice"
-#~ msgstr "Račun"
-
-#~ msgid "Journal Entries"
-#~ msgstr "Dnevniški vnosi"
-
-#~ msgid "Planned"
-#~ msgstr "Planirano"
-
-#~ msgid "Account Entry"
-#~ msgstr "Knjigovodski vnos"

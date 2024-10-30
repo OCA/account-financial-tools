@@ -1048,10 +1048,3 @@ msgstr "Vid kontroll kommer den första betalningen att vara på startdatum"
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "eller"
-
-#~ msgid "Invoice"
-#~ msgstr "Faktura"
-
-#, fuzzy
-#~ msgid "Journal Entries"
-#~ msgstr "Journal"

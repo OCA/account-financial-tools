@@ -1031,10 +1031,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "sau"
-
-#~ msgid "Invoice"
-#~ msgstr "Factura"
-
-#, fuzzy
-#~ msgid "Journal Entries"
-#~ msgstr "Registru"

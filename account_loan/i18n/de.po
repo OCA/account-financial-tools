@@ -1045,28 +1045,3 @@ msgstr "Wenn angehakt, erfolgt die erste Zahlung am Anfangsdatum"
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "oder"
-
-#~ msgid "Followers (Channels)"
-#~ msgstr "Abonnenten (Kanäle)"
-
-#~ msgid "If checked new messages require your attention."
-#~ msgstr ""
-#~ "Wenn es gesetzt ist, erfordern neue Nachrichten Ihre Aufmerksamkeit."
-
-#~ msgid "Invoice"
-#~ msgstr "Rechnung"
-
-#~ msgid "Journal Entries"
-#~ msgstr "Journal-Buchungen"
-
-#~ msgid "Loan items"
-#~ msgstr "Darlehenspositionen"
-
-#~ msgid "Account Entry"
-#~ msgstr "Kontobuchung"
-
-#~ msgid "account.loan.pay.amount"
-#~ msgstr "account.loan.pay.amount"
-
-#~ msgid "account.loan.post"
-#~ msgstr "account.loan.post"

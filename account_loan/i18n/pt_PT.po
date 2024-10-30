@@ -1031,13 +1031,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "ou"
-
-#~ msgid "Invoice"
-#~ msgstr "Fatura"
-
-#, fuzzy
-#~ msgid "Journal Entries"
-#~ msgstr "Diário"
-
-#~ msgid "Account Entry"
-#~ msgstr "Movimento de Conta"

@@ -1030,13 +1030,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "of"
-
-#~ msgid "Invoice"
-#~ msgstr "Factuur"
-
-#, fuzzy
-#~ msgid "Journal Entries"
-#~ msgstr "Dagboek"
-
-#~ msgid "Account Entry"
-#~ msgstr "Boeking"

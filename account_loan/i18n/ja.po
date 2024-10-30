@@ -1030,10 +1030,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr "または"
-
-#~ msgid "Invoice"
-#~ msgstr "請求書"
-
-#, fuzzy
-#~ msgid "Journal Entries"
-#~ msgstr "仕訳帳"

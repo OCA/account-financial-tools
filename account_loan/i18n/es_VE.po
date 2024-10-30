@@ -1030,7 +1030,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Journal Entries"
-#~ msgstr "Diario"
