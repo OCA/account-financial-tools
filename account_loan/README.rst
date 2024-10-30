@@ -17,29 +17,30 @@ Account Loan management
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/16.0/account_loan
+    :target: https://github.com/OCA/account-financial-tools/tree/17.0/account_loan
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_loan
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-17-0/account-financial-tools-17-0-account_loan
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of accounting to support loans.
-It will create automatically moves or invoices for loans.
-Moreover, you can check the pending amount to be paid and reduce the debt.
+This module extends the functionality of accounting to support loans. It
+will create automatically moves or invoices for loans. Moreover, you can
+check the pending amount to be paid and reduce the debt.
 
 It currently supports two kinds of debts:
 
-* Loans: a standard debt with banks, that only creates account moves.
-   Loan types info:
-   `APR <https://en.wikipedia.org/wiki/Annual_percentage_rate>`_,
-   `EAR <https://en.wikipedia.org/wiki/Effective_interest_rate>`_,
-   `Real Rate <https://en.wikipedia.org/wiki/Real_interest_rate>`_.
-* Leases: a debt with a bank where purchase invoices are necessary
+-  | Loans: a standard debt with banks, that only creates account moves.
+   | Loan types info:
+     `APR <https://en.wikipedia.org/wiki/Annual_percentage_rate>`__,
+     `EAR <https://en.wikipedia.org/wiki/Effective_interest_rate>`__,
+     `Real Rate <https://en.wikipedia.org/wiki/Real_interest_rate>`__.
+
+-  Leases: a debt with a bank where purchase invoices are necessary
 
 **Table of contents**
 
@@ -51,30 +52,33 @@ Usage
 
 To use this module, you need to:
 
-#. Go to `Invoicing / Accounting > Accounting > Loans`
-#. Configure a loan selecting the company, loan type, amount, rate and accounts
-#. Post the loan, it will automatically create an account move with the
+1. Go to Invoicing / Accounting > Accounting > Loans
+2. Configure a loan selecting the company, loan type, amount, rate and
+   accounts
+3. Post the loan, it will automatically create an account move with the
    expected amounts
-#. Create automatically the account moves / invoices related to loans and
-   leases before a selected date
+4. Create automatically the account moves / invoices related to loans
+   and leases before a selected date
 
 On a posted loan you can:
 
-* Create moves or invoices (according to the configuration)
-* Modify rates when needed (only unposted lines will be modified)
-* Reduce or cancel the debt of a loan / lease
+-  Create moves or invoices (according to the configuration)
+-  Modify rates when needed (only unposted lines will be modified)
+-  Reduce or cancel the debt of a loan / lease
 
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
+|Try me on Runbot|
+
+.. |Try me on Runbot| image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :target: https://runbot.odoo-community.org/runbot/92/12.0
 
 Changelog
 =========
 
 16.0.1.0.0
-~~~~~~~~~~
+----------
 
-Due to the changes on 16, we will generate two moves on leasings, one for the invoice, and another one for the change from long to short term.
+Due to the changes on 16, we will generate two moves on leasings, one
+for the invoice, and another one for the change from long to short term.
 
 Bug Tracker
 ===========
@@ -82,7 +86,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_loan%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_loan%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -90,19 +94,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Creu Blanca
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Enric Tobella <etobella@creublanca.es>
-* Bhavesh Odedra <bodedra@opensourceintegrators.com>
-* Alberto Martín Cortada <alberto.martin@guadaltech.es>
+-  Enric Tobella <etobella@creublanca.es>
+-  Bhavesh Odedra <bodedra@opensourceintegrators.com>
+-  Alberto Martín Cortada <alberto.martin@guadaltech.es>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -122,6 +126,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-etobella| 
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/16.0/account_loan>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/17.0/account_loan>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
