@@ -132,7 +132,8 @@ msgstr "Beloppet av betalning som kommer att tilldelas räntor"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__principal_amount
 msgid "Amount of the payment that will reduce the pending loan amount"
-msgstr "Belopp av betalningen som kommer att minska det utestående lånebeloppet"
+msgstr ""
+"Belopp av betalningen som kommer att minska det utestående lånebeloppet"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__long_term_principal_amount
@@ -472,16 +473,6 @@ msgid "Journal Type"
 msgstr "Journaltyp"
 
 #. module: account_loan
-#: model:ir.model.fields,field_description:account_loan.field_account_loan____last_update
-#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard____last_update
-#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount____last_update
-#: model:ir.model.fields,field_description:account_loan.field_account_loan_line____last_update
-#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount____last_update
-#: model:ir.model.fields,field_description:account_loan.field_account_loan_post____last_update
-msgid "Last Modified on"
-msgstr "Senast redigerad"
-
-#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__write_uid
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__write_uid
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__write_uid
@@ -625,11 +616,6 @@ msgstr "Långfristiga kapitalbelopp"
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__long_term_loan_account_id
 msgid "Long term account"
 msgstr "Långsiktigt konto"
-
-#. module: account_loan
-#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Huvudanslutning"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_has_error
@@ -1041,10 +1027,11 @@ msgstr ""
 msgid "When checked, the first payment will be on start date"
 msgstr "Vid kontroll kommer den första betalningen att vara på startdatum"
 
-#. module: account_loan
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_generate_wizard_form
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_increase_amount_form_view
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
-#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
-msgid "or"
-msgstr "eller"
+#~ msgid "Last Modified on"
+#~ msgstr "Senast redigerad"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Huvudanslutning"
+
+#~ msgid "or"
+#~ msgstr "eller"
