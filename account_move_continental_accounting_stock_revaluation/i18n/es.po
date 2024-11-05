@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_continental_accounting_stock_revaluation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-27 15:09+0000\n"
+"PO-Revision-Date: 2024-09-27 15:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_continental_accounting_stock_revaluation
+#. odoo-python
+#: code:addons/account_move_continental_accounting_stock_revaluation/models/account_move.py:0
+#, python-format
+msgid "Adjust stock valuation when reseting to draft bill: %s"
+msgstr "Ajustar la valoración de stock al restablecer la factura a borrador: %s"
+
+#. module: account_move_continental_accounting_stock_revaluation
+#: model:ir.model.fields,field_description:account_move_continental_accounting_stock_revaluation.field_account_bank_statement_line__allow_move_with_valuation_cancelation
+#: model:ir.model.fields,field_description:account_move_continental_accounting_stock_revaluation.field_account_move__allow_move_with_valuation_cancelation
+#: model:ir.model.fields,field_description:account_move_continental_accounting_stock_revaluation.field_account_payment__allow_move_with_valuation_cancelation
+msgid "Allow Move With Valuation Cancelation"
+msgstr "Permitir movimiento con cancelación de valoración"
+
+#. module: account_move_continental_accounting_stock_revaluation
+#: model:ir.model,name:account_move_continental_accounting_stock_revaluation.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: account_move_continental_accounting_stock_revaluation
+#: model_terms:ir.ui.view,arch_db:account_move_continental_accounting_stock_revaluation.view_move_form
+msgid "Reset to Draft"
+msgstr "Restablecer a borrador"
+
+#. module: account_move_continental_accounting_stock_revaluation
+#: model_terms:ir.ui.view,arch_db:account_move_continental_accounting_stock_revaluation.view_move_form
+msgid ""
+"This journal entry is related to an inventory valuation record, built-in "
+"behaviour does not allow further modifications for this journal entry. A "
+"manual stock revaluation will be perfomed in order to be able to modify this"
+" record."
+msgstr "Este asiento contable está relacionado con un registro de valoración de inventario, "
+"el comportamiento estándar no permite más modificaciones para este asiento contable. "
+"Se realizará una revaluación de stock para poder restablecer a borrardor este registro."
