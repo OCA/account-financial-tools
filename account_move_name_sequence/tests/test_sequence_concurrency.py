@@ -221,7 +221,10 @@ class TestSequenceConcurrency(TransactionCase):
             lines2reconcile = (
                 (payment_move | invoice)
                 .mapped("line_ids")
-                .filtered(lambda l: l.account_id.account_type == "asset_receivable")
+                .filtered(
+                    lambda move_line: move_line.account_id.account_type
+                    == "asset_receivable"
+                )
             )
             with env0.cr.savepoint(), env1.cr.savepoint():
                 # Reconciling "last move"
@@ -251,7 +254,10 @@ class TestSequenceConcurrency(TransactionCase):
             lines2reconcile = (
                 (payment_move | invoice)
                 .mapped("line_ids")
-                .filtered(lambda l: l.account_id.account_type == "asset_receivable")
+                .filtered(
+                    lambda move_line: move_line.account_id.account_type
+                    == "asset_receivable"
+                )
             )
             with env0.cr.savepoint(), env1.cr.savepoint():
                 # Reconciling "last move"

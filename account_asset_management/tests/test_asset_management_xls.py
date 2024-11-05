@@ -12,10 +12,10 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 class TestAssetManagementXls(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
-        super(TestAssetManagementXls, cls).setUpClass()
+        super().setUpClass()
 
         module = __name__.split("addons.")[1].split(".")[0]
-        cls.xls_report_name = "{}.asset_report_xls".format(module)
+        cls.xls_report_name = f"{module}.asset_report_xls"
         cls.wiz_model = cls.env["wiz.account.asset.report"]
         cls.company = cls.env.ref("base.main_company")
         # Ensure we have something to report on
@@ -82,7 +82,9 @@ class TestAssetManagementXls(AccountTestInvoicingCommon):
                 "report_name": self.xls_report_name,
             }.items(),
         )
-        model = self.env["report.%s" % self.report_action["report_name"]].with_context(
+        model = self.env[
+            "report.{}".format(self.report_action["report_name"])
+        ].with_context(
             active_model=self.xls_report._name, **self.report_action["context"]
         )
         model.create_xlsx_report(self.xls_report.ids, data=self.report_action["data"])

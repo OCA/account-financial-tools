@@ -161,9 +161,7 @@ class AccountAssetRemove(models.TransientModel):
 
         asset_id = self.env.context.get("active_id")
         asset = self.env["account.asset"].browse(asset_id)
-        asset_ref = (
-            asset.code and "{} (ref: {})".format(asset.name, asset.code) or asset.name
-        )
+        asset_ref = asset.code and f"{asset.name} (ref: {asset.code})" or asset.name
 
         if self.env.context.get("early_removal"):
             residual_value = self._prepare_early_removal(asset)
@@ -245,11 +243,13 @@ class AccountAssetRemove(models.TransientModel):
         def _dlines(asset):
             lines = asset.depreciation_line_ids
             dlines = lines.filtered(
-                lambda l: l.type == "depreciate"
-                and not l.init_entry
-                and not l.move_check
+                lambda depreciation_line: depreciation_line.type == "depreciate"
+                and not depreciation_line.init_entry
+                and not depreciation_line.move_check
             )
-            dlines = dlines.sorted(key=lambda l: l.line_date)
+            dlines = dlines.sorted(
+                key=lambda depreciation_line: depreciation_line.line_date
+            )
             return dlines
 
         dlines = _dlines(asset)

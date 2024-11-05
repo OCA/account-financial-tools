@@ -130,7 +130,7 @@ class TestAccountAssetTransfer(TestAssetManagement):
         transfer_move = self.env["account.move"].browse(res["domain"][0][2])
         assets = transfer_move.invoice_line_ids.mapped("asset_id")
         # 2 new assets created, and value equal to original assets
-        new_assets = assets.filtered(lambda l: l.state == "draft")
+        new_assets = assets.filtered(lambda asset: asset.state == "draft")
         self.assertEqual(sum(new_assets.mapped("purchase_value")), 23000)
         # All asset transfer will change to is_transfer
         self.assertEqual(list(set(assets.mapped("is_transfer"))), [True])

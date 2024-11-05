@@ -9,7 +9,7 @@ from odoo.tests import Form, common
 class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockAccountAngloSaxonCogsKit, cls).setUpClass()
+        super().setUpClass()
         # Useful models
         cls.StockMove = cls.env["stock.move"]
         cls.UoM = cls.env["uom.uom"]
@@ -203,8 +203,12 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
         self.invoice = move_form.save()
         self.invoice.action_post()
         aml = self.invoice.line_ids
-        aml_expense = aml.filtered(lambda l: l.account_id == self.account_expense)
-        aml_output = aml.filtered(lambda l: l.account_id == self.account_output)
+        aml_expense = aml.filtered(
+            lambda move_line: move_line.account_id == self.account_expense
+        )
+        aml_output = aml.filtered(
+            lambda move_line: move_line.account_id == self.account_output
+        )
         # Check that the cost of Good Sold entries are equal to:
         # 2* (2 * 20 + 1 * 10) = 100
         self.assertEqual(
@@ -273,8 +277,12 @@ class TestStockAccountAngloSaxonCogsKit(common.TransactionCase):
         self.invoice.invoice_date = self.invoice.date
         self.invoice.action_post()
         aml = self.invoice.line_ids
-        aml_expense = aml.filtered(lambda l: l.account_id == self.account_expense)
-        aml_input = aml.filtered(lambda l: l.account_id == self.account_input)
+        aml_expense = aml.filtered(
+            lambda move_line: move_line.account_id == self.account_expense
+        )
+        aml_input = aml.filtered(
+            lambda move_line: move_line.account_id == self.account_input
+        )
         # No line with expense account
         self.assertFalse(aml_expense)
         # Check that there is line with stock input account and amount:

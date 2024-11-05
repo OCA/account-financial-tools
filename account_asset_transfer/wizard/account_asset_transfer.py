@@ -102,7 +102,7 @@ class AccountAssetTransfer(models.TransientModel):
         self.ensure_one()
         if float_compare(self.from_asset_value, self.to_asset_value, 2) != 0:
             raise UserError(_("Total values of new assets must equal to source assets"))
-        if self.to_asset_ids.filtered(lambda l: l.asset_value <= 0):
+        if self.to_asset_ids.filtered(lambda asset: asset.asset_value <= 0):
             raise UserError(_("Value of new asset must greater than 0.0"))
 
     def _get_new_move_transfer(self):
@@ -192,7 +192,9 @@ class AccountAssetTransfer(models.TransientModel):
 
     def expand_to_asset_ids(self):
         self.ensure_one()
-        lines = self.to_asset_ids.filtered(lambda l: l.asset_profile_id and l.quantity)
+        lines = self.to_asset_ids.filtered(
+            lambda asset: asset.asset_profile_id and asset.quantity
+        )
         for line in lines:
             line._expand_asset_line()
         action = self.env.ref("account_asset_transfer.action_account_asset_transfer")
@@ -248,6 +250,6 @@ class AccountAssetTransferLine(models.TransientModel):
             line = self
             qty = self.quantity
             name = self.asset_name
-            self.update({"quantity": 1, "asset_name": "{} {}".format(name, 1)})
+            self.update({"quantity": 1, "asset_name": f"{name} {1}"})
             for i in range(1, int(qty)):
-                line.copy({"asset_name": "{} {}".format(name, i + 1)})
+                line.copy({"asset_name": f"{name} {i + 1}"})

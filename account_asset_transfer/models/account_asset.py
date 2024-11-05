@@ -71,17 +71,25 @@ class AccountAsset(models.Model):
             if (
                 asset_from
                 and self.id
-                not in move.line_ids.filtered(lambda l: l.credit).mapped("asset_id").ids
+                not in move.line_ids.filtered(lambda move_line: move_line.credit)
+                .mapped("asset_id")
+                .ids
             ):
-                assets = move.line_ids.filtered(lambda l: l.credit).mapped("asset_id")
+                assets = move.line_ids.filtered(
+                    lambda move_line: move_line.credit
+                ).mapped("asset_id")
                 break
             # Destination Assets, we check from move that create destination asset
             elif (
                 asset_to
                 and self.id
-                in move.line_ids.filtered(lambda l: l.credit).mapped("asset_id").ids
+                in move.line_ids.filtered(lambda move_line: move_line.credit)
+                .mapped("asset_id")
+                .ids
             ):
-                assets = move.line_ids.filtered(lambda l: l.debit).mapped("asset_id")
+                assets = move.line_ids.filtered(
+                    lambda move_line: move_line.debit
+                ).mapped("asset_id")
                 break
         return {
             "name": _("Assets"),

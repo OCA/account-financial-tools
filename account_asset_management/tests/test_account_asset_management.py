@@ -637,9 +637,11 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertEqual(len(new_assets), 2)
         for asset in new_assets:
             dlines = asset.depreciation_line_ids.filtered(
-                lambda l: l.type == "depreciate"
+                lambda depreciation_line: depreciation_line.type == "depreciate"
             )
-            dlines = dlines.sorted(key=lambda l: l.line_date)
+            dlines = dlines.sorted(
+                key=lambda depreciation_line: depreciation_line.line_date
+            )
             self.assertAlmostEqual(dlines[0].depreciated_value, 0.0)
             self.assertAlmostEqual(dlines[-1].remaining_value, 0.0)
 
