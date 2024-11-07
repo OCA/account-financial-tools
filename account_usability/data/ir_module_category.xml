@@ -9,5 +9,4 @@
     <record id="base.module_category_accounting_accounting" model="ir.module.category">
         <field name="name">Accounting</field>
     </record>
-
 </odoo>
