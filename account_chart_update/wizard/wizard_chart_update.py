@@ -783,8 +783,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         } | specials_mapping.get(name, set())
         return set(models.MAGIC_COLUMNS) | specials
 
-    @api.model
-    @tools.ormcache("name")
     def fields_to_include(self, name):
         """Get fields that will be used when checking differences.
 
