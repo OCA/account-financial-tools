@@ -42,6 +42,7 @@ class AccountLoanLine(models.Model):
             "rate": last_line.rate,
             "pending_principal_amount": last_line.loan_id.loan_amount,
             "long_term_pending_principal_amount": last_line.loan_id.loan_amount,
+            "company_id": last_line.loan_id.company_id.id,
         }
 
         new_line = self.create(new_line_vals)

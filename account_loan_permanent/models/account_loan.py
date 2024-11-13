@@ -52,15 +52,19 @@ class AccountLoan(models.Model):
         :return:
         """
         res = super()._generate_loan_entries(date)
-        for loan in self.filtered(lambda l: l.is_permanent):
+        for loan in self.filtered(
+            lambda l: l.is_permanent and l.company_id == self.env.company
+        ):
             lines = loan.line_ids.filtered(lambda l: l.date <= date and not l.move_ids)
             if lines:
                 res += lines._generate_move()
                 loan.periods += len(lines)
                 last_line = loan.line_ids.sorted(key=lambda r: r.sequence)[-1]
                 while last_line.date <= date:
-                    new_line = self.env["account.loan.line"]._create_next_line(
-                        last_line
+                    new_line = (
+                        self.env["account.loan.line"]
+                        .with_context(company_id=loan.company_id.id)
+                        ._create_next_line(last_line)
                     )
                     last_line = new_line
                     loan.periods += 1
