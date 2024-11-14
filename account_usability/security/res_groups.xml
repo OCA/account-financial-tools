@@ -5,11 +5,20 @@
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-    <!-- Change groups to fit with EE configuration -->
+    <!-- Change groups to fit with EE configuration
+    Note: The inheritance mechanism is :
+    group_account_readonly ⬂
+    group_account_invoice  ⇨ group_account_user ⇨ group_account_manager
+-->
 
-    <!-- Level 2:
+    <!-- Level 1:
     Name:  Show Accounting Features - Readonly -> Read-only
-    Parent: Technical -> Accounting
+    Parent:
+        Before: Technical (base.module_category_hidden)
+        After: Accounting (base.module_category_accounting_accounting)
+    Implied Groups:
+        Before: base.group_user
+        No Change.
 -->
 
     <record id="account.group_account_readonly" model="res.groups">
@@ -17,9 +26,25 @@
         <field name="category_id" ref="base.module_category_accounting_accounting" />
     </record>
 
+    <!-- Level 2: account.group_account_invoice
+    Name: Billing
+    This group is not modified by this module.
+    Parent:
+        Before: Accounting (base.module_category_accounting_accounting)
+        No Change.
+    Implied Groups:
+        Before: base.group_user
+        No Change.
+-->
+
     <!-- Level 3:
     Name: Show Full Accounting Features -> Bookkeeper
-    Parent: Technical -> Accounting
+    Parent:
+        Before: Technical (base.module_category_hidden)
+        After: Accounting (base.module_category_accounting_accounting)
+    Implied Groups:
+        Before: account.group_account_invoice + account.group_account_readonly
+        No Change.
 -->
     <record id="account.group_account_user" model="res.groups">
         <field name="name">Bookkeeper</field>
@@ -28,13 +53,17 @@
 
     <!-- Level 4:
     Name: Billing Administrator -> Accountant
-    Implied Groups : account.group_account_invoice -> account.group_account_user
+    Implied Groups :
+        Before: account.group_account_invoice + base.group_private_addresses
+        After: account.group_account_user + base.group_private_addresses
 -->
     <record id="account.group_account_manager" model="res.groups">
         <field name="name">Accountant</field>
         <field
             name="implied_ids"
-            eval="[(6, 0, [ref('account.group_account_user')])]"
+            eval="[
+            (3, ref('account.group_account_invoice')),
+            (4, ref('account.group_account_user'))]"
         />
     </record>
 </odoo>
