@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-11-18 19:06+0000\n"
+"PO-Revision-Date: 2024-11-18 22:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -183,6 +183,7 @@ msgstr "Non si ha l'autorizzazione di eseguire questa azione."
 msgid ""
 "You cannot add/modify entries after and inclusive of the lock to date %s"
 msgstr ""
+"Non si possono aggiungere/modificare le registrazioni dalla data di blocco %s"
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -192,6 +193,9 @@ msgid ""
 "You cannot add/modify entries after and inclusive of the lock to date %s. "
 "Check the company settings or ask someone with the 'Adviser' role"
 msgstr ""
+"Non si possono aggiungere/modificare le registrazioni dalla data di blocco "
+"%s. Controllare le impostazioni azienda o chiedere a qualcuno con il ruolo "
+"di 'Revisore'"
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -201,6 +205,9 @@ msgid ""
 "You cannot define stricter conditions on advisors than on users. Please make"
 " sure that the lock date on advisor is set after the lock date for users."
 msgstr ""
+"Non si possono definire condizioni sui revisori più stringenti che sui "
+"revisori. Assicurarsi che la data di blocco sul revisore sia impostata "
+"successiva alla data di blocco per gli utenti."
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -210,3 +217,6 @@ msgid ""
 "You cannot lock a period that is not finished yet. Please make sure that the"
 " lock date for advisors is set at or after the last day of the next month."
 msgstr ""
+"Non si può bloccare un periodo che non sia ancora terminato. Assicurarsi che "
+"la data di blocco per i revisori sia pari o successiva all' ultimo giorno "
+"del mese successivo."
