@@ -915,34 +915,3 @@ msgid ""
 "going to be created. Aborting as this will provoke an infinite loop. Please "
 "check if children have been matched, but not the parent one."
 msgstr ""
-
-#~ msgid "<span states=\"init,ready\"> or </span>"
-#~ msgstr "<span states=\"init,ready\"> oder </span>"
-
-#~ msgid "Continue on errors"
-#~ msgstr "Bei Fehlern fortfahren"
-
-#~ msgid "New accounts"
-#~ msgstr "Neue Konten"
-
-#~ msgid "New taxes"
-#~ msgstr "Neue  Steuern"
-
-#~ msgid "Updated accounts"
-#~ msgstr "Aktualisierte Konten"
-
-#~ msgid "Updated taxes"
-#~ msgstr "Steuern aktualisiert"
-
-#~ msgid "Post-updated tax %s."
-#~ msgstr "Steuer %s aktualisiert."
-
-#~ msgid "Tax Scope"
-#~ msgstr "Steuerumfang"
-
-#~ msgid ""
-#~ "No. of digits to use for account code. Make sure it is the same number as "
-#~ "existing accounts."
-#~ msgstr ""
-#~ "Anzahl Ziffern, die für die Kontenschlüssel verwendet werden. Stellen Sie "
-#~ "bitte sicher, die gleiche Anzahl wie bestehende Konten zu verwenden."

@@ -914,34 +914,3 @@ msgstr ""
 "Hay por lo menos una plantilla de impuestos padre (%s) cuyos impuestos hijo "
 "no se van a crear. Cancela si no se provocará un loop infinito. Por favor "
 "comprueba si los hijos han sido emparejados, pero el padre no."
-
-#~ msgid "<span states=\"init,ready\"> or </span>"
-#~ msgstr "<span states=\"init,ready\"> o </span>"
-
-#~ msgid "Continue on errors"
-#~ msgstr "Continuar con errores"
-
-#~ msgid "New accounts"
-#~ msgstr "Nuevas cuentas"
-
-#~ msgid "New taxes"
-#~ msgstr "Nuevos impuestos"
-
-#~ msgid "Updated accounts"
-#~ msgstr "Cuentas actualizadas"
-
-#~ msgid "Updated taxes"
-#~ msgstr "Impuestos actualizados"
-
-#~ msgid "Post-updated tax %s."
-#~ msgstr "Impuesto %s post-actualizado."
-
-#~ msgid "Tax Scope"
-#~ msgstr "Ámbito del impuesto"
-
-#~ msgid ""
-#~ "No. of digits to use for account code. Make sure it is the same number as "
-#~ "existing accounts."
-#~ msgstr ""
-#~ "Nº de dígitos a usar para el código de cuenta. Asegúrese que es el mismo "
-#~ "número que las cuentas existentes."

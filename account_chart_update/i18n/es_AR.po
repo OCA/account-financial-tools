@@ -923,21 +923,3 @@ msgstr ""
 "secundarios no se van a crear. Abortar esto provocará un bucle infinito. "
 "Compruebe si los impuestos secundarios han sido emparejados, pero no el "
 "principal."
-
-#~ msgid "<span states=\"init,ready\"> or </span>"
-#~ msgstr "<span states=\"init,ready\"> o </span>"
-
-#~ msgid "Continue on errors"
-#~ msgstr "Continuar con errores"
-
-#~ msgid "New accounts"
-#~ msgstr "Nuevas cuentas"
-
-#~ msgid "New taxes"
-#~ msgstr "Nuevos impuestos"
-
-#~ msgid "Updated accounts"
-#~ msgstr "Cuentas actualizadas"
-
-#~ msgid "Updated taxes"
-#~ msgstr "Impuestos actualizados"

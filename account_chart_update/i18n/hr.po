@@ -908,9 +908,3 @@ msgstr ""
 "Imate najmanje jedan nadređeni predložak poreza (%s) čiji podređeni porezi "
 "neće biti kreirani. Ovakvo odustajanje će prouzročiti beskonačnu petlju. "
 "Molimo provjerite jesu li podređeni usklađeni, ali ne i nadređeni porezi."
-
-#~ msgid "<span states=\"init,ready\"> or </span>"
-#~ msgstr "<span states=\"init,ready\"> ili </span>"
-
-#~ msgid "Continue on errors"
-#~ msgstr "Nastavi u slučaju greške"
