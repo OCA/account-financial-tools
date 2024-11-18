@@ -11,7 +11,7 @@ class TestAccountChartUpdateCommon(common.TransactionCase):
         return cls.env["ir.model.data"].create(
             {
                 "module": "account_chart_update",
-                "name": "{}-{}".format(record._table, record.id),
+                "name": f"{record._table}-{record.id}",
                 "model": record._name,
                 "res_id": record.id,
             }

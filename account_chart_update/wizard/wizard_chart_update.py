@@ -1129,9 +1129,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             new_tax = self.env["account.tax"].browse(
                 template_to_tax_dict[wiz_tax.tax_id.id]
             )
-            _logger.info(
-                _("Created tax %s."), "'{}' (ID:{})".format(new_tax.name, new_tax.id)
-            )
+            _logger.info(_("Created tax %s."), f"'{new_tax.name}' (ID:{new_tax.id})")
         for wiz_tax in self.tax_ids.filtered(lambda x: x.type != "new"):
             template, tax = wiz_tax.tax_id, wiz_tax.update_tax_id
             # Deactivate tax
@@ -1192,7 +1190,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     else:  # pragma: no cover
                         _logger.exception(
                             "ERROR: " + _("Exception creating account %s."),
-                            "'{} - {}'".format(template.code, template.name),
+                            f"'{template.code} - {template.name}'",
                         )
                     if not self.continue_on_errors:
                         break
@@ -1206,7 +1204,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             account[key] = value
                             _logger.info(
                                 _("Updated account %s."),
-                                "'{} - {}'".format(account.code, account.name),
+                                f"'{account.code} - {account.name}'",
                             )
                         if self.recreate_xml_ids and self.missing_xml_id(
                             template, account
@@ -1214,7 +1212,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             self.recreate_xml_id(template, account)
                             _logger.info(
                                 _("Updated account %s. (Recreated XML-ID)"),
-                                "'{} - {}'".format(account.code, account.name),
+                                f"'{account.code} - {account.name}'",
                             )
 
                 except Exception:
@@ -1224,7 +1222,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     else:  # pragma: no cover
                         _logger.exception(
                             "ERROR: " + _("Exception writing account %s."),
-                            "'{} - {}'".format(account.code, account.name),
+                            f"'{account.code} - {account.name}'",
                         )
                     if not self.continue_on_errors:
                         break
@@ -1516,7 +1514,7 @@ class WizardMatching(models.TransientModel):
         for opt in field_opts:
             model = self.env[model_name]
             desc = model._fields[opt].get_description(self.env)["string"]
-            result.append((opt, "{} ({})".format(desc, opt)))
+            result.append((opt, f"{desc} ({opt})"))
         return result
 
 

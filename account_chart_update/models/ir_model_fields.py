@@ -12,8 +12,6 @@ class IrModelFields(models.Model):
         if self.env.context.get("account_chart_update"):
             res = []
             for record in self:
-                res.append(
-                    (record.id, "{} ({})".format(record.field_description, record.name))
-                )
+                res.append((record.id, f"{record.field_description} ({record.name})"))
             return res
         return super(IrModelFields, self).name_get()

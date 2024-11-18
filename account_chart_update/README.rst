@@ -17,29 +17,29 @@ Detect changes and update the Account Chart from a template
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/16.0/account_chart_update
+    :target: https://github.com/OCA/account-financial-tools/tree/17.0/account_chart_update
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_chart_update
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-17-0/account-financial-tools-17-0-account_chart_update
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This is a pretty useful tool to update Odoo installations after tax reforms
-on the official charts of accounts, or to apply fixes performed on the chart
-template.
+This is a pretty useful tool to update Odoo installations after tax
+reforms on the official charts of accounts, or to apply fixes performed
+on the chart template.
 
 The wizard:
 
-* Allows the user to compare a chart and a template showing differences
-  on accounts, taxes, tax codes and fiscal positions.
-* It may create the new account, taxes, tax codes and fiscal positions detected
-  on the template.
-* It can also update (overwrite) the accounts, taxes, tax codes and fiscal
-  positions that got modified on the template.
+-  Allows the user to compare a chart and a template showing differences
+   on accounts, taxes, tax codes and fiscal positions.
+-  It may create the new account, taxes, tax codes and fiscal positions
+   detected on the template.
+-  It can also update (overwrite) the accounts, taxes, tax codes and
+   fiscal positions that got modified on the template.
 
 **Table of contents**
 
@@ -49,22 +49,23 @@ The wizard:
 Usage
 =====
 
-The wizard, accesible from *Accounting > Settings > Update Chart Template*,
-lets the user select what kind of objects must be checked/updated, and whether
-old records must be checked for changes and updates.
+The wizard, accesible from *Accounting > Settings > Update Chart
+Template*, lets the user select what kind of objects must be
+checked/updated, and whether old records must be checked for changes and
+updates.
 
-It will display all the objects to be created / updated / deactivated with some
-information about the detected differences, and allow the user to exclude
-records individually.
+It will display all the objects to be created / updated / deactivated
+with some information about the detected differences, and allow the user
+to exclude records individually.
 
 Known issues / Roadmap
 ======================
 
-* Generate and update account reconcile models.
-* Generate XML-ID for fiscal position tax and account mapping lines.
-* Allow to select independently operations to perform (create, update,
-  deactivate).
-* Detect fiscal positions to deactivate?
+-  Generate and update account reconcile models.
+-  Generate XML-ID for fiscal position tax and account mapping lines.
+-  Allow to select independently operations to perform (create, update,
+   deactivate).
+-  Detect fiscal positions to deactivate?
 
 Bug Tracker
 ===========
@@ -72,7 +73,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_chart_update%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_chart_update%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -80,32 +81,32 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 * BCIM
 * Okia
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Pedro M. Baeza
-  * Ernesto Tejeda
+   -  Pedro M. Baeza
+   -  Ernesto Tejeda
 
-* Jacques-Etienne Baudoux <je@bcim.be>
-* Sylvain Van Hoof <sylvain@okia.be>
-* Nacho Muñoz <nacmuro@gmail.com>
-* Alberto Martín - Guadaltech <alberto.martin@guadaltech.es>
-* Fernando La Chica - GreenIce <fernandolachica@gmail.com>
-* Jairo Llopis (https://www.moduon.team/)
-* `Factor Libre <https://factorlibre.com>`_:
+-  Jacques-Etienne Baudoux <je@bcim.be>
+-  Sylvain Van Hoof <sylvain@okia.be>
+-  Nacho Muñoz <nacmuro@gmail.com>
+-  Alberto Martín - Guadaltech <alberto.martin@guadaltech.es>
+-  Fernando La Chica - GreenIce <fernandolachica@gmail.com>
+-  Jairo Llopis (https://www.moduon.team/)
+-  `Factor Libre <https://factorlibre.com>`__:
 
-  * Luis J. Salvatierra
+   -  Luis J. Salvatierra
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -117,6 +118,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/16.0/account_chart_update>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/17.0/account_chart_update>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
