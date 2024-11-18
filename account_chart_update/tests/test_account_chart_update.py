@@ -22,12 +22,10 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         field = wizard.fp_field_ids[:1]
         name = field.with_context(account_chart_update=True).name_get()[0]
         self.assertEqual(name[0], field.id)
-        self.assertEqual(name[1], "{} ({})".format(field.field_description, field.name))
+        self.assertEqual(name[1], f"{field.field_description} ({field.name})")
         name = field.name_get()[0]
         self.assertEqual(name[0], field.id)
-        self.assertEqual(
-            name[1], "{} ({})".format(field.field_description, field.model)
-        )
+        self.assertEqual(name[1], f"{field.field_description} ({field.model})")
         # Test no changes
         self.assertEqual(wizard.state, "ready")
         self.assertFalse(wizard.tax_ids)
@@ -361,7 +359,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         expected_xmlid = "{}.{}_{}".format(
             "account_chart_update",
             wizard.company_id.id,
-            "account_fiscal_position_template-{}".format(self.fp_template.id),
+            f"account_fiscal_position_template-{self.fp_template.id}",
         )
         self.assertEqual(fp_rec.get_external_id().get(fp_id), expected_xmlid)
         wizard.unlink()
