@@ -16,7 +16,7 @@
                         statusbar_colors='{"ready":"blue","done":"blue"}'
                     />
                 </header>
-                <div attrs="{'invisible':[('state','!=','init')]}">
+                <div invisible="state!='init'">
                     <h3>
                         <p>
                             <center>
@@ -27,23 +27,12 @@
                         </p>
                     </h3>
                 </div>
-                <group
-                    string="Chart of Accounts"
-                    attrs="{'invisible':[('state','!=','init')]}"
-                >
-                    <field
-                        name="company_id"
-                        attrs="{'invisible':[('state','!=','init')]}"
-                    />
+                <group string="Chart of Accounts" invisible="state!='init'">
+                    <field name="company_id" />
                     <field name="code_digits" invisible="1" />
-                    <field
-                        name="chart_template_id"
-                        domain="[('visible', '=', True)]"
-                        attrs="{'invisible': [('state','!=','init')], 'required': True}"
-                    />
-                    <field name="lang" attrs="{'invisible':[('state','!=','init')]}" />
+                    <field name="chart_template" required="1" />
                 </group>
-                <notebook attrs="{'invisible':[('state','!=','init')]}">
+                <notebook invisible="state!='init'">
                     <page string="General options" name="page_general_options">
                         <group>
                             <group string="Update records?">
@@ -51,13 +40,6 @@
                                 <field name="update_account" />
                                 <field name="update_account_group" />
                                 <field name="update_fiscal_position" />
-                            </group>
-                            <group
-                                string="Other options"
-                                attrs="{'invisible':[('state','!=','init')]}"
-                            >
-                                <field name="continue_on_errors" />
-                                <field name="recreate_xml_ids" />
                             </group>
                         </group>
                         <div>
@@ -75,12 +57,7 @@
                     </page>
                     <page
                         string="Field options"
-                        attrs="{'invisible': [
-                          ('update_tax', '=', False),
-                          ('update_account', '=', False),
-                          ('update_fiscal_position', '=', False),
-                          ('update_account_group', '=', False),
-                      ]}"
+                        invisible="not update_tax and not update_account and not update_fiscal_position and not update_account_group"
                     >
                         <h3>
                             <p>
@@ -92,18 +69,8 @@
                             <page
                                 string="Taxes"
                                 name="page_fields_taxes"
-                                attrs="{'invisible': [('update_tax', '=', False)]}"
+                                invisible="not update_tax"
                             >
-                                <group>
-                                    <field
-                                        name="update_tax_repartition_line_account"
-                                        attrs="{'invisible':[('update_tax', '=', False)]}"
-                                    />
-                                    <field
-                                        name="update_tax_repartition_line_tags"
-                                        attrs="{'invisible':[('update_tax', '=', False)]}"
-                                    />
-                                </group>
                                 <field
                                     name="tax_field_ids"
                                     widget="many2many_checkboxes"
@@ -113,7 +80,7 @@
                             <page
                                 string="Accounts"
                                 name="page_fields_accounts"
-                                attrs="{'invisible': [('update_account', '=', False)]}"
+                                invisible="not update_account"
                             >
                                 <field
                                     name="account_field_ids"
@@ -124,7 +91,7 @@
                             <page
                                 string="Account groups"
                                 name="page_fields_account_groups"
-                                attrs="{'invisible': [('update_account_group', '=', False)]}"
+                                invisible="not update_account_group"
                             >
                                 <field
                                     name="account_group_field_ids"
@@ -135,7 +102,7 @@
                             <page
                                 string="Fiscal positions"
                                 name="page_fields_fps"
-                                attrs="{'invisible': [('update_fiscal_position', '=', False)]}"
+                                invisible="not update_fiscal_position"
                             >
                                 <field
                                     name="fp_field_ids"
@@ -147,12 +114,7 @@
                     </page>
                     <page
                         string="Matching"
-                        attrs="{'invisible': [
-                          ('update_tax', '=', False),
-                          ('update_account', '=', False),
-                          ('update_fiscal_position', '=', False),
-                          ('update_account_group', '=', False),
-                      ]}"
+                        invisible="not update_tax and not update_account and not update_fiscal_position and not update_account_group"
                     >
                         <h3>
                             <p>Here you can set the matching order.</p>
@@ -161,14 +123,10 @@
                             <page
                                 string="Taxes"
                                 name="page_matching_taxes"
-                                attrs="{'invisible': [('update_tax', '=', False)]}"
+                                invisible="not update_tax"
                             >
                                 <field name="tax_matching_ids">
-                                    <tree
-                                        create="false"
-                                        edit="false"
-                                        default_order="sequence"
-                                    >
+                                    <tree create="false" edit="false">
                                         <field name="sequence" widget="handle" />
                                         <field name="matching_value" />
                                     </tree>
@@ -180,14 +138,10 @@
                             <page
                                 string="Accounts"
                                 name="page_matching_accounts"
-                                attrs="{'invisible': [('update_account', '=', False)]}"
+                                invisible="not update_account"
                             >
                                 <field name="account_matching_ids">
-                                    <tree
-                                        create="false"
-                                        edit="false"
-                                        default_order="sequence"
-                                    >
+                                    <tree create="false" edit="false">
                                         <field name="sequence" widget="handle" />
                                         <field name="matching_value" />
                                     </tree>
@@ -199,14 +153,10 @@
                             <page
                                 string="Account groups"
                                 name="page_matching_account_groups"
-                                attrs="{'invisible': [('update_account_group', '=', False)]}"
+                                invisible="not update_account_group"
                             >
                                 <field name="account_group_matching_ids">
-                                    <tree
-                                        create="false"
-                                        edit="false"
-                                        default_order="sequence"
-                                    >
+                                    <tree create="false" edit="false">
                                         <field name="sequence" widget="handle" />
                                         <field name="matching_value" />
                                     </tree>
@@ -218,14 +168,10 @@
                             <page
                                 string="Fiscal positions"
                                 name="page_matching_fps"
-                                attrs="{'invisible': [('update_fiscal_position', '=', False)]}"
+                                invisible="not update_fiscal_position"
                             >
                                 <field name="fp_matching_ids">
-                                    <tree
-                                        create="false"
-                                        edit="false"
-                                        default_order="sequence"
-                                    >
+                                    <tree create="false" edit="false">
                                         <field name="sequence" widget="handle" />
                                         <field name="matching_value" />
                                     </tree>
@@ -237,17 +183,17 @@
                         </notebook>
                     </page>
                 </notebook>
-                <div attrs="{'invisible':[('state','!=','ready')]}">
+                <div invisible="state!='ready'">
                     <h3>Records to create/update</h3>
                     <notebook>
-                        <page
-                            string="Taxes"
-                            attrs="{'invisible': [('update_tax', '=', False)]}"
-                        >
+                        <page string="Taxes" invisible="not update_tax">
                             <field name="tax_ids" nolabel="1">
                                 <tree decoration-danger="type=='updated'">
-                                    <field name="tax_id" />
-                                    <field name="update_tax_id" />
+                                    <field
+                                        name="update_tax_id"
+                                        invisible="not update_tax_id"
+                                    />
+                                    <field name="xml_id" invisible="update_tax_id" />
                                     <field name="type_tax_use" />
                                     <field name="notes" />
                                     <field name="type" />
@@ -255,15 +201,8 @@
                                 <form>
                                     <group col="2">
                                         <group>
-                                            <field
-                                                name="recreate_xml_ids"
-                                                invisible="1"
-                                            />
-                                            <field name="tax_id" />
-                                            <field
-                                                name="type"
-                                                attrs="{'readonly': [('recreate_xml_ids','=', False)]}"
-                                            />
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
                                             <field name="notes" />
                                         </group>
                                         <group>
@@ -275,29 +214,25 @@
                                 </form>
                             </field>
                         </page>
-                        <page
-                            string="Accounts"
-                            attrs="{'invisible': [('update_account', '=', False)]}"
-                        >
+                        <page string="Accounts" invisible="not update_account">
                             <field name="account_ids" nolabel="1">
                                 <tree decoration-danger="type=='updated'">
-                                    <field name="account_id" />
-                                    <field name="update_account_id" />
+                                    <field
+                                        name="update_account_id"
+                                        invisible="not update_account_id"
+                                    />
+                                    <field
+                                        name="xml_id"
+                                        invisible="update_account_id"
+                                    />
                                     <field name="notes" />
                                     <field name="type" />
                                 </tree>
                                 <form>
                                     <group col="2">
                                         <group>
-                                            <field
-                                                name="recreate_xml_ids"
-                                                invisible="1"
-                                            />
-                                            <field name="account_id" />
-                                            <field
-                                                name="type"
-                                                attrs="{'readonly': [('recreate_xml_ids','=', False)]}"
-                                            />
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
                                             <field name="notes" />
                                         </group>
                                         <group>
@@ -310,27 +245,26 @@
                         </page>
                         <page
                             string="Account groups"
-                            attrs="{'invisible': [('update_account_group', '=', False)]}"
+                            invisible="not update_account_group"
                         >
                             <field name="account_group_ids" nolabel="1">
                                 <tree decoration-danger="type=='updated'">
-                                    <field name="account_group_id" />
-                                    <field name="update_account_group_id" />
+                                    <field
+                                        name="update_account_group_id"
+                                        invisible="not update_account_group_id"
+                                    />
+                                    <field
+                                        name="xml_id"
+                                        invisible="update_account_group_id"
+                                    />
                                     <field name="notes" />
                                     <field name="type" />
                                 </tree>
                                 <form>
                                     <group col="2">
                                         <group>
-                                            <field
-                                                name="recreate_xml_ids"
-                                                invisible="1"
-                                            />
-                                            <field name="account_group_id" />
-                                            <field
-                                                name="type"
-                                                attrs="{'readonly': [('recreate_xml_ids','=', False)]}"
-                                            />
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
                                             <field name="notes" />
                                         </group>
                                         <group>
@@ -343,30 +277,29 @@
                         </page>
                         <page
                             string="Fiscal positions"
-                            attrs="{'invisible': [('update_fiscal_position', '=', False)]}"
+                            invisible="not update_fiscal_position"
                         >
                             <field name="fiscal_position_ids" nolabel="1">
                                 <tree
                                     name="fiscal_positions"
                                     decoration-danger="type=='updated'"
                                 >
-                                    <field name="fiscal_position_id" />
-                                    <field name="update_fiscal_position_id" />
+                                    <field
+                                        name="update_fiscal_position_id"
+                                        invisible="not update_fiscal_position_id"
+                                    />
+                                    <field
+                                        name="xml_id"
+                                        invisible="update_fiscal_position_id"
+                                    />
                                     <field name="notes" />
                                     <field name="type" />
                                 </tree>
                                 <form>
                                     <group col="2">
                                         <group>
-                                            <field
-                                                name="recreate_xml_ids"
-                                                invisible="1"
-                                            />
-                                            <field name="fiscal_position_id" />
-                                            <field
-                                                name="type"
-                                                attrs="{'readonly': [('recreate_xml_ids','=', False)]}"
-                                            />
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
                                             <field name="notes" />
                                         </group>
                                         <group>
@@ -379,11 +312,7 @@
                         </page>
                     </notebook>
                 </div>
-                <group
-                    col="4"
-                    colspan="4"
-                    attrs="{'invisible':[('state','!=','done'),]}"
-                >
+                <group col="4" colspan="4" invisible="state!='done'">
                     <separator colspan="4" string="Log" />
                     <field name="log" colspan="4" nolabel="1" />
                     <group colspan="4">
@@ -408,21 +337,21 @@
                         string="Next"
                         type="object"
                         class="btn-primary"
-                        states="init"
+                        invisible="state!='init'"
                     />
                     <button
                         name="action_init"
                         string="Previous"
                         type="object"
                         class="btn-secondary"
-                        states="ready"
+                        invisible="state!='ready'"
                     />
                     <button
                         name="action_update_records"
                         string="Create/Update"
                         type="object"
                         class="btn-primary"
-                        states="ready"
+                        invisible="state!='ready'"
                     />
                     <button special="cancel" string="Close" class="btn-secondary" />
                 </footer>
