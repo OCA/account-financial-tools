@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-11-18 22:06+0000\n"
+"PO-Revision-Date: 2024-11-19 14:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 #. module: account_asset_transfer
 #: model:ir.model.fields,help:account_asset_transfer.field_account_asset__can_transfer
 msgid "Allow transfer AUC (running) to Asset"
-msgstr ""
+msgstr "Consenti trasferimento CiC (in sviluppo) al cespite"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_distribution
@@ -96,12 +96,12 @@ msgstr "Saldo"
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset__can_transfer
 msgid "Can Transfer"
-msgstr ""
+msgstr "Può trasferire"
 
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_view_search
 msgid "Can be transferred"
-msgstr ""
+msgstr "Può essere trasferito"
 
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
@@ -139,57 +139,57 @@ msgstr "Nome visualizzato"
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
 msgid "Expand Asset"
-msgstr ""
+msgstr "Espandi cespite"
 
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
 msgid "From"
-msgstr ""
+msgstr "Da"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__from_asset_ids
 msgid "From Asset(s)"
-msgstr ""
+msgstr "Da cespite(i)"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__from_asset_value
 msgid "From Value"
-msgstr ""
+msgstr "Dal valore"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__id
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset__is_transfer
 msgid "Is Transfer"
-msgstr ""
+msgstr "È un trasferimento"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer____last_update
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__write_uid
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__write_date
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__note
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
 msgid "Notes"
-msgstr ""
+msgstr "Note"
 
 #. module: account_asset_transfer
 #. odoo-python
@@ -197,17 +197,18 @@ msgstr ""
 #, python-format
 msgid "Only running assets without depreciation (AUC) can transfer"
 msgstr ""
+"Si possono trasferire solo i cespiti in sviluppo senza ammortamenti (CiC)"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__partner_id
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__quantity
 msgid "Quantity"
-msgstr ""
+msgstr "Quantità"
 
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_view_form
@@ -215,21 +216,23 @@ msgid ""
 "There are no journal entries on current asset(s), asset transfer will use "
 "account settings from the asset/asset profile instead."
 msgstr ""
+"Non ci sono registrazioni contabili nei cespiti attuali, il trasferimento di "
+"cespite utilizzerà le impostazioni conto dal cespite/profilo del cespite."
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__to_asset_ids
 msgid "To Asset(s)"
-msgstr ""
+msgstr "Al cespite(i)"
 
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
 msgid "To New Asset"
-msgstr ""
+msgstr "A nuovo cespite"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__to_asset_value
 msgid "To Value"
-msgstr ""
+msgstr "Al valore"
 
 #. module: account_asset_transfer
 #. odoo-python
@@ -237,13 +240,14 @@ msgstr ""
 #, python-format
 msgid "Total values of new assets must equal to source assets"
 msgstr ""
+"I valori totali dei nuovi cespiti devono essere uguali ai cespiti origine"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__transfer_id
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_view_form
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: account_asset_transfer
 #. odoo-python
@@ -251,7 +255,7 @@ msgstr ""
 #, python-format
 msgid "Transfer AUC to Asset & Create Transfer Journal Entry"
 msgstr ""
-"Trasferisci AUC al cespite e crea il movimento giornale del trasferimento"
+"Trasferisci CiC al cespite e crea il movimento giornale del trasferimento"
 
 #. module: account_asset_transfer
 #: model:ir.actions.act_window,name:account_asset_transfer.action_account_asset_transfer
@@ -280,7 +284,7 @@ msgstr "Trasferisci a cespite"
 #. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_view_form
 msgid "Transfer asset from AUC to Asset"
-msgstr "Trasferisci cespite da AUC a cespite"
+msgstr "Trasferisci cespite da CiC a cespite"
 
 #. module: account_asset_transfer
 #: model:ir.model.fields,help:account_asset_transfer.field_account_asset_transfer__date_transfer
