@@ -284,6 +284,7 @@ class AccountLoanLine(models.Model):
         )
 
     def _move_vals(self, journal=False, account=False):
+        self.ensure_one()
         return {
             "loan_line_id": self.id,
             "loan_id": self.loan_id.id,
@@ -295,8 +296,8 @@ class AccountLoanLine(models.Model):
             ],
         }
 
-    def _move_line_vals(self, account=False):
-        vals = []
+    def _add_basic_values(self, vals, account):
+        self.ensure_one()
         partner = self.loan_id.partner_id.with_company(self.loan_id.company_id)
         # Amounts are evaled if > 0 for allowing negative loans to be able to be the
         # donors of the loan
@@ -313,16 +314,22 @@ class AccountLoanLine(models.Model):
                 "debit": -self.payment_amount if self.payment_amount < 0 else 0,
             }
         )
-        if self.interests_amount:
-            amount = self.interests_amount
-            vals.append(
-                {
-                    "account_id": self.loan_id.interest_expenses_account_id.id,
-                    "credit": -amount if amount < 0 else 0,
-                    "debit": amount if amount > 0 else 0,
-                }
-            )
-        diff_amount = self.payment_amount - self.interests_amount
+        return vals 
+
+    def _add_interests_values(self, vals):
+        self.ensure_one()
+        amount = self.interests_amount
+        vals.append(
+            {
+                "account_id": self.loan_id.interest_expenses_account_id.id,
+                "credit": -amount if amount < 0 else 0,
+                "debit": amount if amount > 0 else 0,
+            }
+        )
+        return vals
+
+    def _add_short_term_account_values(self, vals):
+        self.ensure_one()
         vals.append(
             {
                 "account_id": self.loan_id.short_term_loan_account_id.id,
@@ -330,6 +337,10 @@ class AccountLoanLine(models.Model):
                 "debit": diff_amount if diff_amount > 0 else 0,
             }
         )
+        return vals
+
+    def _add_long_term_account_values(self, vals):
+        self.ensure_one()
         if self.long_term_loan_account_id and self.long_term_principal_amount:
             amount = self.long_term_principal_amount
             vals.append(
@@ -348,7 +359,20 @@ class AccountLoanLine(models.Model):
             )
         return vals
 
+    def _move_line_vals(self, account=False):
+        self.ensure_one()
+        vals = []
+        vals = self._add_basic_values(vals, account)
+        if self.interests_amount:
+            vals = self._add_interests_values(vals)
+
+        vals = self._add_short_term_account_values(vals)
+        vals = self._add_long_term_account_values(vals)
+
+        return vals
+
     def _invoice_vals(self):
+        self.ensure_one()
         return {
             "loan_line_id": self.id,
             "loan_id": self.loan_id.id,
@@ -362,8 +386,7 @@ class AccountLoanLine(models.Model):
             ],
         }
 
-    def _invoice_line_vals(self):
-        vals = list()
+    def _add_basic_values_invoice_line(self, vals):
         vals.append(
             {
                 "product_id": self.loan_id.product_id.id,
@@ -373,6 +396,9 @@ class AccountLoanLine(models.Model):
                 "account_id": self.loan_id.short_term_loan_account_id.id,
             }
         )
+        return vals
+
+    def _add_interests_values_invoice_line(self, vals):
         vals.append(
             {
                 "product_id": self.loan_id.interests_product_id.id,
@@ -382,6 +408,12 @@ class AccountLoanLine(models.Model):
                 "account_id": self.loan_id.interest_expenses_account_id.id,
             }
         )
+        return vals
+
+    def _invoice_line_vals(self):
+        vals = list()
+        vals = self._add_basic_values_invoice_line(vals)
+        vals = self._add_interests_values_invoice_line(vals)
         return vals
 
     def _generate_move(self, journal=False, account=False):
