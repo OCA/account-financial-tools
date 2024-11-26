@@ -5,7 +5,6 @@
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <record id="res_company_view_tree" model="ir.ui.view">
         <field name="model">res.company</field>
         <field name="inherit_id" ref="base.view_company_tree" />
@@ -27,5 +26,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
