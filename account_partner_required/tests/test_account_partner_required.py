@@ -33,7 +33,7 @@ class TestAccountPartnerRequired(TransactionCase):
                 "code": "124242",
                 "name": "Test 1",
                 "account_type": "asset_cash",
-                "company_id": cls.company_id,
+                "company_ids": [cls.company_id],
             }
         )
         cls.account2 = cls.account_obj.create(
@@ -41,7 +41,7 @@ class TestAccountPartnerRequired(TransactionCase):
                 "code": "124243",
                 "name": "Test 2",
                 "account_type": "asset_receivable",
-                "company_id": cls.company_id,
+                "company_ids": [cls.company_id],
             }
         )
         cls.account3 = cls.account_obj.create(
@@ -49,7 +49,7 @@ class TestAccountPartnerRequired(TransactionCase):
                 "code": "124244",
                 "name": "Test 3",
                 "account_type": "liability_payable",
-                "company_id": cls.company_id,
+                "company_ids": [cls.company_id],
             }
         )
 

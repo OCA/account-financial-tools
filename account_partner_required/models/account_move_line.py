@@ -4,7 +4,7 @@
 # @author Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 
 
@@ -18,7 +18,7 @@ class AccountMoveLine(models.Model):
                 continue
             policy = line.account_id.get_partner_policy()
             if policy == "always" and not line.partner_id:
-                return _(
+                return self.env._(
                     "Partner policy is set to 'Always' on account '%(account)s' but "
                     "the partner is missing on the journal item '%(move_line)s'."
                 ) % {
@@ -26,7 +26,7 @@ class AccountMoveLine(models.Model):
                     "move_line": line.display_name,
                 }
             elif policy == "never" and line.partner_id:
-                return _(
+                return self.env._(
                     "Partner policy is set to 'Never' on account '%(account)s' but "
                     "the journal item '%(move_line)s' has the partner '%(partner)s'."
                 ) % {
