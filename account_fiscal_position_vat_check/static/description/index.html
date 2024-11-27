@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -9,10 +8,11 @@
 
 /*
 :Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 8954 2022-01-20 10:10:25Z milde $
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
 :Copyright: This stylesheet has been placed in the public domain.
 
 Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
 
 See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
 customize this style sheet.
@@ -275,7 +275,7 @@ pre.literal-block, pre.doctest-block, pre.math, pre.code {
   margin-left: 2em ;
   margin-right: 2em }
 
-pre.code .ln { color: grey; } /* line numbers */
+pre.code .ln { color: gray; } /* line numbers */
 pre.code, code { background-color: #eeeeee }
 pre.code .comment, code .comment { color: #5C6576 }
 pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
@@ -301,7 +301,7 @@ span.option {
 span.pre {
   white-space: pre }
 
-span.problematic {
+span.problematic, pre.problematic {
   color: red }
 
 span.section-subtitle {
@@ -369,17 +369,16 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:5b7ae0e100ee5869f32ffed2404d355bb1f40a31dea5f99fa15ca2cba42e8a73
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-financial-tools/tree/16.0/account_fiscal_position_vat_check"><img alt="OCA/account-financial-tools" src="https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_fiscal_position_vat_check"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>With this module, when a user tries to validate a customer invoice or refund
-with a fiscal position that requires VAT, Odoo blocks the validation of the invoice
-if the customer doesn’t have a VAT number in Odoo.</p>
-<div class="figure">
-<img alt="Error upon customer invoice validation" src="https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_fiscal_position_vat_check/static/description/vat_check_invoice_validation.png" />
-</div>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-financial-tools/tree/18.0/account_fiscal_position_vat_check"><img alt="OCA/account-financial-tools" src="https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-financial-tools-18-0/account-financial-tools-18-0-account_fiscal_position_vat_check"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>With this module, when a user tries to validate a customer invoice or
+refund with a fiscal position that requires VAT, Odoo blocks the
+validation of the invoice if the customer doesn’t have a VAT number in
+Odoo.</p>
+<p><img alt="Block on invoice validation if partner's VAT is missing" src="https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_fiscal_position_vat_check/static/description/vat_check_invoice_validation.png" /></p>
 <p>In the European Union (EU), when an EU company sends an invoice to
-another EU company in another country, it can invoice without VAT
-(most of the time) but the VAT number of the customer must be displayed
-on the invoice.</p>
+another EU company in another country, it can invoice without VAT (most
+of the time) but the VAT number of the customer must be displayed on the
+invoice.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -396,28 +395,24 @@ on the invoice.</p>
 </div>
 <div class="section" id="configuration">
 <h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
-<p>To configure this module, go to the menu <em>Invoicing &gt; Configuration &gt; Accounting
-&gt; Fiscal Positions</em> and enable the option <strong>VAT Required</strong> on the relevant
-fiscal positions.</p>
-<div class="figure">
-<img alt="Fiscal Position form view" src="https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_fiscal_position_vat_check/static/description/fiscal_position_form.png" />
-</div>
+<p>To configure this module, go to the menu <em>Invoicing &gt; Configuration &gt;
+Accounting &gt; Fiscal Positions</em> and enable the option <strong>VAT Required</strong> on
+the relevant fiscal positions.</p>
+<p><img alt="Configuration fiscal position" src="https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_fiscal_position_vat_check/static/description/fiscal_position_form.png" /></p>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
-<p>On the partner form view, Odoo will display a yellow warning banner
-when the partner has a fiscal position that has the option <strong>VAT Required</strong>
+<p>On the partner form view, Odoo will display a yellow warning banner when
+the partner has a fiscal position that has the option <strong>VAT Required</strong>
 but its VAT number is not set.</p>
-<div class="figure">
-<img alt="Warning Banner on partner form view" src="https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_fiscal_position_vat_check/static/description/warning_banner_vat_required.png" />
-</div>
+<p><img alt="Warning banner on partner form" src="https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_fiscal_position_vat_check/static/description/warning_banner_vat_required.png" /></p>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-3">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/account-financial-tools/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_fiscal_position_vat_check%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_fiscal_position_vat_check%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -437,11 +432,13 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <div class="section" id="maintainers">
 <h2><a class="toc-backref" href="#toc-entry-7">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
-<a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-financial-tools/tree/16.0/account_fiscal_position_vat_check">OCA/account-financial-tools</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-financial-tools/tree/18.0/account_fiscal_position_vat_check">OCA/account-financial-tools</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>

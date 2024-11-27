@@ -5,7 +5,6 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="view_partner_property_form" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form" />
@@ -17,11 +16,9 @@
                     groups="account.group_account_invoice,account.group_account_readonly"
                     attrs="{'invisible': [('show_warning_vat_required', '=', False)]}"
                 >
-                    <b>Missing VAT number</b>: this partner has the fiscal position <em
-                    ><field
-                            name="property_account_position_id"
-                            readonly="1"
-                        /></em> that require to know the VAT number of the partner.
+                    <b>Missing VAT number</b>: this partner has the fiscal position <em>
+                    <field name="property_account_position_id" readonly="1" />
+                </em> that require to know the VAT number of the partner.
                 </div>
             </div>
             <group name="sale" position="inside">
@@ -29,5 +26,4 @@
             </group>
         </field>
     </record>
-
 </odoo>
