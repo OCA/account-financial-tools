@@ -12,7 +12,7 @@
         <field name="arch" type="xml">
             <field name="vat_required" position="attributes">
                 <!-- always display that field -->
-                <attribute name="attrs">{}</attribute>
+                <attribute name="invisible">0</attribute>
             </field>
         </field>
     </record>
@@ -22,7 +22,7 @@
         <field name="inherit_id" ref="account.view_account_position_tree" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="vat_required" />
+                <field name="vat_required" optional="show" />
             </field>
         </field>
     </record>

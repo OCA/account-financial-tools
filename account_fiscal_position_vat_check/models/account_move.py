@@ -23,9 +23,9 @@ class AccountMove(models.Model):
                         "You are trying to validate a customer "
                         "invoice/refund with the fiscal position '%(fp)s' "
                         "that require the customer to have a VAT number. "
-                        "But the Customer '%(rp)s' "
+                        "But the partner '%(rp)s' "
                         "doesn't have a VAT number in Odoo. "
-                        "Please add the VAT number of this Customer in Odoo "
+                        "Please add the VAT number of this partner in Odoo "
                         "and try to validate again."
                     )
                     % {

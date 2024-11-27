@@ -1,2 +1,2 @@
 from . import account_move
-from . import partner
+from . import res_partner
