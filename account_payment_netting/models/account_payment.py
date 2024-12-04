@@ -18,7 +18,7 @@ class AccountPayments(models.Model):
         return super()._synchronize_from_moves(changed_fields)
 
     def _get_move_line_vals_netting(
-        self, name, date, remaining_amount_currency, currency, account
+        self, name, date, remaining_amount_currency, currency, account, debit, credit
     ):
         return [
             {
@@ -28,15 +28,18 @@ class AccountPayments(models.Model):
                 "currency_id": currency.id,
                 "partner_id": self.partner_id.id,
                 "account_id": account.id,
+                "debit": debit,
+                "credit": credit,
             }
         ]
 
+    # user_type_id.type
     def _prepare_move_line_default_vals(self, write_off_line_vals=None):
         self.ensure_one()
         if self.env.context.get("netting"):
             domain = [
                 ("move_id", "in", self.env.context.get("active_ids", [])),
-                ("account_type", "in", ["asset_receivable", "liability_payable"]),
+                ("account_internal_type", "in", ["receivable", "payable"]),
                 ("reconciled", "=", False),
             ]
             # Sort by amount
@@ -45,12 +48,13 @@ class AccountPayments(models.Model):
             ml_reconciled = self.env["account.move.line"].search(domain)
             if self.payment_type == "inbound":
                 move_lines = sorted(
-                    ml_reconciled, key=lambda k: (k.move_type, k.amount_residual)
+                    ml_reconciled,
+                    key=lambda k: (k.move_id.move_type, k.amount_residual),
                 )
             else:
                 move_lines = sorted(
                     ml_reconciled,
-                    key=lambda k: (k.move_type, -abs(k.amount_residual)),
+                    key=lambda k: (k.move_id.move_type, -abs(k.amount_residual)),
                     reverse=True,
                 )
 
@@ -67,7 +71,7 @@ class AccountPayments(models.Model):
                 sign = (
                     1
                     if self.payment_type == "outbound"
-                    and line.move_type == "in_invoice"
+                    and line.move_id.move_type == "in_invoice"
                     else -1
                 )
                 amount_residual_currency = line.amount_residual_currency
@@ -93,10 +97,16 @@ class AccountPayments(models.Model):
                         sign * amount_total_currency,
                         line.currency_id,
                         line.account_id,
+                        abs(amount_total_currency)
+                        if line.account_internal_type == "payable"
+                        else 0,
+                        abs(amount_total_currency)
+                        if line.account_internal_type == "receivable"
+                        else 0,
                     )
                     break
                 # Check if move_type is changed
-                if current_move_type and current_move_type != line.move_type:
+                if current_move_type and current_move_type != line.move_id.move_type:
                     # Get min amount from remaining_amount_currency and amount_residual_currency
                     if not write_off_line_vals:
                         amount_remaining = min(
@@ -117,19 +127,31 @@ class AccountPayments(models.Model):
                         sign * amount_remaining,
                         line.currency_id,
                         line.account_id,
+                        abs(amount_remaining)
+                        if line.account_internal_type == "payable"
+                        else 0,
+                        abs(amount_remaining)
+                        if line.account_internal_type == "receivable"
+                        else 0,
                     )
                     remaining_amount_currency = abs(remaining_amount_currency) - abs(
                         amount_remaining
                     )
                 # First line or same move_type
                 else:
-                    current_move_type = line.move_type
+                    current_move_type = line.move_id.move_type
                     line_vals_list += self._get_move_line_vals_netting(
                         line.move_id.name,
                         self.date,
                         -1 * amount_residual_currency,
                         line.currency_id,
                         line.account_id,
+                        abs(amount_residual_currency)
+                        if line.account_internal_type == "payable"
+                        else 0,
+                        abs(amount_residual_currency)
+                        if line.account_internal_type == "receivable"
+                        else 0,
                     )
                     remaining_amount_currency += amount_residual_currency
 
@@ -143,6 +165,27 @@ class AccountPayments(models.Model):
                     else -liquidity_amount_currency,
                     self.currency_id,
                     self.outstanding_account_id,
+                    liquidity_amount_currency if self.payment_type == "inbound" else 0,
+                    liquidity_amount_currency if self.payment_type == "outbound" else 0,
                 )
-            return line_vals_list + write_off_line_vals
+            if write_off_line_vals:
+                account_id = self.env["account.account"].browse(
+                    write_off_line_vals["account_id"]
+                )
+                line_vals_list += self._get_move_line_vals_netting(
+                    write_off_line_vals["name"],
+                    self.date,
+                    write_off_line_vals["amount"]
+                    if self.payment_type == "inbound"
+                    else -1 * write_off_line_vals["amount"],
+                    self.currency_id,
+                    account_id,
+                    write_off_line_vals["amount"]
+                    if self.payment_type == "inbound"
+                    else 0,
+                    write_off_line_vals["amount"]
+                    if self.payment_type == "outbound"
+                    else 0,
+                )
+            return line_vals_list
         return super()._prepare_move_line_default_vals(write_off_line_vals)

@@ -27,7 +27,7 @@ class TestAccountNetting(TransactionCase):
         )
         cls.account_expense = cls.env["account.account"].search(
             [
-                ("account_type", "=", "expense"),
+                ("internal_group", "=", "expense"),
                 ("company_id", "=", cls.env.company.id),
             ],
             limit=1,

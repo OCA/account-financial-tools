@@ -3,7 +3,7 @@
 
 {
     "name": "Account Payment Netting",
-    "version": "16.0.1.0.0",
+    "version": "15.0.1.0.0",
     "summary": "Net Payment on AR/AP invoice from the same partner",
     "category": "Accounting & Finance",
     "author": "Ecosoft, Odoo Community Association (OCA)",

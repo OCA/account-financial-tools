@@ -66,7 +66,7 @@ class AccountPaymentRegister(models.TransientModel):
                         _("You can only register payment for posted journal entries.")
                     )
 
-                if line.account_type not in ("asset_receivable", "liability_payable"):
+                if line.account_internal_type not in ("receivable", "payable"):
                     continue
                 if line.currency_id:
                     if line.currency_id.is_zero(line.amount_residual_currency):
@@ -113,8 +113,8 @@ class AccountPaymentRegister(models.TransientModel):
             return ", ".join(sorted(labels))
         return super()._get_batch_communication(batch_result)
 
-    def _create_payment_vals_from_wizard(self, batch_result):
-        payment_vals = super()._create_payment_vals_from_wizard(batch_result)
+    def _create_payment_vals_from_wizard(self):
+        payment_vals = super()._create_payment_vals_from_wizard()
         payment_vals["netting"] = self.netting
         return payment_vals
 
@@ -126,9 +126,9 @@ class AccountPaymentRegister(models.TransientModel):
                 continue
 
             batches = wizard._get_batches()
-            balance = sum([sum(batch["lines"].mapped("balance")) for batch in batches])
+            balance = sum(sum(batch["lines"].mapped("balance")) for batch in batches)
             amount_currency = sum(
-                [sum(batch["lines"].mapped("amount_currency")) for batch in batches]
+                sum(batch["lines"].mapped("amount_currency")) for batch in batches
             )
             if balance < 0.0:
                 payment_type = "outbound"
@@ -181,7 +181,7 @@ class AccountPaymentRegister(models.TransientModel):
         moveline_obj = self.env["account.move.line"]
         domain = [
             ("parent_state", "=", "posted"),
-            ("account_type", "in", ("asset_receivable", "liability_payable")),
+            ("account_internal_type", "in", ("receivable", "payable")),
             ("reconciled", "=", False),
         ]
         moves = self.env["account.move"].browse(self.env.context.get("active_ids"))
