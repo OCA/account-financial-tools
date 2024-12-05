@@ -108,7 +108,7 @@
                             context="{'currency': currency_id,
                                         'journal_id': journal_id}"
                         >
-                            <tree>
+                            <list>
                                 <field name="date" />
                                 <field name="date_maturity" optional="hide" />
                                 <field name="journal_id" optional="hide" />
@@ -123,37 +123,32 @@
                                     sum="1"
                                     optional="hide"
                                 />
-                                <field name="currency_id" invisible="1" />
-                                <field name="company_currency_id" invisible="1" />
-                                <field name="full_reconcile_id" optional="show" />
-                            </tree>
+                                <field name="currency_id" column_invisible="1" />
+                                <field
+                                    name="company_currency_id"
+                                    column_invisible="1"
+                                />
+                                <field name="matching_number" optional="show" />
+                            </list>
                         </field>
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
     <record id="account_check_deposit_view_tree" model="ir.ui.view">
-        <field name="name">account.check.deposit.tree</field>
+        <field name="name">account.check.deposit.list</field>
         <field name="model">account.check.deposit</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" decoration-bf="1" />
                 <field name="deposit_date" />
-                <field name="journal_id" />
+                <field name="journal_id" optional="hide" />
                 <field name="bank_journal_id" />
                 <field name="check_count" />
                 <field name="total_amount" decoration-bf="1" />
-                <field
-                    name="currency_id"
-                    groups="base.group_multi_currency"
-                    optional="show"
-                />
+                <field name="currency_id" column_invisible="1" />
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
@@ -165,7 +160,7 @@
                     decoration-info="state == 'draft'"
                     decoration-success="state == 'done'"
                 />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_check_deposit_search" model="ir.ui.view">
@@ -193,11 +188,6 @@
                         context="{'group_by': 'deposit_date'}"
                     />
                     <filter
-                        name="journal_groupby"
-                        string="Check Journal"
-                        context="{'group_by': 'journal_id'}"
-                    />
-                    <filter
                         name="bank_journal_id_groupby"
                         string="Bank Account"
                         context="{'group_by': 'bank_journal_id'}"
@@ -219,7 +209,7 @@
     <record id="action_check_deposit_tree" model="ir.actions.act_window">
         <field name="name">Checks Deposits</field>
         <field name="res_model">account.check.deposit</field>
-        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_mode">list,form,pivot</field>
     </record>
     <menuitem
         action="action_check_deposit_tree"
