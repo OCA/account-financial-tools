@@ -209,11 +209,11 @@
     <record id="check_deposit_pivot" model="ir.ui.view">
         <field name="model">account.check.deposit</field>
         <field name="arch" type="xml">
-                <pivot>
-                    <field name="deposit_date" interval="month" type="row" />
-                    <field name="bank_journal_id" type="col" />
-                    <field name="check_count" type="measure" />
-                </pivot>
+            <pivot>
+                <field name="deposit_date" interval="month" type="row" />
+                <field name="bank_journal_id" type="col" />
+                <field name="check_count" type="measure" />
+            </pivot>
         </field>
     </record>
     <record id="action_check_deposit_tree" model="ir.actions.act_window">
