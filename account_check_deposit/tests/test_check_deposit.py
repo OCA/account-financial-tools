@@ -12,8 +12,8 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 @tagged("post_install", "-at_install")
 class TestAccountCheckDeposit(AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.company = cls.company_data["company"]
         cls.user.write(
@@ -26,13 +26,14 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
         cls.account_model = cls.env["account.account"]
         cls.partner = cls.env["res.partner"].create({"name": "Test partner"})
         cls.currency = cls.company.currency_id
+        cls.iban_acc_number = "FR62 1234 5678 9012 3456 7890 A98"
         cls.received_check_account = cls.account_model.create(
             {
                 "code": "5112ZZ",
                 "name": "Received check - (test)",
                 "reconcile": True,
                 "account_type": "asset_current",
-                "company_id": cls.company.id,
+                "company_ids": [Command.set([cls.company.id])],
             }
         )
         cls.check_journal = cls.env["account.journal"].create(
@@ -59,7 +60,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
             "res.partner.bank"
         ].create(
             {
-                "acc_number": "SI56 1910 0000 0123 438 584",
+                "acc_number": cls.iban_acc_number,
                 "partner_id": cls.company.partner_id.id,
             }
         )
@@ -117,7 +118,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
         )
         payment = register_payments._create_payments()
         self.assertAlmostEqual(payment.amount, 300)
-        self.assertEqual(payment.state, "posted")
+        self.assertEqual(payment.state, "paid")
         check_deposit = self.create_check_deposit()
         self.assertEqual(
             check_deposit.in_hand_check_account_id, self.received_check_account
@@ -132,4 +133,4 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
         res = self.env["ir.actions.report"]._render_qweb_text(
             "account_check_deposit.report_checkdeposit", check_deposit.ids
         )
-        self.assertRegex(str(res[0]), "SI56 1910 0000 0123 438 584")
+        self.assertRegex(str(res[0]), self.iban_acc_number)

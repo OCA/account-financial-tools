@@ -131,7 +131,6 @@ msgstr "Deposito Assegno"
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid "Check Deposit %s"
 msgstr "Deposito Assegno %s"
 
@@ -142,7 +141,6 @@ msgstr "Deposito Assegno n°"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Check Journal"
 msgstr "Registro assegno"
 
@@ -196,7 +194,6 @@ msgstr "Debitore"
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid "Deposit '%s' has already been credited on the bank account."
 msgstr "Il deposito '%s' è già stato accreditato sul conto bancario."
 
@@ -242,7 +239,6 @@ msgstr "Icona Font Awesome es. fa-tasks"
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
-#, python-format
 msgid "Get All Received Checks"
 msgstr "Ottieni tutti gli assegni ricevuti"
 
@@ -289,7 +285,6 @@ msgstr "Conto assegni incassati"
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid ""
 "In the configuration of journal '%s', in the 'Incoming Payments' tab, you "
 "must configure an Outstanding Receipts Account for the payment method "
@@ -347,9 +342,8 @@ msgstr "Messaggi"
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
-msgid "Missing 'Outstanding Receipts Account' on the company '%s'."
-msgstr "Manca il 'Conto incassi in sospeso' per la società '%s'."
+msgid "Missing 'Internal Transfer' account on the company '%s'."
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
@@ -364,7 +358,6 @@ msgstr "Nome"
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid "New"
 msgstr "Nuovo"
 
@@ -444,7 +437,6 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid ""
 "The check with amount %(amount)s and reference '%(ref)s' is in currency "
 "%(check_currency)s but the deposit is in currency %(deposit_currency)s."
@@ -455,7 +447,6 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting it."
 msgstr "Il deposito '%s' è validato, devi annullarlo per poterlo eliminare."
@@ -463,13 +454,12 @@ msgstr "Il deposito '%s' è validato, devi annullarlo per poterlo eliminare."
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid ""
 "There are no received checks in account '%(account)s' in currency "
 "'%(currency)s' that are not already in this check deposit."
 msgstr ""
-"Non ci sono assegni ricevuti nel conto '%(account)s' in valuta '%(currency)"
-"s' che non siano già in questo deposito di assegni."
+"Non ci sono assegni ricevuti nel conto '%(account)s' in valuta "
+"'%(currency)s' che non siano già in questo deposito di assegni."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount
@@ -495,6 +485,10 @@ msgstr "Messaggi sito web"
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
 msgstr "Cronologia comunicazioni sito web"
+
+#, python-format
+#~ msgid "Missing 'Outstanding Receipts Account' on the company '%s'."
+#~ msgstr "Manca il 'Conto incassi in sospeso' per la società '%s'."
 
 #~ msgid "<b>Transfer Date:</b>"
 #~ msgstr "<b>Data Trasferimento:</b>"

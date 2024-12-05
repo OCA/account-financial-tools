@@ -247,13 +247,19 @@ class AccountCheckDeposit(models.Model):
             if line.payment_method_id.code == "manual" and line.payment_account_id:
                 counterpart_account_id = line.payment_account_id.id
                 break
+        # inspired by _get_outstanding_account() on account.payment
         if not counterpart_account_id:
-            counterpart_account_id = (
-                self.company_id.account_journal_payment_debit_account_id.id
-            )
+            chart_template = self.with_context(
+                allowed_company_ids=self.company_id.root_id.ids
+            ).env["account.chart.template"]
+            counterpart_account_id = chart_template.ref(
+                "account_journal_payment_debit_account_id", raise_if_not_found=False
+            ).id
+        if not counterpart_account_id:
+            counterpart_account_id = self.company_id.transfer_account_id.id
         if not counterpart_account_id:
             raise UserError(
-                _("Missing 'Outstanding Receipts Account' on the company '%s'.")
+                _("Missing 'Internal Transfer' account on the company '%s'.")
                 % self.company_id.display_name
             )
 

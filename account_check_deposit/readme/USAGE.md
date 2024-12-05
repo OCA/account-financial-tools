@@ -1,5 +1,5 @@
 When you receive a check that pays a customer invoice, you can go to
-that invoice and click on the button *Register Payment* and select the
+that invoice and click on the button *Pay* and select the
 *Checks Received* journal as *Journal*.
 
 When you want to deposit checks to the bank, go to the menu *Invoicing
