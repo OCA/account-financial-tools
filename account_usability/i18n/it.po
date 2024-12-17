@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-11-18 21:06+0000\n"
+"PO-Revision-Date: 2024-12-17 15:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -63,7 +63,7 @@ msgstr "Banca e Cassa"
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_accounting_statement_cash
 msgid "Cash Registers"
-msgstr "Registri di Cassa"
+msgstr "Registri di cassa"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_res_config_settings
