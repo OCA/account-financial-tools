@@ -111,7 +111,10 @@
                                 />
                             </group>
                             <group>
-                                <group string="Depreciation Dates">
+                                <group
+                                    string="Depreciation Dates"
+                                    attrs="{'invisible': [('method', '=', 'unit-activity')]}"
+                                >
                                     <field name="method_time" required="1" />
                                     <field
                                         name="method_number"
@@ -127,18 +130,30 @@
                                         name="use_leap_years"
                                         attrs="{'invisible': [('days_calc', '=', True)]}"
                                     />
+
                                 </group>
                                 <group string="Depreciation Method">
                                     <field name="method" required="1" />
                                     <field
                                         name="method_progress_factor"
-                                        attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
+                                        attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit', 'unit-activity'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
                                     />
                                     <field
                                         name="prorata"
-                                        attrs="{'readonly': [('method_time', '!=', 'year')]}"
+                                        attrs="{'readonly': [('method_time', '!=', 'year')], 'invisible': [('method', 'in', ['unit-activity'])]}"
                                     />
                                     <field name="carry_forward_missed_depreciations" />
+                                    <field
+                                        name="total_number_of_use"
+                                        attrs="{'invisible': [('method', 'not in', ['unit-activity'])],
+                                                'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]
+                                        }"
+                                    />
+                                    <field
+                                        name="remaining_usage"
+                                        readonly="1"
+                                        attrs="{'invisible': [('method', 'not in', ['unit-activity'])]}"
+                                    />
                                 </group>
                             </group>
                         </page>
@@ -149,7 +164,16 @@
                                     name="compute_depreciation_board"
                                     string="Compute"
                                     icon="fa-gears"
-                                    attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"
+                                    attrs="{'invisible': ['|',('state', 'in', ['close', 'removed']), ('method', '=', 'unit-activity')]}"
+                                />
+                                <button
+                                    name="add_unit_of_activity"
+                                    string="Add Unit of Activity"
+                                    help="Add a line of usage for this Asset"
+                                    icon="fa-plus"
+                                    class="oe_highlight"
+                                    type="object"
+                                    attrs="{'invisible':['|', ('method', '!=', 'unit-activity'),('remaining_usage', '=', 0)]}"
                                 />
                             </div>
                             <field
@@ -162,8 +186,21 @@
                                     create="false"
                                 >
                                     <field name="type" />
-                                    <field name="line_date" />
-                                    <field name="line_days" sum="Total Days" />
+                                    <field
+                                        name="line_date"
+                                        attrs="{'invisible': [('move_check', '!=', True)]}"
+                                    />
+                                    <field
+                                        name="line_days"
+                                        sum="Total Days"
+                                        attrs="{'column_invisible': [('parent.method', '=', 'unit-activity')]}"
+                                    />
+                                    <field
+                                        name="quantity"
+                                        sum="Total Days"
+                                        attrs="{'column_invisible': [('parent.method', '!=', 'unit-activity')]}"
+                                    />
+
                                     <field name="depreciated_value" readonly="1" />
                                     <field name="amount" />
                                     <field name="remaining_value" readonly="1" />

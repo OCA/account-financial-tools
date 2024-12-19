@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_asset_unit_of_activity_view_form" model="ir.ui.view">
+        <field name="name">account.asset.unit.of.activity</field>
+        <field name="model">account.asset.unit.of.activity</field>
+        <field name="arch" type="xml">
+            <form string="Compute asset unit of activity">
+
+                <group>
+                    <field name="quantity" />
+                    <field name="date" />
+                    <field name="auto_create_asset_move" />
+                </group>
+                <footer>
+                    <button
+                        string="Add a usage"
+                        name="add_usage"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_asset_unit_of_activity_action" model="ir.actions.act_window">
+        <field name="name">Unit of Activity</field>
+        <field name="res_model">account.asset.unit.of.activity</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="account_asset_unit_of_activity_view_form" />
+        <field name="target">new</field>
+    </record>
+</odoo>

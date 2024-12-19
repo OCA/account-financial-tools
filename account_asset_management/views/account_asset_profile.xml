@@ -39,7 +39,10 @@
                         <field name="account_residual_value_id" />
                         <field name="allow_reversal" />
                     </group>
-                    <group string="Depreciation Dates">
+                    <group
+                            string="Depreciation Dates"
+                            attrs="{'invisible': [('method', '=', 'unit-activity')]}"
+                        >
                         <field name="method_time" />
                         <field
                                 name="method_number"
@@ -56,11 +59,11 @@
                         <field name="method" />
                         <field
                                 name="method_progress_factor"
-                                attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
+                                attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit', 'unit-activity'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"
                             />
                         <field
                                 name="prorata"
-                                attrs="{'readonly':[('method_time','!=','year')]}"
+                                attrs="{'readonly':[('method_time','!=','year')], 'invisible': [('method', 'in', ['unit-activity'])]}"
                             />
                         <field name="open_asset" />
                     </group>

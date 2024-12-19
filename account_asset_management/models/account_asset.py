@@ -11,7 +11,7 @@ from traceback import format_exception
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import _, api, exceptions, fields, models
 from odoo.exceptions import UserError
 from odoo.osv import expression
 
@@ -293,6 +293,28 @@ class AccountAsset(models.Model):
         carried forward to the first depreciation line of the current open
         period.""",
     )
+    total_number_of_use = fields.Integer()
+    remaining_usage = fields.Integer(compute="_compute_remaining_usage")
+
+    @api.constrains("total_number_of_use", "method")
+    def _check_number_of_use(self):
+        for rec in self:
+            if rec.method == "unit-activity":
+                if rec.total_number_of_use == 0:
+                    raise exceptions.ValidationError(_("Number of usage can't be null"))
+                elif rec.total_number_of_use < 0:
+                    raise exceptions.ValidationError(
+                        _("Number of usage can't be negativ")
+                    )
+
+    @api.depends("total_number_of_use")
+    def _compute_remaining_usage(self):
+        for asset in self:
+            asset.remaining_usage = asset.total_number_of_use - sum(
+                asset.depreciation_line_ids.filtered(
+                    lambda a: a.type == "depreciate"
+                ).mapped("quantity")
+            )
 
     @api.model
     def _default_company_id(self):
@@ -532,8 +554,11 @@ class AccountAsset(models.Model):
                 asset.state = "close"
             else:
                 asset.state = "open"
-                if not asset.depreciation_line_ids.filtered(
-                    lambda l: l.type != "create"
+                if (
+                    not asset.depreciation_line_ids.filtered(
+                        lambda l: l.type != "create"
+                    )
+                    and asset.method != "unit-activity"
                 ):
                     asset.compute_depreciation_board()
         return True
@@ -576,6 +601,19 @@ class AccountAsset(models.Model):
             "type": "ir.actions.act_window",
             "context": context,
             "domain": [("id", "in", self.account_move_line_ids.mapped("move_id").ids)],
+        }
+
+    def add_unit_of_activity(self):
+        self.ensure_one()
+        ctx = dict(self.env.context, active_ids=self.ids, active_id=self.id)
+
+        return {
+            "name": _("Add Asset Unit of activity"),
+            "view_mode": "form",
+            "res_model": "account.asset.unit.of.activity",
+            "target": "new",
+            "type": "ir.actions.act_window",
+            "context": ctx,
         }
 
     def _group_lines(self, table):
@@ -765,7 +803,6 @@ class AccountAsset(models.Model):
             else:  # no posted lines
                 table_i_start = 0
                 line_i_start = 0
-
             asset._compute_depreciation_line(
                 depreciated_value_posted,
                 table_i_start,

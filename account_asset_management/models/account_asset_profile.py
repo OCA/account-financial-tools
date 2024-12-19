@@ -182,6 +182,7 @@ class AccountAssetProfile(models.Model):
             ("degressive", _("Degressive")),
             ("degr-linear", _("Degressive-Linear")),
             ("degr-limit", _("Degressive  up to Salvage Value")),
+            ("unit-activity", _("Unit of Activity")),
         ]
 
     @api.model

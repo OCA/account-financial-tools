@@ -79,6 +79,7 @@ class AccountAssetLine(models.Model):
     company_currency_id = fields.Many2one(
         related="asset_id.company_id.currency_id", store=True, string="Company Currency"
     )
+    quantity = fields.Integer(readonly=True)
 
     @api.depends("amount", "previous_id", "type")
     def _compute_values(self):
