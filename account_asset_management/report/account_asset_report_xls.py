@@ -494,7 +494,7 @@ class AssetReportXlsx(models.AbstractModel):
                 lambda r: r.type == "depreciate"
             )
             dls_all = dls_all.sorted(key=lambda r: r.line_date)
-            if not dls_all:
+            if not dls_all and asset.method_number:
                 error_dict["no_table"] += asset
             # period_start_value
             dls = dls_all.filtered(lambda r: r.line_date <= wiz.date_from)
