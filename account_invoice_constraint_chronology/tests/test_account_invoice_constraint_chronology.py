@@ -2,13 +2,19 @@
 # Copyright 2021 CorporateHub (https://corporatehub.eu)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from datetime import timedelta
+from datetime import date, timedelta
+
+from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests import common
 
 
+# in order to avoid a raise caused by the sequence mixin we must ensure
+# that all dates are in the same year, hence we freeze the date
+# in the middle of the year
+@freeze_time(f"{date.today().year}-07-01")
 class TestAccountInvoiceConstraintChronology(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
