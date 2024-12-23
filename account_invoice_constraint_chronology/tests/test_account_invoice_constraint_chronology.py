@@ -176,6 +176,25 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
         # it should be able to validate, but if we change the date
         # higher than YYYYYMM15 or lower than YYYYYMM05
         # it should not be able to validate.
+
+        # FIX conflict between 'freeze_time' and account module demo data
+        conflicting_invoices = self.env["account.move"]
+        conflicting_names = [
+            "demo_invoice_1",
+            "demo_invoice_2",
+            "demo_invoice_3",
+            "demo_invoice_followup",
+            "demo_invoice_5",
+        ]
+        for name in conflicting_names:
+            conflicting_invoices += self.env.ref(
+                f"account.{self.env.company.id}_{name}"
+            )
+        conflicting_invoices.button_draft()
+        conflicting_invoices.write(
+            {"name": False, "invoice_date": date.today().replace(day=1)}
+        )
+
         after_5_days = self.today + timedelta(days=5)
         after_10_days = self.today + timedelta(days=10)
         after_15_days = self.today + timedelta(days=15)
