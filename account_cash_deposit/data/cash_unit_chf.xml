@@ -5,7 +5,6 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo noupdate="1">
-
     <record id="chf_note_1000" model="cash.unit">
         <field name="currency_id" ref="base.CHF" />
         <field name="cash_type">note</field>
@@ -118,5 +117,4 @@
         <field name="value">0.05</field>
         <field name="coinroll_qty">50</field>
     </record>
-
 </odoo>

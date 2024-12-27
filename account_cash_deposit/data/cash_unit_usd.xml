@@ -5,7 +5,6 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo noupdate="1">
-
     <record id="usd_note_100" model="cash.unit">
         <field name="currency_id" ref="base.USD" />
         <field name="cash_type">note</field>
@@ -34,21 +33,19 @@
         <field name="cash_type">note</field>
         <field name="value">5</field>
         <field name="auto_create">deposit</field>
-</record>
+    </record>
     <record id="usd_note_2" model="cash.unit">
         <field name="currency_id" ref="base.USD" />
         <field name="cash_type">note</field>
         <field name="value">2</field>
         <field name="auto_create">deposit</field>
-</record>
+    </record>
     <record id="usd_note_1" model="cash.unit">
         <field name="currency_id" ref="base.USD" />
         <field name="cash_type">note</field>
         <field name="value">1</field>
         <field name="auto_create">deposit</field>
-</record>
-
-
+    </record>
 
     <record id="usd_coin_1" model="cash.unit">
         <field name="currency_id" ref="base.USD" />
@@ -118,5 +115,4 @@
         <field name="value">0.01</field>
         <field name="coinroll_qty">50</field>
     </record>
-
 </odoo>

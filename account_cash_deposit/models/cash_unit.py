@@ -91,9 +91,9 @@ class CashUnit(models.Model):
         if self.currency_id.compare_amounts(value, int_value) == 0:
             amount_label = str(int_value)
             if symbol_position == "before":
-                value_label = "%s %s" % (symbol, amount_label)
+                value_label = f"{symbol} {amount_label}"
             else:
-                value_label = "%s %s" % (amount_label, symbol)
+                value_label = f"{amount_label} {symbol}"
         else:
             value_label = format_amount(self.env, value, self.currency_id)
         return value_label
@@ -115,7 +115,7 @@ class CashUnit(models.Model):
                     total_value_label,
                 )
             else:
-                label = "%s %s" % (cash_type_label, value_label)
+                label = f"{cash_type_label} {value_label}"
             res.append((rec.id, label))
         return res
 

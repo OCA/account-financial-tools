@@ -5,38 +5,36 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="account_cash_order_reception_form" model="ir.ui.view">
         <field name="model">account.cash.order.reception</field>
         <field name="arch" type="xml">
             <form>
                 <group name="main">
-                        <field name="order_id" />
-                        <field
+                    <field name="order_id" />
+                    <field
                         name="date"
                         options="{'datepicker': {'warn_future': true}}"
                     />
-                        <field name="total_amount" />
-                        <field name="currency_id" invisible="1" />
+                    <field name="total_amount" />
+                    <field name="currency_id" invisible="1" />
                 </group>
                 <footer>
-                        <button
+                    <button
                         name="run"
                         type="object"
                         string="Confirm Cash Reception"
                         class="btn-primary"
                     />
-                        <button special="cancel" string="Cancel" />
+                    <button special="cancel" string="Cancel" />
                 </footer>
-        </form>
-</field>
-</record>
+            </form>
+        </field>
+    </record>
 
-<record id="account_cash_order_reception_action" model="ir.actions.act_window">
+    <record id="account_cash_order_reception_action" model="ir.actions.act_window">
         <field name="name">Cash Order Reception</field>
         <field name="res_model">account.cash.order.reception</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-</record>
-
+    </record>
 </odoo>
