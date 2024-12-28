@@ -13,7 +13,7 @@
                     name="web_ribbon"
                     title="Archived"
                     bg_color="bg-danger"
-                    attrs="{'invisible': [('active', '=', True)]}"
+                    invisible="active"
                 />
                 <group name="main">
                     <field
@@ -24,13 +24,11 @@
                     <field name="cash_type" />
                     <field
                         name="coinroll_qty"
-                        attrs="{'invisible': [('cash_type', '!=', 'coinroll')], 'required': [('cash_type', '=', 'coinroll')]}"
+                        invisible="cash_type != 'coinroll'"
+                        required="cash_type == 'coinroll'"
                     />
                     <field name="value" />
-                    <field
-                        name="total_value"
-                        attrs="{'invisible': [('cash_type', '!=', 'coinroll')]}"
-                    />
+                    <field name="total_value" invisible="cash_type != 'coinroll'" />
                     <field name="auto_create" />
                 </group>
             </form>
@@ -40,7 +38,7 @@
     <record id="cash_unit_tree" model="ir.ui.view">
         <field name="model">cash.unit</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field
                     name="currency_id"
                     invisible="not context.get('cash_unit_main_view')"
@@ -53,20 +51,17 @@
                     decoration-info="cash_type == 'coinroll'"
                 />
                 <field name="value" />
-                <field
-                    name="coinroll_qty"
-                    attrs="{'invisible': [('cash_type', '!=', 'coinroll')]}"
-                />
+                <field name="coinroll_qty" invisible="cash_type != 'coinroll'" />
                 <field name="total_value" />
                 <field name="auto_create" optional="show" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="cash_unit_action" model="ir.actions.act_window">
         <field name="name">Cash Unit</field>
         <field name="res_model">cash.unit</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{'cash_unit_main_view': True}</field>
     </record>
 </odoo>

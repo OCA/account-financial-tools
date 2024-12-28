@@ -13,14 +13,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.17\n"
 
 #. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
-#, python-format
 msgid "%s has already been credited/debited on the bank account."
 msgstr "%s je već zadužen/razdužen na bankovnom računu."
 
@@ -223,7 +222,6 @@ msgstr "Gotovinske jedinice"
 #. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/wizards/account_cash_order_reception.py:0
-#, python-format
 msgid "Cash reception confirmed on %s."
 msgstr "Zaprimanje gotovine potvrđeno %s."
 
@@ -338,7 +336,6 @@ msgstr ""
 #. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/cash_unit.py:0
-#, python-format
 msgid "For a coin roll, the coin quantity must be strictly positive."
 msgstr "Za rolu kovanica količina mora biti striktno pozitivna."
 
@@ -409,14 +406,6 @@ msgid "Journal Entry"
 msgstr "Stavka dnevnika"
 
 #. module: account_cash_deposit
-#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit____last_update
-#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line____last_update
-#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception____last_update
-#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit____last_update
-msgid "Last Modified on"
-msgstr "Zadnje modificirano"
-
-#. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__write_uid
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__write_uid
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__write_uid
@@ -443,11 +432,6 @@ msgid "Loose Coin Amount"
 msgstr "Iznos gubitka kovanica"
 
 #. module: account_cash_deposit
-#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Glavni prilog"
-
-#. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_error
 msgid "Message Delivery error"
 msgstr "Greška pri isporuci poruke"
@@ -461,6 +445,12 @@ msgstr "Poruke"
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__my_activity_date_deadline
 msgid "My Activity Deadline"
 msgstr "Krajnji rok moje aktivnosti"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+msgid "New"
+msgstr ""
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_date_deadline
@@ -511,7 +501,6 @@ msgstr "Broj poruka sa greškom pri isporuci"
 #. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
-#, python-format
 msgid ""
 "On %(deposit)s, the cash journal %(cash_journal)s is not in the selected "
 "currency %(currency)s."
@@ -595,14 +584,18 @@ msgstr "Podzbroj"
 #. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
-#, python-format
 msgid "The %s is not in draft state, so you cannot delete it."
 msgstr "%s nije u stanju Nacrta, dakle nije moguće brisanje."
 
 #. module: account_cash_deposit
 #. odoo-python
+#: code:addons/account_cash_deposit/wizards/account_cash_order_reception.py:0
+msgid "The Cash Reception Date (%s) is in the future."
+msgstr ""
+
+#. module: account_cash_deposit
+#. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
-#, python-format
 msgid "The Inter-Banks Transfer Account is not configured."
 msgstr "Prelazni bankovni konto nije definiran."
 
@@ -624,7 +617,6 @@ msgstr "Količina mora biti pozitivna ili nula."
 #. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
-#, python-format
 msgid "The total amount of %s is zero."
 msgstr "Ukupni iznos %s je nula."
 
@@ -701,9 +693,14 @@ msgstr ""
 #. module: account_cash_deposit
 #. odoo-python
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
-#, python-format
 msgid "You must delete cash lines that are linked to a currency other than %s."
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnje modificirano"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Glavni prilog"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Broj poruka koje traže vašu pozornost"

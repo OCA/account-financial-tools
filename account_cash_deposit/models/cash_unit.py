@@ -17,6 +17,10 @@ class CashUnit(models.Model):
     _order = "currency_id, tree_order desc"
     _rec_name = "value"
 
+    # In the point_of_sale module, there is a model pos.bill that represent coins
+    # and notes. But we can't use it because it's in the point_of_sale module and
+    # the datamodel is very badly designed. That's why we create our own model.
+
     currency_id = fields.Many2one("res.currency", ondelete="cascade")
     active = fields.Boolean(default=True)
     tree_order = fields.Float(compute="_compute_all", store=True)
@@ -98,8 +102,8 @@ class CashUnit(models.Model):
             value_label = format_amount(self.env, value, self.currency_id)
         return value_label
 
-    def name_get(self):
-        res = []
+    @api.depends("cash_type", "value", "coinroll_qty")
+    def _compute_display_name(self):
         type2label = dict(
             self.fields_get("cash_type", "selection")["cash_type"]["selection"]
         )
@@ -108,16 +112,13 @@ class CashUnit(models.Model):
             value_label = rec._get_value_label(rec.value)
             if rec.cash_type == "coinroll":
                 total_value_label = rec._get_value_label(rec.total_value)
-                label = "%s %s x %d (%s)" % (
-                    cash_type_label,
-                    value_label,
-                    rec.coinroll_qty,
-                    total_value_label,
+                label = (
+                    f"{cash_type_label} {value_label} x {rec.coinroll_qty} "
+                    f"({total_value_label})"
                 )
             else:
                 label = f"{cash_type_label} {value_label}"
-            res.append((rec.id, label))
-        return res
+            rec.display_name = label
 
     @api.model
     def name_search(self, name="", args=None, operator="ilike", limit=100):
@@ -127,7 +128,7 @@ class CashUnit(models.Model):
             if name.isdigit():
                 recs = self.search([("value", "=", name)] + args, limit=limit)
                 if recs:
-                    return recs.name_get()
+                    return [(rec.id, rec.display_name) for rec in recs]
             value = False
             try:
                 value = float(name)
@@ -136,7 +137,7 @@ class CashUnit(models.Model):
             if value:
                 recs = self.search([("value", "=", value)] + args, limit=limit)
                 if recs:
-                    return recs.name_get()
+                    return [(rec.id, rec.display_name) for rec in recs]
             lang = self.env["res.lang"]._lang_get(self.env.user.lang)
             if lang:
                 decimal_sep = lang.decimal_point
@@ -148,5 +149,5 @@ class CashUnit(models.Model):
                     if value:
                         recs = self.search([("value", "=", value)] + args, limit=limit)
                         if recs:
-                            return recs.name_get()
+                            return [(rec.id, rec.display_name) for rec in recs]
         return super().name_search(name=name, args=args, operator=operator, limit=limit)

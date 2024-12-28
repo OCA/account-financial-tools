@@ -8,33 +8,35 @@ from odoo.tests.common import TransactionCase
 
 
 class TestAccountCashDeposit(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.company = self.env.ref("base.main_company")
-        self.currency = self.company.currency_id
-        self.cash_journal = self.env["account.journal"].search(
-            [("type", "=", "cash"), ("company_id", "=", self.company.id)], limit=1
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.company = cls.env.ref("base.main_company")
+        cls.currency = cls.company.currency_id
+        cls.cash_journal = cls.env["account.journal"].search(
+            [("type", "=", "cash"), ("company_id", "=", cls.company.id)], limit=1
         )
-        self.bank_journal = self.env["account.journal"].search(
-            [("type", "=", "bank"), ("company_id", "=", self.company.id)], limit=1
+        cls.bank_journal = cls.env["account.journal"].search(
+            [("type", "=", "bank"), ("company_id", "=", cls.company.id)], limit=1
         )
-        self.cash_unit_note = self.env["cash.unit"].search(
-            [("currency_id", "=", self.currency.id), ("cash_type", "=", "note")],
+        cls.cash_unit_note = cls.env["cash.unit"].search(
+            [("currency_id", "=", cls.currency.id), ("cash_type", "=", "note")],
             limit=1,
         )
-        self.cash_unit_coinroll = self.env["cash.unit"].search(
-            [("currency_id", "=", self.currency.id), ("cash_type", "=", "coinroll")],
+        cls.cash_unit_coinroll = cls.env["cash.unit"].search(
+            [("currency_id", "=", cls.currency.id), ("cash_type", "=", "coinroll")],
             limit=1,
         )
-        self.all_cash_units = self.env["cash.unit"].search(
-            [("currency_id", "=", self.currency.id)]
+        cls.all_cash_units = cls.env["cash.unit"].search(
+            [("currency_id", "=", cls.currency.id)]
         )
-        self.date = date.today()
-        self.yesterday = date.today() - timedelta(days=1)
-        self.deposit_seq = self.env["ir.sequence"].search(
+        cls.date = date.today()
+        cls.yesterday = date.today() - timedelta(days=1)
+        cls.deposit_seq = cls.env["ir.sequence"].search(
             [("code", "=", "account.cash.deposit")]
         )
-        self.order_seq = self.env["ir.sequence"].search(
+        cls.order_seq = cls.env["ir.sequence"].search(
             [("code", "=", "account.cash.order")]
         )
 
@@ -80,7 +82,7 @@ class TestAccountCashDeposit(TransactionCase):
         self.assertEqual(len(order.line_ids), 2)
         wizard = (
             self.env["account.cash.order.reception"]
-            .with_context(default_order_id=order.id)
+            .with_context(active_model="account.cash.deposit", active_id=order.id)
             .create({"date": self.yesterday})
         )
         wizard.run()

@@ -4,7 +4,7 @@
 
 {
     "name": "Account Cash Deposit",
-    "version": "16.0.1.2.0",
+    "version": "18.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Manage cash deposits and cash orders",
@@ -14,6 +14,8 @@
     "data": [
         "security/ir.model.access.csv",
         "security/security.xml",
+        "report/report.xml",
+        "report/report_cashdeposit.xml",
         "wizards/account_cash_order_reception_view.xml",
         "data/sequence.xml",
         "data/cash_unit_eur.xml",
@@ -23,8 +25,6 @@
         "views/account_cash_deposit.xml",
         "views/cash_unit.xml",
         "views/res_currency.xml",
-        "report/report.xml",
-        "report/report_cashdeposit.xml",
     ],
     "installable": True,
 }

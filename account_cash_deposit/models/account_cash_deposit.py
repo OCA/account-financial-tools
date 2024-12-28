@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -14,7 +14,11 @@ class AccountCashDeposit(models.Model):
     _check_company_auto = True
 
     name = fields.Char(
-        string="Reference", size=64, readonly=True, default="/", copy=False
+        string="Reference",
+        size=64,
+        readonly=True,
+        default=lambda self: _("New"),
+        copy=False,
     )
     operation_type = fields.Selection(
         [
@@ -28,16 +32,11 @@ class AccountCashDeposit(models.Model):
         "account.cash.deposit.line",
         "parent_id",
         string="Lines",
-        readonly=True,
-        states={"draft": [("readonly", "=", False)]},
     )
     order_date = fields.Date(
         default=fields.Date.context_today,
-        readonly=True,
-        states={"draft": [("readonly", "=", False)]},
     )
     date = fields.Date(
-        states={"done": [("readonly", "=", True)]},
         tracking=True,
         copy=False,
         help="Used as date for the journal entry.",
@@ -48,16 +47,12 @@ class AccountCashDeposit(models.Model):
         domain="[('company_id', '=', company_id), ('type', '=', 'cash')]",
         required=True,
         check_company=True,
-        readonly=True,
-        states={"draft": [("readonly", "=", False)]},
         tracking=True,
     )
     currency_id = fields.Many2one(
         "res.currency",
         required=True,
         tracking=True,
-        readonly=True,
-        states={"draft": [("readonly", "=", False)]},
     )
     state = fields.Selection(
         [
@@ -83,22 +78,16 @@ class AccountCashDeposit(models.Model):
         domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
         "('bank_account_id', '!=', False)]",
         check_company=True,
-        readonly=True,
-        states={"draft": [("readonly", "=", False)]},
         tracking=True,
     )
     company_id = fields.Many2one(
         "res.company",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", "=", False)]},
         tracking=True,
     )
     coin_amount = fields.Monetary(
         string="Loose Coin Amount",
         currency_field="currency_id",
-        readonly=True,
-        states={"draft": [("readonly", "=", False)]},
         tracking=True,
         help="If your bank has a coin counting machine, enter the total amount "
         "of coins counted by the machine instead of creating a line for each type "
@@ -189,7 +178,9 @@ class AccountCashDeposit(models.Model):
                     ("currency_id", "=", currency.id),
                 ]
             )
-            res["line_ids"] = [(0, 0, {"cash_unit_id": cu.id}) for cu in cash_units]
+            res["line_ids"] = [
+                Command.create({"cash_unit_id": cu.id}) for cu in cash_units
+            ]
         return res
 
     @api.depends("line_ids.subtotal", "coin_amount")
@@ -241,32 +232,33 @@ class AccountCashDeposit(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if "company_id" in vals:
-                self = self.with_company(vals["company_id"])
-            if vals.get("name", "/") == "/":
+            if vals.get("name", _("New")) == _("New"):
                 if (
                     vals.get("operation_type") == "order"
                     or self._context.get("default_operation_type") == "order"
                 ):
-                    vals["name"] = self.env["ir.sequence"].next_by_code(
-                        "account.cash.order", vals.get("order_date")
+                    vals["name"] = (
+                        self.env["ir.sequence"]
+                        .with_company(vals.get("company_id"))
+                        .next_by_code("account.cash.order", vals.get("order_date"))
                     )
                 else:
-                    vals["name"] = self.env["ir.sequence"].next_by_code(
-                        "account.cash.deposit"
+                    vals["name"] = (
+                        self.env["ir.sequence"]
+                        .with_company(vals.get("company_id"))
+                        .next_by_code("account.cash.deposit")
                     )
         return super().create(vals_list)
 
-    def name_get(self):
-        res = []
+    @api.depends("operation_type", "name")
+    def _compute_display_name(self):
         type2label = dict(
             self.fields_get("operation_type", "selection")["operation_type"][
                 "selection"
             ]
         )
         for rec in self:
-            res.append((rec.id, " ".join([type2label[self.operation_type], self.name])))
-        return res
+            rec.display_name = " ".join([type2label[rec.operation_type], rec.name])
 
     def confirm_order(self):
         self.ensure_one()
@@ -321,7 +313,7 @@ class AccountCashDeposit(models.Model):
             "date": date,
             "ref": self.display_name,
             "company_id": self.company_id.id,
-            "line_ids": [(0, 0, cash_vals), (0, 0, bank_vals)],
+            "line_ids": [Command.create(cash_vals), Command.create(bank_vals)],
         }
         return move_vals
 
@@ -379,11 +371,6 @@ class AccountCashDeposit(models.Model):
                     self.cash_journal_id = cash_journals.id
                 else:
                     self.cash_journal_id = False
-
-    def get_report(self):
-        report = self.env.ref("account_cash_deposit.report_account_cash_deposit")
-        action = report.with_context(discard_logo_check=True).report_action(self)
-        return action
 
 
 class AccountCashDepositLine(models.Model):

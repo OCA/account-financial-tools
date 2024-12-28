@@ -16,15 +16,14 @@
                         string="Confirm Order"
                         type="object"
                         class="btn-primary"
-                        attrs="{'invisible': ['|', ('operation_type', '!=', 'order'), ('state', '!=', 'draft')]}"
+                        invisible="operation_type != 'order' or state != 'draft'"
                     />
                     <button
                         name="%(account_cash_order_reception_action)d"
                         string="Cash Received"
                         type="action"
-                        context="{'default_order_id': active_id}"
                         class="btn-primary"
-                        attrs="{'invisible': ['|', ('operation_type', '!=', 'order'), ('state', '!=', 'confirmed')]}"
+                        invisible="operation_type != 'order' or state != 'confirmed'"
                     />
                     <!-- deposit -->
                     <button
@@ -32,13 +31,17 @@
                         string="Validate"
                         type="object"
                         class="btn-primary"
-                        attrs="{'invisible': ['|', ('operation_type', '!=', 'deposit'), ('state', '!=', 'draft')]}"
+                        invisible="operation_type != 'deposit' or state != 'draft'"
                     />
 
-                    <button name="get_report" string="Print" type="object" />
+                    <button
+                        name="%(account_cash_deposit.report_account_cash_deposit)d"
+                        string="Print"
+                        type="action"
+                    />
                     <button
                         name="backtodraft"
-                        states="confirmed,done"
+                        invisible="state == 'draft'"
                         string="Back to Draft"
                         type="object"
                     />
@@ -59,29 +62,33 @@
                     </div>
                     <group name="main">
                         <group name="left">
+                            <field name="cash_journal_id" readonly="state != 'draft'" />
+                            <field name="bank_journal_id" readonly="state != 'draft'" />
                             <field
-                                name="order_date"
-                                attrs="{'invisible': [('operation_type', '!=', 'order')]}"
+                                name="coin_amount"
+                                invisible="operation_type != 'deposit'"
+                                readonly="state != 'draft'"
                             />
-
+                            <field name="total_amount" />
+                        </group>
+                        <group name="right">
                             <field
                                 name="currency_id"
                                 groups="base.group_multi_currency"
+                                readonly="state != 'draft'"
                             />
                             <field name="currency_id" invisible="1" />
-                            <field name="cash_journal_id" />
-                            <field name="bank_journal_id" />
                             <field
-                                name="coin_amount"
-                                attrs="{'invisible': [('operation_type', '!=', 'deposit')]}"
+                                name="order_date"
+                                invisible="operation_type != 'order'"
+                                readonly="state != 'draft'"
                             />
-                        </group>
-                        <group name="right">
-                            <field name="total_amount" />
-                            <field name="date" />
+
+                            <field name="date" readonly="state == 'done'" />
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
+                                readonly="state != 'draft'"
                             />
                             <field name="company_id" invisible="1" />
                             <field name="move_id" />
@@ -93,31 +100,28 @@
                             nolabel="1"
                             colspan="2"
                             context="{'default_currency_id': currency_id}"
+                            readonly="state != 'draft'"
                         >
-                            <tree editable="bottom">
+                            <list editable="bottom">
                                 <field name="cash_unit_id" />
                                 <field name="qty" />
-                                <field name="subtotal" sum="1" />
+                                <field name="subtotal" />
                                 <field name="currency_id" invisible="1" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                     <group name="notes" string="Notes">
                         <field name="notes" nolabel="1" />
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
     <record id="account_cash_deposit_tree" model="ir.ui.view">
         <field name="model">account.cash.deposit</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="operation_type" optional="hide" />
                 <field name="name" decoration-bf="1" />
                 <field
@@ -146,7 +150,7 @@
                     decoration-warning="state == 'confirmed'"
                     decoration-success="state == 'done'"
                 />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="account_cash_deposit_search" model="ir.ui.view">
@@ -205,7 +209,7 @@
     <record id="account_cash_deposit_action" model="ir.actions.act_window">
         <field name="name">Cash Deposits</field>
         <field name="res_model">account.cash.deposit</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('operation_type', '=', 'deposit')]</field>
         <field name="context">{'default_operation_type': 'deposit'}</field>
     </record>
@@ -213,13 +217,13 @@
     <menuitem
         id="account_cash_deposit_menu"
         action="account_cash_deposit_action"
-        parent="account.menu_finance_entries_accounting_miscellaneous"
-        sequence="35"
+        parent="account.menu_finance_entries"
+        sequence="25"
     />
     <record id="account_cash_order_action" model="ir.actions.act_window">
         <field name="name">Cash Orders</field>
         <field name="res_model">account.cash.deposit</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('operation_type', '=', 'order')]</field>
         <field name="context">{'default_operation_type': 'order'}</field>
     </record>
@@ -227,7 +231,7 @@
     <menuitem
         id="account_cash_order_menu"
         action="account_cash_order_action"
-        parent="account.menu_finance_entries_accounting_miscellaneous"
-        sequence="37"
+        parent="account.menu_finance_entries"
+        sequence="27"
     />
 </odoo>
