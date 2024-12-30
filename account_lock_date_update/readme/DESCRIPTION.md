@@ -1,2 +1,1 @@
-Allow an Account adviser to update locking dates without having access
-to all technical settings.
+Allow an Account adviser to update accounting lock dates.

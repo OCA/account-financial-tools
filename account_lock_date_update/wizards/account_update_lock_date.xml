@@ -10,17 +10,21 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group id="main">
+                    <group id="soft_lock_dates" string="Reversible Lock Dates">
                         <field name="company_id" invisible="1" />
-                        <field name="tax_lock_date" options="{'warn_future': true}" />
+                        <field name="sale_lock_date" options="{'warn_future': true}" />
                         <field
-                            name="period_lock_date"
+                            name="purchase_lock_date"
                             options="{'warn_future': true}"
                         />
+                        <field name="tax_lock_date" options="{'warn_future': true}" />
                         <field
                             name="fiscalyear_lock_date"
                             options="{'warn_future': true}"
                         />
+                    </group>
+                    <group id="hard_lock_dates" string="Irreversible Lock Date">
+                        <field name="hard_lock_date" options="{'warn_future': true}" />
                     </group>
                 </sheet>
                 <footer>
@@ -29,6 +33,7 @@
                         name="execute"
                         type="object"
                         class="btn-primary"
+                        groups="account.group_account_manager"
                     />
                     <button string="Cancel" class="btn-default" special="cancel" />
                 </footer>
@@ -36,14 +41,14 @@
         </field>
     </record>
     <record id="account_update_lock_date_act_window" model="ir.actions.act_window">
-        <field name="name">Update Lock Dates</field>
+        <field name="name">Lock Dates</field>
         <field name="res_model">account.update.lock_date</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
     <record id="account_update_lock_date_menu" model="ir.ui.menu">
-        <field name="name">Update Lock Dates</field>
-        <field name="parent_id" ref="account.menu_finance_entries_actions" />
+        <field name="name">Lock Dates</field>
+        <field name="parent_id" ref="account.menu_finance_entries" />
         <field name="action" ref="account_update_lock_date_act_window" />
         <field name="sequence" eval="70" />
     </record>
