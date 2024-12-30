@@ -19,11 +19,10 @@ msgstr ""
 #. module: account_journal_restrict_mode
 #: model:ir.model.fields,help:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
 msgid ""
-"If ticked, the accounting entry or invoice receives a hash as soon as it is "
-"posted and cannot be modified anymore."
+"If ticked, when an entry is posted, we retroactively hash all moves in the "
+"sequence from the entry back to the last hashed entry. The hash can also be "
+"performed on demand by the Secure Entries wizard."
 msgstr ""
-"Si está marcada, la entrada contable o la factura recibe un hash en cuanto "
-"se contabiliza y ya no puede modificarse."
 
 #. module: account_journal_restrict_mode
 #: model:ir.model,name:account_journal_restrict_mode.model_account_journal
@@ -33,11 +32,20 @@ msgstr "Diario"
 #. module: account_journal_restrict_mode
 #. odoo-python
 #: code:addons/account_journal_restrict_mode/models/account_journal.py:0
-#, python-format
 msgid "Journal %s must have Lock Posted Entries enabled."
 msgstr "El diario %s debe tener Activado el Bloqueo de Asientos."
 
 #. module: account_journal_restrict_mode
 #: model:ir.model.fields,field_description:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
-msgid "Lock Posted Entries with Hash"
-msgstr "Bloquear Entradas Publicadas con Hash"
+msgid "Secure Posted Entries with Hash"
+msgstr ""
+
+#~ msgid ""
+#~ "If ticked, the accounting entry or invoice receives a hash as soon as it "
+#~ "is posted and cannot be modified anymore."
+#~ msgstr ""
+#~ "Si está marcada, la entrada contable o la factura recibe un hash en "
+#~ "cuanto se contabiliza y ya no puede modificarse."
+
+#~ msgid "Lock Posted Entries with Hash"
+#~ msgstr "Bloquear Entradas Publicadas con Hash"
