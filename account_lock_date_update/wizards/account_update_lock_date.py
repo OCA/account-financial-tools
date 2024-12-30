@@ -3,6 +3,9 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools.misc import format_date
+
+from odoo.addons.account.models.company import LOCK_DATE_FIELDS
 
 
 class AccountUpdateLockDate(models.TransientModel):
@@ -10,35 +13,37 @@ class AccountUpdateLockDate(models.TransientModel):
     _description = "Wizard to Update Accounting Lock Dates"
 
     company_id = fields.Many2one(comodel_name="res.company", required=True)
-    period_lock_date = fields.Date(
-        string="Lock Date for Non-Advisers",
-        help="Only users with the 'Adviser' role can edit accounts prior to "
-        "and inclusive of this date. Use it for period locking inside an "
-        "open fiscal year, for example.",
-    )
     fiscalyear_lock_date = fields.Date(
-        string="Lock Date for All Users",
-        help="No users, including Advisers, can edit accounts prior to and "
-        "inclusive of this date. Use it for fiscal year locking for "
-        "example.",
+        string="Global Lock Date",
+        help="Impossible to edit/create journal entries prior to and "
+        "inclusive of this date. Subject to exceptions.",
     )
     tax_lock_date = fields.Date(
-        help="No users can edit journal entries related to a tax prior and "
-        "inclusive of this date.",
+        string="Tax Return Lock Date",
+        help="Impossible to edit/create journal entries related to a tax prior and "
+        "inclusive of this date. Subject to exceptions.",
+    )
+    sale_lock_date = fields.Date(
+        help="Impossible to edit/create sale journal entries prior to and "
+        "inclusive of this date. Subject to exceptions.",
+    )
+    purchase_lock_date = fields.Date(
+        help="Impossible to edit/create purchase journal entries prior to and "
+        "inclusive of this date. Subject to exceptions.",
+    )
+    hard_lock_date = fields.Date(
+        help="Impossible to edit/create journal entries prior to and "
+        "inclusive of this date. This lock date is irreversible and "
+        "does not allow any exception.",
     )
 
     @api.model
     def default_get(self, field_list):
         res = super().default_get(field_list)
         company = self.env.company
-        res.update(
-            {
-                "company_id": company.id,
-                "period_lock_date": company.period_lock_date,
-                "fiscalyear_lock_date": company.fiscalyear_lock_date,
-                "tax_lock_date": company.tax_lock_date,
-            }
-        )
+        for lock_field in LOCK_DATE_FIELDS:
+            res[lock_field] = company[lock_field]
+        res["company_id"] = company.id
         return res
 
     def _check_execute_allowed(self):
@@ -50,10 +55,28 @@ class AccountUpdateLockDate(models.TransientModel):
     def execute(self):
         self.ensure_one()
         self._check_execute_allowed()
-        self.company_id.sudo().write(
-            {
-                "period_lock_date": self.period_lock_date,
-                "fiscalyear_lock_date": self.fiscalyear_lock_date,
-                "tax_lock_date": self.tax_lock_date,
-            }
+        today = fields.Date.context_today(self)
+        fields_sr = (
+            self.env["ir.model.fields"]
+            .sudo()
+            .search_read(
+                [("model", "=", self._name), ("name", "in", LOCK_DATE_FIELDS)],
+                ["field_description", "name"],
+            )
         )
+        field2string = dict(
+            (field["name"], field["field_description"]) for field in fields_sr
+        )
+        vals = {}
+        for lock_field in LOCK_DATE_FIELDS:
+            if self[lock_field] and self[lock_field] > today:
+                raise UserError(
+                    _(
+                        "You tried to set %(field)s to %(date)s, "
+                        "but it is in the future.",
+                        field=field2string[lock_field],
+                        date=format_date(self.env, self[lock_field]),
+                    )
+                )
+            vals[lock_field] = self[lock_field]
+        self.company_id.sudo().write(vals)
