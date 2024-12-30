@@ -24,13 +24,11 @@ msgstr "Registrazione contabile"
 #. module: account_move_post_date_user
 #: model:ir.model.fields,field_description:account_move_post_date_user.field_account_bank_statement_line__last_post_uid
 #: model:ir.model.fields,field_description:account_move_post_date_user.field_account_move__last_post_uid
-#: model:ir.model.fields,field_description:account_move_post_date_user.field_account_payment__last_post_uid
 msgid "Last Posted by"
 msgstr "Ultimo invio di"
 
 #. module: account_move_post_date_user
 #: model:ir.model.fields,field_description:account_move_post_date_user.field_account_bank_statement_line__last_post_date
 #: model:ir.model.fields,field_description:account_move_post_date_user.field_account_move__last_post_date
-#: model:ir.model.fields,field_description:account_move_post_date_user.field_account_payment__last_post_date
 msgid "Last Posted on"
 msgstr "Ultimo invio il"
