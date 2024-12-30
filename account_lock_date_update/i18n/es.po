@@ -45,14 +45,59 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
+msgid "Global Lock Date"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__hard_lock_date
+msgid "Hard Lock Date"
+msgstr ""
+
+#. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
+msgid ""
+"Impossible to edit/create journal entries prior to and inclusive of this "
+"date. Subject to exceptions."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__hard_lock_date
+msgid ""
+"Impossible to edit/create journal entries prior to and inclusive of this "
+"date. This lock date is irreversible and does not allow any exception."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
+msgid ""
+"Impossible to edit/create journal entries related to a tax prior and "
+"inclusive of this date. Subject to exceptions."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__purchase_lock_date
+msgid ""
+"Impossible to edit/create purchase journal entries prior to and inclusive of "
+"this date. Subject to exceptions."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__sale_lock_date
+msgid ""
+"Impossible to edit/create sale journal entries prior to and inclusive of "
+"this date. Subject to exceptions."
+msgstr ""
+
+#. module: account_lock_date_update
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+msgid "Irreversible Lock Date"
+msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_uid
@@ -65,60 +110,35 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
-msgid "Lock Date for All Users"
-msgstr "Fecha bloqueo para todos los usuarios"
-
-#. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
-msgid "Lock Date for Non-Advisers"
-msgstr "Fecha de bloqueo para no asesores"
-
-#. module: account_lock_date_update
-#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
-msgid ""
-"No users can edit journal entries related to a tax prior and inclusive of "
-"this date."
+#: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
+#: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
+msgid "Lock Dates"
 msgstr ""
-"Ningún usuario puede editar los asientos relacionados con un impuesto "
-"anterior e inclusive a esta fecha."
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
-msgid ""
-"No users, including Advisers, can edit accounts prior to and inclusive of "
-"this date. Use it for fiscal year locking for example."
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__purchase_lock_date
+msgid "Purchase Lock Date"
 msgstr ""
-"Ningún usuario, incluyendo a los asesores, pueden editar cuentas anteriores "
-"a o incluida esta fecha. Úselo por ejemplo para el bloqueo del ejercicio "
-"fiscal."
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__period_lock_date
-msgid ""
-"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
-"of this date. Use it for period locking inside an open fiscal year, for "
-"example."
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+msgid "Reversible Lock Dates"
 msgstr ""
-"Sólo los usuarios con el rol de 'Asesor' pueden editar las cuentas "
-"anteriores a o incluida esta fecha. Úselo por ejemplo para bloqueo de "
-"periodo dentro del ejercicio fiscal abierto."
+
+#. module: account_lock_date_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__sale_lock_date
+msgid "Sale Lock Date"
+msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
-msgid "Tax Lock Date"
-msgstr "Fecha de bloqueo de impuestos"
+msgid "Tax Return Lock Date"
+msgstr ""
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Update"
 msgstr "Actualizar"
-
-#. module: account_lock_date_update
-#: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
-#: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
-msgid "Update Lock Dates"
-msgstr "Actualizar las fechas de bloqueo"
 
 #. module: account_lock_date_update
 #: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
@@ -128,9 +148,53 @@ msgstr "Asistente para Actualizar Fechas de Bloqueo Contable"
 #. module: account_lock_date_update
 #. odoo-python
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
-#, python-format
 msgid "You are not allowed to execute this action."
 msgstr "No está autorizado a realizar esta acción."
+
+#. module: account_lock_date_update
+#. odoo-python
+#: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
+msgid "You tried to set %(field)s to %(date)s, but it is in the future."
+msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
+
+#~ msgid "Lock Date for All Users"
+#~ msgstr "Fecha bloqueo para todos los usuarios"
+
+#~ msgid "Lock Date for Non-Advisers"
+#~ msgstr "Fecha de bloqueo para no asesores"
+
+#~ msgid ""
+#~ "No users can edit journal entries related to a tax prior and inclusive of "
+#~ "this date."
+#~ msgstr ""
+#~ "Ningún usuario puede editar los asientos relacionados con un impuesto "
+#~ "anterior e inclusive a esta fecha."
+
+#~ msgid ""
+#~ "No users, including Advisers, can edit accounts prior to and inclusive of "
+#~ "this date. Use it for fiscal year locking for example."
+#~ msgstr ""
+#~ "Ningún usuario, incluyendo a los asesores, pueden editar cuentas "
+#~ "anteriores a o incluida esta fecha. Úselo por ejemplo para el bloqueo del "
+#~ "ejercicio fiscal."
+
+#~ msgid ""
+#~ "Only users with the 'Adviser' role can edit accounts prior to and "
+#~ "inclusive of this date. Use it for period locking inside an open fiscal "
+#~ "year, for example."
+#~ msgstr ""
+#~ "Sólo los usuarios con el rol de 'Asesor' pueden editar las cuentas "
+#~ "anteriores a o incluida esta fecha. Úselo por ejemplo para bloqueo de "
+#~ "periodo dentro del ejercicio fiscal abierto."
+
+#~ msgid "Tax Lock Date"
+#~ msgstr "Fecha de bloqueo de impuestos"
+
+#~ msgid "Update Lock Dates"
+#~ msgstr "Actualizar las fechas de bloqueo"
 
 #~ msgid "Account Update Lock_date"
 #~ msgstr "Actualización de fecha de bloqueo contable"
