@@ -62,12 +62,12 @@ class TestJournalLockDate(common.AccountTestInvoicingCommon):
 
         # Test that the move cannot be written, or cancelled
         with self.assertRaisesRegex(
-            UserError, ".*prior to and inclusive of the lock date.*"
+            UserError, r".*prior to and inclusive of the lock date.*"
         ):
             self.move.write({"name": "TEST"})
 
         with self.assertRaisesRegex(
-            UserError, ".*prior to and inclusive of the lock date.*"
+            UserError, r".*prior to and inclusive of the lock date.*"
         ):
             self.move.button_cancel()
 
@@ -150,12 +150,12 @@ class TestJournalLockDate(common.AccountTestInvoicingCommon):
         wizard.action_update_lock_dates()
         # Advisers cannot write, or cancel moves before 'Lock Date'
         with self.assertRaisesRegex(
-            UserError, ".*prior to and inclusive of the lock date.*"
+            UserError, r".*prior to and inclusive of the lock date.*"
         ):
             self.move.write({"name": "TEST"})
 
         with self.assertRaisesRegex(
-            UserError, ".*prior to and inclusive of the lock date.*"
+            UserError, r".*prior to and inclusive of the lock date.*"
         ):
             self.move.button_cancel()
         # Advisers can create movements on a date after the 'Lock Date'

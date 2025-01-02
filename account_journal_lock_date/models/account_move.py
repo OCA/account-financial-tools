@@ -9,14 +9,14 @@ from odoo.tools.misc import format_date
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    def _check_fiscalyear_lock_date(self):
-        res = super()._check_fiscalyear_lock_date()
+    def _check_fiscal_lock_dates(self):
+        res = super()._check_fiscal_lock_dates()
         if self.env.context.get("bypass_journal_lock_date"):
             return res
 
         date_min = fields.date.min
         for move in self:
-            if self.user_has_groups("account.group_account_manager"):
+            if self.env.user.has_group("account.group_account_manager"):
                 lock_date = move.journal_id.fiscalyear_lock_date or date_min
             else:
                 lock_date = max(
@@ -25,7 +25,7 @@ class AccountMove(models.Model):
                 )
             if move.date <= lock_date:
                 lock_date = format_date(self.env, lock_date)
-                if self.user_has_groups("account.group_account_manager"):
+                if self.env.user.has_group("account.group_account_manager"):
                     message = _(
                         "You cannot add/modify entries for the journal '%(journal)s' "
                         "prior to and inclusive of the lock date %(journal_date)s"
