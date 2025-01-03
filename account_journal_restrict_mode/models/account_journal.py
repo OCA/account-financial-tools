@@ -10,10 +10,10 @@ class AccountJournal(models.Model):
     _inherit = "account.journal"
 
     restrict_mode_hash_table = fields.Boolean(
-        default=lambda self: self._default_restrict_mode_hash_table(), readonly=True
+        compute="_compute_restrict_mode_hash_table", store=True, readonly=True
     )
 
-    @api.constrains("restrict_mode_hash_table")
+    @api.constrains("restrict_mode_hash_table", "type")
     def _check_journal_restrict_mode(self):
         test_condition = not config["test_enable"] or (
             config["test_enable"]
@@ -22,15 +22,24 @@ class AccountJournal(models.Model):
         if not test_condition:
             return
         for rec in self:
-            if not rec.restrict_mode_hash_table:
+            if not rec.restrict_mode_hash_table and rec.type in [
+                "sale",
+                "purchase",
+                "general",
+            ]:
                 raise UserError(
                     self.env._("Journal %s must have Lock Posted Entries enabled.")
                     % rec.name
                 )
 
-    def _default_restrict_mode_hash_table(self):
+    @api.depends("type")
+    def _compute_restrict_mode_hash_table(self):
         test_condition = not config["test_enable"] or (
             config["test_enable"]
             and self.env.context.get("test_account_journal_restrict_mode")
         )
-        return bool(test_condition)
+        for rec in self:
+            if not test_condition:
+                rec.restrict_mode_hash_table = False
+                continue
+            rec.restrict_mode_hash_table = rec.type in ["sale", "purchase", "general"]
