@@ -115,14 +115,12 @@ msgstr ""
 #. module: account_fiscal_year
 #. odoo-python
 #: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "The ending date must not be prior to the starting date."
 msgstr ""
 
 #. module: account_fiscal_year
 #. odoo-python
 #: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid ""
 "This fiscal year '{fy}' overlaps with '{overlapping_fy}'.\n"
 "Please correct the start and/or end dates of your fiscal years."
