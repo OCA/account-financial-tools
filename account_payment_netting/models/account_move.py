@@ -10,7 +10,7 @@ class AccountMove(models.Model):
     def action_register_payment(self):
         """Register Payment from Server Action, add netting context"""
         res = super().action_register_payment()
-        active_domain = self.env.context.get("active_domain")
+        active_domain = self.env.context.get("active_domain", [])
         for domain in active_domain:
             if (
                 isinstance(domain, list)
