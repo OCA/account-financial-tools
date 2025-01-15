@@ -15,8 +15,23 @@
                             options="{'no_create': True}"
                             groups="base.group_multi_company"
                         />
-                        <field name="period_lock_to_date" />
-                        <field name="fiscalyear_lock_to_date" />
+                        <field name="is_lock_to_date_periodic" />
+                        <field
+                            name="lock_to_date_periodicity"
+                            attrs="{'invisible': [('is_lock_to_date_periodic', '=', False)]}"
+                        />
+                        <field
+                            name="lock_to_date_periodicity_advisers"
+                            attrs="{'invisible': [('is_lock_to_date_periodic', '=', False)]}"
+                        />
+                        <field
+                            name="period_lock_to_date"
+                            attrs="{'invisible': [('is_lock_to_date_periodic', '=', True)]}"
+                        />
+                        <field
+                            name="fiscalyear_lock_to_date"
+                            attrs="{'invisible': [('is_lock_to_date_periodic', '=', True)]}"
+                        />
                     </group>
                 </sheet>
                 <footer>

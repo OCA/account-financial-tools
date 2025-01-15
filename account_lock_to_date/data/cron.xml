@@ -1,0 +1,13 @@
+<odoo>
+    <record id="ir_cron_account_lock_to_date_periodic" model="ir.cron">
+        <field name="name">Account Lock To Date Periodic</field>
+        <field name="model_id" ref="base.model_res_company" />
+        <field name="state">code</field>
+        <field name="code">model.update_lock_to_date_periodic()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall">False</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

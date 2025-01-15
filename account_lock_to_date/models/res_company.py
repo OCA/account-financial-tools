@@ -27,6 +27,31 @@ class ResCompany(models.Model):
         help="No users, including Advisers, can edit accounts after "
         "this date. Use it for fiscal year locking for example.",
     )
+    is_lock_to_date_periodic = fields.Boolean(
+        string="Lock Date Periodic", default=False
+    )
+    lock_to_date_periodicity_advisers = fields.Integer(
+        string="Periodicity for Advisers",
+        default="15",
+        help="Number of days after which all users, including advisers, "
+        "cannot write in accounting.",
+    )
+    lock_to_date_periodicity = fields.Integer(
+        string="Periodicity for Non-Advisers",
+        default="15",
+        help="Number of days after which non-advisers cannot write in accounting.",
+    )
+
+    def update_lock_to_date_periodic(self):
+        company_ids = self.env["res.company"].search([])
+        for company in company_ids:
+            if company.is_lock_to_date_periodic:
+                company.fiscalyear_lock_to_date = datetime.now() + relativedelta(
+                    days=company.lock_to_date_periodicity_advisers + 1
+                )
+                company.period_lock_to_date = datetime.now() + relativedelta(
+                    days=company.lock_to_date_periodicity + 1
+                )
 
     def write(self, vals):
         # fiscalyear_lock_date can't be set to a prior date
