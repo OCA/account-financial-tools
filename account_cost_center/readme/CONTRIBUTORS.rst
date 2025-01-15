@@ -2,3 +2,4 @@
 * Richard Dijkstra <r.dijkstra@onestein.nl>
 * Andrea Stirpe <a.stirpe@onestein.nl>
 * Antonio Esposito <a.esposito@onestein.nl>
+* `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`_
