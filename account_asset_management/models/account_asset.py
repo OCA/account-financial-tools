@@ -293,7 +293,7 @@ class AccountAsset(models.Model):
         carried forward to the first depreciation line of the current open
         period.""",
     )
-    total_number_of_use = fields.Integer()
+    total_number_of_use = fields.Integer(store=True)
     remaining_usage = fields.Integer(compute="_compute_remaining_usage")
 
     @api.constrains("total_number_of_use", "method")
@@ -307,7 +307,7 @@ class AccountAsset(models.Model):
                         _("Number of usage can't be negativ")
                     )
 
-    @api.depends("total_number_of_use")
+    @api.depends("total_number_of_use", "depreciation_line_ids.quantity")
     def _compute_remaining_usage(self):
         for asset in self:
             asset.remaining_usage = asset.total_number_of_use - sum(
@@ -554,11 +554,8 @@ class AccountAsset(models.Model):
                 asset.state = "close"
             else:
                 asset.state = "open"
-                if (
-                    not asset.depreciation_line_ids.filtered(
-                        lambda l: l.type != "create"
-                    )
-                    and asset.method != "unit-activity"
+                if not asset.depreciation_line_ids.filtered(
+                    lambda l: l.type != "create"
                 ):
                     asset.compute_depreciation_board()
         return True
@@ -694,11 +691,14 @@ class AccountAsset(models.Model):
                     seq -= 1
             line_i_start = 0
 
-    def compute_depreciation_board(self):
+    def compute_depreciation_board(self):  # noqa: C901
 
         line_obj = self.env["account.asset.line"]
 
         for asset in self:
+            if asset.method == "unit-activity":
+                # with this asset method the board is filled manually
+                continue
             currency = asset.company_id.currency_id
             if currency.is_zero(asset.value_residual):
                 continue
