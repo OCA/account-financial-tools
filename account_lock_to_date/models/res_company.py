@@ -68,7 +68,7 @@ class ResCompany(models.Model):
             if (
                 old_fiscalyear_lock_to_date
                 and fiscalyear_lock_to_date
-                and fiscalyear_lock_to_date > old_fiscalyear_lock_to_date
+                and fiscalyear_lock_to_date < old_fiscalyear_lock_to_date
             ):
                 raise ValidationError(
                     _(
