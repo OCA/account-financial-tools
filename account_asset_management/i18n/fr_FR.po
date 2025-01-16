@@ -1794,3 +1794,121 @@ msgstr ""
 
 #~ msgid "Fiscal Year"
 #~ msgstr "Exercice"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset.py:0
+#, python-format
+msgid "Number of usage can't be negativ"
+msgstr "Le nombre d'utilisation ne peut pas être négatif"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset.py:0
+#, python-format
+msgid "Number of usage can't be null"
+msgstr "Le nombre d'utilisation ne peut pas être null"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/wizard/account_asset_unit_of_activity.py:0
+#, python-format
+msgid ""
+"The asset is totaly depreciated.\n"
+"You can't add depreciation line"
+msgstr "L'immobilisation est totalement ammortie\n"
+"vous ne pouvez pas ajouter de nouvelles lignes"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset.py:0
+#, python-format
+msgid "Add Asset Unit of activity"
+msgstr "Ajouter une utilisation"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Add Unit of Activity"
+msgstr "Ajouter une utilisation"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Add a line of usage for this Asset"
+msgstr "Ajoute une ligne d'amortissement correspondant a une utilisation"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_unit_of_activity_view_form
+msgid "Add a usage"
+msgstr "Ajouter une utilisation"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_unit_of_activity__auto_create_asset_move
+msgid "Auto Create Asset Move"
+msgstr "Création automatique des pièces comptables"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_asset_unit_of_activity
+msgid "Compute Assets unit of activity"
+msgstr "Calcul les immobilisations de type unité d'oeuvre"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_unit_of_activity_view_form
+msgid "Compute asset unit of activity"
+msgstr "Calcul les immobilisations de type unité d'oeuvre"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/wizard/account_asset_unit_of_activity.py:0
+#, python-format
+msgid "Date can't be before assert start date"
+msgstr "La date saisie ne peut être avant la date d'activation de l'immobilisation"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_unit_of_activity__auto_create_asset_move
+msgid ""
+"If the other asset line has all a move created,             the move "
+"associated to this asset line will be created automatically"
+msgstr ""
+"Si toutes les autres lignes d'immobilisation ont une pièce comptable déjà créée, \n"
+"celle associé a cette ligne sera créer automatiquement"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__quantity
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_unit_of_activity__quantity
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__remaining_usage
+msgid "Remaining Usage"
+msgstr "Utilisations restantes"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/wizard/account_asset_unit_of_activity.py:0
+#, python-format
+msgid ""
+"Some asset lines have no associated accounting entries. \n"
+"Validate them before create a new one"
+msgstr "Certaines lignes d'immobilisation n'ont pas pièce comptable créée, \n"
+"Créez les avant celle-ci"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/wizard/account_asset_unit_of_activity.py:0
+#, python-format
+msgid ""
+"The number of remaining asset usage\n"
+"is exceed"
+msgstr "La quantité saisie dépasse le nombre d'utilisation restante"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/wizard/account_asset_unit_of_activity.py:0
+#, python-format
+msgid "The quantity can't be negative"
+msgstr "Cette quantité ne peut être négative"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__total_number_of_use
+msgid "Total Number Of Use"
+msgstr "Nombre total d'utilisation"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+#: model:ir.actions.act_window,name:account_asset_management.account_asset_unit_of_activity_action
+#, python-format
+msgid "Unit of Activity"
+msgstr "Unité d'Oeuvre"
