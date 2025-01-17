@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="name">account.move.form - account_move_reversal_button</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    name="action_open_reversed_move"
+                    class="oe_stat_button"
+                    icon="fa-arrow-left"
+                    type="object"
+                    attrs="{'invisible': [('reversed_entry_id', '=', False)]}"
+                    string="Reverse Of"
+                >
+                </button>
+                <field name="is_reversed" invisible="1" />
+                <button
+                    name="action_open_reversal_moves"
+                    class="oe_stat_button"
+                    icon="fa-arrow-right"
+                    type="object"
+                    attrs="{'invisible': [('is_reversed', '=', False)]}"
+                    string="Reversed By"
+                >
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
