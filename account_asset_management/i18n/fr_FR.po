@@ -1882,15 +1882,6 @@ msgstr "Utilisations restantes"
 #: code:addons/account_asset_management/wizard/account_asset_unit_of_activity.py:0
 #, python-format
 msgid ""
-"Some asset lines have no associated accounting entries. \n"
-"Validate them before create a new one"
-msgstr "Certaines lignes d'immobilisation n'ont pas pièce comptable créée, \n"
-"Créez les avant celle-ci"
-
-#. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_unit_of_activity.py:0
-#, python-format
-msgid ""
 "The number of remaining asset usage\n"
 "is exceed"
 msgstr "La quantité saisie dépasse le nombre d'utilisation restante"
@@ -1912,3 +1903,12 @@ msgstr "Nombre total d'utilisation"
 #, python-format
 msgid "Unit of Activity"
 msgstr "Unité d'Oeuvre"
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/wizard/account_asset_unit_of_activity.py:0
+#, python-format
+msgid ""
+"The date is before last asset line,\n"
+"Please enter usages in chronologic order"
+msgstr "La date saisie est antérieure à la dernière ligne d'immobilisation.\n"
+       "Veuillez renseigner les utilisations dans l'ordre chronologique"

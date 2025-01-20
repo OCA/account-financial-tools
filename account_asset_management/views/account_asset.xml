@@ -142,7 +142,10 @@
                                         name="prorata"
                                         attrs="{'readonly': [('method_time', '!=', 'year')], 'invisible': [('method', 'in', ['unit-activity'])]}"
                                     />
-                                    <field name="carry_forward_missed_depreciations" />
+                                    <field
+                                        name="carry_forward_missed_depreciations"
+                                        attrs="{'invisible': [('method', 'in', ['unit-activity'])]}"
+                                    />
                                     <field
                                         name="total_number_of_use"
                                         attrs="{'invisible': [('method', 'not in', ['unit-activity'])],
@@ -188,7 +191,7 @@
                                     <field name="type" />
                                     <field
                                         name="line_date"
-                                        attrs="{'invisible': [('move_check', '!=', True)]}"
+                                        attrs="{'invisible': [('move_check', '!=', True),('parent.method', '!=', 'unit-activity')]}"
                                     />
                                     <field
                                         name="line_days"

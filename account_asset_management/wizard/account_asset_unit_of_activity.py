@@ -22,6 +22,16 @@ class AccountAssetUnitOfActivity(models.TransientModel):
                 raise exceptions.ValidationError(
                     _("Date can't be before assert start date")
                 )
+            dline = asset.depreciation_line_ids.filtered(
+                lambda line: line.type == "depreciate"
+            )
+            if dline and self.date < dline.sorted("line_date")[-1].line_date:
+                raise exceptions.UserError(
+                    _(
+                        "The date is before last asset line,\n"
+                        "Please enter usages in chronologic order"
+                    )
+                )
 
     def add_usage(self):
         asset_id = self.env.context.get("active_id")
@@ -49,24 +59,9 @@ class AccountAssetUnitOfActivity(models.TransientModel):
                 "quantity": self.quantity,
             }
         )
-
+        aal = self.env["account.asset.line"].create(vals)
         if self.auto_create_asset_move:
-            previous_depreciation_lines = asset.depreciation_line_ids.filtered(
-                lambda line: line.type == "depreciate"
-                and line.line_date <= vals.get("line_date")
-            )
-            if all([line.move_id for line in previous_depreciation_lines]):
-                aal = self.env["account.asset.line"].create(vals)
-                aal.create_move()
-            else:
-                raise exceptions.UserError(
-                    _(
-                        "Some asset lines have no associated accounting entries. \n"
-                        "Validate them before create a new one"
-                    )
-                )
-        else:
-            self.env["account.asset.line"].create(vals)
+            aal.create_move()
 
     def _compute_values(self, asset_id):
         asset = self.env["account.asset"].browse(asset_id)
