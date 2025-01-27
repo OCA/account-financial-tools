@@ -373,6 +373,16 @@ ul.auto-toc {
 <p>This module will add the purchase order line to journal items.</p>
 <p>The ultimate goal is to establish the purchase order line as one of the
 key fields to reconcile the Goods Received Not Invoiced accrual account.</p>
+<p>Field oca_purchase_line_id it’s necessary. In Odoo &gt;=16 automatic
+revaluation for a product with FIFO costing method only works if invoice
+lines related to a purchase order line do not include stock journal
+items. To avoid that oca_purchase_line_id includes invoice and stock
+journal items, and we keep Odoo field invoice_lines just with bill
+lines.</p>
+<ul class="simple">
+<li>Check issue
+<a class="reference external" href="https://github.com/OCA/account-financial-tools/issues/2017">https://github.com/OCA/account-financial-tools/issues/2017</a></li>
+</ul>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">

@@ -33,6 +33,16 @@ This module will add the purchase order line to journal items.
 The ultimate goal is to establish the purchase order line as one of the
 key fields to reconcile the Goods Received Not Invoiced accrual account.
 
+Field oca_purchase_line_id it's necessary. In Odoo >=16 automatic
+revaluation for a product with FIFO costing method only works if invoice
+lines related to a purchase order line do not include stock journal
+items. To avoid that oca_purchase_line_id includes invoice and stock
+journal items, and we keep Odoo field invoice_lines just with bill
+lines.
+
+-  Check issue
+   https://github.com/OCA/account-financial-tools/issues/2017
+
 **Table of contents**
 
 .. contents::
@@ -44,10 +54,10 @@ Usage
 The purchase order line will be automatically copied to the journal
 items.
 
-- When a supplier invoice is created referencing purchase orders, the
-  purchase order line will be copied to the corresponding journal item.
-- When a stock move is validated and generates a journal entry, the
-  purchase order line is copied to the account move line.
+-  When a supplier invoice is created referencing purchase orders, the
+   purchase order line will be copied to the corresponding journal item.
+-  When a stock move is validated and generates a journal entry, the
+   purchase order line is copied to the account move line.
 
 Bug Tracker
 ===========
@@ -70,9 +80,9 @@ Authors
 Contributors
 ------------
 
-- Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
-- Héctor Villarreal <hector.villarreal@forgeflow.com>
-- Pimolnat Suntian <pimolnats@ecosoft.co.th>
+-  Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+-  Héctor Villarreal <hector.villarreal@forgeflow.com>
+-  Pimolnat Suntian <pimolnats@ecosoft.co.th>
 
 Maintainers
 -----------
