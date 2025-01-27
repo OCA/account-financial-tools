@@ -15,5 +15,5 @@ class StockMove(models.Model):
             qty, cost, credit_account_id, debit_account_id, svl_id, description
         )
         for line in res:
-            line[2]["purchase_line_id"] = self.purchase_line_id.id
+            line[2]["oca_purchase_line_id"] = self.purchase_line_id.id
         return res
