@@ -153,7 +153,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         """
         domain = [("account_id", "=", account_id)]
         if purchase_line:
-            domain.extend([("purchase_line_id", "=", purchase_line.id)])
+            domain.extend([("oca_purchase_line_id", "=", purchase_line.id)])
 
         balance = self._get_balance(domain)
         if purchase_line:
@@ -207,7 +207,8 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
     def test_display_name(self):
         purchase = self._create_purchase([(self.product, 1)])
         po_line = purchase.order_line[0]
-        name_get = po_line.with_context(**{"po_line_info": True}).name_get()
+        name_get = po_line.with_context(**{"po_line_info": True}).read(["display_name"])
+        name_get = [(po_line.id, name_get[0]["display_name"])]
         self.assertEqual(
             name_get,
             [
@@ -219,7 +220,8 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 )
             ],
         )
-        name_get_no_ctx = po_line.name_get()
+        name_get_no_ctx = po_line.read(["display_name"])
+        name_get_no_ctx = [(po_line.id, name_get_no_ctx[0]["display_name"])]
         self.assertEqual(name_get_no_ctx, [(po_line.id, po_line.name)])
 
     def test_purchase_order_with_journal_entries_and_vendor_bills(self):
