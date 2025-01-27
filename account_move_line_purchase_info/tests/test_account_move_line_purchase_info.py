@@ -153,7 +153,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         """
         domain = [("account_id", "=", account_id)]
         if purchase_line:
-            domain.extend([("purchase_line_id", "=", purchase_line.id)])
+            domain.extend([("oca_purchase_line_id", "=", purchase_line.id)])
 
         balance = self._get_balance(domain)
         if purchase_line:
