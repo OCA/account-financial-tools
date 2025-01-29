@@ -6,7 +6,7 @@
     "name": "Account Lock To Date",
     "summary": """
         Allows to set an account lock date in the future.""",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
