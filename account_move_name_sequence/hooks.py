@@ -4,12 +4,14 @@
 # @author: Moisés López <moylop260@vauxoo.com>
 # @author: Francisco Luna <fluna@vauxoo.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from odoo import tools
 
 
 def post_init_hook(env):
     create_journal_sequences(env)
 
 
+@tools.mute_logger("odoo.addons.account_move_name_sequence.models.account_journal")
 def create_journal_sequences(env):
     journals = (
         env["account.journal"]

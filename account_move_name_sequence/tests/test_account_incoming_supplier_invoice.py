@@ -10,8 +10,8 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon):
     """Testing creating account move fetching mail.alias"""
 
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
 
         cls.env["ir.config_parameter"].sudo().set_param(
             "mail.catchall.domain", "test-company.odoo.com"
@@ -66,8 +66,18 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon):
             "attachments": [b"Hello, invoice"],
         }
 
-        invoice = self.env["account.move"].message_new(
-            message_parsed, {"move_type": "in_invoice", "journal_id": self.journal.id}
+        invoice = (
+            self.env["account.move"]
+            .with_context(
+                tracking_disable=False,
+                mail_create_nolog=False,
+                mail_create_nosubscribe=False,
+                mail_notrack=False,
+            )
+            .message_new(
+                message_parsed,
+                {"move_type": "in_invoice", "journal_id": self.journal.id},
+            )
         )
 
         message_ids = invoice.message_ids

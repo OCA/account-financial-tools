@@ -5,13 +5,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
+from unittest.mock import patch
 
 from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import tagged
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form, TransactionCase, tagged
 
 
 @tagged("post_install", "-at_install")
@@ -59,11 +59,25 @@ class TestAccountMoveNameSequence(TransactionCase):
             }
         )
         self.accounts = self.env["account.account"].search(
-            [("company_id", "=", self.company.id)], limit=2
+            [("company_ids", "=", self.company.id)], limit=2
         )
         self.account1 = self.accounts[0]
         self.account2 = self.accounts[1]
         self.date = datetime.now()
+        self.purchase_journal2 = self.purchase_journal.copy()
+
+        self.journals = (
+            self.misc_journal
+            | self.purchase_journal
+            | self.sales_journal
+            | self.purchase_journal2
+        )
+        # This patch was added to avoid test failures in the CI pipeline caused by the
+        # `account_journal_restrict_mode` module. It prevents a validation error when
+        # disabling restrict mode on journals used in the test, allowing moves to be
+        # set to draft and deleted.
+        with patch("odoo.models.BaseModel._validate_fields"):
+            self.journals.restrict_mode_hash_table = False
 
     def test_seq_creation(self):
         self.assertTrue(self.misc_journal.sequence_id)
@@ -323,7 +337,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         self.assertTrue(in_refund_invoice.unlink())
 
     def test_journal_check_journal_sequence(self):
-        new_journal = self.purchase_journal.copy()
+        new_journal = self.purchase_journal2
         # same sequence_id and refund_sequence_id
         with self.assertRaises(ValidationError):
             new_journal.write({"refund_sequence_id": new_journal.sequence_id})

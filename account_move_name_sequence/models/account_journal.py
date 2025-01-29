@@ -7,7 +7,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -48,14 +48,14 @@ class AccountJournal(models.Model):
                 and journal.refund_sequence_id == journal.sequence_id
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "On journal '%s', the same sequence is used as "
                         "Entry Sequence and Credit Note Entry Sequence.",
                         journal.display_name,
                     )
                 )
             if journal.sequence_id and not journal.sequence_id.company_id:
-                msg = _(
+                msg = self.env._(
                     "The company is not set on sequence '%(sequence)s' configured on "
                     "journal '%(journal)s'.",
                     sequence=journal.sequence_id.display_name,
@@ -63,7 +63,7 @@ class AccountJournal(models.Model):
                 )
                 raise ValidationError(msg)
             if journal.refund_sequence_id and not journal.refund_sequence_id.company_id:
-                msg = _(
+                msg = self.env._(
                     "The company is not set on sequence '%(sequence)s' configured as "
                     "credit note sequence of journal '%(journal)s'.",
                     sequence=journal.refund_sequence_id.display_name,
@@ -90,7 +90,8 @@ class AccountJournal(models.Model):
         prefix = "{}{}/%(range_year)s/".format(refund and "R" or "", code)
         seq_vals = {
             "name": "{}{}".format(
-                vals.get("name", _("Sequence")), refund and " " + _("Refund") or ""
+                vals.get("name", self.env._("Sequence")),
+                refund and " " + self.env._("Refund") or "",
             ),
             "company_id": vals.get("company_id") or self.env.company.id,
             "implementation": "no_gap",

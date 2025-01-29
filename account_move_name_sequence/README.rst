@@ -17,13 +17,13 @@ Account Move Number Sequence
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/17.0/account_move_name_sequence
+    :target: https://github.com/OCA/account-financial-tools/tree/18.0/account_move_name_sequence
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-17-0/account-financial-tools-17-0-account_move_name_sequence
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-18-0/account-financial-tools-18-0-account_move_name_sequence
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -37,16 +37,16 @@ the same journal is computed by a complex piece of code that guesses the
 format of the journal entry number from the number of the journal entry
 which was manually entered by the user. It has several drawbacks:
 
--  the available options for the sequence are limited,
--  it is not possible to configure the sequence in advance before the
-   deployment in production,
--  as it is error-prone, they added a *Resequence* wizard to re-generate
-   the journal entry numbers, which can be considered as illegal in many
-   countries,
--  the `piece of
-   code <https://github.com/odoo/odoo/blob/14.0/addons/account/models/sequence_mixin.py>`__
-   that handles this is not easy to understand and quite difficult to
-   debug.
+- the available options for the sequence are limited,
+- it is not possible to configure the sequence in advance before the
+  deployment in production,
+- as it is error-prone, they added a *Resequence* wizard to re-generate
+  the journal entry numbers, which can be considered as illegal in many
+  countries,
+- the `piece of
+  code <https://github.com/odoo/odoo/blob/14.0/addons/account/models/sequence_mixin.py>`__
+  that handles this is not easy to understand and quite difficult to
+  debug.
 
 Using this module, you can configure what kind of documents the gap
 sequence may be relaxed And even if you must use no-gap in your company
@@ -98,7 +98,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_move_name_sequence%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_move_name_sequence%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -114,18 +114,18 @@ Authors
 Contributors
 ------------
 
--  `Akretion <https://www.akretion.com>`__:
+- `Akretion <https://www.akretion.com>`__:
 
-   -  Alexis de Lattre <alexis.delattre@akretion.com>
+  - Alexis de Lattre <alexis.delattre@akretion.com>
 
--  `Vauxoo <https://www.vauxoo.com>`__:
+- `Vauxoo <https://www.vauxoo.com>`__:
 
-   -  Moisés López <moylop260@vauxoo.com>
-   -  Francisco Luna <fluna@vauxoo.com>
+  - Moisés López <moylop260@vauxoo.com>
+  - Francisco Luna <fluna@vauxoo.com>
 
--  `Factor Libre <https://www.factorlibre.com>`__:
+- `Factor Libre <https://www.factorlibre.com>`__:
 
-   -  Rodrigo Bonilla Martinez <rodrigo.bonilla@factorlibre.com>
+  - Rodrigo Bonilla Martinez <rodrigo.bonilla@factorlibre.com>
 
 Maintainers
 -----------
@@ -154,6 +154,6 @@ Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-alexis-via| |maintainer-moylop260| |maintainer-luisg123v| 
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/17.0/account_move_name_sequence>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/18.0/account_move_name_sequence>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

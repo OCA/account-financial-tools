@@ -1,13 +1,12 @@
 import logging
 import threading
 import time
+from unittest.mock import patch
 
 import psycopg2
 
-import odoo
 from odoo import SUPERUSER_ID, api, fields, tools
-from odoo.tests import tagged
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form, TransactionCase, tagged
 
 _logger = logging.getLogger(__name__)
 
@@ -71,7 +70,14 @@ class TestSequenceConcurrency(TransactionCase):
         if ir_sequence_standard:
             invoice.journal_id = self.journal_sale_std
         if post:
-            invoice.action_post()
+            # This patch was added to avoid test failures in the CI pipeline caused by
+            # the `account_journal_restrict_mode` module. It avoids errors when setting
+            # posted moves to draft and deleting them by bypassing the method that
+            # writes the hash field used for validation.
+            with patch(
+                "odoo.addons.account.models.account_move.AccountMove._hash_moves"
+            ):
+                invoice.action_post()
         return invoice
 
     def _create_payment_form(self, env, ir_sequence_standard=False):
@@ -85,31 +91,43 @@ class TestSequenceConcurrency(TransactionCase):
             payment_form.partner_id = env.ref("base.res_partner_12")
             payment_form.amount = 100
             payment_form.date = self.date
-
+            if ir_sequence_standard:
+                payment_form.journal_id = self.journal_cash_std
             payment = payment_form.save()
-        if ir_sequence_standard:
-            payment.move_id.journal_id = self.journal_cash_std
-        payment.action_post()
+        # This patch was added to avoid test failures in the CI pipeline caused by
+        # the `account_journal_restrict_mode` module. It avoids errors when setting
+        # posted moves to draft and deleting them by bypassing the method that
+        # writes the hash field used for validation.
+        with patch("odoo.addons.account.models.account_move.AccountMove._hash_moves"):
+            payment.action_post()
         return payment
 
-    def _clean_moves(self, move_ids, payment=None):
-        """Delete moves created after finish unittest using
+    def _clean_moves_and_payments(self, move_ids):
+        """Delete moves and payments created after finish unittest using
         self.addCleanup(
-            self._clean_moves, self.env, (invoices | payments.mapped('move_id')).ids
-        )"""
+            self._clean_moves_and_payments,
+            self.env,
+            (invoices | payments.mapped('move_id')).ids,
+        )
+        """
         with self._new_cr() as cr:
             env = api.Environment(cr, SUPERUSER_ID, {})
-            moves = env["account.move"].browse(move_ids)
-            moves.button_draft()
-            moves = moves.with_context(force_delete=True)
-            moves.unlink()
-            # TODO: Delete payment and journal
+            moves = env["account.move"].with_context(force_delete=True).browse(move_ids)
+            payments = moves.payment_ids
+            moves_without_payments = moves - payments.move_id
+            if payments:
+                payments.action_draft()
+                payments.unlink()
+            if moves_without_payments:
+                moves_without_payments.filtered(
+                    lambda move: move.state != "draft"
+                ).button_draft()
+                moves_without_payments.unlink()
             env.cr.commit()
 
     def _create_invoice_payment(
         self, deadlock_timeout, payment_first=False, ir_sequence_standard=False
     ):
-        odoo.registry(self.env.cr.dbname)
         with self._new_cr() as cr, cr.savepoint():
             env = api.Environment(cr, SUPERUSER_ID, {})
             cr_pid = cr.connection.get_backend_pid()
@@ -151,7 +169,7 @@ class TestSequenceConcurrency(TransactionCase):
 
             # Create "last move" to lock
             invoice = self._create_invoice_form(env0)
-            self.addCleanup(self._clean_moves, invoice.ids)
+            self.addCleanup(self._clean_moves_and_payments, invoice.ids)
             env0.cr.commit()
             with env1.cr.savepoint(), env2.cr.savepoint():
                 invoice1 = self._create_invoice_form(env1, post=False)
@@ -172,7 +190,7 @@ class TestSequenceConcurrency(TransactionCase):
             # Create "last move" to lock
             invoice = self._create_invoice_form(env0)
 
-            self.addCleanup(self._clean_moves, invoice.ids)
+            self.addCleanup(self._clean_moves_and_payments, invoice.ids)
             env0.cr.commit()
             with env0.cr.savepoint(), env1.cr.savepoint():
                 # Edit something in "last move"
@@ -193,7 +211,7 @@ class TestSequenceConcurrency(TransactionCase):
             # Create "last move" to lock
             payment = self._create_payment_form(env0)
             payment_move = payment.move_id
-            self.addCleanup(self._clean_moves, payment_move.ids)
+            self.addCleanup(self._clean_moves_and_payments, payment_move.ids)
             env0.cr.commit()
             with env0.cr.savepoint(), env1.cr.savepoint():
                 # Edit something in "last move"
@@ -216,7 +234,9 @@ class TestSequenceConcurrency(TransactionCase):
             invoice = self._create_invoice_form(env0)
             payment = self._create_payment_form(env0)
             payment_move = payment.move_id
-            self.addCleanup(self._clean_moves, invoice.ids + payment_move.ids)
+            self.addCleanup(
+                self._clean_moves_and_payments, invoice.ids + payment_move.ids
+            )
             env0.cr.commit()
             lines2reconcile = (
                 (payment_move | invoice)
@@ -248,7 +268,9 @@ class TestSequenceConcurrency(TransactionCase):
             invoice = self._create_invoice_form(env0)
             payment = self._create_payment_form(env0)
             payment_move = payment.move_id
-            self.addCleanup(self._clean_moves, invoice.ids + payment_move.ids)
+            self.addCleanup(
+                self._clean_moves_and_payments, invoice.ids + payment_move.ids
+            )
             env0.cr.commit()
             lines2reconcile = (
                 (payment_move | invoice)
@@ -279,7 +301,7 @@ class TestSequenceConcurrency(TransactionCase):
             # Create "last move" to lock
             payment = self._create_payment_form(env0, ir_sequence_standard=True)
             payment_move_ids = payment.move_id.ids
-            self.addCleanup(self._clean_moves, payment_move_ids)
+            self.addCleanup(self._clean_moves_and_payments, payment_move_ids)
             env0.cr.commit()
             with env1.cr.savepoint(), env2.cr.savepoint():
                 self._create_payment_form(env1, ir_sequence_standard=True)
@@ -297,7 +319,7 @@ class TestSequenceConcurrency(TransactionCase):
 
             # Create "last move" to lock
             invoice = self._create_invoice_form(env0, ir_sequence_standard=True)
-            self.addCleanup(self._clean_moves, invoice.ids)
+            self.addCleanup(self._clean_moves_and_payments, invoice.ids)
             env0.cr.commit()
             with env1.cr.savepoint(), env2.cr.savepoint():
                 self._create_invoice_form(env1, ir_sequence_standard=True)
@@ -320,7 +342,9 @@ class TestSequenceConcurrency(TransactionCase):
             # Create "last move" to lock
             payment = self._create_payment_form(env0)
             payment_move_ids = payment.move_id.ids
-            self.addCleanup(self._clean_moves, invoice.ids + payment_move_ids)
+            self.addCleanup(
+                self._clean_moves_and_payments, invoice.ids + payment_move_ids
+            )
             env0.cr.commit()
             env0.cr.execute(
                 "SELECT setting FROM pg_settings WHERE name = 'deadlock_timeout'"
@@ -344,6 +368,7 @@ class TestSequenceConcurrency(TransactionCase):
                 args=(deadlock_timeout, False, True),
                 name="Thread invoice payment",
             )
+            self.env.registry.enter_test_mode(self.env.registry.cursor())
             t_pay_inv.start()
             t_inv_pay.start()
             # the thread could raise the error before to wait for it so disable coverage
