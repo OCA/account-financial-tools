@@ -4,6 +4,7 @@
 import logging
 
 from dateutil.relativedelta import relativedelta
+from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import UserError
@@ -106,6 +107,7 @@ class TestLoan(BaseCommon):
         self.assertEqual(line_end.principal_amount, 500000)
 
     @mute_logger("odoo.models.unlink")
+    @freeze_time("2025-01-01")
     def test_increase_amount_validation(self):
         amount = 10000
         periods = 24
@@ -153,6 +155,7 @@ class TestLoan(BaseCommon):
             ).create({"amount": -100, "date": line.date}).run()
 
     @mute_logger("odoo.models.unlink")
+    @freeze_time("2025-01-01")
     def test_pay_amount_validation(self):
         amount = 10000
         periods = 24
@@ -205,6 +208,7 @@ class TestLoan(BaseCommon):
             ).create({"amount": -100, "fees": 100, "date": line.date}).run()
 
     @mute_logger("odoo.models.unlink")
+    @freeze_time("2025-01-01")
     def test_increase_amount_loan(self):
         amount = 10000
         periods = 24
@@ -252,6 +256,7 @@ class TestLoan(BaseCommon):
         self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
 
     @mute_logger("odoo.models.unlink")
+    @freeze_time("2025-01-01")
     def test_increase_amount_leasing(self):
         amount = 10000
         periods = 24
@@ -305,6 +310,7 @@ class TestLoan(BaseCommon):
         self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
 
     @mute_logger("odoo.models.unlink")
+    @freeze_time("2025-01-01")
     def test_fixed_annuity_begin_loan(self):
         amount = 10000
         periods = 24
@@ -356,6 +362,7 @@ class TestLoan(BaseCommon):
             line.view_process_values()
 
     @mute_logger("odoo.models.unlink")
+    @freeze_time("2025-01-01")
     def test_fixed_annuity_loan(self):
         amount = 10000
         periods = 24
@@ -403,6 +410,7 @@ class TestLoan(BaseCommon):
             line.view_process_values()
 
     @mute_logger("odoo.models.unlink")
+    @freeze_time("2025-01-01")
     def test_fixed_principal_loan_leasing(self):
         amount = 24000
         periods = 24
@@ -508,6 +516,7 @@ class TestLoan(BaseCommon):
             line.view_process_values()
 
     @mute_logger("odoo.models.unlink")
+    @freeze_time("2025-01-01")
     def test_fixed_principal_loan_auto_post_leasing(self):
         amount = 24000
         periods = 24
