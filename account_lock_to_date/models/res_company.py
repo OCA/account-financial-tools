@@ -32,7 +32,7 @@ class ResCompany(models.Model):
         # fiscalyear_lock_date can't be set to a prior date
         if "fiscalyear_lock_to_date" in vals or "period_lock_to_date" in vals:
             self._check_lock_to_dates(vals)
-        return super(ResCompany, self).write(vals)
+        return super().write(vals)
 
     def _check_lock_to_dates(self, vals):
         """Check the lock to dates for the current companies.
