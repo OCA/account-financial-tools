@@ -275,7 +275,11 @@ class TestAccountMoveNameSequence(TransactionCase):
         )
         self.assertEqual(invoice.name, "/")
         invoice.action_post()
-        error_msg = "You can't delete a posted journal item. Don’t play games with your accounting records; reset the journal entry to draft before deleting it."
+        error_msg = (
+            "You can't delete a posted journal item. "
+            "Don’t play games with your accounting records; "
+            "reset the journal entry to draft before deleting it."
+        )
         with self.assertRaisesRegex(UserError, error_msg):
             invoice.unlink()
         invoice.button_draft()
@@ -307,7 +311,11 @@ class TestAccountMoveNameSequence(TransactionCase):
         )
         self.assertEqual(in_refund_invoice.name, "/")
         in_refund_invoice.action_post()
-        error_msg = "You can't delete a posted journal item. Don’t play games with your accounting records; reset the journal entry to draft before deleting it."
+        error_msg = (
+            "You can't delete a posted journal item. "
+            "Don’t play games with your accounting records; "
+            "reset the journal entry to draft before deleting it."
+        )
         with self.assertRaisesRegex(UserError, error_msg):
             in_refund_invoice.unlink()
         in_refund_invoice.button_draft()

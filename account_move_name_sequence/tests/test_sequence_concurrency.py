@@ -146,7 +146,7 @@ class TestSequenceConcurrency(TransactionCase):
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             env2 = api.Environment(cr2, SUPERUSER_ID, {})
             for cr in [cr0, cr1, cr2]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set a 10-second timeout to avoid waiting too long for release locks
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -166,7 +166,7 @@ class TestSequenceConcurrency(TransactionCase):
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             for cr in [cr0, cr1]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set a 10-second timeout to avoid waiting too long for release locks
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -187,7 +187,7 @@ class TestSequenceConcurrency(TransactionCase):
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             for cr in [cr0, cr1]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set a 10-second timeout to avoid waiting too long for release locks
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -209,7 +209,7 @@ class TestSequenceConcurrency(TransactionCase):
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             for cr in [cr0, cr1]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set a 10-second timeout to avoid waiting too long for release locks
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -241,7 +241,7 @@ class TestSequenceConcurrency(TransactionCase):
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             for cr in [cr0, cr1]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set a 10-second timeout to avoid waiting too long for release locks
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -273,7 +273,7 @@ class TestSequenceConcurrency(TransactionCase):
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             env2 = api.Environment(cr2, SUPERUSER_ID, {})
             for cr in [cr0, cr1, cr2]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set a 10-second timeout to avoid waiting too long for release locks
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock
@@ -292,7 +292,7 @@ class TestSequenceConcurrency(TransactionCase):
             env1 = api.Environment(cr1, SUPERUSER_ID, {})
             env2 = api.Environment(cr2, SUPERUSER_ID, {})
             for cr in [cr0, cr1, cr2]:
-                # Set 10s timeout in order to avoid waiting for release locks a long time
+                # Set a 10-second timeout to avoid waiting too long for release locks
                 cr.execute("SET LOCAL statement_timeout = '10s'")
 
             # Create "last move" to lock

@@ -60,7 +60,8 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon):
             "message_id": "message-id-dead-beef",
             "subject": "Incoming bill",
             "from": f"{self.supplier_partner.name} <{self.supplier_partner.email}>",
-            "to": f"{self.journal.alias_id.alias_name}@{self.journal.alias_id.alias_domain}",
+            "to": f"{self.journal.alias_id.alias_name}@"
+            f"{self.journal.alias_id.alias_domain}",
             "body": "You know, that thing that you bought.",
             "attachments": [b"Hello, invoice"],
         }
