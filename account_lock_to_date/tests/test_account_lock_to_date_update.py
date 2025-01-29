@@ -11,7 +11,7 @@ from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 
 class TestAccountLockToDateUpdate(TransactionCase):
     def setUp(self):
-        super(TestAccountLockToDateUpdate, self).setUp()
+        super().setUp()
         self.company = self.env.ref("base.main_company")
         self.demo_user = self.env.ref("base.user_demo")
         self.adviser_group = self.env.ref("account.group_account_manager")
@@ -118,8 +118,6 @@ class TestAccountLockToDateUpdate(TransactionCase):
         self.company.fiscalyear_lock_to_date = "2900-02-01"
         user = self.demo_user
         adviser_group = self.adviser_group
-        self.assertTrue(user in adviser_group.users)
-        user.groups_id -= adviser_group
         # pre-condition
         self.assertFalse(user in adviser_group.users)
 
