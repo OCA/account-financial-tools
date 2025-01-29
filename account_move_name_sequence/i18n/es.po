@@ -57,7 +57,6 @@ msgstr "Hay agujeros en la secuencia"
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__highest_name
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__highest_name
 msgid "Highest Name"
 msgstr "Número más alto"
 
@@ -74,21 +73,18 @@ msgstr "Asiento"
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_hole
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__made_sequence_hole
 msgid "Made Sequence Hole"
 msgstr "Creado agujero en secuencia"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__name
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__name
 msgid "Number"
 msgstr "Número"
 
 #. module: account_move_name_sequence
 #. odoo-python
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
-#, python-format
 msgid ""
 "On journal '%s', the same sequence is used as Entry Sequence and Credit Note "
 "Entry Sequence."
@@ -99,7 +95,6 @@ msgstr ""
 #. module: account_move_name_sequence
 #. odoo-python
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
-#, python-format
 msgid "Refund"
 msgstr "Rectificativa"
 
@@ -107,21 +102,18 @@ msgstr "Rectificativa"
 #. odoo-python
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
 #: model:ir.model,name:account_move_name_sequence.model_ir_sequence
-#, python-format
 msgid "Sequence"
 msgstr "Secuencia"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_number
 msgid "Sequence Number"
 msgstr "Número de secuencia"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_payment__sequence_prefix
 msgid "Sequence Prefix"
 msgstr "Prefijo de la secuencia"
 
@@ -138,7 +130,6 @@ msgstr "Demostración del Diario de Venta Estándar"
 #. module: account_move_name_sequence
 #. odoo-python
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
-#, python-format
 msgid ""
 "The company is not set on sequence '%(sequence)s' configured as credit note "
 "sequence of journal '%(journal)s'."
@@ -149,7 +140,6 @@ msgstr ""
 #. module: account_move_name_sequence
 #. odoo-python
 #: code:addons/account_move_name_sequence/models/account_journal.py:0
-#, python-format
 msgid ""
 "The company is not set on sequence '%(sequence)s' configured on journal "
 "'%(journal)s'."

@@ -4,7 +4,7 @@
         <field name="name">Standard Sale Journal Demo</field>
         <field name="code">SSJD</field>
         <field name="type">sale</field>
-        <field name="refund_sequence">True</field>
+        <field name="refund_sequence" eval="True" />
         <field name="company_id" ref="base.main_company" />
         <field name="sequence_id" ref="seq_sale_std_demo" />
     </record>
@@ -12,7 +12,7 @@
         <field name="name">Standard Cash Journal Demo</field>
         <field name="code">SCJD</field>
         <field name="type">cash</field>
-        <field name="refund_sequence">True</field>
+        <field name="refund_sequence" eval="True" />
         <field name="company_id" ref="base.main_company" />
         <field name="sequence_id" ref="seq_cash_std_demo" />
     </record>

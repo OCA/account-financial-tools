@@ -7,7 +7,7 @@
 
 import logging
 
-from odoo import api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -236,14 +236,12 @@ class AccountJournal(models.Model):
                         date_from = fields.Date.to_date(f"{year}-1-1")
                         date_to = fields.Date.to_date(f"{year}-12-31")
                     seq_vals["date_range_ids"].append(
-                        (
-                            0,
-                            0,
+                        Command.create(
                             {
                                 "date_from": date_from,
                                 "date_to": date_to,
                                 "number_next_actual": max_number + 1,
-                            },
+                            }
                         )
                     )
                 return seq_vals

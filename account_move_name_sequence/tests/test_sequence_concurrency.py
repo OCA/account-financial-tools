@@ -35,31 +35,64 @@ class ThreadRaiseJoin(threading.Thread):
 
 @tagged("post_install", "-at_install", "test_move_sequence")
 class TestSequenceConcurrency(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.product = self.env.ref("product.product_delivery_01")
-        self.partner = self.env.ref("base.res_partner_12")
-        self.partner2 = self.env.ref("base.res_partner_1")
-        self.date = fields.Date.to_date("1985-04-14")
-        self.journal_sale_std = self.env.ref(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.product = cls.env.ref("product.product_delivery_01")
+        cls.partner = cls.env.ref("base.res_partner_12")
+        cls.partner2 = cls.env.ref("base.res_partner_1")
+        cls.date = fields.Date.to_date("1985-04-14")
+        cls.journal_sale_std = cls.env.ref(
             "account_move_name_sequence.journal_sale_std_demo"
         )
-        self.journal_cash_std = self.env.ref(
+        cls.journal_cash_std = cls.env.ref(
             "account_move_name_sequence.journal_cash_std_demo"
         )
 
-    def _new_cr(self):
-        return self.env.registry.cursor()
+        cls.cr0 = cls.cursor(cls)
+        cls.env0 = api.Environment(cls.cr0, SUPERUSER_ID, {})
+        cls.cr1 = cls.cursor(cls)
+        cls.env1 = api.Environment(cls.cr1, SUPERUSER_ID, {})
+        cls.cr2 = cls.cursor(cls)
+        cls.env2 = api.Environment(cls.cr2, SUPERUSER_ID, {})
+        for cr in [cls.cr0, cls.cr1, cls.cr2]:
+            # Set a 10-second timeout to avoid waiting too long for release locks
+            cr.execute("SET LOCAL statement_timeout = '10s'")
+        cls.registry.enter_test_mode(cls.cursor(cls))
+        cls.last_existing_move = cls.env["account.move"].search(
+            [], limit=1, order="id desc"
+        )
+
+    @classmethod
+    def _clean_moves_and_payments(cls, last_move):
+        """Delete moves and payments created after finish test."""
+        moves = (
+            cls.env["account.move"]
+            .with_context(force_delete=True)
+            .search([("id", ">=", last_move)])
+        )
+        payments = moves.payment_ids
+        moves_without_payments = moves - payments.move_id
+        if payments:
+            payments.action_draft()
+            payments.unlink()
+        if moves_without_payments:
+            moves_without_payments.filtered(
+                lambda move: move.state != "draft"
+            ).button_draft()
+            moves_without_payments.unlink()
+
+    def _commit_crs(self, *envs):
+        for env in envs:
+            env.cr.commit()
 
     def _create_invoice_form(
         self, env, post=True, partner=None, ir_sequence_standard=False
     ):
-        if partner is None:
-            # Use another partner to bypass "increase_rank" lock error
-            partner = self.partner
         ctx = {"default_move_type": "out_invoice"}
         with Form(env["account.move"].with_context(**ctx)) as invoice_form:
-            invoice_form.partner_id = partner
+            # Use another partner to bypass "increase_rank" lock error
+            invoice_form.partner_id = partner or self.partner
             invoice_form.invoice_date = self.date
 
             with invoice_form.invoice_line_ids.new() as line_form:
@@ -80,7 +113,7 @@ class TestSequenceConcurrency(TransactionCase):
                 invoice.action_post()
         return invoice
 
-    def _create_payment_form(self, env, ir_sequence_standard=False):
+    def _create_payment_form(self, env, partner=None, ir_sequence_standard=False):
         with Form(
             env["account.payment"].with_context(
                 default_payment_type="inbound",
@@ -88,7 +121,7 @@ class TestSequenceConcurrency(TransactionCase):
                 default_move_journal_types=("bank", "cash"),
             )
         ) as payment_form:
-            payment_form.partner_id = env.ref("base.res_partner_12")
+            payment_form.partner_id = partner or self.partner
             payment_form.amount = 100
             payment_form.date = self.date
             if ir_sequence_standard:
@@ -102,33 +135,10 @@ class TestSequenceConcurrency(TransactionCase):
             payment.action_post()
         return payment
 
-    def _clean_moves_and_payments(self, move_ids):
-        """Delete moves and payments created after finish unittest using
-        self.addCleanup(
-            self._clean_moves_and_payments,
-            self.env,
-            (invoices | payments.mapped('move_id')).ids,
-        )
-        """
-        with self._new_cr() as cr:
-            env = api.Environment(cr, SUPERUSER_ID, {})
-            moves = env["account.move"].with_context(force_delete=True).browse(move_ids)
-            payments = moves.payment_ids
-            moves_without_payments = moves - payments.move_id
-            if payments:
-                payments.action_draft()
-                payments.unlink()
-            if moves_without_payments:
-                moves_without_payments.filtered(
-                    lambda move: move.state != "draft"
-                ).button_draft()
-                moves_without_payments.unlink()
-            env.cr.commit()
-
     def _create_invoice_payment(
         self, deadlock_timeout, payment_first=False, ir_sequence_standard=False
     ):
-        with self._new_cr() as cr, cr.savepoint():
+        with self.cursor() as cr, cr.savepoint():
             env = api.Environment(cr, SUPERUSER_ID, {})
             cr_pid = cr.connection.get_backend_pid()
             # Avoid waiting for a long time and it needs to be less than deadlock
@@ -159,221 +169,149 @@ class TestSequenceConcurrency(TransactionCase):
 
     def test_sequence_concurrency_10_draft_invoices(self):
         """Creating 2 DRAFT invoices not should raises errors"""
-        with self._new_cr() as cr0, self._new_cr() as cr1, self._new_cr() as cr2:
-            env0 = api.Environment(cr0, SUPERUSER_ID, {})
-            env1 = api.Environment(cr1, SUPERUSER_ID, {})
-            env2 = api.Environment(cr2, SUPERUSER_ID, {})
-            for cr in [cr0, cr1, cr2]:
-                # Set a 10-second timeout to avoid waiting too long for release locks
-                cr.execute("SET LOCAL statement_timeout = '10s'")
-
-            # Create "last move" to lock
-            invoice = self._create_invoice_form(env0)
-            self.addCleanup(self._clean_moves_and_payments, invoice.ids)
-            env0.cr.commit()
-            with env1.cr.savepoint(), env2.cr.savepoint():
-                invoice1 = self._create_invoice_form(env1, post=False)
-                self.assertEqual(invoice1.state, "draft")
-                invoice2 = self._create_invoice_form(env2, post=False)
-                self.assertEqual(invoice2.state, "draft")
+        # Create "last move" to lock
+        self._create_invoice_form(self.env0)
+        self.cr0.commit()
+        with self.cr1.savepoint(), self.cr2.savepoint():
+            invoice1 = self._create_invoice_form(self.env1, post=False)
+            self.assertEqual(invoice1.state, "draft")
+            invoice2 = self._create_invoice_form(self.env2, post=False)
+            self.assertEqual(invoice2.state, "draft")
+        self._commit_crs(self.env0, self.env1, self.env2)
 
     def test_sequence_concurrency_20_editing_last_invoice(self):
         """Edit last invoice and create a new invoice
         should not raises errors"""
-        with self._new_cr() as cr0, self._new_cr() as cr1:
-            env0 = api.Environment(cr0, SUPERUSER_ID, {})
-            env1 = api.Environment(cr1, SUPERUSER_ID, {})
-            for cr in [cr0, cr1]:
-                # Set a 10-second timeout to avoid waiting too long for release locks
-                cr.execute("SET LOCAL statement_timeout = '10s'")
-
-            # Create "last move" to lock
-            invoice = self._create_invoice_form(env0)
-
-            self.addCleanup(self._clean_moves_and_payments, invoice.ids)
-            env0.cr.commit()
-            with env0.cr.savepoint(), env1.cr.savepoint():
-                # Edit something in "last move"
-                invoice.write({"write_uid": env0.uid})
-                env0.flush_all()
-                self._create_invoice_form(env1)
+        # Create "last move" to lock
+        invoice = self._create_invoice_form(self.env0)
+        self.cr0.commit()
+        with self.cr0.savepoint(), self.cr1.savepoint():
+            # Edit something in "last move"
+            invoice.write({"write_uid": self.env0.uid})
+            self.env0.flush_all()
+            self._create_invoice_form(self.env1)
+        self._commit_crs(self.env0, self.env1)
 
     def test_sequence_concurrency_30_editing_last_payment(self):
         """Edit last payment and create a new payment
         should not raises errors"""
-        with self._new_cr() as cr0, self._new_cr() as cr1:
-            env0 = api.Environment(cr0, SUPERUSER_ID, {})
-            env1 = api.Environment(cr1, SUPERUSER_ID, {})
-            for cr in [cr0, cr1]:
-                # Set a 10-second timeout to avoid waiting too long for release locks
-                cr.execute("SET LOCAL statement_timeout = '10s'")
-
-            # Create "last move" to lock
-            payment = self._create_payment_form(env0)
-            payment_move = payment.move_id
-            self.addCleanup(self._clean_moves_and_payments, payment_move.ids)
-            env0.cr.commit()
-            with env0.cr.savepoint(), env1.cr.savepoint():
-                # Edit something in "last move"
-                payment_move.write({"write_uid": env0.uid})
-                env0.flush_all()
-                self._create_payment_form(env1)
+        # Create "last move" to lock
+        payment = self._create_payment_form(self.env0)
+        payment_move = payment.move_id
+        self.cr0.commit()
+        with self.cr0.savepoint(), self.cr1.savepoint():
+            # Edit something in "last move"
+            payment_move.write({"write_uid": self.env0.uid})
+            self.env0.flush_all()
+            self._create_payment_form(self.env1)
+        self._commit_crs(self.env0, self.env1)
 
     @tools.mute_logger("odoo.sql_db")
     def test_sequence_concurrency_40_reconciling_last_invoice(self):
         """Reconcile last invoice and create a new one
         should not raises errors"""
-        with self._new_cr() as cr0, self._new_cr() as cr1:
-            env0 = api.Environment(cr0, SUPERUSER_ID, {})
-            env1 = api.Environment(cr1, SUPERUSER_ID, {})
-            for cr in [cr0, cr1]:
-                # Set a 10-second timeout to avoid waiting too long for release locks
-                cr.execute("SET LOCAL statement_timeout = '10s'")
-
-            # Create "last move" to lock
-            invoice = self._create_invoice_form(env0)
-            payment = self._create_payment_form(env0)
-            payment_move = payment.move_id
-            self.addCleanup(
-                self._clean_moves_and_payments, invoice.ids + payment_move.ids
-            )
-            env0.cr.commit()
-            lines2reconcile = (
-                (payment_move | invoice)
-                .mapped("line_ids")
-                .filtered(
-                    lambda line: line.account_id.account_type == "asset_receivable"
-                )
-            )
-            with env0.cr.savepoint(), env1.cr.savepoint():
-                # Reconciling "last move"
-                # reconcile a payment with many invoices spend a lot so it could
-                # lock records too many time
-                lines2reconcile.reconcile()
-                # Many pieces of code call flush directly
-                env0.flush_all()
-                self._create_invoice_form(env1)
+        # Create "last move" to lock
+        invoice = self._create_invoice_form(self.env0)
+        payment = self._create_payment_form(self.env0)
+        payment_move = payment.move_id
+        self.cr0.commit()
+        lines2reconcile = (
+            (payment_move | invoice)
+            .mapped("line_ids")
+            .filtered(lambda line: line.account_id.account_type == "asset_receivable")
+        )
+        with self.cr0.savepoint(), self.cr1.savepoint():
+            # Reconciling "last move"
+            # reconcile a payment with many invoices spend a lot so it could
+            # lock records too many time
+            lines2reconcile.reconcile()
+            # Many pieces of code call flush directly
+            self.env0.flush_all()
+            self._create_invoice_form(self.env1)
+        self._commit_crs(self.env0, self.env1)
 
     def test_sequence_concurrency_50_reconciling_last_payment(self):
         """Reconcile last payment and create a new one
         should not raises errors"""
-        with self._new_cr() as cr0, self._new_cr() as cr1:
-            env0 = api.Environment(cr0, SUPERUSER_ID, {})
-            env1 = api.Environment(cr1, SUPERUSER_ID, {})
-            for cr in [cr0, cr1]:
-                # Set a 10-second timeout to avoid waiting too long for release locks
-                cr.execute("SET LOCAL statement_timeout = '10s'")
-
-            # Create "last move" to lock
-            invoice = self._create_invoice_form(env0)
-            payment = self._create_payment_form(env0)
-            payment_move = payment.move_id
-            self.addCleanup(
-                self._clean_moves_and_payments, invoice.ids + payment_move.ids
-            )
-            env0.cr.commit()
-            lines2reconcile = (
-                (payment_move | invoice)
-                .mapped("line_ids")
-                .filtered(
-                    lambda line: line.account_id.account_type == "asset_receivable"
-                )
-            )
-            with env0.cr.savepoint(), env1.cr.savepoint():
-                # Reconciling "last move"
-                # reconcile a payment with many invoices spend a lot so it could
-                # lock records too many time
-                lines2reconcile.reconcile()
-                # Many pieces of code call flush directly
-                env0.flush_all()
-                self._create_payment_form(env1)
+        # Create "last move" to lock
+        invoice = self._create_invoice_form(self.env0)
+        payment = self._create_payment_form(self.env0)
+        payment_move = payment.move_id
+        self.cr0.commit()
+        lines2reconcile = (
+            (payment_move | invoice)
+            .mapped("line_ids")
+            .filtered(lambda line: line.account_id.account_type == "asset_receivable")
+        )
+        with self.cr0.savepoint(), self.cr1.savepoint():
+            # Reconciling "last move"
+            # reconcile a payment with many invoices spend a lot so it could
+            # lock records too many time
+            lines2reconcile.reconcile()
+            # Many pieces of code call flush directly
+            self.env0.flush_all()
+            self._create_payment_form(self.env1)
+        self._commit_crs(self.env0, self.env1)
 
     def test_sequence_concurrency_90_payments(self):
         """Creating concurrent payments should not raises errors"""
-        with self._new_cr() as cr0, self._new_cr() as cr1, self._new_cr() as cr2:
-            env0 = api.Environment(cr0, SUPERUSER_ID, {})
-            env1 = api.Environment(cr1, SUPERUSER_ID, {})
-            env2 = api.Environment(cr2, SUPERUSER_ID, {})
-            for cr in [cr0, cr1, cr2]:
-                # Set a 10-second timeout to avoid waiting too long for release locks
-                cr.execute("SET LOCAL statement_timeout = '10s'")
-
-            # Create "last move" to lock
-            payment = self._create_payment_form(env0, ir_sequence_standard=True)
-            payment_move_ids = payment.move_id.ids
-            self.addCleanup(self._clean_moves_and_payments, payment_move_ids)
-            env0.cr.commit()
-            with env1.cr.savepoint(), env2.cr.savepoint():
-                self._create_payment_form(env1, ir_sequence_standard=True)
-                self._create_payment_form(env2, ir_sequence_standard=True)
+        # Create "last move" to lock
+        self._create_payment_form(self.env0, ir_sequence_standard=True)
+        self.cr0.commit()
+        with self.cr1.savepoint(), self.cr2.savepoint():
+            self._create_payment_form(self.env1, ir_sequence_standard=True)
+            self._create_payment_form(self.env2, ir_sequence_standard=True)
+        self._commit_crs(self.env0, self.env1, self.env2)
 
     def test_sequence_concurrency_92_invoices(self):
         """Creating concurrent invoices should not raises errors"""
-        with self._new_cr() as cr0, self._new_cr() as cr1, self._new_cr() as cr2:
-            env0 = api.Environment(cr0, SUPERUSER_ID, {})
-            env1 = api.Environment(cr1, SUPERUSER_ID, {})
-            env2 = api.Environment(cr2, SUPERUSER_ID, {})
-            for cr in [cr0, cr1, cr2]:
-                # Set a 10-second timeout to avoid waiting too long for release locks
-                cr.execute("SET LOCAL statement_timeout = '10s'")
-
-            # Create "last move" to lock
-            invoice = self._create_invoice_form(env0, ir_sequence_standard=True)
-            self.addCleanup(self._clean_moves_and_payments, invoice.ids)
-            env0.cr.commit()
-            with env1.cr.savepoint(), env2.cr.savepoint():
-                self._create_invoice_form(env1, ir_sequence_standard=True)
-                # Using another partner to bypass "increase_rank" lock error
-                self._create_invoice_form(
-                    env2, partner=self.partner2, ir_sequence_standard=True
-                )
+        # Create "last move" to lock
+        self._create_invoice_form(self.env0, ir_sequence_standard=True)
+        self.cr0.commit()
+        with self.cr1.savepoint(), self.cr2.savepoint():
+            self._create_invoice_form(self.env1, ir_sequence_standard=True)
+            # Using another partner to bypass "increase_rank" lock error
+            self._create_invoice_form(
+                self.env2, partner=self.partner2, ir_sequence_standard=True
+            )
+        self._commit_crs(self.env0, self.env1, self.env2)
 
     @tools.mute_logger("odoo.sql_db")
     def test_sequence_concurrency_95_pay2inv_inv2pay(self):
         """Creating concurrent payment then invoice and invoice then payment
         should not raises errors
         It raises deadlock sometimes"""
-        with self._new_cr() as cr0:
-            env0 = api.Environment(cr0, SUPERUSER_ID, {})
-
-            # Create "last move" to lock
-            invoice = self._create_invoice_form(env0)
-
-            # Create "last move" to lock
-            payment = self._create_payment_form(env0)
-            payment_move_ids = payment.move_id.ids
-            self.addCleanup(
-                self._clean_moves_and_payments, invoice.ids + payment_move_ids
-            )
-            env0.cr.commit()
-            env0.cr.execute(
-                "SELECT setting FROM pg_settings WHERE name = 'deadlock_timeout'"
-            )
-            deadlock_timeout = int(env0.cr.fetchone()[0])  # ms
-            # You could not have permission to set this parameter
-            # psycopg2.errors.InsufficientPrivilege
-            self.assertTrue(
-                deadlock_timeout,
-                "You need to configure PG parameter deadlock_timeout='1s'",
-            )
-            deadlock_timeout = int(deadlock_timeout / 1000)  # s
-
-            t_pay_inv = ThreadRaiseJoin(
-                target=self._create_invoice_payment,
-                args=(deadlock_timeout, True, True),
-                name="Thread payment invoice",
-            )
-            t_inv_pay = ThreadRaiseJoin(
-                target=self._create_invoice_payment,
-                args=(deadlock_timeout, False, True),
-                name="Thread invoice payment",
-            )
-            self.env.registry.enter_test_mode(self.env.registry.cursor())
-            t_pay_inv.start()
-            t_inv_pay.start()
-            # the thread could raise the error before to wait for it so disable coverage
-            self._thread_join(t_pay_inv, deadlock_timeout + 15)
-            self._thread_join(t_inv_pay, deadlock_timeout + 15)
+        # Create "last move" to lock
+        self._create_invoice_form(self.env0)
+        # Create "last move" to lock
+        self._create_payment_form(self.env0)
+        self.cr0.commit()
+        self.cr0.execute(
+            "SELECT setting FROM pg_settings WHERE name = 'deadlock_timeout'"
+        )
+        deadlock_timeout = int(self.cr0.fetchone()[0])  # ms
+        # You could not have permission to set this parameter
+        # psycopg2.errors.InsufficientPrivilege
+        self.assertTrue(
+            deadlock_timeout,
+            "You need to configure PG parameter deadlock_timeout='1s'",
+        )
+        deadlock_timeout = int(deadlock_timeout / 1000)  # s
+        t_pay_inv = ThreadRaiseJoin(
+            target=self._create_invoice_payment,
+            args=(deadlock_timeout, True, True),
+            name="Thread payment invoice",
+        )
+        t_inv_pay = ThreadRaiseJoin(
+            target=self._create_invoice_payment,
+            args=(deadlock_timeout, False, True),
+            name="Thread invoice payment",
+        )
+        t_pay_inv.start()
+        t_inv_pay.start()
+        # the thread could raise the error before to wait for it so disable coverage
+        self._thread_join(t_pay_inv, deadlock_timeout + 15)
+        self._thread_join(t_inv_pay, deadlock_timeout + 15)
 
     def _thread_join(self, thread_obj, timeout):
         try:
