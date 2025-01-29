@@ -188,16 +188,11 @@ class AccountJournal(models.Model):
                     if prefix3
                     else "''"
                 )
-                select_max_number = (
-                    "MAX(split_part(name, '{}', {})::INTEGER) AS max_number".format(
-                        prefixes[-1],
-                        prefixes.count(prefixes[-1]) + 1,
-                    )
-                )
+                select_max_number = f"MAX(split_part(name, '{prefixes[-1]}', {prefixes.count(prefixes[-1]) + 1})::INTEGER) AS max_number"
                 query = (
-                    "SELECT {}, {}, {} FROM account_move "
+                    f"SELECT {select_year}, {select_month}, {select_max_number} FROM account_move "
                     "WHERE name LIKE %s AND journal_id=%s GROUP BY 1,2"
-                ).format(select_year, select_month, select_max_number)
+                )
 
                 # It is not using user input
                 # pylint: disable=sql-injection
