@@ -12,6 +12,12 @@ class TestAccountJournalRestrictMode(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                test_account_journal_restrict_mode=True,
+            )
+        )
         cls.account_journal_obj = cls.env["account.journal"]
         cls.company_obj = cls.env["res.company"]
         cls.currency_obj = cls.env["res.currency"]
