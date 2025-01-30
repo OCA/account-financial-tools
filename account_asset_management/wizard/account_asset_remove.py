@@ -2,20 +2,18 @@
 # Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import logging
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
-
-_logger = logging.getLogger(__name__)
 
 
 class AccountAssetRemove(models.TransientModel):
     _name = "account.asset.remove"
     _description = "Remove Asset"
     _check_company_auto = True
+    _check_company_domain = models.check_company_domain_parent_of
 
     company_id = fields.Many2one(
         comodel_name="res.company",
@@ -41,25 +39,29 @@ class AccountAssetRemove(models.TransientModel):
     account_sale_id = fields.Many2one(
         comodel_name="account.account",
         string="Asset Sale Account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
+        check_company=True,
         default=lambda self: self._default_account_sale_id(),
     )
     account_plus_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Plus-Value Account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
+        check_company=True,
         default=lambda self: self._default_account_plus_value_id(),
     )
     account_min_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Min-Value Account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
+        check_company=True,
         default=lambda self: self._default_account_min_value_id(),
     )
     account_residual_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Residual Value Account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
+        check_company=True,
         default=lambda self: self._default_account_residual_value_id(),
     )
     posting_regime = fields.Selection(
@@ -78,7 +80,7 @@ class AccountAssetRemove(models.TransientModel):
     @api.constrains("sale_value", "company_id")
     def _check_sale_value(self):
         if self.company_id.currency_id.compare_amounts(self.sale_value, 0) < 0:
-            raise ValidationError(_("The Sale Value must be positive!"))
+            raise ValidationError(self.env._("The Sale Value must be positive!"))
 
     @api.model
     def _default_company_id(self):
@@ -138,8 +140,8 @@ class AccountAssetRemove(models.TransientModel):
     @api.model
     def _selection_posting_regime(self):
         return [
-            ("residual_value", _("Residual Value")),
-            ("gain_loss_on_sale", _("Gain/Loss on Sale")),
+            ("residual_value", self.env._("Residual Value")),
+            ("gain_loss_on_sale", self.env._("Gain/Loss on Sale")),
         ]
 
     @api.model
@@ -186,7 +188,9 @@ class AccountAssetRemove(models.TransientModel):
 
         if self.date_remove < last_date:
             raise UserError(
-                _("The removal date must be after " "the last depreciation date.")
+                self.env._(
+                    "The removal date must be after " "the last depreciation date."
+                )
             )
 
         line_name = asset._get_depreciation_entry_name(len(dlines) + 1)
@@ -222,8 +226,8 @@ class AccountAssetRemove(models.TransientModel):
         move.with_context(allow_asset=True).write({"line_ids": move_lines})
 
         return {
-            "name": _("Asset '%s' Removal Journal Entry") % asset_ref,
-            "view_mode": "tree,form",
+            "name": self.env._("Asset '%s' Removal Journal Entry", asset_ref),
+            "view_mode": "list,form",
             "res_model": "account.move",
             "view_id": False,
             "type": "ir.actions.act_window",
@@ -261,7 +265,7 @@ class AccountAssetRemove(models.TransientModel):
         first_date = first_to_depreciate_dl.line_date
         if date_remove > first_date:
             raise UserError(
-                _(
+                self.env._(
                     "You can't make an early removal if all the depreciation "
                     "lines for previous periods are not posted."
                 )

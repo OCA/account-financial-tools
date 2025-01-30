@@ -11,7 +11,7 @@ from traceback import format_exception
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -29,6 +29,7 @@ class AccountAsset(models.Model):
     _description = "Asset"
     _order = "date_start desc, code, name"
     _check_company_auto = True
+    _check_company_domain = models.check_company_domain_parent_of
     _rec_names_search = ["code", "name"]
 
     account_move_line_ids = fields.One2many(
@@ -362,7 +363,9 @@ class AccountAsset(models.Model):
             lambda a: a.method == "degr-linear" and a.method_time != "year"
         ):
             raise UserError(
-                _("Degressive-Linear is only supported for Time Method = Year.")
+                self.env._(
+                    "Degressive-Linear is only supported for Time Method = Year."
+                )
             )
 
     @api.constrains("date_start", "method_end", "method_number", "method_time")
@@ -373,13 +376,13 @@ class AccountAsset(models.Model):
             and a.method_end
             and a.method_end <= a.date_start
         ):
-            raise UserError(_("The Start Date must precede the Ending Date."))
+            raise UserError(self.env._("The Start Date must precede the Ending Date."))
 
     @api.constrains("profile_id")
     def _check_profile_change(self):
         if self.depreciation_line_ids.filtered("move_id"):
             raise UserError(
-                _(
+                self.env._(
                     "You cannot change the profile of an asset "
                     "with accounting entries."
                 )
@@ -448,12 +451,14 @@ class AccountAsset(models.Model):
     def unlink(self):
         for asset in self:
             if asset.state != "draft":
-                raise UserError(_("You can only delete assets in draft state."))
+                raise UserError(
+                    self.env._("You can only delete assets in draft state.")
+                )
             if asset.depreciation_line_ids.filtered(
                 lambda r: r.type == "depreciate" and r.move_check
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "You cannot delete an asset that contains "
                         "posted depreciation lines."
                     )
@@ -499,7 +504,7 @@ class AccountAsset(models.Model):
             ctx.update({"early_removal": True})
 
         return {
-            "name": _("Generate Asset Removal entries"),
+            "name": self.env._("Generate Asset Removal entries"),
             "view_mode": "form",
             "res_model": "account.asset.remove",
             "target": "new",
@@ -516,8 +521,8 @@ class AccountAsset(models.Model):
         context = dict(self.env.context)
         context.pop("group_by", None)
         return {
-            "name": _("Journal Entries"),
-            "view_mode": "tree,form",
+            "name": self.env._("Journal Entries"),
+            "view_mode": "list,form",
             "res_model": "account.move",
             "view_id": False,
             "type": "ir.actions.act_window",
@@ -653,7 +658,7 @@ class AccountAsset(models.Model):
                     and total_table_lines != len(move_check_lines)
                 ):
                     raise UserError(
-                        _(
+                        self.env._(
                             "The duration of the asset conflicts with the "
                             "posted depreciation table entry dates."
                         )
@@ -863,7 +868,7 @@ class AccountAsset(models.Model):
         """
         if self.method_time != "year":
             raise UserError(
-                _(
+                self.env._(
                     "The '_compute_year_amount' method is only intended for "
                     "Time Method 'Number of Years'."
                 )
@@ -892,7 +897,9 @@ class AccountAsset(models.Model):
             else:
                 return year_amount_degressive
         else:
-            raise UserError(_("Illegal value %s in asset.method.") % self.method)
+            raise UserError(
+                self.env._("Illegal value %s in asset.method.") % self.method
+            )
 
     def _compute_line_dates(self, table, start_date, stop_date):
         """
@@ -1196,12 +1203,12 @@ class AccountAsset(models.Model):
                 asset_ref = depreciation.asset_id.name
                 if depreciation.asset_id.code:
                     asset_ref = f"[{depreciation.asset_id.code}] {asset_ref}"
-                error_log += _(
+                error_log += self.env._(
                     "\nError while processing asset '{ref}': {exception}"
                 ).format(ref=asset_ref, exception=str(e))
-                error_msg = _("Error while processing asset '{ref}': \n\n{tb}").format(
-                    ref=asset_ref, tb=tb
-                )
+                error_msg = self.env._(
+                    "Error while processing asset '{ref}': \n\n{tb}"
+                ).format(ref=asset_ref, tb=tb)
                 _logger.error("%s, %s", self._name, error_msg)
 
         if check_triggers and recomputes:
