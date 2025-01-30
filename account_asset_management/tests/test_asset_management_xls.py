@@ -82,7 +82,8 @@ class TestAssetManagementXls(AccountTestInvoicingCommon):
                 "report_name": self.xls_report_name,
             }.items(),
         )
-        model = self.env["report.%s" % self.report_action["report_name"]].with_context(
+        report_model = f"report.{self.report_action['report_name']}"
+        model = self.env[report_model].with_context(
             active_model=self.xls_report._name, **self.report_action["context"]
         )
         model.create_xlsx_report(self.xls_report.ids, data=self.report_action["data"])

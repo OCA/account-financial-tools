@@ -1,7 +1,7 @@
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -9,6 +9,7 @@ class AccountAssetProfile(models.Model):
     _name = "account.asset.profile"
     _inherit = "analytic.mixin"
     _check_company_auto = True
+    _check_company_domain = models.check_company_domain_parent_of
     _description = "Asset profile"
     _order = "name"
 
@@ -16,40 +17,40 @@ class AccountAssetProfile(models.Model):
     note = fields.Text()
     account_asset_id = fields.Many2one(
         comodel_name="account.account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
         string="Asset Account",
         check_company=True,
         required=True,
     )
     account_depreciation_id = fields.Many2one(
         comodel_name="account.account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
         string="Depreciation Account",
         check_company=True,
         required=True,
     )
     account_expense_depreciation_id = fields.Many2one(
         comodel_name="account.account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
         string="Depr. Expense Account",
         check_company=True,
         required=True,
     )
     account_plus_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
         check_company=True,
         string="Plus-Value Account",
     )
     account_min_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
         check_company=True,
         string="Min-Value Account",
     )
     account_residual_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain=[("deprecated", "=", False)],
         check_company=True,
         string="Residual Value Account",
     )
@@ -171,29 +172,35 @@ class AccountAssetProfile(models.Model):
     @api.model
     def _selection_method(self):
         return [
-            ("linear", _("Linear")),
-            ("linear-limit", _("Linear up to Salvage Value")),
-            ("degressive", _("Degressive")),
-            ("degr-linear", _("Degressive-Linear")),
-            ("degr-limit", _("Degressive  up to Salvage Value")),
+            ("linear", self.env._("Linear")),
+            ("linear-limit", self.env._("Linear up to Salvage Value")),
+            ("degressive", self.env._("Degressive")),
+            ("degr-linear", self.env._("Degressive-Linear")),
+            ("degr-limit", self.env._("Degressive  up to Salvage Value")),
         ]
 
     @api.model
     def _selection_method_period(self):
-        return [("month", _("Month")), ("quarter", _("Quarter")), ("year", _("Year"))]
+        return [
+            ("month", self.env._("Month")),
+            ("quarter", self.env._("Quarter")),
+            ("year", self.env._("Year")),
+        ]
 
     @api.model
     def _selection_method_time(self):
         return [
-            ("year", _("Number of Years or end date")),
-            ("number", _("Number of Depreciations")),
+            ("year", self.env._("Number of Years or end date")),
+            ("number", self.env._("Number of Depreciations")),
         ]
 
     @api.constrains("method", "method_time")
     def _check_method(self):
         if any(a.method == "degr-linear" and a.method_time != "year" for a in self):
             raise UserError(
-                _("Degressive-Linear is only supported for Time Method = Year.")
+                self.env._(
+                    "Degressive-Linear is only supported for Time Method = Year."
+                )
             )
 
     @api.depends("method_time")

@@ -2,7 +2,7 @@
 # Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -11,6 +11,7 @@ class AccountAssetLine(models.Model):
     _description = "Asset depreciation table line"
     _order = "type, line_date"
     _check_company_auto = True
+    _check_company_domain = models.check_company_domain_parent_of
 
     name = fields.Char(string="Depreciation Name", size=64, readonly=True)
     asset_id = fields.Many2one(
@@ -132,7 +133,7 @@ class AccountAssetLine(models.Model):
                 # 'Delete Move' button on the depreciation lines.
                 if not self.env.context.get("unlink_from_asset"):
                     raise UserError(
-                        _(
+                        self.env._(
                             "You are not allowed to remove an accounting entry "
                             "linked to an asset."
                             "\nYou should remove such entries from the asset."
@@ -146,7 +147,7 @@ class AccountAssetLine(models.Model):
                 and dl.type != "create"
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "You cannot change a depreciation line "
                         "with an associated accounting entry."
                     )
@@ -159,7 +160,7 @@ class AccountAssetLine(models.Model):
                 )
                 if check:
                     raise UserError(
-                        _(
+                        self.env._(
                             "You cannot set the 'Initial Balance Entry' flag "
                             "on a depreciation line "
                             "with prior posted entries."
@@ -174,7 +175,7 @@ class AccountAssetLine(models.Model):
                     )
                     if check:
                         raise UserError(
-                            _(
+                            self.env._(
                                 "You cannot set the Asset Start Date "
                                 "after already posted entries."
                             )
@@ -187,7 +188,7 @@ class AccountAssetLine(models.Model):
                     )
                     if check:
                         raise UserError(
-                            _(
+                            self.env._(
                                 "You cannot set the date on a depreciation line "
                                 "prior to already posted entries."
                             )
@@ -198,11 +199,13 @@ class AccountAssetLine(models.Model):
         for dl in self:
             if dl.type == "create" and dl.amount:
                 raise UserError(
-                    _("You cannot remove an asset line of type 'Depreciation Base'.")
+                    self.env._(
+                        "You cannot remove an asset line of type 'Depreciation Base'."
+                    )
                 )
             elif dl.move_id:
                 raise UserError(
-                    _(
+                    self.env._(
                         "You cannot delete a depreciation line with "
                         "an associated accounting entry."
                     )
@@ -287,7 +290,7 @@ class AccountAssetLine(models.Model):
     def open_move(self):
         self.ensure_one()
         return {
-            "name": _("Journal Entry"),
+            "name": self.env._("Journal Entry"),
             "view_mode": "form",
             "res_id": self.move_id.id,
             "res_model": "account.move",
@@ -316,7 +319,7 @@ class AccountAssetLine(models.Model):
                     }
                 )
                 return {
-                    "name": _("Reverse Move"),
+                    "name": self.env._("Reverse Move"),
                     "view_mode": "form",
                     "res_model": "wiz.asset.move.reverse",
                     "target": "new",

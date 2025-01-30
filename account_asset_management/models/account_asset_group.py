@@ -12,11 +12,12 @@ class AccountAssetGroup(models.Model):
     _order = "code, name"
     _parent_store = True
     _check_company_auto = True
+    _check_company_domain = models.check_company_domain_parent_of
     _rec_names_search = ["code", "name"]
 
     name = fields.Char(size=64, required=True, index=True)
     code = fields.Char(index=True)
-    parent_path = fields.Char(index=True, unaccent=False)
+    parent_path = fields.Char(index=True)
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",

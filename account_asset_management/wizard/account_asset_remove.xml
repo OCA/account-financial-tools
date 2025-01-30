@@ -4,7 +4,7 @@
         <field name="name">account.asset.remove.form</field>
         <field name="model">account.asset.remove</field>
         <field name="arch" type="xml">
-            <form string="Remove Asset">
+            <form>
                 <group>
                     <group>
                         <field name="company_id" invisible="1" />

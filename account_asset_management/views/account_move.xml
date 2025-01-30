@@ -23,7 +23,7 @@
                 </button>
             </xpath>
             <xpath
-                expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']"
+                expr="//field[@name='invoice_line_ids']/list/field[@name='quantity']"
                 position="before"
             >
                 <field
@@ -54,7 +54,7 @@
                 />
             </xpath>
             <xpath
-                expr="//notebook//field[@name='line_ids']/tree/field[@name='date_maturity']"
+                expr="//notebook//field[@name='line_ids']/list/field[@name='date_maturity']"
                 position="after"
             >
                 <field

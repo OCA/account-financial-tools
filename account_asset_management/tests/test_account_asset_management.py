@@ -8,8 +8,7 @@ import time
 from datetime import date, datetime
 
 from odoo import Command, fields
-from odoo.tests import tagged
-from odoo.tests.common import Form
+from odoo.tests import Form, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
@@ -884,7 +883,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         ict0.invalidate_recordset()
         self.assertEqual(ict0.value_depreciated, 500)
         self.assertEqual(ict0.value_residual, 1000)
-        self.assertEqual(len(original_move.reversal_move_id), 0)
+        self.assertEqual(len(original_move.reversal_move_ids), 0)
 
     def test_19_unlink_entries(self):
         """Test that cancelling a posted entry creates a reversal, if the

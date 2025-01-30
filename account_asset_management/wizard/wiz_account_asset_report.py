@@ -3,7 +3,7 @@
 
 import unicodedata
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -48,7 +48,9 @@ class WizAccountAssetReport(models.TransientModel):
     def _check_dates(self):
         for wiz in self:
             if wiz.date_to <= wiz.date_from:
-                raise UserError(_("The Start Date must precede the Ending Date."))
+                raise UserError(
+                    self.env._("The Start Date must precede the Ending Date.")
+                )
 
     def xls_export(self):
         self.ensure_one()
