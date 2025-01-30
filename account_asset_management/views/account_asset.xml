@@ -4,7 +4,7 @@
         <field name="name">account.asset.form</field>
         <field name="model">account.asset</field>
         <field name="arch" type="xml">
-            <form string="Asset">
+            <form>
                 <header>
                     <button
                         name="validate"
@@ -189,11 +189,11 @@
                             </div>
                             <field
                                 name="depreciation_line_ids"
-                                mode="tree"
+                                mode="list"
                                 options="{'reload_on_button': true}"
                                 readonly="state in ['open', 'close', 'removed']"
                             >
-                                <tree
+                                <list
                                     decoration-info="(move_check == False) and (init_entry == False)"
                                     create="false"
                                 >
@@ -230,7 +230,7 @@
                                         groups="account.group_account_manager"
                                         invisible="not move_check"
                                     />
-                                </tree>
+                                </list>
                                 <form string="Asset Line">
                                     <group>
                                         <group>
@@ -273,7 +273,7 @@
                         </page>
                         <page string="History">
                             <field name="account_move_line_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="date" />
                                     <field name="move_id" />
                                     <field name="journal_id" optional="show" />
@@ -283,7 +283,7 @@
                                     <field name="name" optional="hide" />
                                     <field name="debit" sum="1" />
                                     <field name="credit" sum="1" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Notes">
@@ -294,19 +294,15 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
     <record model="ir.ui.view" id="account_asset_view_tree">
-        <field name="name">account.asset.tree</field>
+        <field name="name">account.asset.list</field>
         <field name="model">account.asset</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="code" optional="show" />
                 <field name="depreciation_base" optional="show" />
@@ -332,14 +328,14 @@
                     decoration-muted="state == 'close'"
                 />
                 <field name="currency_id" column_invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="account_asset_view_search" model="ir.ui.view">
         <field name="name">account.asset.search</field>
         <field name="model">account.asset</field>
         <field name="arch" type="xml">
-            <search string="Account Asset">
+            <search>
                 <filter
                     string="Draft"
                     name="draft"
@@ -402,7 +398,7 @@
     <record id="account_asset_action" model="ir.actions.act_window">
         <field name="name">Assets</field>
         <field name="res_model">account.asset</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <record id="act_entries_open" model="ir.actions.act_window">
         <field name="name">Journal Items</field>

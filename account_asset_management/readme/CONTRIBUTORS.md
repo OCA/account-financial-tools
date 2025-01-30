@@ -14,6 +14,7 @@
   - Pedro M. Baeza
   - João Marques
   - Víctor Martínez
+  - Carlos Lopez
 - [ForgeFlow](https://www.forgeflow.com):
   - Jordi Ballester \<<jordi.ballester@forgeflow.com>\>
   - Miquel Raïch \<<miquel.raich@forgeflow.com>\>
