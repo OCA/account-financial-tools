@@ -122,8 +122,8 @@ class AccountMove(models.Model):
                 message = _(
                     "This invoice created the asset(s): %s",
                     Markup(
-                        """<a href=# data-oe-model=account.asset data-oe-id={}"""
-                        """>{}</a>""".format(new_name_get[0], new_name_get[1])
+                        f"""<a href=# data-oe-model=account.asset data-oe-id={new_name_get[0]}"""
+                        f""">{new_name_get[1]}</a>"""
                     ),
                 )
                 move.message_post(body=message)
