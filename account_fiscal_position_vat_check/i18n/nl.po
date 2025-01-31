@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
 "PO-Revision-Date: 2023-11-14 17:36+0000\n"
 "Last-Translator: Thijs van Oers <thijsvanoers@yahoo.com>\n"
-"Language-Team: Dutch (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/nl/)\n"
+"Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,22 +43,29 @@ msgstr "Toon waarschuwing BTW verplicht"
 #. module: account_fiscal_position_vat_check
 #. odoo-python
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
-#, python-format
 msgid ""
 "You are trying to validate a customer invoice/refund with the fiscal "
 "position '%(fp)s' that require the customer to have a VAT number. But the "
-"Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
-"number of this Customer in Odoo and try to validate again."
+"partner '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+"number of this partner in Odoo and try to validate again."
 msgstr ""
-"U probeert een verkoop factuur/credit factuur te valideren met de volgende "
-"fiscale positie '%(fp)s' waarvoor het is verplicht dat er een BTW nummer is "
-"ingevuld. Maar voor de klant '%(rp)s' is geen BTW nummer bekend. Voeg het "
-"BTW nummer van deze klant toe en valideer opnieuw."
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
 msgid "that require to know the VAT number of the partner."
 msgstr "dat vereist dat het BTW nummer van de klant bekend is."
+
+#, python-format
+#~ msgid ""
+#~ "You are trying to validate a customer invoice/refund with the fiscal "
+#~ "position '%(fp)s' that require the customer to have a VAT number. But the "
+#~ "Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+#~ "number of this Customer in Odoo and try to validate again."
+#~ msgstr ""
+#~ "U probeert een verkoop factuur/credit factuur te valideren met de "
+#~ "volgende fiscale positie '%(fp)s' waarvoor het is verplicht dat er een "
+#~ "BTW nummer is ingevuld. Maar voor de klant '%(rp)s' is geen BTW nummer "
+#~ "bekend. Voeg het BTW nummer van deze klant toe en valideer opnieuw."
 
 #~ msgid "Invoice"
 #~ msgstr "Factuur"

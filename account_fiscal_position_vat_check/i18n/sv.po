@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
 "PO-Revision-Date: 2024-02-27 12:34+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
-"Language-Team: Swedish (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/sv/)\n"
+"Language-Team: Swedish (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,22 +43,29 @@ msgstr "Visa Varning Moms krävs"
 #. module: account_fiscal_position_vat_check
 #. odoo-python
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
-#, python-format
 msgid ""
 "You are trying to validate a customer invoice/refund with the fiscal "
 "position '%(fp)s' that require the customer to have a VAT number. But the "
-"Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
-"number of this Customer in Odoo and try to validate again."
+"partner '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+"number of this partner in Odoo and try to validate again."
 msgstr ""
-"Du försöker validera en kundfaktura/återbetalning med skattepositionen '%(fp)"
-"s' som kräver att kunden har ett momsregistreringsnummer. Men kunden '%(rp)"
-"s' har inget momsregistreringsnummer i Odoo. Lägg till momsnumret för denna "
-"kund i Odoo och försök att validera igen."
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
 msgid "that require to know the VAT number of the partner."
 msgstr "som behöver veta partnerns momsregistreringsnummer."
+
+#, python-format
+#~ msgid ""
+#~ "You are trying to validate a customer invoice/refund with the fiscal "
+#~ "position '%(fp)s' that require the customer to have a VAT number. But the "
+#~ "Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+#~ "number of this Customer in Odoo and try to validate again."
+#~ msgstr ""
+#~ "Du försöker validera en kundfaktura/återbetalning med skattepositionen "
+#~ "'%(fp)s' som kräver att kunden har ett momsregistreringsnummer. Men "
+#~ "kunden '%(rp)s' har inget momsregistreringsnummer i Odoo. Lägg till "
+#~ "momsnumret för denna kund i Odoo och försök att validera igen."
 
 #~ msgid "Invoice"
 #~ msgstr "Faktura"

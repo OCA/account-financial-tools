@@ -44,22 +44,29 @@ msgstr ""
 #. module: account_fiscal_position_vat_check
 #. odoo-python
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
-#, python-format
 msgid ""
 "You are trying to validate a customer invoice/refund with the fiscal "
 "position '%(fp)s' that require the customer to have a VAT number. But the "
-"Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
-"number of this Customer in Odoo and try to validate again."
+"partner '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+"number of this partner in Odoo and try to validate again."
 msgstr ""
-"Sie versuchen, eine Ausgangsrechnung/-gutschrift mit der Steuerzuordnung "
-"'%(fp)s' zu genehmigen, für die der Kunde eine Umsatzsteuernummer benötigt. "
-"Der Kunde '%(rp)s' hat aber keine USt-ID in Odoo. Bitte geben Sie die USt-ID "
-"des Kunden in Odoo an und starten Sie die Prüfung erneut."
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
 msgid "that require to know the VAT number of the partner."
 msgstr ""
+
+#, python-format
+#~ msgid ""
+#~ "You are trying to validate a customer invoice/refund with the fiscal "
+#~ "position '%(fp)s' that require the customer to have a VAT number. But the "
+#~ "Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+#~ "number of this Customer in Odoo and try to validate again."
+#~ msgstr ""
+#~ "Sie versuchen, eine Ausgangsrechnung/-gutschrift mit der Steuerzuordnung "
+#~ "'%(fp)s' zu genehmigen, für die der Kunde eine Umsatzsteuernummer "
+#~ "benötigt. Der Kunde '%(rp)s' hat aber keine USt-ID in Odoo. Bitte geben "
+#~ "Sie die USt-ID des Kunden in Odoo an und starten Sie die Prüfung erneut."
 
 #~ msgid "Invoice"
 #~ msgstr "Rechnung"

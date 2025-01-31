@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2024-02-22 10:34+0000\n"
+"PO-Revision-Date: 2025-02-03 11:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/it/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
@@ -43,22 +43,34 @@ msgstr "Visualizza avviso P.IVA richiesta"
 #. module: account_fiscal_position_vat_check
 #. odoo-python
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
-#, python-format
 msgid ""
 "You are trying to validate a customer invoice/refund with the fiscal "
 "position '%(fp)s' that require the customer to have a VAT number. But the "
-"Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
-"number of this Customer in Odoo and try to validate again."
+"partner '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+"number of this partner in Odoo and try to validate again."
 msgstr ""
-"Si sta cercando di validare una fattura/rimborso di un cliente con la "
-"posizione fiscale '%(fp)s' che richiede che il cliente abbia una P.IVA. Ma "
-"il cliente '%(rp)s' non ha una P.IVA in Odoo. Aggiungere la P.IVA di questo "
-"cliente in Odoo e riprovare a validare."
+"Stai tentando di convalidare una fattura/rimborso cliente con la posizione "
+"fiscale '%(fp)s' che richiede che il cliente abbia un numero di partita IVA. "
+"Ma il partner '%(rp)s' non ha un numero di partita IVA in Odoo. Aggiungere "
+"il numero di partita IVA di questo partner in Odoo e provre a convalidare di "
+"nuovo."
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
 msgid "that require to know the VAT number of the partner."
 msgstr "che richiede di conoscere la P.IVA del partner."
+
+#, python-format
+#~ msgid ""
+#~ "You are trying to validate a customer invoice/refund with the fiscal "
+#~ "position '%(fp)s' that require the customer to have a VAT number. But the "
+#~ "Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+#~ "number of this Customer in Odoo and try to validate again."
+#~ msgstr ""
+#~ "Si sta cercando di validare una fattura/rimborso di un cliente con la "
+#~ "posizione fiscale '%(fp)s' che richiede che il cliente abbia una P.IVA. "
+#~ "Ma il cliente '%(rp)s' non ha una P.IVA in Odoo. Aggiungere la P.IVA di "
+#~ "questo cliente in Odoo e riprovare a validare."
 
 #~ msgid "Invoice"
 #~ msgstr "Fattura"

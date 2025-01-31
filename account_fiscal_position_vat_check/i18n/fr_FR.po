@@ -40,22 +40,29 @@ msgstr "Montrer l'avertissement TVA requise"
 #. module: account_fiscal_position_vat_check
 #. odoo-python
 #: code:addons/account_fiscal_position_vat_check/models/account_move.py:0
-#, python-format
 msgid ""
 "You are trying to validate a customer invoice/refund with the fiscal "
 "position '%(fp)s' that require the customer to have a VAT number. But the "
-"Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
-"number of this Customer in Odoo and try to validate again."
+"partner '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+"number of this partner in Odoo and try to validate again."
 msgstr ""
-"Vous essayez de valider une facture/remboursement client avec la position "
-"fiscale '%(fp)s' qui exige que le client ait un numéro de TVA. Mais le "
-"client '%(rp)s' n'a pas de numéro de TVA dans Odoo. Veuillez ajouter le "
-"numéro de TVA de ce client dans Odoo et essayer de valider à nouveau."
 
 #. module: account_fiscal_position_vat_check
 #: model_terms:ir.ui.view,arch_db:account_fiscal_position_vat_check.view_partner_property_form
 msgid "that require to know the VAT number of the partner."
 msgstr "Ceci demande de connaître le numéro de TVA du partenaire."
+
+#, python-format
+#~ msgid ""
+#~ "You are trying to validate a customer invoice/refund with the fiscal "
+#~ "position '%(fp)s' that require the customer to have a VAT number. But the "
+#~ "Customer '%(rp)s' doesn't have a VAT number in Odoo. Please add the VAT "
+#~ "number of this Customer in Odoo and try to validate again."
+#~ msgstr ""
+#~ "Vous essayez de valider une facture/remboursement client avec la position "
+#~ "fiscale '%(fp)s' qui exige que le client ait un numéro de TVA. Mais le "
+#~ "client '%(rp)s' n'a pas de numéro de TVA dans Odoo. Veuillez ajouter le "
+#~ "numéro de TVA de ce client dans Odoo et essayer de valider à nouveau."
 
 #~ msgid "Display Name"
 #~ msgstr "Nom affiché"
