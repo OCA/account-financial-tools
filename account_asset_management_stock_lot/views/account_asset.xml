@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="account_asset_view_form">
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='general_info']" position="inside">
+                <group>
+                    <field name="product_id" />
+                    <field name="stock_lot_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
