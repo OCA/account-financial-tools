@@ -6,6 +6,7 @@
 from datetime import datetime
 
 import odoo.tests.common as common
+from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests import Form, tagged
 
@@ -19,7 +20,11 @@ class TestAccountNetting(common.TransactionCase):
         res_users_account_manager = cls.env.ref("account.group_account_manager")
         partner_manager = cls.env.ref("base.group_partner_manager")
         cls.env.user.write(
-            {"groups_id": [(6, 0, [res_users_account_manager.id, partner_manager.id])]}
+            {
+                "groups_id": [
+                    Command.set([res_users_account_manager.id, partner_manager.id])
+                ]
+            }
         )
         cls.company = cls.env.ref("base.main_company")
         # only adviser can create an account
@@ -48,7 +53,7 @@ class TestAccountNetting(common.TransactionCase):
             {
                 "name": "Product Test",
                 "list_price": 10,
-                "taxes_id": [(6, 0, [cls.account_tax.id])],
+                "taxes_id": [Command.set([cls.account_tax.id])],
             }
         )
         out_invoice_partner1 = cls._create_move(cls, "out_invoice", cls.partner1, 100)
@@ -84,7 +89,7 @@ class TestAccountNetting(common.TransactionCase):
         return self.aa_model.search(
             [
                 ("account_type", "=", account_type),
-                ("company_id", "=", self.company.id),
+                ("company_ids", "in", self.company.id),
             ],
             limit=1,
         )
@@ -121,7 +126,7 @@ class TestAccountNetting(common.TransactionCase):
         with self.assertRaises(UserError):
             wizard = obj.create(
                 {
-                    "move_line_ids": [(6, 0, [self.move_line_1.id])],
+                    "move_line_ids": [Command.set([self.move_line_1.id])],
                     "journal_id": self.miscellaneous_journal.id,
                 }
             )
@@ -133,7 +138,7 @@ class TestAccountNetting(common.TransactionCase):
             wizard = obj.create(
                 {
                     "move_line_ids": [
-                        (6, 0, [self.move_line_1.id, self.move_line_3.id])
+                        Command.set([self.move_line_1.id, self.move_line_3.id])
                     ],
                     "journal_id": self.miscellaneous_journal.id,
                 }
@@ -146,7 +151,7 @@ class TestAccountNetting(common.TransactionCase):
             wizard = obj.create(
                 {
                     "move_line_ids": [
-                        (6, 0, [self.move_line_4.id, self.move_line_5.id])
+                        Command.set([self.move_line_4.id, self.move_line_5.id])
                     ],
                     "journal_id": self.miscellaneous_journal.id,
                 }
@@ -163,7 +168,7 @@ class TestAccountNetting(common.TransactionCase):
             wizard = obj.create(
                 {
                     "move_line_ids": [
-                        (6, 0, [self.move_line_4.id, self.move_line_5.id])
+                        Command.set([self.move_line_4.id, self.move_line_5.id])
                     ],
                     "journal_id": self.miscellaneous_journal.id,
                 }
@@ -176,7 +181,7 @@ class TestAccountNetting(common.TransactionCase):
             wizard = obj.create(
                 {
                     "move_line_ids": [
-                        (6, 0, [self.move_line_1.id, self.move_line_6.id])
+                        Command.set([self.move_line_1.id, self.move_line_6.id])
                     ],
                     "journal_id": self.miscellaneous_journal.id,
                 }
@@ -186,7 +191,9 @@ class TestAccountNetting(common.TransactionCase):
         )
         wizard = obj.create(
             {
-                "move_line_ids": [(6, 0, [self.move_line_1.id, self.move_line_2.id])],
+                "move_line_ids": [
+                    Command.set([self.move_line_1.id, self.move_line_2.id])
+                ],
                 "journal_id": self.miscellaneous_journal.id,
             }
         )

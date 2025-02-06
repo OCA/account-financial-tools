@@ -2,7 +2,7 @@
 # Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -108,20 +108,19 @@ class AccountMoveMakeNetting(models.TransientModel):
 
     def _prepare_account_move(self):
         # Group amounts by account
-        account_groups = self.move_line_ids.read_group(
+        account_groups = self.env["account.move.line"]._read_group(
             [("id", "in", self.move_line_ids.ids)],
-            ["account_id", "amount_residual"],
-            ["account_id"],
+            groupby=["account_id"],
+            aggregates=["amount_residual:sum"],
         )
         debtors = []
         creditors = []
         total_debtors = 0.0
         total_creditors = 0.0
         ccur = self.company_id.currency_id
-        for account_group in account_groups:
-            balance = account_group["amount_residual"]
+        for account, balance in account_groups:
             group_vals = {
-                "account_id": account_group["account_id"][0],
+                "account_id": account.id,
                 "balance": abs(balance),
             }
             if ccur.compare_amounts(balance, 0) > 0:
@@ -142,7 +141,7 @@ class AccountMoveMakeNetting(models.TransientModel):
                     "partner_id": self.partner_id.id,
                     "account_id": account_group["account_id"],
                 }
-                move_lines.append((0, 0, move_line_vals))
+                move_lines.append(Command.create(move_line_vals))
                 available_amount -= account_group["balance"]
                 if ccur.compare_amounts(available_amount, 0) <= 0:
                     break
