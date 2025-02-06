@@ -23,6 +23,8 @@
                     <field name="balance" />
                     <field name="balance_type" invisible="balance == 0" />
                     <field name="journal_id" />
+                    <field name="date" options="{'warn_future': true}"/>
+                    <field name="ref" />
                 </group>
                 <footer>
                     <button

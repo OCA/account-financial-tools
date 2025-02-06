@@ -30,6 +30,8 @@ class AccountMoveMakeNetting(models.TransientModel):
         selection=[("pay", "To pay"), ("receive", "To receive")],
         readonly=True,
     )
+    ref = fields.Char(string="Reference")
+    date = fields.Date(required=True)
 
     @api.model
     def default_get(self, fields_list):
@@ -102,6 +104,8 @@ class AccountMoveMakeNetting(models.TransientModel):
                 "company_id": company.id,
                 "move_line_ids": move_lines.ids,
                 "partner_id": partners.id,
+                "date": fields.Date.context_today(self),
+                "ref": _("AR/AP netting"),
             }
         )
         return res
@@ -146,7 +150,8 @@ class AccountMoveMakeNetting(models.TransientModel):
                 if ccur.compare_amounts(available_amount, 0) <= 0:
                     break
         vals = {
-            "ref": _("AR/AP netting"),
+            "date": self.date,
+            "ref": self.ref,
             "journal_id": self.journal_id.id,
             "company_id": self.company_id.id,
             "line_ids": move_lines,
