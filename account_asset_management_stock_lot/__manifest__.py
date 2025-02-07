@@ -2,7 +2,7 @@
 
 {
     "name": "Assets Management Stock Lot",
-    "version": "16.0.1.2.5",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["account_asset_management", "stock"],
     "author": "Akretion, Odoo Community Association (OCA)",
