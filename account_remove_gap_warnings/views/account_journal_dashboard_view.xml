@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2024 Miika Nissi (https://miikanissi.com)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_journal_dashboard_kanban_view_inherit" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//a[@name='show_sequence_holes']" position="attributes">
+                <attribute name="t-if">0</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
