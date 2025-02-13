@@ -84,7 +84,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 "name": name,
                 "code": code,
                 "account_type": acc_type,
-                "company_id": company.id,
+                "company_ids": [(6, 0, [company.id])],
                 "reconcile": True,
             }
         )
@@ -106,9 +106,9 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             {
                 "name": "test_product",
                 "categ_id": product_ctg.id,
-                "type": "product",
                 "standard_price": 1.0,
                 "list_price": 1.0,
+                "is_storable": True,
             }
         )
         return product
@@ -160,7 +160,8 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             self.assertEqual(
                 balance,
                 expected_balance,
-                f"Balance is not {str(expected_balance)} for Purchase Line {purchase_line.name}.",
+                f"Balance is not {str(expected_balance)} for Purchase "
+                f"Line {purchase_line.name}.",
             )
 
     def test_purchase_invoice(self):
@@ -205,17 +206,20 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
     def test_display_name(self):
         purchase = self._create_purchase([(self.product, 1)])
         po_line = purchase.order_line[0]
-        name_get = po_line.with_context(**{"po_line_info": True}).name_get()
+        name_get = po_line.with_context(**{"po_line_info": True}).read(["display_name"])
+        name_get = [(po_line.id, name_get[0]["display_name"])]
         self.assertEqual(
             name_get,
             [
                 (
                     po_line.id,
-                    f"[{po_line.order_id.name}] {po_line.name} ({po_line.order_id.state})",
+                    f"[{po_line.order_id.name}] {po_line.name} "
+                    f"({po_line.order_id.state})",
                 )
             ],
         )
-        name_get_no_ctx = po_line.name_get()
+        name_get_no_ctx = po_line.read(["display_name"])
+        name_get_no_ctx = [(po_line.id, name_get_no_ctx[0]["display_name"])]
         self.assertEqual(name_get_no_ctx, [(po_line.id, po_line.name)])
 
     def test_purchase_order_with_journal_entries_and_vendor_bills(self):
