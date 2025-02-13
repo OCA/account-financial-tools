@@ -75,7 +75,7 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//field[@name='line_ids']/tree//field[@name='partner_id']"
+                expr="//field[@name='line_ids']/list//field[@name='partner_id']"
                 position="after"
             >
                 <field
