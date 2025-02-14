@@ -102,8 +102,10 @@ class TestAccountMoveLineTaxEditable(AccountTestInvoicingCommon):
         )
 
     def test_tax_not_edited(self):
-        """In this case we set the tax_repartition_line_id field, simulating that the
-        move came from an invoice with tax applied. Thus, tax_line_id should be computed"""
+        """
+        In this case we set the tax_repartition_line_id field, simulating that the
+        move came from an invoice with tax applied. Thus, tax_line_id should be computed
+        """
         tax_line = self.test_move.line_ids.filtered(
             lambda x: x.account_id == self.account_tax_sale
         )
