@@ -37,7 +37,6 @@ msgstr ""
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid "%s (copy)"
 msgstr "%s (copiat)"
 
@@ -77,12 +76,6 @@ msgstr "Quantitat"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
 msgid "Analytic Distribution"
 msgstr "Dsitribució analítica"
-
-#. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution_search
-msgid "Analytic Distribution Search"
-msgstr "Cerca de Distribució Analítica"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_precision
@@ -167,7 +160,6 @@ msgstr "Dèbit"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid "Debit and credit of all lines are null."
 msgstr "El dèbit i crèdit de totes les línies estàn buits."
 
@@ -186,9 +178,14 @@ msgid "Display Name"
 msgstr "Veure el nom"
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr ""
+
+#. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid "Entry from template %s"
 msgstr "Entrada des de plantilla %s"
 
@@ -213,7 +210,6 @@ msgstr "ID"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %(sequence)s "
 "(formula: %(code)s). Check that the lines used in the formula really exists "
@@ -226,7 +222,6 @@ msgstr ""
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %(sequence)s "
 "(formula: %(code)s): the syntax of the formula is wrong."
@@ -237,7 +232,6 @@ msgstr ""
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid ""
 "Invalid dictionary: %(exception)s\n"
 "%(msg)s"
@@ -260,16 +254,8 @@ msgstr "Diari"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal Entry Template"
 msgstr "Plantilla d'Entrada de Diari"
-
-#. module: account_move_template
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
-msgid "Journal Entry Template Line"
-msgstr "Línia de Plantilla d'Entrada del Diari"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
@@ -285,7 +271,14 @@ msgstr "Plantilla d'Element de Diari"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
+msgid ""
+"Journal entry created from template <a href=# data-oe-model=account.move."
+"template data-oe-id=%(template_id)d>%(template_name)s</a>."
+msgstr ""
+
+#. module: account_move_template
+#. odoo-python
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
 msgid "Keys must be line sequence i.e. L1, L2, ..."
 msgstr "Les claus han de ser seqüències lineals, és a dir: L1, L2, ..."
 
@@ -372,7 +365,6 @@ msgstr "Sobreescriure"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid "Overwrite value must be a valid python dict"
 msgstr "El valor sobreescrit ha de ser un dictat de Python vàlid"
 
@@ -391,7 +383,6 @@ msgstr "Terminis de pagament"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid "Python Code must be set for computed line with sequence %d."
 msgstr ""
 "El codi Python s'ha d'establir per a la línia calculada amb la seqüència %d."
@@ -468,7 +459,6 @@ msgstr "Entrada de l'usuari"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid "Valid fields to overwrite are %s"
 msgstr "Els camps vàlids per sobreescriure són %s"
 
@@ -495,7 +485,6 @@ msgstr "Wizard per generar moviment des de la plantilla"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid ""
 "You added a line in the wizard. This is not allowed: you should either "
 "update the template or modify the journal entry that will be generated by "
@@ -516,7 +505,6 @@ msgstr ""
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid ""
 "You deleted a line in the wizard. This is not allowed: you should either "
 "update the template or modify the journal entry that will be generated by "
@@ -524,6 +512,12 @@ msgid ""
 msgstr ""
 "Heu suprimit una línia del wizard. Això no està permès: haureu d'actualitzar "
 "la plantilla o modificar l'entrada del diari que generarà aquest wizard."
+
+#~ msgid "Analytic Distribution Search"
+#~ msgstr "Cerca de Distribució Analítica"
+
+#~ msgid "Journal Entry Template Line"
+#~ msgstr "Línia de Plantilla d'Entrada del Diari"
 
 #~ msgid "Analytic"
 #~ msgstr "Analític"

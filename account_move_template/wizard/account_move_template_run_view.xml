@@ -27,7 +27,7 @@
                 <group name="lines" invisible="state != 'set_lines'">
                     <field name="line_ids" nolabel="1" colspan="2">
                         <list editable="bottom">
-                            <field name="sequence" invisible="1" />
+                            <field name="sequence" column_invisible="1" />
                             <field name="name" />
                             <field name="account_id" />
                             <field name="partner_id" />
@@ -42,7 +42,7 @@
                                 widget="many2many_tags"
                                 invisible="not tax_ids"
                             />
-                            <field name="move_line_type" />
+                            <field name="move_line_type" widget="badge" decoration-info="move_line_type == 'cr'" decoration-success="move_line_type == 'dr'"/>
                             <field name="amount" />
                             <field name="note" />
                             <field name="payment_term_id" />

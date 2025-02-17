@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
 "PO-Revision-Date: 2024-09-17 02:06+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
-"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/"
-"23907/es_AR/)\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
+"teams/23907/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,6 @@ msgstr ""
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid "%s (copy)"
 msgstr "%s (copia)"
 
@@ -78,12 +77,6 @@ msgstr "Monto"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution
 msgid "Analytic Distribution"
 msgstr "Distribución Analítica"
-
-#. module: account_move_template
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_distribution_search
-#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_distribution_search
-msgid "Analytic Distribution Search"
-msgstr "Buscar Distribución Analítica"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_precision
@@ -168,7 +161,6 @@ msgstr "Débito"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid "Debit and credit of all lines are null."
 msgstr "El Débito y Crédito de todas las líneas es nulo."
 
@@ -187,9 +179,14 @@ msgid "Display Name"
 msgstr "Mostrar Nombre"
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr ""
+
+#. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid "Entry from template %s"
 msgstr "Entrada desde plantilla %s"
 
@@ -214,7 +211,6 @@ msgstr "ID"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %(sequence)s "
 "(formula: %(code)s). Check that the lines used in the formula really exists "
@@ -227,7 +223,6 @@ msgstr ""
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %(sequence)s "
 "(formula: %(code)s): the syntax of the formula is wrong."
@@ -238,7 +233,6 @@ msgstr ""
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid ""
 "Invalid dictionary: %(exception)s\n"
 "%(msg)s"
@@ -261,16 +255,8 @@ msgstr "Diario"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal Entry Template"
 msgstr "Plantilla de Asiento Contable"
-
-#. module: account_move_template
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
-msgid "Journal Entry Template Line"
-msgstr "Plantilla de línea de Asiento Contable"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
@@ -286,7 +272,14 @@ msgstr "Plantilla de Apunte Contable"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
+msgid ""
+"Journal entry created from template <a href=# data-oe-model=account.move."
+"template data-oe-id=%(template_id)d>%(template_name)s</a>."
+msgstr ""
+
+#. module: account_move_template
+#. odoo-python
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
 msgid "Keys must be line sequence i.e. L1, L2, ..."
 msgstr "Las llaves deben ser líneas de secuencia por ejemplo L1, L2, ..."
 
@@ -373,7 +366,6 @@ msgstr "Sobreescribir"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid "Overwrite value must be a valid python dict"
 msgstr "El valor de sobreescritura debe ser un dict válido de python"
 
@@ -392,7 +384,6 @@ msgstr "Términos de Pago"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid "Python Code must be set for computed line with sequence %d."
 msgstr ""
 "El Código Python debe estar configurado para la línea computada con la "
@@ -470,7 +461,6 @@ msgstr "Entrada de usuario"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
-#, python-format
 msgid "Valid fields to overwrite are %s"
 msgstr "Campos válidos para sobreescribir son %s"
 
@@ -497,7 +487,6 @@ msgstr "Asistente para generar movimiento desde plantilla"
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid ""
 "You added a line in the wizard. This is not allowed: you should either "
 "update the template or modify the journal entry that will be generated by "
@@ -519,7 +508,6 @@ msgstr ""
 #. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/models/account_move_template.py:0
-#, python-format
 msgid ""
 "You deleted a line in the wizard. This is not allowed: you should either "
 "update the template or modify the journal entry that will be generated by "
@@ -528,6 +516,12 @@ msgstr ""
 "Borró una línea en el asistente. Esto no está permitido: debe actualizar la "
 "plantilla o modificar el asiento contable que será generado por este "
 "asistente."
+
+#~ msgid "Analytic Distribution Search"
+#~ msgstr "Buscar Distribución Analítica"
+
+#~ msgid "Journal Entry Template Line"
+#~ msgstr "Plantilla de línea de Asiento Contable"
 
 #~ msgid "Analytic"
 #~ msgstr "Analítico"

@@ -7,24 +7,26 @@
             <list>
                 <field name="sequence" />
                 <field name="account_id" />
-                <field name="opt_account_id" />
+                <field name="opt_account_id" optional="show"/>
                 <field name="partner_id" />
-                <field name="name" />
+                <field name="name" optional="show"/>
                 <field
                     name="analytic_distribution"
                     widget="analytic_distribution"
                     groups="analytic.group_analytic_accounting"
                 />
-                <field name="move_line_type" />
-                <field name="type" />
+                <field name="move_line_type" widget="badge" decoration-info="move_line_type == 'cr'" decoration-success="move_line_type == 'dr'"/>
+                <field name="type" widget="badge" decoration-warning="type == 'input'"/>
                 <field name="note" />
                 <field name="tax_line_id" column_invisible="1" />
                 <field
                     name="tax_ids"
                     widget="many2many_tags"
                     options="{'no_create': True}"
+                    optional="show"
                 />
-                <field name="payment_term_id" />
+                <field name="payment_term_id" optional="hide"/>
+                <field name="is_refund" optional="hide"/>
                 <field name="company_id" column_invisible="1" />
                 <field name="company_currency_id" column_invisible="1" />
             </list>
@@ -153,8 +155,9 @@
         <field name="model">account.move.template</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name" />
-                <field name="journal_id" />
+                <field name="name" decoration-bf="1"/>
+                <field name="journal_id" optional="show"/>
+                <field name="ref" optional="show"/>
                 <field name="company_id" groups="base.group_multi_company" />
             </list>
         </field>
