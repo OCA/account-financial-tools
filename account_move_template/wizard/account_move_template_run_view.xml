@@ -3,7 +3,7 @@
     <record id="account_move_template_run_form" model="ir.ui.view">
         <field name="model">account.move.template.run</field>
         <field name="arch" type="xml">
-            <form string="Journal Entry Template">
+            <form>
                 <group name="main">
                     <field name="state" invisible="1" />
                     <field
@@ -26,13 +26,10 @@
                 </group>
                 <group name="lines" invisible="state != 'set_lines'">
                     <field name="line_ids" nolabel="1" colspan="2">
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="sequence" invisible="1" />
                             <field name="name" />
-                            <field
-                                name="account_id"
-                                domain="[('company_id','=',company_id)]"
-                            />
+                            <field name="account_id" />
                             <field name="partner_id" />
                             <field
                                 name="analytic_distribution"
@@ -51,7 +48,7 @@
                             <field name="payment_term_id" />
                             <field name="company_id" invisible="1" />
                             <field name="company_currency_id" invisible="1" />
-                        </tree>
+                        </list>
                     </field>
                 </group>
                 <footer>
@@ -82,7 +79,7 @@
     </record>
     <menuitem
         id="account_move_template_run_menu"
-        parent="account.menu_finance_entries_actions"
+        parent="account.menu_finance_entries"
         action="account_move_template_run_action"
         sequence="10"
     />

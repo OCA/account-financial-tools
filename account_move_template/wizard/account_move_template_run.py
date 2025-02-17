@@ -191,7 +191,7 @@ Valid dictionary to overwrite template lines:
                 "res_id": move.id,
                 "views": False,
                 "view_id": False,
-                "view_mode": "form,tree,kanban",
+                "view_mode": "form,list,kanban",
                 "context": self.env.context,
             }
         )

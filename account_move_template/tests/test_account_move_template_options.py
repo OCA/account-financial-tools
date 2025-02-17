@@ -4,34 +4,30 @@ from datetime import timedelta
 
 from odoo import Command, fields
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import tagged
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestAccountMoveTemplateEnhanced(TransactionCase):
+@tagged("post_install", "-at_install")
+class TestAccountMoveTemplateEnhanced(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.company = cls.company_data["company"]
+        cls.env.user.write({"company_ids": [Command.link(cls.company.id)]})
         cls.Move = cls.env["account.move"]
         cls.Journal = cls.env["account.journal"]
         cls.Account = cls.env["account.account"]
         cls.Template = cls.env["account.move.template"]
         cls.Partner = cls.env["res.partner"]
 
-        cls.journal = cls._get_first_record(cls.Journal, [("type", "=", "general")])
-        cls.ar_account_id = cls._get_first_record(
-            cls.Account, [("account_type", "=", "asset_receivable")]
-        )
-        cls.ap_account_id = cls._get_first_record(
-            cls.Account, [("account_type", "=", "liability_payable")]
-        )
-        cls.income_account_id = cls._get_first_record(
-            cls.Account,
-            [("account_type", "=", "income_other"), ("internal_group", "=", "income")],
-        )
-        cls.expense_account_id = cls._get_first_record(
-            cls.Account,
-            [("account_type", "=", "expense"), ("internal_group", "=", "expense")],
-        )
+        cls.journal = cls.company_data["default_journal_misc"]
+        cls.ar_account_id = cls.company_data["default_account_receivable"]
+        cls.ap_account_id = cls.company_data["default_account_payable"]
+        cls.income_account_id = cls.company_data["default_account_revenue"]
+        cls.expense_account_id = cls.company_data["default_account_expense"]
         cls.automatic_balancing_account_id = cls._get_first_record(
             cls.Account, [("code", "=", "101402")]
         )
@@ -39,13 +35,16 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
             cls.Account, [("code", "=", "131000")]
         )
 
-        cls.partners = cls._ensure_minimum_partners(3)
+        cls.partner0 = cls.Partner.create({"name": "Beloved test partner"})
+        cls.partner1 = cls.Partner.create({"name": "World company test inc."})
+        cls.partner2 = cls.Partner.create({"name": "Odoo debug expert GmbH"})
 
         cls.payment_term = cls._get_first_record(
             cls.env["account.payment.term.line"], [("nb_days", "=", 30)]
         )
         cls.tax = cls._get_first_record(
-            cls.env["account.tax"], [("type_tax_use", "=", "purchase")]
+            cls.env["account.tax"],
+            [("type_tax_use", "=", "purchase"), ("company_id", "=", cls.company.id)],
         )
 
         cls.move_template = cls._create_move_template("Test Template", with_tax=False)
@@ -56,17 +55,6 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
     @classmethod
     def _get_first_record(cls, model, domain):
         return model.search(domain, limit=1)
-
-    @classmethod
-    def _ensure_minimum_partners(cls, min_count):
-        partners = cls.Partner.search([], limit=min_count)
-        if len(partners) < min_count:
-            for i in range(min_count - len(partners)):
-                new_partner = cls.Partner.create(
-                    {"name": f"Test Partner {len(partners) + i + 1}"}
-                )
-                partners += new_partner
-        return partners
 
     @classmethod
     def _create_move_template(cls, name, with_tax=False):
@@ -106,6 +94,7 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
             {
                 "name": name,
                 "journal_id": cls.journal.id,
+                "company_id": cls.company.id,
                 "line_ids": [
                     Command.create(ar_line),
                     Command.create(income_line1),
@@ -117,12 +106,10 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
     def _run_template_and_validate(
         self, template, input_amount, expected_values, sort_field
     ):
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = template
-        template_run = f.save()
-        template_run.load_lines()
-        template_run.line_ids[0].amount = input_amount
-        res = template_run.generate_move()
+        wiz = self.env["account.move.template.run"].create({"template_id": template.id})
+        wiz.load_lines()
+        wiz.line_ids[0].amount = input_amount
+        res = wiz.generate_move()
         move = self.Move.browse(res["res_id"])
         self.assertRecordValues(move.line_ids.sorted(sort_field), expected_values)
 
@@ -193,54 +180,58 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
     def test_move_template_overwrite(self):
         """Test case overwrite, amount = 3000, no need to manual input"""
         # Test for error when debit is not a valid field
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            f.overwrite = str(
-                {
-                    "L0": {
-                        "partner_id": self.partners[0].id,
-                        "amount": 3000,
-                        "debit": 3000,
-                    },
-                }
-            )
-        template_run = f.save()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+                "overwrite": str(
+                    {
+                        "L0": {
+                            "partner_id": self.partner0.id,
+                            "amount": 3000,
+                            "debit": 3000,
+                        },
+                    }
+                ),
+            }
+        )
         msg_error = "overwrite are .'partner_id', 'amount', 'name', 'date_maturity'"
         with self.assertRaisesRegex(ValidationError, msg_error):
-            template_run.load_lines()
+            wiz.load_lines()
         # Assign only on valid fields, and load_lines again
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            f.overwrite = str(
-                {
-                    "L0": {"partner_id": self.partners[0].id, "amount": 3000},
-                    "L1": {"partner_id": self.partners[1].id},
-                    "L2": {"partner_id": self.partners[2].id},
-                }
-            )
-        template_run = f.save()
-        res = template_run.load_lines()
-        self.assertEqual(template_run.line_ids[0].partner_id, self.partners[0])
-        self.assertEqual(template_run.line_ids[0].amount, 3000)
-        res = template_run.with_context(**res["context"]).generate_move()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+                "overwrite": str(
+                    {
+                        "L0": {"partner_id": self.partner0.id, "amount": 3000},
+                        "L1": {"partner_id": self.partner1.id},
+                        "L2": {"partner_id": self.partner2.id},
+                    }
+                ),
+            }
+        )
+        res = wiz.load_lines()
+        self.assertEqual(wiz.line_ids[0].partner_id, self.partner0)
+        self.assertEqual(wiz.line_ids[0].amount, 3000)
+        res = wiz.with_context(**res["context"]).generate_move()
         move = self.Move.browse(res["res_id"])
         self.assertRecordValues(
             move.line_ids.sorted("credit"),
             [
                 {
-                    "partner_id": self.partners[0].id,
+                    "partner_id": self.partner0.id,
                     "account_id": self.ar_account_id.id,
                     "credit": 0.0,
                     "debit": 3000.0,
                 },
                 {
-                    "partner_id": self.partners[1].id,
+                    "partner_id": self.partner1.id,
                     "account_id": self.income_account_id.id,
                     "credit": 1000.0,
                     "debit": 0.0,
                 },
                 {
-                    "partner_id": self.partners[2].id,
+                    "partner_id": self.partner2.id,
                     "account_id": self.income_account_id.id,
                     "credit": 2000.0,
                     "debit": 0.0,
@@ -264,69 +255,85 @@ class TestAccountMoveTemplateEnhanced(TransactionCase):
             self.move_template.line_ids[1].python_code = ""
 
         self.move_template.line_ids[1].python_code = "P0*1/3"
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            template_run = f.save()
-        template_run.load_lines()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+            }
+        )
+        wiz.load_lines()
         msg_error = "really exists and have a lower sequence than the current line."
         with self.assertRaisesRegex(UserError, msg_error):
-            template_run.generate_move()
+            wiz.generate_move()
 
         self.move_template.line_ids[1].python_code = "L0*"
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            template_run = f.save()
-        template_run.load_lines()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+            }
+        )
+        wiz.load_lines()
         msg_error = "the syntax of the formula is wrong."
         with self.assertRaisesRegex(UserError, msg_error):
-            template_run.generate_move()
+            wiz.generate_move()
 
         self.move_template.line_ids[1].python_code = "L0*1/3"
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            template_run = f.save()
-        template_run.load_lines()
-        template_run.line_ids[0].amount = 0
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+            }
+        )
+        wiz.load_lines()
+        wiz.line_ids[0].amount = 0
         msg_error = "Debit and credit of all lines are null."
         with self.assertRaisesRegex(UserError, msg_error):
-            template_run.generate_move()
+            wiz.generate_move()
 
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            f.overwrite = []
-            template_run = f.save()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+                "overwrite": [],
+            }
+        )
         msg_error = "Overwrite value must be a valid python dict"
         with self.assertRaisesRegex(ValidationError, msg_error):
-            template_run.load_lines()
+            wiz.load_lines()
 
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            f.overwrite = str({"P0": {"amount": 100}})
-            template_run = f.save()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+                "overwrite": str({"P0": {"amount": 100}}),
+            }
+        )
         msg_error = "Keys must be line sequence i.e. L1, L2, ..."
         with self.assertRaisesRegex(ValidationError, msg_error):
-            template_run.load_lines()
+            wiz.load_lines()
 
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            f.overwrite = str({"L0": []})
-            template_run = f.save()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+                "overwrite": str({"L0": []}),
+            }
+        )
         msg_error = "Invalid dictionary: 'list' object has no attribute 'keys'"
         with self.assertRaisesRegex(ValidationError, msg_error):
-            template_run.load_lines()
+            wiz.load_lines()
 
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            f.overwrite = str({"L0": {"test": 100}})
-            template_run = f.save()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+                "overwrite": str({"L0": {"test": 100}}),
+            }
+        )
         msg_error = "overwrite are .'partner_id', 'amount', 'name', 'date_maturity'"
         with self.assertRaisesRegex(ValidationError, msg_error):
-            template_run.load_lines()
+            wiz.load_lines()
 
-        with Form(self.env["account.move.template.run"]) as f:
-            f.template_id = self.move_template
-            template_run = f.save()
-        template_run.line_ids.unlink()
+        wiz = self.env["account.move.template.run"].create(
+            {
+                "template_id": self.move_template.id,
+            }
+        )
+        wiz.line_ids.unlink()
         msg_error = "You deleted a line in the wizard. This is not allowed:"
         with self.assertRaisesRegex(UserError, msg_error):
-            template_run.generate_move()
+            wiz.generate_move()

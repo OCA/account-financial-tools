@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="account_move_template_line_tree" model="ir.ui.view">
-        <field name="name">account.move.template.line.tree</field>
+        <field name="name">account.move.template.line.list</field>
         <field name="model">account.move.template.line</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="sequence" />
                 <field name="account_id" />
                 <field name="opt_account_id" />
@@ -27,14 +27,14 @@
                 <field name="payment_term_id" />
                 <field name="company_id" column_invisible="1" />
                 <field name="company_currency_id" column_invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="account_move_template_line_form" model="ir.ui.view">
         <field name="name">account.move.template.line.form</field>
         <field name="model">account.move.template.line</field>
         <field name="arch" type="xml">
-            <form string="Journal Entry Template Line">
+            <form>
                 <sheet>
                     <group name="main">
                         <group name="main-left">
@@ -47,7 +47,7 @@
                                 name="analytic_distribution"
                                 widget="analytic_distribution"
                                 groups="analytic.group_analytic_accounting"
-                                options="{'account_field': 'account_id'}"
+                                options="{'account_field': 'account_id', 'business_domain': 'general'}"
                             />
 
                             <field name="payment_term_id" />
@@ -96,7 +96,7 @@
         <field name="name">account.move.template.form</field>
         <field name="model">account.move.template</field>
         <field name="arch" type="xml">
-            <form string="Journal Entry Template">
+            <form>
                 <header>
                     <button
                         string="Generate Journal Entry"
@@ -149,21 +149,21 @@
         </field>
     </record>
     <record id="account_move_template_tree" model="ir.ui.view">
-        <field name="name">account.move.template.tree</field>
+        <field name="name">account.move.template.list</field>
         <field name="model">account.move.template</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="journal_id" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="account_move_template_search" model="ir.ui.view">
         <field name="name">account.move.template.search</field>
         <field name="model">account.move.template</field>
         <field name="arch" type="xml">
-            <search string="Journal Entry Template">
+            <search>
                 <filter
                     string="Archived"
                     name="inactive"
@@ -183,7 +183,7 @@
     <record id="account_move_template_action" model="ir.actions.act_window">
         <field name="name">Journal Entry Templates</field>
         <field name="res_model">account.move.template</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <menuitem
         id="account_move_template_menu"
