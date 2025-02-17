@@ -2,6 +2,8 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from ast import literal_eval
 
+from markupsafe import Markup
+
 from odoo import Command, _, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -182,6 +184,14 @@ Valid dictionary to overwrite template lines:
                     Command.create(self._prepare_move_line(line, amount))
                 )
         move = self.env["account.move"].create(move_vals)
+        msg = _(
+            "Journal entry created from template "
+            "<a href=# data-oe-model=account.move.template "
+            "data-oe-id=%(template_id)d>%(template_name)s</a>.",
+            template_id=self.template_id.id,
+            template_name=self.template_id.display_name,
+        )
+        move.message_post(body=Markup(msg))
         result = self.env["ir.actions.actions"]._for_xml_id(
             "account.action_move_journal_line"
         )
