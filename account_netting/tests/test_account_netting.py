@@ -8,7 +8,7 @@ from datetime import datetime
 import odoo.tests.common as common
 from odoo import Command
 from odoo.exceptions import UserError
-from odoo.tests import Form, tagged
+from odoo.tests import tagged
 
 
 @tagged("post_install", "-at_install")
@@ -104,19 +104,23 @@ class TestAccountNetting(common.TransactionCase):
         )
 
     def _create_move(self, move_type, partner, price):
-        move_form = Form(
-            self.env["account.move"]
-            .with_company(self.company.id)
-            .with_context(
-                default_move_type=move_type,
-            )
-        )
-        move_form.partner_id = partner
-        move_form.invoice_date = datetime.now()
-        with move_form.invoice_line_ids.new() as line_form:
-            line_form.product_id = self.product
-            line_form.price_unit = price
-        return move_form.save()
+        vals = {
+            "company_id": self.company.id,
+            "move_type": move_type,
+            "partner_id": partner.id,
+            "invoice_line_ids": [
+                Command.create(
+                    {
+                        "product_id": self.product.id,
+                        "price_unit": price,
+                    }
+                )
+            ],
+        }
+        if move_type in ("in_invoice", "in_refund"):
+            vals["invoice_date"] = datetime.now()
+        move = self.env["account.move"].create(vals)
+        return move
 
     def test_compensation(self):
         # Test raise if 1 account.move.line selected

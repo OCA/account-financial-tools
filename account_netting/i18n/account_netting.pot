@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
-#, python-format
 msgid "AR/AP netting"
 msgstr ""
 
@@ -62,6 +61,11 @@ msgid "Currency"
 msgstr ""
 
 #. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__date
+msgid "Date"
+msgstr ""
+
+#. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__display_name
 msgid "Display Name"
 msgstr ""
@@ -94,7 +98,6 @@ msgstr ""
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
-#, python-format
 msgid ""
 "Line '%(line)s' has account '%(account)s' which is not a payable nor a "
 "receivable account."
@@ -103,21 +106,18 @@ msgstr ""
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
-#, python-format
 msgid "Line '%s' doesn't have a partner."
 msgstr ""
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
-#, python-format
 msgid "Line '%s' is already reconciled."
 msgstr ""
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
-#, python-format
 msgid "Line '%s' is not posted."
 msgstr ""
 
@@ -127,9 +127,13 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__ref
+msgid "Reference"
+msgstr ""
+
+#. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
-#, python-format
 msgid ""
 "The 'Compensate' function is intended to balance operations on different "
 "accounts for the same partner. The selected journal items have the same "
@@ -139,7 +143,6 @@ msgstr ""
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
-#, python-format
 msgid ""
 "The selected journal items have different partners: %s. All the selected "
 "journal items must have the same partner."
@@ -171,6 +174,5 @@ msgstr ""
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
-#, python-format
 msgid "You should select at least 2 journal items."
 msgstr ""
