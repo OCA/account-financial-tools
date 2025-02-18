@@ -220,20 +220,12 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         name_get = so_line.with_context(**{"so_line_info": True}).display_name
         self.assertEqual(
             name_get,
-            "[{}] {} - ({})".format(
-                so_line.order_id.name,
-                so_line.product_id.name,
-                so_line.order_id.state,
-            ),
+            f"[{so_line.order_id.name}] {so_line.product_id.name} - ({so_line.order_id.state})",
         )
         name_get_no_ctx = so_line.with_context(**{}).display_name
         self.assertEqual(
             name_get_no_ctx,
-            "{} - {} {}".format(
-                so_line.order_id.name,
-                so_line.product_id.name,
-                so_line._additional_name_per_id()[so_line.id],
-            ),
+            f"{so_line.order_id.name} - {so_line.product_id.name} {so_line._additional_name_per_id()[so_line.id]}",
         )
 
     def test_03_credit_note(self):
