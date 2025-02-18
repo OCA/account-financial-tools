@@ -13,9 +13,7 @@ class SaleOrderLine(models.Model):
         res = super()._compute_display_name()
         if self.env.context.get("so_line_info", False):
             for line in self.sudo():
-                name = "[{}] {} - ({})".format(
-                    line.order_id.name, line.product_id.name, line.order_id.state
-                )
+                name = f"[{line.order_id.name}] {line.product_id.name} - ({line.order_id.state})"
                 line.display_name = name
         return res
 
