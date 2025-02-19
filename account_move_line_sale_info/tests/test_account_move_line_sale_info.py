@@ -1,69 +1,70 @@
 # Copyright 2020-23 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+from odoo import Command
 from odoo.tests import common
 
 
 class TestAccountMoveLineSaleInfo(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.sale_model = self.env["sale.order"]
-        self.sale_line_model = self.env["sale.order.line"]
-        self.product_model = self.env["product.product"]
-        self.product_ctg_model = self.env["product.category"]
-        self.account_model = self.env["account.account"]
-        self.aml_model = self.env["account.move.line"]
-        self.res_users_model = self.env["res.users"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.sale_model = cls.env["sale.order"]
+        cls.sale_line_model = cls.env["sale.order.line"]
+        cls.product_model = cls.env["product.product"]
+        cls.product_ctg_model = cls.env["product.category"]
+        cls.account_model = cls.env["account.account"]
+        cls.aml_model = cls.env["account.move.line"]
+        cls.res_users_model = cls.env["res.users"]
 
-        self.partner1 = self.env.ref("base.res_partner_1")
-        self.location_stock = self.env.ref("stock.stock_location_stock")
-        self.company = self.env.ref("base.main_company")
-        self.group_sale_user = self.env.ref("sales_team.group_sale_salesman")
-        self.group_account_invoice = self.env.ref("account.group_account_invoice")
-        self.group_account_manager = self.env.ref("account.group_account_manager")
+        cls.partner1 = cls.env.ref("base.res_partner_1")
+        cls.location_stock = cls.env.ref("stock.stock_location_stock")
+        cls.company = cls.env.ref("base.main_company")
+        cls.group_sale_user = cls.env.ref("sales_team.group_sale_salesman")
+        cls.group_account_invoice = cls.env.ref("account.group_account_invoice")
+        cls.group_account_manager = cls.env.ref("account.group_account_manager")
 
         # Create account for Goods Received Not Invoiced
         acc_type = "equity"
         name = "Goods Received Not Invoiced"
         code = "grni"
-        self.account_grni = self._create_account(acc_type, name, code, self.company)
+        cls.account_grni = cls._create_account(acc_type, name, code, cls.company)
 
         # Create account for Cost of Goods Sold
         acc_type = "expense"
         name = "Cost of Goods Sold"
         code = "cogs"
-        self.account_cogs = self._create_account(acc_type, name, code, self.company)
+        cls.account_cogs = cls._create_account(acc_type, name, code, cls.company)
         # Create account for Inventory
         acc_type = "asset_fixed"
         name = "Inventory"
         code = "inventory"
-        self.account_inventory = self._create_account(
-            acc_type, name, code, self.company
-        )
+        cls.account_inventory = cls._create_account(acc_type, name, code, cls.company)
         # Create Product
-        self.product = self._create_product()
+        cls.product = cls._create_product()
 
         # Create users
-        self.sale_user = self._create_user(
+        cls.sale_user = cls._create_user(
             "sale_user",
-            [self.group_sale_user, self.group_account_invoice],
-            self.company,
+            [cls.group_sale_user, cls.group_account_invoice],
+            cls.company,
         )
-        self.account_invoice = self._create_user(
-            "account_invoice", [self.group_account_invoice], self.company
+        cls.account_invoice = cls._create_user(
+            "account_invoice", [cls.group_account_invoice], cls.company
         )
-        self.account_manager = self._create_user(
-            "account_manager", [self.group_account_manager], self.company
+        cls.account_manager = cls._create_user(
+            "account_manager", [cls.group_account_manager], cls.company
         )
-        self.JournalObj = self.env["account.journal"]
-        self.journal_sale = self.JournalObj.create(
+        cls.JournalObj = cls.env["account.journal"]
+        cls.journal_sale = cls.JournalObj.create(
             {
                 "name": "Test journal sale",
                 "code": "TST-JRNL-S",
                 "type": "sale",
-                "company_id": self.company.id,
+                "company_id": cls.company.id,
             }
         )
 
+    @classmethod
     def _create_user(self, login, groups, company):
         """Create a user."""
         group_ids = [group.id for group in groups]
@@ -80,6 +81,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         )
         return user.id
 
+    @classmethod
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
         account = self.account_model.create(
@@ -87,11 +89,12 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                 "name": name,
                 "code": code,
                 "account_type": acc_type,
-                "company_id": company.id,
+                "company_ids": [Command.set([company.id])],
             }
         )
         return account
 
+    @classmethod
     def _create_product(self):
         """Create a Product."""
         #        group_ids = [group.id for group in groups]
@@ -108,9 +111,10 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             {
                 "name": "test_product",
                 "categ_id": product_ctg.id,
-                "type": "product",
+                "type": "consu",
                 "standard_price": 1.0,
                 "list_price": 1.0,
+                "is_storable": True,
             }
         )
         return product
@@ -159,7 +163,8 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             self.assertEqual(
                 balance,
                 expected_balance,
-                f"Balance is not {str(expected_balance)} for sale Line {sale_line.name}.",
+                f"Balance is not {str(expected_balance)} "
+                f"for sale Line {sale_line.name}.",
             )
 
     def move_reversal_wiz(self, move):
@@ -220,12 +225,14 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         name_get = so_line.with_context(**{"so_line_info": True}).display_name
         self.assertEqual(
             name_get,
-            f"[{so_line.order_id.name}] {so_line.product_id.name} - ({so_line.order_id.state})",
+            f"[{so_line.order_id.name}] {so_line.product_id.name} - "
+            f"({so_line.order_id.state})",
         )
         name_get_no_ctx = so_line.with_context(**{}).display_name
         self.assertEqual(
             name_get_no_ctx,
-            f"{so_line.order_id.name} - {so_line.product_id.name} {so_line._additional_name_per_id()[so_line.id]}",
+            f"{so_line.order_id.name} - {so_line.product_id.name} "
+            f"{so_line._additional_name_per_id()[so_line.id]}",
         )
 
     def test_03_credit_note(self):
