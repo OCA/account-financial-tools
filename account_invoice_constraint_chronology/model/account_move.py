@@ -34,13 +34,18 @@ class AccountMove(models.Model):
             ]
         )
 
-    def _raise_older_conflicting_invoices(self):
+    def _raise_older_conflicting_invoices(self, older_move):
         self.ensure_one()
         raise UserError(
             _(
-                "Chronology conflict: A conflicting draft invoice dated before "
-                "{date_invoice} exists, please validate it first."
-            ).format(date_invoice=format_date(self.env, self.invoice_date))
+                "Chronology conflict: A conflicting draft invoice {name} for "
+                "{partner} dated before {date_invoice} exists, please validate it "
+                "first or remove its invoice date."
+            ).format(
+                date_invoice=format_date(self.env, self.invoice_date),
+                name=older_move.name,
+                partner=older_move.partner_id.name,
+            )
         )
 
     def _get_newer_conflicting_invoices_domain(self):
@@ -174,8 +179,11 @@ class AccountMove(models.Model):
                 move._get_sequence_order_conflicting_invoices_domain(), limit=1
             ):
                 move._raise_sequence_ordering_conflict()
-            if self.search(move._get_older_conflicting_invoices_domain(), limit=1):
-                move._raise_older_conflicting_invoices()
+            older_move = self.search(
+                move._get_older_conflicting_invoices_domain(), limit=1
+            )
+            if older_move:
+                move._raise_older_conflicting_invoices(older_move)
             if move in previously_validated:
                 if self.search(
                     move._get_sequence_order_conflicting_previously_validated(), limit=1
