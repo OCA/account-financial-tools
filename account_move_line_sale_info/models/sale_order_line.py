@@ -10,12 +10,14 @@ class SaleOrderLine(models.Model):
     @api.depends()
     @api.depends_context("so_line_info")
     def _compute_display_name(self):
-        res = super()._compute_display_name()
-        if self.env.context.get("so_line_info", False):
-            for line in self.sudo():
-                name = f"[{line.order_id.name}] {line.product_id.name} - ({line.order_id.state})"
-                line.display_name = name
-        return res
+        if not self.env.context.get("so_line_info", False):
+            return super()._compute_display_name()
+        for line in self.sudo():
+            name = (
+                f"[{line.order_id.name}] {line.product_id.name} - "
+                f"({line.order_id.state})"
+            )
+            line.display_name = name
 
     def _prepare_invoice_line(self, **optional_values):
         res = super()._prepare_invoice_line(**optional_values)
