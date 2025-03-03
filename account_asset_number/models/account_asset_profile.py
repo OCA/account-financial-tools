@@ -9,7 +9,6 @@ class AccountAssetProfile(models.Model):
 
     use_sequence = fields.Boolean(
         string="Auto Asset Number by Sequence",
-        default=False,
         help="If check, asset number auto run by sequence.",
     )
     sequence_id = fields.Many2one(
