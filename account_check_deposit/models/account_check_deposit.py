@@ -17,7 +17,7 @@ class AccountCheckDeposit(models.Model):
     _order = "deposit_date desc"
     _check_company_auto = True
 
-    name = fields.Char(readonly=True, default=lambda self: _("New"), copy=False)
+    name = fields.Char(readonly=True, default=lambda self: self.env._("New"), copy=False)
     check_payment_ids = fields.One2many(
         comodel_name="account.move.line",
         inverse_name="check_deposit_id",
@@ -175,7 +175,7 @@ class AccountCheckDeposit(models.Model):
             for line in deposit.check_payment_ids:
                 if line.currency_id != deposit_currency:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "The check with amount %(amount)s and reference '%(ref)s' "
                             "is in currency %(check_currency)s but the deposit is in "
                             "currency %(deposit_currency)s.",
@@ -189,7 +189,7 @@ class AccountCheckDeposit(models.Model):
     def unlink(self):
         for deposit in self.filtered(lambda x: x.state == "done"):
             raise UserError(
-                _(
+                self.env._(
                     "The deposit '%s' is in valid state, so you must "
                     "cancel it before deleting it."
                 )
@@ -225,10 +225,10 @@ class AccountCheckDeposit(models.Model):
         for vals in vals_list:
             if "company_id" in vals:
                 self = self.with_company(vals["company_id"])
-            if vals.get("name", _("New")) == _("New"):
+            if vals.get("name", self.env._("New")) == self.env._("New"):
                 vals["name"] = self.env["ir.sequence"].next_by_code(
                     "account.check.deposit", vals.get("deposit_date")
-                ) or _("New")
+                ) or self.env._("New")
         return super().create(vals_list)
 
     def _prepare_move_vals(self):
@@ -253,14 +253,14 @@ class AccountCheckDeposit(models.Model):
             )
         if not counterpart_account_id:
             raise UserError(
-                _("Missing 'Outstanding Receipts Account' on the company '%s'.")
+                self.env._("Missing 'Outstanding Receipts Account' on the company '%s'.")
                 % self.company_id.display_name
             )
 
         vals = {
             "journal_id": self.journal_id.id,
             "date": self.deposit_date,
-            "ref": _("Check Deposit %s") % self.name,
+            "ref": self.env._("Check Deposit %s") % self.name,
             "company_id": self.company_id.id,
             "line_ids": [
                 (
@@ -304,7 +304,7 @@ class AccountCheckDeposit(models.Model):
         self.ensure_one()
         if not self.in_hand_check_account_id:
             raise UserError(
-                _(
+                self.env._(
                     "In the configuration of journal '%s', "
                     "in the 'Incoming Payments' tab, you must configure an "
                     "Outstanding Receipts Account for the payment method "
@@ -324,11 +324,11 @@ class AccountCheckDeposit(models.Model):
             ]
         )
         if all_pending_checks:
-            self.message_post(body=_("Get All Received Checks"))
+            self.message_post(body=self.env._("Get All Received Checks"))
             all_pending_checks.write({"check_deposit_id": self.id})
         else:
             raise UserError(
-                _(
+                self.env._(
                     "There are no received checks in account '%(account)s' in currency "
                     "'%(currency)s' that are not already in this check deposit.",
                     account=self.in_hand_check_account_id.display_name,
