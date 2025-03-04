@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-03-04 18:06+0000\n"
+"Last-Translator: Miquel Alzanillas <malzanillas@apsl.net>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.2\n"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -21,6 +23,11 @@ msgid ""
 "                                  This account in deprecated! The reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible="
+"\"not is_credit_account_deprecated\">\n"
+"                                  Esta cuenta está obsoleta. ¡La "
+"conciliación NO será posible!.\n"
+"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -29,6 +36,11 @@ msgid ""
 "                                  This account in deprecated! The reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible="
+"\"not is_debit_account_deprecated\">\n"
+"                                  Esta cuenta está obsoleta. ¡La "
+"conciliación NO será posible!\n"
+"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -40,6 +52,18 @@ msgid ""
 "                                      The Expense account in the vendor bill line.<br/>Usually the same account of the vendor bill line.\n"
 "                                </span>"
 msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible="
+"\"invoice_type not in ['out_invoice','in_refund']\">\n"
+"                                      La cuenta del Balance General "
+"utilizada para la periodificación.<br/>Esta cuenta es la contrapartida de la "
+"cuenta en la línea de la factura.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      La cuenta de gastos en la línea de la "
+"factura del proveedor.<br/>Generalmente, es la misma cuenta que la de la "
+"línea de la factura del proveedor.\n"
+"                                </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -51,6 +75,16 @@ msgid ""
 "                                      The Expense account used for the spreading.<br/>This account is the counterpart of the account of the vendor bill line.\n"
 "                                </span>"
 msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible="
+"\"invoice_type not in ['out_invoice','in_refund']\">\n"
+"    La cuenta del Balance General.<br/>Esta es la cuenta en la línea de la "
+"factura.\n"
+"</span>\n"
+"<span class=\"help-block\" colspan=\"2\" invisible="
+"\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"    La cuenta de gastos utilizada para la periodificación.<br/>Esta cuenta "
+"es la contrapartida de la cuenta en la línea de la factura del proveedor.\n"
+"</span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
