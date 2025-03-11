@@ -17,18 +17,19 @@ Assets - Compute Depre. in Batch
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/15.0/account_asset_compute_batch
+    :target: https://github.com/OCA/account-financial-tools/tree/18.0/account_asset_compute_batch
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-15-0/account-financial-tools-15-0-account_asset_compute_batch
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-18-0/account-financial-tools-18-0-account_asset_compute_batch
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=15.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extend existing "Compute Asset" feature by allowing to create an Compute Asset Batch (record) to track the computation.
+This module extend existing "Compute Asset" feature by allowing to
+create an Compute Asset Batch (record) to track the computation.
 
 **Table of contents**
 
@@ -40,18 +41,19 @@ Usage
 
 There are 2 ways to create "Compute Asset Batch"
 
-1. On the Compute Assets wizards, choose "Create Batch" option,
-    1.1 Type in batch name and description.
-    1.2 Select asset profiles, to limit only some profiles to get computed.
-    1.3 Option to "Delay Compute Asset", will only create Batch record for user to execute it later.
+1. | On the Compute Assets wizards, choose "Create Batch" option,
+   | 1.1 Type in batch name and description. 1.2 Select asset profiles,
+     to limit only some profiles to get computed. 1.3 Option to "Delay
+     Compute Asset", will only create Batch record for user to execute
+     it later.
 
-2. Create Compute Asset Batch directly
-    2.1 Select date for depreciation
-    2.2 Type in batch name and descripton
-    2.3 Select asset profiles, to limit only some profiles to get computed.
-    2.4 Option to "Auto Compute" if you want to compute this batch by cron job.
-    2.4 Option to "Delay Post" if you want to post journal entry by cron job.
-    2.5 Click "Compute" button to compute asset.
+2. | Create Compute Asset Batch directly
+   | 2.1 Select date for depreciation 2.2 Type in batch name and
+     descripton 2.3 Select asset profiles, to limit only some profiles
+     to get computed. 2.4 Option to "Auto Compute" if you want to
+     compute this batch by cron job. 2.4 Option to "Delay Post" if you
+     want to post journal entry by cron job. 2.5 Click "Compute" button
+     to compute asset.
 
 Bug Tracker
 ===========
@@ -59,7 +61,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_asset_compute_batch%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_asset_compute_batch%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -67,20 +69,20 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Ecosoft
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Ecosoft <http://ecosoft.co.th>`_:
+- `Ecosoft <http://ecosoft.co.th>`__:
 
-  * Kitti U. <kittiu@ecosoft.co.th>
-  * Pimolnat Suntian <pimolnats@ecosoft.co.th>
+  - Kitti U. <kittiu@ecosoft.co.th>
+  - Pimolnat Suntian <pimolnats@ecosoft.co.th>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -92,6 +94,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/15.0/account_asset_compute_batch>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/18.0/account_asset_compute_batch>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
