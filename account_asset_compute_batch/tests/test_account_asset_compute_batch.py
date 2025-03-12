@@ -5,8 +5,7 @@ import time
 
 from freezegun import freeze_time
 
-from odoo.tests import tagged
-from odoo.tests.common import Form
+from odoo.tests import Form, tagged
 
 from odoo.addons.account_asset_management.tests.test_account_asset_management import (
     TestAssetManagement,
@@ -62,11 +61,11 @@ class TestAssetComputeBatch(TestAssetManagement):
 
     def _create_compute_wizard(self, use_batch=False, delay_compute=False):
         with Form(self.env["account.asset.compute"]) as f:
+            f.use_batch = use_batch
             f.batch_name = "Test Batch"
             f.description = "Compute asset with 2 profiles"
             f.profile_ids.add(self.ict3Y)
             f.profile_ids.add(self.car5y)
-            f.use_batch = use_batch
             f.delay_compute = delay_compute
         wiz = f.save()
         return wiz
@@ -87,7 +86,7 @@ class TestAssetComputeBatch(TestAssetManagement):
         self.assertEqual(batch.state, "computed")
         self.assertEqual(batch.depre_amount, 3200)
         # Test summary amount by profile
-        batch.invalidate_cache()
+        batch.invalidate_model()
         self.assertEqual(
             {x.profile_id: x.amount for x in batch.profile_report},
             {self.ict3Y: 1200, self.car5y: 2000},
@@ -136,14 +135,10 @@ class TestAssetComputeBatch(TestAssetManagement):
         batch.action_compute()
         self.assertEqual(batch.state, "computed")
         self.assertEqual(batch.depre_amount, 2500)
-        # All account.move is flag as auto_post = True, and state in draft
-        self.assertTrue(all(batch.move_line_ids.mapped("move_id.auto_post")))
-        self.assertTrue(
-            all(
-                state == "draft"
-                for state in batch.move_line_ids.mapped("move_id.state")
-            )
-        )
+        # All account.move is flag as auto_post = 'at_date', and state in draft
+        for move in batch.move_line_ids.mapped("move_id"):
+            self.assertEqual(move.auto_post, "at_date")
+            self.assertEqual(move.state, "draft")
 
     @freeze_time("2000-12-31")
     def test_04_asset_compute_batch_auto_compute(self):

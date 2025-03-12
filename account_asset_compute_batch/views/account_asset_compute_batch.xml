@@ -8,9 +8,9 @@
                 <header>
                     <button
                         name="action_compute"
-                        states="draft"
                         type="object"
                         string="Compute"
+                        invisible="state != 'draft'"
                         class="oe_highlight"
                     />
                     <field
@@ -38,36 +38,33 @@
                     </div>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" />
+                            <field name="name" required="1" readonly="state != 'draft'" />
                         </h1>
                     </div>
                     <group name="main_group">
                         <group>
-                            <field name="description" />
-                            <field name="date_end" />
-                            <field name="auto_compute" />
-                            <field name="delay_post" />
+                            <field name="description" required="1" readonly="state != 'draft'" />
+                            <field name="date_end" required="1" readonly="state != 'draft'" />
+                            <field name="auto_compute" readonly="state != 'draft'" />
+                            <field name="delay_post" readonly="state != 'draft'" />
                         </group>
                         <group>
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
+                                readonly="1"
                             />
-                            <field name="profile_ids" widget="many2many_tags">
-                                <tree>
-                                    <field name="name" />
-                                </tree>
-                            </field>
+                            <field name="profile_ids" widget="many2many_tags" required="1" readonly="state != 'draft'" />
                         </group>
                     </group>
                     <notebook>
                         <page string="Depreciation By Profile" name="profile_report">
                             <field name="profile_report" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="profile_id" />
-                                    <field name="currency_id" invisible="1" />
+                                    <field name="currency_id" column_invisible="1" />
                                     <field name="amount" />
-                                </tree>
+                                </list>
                             </field>
                             <group class="oe_subtotal_footer oe_right">
                                 <field name="currency_id" invisible="1" />
@@ -81,25 +78,21 @@
                                 />
                             </group>
                         </page>
-                        <page string="Exception" name="exception" states="exception">
+                        <page string="Exception" name="exception" invisible="state != 'exception'">
                             <field name="note" readonly="1" />
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
 
-    <record id="view_account_asset_compute_batch_tree" model="ir.ui.view">
-        <field name="name">account.asset.compute.batch.tree</field>
+    <record id="view_account_asset_compute_batch_list" model="ir.ui.view">
+        <field name="name">account.asset.compute.batch.list</field>
         <field name="model">account.asset.compute.batch</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="description" />
                 <field name="date_end" />
@@ -113,10 +106,10 @@
                     decoration-danger="state == 'exception'"
                 />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
-    <record model="ir.ui.view" id="search_account_asset_compute_batch_filter">
+    <record id="search_account_asset_compute_batch_filter" model="ir.ui.view">
         <field name="name">search.account.asset.compute.batch.filter</field>
         <field name="model">account.asset.compute.batch</field>
         <field name="arch" type="xml">
@@ -133,8 +126,8 @@
     <record id="account_asset_compute_batch_action" model="ir.actions.act_window">
         <field name="name">Compute Asset Batch</field>
         <field name="res_model">account.asset.compute.batch</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_account_asset_compute_batch_tree" />
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_account_asset_compute_batch_list" />
         <field name="search_view_id" ref="search_account_asset_compute_batch_filter" />
     </record>
 

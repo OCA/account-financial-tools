@@ -4,7 +4,7 @@ import logging
 from sys import exc_info
 from traceback import format_exception
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -16,48 +16,29 @@ class AssetComputeBatch(models.Model):
     _description = "Compute Depreciation Batch"
     _check_company_auto = True
 
-    name = fields.Char(
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-    )
-    description = fields.Char(
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-    )
+    name = fields.Char()
+    description = fields.Char()
     date_end = fields.Date(
         string="Date",
-        required=True,
         default=fields.Date.today,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         help="All depreciation lines prior to this date will be computed",
     )
     note = fields.Text(string="Exception Error")
     profile_ids = fields.Many2many(
         comodel_name="account.asset.profile",
         string="Profiles",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Selected asset to run depreciation. Run all profiles if left blank.",
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
-        readonly=True,
         default=lambda self: self.env.company,
     )
     delay_post = fields.Boolean(
         string="Delay Posting",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Dalay account posting of newly created journaly entries, "
-        "by setting auto_post=True, to be posted by cron job",
+        "by setting auto_post='at_date', to be posted by cron job",
     )
     auto_compute = fields.Boolean(
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Auto compute draft batches with 'Date' up to today, by cron job",
     )
     move_line_ids = fields.One2many(
@@ -96,38 +77,48 @@ class AssetComputeBatch(models.Model):
     @api.depends("state")
     def _compute_depre_amount(self):
         res = self.env["account.move.line"].read_group(
-            [("compute_batch_id", "in", self.ids)],
-            ["compute_batch_id", "debit"],
-            ["compute_batch_id"],
+            domain=[("compute_batch_id", "in", self.ids)],
+            fields=["compute_batch_id", "debit"],
+            groupby=["compute_batch_id"],
         )
         res = {x["compute_batch_id"][0]: x["debit"] for x in res}
         for rec in self:
             rec.depre_amount = res.get(rec.id)
 
     def unlink(self):
-        if self.filtered(lambda l: l.state != "draft"):
-            raise ValidationError(_("Only draft batch can be deleted!"))
+        if self.filtered(lambda batch: batch.state != "draft"):
+            raise ValidationError(self.env._("Only draft batch can be deleted!"))
         return super().unlink()
 
     def action_compute(self):
+        asset_model = self.env["account.asset"]
         for batch in self:
-            assets = self.env["account.asset"].search([("state", "=", "open")])
+            domain = [
+                ("state", "=", "open"),
+                ("profile_id", "in", batch.profile_ids.ids),
+            ]
+            assets = asset_model.search(domain)
+            if not assets:
+                continue
+
             created_move_ids, error_log = assets.with_context(
                 compute_batch_id=batch.id,
-                compute_profile_ids=batch.profile_ids.ids,
                 delay_post=batch.delay_post,
             )._compute_entries(self.date_end, check_triggers=True)
             if error_log:
-                batch.note = _("Compute Assets errors") + ":\n" + error_log
-                batch.state = "exception"
+                batch.write(
+                    {
+                        "note": self.env._("Compute Assets errors") + ":\n" + error_log,
+                        "state": "exception",
+                    }
+                )
             else:
-                batch.state = "computed"
+                batch.write({"state": "computed"})
 
     def open_move_lines(self):
         self.ensure_one()
         action = {
-            "name": _("Journal Items"),
-            "view_type": "tree",
+            "name": self.env._("Journal Items"),
             "view_mode": "list,form",
             "res_model": "account.move.line",
             "type": "ir.actions.act_window",
@@ -139,13 +130,19 @@ class AssetComputeBatch(models.Model):
     def open_moves(self):
         self.ensure_one()
         action = {
-            "name": _("Journal Entries"),
-            "view_type": "tree",
+            "name": self.env._("Journal Entries"),
             "view_mode": "list,form",
             "res_model": "account.move",
             "type": "ir.actions.act_window",
-            "context": {},
             "domain": [("id", "in", self.move_line_ids.mapped("move_id").ids)],
+            "search_view_id": [
+                self.env.ref("account.view_account_move_filter").id,
+                "search",
+            ],
+            "views": [
+                [self.env.ref("account.view_move_tree").id, "list"],
+                [self.env.ref("account.view_move_form").id, "form"],
+            ],
         }
         return action
 
@@ -170,7 +167,7 @@ class AssetComputeBatch(models.Model):
                 exc_info()[0]
                 tb = "".join(format_exception(*exc_info()))
                 batch_ref = ", ".join(batches.mapped("name"))
-                error_msg = _(
+                error_msg = self.env._(
                     "Error while processing batches %(batch_ref)s: \n\n%(tb)s"
                 ) % {"batch_ref": batch_ref, "tb": tb}
                 _logger.error("%s, %s", self._name, error_msg)
@@ -201,22 +198,20 @@ class AccountAssetComputeBatchProfileReport(models.Model):
 
     @property
     def _table_query(self):
-        return "%s %s %s %s" % (
-            self._select(),
-            self._from(),
-            self._where(),
-            self._group_by(),
-        )
+        """
+        Build SQL query for depreciation amount by profile report.
+        """
+        return f"{self._select()} {self._from()} {self._where()} {self._group_by()}"
 
     @api.model
     def _select(self):
         return """
             SELECT
                 min(ml.id) as id,
-                compute_batch_id,
+                ml.compute_batch_id,
                 p.id as profile_id,
-                currency_id,
-                sum(debit) as amount
+                ml.currency_id,
+                sum(ml.debit) as amount
         """
 
     @api.model
@@ -231,14 +226,14 @@ class AccountAssetComputeBatchProfileReport(models.Model):
     def _where(self):
         return """
             WHERE
-                compute_batch_id IS NOT NULL
+                ml.compute_batch_id IS NOT NULL
         """
 
     @api.model
     def _group_by(self):
         return """
             GROUP BY
-                compute_batch_id,
+                ml.compute_batch_id,
                 p.id,
-                currency_id
+                ml.currency_id
         """

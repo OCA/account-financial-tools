@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,22 +49,15 @@ msgid "Amount"
 msgstr ""
 
 #. module: account_asset_compute_batch
-#: model:ir.model,name:account_asset_compute_batch.model_account_asset
-msgid "Asset"
-msgstr ""
-
-#. module: account_asset_compute_batch
+#. odoo-python
 #: code:addons/account_asset_compute_batch/wizard/account_asset_compute.py:0
 #: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.search_account_asset_compute_batch_filter
 #: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
-#, python-format
 msgid "Asset Compute Batch"
 msgstr ""
 
 #. module: account_asset_compute_batch
 #: model:ir.actions.server,name:account_asset_compute_batch.ir_cron_auto_compute_draft_batch_ir_actions_server
-#: model:ir.cron,cron_name:account_asset_compute_batch.ir_cron_auto_compute_draft_batch
-#: model:ir.cron,name:account_asset_compute_batch.ir_cron_auto_compute_draft_batch
 msgid ""
 "Asset Compute Batch; Post draft batches with auto_compute set to True up to "
 "today"
@@ -132,8 +125,8 @@ msgid "Compute Assets"
 msgstr ""
 
 #. module: account_asset_compute_batch
+#. odoo-python
 #: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
-#, python-format
 msgid "Compute Assets errors"
 msgstr ""
 
@@ -178,7 +171,7 @@ msgstr ""
 #: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__delay_post
 msgid ""
 "Dalay account posting of newly created journaly entries, by setting "
-"auto_post=True, to be posted by cron job"
+"auto_post='at_date', to be posted by cron job"
 msgstr ""
 
 #. module: account_asset_compute_batch
@@ -234,8 +227,8 @@ msgid "Draft"
 msgstr ""
 
 #. module: account_asset_compute_batch
+#. odoo-python
 #: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
-#, python-format
 msgid ""
 "Error while processing batches %(batch_ref)s: \n"
 "\n"
@@ -296,12 +289,12 @@ msgstr ""
 
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_needaction
-#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_has_error
+#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -311,9 +304,9 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: account_asset_compute_batch
+#. odoo-python
 #: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
 #: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_form
-#, python-format
 msgid "Journal Entries"
 msgstr ""
 
@@ -328,15 +321,9 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: account_asset_compute_batch
+#. odoo-python
 #: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
-#, python-format
 msgid "Journal Items"
-msgstr ""
-
-#. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch____last_update
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch_profile_report____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: account_asset_compute_batch
@@ -347,11 +334,6 @@ msgstr ""
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__write_date
 msgid "Last Updated on"
-msgstr ""
-
-#. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: account_asset_compute_batch
@@ -406,7 +388,7 @@ msgstr ""
 
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: account_asset_compute_batch
@@ -415,13 +397,8 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: account_asset_compute_batch
-#: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__message_unread_counter
-msgid "Number of unread messages"
-msgstr ""
-
-#. module: account_asset_compute_batch
+#. odoo-python
 #: code:addons/account_asset_compute_batch/models/account_asset_compute_batch.py:0
-#, python-format
 msgid "Only draft batch can be deleted!"
 msgstr ""
 
@@ -439,6 +416,11 @@ msgstr ""
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__activity_user_id
 msgid "Responsible User"
+msgstr ""
+
+#. module: account_asset_compute_batch
+#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_asset_compute_batch
@@ -461,23 +443,13 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_compute_batch
-#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_tree
+#: model_terms:ir.ui.view,arch_db:account_asset_compute_batch.view_account_asset_compute_batch_list
 msgid "Total"
 msgstr ""
 
 #. module: account_asset_compute_batch
 #: model:ir.model.fields,help:account_asset_compute_batch.field_account_asset_compute_batch__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
-
-#. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: account_asset_compute_batch
-#: model:ir.model.fields,field_description:account_asset_compute_batch.field_account_asset_compute_batch__message_unread_counter
-msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: account_asset_compute_batch

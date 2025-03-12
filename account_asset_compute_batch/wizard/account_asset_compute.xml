@@ -13,26 +13,25 @@
                         <field name="use_batch" widget="boolean_toggle" />
                         <field
                             name="batch_name"
-                            attrs="{'invisible': [('use_batch', '=', False)], 'required': [('use_batch', '=', True)]}"
+                            invisible="not use_batch"
+                            required="use_batch"
                         />
                         <field
                             name="description"
-                            attrs="{'invisible': [('use_batch', '=', False)], 'required': [('use_batch', '=', True)]}"
+                            invisible="not use_batch"
+                            required="use_batch"
                         />
                         <field
                             name="delay_compute"
-                            attrs="{'invisible': [('use_batch', '=', False)]}"
+                            invisible="not use_batch"
                         />
                     </group>
                     <group>
                         <field
                             name="profile_ids"
-                            attrs="{'invisible': [('use_batch', '=', False)]}"
-                        >
-                            <tree>
-                                <field name="name" />
-                            </tree>
-                        </field>
+                            invisible="not use_batch"
+                            widget="many2many_tags"
+                        />
                     </group>
                 </group>
             </group>

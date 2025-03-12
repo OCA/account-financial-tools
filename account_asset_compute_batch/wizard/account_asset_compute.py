@@ -1,7 +1,7 @@
 # Copyright 2021 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class AccountAssetCompute(models.TransientModel):
@@ -18,23 +18,27 @@ class AccountAssetCompute(models.TransientModel):
     )
     delay_compute = fields.Boolean(string="Delay Compute Asset")
 
+    def _prepare_asset_compute_batch(self):
+        return {
+            "date_end": self.date_end,
+            "name": self.batch_name,
+            "description": self.description,
+            "profile_ids": [(4, profile.id) for profile in self.profile_ids],
+        }
+
     def asset_compute(self):
-        if self.use_batch:
-            vals = {
-                "date_end": self.date_end,
-                "name": self.batch_name,
-                "description": self.description,
-                "profile_ids": [(4, x.id) for x in self.profile_ids],
-            }
-            batch = self.env["account.asset.compute.batch"].create(vals)
-            if not self.delay_compute:
-                batch.action_compute()
-            return {
-                "name": _("Asset Compute Batch"),
-                "type": "ir.actions.act_window",
-                "view_type": "form",
-                "view_mode": "form",
-                "res_model": "account.asset.compute.batch",
-                "res_id": batch.id,
-            }
-        return super().asset_compute()
+        if not self.use_batch:
+            return super().asset_compute()
+
+        batch = self.env["account.asset.compute.batch"].create(
+            self._prepare_asset_compute_batch()
+        )
+        if not self.delay_compute:
+            batch.action_compute()
+        return {
+            "name": self.env._("Asset Compute Batch"),
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "res_model": "account.asset.compute.batch",
+            "res_id": batch.id,
+        }
