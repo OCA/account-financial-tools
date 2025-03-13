@@ -8,7 +8,6 @@ from markupsafe import Markup
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.tests import Form
 
 # List of move's fields that can't be modified if move is linked
 # with a depreciation line
@@ -81,9 +80,9 @@ class AccountMove(models.Model):
         return {
             "name": aml.name,
             "code": self.name,
-            "profile_id": aml.asset_profile_id,
+            "profile_id": aml.asset_profile_id.id,
             "purchase_value": depreciation_base,
-            "partner_id": aml.partner_id,
+            "partner_id": aml.partner_id.id,
             "date_start": self.date,
         }
 
@@ -100,14 +99,12 @@ class AccountMove(models.Model):
                 if aml.asset_id:
                     continue
                 vals = move._prepare_asset_vals(aml)
-                asset_form = Form(
+                asset = (
                     self.env["account.asset"]
                     .with_company(move.company_id)
                     .with_context(create_asset_from_move_line=True, move_id=move.id)
+                    .create(vals)
                 )
-                for key, val in vals.items():
-                    setattr(asset_form, key, val)
-                asset = asset_form.save()
                 asset.analytic_distribution = aml.analytic_distribution
                 aml.with_context(
                     allow_asset=True, allow_asset_removal=True
