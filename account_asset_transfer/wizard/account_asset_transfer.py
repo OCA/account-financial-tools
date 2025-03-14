@@ -248,6 +248,6 @@ class AccountAssetTransferLine(models.TransientModel):
             line = self
             qty = self.quantity
             name = self.asset_name
-            self.update({"quantity": 1, "asset_name": "{} {}".format(name, 1)})
+            self.update({"quantity": 1, "asset_name": f"{name} {1}"})
             for i in range(1, int(qty)):
-                line.copy({"asset_name": "{} {}".format(name, i + 1)})
+                line.copy({"asset_name": f"{name} {i + 1}"})
