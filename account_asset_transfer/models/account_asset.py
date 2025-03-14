@@ -1,7 +1,7 @@
 # Copyright 2020 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -45,14 +45,16 @@ class AccountAsset(models.Model):
     def _check_can_transfer(self):
         if not all(self.mapped("can_transfer")):
             raise ValidationError(
-                _("Only running assets without depreciation (AUC) can transfer")
+                self.env._(
+                    "Only running assets without depreciation (AUC) can transfer"
+                )
             )
 
     def transfer(self):
         ctx = dict(self.env.context, active_ids=self.ids)
         self._check_can_transfer()
         return {
-            "name": _("Transfer AUC to Asset & Create Transfer Journal Entry"),
+            "name": self.env._("Transfer AUC to Asset & Create Transfer Journal Entry"),
             "view_mode": "form",
             "res_model": "account.asset.transfer",
             "target": "new",
@@ -71,20 +73,28 @@ class AccountAsset(models.Model):
             if (
                 asset_from
                 and self.id
-                not in move.line_ids.filtered(lambda l: l.credit).mapped("asset_id").ids
+                not in move.line_ids.filtered(lambda line: line.credit)
+                .mapped("asset_id")
+                .ids
             ):
-                assets = move.line_ids.filtered(lambda l: l.credit).mapped("asset_id")
+                assets = move.line_ids.filtered(lambda line: line.credit).mapped(
+                    "asset_id"
+                )
                 break
             # Destination Assets, we check from move that create destination asset
             elif (
                 asset_to
                 and self.id
-                in move.line_ids.filtered(lambda l: l.credit).mapped("asset_id").ids
+                in move.line_ids.filtered(lambda line: line.credit)
+                .mapped("asset_id")
+                .ids
             ):
-                assets = move.line_ids.filtered(lambda l: l.debit).mapped("asset_id")
+                assets = move.line_ids.filtered(lambda line: line.debit).mapped(
+                    "asset_id"
+                )
                 break
         return {
-            "name": _("Assets"),
+            "name": self.env._("Assets"),
             "view_mode": "tree,form",
             "res_model": "account.asset",
             "view_id": False,

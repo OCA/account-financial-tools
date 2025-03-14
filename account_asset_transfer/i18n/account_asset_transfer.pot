@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,13 +21,7 @@ msgstr ""
 #. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_distribution
-msgid "Analytic"
-msgstr ""
-
-#. module: account_asset_transfer
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__analytic_distribution_search
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__analytic_distribution_search
-msgid "Analytic Distribution Search"
+msgid "Analytic Distribution"
 msgstr ""
 
 #. module: account_asset_transfer
@@ -64,7 +58,6 @@ msgstr ""
 #. module: account_asset_transfer
 #. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
-#, python-format
 msgid "Asset Transfer Journal Entry"
 msgstr ""
 
@@ -81,7 +74,6 @@ msgstr ""
 #. module: account_asset_transfer
 #. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
-#, python-format
 msgid "Assets"
 msgstr ""
 
@@ -134,6 +126,12 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_asset_transfer
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr ""
+
+#. module: account_asset_transfer
 #: model_terms:ir.ui.view,arch_db:account_asset_transfer.account_asset_transfer_view_form
 msgid "Expand Asset"
 msgstr ""
@@ -165,12 +163,6 @@ msgid "Is Transfer"
 msgstr ""
 
 #. module: account_asset_transfer
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer____last_update
-#: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: account_asset_transfer
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer__write_uid
 #: model:ir.model.fields,field_description:account_asset_transfer.field_account_asset_transfer_line__write_uid
 msgid "Last Updated by"
@@ -191,7 +183,6 @@ msgstr ""
 #. module: account_asset_transfer
 #. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
-#, python-format
 msgid "Only running assets without depreciation (AUC) can transfer"
 msgstr ""
 
@@ -231,7 +222,6 @@ msgstr ""
 #. module: account_asset_transfer
 #. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
-#, python-format
 msgid "Total values of new assets must equal to source assets"
 msgstr ""
 
@@ -245,7 +235,6 @@ msgstr ""
 #. module: account_asset_transfer
 #. odoo-python
 #: code:addons/account_asset_transfer/models/account_asset.py:0
-#, python-format
 msgid "Transfer AUC to Asset & Create Transfer Journal Entry"
 msgstr ""
 
@@ -296,7 +285,6 @@ msgstr ""
 #. module: account_asset_transfer
 #. odoo-python
 #: code:addons/account_asset_transfer/wizard/account_asset_transfer.py:0
-#, python-format
 msgid "Value of new asset must greater than 0.0"
 msgstr ""
 

@@ -10,6 +10,5 @@ class AccountAssetProfile(models.Model):
     transfer_journal_id = fields.Many2one(
         comodel_name="account.journal",
         domain="[('type', '=', 'general'), ('company_id', '=', company_id)]",
-        string="Transfer Journal",
         check_company=True,
     )

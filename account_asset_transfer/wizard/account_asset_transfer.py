@@ -1,7 +1,7 @@
 # Copyright 2020 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
@@ -75,13 +75,10 @@ class AccountAssetTransfer(models.TransientModel):
         analytics = assets.mapped("analytic_distribution")
         # Combine analytic to dict
         analytic_dict = {}
-        unique_elements = set()
         for analytic in analytics:
-            if analytic is not False:
+            if analytic:
                 for key, value in analytic.items():
-                    if key not in analytic_dict and key not in unique_elements:
-                        analytic_dict[key] = value
-                        unique_elements.add(key)
+                    analytic_dict.setdefault(key, value)
         # Assign values
         res["company_id"] = company.id
         res["partner_id"] = partners[0].id if len(partners) == 1 else False
@@ -101,9 +98,11 @@ class AccountAssetTransfer(models.TransientModel):
     def _check_amount_transfer(self):
         self.ensure_one()
         if float_compare(self.from_asset_value, self.to_asset_value, 2) != 0:
-            raise UserError(_("Total values of new assets must equal to source assets"))
-        if self.to_asset_ids.filtered(lambda l: l.asset_value <= 0):
-            raise UserError(_("Value of new asset must greater than 0.0"))
+            raise UserError(
+                self.env._("Total values of new assets must equal to source assets")
+            )
+        if self.to_asset_ids.filtered(lambda asset: asset.asset_value <= 0):
+            raise UserError(self.env._("Value of new asset must greater than 0.0"))
 
     def _get_new_move_transfer(self):
         return {
@@ -130,13 +129,20 @@ class AccountAssetTransfer(models.TransientModel):
         # Set all assets is transfer document
         move.line_ids.mapped("asset_id").write({"is_transfer": True})
         return {
-            "name": _("Asset Transfer Journal Entry"),
-            "view_mode": "tree,form",
+            "name": self.env._("Asset Transfer Journal Entry"),
+            "view_mode": "list,form",
             "res_model": "account.move",
-            "view_id": False,
             "type": "ir.actions.act_window",
             "context": self.env.context,
             "domain": [("id", "=", move.id)],
+            "search_view_id": [
+                self.env.ref("account.view_account_move_filter").id,
+                "search",
+            ],
+            "views": [
+                [self.env.ref("account.view_move_tree").id, "list"],
+                [self.env.ref("account.view_move_form").id, "form"],
+            ],
         }
 
     def _get_move_line_from_asset(self, asset):
@@ -192,11 +198,14 @@ class AccountAssetTransfer(models.TransientModel):
 
     def expand_to_asset_ids(self):
         self.ensure_one()
-        lines = self.to_asset_ids.filtered(lambda l: l.asset_profile_id and l.quantity)
+        lines = self.to_asset_ids.filtered(
+            lambda asset: asset.asset_profile_id and asset.quantity
+        )
         for line in lines:
             line._expand_asset_line()
-        action = self.env.ref("account_asset_transfer.action_account_asset_transfer")
-        result = action.sudo().read()[0]
+        result = self.env["ir.actions.act_window"]._for_xml_id(
+            "account_asset_transfer.action_account_asset_transfer"
+        )
         result.update({"res_id": self.id})
         return result
 

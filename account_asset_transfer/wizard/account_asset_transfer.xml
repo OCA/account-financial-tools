@@ -39,7 +39,7 @@
                                 'default_analytic_distribution': analytic_distribution,
                             }"
                         >
-                            <tree editable="bottom">
+                            <list editable="bottom">
                                 <field name="asset_profile_id" />
                                 <field name="asset_name" />
                                 <field name="price_unit" />
@@ -50,7 +50,7 @@
                                     name="analytic_distribution"
                                     groups="analytic.group_analytic_accounting"
                                 />
-                            </tree>
+                            </list>
                         </field>
                     </page>
                     <page name="from_asset" string="From">
