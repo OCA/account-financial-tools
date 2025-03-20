@@ -1,2 +1,4 @@
 - [Ecosoft](http://ecosoft.co.th):
   - Pimolnat Suntian \<<pimolnats@ecosoft.co.th>\>
+- [Trobz](https://trobz.com):
+  - Chau Le \<<chaulb@trobz.com>\>

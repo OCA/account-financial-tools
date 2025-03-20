@@ -65,6 +65,10 @@ Contributors
 
    -  Pimolnat Suntian <pimolnats@ecosoft.co.th>
 
+-  `Trobz <https://trobz.com>`__:
+
+   -  Chau Le <chaulb@trobz.com>
+
 Maintainers
 -----------
 

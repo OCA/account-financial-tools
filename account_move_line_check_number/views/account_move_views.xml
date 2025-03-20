@@ -13,12 +13,12 @@
         </field>
     </record>
     <record id="view_move_line_tree" model="ir.ui.view">
-        <field name="name">account.move.line.tree</field>
+        <field name="name">account.move.line.list</field>
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account.view_move_line_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="check_number" readonly="True" optional="hide" />
+                <field name="check_number" optional="hide" />
             </xpath>
         </field>
     </record>
@@ -40,16 +40,16 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//notebook//field[@name='line_ids']/tree/field[@name='name']"
+                expr="//notebook//field[@name='line_ids']/list/field[@name='name']"
                 position="after"
             >
-                <field name="check_number" readonly="True" optional="hide" />
+                <field name="check_number" optional="hide" />
             </xpath>
             <xpath
                 expr="//notebook//field[@name='line_ids']/form//field[@name='name']"
                 position="after"
             >
-                <field name="check_number" readonly="True" />
+                <field name="check_number" />
             </xpath>
         </field>
     </record>
