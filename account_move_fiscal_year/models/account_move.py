@@ -6,7 +6,6 @@ from odoo.osv import expression
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     date_range_fy_id = fields.Many2one(
