@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = "account.move.line"
 
     date_range_fy_id = fields.Many2one(
