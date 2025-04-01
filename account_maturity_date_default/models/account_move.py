@@ -12,7 +12,7 @@ class AccountMove(models.Model):
             self.mapped("line_ids").filtered(
                 lambda x: (
                     not x.date_maturity
-                    and x.account_internal_type in {"receivable", "payable"}
+                    and x.account_type in {"asset_receivable", "liability_payable"}
                 )
             ).write({"date_maturity": vals["date"]})
         return res

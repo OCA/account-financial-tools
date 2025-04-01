@@ -11,7 +11,7 @@ class AccountMoveLine(models.Model):
         for vals in vals_list:
             if not vals.get("date_maturity"):
                 account = self.env["account.account"].browse(vals.get("account_id"))
-                if account.internal_type in {"receivable", "payable"}:
+                if account.account_type in {"asset_receivable", "liability_payable"}:
                     move = self.env["account.move"].browse(vals.get("move_id"))
                     vals["date_maturity"] = move.date
         return super().create(vals_list)
