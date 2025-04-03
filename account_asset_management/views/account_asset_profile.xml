@@ -66,6 +66,10 @@
                                 attrs="{'readonly':[('method_time','!=','year')], 'invisible': [('method', 'in', ['unit-activity'])]}"
                             />
                         <field name="open_asset" />
+                        <field
+                                name="total_number_of_use"
+                                attrs="{'invisible': [('method', 'not in', ['unit-activity'])]}"
+                            />
                     </group>
                     <group
                             groups="analytic.group_analytic_accounting"

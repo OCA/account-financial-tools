@@ -69,6 +69,7 @@
                             invisible="1"
                         />
                         <field name="move_line_check" invisible="1" />
+                        <field name="has_depreciation_accounting_entry" invisible="1" />
                         <newline />
                         <field name="depreciation_base" />
                         <field name="value_depreciated" />
@@ -149,7 +150,7 @@
                                     <field
                                         name="total_number_of_use"
                                         attrs="{'invisible': [('method', 'not in', ['unit-activity'])],
-                                                'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]
+                                                'readonly':['|', ('has_depreciation_accounting_entry', '=', True), ('state', '!=', 'draft')]
                                         }"
                                     />
                                     <field

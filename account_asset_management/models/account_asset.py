@@ -293,8 +293,15 @@ class AccountAsset(models.Model):
         carried forward to the first depreciation line of the current open
         period.""",
     )
-    total_number_of_use = fields.Integer(store=True)
+    total_number_of_use = fields.Integer(
+        compute="_compute_total_number_of_use",
+        readonly=False,
+        store=True,
+    )
     remaining_usage = fields.Integer(compute="_compute_remaining_usage")
+    has_depreciation_accounting_entry = fields.Boolean(
+        compute="_compute_has_depreciation_accounting_entry"
+    )
 
     @api.constrains("total_number_of_use", "method")
     def _check_number_of_use(self):
@@ -325,6 +332,20 @@ class AccountAsset(models.Model):
         for asset in self:
             asset.move_line_check = bool(
                 asset.depreciation_line_ids.filtered("move_id")
+            )
+
+    # When assets are created from supplier invoice,
+    # using an asset profile on account move line.
+    # the Base asset line has the move_id of the invoice,
+    # and we need to exclude this case in the readonly
+    # of purchase_value and total_number_of_use
+    @api.depends("depreciation_line_ids.move_id")
+    def _compute_has_depreciation_accounting_entry(self):
+        for asset in self:
+            asset.has_depreciation_accounting_entry = bool(
+                asset.depreciation_line_ids.filtered(
+                    lambda line: line.type == "depreciate"
+                )
             )
 
     @api.depends("purchase_value", "salvage_value", "method")
@@ -421,6 +442,11 @@ class AccountAsset(models.Model):
     def _compute_analytic_tag_ids(self):
         for asset in self:
             asset.analytic_tag_ids = asset.profile_id.analytic_tag_ids
+
+    @api.depends("profile_id")
+    def _compute_total_number_of_use(self):
+        for asset in self:
+            asset.total_number_of_use = asset.profile_id.total_number_of_use
 
     @api.constrains("method", "method_time")
     def _check_method(self):

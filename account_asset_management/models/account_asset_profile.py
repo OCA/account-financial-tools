@@ -169,6 +169,7 @@ class AccountAssetProfile(models.Model):
         "posted depreciation line will prompt the option to reverse the "
         "journal entry, instead of deleting them.",
     )
+    total_number_of_use = fields.Integer(store=True)
 
     @api.model
     def _default_company_id(self):
