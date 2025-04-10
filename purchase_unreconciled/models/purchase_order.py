@@ -118,8 +118,8 @@ class PurchaseOrder(models.Model):
         all_writeoffs = self.env["account.move.line"]
         reconciling_groups = self.env["account.move.line"].read_group(
             domain=unreconciled_domain,
-            fields=["account_id", "product_id", "purchase_line_id"],
-            groupby=["account_id", "product_id", "purchase_line_id"],
+            fields=["account_id", "product_id", "oca_purchase_line_id"],
+            groupby=["account_id", "product_id", "oca_purchase_line_id"],
             lazy=False,
         )
         unreconciled_items = self.env["account.move.line"].search(unreconciled_domain)
@@ -127,7 +127,9 @@ class PurchaseOrder(models.Model):
             account_id = group["account_id"][0]
             product_id = group["product_id"][0] if group["product_id"] else False
             purchase_line_id = (
-                group["purchase_line_id"][0] if group["purchase_line_id"] else False
+                group["oca_purchase_line_id"][0]
+                if group["oca_purchase_line_id"]
+                else False
             )
             unreconciled_items_group = unreconciled_items.filtered(
                 lambda line, account_id=account_id, product_id=product_id: (
