@@ -7,12 +7,9 @@
             ref="account_asset_management.account_asset_view_form"
         />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='general_info']" position="inside">
+            <xpath expr="//group[.//field[@name='profile_id']]" position="inside">
                 <group>
-                    <field
-                        name="product_id"
-                        attrs="{'invisible': [('stock_lot_id', '=', False)]}"
-                    />
+                    <field name="product_id" invisible="not stock_lot_id" />
                     <field name="stock_lot_id" />
                 </group>
             </xpath>
