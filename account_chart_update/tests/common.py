@@ -24,7 +24,7 @@ class TestAccountChartUpdateCommon(BaseCommon):
             }
         )
         template = cls.env["account.chart.template"]
-        template.try_loading("generic_coa", cls.company)
+        template.try_loading("generic_coa", company=cls.company)
         cls.chart_template_data = template._get_chart_template_data("generic_coa")
         # We delete the records so that we can later delete the linked data
         moves = cls.env["account.move"].search(

@@ -16,7 +16,7 @@
                     name="%(action_wizard_update_chart)d"
                     type="action"
                     string="Update chart of accounts"
-                    class="btn-secondary ps-2 w-100"
+                    class="btn-secondary ps-2 mt-3 w-100"
                     icon="fa-refresh"
                     context="{'default_company_id': company_id}"
                 />
