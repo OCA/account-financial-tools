@@ -181,6 +181,12 @@ msgid "Display Name"
 msgstr "השם המוצג"
 
 #. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr ""
+
+#. module: account_move_template
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
