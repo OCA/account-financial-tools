@@ -32,7 +32,7 @@ addon | version | maintainers | summary
 [account_loan](account_loan/) | 17.0.1.0.1 | [![etobella](https://github.com/etobella.png?size=30px)](https://github.com/etobella) | Account Loan management
 [account_lock_date_update](account_lock_date_update/) | 17.0.1.0.1 |  | Allow an Account adviser to update locking date without having access to all technical settings
 [account_move_budget](account_move_budget/) | 17.0.1.0.0 |  | Create Accounting Budgets
-[account_move_line_purchase_info](account_move_line_purchase_info/) | 17.0.1.0.1 |  | Introduces the purchase order line to the journal items
+[account_move_line_purchase_info](account_move_line_purchase_info/) | 17.0.2.0.0 |  | Introduces the purchase order line to the journal items
 [account_move_line_sale_info](account_move_line_sale_info/) | 17.0.1.0.0 |  | Introduces the purchase order line to the journal items
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 17.0.1.0.0 |  | Allows to edit taxes on non-posted account move lines
 [account_move_name_sequence](account_move_name_sequence/) | 17.0.1.0.5 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) [![moylop260](https://github.com/moylop260.png?size=30px)](https://github.com/moylop260) [![luisg123v](https://github.com/luisg123v.png?size=30px)](https://github.com/luisg123v) | Generate journal entry number from sequence
@@ -45,7 +45,7 @@ addon | version | maintainers | summary
 [account_tax_repartition_line_tax_group_account](account_tax_repartition_line_tax_group_account/) | 17.0.1.0.0 |  | Set a default account from tax group to tax repartition lines
 [account_usability](account_usability/) | 17.0.1.0.0 | [![legalsylvain](https://github.com/legalsylvain.png?size=30px)](https://github.com/legalsylvain) | Adds missing menu entries for Account module and adds the option to enable Saxon Accounting
 [mail_template_substitute_account_move](mail_template_substitute_account_move/) | 17.0.1.0.0 | [![SodexisTeam](https://github.com/SodexisTeam.png?size=30px)](https://github.com/SodexisTeam) | Module to support Mail Template Substitution for Account Move
-[purchase_unreconciled](purchase_unreconciled/) | 17.0.1.0.0 | [![AaronHForgeFlow](https://github.com/AaronHForgeFlow.png?size=30px)](https://github.com/AaronHForgeFlow) | Purchase Unreconciled
+[purchase_unreconciled](purchase_unreconciled/) | 17.0.2.0.0 | [![AaronHForgeFlow](https://github.com/AaronHForgeFlow.png?size=30px)](https://github.com/AaronHForgeFlow) | Purchase Unreconciled
 
 [//]: # (end addons)
 
