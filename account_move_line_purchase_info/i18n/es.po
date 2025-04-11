@@ -36,6 +36,11 @@ msgid "Journal Item"
 msgstr "Apunte contable"
 
 #. module: account_move_line_purchase_info
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__oca_purchase_line_id
+msgid "OCA Purchase Line"
+msgstr ""
+
+#. module: account_move_line_purchase_info
 #: model:ir.model,name:account_move_line_purchase_info.model_purchase_order
 #: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__purchase_order_id
 #: model_terms:ir.ui.view,arch_db:account_move_line_purchase_info.view_account_move_line_filter
@@ -52,6 +57,11 @@ msgstr "Línea orden de compra"
 #: model:res.groups,name:account_move_line_purchase_info.group_account_move_purchase_info
 msgid "Purchase info in Journal Items"
 msgstr "Información de compra en los apuntes contables"
+
+#. module: account_move_line_purchase_info
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_purchase_order_line__stock_invoice_lines
+msgid "Stock Invoice Lines"
+msgstr ""
 
 #. module: account_move_line_purchase_info
 #: model:ir.model,name:account_move_line_purchase_info.model_stock_move
