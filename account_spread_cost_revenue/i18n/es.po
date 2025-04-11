@@ -19,12 +19,14 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not is_credit_account_deprecated\">\n"
-"                                  This account in deprecated! The reconciliation will be NOT possible.\n"
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
+"is_credit_account_deprecated\">\n"
+"                                  This account in deprecated! The "
+"reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
-"<span class=\"help-block text-danger\" colspan=\"2\" invisible="
-"\"not is_credit_account_deprecated\">\n"
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
+"is_credit_account_deprecated\">\n"
 "                                  Esta cuenta está obsoleta. ¡La "
 "conciliación NO será posible!.\n"
 "                            </span>"
@@ -32,12 +34,14 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not is_debit_account_deprecated\">\n"
-"                                  This account in deprecated! The reconciliation will be NOT possible.\n"
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
+"is_debit_account_deprecated\">\n"
+"                                  This account in deprecated! The "
+"reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
-"<span class=\"help-block text-danger\" colspan=\"2\" invisible="
-"\"not is_debit_account_deprecated\">\n"
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
+"is_debit_account_deprecated\">\n"
 "                                  Esta cuenta está obsoleta. ¡La "
 "conciliación NO será posible!\n"
 "                            </span>"
@@ -45,15 +49,20 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
-"                                      The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the invoice line.\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      The Balance Sheet account used for the "
+"spreading.<br/>This account is the counterpart of the account in the invoice "
+"line.\n"
 "                                </span>\n"
-"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
-"                                      The Expense account in the vendor bill line.<br/>Usually the same account of the vendor bill line.\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      The Expense account in the vendor bill "
+"line.<br/>Usually the same account of the vendor bill line.\n"
 "                                </span>"
 msgstr ""
-"<span class=\"help-block\" colspan=\"2\" invisible="
-"\"invoice_type not in ['out_invoice','in_refund']\">\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
 "                                      La cuenta del Balance General "
 "utilizada para la periodificación.<br/>Esta cuenta es la contrapartida de la "
 "cuenta en la línea de la factura.\n"
@@ -68,20 +77,25 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
-"                                      The Balance Sheet account.<br/>This is the account in the invoice line.\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      The Balance Sheet account.<br/>This is "
+"the account in the invoice line.\n"
 "                                </span>\n"
-"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
-"                                      The Expense account used for the spreading.<br/>This account is the counterpart of the account of the vendor bill line.\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      The Expense account used for the "
+"spreading.<br/>This account is the counterpart of the account of the vendor "
+"bill line.\n"
 "                                </span>"
 msgstr ""
-"<span class=\"help-block\" colspan=\"2\" invisible="
-"\"invoice_type not in ['out_invoice','in_refund']\">\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
 "    La cuenta del Balance General.<br/>Esta es la cuenta en la línea de la "
 "factura.\n"
 "</span>\n"
-"<span class=\"help-block\" colspan=\"2\" invisible="
-"\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['in_invoice','out_refund']\">\n"
 "    La cuenta de gastos utilizada para la periodificación.<br/>Esta cuenta "
 "es la contrapartida de la cuenta en la línea de la factura del proveedor.\n"
 "</span>"
@@ -89,22 +103,32 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
-"                                      The Revenue account in the invoice line.<br/>Usually the same account of the invoice line.\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      The Revenue account in the invoice "
+"line.<br/>Usually the same account of the invoice line.\n"
 "                                </span>\n"
-"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
-"                                      The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the vendor bill line.\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      The Balance Sheet account used for the "
+"spreading.<br/>This account is the counterpart of the account in the vendor "
+"bill line.\n"
 "                                </span>"
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
-"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
-"                                      The Revenue account used for the spreading.<br/>This account is the counterpart of the account of the invoice line.\n"
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      The Revenue account used for the "
+"spreading.<br/>This account is the counterpart of the account of the invoice "
+"line.\n"
 "                                </span>\n"
-"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
-"                                      The Balance Sheet account.<br/>This is the account in the vendor bill line.\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      The Balance Sheet account.<br/>This is "
+"the account in the vendor bill line.\n"
 "                                </span>"
 msgstr ""
 
@@ -454,6 +478,13 @@ msgid "Display Recompute Buttons"
 msgstr ""
 
 #. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr ""
+
+#. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company__auto_archive_spread
 msgid ""
 "Enable this option if you want the cron job to automatically archive the "
@@ -463,8 +494,8 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company__force_move_auto_post
 msgid ""
-"Enable this option if you want to post automatically the accounting moves of"
-" all the spreads."
+"Enable this option if you want to post automatically the accounting moves of "
+"all the spreads."
 msgstr ""
 
 #. module: account_spread_cost_revenue
@@ -675,7 +706,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
 #, python-format
-msgid "Move line: %(line_id)s (%(line_name)s), account code: %(account_code)s\n"
+msgid ""
+"Move line: %(line_id)s (%(line_name)s), account code: %(account_code)s\n"
 msgstr ""
 
 #. module: account_spread_cost_revenue
@@ -846,7 +878,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
-#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
 #, python-format
 msgid "Spread Details"
 msgstr ""
@@ -974,8 +1005,8 @@ msgstr ""
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:0
 #, python-format
 msgid ""
-"This spread line is already linked to a journal entry! Please post or delete"
-" it."
+"This spread line is already linked to a journal entry! Please post or delete "
+"it."
 msgstr ""
 
 #. module: account_spread_cost_revenue
