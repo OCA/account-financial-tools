@@ -509,6 +509,13 @@ msgid "Display Recompute Buttons"
 msgstr "Visualizza pulsanti ricalcolo"
 
 #. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr ""
+
+#. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company__auto_archive_spread
 msgid ""
 "Enable this option if you want the cron job to automatically archive the "
