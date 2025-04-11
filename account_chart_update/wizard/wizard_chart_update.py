@@ -402,7 +402,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Return a right-zero-padded code with the chosen digits.
         Similar to what is done in the _pre_load_data() method of chart.template
         """
-        return code.ljust(self.code_digits, "0")
+        if isinstance(code, str):
+            return code.ljust(self.code_digits, "0")
+        _logger.info(
+            "padded_code received a non-string value: %s. Returning it as is.", code
+        )
+        return code
 
     @api.model
     @tools.ormcache("name")
@@ -485,7 +490,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     if record_value_compare.sort() != real_value.ids.sort():
                         result[key] = record_value
                 continue
-            elif field.ttype == "many2one":
+            if field.ttype == "many2one":
                 real_xml_id = self._get_external_id(real_value)
                 full_xml_id = (
                     f"account.{self.company_id.id}_{record_value}"
@@ -495,7 +500,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 if real_xml_id != full_xml_id:
                     result[key] = record_value
                 continue
-            elif field.ttype == "one2many":
+            if field.ttype == "one2many":
                 if len(record_value) != len(real_value):
                     result[key] = [(5, 0, 0)] + record_value
                 else:
@@ -522,7 +527,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         record_value_lang = record_values[key_lang]
                         if record_value_lang != real_value_lang:
                             result[key_lang] = record_value_lang
-                # print(asass)
+            elif field.ttype == "html":
+                record_value = tools.html_to_inner_content(record_value)
+                if record_value != real_value:
+                    result[key] = record_value
             elif record_value != real_value:
                 result[key] = record_value
         # __translation_module__
@@ -547,14 +555,17 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             Notes result.
         """
         result = list()
-        different_fields = sorted(
-            real._fields[f.split("@")[0] if "@" in f else f].get_description(self.env)[
-                "string"
-            ]
-            for f in self.with_context(skip_translation_keys=True)
+        different_fields_set = set()
+        for f in (
+            self.with_context(skip_translation_keys=True)
             .diff_fields(record_values, real)
             .keys()
-        )
+        ):
+            field_name = f.split("@")[0] if "@" in f else f
+            different_fields_set.add(
+                real._fields[field_name].get_description(self.env)["string"]
+            )
+        different_fields = sorted(list(different_fields_set))
         if different_fields:
             result.append(
                 _("Differences in these fields: %s.") % ", ".join(different_fields)
@@ -577,7 +588,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         }
         company = self.company_id
         model = self.env[model_name]
-        company_domain = [("company_id", "=", company.id)]
+        if "company_id" in model._fields:
+            company_domain = [("company_id", "=", company.id)]
+        elif "company_ids" in model._fields:
+            company_domain = [("company_ids", "in", company.ids)]
+        else:
+            company_domain = []
         for matching in mapped_fields[model_name].sorted("sequence"):
             if matching.matching_value == "xml_id":
                 full_xmlid = (
@@ -606,7 +622,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         return False
 
     def _get_external_id(self, record):
-        return record.get_external_id()[record.id]
+        external_ids = record.get_external_id()
+        return external_ids.get(record.id, False)
 
     @tools.ormcache("self", "record", "xml_id")
     def missing_xml_id(self, record, xml_id):
@@ -821,7 +838,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             if isinstance(xml_id, int):
                 record = self.env[model].browse(xml_id)
             else:
-                xml_id = f"{('account.' + str(self.company_id.id) + '_') if '.' not in xml_id else ''}{xml_id}"
+                prefix = f"account.{self.company_id.id}_" if "." not in xml_id else ""
+                xml_id = f"{prefix}{xml_id}"
                 record = self.env.ref(xml_id)
             # Updatr translation vals
             for lang in langs:
@@ -848,7 +866,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             tax = wiz_tax.update_tax_id
             if wiz_tax.type == "deleted":
                 tax.active = False
-                _logger.info(_("Deactivated tax %s."), "'%s'" % tax.name)
+                _logger.info(_("Deactivated tax %s."), tax.name)
                 continue
             xml_id = wiz_tax.xml_id
             key = tax.id or xml_id
