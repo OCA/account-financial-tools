@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2025 - Today: Sylvain LE GAL (http://www.grap.coop)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='inbound_payment_method_line_ids']/tree/field[@name='payment_account_id']"
+                position="attributes"
+            >
+                <attribute name="option">show</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='outbound_payment_method_line_ids']/tree/field[@name='payment_account_id']"
+                position="attributes"
+            >
+                <attribute name="option">show</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
