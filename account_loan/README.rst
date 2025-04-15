@@ -104,6 +104,9 @@ Contributors
 - Enric Tobella <etobella@creublanca.es>
 - Bhavesh Odedra <bodedra@opensourceintegrators.com>
 - Alberto Martín Cortada <alberto.martin@guadaltech.es>
+- `Tecnativa <https://www.tecnativa.com>`__:
+
+  - Juan Carlos Oñate
 
 Maintainers
 -----------

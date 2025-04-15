@@ -205,6 +205,22 @@ class AccountLoan(models.Model):
         ("name_uniq", "unique(name, company_id)", "Loan name must be unique"),
     ]
 
+    @api.onchange("line_ids")
+    def _onchange_line_ids_draft_manual(self):
+        if self.state == "draft":
+            self.line_ids = self.line_ids.sorted(key=lambda line: line.sequence)
+            previous_pending_principal = 0
+            previous_principal_amount = 0
+            for line in self.line_ids:
+                if line.sequence == 1:
+                    line.pending_principal_amount = line.loan_id.loan_amount
+                else:
+                    line.pending_principal_amount = (
+                        previous_pending_principal - previous_principal_amount
+                    )
+                previous_pending_principal = line.pending_principal_amount
+                previous_principal_amount = line.principal_amount
+
     @api.depends("line_ids", "currency_id", "loan_amount")
     def _compute_total_amounts(self):
         for record in self:
@@ -319,7 +335,8 @@ class AccountLoan(models.Model):
         self.ensure_one()
         if not self.start_date:
             self.start_date = fields.Date.today()
-        self._compute_draft_lines()
+        if not self.line_ids:
+            self._compute_draft_lines()
         self.write({"state": "posted"})
 
     def close(self):
