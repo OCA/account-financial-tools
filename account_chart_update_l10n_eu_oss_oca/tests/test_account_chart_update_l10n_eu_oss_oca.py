@@ -9,7 +9,7 @@ class TestOSSCoA(AccountTestInvoicingCommon):
     # pylint: disable=W8106
     @classmethod
     def setUpClass(cls, chart_template_ref="generic_coa"):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+        super().setUpClass()
         cls.chart_template = chart_template_ref
         template = cls.env["account.chart.template"]
         template.try_loading(chart_template_ref, cls.env.company)
