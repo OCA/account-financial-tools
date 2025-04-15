@@ -142,6 +142,7 @@
                             <field
                                 name="line_ids"
                                 context="{'tree_view_ref': 'account_loan.account_loan_line_tree'}"
+                                readonly="state != 'draft'"
                             />
                         </page>
                         <page string="Accounts" id="accounting">

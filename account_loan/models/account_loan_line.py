@@ -70,12 +70,14 @@ class AccountLoanLine(models.Model):
     )
     rate = fields.Float(
         required=True,
-        readonly=True,
+        readonly=False,
+        store=True,
         digits=(8, 6),
+        compute="_compute_rate",
     )
     pending_principal_amount = fields.Monetary(
         currency_field="currency_id",
-        readonly=True,
+        readonly=False,
         help="Pending amount of the loan before the payment",
     )
     long_term_pending_principal_amount = fields.Monetary(
@@ -86,17 +88,22 @@ class AccountLoanLine(models.Model):
     )
     payment_amount = fields.Monetary(
         currency_field="currency_id",
-        readonly=True,
+        readonly=False,
+        store=True,
+        compute="_compute_payment_amount",
         help="Total amount that will be payed (Annuity)",
     )
     interests_amount = fields.Monetary(
         currency_field="currency_id",
-        readonly=True,
+        readonly=False,
+        store=True,
+        compute="_compute_interests_amount",
         help="Amount of the payment that will be assigned to interests",
     )
     principal_amount = fields.Monetary(
         currency_field="currency_id",
-        compute="_compute_amounts",
+        compute="_compute_principal_amount",
+        store=True,
         help="Amount of the payment that will reduce the pending loan amount",
     )
     long_term_principal_amount = fields.Monetary(
@@ -107,6 +114,7 @@ class AccountLoanLine(models.Model):
     final_pending_principal_amount = fields.Monetary(
         currency_field="currency_id",
         compute="_compute_amounts",
+        store=True,
         help="Pending amount of the loan after the payment",
     )
     move_ids = fields.One2many(
@@ -115,13 +123,20 @@ class AccountLoanLine(models.Model):
     )
     has_moves = fields.Boolean(compute="_compute_has_moves")
     has_invoices = fields.Boolean(compute="_compute_has_invoices")
-    _sql_constraints = [
-        (
-            "sequence_loan",
-            "unique(loan_id, sequence)",
-            "Sequence must be unique in a loan",
-        )
-    ]
+
+    @api.depends("interests_amount")
+    def _compute_rate(self):
+        for record in self:
+            record.rate = (
+                record.interests_amount * 100
+            ) / record.pending_principal_amount
+
+    @api.depends("rate")
+    def _compute_interests_amount(self):
+        for record in self:
+            record.interests_amount = (
+                record.pending_principal_amount * record.rate
+            ) / 100
 
     @api.depends("move_ids")
     def _compute_has_moves(self):
@@ -138,12 +153,21 @@ class AccountLoanLine(models.Model):
         for record in self:
             record.name = "%s-%d" % (record.loan_id.name, record.sequence)
 
+    @api.depends("principal_amount", "interests_amount")
+    def _compute_payment_amount(self):
+        for rec in self:
+            rec.payment_amount = rec.principal_amount + rec.interests_amount
+
     @api.depends("payment_amount", "interests_amount", "pending_principal_amount")
     def _compute_amounts(self):
         for rec in self:
             rec.final_pending_principal_amount = (
                 rec.pending_principal_amount - rec.payment_amount + rec.interests_amount
             )
+
+    @api.depends("pending_principal_amount")
+    def _compute_principal_amount(self):
+        for rec in self:
             rec.principal_amount = rec.payment_amount - rec.interests_amount
 
     def _compute_amount(self):

@@ -2,6 +2,7 @@
 
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class AccountLoanPost(models.TransientModel):
@@ -87,6 +88,17 @@ class AccountLoanPost(models.TransientModel):
 
     def run(self):
         self.ensure_one()
+        if self.loan_id.line_ids:
+            total_principal = sum(self.loan_id.line_ids.mapped("principal_amount"))
+            if (
+                float_compare(
+                    self.loan_id.loan_amount, total_principal, precision_digits=2
+                )
+                != 0
+            ):
+                raise UserError(
+                    _("The total principal amount does not match the loan amount.")
+                )
         if self.loan_id.state != "draft":
             raise UserError(_("Only loans in draft state can be posted"))
         self.loan_id.post()

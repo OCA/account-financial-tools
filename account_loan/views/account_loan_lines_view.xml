@@ -6,21 +6,28 @@
         <field name="model">account.loan.line</field>
         <field name="priority">99</field>
         <field name="arch" type="xml">
-            <tree create="0">
-                <field name="sequence" />
-                <field name="date" />
+            <tree editable="bottom">
+                <field name="sequence" readonly="false" widget="handle" />
+                <field name="sequence" readonly="false" />
+                <field name="date" readonly="false" />
                 <field name="rate" />
-                <field name="pending_principal_amount" />
+                <field name="pending_principal_amount" readonly="True" force_save="1" />
                 <field name="payment_amount" sum="Total payments" />
-                <field name="principal_amount" />
+                <field
+                    name="principal_amount"
+                    sum="principal_amount"
+                    readonly="false"
+                />
                 <field name="interests_amount" sum="Total interests" />
                 <field
                     name="long_term_pending_principal_amount"
                     column_invisible="not parent.long_term_loan_account_id"
+                    readonly="false"
                 />
                 <field
                     name="long_term_principal_amount"
                     column_invisible="not parent.long_term_loan_account_id"
+                    readonly="false"
                 />
                 <field name="long_term_loan_account_id" column_invisible="True" />
                 <field name="loan_state" column_invisible="True" />
