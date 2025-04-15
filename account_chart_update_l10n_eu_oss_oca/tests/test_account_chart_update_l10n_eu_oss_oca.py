@@ -6,59 +6,17 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 @tagged("post_install", "-at_install")
 class TestOSSCoA(AccountTestInvoicingCommon):
-    def _create_xml_id(self, record):
-        return self.env["ir.model.data"].create(
-            {
-                "module": "account_chart_update",
-                "name": f"{record._table}-{record.id}",
-                "model": record._name,
-                "res_id": record.id,
-            }
-        )
-
-    def _create_tax_tmpl(self, name, chart_template):
-        record = self.env["account.tax.template"].create(
-            {
-                "name": name,
-                "amount": 0,
-                "chart_template_id": chart_template.id,
-                "tax_group_id": self.env.ref("account.tax_group_taxes").id,
-                "refund_repartition_line_ids": [
-                    (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
-                    (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
-                    (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
-                ],
-                "invoice_repartition_line_ids": [
-                    (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
-                    (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
-                    (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
-                ],
-            }
-        )
-        self._create_xml_id(record)
-        return record
-
     # pylint: disable=W8106
     @classmethod
-    def setUpClass(
-        cls, chart_template_ref="l10n_generic_coa.configurable_chart_template"
-    ):
+    def setUpClass(cls, chart_template_ref="generic_coa"):
         super().setUpClass(chart_template_ref=chart_template_ref)
-        cls.chart_template = cls.env.ref(chart_template_ref)
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
+        cls.chart_template = chart_template_ref
+        template = cls.env["account.chart.template"]
+        template.try_loading(chart_template_ref, cls.env.company)
+        cls.chart_template_data = template._get_chart_template_data(cls.chart_template)
         cls.company = cls.env["res.company"].create(
             {
                 "name": "Test account_chart_update company",
-                "currency_id": cls.chart_template.currency_id.id,
                 "country_id": cls.env.ref("base.es").id,
             }
         )
@@ -81,8 +39,8 @@ class TestOSSCoA(AccountTestInvoicingCommon):
 
     def setUp(self):
         super().setUp()
-        # Create demo tax
-        self._create_tax_tmpl("Not OSS Demo tax", self.chart_template)
+        # Create demo tax group and tax
+        self.tax_group = self.env["account.tax.group"].create({"name": "Test 1"})
         self.tax = self.env["account.tax"].create(
             {
                 "name": "Not OSS Demo tax",
@@ -91,15 +49,14 @@ class TestOSSCoA(AccountTestInvoicingCommon):
                 "type_tax_use": "sale",
                 "country_id": self.env.ref("base.es").id,
                 "company_id": self.company.id,
-                "tax_group_id": self.env.ref("account.tax_group_taxes").id,
+                "tax_group_id": self.tax_group.id,
             }
         )
         self.wizard_obj = self.env["wizard.update.charts.accounts"]
         self.wizard_vals = {
             "company_id": self.company.id,
-            "chart_template_id": self.chart_template.id,
+            "chart_template": self.chart_template,
             "code_digits": 6,
-            "lang": "en_US",
         }
 
     @classmethod
