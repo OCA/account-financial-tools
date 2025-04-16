@@ -997,7 +997,12 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         prev_assets = len(self.env["account.asset"].search([]))
         move = self.env["account.move"].create(
             {
+                "name": "Test move",
                 "move_type": "entry",
+                "journal_id": self.env["account.journal"]
+                .search([("company_id", "=", self.company.id)], limit=1)
+                .id,
+                "date": fields.Date.today(),
                 "tax_cash_basis_origin_move_id": self.invoice,
                 "line_ids": [
                     (
