@@ -992,3 +992,46 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_CABA_move_ignored(self):
+        prev_assets = len(self.env["account.asset"].search([]))
+        move = self.env["account.move"].create(
+            {
+                "move_type": "entry",
+                "tax_cash_basis_origin_move_id": self.invoice,
+                "line_ids": [
+                    (
+                        0,
+                        None,
+                        {
+                            "name": "1 CABA product line",
+                            "account_id": self.company_data[
+                                "default_account_revenue"
+                            ].id,
+                            "asset_profile_id": self.car5y.id,
+                            "debit": 0.0,
+                            "credit": 100.0,
+                        },
+                    ),
+                    (
+                        0,
+                        None,
+                        {
+                            "name": "2 CABA product line",
+                            "account_id": self.company_data[
+                                "default_account_revenue"
+                            ].id,
+                            "asset_profile_id": self.car5y.id,
+                            "debit": 100.0,
+                            "credit": 0.0,
+                        },
+                    ),
+                ],
+            }
+        )
+        move.action_post()
+        new_assets = len(self.env["account.asset"].search([]))
+        # No new assets created
+        self.assertEqual(new_assets, prev_assets)
+        # posted move
+        self.assertEqual(move.state, "posted")
