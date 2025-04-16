@@ -1003,7 +1003,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 .search([("company_id", "=", self.company_data["company"].id)], limit=1)
                 .id,
                 "date": fields.Date.today(),
-                "tax_cash_basis_origin_move_id": self.invoice,
+                "tax_cash_basis_origin_move_id": self.invoice.id,
                 "line_ids": [
                     (
                         0,
