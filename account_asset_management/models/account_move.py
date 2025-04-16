@@ -91,7 +91,7 @@ class AccountMove(models.Model):
     def _post(self, soft=True):
         ret_val = super()._post(soft=soft)
         for move in self:
-            if move.tax_cash_basis_origin_move_id: 
+            if move.tax_cash_basis_origin_move_id:
                 continue
             for aml in move.line_ids.filtered(
                 lambda line: line.asset_profile_id and not line.tax_line_id
