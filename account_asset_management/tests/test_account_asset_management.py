@@ -1000,7 +1000,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "name": "Test move",
                 "move_type": "entry",
                 "journal_id": self.env["account.journal"]
-                .search([("company_id", "=", self.company.id)], limit=1)
+                .search([("company_id", "=", self.company_data["company"].id)], limit=1)
                 .id,
                 "date": fields.Date.today(),
                 "tax_cash_basis_origin_move_id": self.invoice,
