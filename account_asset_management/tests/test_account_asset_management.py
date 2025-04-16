@@ -1011,7 +1011,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                         {
                             "name": "1 CABA product line",
                             "account_id": self.company_data[
-                                "default_account_revenue"
+                                "default_account_expense"
                             ].id,
                             "asset_profile_id": self.car5y.id,
                             "debit": 0.0,
@@ -1024,7 +1024,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                         {
                             "name": "2 CABA product line",
                             "account_id": self.company_data[
-                                "default_account_revenue"
+                                "default_account_expense"
                             ].id,
                             "asset_profile_id": self.car5y.id,
                             "debit": 100.0,
