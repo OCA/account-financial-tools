@@ -405,15 +405,16 @@ class AccountLoan(models.Model):
             date = self.start_date
         else:
             date = datetime.today().date()
+        initial_date = date
         delta = relativedelta(months=self.method_period)
         if not self.payment_on_first_period:
-            date += delta
+            date = initial_date + delta
         for i in range(1, self.periods + 1):
             line = self.env["account.loan.line"].create(
                 self._new_line_vals(i, date, amount)
             )
             line._check_amount()
-            date += delta
+            date = initial_date + delta * i
             amount -= line.payment_amount - line.interests_amount
         if self.long_term_loan_account_id:
             self._check_long_term_principal_amount()
