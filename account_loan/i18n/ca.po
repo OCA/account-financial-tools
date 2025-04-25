@@ -874,11 +874,6 @@ msgid "Sequence"
 msgstr "Seqüència"
 
 #. module: account_loan
-#: model:ir.model.constraint,message:account_loan.constraint_account_loan_line_sequence_loan
-msgid "Sequence must be unique in a loan"
-msgstr "La seqüència ha de ser única en un préstec"
-
-#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__short_term_loan_account_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__short_term_loan_account_id
 msgid "Short term account"
@@ -965,6 +960,13 @@ msgstr ""
 "Planificades: Activitats futures."
 
 #. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_post.py:0
+#, python-format
+msgid "The total principal amount does not match the loan amount."
+msgstr ""
+
+#. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__payment_amount
 msgid "Total amount that will be payed (Annuity)"
 msgstr "Import total que es pagarà (Anualitat)"
@@ -1022,6 +1024,14 @@ msgstr ""
 #: model:ir.model.fields,help:account_loan.field_account_loan__payment_on_first_period
 msgid "When checked, the first payment will be on start date"
 msgstr "Quan es comprovi, el primer pagament serà a la data d'inici"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
+msgid "principal_amount"
+msgstr ""
+
+#~ msgid "Sequence must be unique in a loan"
+#~ msgstr "La seqüència ha de ser única en un préstec"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Darrera modificació el"
