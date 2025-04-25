@@ -17,30 +17,32 @@ Fiscal Years - Automatic Creation
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/16.0/account_fiscal_year_auto_create
+    :target: https://github.com/OCA/account-financial-tools/tree/18.0/account_fiscal_year_auto_create
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_fiscal_year_auto_create
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-18-0/account-financial-tools-18-0-account_fiscal_year_auto_create
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of Accounting Odoo module, to
-auto generate fiscal years.
+This module extends the functionality of Accounting Odoo module, to auto
+generate fiscal years.
 
-Once installed, a cron is running each day. It will create, for each company,
-a new fiscal year, if it is the last day of the current fiscal year.
+Once installed, a cron is running each day. It will create, for each
+company, a new fiscal year, if it is the last day of the current fiscal
+year.
 
-This module is interesting specially in multi company context, to avoid annoying setup every year.
+This module is interesting specially in multi company context, to avoid
+annoying setup every year.
 
-The fiscal year created has a classical "12 monthes" duration, but the accountant
-can modify it, once created.
+The fiscal year created has a classical "12 monthes" duration, but the
+accountant can modify it, once created.
 
 Example
-~~~~~~~
+-------
 
 If a company has it last fiscal year, defined as:
 
@@ -48,7 +50,8 @@ If a company has it last fiscal year, defined as:
 - ``date_from``: 2021-06-01
 - ``date_to``: 2022-05-31
 
-When the cron will be executed on May 31, 2022, it will create the following fiscal year:
+When the cron will be executed on May 31, 2022, it will create the
+following fiscal year:
 
 - ``name``: FY 2022-2023
 - ``date_from``: 2022-06-01
@@ -65,7 +68,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_fiscal_year_auto_create%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_fiscal_year_auto_create%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -73,17 +76,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sylvain LE GAL <https://twitter.com/legalsylvain>
+- Sylvain LE GAL
+  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -103,6 +107,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-legalsylvain| 
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/16.0/account_fiscal_year_auto_create>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/18.0/account_fiscal_year_auto_create>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
