@@ -88,9 +88,43 @@ class TestLoan(BaseCommon):
 
     @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-31")
-    def test_loan_lines_custom_day(self):
+    def test_loan_lines_custom_day_01(self):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
         loan.long_term_loan_account_id = self.lt_loan_account
+        loan.compute_lines()
+        dates_by_sequence = {}
+        for line in loan.line_ids:
+            dates_by_sequence[line.sequence] = line.date
+        self.assertEqual(dates_by_sequence[1], fields.Date.from_string("2025-01-31"))
+        self.assertEqual(dates_by_sequence[2], fields.Date.from_string("2025-02-28"))
+        self.assertEqual(dates_by_sequence[3], fields.Date.from_string("2025-03-31"))
+        self.assertEqual(dates_by_sequence[4], fields.Date.from_string("2025-04-30"))
+        self.assertEqual(dates_by_sequence[5], fields.Date.from_string("2025-05-31"))
+        self.assertEqual(dates_by_sequence[6], fields.Date.from_string("2025-06-30"))
+        self.assertEqual(dates_by_sequence[7], fields.Date.from_string("2025-07-31"))
+        self.assertEqual(dates_by_sequence[8], fields.Date.from_string("2025-08-31"))
+        self.assertEqual(dates_by_sequence[9], fields.Date.from_string("2025-09-30"))
+        self.assertEqual(dates_by_sequence[10], fields.Date.from_string("2025-10-31"))
+        self.assertEqual(dates_by_sequence[11], fields.Date.from_string("2025-11-30"))
+        self.assertEqual(dates_by_sequence[12], fields.Date.from_string("2025-12-31"))
+        self.assertEqual(dates_by_sequence[13], fields.Date.from_string("2026-01-31"))
+        line_1 = loan.line_ids.filtered(lambda x: x.sequence == 1)
+        self.assertEqual(line_1.long_term_pending_principal_amount, 401989.15)
+        self.assertAlmostEqual(line_1.long_term_principal_amount, 8211.88)
+        line_2 = loan.line_ids.filtered(lambda x: x.sequence == 2)
+        self.assertEqual(line_2.long_term_pending_principal_amount, 393777.27)
+        line_13 = loan.line_ids.filtered(lambda x: x.sequence == 13)
+        self.assertEqual(line_13.pending_principal_amount, 401989.15)
+        self.assertEqual(
+            line_1.long_term_pending_principal_amount, line_13.pending_principal_amount
+        )
+
+    @mute_logger("odoo.models.unlink")
+    @freeze_time("2024-12-31")
+    def test_loan_lines_custom_day_02(self):
+        loan = self.create_loan("fixed-annuity", 500000, 1, 60)
+        loan.long_term_loan_account_id = self.lt_loan_account
+        loan.payment_on_first_period = False
         loan.compute_lines()
         dates_by_sequence = {}
         for line in loan.line_ids:

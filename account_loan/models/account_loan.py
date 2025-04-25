@@ -409,6 +409,7 @@ class AccountLoan(models.Model):
         delta = relativedelta(months=self.method_period)
         if not self.payment_on_first_period:
             date = initial_date + delta
+            initial_date = date
         for i in range(1, self.periods + 1):
             line = self.env["account.loan.line"].create(
                 self._new_line_vals(i, date, amount)
