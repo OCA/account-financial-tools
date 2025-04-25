@@ -4,49 +4,46 @@
 
 from datetime import date, datetime
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestModule(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.AccountFiscalYear = self.env["account.fiscal.year"]
-        self.company = self.env["res.company"].create(
+class TestFiscalYear(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.AccountFiscalYear = cls.env["account.fiscal.year"]
+        cls.company = cls.env["res.company"].create(
             {
                 "name": "Demo Company (account_fiscal_year_auto_create)",
             }
         )
 
-        # create a fiscal year
-        self.last_year = datetime.now().year - 1
-        self.last_fiscal_year = self.AccountFiscalYear.create(
+        cls.last_year = datetime.now().year - 1
+        cls.last_fiscal_year = cls.AccountFiscalYear.create(
             {
-                "name": "FY %d" % (self.last_year),
-                "date_from": date(self.last_year, 1, 1).strftime("%Y-%m-%d"),
-                "date_to": date(self.last_year, 12, 31).strftime("%Y-%m-%d"),
-                "company_id": self.company.id,
+                "name": f"FY {cls.last_year}",
+                "date_from": date(cls.last_year, 1, 1),
+                "date_to": date(cls.last_year, 12, 31),
+                "company_id": cls.company.id,
             }
         )
 
-    def test_cron(self):
-        # Run cron should create a new fiscal year
-        existing_fiscal_years = self.AccountFiscalYear.search([])
+    def test_cron_auto_create(self):
+        """It should create new fiscal year via cron and not duplicate"""
+        # Step 1: Run cron -> should create one new fiscal year
+        old_fiscal_year_ids = self.AccountFiscalYear.search([]).ids
         self.AccountFiscalYear.cron_auto_create()
 
-        new_fiscal_year = self.AccountFiscalYear.search(
-            [("id", "not in", existing_fiscal_years.ids)]
-        )
-        self.assertTrue(new_fiscal_year)
-        self.assertEqual(new_fiscal_year.name, "FY %d" % (self.last_year + 1))
-        self.assertEqual(new_fiscal_year.date_from, date(self.last_year + 1, 1, 1))
-        self.assertEqual(new_fiscal_year.date_from, date(self.last_year + 1, 1, 1))
-        self.assertEqual(new_fiscal_year.name, "FY %d" % (self.last_year + 1))
+        new_fy = self.AccountFiscalYear.search([("id", "not in", old_fiscal_year_ids)])
+        self.assertEqual(len(new_fy), 1, "A new fiscal year should be created.")
 
-        # Rerun cron should not create a new fiscal year
-        existing_fiscal_years = self.AccountFiscalYear.search([])
+        expected_year = self.last_year + 1
+        self.assertEqual(new_fy.name, f"FY {expected_year}")
+        self.assertEqual(new_fy.date_from, date(expected_year, 1, 1))
+        self.assertEqual(new_fy.date_to, date(expected_year, 12, 31))
+
+        # Step 2: Run cron again -> should NOT create duplicate fiscal year
+        new_ids = self.AccountFiscalYear.search([]).ids
         self.AccountFiscalYear.cron_auto_create()
-
-        new_fiscal_year = self.AccountFiscalYear.search(
-            [("id", "not in", existing_fiscal_years.ids)]
-        )
-        self.assertFalse(new_fiscal_year)
+        newer_fy = self.AccountFiscalYear.search([("id", "not in", new_ids)])
+        self.assertFalse(newer_fy, "No new fiscal year should be created again.")
