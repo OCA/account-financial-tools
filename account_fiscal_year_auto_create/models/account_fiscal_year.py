@@ -1,7 +1,3 @@
-# Copyright (C) 2021 - Today: GRAP (http://www.grap.coop)
-# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
 from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
@@ -19,7 +15,6 @@ class AccountFiscalYear(models.Model):
             last_fiscal_year = self.search(
                 [("company_id", "=", company.id)], order="date_to desc", limit=1
             )
-
             if last_fiscal_year and (
                 last_fiscal_year.date_to < datetime.now().date() + relativedelta(days=1)
             ):
@@ -37,7 +32,6 @@ class AccountFiscalYear(models.Model):
         if self.search(
             [("name", "=", new_name), ("company_id", "=", self.company_id.id)]
         ):
-            # the replace process fail to guess a correct unique name
             new_name = _(
                 "FY %(date_to)s - %(date_from)s",
                 date_to=str(self.date_to),
