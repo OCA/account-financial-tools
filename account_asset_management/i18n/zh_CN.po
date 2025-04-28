@@ -23,16 +23,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:33+0000\n"
-"PO-Revision-Date: 2020-08-17 16:59+0000\n"
-"Last-Translator: Dong <dong@freshoo.cn>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/zh_CN/)\n"
+"PO-Revision-Date: 2025-04-28 05:23+0000\n"
+"Last-Translator: 张飞虎 <feihu.zhang@live.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/zh_CN/)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_asset_management
 #. odoo-python
@@ -42,6 +42,8 @@ msgid ""
 "\n"
 "Error while processing asset '{ref}': {exception}"
 msgstr ""
+"\n"
+"处理资产'{ref}'时出错：{exception}"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -49,11 +51,13 @@ msgid ""
 "<span class=\"o_form_label oe_inline\" invisible=\"salvage_type != "
 "'percent'\">%</span>"
 msgstr ""
+"<span class=\"o_form_label oe_inline\" invisible="
+"\"salvage_type != 'percent'\">%</span>"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
 msgid "<span class=\"o_stat_text\"> Asset(s)</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\"> 资产</span>"
 
 #. module: account_asset_management
 #. odoo-python
@@ -61,7 +65,7 @@ msgstr ""
 #: model:ir.model,name:account_asset_management.model_account_account
 #, python-format
 msgid "Account"
-msgstr ""
+msgstr "账户"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
@@ -71,12 +75,12 @@ msgstr "固定资产"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__carry_forward_missed_depreciations
 msgid "Accumulate missed depreciations"
-msgstr ""
+msgstr "累计遗漏折旧"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "需要行动"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
@@ -89,27 +93,27 @@ msgstr "激活"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Active Assets"
-msgstr ""
+msgstr "活跃资产"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "活动"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "活动异常装饰"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "活动状态"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "活动类型图标"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -124,7 +128,7 @@ msgstr "此日期之前的折旧将自动计提并过帐"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__allow_reversal
 msgid "Allow Reversal of journal entries"
-msgstr ""
+msgstr "允许日记账分录反转"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
@@ -140,13 +144,13 @@ msgstr "已计提折旧金额"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
 msgid "Analytic Distribution"
-msgstr ""
+msgstr "分析分配"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution_search
 msgid "Analytic Distribution Search"
-msgstr ""
+msgstr "分析分布搜索"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -157,7 +161,7 @@ msgstr "辅助核算信息"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_precision
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_precision
 msgid "Analytic Precision"
-msgstr ""
+msgstr "分析精度"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -165,7 +169,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Archived"
-msgstr ""
+msgstr "已归档"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -197,7 +201,7 @@ msgstr "固定资产科目"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move__asset_count
 #: model:ir.model.fields,field_description:account_asset_management.field_account_payment__asset_count
 msgid "Asset Count"
-msgstr ""
+msgstr "资产计数"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_group
@@ -236,16 +240,14 @@ msgstr "资产名称"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-#, fuzzy
 msgid "Asset Profile"
-msgstr "资产类别"
+msgstr "资产档案"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_profile_menu
-#, fuzzy
 msgid "Asset Profiles"
-msgstr "资产类别"
+msgstr "资产档案"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__remove
@@ -276,23 +278,21 @@ msgstr "开始使用日期"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_line
-#, fuzzy
 msgid "Asset depreciation table line"
-msgstr "资产折旧明细"
+msgstr "资产折旧表行"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "Asset name must be set in the label of the line."
-msgstr ""
+msgstr "必须在行的标签中设置资产名称。"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
-#, fuzzy
 msgid "Asset profile"
-msgstr "资产类别"
+msgstr "资产档案"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -302,7 +302,7 @@ msgstr "资产清理。"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_recompute_trigger
 msgid "Asset table recompute triggers"
-msgstr ""
+msgstr "资产表重新计算触发器"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_action
@@ -317,12 +317,12 @@ msgstr "固定资产"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
-msgstr ""
+msgstr "待更正资产"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "附件计数"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
@@ -331,13 +331,14 @@ msgid ""
 "invoice line as long as an accounting entry is created by invoice line. With "
 "this setting, an accounting entry will be created by product item. So, there "
 "will be an asset by product item."
-msgstr ""
+msgstr "默认情况下，在发票验证期间，只要按发票行创建会计条目，就会按发票行创建资产。"
+"通过此设置，将按产品项目创建会计条目。因此，将按产品项目创建资产。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__days_calc
 msgid "Calculate by days"
-msgstr ""
+msgstr "按天计算"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
@@ -350,16 +351,15 @@ msgstr "取消"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__open_asset
-#, fuzzy
 msgid ""
 "Check this if you want to automatically confirm the assets of this profile "
 "when created by invoices."
-msgstr "如果你像让这类固定资产在开发票之后自动确认为“运行”状态，勾选这里。"
+msgstr "如果您希望在通过发票创建时自动确认此档案的资产，请勾选此项。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__child_ids
 msgid "Child Asset Groups"
-msgstr ""
+msgstr "子资产组"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
@@ -371,6 +371,9 @@ msgid ""
 "  * Number of Depreciations: Fix the number of depreciation lines and the "
 "time between 2 depreciations.\n"
 msgstr ""
+"选择用于计算日期和折旧行数的方法。\n"
+"  * 年数：指定折旧的年数。\n"
+"  * 折旧次数：固定折旧行数和两次折旧之间的时间。\n"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
@@ -388,6 +391,13 @@ msgid ""
 "   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base "
 "is equal to the asset value."
 msgstr ""
+"选择用于计算折旧行的方法。\n"
+"  * 直线法：基于：折旧基础/折旧次数计算。折旧基础 = 购买价值 - 残值。\n"
+"  * 直线限制：直线至残值。折旧基础 = 购买价值。\n"
+"  * 递减法：基于：残值 * 递减因子计算。\n"
+"  * 递减-直线（仅适用于时间方法 = "
+"年）：当年直线折旧超过年递减折旧时，递减变为直线。\n"
+"   * 递减限制：递减至残值。折旧基础等于资产价值。"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__close
@@ -398,7 +408,7 @@ msgstr "报废"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
 msgid "Code"
-msgstr ""
+msgstr "代码"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
@@ -421,14 +431,14 @@ msgstr "本位币"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_completed
 msgid "Completion Date"
-msgstr ""
+msgstr "完成日期"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Comput. Method"
-msgstr ""
+msgstr "计算方法"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
@@ -478,7 +488,7 @@ msgstr "计提折旧结果"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -493,7 +503,7 @@ msgstr "生成凭证"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__asset_product_item
 msgid "Create an asset by product item"
-msgstr ""
+msgstr "通过产品项创建资产"
 
 #. module: account_asset_management
 #. odoo-python
@@ -537,17 +547,17 @@ msgstr "日期"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger__date_trigger
 msgid "Date of the event triggering the need to recompute the Asset Tables."
-msgstr ""
+msgstr "触发需要重新计算资产表的事件日期。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_days
 msgid "Days"
-msgstr ""
+msgstr "天数"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_account__asset_profile_id
 msgid "Default Asset Profile when creating invoice lines with this account."
-msgstr ""
+msgstr "使用此账户创建发票行时的默认资产配置文件。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -561,7 +571,7 @@ msgstr "递减"
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive  up to Salvage Value"
-msgstr ""
+msgstr "递减至残值"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_progress_factor
@@ -574,7 +584,7 @@ msgstr "递减因子"
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear"
-msgstr ""
+msgstr "递减-线性"
 
 #. module: account_asset_management
 #. odoo-python
@@ -582,12 +592,12 @@ msgstr ""
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
-msgstr ""
+msgstr "递减-线性仅支持时间方法=年。"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Delete/Reverse Move"
-msgstr ""
+msgstr "删除/反向移动"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_expense_depreciation_id
@@ -602,7 +612,7 @@ msgstr "累计折旧"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__depreciate
 msgid "Depreciation"
-msgstr ""
+msgstr "折旧"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_depreciation_id
@@ -668,7 +678,7 @@ msgstr "显示名称"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__distribution_analytic_account_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__distribution_analytic_account_ids
 msgid "Distribution Analytic Account"
-msgstr ""
+msgstr "分配分析账户"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__done
@@ -686,17 +696,17 @@ msgstr "草稿"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Duplicate reporting entries"
-msgstr ""
+msgstr "重复的报告条目"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_report_account_asset_management_asset_report_xls
 msgid "Dynamic XLS asset report generator"
-msgstr ""
+msgstr "动态XLS资产报告生成器"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__date_to
 msgid "End Date"
-msgstr ""
+msgstr "结束日期"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_end
@@ -717,11 +727,14 @@ msgid ""
 "\n"
 "{tb}"
 msgstr ""
+"处理资产'{ref}'时出错：\n"
+"\n"
+"{tb}"
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
 msgid "Financial Assets"
-msgstr ""
+msgstr "金融资产"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.wiz_account_asset_report_action
@@ -729,39 +742,39 @@ msgstr ""
 #: model:ir.ui.menu,name:account_asset_management.wiz_account_asset_report_menu
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Financial Assets report"
-msgstr ""
+msgstr "金融资产报告"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__fixed
 msgid "Fixed"
-msgstr ""
+msgstr "固定"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "关注者"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "关注者（合作伙伴）"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Font awesome图标，例如fa-tasks"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
 msgid "Force accounting date"
-msgstr ""
+msgstr "强制会计日期"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Gain/Loss on Sale"
-msgstr ""
+msgstr "销售损益"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -773,27 +786,27 @@ msgstr "基本信息"
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "Generate Asset Removal entries"
-msgstr ""
+msgstr "生成资产移除条目"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
 msgid "Generate Removal entries"
-msgstr ""
+msgstr "生成移除条目"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Generate Report"
-msgstr ""
+msgstr "生成报告"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "有消息"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
 msgid "Has accounting entries"
-msgstr ""
+msgstr "有会计条目"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -816,22 +829,22 @@ msgstr "ID"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "图标"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "表示异常活动的图标。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "如果勾选，新消息需要您的关注。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "如果勾选，部分消息存在发送错误。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__carry_forward_missed_depreciations
@@ -841,12 +854,13 @@ msgid ""
 "be\n"
 "        carried forward to the first depreciation line of the current open\n"
 "        period."
-msgstr ""
+msgstr "如果在现已关闭的会计期间创建资产，无法过账的累计折旧金额将结转到当前开放期间"
+"的第一条折旧行。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_wiz_asset_move_reverse__journal_id
 msgid "If empty, uses the journal of the journal entry to be reversed."
-msgstr ""
+msgstr "如果为空，使用要冲销的日记账分录的日记账。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__use_leap_years
@@ -859,6 +873,10 @@ msgid ""
 "amount to depreciate per year will be calculated as depreciation base / "
 "(depreciation end date - start date + 1) * days in the current year."
 msgstr ""
+"如果未设置，系统将根据年数均匀分配摊销金额。因此，每年的金额将为折旧基数/年数"
+"。\n"
+" 如果设置，系统将考虑当前年份是否为闰年。每年的折旧金额将计算为折旧基数/（"
+"折旧结束日期 - 开始日期 + 1）* 当前年份的天数。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__allow_reversal
@@ -866,19 +884,20 @@ msgid ""
 "If set, when pressing the Delete/Reverse Move button in a posted "
 "depreciation line will prompt the option to reverse the journal entry, "
 "instead of deleting them."
-msgstr ""
+msgstr "如果设置，在已过账的折旧行中按下删除/冲销移动按钮将提示冲销日记账分录的选项，"
+"而不是删除它们。"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "Illegal value %s in asset.method."
-msgstr ""
+msgstr "asset.method中的非法值%s。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__draft
 msgid "Include draft assets"
-msgstr ""
+msgstr "包括草稿资产"
 
 #. module: account_asset_management
 #. odoo-python
@@ -888,6 +907,8 @@ msgid ""
 "Inconsistent reporting structure.\n"
 "Please correct Asset Group '{group}' (id {id})"
 msgstr ""
+"报告结构不一致。\n"
+"请更正资产组'{group}'（id {id}）"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
@@ -895,22 +916,22 @@ msgstr ""
 msgid ""
 "Indicates that the first depreciation entry for this asset has to be done "
 "from the depreciation start date instead of the first day of the fiscal year."
-msgstr ""
+msgstr "表示此资产的第一笔折旧分录必须从折旧开始日期而不是财政年度的第一天开始。"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Init"
-msgstr ""
+msgstr "初始化"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__init_entry
 msgid "Initial Balance Entry"
-msgstr ""
+msgstr "初始余额分录"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "是关注者"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__journal_id
@@ -979,44 +1000,44 @@ msgstr "线性"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Linear up to Salvage Value"
-msgstr "细分值"
+msgstr "线性至残值"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "消息传递错误"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "消息"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_min_value_id
 msgid "Min-Value Account"
-msgstr ""
+msgstr "最小值账户"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Missing depreciation table"
-msgstr ""
+msgstr "缺少折旧表"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "我的活动截止日期"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1032,22 +1053,22 @@ msgstr "名称"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "New Acquisitions"
-msgstr ""
+msgstr "新购置"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "下一个活动截止日期"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "下一个活动摘要"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "下一个活动类型"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__remaining_value
@@ -1059,7 +1080,7 @@ msgstr "下个期间的折旧"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__note
@@ -1079,14 +1100,14 @@ msgstr "备注"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "行动数量"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Depreciations"
-msgstr ""
+msgstr "折旧次数"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1095,34 +1116,34 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_number
 #, python-format
 msgid "Number of Years"
-msgstr ""
+msgstr "年数"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Number of Years or end date"
-msgstr ""
+msgstr "年数或结束日期"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "错误数量"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "需要采取行动的消息数量"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "传递错误的消息数量"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__open
 msgid "Open"
-msgstr ""
+msgstr "打开"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1131,15 +1152,13 @@ msgstr "其他信息"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
-#, fuzzy
 msgid "Parent Asset Group"
-msgstr "上级资产"
+msgstr "父资产组"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
-#, fuzzy
 msgid "Parent Path"
-msgstr "上级资产"
+msgstr "父路径"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__partner_id
@@ -1149,21 +1168,21 @@ msgstr "往来单位"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__percent
 msgid "Percentage of Price"
-msgstr ""
+msgstr "价格百分比"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period Depreciation"
-msgstr ""
+msgstr "期间折旧"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period End Value"
-msgstr ""
+msgstr "期间结束值"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_period
@@ -1176,19 +1195,19 @@ msgstr "期间长度"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Period Start Value"
-msgstr ""
+msgstr "期间开始值"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_period
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_period
 msgid "Period length for the depreciation accounting entries"
-msgstr ""
+msgstr "折旧会计条目的期间长度"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_plus_value_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_plus_value_id
 msgid "Plus-Value Account"
-msgstr ""
+msgstr "增值账户"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__move_check
@@ -1198,12 +1217,12 @@ msgstr "已登帐"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__previous_id
 msgid "Previous Depreciation Line"
-msgstr ""
+msgstr "前期折旧行"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Profile"
-msgstr ""
+msgstr "配置文件"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1227,7 +1246,7 @@ msgstr "资产原值"
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Quarter"
-msgstr ""
+msgstr "季度"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1249,7 +1268,7 @@ msgstr "卡片编码"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__posting_regime
 msgid "Removal Entry Policy"
-msgstr ""
+msgstr "移除条目政策"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__posting_regime
@@ -1260,36 +1279,39 @@ msgid ""
 "  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value "
 "Account' or 'Min-Value Account' "
 msgstr ""
+"移除条目政策 \n"
+"  * 残值：未折旧的价值将过账到'残值账户' \n"
+"  * 销售损益：损益将过账到'增值账户'或'减值账户' "
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__date_remove
 msgid ""
 "Removal date must be after the last posted entry in case of early removal"
-msgstr ""
+msgstr "提前移除时，移除日期必须在上次过账条目之后"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_remove
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
 msgid "Remove Asset"
-msgstr ""
+msgstr "移除资产"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__removed
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Removed"
-msgstr ""
+msgstr "已移除"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Removed Assets"
-msgstr ""
+msgstr "已移除资产"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1303,39 +1325,39 @@ msgstr "资产净值"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_residual_value_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_residual_value_id
 msgid "Residual Value Account"
-msgstr ""
+msgstr "残值账户"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "负责用户"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 msgid "Results :"
-msgstr ""
+msgstr "结果："
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__date_reversal
 msgid "Reversal date"
-msgstr ""
+msgstr "反转日期"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
 msgid "Reverse Journal Entry"
-msgstr ""
+msgstr "反转日记账条目"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "Reverse Move"
-msgstr ""
+msgstr "反转移动"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_wiz_asset_move_reverse
 msgid "Reverse posted journal entry on depreciation line"
-msgstr ""
+msgstr "在折旧行上反转已过账的日记账条目"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__open
@@ -1346,12 +1368,12 @@ msgstr "运行中"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
 msgid "Sale Value"
-msgstr ""
+msgstr "销售价值"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
 msgid "Salvage Type"
-msgstr ""
+msgstr "残值类型"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1364,22 +1386,20 @@ msgstr "预计残值"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#, fuzzy
 msgid "Search Asset Group"
-msgstr "搜索资产类别"
+msgstr "搜索资产组"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-#, fuzzy
 msgid "Search Asset Profile"
-msgstr "搜索资产类别"
+msgstr "搜索资产配置文件"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__init_entry
 msgid ""
 "Set this flag for entries of previous fiscal years for which Odoo has not "
 "generated accounting entries."
-msgstr ""
+msgstr "为Odoo未生成会计条目的以前财政年度的条目设置此标志。"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1394,12 +1414,12 @@ msgstr "跳过草稿状态"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__date_from
 msgid "Start Date"
-msgstr ""
+msgstr "开始日期"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__state
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__parent_state
@@ -1423,6 +1443,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"基于活动的状态\n"
+"逾期：截止日期已过\n"
+"今天：活动日期为今天\n"
+"计划中：未来活动。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1431,14 +1455,14 @@ msgstr ""
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years'."
-msgstr ""
+msgstr "'_compute_year_amount'方法仅适用于时间方法'年数'。"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
-msgstr ""
+msgstr "'account'字段是'_xls_%s_fields'列表的必填项！"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1446,14 +1470,14 @@ msgstr ""
 #, python-format
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
-msgstr ""
+msgstr "资产配置文件中定义的资产账户必须等于账户。"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The Sale Value must be positive!"
-msgstr ""
+msgstr "销售价值必须为正！"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1461,7 +1485,7 @@ msgstr ""
 #: code:addons/account_asset_management/wizard/wiz_account_asset_report.py:0
 #, python-format
 msgid "The Start Date must precede the Ending Date."
-msgstr ""
+msgstr "开始日期必须在结束日期之前。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1470,7 +1494,7 @@ msgstr ""
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
 "dates."
-msgstr ""
+msgstr "资产的持续时间与已发布的折旧表条目日期冲突。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__salvage_value
@@ -1480,19 +1504,21 @@ msgid ""
 "its useful life.\n"
 "This value is used to determine the depreciation amounts."
 msgstr ""
+"资产在其使用寿命结束时出售时将实现的估计价值。\n"
+"此值用于确定折旧金额。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_number
 msgid "The number of years needed to depreciate your asset"
-msgstr ""
+msgstr "资产折旧所需的年数"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The removal date must be after the last depreciation date."
-msgstr ""
+msgstr "移除日期必须在最后一次折旧日期之后。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
@@ -1500,7 +1526,7 @@ msgstr ""
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value)."
-msgstr ""
+msgstr "此金额代表资产的折旧基础（购买价值 - 残值）。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__purchase_value
@@ -1509,13 +1535,16 @@ msgid ""
 "The Depreciation Base is calculated as follows:\n"
 "Purchase Value - Salvage Value."
 msgstr ""
+"此金额代表资产的初始价值。\n"
+"折旧基础计算如下：\n"
+"购买价值 - 残值。"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "This invoice created the asset(s): %s"
-msgstr ""
+msgstr "此发票创建了资产：%s"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
@@ -1528,24 +1557,24 @@ msgstr "计时方法"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Tot. Depreciation"
-msgstr ""
+msgstr "总折旧"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Total Days"
-msgstr ""
+msgstr "总天数"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Totals"
-msgstr ""
+msgstr "总计"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_trigger
 msgid "Trigger Date"
-msgstr ""
+msgstr "触发日期"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__type
@@ -1555,31 +1584,31 @@ msgstr "类型"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "记录中异常活动的类型。"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Undetermined error"
-msgstr ""
+msgstr "未确定的错误"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
 msgid "Use Leap Years"
-msgstr ""
+msgstr "使用闰年"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
 msgid "Use Specific Journal"
-msgstr ""
+msgstr "使用特定日记账"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__days_calc
 msgid "Use number of days to calculate depreciation amount"
-msgstr ""
+msgstr "使用天数计算折旧金额"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
@@ -1589,17 +1618,17 @@ msgstr "查看折旧凭证"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "View Move"
-msgstr ""
+msgstr "查看移动"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "网站消息"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "网站通讯历史"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__state
@@ -1613,6 +1642,10 @@ msgid ""
 "When the removal entries are generated, the asset goes into the 'Removed' "
 "status."
 msgstr ""
+"资产创建时，状态为'草稿'。\n"
+"如果资产被确认，状态变为'运行中'，折旧行可以过账到会计。\n"
+"如果最后一条折旧行过账，资产进入'关闭'状态。\n"
+"当生成移除条目时，资产进入'已移除'状态。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1629,6 +1662,8 @@ msgid ""
 "You are not allowed to link an accounting entry to an asset.\n"
 "You should generate such entries from the asset."
 msgstr ""
+"不允许将会计条目链接到资产。\n"
+"您应该从资产生成这些条目。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1639,13 +1674,15 @@ msgid ""
 "You are not allowed to remove an accounting entry linked to an asset.\n"
 "You should remove such entries from the asset."
 msgstr ""
+"不允许移除与资产链接的会计条目。\n"
+"您应该从资产中移除这些条目。"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You can only delete assets in draft state."
-msgstr ""
+msgstr "只能删除草稿状态的资产。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1654,7 +1691,7 @@ msgstr ""
 msgid ""
 "You can't make an early removal if all the depreciation lines for previous "
 "periods are not posted."
-msgstr ""
+msgstr "如果前期所有折旧行未过账，不能进行提前移除。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1662,7 +1699,7 @@ msgstr ""
 #, python-format
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
-msgstr ""
+msgstr "不能更改有关联会计条目的折旧行。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1670,7 +1707,7 @@ msgstr ""
 #, python-format
 msgid ""
 "You cannot change an accounting entry linked to an asset depreciation line."
-msgstr ""
+msgstr "不能更改与资产折旧行链接的会计条目。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1678,14 +1715,14 @@ msgstr ""
 #, python-format
 msgid ""
 "You cannot change an accounting item linked to an asset depreciation line."
-msgstr ""
+msgstr "不能更改与资产折旧行链接的会计项目。"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
-msgstr "您不能删除一个包含有折旧行的资产"
+msgstr "不能更改有会计条目的资产档案。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1693,7 +1730,7 @@ msgstr "您不能删除一个包含有折旧行的资产"
 #, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
-msgstr ""
+msgstr "不能删除有关联会计条目的折旧行。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1705,9 +1742,9 @@ msgstr "您不能删除一个包含有折旧行的资产"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
-msgstr "您不能删除一个包含有折旧行的资产"
+msgstr "不能移除类型为'折旧基础'的资产行。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1716,14 +1753,14 @@ msgstr "您不能删除一个包含有折旧行的资产"
 msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
 "prior posted entries."
-msgstr ""
+msgstr "不能在已有过账条目的折旧行上设置'初始余额条目'标志。"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
-msgstr "您不能删除一个包含有折旧行的资产"
+msgstr "不能在已有过账条目后设置资产开始日期。"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1732,7 +1769,7 @@ msgstr "您不能删除一个包含有折旧行的资产"
 msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
 "entries."
-msgstr ""
+msgstr "不能在折旧行上设置早于已有过账条目的日期。"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__date_start
@@ -1740,7 +1777,8 @@ msgid ""
 "You should manually add depreciation lines with the depreciations of "
 "previous fiscal years if the Depreciation Start Date is different from the "
 "date for which accounting entries need to be generated."
-msgstr ""
+msgstr "如果折旧开始日期与需要生成会计条目的日期不同，应手动添加包含以前财政年度折旧"
+"的折旧行。"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
