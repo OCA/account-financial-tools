@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2024-08-19 09:58+0000\n"
+"PO-Revision-Date: 2025-04-28 09:23+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -969,7 +969,7 @@ msgstr ""
 #: code:addons/account_loan/wizards/account_loan_post.py:0
 #, python-format
 msgid "The total principal amount does not match the loan amount."
-msgstr ""
+msgstr "Il valore totale del capitale non corrisponde al valore del prestito."
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line__payment_amount
@@ -1033,7 +1033,7 @@ msgstr "Quando spuntato, il primo pagamento sarà alla data inizio"
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
 msgid "principal_amount"
-msgstr ""
+msgstr "principal_amount"
 
 #~ msgid "Sequence must be unique in a loan"
 #~ msgstr "La sequenza deve essere univoco in un prestito"
