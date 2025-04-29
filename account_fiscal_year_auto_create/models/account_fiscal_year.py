@@ -19,7 +19,6 @@ class AccountFiscalYear(models.Model):
             last_fiscal_year = self.search(
                 [("company_id", "=", company.id)], order="date_to desc", limit=1
             )
-
             if last_fiscal_year and (
                 last_fiscal_year.date_to < datetime.now().date() + relativedelta(days=1)
             ):
@@ -29,15 +28,14 @@ class AccountFiscalYear(models.Model):
         self.ensure_one()
         # try to generate a new name, based on the previous
         # name replacing YYYY pattern by YYYY+1 value
-        # - "FY 2018" will be replace by "FY 2019"
-        # - "FY 2018-2019" will be replace by "FY 2019-2020"
+        # - "FY 2024" will be replace by "FY 2025"
+        # - "FY 2024-2025" will be replace by "FY 2025-2026"
         new_name = self.name.replace(
             str(self.date_to.year), str(self.date_to.year + 1)
         ).replace(str(self.date_from.year), str(self.date_from.year + 1))
         if self.search(
             [("name", "=", new_name), ("company_id", "=", self.company_id.id)]
         ):
-            # the replace process fail to guess a correct unique name
             new_name = _(
                 "FY %(date_to)s - %(date_from)s",
                 date_to=str(self.date_to),
