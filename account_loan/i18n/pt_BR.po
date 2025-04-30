@@ -446,6 +446,15 @@ msgid "Is Leasing"
 msgstr "Está Alugando"
 
 #. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan.py:0
+#, python-format
+msgid ""
+"It is only possible to change to draft if the status is cancelled or posted "
+"and there are no account moves."
+msgstr ""
+
+#. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Items"
 msgstr "Itens"
@@ -641,6 +650,11 @@ msgid "Move"
 msgstr "Movimento"
 
 #. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__move_count
+msgid "Move Count"
+msgstr ""
+
+#. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Moves"
 msgstr "Movimentos"
@@ -834,6 +848,11 @@ msgstr "Taxa real"
 #: model:ir.model.fields,help:account_loan.field_account_loan__rate_period
 msgid "Real rate that will be applied on each period"
 msgstr "Taxa real que será aplicada em cada período"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Reset to draft"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__residual_amount
