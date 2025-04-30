@@ -47,6 +47,13 @@
                         string="Post"
                         groups="account.group_account_manager"
                     />
+                    <button
+                        name="button_draft"
+                        invisible="state not in ('posted', 'cancelled') or move_count != 0"
+                        type="object"
+                        string="Reset to draft"
+                        groups="account.group_account_manager"
+                    />
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
@@ -57,8 +64,9 @@
                             icon="fa-bars"
                             invisible="state == 'draft'"
                             type="object"
-                            string="Moves"
-                        />
+                        >
+                            <field string="Moves" name="move_count" widget="statinfo" />
+                        </button>
                         <button
                             name="view_account_invoices"
                             class="oe_stat_button"
