@@ -5,6 +5,7 @@ import logging
 
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_is_zero
 
 _logger = logging.getLogger(__name__)
 try:
@@ -127,9 +128,10 @@ class AccountLoanLine(models.Model):
     @api.depends("interests_amount")
     def _compute_rate(self):
         for record in self:
-            record.rate = (
-                record.interests_amount * 100
-            ) / record.pending_principal_amount
+            rate = 0
+            if not float_is_zero(record.pending_principal_amount, precision_digits=2):
+                rate = (record.interests_amount * 100) / record.pending_principal_amount
+            record.rate = rate
 
     @api.depends("rate")
     def _compute_interests_amount(self):

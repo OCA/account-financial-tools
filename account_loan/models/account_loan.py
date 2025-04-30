@@ -7,7 +7,8 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 try:
@@ -183,6 +184,7 @@ class AccountLoan(models.Model):
         "invoice is created",
     )
     move_ids = fields.One2many("account.move", copy=False, inverse_name="loan_id")
+    move_count = fields.Integer(compute="_compute_move_count")
     pending_principal_amount = fields.Monetary(
         currency_field="currency_id",
         compute="_compute_total_amounts",
@@ -220,6 +222,11 @@ class AccountLoan(models.Model):
                     )
                 previous_pending_principal = line.pending_principal_amount
                 previous_principal_amount = line.principal_amount
+
+    @api.depends("move_ids")
+    def _compute_move_count(self):
+        for item in self:
+            item.move_count = len(item.move_ids)
 
     @api.depends("line_ids", "currency_id", "loan_amount")
     def _compute_total_amounts(self):
@@ -419,6 +426,17 @@ class AccountLoan(models.Model):
             amount -= line.payment_amount - line.interests_amount
         if self.long_term_loan_account_id:
             self._check_long_term_principal_amount()
+
+    def button_draft(self):
+        for item in self:
+            if item.state not in ("posted", "cancelled") or item.move_count > 0:
+                raise UserError(
+                    _(
+                        "It is only possible to change to draft if the status is "
+                        "cancelled or posted and there are no account moves."
+                    )
+                )
+            item.state = "draft"
 
     def view_account_moves(self):
         self.ensure_one()

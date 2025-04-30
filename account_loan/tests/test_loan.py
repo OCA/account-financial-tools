@@ -648,6 +648,8 @@ class TestLoan(BaseCommon):
         periods = 10
         loan = self.create_loan("fixed-annuity", amount, 1, periods)
         self.post(loan)
+        with self.assertRaises(UserError):
+            loan.button_draft()
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         line.view_process_values()
         self.assertTrue(line.move_ids)
@@ -660,6 +662,12 @@ class TestLoan(BaseCommon):
         self.assertEqual(pay.amount, line.final_pending_principal_amount)
         pay.run()
         self.assertEqual(loan.state, "cancelled")
+        with self.assertRaises(UserError):
+            loan.button_draft()
+        loan.move_ids.button_draft()
+        loan.move_ids.unlink()
+        loan.button_draft()
+        self.assertEqual(loan.state, "draft")
 
     def post(self, loan):
         self.assertFalse(loan.move_ids)
