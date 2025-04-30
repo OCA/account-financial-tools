@@ -42,6 +42,7 @@
                     <button
                         name="%(account_loan_post_action)d"
                         invisible="state != 'draft'"
+                        class="oe_highlight"
                         type="action"
                         string="Post"
                         groups="account.group_account_manager"
