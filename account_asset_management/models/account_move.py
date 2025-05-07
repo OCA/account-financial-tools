@@ -227,7 +227,12 @@ class AccountMoveLine(models.Model):
             linked_asset = False
             for move_line in self.filtered(lambda r: not r.move_id.is_sale_document()):
                 linked_asset = move_line.asset_id
-                if linked_asset:
+                if linked_asset and self.env["account.asset.line"].sudo().search(
+                    [
+                        ("move_id", "=", move_line.move_id.id),
+                        ("type", "=", "depreciate"),
+                    ]
+                ):
                     raise UserError(
                         _(
                             "You cannot change an accounting item "
