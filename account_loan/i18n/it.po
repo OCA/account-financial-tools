@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2025-04-28 09:23+0000\n"
+"PO-Revision-Date: 2025-05-10 09:24+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -457,6 +457,8 @@ msgid ""
 "It is only possible to change to draft if the status is cancelled or posted "
 "and there are no account moves."
 msgstr ""
+"È possibile mettere a bozza solo se lo stato è annullato o inserito e non ci "
+"sono movimenti contabili."
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -656,7 +658,7 @@ msgstr "Movimento"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__move_count
 msgid "Move Count"
-msgstr ""
+msgstr "Conteggio movimenti"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -860,7 +862,7 @@ msgstr "Tasso reale che sarà applicato ogni rata"
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Reset to draft"
-msgstr ""
+msgstr "Reimposta a bozza"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__residual_amount
