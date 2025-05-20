@@ -229,9 +229,7 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
         self.invoice_1_a_15.invoice_date = after_10_days - timedelta(days=1)
         with self.assertRaisesRegex(
             UserError,
-            "Chronology conflict: Invoice {} cannot be before invoice {}.".format(
-                self.invoice_1_a_15.name, self.invoice_1_a_10.name
-            ),
+            f"Chronology conflict: Invoice {self.invoice_1_a_15.name} cannot be before invoice {self.invoice_1_a_10.name}.",
         ):
             self.invoice_1_a_15.action_post()
 
@@ -245,9 +243,7 @@ class TestAccountInvoiceConstraintChronology(common.TransactionCase):
         self.invoice_1_a_15.invoice_date = after_20_days + timedelta(days=1)
         with self.assertRaisesRegex(
             UserError,
-            "Chronology conflict: Invoice {} cannot be after invoice {}.".format(
-                self.invoice_1_a_15.name, self.invoice_1_a_20.name
-            ),
+            f"Chronology conflict: Invoice {self.invoice_1_a_15.name} cannot be after invoice {self.invoice_1_a_20.name}.",
         ):
             self.invoice_1_a_15.action_post()
 
