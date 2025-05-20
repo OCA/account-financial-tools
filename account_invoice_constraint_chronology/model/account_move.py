@@ -63,14 +63,11 @@ class AccountMove(models.Model):
 
     def _get_sequence_order_conflicting_invoices_domain(self):
         self.ensure_one()
-
         if not self.name or self.name == "/":
             return expression.FALSE_DOMAIN
-
         last_sequence = self._get_last_sequence()
         if not last_sequence or self.name > last_sequence:
             return expression.FALSE_DOMAIN
-
         return expression.AND(
             [
                 [("name", "=", last_sequence)],
@@ -184,5 +181,4 @@ class AccountMove(models.Model):
                 continue
             if self.search(move._get_newer_conflicting_invoices_domain(), limit=1):
                 move._raise_newer_conflicting_invoices()
-
         return res
