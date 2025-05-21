@@ -160,6 +160,7 @@
                         </tfooter>
                     </table>
                 </div>
+                <span t-field="o.narration" />
             </div>
         </t>
     </template>
