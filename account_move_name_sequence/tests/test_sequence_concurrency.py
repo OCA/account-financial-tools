@@ -59,6 +59,7 @@ class TestSequenceConcurrency(TransactionCase):
             # Set a 10-second timeout to avoid waiting too long for release locks
             cr.execute("SET LOCAL statement_timeout = '10s'")
         cls.registry.enter_test_mode(cls.cursor(cls))
+        cls.addClassCleanup(cls.registry.leave_test_mode)
         cls.last_existing_move = cls.env["account.move"].search(
             [], limit=1, order="id desc"
         )
