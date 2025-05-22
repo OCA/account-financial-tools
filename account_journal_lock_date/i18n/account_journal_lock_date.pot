@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,14 +104,12 @@ msgstr ""
 #. module: account_journal_lock_date
 #. odoo-python
 #: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
-#, python-format
 msgid "You are not allowed to execute this action."
 msgstr ""
 
 #. module: account_journal_lock_date
 #. odoo-python
 #: code:addons/account_journal_lock_date/models/account_move.py:0
-#, python-format
 msgid ""
 "You cannot add/modify entries for the journal '%(journal)s' prior to and "
 "inclusive of the lock date %(journal_date)s"
@@ -120,7 +118,6 @@ msgstr ""
 #. module: account_journal_lock_date
 #. odoo-python
 #: code:addons/account_journal_lock_date/models/account_move.py:0
-#, python-format
 msgid ""
 "You cannot add/modify entries for the journal '%(journal)s' prior to and "
 "inclusive of the lock date %(journal_date)s. Check the Journal settings or "
