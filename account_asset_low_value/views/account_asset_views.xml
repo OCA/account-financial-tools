@@ -10,7 +10,7 @@
             <field name="value_residual" position="after">
                 <field
                     name="low_value"
-                    attrs="{'invisible': [('low_value', '=', False)]}"
+                    invisible="not low_value"
                 />
             </field>
         </field>

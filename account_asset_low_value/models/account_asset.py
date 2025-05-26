@@ -1,7 +1,7 @@
 # Copyright 2021 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class AccountAsset(models.Model):
@@ -44,17 +44,13 @@ class AccountAsset(models.Model):
     def _compute_depreciation(self):
         res = super()._compute_depreciation()
         # For low value asset, there is no depreciation
-        for asset in self:
-            if asset.low_value:
-                asset.value_residual = 0
+        self.filtered(lambda asset: asset.low_value).write({"value_residual": 0.0})
         return res
 
     def validate(self):
         res = super().validate()
         # For low value asset, state = "open" even value_residual = 0
-        for asset in self:
-            if asset.low_value:
-                asset.state = "open"
+        self.filtered(lambda asset: asset.low_value).write({"state": "open"})
         return res
 
     def remove(self):
@@ -64,7 +60,7 @@ class AccountAsset(models.Model):
         if self.low_value:
             view = self.env.ref("account_asset_low_value.asset_low_value_remove_form")
             return {
-                "name": _("Remove Low Value Asset"),
+                "name": self.env._("Remove Low Value Asset"),
                 "view_mode": "form",
                 "res_model": "account.asset.remove",
                 "view_id": view.id,
