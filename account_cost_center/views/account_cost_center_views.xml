@@ -26,8 +26,7 @@
                             />
                         </group>
                     </group>
-                    <notebook name="notebook">
-                    </notebook>
+                    <notebook name="notebook" />
                 </sheet>
             </form>
         </field>
@@ -35,11 +34,11 @@
     <record id="account_cost_center_view_tree" model="ir.ui.view">
         <field name="model">account.cost.center</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="code" />
                 <field name="name" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="account_cost_center_view_search" model="ir.ui.view">
@@ -58,7 +57,8 @@
         <field name="name">Cost Centers</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.cost.center</field>
-        <field name="view_mode">tree,form</field>
+        <field name="path">cost-centers</field>
+        <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="account_cost_center_view_search" />
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -78,5 +78,4 @@
         groups="account.group_account_invoice"
         sequence="40"
     />
-
 </odoo>

@@ -10,6 +10,5 @@ class AccountMove(models.Model):
     cost_center_id = fields.Many2one(
         "account.cost.center",
         readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Default Cost Center",
     )
