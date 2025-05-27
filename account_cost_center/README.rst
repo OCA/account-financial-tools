@@ -46,26 +46,30 @@ Start using cost centers by defining the cost centers. Be aware that
 Analytic Accounting must be activated on the user for the following menu
 option. Use the menu in the accounting module:
 
+::
+
    **Configuration > Analytics accounting > Cost centers**
 
-|image1|
+|Cost centers can be configured|
 
 Once defined you can add a cost center to an invoice line. A default
 cost center for the current invoice can be set in the other info tab.
 
-|image2|
+|Cost centers can be selected on invoice lines|
 
 This module adds the cost center concept to the reporting.
+
+::
 
    **Accounting > Invoice Analysis**
 
 Here you can select or unselect the cost center within your analysis.
 
-|image3|
+|image1|
 
-.. |image1| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_cost_center/static/description/account_costcenter_1.png
-.. |image2| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_cost_center/static/description/account_costcenter_2.png
-.. |image3| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_cost_center/static/description/account_costcenter_3.png
+.. |Cost centers can be configured| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_cost_center/static/description/account_costcenter_1.png
+.. |Cost centers can be selected on invoice lines| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_cost_center/static/description/account_costcenter_2.png
+.. |image1| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_cost_center/static/description/account_costcenter_3.png
 
 Bug Tracker
 ===========
@@ -88,10 +92,11 @@ Authors
 Contributors
 ------------
 
-- Kevin Graveman <k.graveman@onestein.nl>
-- Richard Dijkstra <r.dijkstra@onestein.nl>
-- Andrea Stirpe <a.stirpe@onestein.nl>
-- Antonio Esposito <a.esposito@onestein.nl>
+- Kevin Graveman k.graveman@onestein.nl
+- Richard Dijkstra r.dijkstra@onestein.nl
+- Andrea Stirpe a.stirpe@onestein.nl
+- Antonio Esposito a.esposito@onestein.nl
+- ``Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>``\ \_
 
 Maintainers
 -----------
