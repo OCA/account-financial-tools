@@ -10,7 +10,4 @@ class AccountInvoiceReport(models.Model):
     cost_center_id = fields.Many2one("account.cost.center", readonly=True)
 
     def _select(self):
-        return (
-            super(AccountInvoiceReport, self)._select()
-            + ", line.cost_center_id as cost_center_id"
-        )
+        return super()._select() + ", line.cost_center_id as cost_center_id"
