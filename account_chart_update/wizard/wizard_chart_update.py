@@ -490,7 +490,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     if record_value_compare.sort() != real_value.ids.sort():
                         result[key] = record_value
                 continue
-            if field.ttype == "many2one":
+            elif field.ttype == "many2one":
                 real_xml_id = self._get_external_id(real_value)
                 full_xml_id = (
                     f"account.{self.company_id.id}_{record_value}"
@@ -500,7 +500,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 if real_xml_id != full_xml_id:
                     result[key] = record_value
                 continue
-            if field.ttype == "one2many":
+            elif field.ttype == "one2many":
                 if len(record_value) != len(real_value):
                     result[key] = [(5, 0, 0)] + record_value
                 else:
@@ -525,10 +525,18 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     if key_lang in record_values:
                         real_value_lang = real.with_context(lang=lang.code)[key]
                         record_value_lang = record_values[key_lang]
+                        if field.ttype == "html":
+                            # Convert HTML to inner content for comparison
+                            # especially to prevent comparing str with Markup
+                            real_value_lang = tools.mail.html_to_inner_content(
+                                real_value_lang
+                            )
                         if record_value_lang != real_value_lang:
                             result[key_lang] = record_value_lang
             elif field.ttype == "html":
-                record_value = tools.html_to_inner_content(record_value)
+                # Convert HTML to inner content for comparison
+                # especially to prevent comparing str with Markup
+                real_value = tools.mail.html_to_inner_content(real_value)
                 if record_value != real_value:
                     result[key] = record_value
             elif record_value != real_value:
@@ -588,12 +596,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         }
         company = self.company_id
         model = self.env[model_name]
+        company_domain = []
         if "company_id" in model._fields:
             company_domain = [("company_id", "=", company.id)]
         elif "company_ids" in model._fields:
             company_domain = [("company_ids", "in", company.ids)]
-        else:
-            company_domain = []
         for matching in mapped_fields[model_name].sorted("sequence"):
             if matching.matching_value == "xml_id":
                 full_xmlid = (
@@ -601,7 +608,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 )
                 record = self.env.ref(full_xmlid, raise_if_not_found=False)
                 if record:
-                    return record
+                    # To read company-dependent fields correctly
+                    return record.with_company(company)
             else:
                 f_name = matching.matching_value
                 if not data.get(f_name):

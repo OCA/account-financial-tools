@@ -188,17 +188,17 @@
                     <notebook>
                         <page string="Taxes" invisible="not update_tax">
                             <field name="tax_ids" nolabel="1">
-                                <list decoration-danger="type=='updated'">
+                                <list create="false" edit="false" decoration-danger="type=='updated'">
                                     <field
                                         name="update_tax_id"
                                         invisible="not update_tax_id"
                                     />
-                                    <field name="xml_id" column_invisible="1" />
+                                    <field name="xml_id" optional="hide" />
                                     <field name="type_tax_use" />
                                     <field name="notes" />
                                     <field name="type" />
                                 </list>
-                                <form>
+                                <form edit="false">
                                     <group col="2">
                                         <group>
                                             <field name="xml_id" />
@@ -216,19 +216,19 @@
                         </page>
                         <page string="Accounts" invisible="not update_account">
                             <field name="account_ids" nolabel="1">
-                                <list decoration-danger="type=='updated'">
+                                <list create="false" edit="false" decoration-danger="type=='updated'">
                                     <field
                                         name="update_account_id"
                                         invisible="not update_account_id"
                                     />
                                     <field
                                         name="xml_id"
-                                        column_invisible="1"
+                                        optional="hide"
                                     />
                                     <field name="notes" />
                                     <field name="type" />
                                 </list>
-                                <form>
+                                <form edit="false">
                                     <group col="2">
                                         <group>
                                             <field name="xml_id" />
@@ -248,19 +248,19 @@
                             invisible="not update_account_group"
                         >
                             <field name="account_group_ids" nolabel="1">
-                                <list decoration-danger="type=='updated'">
+                                <list create="false" edit="false" decoration-danger="type=='updated'">
                                     <field
                                         name="update_account_group_id"
                                         invisible="not update_account_group_id"
                                     />
                                     <field
                                         name="xml_id"
-                                        column_invisible="1"
+                                        optional="hide"
                                     />
                                     <field name="notes" />
                                     <field name="type" />
                                 </list>
-                                <form>
+                                <form edit="false">
                                     <group col="2">
                                         <group>
                                             <field name="xml_id" />
@@ -282,6 +282,7 @@
                             <field name="fiscal_position_ids" nolabel="1">
                                 <list
                                     name="fiscal_positions"
+                                    create="false" edit="false"
                                     decoration-danger="type=='updated'"
                                 >
                                     <field
@@ -290,12 +291,12 @@
                                     />
                                     <field
                                         name="xml_id"
-                                        invisible="update_fiscal_position_id"
+                                        optional="hide"
                                     />
                                     <field name="notes" />
                                     <field name="type" />
                                 </list>
-                                <form>
+                                <form edit="false">
                                     <group col="2">
                                         <group>
                                             <field name="xml_id" />
