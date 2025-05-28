@@ -2,6 +2,7 @@
   - Pedro M. Baeza
   - Ernesto Tejeda
   - Víctor Martínez
+  - Carlos Lopez
 - Jacques-Etienne Baudoux \<<je@bcim.be>\>
 - Sylvain Van Hoof \<<sylvain@okia.be>\>
 - Nacho Muñoz \<<nacmuro@gmail.com>\>

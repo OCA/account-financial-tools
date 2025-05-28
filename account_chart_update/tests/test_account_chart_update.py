@@ -2,7 +2,6 @@
 # Copyright 2024 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import json
 import logging
 
 from odoo.tests import tagged
@@ -16,11 +15,14 @@ _logger = logging.getLogger(__name__)
 @tagged("-at_install", "post_install")
 class TestAccountChartUpdate(TestAccountChartUpdateCommon):
     def _get_record_for_xml_id(self, xml_id):
-        return self.env.ref(f"account.{self.company.id}_{xml_id}")
+        # To read company-dependent fields correctly
+        return self.env.ref(f"account.{self.company.id}_{xml_id}").with_company(
+            self.company
+        )
 
     @mute_logger("odoo.models.unlink")
     def test_01_chart_update(self):
-        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
         # Test ir.model.fields _compute_display_name
         field = wizard.fp_field_ids[:1]
@@ -30,7 +32,6 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertNotEqual(field.display_name, expected_name)
         # Test no changes
         self.assertEqual(wizard.state, "ready")
-        wizard.account_ids.unlink()
         self.assertFalse(wizard.tax_ids)
         self.assertFalse(wizard.account_ids)
         self.assertFalse(wizard.fiscal_position_ids)
@@ -44,7 +45,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
                 "update_fiscal_position": False,
             }
         )
-        wizard = self.wizard_obj.create(wizard_vals)
+        wizard = self.wizard_obj.with_company(self.company).create(wizard_vals)
         wizard.action_find_records()
         self.assertFalse(wizard.tax_ids)
         self.assertFalse(wizard.account_ids)
@@ -56,64 +57,17 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.env.cr.execute("DELETE FROM account_reconcile_model_line_account_tax_rel")
         self.env["account.tax"].search(domain).unlink()
         journals = self.env["account.journal"].search(domain)
-        for model_field in self.env["ir.model.fields"].search(
-            [
-                ("relation", "=", "account.journal"),
-                ("store", "=", True),
-                ("company_dependent", "=", True),
-            ]
-        ):
-            field_name = model_field.name
-            model = model_field.model_id.model
-            records = self.env[model].search([(field_name, "in", journals.ids)])
-            sub_ids_json_text = tuple(json.dumps(rec.id) for rec in journals)
-            defaults = (
-                self.env["ir.default"]
-                .sudo()
-                .search(
-                    [
-                        ("field_id", "=", model_field.id),
-                        ("json_value", "in", sub_ids_json_text),
-                    ]
-                )
-            )
-            if defaults:
-                defaults.unlink()
-            if records:
-                records.with_company(self.company).write({field_name: False})
+        IrDefault = self.env["ir.default"]
+        IrDefault.discard_records(journals)
         journals.unlink()
         accounts = self.env["account.account"].search(domain_account)
-        for model_field in self.env["ir.model.fields"].search(
-            [
-                ("relation", "=", "account.account"),
-                ("store", "=", True),
-                ("company_dependent", "=", True),
-            ]
-        ):
-            field_name = model_field.name
-            model = model_field.model_id.model
-            records = self.env[model].search([(field_name, "in", accounts.ids)])
-            sub_ids_json_text = tuple(json.dumps(rec.id) for rec in accounts)
-            defaults = (
-                self.env["ir.default"]
-                .sudo()
-                .search(
-                    [
-                        ("field_id", "=", model_field.id),
-                        ("json_value", "in", sub_ids_json_text),
-                    ]
-                )
-            )
-            if defaults:
-                defaults.unlink()
-            if records:
-                records.with_company(self.company).write({field_name: False})
+        IrDefault.discard_records(accounts)
         accounts.unlink()
         self.env["account.fiscal.position"].search(domain).unlink()
         self.env["account.group"].search(domain).unlink()
         wizard.unlink()
         # Now do the real one for detecting additions
-        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
         # account.tax data
         tax_data = self.chart_template_data["account.tax"]
@@ -175,7 +129,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             lambda r: r.repartition_type == "tax"
         )[0]
         repartition.account_id = new_account.id
-        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.tax_field_ids += self.env["ir.model.fields"].search(
             [("model", "=", "account.tax"), ("name", "=", "repartition_line_ids")]
         )
@@ -183,12 +137,12 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertEqual(len(wizard.tax_ids), 1)
         self.assertEqual(wizard.tax_ids.type, "updated")
         self.assertEqual(wizard.tax_ids.update_tax_id, new_tax)
-        self.assertEqual(len(wizard.account_ids), 44)
-        self.assertEqual(wizard.account_ids[0].type, "updated")
-        self.assertEqual(wizard.account_ids[0].update_account_id, new_account)
+        self.assertEqual(len(wizard.account_ids), 1)
+        self.assertEqual(wizard.account_ids.type, "updated")
+        self.assertEqual(wizard.account_ids.update_account_id, new_account)
         wizard.action_update_records()
         self.assertEqual(wizard.updated_taxes, 1)
-        self.assertEqual(wizard.updated_accounts, 44)
+        self.assertEqual(wizard.updated_accounts, 1)
         self.assertEqual(new_tax.name, tax_data_0["name"])
         self.assertNotEqual(new_tax.tax_group_id, new_tax_group)
         repartition = new_tax.repartition_line_ids.filtered(
@@ -200,7 +154,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         # Exclude fields from check
         new_tax.description = "Test description 2"
         new_account.name = "Other name 2"
-        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
         wizard.tax_field_ids -= self.env["ir.model.fields"].search(
             [("model", "=", "account.tax"), ("name", "=", "description")]
@@ -210,7 +164,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         )
         wizard.action_find_records()
         self.assertFalse(wizard.tax_ids)
-        # self.assertFalse(wizard.account_ids)
+        self.assertFalse(wizard.account_ids)
         wizard.unlink()
 
     @mute_logger("odoo.models.unlink")
@@ -227,42 +181,57 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         new_tax = self._get_record_for_xml_id(tax_data_key_0)
         new_tax.name = "Test 1 tax name changed"
         new_account = self._get_record_for_xml_id(account_data_key_0)
-        new_account.code = "101000"
-        wizard = self.wizard_obj.create(self.wizard_vals)
+        new_account.code = "200000"
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
         self.assertEqual(wizard.tax_ids.update_tax_id, new_tax)
         self.assertEqual(wizard.tax_ids.type, "updated")
-        # self.assertEqual(wizard.account_ids[0].update_account_id, new_account)
-        self.assertEqual(wizard.account_ids[0].type, "updated")
+        self.assertEqual(wizard.account_ids.update_account_id, new_account)
+        self.assertEqual(wizard.account_ids.type, "updated")
         wizard.action_update_records()
         self.assertEqual(wizard.updated_taxes, 1)
-        self.assertEqual(wizard.updated_accounts, 43)
+        self.assertEqual(wizard.updated_accounts, 1)
+        self.assertEqual(wizard.new_account_groups, 0)
+        self.assertEqual(wizard.updated_account_groups, 0)
+        self.assertEqual(wizard.updated_fps, 0)
+        self.assertEqual(wizard.deleted_taxes, 0)
         self.assertEqual(new_tax.name, tax_data_0["name"])
         self.assertEqual(new_account.code, wizard.padded_code(account_data_0["code"]))
         # Test match by another field, there is no match by XML-ID
         self._get_model_data(new_tax).unlink()
         self._get_model_data(new_account).unlink()
         new_account.name = "Test 2 account name changed"
-        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
         self.assertEqual(wizard.tax_ids.update_tax_id, new_tax)
         self.assertEqual(wizard.tax_ids.type, "updated")
-        self.assertEqual(wizard.account_ids[0].update_account_id, new_account)
-        self.assertEqual(wizard.account_ids[0].type, "updated")
+        self.assertEqual(wizard.account_ids.update_account_id, new_account)
+        self.assertEqual(wizard.account_ids.type, "updated")
         wizard.action_update_records()
         self.assertEqual(wizard.updated_taxes, 1)
-        self.assertEqual(wizard.updated_accounts, 44)
+        self.assertEqual(wizard.updated_accounts, 1)
         self.assertEqual(new_tax.name, tax_data_0["name"])
         self.assertEqual(new_account.name, account_data_0["name"])
         wizard.unlink()
         # Test match by name, there is no match by XML-ID or by code
         self._get_model_data(new_account).unlink()
-        new_account.code = "101000"
-        wizard = self.wizard_obj.create(self.wizard_vals)
+        new_account.code = "300000"
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
         self.assertEqual(wizard.account_ids[0].update_account_id, new_account)
         self.assertEqual(wizard.account_ids[0].type, "updated")
         wizard.action_update_records()
-        self.assertEqual(wizard.updated_accounts, 44)
+        self.assertEqual(wizard.updated_accounts, 1)
         self.assertEqual(new_account.code, wizard.padded_code(account_data_0["code"]))
         wizard.unlink()
+
+    def test_03_installed_charts(self):
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        chart_template_installed = wizard._chart_template_selection()
+        all_chart_templates = self.env[
+            "account.chart.template"
+        ]._get_chart_template_mapping()
+        only_installed = list(
+            filter(lambda x: x["installed"], all_chart_templates.values())
+        )
+        self.assertEqual(len(chart_template_installed), len(only_installed))

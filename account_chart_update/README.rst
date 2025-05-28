@@ -34,12 +34,12 @@ on the chart template.
 
 The wizard:
 
--  Allows the user to compare a chart and a template showing differences
-   on accounts, taxes, tax codes and fiscal positions.
--  It may create the new account, taxes, tax codes and fiscal positions
-   detected on the template.
--  It can also update (overwrite) the accounts, taxes, tax codes and
-   fiscal positions that got modified on the template.
+- Allows the user to compare a chart and a template showing differences
+  on accounts, taxes, tax codes and fiscal positions.
+- It may create the new account, taxes, tax codes and fiscal positions
+  detected on the template.
+- It can also update (overwrite) the accounts, taxes, tax codes and
+  fiscal positions that got modified on the template.
 
 **Table of contents**
 
@@ -61,11 +61,11 @@ to exclude records individually.
 Known issues / Roadmap
 ======================
 
--  Generate and update account reconcile models.
--  Generate XML-ID for fiscal position tax and account mapping lines.
--  Allow to select independently operations to perform (create, update,
-   deactivate).
--  Detect fiscal positions to deactivate?
+- Generate and update account reconcile models.
+- Generate XML-ID for fiscal position tax and account mapping lines.
+- Allow to select independently operations to perform (create, update,
+  deactivate).
+- Detect fiscal positions to deactivate?
 
 Bug Tracker
 ===========
@@ -90,23 +90,24 @@ Authors
 Contributors
 ------------
 
--  `Tecnativa <https://www.tecnativa.com>`__:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Pedro M. Baeza
-   -  Ernesto Tejeda
-   -  Víctor Martínez
+  - Pedro M. Baeza
+  - Ernesto Tejeda
+  - Víctor Martínez
+  - Carlos Lopez
 
--  Jacques-Etienne Baudoux <je@bcim.be>
--  Sylvain Van Hoof <sylvain@okia.be>
--  Nacho Muñoz <nacmuro@gmail.com>
--  Alberto Martín - Guadaltech <alberto.martin@guadaltech.es>
--  Fernando La Chica - GreenIce <fernandolachica@gmail.com>
--  Jairo Llopis (https://www.moduon.team/)
--  `Factor Libre <https://factorlibre.com>`__:
+- Jacques-Etienne Baudoux <je@bcim.be>
+- Sylvain Van Hoof <sylvain@okia.be>
+- Nacho Muñoz <nacmuro@gmail.com>
+- Alberto Martín - Guadaltech <alberto.martin@guadaltech.es>
+- Fernando La Chica - GreenIce <fernandolachica@gmail.com>
+- Jairo Llopis (https://www.moduon.team/)
+- `Factor Libre <https://factorlibre.com>`__:
 
-   -  Luis J. Salvatierra
+  - Luis J. Salvatierra
 
--  Daniel Reis (dreis@opensourceintegrators.com)
+- Daniel Reis (dreis@opensourceintegrators.com)
 
 Maintainers
 -----------
