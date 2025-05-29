@@ -1,0 +1,1 @@
+This is a small technical module for the use of the native object account.payment.method. This object is defined in the **account** module, but the account module doesn't provide any view for this object. This module adds a list view, a form view and a menu entry. It also adds an **active** field on this object.
