@@ -48,9 +48,9 @@ class AccountAsset(models.Model):
                 if not vals.get("account_depreciation_id"):
                     vals["account_depreciation_id"] = profile.account_depreciation_id.id
                 if not vals.get("account_expense_depreciation_id"):
-                    vals[
-                        "account_expense_depreciation_id"
-                    ] = profile.account_expense_depreciation_id.id
+                    vals["account_expense_depreciation_id"] = (
+                        profile.account_expense_depreciation_id.id
+                    )
         return super().create(vals_list)
 
     @api.depends("account_move_line_ids", "profile_id")
