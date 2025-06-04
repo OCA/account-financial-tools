@@ -107,7 +107,8 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "profile_id": self.car5y.id,
                 "date_start": time.strftime("%Y-01-01"),
                 "account_depreciation_id": self.account_depreciation_car.id,
-                "account_expense_depreciation_id": self.car5y.account_expense_depreciation_id.id,
+                "account_expense_depreciation_id": 
+                    self.car5y.account_expense_depreciation_id.id,
             }
         )
         self.assertEqual(vehicle0.state, "draft")

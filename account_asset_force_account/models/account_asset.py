@@ -59,7 +59,8 @@ class AccountAsset(models.Model):
             # Cannot update the account_asset_id if the asset is not in draft state
             if record.state != "draft":
                 continue
-            # Looks if the asset comes from an invoice, if so, takes the account from the invoice
+            # Looks if the asset comes from an invoice, 
+            # if so, takes the account from the invoice
             if len(record.account_move_line_ids.account_id) != 0:
                 invoice_line = record.account_move_line_ids.filtered(
                     lambda line: line.move_id.move_type == "in_invoice"
