@@ -3,7 +3,8 @@
 {
     "name": "Asset Force Account",
     "summary": "This module allows you to enforce specific accounts for assets, "
-        "including depreciation and expense accounts, through asset profiles and forms.",
+        "including depreciation and expense accounts, "
+        "through asset profiles and forms.",
     "version": "18.0.1.0.0",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Bernat Obrador (APSL-Nagarro), Odoo Community Association (OCA)",
