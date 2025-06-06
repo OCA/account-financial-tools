@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-12-17 15:06+0000\n"
+"PO-Revision-Date: 2025-06-06 14:56+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Conto"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_group
@@ -46,7 +46,7 @@ msgstr "Etichette conto"
 #. module: account_usability
 #: model:ir.model.fields,help:account_usability.field_account_account__group_id
 msgid "Account prefixes can determine account groups."
-msgstr ""
+msgstr "I prefissi del conto determinano i gruppi del conto."
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
@@ -83,7 +83,7 @@ msgstr "Impostazioni configurazione"
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
 msgid "Group"
-msgstr ""
+msgstr "Gruppo"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
