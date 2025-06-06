@@ -18,6 +18,11 @@ msgstr ""
 "X-Generator: Weblate 5.6.2\n"
 
 #. module: account_usability
+#: model:ir.model,name:account_usability.model_account_account
+msgid "Account"
+msgstr ""
+
+#. module: account_usability
 #: model:ir.model,name:account_usability.model_account_group
 msgid "Account Group"
 msgstr "مجموعة الحساب"
@@ -38,6 +43,11 @@ msgstr "وسم الحساب"
 #: model:ir.ui.menu,name:account_usability.account_tag_menu
 msgid "Account Tags"
 msgstr "وسوم الحسابات"
+
+#. module: account_usability
+#: model:ir.model.fields,help:account_usability.field_account_account__group_id
+msgid "Account prefixes can determine account groups."
+msgstr ""
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
@@ -72,15 +82,21 @@ msgid "Config Settings"
 msgstr "ضبط الإعدادات"
 
 #. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
+msgid "Group"
+msgstr ""
+
+#. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid ""
 "Record the cost of a good as an expense when this good is\n"
-"                                invoiced to a final customer (instead of recording the cost as soon\n"
+"                                invoiced to a final customer (instead of "
+"recording the cost as soon\n"
 "                                as the product is received in stock)."
 msgstr ""
 "تسجيل تكلفة المنتج كمصروف عند\n"
-"                                إصدار الفاتورة للعميل النهائي (بدلاً من "
-"تسجيل التكلفة\n"
+"                                إصدار الفاتورة للعميل النهائي (بدلاً من تسجيل "
+"التكلفة\n"
 "                                عند استلام المنتج في المخزون)."
 
 #. module: account_usability

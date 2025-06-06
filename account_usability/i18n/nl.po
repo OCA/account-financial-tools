@@ -17,6 +17,11 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: account_usability
+#: model:ir.model,name:account_usability.model_account_account
+msgid "Account"
+msgstr ""
+
+#. module: account_usability
 #: model:ir.model,name:account_usability.model_account_group
 #, fuzzy
 msgid "Account Group"
@@ -38,6 +43,11 @@ msgstr "Rekening label"
 #: model:ir.ui.menu,name:account_usability.account_tag_menu
 msgid "Account Tags"
 msgstr "Boekhoudingslabels"
+
+#. module: account_usability
+#: model:ir.model.fields,help:account_usability.field_account_account__group_id
+msgid "Account prefixes can determine account groups."
+msgstr ""
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
@@ -69,6 +79,11 @@ msgstr "Kassysteem"
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_res_config_settings
 msgid "Config Settings"
+msgstr ""
+
+#. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
+msgid "Group"
 msgstr ""
 
 #. module: account_usability
