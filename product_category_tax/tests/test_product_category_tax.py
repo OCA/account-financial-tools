@@ -107,7 +107,7 @@ class ProductCategoryTax(TransactionCase):
         self.product_test4.categ_id = test_categ.id
         test_categ.update_product_taxes()
         self.assertEqual(self.product_test3.supplier_taxes_id, self.tax_purchase)
-        self.assertNotEquals(self.product_test4.supplier_taxes_id, self.tax_purchase)
+        self.assertNotEqual(self.product_test4.supplier_taxes_id, self.tax_purchase)
 
     def test_04_copy_taxes_during_create_product_product(self):
         """Default taxes taken from the category during product create"""
