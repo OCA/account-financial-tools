@@ -7,27 +7,35 @@
         <field name="priority">99</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
-                <field name="sequence" readonly="false" widget="handle" />
-                <field name="sequence" readonly="false" />
-                <field name="date" readonly="false" />
-                <field name="rate" />
-                <field name="pending_principal_amount" readonly="True" force_save="1" />
-                <field name="payment_amount" sum="Total payments" />
+                <field
+                    name="sequence"
+                    readonly="has_moves or has_invoices"
+                    widget="handle"
+                />
+                <field name="sequence" readonly="has_moves or has_invoices" />
+                <field name="date" readonly="has_moves or has_invoices" />
+                <field name="rate" readonly="has_moves or has_invoices" />
+                <field name="pending_principal_amount" readonly="True" />
+                <field name="payment_amount" sum="Total payments" readonly="True" />
                 <field
                     name="principal_amount"
                     sum="principal_amount"
-                    readonly="false"
+                    readonly="has_moves or has_invoices"
                 />
-                <field name="interests_amount" sum="Total interests" />
+                <field
+                    name="interests_amount"
+                    sum="Total interests"
+                    readonly="has_moves or has_invoices"
+                />
                 <field
                     name="long_term_pending_principal_amount"
                     column_invisible="not parent.long_term_loan_account_id"
-                    readonly="false"
+                    readonly="has_moves or has_invoices"
                 />
                 <field
                     name="long_term_principal_amount"
                     column_invisible="not parent.long_term_loan_account_id"
-                    readonly="false"
+                    readonly="has_moves or has_invoices"
                 />
                 <field name="long_term_loan_account_id" column_invisible="True" />
                 <field name="loan_state" column_invisible="True" />

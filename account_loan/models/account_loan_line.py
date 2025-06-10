@@ -136,9 +136,10 @@ class AccountLoanLine(models.Model):
     @api.depends("rate")
     def _compute_interests_amount(self):
         for record in self:
-            record.interests_amount = (
-                record.pending_principal_amount * record.rate
-            ) / 100
+            if record.interests_amount and record.pending_principal_amount:
+                record.interests_amount = (
+                    record.pending_principal_amount * record.rate
+                ) / 100
 
     @api.depends("move_ids")
     def _compute_has_moves(self):

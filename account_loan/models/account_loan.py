@@ -207,21 +207,32 @@ class AccountLoan(models.Model):
         ("name_uniq", "unique(name, company_id)", "Loan name must be unique"),
     ]
 
+    @api.onchange("rate")
+    def _onchange_rate_warning(self):
+        if self.state != "draft":
+            return {
+                "warning": {
+                    "title": _("Rate Change"),
+                    "message": _(
+                        "You have modified the interest rate. Click the Compute items button to update the lines. Please note that if you have manually edited these lines, those changes will be lost upon computation."
+                    ),
+                }
+            }
+
     @api.onchange("line_ids")
     def _onchange_line_ids_draft_manual(self):
-        if self.state == "draft":
-            self.line_ids = self.line_ids.sorted(key=lambda line: line.sequence)
-            previous_pending_principal = 0
-            previous_principal_amount = 0
-            for line in self.line_ids:
-                if line.sequence == 1:
-                    line.pending_principal_amount = line.loan_id.loan_amount
-                else:
-                    line.pending_principal_amount = (
-                        previous_pending_principal - previous_principal_amount
-                    )
-                previous_pending_principal = line.pending_principal_amount
-                previous_principal_amount = line.principal_amount
+        self.line_ids = self.line_ids.sorted(key=lambda line: line.sequence)
+        previous_pending_principal = 0
+        previous_principal_amount = 0
+        for line in self.line_ids:
+            if line.sequence == 1:
+                line.pending_principal_amount = line.loan_id.loan_amount
+            else:
+                line.pending_principal_amount = (
+                    previous_pending_principal - previous_principal_amount
+                )
+            previous_pending_principal = line.pending_principal_amount
+            previous_principal_amount = line.principal_amount
 
     @api.depends("move_ids")
     def _compute_move_count(self):
