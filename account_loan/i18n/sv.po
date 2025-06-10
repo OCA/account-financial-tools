@@ -834,6 +834,13 @@ msgid "Rate"
 msgstr "Ränta"
 
 #. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan.py:0
+#, python-format
+msgid "Rate Change"
+msgstr ""
+
+#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__rate_period
 msgid "Rate Period"
 msgstr "Ränteperiod"
@@ -1047,6 +1054,16 @@ msgstr ""
 #: model:ir.model.fields,help:account_loan.field_account_loan__payment_on_first_period
 msgid "When checked, the first payment will be on start date"
 msgstr "Vid kontroll kommer den första betalningen att vara på startdatum"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan.py:0
+#, python-format
+msgid ""
+"You have modified the interest rate. Click the Compute items button to "
+"update the lines. Please note that if you have manually edited these lines, "
+"those changes will be lost upon computation."
+msgstr ""
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
