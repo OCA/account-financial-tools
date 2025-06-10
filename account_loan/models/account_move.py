@@ -26,7 +26,6 @@ class AccountMove(models.Model):
             if loan_line_id:
                 record.loan_id = loan_line_id.loan_id
                 record.loan_line_id._check_move_amount()
-                record.loan_line_id.loan_id._compute_posted_lines()
                 if record.loan_line_id.sequence == record.loan_id.periods:
                     record.loan_id.close()
         return res
