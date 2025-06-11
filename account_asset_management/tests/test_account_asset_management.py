@@ -1010,9 +1010,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         line = invoice.invoice_line_ids[0]
         self.assertTrue(line.price_unit > 0.0)
         # invoice line has asset_profile but no analytic_distribution
-        invoice.invoice_line_ids[0].write(
-            {"asset_profile_id": asset_profile.id}
-        )
+        invoice.invoice_line_ids[0].write({"asset_profile_id": asset_profile.id})
         invoice.action_post()
         # get all assets after invoice validation
         current_asset = self.env["account.asset"].search([])
@@ -1020,9 +1018,11 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         new_asset = current_asset - all_asset
         # check that the new asset has the analytic_distribution from the
         # profile
-        self.assertEqual(new_asset.analytic_distribution,
-                            asset_profile.analytic_distribution,
-                            "Asset should have analytic_distribution from the profile")
+        self.assertEqual(
+            new_asset.analytic_distribution,
+            asset_profile.analytic_distribution,
+            "Asset should have analytic_distribution from the profile",
+        )
 
     def test_23_asset_distribution_override_from_vendor_bill_line(self):
         """
@@ -1048,8 +1048,10 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertTrue(line.price_unit > 0.0)
         # invoice line has asset_profile AND analytic_distribution
         invoice.invoice_line_ids[0].write(
-            {"asset_profile_id": asset_profile.id,
-             "analytic_distribution": overriding_distribution.analytic_distribution}
+            {
+                "asset_profile_id": asset_profile.id,
+                "analytic_distribution": overriding_distribution.analytic_distribution,
+            }
         )
         invoice.action_post()
         # get all assets after invoice validation
@@ -1059,5 +1061,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         # check that the new asset has the overriding analytic_distribution
         # from the Vendor Bill line
         self.assertTrue(
-            new_asset.analytic_distribution == overriding_distribution.analytic_distribution,
-            "Manual override from the Vendor Bill should take precedence")
+            new_asset.analytic_distribution
+            == overriding_distribution.analytic_distribution,
+            "Manual override from the Vendor Bill should take precedence",
+        )
