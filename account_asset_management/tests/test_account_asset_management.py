@@ -89,11 +89,20 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         cls.analytic_account = cls.env["account.analytic.account"].create(
             {"name": "test_analytic_account", "plan_id": cls.default_plan.id}
         )
+        cls.analytic_account_2 = cls.env["account.analytic.account"].create(
+            {"name": "test_analytic_account_2", "plan_id": cls.default_plan.id}
+        )
 
         cls.distribution = cls.env["account.analytic.distribution.model"].create(
             {
                 "partner_id": cls.partner.id,
                 "analytic_distribution": {cls.analytic_account.id: 100},
+            }
+        )
+        cls.distribution_2 = cls.env["account.analytic.distribution.model"].create(
+            {
+                "partner_id": cls.partner.id,
+                "analytic_distribution": {cls.analytic_account_2.id: 100},
             }
         )
 
@@ -979,3 +988,76 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_asset_distribution_from_vendor_bill(self):
+        """
+        Test that an asset created from a vendor bill line
+        inherits the analytic distribution defined on the asset profile
+        when no analytic distribution is set directly on the invoice line.
+
+        Steps:
+            - Create a vendor bill with an invoice line referencing an asset
+              profile that has an analytic distribution set.
+            - Do not set any analytic distribution on the invoice line itself.
+            - Validate the vendor bill.
+            - Ensure that the created asset has the analytic distribution
+              from the asset profile.
+        """
+        all_asset = self.env["account.asset"].search([])
+        invoice = self.invoice
+        asset_profile = self.car5y  # has analytic_distribution
+        self.assertTrue(len(invoice.invoice_line_ids) > 0)
+        line = invoice.invoice_line_ids[0]
+        self.assertTrue(line.price_unit > 0.0)
+        # invoice line has asset_profile but no analytic_distribution
+        invoice.invoice_line_ids[0].write(
+            {"asset_profile_id": asset_profile.id}
+        )
+        invoice.action_post()
+        # get all assets after invoice validation
+        current_asset = self.env["account.asset"].search([])
+        # get the new asset
+        new_asset = current_asset - all_asset
+        # check that the new asset has the analytic_distribution from the
+        # profile
+        self.assertEqual(new_asset.analytic_distribution,
+                            asset_profile.analytic_distribution,
+                            "Asset should have analytic_distribution from the profile")
+
+    def test_23_asset_distribution_override_from_vendor_bill_line(self):
+        """
+        Test that an asset created from a vendor bill line
+        inherits the analytic distribution from the vendor bill line itself
+        when both the asset profile and the vendor bill line have analytic
+        distributions defined.
+
+        Steps:
+            - Create a vendor bill with an invoice line referencing an asset
+              profile that has an analytic distribution set.
+            - Set an overriding analytic distribution directly on the invoice line.
+            - Validate the vendor bill.
+            - Ensure that the created asset has the analytic distribution
+              from the vendor bill line (not the asset profile).
+        """
+        all_asset = self.env["account.asset"].search([])
+        invoice = self.invoice
+        asset_profile = self.car5y  # has analytic_distribution
+        overriding_distribution = self.distribution_2
+        self.assertTrue(len(invoice.invoice_line_ids) > 0)
+        line = invoice.invoice_line_ids[0]
+        self.assertTrue(line.price_unit > 0.0)
+        # invoice line has asset_profile AND analytic_distribution
+        invoice.invoice_line_ids[0].write(
+            {"asset_profile_id": asset_profile.id,
+             "analytic_distribution": overriding_distribution.analytic_distribution}
+        )
+        invoice.action_post()
+        # get all assets after invoice validation
+        current_asset = self.env["account.asset"].search([])
+        # get the new asset
+        new_asset = current_asset - all_asset
+        # check that the new asset has the overriding analytic_distribution
+        # from the Vendor Bill line
+        self.assertTrue(
+            new_asset.analytic_distribution == overriding_distribution.analytic_distribution,
+            "Manual override from the Vendor Bill should take precedence")

@@ -111,7 +111,13 @@ class AccountMove(models.Model):
                 for key, val in vals.items():
                     setattr(asset_form, key, val)
                 asset = asset_form.save()
-                asset.analytic_distribution = aml.analytic_distribution
+                if not aml.analytic_distribution and asset.analytic_distribution:
+                    asset.write(
+                        {'analytic_distribution': asset.analytic_distribution})
+                # Otherwise, override with the Vendor Bill's value
+                elif aml.analytic_distribution:
+                    asset.write(
+                        {'analytic_distribution': aml.analytic_distribution})
                 aml.with_context(
                     allow_asset=True, allow_asset_removal=True
                 ).asset_id = asset.id
