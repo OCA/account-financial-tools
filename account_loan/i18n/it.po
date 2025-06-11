@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2025-05-10 09:24+0000\n"
+"PO-Revision-Date: 2025-06-11 09:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -844,7 +844,7 @@ msgstr "Tasso"
 #: code:addons/account_loan/models/account_loan.py:0
 #, python-format
 msgid "Rate Change"
-msgstr ""
+msgstr "Modifica tasso"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__rate_period
@@ -1067,6 +1067,9 @@ msgid ""
 "update the lines. Please note that if you have manually edited these lines, "
 "those changes will be lost upon computation."
 msgstr ""
+"È stato modificato il tasso di interesse. Fare clic sul pulsante calcola "
+"articoli per aggiornare le righe. Tenere presente che se si è modificato "
+"manualmente queste righe, le modifiche andranno perse durante il calcolo."
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
