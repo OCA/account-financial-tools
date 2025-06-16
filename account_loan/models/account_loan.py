@@ -354,33 +354,11 @@ class AccountLoan(models.Model):
         if not self.start_date:
             self.start_date = fields.Date.today()
         if not self.line_ids:
-            self._compute_draft_lines()
+            self.compute_lines()
         self.write({"state": "posted"})
 
     def close(self):
         self.write({"state": "closed"})
-
-    def compute_lines(self):
-        self.ensure_one()
-        if self.state == "draft":
-            return self._compute_draft_lines()
-        return self._compute_posted_lines()
-
-    def _compute_posted_lines(self):
-        """
-        Recompute the amounts of not finished lines. Useful if rate is changed
-        """
-        amount = self.loan_amount
-        for line in self.line_ids.sorted("sequence"):
-            if line.move_ids:
-                amount = line.final_pending_principal_amount
-            else:
-                line.rate = self.rate_period
-                line.pending_principal_amount = amount
-                line._check_amount()
-                amount -= line.payment_amount - line.interests_amount
-        if self.long_term_loan_account_id:
-            self._check_long_term_principal_amount()
 
     def _check_long_term_principal_amount(self):
         """
@@ -413,28 +391,36 @@ class AccountLoan(models.Model):
             "rate": self.rate_period,
         }
 
-    def _compute_draft_lines(self):
+    def compute_lines(self):
         self.ensure_one()
         self.fixed_periods = self.periods
         self.fixed_loan_amount = self.loan_amount
-        self.line_ids.unlink()
         amount = self.loan_amount
-        if self.start_date:
-            date = self.start_date
-        else:
-            date = datetime.today().date()
+        date = self.start_date or datetime.today().date()
         initial_date = date
         delta = relativedelta(months=self.method_period)
         if not self.payment_on_first_period:
-            date = initial_date + delta
+            date += delta
             initial_date = date
+        existing_lines = self.line_ids.sorted("sequence")
         for i in range(1, self.periods + 1):
-            line = self.env["account.loan.line"].create(
-                self._new_line_vals(i, date, amount)
-            )
+            vals = self._new_line_vals(i, date, amount)
+            if i <= len(existing_lines):
+                line = existing_lines[i - 1]
+                if line.move_ids:
+                    date = initial_date + delta * i
+                    amount -= line.payment_amount - line.interests_amount
+                    continue
+                line.write(vals)
+            else:
+                line = self.line_ids.create(vals)
             line._check_amount()
             date = initial_date + delta * i
             amount -= line.payment_amount - line.interests_amount
+        if len(existing_lines) > self.periods:
+            extra_lines = existing_lines[self.periods :]
+            extra_lines_to_unlink = extra_lines.filtered(lambda line: not line.move_ids)
+            extra_lines_to_unlink.unlink()
         if self.long_term_loan_account_id:
             self._check_long_term_principal_amount()
 
