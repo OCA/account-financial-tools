@@ -17,22 +17,22 @@ General sequence in account journals
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/16.0/account_journal_general_sequence
+    :target: https://github.com/OCA/account-financial-tools/tree/18.0/account_journal_general_sequence
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_journal_general_sequence
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-18-0/account-financial-tools-18-0-account_journal_general_sequence
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of account to support sequenced entry
-numbers and to allow you to renumber them if needed, on demand.
+This module extends the functionality of account to support sequenced
+entry numbers and to allow you to renumber them if needed, on demand.
 
-It adds a new field called *Entry number*. This is independent from the *Number*
-that Odoo adds by default, and has different purpose.
+It adds a new field called *Entry number*. This is independent from the
+*Number* that Odoo adds by default, and has different purpose.
 
 **Table of contents**
 
@@ -42,9 +42,9 @@ that Odoo adds by default, and has different purpose.
 Installation
 ============
 
-After installing this module, no entry numbers will be generated because that
-could have a very negative impact in installations that already had a lot of
-account moves.
+After installing this module, no entry numbers will be generated because
+that could have a very negative impact in installations that already had
+a lot of account moves.
 
 If you need to add numbers to preexisting account moves, please use the
 renumbering wizard as explained in the *Usage* section.
@@ -54,43 +54,45 @@ Configuration
 
 To configure journal sequences:
 
-#. Have full accounting permissions.
-#. Go to *Invoicing > Configuration > Accounting > Journals*.
-#. Select or create the journal you want to configure.
-#. Use *Account entry number sequence* to configure a sequence.
+1. Have full accounting permissions.
+2. Go to *Invoicing > Configuration > Accounting > Journals*.
+3. Select or create the journal you want to configure.
+4. Use *Account entry number sequence* to configure a sequence.
 
 Note that:
 
-* Various journals can share the same sequence.
-* All journals get a shared default sequence, per company.
-* Entry numbers must be unique per company. So, if you use different sequences
-  per journal, make sure they don't produce colliding results.
+- Various journals can share the same sequence.
+- All journals get a shared default sequence, per company.
+- Entry numbers must be unique per company. So, if you use different
+  sequences per journal, make sure they don't produce colliding results.
 
 Usage
 =====
 
 To see journal entry numbers:
 
-#. Go to *Invoicing > Accounting > Miscellaneous > Journal Entries*.
-#. Notice the new field *Entry Number*. Only posted moves get an entry number.
+1. Go to *Invoicing > Accounting > Miscellaneous > Journal Entries*.
+2. Notice the new field *Entry Number*. Only posted moves get an entry
+   number.
 
 Note that:
 
-* You can use that new field in quick searches.
-* You can see it also in *Invoicing > Accounting > Miscellaneous > Journal Items*.
+- You can use that new field in quick searches.
+- You can see it also in *Invoicing > Accounting > Miscellaneous >
+  Journal Items*.
 
 To renumber journal entries:
 
-#. Have full accounting permissions.
-#. Have *Accounting / Invoicing / Billing Administrator* permissions.
-#. Go to *Invoicing > Accounting > Actions > Renumber journal entries*.
-#. Configure those parameters.
-#. Click on *Renumber*.
+1. Have full accounting permissions.
+2. Have *Accounting / Invoicing / Billing Administrator* permissions.
+3. Go to *Invoicing > Accounting > Actions > Renumber journal entries*.
+4. Configure those parameters.
+5. Click on *Renumber*.
 
 Note that:
 
-* You will only be able to select sequences related to journals.
-* A sequence usually affects various journals, if not all.
+- You will only be able to select sequences related to journals.
+- A sequence usually affects various journals, if not all.
 
 Bug Tracker
 ===========
@@ -98,7 +100,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_journal_general_sequence%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_journal_general_sequence%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -106,18 +108,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Moduon
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Jairo Llopis (`Moduon <https://www.moduon.team/>`__)
-* Rafael Blasco (`Moduon <https://www.moduon.team/>`__)
+- Jairo Llopis (`Moduon <https://www.moduon.team/>`__)
+- Rafael Blasco (`Moduon <https://www.moduon.team/>`__)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -137,6 +139,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-yajo| 
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/16.0/account_journal_general_sequence>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/18.0/account_journal_general_sequence>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

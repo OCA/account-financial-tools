@@ -25,9 +25,7 @@ def migrate(cr, version):
             ) or journal.entry_number_sequence_id.copy(
                 {
                     "company_id": journal.company_id.id,
-                    "name": "{} ({})".format(
-                        journal.entry_number_sequence_id.name, journal.company_id.name
-                    ),
+                    "name": f"{journal.entry_number_sequence_id.name} ({journal.company_id.name})",
                     "number_next_actual": journal.entry_number_sequence_id.number_next_actual,
                     "date_range_ids": [
                         fields.Command.create(
