@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -37,7 +37,7 @@ class AccountJournal(models.Model):
                 _logger.info("Creating default sequence for account move numbers")
                 sequence = self.env["ir.sequence"].create(
                     {
-                        "name": _(
+                        "name": self.env._(
                             "Account entry default numbering (%s)",
                             one.company_id.name,
                         ),
