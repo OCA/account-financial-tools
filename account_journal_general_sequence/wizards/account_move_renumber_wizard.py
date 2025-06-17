@@ -29,7 +29,8 @@ class AccountMoveRenumberWizard(models.TransientModel):
         required=True,
         default=lambda self: self._default_entry_number_sequence(),
         domain="[('id', 'in', available_sequence_ids)]",
-        help="Sequence to use for renumbering. Affects all journals that use this sequence.",
+        help="Sequence to use for renumbering. "
+        "Affects all journals that use this sequence.",
     )
 
     @api.model

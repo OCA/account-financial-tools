@@ -2,37 +2,41 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from freezegun import freeze_time
 
-from odoo.fields import Command
-from odoo.tests.common import Form, new_test_user, tagged, users
+from odoo import fields
+from odoo.tests import Form, new_test_user, tagged, users
 from odoo.tools import mute_logger
 
-from odoo.addons.account.tests.common import TestAccountReconciliationCommon
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
 @freeze_time("2022-05-11", tick=True)
 @tagged("post_install", "-at_install")
-class RenumberCase(TestAccountReconciliationCommon):
+class RenumberCase(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        companies = cls.company_data["company"] | cls.company_data_2["company"]
+        cls.company_t1 = cls.company_data["company"]
+        cls.company_t2 = cls._create_company(name="company_2_test_numbering_data")
         cls.invoicer = new_test_user(
             cls.env,
             "test_invoicer",
             "account.group_account_invoice",
-            company_ids=[Command.set(companies.ids)],
+            company_ids=[fields.Command.set((cls.company_t1 + cls.company_t2).ids)],
         )
         cls.manager = new_test_user(
             cls.env,
             "test_manager",
             "account.group_account_manager",
-            company_ids=[Command.set(companies.ids)],
+            company_ids=[fields.Command.set((cls.company_t1 + cls.company_t2).ids)],
         )
+        cls.today = fields.Date.to_string(fields.Date.today())
 
     @users("test_invoicer")
     def test_invoice_gets_entry_number(self):
         # Draft invoice without entry number
-        invoice = self._create_invoice()
+        invoice = self.init_invoice(
+            "out_invoice", invoice_date=self.today, products=self.product_a
+        )
         self.assertFalse(invoice.entry_number)
         # Gets one once posted
         invoice.action_post()
@@ -42,21 +46,30 @@ class RenumberCase(TestAccountReconciliationCommon):
             "odoo.addons.account_journal_general_sequence.models.account_move"
         ):
             invoice.button_cancel()
-        self.assertFalse(invoice.entry_number)
+            self.assertFalse(invoice.entry_number)
 
     @users("test_manager")
     def test_renumber(self):
         # Post invoices in wrong order
-        next_year_invoice = self._create_invoice(
-            date_invoice="2023-12-31", auto_validate=True
+        next_year_invoice = self.init_invoice(
+            move_type="out_invoice",
+            invoice_date="2023-12-31",
+            post=True,
+            products=self.product_a,
         )
         next_year_invoice.flush_recordset(["entry_number"])
-        new_invoice = self._create_invoice(
-            date_invoice="2022-05-10", auto_validate=True
+        new_invoice = self.init_invoice(
+            move_type="out_invoice",
+            invoice_date="2022-05-10",
+            post=True,
+            products=self.product_a,
         )
         new_invoice.flush_recordset(["entry_number"])
-        old_invoice = self._create_invoice(
-            date_invoice="2022-04-30", auto_validate=True
+        old_invoice = self.init_invoice(
+            move_type="out_invoice",
+            invoice_date="2022-04-30",
+            post=True,
+            products=self.product_a,
         )
         old_invoice.flush_recordset(["entry_number"])
         self.assertLess(new_invoice.entry_number, old_invoice.entry_number)
@@ -71,8 +84,11 @@ class RenumberCase(TestAccountReconciliationCommon):
         wiz.action_renumber()
         self.assertGreater(new_invoice.entry_number, old_invoice.entry_number)
         # Add opening move
-        opening_invoice = self._create_invoice(
-            date_invoice="2022-01-01", auto_validate=True
+        opening_invoice = self.init_invoice(
+            move_type="out_invoice",
+            invoice_date="2022-01-01",
+            post=True,
+            products=self.product_a,
         )
         self.assertGreater(opening_invoice.entry_number, new_invoice.entry_number)
         # Renumber again, starting from zero
@@ -87,34 +103,36 @@ class RenumberCase(TestAccountReconciliationCommon):
     @users("test_invoicer")
     def test_install_no_entry_number(self):
         """No entry numbers assigned on module installation."""
-        # Imitate installation environment
-        self.env = self.env(
-            context=dict(self.env.context, module="account_journal_general_sequence")
+        invoice = self.init_invoice(
+            "out_invoice", products=self.product_a, invoice_date=self.today
         )
+        self.assertFalse(invoice.entry_number)
+        # Imitate installation environment
         self.env["ir.module.module"].sudo().search(
             [("name", "=", "account_journal_general_sequence")]
         ).state = "to install"
         # Do some action that would make the move get an entry number
-        invoice = self._create_invoice()
-        self.assertFalse(invoice.entry_number)
-        invoice.action_post()
+        invoice.with_context(module="account_journal_general_sequence").action_post()
         # Ensure there's no entry number
         self.assertFalse(invoice.entry_number)
 
     @users("test_invoicer")
     def test_new_company_journal(self):
-        # Create new companies
-        cmp1 = self.company_data["company"]
-        cmp2 = self.company_data_2["company"]
         # Create a new invoice for each company
-        self.env = self.env(
-            context=dict(self.env.context, allowed_company_ids=cmp1.ids)
+        invoice1 = self.init_invoice(
+            "out_invoice",
+            products=self.product_a,
+            invoice_date=self.today,
+            post=True,
+            company=self.company_t1,
         )
-        invoice1 = self.create_invoice()
-        self.env = self.env(
-            context=dict(self.env.context, allowed_company_ids=cmp2.ids)
+        invoice2 = self.init_invoice(
+            "out_invoice",
+            products=self.product_a,
+            invoice_date=self.today,
+            post=True,
+            company=self.company_t2,
         )
-        invoice2 = self.create_invoice()
         # Each company has a different sequence, so the entry number should be the same
         self.assertEqual(invoice1.entry_number, "2022/00000001")
         self.assertEqual(invoice2.entry_number, "2022/00000001")

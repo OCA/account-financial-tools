@@ -39,8 +39,9 @@
 
     <menuitem
         id="account_move_renumber_wizard_menu"
-        parent="account.menu_finance_entries_actions"
+        parent="account.menu_finance_entries"
         action="account_move_renumber_wizard_action"
+        sequence="85"
     />
 
 </data>
