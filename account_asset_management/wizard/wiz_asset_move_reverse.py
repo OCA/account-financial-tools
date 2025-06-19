@@ -40,7 +40,11 @@ class WizAssetMoveReverse(models.TransientModel):
         move = self.line_id.move_id
         move_reversal = (
             self.env["account.move.reversal"]
-            .with_context(active_model="account.move", active_ids=move.ids)
+            .with_context(
+                active_model="account.move",
+                active_ids=move.ids,
+                active_id=move.id,
+            )
             .create(
                 {
                     "date": self.date_reversal,
