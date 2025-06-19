@@ -441,7 +441,8 @@ class AccountLoanLine(models.Model):
             "loan_id": self.loan_id.id,
             "date": self.date,
             "ref": self.name,
-            "journal_id": self.loan_id.journal_id.id,
+            "journal_id": self.loan_id.long_term_journal_id.id
+            or self.loan_id.journal_id.id,
             "line_ids": [
                 Command.create(vals) for vals in self._get_long_term_move_line_vals()
             ],
