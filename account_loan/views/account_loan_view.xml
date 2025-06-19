@@ -182,6 +182,10 @@
                                         readonly="state != 'draft'"
                                     />
                                     <field
+                                        name="long_term_journal_id"
+                                        attrs="{'invisible': ['|', ('is_leasing', '=', False), ('long_term_loan_account_id', '=', False)]}"
+                                    />
+                                    <field
                                         name="interest_expenses_account_id"
                                         readonly="state != 'draft'"
                                     />

@@ -147,6 +147,12 @@ class AccountLoan(models.Model):
         domain="[('company_id', '=', company_id),('type', '=', journal_type)]",
         required=True,
     )
+    long_term_journal_id = fields.Many2one(
+        "account.journal",
+        domain="[('company_id', '=', company_id),('type', '=', 'general')]",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+    )
     short_term_loan_account_id = fields.Many2one(
         "account.account",
         domain="[('company_ids', '=', company_id)]",
