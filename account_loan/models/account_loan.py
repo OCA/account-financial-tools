@@ -214,7 +214,10 @@ class AccountLoan(models.Model):
                 "warning": {
                     "title": _("Rate Change"),
                     "message": _(
-                        "You have modified the interest rate. Click the Compute items button to update the lines. Please note that if you have manually edited these lines, those changes will be lost upon computation."
+                        "You have modified the interest rate. Click the Compute "
+                        "items button to update the lines. Please note that if you "
+                        "have manually edited these lines, those changes will be lost "
+                        "upon computation."
                     ),
                 }
             }
@@ -335,9 +338,9 @@ class AccountLoan(models.Model):
     @api.onchange("company_id")
     def _onchange_company(self):
         self._onchange_is_leasing()
-        self.interest_expenses_account_id = (
-            self.short_term_loan_account_id
-        ) = self.long_term_loan_account_id = False
+        self.interest_expenses_account_id = self.short_term_loan_account_id = (
+            self.long_term_loan_account_id
+        ) = False
 
     def _get_default_name(self, vals):
         return self.env["ir.sequence"].next_by_code("account.loan") or "/"
