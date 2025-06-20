@@ -18,7 +18,7 @@
         <field name="name">account.loan.tree</field>
         <field name="model">account.loan</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="partner_id" optional="hide" />
                 <field name="company_id" groups="base.group_multi_company" />
@@ -29,7 +29,7 @@
                 <field name="pending_principal_amount" optional="hide" sum="Total" />
                 <field name="periods" optional="hide" />
                 <field name="start_date" optional="hide" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="account_loan_pivot" model="ir.ui.view">
@@ -215,11 +215,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -227,7 +223,7 @@
     <record id="account_loan_action" model="ir.actions.act_window">
         <field name="name">Loans</field>
         <field name="res_model">account.loan</field>
-        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_mode">list,form,pivot</field>
     </record>
 
     <menuitem

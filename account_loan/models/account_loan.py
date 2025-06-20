@@ -7,7 +7,7 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -148,7 +148,7 @@ class AccountLoan(models.Model):
     )
     short_term_loan_account_id = fields.Many2one(
         "account.account",
-        domain="[('company_id', '=', company_id)]",
+        domain="[('company_ids', '=', company_id)]",
         string="Short term account",
         help="Account that will contain the pending amount on short term",
         required=True,
@@ -157,11 +157,11 @@ class AccountLoan(models.Model):
         "account.account",
         string="Long term account",
         help="Account that will contain the pending amount on Long term",
-        domain="[('company_id', '=', company_id)]",
+        domain="[('company_ids', '=', company_id)]",
     )
     interest_expenses_account_id = fields.Many2one(
         "account.account",
-        domain="[('company_id', '=', company_id)]",
+        domain="[('company_ids', '=', company_id)]",
         string="Interests account",
         help="Account where the interests will be assigned to",
         required=True,
@@ -169,7 +169,7 @@ class AccountLoan(models.Model):
     is_leasing = fields.Boolean()
     leased_asset_account_id = fields.Many2one(
         "account.account",
-        domain="[('company_id', '=', company_id)]",
+        domain="[('company_ids', '=', company_id)]",
     )
     product_id = fields.Many2one(
         "product.product",
@@ -212,12 +212,12 @@ class AccountLoan(models.Model):
         if self.state != "draft":
             return {
                 "warning": {
-                    "title": _("Rate Change"),
-                    "message": _(
-                        "You have modified the interest rate. Click the Compute "
-                        "items button to update the lines. Please note that if you "
-                        "have manually edited these lines, those changes will be lost "
-                        "upon computation."
+                    "title": self.env._("Rate Change"),
+                    "message": self.env._(
+                        "You have modified the interest rate. Click the Compute items "
+                        "button to update the lines. Please note that if you have "
+                        "manually edited these lines, those changes will be lost upon "
+                        "computation."
                     ),
                 }
             }
@@ -445,7 +445,7 @@ class AccountLoan(models.Model):
         for item in self:
             if item.state not in ("posted", "cancelled") or item.move_count > 0:
                 raise UserError(
-                    _(
+                    self.env._(
                         "It is only possible to change to draft if the status is "
                         "cancelled or posted and there are no account moves."
                     )

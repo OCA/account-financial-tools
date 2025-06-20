@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
@@ -97,10 +97,12 @@ class AccountLoanPost(models.TransientModel):
                 != 0
             ):
                 raise UserError(
-                    _("The total principal amount does not match the loan amount.")
+                    self.env._(
+                        "The total principal amount does not match the loan amount."
+                    )
                 )
         if self.loan_id.state != "draft":
-            raise UserError(_("Only loans in draft state can be posted"))
+            raise UserError(self.env._("Only loans in draft state can be posted"))
         self.loan_id.post()
         move = self.env["account.move"].create(self.move_vals())
         move.action_post()

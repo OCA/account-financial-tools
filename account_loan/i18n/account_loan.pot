@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -94,7 +94,6 @@ msgstr ""
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
-#, python-format
 msgid "Amount cannot be bigger than debt"
 msgstr ""
 
@@ -102,14 +101,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
 #: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
-#, python-format
 msgid "Amount cannot be less than zero"
 msgstr ""
 
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/models/account_loan_line.py:0
-#, python-format
 msgid "Amount cannot be recomputed if moves or invoices exists already"
 msgstr ""
 
@@ -438,7 +435,6 @@ msgstr ""
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/models/account_loan.py:0
-#, python-format
 msgid ""
 "It is only possible to change to draft if the status is cancelled or posted "
 "and there are no account moves."
@@ -533,7 +529,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__loan_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post__loan_id
 #: model:ir.model.fields,field_description:account_loan.field_account_move__loan_id
-#: model:ir.model.fields,field_description:account_loan.field_account_payment__loan_id
 #: model_terms:ir.ui.view,arch_db:account_loan.view_account_loan_lines_search
 msgid "Loan"
 msgstr ""
@@ -552,7 +547,6 @@ msgstr ""
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_bank_statement_line__loan_line_id
 #: model:ir.model.fields,field_description:account_loan.field_account_move__loan_line_id
-#: model:ir.model.fields,field_description:account_loan.field_account_payment__loan_line_id
 msgid "Loan Line"
 msgstr ""
 
@@ -594,6 +588,11 @@ msgstr ""
 #: model:ir.ui.menu,name:account_loan.account_loan_menu
 #: model:ir.ui.menu,name:account_loan.loan_menu
 msgid "Loans"
+msgstr ""
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pivot
+msgid "Loans pivot"
 msgstr ""
 
 #. module: account_loan
@@ -713,7 +712,6 @@ msgstr ""
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/wizards/account_loan_post.py:0
-#, python-format
 msgid "Only loans in draft state can be posted"
 msgstr ""
 
@@ -820,7 +818,6 @@ msgstr ""
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/models/account_loan.py:0
-#, python-format
 msgid "Rate Change"
 msgstr ""
 
@@ -894,7 +891,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
 #: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
-#, python-format
 msgid "Some future invoices already exists"
 msgstr ""
 
@@ -902,7 +898,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
 #: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
-#, python-format
 msgid "Some future moves already exists"
 msgstr ""
 
@@ -910,14 +905,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
 #: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
-#, python-format
 msgid "Some invoices are not created"
 msgstr ""
 
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/models/account_loan_line.py:0
-#, python-format
 msgid "Some invoices must be created first"
 msgstr ""
 
@@ -925,14 +918,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
 #: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
-#, python-format
 msgid "Some moves are not created"
 msgstr ""
 
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/models/account_loan_line.py:0
-#, python-format
 msgid "Some moves must be created first"
 msgstr ""
 
@@ -969,8 +960,12 @@ msgstr ""
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/wizards/account_loan_post.py:0
-#, python-format
 msgid "The total principal amount does not match the loan amount."
+msgstr ""
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_tree
+msgid "Total"
 msgstr ""
 
 #. module: account_loan
@@ -1033,7 +1028,6 @@ msgstr ""
 #. module: account_loan
 #. odoo-python
 #: code:addons/account_loan/models/account_loan.py:0
-#, python-format
 msgid ""
 "You have modified the interest rate. Click the Compute items button to "
 "update the lines. Please note that if you have manually edited these lines, "

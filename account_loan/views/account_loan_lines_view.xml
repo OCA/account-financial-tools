@@ -6,7 +6,7 @@
         <field name="model">account.loan.line</field>
         <field name="priority">99</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <list editable="bottom">
                 <field
                     name="sequence"
                     readonly="has_moves or has_invoices"
@@ -57,7 +57,7 @@
                     icon="fa-cogs"
                     invisible="has_moves or has_invoices or loan_state != 'posted'"
                 />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="account_loan_line_form" model="ir.ui.view">
@@ -90,7 +90,7 @@
         <field name="name">account.loan.lines.view</field>
         <field name="model">account.loan.line</field>
         <field name="arch" type="xml">
-            <tree create="0" import="0">
+            <list create="0" import="0">
                 <field name="sequence" />
                 <field name="loan_id" />
                 <field name="date" />
@@ -114,7 +114,7 @@
                 <groupby name="loan_id">
                     <button name="edit" type="edit" icon="fa-edit" title="Edit" />
                 </groupby>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -140,7 +140,7 @@
         <field name="name">Loan Items</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.loan.line</field>
-        <field name="view_mode">tree,pivot,graph</field>
+        <field name="view_mode">list,pivot,graph</field>
         <field name="view_id" ref="account_loan_lines_view" />
         <field name="context">{'search_default_group_by_loan_id': 1}</field>
     </record>
