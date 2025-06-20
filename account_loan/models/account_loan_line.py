@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_is_zero
 
@@ -220,7 +220,9 @@ class AccountLoanLine(models.Model):
         """Recompute amounts if the annuity has not been processed"""
         if self.move_ids:
             raise UserError(
-                _("Amount cannot be recomputed if moves or invoices exists " "already")
+                self.env._(
+                    "Amount cannot be recomputed if moves or invoices exists " "already"
+                )
             )
         if (
             self.sequence == self.loan_id.periods
@@ -392,7 +394,7 @@ class AccountLoanLine(models.Model):
                 if record.loan_id.line_ids.filtered(
                     lambda r, record=record: r.date < record.date and not r.move_ids
                 ):
-                    raise UserError(_("Some moves must be created first"))
+                    raise UserError(self.env._("Some moves must be created first"))
                 move = self.env["account.move"].create(
                     record._move_vals(journal=journal, account=account)
                 )
@@ -421,9 +423,9 @@ class AccountLoanLine(models.Model):
         for record in self:
             if not record.move_ids:
                 if record.loan_id.line_ids.filtered(
-                    lambda r, record=record: r.date < record.date and not r.move_ids
+                    lambda r, rec=record: r.date < rec.date and not r.move_ids
                 ):
-                    raise UserError(_("Some invoices must be created first"))
+                    raise UserError(self.env._("Some invoices must be created first"))
                 invoice = self.env["account.move"].create(record._invoice_vals())
                 res.append(invoice.id)
                 for line in invoice.invoice_line_ids:

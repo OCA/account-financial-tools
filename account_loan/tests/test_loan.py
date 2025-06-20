@@ -6,7 +6,7 @@ import logging
 from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.exceptions import UserError
 from odoo.tests import Form, tagged
 from odoo.tools import mute_logger
@@ -691,7 +691,7 @@ class TestLoan(BaseCommon):
     def create_account(cls, code, name, account_type):
         return cls.env["account.account"].create(
             {
-                "company_id": cls.company.id,
+                "company_ids": [Command.set([cls.company.id])],
                 "name": name,
                 "code": code,
                 "account_type": account_type,

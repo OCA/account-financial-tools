@@ -34,7 +34,7 @@
         name="Generate Loan Entries"
         action="account_loan_generate_wizard_action"
         id="account_loan_generate_wizard_menu"
-        parent="account.menu_finance_entries_generate_entries"
+        parent="account_loan.loan_menu"
         sequence="111"
         groups="account.group_account_manager"
     />

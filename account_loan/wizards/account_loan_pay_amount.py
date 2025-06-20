@@ -1,7 +1,7 @@
 # Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -52,20 +52,20 @@ class AccountLoan(models.TransientModel):
             if self.loan_id.line_ids.filtered(
                 lambda r: r.date <= self.date and not r.move_ids
             ):
-                raise UserError(_("Some invoices are not created"))
+                raise UserError(self.env._("Some invoices are not created"))
             if self.loan_id.line_ids.filtered(
                 lambda r: r.date > self.date and r.move_ids
             ):
-                raise UserError(_("Some future invoices already exists"))
+                raise UserError(self.env._("Some future invoices already exists"))
         else:
             if self.loan_id.line_ids.filtered(
                 lambda r: r.date < self.date and not r.move_ids
             ):
-                raise UserError(_("Some moves are not created"))
+                raise UserError(self.env._("Some moves are not created"))
             if self.loan_id.line_ids.filtered(
                 lambda r: r.date > self.date and r.move_ids
             ):
-                raise UserError(_("Some future moves already exists"))
+                raise UserError(self.env._("Some future moves already exists"))
         lines = self.loan_id.line_ids.filtered(lambda r: r.date > self.date).sorted(
             "sequence", reverse=True
         )
@@ -76,9 +76,9 @@ class AccountLoan(models.TransientModel):
         old_line = lines.filtered(lambda r: r.sequence == sequence + 1)
         pending = old_line.pending_principal_amount
         if self.loan_id.currency_id.compare_amounts(self.amount, pending) == 1:
-            raise UserError(_("Amount cannot be bigger than debt"))
+            raise UserError(self.env._("Amount cannot be bigger than debt"))
         if self.loan_id.currency_id.compare_amounts(self.amount, 0) <= 0:
-            raise UserError(_("Amount cannot be less than zero"))
+            raise UserError(self.env._("Amount cannot be less than zero"))
         self.loan_id.periods += 1
         self.loan_id.fixed_periods = self.loan_id.periods - sequence
         self.loan_id.fixed_loan_amount = pending - self.amount
