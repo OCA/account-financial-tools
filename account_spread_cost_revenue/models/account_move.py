@@ -32,7 +32,3 @@ class AccountMove(models.Model):
         spread_lines.unlink()
         res = super().button_cancel()
         return res
-
-    def _get_unbalanced_moves(self, container):
-        if not self.env.context.get("skip_unique_sequence_number"):
-            return super()._get_unbalanced_moves(container)

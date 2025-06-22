@@ -5,6 +5,7 @@ import calendar
 import time
 
 from dateutil.relativedelta import relativedelta
+from markupsafe import Markup
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -536,7 +537,7 @@ class AccountSpread(models.Model):
                 "spread_line_name": spread.invoice_line_id.name,
                 "inv_link": inv_link,
             }
-            spread.message_post(body=msg_body)
+            spread.message_post(body=Markup(msg_body))
             spread_link = (
                 "<a href=# data-oe-model=account.spread "
                 "data-oe-id=%d>%s</a>" % (spread.id, _("Spread"))
@@ -545,7 +546,7 @@ class AccountSpread(models.Model):
                 "spread_link": spread_link,
                 "inv_line": spread.invoice_line_id.name,
             }
-            spread.invoice_id.message_post(body=msg_body)
+            spread.invoice_id.message_post(body=Markup(msg_body))
 
     def unlink(self):
         if self.filtered(lambda s: s.invoice_line_id):

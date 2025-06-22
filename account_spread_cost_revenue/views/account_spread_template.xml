@@ -64,11 +64,11 @@
                         invisible="not auto_spread"
                         nolabel="1"
                     >
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="name" />
                             <field name="product_id" />
                             <field name="account_id" />
-                        </tree>
+                        </list>
                     </field>
                 </sheet>
             </form>
@@ -77,18 +77,18 @@
     <record id="view_account_spread_template_tree" model="ir.ui.view">
         <field name="model">account.spread.template</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="spread_account_id" />
                 <field name="spread_journal_id" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="action_account_spread_template_form" model="ir.actions.act_window">
         <field name="name">Spread Templates</field>
         <field name="res_model">account.spread.template</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="view_id" ref="view_account_spread_template_tree" />
     </record>
     <menuitem

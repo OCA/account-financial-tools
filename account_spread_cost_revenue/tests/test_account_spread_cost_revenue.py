@@ -6,10 +6,11 @@ import datetime
 from psycopg2.errors import NotNullViolation
 
 from odoo.exceptions import ValidationError
-from odoo.tests import Form, common
+from odoo.tests import Form, common, tagged
 from odoo.tools import mute_logger
 
 
+@tagged("post_install", "-at_install")
 class TestAccountSpreadCostRevenue(common.TransactionCase):
     @classmethod
     def setUpClass(cls):

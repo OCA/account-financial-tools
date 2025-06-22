@@ -2,10 +2,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.exceptions import UserError
+from odoo.tests import tagged
 
 from .test_account_invoice_spread import TestAccountInvoiceSpread
 
 
+@tagged("post_install", "-at_install")
 class TestAccountInvoiceAutoSpread(TestAccountInvoiceSpread):
     def test_01_no_auto_spread_sheet(self):
         self.env["account.spread.template"].create(
