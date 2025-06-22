@@ -5,9 +5,10 @@ import datetime
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import Form, common
+from odoo.tests import Form, common, tagged
 
 
+@tagged("post_install", "-at_install")
 class TestAccountInvoiceSpread(common.TransactionCase):
     @classmethod
     def create_account_invoice(self, invoice_type, quantity=1.0, price_unit=1000.0):
@@ -173,7 +174,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             default_company_id=self.env.company.id,
             allow_spread_planning=True,
         ).create({})
-
         self.assertEqual(wizard1.invoice_line_id, self.vendor_bill_line)
         self.assertEqual(wizard1.invoice_line_id.move_id, self.vendor_bill)
         self.assertEqual(wizard1.invoice_type, "in_invoice")

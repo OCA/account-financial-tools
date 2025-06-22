@@ -2,11 +2,15 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import datetime
+import logging
 
 from odoo.exceptions import UserError
-from odoo.tests import Form, common
+from odoo.tests import Form, common, tagged
+from odoo.tools import mute_logger
+from odoo.tools.misc import lower_logging
 
 
+@tagged("post_install", "-at_install")
 class TestComputeSpreadBoard(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
@@ -15,7 +19,6 @@ class TestComputeSpreadBoard(common.TransactionCase):
         journal = cls.env["account.journal"].create(
             {"name": "Test", "type": "general", "code": "test"}
         )
-
         cls.receivable_account = cls.env["account.account"].create(
             {
                 "name": "test_account_receivable",
@@ -24,7 +27,6 @@ class TestComputeSpreadBoard(common.TransactionCase):
                 "reconcile": True,
             }
         )
-
         cls.expense_account = cls.env["account.account"].create(
             {
                 "name": "test account_expenses",
@@ -99,6 +101,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
             }
         )
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_01_supplier_invoice(self):
         self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
@@ -139,12 +142,13 @@ class TestComputeSpreadBoard(common.TransactionCase):
         for line in spread_lines:
             line.create_move()
             self.assertTrue(line.move_id)
-
-        self.spread.action_recalculate_spread()
+        with lower_logging(25, logging.INFO):
+            self.spread.action_recalculate_spread()
         spread_lines = self.spread.line_ids
         for line in spread_lines:
             self.assertTrue(line.move_id)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_02_supplier_invoice(self):
         # spread date set
         self.spread.write(
@@ -156,8 +160,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
         )
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
         self.assertEqual(len(spread_lines), 13)
 
@@ -199,6 +203,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         for line in self.spread.line_ids:
             self.assertTrue(line.move_id)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_03_supplier_invoice(self):
         # spread date set
         self.spread.write(
@@ -209,8 +214,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
                 "move_line_auto_post": False,
             }
         )
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
         self.assertEqual(len(spread_lines), 13)
         self.assertEqual(2.69, spread_lines[0].amount)
@@ -288,6 +293,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(datetime.date(2017, 12, 31), spread_lines[11].date)
         self.assertEqual(datetime.date(2018, 1, 31), spread_lines[12].date)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_04_supplier_invoice(self):
         self.spread.write(
             {
@@ -300,7 +306,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
         )
 
         # change the state of invoice to open by clicking Validate button
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
         self.assertEqual(len(spread_lines), 4)
         self.assertEqual(333.33, spread_lines[1].amount)
@@ -320,6 +327,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_05_supplier_invoice(self):
         # spread date set
         self.spread.write(
@@ -329,9 +337,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
                 "spread_date": datetime.date(2017, 2, 1),
             }
         )
-
-        self.spread.compute_spread_board()
-
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         # create moves for all the spread lines and open them
         self.spread.line_ids.create_and_reconcile_moves()
         for spread_line in self.spread.line_ids:
@@ -346,13 +353,14 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_06_supplier_invoice(self):
         # spread date set
         self.spread.write(
             {"period_number": 3, "period_type": "quarter", "move_line_auto_post": False}
         )
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
 
         # create moves for all the spread lines and open them
         self.spread.line_ids.create_and_reconcile_moves()
@@ -387,6 +395,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 0.0)
         self.assertEqual(self.spread.unposted_amount, 0.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_07_supplier_invoice(self):
         self.spread.write(
             {
@@ -396,8 +405,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
                 "estimated_amount": 345.96,
             }
         )
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
         self.assertEqual(len(spread_lines), 3)
         self.assertAlmostEqual(115.32, spread_lines[0].amount)
@@ -413,6 +422,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 345.96)
         self.assertEqual(self.spread.unposted_amount, 345.96)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_08_supplier_invoice(self):
         # spread date set
         self.spread.write(
@@ -422,8 +432,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
                 "spread_date": datetime.date(2017, 2, 1),
             }
         )
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         self.assertTrue(self.spread.line_ids)
         self.spread.action_undo_spread()
         self.assertFalse(self.spread.line_ids)
@@ -431,6 +441,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_09_supplier_invoice(self):
         # spread date set
         self.spread.write(
@@ -440,15 +451,15 @@ class TestComputeSpreadBoard(common.TransactionCase):
                 "spread_date": datetime.date(2017, 2, 1),
             }
         )
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         for line in self.spread.line_ids:
             line.create_move()
             self.assertTrue(line.move_id)
             action = line.open_move()
             self.assertTrue(action)
-
-        self.spread.line_ids.unlink_move()
+        with lower_logging(25, logging.INFO):
+            self.spread.line_ids.unlink_move()
         for line in self.spread.line_ids:
             self.assertFalse(line.move_id)
         self.assertTrue(self.spread.line_ids)
@@ -456,16 +467,18 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_10_create_entries(self):
         self.env["account.spread.line"]._create_entries()
         self.assertFalse(self.spread.line_ids)
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         self.env["account.spread.line"]._create_entries()
         self.assertTrue(self.spread.line_ids)
         for line in self.spread.line_ids:
             self.assertTrue(line.move_id)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_11_create_move_sale_invoice(self):
         self.spread2.move_line_auto_post = False
         self.spread2.compute_spread_board()
@@ -474,12 +487,12 @@ class TestComputeSpreadBoard(common.TransactionCase):
             line.create_move()
             self.assertTrue(line.move_id)
             self.assertFalse(line.move_id.state == "posted")
-
-        self.spread2.action_undo_spread()
+        with lower_logging(25, logging.INFO):
+            self.spread2.action_undo_spread()
         for line in self.spread2.line_ids:
             self.assertFalse(line.move_id)
-
-        self.spread2.action_recalculate_spread()
+        with lower_logging(25, logging.INFO):
+            self.spread2.action_recalculate_spread()
         for line in self.spread2.line_ids:
             self.assertTrue(line.move_id)
             self.assertTrue(line.move_id)
@@ -488,13 +501,14 @@ class TestComputeSpreadBoard(common.TransactionCase):
             with self.assertRaises(UserError):
                 line.create_move()
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_12_supplier_invoice_auto_post(self):
         # spread date set
         self.spread.write(
             {"period_number": 8, "period_type": "month", "move_line_auto_post": True}
         )
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
 
         # create moves for all the spread lines and open them
         self.spread.line_ids.create_and_reconcile_moves()
@@ -515,12 +529,13 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 0.0)
         self.assertEqual(self.spread.unposted_amount, 0.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_13_create_move_in_invoice_auto_post(self):
         self.spread2.write({"period_number": 4, "move_line_auto_post": True})
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
-
-        self.spread2.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread2.compute_spread_board()
         for line in self.spread2.line_ids:
             self.assertFalse(line.move_id)
             line.create_move()
@@ -530,6 +545,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_14_negative_amount(self):
         # spread date set
         self.spread.write(
@@ -540,33 +556,40 @@ class TestComputeSpreadBoard(common.TransactionCase):
                 "spread_date": datetime.date(2017, 1, 7),
             }
         )
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
 
         spread_lines = self.spread.line_ids
         self.assertTrue(spread_lines)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_15_compute_spread_board_line_account_deprecated(self):
         self.spread.debit_account_id.deprecated = True
         self.assertTrue(self.spread.debit_account_id.deprecated)
 
         self.assertTrue(self.spread.is_debit_account_deprecated)
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
 
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_16_compute_spread_board_line_account_deprecated(self):
         self.spread.credit_account_id.deprecated = True
         self.assertTrue(self.spread.credit_account_id.deprecated)
 
         self.assertTrue(self.spread.is_credit_account_deprecated)
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
 
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_17_compute_spread_board_line_account_deprecated(self):
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         self.spread.debit_account_id.deprecated = True
         self.assertTrue(self.spread.debit_account_id.deprecated)
 
@@ -578,6 +601,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_18_supplier_invoice(self):
         # spread date set
         self.spread.write(
@@ -589,8 +613,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
         )
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
-
-        self.spread.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
         self.assertEqual(len(spread_lines), 13)
 
@@ -645,6 +669,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertAlmostEqual(self.spread.unspread_amount, 682.81)
         self.assertAlmostEqual(self.spread.unposted_amount, 682.81)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_19_supplier_invoice_calc_day(self):
         self.assertTrue(self.spread3.days_calc)
         self.spread3.compute_spread_board()
@@ -680,7 +705,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
 
         # Period Type is 'Quarter'
         self.spread3.period_type = "quarter"
-        self.spread3.compute_spread_board()
+        with lower_logging(25, logging.INFO):
+            self.spread3.compute_spread_board()
         spread_lines = self.spread3.line_ids
         self.assertEqual(len(spread_lines), 12)
         self.assertAlmostEqual(325.27, spread_lines[0].amount)
@@ -716,6 +742,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertAlmostEqual(1002.05, spread_lines[11].amount)
         self.assertAlmostEqual(925.37, spread_lines[12].amount)
 
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_20_supplier_invoice_template(self):
         """Test onchange template"""
         self.assertEqual(self.spread3.invoice_type, "out_invoice")

@@ -243,7 +243,7 @@
                     <notebook name="notebook">
                         <page name="spread_lines" string="Spread lines">
                             <field name="line_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="name" readonly="1" />
                                     <field
                                         name="amount"
@@ -276,7 +276,7 @@
                                         groups="account.group_account_manager"
                                         invisible="not move_id"
                                     />
-                                </tree>
+                                </list>
                             </field>
                             <group name="extension">
                                 <group name="extension_left">
@@ -333,22 +333,21 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
+
     <record id="view_account_spread_tree" model="ir.ui.view">
         <field name="model">account.spread</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
+
     <record id="view_account_spread_search" model="ir.ui.view">
         <field name="model">account.spread</field>
         <field name="arch" type="xml">
@@ -362,15 +361,16 @@
             </search>
         </field>
     </record>
+
     <record id="action_account_spread_form" model="ir.actions.act_window">
         <field name="name">Spread Costs/Revenues</field>
         <field name="res_model">account.spread</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="view_id" ref="view_account_spread_tree" />
     </record>
     <menuitem
         id="menu_action_account_spread_form"
-        parent="account.menu_finance_entries_accounting_miscellaneous"
+        parent="account.menu_finance_entries"
         action="action_account_spread_form"
         groups="account.group_account_user,account.group_account_manager"
     />

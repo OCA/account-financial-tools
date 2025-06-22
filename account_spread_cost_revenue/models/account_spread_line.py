@@ -1,6 +1,8 @@
 # Copyright 2016-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from markupsafe import Markup
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -26,7 +28,7 @@ class AccountInvoiceSpreadLine(models.Model):
             grouped_lines.update({spread: spread_line_list + spread_line})
         for spread in grouped_lines:
             created_moves = grouped_lines[spread]._create_moves()
-
+            spread._post_spread_moves(created_moves)
             if created_moves:
                 post_msg = _("Created move(s) ")
                 post_msg += ", ".join(
@@ -34,8 +36,7 @@ class AccountInvoiceSpreadLine(models.Model):
                     ">%s</a>" % (move.id, move.name)
                     for move in created_moves
                 )
-                spread.message_post(body=post_msg)
-            spread._post_spread_moves(created_moves)
+                spread.message_post(body=Markup(post_msg))
 
     def create_move(self):
         """Button to manually create a move from a spread line entry."""
@@ -56,7 +57,11 @@ class AccountInvoiceSpreadLine(models.Model):
         created_moves = self.env["account.move"]
         for line in self:
             move_vals = line._prepare_move()
-            move = self.env["account.move"].create(move_vals)
+            move = (
+                self.env["account.move"]
+                .with_context(check_move_validity=False)
+                .create(move_vals)
+            )
             line.move_id = move
             created_moves += move
         return created_moves

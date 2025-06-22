@@ -160,7 +160,8 @@ class AccountMoveLine(models.Model):
             elif len(template) > 1:
                 raise UserError(
                     _(
-                        "Too many auto spread templates (%(len_template)s) matched with the "
+                        "Too many auto spread templates (%(len_template)s) "
+                        "matched with the "
                         "invoice line, %(line_name)s"
                     )
                     % {"len_template": len(template), "line_name": line.display_name}
