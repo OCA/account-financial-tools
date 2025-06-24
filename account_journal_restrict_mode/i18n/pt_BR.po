@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_journal_restrict_mode
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: account_journal_restrict_mode
+#: model:ir.model.fields,help:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
+msgid ""
+"If ticked, when an entry is posted, we retroactively hash all moves in the "
+"sequence from the entry back to the last hashed entry. The hash can also be "
+"performed on demand by the Secure Entries wizard."
+msgstr ""
+
+#. module: account_journal_restrict_mode
+#: model:ir.model,name:account_journal_restrict_mode.model_account_journal
+msgid "Journal"
+msgstr ""
+
+#. module: account_journal_restrict_mode
+#. odoo-python
+#: code:addons/account_journal_restrict_mode/models/account_journal.py:0
+msgid "Journal %s must have Lock Posted Entries enabled."
+msgstr ""
+
+#. module: account_journal_restrict_mode
+#: model:ir.model.fields,field_description:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
+msgid "Secure Posted Entries with Hash"
+msgstr ""
