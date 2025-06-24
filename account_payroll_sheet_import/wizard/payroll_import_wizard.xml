@@ -1,0 +1,50 @@
+<odoo>
+    <record id="view_payroll_import_form" model="ir.ui.view">
+        <field name="name">payroll.import.wizard.form</field>
+        <field name="model">payroll.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Payroll">
+            <sheet>
+                <group>
+                    <field name="file" filename="filename" />
+                    <field name="filename" invisible="1" />
+                    <field name="mapping_id" />
+                </group>
+                <footer>
+                    <button
+                            string="Import"
+                            type="object"
+                            name="action_import_payroll"
+                            class="btn-primary"
+                        />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_payroll_import" model="ir.actions.act_window">
+        <field name="name">Import Payroll</field>
+        <field name="res_model">payroll.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem
+        id="menu_payroll_import_root"
+        name="Payroll Import"
+        parent="account.menu_finance_entries"
+        sequence="99"
+    />
+
+    <menuitem
+        id="menu_payroll_import"
+        name="Import Payroll"
+        parent="menu_payroll_import_root"
+        action="action_payroll_import"
+        sequence="98"
+    />
+
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payroll_importer,payroll.importer,model_payroll_import_wizard,account.group_account_user,1,1,1,1
+access_payroll_import_mapping_line,payroll.import.mapping.line,model_payroll_import_mapping_line,account.group_account_user,1,1,1,1
+access_payroll_import_mapping,payroll.import.mapping,model_payroll_import_mapping,account.group_account_user,1,1,1,1
+access_missing_partner_wizard,missing.partner.wizard,model_missing_partner_wizard,account.group_account_user,1,0,0,0

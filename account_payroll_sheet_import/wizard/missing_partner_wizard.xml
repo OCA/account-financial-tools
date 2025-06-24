@@ -1,0 +1,31 @@
+<odoo>
+  <record id="view_missing_partner_wizard" model="ir.ui.view">
+    <field name="name">missing.partner.wizard.form</field>
+    <field name="model">missing.partner.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Missing Contacts">
+        <div class="alert alert-warning" role="alert">
+          <i
+                        class="fa fa-exclamation-triangle text-warning"
+                        aria-hidden="true"
+                        style="margin-right: 8px;"
+                    />
+          The following employees could not be identified.
+          Please create them and ensure their Identification Nº or Passport is set correctly.
+        </div>
+        <p><strong>ID Numbers:</strong></p>
+        <field name="missing_ids" invisible="1" />
+        <field
+                    name="missing_ids"
+                    widget="text"
+                    readonly="1"
+                    class="o_form_textarea"
+                    style="min-height: 150px;"
+                />
+        <footer>
+          <button string="Close" class="btn-primary" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_payroll_mapping_line_tree" model="ir.ui.view">
+        <field name="name">payroll.import.mapping.line.tree</field>
+        <field name="model">payroll.import.mapping.line</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="column_name" />
+                <field name="account_id" />
+                <field name="move_type" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_payroll_mapping_tree" model="ir.ui.view">
+        <field name="name">payroll.import.mapping.tree</field>
+        <field name="model">payroll.import.mapping</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_payroll_mapping_form" model="ir.ui.view">
+        <field name="name">payroll.import.mapping.form</field>
+        <field name="model">payroll.import.mapping</field>
+        <field name="arch" type="xml">
+            <form string="Payroll Mapping Line">
+                <group>
+                    <field name="name" />
+                    <field name="journal_id" />
+                    <field name="id_column" />
+                    <field name="mapping_line_ids">
+                        <tree>
+                            <field name="column_name" />
+                            <field name="account_id" />
+                            <field name="move_type" />
+                        </tree>
+                    </field>
+                    <field name="company_id" groups="base.group_multi_company" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_payroll_mapping" model="ir.actions.act_window">
+        <field name="name">Payroll Mapping</field>
+        <field name="res_model">payroll.import.mapping</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payroll_mapping_line" model="ir.actions.act_window">
+        <field name="name">Payroll Mapping Lines</field>
+        <field name="res_model">payroll.import.mapping.line</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem
+        id="menu_payroll_root"
+        name="Payroll Mapping"
+        parent="account.menu_finance_configuration"
+    />
+
+    <menuitem
+        id="menu_payroll_mapping"
+        name="Payroll Mapping"
+        parent="menu_payroll_root"
+        action="action_payroll_mapping"
+        sequence="100"
+    />
+
+
+    <menuitem
+        id="menu_payroll_mapping_line"
+        name="Payroll Mapping Lines"
+        parent="menu_payroll_root"
+        action="action_payroll_mapping_line"
+        sequence="101"
+    />
+
+</odoo>

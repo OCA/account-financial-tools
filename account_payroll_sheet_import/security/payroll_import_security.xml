@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="payroll_import_mapping_multi" model="ir.rule">
+        <field name="name">payroll import mapping multi-company</field>
+        <field ref="model_payroll_import_mapping" name="model_id" />
+        <field eval="True" name="global" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="payroll_import_mapping_line_multi" model="ir.rule">
+        <field name="name">payroll import mapping line multi-company</field>
+        <field ref="model_payroll_import_mapping_line" name="model_id" />
+        <field eval="True" name="global" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
