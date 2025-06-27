@@ -719,6 +719,6 @@ class AssetReportXlsx(models.AbstractModel):
                     reason = self.env._("Undetermined error")
                 row_pos += 1
                 err_msg = self.env._("Assets to be corrected") + ": "
-                err_msg += "{}".format(", ".join(error_dict[k].mapped("display_name")))
+                err_msg += ", ".join(error_dict[k].mapped("display_name"))
                 err_msg += " - " + self.env._("Reason") + ": " + reason
                 ws.write_string(row_pos, 0, err_msg, FORMATS["format_left_bold"])
