@@ -98,7 +98,7 @@ class TestAccountAssetBatchCompute(TransactionCase):
             lambda r: r.type == "depreciate" and r.move_id
         )
         self.assertTrue(len(depreciation_line) == 0)
-        job_name = "Creating jobs to create moves for assets to %s" % (self.nextmonth)
+        job_name = f"Creating jobs to create moves for assets to {self.nextmonth}"
         jobs = self.env["queue.job"].search(
             [("name", "=", job_name)], order="date_created desc", limit=1
         )
@@ -117,9 +117,8 @@ class TestAccountAssetBatchCompute(TransactionCase):
             lambda r: r.type == "depreciate" and r.move_id
         )
         self.assertTrue(len(depreciation_line) == 0)
-        job_name = "Creating move for asset with id {} to {}".format(
-            self.asset01.id,
-            self.nextmonth,
+        job_name = (
+            f"Creating move for asset with id {self.asset01.id} to {self.nextmonth}"
         )
         jobs = self.env["queue.job"].search(
             [("name", "=", job_name)], order="date_created desc", limit=1
