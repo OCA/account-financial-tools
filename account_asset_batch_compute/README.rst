@@ -61,6 +61,9 @@ Contributors
 - Adrien Peiffer
 - Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
 - Alba Riera <alba.riera@creublanca.es>
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+
+  - Bhavesh Heliconia
 
 Maintainers
 -----------

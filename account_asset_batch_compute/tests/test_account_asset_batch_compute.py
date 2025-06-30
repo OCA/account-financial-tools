@@ -6,12 +6,11 @@ from datetime import date
 
 from dateutil import relativedelta
 
-from odoo.tests.common import TransactionCase
-
+from odoo.addons.base.tests.common import BaseCommon
 from odoo.addons.queue_job.job import Job
 
 
-class TestAccountAssetBatchCompute(TransactionCase):
+class TestAccountAssetBatchCompute(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

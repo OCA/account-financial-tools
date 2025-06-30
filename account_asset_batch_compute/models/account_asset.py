@@ -1,7 +1,7 @@
 # Copyright 2016 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 
 
 class AccountAsset(models.Model):
@@ -14,7 +14,7 @@ class AccountAsset(models.Model):
             results = []
             log_error = ""
             for record in self:
-                description = _(
+                description = self.env._(
                     "Creating move for asset with id {rec_id} to {date_end}"
                 ).format(
                     rec_id=record.id,

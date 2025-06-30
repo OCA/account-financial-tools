@@ -1,7 +1,7 @@
 # Copyright 2016-2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class AccountAssetCompute(models.TransientModel):
@@ -16,7 +16,9 @@ class AccountAssetCompute(models.TransientModel):
         if not self.env.context.get("job_uuid") and not self.env.context.get(
             "test_queue_job_no_delay"
         ):
-            description = _("Creating jobs to create moves for assets to {}").format(
+            description = self.env._(
+                "Creating jobs to create moves for assets to {}"
+            ).format(
                 self.date_end,
             )
             job = self.with_delay(description=description).asset_compute()
