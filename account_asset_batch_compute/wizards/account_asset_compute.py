@@ -5,7 +5,6 @@ from odoo import _, fields, models
 
 
 class AccountAssetCompute(models.TransientModel):
-
     _inherit = "account.asset.compute"
 
     batch_processing = fields.Boolean()
@@ -21,7 +20,7 @@ class AccountAssetCompute(models.TransientModel):
                 self.date_end,
             )
             job = self.with_delay(description=description).asset_compute()
-            return "Job created with uuid {}".format(job.uuid)
+            return f"Job created with uuid {job.uuid}"
         else:
             return super(
                 AccountAssetCompute, self.with_context(asset_batch_processing=True)

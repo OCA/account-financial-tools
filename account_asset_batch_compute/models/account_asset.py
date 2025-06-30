@@ -5,7 +5,6 @@ from odoo import _, models
 
 
 class AccountAsset(models.Model):
-
     _inherit = "account.asset"
 
     def _compute_entries(self, date_end, check_triggers=False):
@@ -26,6 +25,4 @@ class AccountAsset(models.Model):
                 )
             return results, log_error
         else:
-            return super(AccountAsset, self)._compute_entries(
-                date_end, check_triggers=check_triggers
-            )
+            return super()._compute_entries(date_end, check_triggers=check_triggers)
