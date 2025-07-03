@@ -118,7 +118,9 @@ class AccountSpreadTemplate(models.Model):
     def _onchange_user_invoice_line_account(self):
         self.exp_rev_account_id = False
 
-    def _prepare_spread_from_template(self, spread_account_id=False):
+    def _prepare_spread_from_template(
+        self, spread_account_id=False, invoice_type=False
+    ):
         self.ensure_one()
         company = self.company_id
         spread_vals = {
@@ -131,11 +133,11 @@ class AccountSpreadTemplate(models.Model):
         }
 
         account_id = spread_account_id or self.spread_account_id.id
-        if self.spread_type == "sale":
-            invoice_type = "out_invoice"
+        if not invoice_type:
+            invoice_type = "out_invoice" if self.spread_type == "sale" else "in_invoice"
+        if invoice_type in ("out_invoice", "in_refund"):
             spread_vals["debit_account_id"] = account_id
         else:
-            invoice_type = "in_invoice"
             spread_vals["credit_account_id"] = account_id
 
         if self.period_number:
