@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [account_asset_force_account](account_asset_force_account/) | 17.0.1.1.0 | <a href='https://github.com/BernatObrador'><img src='https://github.com/BernatObrador.png' width='32' height='32' style='border-radius:50%;' alt='BernatObrador'/></a> | This module allows you to enforce specific accounts for assets, including depreciation and expense accounts, through asset profiles and forms.
 [account_asset_management](account_asset_management/) | 17.0.1.1.0 |  | Assets Management
 [account_chart_update](account_chart_update/) | 17.0.1.0.0 |  | Wizard to update a company's account chart from a template
+[account_chart_update_l10n_eu_oss](account_chart_update_l10n_eu_oss/) | 17.0.1.0.0 | <a href='https://github.com/LoisRForgeFlow'><img src='https://github.com/LoisRForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='LoisRForgeFlow'/></a> | Account Chart update OSS
 [account_check_deposit](account_check_deposit/) | 17.0.1.0.0 |  | Manage deposit of checks to the bank
 [account_fiscal_year](account_fiscal_year/) | 17.0.1.1.0 | <a href='https://github.com/eLBati'><img src='https://github.com/eLBati.png' width='32' height='32' style='border-radius:50%;' alt='eLBati'/></a> | Create Account Fiscal Year
 [account_journal_lock_date](account_journal_lock_date/) | 17.0.1.0.0 |  | Lock each journal independently
