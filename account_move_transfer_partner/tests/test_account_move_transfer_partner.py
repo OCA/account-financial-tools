@@ -1,12 +1,13 @@
 # Copyright 2022 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, fields
+from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form, TransactionCase, tagged
 
 CURRENCY_RATE = 0.5
 
 
+@tagged("post_install", "-at_install")
 class TestAccountMoveTransferPartner(TransactionCase):
     def setUp(self):
         super().setUp()
@@ -44,11 +45,6 @@ class TestAccountMoveTransferPartner(TransactionCase):
         self.product = self.ProductProduct.create(
             {"name": "Product", "lst_price": 100.0, "standard_price": 100.0}
         )
-        charts = self.env["account.chart.template"].search([])
-        if charts:
-            self.chart = charts[0]
-        else:
-            raise ValidationError(_("No Chart of Account Template has been defined !"))
         self.AccountMove = self.env["account.move"]
         with Form(
             self.AccountMove.with_context(default_move_type="out_invoice")
@@ -137,7 +133,8 @@ class TestAccountMoveTransferPartner(TransactionCase):
                         0,
                         {
                             "value": "percent",
-                            "value_amount": 50,
+                            "value_amount": 50.0,
+                            "nb_days": 0,
                         },
                     ),
                     # Pay the rest after 14 days
@@ -145,8 +142,9 @@ class TestAccountMoveTransferPartner(TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 14,
+                            "value": "percent",
+                            "value_amount": 50.0,
+                            "nb_days": 14,
                         },
                     ),
                 ],
@@ -305,7 +303,7 @@ class TestAccountMoveTransferPartner(TransactionCase):
         wizard_form.destination_partner_id = self.partner_3
         self.assertEqual(
             wizard_form.total_amount_due,
-            self.invoice_with_payment_term.currency_id.compute(
+            self.invoice_with_payment_term.currency_id._convert(
                 self.invoice_with_payment_term.amount_residual,
                 self.env.company.currency_id,
             ),

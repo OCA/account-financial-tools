@@ -9,7 +9,7 @@
                     class="alert alert-info"
                     role="alert"
                     style="margin-bottom:0px;"
-                    attrs="{'invisible': [('allow_edit_amount_to_transfer', '=', True)]}"
+                    invisible="allow_edit_amount_to_transfer"
                 >
                         <span>You can edit <strong
                         >Amount to transfer</strong> only when you apply this on one move</span>
@@ -18,7 +18,7 @@
                     class="alert alert-warning"
                     role="alert"
                     style="margin-bottom:0px;"
-                    attrs="{'invisible': [('move_ids', '!=', [])]}"
+                    invisible="move_ids"
                 >
                         <span
                     >You only can perform this operation on invoice/refund documents</span>
@@ -50,7 +50,7 @@
                                 <field
                                 name="amount_to_transfer"
                                 force_save="1"
-                                attrs="{'readonly': [('allow_edit_amount_to_transfer', '!=', True)]}"
+                                readonly="not allow_edit_amount_to_transfer"
                             />
                             </group>
                         </group>
