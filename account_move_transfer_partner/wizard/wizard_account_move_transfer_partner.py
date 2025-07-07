@@ -6,7 +6,6 @@ from odoo.tools import float_compare
 
 
 class WizardAccountMoveTransferPartner(models.TransientModel):
-
     _name = "wizard.account.move.transfer.partner"
     _description = "Wizard to transfer due amount to another partner"
 
@@ -80,7 +79,7 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        values = super(WizardAccountMoveTransferPartner, self).default_get(fields_list)
+        values = super().default_get(fields_list)
         current_model = self.env.context.get("active_model")
         moves = self.env["account.move"].browse()
         records = self.env[current_model].browse(self.env.context.get("active_ids"))
@@ -123,8 +122,8 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
         ):
             raise ValidationError(
                 _(
-                    "Amount to transfer %(amount_to_transfer)s should be equal or lower "
-                    "than total amount due %(total_amount_due)s"
+                    "Amount to transfer %(amount_to_transfer)s should be equal or lower"
+                    " than total amount due %(total_amount_due)s"
                 )
                 % {
                     "amount_to_transfer": self.amount_to_transfer,
@@ -154,7 +153,8 @@ class WizardAccountMoveTransferPartner(models.TransientModel):
                 lines = counterpart_lines.filtered(lambda x: not x.reconciled)
             else:
                 lines = move.line_ids.filtered(
-                    lambda line: line.account_id == reconcilable_account
+                    lambda line, reconcilable=reconcilable_account: line.account_id
+                    == reconcilable
                     and not line.reconciled
                 )
             common_data = {
