@@ -3,8 +3,6 @@
 
 import logging
 
-from odoo import SUPERUSER_ID, api
-
 _logger = logging.getLogger(
     "Adding stock valuation adjustment line to the account move line"
 )
@@ -65,6 +63,5 @@ def add_stock_valuation_adjustment_line(env):
                 )
 
 
-def post_init_hook(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
+def post_init_hook(env):
     add_stock_valuation_adjustment_line(env)

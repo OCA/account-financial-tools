@@ -4,7 +4,7 @@
 {
     "name": "Account Move Line Landed Cost Info",
     "summary": "Introduces the landed cost adjustment lines to the journal items",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Generic",
