@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = "account.move.line"
 
     stock_valuation_adjustment_line_id = fields.Many2one(

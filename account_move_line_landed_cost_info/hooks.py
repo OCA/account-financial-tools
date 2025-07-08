@@ -22,14 +22,12 @@ def add_stock_valuation_adjustment_line(env):
         if len(landed_cost.valuation_adjustment_lines) == 1:
             # if only one adjustment all the journal items are for the same val_adj_line
             _logger.info(
-                "Assigning %s for %s to %s"
-                % (
-                    am.name,
-                    val_adj_line.product_id.display_name,
-                    val_adj_line.cost_id.name,
-                )
+                f"Assigning {am.name} for {val_adj_line.product_id.display_name} "
+                f"to {val_adj_line.cost_id.name}"
             )
-            matched_lines = am.line_ids.filtered(lambda l: not l.stock_landed_cost_id)
+            matched_lines = am.line_ids.filtered(
+                lambda line: not line.stock_landed_cost_id
+            )
             if matched_lines:
                 env.cr.execute(
                     """UPDATE account_move_line
@@ -46,14 +44,10 @@ def add_stock_valuation_adjustment_line(env):
             # for the same product. And qty or the additional value added do not
             # match in a normal case, because the quantities could already leave the
             # company, so it is best to fill the stock landed cost info only
-            matched_lines = am.line_ids.filtered(lambda l: not l.stock_landed_cost_id)
-            _logger.info(
-                "Assigning %s to %s"
-                % (
-                    am.name,
-                    val_adj_line.cost_id.name,
-                )
+            matched_lines = am.line_ids.filtered(
+                lambda line: not line.stock_landed_cost_id
             )
+            _logger.info(f"Assigning {am.name} to {val_adj_line.cost_id.name}")
             if matched_lines:
                 env.cr.execute(
                     """UPDATE account_move_line
@@ -66,12 +60,8 @@ def add_stock_valuation_adjustment_line(env):
                 )
             else:
                 _logger.info(
-                    "Could not match account move line for %s and %s, product %s"
-                    % (
-                        landed_cost.name,
-                        am.name,
-                        val_adj_line.product_id.display_name,
-                    )
+                    f"Could not match account move line for {landed_cost.name} "
+                    f"and {am.name}, product {val_adj_line.product_id.display_name}"
                 )
 
 
