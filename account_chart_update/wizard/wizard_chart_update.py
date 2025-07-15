@@ -865,7 +865,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 )
                 if not self.env.ref(real_tax_group_xml_id, raise_if_not_found=False):
                     del data_item["tax_group_id"]
-            # Do not set repartition_line_ids lines linked to non-existent accounts
+            # Remove account from commands if not exists
             if wiz_tax.type == "new" and "repartition_line_ids" in data_item:
                 new_repartition_line_ids = []
                 for line in data_item["repartition_line_ids"]:
@@ -874,10 +874,23 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         real_account_id_xml_id = (
                             f"account.{self.company_id.id}_{account_id_xml_id}"
                         )
-                        if self.env.ref(
+                        account = self.env.ref(
                             real_account_id_xml_id, raise_if_not_found=False
-                        ):
-                            new_repartition_line_ids.append(line)
+                        )
+                        if account:
+                            new_cmd = (
+                                line[0],
+                                line[1],
+                                {**line[2], "account_id": account.id},
+                            )
+                        else:
+                            line[2].pop("account_id")
+                            new_cmd = (
+                                line[0],
+                                line[1],
+                                {**line[2]},
+                            )
+                        new_repartition_line_ids.append(new_cmd)
                     else:
                         new_repartition_line_ids.append(line)
                 data_item["repartition_line_ids"] = new_repartition_line_ids
