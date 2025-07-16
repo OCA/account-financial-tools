@@ -222,9 +222,10 @@ class AccountDashboardBannerCell(models.Model):
         )
         specific_domain = expression.OR(
             [
+                [("date_maturity", "=", False)],
                 [("date_maturity", "<", speedy["today"])],
                 [
-                    ("date_maturity", "<=", speedy["today"]),
+                    ("date_maturity", "=", speedy["today"]),
                     ("journal_id.type", "!=", "sale"),
                 ],
             ]
