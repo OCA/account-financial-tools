@@ -15,8 +15,10 @@
                             options="{'no_create': True}"
                             groups="base.group_multi_company"
                         />
-                        <field name="period_lock_to_date" />
+                        <field name="sale_lock_to_date" />
+                        <field name="purchase_lock_to_date" />
                         <field name="fiscalyear_lock_to_date" />
+                        <field name="hard_lock_to_date" />
                     </group>
                 </sheet>
                 <footer>
@@ -39,7 +41,7 @@
     </record>
     <record model="ir.ui.menu" id="account_update_lock_to_date_menu">
         <field name="name">Update accounting lock to dates</field>
-        <field name="parent_id" ref="account.menu_finance_entries_actions" />
+        <field name="parent_id" ref="account.menu_finance_entries" />
         <field name="action" ref="account_update_lock_to_date_act_window" />
         <field
             name="groups_id"

@@ -15,17 +15,23 @@ class AccountUpdateLockToDate(models.TransientModel):
         required=True,
         default=lambda self: self.env.user.company_id,
     )
-    period_lock_to_date = fields.Date(
-        string="Lock To Date for Non-Advisers",
-        help="Only users with the 'Adviser' role can edit accounts after "
-        "and inclusive of this date. Use it for period locking inside an "
-        "open fiscal year, for example.",
+    sale_lock_to_date = fields.Date(
+        string="Sales Lock To Date",
+        help="Prevents creation and modification of entries in sales journals"
+        " posterior to the defined date inclusive.",
+    )
+    purchase_lock_to_date = fields.Date(
+        help="Prevents creation and modification of entries in purchase journals"
+        " posterior to the defined date inclusive.",
     )
     fiscalyear_lock_to_date = fields.Date(
+        string="Global Lock To Date",
+        help="No users can edit accounts posterior to this date."
+        " Use it for fiscal year locking for example.",
+    )
+    hard_lock_to_date = fields.Date(
         string="Lock To Date",
-        help="No users, including Advisers, can edit accounts after and "
-        "inclusive of this date. Use it for fiscal year locking for "
-        "example.",
+        help='Like the "Global Lock Date", but no exceptions are possible.',
     )
 
     @api.model
@@ -35,8 +41,10 @@ class AccountUpdateLockToDate(models.TransientModel):
         res.update(
             {
                 "company_id": company.id,
-                "period_lock_to_date": company.period_lock_to_date,
+                "sale_lock_to_date": company.sale_lock_to_date,
+                "purchase_lock_to_date": company.purchase_lock_to_date,
                 "fiscalyear_lock_to_date": company.fiscalyear_lock_to_date,
+                "hard_lock_to_date": company.hard_lock_to_date,
             }
         )
         return res
@@ -52,7 +60,9 @@ class AccountUpdateLockToDate(models.TransientModel):
         self._check_execute_allowed()
         self.company_id.sudo().write(
             {
-                "period_lock_to_date": self.period_lock_to_date,
+                "sale_lock_to_date": self.sale_lock_to_date,
+                "purchase_lock_to_date": self.purchase_lock_to_date,
                 "fiscalyear_lock_to_date": self.fiscalyear_lock_to_date,
+                "hard_lock_to_date": self.hard_lock_to_date,
             }
         )

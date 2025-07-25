@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,6 +12,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: account_lock_to_date
+#. odoo-python
+#: code:addons/account_lock_to_date/models/res_company.py:0
+msgid "A new Hard Lock To Date must be prior (or equal) to the previous one."
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model,name:account_lock_to_date.model_account_lock_exception
+msgid "Account Lock Exception"
+msgstr ""
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_account_update_lock_to_date
@@ -49,6 +60,19 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_account_lock_exception__fiscalyear_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__fiscalyear_lock_to_date
+#: model:ir.model.fields.selection,name:account_lock_to_date.selection__account_lock_exception__lock_date_field__fiscalyear_lock_to_date
+msgid "Global Lock To Date"
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__hard_lock_to_date
+msgid "Hard Lock To Date"
+msgstr ""
+
+#. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__id
 msgid "ID"
 msgstr ""
@@ -69,69 +93,105 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_lock_to_date
-#: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
-#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__fiscalyear_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__hard_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_res_company__hard_lock_to_date
+msgid "Like the \"Global Lock Date\", but no exceptions are possible."
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_account_lock_exception__lock_date_field
+msgid "Lock Date Field"
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__hard_lock_to_date
 msgid "Lock To Date"
 msgstr ""
 
 #. module: account_lock_to_date
-#: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__period_lock_to_date
-#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__period_lock_to_date
-msgid "Lock To Date for Non-Advisers"
-msgstr ""
-
-#. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
-msgid ""
-"No users, including Advisers, can edit accounts after and inclusive of this "
-"date. Use it for fiscal year locking for example."
-msgstr ""
-
-#. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_res_company__fiscalyear_lock_to_date
 msgid ""
-"No users, including Advisers, can edit accounts after this date. Use it for "
-"fiscal year locking for example."
+"No users can edit accounts posterior to this date. Use it for fiscal year "
+"locking for example."
 msgstr ""
 
 #. module: account_lock_to_date
-#: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__period_lock_to_date
-msgid ""
-"Only users with the 'Adviser' role can edit accounts after and inclusive of "
-"this date. Use it for period locking inside an open fiscal year, for "
-"example."
+#. odoo-python
+#: code:addons/account_lock_to_date/models/account_lock_exception.py:0
+msgid "Operation not supported"
 msgstr ""
 
 #. module: account_lock_to_date
-#: model:ir.model.fields,help:account_lock_to_date.field_res_company__period_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__purchase_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_res_company__purchase_lock_to_date
 msgid ""
-"Only users with the 'Adviser' role can edit accounts after this date. Use it"
-" for period locking inside an open fiscal year, for example."
+"Prevents creation and modification of entries in purchase journals posterior"
+" to the defined date inclusive."
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__sale_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_res_company__sale_lock_to_date
+msgid ""
+"Prevents creation and modification of entries in sales journals posterior to"
+" the defined date inclusive."
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_account_lock_exception__purchase_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__purchase_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__purchase_lock_to_date
+#: model:ir.model.fields.selection,name:account_lock_to_date.selection__account_lock_exception__lock_date_field__purchase_lock_to_date
+msgid "Purchase Lock To Date"
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_account_lock_exception__sale_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__sale_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__sale_lock_to_date
+#: model:ir.model.fields.selection,name:account_lock_to_date.selection__account_lock_exception__lock_date_field__sale_lock_to_date
+msgid "Sales Lock To Date"
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_account_lock_exception__lock_date_field
+msgid "Technical field identifying the changed lock date"
 msgstr ""
 
 #. module: account_lock_to_date
 #. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
-#, python-format
-msgid "The lock date for advisors is irreversible and can't be removed."
+msgid "The Hard Lock Date cannot be removed."
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_account_lock_exception__fiscalyear_lock_to_date
+msgid ""
+"The date the Global Lock To Date is set to by this exception. If the lock to"
+" date is not changed it is set to False."
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_account_lock_exception__purchase_lock_to_date
+msgid ""
+"The date the Purchase Lock To Date is set to by this exception. If the lock "
+"to date is not changed it is set to False."
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,help:account_lock_to_date.field_account_lock_exception__sale_lock_to_date
+msgid ""
+"The date the Sale Lock To Date is set to by this exception. If the lock to "
+"date is not changed it is set to False."
 msgstr ""
 
 #. module: account_lock_to_date
 #. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
-#, python-format
 msgid ""
-"The new lock to date for advisors must be set after the previous lock to "
-"date."
-msgstr ""
-
-#. module: account_lock_to_date
-#. odoo-python
-#: code:addons/account_lock_to_date/models/res_company.py:0
-#, python-format
-msgid ""
-"There are still unposted entries in the period to date you want to lock. You"
-" should either post or delete them."
+"There are still unposted entries in the period to date you want to hard "
+"lock. You should either post or delete them."
 msgstr ""
 
 #. module: account_lock_to_date
@@ -146,43 +206,35 @@ msgid "Update accounting lock to dates"
 msgstr ""
 
 #. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__user_fiscalyear_lock_to_date
+msgid "User Fiscalyear Lock To Date"
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__user_hard_lock_to_date
+msgid "User Hard Lock To Date"
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__user_purchase_lock_to_date
+msgid "User Purchase Lock To Date"
+msgstr ""
+
+#. module: account_lock_to_date
+#: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__user_sale_lock_to_date
+msgid "User Sale Lock To Date"
+msgstr ""
+
+#. module: account_lock_to_date
 #. odoo-python
 #: code:addons/account_lock_to_date/wizards/account_update_lock_to_date.py:0
-#, python-format
 msgid "You are not allowed to execute this action."
 msgstr ""
 
 #. module: account_lock_to_date
 #. odoo-python
 #: code:addons/account_lock_to_date/models/account_move.py:0
-#, python-format
 msgid ""
-"You cannot add/modify entries after and inclusive of the lock to date %s"
-msgstr ""
-
-#. module: account_lock_to_date
-#. odoo-python
-#: code:addons/account_lock_to_date/models/account_move.py:0
-#, python-format
-msgid ""
-"You cannot add/modify entries after and inclusive of the lock to date %s. "
-"Check the company settings or ask someone with the 'Adviser' role"
-msgstr ""
-
-#. module: account_lock_to_date
-#. odoo-python
-#: code:addons/account_lock_to_date/models/res_company.py:0
-#, python-format
-msgid ""
-"You cannot define stricter conditions on advisors than on users. Please make"
-" sure that the lock date on advisor is set after the lock date for users."
-msgstr ""
-
-#. module: account_lock_to_date
-#. odoo-python
-#: code:addons/account_lock_to_date/models/res_company.py:0
-#, python-format
-msgid ""
-"You cannot lock a period that is not finished yet. Please make sure that the"
-" lock date for advisors is set at or after the last day of the next month."
+"You cannot add/modify entries posterior to and inclusive of: "
+"%(lock_date_info)s."
 msgstr ""
