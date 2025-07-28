@@ -19,7 +19,6 @@ class AccountFiscalYear(models.Model):
             last_fiscal_year = self.search(
                 [("company_id", "=", company.id)], order="date_to desc", limit=1
             )
-
             if last_fiscal_year and (
                 last_fiscal_year.date_to < datetime.now().date() + relativedelta(days=1)
             ):

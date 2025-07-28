@@ -6,7 +6,7 @@
     "name": "Fiscal Years - Automatic Creation",
     "summary": "Automatically create new fiscal years, based on the datas"
     " of the last fiscal years",
-    "version": "16.0.1.0.2",
+    "version": "18.0.1.0.0",
     "category": "Accounting",
     "author": "GRAP,Odoo Community Association (OCA)",
     "maintainers": ["legalsylvain"],
