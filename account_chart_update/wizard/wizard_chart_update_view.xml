@@ -36,9 +36,10 @@
                     <page string="General options" name="page_general_options">
                         <group>
                             <group string="Update records?">
-                                <field name="update_tax" />
-                                <field name="update_account" />
                                 <field name="update_account_group" />
+                                <field name="update_account" />
+                                <field name="update_tax_group" />
+                                <field name="update_tax" />
                                 <field name="update_fiscal_position" />
                             </group>
                         </group>
@@ -57,7 +58,7 @@
                     </page>
                     <page
                         string="Field options"
-                        invisible="not update_tax and not update_account and not update_fiscal_position and not update_account_group"
+                        invisible="not update_account_group and not update_account and not update_tax_group and not update_tax and not update_fiscal_position"
                     >
                         <h3>
                             <p>
@@ -67,12 +68,12 @@
                         </h3>
                         <notebook>
                             <page
-                                string="Taxes"
-                                name="page_fields_taxes"
-                                invisible="not update_tax"
+                                string="Account groups"
+                                name="page_fields_account_groups"
+                                invisible="not update_account_group"
                             >
                                 <field
-                                    name="tax_field_ids"
+                                    name="account_group_field_ids"
                                     widget="many2many_checkboxes"
                                     context="{'account_chart_update': True}"
                                 />
@@ -89,12 +90,23 @@
                                 />
                             </page>
                             <page
-                                string="Account groups"
-                                name="page_fields_account_groups"
-                                invisible="not update_account_group"
+                                string="Tax Group"
+                                name="page_fields_tax_groups"
+                                invisible="not update_tax_group"
                             >
                                 <field
-                                    name="account_group_field_ids"
+                                    name="tax_group_field_ids"
+                                    widget="many2many_checkboxes"
+                                    context="{'account_chart_update': True}"
+                                />
+                            </page>
+                            <page
+                                string="Taxes"
+                                name="page_fields_taxes"
+                                invisible="not update_tax"
+                            >
+                                <field
+                                    name="tax_field_ids"
                                     widget="many2many_checkboxes"
                                     context="{'account_chart_update': True}"
                                 />
@@ -114,18 +126,18 @@
                     </page>
                     <page
                         string="Matching"
-                        invisible="not update_tax and not update_account and not update_fiscal_position and not update_account_group"
+                        invisible="not update_account_group and not update_account and not update_tax_group and not update_tax and not update_fiscal_position"
                     >
                         <h3>
                             <p>Here you can set the matching order.</p>
                         </h3>
                         <notebook>
                             <page
-                                string="Taxes"
-                                name="page_matching_taxes"
-                                invisible="not update_tax"
+                                string="Account groups"
+                                name="page_matching_account_groups"
+                                invisible="not update_account_group"
                             >
-                                <field name="tax_matching_ids">
+                                <field name="account_group_matching_ids">
                                     <list create="false" edit="false">
                                         <field name="sequence" widget="handle" />
                                         <field name="matching_value" />
@@ -151,11 +163,26 @@
                                 </field>
                             </page>
                             <page
-                                string="Account groups"
-                                name="page_matching_account_groups"
-                                invisible="not update_account_group"
+                                string="Tax groups"
+                                name="page_matching_tax_groups"
+                                invisible="not update_tax_group"
                             >
-                                <field name="account_group_matching_ids">
+                                <field name="tax_group_matching_ids">
+                                    <list create="false" edit="false">
+                                        <field name="sequence" widget="handle" />
+                                        <field name="matching_value" />
+                                    </list>
+                                    <form>
+                                        <field name="matching_value" readonly="1" />
+                                    </form>
+                                </field>
+                            </page>
+                            <page
+                                string="Taxes"
+                                name="page_matching_taxes"
+                                invisible="not update_tax"
+                            >
+                                <field name="tax_matching_ids">
                                     <list create="false" edit="false">
                                         <field name="sequence" widget="handle" />
                                         <field name="matching_value" />
@@ -186,15 +213,20 @@
                 <div invisible="state!='ready'">
                     <h3>Records to create/update</h3>
                     <notebook>
-                        <page string="Taxes" invisible="not update_tax">
-                            <field name="tax_ids" nolabel="1">
+                        <page
+                            string="Account groups"
+                            invisible="not update_account_group"
+                        >
+                            <field name="account_group_ids" nolabel="1">
                                 <list create="false" edit="false" decoration-danger="type=='updated'">
                                     <field
-                                        name="update_tax_id"
-                                        invisible="not update_tax_id"
+                                        name="update_account_group_id"
+                                        invisible="not update_account_group_id"
                                     />
-                                    <field name="xml_id" optional="hide" />
-                                    <field name="type_tax_use" />
+                                    <field
+                                        name="xml_id"
+                                        optional="hide"
+                                    />
                                     <field name="notes" />
                                     <field name="type" />
                                 </list>
@@ -207,8 +239,7 @@
                                         </group>
                                         <group>
                                             <field name="update_chart_wizard_id" />
-                                            <field name="type_tax_use" />
-                                            <field name="update_tax_id" />
+                                            <field name="update_account_group_id" />
                                         </group>
                                     </group>
                                 </form>
@@ -243,20 +274,14 @@
                                 </form>
                             </field>
                         </page>
-                        <page
-                            string="Account groups"
-                            invisible="not update_account_group"
-                        >
-                            <field name="account_group_ids" nolabel="1">
+                        <page string="Tax groups" invisible="not update_tax_group">
+                            <field name="tax_group_ids" nolabel="1">
                                 <list create="false" edit="false" decoration-danger="type=='updated'">
                                     <field
-                                        name="update_account_group_id"
-                                        invisible="not update_account_group_id"
+                                        name="update_tax_group_id"
+                                        invisible="not update_tax_group_id"
                                     />
-                                    <field
-                                        name="xml_id"
-                                        optional="hide"
-                                    />
+                                    <field name="xml_id" optional="hide" />
                                     <field name="notes" />
                                     <field name="type" />
                                 </list>
@@ -269,7 +294,35 @@
                                         </group>
                                         <group>
                                             <field name="update_chart_wizard_id" />
-                                            <field name="update_account_group_id" />
+                                            <field name="update_tax_group_id" />
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Taxes" invisible="not update_tax">
+                            <field name="tax_ids" nolabel="1">
+                                <list create="false" edit="false" decoration-danger="type=='updated'">
+                                    <field
+                                        name="update_tax_id"
+                                        invisible="not update_tax_id"
+                                    />
+                                    <field name="xml_id" optional="hide" />
+                                    <field name="type_tax_use" />
+                                    <field name="notes" />
+                                    <field name="type" />
+                                </list>
+                                <form edit="false">
+                                    <group col="2">
+                                        <group>
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field name="type_tax_use" />
+                                            <field name="update_tax_id" />
                                         </group>
                                     </group>
                                 </form>
@@ -318,17 +371,19 @@
                     <field name="log" colspan="4" nolabel="1" />
                     <group colspan="4">
                         <separator colspan="4" string="Summary of created objects" />
-                        <field name="new_taxes" />
-                        <field name="new_accounts" />
                         <field name="new_account_groups" />
+                        <field name="new_accounts" />
+                        <field name="new_tax_groups" />
+                        <field name="new_taxes" />
                         <field name="new_fps" />
                     </group>
                     <group colspan="4">
                         <separator colspan="4" string="Summary of updated objects" />
+                        <field name="updated_account_groups" />
+                        <field name="updated_accounts" />
+                        <field name="updated_tax_groups" />
                         <field name="updated_taxes" />
                         <field name="deleted_taxes" />
-                        <field name="updated_accounts" />
-                        <field name="updated_account_groups" />
                         <field name="updated_fps" />
                     </group>
                 </group>

@@ -42,6 +42,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         required=True,
     )
     code_digits = fields.Integer()
+    update_tax_group = fields.Boolean(
+        string="Update taxe groups",
+        default=True,
+        help="Existing tax groups are updated. Tax group are searched by name.",
+    )
     update_tax = fields.Boolean(
         string="Update taxes",
         default=True,
@@ -64,6 +69,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         help="Existing fiscal positions are updated. Fiscal positions are "
         "searched by name.",
     )
+    tax_group_ids = fields.One2many(
+        comodel_name="wizard.update.charts.accounts.tax.group",
+        inverse_name="update_chart_wizard_id",
+        string="Taxe Groups",
+    )
     tax_ids = fields.One2many(
         comodel_name="wizard.update.charts.accounts.tax",
         inverse_name="update_chart_wizard_id",
@@ -84,6 +94,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         inverse_name="update_chart_wizard_id",
         string="Fiscal positions",
     )
+    new_tax_groups = fields.Integer(compute="_compute_new_tax_group_count")
     new_taxes = fields.Integer(compute="_compute_new_taxes_count")
     new_accounts = fields.Integer(compute="_compute_new_accounts_count")
     new_account_groups = fields.Integer(compute="_compute_new_account_groups_count")
@@ -91,6 +102,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     new_fps = fields.Integer(
         string="New fiscal positions", compute="_compute_new_fps_count"
     )
+    updated_tax_groups = fields.Integer(compute="_compute_updated_tax_groups_count")
     updated_taxes = fields.Integer(compute="_compute_updated_taxes_count")
     rejected_updated_account_number = fields.Integer()
     updated_accounts = fields.Integer(compute="_compute_updated_accounts_count")
@@ -104,6 +116,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         string="Deactivated taxes", compute="_compute_deleted_taxes_count"
     )
     log = fields.Text(string="Messages and Errors", readonly=True)
+    tax_group_field_ids = fields.Many2many(
+        comodel_name="ir.model.fields",
+        relation="wizard_update_charts_tax_group_fields_rel",
+        string="Tax group fields",
+        domain=lambda self: self._domain_tax_group_field_ids(),
+        default=lambda self: self._default_tax_group_field_ids(),
+    )
     tax_field_ids = fields.Many2many(
         comodel_name="ir.model.fields",
         relation="wizard_update_charts_tax_fields_rel",
@@ -131,6 +150,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         string="Fiscal position fields",
         domain=lambda self: self._domain_fp_field_ids(),
         default=lambda self: self._default_fp_field_ids(),
+    )
+    tax_group_matching_ids = fields.One2many(
+        comodel_name="wizard.tax.group.matching",
+        inverse_name="update_chart_wizard_id",
+        string="Tax goups matching",
+        default=lambda self: self._default_tax_group_matching_ids(),
     )
     tax_matching_ids = fields.One2many(
         comodel_name="wizard.tax.matching",
@@ -163,6 +188,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             ("name", "not in", tuple(self.fields_to_ignore(name))),
         ]
 
+    def _domain_tax_group_field_ids(self):
+        return self._domain_per_name("account.tax.group")
+
     def _domain_tax_field_ids(self):
         return self._domain_per_name("account.tax")
 
@@ -174,6 +202,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _domain_fp_field_ids(self):
         return self._domain_per_name("account.fiscal.position")
+
+    def _default_tax_group_field_ids(self):
+        return [
+            (4, x.id)
+            for x in self.env["ir.model.fields"].search(
+                self._domain_tax_group_field_ids() + [("ttype", "!=", "one2many")],
+            )
+        ]
 
     def _default_tax_field_ids(self):
         return [
@@ -221,6 +257,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         ordered_opts = ["xml_id", "name"]
         return self._get_matching_ids("wizard.fp.matching", ordered_opts)
 
+    def _default_tax_group_matching_ids(self):
+        ordered_opts = ["xml_id", "name"]
+        return self._get_matching_ids("wizard.tax.group.matching", ordered_opts)
+
     def _default_tax_matching_ids(self):
         ordered_opts = ["xml_id", "description", "name"]
         return self._get_matching_ids("wizard.tax.matching", ordered_opts)
@@ -238,6 +278,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             self.env["account.chart.template"]
             .with_context(chart_template_only_installed=True)
             ._select_chart_template(self.company_id.country_id)
+        )
+
+    @api.depends("tax_group_ids")
+    def _compute_new_tax_group_count(self):
+        self.new_tax_groups = len(
+            self.tax_group_ids.filtered(lambda x: x.type == "new")
         )
 
     @api.depends("tax_ids")
@@ -260,6 +306,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.depends("fiscal_position_ids")
     def _compute_new_fps_count(self):
         self.new_fps = len(self.fiscal_position_ids.filtered(lambda x: x.type == "new"))
+
+    @api.depends("tax_group_ids")
+    def _compute_updated_tax_groups_count(self):
+        self.updated_tax_groups = len(
+            self.tax_group_ids.filtered(lambda x: x.type == "updated")
+        )
 
     @api.depends("tax_ids")
     def _compute_updated_taxes_count(self):
@@ -319,6 +371,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.write(
             {
                 "state": "init",
+                "tax_group_ids": [(2, r.id, False) for r in self.tax_group_ids],
                 "tax_ids": [(2, r.id, False) for r in self.tax_ids],
                 "account_ids": [(2, r.id, False) for r in self.account_ids],
                 "fiscal_position_ids": [
@@ -332,9 +385,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         chart_template_model = self.env["account.chart.template"]
         t_data = chart_template_model._get_chart_template_data(self.chart_template)
         model_mapping = {
-            "account.tax": self.update_tax,
-            "account.account": self.update_account,
             "account.group": self.update_account_group,
+            "account.account": self.update_account,
+            "account.tax.group": self.update_tax_group,
+            "account.tax": self.update_tax,
             "account.fiscal.position": self.update_fiscal_position,
         }
         langs = self.env["res.lang"].search([])
@@ -363,12 +417,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.env.registry.clear_cache()
         t_data = self._get_chart_template_data()
         # Search for, and load, the records to create/update.
-        if self.update_tax:
-            self._find_taxes(t_data["account.tax"])
-        if self.update_account:
-            self._find_accounts(t_data["account.account"])
         if self.update_account_group:
             self._find_account_groups(t_data["account.group"])
+        if self.update_account:
+            self._find_accounts(t_data["account.account"])
+        if self.update_tax_group:
+            self._find_tax_groups(t_data["account.tax.group"])
+        if self.update_tax:
+            self._find_taxes(t_data["account.tax"])
         if self.update_fiscal_position:
             self._find_fiscal_positions(t_data["account.fiscal.position"])
         # Write the results, and go to the next step.
@@ -382,12 +438,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.log = False
         t_data = self._get_chart_template_data()
         # Create or update the records.
-        if self.update_account:
-            self._update_accounts(t_data["account.account"])
-        if self.update_tax:
-            self._update_taxes(t_data["account.tax"])
         if self.update_account_group:
             self._update_account_groups(t_data["account.group"])
+        if self.update_account:
+            self._update_accounts(t_data["account.account"])
+        if self.update_tax_group:
+            self._update_tax_groups(t_data["account.tax.group"])
+        if self.update_tax:
+            self._update_taxes(t_data["account.tax"])
         if self.update_fiscal_position:
             self._update_fiscal_positions(t_data["account.fiscal.position"])
         # Store new chart in the company
@@ -420,6 +478,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         mail_thread_fields = set(self.env["mail.thread"]._fields)
         specials_mapping = {
+            "account.tax.group": mail_thread_fields | {"sequence"},
             "account.tax": mail_thread_fields | {"children_tax_ids", "sequence"},
             "account.account": mail_thread_fields
             | {
@@ -491,7 +550,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         result[key] = record_value
                 continue
             elif field.ttype == "many2one":
-                real_xml_id = self._get_external_id(real_value)
+                real_xml_id = self._get_external_id(real_value) if real_value else False
                 full_xml_id = (
                     f"account.{self.company_id.id}_{record_value}"
                     if "." not in record_value
@@ -589,9 +648,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _find_record_matching(self, model_name, xmlid, data):
         mapped_fields = {
-            "account.account": self.account_matching_ids,
-            "account.tax": self.tax_matching_ids,
             "account.group": self.account_group_matching_ids,
+            "account.account": self.account_matching_ids,
+            "account.tax.group": self.tax_group_matching_ids,
+            "account.tax": self.tax_matching_ids,
             "account.fiscal.position": self.fp_matching_ids,
         }
         company = self.company_id
@@ -656,6 +716,44 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     "noupdate": True,
                 }
             )
+
+    def _find_tax_groups(self, t_data):
+        """Search for, and load, template data to create/update/delete."""
+        found_tax_groups_ids = []
+        tax_group_vals = []
+        for xmlid, r_data in t_data.items():
+            tax_group = self._find_record_matching("account.tax.group", xmlid, r_data)
+            # Check if the template data matches a real tax group
+            if not tax_group:
+                # Tax group to be created
+                tax_group_vals.append(
+                    {
+                        "xml_id": xmlid,
+                        "update_chart_wizard_id": self.id,
+                        "type": "new",
+                        "notes": _("Name or description not found."),
+                    }
+                )
+            else:
+                found_tax_groups_ids.append(tax_group.id)
+                # Check the tax group for changes
+                notes = self.diff_notes(r_data, tax_group)
+                if self.missing_xml_id(tax_group, xmlid):
+                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+                if notes:
+                    # Tax group to be updated
+                    tax_group_vals.append(
+                        {
+                            "xml_id": xmlid,
+                            "update_chart_wizard_id": self.id,
+                            "type": "updated",
+                            "update_tax_group_id": tax_group.id,
+                            "notes": notes,
+                        }
+                    )
+        self.tax_group_ids = [(5, 0, 0)] + [
+            (0, 0, tax_group_val) for tax_group_val in tax_group_vals
+        ]
 
     def _find_taxes(self, t_data):
         """Search for, and load, template data to create/update/delete."""
@@ -866,6 +964,21 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             else:
                 self.log += f"\n{msg}"
 
+    def _update_tax_groups(self, t_data):
+        """Process account groups templates to create/update."""
+        data = {}
+        for wiz_tg in self.tax_group_ids:
+            tg = wiz_tg.update_tax_group_id
+            xml_id = wiz_tg.xml_id
+            key = tg.id or xml_id
+            t_data_item = t_data[xml_id]
+            data_item = t_data_item if wiz_tg.type == "new" else {}
+            if wiz_tg.type == "updated":
+                self.recreate_xml_id(tg, xml_id)
+                data_item = self.diff_fields(t_data_item, tg)
+            data[key] = data_item
+        self._load_data("account.tax.group", data)
+
     def _update_taxes(self, t_data):
         """Process taxes to create/update/deactivate."""
         # First create taxes in batch
@@ -954,6 +1067,35 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 data_item = self.diff_fields(t_data_item, fp)
             data[key] = data_item
         self._load_data("account.fiscal.position", data)
+
+
+class WizardUpdateChartsAccountsTaxGroup(models.TransientModel):
+    _name = "wizard.update.charts.accounts.tax.group"
+    _description = (
+        "Tax group that needs to be updated (new or updated in the template)."
+    )
+
+    xml_id = fields.Char()
+    update_chart_wizard_id = fields.Many2one(
+        comodel_name="wizard.update.charts.accounts",
+        string="Update chart wizard",
+        required=True,
+        ondelete="cascade",
+    )
+    type = fields.Selection(
+        selection=[
+            ("new", "New tax group"),
+            ("updated", "Updated tax group"),
+        ],
+        readonly=False,
+    )
+    update_tax_group_id = fields.Many2one(
+        comodel_name="account.tax.group",
+        string="Tax group to update",
+        required=False,
+        ondelete="set null",
+    )
+    notes = fields.Text(readonly=True)
 
 
 class WizardUpdateChartsAccountsTax(models.TransientModel):
@@ -1097,6 +1239,17 @@ class WizardMatching(models.TransientModel):
             desc = model._fields[opt].get_description(self.env)["string"]
             result.append((opt, f"{desc} ({opt})"))
         return result
+
+
+class WizardTaxGroupMatching(models.TransientModel):
+    _name = "wizard.tax.group.matching"
+    _description = "Wizard Tax Group Matching"
+    _inherit = "wizard.matching"
+
+    def _get_matching_selection(self):
+        vals = super()._get_matching_selection()
+        vals += self._selection_from_files("account.tax.group", ["name"])
+        return vals
 
 
 class WizardTaxMatching(models.TransientModel):
