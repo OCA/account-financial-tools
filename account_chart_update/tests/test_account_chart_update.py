@@ -32,6 +32,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertNotEqual(field.display_name, expected_name)
         # Test no changes
         self.assertEqual(wizard.state, "ready")
+        self.assertFalse(wizard.tax_group_ids)
         self.assertFalse(wizard.tax_ids)
         self.assertFalse(wizard.account_ids)
         self.assertFalse(wizard.fiscal_position_ids)
@@ -40,6 +41,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         wizard_vals = self.wizard_vals.copy()
         wizard_vals.update(
             {
+                "update_tax_group": False,
                 "update_tax": False,
                 "update_account": False,
                 "update_fiscal_position": False,
@@ -47,6 +49,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         )
         wizard = self.wizard_obj.with_company(self.company).create(wizard_vals)
         wizard.action_find_records()
+        self.assertFalse(wizard.tax_group_ids)
         self.assertFalse(wizard.tax_ids)
         self.assertFalse(wizard.account_ids)
         self.assertFalse(wizard.fiscal_position_ids)
