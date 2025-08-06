@@ -14,20 +14,10 @@ class AccountMove(models.Model):
         by the fiscalyear_lock_to_date.
         Other users will also be restricted by the period_lock_to_date.
         """
-        is_advisor = self.user_has_groups("account.group_account_manager")
         for move in self:
-            advisor_lock_to_date = move.company_id.fiscalyear_lock_to_date
-            user_lock_to_date = move.company_id.period_lock_to_date
-            if is_advisor:
-                lock_to_date = advisor_lock_to_date or False
-            else:
-                lock_to_date = (
-                    min(user_lock_to_date, advisor_lock_to_date)
-                    if user_lock_to_date and advisor_lock_to_date
-                    else user_lock_to_date or advisor_lock_to_date or False
-                )
+            lock_to_date = move.company_id._get_user_fiscal_lock_to_date()
             if lock_to_date and move.date >= lock_to_date:
-                if is_advisor:
+                if self.user_has_groups("account.group_account_manager"):
                     message = _(
                         "You cannot add/modify entries after and "
                         "inclusive of the lock to date %s"

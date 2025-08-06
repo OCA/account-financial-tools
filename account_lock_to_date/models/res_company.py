@@ -121,7 +121,7 @@ class ResCompany(models.Model):
         if values.get("fiscalyear_lock_to_date"):
             nb_draft_entries = self.env["account.move"].search(
                 [
-                    ("company_id", "in", self.ids),
+                    ("company_id", "child_of", self.ids),
                     ("state", "=", "draft"),
                     ("date", ">=", values["fiscalyear_lock_to_date"]),
                 ],
@@ -136,3 +136,23 @@ class ResCompany(models.Model):
                     )
                 )
         return res
+
+    def _get_user_fiscal_lock_to_date(self):
+        """Get the fiscal lock to date for this company depending on the user"""
+        if self.user_has_groups("account.group_account_manager"):
+            lock_to_date = self.fiscalyear_lock_to_date or False
+        else:
+            lock_to_date = (
+                min(self.period_lock_to_date, self.fiscalyear_lock_to_date)
+                if self.period_lock_to_date and self.fiscalyear_lock_to_date
+                else self.period_lock_to_date or self.fiscalyear_lock_to_date or False
+            )
+        if self.parent_id:
+            # We need to use sudo, since we might not have access to a parent company.
+            parent_lock_to_date = self.sudo().parent_id._get_user_fiscal_lock_to_date()
+            lock_to_date = (
+                min(lock_to_date, parent_lock_to_date)
+                if lock_to_date and parent_lock_to_date
+                else lock_to_date or parent_lock_to_date or False
+            )
+        return lock_to_date
