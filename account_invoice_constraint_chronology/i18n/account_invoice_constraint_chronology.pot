@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,7 +21,6 @@ msgstr ""
 #. module: account_invoice_constraint_chronology
 #. odoo-python
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
-#, python-format
 msgid ""
 "Chronology conflict: A conflicting draft invoice dated before {date_invoice}"
 " exists, please validate it first."
@@ -30,7 +29,6 @@ msgstr ""
 #. module: account_invoice_constraint_chronology
 #. odoo-python
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
-#, python-format
 msgid ""
 "Chronology conflict: A conflicting validated invoice dated after "
 "{date_invoice} exists."
@@ -39,7 +37,6 @@ msgstr ""
 #. module: account_invoice_constraint_chronology
 #. odoo-python
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
-#, python-format
 msgid ""
 "Chronology conflict: An invoice with a higher number {highest_name} dated "
 "before {date_invoice} exists."
@@ -48,7 +45,6 @@ msgstr ""
 #. module: account_invoice_constraint_chronology
 #. odoo-python
 #: code:addons/account_invoice_constraint_chronology/model/account_move.py:0
-#, python-format
 msgid ""
 "Chronology conflict: Invoice {name} cannot be {time} invoice {inv_name}."
 msgstr ""
