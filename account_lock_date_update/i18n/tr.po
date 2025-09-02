@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2025-09-02 22:43+0000\n"
+"Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
@@ -46,12 +47,12 @@ msgstr "Görünen İsim"
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
 msgid "Global Lock Date"
-msgstr ""
+msgstr "Genel Kilit Tarihi"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__hard_lock_date
 msgid "Hard Lock Date"
-msgstr ""
+msgstr "Katı Kilit Tarihi"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__id
@@ -64,6 +65,8 @@ msgid ""
 "Impossible to edit/create journal entries prior to and inclusive of this "
 "date. Subject to exceptions."
 msgstr ""
+"Bu tarihten önce ve bu tarih dahil olmak üzere yevmiye kayıtlarını gü"
+"ncellemek/yaratmak mümkün değildir. İstisnalara izin verilir."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__hard_lock_date
@@ -71,6 +74,9 @@ msgid ""
 "Impossible to edit/create journal entries prior to and inclusive of this "
 "date. This lock date is irreversible and does not allow any exception."
 msgstr ""
+"Bu tarihten önce ve bu tarih dahil olmak üzere yevmiye kayıtlarını gü"
+"ncellemek/yaratmak imkansızdır. Bu kilitlenme tarihi geri alınamaz ve "
+"herhangi bir istisnaya izin vermez."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
@@ -78,6 +84,8 @@ msgid ""
 "Impossible to edit/create journal entries related to a tax prior and "
 "inclusive of this date. Subject to exceptions."
 msgstr ""
+"Bu tarihten önceki ve bu tarihi de kapsayan bir vergiye ilişkin yevmiye "
+"kayıtları güncellemek/yaratmak mümkün değildir. İstisnalara izin verilir."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__purchase_lock_date
@@ -85,6 +93,8 @@ msgid ""
 "Impossible to edit/create purchase journal entries prior to and inclusive of "
 "this date. Subject to exceptions."
 msgstr ""
+"Bu tarihten önce ve bu tarih dahil olmak üzere satınalma yevmiye kayıtlarını "
+"güncellemek/yaratmak mümkün değildir. İstisnalara izin verilir."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__sale_lock_date
@@ -92,69 +102,73 @@ msgid ""
 "Impossible to edit/create sale journal entries prior to and inclusive of "
 "this date. Subject to exceptions."
 msgstr ""
+"Bu tarihten önce ve bu tarih dahil olmak üzere satış yevmiye kayıtlarını gü"
+"ncellemek/yaratmak mümkün değildir. İstisnalara izin verilir."
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Irreversible Lock Date"
-msgstr ""
+msgstr "Geri Alınamaz Kilit Tarihi"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_uid
 msgid "Last Updated by"
-msgstr "Son güncelleyen"
+msgstr "Son Güncelleyen"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_date
 msgid "Last Updated on"
-msgstr "Son güncelleme"
+msgstr "Son Güncelleme"
 
 #. module: account_lock_date_update
 #: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
 #: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
 msgid "Lock Dates"
-msgstr ""
+msgstr "Kilit Tarihleri"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__purchase_lock_date
 msgid "Purchase Lock Date"
-msgstr ""
+msgstr "Satınalma Kilit Tarihi"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Reversible Lock Dates"
-msgstr ""
+msgstr "Geri Alınabilir Kilit Tarihleri"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__sale_lock_date
 msgid "Sale Lock Date"
-msgstr ""
+msgstr "Satış Kilit Tarihi"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
 msgid "Tax Return Lock Date"
-msgstr ""
+msgstr "Vergi İadesi Kilit Tarihi"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Update"
-msgstr ""
+msgstr "Güncelle"
 
 #. module: account_lock_date_update
 #: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
 msgid "Wizard to Update Accounting Lock Dates"
-msgstr ""
+msgstr "Muhasebe Kilit Tarihleri Güncelleme Yardımcısı"
 
 #. module: account_lock_date_update
 #. odoo-python
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 msgid "You are not allowed to execute this action."
-msgstr ""
+msgstr "Bu işlemi yapmaya yetkili değilsiniz."
 
 #. module: account_lock_date_update
 #. odoo-python
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 msgid "You tried to set %(field)s to %(date)s, but it is in the future."
 msgstr ""
+"%(field)s alanına %(date)s değeri atamaya çalıştınız, fakat gelecekte bir "
+"tarih."
 
 #~ msgid "Last Modified on"
 #~ msgstr "Son değişiklik"
