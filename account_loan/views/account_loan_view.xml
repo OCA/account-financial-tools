@@ -189,7 +189,10 @@
                                         name="interest_expenses_account_id"
                                         readonly="state != 'draft'"
                                     />
-                                    <field name="currency_id" invisible="1" />
+                                    <field
+                                        name="currency_id"
+                                        groups="base.group_multi_currency"
+                                    />
                                 </group>
                             </group>
                         </page>
