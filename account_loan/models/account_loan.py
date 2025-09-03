@@ -137,9 +137,7 @@ class AccountLoan(models.Model):
         help="When checked, the first payment will be on start date",
     )
     currency_id = fields.Many2one(
-        "res.currency",
-        compute="_compute_currency",
-        readonly=True,
+        "res.currency", compute="_compute_currency", readonly=False, store=True
     )
     journal_type = fields.Char(compute="_compute_journal_type")
     journal_id = fields.Many2one(
