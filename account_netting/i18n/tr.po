@@ -9,31 +9,32 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2017-12-03 03:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2025-09-08 12:43+0000\n"
+"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "AR/AP netting"
-msgstr ""
+msgstr "Borç/Alacak Hesabı Mahsuplaştırma"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance
 msgid "Balance"
-msgstr ""
+msgstr "Bakiye"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance_type
 msgid "Balance Type"
-msgstr ""
+msgstr "Bakiye Türü"
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -43,13 +44,13 @@ msgstr "Vazgeç"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__company_id
 msgid "Company"
-msgstr ""
+msgstr "Şirket"
 
 #. module: account_netting
 #: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate"
-msgstr ""
+msgstr "Mashuplaştır"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_uid
@@ -64,7 +65,7 @@ msgstr "Oluşturuldu"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__company_currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Para Birimi"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__display_name
@@ -79,12 +80,12 @@ msgstr "ID"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Yevmiye"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
 msgid "Journal Items to Compensate"
-msgstr ""
+msgstr "Mahsuplaştırılacak Yevmiye Kalemleri"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
@@ -104,32 +105,34 @@ msgid ""
 "Line '%(line)s' has account '%(account)s' which is not a payable nor a "
 "receivable account."
 msgstr ""
+"'%(line)s' satırının '%(account)s' hesabı vardır ve bu hesap ne ödenecek ne "
+"de alacak hesabı."
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "Line '%s' doesn't have a partner."
-msgstr ""
+msgstr "'%s' satırının bir ortağı yok."
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "Line '%s' is already reconciled."
-msgstr ""
+msgstr "'%s' satırı zaten uzlaştırılmış."
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "Line '%s' is not posted."
-msgstr ""
+msgstr "'%s' satırı gönderilmedi."
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "İş Ortağı"
 
 #. module: account_netting
 #. odoo-python
@@ -140,6 +143,9 @@ msgid ""
 "accounts for the same partner. The selected journal items have the same "
 "account '%s', so you should use the 'Reconcile' function instead."
 msgstr ""
+"'Mahsuplaştır' işlevi, aynı ortak için farklı hesaplar üzerindeki işlemleri "
+"dengelemek için tasarlanmıştır. Bu durumda seçilen tüm girişler aynı '%s' "
+"hesabına aittir. Bunun yerine 'Uzlaştır' işlevini kullanın."
 
 #. module: account_netting
 #. odoo-python
@@ -149,6 +155,8 @@ msgid ""
 "The selected journal items have different partners: %s. All the selected "
 "journal items must have the same partner."
 msgstr ""
+"Seçilen yevmiye kalemlerinin farklı ortakları var: %s. Seçilen tüm yevmiye "
+"öğelerinin aynı ortakları olmalıdır."
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -157,28 +165,31 @@ msgid ""
 "the receivable/payable accounts selected, and reconcile each other, letting "
 "this balance in the partner."
 msgstr ""
+"Bu işlem, satırları seçilen alacak/borç hesaplarının karşılığı olan bir "
+"yevmiye kaydı oluşturacak ve birbirleriyle uzlaşarak iş ortağında bu dengeyi "
+"sağlayacaktır."
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
 msgid "To pay"
-msgstr ""
+msgstr "Ödenecek"
 
 #. module: account_netting
 #: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
 msgid "To receive"
-msgstr ""
+msgstr "Alınacak"
 
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "Wizard to generate account moves for netting"
-msgstr ""
+msgstr "Muhasebe hareketlerini mahsuplaştırma sihirbazı"
 
 #. module: account_netting
 #. odoo-python
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "You should select at least 2 journal items."
-msgstr ""
+msgstr "En az iki yevmiye girişini mahsuplaştırmalısınız."
 
 #~ msgid "Last Modified on"
 #~ msgstr "Son değişiklik"
