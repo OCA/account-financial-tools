@@ -27,15 +27,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2017-01-13 09:22+0000\n"
-"Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>\n"
-"Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/tr/)\n"
+"PO-Revision-Date: 2025-09-08 08:01+0000\n"
+"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
+"Language-Team: Turkish (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_asset_management
 #. odoo-python
@@ -45,11 +46,13 @@ msgid ""
 "\n"
 "Error while processing asset '{ref}': {exception}"
 msgstr ""
+"\n"
+"'{ref}' demirbaşı işlenirken hata oluştu: {exception}"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
 msgid "<span class=\"o_stat_text\"> Asset(s)</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\"> Demirbaş(lar)</span>"
 
 #. module: account_asset_management
 #. odoo-python
@@ -57,7 +60,7 @@ msgstr ""
 #: model:ir.model,name:account_asset_management.model_account_account
 #, python-format
 msgid "Account"
-msgstr ""
+msgstr "Hesap"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
@@ -67,12 +70,12 @@ msgstr "Demirbaş Hesabı"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__carry_forward_missed_depreciations
 msgid "Accumulate missed depreciations"
-msgstr ""
+msgstr "Kaçırılan amortismanları topla"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Eylem Gerekiyor"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
@@ -85,27 +88,27 @@ msgstr "Etkin"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Active Assets"
-msgstr ""
+msgstr "Aktif Demirbaşlar"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Aktiviteler"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Aktivite İstisna Donatımı"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Aktivite Durumu"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Aktivite Tipi Simgesi"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -116,11 +119,12 @@ msgstr "Buraya iç not ekleyin..."
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_compute__date_end
 msgid "All depreciation lines prior to this date will be automatically posted"
 msgstr ""
+"Bu tarihten önceki tüm amortisman satırları otomatik olarak işlenecektir"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__allow_reversal
 msgid "Allow Reversal of journal entries"
-msgstr ""
+msgstr "Yevmiye kayıtlarının Ters Kaydına İzin Ver"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
@@ -136,13 +140,13 @@ msgstr "Halihazırda Düşülmüş Tutarı"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
 msgid "Analytic Distribution"
-msgstr ""
+msgstr "Analitik Dağılımı"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution_search
 msgid "Analytic Distribution Search"
-msgstr ""
+msgstr "Analitik Dağıtım Araması"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -153,7 +157,7 @@ msgstr "Analitik Bilgi"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_precision
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_precision
 msgid "Analytic Precision"
-msgstr ""
+msgstr "Analitik Hassasiyet"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -161,12 +165,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Archived"
-msgstr ""
+msgstr "Arşivlendi"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Are you sure ?"
-msgstr ""
+msgstr "Emin misiniz ?"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset
@@ -181,7 +185,7 @@ msgstr "Demirbaş"
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
-msgstr ""
+msgstr "'%s' Demirbaşı Kaldırılması Yevmiye Kaydı"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
@@ -193,36 +197,34 @@ msgstr "Demirbaş Hesabı"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move__asset_count
 #: model:ir.model.fields,field_description:account_asset_management.field_account_payment__asset_count
 msgid "Asset Count"
-msgstr ""
+msgstr "Demirbaş Sayısı"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_group
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__asset_group_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#, fuzzy
 msgid "Asset Group"
-msgstr "Demirbaş Hesabı"
+msgstr "Demirbaş Grubu"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_group_action
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__group_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
 #: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
-#, fuzzy
 msgid "Asset Groups"
-msgstr "Demirbaş Kategorileri"
+msgstr "Demirbaş Grupları"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__line_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset Line"
-msgstr ""
+msgstr "Demirbaş Satırı"
 
 #. module: account_asset_management
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
 msgid "Asset Management: Generate assets"
-msgstr ""
+msgstr "Demirbaş Yönetimi: Demirbaşlar oluştur"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__name
@@ -234,21 +236,19 @@ msgstr "Demirbaş Adı"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-#, fuzzy
 msgid "Asset Profile"
-msgstr "Demirbaş Kategorileri"
+msgstr "Demirbaş Profili"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_profile_menu
-#, fuzzy
 msgid "Asset Profiles"
-msgstr "Demirbaş Kategorileri"
+msgstr "Demirbaş Profilleri"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__remove
 msgid "Asset Removal"
-msgstr ""
+msgstr "Demirbaş Kaldırma"
 
 #. module: account_asset_management
 #. odoo-python
@@ -257,12 +257,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__date_remove
 #, python-format
 msgid "Asset Removal Date"
-msgstr ""
+msgstr "Demirbaş Kaldırma Tarihi"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_sale_id
 msgid "Asset Sale Account"
-msgstr ""
+msgstr "Demirbaş Satış Hesabı"
 
 #. module: account_asset_management
 #. odoo-python
@@ -270,37 +270,35 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_start
 #, python-format
 msgid "Asset Start Date"
-msgstr ""
+msgstr "Demirbaş Başlama Tarihi"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_line
-#, fuzzy
 msgid "Asset depreciation table line"
-msgstr "Demirbaş amortisman satırı"
+msgstr "Demirbaş amortisman tablosu satırı"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid "Asset name must be set in the label of the line."
-msgstr ""
+msgstr "Demirbaş adı satır etiketinde ayarlanmalıdır."
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
-#, fuzzy
 msgid "Asset profile"
-msgstr "Demirbaş Kategorileri"
+msgstr "Demirbaş profili"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset removal."
-msgstr ""
+msgstr "Demirbaş kaldırma."
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_recompute_trigger
 msgid "Asset table recompute triggers"
-msgstr ""
+msgstr "Demirbaş tablosu yeniden hesaplama tetikleyicileri"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_action
@@ -315,12 +313,12 @@ msgstr "Demirbaşlar"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Assets to be corrected"
-msgstr ""
+msgstr "Düzeltilecek demirbaşlar"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Ek Sayısı"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
@@ -330,12 +328,16 @@ msgid ""
 "this setting, an accounting entry will be created by product item. So, there "
 "will be an asset by product item."
 msgstr ""
+"Bir fatura doğrulanırken varsayılan olarak fatura satırından bir muhasebe "
+"kaydı oluşturulduğu sürece fatura satırı tarafından bir demirbaş "
+"oluşturulur. Bu ayar ile, muhasebe kaydı ürün kaleminden oluşturulacak. "
+"Böylece ürün kaleminden bir demirbaş oluşmuş olacak."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__days_calc
 msgid "Calculate by days"
-msgstr ""
+msgstr "Günlere göre hesapla"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
@@ -348,18 +350,17 @@ msgstr "Vazgeç"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__open_asset
-#, fuzzy
 msgid ""
 "Check this if you want to automatically confirm the assets of this profile "
 "when created by invoices."
 msgstr ""
-"Faturalar oluşturulurken bu kategorideki demirbaşların otomatikmen "
+"Faturalar oluşturulurken bu profildeki demirbaşların otomatikmen "
 "onaylanmasını istiyorsanız bunu işaretleyin."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__child_ids
 msgid "Child Asset Groups"
-msgstr ""
+msgstr "Alt Demirbaş Kategorileri"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
@@ -371,6 +372,11 @@ msgid ""
 "  * Number of Depreciations: Fix the number of depreciation lines and the "
 "time between 2 depreciations.\n"
 msgstr ""
+"Amortisman kalemlerinin tarihlerini ve sayısını hesaplamak için kullanılacak "
+"yöntemi seçin.\n"
+"  * Yıl Sayısı: Amortisman için yıl sayısını belirtin.\n"
+"  * Amortisman Sayısı: Amortisman kalemlerinin sayısını ve 2 amortisman "
+"arasındaki süreyi düzeltin.\n"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
@@ -388,6 +394,16 @@ msgid ""
 "   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base "
 "is equal to the asset value."
 msgstr ""
+"Amortisman kalemlerini hesaplamak için kullanılacak yöntemi seçin.\n"
+"  * Doğrusal: Hesaplama yöntemi: Amortisman Tabanı / Amortisman Sayısı. "
+"Amortisman Tabanı = Satınalma Değeri - Hurda Değeri.\n"
+"  * Doğrusal-Limit: Hurda Değerine dek doğrusal. Amortisman Tabanı = "
+"Satınalma Değeri.\n"
+"  * Azalan: Hesaplama yöntemi: Kalan Değer * Azalma Faktörü.\n"
+"  * Doğrusal-Azalan (yalnızca Zaman Yöntemi = Yıl için): Yıllık doğrusal "
+"amortisman yıllık azalan amortismanı geçtiğinde Azalan, Doğrusal olur.\n"
+"   * Azalan-Limit: Hurda Değerine dek azalan. Amortisman Tabanı demirbaş "
+"değerine eşittir."
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__close
@@ -398,7 +414,7 @@ msgstr "Kapat"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
 msgid "Code"
-msgstr ""
+msgstr "Kod"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
@@ -416,19 +432,19 @@ msgstr "Şirket"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__currency_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Şirket Para Birimi"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_completed
 msgid "Completion Date"
-msgstr ""
+msgstr "Tamamlama tarihi"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #, python-format
 msgid "Comput. Method"
-msgstr ""
+msgstr "Hesaplama yöntemi"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
@@ -459,27 +475,26 @@ msgstr "Demirbaşları Hesapla"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Compute Assets errors"
-msgstr "Demirbaşları Hesapla"
+msgstr "Demirbaşları Hesapla hataları"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Compute Assets result"
-msgstr "Demirbaşları Hesapla"
+msgstr "Demirbaşları Hesapla sonucu"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
-#, fuzzy
 msgid "Compute Assets results"
-msgstr "Demirbaşları Hesapla"
+msgstr "Demirbaşları Hesapla sonuçları"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
 msgid "Confirm"
-msgstr ""
+msgstr "Onayla"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -494,7 +509,7 @@ msgstr "Hareket Oluştur"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__asset_product_item
 msgid "Create an asset by product item"
-msgstr ""
+msgstr "Ürün kalemine göre bir demirbaş oluştur"
 
 #. module: account_asset_management
 #. odoo-python
@@ -539,6 +554,7 @@ msgstr "Tarih"
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger__date_trigger
 msgid "Date of the event triggering the need to recompute the Asset Tables."
 msgstr ""
+"Demirbaş tablolarının yeniden hesaplanma ihtiyacını tetikleyen olayın tarihi."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_days
