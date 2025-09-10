@@ -49,7 +49,7 @@ class AccountMove(models.Model):
                 "journal_id.entry_number_sequence_id"
             ).filtered_domain([("implementation", "=", "no_gap")])
             if no_gap_seqs:
-                _logger.warning(
+                _logger.info(
                     "Emptied entry_number for %r after cancellation. "
                     "This created gaps on %r.",
                     canceled,
