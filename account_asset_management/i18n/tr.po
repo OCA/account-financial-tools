@@ -27,8 +27,8 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2025-09-08 12:43+0000\n"
-"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
+"PO-Revision-Date: 2025-09-10 10:59+0000\n"
+"Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/tr/)\n"
 "Language: tr\n"
@@ -758,7 +758,7 @@ msgstr "Takipçiler (Kanallar)"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Font awesome simgesi örn. fa-tasks"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
@@ -825,7 +825,7 @@ msgstr "ID"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Simge"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_icon
@@ -1383,9 +1383,8 @@ msgstr "Hurda Değeri"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#, fuzzy
 msgid "Search Asset Group"
-msgstr "Demirbaş Kategorisi Ara"
+msgstr "Demirbaş Grubu Ara"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
