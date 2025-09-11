@@ -270,17 +270,40 @@ class AccountLoanLine(models.Model):
         long_term_moves = self.move_ids.mapped("line_ids").filtered(
             lambda r: r.account_id == self.loan_id.long_term_loan_account_id
         )
-        self.interests_amount = sum(interests_moves.mapped("debit")) - sum(
+        interests_in_company_currency = sum(interests_moves.mapped("debit")) - sum(
             interests_moves.mapped("credit")
         )
-        self.long_term_principal_amount = sum(long_term_moves.mapped("debit")) - sum(
-            long_term_moves.mapped("credit")
+        self.interests_amount = self.loan_id.company_id.currency_id._convert(
+            from_amount=interests_in_company_currency,
+            to_currency=self.loan_id.currency_id,
+            company=self.loan_id.company_id,
+            date=self.date,
+            round=True,
         )
-        self.payment_amount = (
+
+        long_term_principal_amount_in_company_currency = sum(
+            long_term_moves.mapped("debit")
+        ) - sum(long_term_moves.mapped("credit"))
+        self.long_term_principal_amount = self.loan_id.company_id.currency_id._convert(
+            from_amount=long_term_principal_amount_in_company_currency,
+            to_currency=self.loan_id.currency_id,
+            company=self.loan_id.company_id,
+            date=self.date,
+            round=True,
+        )
+
+        payment_amount_in_company_currency = (
             sum(short_term_moves.mapped("debit"))
             - sum(short_term_moves.mapped("credit"))
-            + self.long_term_principal_amount
-            + self.interests_amount
+            + long_term_principal_amount_in_company_currency
+            + interests_in_company_currency
+        )
+        self.payment_amount = self.loan_id.company_id.currency_id._convert(
+            from_amount=payment_amount_in_company_currency,
+            to_currency=self.loan_id.currency_id,
+            company=self.loan_id.company_id,
+            date=self.date,
+            round=True,
         )
 
     def _move_vals(self, journal=False, account=False):
@@ -306,35 +329,61 @@ class AccountLoanLine(models.Model):
             if self.payment_amount > 0
             else partner.property_account_receivable_id
         )
+        loan_currency_amount = self.loan_id.currency_id._convert(
+            from_amount=self.payment_amount,
+            to_currency=self.loan_id.company_id.currency_id,
+            company=self.loan_id.company_id,
+            date=self.date,
+            round=True,
+        )
         vals.append(
             {
                 "account_id": (account and account.id) or partner_account.id,
                 "partner_id": partner.id,
-                "credit": self.payment_amount if self.payment_amount > 0 else 0,
-                "debit": -self.payment_amount if self.payment_amount < 0 else 0,
+                "credit": loan_currency_amount if loan_currency_amount > 0 else 0,
+                "debit": -loan_currency_amount if loan_currency_amount < 0 else 0,
+                "currency_id": self.loan_id.currency_id.id,
+                "amount_currency": -self.payment_amount,
             }
         )
-        return vals 
+        return vals
 
     def _add_interests_values(self, vals):
         self.ensure_one()
-        amount = self.interests_amount
+        loan_currency_amount = self.loan_id.currency_id._convert(
+            from_amount=self.interests_amount,
+            to_currency=self.loan_id.company_id.currency_id,
+            company=self.loan_id.company_id,
+            date=self.date,
+            round=True,
+        )
         vals.append(
             {
                 "account_id": self.loan_id.interest_expenses_account_id.id,
-                "credit": -amount if amount < 0 else 0,
-                "debit": amount if amount > 0 else 0,
+                "credit": -loan_currency_amount if loan_currency_amount < 0 else 0,
+                "debit": loan_currency_amount if loan_currency_amount > 0 else 0,
+                "currency_id": self.loan_id.currency_id.id,
+                "amount_currency": self.interests_amount,
             }
         )
         return vals
 
     def _add_short_term_account_values(self, vals):
         self.ensure_one()
+        loan_currency_amount = self.loan_id.currency_id._convert(
+            from_amount=self.payment_amount - self.interests_amount,
+            to_currency=self.loan_id.company_id.currency_id,
+            company=self.loan_id.company_id,
+            date=self.date,
+            round=True,
+        )
         vals.append(
             {
                 "account_id": self.loan_id.short_term_loan_account_id.id,
-                "credit": -diff_amount if diff_amount < 0 else 0,
-                "debit": diff_amount if diff_amount > 0 else 0,
+                "credit": -loan_currency_amount if loan_currency_amount < 0 else 0,
+                "debit": loan_currency_amount if loan_currency_amount > 0 else 0,
+                "currency_id": self.loan_id.currency_id.id,
+                "amount_currency": self.payment_amount - self.interests_amount,
             }
         )
         return vals
@@ -342,19 +391,29 @@ class AccountLoanLine(models.Model):
     def _add_long_term_account_values(self, vals):
         self.ensure_one()
         if self.long_term_loan_account_id and self.long_term_principal_amount:
-            amount = self.long_term_principal_amount
+            loan_currency_amount = self.loan_id.currency_id._convert(
+                from_amount=self.long_term_principal_amount,
+                to_currency=self.loan_id.company_id.currency_id,
+                company=self.loan_id.company_id,
+                date=self.date,
+                round=True,
+            )
             vals.append(
                 {
                     "account_id": self.loan_id.short_term_loan_account_id.id,
-                    "credit": amount if amount > 0 else 0,
-                    "debit": -amount if amount < 0 else 0,
+                    "credit": loan_currency_amount if loan_currency_amount > 0 else 0,
+                    "debit": -loan_currency_amount if loan_currency_amount < 0 else 0,
+                    "currency_id": self.loan_id.currency_id.id,
+                    "amount_currency": -self.long_term_principal_amount,
                 }
             )
             vals.append(
                 {
                     "account_id": self.long_term_loan_account_id.id,
-                    "credit": -amount if amount < 0 else 0,
-                    "debit": amount if amount > 0 else 0,
+                    "credit": -loan_currency_amount if loan_currency_amount < 0 else 0,
+                    "debit": loan_currency_amount if loan_currency_amount > 0 else 0,
+                    "currency_id": self.loan_id.currency_id.id,
+                    "amount_currency": self.long_term_principal_amount,
                 }
             )
         return vals
