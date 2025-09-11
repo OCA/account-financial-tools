@@ -128,7 +128,6 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid "Check Deposit %s"
 msgstr ""
 
@@ -139,7 +138,6 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Check Journal"
 msgstr ""
 
@@ -193,7 +191,6 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid "Deposit '%s' has already been credited on the bank account."
 msgstr ""
 
@@ -239,7 +236,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
-#, python-format
 msgid "Get All Received Checks"
 msgstr ""
 
@@ -286,7 +282,6 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid ""
 "In the configuration of journal '%s', in the 'Incoming Payments' tab, you "
 "must configure an Outstanding Receipts Account for the payment method "
@@ -341,8 +336,7 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
-msgid "Missing 'Outstanding Receipts Account' on the company '%s'."
+msgid "Missing 'Internal Transfer' account on the company '%s'."
 msgstr ""
 
 #. module: account_check_deposit
@@ -358,7 +352,6 @@ msgstr "Nome"
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid "New"
 msgstr ""
 
@@ -434,7 +427,6 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid ""
 "The check with amount %(amount)s and reference '%(ref)s' is in currency "
 "%(check_currency)s but the deposit is in currency %(deposit_currency)s."
@@ -443,7 +435,6 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting it."
 msgstr ""
@@ -451,7 +442,6 @@ msgstr ""
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
-#, python-format
 msgid ""
 "There are no received checks in account '%(account)s' in currency "
 "'%(currency)s' that are not already in this check deposit."
