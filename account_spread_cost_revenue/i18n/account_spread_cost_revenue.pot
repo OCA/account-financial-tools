@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -132,13 +132,6 @@ msgid "Analytic Distribution"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__analytic_distribution_search
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__analytic_distribution_search
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_distribution_search
-msgid "Analytic Distribution Search"
-msgstr ""
-
-#. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__analytic_precision
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__analytic_precision
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_precision
@@ -213,28 +206,24 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "Cannot delete spread(s) that are linked to an invoice line."
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "Cannot delete spread(s): there are posted Journal Entries."
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
-#, python-format
 msgid "Cannot reconcile entries that are already reconciled:\n"
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "Cannot unlink invoice lines if the invoice is validated"
 msgstr ""
 
@@ -274,14 +263,12 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
-#, python-format
 msgid "Create from spread template"
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
-#, python-format
 msgid "Create new spread board"
 msgstr ""
 
@@ -297,7 +284,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:0
-#, python-format
 msgid "Created move(s) "
 msgstr ""
 
@@ -373,7 +359,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:0
-#, python-format
 msgid "Deleted move %s"
 msgstr ""
 
@@ -513,7 +498,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "Invoice"
 msgstr ""
 
@@ -571,7 +555,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__invoice_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__invoice_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__move_id
-#, python-format
 msgid "Journal Entry"
 msgstr ""
 
@@ -606,14 +589,12 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
-#, python-format
 msgid "Link Invoice Line with Spread Board"
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
-#, python-format
 msgid "Link to existing spread board"
 msgstr ""
 
@@ -646,7 +627,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
-#, python-format
 msgid "Move line: %(line_id)s (%(line_name)s), account code: %(account_code)s\n"
 msgstr ""
 
@@ -660,7 +640,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
-#, python-format
 msgid "New Spread Board"
 msgstr ""
 
@@ -716,7 +695,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread_template.py:0
-#, python-format
 msgid "Please select product and/or account on auto spread options"
 msgstr ""
 
@@ -769,7 +747,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
-#, python-format
 msgid "Some entries are not from the same account:\n"
 msgstr ""
 
@@ -778,7 +755,6 @@ msgstr ""
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__spread_id
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_search
-#, python-format
 msgid "Spread"
 msgstr ""
 
@@ -818,8 +794,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
-#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
-#, python-format
 msgid "Spread Details"
 msgstr ""
 
@@ -871,7 +845,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "Spread table '%s' created."
 msgstr ""
 
@@ -896,21 +869,18 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "The Invoice Type does not correspond to the Invoice"
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "The Journal is not consistent with the account moves."
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid ""
 "The Spread Template (Purchases) is not compatible with selected invoice type"
 msgstr ""
@@ -918,7 +888,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid ""
 "The Spread Template (Sales) is not compatible with selected invoice type"
 msgstr ""
@@ -926,7 +895,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
-#, python-format
 msgid ""
 "The account of the invoice line does not correspond to the Balance Sheet "
 "(credit account) of the spread"
@@ -935,7 +903,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
-#, python-format
 msgid ""
 "The account of the invoice line does not correspond to the Balance Sheet "
 "(debit account) of the spread"
@@ -944,7 +911,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:0
-#, python-format
 msgid ""
 "This spread line is already linked to a journal entry! Please post or delete"
 " it."
@@ -958,7 +924,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
-#, python-format
 msgid ""
 "Too many auto spread templates (%(len_template)s) matched with the invoice "
 "line, %(line_name)s"
@@ -997,14 +962,12 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "Unlinked '%(spread_link)s' (invoice line %(inv_line)s)."
 msgstr ""
 
 #. module: account_spread_cost_revenue
 #. odoo-python
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:0
-#, python-format
 msgid "Unlinked invoice line '%(spread_line_name)s' (view %(inv_link)s)."
 msgstr ""
 
