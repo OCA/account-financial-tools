@@ -787,3 +787,30 @@ class TestLoan(BaseCommon):
         if compute_lines:
             loan.compute_lines()
         return loan
+
+    def test_change_currency(self):
+        loan = self.create_loan("fixed-annuity", 500000, 1, 60)
+        eur_currency = self.env.ref("base.EUR")
+        usd_currency = self.env.ref("base.USD")
+        loan.journal_id.currency_id = eur_currency
+        loan.currency_id = eur_currency
+        loan.company_id.currency_id = usd_currency
+        self.assertEqual(loan.currency_id, loan.journal_id.currency_id)
+        loan.compute_lines()
+        for line in loan.line_ids:
+            self.assertEqual(line.currency_id, loan.currency_id)
+
+        line = fields.first(loan.line_ids)
+        line.view_process_values()
+
+        move_lines = line.mapped("move_ids.line_ids")
+        # Credit/Debit lines should be in USD, while amount_currency is in EUR
+        self.assertAlmostEqual(
+            move_lines[0].credit, -move_lines[0].amount_currency / eur_currency.rate, 2
+        )
+        self.assertAlmostEqual(
+            move_lines[1].debit, move_lines[1].amount_currency / eur_currency.rate, 2
+        )
+        self.assertAlmostEqual(
+            move_lines[2].debit, move_lines[2].amount_currency / eur_currency.rate, 2
+        )
