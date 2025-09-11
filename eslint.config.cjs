@@ -17,6 +17,7 @@ const config = [{
             openerp: "readonly",
             owl: "readonly",
             luxon: "readonly",
+            QUnit: "readonly",
             ...globals.browser,
         },
 
@@ -193,7 +194,7 @@ const config = [{
     },
 
 }, {
-    files: ["**/*.esm.js"],
+    files: ["**/*.esm.js", "**/*test.js"],
 
     languageOptions: {
         ecmaVersion: 2024,

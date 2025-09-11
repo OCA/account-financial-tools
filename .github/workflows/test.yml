@@ -36,18 +36,26 @@ jobs:
       matrix:
         include:
           - container: ghcr.io/oca/oca-ci/py3.10-odoo18.0:latest
-            exclude: "account_journal_restrict_mode,account_move_name_sequence"
+            include: "account_move_name_sequence,account_journal_restrict_mode"
             name: test with Odoo
             makepot: "true"
           - container: ghcr.io/oca/oca-ci/py3.10-ocb18.0:latest
-            exclude: "account_journal_restrict_mode,account_move_name_sequence"
+            include: "account_move_name_sequence,account_journal_restrict_mode"
             name: test with OCB
           - container: ghcr.io/oca/oca-ci/py3.10-odoo18.0:latest
-            include: "account_journal_restrict_mode,account_move_name_sequence"
-            name: test with Odoo (rebel modules)
+            include: "account_journal_general_sequence"
+            name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.10-ocb18.0:latest
-            include: "account_journal_restrict_mode,account_move_name_sequence"
-            name: test with OCB (rebel modules)
+            include: "account_journal_general_sequence"
+            name: test with OCB
+            makepot: "true"
+          - container: ghcr.io/oca/oca-ci/py3.10-odoo18.0:latest
+            exclude: "account_move_name_sequence,account_journal_restrict_mode,account_journal_general_sequence"
+            name: test with Odoo
+          - container: ghcr.io/oca/oca-ci/py3.10-ocb18.0:latest
+            exclude: "account_move_name_sequence,account_journal_restrict_mode,account_journal_general_sequence"
+            name: test with OCB
+            makepot: "true"
     services:
       postgres:
         image: postgres:12.0

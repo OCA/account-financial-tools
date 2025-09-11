@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.30
+_commit: v1.33
 _src_path: git+https://github.com/OCA/oca-addons-repo-template
 additional_ruff_rules: []
 ci: GitHub
@@ -18,7 +18,8 @@ odoo_version: 18.0
 org_name: Odoo Community Association (OCA)
 org_slug: OCA
 rebel_module_groups:
-- account_move_name_sequence
+- account_move_name_sequence,account_journal_restrict_mode
+- account_journal_general_sequence
 repo_description: account-financial-tools
 repo_name: account-financial-tools
 repo_slug: account-financial-tools
