@@ -35,13 +35,19 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid ""
 "\n"
 "Error while processing asset '{ref}': {exception}"
 msgstr ""
 "\n"
 "Erreur pendant le traitement de l'immobilisation '{ref}' : {exception}"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+msgid ""
+"<span class=\"o_form_label oe_inline\" invisible=\"salvage_type != "
+"'percent'\">%</span>"
+msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -52,14 +58,8 @@ msgstr "<span class=\"o_stat_text\"> Immobilisation(s)</span>"
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model,name:account_asset_management.model_account_account
-#, python-format
 msgid "Account"
 msgstr "Compte"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-msgid "Account Asset"
-msgstr "Compte d'actif"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__carry_forward_missed_depreciations
@@ -80,7 +80,6 @@ msgstr "Actif"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Active Assets"
 msgstr "Immobilisations en cours"
 
@@ -138,12 +137,6 @@ msgid "Analytic Distribution"
 msgstr ""
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution_search
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution_search
-msgid "Analytic Distribution Search"
-msgstr "Recherche de distribution analytique"
-
-#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Analytic Information"
 msgstr "Information analytique"
@@ -171,14 +164,12 @@ msgstr "Etes-vous sûr ?"
 #: model:ir.model,name:account_asset_management.model_account_asset
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset"
 msgstr "Immobilisation"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
-#, python-format
 msgid "Asset '%s' Removal Journal Entry"
 msgstr "Immobilisation '%s' Pièce comptable de sortie"
 
@@ -190,7 +181,6 @@ msgstr "Compte d'immobilisation"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_bank_statement_line__asset_count
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move__asset_count
-#: model:ir.model.fields,field_description:account_asset_management.field_account_payment__asset_count
 msgid "Asset Count"
 msgstr "Nombre d'immobilisations"
 
@@ -250,7 +240,6 @@ msgstr "Sortie d'immobilisation"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_remove
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__date_remove
-#, python-format
 msgid "Asset Removal Date"
 msgstr "Date de la sortie de l'immobilisation"
 
@@ -263,7 +252,6 @@ msgstr "Compte de cession de l'immobilisation"
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_start
-#, python-format
 msgid "Asset Start Date"
 msgstr "Date d'activation"
 
@@ -275,14 +263,12 @@ msgstr "Ligne du tableau d'amortissement"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
-#, python-format
 msgid "Asset name must be set in the label of the line."
 msgstr ""
 "Le nom de l'immobilisation doit être défini dans le libellé de la ligne."
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Asset profile"
 msgstr "Catégorie d'immobilisation"
 
@@ -307,7 +293,6 @@ msgstr "Immobilisations"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Assets to be corrected"
 msgstr "Actifs à corriger"
 
@@ -439,7 +424,6 @@ msgstr "Date de fin"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Comput. Method"
 msgstr "Méthode de calcul"
 
@@ -458,11 +442,6 @@ msgid "Compute"
 msgstr "Calculer"
 
 #. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
-msgid "Compute Asset"
-msgstr "Calcul des amortissements"
-
-#. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_compute_action
 #: model:ir.model,name:account_asset_management.model_account_asset_compute
 #: model:ir.ui.menu,name:account_asset_management.account_asset_compute_menu
@@ -472,21 +451,14 @@ msgstr "Calcul des amortissements"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:0
-#, python-format
 msgid "Compute Assets errors"
 msgstr "Erreurs lors du calcul des amortissements"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:0
-#, python-format
 msgid "Compute Assets result"
 msgstr "Résultat du calcul des amortissements"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
-msgid "Compute Assets results"
-msgstr "Résultats du calcul des amortissements"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
@@ -511,7 +483,6 @@ msgstr "Créer une immobilisation par article"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:0
-#, python-format
 msgid "Created Asset Moves"
 msgstr "Écritures d'amortissement créées"
 
@@ -569,14 +540,12 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Degressive"
 msgstr "Dégressif"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Degressive  up to Salvage Value"
 msgstr "Dégressif jusqu'à la valeur de revente"
 
@@ -589,7 +558,6 @@ msgstr "Taux dégréssif"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Degressive-Linear"
 msgstr "Dégressif-Linéaire"
 
@@ -597,7 +565,6 @@ msgstr "Dégressif-Linéaire"
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
 msgstr "Dégressif-Linéaire n'est supporté qu'avec la méthode de temps 'Année'."
 
@@ -632,7 +599,6 @@ msgstr "Compte de dépréciation"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__create
-#, python-format
 msgid "Depreciation Base"
 msgstr "Base d'amortissement"
 
@@ -682,6 +648,12 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__done
 msgid "Done"
 msgstr "Fait"
@@ -695,7 +667,6 @@ msgstr "Brouillon"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Duplicate reporting entries"
 msgstr "Entrées en double"
 
@@ -722,7 +693,6 @@ msgstr "Pièces comptables"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid ""
 "Error while processing asset '{ref}': \n"
 "\n"
@@ -741,9 +711,13 @@ msgstr "Immobilisations"
 #: model:ir.actions.act_window,name:account_asset_management.wiz_account_asset_report_action
 #: model:ir.model,name:account_asset_management.model_wiz_account_asset_report
 #: model:ir.ui.menu,name:account_asset_management.wiz_account_asset_report_menu
-#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
 msgid "Financial Assets report"
 msgstr "État des immobilisations"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__fixed
+msgid "Fixed"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
@@ -768,7 +742,6 @@ msgstr "Forcer la date comptable"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
-#, python-format
 msgid "Gain/Loss on Sale"
 msgstr "Gain/Perte sur cession"
 
@@ -780,7 +753,6 @@ msgstr "Général"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid "Generate Asset Removal entries"
 msgstr "Générer la pièce comptable de sortie"
 
@@ -895,7 +867,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid "Illegal value %s in asset.method."
 msgstr "Valeur illégale %s dans asset.method."
 
@@ -907,7 +878,6 @@ msgstr "Inclure les immobilisations en brouillon"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid ""
 "Inconsistent reporting structure.\n"
 "Please correct Asset Group '{group}' (id {id})"
@@ -950,7 +920,6 @@ msgstr "Journal"
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-#, python-format
 msgid "Journal Entries"
 msgstr "Pièces comptables"
 
@@ -958,7 +927,6 @@ msgstr "Pièces comptables"
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #: model:ir.model,name:account_asset_management.model_account_move
-#, python-format
 msgid "Journal Entry"
 msgstr "Pièce comptable"
 
@@ -1001,14 +969,12 @@ msgstr "Dernière mise à jour le"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Linear"
 msgstr "Linéaire"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Linéaire jusqu'à la valeur de revente"
 
@@ -1031,14 +997,12 @@ msgstr "Compte de moins-value"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Missing depreciation table"
 msgstr "Tableau d'amortissement manquant"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Month"
 msgstr "Mois"
 
@@ -1052,14 +1016,12 @@ msgstr "Date butoir de l'activité"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__name
-#, python-format
 msgid "Name"
 msgstr "Nom"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "New Acquisitions"
 msgstr "Nouvelles acquisitions"
 
@@ -1086,7 +1048,6 @@ msgstr "Période d'amortissement suivante"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "No"
 msgstr "Non"
 
@@ -1113,7 +1074,6 @@ msgstr "Nombre d'actions"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Number of Depreciations"
 msgstr "Nombre d'amortissements"
 
@@ -1122,14 +1082,12 @@ msgstr "Nombre d'amortissements"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_number
-#, python-format
 msgid "Number of Years"
 msgstr "Nombre d'années"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Number of Years or end date"
 msgstr "Nombre d'années ou date de fin"
 
@@ -1174,16 +1132,19 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__percent
+msgid "Percentage of Price"
+msgstr ""
+
+#. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Period Depreciation"
 msgstr "Période d'amortissement"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Period End Value"
 msgstr "Valeur en fin de période"
 
@@ -1196,7 +1157,6 @@ msgstr "Durée de la période"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Period Start Value"
 msgstr "Valeur en début de période"
 
@@ -1232,7 +1192,6 @@ msgstr "Catégorie"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__prorata
-#, python-format
 msgid "Prorata Temporis"
 msgstr "Prorata temporis"
 
@@ -1240,14 +1199,12 @@ msgstr "Prorata temporis"
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__purchase_value
-#, python-format
 msgid "Purchase Value"
 msgstr "Valeur d'achat"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Quarter"
 msgstr "Trimestre"
 
@@ -1256,7 +1213,6 @@ msgstr "Trimestre"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__reason
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__reason
-#, python-format
 msgid "Reason"
 msgstr "Motif"
 
@@ -1264,7 +1220,6 @@ msgstr "Motif"
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__code
-#, python-format
 msgid "Reference"
 msgstr "Référence"
 
@@ -1303,7 +1258,6 @@ msgstr "Sortir"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_remove
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
 msgid "Remove Asset"
 msgstr "Sortir l'immobilisation"
 
@@ -1316,7 +1270,6 @@ msgstr "Sortie"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Removed Assets"
 msgstr "Immobilisations sorties"
 
@@ -1324,7 +1277,6 @@ msgstr "Immobilisations sorties"
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__value_residual
-#, python-format
 msgid "Residual Value"
 msgstr "Valeur résiduelle"
 
@@ -1357,7 +1309,6 @@ msgstr "Pièce comptable d'extourne"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, python-format
 msgid "Reverse Move"
 msgstr "Pièce comptable d'extourne"
 
@@ -1378,10 +1329,15 @@ msgid "Sale Value"
 msgstr "Valeur de cession"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
+msgid "Salvage Type"
+msgstr ""
+
+#. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__salvage_value
-#, python-format
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_value
 msgid "Salvage Value"
 msgstr "Valeur de revente"
 
@@ -1389,11 +1345,6 @@ msgstr "Valeur de revente"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 msgid "Search Asset Group"
 msgstr "Rechercher un groupe d'immobilisation"
-
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-msgid "Search Asset Profile"
-msgstr "Rechercher une catégorie d'immobilisation"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__init_entry
@@ -1434,7 +1385,6 @@ msgstr "État de l'immobilisation"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
-#, python-format
 msgid "Status"
 msgstr "Statut"
 
@@ -1454,7 +1404,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years'."
@@ -1465,14 +1414,12 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "The 'account' field is a mandatory entry of the '_xls_%s_fields' list !"
 msgstr "Le champ 'compte' est obligatoire dans la liste '_xls_%s_fields' !"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_account.py:0
-#, python-format
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
 msgstr ""
@@ -1481,7 +1428,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
-#, python-format
 msgid "The Sale Value must be positive!"
 msgstr "La valeur de cession doit être positive !"
 
@@ -1489,14 +1435,12 @@ msgstr "La valeur de cession doit être positive !"
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 #: code:addons/account_asset_management/wizard/wiz_account_asset_report.py:0
-#, python-format
 msgid "The Start Date must precede the Ending Date."
 msgstr "La date de début doit précéder la date de fin."
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
 "dates."
@@ -1506,6 +1450,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__salvage_value
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__salvage_value
 msgid ""
 "The estimated value that an asset will realize upon its sale at the end of "
 "its useful life.\n"
@@ -1525,7 +1470,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
-#, python-format
 msgid "The removal date must be after the last depreciation date."
 msgstr ""
 "La date de sortie doit être postérieure à la dernière date d'amortissement."
@@ -1554,7 +1498,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
-#, python-format
 msgid "This invoice created the asset(s): %s"
 msgstr "Cette facture a créé le(s) immobilisation(s) suivante(s) : %s"
 
@@ -1567,7 +1510,6 @@ msgstr "Méthode de temps"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Tot. Depreciation"
 msgstr "Tot. Amortissement"
 
@@ -1579,7 +1521,6 @@ msgstr "Nombre total de jours"
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Totals"
 msgstr "Totaux"
 
@@ -1601,7 +1542,6 @@ msgstr "Type de l'activité-alerte sur l'enregistrement."
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
-#, python-format
 msgid "Undetermined error"
 msgstr "Erreur inconnue"
 
@@ -1664,14 +1604,12 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
-#, python-format
 msgid "Year"
 msgstr "Année"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
-#, python-format
 msgid ""
 "You are not allowed to link an accounting entry to an asset.\n"
 "You should generate such entries from the asset."
@@ -1683,7 +1621,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #: code:addons/account_asset_management/models/account_move.py:0
-#, python-format
 msgid ""
 "You are not allowed to remove an accounting entry linked to an asset.\n"
 "You should remove such entries from the asset."
@@ -1695,14 +1632,12 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid "You can only delete assets in draft state."
 msgstr "Vous ne pouvez supprimer que des immobilisations à l'état 'Brouillon'."
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
-#, python-format
 msgid ""
 "You can't make an early removal if all the depreciation lines for previous "
 "periods are not posted."
@@ -1713,7 +1648,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, python-format
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
 msgstr ""
@@ -1723,7 +1657,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
-#, python-format
 msgid ""
 "You cannot change an accounting entry linked to an asset depreciation line."
 msgstr ""
@@ -1733,7 +1666,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_move.py:0
-#, python-format
 msgid ""
 "You cannot change an accounting item linked to an asset depreciation line."
 msgstr ""
@@ -1743,7 +1675,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
 "Vous ne pouvez pas modifier la catégorie d'une immobilisation dont certaines "
@@ -1752,7 +1683,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
 msgstr ""
@@ -1762,7 +1692,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr ""
 "Vous ne pouvez pas supprimer une immobilisation qui contient des lignes "
@@ -1771,7 +1700,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
 msgstr ""
 "Vous ne pouvez pas supprimer une ligne de type \"Base d'immobilisation\"."
@@ -1779,7 +1707,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, python-format
 msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
 "prior posted entries."
@@ -1790,7 +1717,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr ""
 "Vous ne pouvez pas configurer la date de début de l'immobilisation après la "
@@ -1799,7 +1725,6 @@ msgstr ""
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
-#, python-format
 msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
 "entries."
@@ -1818,10 +1743,23 @@ msgstr ""
 "exercices comptables antérieurs si la date de début de l'immobilisation "
 "diffère de la date à laquelle des pièces comptables doivent être générées."
 
-#. module: account_asset_management
-#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
-msgid "or"
-msgstr "ou"
+#~ msgid "Account Asset"
+#~ msgstr "Compte d'actif"
+
+#~ msgid "Analytic Distribution Search"
+#~ msgstr "Recherche de distribution analytique"
+
+#~ msgid "Compute Asset"
+#~ msgstr "Calcul des amortissements"
+
+#~ msgid "Compute Assets results"
+#~ msgstr "Résultats du calcul des amortissements"
+
+#~ msgid "Search Asset Profile"
+#~ msgstr "Rechercher une catégorie d'immobilisation"
+
+#~ msgid "or"
+#~ msgstr "ou"
 
 #~ msgid "Analytic"
 #~ msgstr "Analytique"
