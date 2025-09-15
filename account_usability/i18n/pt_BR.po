@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-28 13:25+0000\n"
-"Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
+"PO-Revision-Date: 2025-09-15 13:42+0000\n"
+"Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_account
@@ -63,7 +63,7 @@ msgstr "Contabilidade Angro-Saxonica"
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_accounting_statement_bank
 msgid "Bank Statements"
-msgstr "Estratos Bancários"
+msgstr "Extratos Bancários"
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_accounting_bank_and_cash
