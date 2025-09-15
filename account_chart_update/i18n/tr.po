@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2025-09-15 08:42+0000\n"
-"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
+"PO-Revision-Date: 2025-09-15 11:17+0000\n"
+"Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -98,7 +98,6 @@ msgstr "Kapat"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
-#, fuzzy
 msgid "Code Digits"
 msgstr "Kod Rakamları"
 
@@ -422,7 +421,7 @@ msgstr "Sonraki"
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "No account found with this code."
-msgstr ""
+msgstr "Bu koda sahip bir hesap bulunamadı."
 
 #. module: account_chart_update
 #. odoo-python
@@ -594,9 +593,8 @@ msgstr "Tipi"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
-#, fuzzy
 msgid "Type Tax Use"
-msgstr "Tür Vergi Kullanımı"
+msgstr "Vergi Kullanım Türü"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
@@ -672,7 +670,7 @@ msgstr "Güncellenen Vergiler"
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__updated
 msgid "Updated accoung group"
-msgstr ""
+msgstr "Güncellenmiş hesap grubu"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__updated
@@ -746,7 +744,7 @@ msgstr "Sihirbaz tamamlandı"
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__xml_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__xml_id
 msgid "Xml"
-msgstr ""
+msgstr "Xml"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Son değişiklik"
