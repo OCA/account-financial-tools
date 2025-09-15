@@ -9,96 +9,98 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2025-09-15 08:42+0000\n"
+"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_account_chart_template
 msgid "Account Chart Template"
-msgstr ""
+msgstr "Hesap Planı Şablonu"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_ids
 msgid "Account Groups"
-msgstr ""
+msgstr "Hesap Grupları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
 msgid "Account fields"
-msgstr ""
+msgstr "Hesap alanları"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account_group
 msgid ""
 "Account group that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Güncellenmesi gereken hesap grubu (şablonda yeni veya güncellenmiş)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_account_group_id
 msgid "Account group to update"
-msgstr ""
+msgstr "Güncellenecek hesap grubu"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Account groups"
-msgstr ""
+msgstr "Hesap grupları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_field_ids
 msgid "Account groups fields"
-msgstr ""
+msgstr "Hesap grupları alanları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_matching_ids
 msgid "Account groups matching"
-msgstr ""
+msgstr "Hesap grupları eşleştirme"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
 msgid "Account that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Güncellenmesi gereken hesap (yeni veya şablonda güncellenen)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_account_id
 msgid "Account to update"
-msgstr ""
+msgstr "Güncellenecek hesap"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Accounts"
-msgstr ""
+msgstr "Hesaplar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
 msgid "Accounts matching"
-msgstr ""
+msgstr "Hesap eşleştirme"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template
 msgid "Chart Template"
-msgstr ""
+msgstr "Plan Şablonu"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Chart of Accounts"
-msgstr ""
+msgstr "Hesap Planı"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
+#, fuzzy
 msgid "Code Digits"
-msgstr ""
+msgstr "Kod Rakamları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__company_id
@@ -108,12 +110,12 @@ msgstr "Şirket"
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__init
 msgid "Configuration"
-msgstr ""
+msgstr "Ayarlar"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Create/Update"
-msgstr ""
+msgstr "Oluşturma/Güncelleştirme"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_uid
@@ -150,13 +152,13 @@ msgstr "Oluşturuldu"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__deleted_taxes
 msgid "Deactivated taxes"
-msgstr ""
+msgstr "Devre dışı bırakılan vergiler"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "Differences in these fields: %s."
-msgstr ""
+msgstr "Bu alanlardaki farklar: %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__display_name
@@ -180,69 +182,71 @@ msgid ""
 "Existing account groups are updated. Account groups are searched by "
 "prefix_code_start."
 msgstr ""
+"Mevcut hesap grupları güncellendi. Hesap grupları prefix_code_start ile "
+"aranır."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account
 msgid "Existing accounts are updated. Accounts are searched by code."
-msgstr ""
+msgstr "Mevcut hesaplar güncellendi. Hesaplar koda göre arandı."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
 msgid ""
 "Existing fiscal positions are updated. Fiscal positions are searched by name."
-msgstr ""
+msgstr "Mevcut mali koşullar güncellendi. Mali koşullar ada göre aranır."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
 msgid "Existing tax groups are updated. Tax group are searched by name."
-msgstr ""
+msgstr "Mevcut vergi grupları güncellendi. Vergi grupları adına göre arandı."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax
 msgid "Existing taxes are updated. Taxes are searched by name."
-msgstr ""
+msgstr "Mevcut vergiler güncellendi. Vergiler isme göre arandı."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Field options"
-msgstr ""
+msgstr "Alan özellikleri"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_ir_model_fields
 msgid "Fields"
-msgstr ""
+msgstr "Alanlar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_field_ids
 msgid "Fiscal position fields"
-msgstr ""
+msgstr "Mali koşul alanları"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
 msgid ""
 "Fiscal position that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Güncellenmesi gereken mali koşul (yeni ya da şablonda güncellenmiş)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__update_fiscal_position_id
 msgid "Fiscal position to update"
-msgstr ""
+msgstr "Güncellenecek mali koşul"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fiscal_position_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Fiscal positions"
-msgstr ""
+msgstr "Mali Koşullar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_matching_ids
 msgid "Fiscal positions matching"
-msgstr ""
+msgstr "Mali koşul eşleştirme"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "General options"
-msgstr ""
+msgstr "Genel özellikler"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -250,11 +254,14 @@ msgid ""
 "Here you can select the fields you want to check if\n"
 "                            they have been updated in the templates."
 msgstr ""
+"Şablonlarda güncellenip güncellenmediğini kontrol etmek istediğiniz "
+"alanları\n"
+"                             buradan seçebilirsiniz."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Here you can set the matching order."
-msgstr ""
+msgstr "Buradan eşleştirme sırasını ayarlayabilirsiniz."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__id
@@ -281,6 +288,11 @@ msgid ""
 "                                records with changes (i.e. different tax "
 "amount)"
 msgstr ""
+"Eğer bu özellikleri seçili bırakırsanız, sihirbaz \n"
+"                                yeni kayıt oluşturulmanın yanında "
+"değiştirilen \n"
+"                                kayıtları da günceller (örn. farklı vergi "
+"tutarı)"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__write_uid
@@ -317,12 +329,12 @@ msgstr "Son güncelleme"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Log"
-msgstr ""
+msgstr "Kayıt"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Matching"
-msgstr ""
+msgstr "Eşleştirme"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__matching_value
@@ -332,79 +344,79 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__matching_value
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__matching_value
 msgid "Matching Value"
-msgstr ""
+msgstr "Eşleştirme Değeri"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__log
 msgid "Messages and Errors"
-msgstr ""
+msgstr "Mesajlar ve Hatalar"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "Missing XML-ID."
-msgstr ""
+msgstr "Eksik XML-ID."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "Name or description not found."
-msgstr ""
+msgstr "İsim veya açıklama bulunamadı."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_account_groups
 msgid "New Account Groups"
-msgstr ""
+msgstr "Yeni Hesap Grupları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
 msgid "New Accounts"
-msgstr ""
+msgstr "Yeni Hesaplar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_tax_groups
 msgid "New Tax Groups"
-msgstr ""
+msgstr "Yeni Vergi Grupları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
 msgid "New Taxes"
-msgstr ""
+msgstr "Yeni Vergiler"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__new
 msgid "New account"
-msgstr ""
+msgstr "Yeni hesap"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__new
 msgid "New account group"
-msgstr ""
+msgstr "Yeni hesap grubu"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__new
 msgid "New fiscal position"
-msgstr ""
+msgstr "Yeni mali koşul"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_fps
 msgid "New fiscal positions"
-msgstr ""
+msgstr "Yeni mali koşullar"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__new
 msgid "New tax"
-msgstr ""
+msgstr "Yeni vergi"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax_group__type__new
 msgid "New tax group"
-msgstr ""
+msgstr "Yeni vergi grubu"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Next"
-msgstr ""
+msgstr "Sonraki"
 
 #. module: account_chart_update
 #. odoo-python
@@ -416,12 +428,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "No fiscal position found with this name."
-msgstr ""
+msgstr "Bu isimde mali koşul bulunamadı."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Note: Only the changed fields are updated."
-msgstr ""
+msgstr "Not: Yalnızca değiştirilen alanlar güncellenir."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__notes
@@ -430,37 +442,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__notes
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__notes
 msgid "Notes"
-msgstr ""
+msgstr "Notlar"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Previous"
-msgstr ""
+msgstr "Önceki"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Records to create/update"
-msgstr ""
+msgstr "Oluşturulacak/güncellenecek kayıtlar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__rejected_new_account_number
 msgid "Rejected New Account Number"
-msgstr ""
+msgstr "Reddedilmiş Yeni Hesap Adedi"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__rejected_updated_account_number
 msgid "Rejected Updated Account Number"
-msgstr ""
+msgstr "Reddedilmiş Güncellenen Hesap Adedi"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Reload for new elements"
-msgstr ""
+msgstr "Yeni öğeler için yeniden yükle"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__ready
 msgid "Select records to update"
-msgstr ""
+msgstr "Güncellenecek kayıtları seç"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__sequence
@@ -470,7 +482,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__sequence
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sıra"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__state
@@ -480,78 +492,78 @@ msgstr "Durum"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Summary of created objects"
-msgstr ""
+msgstr "Oluşturulan nesnelerin özeti"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Summary of updated objects"
-msgstr ""
+msgstr "Güncellenen nesnelerin özeti"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Tax Group"
-msgstr ""
+msgstr "Vergi Grubu"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_field_ids
 msgid "Tax fields"
-msgstr ""
+msgstr "Vergi alanları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_matching_ids
 msgid "Tax goups matching"
-msgstr ""
+msgstr "Vergi grupları eşleştirmesi"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_field_ids
 msgid "Tax group fields"
-msgstr ""
+msgstr "Vergi grubu alanları"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_group
 msgid "Tax group that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Güncellenmesi gereken vergi grubu (şablonda yeni veya güncellenmiş)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__update_tax_group_id
 msgid "Tax group to update"
-msgstr ""
+msgstr "Güncellenecek vergi grubu"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Tax groups"
-msgstr ""
+msgstr "Vergi grupları"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
 msgid "Tax that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Güncellenmesi gereken vergi (yeni ya da şablonda güncellenmiş)."
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__deleted
 msgid "Tax to deactivate"
-msgstr ""
+msgstr "Devre dışı bırakılacak vergi"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_tax_id
 msgid "Tax to update"
-msgstr ""
+msgstr "Güncellenecek vergi"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_ids
 msgid "Taxe Groups"
-msgstr ""
+msgstr "Vergi Grupları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Taxes"
-msgstr ""
+msgstr "Vergiler"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_matching_ids
 msgid "Taxes matching"
-msgstr ""
+msgstr "Vergi eşleştirme"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -561,12 +573,15 @@ msgid ""
 "chart\n"
 "                            template"
 msgstr ""
+"Bu sihirbaz hesaplarınızı, vergilerinizi ve mali koşullarınızı \n"
+"                            seçili plan şablonuna göre \n"
+"                            güncelle"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "To deactivate: not in the template"
-msgstr ""
+msgstr "Devre dışı bırakmak için: şablonda yok"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__type
@@ -579,24 +594,25 @@ msgstr "Tipi"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
+#, fuzzy
 msgid "Type Tax Use"
-msgstr ""
+msgstr "Tür Vergi Kullanımı"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
 msgid "Update account groups"
-msgstr ""
+msgstr "Hesap gruplarını güncelle"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account
 msgid "Update accounts"
-msgstr ""
+msgstr "Hesapları güncelle"
 
 #. module: account_chart_update
 #: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Update chart of accounts"
-msgstr ""
+msgstr "Hesap planlarını güncelle"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__update_chart_wizard_id
@@ -611,47 +627,47 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__update_chart_wizard_id
 msgid "Update chart wizard"
-msgstr ""
+msgstr "Plan güncelleme sihirbazı"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
 msgid "Update fiscal positions"
-msgstr ""
+msgstr "Mali koşulları güncelle"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Update records?"
-msgstr ""
+msgstr "Kayıtları güncelle?"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
 msgid "Update taxe groups"
-msgstr ""
+msgstr "Vergi gruplarını güncelle"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax
 msgid "Update taxes"
-msgstr ""
+msgstr "Vergileri güncelle"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_account_groups
 msgid "Updated Account Groups"
-msgstr ""
+msgstr "Güncellenen Hesap Grupları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
 msgid "Updated Accounts"
-msgstr ""
+msgstr "Güncellenmiş Hesaplar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_tax_groups
 msgid "Updated Tax Groups"
-msgstr ""
+msgstr "Güncellenen Vergi Grupları"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
 msgid "Updated Taxes"
-msgstr ""
+msgstr "Güncellenen Vergiler"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__updated
@@ -661,67 +677,67 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__updated
 msgid "Updated account"
-msgstr ""
+msgstr "Güncellenen hesap"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__updated
 msgid "Updated fiscal position"
-msgstr ""
+msgstr "Güncellenmiş mali pozisyon"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_fps
 msgid "Updated fiscal positions"
-msgstr ""
+msgstr "Güncellenmiş mali pozisyonlar"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__updated
 msgid "Updated tax"
-msgstr ""
+msgstr "Güncellenmiş vergi"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax_group__type__updated
 msgid "Updated tax group"
-msgstr ""
+msgstr "Güncellenen vergi grubu"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_group_matching
 msgid "Wizard Account Group Matching"
-msgstr ""
+msgstr "Sihirbaz Hesap Grubu Eşleştirme"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_matching
 msgid "Wizard Account Matching"
-msgstr ""
+msgstr "Hesap Eşleştirme Sihirbazı"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_fp_matching
 msgid "Wizard Fiscal Position Matching"
-msgstr ""
+msgstr "Mali Koşul Eşleştirme Sihirbazı"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_matching
 msgid "Wizard Matching"
-msgstr ""
+msgstr "Eşleştirme Sihirbazı"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_tax_group_matching
 msgid "Wizard Tax Group Matching"
-msgstr ""
+msgstr "Sihirbaz Vergi Grubu Eşleştirme"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_tax_matching
 msgid "Wizard Tax Matching"
-msgstr ""
+msgstr "Vergi Eşleştirme Sihirbazı"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
 msgid "Wizard Update Charts Accounts"
-msgstr ""
+msgstr "Hesap Planları Güncelleme Sihirbazı"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__done
 msgid "Wizard completed"
-msgstr ""
+msgstr "Sihirbaz tamamlandı"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__xml_id
