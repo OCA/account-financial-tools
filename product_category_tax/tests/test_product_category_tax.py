@@ -162,3 +162,74 @@ class ProductCategoryTax(common.SavepointCase):
         )
         self.assertFalse(product.taxes_id, False)
         self.assertEqual(product.supplier_taxes_id, self.tax_purchase2)
+
+    def test_05_multicompany_category_taxes(self):
+        """Test multicompany: taxes from all companies are added if user has only one active company"""
+        company_a = self.env["res.company"].create({"name": "Company A"})
+        company_b = self.env["res.company"].create({"name": "Company B"})
+
+        tax_a = self.tax_model.create(
+            {
+                "name": "Tax A",
+                "type_tax_use": "sale",
+                "amount": 10.0,
+                "company_id": company_a.id,
+            }
+        )
+        tax_b = self.tax_model.create(
+            {
+                "name": "Tax B",
+                "type_tax_use": "sale",
+                "amount": 20.0,
+                "company_id": company_b.id,
+            }
+        )
+        purchase_tax_a = self.tax_model.create(
+            {
+                "name": "Purchase Tax A",
+                "type_tax_use": "purchase",
+                "amount": 5.0,
+                "company_id": company_a.id,
+            }
+        )
+        purchase_tax_b = self.tax_model.create(
+            {
+                "name": "Purchase Tax B",
+                "type_tax_use": "purchase",
+                "amount": 15.0,
+                "company_id": company_b.id,
+            }
+        )
+
+        # Create category with taxes from both companies
+        category = self.categ_obj.create(
+            {
+                "name": "MultiCompany Category",
+                "taxes_id": [(6, 0, [tax_a.id, tax_b.id])],
+                "supplier_taxes_id": [(6, 0, [purchase_tax_a.id, purchase_tax_b.id])],
+            }
+        )
+
+        # Set user to only one active company
+        user = self.env.user
+        user.company_ids = [(6, 0, [company_a.id])]
+        user.company_id = company_a.id
+
+        product = self.product_obj.create(
+            {
+                "name": "MultiCompany Product",
+                "categ_id": category.id,
+            }
+        )
+        self.assertIn(tax_a, product.taxes_id)
+        self.assertIn(tax_b, product.taxes_id)
+        self.assertIn(purchase_tax_a, product.supplier_taxes_id)
+        self.assertIn(purchase_tax_b, product.supplier_taxes_id)
+
+        # Remove taxes and "Apply on Products" from category
+        product.write({"taxes_id": [(6, 0, [])], "supplier_taxes_id": [(6, 0, [])]})
+        product.set_tax_from_category()
+        self.assertIn(tax_a, product.taxes_id)
+        self.assertIn(tax_b, product.taxes_id)
+        self.assertIn(purchase_tax_a, product.supplier_taxes_id)
+        self.assertIn(purchase_tax_b, product.supplier_taxes_id)
