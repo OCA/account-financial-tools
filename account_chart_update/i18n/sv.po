@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2025-09-19 07:18+0000\n"
+"PO-Revision-Date: 2025-09-19 07:51+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_account_chart_template
 msgid "Account Chart Template"
-msgstr ""
+msgstr "Mall för kontoplan"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_ids
@@ -99,7 +99,7 @@ msgstr "Stänga"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
 msgid "Code Digits"
-msgstr ""
+msgstr "Kodsiffror"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__company_id
@@ -200,7 +200,7 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
 msgid "Existing tax groups are updated. Tax group are searched by name."
-msgstr ""
+msgstr "Befintliga skattegrupper uppdateras. Skattegrupper söks efter namn."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax
@@ -376,7 +376,7 @@ msgstr "Nya konton"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_tax_groups
 msgid "New Tax Groups"
-msgstr ""
+msgstr "Nya skattegrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
@@ -386,17 +386,17 @@ msgstr "Nya skatter"
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__new
 msgid "New account"
-msgstr ""
+msgstr "Nytt konto"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__new
 msgid "New account group"
-msgstr ""
+msgstr "Ny kontogrupp"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__new
 msgid "New fiscal position"
-msgstr ""
+msgstr "Ny finansiell ställning"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_fps
@@ -406,12 +406,12 @@ msgstr "Nya skatteområden"
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__new
 msgid "New tax"
-msgstr ""
+msgstr "Ny skatt"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax_group__type__new
 msgid "New tax group"
-msgstr ""
+msgstr "Ny skattegrupp"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -467,7 +467,7 @@ msgstr "Avvisad Uppdaterat kontonummer"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Reload for new elements"
-msgstr ""
+msgstr "Ladda om för nya element"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__ready
@@ -502,7 +502,7 @@ msgstr "Sammanfattning av uppdaterade objekt"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Tax Group"
-msgstr ""
+msgstr "Skattegrupp"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_field_ids
@@ -512,27 +512,27 @@ msgstr "Skattefält"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_matching_ids
 msgid "Tax goups matching"
-msgstr ""
+msgstr "Matchning av skattegrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_field_ids
 msgid "Tax group fields"
-msgstr ""
+msgstr "Fält för skattegrupp"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_group
 msgid "Tax group that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Skattegrupp som behöver uppdateras (ny eller uppdaterad i mallen)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__update_tax_group_id
 msgid "Tax group to update"
-msgstr ""
+msgstr "Skattegruppen ska uppdatera"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Tax groups"
-msgstr ""
+msgstr "Skattegrupper"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
@@ -552,7 +552,7 @@ msgstr "Skatt att uppdatera"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_ids
 msgid "Taxe Groups"
-msgstr ""
+msgstr "Skattegrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_ids
@@ -595,7 +595,7 @@ msgstr "Typ"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
 msgid "Type Tax Use"
-msgstr ""
+msgstr "Typ Skatteanvändning"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
@@ -641,7 +641,7 @@ msgstr "Uppdatera register?"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
 msgid "Update taxe groups"
-msgstr ""
+msgstr "Uppdatera taxeringsgrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax
@@ -661,7 +661,7 @@ msgstr "Uppdaterade konton"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_tax_groups
 msgid "Updated Tax Groups"
-msgstr ""
+msgstr "Uppdaterade skattegrupper"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
@@ -671,17 +671,17 @@ msgstr "Uppdaterade skatter"
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__updated
 msgid "Updated accoung group"
-msgstr ""
+msgstr "Uppdaterad accoung-grupp"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__updated
 msgid "Updated account"
-msgstr ""
+msgstr "Uppdaterat konto"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__updated
 msgid "Updated fiscal position"
-msgstr ""
+msgstr "Uppdaterad finansiell ställning"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_fps
@@ -691,12 +691,12 @@ msgstr "Uppdaterade skatteområden"
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__updated
 msgid "Updated tax"
-msgstr ""
+msgstr "Uppdaterad skatt"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax_group__type__updated
 msgid "Updated tax group"
-msgstr ""
+msgstr "Uppdaterad skattegrupp"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_group_matching
@@ -721,7 +721,7 @@ msgstr "Guide för matchning"
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_tax_group_matching
 msgid "Wizard Tax Group Matching"
-msgstr ""
+msgstr "Wizard Matchning av skattegrupp"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_tax_matching
@@ -745,7 +745,7 @@ msgstr "Guiden slutförd"
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__xml_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__xml_id
 msgid "Xml"
-msgstr ""
+msgstr "Xml"
 
 #~ msgid "# of Digits"
 #~ msgstr "# Antal siffror"
