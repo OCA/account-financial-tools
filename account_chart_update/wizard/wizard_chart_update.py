@@ -1035,6 +1035,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             if wiz_account.type == "updated":
                 self.recreate_xml_id(account, xml_id)
                 data_item = self.diff_fields(t_data_item, account)
+            else:
+                data_item["code"] = self.padded_code(data_item["code"])
             data[key] = data_item
         self._load_data("account.account", data)
 

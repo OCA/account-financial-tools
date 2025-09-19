@@ -119,6 +119,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         new_tax = self._get_record_for_xml_id(tax_data_key_0)
         self.assertTrue(new_tax)
         new_account = self._get_record_for_xml_id(account_data_key_0)
+        self.assertEqual(len(new_account.code), wizard.code_digits)
         self.assertTrue(new_account)
         wizard.unlink()
         # Update objects
