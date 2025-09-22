@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:23+0000\n"
-"PO-Revision-Date: 2025-09-22 19:42+0000\n"
+"PO-Revision-Date: 2025-09-22 22:27+0000\n"
 "Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
@@ -195,13 +195,13 @@ msgstr "Borçlu"
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 msgid "Deposit '%s' has already been credited on the bank account."
-msgstr ""
+msgstr "'%s' çek karşılığı banka hesabınıza zaten yatırılmış."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Deposit Date"
-msgstr ""
+msgstr "Çek Kasası Tarihi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
@@ -212,7 +212,7 @@ msgstr "Görünen İsim"
 #: model:ir.model.fields.selection,name:account_check_deposit.selection__account_check_deposit__state__done
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Done"
-msgstr ""
+msgstr "Tamamlandı"
 
 #. module: account_check_deposit
 #: model:ir.model.fields.selection,name:account_check_deposit.selection__account_check_deposit__state__draft
@@ -223,34 +223,34 @@ msgstr "Taslak"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Takipciler"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Takipçiler (İş Ortaklar)"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Font awesome simgesi örn. fa-tasks"
 
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Get All Received Checks"
-msgstr ""
+msgstr "Tüm Alınan Çekleri Getir"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Group By"
-msgstr ""
+msgstr "Grupla"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Mesaj Var mı"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__id
@@ -260,27 +260,27 @@ msgstr "ID"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Simge"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Bir istisna etkinliğini gösteren simge."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "İşaretliyse, yeni mesajlar ilgilenmenizi bekliyor."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "İşaretliyse, bazı mesajlarda teslim hatası var."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__in_hand_check_account_id
 msgid "In Hand Check Account"
-msgstr ""
+msgstr "Eldeki Çekler Hesabı"
 
 #. module: account_check_deposit
 #. odoo-python
@@ -290,21 +290,24 @@ msgid ""
 "must configure an Outstanding Receipts Account for the payment method "
 "'Manual (inbound)'."
 msgstr ""
+"'%s' günlüğünün yapılandırmasında, 'Gelen Ödemeler' sekmesinde, 'Manuel "
+"(gelen)' ödeme yöntemi için bir Ödenmemiş Makbuzlar Hesabı yapılandırmanız "
+"gerekir."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Takipçi mi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
 msgid "Journal Entry"
-msgstr ""
+msgstr "Yevmiye Kaydı"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Yevmiye Kalemi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_uid
@@ -319,33 +322,33 @@ msgstr "Son güncelleme"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__line_ids
 msgid "Lines"
-msgstr ""
+msgstr "Satırlar"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "List of checks:"
-msgstr ""
+msgstr "Çek listesi:"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Mesaj Teslimat hatası"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Mesajlar"
 
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 msgid "Missing 'Internal Transfer' account on the company '%s'."
-msgstr ""
+msgstr "'%s' şirketinde 'Dahili Transfer' hesabı eksik."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Aktivitemin Son Tarihi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__name
@@ -356,52 +359,52 @@ msgstr "Adı"
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 msgid "New"
-msgstr ""
+msgstr "Yeni"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Sonraki Aktivite Son Tarihi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Sonraki Aktivite Özeti"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Sonraki Aktivite Türü"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Eylem Sayısı"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_count
 msgid "Number of Checks"
-msgstr ""
+msgstr "Çeklerin Sayısı"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Hata sayısı"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Eylem gerektiren mesaj sayısı"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Teslimat hatası olan mesaj sayısı"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Print"
-msgstr ""
+msgstr "Yazdır"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -411,7 +414,7 @@ msgstr "Referans"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Sorumlu Kullanıcı"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__state
@@ -426,6 +429,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Aktivitelere dayalı Durum:\n"
+"Overdue: Son günü geçmiş\n"
+"Today: Aktivite günü bugün\n"
+"Planned: Gelecek aktiviteler."
 
 #. module: account_check_deposit
 #. odoo-python
@@ -434,6 +441,8 @@ msgid ""
 "The check with amount %(amount)s and reference '%(ref)s' is in currency "
 "%(check_currency)s but the deposit is in currency %(deposit_currency)s."
 msgstr ""
+"%(amount)s tutarlı ve '%(ref)s' referanslı çekin para birimi "
+"%(check_currency)s ancak çek kasasının para birimi %(deposit_currency)s."
 
 #. module: account_check_deposit
 #. odoo-python
@@ -441,6 +450,8 @@ msgstr ""
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting it."
 msgstr ""
+"Çek kasası '%s' geçerli durumda, bu nedenle silmeden önce iptal etmek "
+"zorundasınız."
 
 #. module: account_check_deposit
 #. odoo-python
@@ -449,31 +460,33 @@ msgid ""
 "There are no received checks in account '%(account)s' in currency "
 "'%(currency)s' that are not already in this check deposit."
 msgstr ""
+"'%(account)s' hesabında '%(currency)s' para biriminde olup bu çek yatırma "
+"işleminde bulunmayan alınmış çek bulunmamaktadır."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount
 msgid "Total Amount"
-msgstr ""
+msgstr "Toplam Tutar"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Kayıttaki istisna aktivitesinin türü."
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Validate"
-msgstr ""
+msgstr "Doğrula"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Websitesi Mesajları"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Web sitesi iletişim geçmişi"
 
 #~ msgid "Journal"
 #~ msgstr "Günlük"
