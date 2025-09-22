@@ -142,11 +142,12 @@ class AccountMoveLine(models.Model):
         for line in self:
             if line.spread_check == "linked":
                 continue
-            spread_type = (
-                "sale"
-                if line.move_id.move_type in ["out_invoice", "out_refund"]
-                else "purchase"
-            )
+            if line.move_id.move_type in ["out_invoice", "out_refund"]:
+                spread_type = "sale"
+            elif line.move_id.move_type in ["in_invoice", "in_refund"]:
+                spread_type = "purchase"
+            else:
+                continue
             spread_auto = self.env["account.spread.template.auto"].search(
                 [
                     ("template_id.auto_spread", "=", True),
