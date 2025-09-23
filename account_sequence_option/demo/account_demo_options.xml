@@ -79,7 +79,7 @@
         <field name="name">Customer Payment</field>
         <field
             name="filter_domain"
-        >[("move_type", "=", "entry"), ("payment_id.payment_type", "=", "inbound")]</field>
+        >[("move_type", "=", "entry"), ("origin_payment_id.payment_type", "=", "inbound")]</field>
         <field name="sequence_id" ref="seq_customer_payment_1" />
     </record>
 
@@ -88,7 +88,7 @@
         <field name="name">Vendor Payment</field>
         <field
             name="filter_domain"
-        >[("move_type", "=", "entry"), ("payment_id.payment_type", "=", "outbound")]</field>
+        >[("move_type", "=", "entry"), ("origin_payment_id.payment_type", "=", "outbound")]</field>
         <field name="sequence_id" ref="seq_vendor_payment_1" />
     </record>
 

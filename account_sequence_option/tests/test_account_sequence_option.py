@@ -4,11 +4,11 @@
 from datetime import timedelta
 
 from odoo import fields
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests import Form, common, tagged
 
 
 @tagged("post_install", "-at_install")
-class TestAccountSequenceOption(TransactionCase):
+class TestAccountSequenceOption(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

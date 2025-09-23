@@ -47,7 +47,8 @@ class AccountMove(models.Model):
                     and rec.name not in (False, "/")
                 ):
                     rec.name = "/"
-                # On cancel/draft w/o number assigned yet, ensure no odoo number assigned.
+                # On cancel/draft w/o number assigned yet,
+                # ensure no odoo number assigned.
                 if (
                     rec.create_date
                     and rec.state in ("draft", "cancel")
