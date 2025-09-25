@@ -1,0 +1,2 @@
+- Rémi Cazenave <remi-filament> (https://le-filament.com)
+- Hugo Trentesaux <Hugo-Trentesaux> (https://le-filament.com)
