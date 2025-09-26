@@ -192,7 +192,7 @@
                                     <field name="type" />
                                     <field
                                         name="line_date"
-                                        attrs="{'invisible': [('move_check', '!=', True),('parent.method', '!=', 'unit-activity')]}"
+                                        attrs="{'invisible': [('move_check', '!=', True),('parent.method', '!=', 'unit-activity'), ('init_entry', '=', False)]}"
                                     />
                                     <field
                                         name="line_days"
