@@ -9,7 +9,7 @@ from freezegun import freeze_time
 from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests import Form, tagged
-from odoo.tools import mute_logger
+from odoo.tools.float_utils import float_compare
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -86,7 +86,6 @@ class TestLoan(BaseCommon):
         action = self.partner.action_view_partner_lended_loans()
         self.assertEqual(loan, self.env[action["res_model"]].search(action["domain"]))
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-31")
     def test_loan_lines_custom_day_01(self):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
@@ -119,7 +118,6 @@ class TestLoan(BaseCommon):
             line_1.long_term_pending_principal_amount, line_13.pending_principal_amount
         )
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2024-12-31")
     def test_loan_lines_custom_day_02(self):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
@@ -153,7 +151,6 @@ class TestLoan(BaseCommon):
             line_1.long_term_pending_principal_amount, line_13.pending_principal_amount
         )
 
-    @mute_logger("odoo.models.unlink")
     def test_round_on_end(self):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
         loan.round_on_end = True
@@ -173,7 +170,6 @@ class TestLoan(BaseCommon):
         self.assertEqual(line_1.principal_amount, 0)
         self.assertEqual(line_end.principal_amount, 500000)
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_increase_amount_validation(self):
         amount = 10000
@@ -221,7 +217,6 @@ class TestLoan(BaseCommon):
                 default_loan_id=loan.id
             ).create({"amount": -100, "date": line.date}).run()
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_pay_amount_validation(self):
         amount = 10000
@@ -274,7 +269,6 @@ class TestLoan(BaseCommon):
                 default_loan_id=loan.id
             ).create({"amount": -100, "fees": 100, "date": line.date}).run()
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_increase_amount_loan(self):
         amount = 10000
@@ -322,7 +316,6 @@ class TestLoan(BaseCommon):
         self.assertEqual(loan, new_move.loan_id)
         self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_increase_amount_leasing(self):
         amount = 10000
@@ -376,7 +369,6 @@ class TestLoan(BaseCommon):
         self.assertEqual(loan, new_move.loan_id)
         self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_fixed_annuity_begin_loan(self):
         amount = 10000
@@ -428,7 +420,6 @@ class TestLoan(BaseCommon):
         with self.assertRaises(UserError):
             line.view_process_values()
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_fixed_annuity_loan(self):
         amount = 10000
@@ -476,7 +467,6 @@ class TestLoan(BaseCommon):
         with self.assertRaises(UserError):
             line.view_process_values()
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_fixed_principal_loan_leasing(self):
         amount = 24000
@@ -582,7 +572,6 @@ class TestLoan(BaseCommon):
         with self.assertRaises(UserError):
             line.view_process_values()
 
-    @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_fixed_principal_loan_auto_post_leasing(self):
         amount = 24000
@@ -611,7 +600,6 @@ class TestLoan(BaseCommon):
         self.assertTrue(line.has_invoices)
         self.assertTrue(line.has_moves)
 
-    @mute_logger("odoo.models.unlink")
     def test_interests_on_end_loan(self):
         amount = 10000
         periods = 10
@@ -642,7 +630,6 @@ class TestLoan(BaseCommon):
         self.assertEqual(loan.payment_amount - loan.interests_amount, amount)
         self.assertEqual(loan.pending_principal_amount, 0)
 
-    @mute_logger("odoo.models.unlink")
     def test_cancel_loan(self):
         amount = 10000
         periods = 10
@@ -668,6 +655,43 @@ class TestLoan(BaseCommon):
         loan.move_ids.unlink()
         loan.button_draft()
         self.assertEqual(loan.state, "draft")
+
+    def test_variable_interest_loan_real_case(self):
+        amount = 8987.12
+        periods = 40
+        loan = self.create_loan("fixed-annuity", amount, 6.07, periods)
+        self.post(loan)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 6)
+        self.assertEqual(
+            float_compare(line.pending_principal_amount, 7960.39, precision_digits=2), 0
+        )
+        self.assertEqual(
+            float_compare(line.payment_amount, 248.74, precision_digits=2), 0
+        )
+        self.assertEqual(
+            float_compare(line.principal_amount, 208.47, precision_digits=2), 0
+        )
+        self.assertEqual(
+            float_compare(line.interests_amount, 40.27, precision_digits=2), 0
+        )
+        for loan_line in loan.line_ids.filtered(
+            lambda loan_line: loan_line.sequence in (1, 2, 3, 4)
+        ):
+            loan_line.view_process_values()
+        loan.rate = 5.57
+        loan.compute_lines()
+        self.assertEqual(
+            float_compare(line.pending_principal_amount, 7958.83, precision_digits=2), 0
+        )
+        self.assertEqual(
+            float_compare(line.payment_amount, 246.89, precision_digits=2), 0
+        )
+        self.assertEqual(
+            float_compare(line.principal_amount, 209.95, precision_digits=2), 0
+        )
+        self.assertEqual(
+            float_compare(line.interests_amount, 36.94, precision_digits=2), 0
+        )
 
     def post(self, loan):
         self.assertFalse(loan.move_ids)
