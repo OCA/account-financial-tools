@@ -16,16 +16,24 @@ class AccountAsset(models.Model):
     )
     use_sequence = fields.Boolean(related="profile_id.use_sequence")
 
+    def _get_sequence_date(self):
+        self.ensure_one()
+        sequence_date = None
+        return sequence_date
+
     def validate(self):
         res = super().validate()
         for asset in self:
             asset_profile = asset.profile_id
+            sequence_date = asset._get_sequence_date()
             if (
                 asset.number in [False, ""]
                 and asset_profile.use_sequence
                 and asset_profile.sequence_id
             ):
-                asset.number = asset_profile.sequence_id.next_by_id()
+                asset.number = asset_profile.sequence_id.next_by_id(
+                    sequence_date=sequence_date
+                )
         return res
 
     @api.model
