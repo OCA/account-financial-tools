@@ -12,6 +12,7 @@ class AccountAccount(models.Model):
         comodel_name="account.asset.profile",
         string="Asset Profile",
         check_company=True,
+        company_dependent=True,
         help="Default Asset Profile when creating invoice lines with this account.",
     )
 
