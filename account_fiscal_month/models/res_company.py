@@ -10,15 +10,17 @@ class ResCompany(models.Model):
     def find_daterange_fm(self, date_str):
         self.ensure_one()
         fm_id = self.env.ref("account_fiscal_month.date_range_fiscal_month")
-        return self.env["date.range"].search(
-            [
-                ("type_id", "=", fm_id.id),
-                ("date_start", "<=", date_str),
-                ("date_end", ">=", date_str),
-                "|",
-                ("company_id", "=", self.id),
-                ("company_id", "=", False),
-            ],
-            limit=1,
-            order="company_id asc",
-        )
+        domain = [
+            ("type_id", "=", fm_id.id),
+            ("date_start", "<=", date_str),
+            ("date_end", ">=", date_str),
+        ]
+        # Add company filter only if company_id field exists on date.range
+        if "company_id" in self.env["date.range"]._fields:
+            domain.extend(
+                ["|", ("company_id", "=", self.id), ("company_id", "=", False)]
+            )
+            order = "company_id asc"
+        else:
+            order = "date_start desc"
+        return self.env["date.range"].search(domain, limit=1, order=order)

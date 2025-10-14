@@ -31,7 +31,6 @@ class TestAccountFiscalMonth(TransactionCase):
                 "date_start": "2017-01-01",
                 "date_end": "2017-01-31",
                 "type_id": cls.date_range_type.id,
-                "company_id": cls.company.id,
             }
         )
 
@@ -41,16 +40,14 @@ class TestAccountFiscalMonth(TransactionCase):
                 "date_start": "2017-01-01",
                 "date_end": "2017-01-31",
                 "type_id": cls.date_range_type_month.id,
-                "company_id": cls.company.id,
             }
         )
         cls.date_range_january_no_comp_2017 = cls.DateRangeObj.create(
             {
-                "name": "January 2017",
-                "date_start": "2017-01-01",
-                "date_end": "2017-01-31",
+                "name": "January 2017 (no company)",
+                "date_start": "2017-02-01",
+                "date_end": "2017-02-28",
                 "type_id": cls.date_range_type_month.id,
-                "company_id": False,
             }
         )
 
