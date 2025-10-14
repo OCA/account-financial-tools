@@ -105,18 +105,6 @@ msgid "Sequence"
 msgstr "Zaporedje"
 
 #. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
-msgid "Sequence Number"
-msgstr "Številka zaporedja"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
-msgid "Sequence Prefix"
-msgstr "Predpona zaporedja"
-
-#. module: account_move_name_sequence
 #: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
 msgid "Standard Cash Journal Demo"
 msgstr ""
@@ -152,6 +140,12 @@ msgstr "To zaporedje bo v rabi za knjigovodske vnose dobropisov."
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
 msgid "This sequence will be used to generate the journal entry number."
 msgstr "To zaporedje bo v rabi za knjigovodske vnose dobropisov."
+
+#~ msgid "Sequence Number"
+#~ msgstr "Številka zaporedja"
+
+#~ msgid "Sequence Prefix"
+#~ msgstr "Predpona zaporedja"
 
 #~ msgid "Display Name"
 #~ msgstr "Prikazani naziv"

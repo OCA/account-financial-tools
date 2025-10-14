@@ -106,18 +106,6 @@ msgid "Sequence"
 msgstr "Secuencia"
 
 #. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
-msgid "Sequence Number"
-msgstr "Número de secuencia"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
-msgid "Sequence Prefix"
-msgstr "Prefijo de la secuencia"
-
-#. module: account_move_name_sequence
 #: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
 msgid "Standard Cash Journal Demo"
 msgstr "Demostración del Libro de Caja Estándar"
@@ -161,3 +149,9 @@ msgid "This sequence will be used to generate the journal entry number."
 msgstr ""
 "Esta secuencia se usará para establecer para generar el número de asiento "
 "contable."
+
+#~ msgid "Sequence Number"
+#~ msgstr "Número de secuencia"
+
+#~ msgid "Sequence Prefix"
+#~ msgstr "Prefijo de la secuencia"

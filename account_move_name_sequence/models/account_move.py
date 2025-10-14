@@ -1,7 +1,6 @@
 # Copyright 2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from odoo import api, fields, models
 
 
@@ -9,11 +8,9 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     name = fields.Char(compute="_compute_name_by_sequence")
-    # highest_name, sequence_prefix, sequence_number are not needed any more
+    # highest_name is not needed any more
     # -> compute=False to improve perf
     highest_name = fields.Char(compute=False)
-    sequence_prefix = fields.Char(compute=False)
-    sequence_number = fields.Integer(compute=False)
     # made_sequence_hole is not relevant anymore (since based on sequence_prefix/number)
     # -> compute=False to improve perf and to avoid displaying warning
     made_sequence_hole = fields.Boolean(compute=False)
@@ -26,6 +23,48 @@ class AccountMove(models.Model):
             "Check the journal sequence, please",
         ),
     ]
+
+    @api.depends("name")
+    def _compute_split_sequence(self):
+        """
+        Replace original compute function from Odoo account module
+        to compute sequend and prefix from name only if journal is
+        in secured mode (restrict_mode_hash_table)
+        Since both sequence_prefix and sequence_number are needed for
+        computing hash since Odoo v18.0
+        """
+        moves = self.filtered(
+            lambda move: move.name
+            and move.name != "/"
+            and move.journal_id
+            and move.move_type
+            and move.restrict_mode_hash_table
+        )
+        # Handle moves grouped by journal / move_type and year
+        for (journal, move_type, year), grouped_moves in moves.grouped(
+            lambda m: (m.journal_id, m.move_type, m.date.year)
+        ).items():
+            # Get the correct sequence in case there is a specific
+            # one for refund configured on journal
+            if (
+                move_type in ["in_refund", "out_refund"]
+                and journal.refund_sequence
+                and journal.refund_sequence_id
+            ):
+                sequence = journal.refund_sequence_id
+            else:
+                sequence = journal.sequence_id
+            # Retrieve prefix and suffix to extract number
+            prefix, suffix = sequence._get_prefix_suffix(
+                date=f"{year}-01-01", date_range=f"{year}-01-01"
+            )
+            # Set prefix
+            grouped_moves.sequence_prefix = prefix
+            for move in grouped_moves:
+                # Get number for each move
+                move.sequence_number = int(
+                    move.name[len(prefix) : len(move.name) - len(suffix)]
+                )
 
     @api.depends("state", "journal_id", "date")
     def _compute_name_by_sequence(self):
@@ -54,6 +93,9 @@ class AccountMove(models.Model):
                 # which applies on ir.sequence.date_range selection AND prefix
                 name = seq.with_context(ir_sequence_date=move.date).next_by_id()
             move.name = name
+        # Force compute of sequence_prefix and sequence_number
+        self._compute_split_sequence()
+        # Force compute of fields depending on name
         self._inverse_name()
 
     # We must by-pass this constraint of sequence.mixin

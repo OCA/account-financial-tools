@@ -105,18 +105,6 @@ msgid "Sequence"
 msgstr "تسلسل"
 
 #. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
-msgid "Sequence Number"
-msgstr "رقم التسلسل"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
-msgid "Sequence Prefix"
-msgstr "قبل التسلسل"
-
-#. module: account_move_name_sequence
 #: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
 msgid "Standard Cash Journal Demo"
 msgstr ""
@@ -152,3 +140,9 @@ msgstr ""
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__sequence_id
 msgid "This sequence will be used to generate the journal entry number."
 msgstr ""
+
+#~ msgid "Sequence Number"
+#~ msgstr "رقم التسلسل"
+
+#~ msgid "Sequence Prefix"
+#~ msgstr "قبل التسلسل"

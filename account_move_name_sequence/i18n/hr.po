@@ -106,18 +106,6 @@ msgid "Sequence"
 msgstr "Sekvenca"
 
 #. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_number
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_number
-msgid "Sequence Number"
-msgstr "Broj sekvence"
-
-#. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__sequence_prefix
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__sequence_prefix
-msgid "Sequence Prefix"
-msgstr "Prefiks sekvence"
-
-#. module: account_move_name_sequence
 #: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
 msgid "Standard Cash Journal Demo"
 msgstr ""
@@ -160,3 +148,9 @@ msgstr ""
 msgid "This sequence will be used to generate the journal entry number."
 msgstr ""
 "Ova sekvenca će biti korištena za generiranje broja knjiženja dnevnika."
+
+#~ msgid "Sequence Number"
+#~ msgstr "Broj sekvence"
+
+#~ msgid "Sequence Prefix"
+#~ msgstr "Prefiks sekvence"
