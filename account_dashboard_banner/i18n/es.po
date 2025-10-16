@@ -6,105 +6,107 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-10-16 16:35+0000\n"
+"Last-Translator: Joaquín Gutiérrez Pedrosa <joaquing.pedrosa@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__above
 msgid "Above Maximum"
-msgstr ""
+msgstr "Por encima del máximo"
 
 #. module: account_dashboard_banner
 #: model:ir.model,name:account_dashboard_banner.model_account_dashboard_banner_cell
 msgid "Accounting Dashboard Banner Cell"
-msgstr ""
+msgstr "Celda del banner del panel de control contable"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__inside
 msgid "Between Minimum and Maximum"
-msgstr ""
+msgstr "Entre el mínimo y el máximo"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__cell_type
 msgid "Cell Type"
-msgstr ""
+msgstr "Tipo de celda"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__custom_label
 msgid "Custom Label"
-msgstr ""
+msgstr "Etiqueta personalizada"
 
 #. module: account_dashboard_banner
 #: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
 #: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_list
 msgid "Custom Label (optional)"
-msgstr ""
+msgstr "Etiqueta personalizada (opcional)"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__custom_tooltip
 msgid "Custom Tooltip"
-msgstr ""
+msgstr "Información personalizada"
 
 #. module: account_dashboard_banner
 #: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
 msgid "Custom Tooltip (optional)"
-msgstr ""
+msgstr "Información personalizada (opcional)"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__customer_debt
 msgid "Customer Debt"
-msgstr ""
+msgstr "Deuda del cliente"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__customer_overdue
 msgid "Customer Overdue"
-msgstr ""
+msgstr "Cliente moroso"
 
 #. module: account_dashboard_banner
 #: model:ir.ui.menu,name:account_dashboard_banner.account_dashboard_config
 msgid "Dashboard"
-msgstr ""
+msgstr "Tablero"
 
 #. module: account_dashboard_banner
 #: model:ir.actions.act_window,name:account_dashboard_banner.account_dashboard_banner_cell_action
 #: model:ir.ui.menu,name:account_dashboard_banner.account_dashboard_banner_cell_menu
 msgid "Dashboard Banner Cells"
-msgstr ""
+msgstr "Celdas del banner de tablero"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_fiscalyear
 msgid "Fiscal Year-to-date Income"
-msgstr ""
+msgstr "Ingresos acumulados en el ejercicio fiscal"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__fiscalyear_lock_date
 msgid "Global Lock Date"
-msgstr ""
+msgstr "Fecha de bloqueo global"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__hard_lock_date
 msgid "Hard Lock Date"
-msgstr ""
+msgstr "Fecha de bloqueo duro"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__id
@@ -114,32 +116,32 @@ msgstr ""
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__liquidity
 msgid "Liquidity"
-msgstr ""
+msgstr "Liquidez"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_max
 msgid "Maximum"
-msgstr ""
+msgstr "Máximo"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_min
 msgid "Minimum"
-msgstr ""
+msgstr "Mínimo"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_month
 msgid "Month-to-date Income"
-msgstr ""
+msgstr "Ingresos mensuales hasta la fecha"
 
 #. module: account_dashboard_banner
 #. odoo-python
@@ -148,100 +150,104 @@ msgid ""
 "On cell '%(cell_type)s' with warning enabled, the minimum (%(warn_min)s) "
 "must be under the maximum (%(warn_max)s)."
 msgstr ""
+"En la celda «%(cell_type)s» con la advertencia habilitada, el mínimo "
+"(%(warn_min)s) debe ser inferior al máximo (%(warn_max)s)."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__purchase_lock_date
 msgid "Purchase Lock Date"
-msgstr ""
+msgstr "Fecha de bloqueo de compra"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
 msgid "Quarter-to-date Income"
-msgstr ""
+msgstr "Ingresos del trimestre hasta la fecha"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
 msgid "Sales Lock Date"
-msgstr ""
+msgstr "Fecha de bloqueo de ventas"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Secuencia"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__supplier_debt
 msgid "Supplier Debt"
-msgstr ""
+msgstr "Deuda con proveedores"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__tax_lock_date
 msgid "Tax Return Lock Date"
-msgstr ""
+msgstr "Fecha límite para la presentación de la declaración de impuestos"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__under
 msgid "Under Minimum"
-msgstr ""
+msgstr "Por debajo del mínimo"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__outside
 msgid "Under Minimum or Above Maximum"
-msgstr ""
+msgstr "Por debajo del mínimo o por encima del máximo"
 
 #. module: account_dashboard_banner
 #: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
 msgid "Warn If"
-msgstr ""
+msgstr "Advertir si"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_lock_date_days
 msgid "Warn Lock Date Days"
-msgstr ""
+msgstr "Fecha de bloqueo de advertencia días"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_type
 msgid "Warn Type"
-msgstr ""
+msgstr "Tipo de advertencia"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_type_show
 msgid "Warn Type Show"
-msgstr ""
+msgstr "Tipo de advertencia a mostrar"
 
 #. module: account_dashboard_banner
 #: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
 msgid "Warn if lock date is older than"
-msgstr ""
+msgstr "Advertir si la fecha de bloqueo es anterior a"
 
 #. module: account_dashboard_banner
 #: model:ir.model.constraint,message:account_dashboard_banner.constraint_account_dashboard_banner_cell_warn_lock_date_days_positive
 msgid "Warn if lock date is older than N days must be positive or null."
 msgstr ""
+"Advertir si la fecha de bloqueo es anterior a N días debe ser positivo o "
+"nulo."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn
 msgid "Warning"
-msgstr ""
+msgstr "Advertencia"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_year
 msgid "Year-to-date Income"
-msgstr ""
+msgstr "Ingresos acumulados en lo que va del año"
 
 #. module: account_dashboard_banner
 #: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
 msgid "days"
-msgstr ""
+msgstr "días"
 
 #. module: account_dashboard_banner
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid "from %s"
-msgstr ""
+msgstr "desde %s"
 
 #. module: account_dashboard_banner
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid "with due date before %s"
-msgstr ""
+msgstr "con fecha de vencimiento antes del %s"
