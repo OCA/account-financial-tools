@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-10-16 16:35+0000\n"
+"PO-Revision-Date: 2025-10-16 16:50+0000\n"
 "Last-Translator: Joaquín Gutiérrez Pedrosa <joaquing.pedrosa@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -70,12 +70,12 @@ msgstr "Información personalizada (opcional)"
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__customer_debt
 msgid "Customer Debt"
-msgstr "Deuda del cliente"
+msgstr "Cobros pendientes"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__customer_overdue
 msgid "Customer Overdue"
-msgstr "Cliente moroso"
+msgstr "Cobros vencidos"
 
 #. module: account_dashboard_banner
 #: model:ir.ui.menu,name:account_dashboard_banner.account_dashboard_config
@@ -106,7 +106,7 @@ msgstr "Fecha de bloqueo global"
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__hard_lock_date
 msgid "Hard Lock Date"
-msgstr "Fecha de bloqueo duro"
+msgstr "Fecha de bloqueo estricto"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__id
