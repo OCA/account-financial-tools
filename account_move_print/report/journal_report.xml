@@ -2,39 +2,41 @@
 <odoo>
     <template id="report_journal_entry_document">
         <t t-call="web.external_layout">
-            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
             <div class="page">
                 <h2>
-                    <span t-field="o.name"/>
+                    <span t-field="o.name" />
                 </h2>
                 <div id="informations" class="row mb-4">
                     <div class="col" t-if="o.date" name="date">
                         <strong>Accounting Date:</strong>
-                        <div t-field="o.date"/>
+                        <div t-field="o.date" />
                     </div>
-                    <div class="col" t-if="o.ref"
-                         name="ref">
+                    <div class="col" t-if="o.ref" name="ref">
                         <strong>Reference:</strong>
-                        <div t-field="o.ref"/>
+                        <div t-field="o.ref" />
                     </div>
                     <div class="col" groups="base.group_multi_company" name="company">
                         <strong>Company :</strong>
-                        <div t-field="o.company_id.name"/>
+                        <div t-field="o.company_id.name" />
                     </div>
                     <div class="col" t-if="o.journal_id" name="journal">
                         <strong>Journal</strong>
-                        <div t-field="o.journal_id.name"/>
+                        <div t-field="o.journal_id.name" />
                     </div>
                     <div class="col" t-if="o.partner_id" name="customer">
                         <strong>Partner</strong>
-                        <div t-field="o.partner_id.name"/>
+                        <div t-field="o.partner_id.name" />
                     </div>
                 </div>
-                <t t-set="total_debit" t-value="0.0"/>
-                <t t-set="total_credit" t-value="0.0"/>
+                <t t-set="total_debit" t-value="0.0" />
+                <t t-set="total_credit" t-value="0.0" />
                 <div class="clearfix invoice_main">
                     <div class="page mb-4">
-                        <table class="table o_main_table table-borderless avoid-page-break-inside" name="lines_content">
+                        <table
+                            class="table o_main_table table-borderless avoid-page-break-inside"
+                            name="lines_content"
+                        >
                             <thead>
                                 <tr>
                                     <th name="th_account" class="text-left">Account</th>
@@ -68,13 +70,15 @@
                                     />
                                     <tr>
                                         <td name='tb_account'>
-                                            <span t-field="line.account_id.display_name"/>
+                                            <span
+                                                t-field="line.account_id.display_name"
+                                            />
                                         </td>
                                         <td name='tb_partner'>
-                                            <span t-field="line.partner_id.name"/>
+                                            <span t-field="line.partner_id.name" />
                                         </td>
                                         <td name='tb_line_name'>
-                                            <span t-field="line.name"/>
+                                            <span t-field="line.name" />
                                         </td>
                                         <td
                                             name='tb_amount_currency'
@@ -110,14 +114,18 @@
                                         >
                                             <span
                                                 t-raw="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"
-                                                id="line_tax_ids"/>
+                                                id="line_tax_ids"
+                                            />
                                         </td>
                                     </tr>
                                 </t>
-                                <tr class="o_subtotal" style="border-top: 1px solid #000;">
-                                    <td name='tf_account'/>
-                                    <td name='tf_partner'/>
-                                    <td name='tf_line_name'/>
+                                <tr
+                                    class="o_subtotal"
+                                    style="border-top: 1px solid #000;"
+                                >
+                                    <td name='tf_account' />
+                                    <td name='tf_partner' />
+                                    <td name='tf_line_name' />
                                     <td
                                         name='tf_analytic'
                                         groups="analytic.group_analytic_accounting"
@@ -138,8 +146,8 @@
                                             t-options='{"widget": "monetary", "display_currency": o.company_currency_id}'
                                         />
                                     </td>
-                                    <td name='tf_originator_tax'/>
-                                    <td name='tb_taxes'/>
+                                    <td name='tf_originator_tax' />
+                                    <td name='tb_taxes' />
                                 </tr>
                             </tbody>
                         </table>
@@ -166,7 +174,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">account_move_print.report_journal_entries</field>
         <field name="report_file">account_move_print.report_journal_entries</field>
-        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move" />
         <field name="binding_view_types">list,form</field>
     </record>
 </odoo>
