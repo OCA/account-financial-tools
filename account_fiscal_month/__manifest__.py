@@ -4,7 +4,7 @@
 {
     "name": "Account Fiscal Month",
     "summary": """Provide a fiscal month date range type""",
-    "version": "16.0.1.1.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
