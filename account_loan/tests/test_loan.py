@@ -642,6 +642,12 @@ class TestLoan(BaseCommon):
         self.assertEqual(loan.payment_amount - loan.interests_amount, amount)
         self.assertEqual(loan.pending_principal_amount, 0)
 
+    def test_negative_loan(self):
+        # Check that negatives amounts don't give an error
+        loan = self.create_loan("fixed-annuity", -4000, 1, 10)
+        self.post(loan)
+        loan.line_ids[0].view_process_values()
+
     @mute_logger("odoo.models.unlink")
     def test_cancel_loan(self):
         amount = 10000
