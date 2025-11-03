@@ -295,43 +295,52 @@ class AccountLoanLine(models.Model):
     def _move_line_vals(self, account=False):
         vals = []
         partner = self.loan_id.partner_id.with_company(self.loan_id.company_id)
+        # Amounts are evaled if > 0 for allowing negative loans to be able to be the
+        # donors of the loan
+        partner_account = (
+            partner.property_account_payable_id
+            if self.payment_amount > 0
+            else partner.property_account_receivable_id
+        )
         vals.append(
             {
-                "account_id": (account and account.id)
-                or partner.property_account_payable_id.id,
+                "account_id": (account and account.id) or partner_account.id,
                 "partner_id": partner.id,
-                "credit": self.payment_amount,
-                "debit": 0,
+                "credit": self.payment_amount if self.payment_amount > 0 else 0,
+                "debit": -self.payment_amount if self.payment_amount < 0 else 0,
             }
         )
         if self.interests_amount:
+            amount = self.interests_amount
             vals.append(
                 {
                     "account_id": self.loan_id.interest_expenses_account_id.id,
-                    "credit": 0,
-                    "debit": self.interests_amount,
+                    "credit": -amount if amount < 0 else 0,
+                    "debit": amount if amount > 0 else 0,
                 }
             )
+        diff_amount = self.payment_amount - self.interests_amount
         vals.append(
             {
                 "account_id": self.loan_id.short_term_loan_account_id.id,
-                "credit": 0,
-                "debit": self.payment_amount - self.interests_amount,
+                "credit": -diff_amount if diff_amount < 0 else 0,
+                "debit": diff_amount if diff_amount > 0 else 0,
             }
         )
         if self.long_term_loan_account_id and self.long_term_principal_amount:
+            amount = self.long_term_principal_amount
             vals.append(
                 {
                     "account_id": self.loan_id.short_term_loan_account_id.id,
-                    "credit": self.long_term_principal_amount,
-                    "debit": 0,
+                    "credit": amount if amount > 0 else 0,
+                    "debit": -amount if amount < 0 else 0,
                 }
             )
             vals.append(
                 {
                     "account_id": self.long_term_loan_account_id.id,
-                    "credit": 0,
-                    "debit": self.long_term_principal_amount,
+                    "credit": -amount if amount < 0 else 0,
+                    "debit": amount if amount > 0 else 0,
                 }
             )
         return vals

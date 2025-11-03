@@ -43,38 +43,38 @@ class AccountLoanPost(models.TransientModel):
         res = list()
         partner = self.loan_id.partner_id.with_company(self.loan_id.company_id)
         line = self.loan_id.line_ids.filtered(lambda r: r.sequence == 1)
+        # Amounts are evaled if > 0 for allowing negative loans to be able to be the
+        # donors of the loan
+        amount = line.pending_principal_amount
         res.append(
             {
                 "account_id": self.account_id.id,
                 "name": self.loan_id.name,
                 "partner_id": partner.id,
-                "credit": 0,
-                "debit": line.pending_principal_amount,
+                "credit": -amount if amount < 0 else 0,
+                "debit": amount if amount > 0 else 0,
             }
         )
-        if line.pending_principal_amount - line.long_term_pending_principal_amount > 0:
+        diff_amount = abs(line.pending_principal_amount) - abs(
+            line.long_term_pending_principal_amount
+        )
+        if diff_amount > 0:
             res.append(
                 {
                     "account_id": self.loan_id.short_term_loan_account_id.id,
-                    "credit": (
-                        line.pending_principal_amount
-                        - line.long_term_pending_principal_amount
-                    ),
-                    "debit": 0,
+                    "credit": diff_amount if amount > 0 else 0,
+                    "debit": diff_amount if amount < 0 else 0,
                 }
             )
-        if (
-            line.long_term_pending_principal_amount > 0
-            and self.loan_id.long_term_loan_account_id
-        ):
+        diff_amount = abs(line.long_term_pending_principal_amount)
+        if diff_amount > 0 and self.loan_id.long_term_loan_account_id:
             res.append(
                 {
                     "account_id": self.loan_id.long_term_loan_account_id.id,
-                    "credit": line.long_term_pending_principal_amount,
-                    "debit": 0,
+                    "credit": diff_amount if amount > 0 else 0,
+                    "debit": diff_amount if amount < 0 else 0,
                 }
             )
-
         return res
 
     def move_vals(self):
