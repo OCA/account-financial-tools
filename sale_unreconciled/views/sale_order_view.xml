@@ -17,7 +17,7 @@
                     groups="account.group_account_manager"
                     class="oe_stat_button"
                     icon="fa-gears"
-                    attrs="{'invisible':[('unreconciled', '=', False)]}"
+                    invisible="not unreconciled"
                 >
                 </button>
                 <button
@@ -27,7 +27,7 @@
                     name="action_reconcile"
                     class="oe_stat_button"
                     icon="fa-link"
-                    attrs="{'invisible':['|', ('unreconciled', '=', False), ('state', '!=', 'done')]}"
+                    invisible="not unreconciled or state != 'done'"
                 >
                 </button>
             </xpath>

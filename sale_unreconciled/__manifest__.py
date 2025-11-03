@@ -3,7 +3,7 @@
 
 {
     "name": "Sale Unreconciled",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "author": "ForgeFlow S.L., Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting",
@@ -16,6 +16,6 @@
     ],
     "license": "AGPL-3",
     "installable": True,
-    "development_status": "Alpha",
+    "development_status": "Beta",
     "maintainers": ["AaronHForgeFlow"],
 }

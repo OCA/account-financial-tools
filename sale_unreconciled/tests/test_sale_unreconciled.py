@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import SingleTransactionCase
 
 
-class TestsaleUnreconciled(common.SingleTransactionCase):
+class TestsaleUnreconciled(SingleTransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -26,7 +26,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         cls.partner = cls.partner_obj.create({"name": "Test Vendor"})
         # Create standard product:
         cls.product = cls.product_obj.create(
-            {"name": "Sold Product", "type": "product"}
+            {"name": "Sold Product", "type": "consu", "is_storable": True}
         )
         # Create product that uses a reconcilable stock input account.
         cls.stock_journal = cls.env["account.journal"].create(
@@ -81,7 +81,8 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         cls.product_to_reconcile = cls.product_obj.create(
             {
                 "name": "sold Product (To reconcile)",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "standard_price": 100,
                 "valuation": "real_time",
                 "categ_id": cls.product_categ.id,
@@ -90,7 +91,8 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         cls.product_to_reconcile2 = cls.product_obj.create(
             {
                 "name": "Purchased Product 2 (To reconcile)",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "standard_price": 100.0,
                 "categ_id": cls.product_categ.id,
             }
@@ -101,7 +103,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
                 "code": 1017,
                 "account_type": revenue,
                 "reconcile": False,
-                "company_id": cls.company.id,
+                "company_ids": [(6, 0, [cls.company.id])],
             }
         )
         cls.account_expense2 = cls.acc_obj.create(
@@ -110,7 +112,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
                 "code": 7991,
                 "account_type": expense_type,
                 "reconcile": False,
-                "company_id": cls.company.id,
+                "company_ids": [(6, 0, [cls.company.id])],
             }
         )
         # company settings for automated valuation
@@ -126,7 +128,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
                 "name": name,
                 "code": code,
                 "account_type": acc_type,
-                "company_id": company.id,
+                "company_ids": [(6, 0, [cls.company.id])],
                 "reconcile": reconcile,
             }
         )
@@ -186,10 +188,11 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
     def _do_picking(self, picking, date):
         """Do picking with only one move on the given date."""
         picking.action_confirm()
+        picking.action_assign()
         for move in picking.move_ids:
-            move.quantity_done = move.product_uom_qty
+            move.quantity = move.product_uom_qty
             move.date = date
-        picking._action_done()
+        picking.button_validate()
 
     def test_01_nothing_to_reconcile(self):
         """Test nothing is reconciled if no manual action"""
@@ -223,7 +226,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         self._do_picking(so.picking_ids, fields.Datetime.now())
         so._create_invoices()
         self.assertTrue(so.unreconciled)
-        so.action_done()
+        so.action_lock()
         so._compute_unreconciled()
         self.assertFalse(so.unreconciled)
 
@@ -296,7 +299,8 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         self.finished_product = Product.create(
             {
                 "name": "Finished product",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "uom_id": self.uom_unit.id,
                 "invoice_policy": "delivery",
                 "categ_id": self.category.id,
@@ -305,7 +309,8 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         self.component1 = Product.create(
             {
                 "name": "Component 1",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "uom_id": self.uom_unit.id,
                 "categ_id": self.category.id,
                 "standard_price": 20,
@@ -314,7 +319,8 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         self.component2 = Product.create(
             {
                 "name": "Component 2",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "uom_id": self.uom_unit.id,
                 "categ_id": self.category.id,
                 "standard_price": 10,
@@ -376,7 +382,6 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
                     },
                 )
             ],
-            "pricelist_id": self.env.ref("product.list0").id,
             "company_id": self.company.id,
         }
         self.so = self.env["sale.order"].create(so_vals)
@@ -396,8 +401,8 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         invoice = self.so.invoice_ids
         invoice.action_post()
         aml = invoice.line_ids
-        aml_expense = aml.filtered(lambda l: l.account_id == account_expense)
-        aml_output = aml.filtered(lambda l: l.account_id == account_output)
+        aml_expense = aml.filtered(lambda line: line.account_id == account_expense)
+        aml_output = aml.filtered(lambda line: line.account_id == account_output)
         # Check that the cost of Good Sold entries are equal to:
         # 3* (2 * 20 + 1 * 10) = 100
         self.assertEqual(
@@ -447,7 +452,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         )
         incoming_ji.write({"sale_line_id": so.order_line[0], "sale_order_id": so.id})
         # Lock the SO to force reconciliation
-        so.action_done()
+        so.action_lock()
         so._compute_unreconciled()
         self.assertFalse(so.unreconciled)
         # The SO is reconciled and the stock interim deliverd account is still
@@ -486,7 +491,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         self.assertEqual(so.state, "sale")
         # The invoice is wrong so this is unreconciled
         self.assertTrue(so.unreconciled)
-        so.action_done()
+        so.action_lock()
         so._compute_unreconciled()
         self.assertFalse(so.unreconciled)
         # check all the journals for the so have the same company
@@ -506,7 +511,7 @@ class TestsaleUnreconciled(common.SingleTransactionCase):
         so.with_context(force_confirm_sale_order=True).action_confirm()
         self._do_picking(so.picking_ids, fields.Datetime.now())
         # Do not create invoices to force discrepancy
-        so.action_done()
+        so.action_lock()
         # Check if all the journals are balanced by product
         ji_s1 = self.env["account.move.line"].search(
             [

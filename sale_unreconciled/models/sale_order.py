@@ -143,13 +143,16 @@ class SaleOrder(models.Model):
             products_considered |= products
             if not products:
                 unreconciled_items_group = unreconciled_items.filtered(
-                    lambda l: (l.account_id.id == account_id and not l.product_id)
+                    lambda line, account_id=account_id, product_id=product_id: (
+                        line.account_id.id == account_id and not line.product_id
+                    )
                 )
             else:
                 unreconciled_items_group = unreconciled_items.filtered(
-                    lambda l: (
-                        l.account_id.id == account_id
-                        and l.product_id.id in products.ids
+                    lambda item_group, account_id=account_id, products=products: (
+                        item_group.amount_residual_currency != 0.0
+                        and item_group.account_id.id == account_id
+                        and item_group.product_id.id in products.ids
                     )
                 )
             # Check which type of force reconciling we are doing:
@@ -157,8 +160,9 @@ class SaleOrder(models.Model):
             # - Force reconciling amount_residual_currency
             amount_residual_currency_reconcile = any(
                 unreconciled_items_group.filtered(
-                    lambda l: l.amount_residual_currency != 0.0
-                    and l.account_id.id == account_id
+                    lambda line, account_id=account_id: line.amount_residual_currency
+                    != 0.0
+                    and line.account_id.id == account_id
                 )
             )
             if amount_residual_currency_reconcile:
@@ -182,35 +186,35 @@ class SaleOrder(models.Model):
                         unreconciled_items_group._create_so_writeoff(writeoff_vals)
                     )
                     all_writeoffs |= writeoff_to_reconcile
-                    # add writeoff line to reconcile algorithm and finish the reconciliation
+                    # add writeoff line to fulfill the reconciliation
                     moves_to_reconcile = (
                         unreconciled_items_group | writeoff_to_reconcile
                     )
             # Check if reconciliation is total or needs an exchange rate entry to be
             # created
             if moves_to_reconcile:
-                moves_to_reconcile.filtered(lambda l: not l.reconciled).reconcile()
+                moves_to_reconcile.filtered(lambda mv: not mv.reconciled).reconcile()
             reconciled_ids = unreconciled_items | all_writeoffs
             res = {
                 "name": _("Reconciled journal items"),
                 "type": "ir.actions.act_window",
                 "view_type": "form",
-                "view_mode": "tree,form",
+                "view_mode": "list,form",
                 "res_model": "account.move.line",
                 "domain": [("id", "in", reconciled_ids.ids)],
             }
         if self.env.context.get("bypass_unreconciled", False):
             # When calling the method from the wizard, lock after reconciling
-            self.action_done()
+            self.action_lock()
         return res
 
     def get_products(self, sale_line_id, product_id):
         # if kit return the kit and components, otherwise just the product
         sale_line = self.env["sale.order.line"].browse(sale_line_id)
         boms = (
-            sale_line.move_ids.filtered(lambda m: m.state != "cancel")
+            sale_line.move_ids.filtered(lambda mv: mv.state != "cancel")
             .mapped("bom_line_id.bom_id")
-            .filtered(lambda b: b.type == "phantom")
+            .filtered(lambda boml: boml.type == "phantom")
         )
         products = self.env["product.product"].browse(product_id)
         if boms:
@@ -244,7 +248,7 @@ class SaleOrder(models.Model):
         self.ensure_one()
         return self.unreconciled and self.company_id.sale_lock_auto_reconcile
 
-    def action_done(self):
+    def action_lock(self):
         for rec in self:
             criteria = rec.reconcile_criteria()
             if criteria:
@@ -255,11 +259,11 @@ class SaleOrder(models.Model):
                         return res
                     else:
                         rec.action_reconcile()
-                        return super(SaleOrder, rec).action_done()
+                        return super(SaleOrder, rec).action_lock()
                 else:
-                    return super(SaleOrder, rec).action_done()
+                    return super(SaleOrder, rec).action_lock()
             else:
-                return super(SaleOrder, rec).action_done()
+                return super(SaleOrder, rec).action_lock()
 
     def action_cancel(self):
         for rec in self:
