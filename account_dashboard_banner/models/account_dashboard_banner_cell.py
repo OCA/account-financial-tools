@@ -212,7 +212,10 @@ class AccountDashboardBannerCell(models.Model):
             ._fields["property_account_receivable_id"]
             .get_company_dependent_fallback(self.env["res.partner"])
         )
-        if hasattr(company, "account_default_pos_receivable_account_id"):
+        if (
+            hasattr(company, "account_default_pos_receivable_account_id")
+            and company.account_default_pos_receivable_account_id
+        ):
             accounts |= company.account_default_pos_receivable_account_id
         return (accounts, 1, False, False)
 
