@@ -11,10 +11,32 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
+from unittest.mock import patch
 
 from odoo import _, api, fields, models, tools
+from odoo.tools.translate import TranslationImporter
 
 _logger = logging.getLogger(__name__)
+
+
+# HACK https://github.com/odoo/odoo/pull/234333
+# If merged upstream, we can remove this class and the patch where it is used.
+class _OverwritingTranslationImporter(TranslationImporter):
+    def save(self, *args, **kwargs):
+        """Always force overwriting existing translations."""
+        # Fix for HTML fields
+        for mname, fnames in self.model_translations.items():
+            for fname, xml_ids in fnames.items():
+                if not callable(self.env[mname]._fields[fname].translate):
+                    continue
+                for xml_id, langs in xml_ids.items():
+                    src = str(self.env.ref(xml_id).with_context(lang="en_US")[fname])
+                    for lang, translation in langs.items():
+                        self.model_terms_translations[mname][fname][xml_id][src][
+                            lang
+                        ] = translation
+
+        return super().save(overwrite=True, force_overwrite=True)
 
 
 class WizardUpdateChartsAccounts(models.TransientModel):
@@ -550,6 +572,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         result[key] = record_value
                 continue
             elif field.ttype == "many2one":
+                if isinstance(record_value, int):
+                    if record_value != real_value.id:
+                        result[key] = record_value
+                    continue
                 real_xml_id = self._get_external_id(real_value) if real_value else False
                 full_xml_id = (
                     f"account.{self.company_id.id}_{record_value}"
@@ -579,8 +605,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             # Define correct value if field is translatable
             if field.translate:
                 for lang in langs:
-                    short_lang = lang.code.split("_")[0]
-                    key_lang = f"{key}@{short_lang}"
+                    if lang.code == "en_US":
+                        key_lang = key
+                    else:
+                        short_lang = lang.code.split("_")[0]
+                        key_lang = f"{key}@{short_lang}"
                     if key_lang in record_values:
                         real_value_lang = real.with_context(lang=lang.code)[key]
                         record_value_lang = record_values[key_lang]
@@ -693,29 +722,33 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         external_ids = record.get_external_id()
         return external_ids.get(record.id, False)
 
-    @tools.ormcache("self", "record", "xml_id")
     def missing_xml_id(self, record, xml_id):
-        record_xml_id = self._get_external_id(record)
+        record_xml_ids = record._get_external_ids()[record.id]
         full_xml_id = (
             f"account.{self.company_id.id}_{xml_id}" if "." not in xml_id else xml_id
         )
-        return record_xml_id != full_xml_id
+        return full_xml_id not in record_xml_ids
 
     def recreate_xml_id(self, record, xml_id):
-        """Eecreate the xml_id if it is different than expected, otherwise
+        """Recreate the xml_id if it is different than expected, otherwise
         chart.template won't do it correctly.
         """
-        if self.missing_xml_id(record, xml_id):
-            ir_model_data = self.env["ir.model.data"]
-            ir_model_data.search(
-                [("model", "=", record._name), ("res_id", "=", record.id)]
-            ).write(
-                {
-                    "module": "account",
-                    "name": f"{self.company_id.id}_{xml_id}",
-                    "noupdate": True,
-                }
-            )
+        if not self.missing_xml_id(record, xml_id):
+            return
+        try:
+            module, name = xml_id.split(".")
+        except ValueError:
+            module = "account"
+            name = f"{self.company_id.id}_{xml_id}"
+        self.env["ir.model.data"].create(
+            {
+                "module": module,
+                "model": record._name,
+                "name": name,
+                "res_id": record.id,
+                "noupdate": True,
+            }
+        )
 
     def _find_tax_groups(self, t_data):
         """Search for, and load, template data to create/update/delete."""
@@ -924,35 +957,27 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             allowed_company_ids=[self.company_id.id],
             tracking_disable=True,
             delay_account_group_sync=True,
-            # lang="en_US",
+            lang="en_US",
         )
         created_records = template._load_data({model: data})[model]
-        langs = self.env["res.lang"].search([])
-        # Similar and simpler process than what the _load_translations() method does
-        for xml_id, record_vals in data.items():
-            if "__translation_module__" not in record_vals:
+        # Make sure all translation data is indexed by XML ID
+        translation_data = {}
+        created_xmlids = created_records.get_external_id()
+        for _id, record_data in data.items():
+            xml_id = _id
+            if isinstance(_id, int):
+                xml_id = created_xmlids.get(xml_id)
+            if not xml_id:
                 continue
-            translation_vals_lang = {}
-            for f_name in record_vals["__translation_module__"].keys():
-                for lang in langs:
-                    short_lang = lang.code.split("_")[0]
-                    key_lang = f"{f_name}@{short_lang}"
-                    if key_lang in record_vals:
-                        if lang not in translation_vals_lang:
-                            translation_vals_lang[lang.code] = {}
-                        translation_vals_lang[lang.code][f_name] = record_vals[key_lang]
-            if isinstance(xml_id, int):
-                record = self.env[model].browse(xml_id)
-            else:
-                prefix = f"account.{self.company_id.id}_" if "." not in xml_id else ""
-                xml_id = f"{prefix}{xml_id}"
-                record = self.env.ref(xml_id)
-            # Updatr translation vals
-            for lang in langs:
-                if lang.code not in translation_vals_lang:
-                    continue
-                translation_vals = translation_vals_lang[lang.code]
-                record.with_context(lang=lang.code).write(translation_vals)
+            translation_data[xml_id] = record_data
+        with patch(
+            "odoo.addons.account.models.chart_template.TranslationImporter",
+            _OverwritingTranslationImporter,
+        ):
+            template._load_translations(
+                companies=self.company_id, template_data={model: translation_data}
+            )
+        created_records.invalidate_recordset()
         for record in created_records:
             msg = _(
                 (f"Created/updated {record._name} %s."),
