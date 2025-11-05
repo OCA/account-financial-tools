@@ -2,3 +2,5 @@
   - Kitti U. \<<kittiu@ecosoft.co.th>\>
   - Pimolnat Suntian \<<pimolnats@ecosoft.co.th>\>
   - Saran Lim. \<<saranl@ecosoft.co.th>\>
+- [NuoBiT](https://www.nuobit.com):
+  - Deniz Gallo <dgallo@nuobit.com>
