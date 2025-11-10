@@ -611,6 +611,11 @@ msgid "Loans"
 msgstr "Préstamos"
 
 #. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pivot
+msgid "Loans pivot"
+msgstr ""
+
+#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__long_term_pending_principal_amount
 msgid "Long Term Pending Principal Amount"
 msgstr "Monto Principal Pendiente a Largo Plazo"
@@ -995,6 +1000,11 @@ msgstr ""
 #: code:addons/account_loan/wizards/account_loan_post.py:0
 #, python-format
 msgid "The total principal amount does not match the loan amount."
+msgstr ""
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_tree
+msgid "Total"
 msgstr ""
 
 #. module: account_loan
