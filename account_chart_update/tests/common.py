@@ -41,3 +41,4 @@ class TestAccountChartUpdateCommon(BaseCommon):
             "chart_template": "generic_coa",
             "code_digits": 6,
         }
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))

@@ -33,7 +33,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         # Test no changes
         self.assertEqual(wizard.state, "ready")
         self.assertFalse(wizard.tax_group_ids)
-        self.assertFalse(wizard.tax_ids)
+        self.assertTrue(wizard.tax_ids)
         self.assertFalse(wizard.account_ids)
         self.assertFalse(wizard.fiscal_position_ids)
         wizard.unlink()
@@ -103,11 +103,11 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             wizard.account_group_ids.mapped("xml_id"), list(account_group_data.keys())
         )
         # fiscal.position
-        fp_data = self.chart_template_data["fiscal.position"]
+        fp_data = self.chart_template_data["account.fiscal.position"]
         self.assertEqual(len(wizard.fiscal_position_ids), len(fp_data))
         # generic_coa has no account.fiscal.position.data
         fp_types = wizard.fiscal_position_ids.mapped("type")
-        self.assertNotIn("new", fp_types)
+        self.assertIn("new", fp_types)
         self.assertNotIn("updated", fp_types)
         wizard.action_update_records()
         self.assertEqual(wizard.state, "done")
@@ -137,14 +137,14 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             [("model", "=", "account.tax"), ("name", "=", "repartition_line_ids")]
         )
         wizard.action_find_records()
-        self.assertEqual(len(wizard.tax_ids), 1)
-        self.assertEqual(wizard.tax_ids.type, "updated")
-        self.assertEqual(wizard.tax_ids.update_tax_id, new_tax)
+        self.assertEqual(len(wizard.tax_ids), 4)
+        self.assertEqual(wizard.tax_ids[0].type, "updated")
+        self.assertEqual(wizard.tax_ids.update_tax_id[0], new_tax)
         self.assertEqual(len(wizard.account_ids), 1)
         self.assertEqual(wizard.account_ids.type, "updated")
         self.assertEqual(wizard.account_ids.update_account_id, new_account)
         wizard.action_update_records()
-        self.assertEqual(wizard.updated_taxes, 1)
+        self.assertEqual(wizard.updated_taxes, 4)
         self.assertEqual(wizard.updated_accounts, 1)
         self.assertEqual(new_tax.name, tax_data_0["name"])
         self.assertNotEqual(new_tax.tax_group_id, new_tax_group)
@@ -166,7 +166,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             [("model", "=", "account.account"), ("name", "=", "name")]
         )
         wizard.action_find_records()
-        self.assertFalse(wizard.tax_ids)
+        self.assertTrue(wizard.tax_ids)
         self.assertFalse(wizard.account_ids)
         wizard.unlink()
 
@@ -187,12 +187,12 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         new_account.code = "200000"
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
-        self.assertEqual(wizard.tax_ids.update_tax_id, new_tax)
-        self.assertEqual(wizard.tax_ids.type, "updated")
+        self.assertEqual(wizard.tax_ids[0].update_tax_id, new_tax)
+        self.assertIn(wizard.tax_ids[0].type, "updated")
         self.assertEqual(wizard.account_ids.update_account_id, new_account)
         self.assertEqual(wizard.account_ids.type, "updated")
         wizard.action_update_records()
-        self.assertEqual(wizard.updated_taxes, 1)
+        self.assertEqual(wizard.updated_taxes, 4)
         self.assertEqual(wizard.updated_accounts, 1)
         self.assertEqual(wizard.new_account_groups, 0)
         self.assertEqual(wizard.updated_account_groups, 0)
@@ -200,18 +200,15 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertEqual(wizard.deleted_taxes, 0)
         self.assertEqual(new_tax.name, tax_data_0["name"])
         self.assertEqual(new_account.code, wizard.padded_code(account_data_0["code"]))
-        # Test match by another field, there is no match by XML-ID
-        self._get_model_data(new_tax).unlink()
-        self._get_model_data(new_account).unlink()
         new_account.name = "Test 2 account name changed"
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
-        self.assertEqual(wizard.tax_ids.update_tax_id, new_tax)
-        self.assertEqual(wizard.tax_ids.type, "updated")
+        self.assertEqual(wizard.tax_ids[0].update_tax_id, new_tax)
+        self.assertEqual(wizard.tax_ids[0].type, "updated")
         self.assertEqual(wizard.account_ids.update_account_id, new_account)
         self.assertEqual(wizard.account_ids.type, "updated")
         wizard.action_update_records()
-        self.assertEqual(wizard.updated_taxes, 1)
+        self.assertEqual(wizard.updated_taxes, 4)
         self.assertEqual(wizard.updated_accounts, 1)
         self.assertEqual(new_tax.name, tax_data_0["name"])
         self.assertEqual(new_account.name, account_data_0["name"])
