@@ -1100,7 +1100,7 @@ class WizardUpdateChartsAccountsTaxGroup(models.TransientModel):
 
 class WizardUpdateChartsAccountsTax(models.TransientModel):
     _name = "wizard.update.charts.accounts.tax"
-    _description = "Tax that needs to be updated (new or updated in the " "template)."
+    _description = "Tax that needs to be updated (new or updated in the template)."
 
     xml_id = fields.Char()
     update_chart_wizard_id = fields.Many2one(
@@ -1136,9 +1136,7 @@ class WizardUpdateChartsAccountsTax(models.TransientModel):
 
 class WizardUpdateChartsAccountsAccount(models.TransientModel):
     _name = "wizard.update.charts.accounts.account"
-    _description = (
-        "Account that needs to be updated (new or updated in the " "template)."
-    )
+    _description = "Account that needs to be updated (new or updated in the template)."
 
     xml_id = fields.Char()
     update_chart_wizard_id = fields.Many2one(
@@ -1189,7 +1187,7 @@ class WizardUpdateChartsAccountsAccountGroup(models.TransientModel):
 class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
     _name = "wizard.update.charts.accounts.fiscal.position"
     _description = (
-        "Fiscal position that needs to be updated (new or updated " "in the template)."
+        "Fiscal position that needs to be updated (new or updated in the template)."
     )
 
     xml_id = fields.Char()
