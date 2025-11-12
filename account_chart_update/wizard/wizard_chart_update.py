@@ -612,7 +612,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         key_lang = f"{key}@{short_lang}"
                     if key_lang in record_values:
                         real_value_lang = real.with_context(lang=lang.code)[key]
-                        record_value_lang = record_values[key_lang]
+                        record_value_lang = record_values[key_lang].strip()
                         if field.ttype == "html":
                             # Convert HTML to inner content for comparison
                             # especially to prevent comparing str with Markup
