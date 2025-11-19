@@ -27,6 +27,18 @@ msgid "Accounting Dashboard Banner Cell"
 msgstr "Cella del banner della bacheca di contabilità"
 
 #. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "Balance of account(s) {account_codes} since %s."
+msgstr ""
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "Balance of account(s) {account_codes}."
+msgstr ""
+
+#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__inside
 msgid "Between Minimum and Maximum"
 msgstr "Tra minimo e massimo"
@@ -146,6 +158,12 @@ msgstr "Ricavi mensili attuali"
 #. module: account_dashboard_banner
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "None"
+msgstr ""
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid ""
 "On cell '%(cell_type)s' with warning enabled, the minimum (%(warn_min)s) "
 "must be under the maximum (%(warn_max)s)."
@@ -162,6 +180,13 @@ msgstr "Data blocco acquisti"
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
 msgid "Quarter-to-date Income"
 msgstr "Ricavi trimestrali attuali"
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid ""
+"Residual amount of account(s) {account_codes} with due date in the past."
+msgstr ""
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
@@ -240,14 +265,8 @@ msgstr "Ricavi annuali attuali"
 msgid "days"
 msgstr "giorni"
 
-#. module: account_dashboard_banner
-#. odoo-python
-#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
-msgid "from %s"
-msgstr "da %s"
+#~ msgid "from %s"
+#~ msgstr "da %s"
 
-#. module: account_dashboard_banner
-#. odoo-python
-#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
-msgid "with due date before %s"
-msgstr "con data scadenza anteriore a %s"
+#~ msgid "with due date before %s"
+#~ msgstr "con data scadenza anteriore a %s"
