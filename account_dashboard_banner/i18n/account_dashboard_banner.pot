@@ -24,6 +24,18 @@ msgid "Accounting Dashboard Banner Cell"
 msgstr ""
 
 #. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "Balance of account(s) {account_codes} since %s."
+msgstr ""
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "Balance of account(s) {account_codes}."
+msgstr ""
+
+#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__inside
 msgid "Between Minimum and Maximum"
 msgstr ""
@@ -143,6 +155,12 @@ msgstr ""
 #. module: account_dashboard_banner
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "None"
+msgstr ""
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid ""
 "On cell '%(cell_type)s' with warning enabled, the minimum (%(warn_min)s) "
 "must be under the maximum (%(warn_max)s)."
@@ -156,6 +174,13 @@ msgstr ""
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
 msgid "Quarter-to-date Income"
+msgstr ""
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid ""
+"Residual amount of account(s) {account_codes} with due date in the past."
 msgstr ""
 
 #. module: account_dashboard_banner
@@ -231,16 +256,4 @@ msgstr ""
 #. module: account_dashboard_banner
 #: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
 msgid "days"
-msgstr ""
-
-#. module: account_dashboard_banner
-#. odoo-python
-#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
-msgid "from %s"
-msgstr ""
-
-#. module: account_dashboard_banner
-#. odoo-python
-#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
-msgid "with due date before %s"
 msgstr ""
