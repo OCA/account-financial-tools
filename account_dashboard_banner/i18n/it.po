@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-07-21 10:25+0000\n"
+"PO-Revision-Date: 2025-11-20 16:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -30,13 +30,13 @@ msgstr "Cella del banner della bacheca di contabilità"
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid "Balance of account(s) {account_codes} since %s."
-msgstr ""
+msgstr "Saldo dei conti {account_codes} dal %s."
 
 #. module: account_dashboard_banner
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid "Balance of account(s) {account_codes}."
-msgstr ""
+msgstr "Saldo dei conti {account_codes}."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__inside
@@ -159,7 +159,7 @@ msgstr "Ricavi mensili attuali"
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #. module: account_dashboard_banner
 #. odoo-python
@@ -186,7 +186,7 @@ msgstr "Ricavi trimestrali attuali"
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid ""
 "Residual amount of account(s) {account_codes} with due date in the past."
-msgstr ""
+msgstr "Valore residuo dei conti {account_codes} con data scadenza nel passato."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
