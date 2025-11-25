@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,7 +47,6 @@ msgstr ""
 #. module: account_partner_required
 #. odoo-python
 #: code:addons/account_partner_required/models/account_move_line.py:0
-#, python-format
 msgid ""
 "Partner policy is set to 'Always' on account '%(account)s' but the partner "
 "is missing on the journal item '%(move_line)s'."
@@ -56,7 +55,6 @@ msgstr ""
 #. module: account_partner_required
 #. odoo-python
 #: code:addons/account_partner_required/models/account_move_line.py:0
-#, python-format
 msgid ""
 "Partner policy is set to 'Never' on account '%(account)s' but the journal "
 "item '%(move_line)s' has the partner '%(partner)s'."
