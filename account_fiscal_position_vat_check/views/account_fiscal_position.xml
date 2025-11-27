@@ -11,8 +11,8 @@
         <field name="inherit_id" ref="account.view_account_position_form" />
         <field name="arch" type="xml">
             <field name="vat_required" position="attributes">
-                <!-- always display that field -->
                 <attribute name="invisible">0</attribute>
+                <!-- always display -->
             </field>
         </field>
     </record>
