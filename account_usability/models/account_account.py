@@ -7,11 +7,14 @@ class Account(models.Model):
     group_id = fields.Many2one(search="_search_group_id")
 
     def _search_group_id(self, operator, value):
-        if operator not in ("in", "="):
+        if operator not in ("in", "=", "any"):
             raise NotImplementedError
 
         # Browse groups because value can be an odoo.tools.query.Query
-        groups = self.env["account.group"].browse(value)
+        if operator == "any" and isinstance(value, fields.Domain):
+            groups = self.env["account.group"].search(value)
+        else:
+            groups = self.env["account.group"].browse(value)
 
         if not groups:
             return [("id", "=", 0)]
