@@ -72,6 +72,7 @@ class AccountMoveLine(models.Model):
                 "journal_id": writeoff_vals["journal_id"],
                 "currency_id": writeoff_vals["currency_id"],
                 "line_ids": [(0, 0, write_off_vals), (0, 0, counter_part)],
+                "sale_order_writeoff": True,
             }
         )
         if writeoff_vals.get("sale_order_id", False):
