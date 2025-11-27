@@ -554,7 +554,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             record_value, real_value = record_values[key], real[key]
             if real._name == "account.account" and key == "code":
                 record_value = self.padded_code(record_value)
-                real_value = self.padded_code(real_value)
             # Field ttype conditions
             if field.ttype == "many2many":
                 if isinstance(record_value, str):

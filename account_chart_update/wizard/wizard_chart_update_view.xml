@@ -29,7 +29,7 @@
                 </div>
                 <group string="Chart of Accounts" invisible="state!='init'">
                     <field name="company_id" domain="[('parent_id', '=', False)]" />
-                    <field name="code_digits" invisible="1" />
+                    <field name="code_digits" />
                     <field name="chart_template" required="1" />
                 </group>
                 <notebook invisible="state!='init'">
