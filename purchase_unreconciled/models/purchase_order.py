@@ -160,7 +160,7 @@ class PurchaseOrder(models.Model):
                 writeoff_vals = self._get_purchase_writeoff_vals(
                     unreconciled_items_group, purchase_line_id, product_id
                 )
-                writeoff_to_reconcile = unreconciled_items_group._create_writeoff(
+                writeoff_to_reconcile = unreconciled_items_group._create_po_writeoff(
                     writeoff_vals
                 )
                 all_writeoffs |= writeoff_to_reconcile

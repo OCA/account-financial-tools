@@ -33,7 +33,7 @@ class AccountMoveLine(models.Model):
             same_curr,
         )
 
-    def _create_writeoff(self, writeoff_vals):
+    def _create_po_writeoff(self, writeoff_vals):
         (
             amount_writeoff,
             amount_writeoff_curr,
@@ -72,6 +72,7 @@ class AccountMoveLine(models.Model):
                 "journal_id": writeoff_vals["journal_id"],
                 "currency_id": writeoff_vals.get("currency_id", False),
                 "line_ids": [(0, 0, write_off_vals), (0, 0, counter_part)],
+                "purchase_order_writeoff": True,
             }
         )
         if writeoff_vals.get("purchase_order_id", False):
