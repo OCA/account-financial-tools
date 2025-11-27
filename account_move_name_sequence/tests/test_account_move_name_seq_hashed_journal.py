@@ -17,7 +17,7 @@ class TestAccountMoveNameSequenceHashedJournal(TestAccountMoveNameSequence):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-
+        cls.partner = cls.env["res.partner"].create({"name": "Demo User"})
         cls.sales_journal.restrict_mode_hash_table = True
 
     def test_account_move_hashed(self):
@@ -27,7 +27,7 @@ class TestAccountMoveNameSequenceHashedJournal(TestAccountMoveNameSequence):
             move = self.env["account.move"].create(
                 {
                     "journal_id": self.sales_journal.id,
-                    "partner_id": self.env.ref("base.res_partner_3").id,
+                    "partner_id": self.partner.id,
                     "move_type": "out_invoice",
                     "invoice_line_ids": self.invoice_line,
                 }
@@ -50,7 +50,7 @@ class TestAccountMoveNameSequenceHashedJournal(TestAccountMoveNameSequence):
             move = self.env["account.move"].create(
                 {
                     "journal_id": self.sales_journal.id,
-                    "partner_id": self.env.ref("base.res_partner_3").id,
+                    "partner_id": self.partner.id,
                     "move_type": "out_invoice",
                     "invoice_line_ids": self.invoice_line,
                 }

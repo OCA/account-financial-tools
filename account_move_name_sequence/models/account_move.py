@@ -15,14 +15,11 @@ class AccountMove(models.Model):
     # -> compute=False to improve perf and to avoid displaying warning
     made_sequence_hole = fields.Boolean(compute=False)
 
-    _sql_constraints = [
-        (
-            "name_state_diagonal",
-            "CHECK(COALESCE(name, '') NOT IN ('/', '') OR state!='posted')",
-            'A move can not be posted with name "/" or empty value\n'
-            "Check the journal sequence, please",
-        ),
-    ]
+    _name_state_diagonal = models.Constraint(
+        "CHECK(COALESCE(name, '') NOT IN ('/', '') OR state!='posted')",
+        'A move can not be posted with name "/" or empty value\n'
+        "Check the journal sequence, please",
+    )
 
     @api.depends("name")
     def _compute_split_sequence(self):

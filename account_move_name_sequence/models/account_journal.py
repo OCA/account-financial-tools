@@ -9,6 +9,7 @@ import logging
 
 from odoo import Command, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 
 _logger = logging.getLogger(__name__)
 
@@ -104,7 +105,7 @@ class AccountJournal(models.Model):
     @api.model
     def _create_sequence(self, vals, refund=False):
         seq_vals = self._prepare_sequence(vals, refund=refund)
-        domain = [(key, "=", value) for key, value in seq_vals.items()]
+        domain = Domain([(key, "=", value) for key, value in seq_vals.items()])
         existing = self.env["ir.sequence"].search(domain, limit=1)
         if existing:
             return existing
@@ -113,16 +114,20 @@ class AccountJournal(models.Model):
     def _prepare_sequence_current_moves(self, refund=False):
         """Get sequence dict values the journal based on current moves"""
         self.ensure_one()
-        move_domain = [
-            ("journal_id", "=", self.id),
-            ("name", "!=", "/"),
-        ]
+        move_domain = Domain(
+            [
+                ("journal_id", "=", self.id),
+                ("name", "!=", "/"),
+            ]
+        )
         if self.refund_sequence:
             #  Based on original Odoo behavior
             if refund:
-                move_domain.append(("move_type", "in", ("out_refund", "in_refund")))
+                move_domain &= Domain("move_type", "in", ("out_refund", "in_refund"))
             else:
-                move_domain.append(("move_type", "not in", ("out_refund", "in_refund")))
+                move_domain &= Domain(
+                    "move_type", "not in", ("out_refund", "in_refund")
+                )
         last_move = self.env["account.move"].search(
             move_domain, limit=1, order="id DESC"
         )

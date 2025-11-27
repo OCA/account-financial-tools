@@ -20,7 +20,7 @@ class TestAccountMoveNameSequence(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.company = cls.env.ref("base.main_company")
-        cls.partner = cls.env.ref("base.res_partner_3")
+        cls.partner = cls.env["res.partner"].create({"name": "Demo User"})
         cls.misc_journal = cls.env["account.journal"].create(
             {
                 "name": "Test Journal Move name seq",
@@ -210,7 +210,7 @@ class TestAccountMoveNameSequence(TransactionCase):
             {
                 "journal_id": self.purchase_journal.id,
                 "invoice_date": self.date,
-                "partner_id": self.env.ref("base.res_partner_3").id,
+                "partner_id": self.partner.id,
                 "move_type": "in_invoice",
                 "invoice_line_ids": self.invoice_line
                 + [
@@ -272,7 +272,7 @@ class TestAccountMoveNameSequence(TransactionCase):
             {
                 "journal_id": self.purchase_journal.id,
                 "invoice_date": self.date,
-                "partner_id": self.env.ref("base.res_partner_3").id,
+                "partner_id": self.partner.id,
                 "move_type": "in_refund",
                 "invoice_line_ids": self.invoice_line,
             }
@@ -316,7 +316,7 @@ class TestAccountMoveNameSequence(TransactionCase):
             {
                 "journal_id": self.purchase_journal.id,
                 "invoice_date": self.date,
-                "partner_id": self.env.ref("base.res_partner_3").id,
+                "partner_id": self.partner.id,
                 "move_type": "in_refund",
                 "invoice_line_ids": self.invoice_line,
             }
@@ -370,7 +370,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         self.assertIn("TB2CSEQ/", invoice.name, "name was not based on sequence")
 
     def test_is_end_of_seq_chain(self):
-        self.env.user.groups_id -= self.env.ref("account.group_account_manager")
+        self.env.user.group_ids -= self.env.ref("account.group_account_manager")
         invoice = self.env["account.move"].create(
             {
                 "date": self.date,

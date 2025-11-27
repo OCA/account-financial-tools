@@ -1,4 +1,5 @@
 from odoo import fields, models
+from odoo.fields import Domain
 
 
 class IrSequence(models.Model):
@@ -22,22 +23,26 @@ class IrSequence(models.Model):
             date_from = fields.Date.start_of(date_obj, "year")
             date_to = fields.Date.end_of(date_obj, "year")
         date_range = sequence_range.search(
-            [
-                ("sequence_id", "=", self.id),
-                ("date_from", ">=", date),
-                ("date_from", "<=", date_to),
-            ],
+            Domain(
+                [
+                    ("sequence_id", "=", self.id),
+                    ("date_from", ">=", date),
+                    ("date_from", "<=", date_to),
+                ]
+            ),
             order="date_from desc",
             limit=1,
         )
         if date_range:
             date_to = fields.Date.subtract(date_range.date_from, days=1)
         date_range = sequence_range.search(
-            [
-                ("sequence_id", "=", self.id),
-                ("date_to", ">=", date_from),
-                ("date_to", "<=", date),
-            ],
+            Domain(
+                [
+                    ("sequence_id", "=", self.id),
+                    ("date_to", ">=", date_from),
+                    ("date_to", "<=", date),
+                ]
+            ),
             order="date_to desc",
             limit=1,
         )
