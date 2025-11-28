@@ -16,10 +16,16 @@ class AccountAssetCompute(models.TransientModel):
         " posted",
     )
     note = fields.Text()
+    company_ids = fields.Many2many(
+        "res.company", string="Companies", default=lambda self: self.env.companies
+    )
 
     def _get_domain_asset_to_compute(self):
         self.ensure_one()
-        return [("state", "=", "open")]
+        domain = [("state", "=", "open")]
+        if self.company_ids:
+            domain += [("company_id", "in", [False] + self.company_ids.ids)]
+        return domain
 
     def asset_compute(self):
         assets = self.env["account.asset"].search(self._get_domain_asset_to_compute())

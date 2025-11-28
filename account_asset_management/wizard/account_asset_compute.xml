@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <form>
                 <group>
+                    <field name="company_ids" widget="many2many_tags" groups="base.group_multi_company" />
                     <field
                         name="date_end"
                         options="{'no_create': True, 'no_open': True}"
