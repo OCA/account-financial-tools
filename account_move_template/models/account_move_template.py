@@ -123,7 +123,7 @@ class AccountMoveTemplateLine(models.Model):
         "account.account",
         string="Account",
         required=True,
-        domain="[('company_ids', 'in', company_id), ('deprecated', '=', False)]",
+        domain="[('company_ids', 'in', company_id)]",
         check_company=True,
     )
     partner_id = fields.Many2one(
@@ -173,7 +173,7 @@ class AccountMoveTemplateLine(models.Model):
     opt_account_id = fields.Many2one(
         "account.account",
         string="Account if Negative",
-        domain="[('company_ids', 'in', company_id), ('deprecated', '=', False)]",
+        domain="[('company_ids', 'in', company_id)]",
         check_company=True,
         help="When amount is negative, use this account instead",
     )
