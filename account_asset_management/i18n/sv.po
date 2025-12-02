@@ -46,7 +46,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
-"PO-Revision-Date: 2025-09-19 07:18+0000\n"
+"PO-Revision-Date: 2025-12-02 18:42+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/sv/)\n"
@@ -497,7 +497,7 @@ msgstr "Bekräfta tillgång"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Create Move"
-msgstr "Skapa lagertransaktion"
+msgstr "Skapa verifikat"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__asset_product_item
@@ -593,7 +593,7 @@ msgstr "Degressive-Linear stöds endast för Time Method = Year."
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Delete/Reverse Move"
-msgstr "Radera/Reversa Flytta"
+msgstr "Radera/Reversera"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_expense_depreciation_id
@@ -627,7 +627,7 @@ msgstr "Avskrivningsbas"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Depreciation Board"
-msgstr "Avskrivningsinfopanel"
+msgstr "Avskrivningar"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -1589,7 +1589,7 @@ msgstr "Visa tillgångsförändringar"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "View Move"
-msgstr "Visa flytt"
+msgstr "Visa verifikat"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
