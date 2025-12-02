@@ -44,6 +44,10 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         cls.account_inventory = cls._create_account(
             cls, acc_type, name, code, cls.company
         )
+        # create pdiff account
+        cls.pdiff_account = cls._create_account(
+            cls, "expense", "P DIFF", "65465", cls.company
+        )
         # Create Product
         cls.product = cls._create_product(cls)
 
@@ -100,6 +104,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 "property_valuation": "real_time",
                 "property_stock_account_input_categ_id": self.account_grni.id,
                 "property_stock_account_output_categ_id": self.account_cogs.id,
+                "property_account_creditor_price_difference_categ": self.pdiff_account.id,  # noqa: E501
             }
         )
         product = self.product_model.create(
@@ -239,3 +244,55 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         self.assertEqual(purchase.journal_entries_count, 1)
         self.assertEqual(purchase.invoice_count, 1)
         self.assertNotEqual(purchase.action_view_journal_entries(), None)
+
+    def test_price_difference_sets_purchase_line_on_aml(self):
+        product_2 = self._create_product()
+        product_2.categ_id.write(
+            {
+                "property_cost_method": "standard",
+            }
+        )
+        purchase = self._create_purchase([(product_2, 1)])
+        po_line = purchase.order_line[0]
+        purchase.button_confirm()
+        # Receive the product (valuation at 100)
+        picking = purchase.picking_ids[0]
+        picking.action_confirm()
+        picking.move_ids.write({"quantity": 1.0})
+        picking.button_validate()
+        # remove qty to simulate already out
+        quant = self.env["stock.quant"].search(
+            [
+                ("product_id", "=", product_2.id),
+                ("location_id", "=", self.location_stock.id),
+            ]
+        )
+        quant.quantity = 0
+        with Form(self.am_model.with_context(default_move_type="in_invoice")) as f:
+            f.partner_id = purchase.partner_id
+            f.invoice_date = fields.Date.today()
+            f.purchase_vendor_bill_id = self.env["purchase.bill.union"].browse(
+                -purchase.id
+            )
+            invoice = f.save()
+
+        # Force invoice line price difference
+        for line in invoice.invoice_line_ids:
+            line.price_unit = 150.0
+        invoice.action_post()
+        pdiff_amls = self.aml_model.search(
+            [
+                ("move_id", "=", invoice.id),
+                ("account_id", "=", self.pdiff_account.id),
+            ]
+        )
+        self.assertTrue(
+            len(pdiff_amls) > 0,
+            "No price difference account move lines were generated.",
+        )
+        for aml in pdiff_amls:
+            self.assertEqual(
+                aml.oca_purchase_line_id,
+                po_line,
+                "Price difference AML does not reference the correct purchase line.",
+            )

@@ -37,3 +37,10 @@ class AccountMoveLine(models.Model):
             rec.purchase_order_id = (
                 rec.purchase_line_id.order_id.id or rec.oca_purchase_line_id.order_id.id
             )
+
+    def _prepare_pdiff_aml_vals(self, qty, unit_valuation_difference):
+        aml_vals_list = super()._prepare_pdiff_aml_vals(qty, unit_valuation_difference)
+        purchase_line = self.purchase_line_id
+        for vals in aml_vals_list:
+            vals["purchase_line_id"] = purchase_line.id
+        return aml_vals_list
