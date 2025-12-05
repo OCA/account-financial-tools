@@ -548,7 +548,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         fields_by_key = {x.name: x for x in field_mapping[real._name]}
         to_include = field_mapping[real._name].mapped("name")
         for key in record_values.keys():
-            if key in ignore or key not in to_include or not record_values.get(key):
+            if (
+                key in ignore
+                or key not in to_include
+                or key in fields_by_key
+                and fields_by_key.get(key).ttype != "boolean"
+                and not record_values.get(key)
+            ):
                 continue
             field = fields_by_key[key]
             record_value, real_value = record_values[key], real[key]
