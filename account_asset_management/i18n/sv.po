@@ -46,7 +46,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
-"PO-Revision-Date: 2025-12-03 15:17+0000\n"
+"PO-Revision-Date: 2025-12-05 11:42+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/sv/)\n"
@@ -159,18 +159,18 @@ msgstr "Andel redan avskrivet"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
 msgid "Analytic Distribution"
-msgstr "Objektdistribution"
+msgstr "Objekt distribution"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Analytic Information"
-msgstr "Objektinformation"
+msgstr "Objekt information"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_precision
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_precision
 msgid "Analytic Precision"
-msgstr "Objektprecision"
+msgstr "Objekt precision"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -497,7 +497,7 @@ msgstr "Bekräfta tillgång"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Create Move"
-msgstr "Skapa verifikat"
+msgstr "Skapa lagertransaktion"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__asset_product_item
@@ -593,7 +593,7 @@ msgstr "Degressive-Linear stöds endast för Time Method = Year."
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Delete/Reverse Move"
-msgstr "Radera/reversera"
+msgstr "Radera/Reversa Flytta"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_expense_depreciation_id
@@ -627,7 +627,7 @@ msgstr "Avskrivningsbas"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Depreciation Board"
-msgstr "Avskrivningsplan"
+msgstr "Avskrivningsinfopanel"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -673,7 +673,7 @@ msgstr "Visningsnamn"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__distribution_analytic_account_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__distribution_analytic_account_ids
 msgid "Distribution Analytic Account"
-msgstr "Objektdistribution"
+msgstr "Verifikatskonto för distribution"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__done
@@ -954,7 +954,7 @@ msgstr "Verifikat"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
 msgid "Journal Item"
-msgstr "Journalpost"
+msgstr "Transaktion"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.act_entries_open
@@ -1214,7 +1214,7 @@ msgstr "Profil"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__prorata
 msgid "Prorata Temporis"
-msgstr "Prorata Temporis"
+msgstr "Prorata temporis"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1331,7 +1331,7 @@ msgstr "Omvänt verifikat"
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 msgid "Reverse Move"
-msgstr "Omvänt verifikat"
+msgstr "Omvänd rörelse"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_wiz_asset_move_reverse
@@ -1352,7 +1352,7 @@ msgstr "Försäljningsvärde"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
 msgid "Salvage Type"
-msgstr "Typ av avskrivning"
+msgstr "Typ av bärgning"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1589,7 +1589,7 @@ msgstr "Visa tillgångsförändringar"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "View Move"
-msgstr "Visa verifikat"
+msgstr "Visa flytt"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
