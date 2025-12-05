@@ -28,8 +28,9 @@ class AccountJournal(models.Model):
                 "general",
             ]:
                 raise UserError(
-                    self.env._("Journal %s must have Lock Posted Entries enabled.")
-                    % rec.name
+                    self.env._(
+                        "Journal %s must have Lock Posted Entries enabled.", rec.name
+                    )
                 )
 
     @api.depends("type")
