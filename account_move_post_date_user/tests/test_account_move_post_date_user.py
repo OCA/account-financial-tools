@@ -9,25 +9,25 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 @tagged("post_install", "-at_install")
 class TestAccountMovePostDateUser(AccountTestInvoicingCommon):
-    def setUp(self):
-        super().setUp()
-        self.account_move_obj = self.env["account.move"]
-        self.partner = self.browse_ref("base.res_partner_12")
-        self.account = self.company_data["default_account_revenue"]
-        self.account2 = self.company_data["default_account_expense"]
-        self.journal = self.company_data["default_journal_bank"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.account_move_obj = cls.env["account.move"]
+        cls.account = cls.company_data["default_account_revenue"]
+        cls.account2 = cls.company_data["default_account_expense"]
+        cls.journal = cls.company_data["default_journal_bank"]
 
         # create a move and post it
-        self.move = self.account_move_obj.create(
+        cls.move = cls.account_move_obj.create(
             {
                 "date": fields.Date.today(),
-                "journal_id": self.journal.id,
+                "journal_id": cls.journal.id,
                 "line_ids": [
                     (
                         0,
                         0,
                         {
-                            "account_id": self.account.id,
+                            "account_id": cls.account.id,
                             "credit": 1000.0,
                             "name": "Credit line",
                         },
@@ -36,7 +36,7 @@ class TestAccountMovePostDateUser(AccountTestInvoicingCommon):
                         0,
                         0,
                         {
-                            "account_id": self.account2.id,
+                            "account_id": cls.account2.id,
                             "debit": 1000.0,
                             "name": "Debit line",
                         },
