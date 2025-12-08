@@ -7,16 +7,25 @@
             <list>
                 <field name="sequence" />
                 <field name="account_id" />
-                <field name="opt_account_id" optional="show"/>
+                <field name="opt_account_id" optional="show" />
                 <field name="partner_id" />
-                <field name="name" optional="show"/>
+                <field name="name" optional="show" />
                 <field
                     name="analytic_distribution"
                     widget="analytic_distribution"
                     groups="analytic.group_analytic_accounting"
                 />
-                <field name="move_line_type" widget="badge" decoration-info="move_line_type == 'cr'" decoration-success="move_line_type == 'dr'"/>
-                <field name="type" widget="badge" decoration-warning="type == 'input'"/>
+                <field
+                    name="move_line_type"
+                    widget="badge"
+                    decoration-info="move_line_type == 'cr'"
+                    decoration-success="move_line_type == 'dr'"
+                />
+                <field
+                    name="type"
+                    widget="badge"
+                    decoration-warning="type == 'input'"
+                />
                 <field name="note" />
                 <field name="tax_line_id" column_invisible="1" />
                 <field
@@ -25,8 +34,8 @@
                     options="{'no_create': True}"
                     optional="show"
                 />
-                <field name="payment_term_id" optional="hide"/>
-                <field name="is_refund" optional="hide"/>
+                <field name="payment_term_id" optional="hide" />
+                <field name="is_refund" optional="hide" />
                 <field name="company_id" column_invisible="1" />
                 <field name="company_currency_id" column_invisible="1" />
             </list>
@@ -69,13 +78,13 @@
                             <field name="note" />
                     >
                         <div
-                                name="python_code_help"
-                                colspan="2"
-                                invisible="type != 'computed'"
-                            >
+                            name="python_code_help"
+                            colspan="2"
+                            invisible="type != 'computed'"
+                        >
                             <p
-                                >You can refer to other lines using their sequence number e.g. <i
-                                    >L1</i> for line with sequence = 1. Examples:</p>
+                            >You can refer to other lines using their sequence number e.g. <i
+                            >L1</i> for line with sequence = 1. Examples:</p>
                             <ul>
                                 <li>L1 * 0.2</li>
                                 <li>L2 - L1</li>
@@ -84,10 +93,10 @@
                             </ul>
                         </div>
                         <field
-                                name="python_code"
-                                invisible="type != 'computed'"
-                                required="type == 'computed'"
-                            />
+                            name="python_code"
+                            invisible="type != 'computed'"
+                            required="type == 'computed'"
+                        />
                         </group>
                     </group>
                 </sheet>
@@ -155,9 +164,9 @@
         <field name="model">account.move.template</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name" decoration-bf="1"/>
-                <field name="journal_id" optional="show"/>
-                <field name="ref" optional="show"/>
+                <field name="name" decoration-bf="1" />
+                <field name="journal_id" optional="show" />
+                <field name="ref" optional="show" />
                 <field name="company_id" groups="base.group_multi_company" />
             </list>
         </field>
