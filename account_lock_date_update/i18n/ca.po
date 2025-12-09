@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2024-05-28 19:36+0000\n"
-"Last-Translator: Santiago Payà <santiagopim@gmail.com>\n"
+"PO-Revision-Date: 2025-12-09 18:42+0000\n"
+"Last-Translator: Ricard <ricard.calvo@forgeflow.com>\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
@@ -47,12 +47,12 @@ msgstr "Veure el nom"
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
 msgid "Global Lock Date"
-msgstr ""
+msgstr "Data de bloqueig global"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__hard_lock_date
 msgid "Hard Lock Date"
-msgstr ""
+msgstr "Data de bloqueig permanent"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__id
@@ -65,6 +65,8 @@ msgid ""
 "Impossible to edit/create journal entries prior to and inclusive of this "
 "date. Subject to exceptions."
 msgstr ""
+"Impossible editar/crear assentaments anteriors i fins a aquesta data. "
+"Subjecte a excepcions."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__hard_lock_date
@@ -72,6 +74,8 @@ msgid ""
 "Impossible to edit/create journal entries prior to and inclusive of this "
 "date. This lock date is irreversible and does not allow any exception."
 msgstr ""
+"Impossible editar/crear assentaments anteriors i fins a aquesta data. "
+"Aquesta data de bloqueig és irreversible i no permet cap excepció."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
@@ -79,6 +83,8 @@ msgid ""
 "Impossible to edit/create journal entries related to a tax prior and "
 "inclusive of this date. Subject to exceptions."
 msgstr ""
+"Impossible editar/crear assentaments relacionats amb un impost anteriors i "
+"fins a aquesta data. Subjecte a excepcions."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__purchase_lock_date
@@ -86,6 +92,8 @@ msgid ""
 "Impossible to edit/create purchase journal entries prior to and inclusive of "
 "this date. Subject to exceptions."
 msgstr ""
+"Impossible editar/crear assentaments de compra anteriors i fins a aquesta "
+"data. Subjecte a excepcions."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__sale_lock_date
@@ -93,11 +101,13 @@ msgid ""
 "Impossible to edit/create sale journal entries prior to and inclusive of "
 "this date. Subject to exceptions."
 msgstr ""
+"Impossible editar/crear assentaments de venda anteriors i fins a aquesta "
+"data. Subjecte a excepcions."
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Irreversible Lock Date"
-msgstr ""
+msgstr "Data de bloqueig irreversible"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_uid
@@ -113,49 +123,49 @@ msgstr "Darrera Actualització el"
 #: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
 #: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
 msgid "Lock Dates"
-msgstr ""
+msgstr "Dates de bloqueig"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__purchase_lock_date
 msgid "Purchase Lock Date"
-msgstr ""
+msgstr "Data de bloqueig de compres"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Reversible Lock Dates"
-msgstr ""
+msgstr "Dates de bloqueig reversibles"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__sale_lock_date
 msgid "Sale Lock Date"
-msgstr ""
+msgstr "Data de bloqueig de vendes"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
 msgid "Tax Return Lock Date"
-msgstr ""
+msgstr "Data de bloqueig de l'IVA"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Update"
-msgstr ""
+msgstr "Actualitza"
 
 #. module: account_lock_date_update
 #: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
 msgid "Wizard to Update Accounting Lock Dates"
-msgstr ""
+msgstr "Wizard per actualitzar dates de bloqueig"
 
 #. module: account_lock_date_update
 #. odoo-python
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 msgid "You are not allowed to execute this action."
-msgstr ""
+msgstr "No esteu autoritzat per executar aquesta acció."
 
 #. module: account_lock_date_update
 #. odoo-python
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 msgid "You tried to set %(field)s to %(date)s, but it is in the future."
-msgstr ""
+msgstr "Heu intentat establir %(field)s a %(date)s, però és en el futur."
 
 #~ msgid "Last Modified on"
 #~ msgstr "Darrera modificació el"
