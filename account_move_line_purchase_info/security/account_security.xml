@@ -2,7 +2,6 @@
 <odoo>
     <record id="group_account_move_purchase_info" model="res.groups">
         <field name="name">Purchase info in Journal Items</field>
-        <field name="category_id" ref="base.module_category_hidden" />
-        <field name="users" eval="[(4, ref('base.user_admin'))]" />
+        <field name="user_ids" eval="[(4, ref('base.user_admin'))]" />
     </record>
 </odoo>

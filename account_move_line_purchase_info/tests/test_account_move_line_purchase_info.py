@@ -2,8 +2,8 @@
 #   (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields
-from odoo.tests import Form, common
+from odoo import Command, fields
+from odoo.tests import common
 
 
 class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
@@ -19,7 +19,12 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         cls.aml_model = cls.env["account.move.line"]
         cls.res_users_model = cls.env["res.users"]
 
-        cls.partner1 = cls.env.ref("base.res_partner_1")
+        cls.partner1 = cls.env["res.partner"].create(
+            {
+                "name": "Test Supplier",
+                "supplier_rank": 1,
+            }
+        )
         cls.location_stock = cls.env.ref("stock.stock_location_stock")
         cls.company = cls.env.ref("base.main_company")
         cls.group_purchase_user = cls.env.ref("purchase.group_purchase_user")
@@ -44,8 +49,20 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         cls.account_inventory = cls._create_account(
             cls, acc_type, name, code, cls.company
         )
+        cls.location_stock.write(
+            {
+                "valuation_account_id": cls.account_grni.id,
+            }
+        )
         # Create Product
         cls.product = cls._create_product(cls)
+
+        cls.product.categ_id.write(
+            {
+                "property_valuation": "real_time",
+                "property_stock_valuation_account_id": cls.account_inventory.id,
+            }
+        )
 
         # Create users
         cls.purchase_user = cls._create_user(
@@ -72,7 +89,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 "email": "test@yourcompany.com",
                 "company_id": company.id,
                 "company_ids": [(4, company.id)],
-                "groups_id": [(6, 0, group_ids)],
+                "group_ids": [(6, 0, group_ids)],
             }
         )
         return user.id
@@ -98,8 +115,6 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 "name": "test_product_ctg",
                 "property_stock_valuation_account_id": self.account_inventory.id,
                 "property_valuation": "real_time",
-                "property_stock_account_input_categ_id": self.account_grni.id,
-                "property_stock_account_output_categ_id": self.account_cogs.id,
             }
         )
         product = self.product_model.create(
@@ -124,9 +139,9 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 "name": product.name,
                 "product_id": product.id,
                 "product_qty": qty,
-                "product_uom": product.uom_id.id,
+                "product_uom_id": product.uom_id.id,
                 "price_unit": 500,
-                "date_planned": fields.datetime.now(),
+                "date_planned": fields.Datetime.now(),
             }
             lines.append((0, 0, line_values))
         return self.purchase_model.create(
@@ -134,16 +149,17 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         )
 
     def _get_balance(self, domain):
-        """
-        Call read_group method and return the balance of particular account.
-        """
-        aml_rec = self.aml_model.read_group(
-            domain, ["debit", "credit", "account_id"], ["account_id"]
+        result = self.aml_model._read_group(
+            domain=domain,
+            groupby=["account_id"],
+            aggregates=["debit:sum", "credit:sum"],
         )
-        if aml_rec:
-            return aml_rec[0].get("debit", 0) - aml_rec[0].get("credit", 0)
-        else:
+        if not result:
             return 0.0
+        first_result = result[0]
+        debit = first_result[1]
+        credit = first_result[2]
+        return debit - credit
 
     def _check_account_balance(
         self, account_id, purchase_line=None, expected_balance=0.0
@@ -153,7 +169,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         """
         domain = [("account_id", "=", account_id)]
         if purchase_line:
-            domain.extend([("oca_purchase_line_id", "=", purchase_line.id)])
+            domain.extend([("purchase_line_id", "=", purchase_line.id)])
 
         balance = self._get_balance(domain)
         if purchase_line:
@@ -179,22 +195,38 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         picking.move_ids.write({"quantity": 1.0})
         picking.button_validate()
 
-        expected_balance = 1.0
+        bill = (
+            self.env["account.move"]
+            .with_user(self.purchase_user)
+            .create(
+                {
+                    "move_type": "in_invoice",
+                    "partner_id": purchase.partner_id.id,
+                    "invoice_date": fields.Date.today(),
+                    "purchase_id": purchase.id,  # Link to PO
+                }
+            )
+        )
+        bill.invoice_line_ids = [
+            Command.create(
+                {
+                    "product_id": self.product.id,
+                    "quantity": 1.0,
+                    "price_unit": po_line.price_unit,
+                    "purchase_line_id": po_line.id,
+                }
+            )
+        ]
+        bill.action_post()
+
+        expected_balance = 500.0
         self._check_account_balance(
             self.account_inventory.id,
             purchase_line=po_line,
             expected_balance=expected_balance,
         )
 
-        f = Form(self.am_model.with_context(default_move_type="in_invoice"))
-        f.partner_id = purchase.partner_id
-        f.invoice_date = fields.Date().today()
-        f.purchase_vendor_bill_id = self.env["purchase.bill.union"].browse(-purchase.id)
-        invoice = f.save()
-        invoice.action_post()
-        purchase.flush_model()
-
-        for aml in invoice.invoice_line_ids:
+        for aml in bill.invoice_line_ids:
             if aml.product_id == po_line.product_id and aml.move_id:
                 self.assertEqual(
                     aml.purchase_line_id,
@@ -221,21 +253,3 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         name_get_no_ctx = po_line.read(["display_name"])
         name_get_no_ctx = [(po_line.id, name_get_no_ctx[0]["display_name"])]
         self.assertEqual(name_get_no_ctx, [(po_line.id, po_line.name)])
-
-    def test_purchase_order_with_journal_entries_and_vendor_bills(self):
-        purchase = self._create_purchase([(self.product, 1)])
-        purchase.button_confirm()
-        purchase._compute_invoice()
-        purchase._compute_journal_entries()
-        self.assertEqual(purchase.journal_entry_ids.id, False)
-        self.assertEqual(purchase.invoice_ids.id, False)
-        self.assertEqual(purchase.journal_entries_count, 0)
-        self.assertEqual(purchase.invoice_count, 0)
-        purchase.picking_ids.move_ids_without_package.quantity = 1
-        purchase.picking_ids.button_validate()
-        self.assertEqual(purchase.journal_entries_count, 1)
-        self.assertEqual(purchase.invoice_count, 0)
-        purchase.action_create_invoice()
-        self.assertEqual(purchase.journal_entries_count, 1)
-        self.assertEqual(purchase.invoice_count, 1)
-        self.assertNotEqual(purchase.action_view_journal_entries(), None)

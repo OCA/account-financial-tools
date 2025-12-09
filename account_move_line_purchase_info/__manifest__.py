@@ -5,7 +5,7 @@
 {
     "name": "Account Move Line Purchase Info",
     "summary": "Introduces the purchase order line to the journal items",
-    "version": "18.0.2.0.0",
+    "version": "19.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Generic",
@@ -14,7 +14,6 @@
     "data": [
         "security/account_security.xml",
         "views/account_move_view.xml",
-        "views/purchase_order_view.xml",
     ],
     "installable": True,
 }
