@@ -17,6 +17,16 @@ msgstr ""
 "X-Generator: Weblate 5.6.2\n"
 
 #. module: account_journal_restrict_mode
+#: model:ir.model.fields,field_description:account_journal_restrict_mode.field_account_journal__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_journal_restrict_mode
+#: model:ir.model.fields,field_description:account_journal_restrict_mode.field_account_journal__id
+msgid "ID"
+msgstr ""
+
+#. module: account_journal_restrict_mode
 #: model:ir.model.fields,help:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
 msgid ""
 "If ticked, when an entry is posted, we retroactively hash all moves in the "
