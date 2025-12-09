@@ -1,7 +1,6 @@
-The purchase order line will be automatically copied to the journal
-items.
+Give the users that need the purchase information the *Purchase info in
+Journal Items* access group.
 
-- When a supplier invoice is created referencing purchase orders, the
-  purchase order line will be copied to the corresponding journal item.
-- When a stock move is validated and generates a journal entry, the
-  purchase order line is copied to the account move line.
+Those users will then see the purchase order and the purchase order line
+on the journal items and on the journal entries, and they will be able
+to group and filter the journal items by them.
