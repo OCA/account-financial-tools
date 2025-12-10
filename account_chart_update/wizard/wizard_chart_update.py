@@ -907,7 +907,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 if code_prefix_end != account_group.code_prefix_end:
                     notes += (notes and "\n" or "") + _(
                         "Differences in these fields: %s."
-                    ) % r_data["code_prefix_end"]
+                    ) % code_prefix_end
                 if self.missing_xml_id(account_group, xmlid):
                     notes += (notes and "\n" or "") + _("Missing XML-ID.")
                 if notes:
