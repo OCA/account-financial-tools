@@ -9,96 +9,98 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2025-12-11 08:58+0000\n"
+"Last-Translator: Ricard <ricard.calvo@forgeflow.com>\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_account_chart_template
 msgid "Account Chart Template"
-msgstr ""
+msgstr "Plantilla de Pla Comptable"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_ids
 msgid "Account Groups"
-msgstr ""
+msgstr "Grups de comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
 msgid "Account fields"
-msgstr ""
+msgstr "Camps de compte"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account_group
 msgid ""
 "Account group that needs to be updated (new or updated in the template)."
 msgstr ""
+"Grup de comptes que s'ha d'actualitzar (nou o actualitzat a la plantilla)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_account_group_id
 msgid "Account group to update"
-msgstr ""
+msgstr "Grup de comptes a actualitzar"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Account groups"
-msgstr ""
+msgstr "Grups de comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_field_ids
 msgid "Account groups fields"
-msgstr ""
+msgstr "Camps de grups de comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_matching_ids
 msgid "Account groups matching"
-msgstr ""
+msgstr "Correspondència de grups de comptes"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
 msgid "Account that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Compte que ha de ser actualitzat (nou o canviat a la plantilla)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_account_id
 msgid "Account to update"
-msgstr ""
+msgstr "Compte a actualitzar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Accounts"
-msgstr ""
+msgstr "Comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
 msgid "Accounts matching"
-msgstr ""
+msgstr "Comptes coincidents"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template
 msgid "Chart Template"
-msgstr ""
+msgstr "Plantilla de comptes"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Chart of Accounts"
-msgstr ""
+msgstr "Pla Comptable"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Close"
-msgstr ""
+msgstr "Tancar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
 msgid "Code Digits"
-msgstr ""
+msgstr "Dígits de Codi"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__company_id
@@ -108,12 +110,12 @@ msgstr "Companyia"
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__init
 msgid "Configuration"
-msgstr ""
+msgstr "Configuració"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Create/Update"
-msgstr ""
+msgstr "Crear/Actualitzar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_uid
@@ -150,13 +152,13 @@ msgstr "Creat el"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__deleted_taxes
 msgid "Deactivated taxes"
-msgstr ""
+msgstr "Impostos desactivats"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "Differences in these fields: %s."
-msgstr ""
+msgstr "Diferències en aquests camps: %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__display_name
@@ -172,7 +174,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__display_name
 msgid "Display Name"
-msgstr "Veure el nom"
+msgstr "Nom a mostrar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account_group
@@ -180,69 +182,77 @@ msgid ""
 "Existing account groups are updated. Account groups are searched by "
 "prefix_code_start."
 msgstr ""
+"Els grups de comptes existents s'actualitzen. Els grups de comptes es "
+"cerquen per prefix_code_start."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account
 msgid "Existing accounts are updated. Accounts are searched by code."
-msgstr ""
+msgstr "Els comptes existents s'actualitzen. Els comptes es cerquen per codi."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
 msgid ""
 "Existing fiscal positions are updated. Fiscal positions are searched by name."
 msgstr ""
+"Les posicions fiscals existents s'actualitzen. Les posicions fiscals es "
+"cerquen per nom."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
 msgid "Existing tax groups are updated. Tax group are searched by name."
 msgstr ""
+"Els grups d'impostos existents s'actualitzen. Els grups d'impostos es "
+"cerquen per nom."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax
 msgid "Existing taxes are updated. Taxes are searched by name."
-msgstr ""
+msgstr "Els impostos existents s'actualitzen. Els impostos es cerquen per nom."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Field options"
-msgstr ""
+msgstr "Opcions de camps"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_ir_model_fields
 msgid "Fields"
-msgstr ""
+msgstr "Camps"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_field_ids
 msgid "Fiscal position fields"
-msgstr ""
+msgstr "Camps de posicions fiscals"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
 msgid ""
 "Fiscal position that needs to be updated (new or updated in the template)."
 msgstr ""
+"Posició fiscal que necessita ser actualitzada (nova o modificada a la "
+"plantilla)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__update_fiscal_position_id
 msgid "Fiscal position to update"
-msgstr ""
+msgstr "Posició fiscal a actualitzar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fiscal_position_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Fiscal positions"
-msgstr ""
+msgstr "Posicions fiscals"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_matching_ids
 msgid "Fiscal positions matching"
-msgstr ""
+msgstr "Emparellament de posicions fiscals"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "General options"
-msgstr ""
+msgstr "Opcions generals"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -250,11 +260,13 @@ msgid ""
 "Here you can select the fields you want to check if\n"
 "                            they have been updated in the templates."
 msgstr ""
+"Aquí podeu seleccionar els camps que vulgueu comprovar si\n"
+"s'han actualitzat a les plantilles."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Here you can set the matching order."
-msgstr ""
+msgstr "Aquí podeu triar l'ordre d'emparellament."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__id
@@ -281,6 +293,9 @@ msgid ""
 "                                records with changes (i.e. different tax "
 "amount)"
 msgstr ""
+"Si deixeu aquestes opcions establertes, \n"
+"l'assistent no només crearà nous registres, sinó que també actualitzarà \n"
+"registres amb canvis (p. ex. import d'impost diferent)"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__write_uid
@@ -317,12 +332,12 @@ msgstr "Darrera Actualització el"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Log"
-msgstr ""
+msgstr "Registre (Log)"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Matching"
-msgstr ""
+msgstr "Emparellament"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__matching_value
@@ -332,96 +347,96 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__matching_value
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__matching_value
 msgid "Matching Value"
-msgstr ""
+msgstr "Valor a emparellar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__log
 msgid "Messages and Errors"
-msgstr ""
+msgstr "Missatges i errors"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "Missing XML-ID."
-msgstr ""
+msgstr "XML-ID buit."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "Name or description not found."
-msgstr ""
+msgstr "Nom o descripció no trobats."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_account_groups
 msgid "New Account Groups"
-msgstr ""
+msgstr "Nous grups de comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
 msgid "New Accounts"
-msgstr ""
+msgstr "Nous comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_tax_groups
 msgid "New Tax Groups"
-msgstr ""
+msgstr "Nous grups d'impostos"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
 msgid "New Taxes"
-msgstr ""
+msgstr "Nous impostos"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__new
 msgid "New account"
-msgstr ""
+msgstr "Nou compte"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__new
 msgid "New account group"
-msgstr ""
+msgstr "Nou grup de comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__new
 msgid "New fiscal position"
-msgstr ""
+msgstr "Nova posició fiscal"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_fps
 msgid "New fiscal positions"
-msgstr ""
+msgstr "Noves posicions fiscals"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__new
 msgid "New tax"
-msgstr ""
+msgstr "Nou impost"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax_group__type__new
 msgid "New tax group"
-msgstr ""
+msgstr "Nou grup d'impostos"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Next"
-msgstr ""
+msgstr "Següent"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "No account found with this code."
-msgstr ""
+msgstr "No s'ha trobat cap compte amb aquest codi."
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "No fiscal position found with this name."
-msgstr ""
+msgstr "No s'ha trobat cap posició fiscal amb aquest nom."
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Note: Only the changed fields are updated."
-msgstr ""
+msgstr "Nota: Només s'actualitzen els camps modificats."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__notes
@@ -430,37 +445,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__notes
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__notes
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Records to create/update"
-msgstr ""
+msgstr "Registres a crear/actualitzar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__rejected_new_account_number
 msgid "Rejected New Account Number"
-msgstr ""
+msgstr "Número de compte nou rebutjat"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__rejected_updated_account_number
 msgid "Rejected Updated Account Number"
-msgstr ""
+msgstr "Número de compte actualitzat rebutjat"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Reload for new elements"
-msgstr ""
+msgstr "Recarregar per a nous elements"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__ready
 msgid "Select records to update"
-msgstr ""
+msgstr "Seleccioneu els registres a actualitzar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__sequence
@@ -470,7 +485,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__sequence
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Seqüència"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__state
@@ -480,78 +495,79 @@ msgstr "Estat"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Summary of created objects"
-msgstr ""
+msgstr "Resum d'objectes creats"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Summary of updated objects"
-msgstr ""
+msgstr "Resum d'objectes actualitzats"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Tax Group"
-msgstr ""
+msgstr "Grup d'Impostos"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_field_ids
 msgid "Tax fields"
-msgstr ""
+msgstr "Camps d'impost"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_matching_ids
 msgid "Tax goups matching"
-msgstr ""
+msgstr "Emparellament de grups d'impostos"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_field_ids
 msgid "Tax group fields"
-msgstr ""
+msgstr "Camps de grup d'impostos"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_group
 msgid "Tax group that needs to be updated (new or updated in the template)."
 msgstr ""
+"Grup d'impostos que s'ha d'actualitzar (nou o actualitzat a la plantilla)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__update_tax_group_id
 msgid "Tax group to update"
-msgstr ""
+msgstr "Grup d'impostos a actualitzar"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Tax groups"
-msgstr ""
+msgstr "Grups d'impostos"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
 msgid "Tax that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Impost que necessita ser actualitzat (nou o modificat a la plantilla)."
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__deleted
 msgid "Tax to deactivate"
-msgstr ""
+msgstr "Impost a desactivar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_tax_id
 msgid "Tax to update"
-msgstr ""
+msgstr "Impost a actualitzar"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_ids
 msgid "Taxe Groups"
-msgstr ""
+msgstr "Grups d'Impostos"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Taxes"
-msgstr ""
+msgstr "Impostos"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_matching_ids
 msgid "Taxes matching"
-msgstr ""
+msgstr "Emparellament d'impostos"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -561,12 +577,15 @@ msgid ""
 "chart\n"
 "                            template"
 msgstr ""
+"Aquest assistent actualitzarà els seus comptes, impostos i \n"
+"posicions fiscals d'acord amb el pla comptable\n"
+" seleccionat"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "To deactivate: not in the template"
-msgstr ""
+msgstr "A desactivar: no es troba a la plantilla"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__type
@@ -580,23 +599,23 @@ msgstr "Tipus"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
 msgid "Type Tax Use"
-msgstr ""
+msgstr "Tipus d'Ús d'Impost"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
 msgid "Update account groups"
-msgstr ""
+msgstr "Actualitzar grups de comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account
 msgid "Update accounts"
-msgstr ""
+msgstr "Actualitzar comptes"
 
 #. module: account_chart_update
 #: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "Update chart of accounts"
-msgstr ""
+msgstr "Actualitzar el pla comptable"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__update_chart_wizard_id
@@ -611,117 +630,117 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__update_chart_wizard_id
 msgid "Update chart wizard"
-msgstr ""
+msgstr "Assistent d'actualització del pla comptable"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
 msgid "Update fiscal positions"
-msgstr ""
+msgstr "Actualitzar posicions fiscals"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Update records?"
-msgstr ""
+msgstr "Actualitzar registres?"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
 msgid "Update taxe groups"
-msgstr ""
+msgstr "Actualitzar grups d'impostos"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax
 msgid "Update taxes"
-msgstr ""
+msgstr "Actualitzar impostos"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_account_groups
 msgid "Updated Account Groups"
-msgstr ""
+msgstr "Grups de comptes actualitzats"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
 msgid "Updated Accounts"
-msgstr ""
+msgstr "Comptes actualitzats"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_tax_groups
 msgid "Updated Tax Groups"
-msgstr ""
+msgstr "Grups d'impostos actualitzats"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
 msgid "Updated Taxes"
-msgstr ""
+msgstr "Impostos actualitzats"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__updated
 msgid "Updated accoung group"
-msgstr ""
+msgstr "Grup de comptes actualitzat"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__updated
 msgid "Updated account"
-msgstr ""
+msgstr "Compte actualitzat"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__updated
 msgid "Updated fiscal position"
-msgstr ""
+msgstr "Posició fiscal actualitzada"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_fps
 msgid "Updated fiscal positions"
-msgstr ""
+msgstr "Posicions fiscals actualitzades"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__updated
 msgid "Updated tax"
-msgstr ""
+msgstr "Impost actualitzat"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax_group__type__updated
 msgid "Updated tax group"
-msgstr ""
+msgstr "Grup d'impostos actualitzat"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_group_matching
 msgid "Wizard Account Group Matching"
-msgstr ""
+msgstr "Assistent de correspondència de grups de comptes"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_matching
 msgid "Wizard Account Matching"
-msgstr ""
+msgstr "Assistent d'emparellament de comptes"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_fp_matching
 msgid "Wizard Fiscal Position Matching"
-msgstr ""
+msgstr "Assistent d'emparellament de Posicions Fiscals"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_matching
 msgid "Wizard Matching"
-msgstr ""
+msgstr "Assistent d'emparellaments"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_tax_group_matching
 msgid "Wizard Tax Group Matching"
-msgstr ""
+msgstr "Assistent d'emparellament de Grups d'Impostos"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_tax_matching
 msgid "Wizard Tax Matching"
-msgstr ""
+msgstr "Assistent d'emparellament d'impostos"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
 msgid "Wizard Update Charts Accounts"
-msgstr ""
+msgstr "Assistent d'Actualització de Plans de Comptes"
 
 #. module: account_chart_update
 #: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__done
 msgid "Wizard completed"
-msgstr ""
+msgstr "Assistent completat"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__xml_id
@@ -730,7 +749,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__xml_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__xml_id
 msgid "Xml"
-msgstr ""
+msgstr "Xml"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Darrera modificació el"
