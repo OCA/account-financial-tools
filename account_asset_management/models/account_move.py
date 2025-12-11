@@ -183,6 +183,7 @@ class AccountMoveLine(models.Model):
         string="Asset",
         ondelete="restrict",
         check_company=True,
+        copy=False,
     )
 
     @api.depends("account_id", "asset_id")
