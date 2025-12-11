@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 class TestAccountMoveTotalsByAccountType(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestAccountMoveTotalsByAccountType, cls).setUpClass()
+        super().setUpClass()
         cls.account_model = cls.env["account.account"]
         cls.acc_type_model = cls.env["account.account.type"]
         cls.company = cls.env.ref("base.main_company")
