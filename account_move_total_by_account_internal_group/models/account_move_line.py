@@ -9,7 +9,7 @@ class AccountMoveLine(models.Model):
 
     # Making standard field stored in order to do the calculations faster
     account_internal_group = fields.Selection(
-        related="account_id.user_type_id.internal_group",
+        related="account_id.internal_group",
         string="Internal Group",
         readonly=True,
         store=True,

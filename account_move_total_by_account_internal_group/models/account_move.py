@@ -27,49 +27,26 @@ class AccountMove(models.Model):
     )
 
     def _compute_amount_total_signed_account_internal_group(self):
+        group_list = [
+            "equity",
+            "asset",
+            "liability",
+            "income",
+            "expense",
+            "off_balance",
+        ]
         for move in self:
+            for g in group_list:
+                move[f"amount_total_signed_account_internal_group_{g}"] = 0.0
             domain = [("move_id", "=", move.id)]
-            aml_groups = self.env["account.move.line"].read_group(
+            aml_groups = self.env["account.move.line"]._read_group(
                 domain=domain,
-                fields=["balance", "account_internal_group"],
                 groupby=["account_internal_group"],
-                lazy=False,
+                aggregates=["balance:sum"],
             )
-            move.amount_total_signed_account_internal_group_asset = sum(
-                ag["balance"]
-                for ag in [
-                    g for g in aml_groups if g["account_internal_group"] == "asset"
-                ]
-            )
-            move.amount_total_signed_account_internal_group_equity = sum(
-                ag["balance"]
-                for ag in [
-                    g for g in aml_groups if g["account_internal_group"] == "equity"
-                ]
-            )
-            move.amount_total_signed_account_internal_group_liability = sum(
-                ag["balance"]
-                for ag in [
-                    g for g in aml_groups if g["account_internal_group"] == "liability"
-                ]
-            )
-            move.amount_total_signed_account_internal_group_income = sum(
-                ag["balance"]
-                for ag in [
-                    g for g in aml_groups if g["account_internal_group"] == "income"
-                ]
-            )
-            move.amount_total_signed_account_internal_group_expense = sum(
-                ag["balance"]
-                for ag in [
-                    g for g in aml_groups if g["account_internal_group"] == "expense"
-                ]
-            )
-            move.amount_total_signed_account_internal_group_off_balance = sum(
-                ag["balance"]
-                for ag in [
-                    g
-                    for g in aml_groups
-                    if g["account_internal_group"] == "off_balance"
-                ]
-            )
+            for aml_group in aml_groups:
+                acc_type = aml_group[0]  # e.g. "asset"
+                balance_sum = aml_group[1]  # sum of balance
+                field_name = f"amount_total_signed_account_internal_group_{acc_type}"
+                if field_name in move._fields:
+                    move[field_name] = balance_sum

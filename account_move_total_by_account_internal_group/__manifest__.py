@@ -3,7 +3,7 @@
 
 {
     "name": "Account Move Total By Account Internal Group",
-    "version": "15.0.1.0.0",
+    "version": "19.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "summary": "Adds Totals by Account Internal Group in Journal Entries",
     "website": "https://github.com/OCA/account-financial-tools",

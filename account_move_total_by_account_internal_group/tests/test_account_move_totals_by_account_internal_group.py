@@ -9,36 +9,29 @@ class TestAccountMoveTotalsByAccountType(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.account_model = cls.env["account.account"]
-        cls.acc_type_model = cls.env["account.account.type"]
         cls.company = cls.env.ref("base.main_company")
         # Create account for Goods Received Not Invoiced
-        acc_type = cls._create_account_type(cls, "liability", "other")
         name = "Goods Received Not Invoiced"
         code = "grni"
-        cls.account_grni = cls._create_account(cls, acc_type, name, code, cls.company)
+        cls.account_grni = cls._create_account(cls, "liability_payable", name, code)
 
         # Create account for Cost of Goods Sold
-        acc_type = cls._create_account_type(cls, "expense", "other")
         name = "Cost of Goods Sold"
         code = "cogs"
-        cls.account_cogs = cls._create_account(cls, acc_type, name, code, cls.company)
+        cls.account_cogs = cls._create_account(cls, "expense", name, code)
         # Create account for Inventory
-        acc_type = cls._create_account_type(cls, "asset", "other")
         name = "Inventory"
         code = "inventory"
-        cls.account_inventory = cls._create_account(
-            cls, acc_type, name, code, cls.company
-        )
+        cls.account_inventory = cls._create_account(cls, "asset_fixed", name, code)
         # Create Income account
         # Create account for Inventory
-        acc_type = cls._create_account_type(cls, "income", "other")
         name = "Income"
         code = "income"
-        cls.account_income = cls._create_account(cls, acc_type, name, code, cls.company)
+        cls.account_income = cls._create_account(cls, "income", name, code)
         cls.journal = cls.env["account.journal"].search(
             [("company_id", "=", cls.env.user.company_id.id)], limit=1
         )
-        cls.partner = cls.env.ref("base.res_partner_12")
+        cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
 
     def _create_account_move(self, dr_account, cr_account):
         move_vals = {
@@ -69,20 +62,13 @@ class TestAccountMoveTotalsByAccountType(TransactionCase):
         }
         return self.env["account.move"].create(move_vals)
 
-    def _create_account_type(self, name, a_type):
-        acc_type = self.acc_type_model.create(
-            {"name": name, "type": a_type, "internal_group": name}
-        )
-        return acc_type
-
-    def _create_account(self, acc_type, name, code, company):
+    def _create_account(self, acc_type, name, code):
         """Create an account."""
         account = self.account_model.create(
             {
                 "name": name,
                 "code": code,
-                "user_type_id": acc_type.id,
-                "company_id": company.id,
+                "account_type": acc_type,
                 "reconcile": True,
             }
         )
