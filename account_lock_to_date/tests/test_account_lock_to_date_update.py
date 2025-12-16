@@ -179,3 +179,34 @@ class TestAccountLockToDateUpdate(TransactionCase):
             self.company.purchase_lock_to_date = "2900-01-01"
             self.company.fiscalyear_lock_to_date = "2900-02-01"
             self.company.hard_lock_to_date = "2900-02-01"
+
+    def test_07_test_soft_lock(self):
+        self.company.fiscalyear_lock_to_date = "2900-01-29"
+        self.company.sale_lock_to_date = False
+        self.company.purchase_lock_to_date = False
+        self.company.hard_lock_to_date = "2900-04-01"
+        # create a super old exception
+        self.env["account.lock_exception"].create(
+            {
+                "state": "active",
+                "user_id": self.demo_user.id,
+                "lock_date_field": "fiscalyear_lock_to_date",
+                "lock_date": "2899-01-01",
+            }
+        )
+        move = self.create_account_move("2900-01-15", self.sale_journal)
+        move.with_user(self.demo_user.id).action_post()
+        self.assertEqual(move.state, "posted")
+        # now we create a current exception and verify it works
+        self.env["account.lock_exception"].create(
+            {
+                "state": "active",
+                "user_id": self.demo_user.id,
+                "lock_date_field": "fiscalyear_lock_to_date",
+                "lock_date": "2900-03-01",
+            }
+        )
+        # now we have an exception that should make this work, even if we are
+        # before soft_lock date
+        move = self.create_account_move("2900-02-01", self.sale_journal)
+        move.with_user(self.demo_user.id).action_post()
