@@ -222,25 +222,42 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         ]
 
     def _domain_tax_group_field_ids(self):
-        return self._domain_per_name("account.tax.group")
+        return self._domain_per_name("account.tax.group") + [
+            ("ttype", "!=", "one2many")
+        ]
 
     def _domain_tax_field_ids(self):
-        return self._domain_per_name("account.tax")
+        # Allow specific o2m fields critical for comparison
+        # (repartition_line_ids) but exclude other o2m
+        return self._domain_per_name("account.tax") + [
+            "|",
+            ("ttype", "!=", "one2many"),
+            (
+                "name",
+                "in",
+                [
+                    "repartition_line_ids",
+                ],
+            ),
+        ]
 
     def _domain_account_field_ids(self):
-        return self._domain_per_name("account.account")
+        return self._domain_per_name("account.account") + [("ttype", "!=", "one2many")]
 
     def _domain_account_group_field_ids(self):
-        return self._domain_per_name("account.group")
+        return self._domain_per_name("account.group") + [("ttype", "!=", "one2many")]
 
     def _domain_fp_field_ids(self):
-        return self._domain_per_name("account.fiscal.position")
+        return self._domain_per_name("account.fiscal.position") + [
+            ("ttype", "!=", "one2many")
+        ]
 
     def _default_tax_group_field_ids(self):
         return [
             (4, x.id)
             for x in self.env["ir.model.fields"].search(
-                self._domain_tax_group_field_ids() + [("ttype", "!=", "one2many")],
+                self._domain_tax_group_field_ids()
+                + self.get_uncheck_fields_domain("account.tax.group"),
             )
         ]
 
@@ -248,7 +265,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         return [
             (4, x.id)
             for x in self.env["ir.model.fields"].search(
-                self._domain_tax_field_ids() + [("ttype", "!=", "one2many")],
+                self._domain_tax_field_ids()
+                + self.get_uncheck_fields_domain("account.tax"),
             )
         ]
 
@@ -256,7 +274,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         return [
             (4, x.id)
             for x in self.env["ir.model.fields"].search(
-                self._domain_account_field_ids() + [("ttype", "!=", "one2many")],
+                self._domain_account_field_ids()
+                + self.get_uncheck_fields_domain("account.account"),
             )
         ]
 
@@ -265,13 +284,17 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             (4, x.id)
             for x in self.env["ir.model.fields"].search(
                 self._domain_account_group_field_ids()
+                + self.get_uncheck_fields_domain("account.group")
             )
         ]
 
     def _default_fp_field_ids(self):
         return [
             (4, x.id)
-            for x in self.env["ir.model.fields"].search(self._domain_fp_field_ids())
+            for x in self.env["ir.model.fields"].search(
+                self._domain_fp_field_ids()
+                + self.get_uncheck_fields_domain("account.fiscal.position")
+            )
         ]
 
     def _get_matching_ids(self, model_name, ordered_opts):
@@ -505,22 +528,18 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def fields_to_ignore(self, name):
         """Get fields that will not be used when checking differences.
 
-        :param str template: A template record.
         :param str name: The name of the template model.
         :return set: Fields to ignore in diff.
         """
         mail_thread_fields = set(self.env["mail.thread"]._fields)
         specials_mapping = {
             "account.tax.group": mail_thread_fields | {"sequence"},
-            "account.tax": mail_thread_fields | {"children_tax_ids", "sequence"},
+            "account.tax": mail_thread_fields | {"children_tax_ids"} | {"sequence"},
             "account.account": mail_thread_fields
             | {
                 "root_id",
             },
-            "account.group": {"parent_id", "code_prefix_end"},
-            "account.fiscal.position": {
-                "sequence",
-            },
+            "account.group": {"parent_id"},
         }
         specials = {
             "display_name",
@@ -528,6 +547,22 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "company_id",
         } | specials_mapping.get(name, set())
         return set(models.MAGIC_COLUMNS) | specials
+
+    @api.model
+    def get_default_unchecked_fields(self, name):
+        """Get fields that should be unchecked by default for a given model.
+
+        :param str name: The name of the template model.
+        :return set: Fields to uncheck by default.
+        """
+        unchecked_mapping = {
+            "account.fiscal.position": {"sequence"},
+        }
+        return unchecked_mapping.get(name, set())
+
+    def get_uncheck_fields_domain(self, name):
+        unchecked_fields = list(self.get_default_unchecked_fields(name))
+        return [("name", "not in", unchecked_fields)]
 
     @api.model
     def diff_fields(self, record_values, real):  # noqa: C901

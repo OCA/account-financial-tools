@@ -12,3 +12,4 @@
 - [Factor Libre](https://factorlibre.com):
   - Luis J. Salvatierra
 - Daniel Reis (dreis@opensourceintegrators.com)
+- Joel Estrada (<https://www.moduon.team/>)
