@@ -166,7 +166,12 @@ class TestAccountLockToDateUpdate(TransactionCase):
         self.company.purchase_lock_to_date = "2900-01-01"
         self.company.fiscalyear_lock_to_date = "2900-02-01"
         self.company.hard_lock_to_date = "2900-02-01"
+        # before: ?
         move = self.create_account_move("2800-01-01", self.bank_journal)
+        move.with_user(self.demo_user.id).action_post()
+        self.assertEqual(move.state, "posted")
+        # after
+        move = self.create_account_move("2901-01-01", self.bank_journal)
         move.with_user(self.demo_user.id).action_post()
         self.assertEqual(move.state, "posted")
 
