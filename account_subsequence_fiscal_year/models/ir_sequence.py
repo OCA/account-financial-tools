@@ -37,11 +37,15 @@ class IrSequence(models.Model):
 
             elif method == "fiscal_year_setting":
                 fiscal_years = AccountFiscalYear.search(
-                    [("date_to", ">=", object_date.strftime("%Y-%m-%d"))],
+                    [
+                        ("date_to", ">=", object_date.strftime("%Y-%m-%d")),
+                        ("date_from", "<=", object_date.strftime("%Y-%m-%d")),
+                        ("company_id", "=", self.company_id.id),
+                    ],
                     order="date_from desc",
                     limit=1
                 )
-                if not fiscal_years or fiscal_years[0].date_from > object_date:
+                if not fiscal_years:
                     raise ValidationError(_(
                         "You can not post an accounting entry for the"
                         " date %s because there is no fiscal year defined at"
