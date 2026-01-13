@@ -9,6 +9,7 @@ from datetime import date, datetime
 
 from odoo import Command, fields
 from odoo.tests import Form, tagged
+from odoo.tools import mute_logger
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
@@ -529,6 +530,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 200.00, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 100.00, places=2)
 
+    @mute_logger("odoo.models.unlink")
     def test_08_asset_removal(self):
         """Asset removal"""
         asset = self.asset_model.create(
@@ -885,6 +887,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertEqual(ict0.value_residual, 1000)
         self.assertEqual(len(original_move.reversal_move_ids), 0)
 
+    @mute_logger("odoo.models.unlink")
     def test_19_unlink_entries(self):
         """Test that cancelling a posted entry creates a reversal, if the
         journal entry has the inalterability hash."""
