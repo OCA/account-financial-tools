@@ -43,15 +43,13 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
                 "code": "ZZCHK",
                 "company_id": cls.company.id,
                 "inbound_payment_method_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "payment_method_id": cls.env.ref(
                                 "account.account_payment_method_manual_in"
                             ).id,
                             "payment_account_id": cls.received_check_account.id,
-                        },
+                        }
                     )
                 ],
             }

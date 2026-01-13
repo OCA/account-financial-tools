@@ -6,7 +6,7 @@
 # Copyright 2018-2022 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -269,27 +269,23 @@ class AccountCheckDeposit(models.Model):
             "ref": _("Check Deposit %s") % self.name,
             "company_id": self.company_id.id,
             "line_ids": [
-                (
-                    0,
-                    0,
+                Command.create(
                     {
                         "account_id": self.in_hand_check_account_id.id,
                         "partner_id": False,
                         "credit": total_debit,
                         "currency_id": self.currency_id.id,
                         "amount_currency": total_amount_currency * -1,
-                    },
+                    }
                 ),
-                (
-                    0,
-                    0,
+                Command.create(
                     {
                         "account_id": counterpart_account.id,
                         "partner_id": False,
                         "debit": total_debit,
                         "currency_id": self.currency_id.id,
                         "amount_currency": total_amount_currency,
-                    },
+                    }
                 ),
             ],
         }
