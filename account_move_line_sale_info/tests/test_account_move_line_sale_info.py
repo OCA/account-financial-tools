@@ -16,29 +16,23 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         cls.aml_model = cls.env["account.move.line"]
         cls.res_users_model = cls.env["res.users"]
 
-        cls.partner1 = cls.env.ref("base.res_partner_1")
+        cls.partner1 = cls.env["res.partner"].create(
+            {"name": "Partner 1", "customer_rank": 1}
+        )
         cls.location_stock = cls.env.ref("stock.stock_location_stock")
         cls.company = cls.env.ref("base.main_company")
         cls.group_sale_user = cls.env.ref("sales_team.group_sale_salesman")
         cls.group_account_invoice = cls.env.ref("account.group_account_invoice")
         cls.group_account_manager = cls.env.ref("account.group_account_manager")
 
-        # Create account for Goods Received Not Invoiced
-        acc_type = "equity"
-        name = "Goods Received Not Invoiced"
-        code = "grni"
-        cls.account_grni = cls._create_account(acc_type, name, code, cls.company)
-
-        # Create account for Cost of Goods Sold
-        acc_type = "expense"
-        name = "Cost of Goods Sold"
-        code = "cogs"
-        cls.account_cogs = cls._create_account(acc_type, name, code, cls.company)
         # Create account for Inventory
         acc_type = "asset_fixed"
         name = "Inventory"
         code = "inventory"
         cls.account_inventory = cls._create_account(acc_type, name, code, cls.company)
+        cls.account_customer_location = cls._create_account(
+            "expense", "Customer Location", "custloc", cls.company
+        )
         # Create Product
         cls.product = cls._create_product()
 
@@ -76,7 +70,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                 "email": "test@yourcompany.com",
                 "company_id": company.id,
                 "company_ids": [(4, company.id)],
-                "groups_id": [(6, 0, group_ids)],
+                "group_ids": [(6, 0, group_ids)],
             }
         )
         return user.id
@@ -97,21 +91,17 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
     @classmethod
     def _create_product(self):
         """Create a Product."""
-        #        group_ids = [group.id for group in groups]
         product_ctg = self.product_ctg_model.create(
             {
                 "name": "test_product_ctg",
                 "property_stock_valuation_account_id": self.account_inventory.id,
                 "property_valuation": "real_time",
-                "property_stock_account_input_categ_id": self.account_grni.id,
-                "property_stock_account_output_categ_id": self.account_cogs.id,
             }
         )
         product = self.product_model.create(
             {
                 "name": "test_product",
                 "categ_id": product_ctg.id,
-                "type": "consu",
                 "standard_price": 1.0,
                 "list_price": 1.0,
                 "is_storable": True,
@@ -130,7 +120,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                 "name": product.name,
                 "product_id": product.id,
                 "product_uom_qty": qty,
-                "product_uom": product.uom_id.id,
+                "product_uom_id": product.uom_id.id,
                 "price_unit": 500,
             }
             lines.append((0, 0, line_values))
@@ -140,13 +130,15 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
 
     def _get_balance(self, domain):
         """
-        Call read_group method and return the balance of particular account.
+        Call _read_group method and return the balance of particular account.
         """
-        aml_rec = self.aml_model.read_group(
-            domain, ["debit", "credit", "account_id"], ["account_id"]
+        aml_rec = self.aml_model._read_group(
+            domain, groupby=["account_id"], aggregates=["debit:sum", "credit:sum"]
         )
         if aml_rec:
-            return aml_rec[0].get("debit", 0) - aml_rec[0].get("credit", 0)
+            debit = aml_rec[0][1] or 0
+            credit = aml_rec[0][2] or 0
+            return debit - credit
         else:
             return 0.0
 
@@ -186,6 +178,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             break
         sale.action_confirm()
         picking = sale.picking_ids[0]
+        picking.location_dest_id.valuation_account_id = self.account_customer_location
         picking.move_ids.write({"quantity": 1.0, "picked": True})
         picking.button_validate()
 
@@ -261,3 +254,24 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                     "sale Order line has not been copied "
                     "from the invoice to the credit note.",
                 )
+
+    def test_04_stock_lines(self):
+        """The sale order line is set on all the stock valuation lines
+        of each sale order line, also when they are validated together.
+        """
+        product2 = self._create_product()
+        sale = self._create_sale([(self.product, 1), (product2, 2)])
+        sale.action_confirm()
+        picking = sale.picking_ids
+        picking.location_dest_id.valuation_account_id = self.account_customer_location
+        for move in picking.move_ids:
+            move.write({"quantity": move.product_uom_qty, "picked": True})
+        picking.button_validate()
+        for so_line in sale.order_line:
+            with self.subTest(product=so_line.product_id.name):
+                stock_amls = so_line.move_ids.account_move_id.line_ids.filtered(
+                    lambda aml, sol=so_line: aml.product_id == sol.product_id
+                )
+                self.assertEqual(len(stock_amls), 2)
+                self.assertEqual(stock_amls.sale_line_id, so_line)
+                self.assertEqual(stock_amls.sale_order_id, sale)
