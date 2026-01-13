@@ -16,24 +16,15 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         cls.aml_model = cls.env["account.move.line"]
         cls.res_users_model = cls.env["res.users"]
 
-        cls.partner1 = cls.env.ref("base.res_partner_1")
+        cls.partner1 = cls.env["res.partner"].create(
+            {"name": "Partner 1", "customer_rank": 1}
+        )
         cls.location_stock = cls.env.ref("stock.stock_location_stock")
         cls.company = cls.env.ref("base.main_company")
         cls.group_sale_user = cls.env.ref("sales_team.group_sale_salesman")
         cls.group_account_invoice = cls.env.ref("account.group_account_invoice")
         cls.group_account_manager = cls.env.ref("account.group_account_manager")
 
-        # Create account for Goods Received Not Invoiced
-        acc_type = "equity"
-        name = "Goods Received Not Invoiced"
-        code = "grni"
-        cls.account_grni = cls._create_account(acc_type, name, code, cls.company)
-
-        # Create account for Cost of Goods Sold
-        acc_type = "expense"
-        name = "Cost of Goods Sold"
-        code = "cogs"
-        cls.account_cogs = cls._create_account(acc_type, name, code, cls.company)
         # Create account for Inventory
         acc_type = "asset_fixed"
         name = "Inventory"
@@ -76,7 +67,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                 "email": "test@yourcompany.com",
                 "company_id": company.id,
                 "company_ids": [(4, company.id)],
-                "groups_id": [(6, 0, group_ids)],
+                "group_ids": [(6, 0, group_ids)],
             }
         )
         return user.id
@@ -97,21 +88,17 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
     @classmethod
     def _create_product(self):
         """Create a Product."""
-        #        group_ids = [group.id for group in groups]
         product_ctg = self.product_ctg_model.create(
             {
                 "name": "test_product_ctg",
                 "property_stock_valuation_account_id": self.account_inventory.id,
                 "property_valuation": "real_time",
-                "property_stock_account_input_categ_id": self.account_grni.id,
-                "property_stock_account_output_categ_id": self.account_cogs.id,
             }
         )
         product = self.product_model.create(
             {
                 "name": "test_product",
                 "categ_id": product_ctg.id,
-                "type": "consu",
                 "standard_price": 1.0,
                 "list_price": 1.0,
                 "is_storable": True,
@@ -130,7 +117,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                 "name": product.name,
                 "product_id": product.id,
                 "product_uom_qty": qty,
-                "product_uom": product.uom_id.id,
+                "product_uom_id": product.uom_id.id,
                 "price_unit": 500,
             }
             lines.append((0, 0, line_values))
@@ -140,13 +127,15 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
 
     def _get_balance(self, domain):
         """
-        Call read_group method and return the balance of particular account.
+        Call _read_group method and return the balance of particular account.
         """
-        aml_rec = self.aml_model.read_group(
-            domain, ["debit", "credit", "account_id"], ["account_id"]
+        aml_rec = self.aml_model._read_group(
+            domain, groupby=["account_id"], aggregates=["debit:sum", "credit:sum"]
         )
         if aml_rec:
-            return aml_rec[0].get("debit", 0) - aml_rec[0].get("credit", 0)
+            debit = aml_rec[0][1] or 0
+            credit = aml_rec[0][2] or 0
+            return debit - credit
         else:
             return 0.0
 
@@ -186,6 +175,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             break
         sale.action_confirm()
         picking = sale.picking_ids[0]
+        picking.location_id.valuation_account_id = self.account_inventory
         picking.move_ids.write({"quantity": 1.0, "picked": True})
         picking.button_validate()
 

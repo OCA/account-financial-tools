@@ -7,8 +7,8 @@ from odoo import fields, models
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    def _stock_account_prepare_anglo_saxon_out_lines_vals(self):
-        res = super()._stock_account_prepare_anglo_saxon_out_lines_vals()
+    def _stock_account_prepare_realtime_out_lines_vals(self):
+        res = super()._stock_account_prepare_realtime_out_lines_vals()
         for i, vals in enumerate(res):
             am = self.env["account.move"].browse(vals["move_id"])
             sale_line_id = am.invoice_line_ids.filtered(
