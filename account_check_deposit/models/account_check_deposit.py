@@ -6,8 +6,9 @@
 # Copyright 2018-2022 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.fields import Domain
 
 
 class AccountCheckDeposit(models.Model):
@@ -17,7 +18,9 @@ class AccountCheckDeposit(models.Model):
     _order = "deposit_date desc"
     _check_company_auto = True
 
-    name = fields.Char(readonly=True, default=lambda self: _("New"), copy=False)
+    name = fields.Char(
+        readonly=True, default=lambda self: self.env._("New"), copy=False
+    )
     check_payment_ids = fields.One2many(
         comodel_name="account.move.line",
         inverse_name="check_deposit_id",
@@ -98,13 +101,10 @@ class AccountCheckDeposit(models.Model):
         tracking=True,
     )
 
-    _sql_constraints = [
-        (
-            "name_company_unique",
-            "unique(company_id, name)",
-            "A check deposit with this reference already exists in this company.",
-        )
-    ]
+    _name_company_unique = models.UniqueIndex(
+        "(company_id, name)",
+        "A check deposit with this reference already exists in this company.",
+    )
 
     @api.depends(
         "company_id",
@@ -159,13 +159,15 @@ class AccountCheckDeposit(models.Model):
         ajo = self.env["account.journal"]
         company_id = res.get("company_id")
         # pre-set journal_id and bank_journal_id is there is only one
-        domain = [("company_id", "=", company_id), ("type", "=", "bank")]
-        journals = ajo.search(domain + [("bank_account_id", "=", False)])
-        if len(journals) == 1:
-            res["journal_id"] = journals.id
-        bank_journals = ajo.search(domain + [("bank_account_id", "!=", False)])
-        if len(bank_journals) == 1:
-            res["bank_journal_id"] = bank_journals.id
+        domain = Domain([("company_id", "=", company_id), ("type", "=", "bank")])
+        journal_ids = list(ajo._search(domain & Domain("bank_account_id", "=", False)))
+        if len(journal_ids) == 1:
+            res["journal_id"] = journal_ids[0]
+        bank_journal_ids = list(
+            ajo._search(domain & Domain("bank_account_id", "!=", False))
+        )
+        if len(bank_journal_ids) == 1:
+            res["bank_journal_id"] = bank_journal_ids[0]
         return res
 
     @api.constrains("currency_id", "check_payment_ids")
@@ -175,7 +177,7 @@ class AccountCheckDeposit(models.Model):
             for line in deposit.check_payment_ids:
                 if line.currency_id != deposit_currency:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "The check with amount %(amount)s and reference '%(ref)s' "
                             "is in currency %(check_currency)s but the deposit is in "
                             "currency %(deposit_currency)s.",
@@ -186,16 +188,16 @@ class AccountCheckDeposit(models.Model):
                         )
                     )
 
-    def unlink(self):
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_state_done(self):
         for deposit in self.filtered(lambda x: x.state == "done"):
             raise UserError(
-                _(
-                    "The deposit '%s' is in valid state, so you must "
-                    "cancel it before deleting it."
+                self.env._(
+                    "The deposit '%s' is in done state, so you must "
+                    "cancel it before deleting it.",
+                    deposit.display_name,
                 )
-                % deposit.display_name
             )
-        return super().unlink()
 
     def backtodraft(self):
         amlo = self.env["account.move.line"]
@@ -211,8 +213,11 @@ class AccountCheckDeposit(models.Model):
                         counterpart_move_line |= move_line
                 if counterpart_move_line.reconciled:
                     raise UserError(
-                        _("Deposit '%s' has already been credited on the bank account.")
-                        % deposit.display_name
+                        self.env._(
+                            "Deposit '%s' has already been credited "
+                            "on the bank account.",
+                            deposit.display_name,
+                        )
                     )
                 check_move_lines.remove_move_reconcile()
                 if move.state == "posted":
@@ -225,10 +230,10 @@ class AccountCheckDeposit(models.Model):
         for vals in vals_list:
             if "company_id" in vals:
                 self = self.with_company(vals["company_id"])
-            if vals.get("name", _("New")) == _("New"):
+            if vals.get("name", self.env._("New")) == self.env._("New"):
                 vals["name"] = self.env["ir.sequence"].next_by_code(
                     "account.check.deposit", vals.get("deposit_date")
-                ) or _("New")
+                ) or self.env._("New")
         return super().create(vals_list)
 
     def _prepare_move_vals(self):
@@ -259,14 +264,16 @@ class AccountCheckDeposit(models.Model):
             counterpart_account = self.company_id.transfer_account_id
         if not counterpart_account:
             raise UserError(
-                _("Missing 'Internal Transfer' account on the company '%s'.")
-                % self.company_id.display_name
+                self.env._(
+                    "Missing 'Internal Transfer' account on the company '%s'.",
+                    self.company_id.display_name,
+                )
             )
 
         vals = {
             "journal_id": self.journal_id.id,
             "date": self.deposit_date,
-            "ref": _("Check Deposit %s") % self.name,
+            "ref": self.env._("Check Deposit %s", self.name),
             "company_id": self.company_id.id,
             "line_ids": [
                 Command.create(
@@ -306,31 +313,33 @@ class AccountCheckDeposit(models.Model):
         self.ensure_one()
         if not self.in_hand_check_account_id:
             raise UserError(
-                _(
+                self.env._(
                     "In the configuration of journal '%s', "
                     "in the 'Incoming Payments' tab, you must configure an "
                     "Outstanding Receipts Account for the payment method "
-                    "'Manual (inbound)'."
+                    "'Manual (inbound)'.",
+                    self.journal_id.display_name,
                 )
-                % self.journal_id.display_name
             )
         all_pending_checks = self.env["account.move.line"].search(
-            [
-                ("company_id", "=", self.company_id.id),
-                ("reconciled", "=", False),
-                ("account_id", "=", self.in_hand_check_account_id.id),
-                ("debit", ">", 0),
-                ("check_deposit_id", "=", False),
-                ("currency_id", "=", self.currency_id.id),
-                ("parent_state", "=", "posted"),
-            ]
+            Domain(
+                [
+                    ("company_id", "=", self.company_id.id),
+                    ("reconciled", "=", False),
+                    ("account_id", "=", self.in_hand_check_account_id.id),
+                    ("debit", ">", 0),
+                    ("check_deposit_id", "=", False),
+                    ("currency_id", "=", self.currency_id.id),
+                    ("parent_state", "=", "posted"),
+                ]
+            )
         )
         if all_pending_checks:
-            self.message_post(body=_("Get All Received Checks"))
+            self.message_post(body=self.env._("Get All Received Checks"))
             all_pending_checks.write({"check_deposit_id": self.id})
         else:
             raise UserError(
-                _(
+                self.env._(
                     "There are no received checks in account '%(account)s' in currency "
                     "'%(currency)s' that are not already in this check deposit.",
                     account=self.in_hand_check_account_id.display_name,

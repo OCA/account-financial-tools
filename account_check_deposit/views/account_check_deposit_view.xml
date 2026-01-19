@@ -181,7 +181,7 @@
                     domain="[('state', '=', 'draft')]"
                 />
                 <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
-                <group string="Group By" name="groupby">
+                <group name="groupby">
                     <filter
                         name="date_groupby"
                         string="Deposit Date"
