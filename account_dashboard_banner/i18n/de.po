@@ -6,23 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-01-20 12:07+0000\n"
+"Last-Translator: smaddlsoft <jm.veddeler@gmail.com>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__above
 msgid "Above Maximum"
-msgstr ""
+msgstr "Über dem Maximum"
 
 #. module: account_dashboard_banner
 #: model:ir.model,name:account_dashboard_banner.model_account_dashboard_banner_cell
 msgid "Accounting Dashboard Banner Cell"
-msgstr ""
+msgstr "Buchhaltung Dashboard Banner Kachel"
 
 #. module: account_dashboard_banner
 #. odoo-python
