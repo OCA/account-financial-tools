@@ -4,10 +4,8 @@
 {
     "name": "Cost-Revenue Spread Extra Features",
     "summary": "Extra feature for account spread cost/revenue",
-    "version": "14.0.1.0.0",
-    "development_status": "Beta",
-    "author": "Ecosoft,Odoo Community Association (OCA)",
-    "maintainers": ["kittiu"],
+    "version": "18.0.1.0.0",
+    "author": "Ecosoft, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting & Finance",
@@ -18,4 +16,6 @@
         "views/account_spread.xml",
     ],
     "installable": True,
+    "maintainers": ["kittiu", "Saran440"],
+    "development_status": "Beta",
 }

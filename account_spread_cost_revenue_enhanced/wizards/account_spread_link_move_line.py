@@ -12,13 +12,10 @@ class AccountSpreadLinkMoveLine(models.TransientModel):
     move_id = fields.Many2one(
         comodel_name="account.move",
         string="Journal Entry",
-        required=True,
     )
     move_line_id = fields.Many2one(
         comodel_name="account.move.line",
         string="Journal Item",
-        domain="[('move_id', '=', move_id), ('spread_id', '=', False)]",
-        required=True,
     )
 
     @api.onchange("move_id")
@@ -31,7 +28,8 @@ class AccountSpreadLinkMoveLine(models.TransientModel):
         if spread.invoice_line_id:
             raise UserError(
                 _(
-                    "Already linked with a journal item, please unlink the existing one first."
+                    "Already linked with a journal item, "
+                    "please unlink the existing one first."
                 )
             )
         spread.invoice_line_id = self.move_line_id

@@ -10,8 +10,12 @@
                     >Journal Item</b> you want to link with this spread costs/revenues sheet.
                 </p>
                 <group>
-                    <field name="move_id" />
-                    <field name="move_line_id" />
+                    <field name="move_id" required="1" />
+                    <field
+                        name="move_line_id"
+                        domain="[('move_id', '=', move_id), ('spread_id', '=', False)]"
+                        required="1"
+                    />
                 </group>
                 <footer>
                     <button
