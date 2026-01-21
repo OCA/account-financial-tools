@@ -4,7 +4,7 @@
 
 {
     "name": "Account netting",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "summary": "Compensate AR/AP accounts from the same partner",
     "category": "Accounting & Finance",
     "author": "Tecnativa, Odoo Community Association (OCA)",

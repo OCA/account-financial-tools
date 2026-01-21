@@ -2,8 +2,9 @@
 # Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
+from odoo.fields import Domain
 
 
 class AccountMoveMakeNetting(models.TransientModel):
@@ -36,55 +37,63 @@ class AccountMoveMakeNetting(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         if len(self.env.context.get("active_ids", [])) < 2:
-            raise UserError(_("You should select at least 2 journal items."))
+            raise UserError(self.env._("You should select at least 2 journal items."))
         move_lines = self.env["account.move.line"].browse(
             self.env.context["active_ids"]
         )
         partners = self.env["res.partner"]
         for line in move_lines:
             if line.parent_state != "posted":
-                raise UserError(_("Line '%s' is not posted.") % line.display_name)
+                raise UserError(
+                    self.env._("Line '%(line)s' is not posted.", line=line.display_name)
+                )
             if line.account_id.account_type not in (
                 "liability_payable",
                 "asset_receivable",
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "Line '%(line)s' has account '%(account)s' which is not "
-                        "a payable nor a receivable account."
+                        "a payable nor a receivable account.",
+                        line=line.display_name,
+                        account=line.account_id.display_name,
                     )
-                    % {
-                        "line": line.display_name,
-                        "account": line.account_id.display_name,
-                    }
                 )
             if line.reconciled:
                 raise UserError(
-                    _("Line '%s' is already reconciled.") % line.display_name
+                    self.env._(
+                        "Line '%(line)s' is already reconciled.",
+                        line=line.display_name,
+                    )
                 )
             if not line.partner_id:
                 raise UserError(
-                    _("Line '%s' doesn't have a partner.") % line.display_name
+                    self.env._(
+                        "Line '%(line)s' doesn't have a partner.",
+                        line=line.display_name,
+                    )
                 )
             partners |= line.partner_id
 
         if len(move_lines.account_id) == 1:
             raise UserError(
-                _(
+                self.env._(
                     "The 'Compensate' function is intended to balance "
                     "operations on different accounts for the same partner. "
                     "The selected journal items have the same "
-                    "account '%s', so you should use the 'Reconcile' function instead."
+                    "account '%(account)s', so you should use the"
+                    "'Reconcile' function instead.",
+                    account=move_lines.account_id.display_name,
                 )
-                % move_lines.account_id.display_name
             )
+
         if len(partners) != 1:
             raise UserError(
-                _(
-                    "The selected journal items have different partners: %s. "
-                    "All the selected journal items must have the same partner."
+                self.env._(
+                    "The selected journal items have different partners: %(partners)s. "
+                    "All the selected journal items must have the same partner.",
+                    partners=", ".join(p.display_name for p in partners),
                 )
-                % ", ".join([p.display_name for p in partners])
             )
         res = super().default_get(fields_list)
         company = self.env.company
@@ -105,7 +114,7 @@ class AccountMoveMakeNetting(models.TransientModel):
                 "move_line_ids": move_lines.ids,
                 "partner_id": partners.id,
                 "date": fields.Date.context_today(self),
-                "ref": _("AR/AP netting"),
+                "ref": self.env._("AR/AP netting"),
             }
         )
         return res
@@ -113,7 +122,7 @@ class AccountMoveMakeNetting(models.TransientModel):
     def _prepare_account_move(self):
         # Group amounts by account
         account_groups = self.env["account.move.line"]._read_group(
-            [("id", "in", self.move_line_ids.ids)],
+            Domain("id", "in", self.move_line_ids.ids),
             groupby=["account_id"],
             aggregates=["amount_residual:sum"],
         )

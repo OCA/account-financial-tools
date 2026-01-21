@@ -3,3 +3,5 @@
   - Vicent Cubells
   - Víctor Martínez
   - Marwan Behillil
+- [APSL-Nagarro](<https://apsl.tech>):
+  - Bernat Obrador \<<bobrador@apsl.net>\>

@@ -21,7 +21,7 @@ class TestAccountNetting(common.TransactionCase):
         partner_manager = cls.env.ref("base.group_partner_manager")
         cls.env.user.write(
             {
-                "groups_id": [
+                "group_ids": [
                     Command.set([res_users_account_manager.id, partner_manager.id])
                 ]
             }
