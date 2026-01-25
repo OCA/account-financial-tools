@@ -62,7 +62,7 @@ class TestAssetManagementXls(AccountTestInvoicingCommon):
                 "date_start": time.strftime("%Y-01-01"),
             }
         ).validate()
-        fy_dates = cls.company.compute_fiscalyear_dates(fields.date.today())
+        fy_dates = cls.company.compute_fiscalyear_dates(fields.Date.today())
 
         wiz_vals = {
             "asset_group_id": group_fa.id,

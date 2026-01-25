@@ -31,14 +31,15 @@ class AccountMove(models.Model):
     asset_count = fields.Integer(compute="_compute_asset_count")
 
     def _compute_asset_count(self):
-        rg_res = self.env["account.asset.line"].read_group(
-            [("move_id", "in", self.ids)], ["move_id"], ["move_id"]
+        rg_res = self.env["account.asset.line"]._read_group(
+            [("move_id", "in", self.ids)], groupby=["move_id"], aggregates=["__count"]
         )
-        mapped_data = {x["move_id"][0]: x["move_id_count"] for x in rg_res}
+        mapped_data = {move.id: count for move, count in rg_res}
         for move in self:
             move.asset_count = mapped_data.get(move.id, 0)
 
-    def unlink(self):
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_linked_to_asset(self):
         # for move in self:
         deprs = (
             self.env["account.asset.line"]
@@ -55,6 +56,15 @@ class AccountMove(models.Model):
                     "\nYou should remove such entries from the asset."
                 )
             )
+
+    def unlink(self):
+        deprs = (
+            self.env["account.asset.line"]
+            .sudo()
+            .search(
+                [("move_id", "in", self.ids), ("type", "in", ["depreciate", "remove"])]
+            )
+        )
         # trigger store function
         deprs.write({"move_id": False})
         return super().unlink()

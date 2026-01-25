@@ -17,40 +17,34 @@ class AccountAssetProfile(models.Model):
     note = fields.Text()
     account_asset_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
         string="Asset Account",
         check_company=True,
         required=True,
     )
     account_depreciation_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
         string="Depreciation Account",
         check_company=True,
         required=True,
     )
     account_expense_depreciation_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
         string="Depr. Expense Account",
         check_company=True,
         required=True,
     )
     account_plus_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
         check_company=True,
         string="Plus-Value Account",
     )
     account_min_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
         check_company=True,
         string="Min-Value Account",
     )
     account_residual_value_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
         check_company=True,
         string="Residual Value Account",
     )
