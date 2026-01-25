@@ -83,7 +83,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
 
         # analytic configuration
-        cls.env.user.groups_id += cls.env.ref("analytic.group_analytic_accounting")
+        cls.env.user.group_ids += cls.env.ref("analytic.group_analytic_accounting")
 
         cls.default_plan = cls.env["account.analytic.plan"].create({"name": "Default"})
         cls.analytic_account = cls.env["account.analytic.account"].create(
@@ -335,7 +335,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "profile_id": self.car5y.id,
                 "purchase_value": 3333,
                 "salvage_value": 0,
-                "date_start": "%d-07-07" % (datetime.now().year - 1,),
+                "date_start": f"{datetime.now().year - 1}-07-07",
                 "method_time": "year",
                 "method_number": 5,
                 "method_period": "month",
@@ -347,7 +347,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             {
                 "asset_id": asset.id,
                 "amount": 325.08,
-                "line_date": "%d-12-31" % (datetime.now().year - 1,),
+                "line_date": f"{datetime.now().year - 1}-12-31",
                 "type": "depreciate",
                 "init_entry": True,
             }
@@ -613,7 +613,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
 
     def test_11_assets_from_invoice(self):
         all_assets = self.env["account.asset"].search([])
-        ctx = dict(self.invoice_2._context)
+        ctx = dict(self.invoice_2.env.context)
         invoice = self.invoice_2.with_context(**ctx)
         asset_profile = self.car5y
         asset_profile.asset_product_item = True

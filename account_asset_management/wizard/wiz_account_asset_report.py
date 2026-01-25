@@ -40,7 +40,7 @@ class WizAccountAssetReport(models.TransientModel):
 
     @api.onchange("company_id")
     def _onchange_company_id(self):
-        fy_dates = self.company_id.compute_fiscalyear_dates(fields.date.today())
+        fy_dates = self.company_id.compute_fiscalyear_dates(fields.Date.today())
         self.date_from = fy_dates["date_from"]
         self.date_to = fy_dates["date_to"]
 

@@ -456,7 +456,8 @@ class AccountAsset(models.Model):
             if self.env.context.get("create_asset_from_move_line"):
                 asset_line.move_id = self.env.context["move_id"]
 
-    def unlink(self):
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_restricted_asset(self):
         for asset in self:
             if asset.state != "draft":
                 raise UserError(
@@ -471,6 +472,8 @@ class AccountAsset(models.Model):
                         "posted depreciation lines."
                     )
                 )
+
+    def unlink(self):
         # update accounting entries linked to lines of type 'create'
         amls = self.with_context(allow_asset_removal=True).mapped(
             "account_move_line_ids"
@@ -905,9 +908,8 @@ class AccountAsset(models.Model):
             else:
                 return year_amount_degressive
         else:
-            raise UserError(
-                self.env._("Illegal value %s in asset.method.") % self.method
-            )
+            msg = self.env._("Illegal value %s in asset.method.")
+            raise UserError(msg % self.method)
 
     def _compute_line_dates(self, table, start_date, stop_date):
         """
@@ -1211,12 +1213,14 @@ class AccountAsset(models.Model):
                 asset_ref = depreciation.asset_id.name
                 if depreciation.asset_id.code:
                     asset_ref = f"[{depreciation.asset_id.code}] {asset_ref}"
-                error_log += self.env._(
-                    "\nError while processing asset '{ref}': {exception}"
-                ).format(ref=asset_ref, exception=str(e))
-                error_msg = self.env._(
-                    "Error while processing asset '{ref}': \n\n{tb}"
-                ).format(ref=asset_ref, tb=tb)
+                msg_log = self.env._(
+                    "\nError while processing asset '%(ref)s': %(exception)s"
+                )
+                error_log += msg_log % {"ref": asset_ref, "exception": str(e)}
+                msg_err = self.env._(
+                    "Error while processing asset '%(ref)s': \n\n%(tb)s"
+                )
+                error_msg = msg_err % {"ref": asset_ref, "tb": tb}
                 _logger.error("%s, %s", self._name, error_msg)
 
         if check_triggers and recomputes:
