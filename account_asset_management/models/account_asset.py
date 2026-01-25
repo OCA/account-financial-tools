@@ -398,8 +398,7 @@ class AccountAsset(models.Model):
         if self.depreciation_line_ids.filtered("move_id"):
             raise UserError(
                 self.env._(
-                    "You cannot change the profile of an asset "
-                    "with accounting entries."
+                    "You cannot change the profile of an asset with accounting entries."
                 )
             )
 

@@ -188,9 +188,7 @@ class AccountAssetRemove(models.TransientModel):
 
         if self.date_remove < last_date:
             raise UserError(
-                self.env._(
-                    "The removal date must be after " "the last depreciation date."
-                )
+                self.env._("The removal date must be after the last depreciation date.")
             )
 
         line_name = asset._get_depreciation_entry_name(len(dlines) + 1)
