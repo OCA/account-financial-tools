@@ -12,8 +12,7 @@ class AccountAssetCompute(models.TransientModel):
         string="Date",
         required=True,
         default=fields.Date.today,
-        help="All depreciation lines prior to this date will be automatically"
-        " posted",
+        help="All depreciation lines prior to this date will be automatically posted",
     )
     note = fields.Text()
 
