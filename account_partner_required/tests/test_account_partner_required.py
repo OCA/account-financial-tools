@@ -56,7 +56,7 @@ class TestAccountPartnerRequired(TransactionCase):
 
     def _create_move(self, with_partner, amount=100):
         if with_partner:
-            partner_id = self.partner
+            partner_id = self.partner.id
         else:
             partner_id = False
         move_vals = {
