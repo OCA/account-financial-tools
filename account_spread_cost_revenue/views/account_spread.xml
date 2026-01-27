@@ -42,8 +42,7 @@
                             icon="fa-bars"
                             type="object"
                             string="Posted entries"
-                        >
-                        </button>
+                        />
                     </div>
                     <widget
                         name="web_ribbon"
@@ -93,7 +92,7 @@
                                     invisible="invoice_type not in ['out_invoice','in_refund']"
                                 >
                                       The Balance Sheet account used for the spreading.<br
-                                    />This account is the counterpart of the account in the invoice line.
+                                />This account is the counterpart of the account in the invoice line.
                                 </span>
                                 <span
                                     class="help-block"
@@ -101,7 +100,7 @@
                                     invisible="invoice_type not in ['in_invoice','out_refund']"
                                 >
                                       The Expense account in the vendor bill line.<br
-                                    />Usually the same account of the vendor bill line.
+                                />Usually the same account of the vendor bill line.
                                 </span>
                             </div>
                             <div invisible="not use_invoice_line_account" colspan="3">
@@ -111,7 +110,7 @@
                                     invisible="invoice_type not in ['out_invoice','in_refund']"
                                 >
                                       The Balance Sheet account.<br
-                                    />This is the account in the invoice line.
+                                />This is the account in the invoice line.
                                 </span>
                                 <span
                                     class="help-block"
@@ -119,7 +118,7 @@
                                     invisible="invoice_type not in ['in_invoice','out_refund']"
                                 >
                                       The Expense account used for the spreading.<br
-                                    />This account is the counterpart of the account of the vendor bill line.
+                                />This account is the counterpart of the account of the vendor bill line.
                                 </span>
                             </div>
                             <field
@@ -157,7 +156,7 @@
                                     invisible="invoice_type not in ['out_invoice','in_refund']"
                                 >
                                       The Revenue account in the invoice line.<br
-                                    />Usually the same account of the invoice line.
+                                />Usually the same account of the invoice line.
                                 </span>
                                 <span
                                     class="help-block"
@@ -165,7 +164,7 @@
                                     invisible="invoice_type not in ['in_invoice','out_refund']"
                                 >
                                       The Balance Sheet account used for the spreading.<br
-                                    />This account is the counterpart of the account in the vendor bill line.
+                                />This account is the counterpart of the account in the vendor bill line.
                                 </span>
                             </div>
                             <div invisible="not use_invoice_line_account" colspan="3">
@@ -175,7 +174,7 @@
                                     invisible="invoice_type not in ['out_invoice','in_refund']"
                                 >
                                       The Revenue account used for the spreading.<br
-                                    />This account is the counterpart of the account of the invoice line.
+                                />This account is the counterpart of the account of the invoice line.
                                 </span>
                                 <span
                                     class="help-block"
@@ -183,7 +182,7 @@
                                     invisible="invoice_type not in ['in_invoice','out_refund']"
                                 >
                                       The Balance Sheet account.<br
-                                    />This is the account in the vendor bill line.
+                                />This is the account in the vendor bill line.
                                 </span>
                             </div>
                             <field
@@ -279,8 +278,7 @@
                                 </list>
                             </field>
                             <group name="extension">
-                                <group name="extension_left">
-                                </group>
+                                <group name="extension_left" />
                                 <group name="extension_right">
                                     <field
                                         name="display_create_all_moves"
@@ -333,7 +331,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <chatter/>
+                <chatter />
             </form>
         </field>
     </record>

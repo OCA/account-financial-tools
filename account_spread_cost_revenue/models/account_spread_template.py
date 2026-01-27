@@ -86,10 +86,7 @@ class AccountSpreadTemplate(models.Model):
             for line in rec.auto_spread_ids:
                 if not line.product_id and not line.account_id:
                     raise UserError(
-                        _(
-                            "Please select product and/or account "
-                            "on auto spread options"
-                        )
+                        _("Please select product and/or account on auto spread options")
                     )
 
     @api.depends("spread_type", "company_id")

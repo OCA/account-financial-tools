@@ -4,8 +4,7 @@
         <field name="model">account.spread.template</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                </header>
+                <header />
                 <sheet>
                     <div class="oe_title">
                         <label for="name" string="Spread Template Name" />

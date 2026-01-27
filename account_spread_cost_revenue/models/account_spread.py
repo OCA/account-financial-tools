@@ -527,9 +527,9 @@ class AccountSpread(models.Model):
 
     def _message_post_unlink_invoice_line(self):
         for spread in self:
-            inv_link = (
-                "<a href=# data-oe-model=account.move "
-                "data-oe-id=%d>%s</a>" % (spread.invoice_id.id, _("Invoice"))
+            inv_link = "<a href=# data-oe-model=account.move data-oe-id=%d>%s</a>" % (
+                spread.invoice_id.id,
+                _("Invoice"),
             )
             msg_body = _(
                 "Unlinked invoice line '%(spread_line_name)s' (view %(inv_link)s)."
