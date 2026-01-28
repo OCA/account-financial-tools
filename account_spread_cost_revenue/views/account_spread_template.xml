@@ -31,7 +31,7 @@
                             <field name="use_invoice_line_account" />
                             <field
                                 name="spread_account_id"
-                                domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
+                                domain="[('active', '=', True), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                                 options="{'no_create': True}"
                                 required="not use_invoice_line_account"
                                 invisible="use_invoice_line_account"
@@ -40,7 +40,7 @@
                                 name="exp_rev_account_id"
                                 invisible="not use_invoice_line_account"
                                 required="use_invoice_line_account"
-                                domain="[('deprecated', '=', False)]"
+                                domain="[('active', '=', True)]"
                                 options="{'no_create': True}"
                             />
                             <field name="spread_journal_id" widget="selection" />

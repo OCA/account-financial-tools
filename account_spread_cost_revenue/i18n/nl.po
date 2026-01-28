@@ -20,8 +20,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
 "<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
-"is_credit_account_deprecated\">\n"
-"                                  This account in deprecated! The "
+"is_credit_account_archived\">\n"
+"                                  This account is archived! The "
 "reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
@@ -30,8 +30,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
 "<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
-"is_debit_account_deprecated\">\n"
-"                                  This account in deprecated! The "
+"is_debit_account_archived\">\n"
+"                                  This account is archived! The "
 "reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
@@ -577,13 +577,13 @@ msgid "Invoice line"
 msgstr "Factuur regel"
 
 #. module: account_spread_cost_revenue
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_credit_account_deprecated
-msgid "Is Credit Account Deprecated"
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_credit_account_archived
+msgid "Is Credit Account Archived"
 msgstr "Is Credit Grootboekrekening Verouderd"
 
 #. module: account_spread_cost_revenue
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_debit_account_deprecated
-msgid "Is Debit Account Deprecated"
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_debit_account_archived
+msgid "Is Debit Account Archived"
 msgstr "Is Debet Grootboekrekening Verouderd"
 
 #. module: account_spread_cost_revenue

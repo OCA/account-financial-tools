@@ -1,7 +1,7 @@
 # Copyright 2018-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -85,9 +85,8 @@ class AccountSpreadTemplate(models.Model):
         for rec in self.filtered("auto_spread"):
             for line in rec.auto_spread_ids:
                 if not line.product_id and not line.account_id:
-                    raise UserError(
-                        _("Please select product and/or account on auto spread options")
-                    )
+                    msg = "Please select product and/or account on auto spread options"
+                    raise UserError(self.env._(msg))
 
     @api.depends("spread_type", "company_id")
     def _compute_spread_journal(self):

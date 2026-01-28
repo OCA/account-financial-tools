@@ -3,7 +3,7 @@
 
 from markupsafe import Markup
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -30,10 +30,12 @@ class AccountInvoiceSpreadLine(models.Model):
             created_moves = grouped_lines[spread]._create_moves()
             spread._post_spread_moves(created_moves)
             if created_moves:
-                post_msg = _("Created move(s) ")
+                post_msg = self.env._("Created move(s) ")
                 post_msg += ", ".join(
-                    "<a href=# data-oe-model=account.move data-oe-id=%d"
-                    ">%s</a>" % (move.id, move.name)
+                    (
+                        f"<a href=# data-oe-model=account.move "
+                        f"data-oe-id={move.id}>{move.name}</a>"
+                    )
                     for move in created_moves
                 )
                 spread.message_post(body=Markup(post_msg))
@@ -48,7 +50,7 @@ class AccountInvoiceSpreadLine(models.Model):
     def _create_moves(self):
         if self.filtered(lambda x: x.move_id):
             raise UserError(
-                _(
+                self.env._(
                     "This spread line is already linked to a "
                     "journal entry! Please post or delete it."
                 )
@@ -131,7 +133,7 @@ class AccountInvoiceSpreadLine(models.Model):
         """Used by a button to manually view a move from a spread line entry."""
         self.ensure_one()
         return {
-            "name": _("Journal Entry"),
+            "name": self.env._("Journal Entry"),
             "view_mode": "form",
             "res_model": "account.move",
             "view_id": False,
@@ -146,7 +148,7 @@ class AccountInvoiceSpreadLine(models.Model):
             if move.state == "posted":
                 move.button_cancel()
             move.line_ids.remove_move_reconcile()
-            post_msg = _("Deleted move %s") % line.move_id.id
+            post_msg = self.env._("Deleted move %s", move.name)
             move.with_context(force_delete=True).unlink()
             line.move_id = False
             line.spread_id.message_post(body=post_msg)

@@ -1,7 +1,7 @@
 # Copyright 2018-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
@@ -11,11 +11,11 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
     @api.model
     def _selection_spread_action_type(self):
         base_selection = [
-            ("template", _("Create from spread template")),
-            ("new", _("Create new spread board")),
+            ("template", self.env._("Create from spread template")),
+            ("new", self.env._("Create new spread board")),
         ]
         if self.env.context.get("allow_spread_planning"):
-            base_selection.append(("link", _("Link to existing spread board")))
+            base_selection.append(("link", self.env._("Link to existing spread board")))
         return base_selection
 
     @api.model
@@ -142,7 +142,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                 self.invoice_line_id.spread_id = self.spread_id
 
             return {
-                "name": _("Spread Details"),
+                "name": self.env._("Spread Details"),
                 "view_mode": "form",
                 "res_model": "account.spread",
                 "type": "ir.actions.act_window",
@@ -165,7 +165,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
             date_invoice = self.invoice_id.invoice_date or fields.Date.today()
 
             return {
-                "name": _("New Spread Board"),
+                "name": self.env._("New Spread Board"),
                 "view_type": "form",
                 "view_mode": "form",
                 "res_model": "account.spread",
@@ -218,7 +218,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
 
                 self.invoice_line_id.spread_id = spread
             return {
-                "name": _("Spread Details"),
+                "name": self.env._("Spread Details"),
                 "view_mode": "form",
                 "res_model": "account.spread",
                 "type": "ir.actions.act_window",

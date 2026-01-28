@@ -20,8 +20,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
 "<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
-"is_credit_account_deprecated\">\n"
-"                                  This account in deprecated! The "
+"is_credit_account_archived\">\n"
+"                                  This account is archived! The "
 "reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
@@ -30,8 +30,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid ""
 "<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
-"is_debit_account_deprecated\">\n"
-"                                  This account in deprecated! The "
+"is_debit_account_archived\">\n"
+"                                  This account is archived! The "
 "reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
@@ -584,15 +584,15 @@ msgid "Invoice line"
 msgstr "Ligne de facture"
 
 #. module: account_spread_cost_revenue
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_credit_account_deprecated
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_credit_account_archived
 #, fuzzy
-msgid "Is Credit Account Deprecated"
-msgstr "Est compte de crédit obsolète"
+msgid "Is Credit Account Archived"
+msgstr "Est compte de crédit archivé"
 
 #. module: account_spread_cost_revenue
-#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_debit_account_deprecated
-msgid "Is Debit Account Deprecated"
-msgstr "Est compte de débit obsolète"
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_debit_account_archived
+msgid "Is Debit Account Archived"
+msgstr "Est compte de débit archivé"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_is_follower
@@ -1130,26 +1130,26 @@ msgstr "p. ex. Modèle contrat nettoyage"
 
 #~ msgid ""
 #~ "<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-#~ "[('is_credit_account_deprecated','!=',True)]}\">\n"
-#~ "                                  This account in deprecated! The "
+#~ "[('is_credit_account_archived','!=',True)]}\">\n"
+#~ "                                  This account is archived! The "
 #~ "reconciliation will be NOT possible.\n"
 #~ "                            </span>"
 #~ msgstr ""
 #~ "<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-#~ "[('is_credit_account_deprecated','!=',True)]}\">\n"
+#~ "[('is_credit_account_archived','!=',True)]}\">\n"
 #~ "                                  Ce compte est obsolète! Le lettrage ne "
 #~ "sera PAS possible.\n"
 #~ "                            </span>"
 
 #~ msgid ""
 #~ "<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-#~ "[('is_debit_account_deprecated','!=',True)]}\">\n"
-#~ "                                  This account in deprecated! The "
+#~ "[('is_debit_account_archived','!=',True)]}\">\n"
+#~ "                                  This account is archived! The "
 #~ "reconciliation will be NOT possible.\n"
 #~ "                            </span>"
 #~ msgstr ""
 #~ "<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-#~ "[('is_debit_account_deprecated','!=',True)]}\">\n"
+#~ "[('is_debit_account_archived','!=',True)]}\">\n"
 #~ "                                  Ce compte est obsolète! Le lettrage ne "
 #~ "sera PAS possible.\n"
 #~ "                            </span>"

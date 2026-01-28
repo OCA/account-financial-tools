@@ -72,7 +72,7 @@
                     </group>
                     <group name="accounts">
                         <group name="debits">
-                            <field name="is_debit_account_deprecated" invisible="1" />
+                            <field name="is_debit_account_archived" invisible="1" />
                             <label
                                 for="debit_account_id"
                                 colspan="3"
@@ -124,19 +124,19 @@
                             <field
                                 name="debit_account_id"
                                 required="1"
-                                domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
+                                domain="[('active', '=', True), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                                 readonly="invoice_line_id"
                             />
                             <span
                                 class="help-block text-danger"
                                 colspan="2"
-                                invisible="not is_debit_account_deprecated"
+                                invisible="not is_debit_account_archived"
                             >
-                                  This account in deprecated! The reconciliation will be NOT possible.
+                                  This account in archived! The reconciliation will be NOT possible.
                             </span>
                         </group>
                         <group name="credits">
-                            <field name="is_credit_account_deprecated" invisible="1" />
+                            <field name="is_credit_account_archived" invisible="1" />
                             <label
                                 for="credit_account_id"
                                 colspan="3"
@@ -188,15 +188,15 @@
                             <field
                                 name="credit_account_id"
                                 required="1"
-                                domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
+                                domain="[('active', '=', True), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                                 readonly="invoice_line_id"
                             />
                             <span
                                 class="help-block text-danger"
                                 colspan="2"
-                                invisible="not is_credit_account_deprecated"
+                                invisible="not is_credit_account_archived"
                             >
-                                  This account in deprecated! The reconciliation will be NOT possible.
+                                  This account is archived! The reconciliation will be NOT possible.
                             </span>
                         </group>
                     </group>
