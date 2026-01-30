@@ -1,9 +1,9 @@
 #  Copyright 2020 Simone Rubino - Agile Business Group
 #  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class AccountFiscalYear(models.Model):
@@ -39,19 +39,20 @@ class AccountFiscalYear(models.Model):
             date_to = fy.date_to
             if date_to < date_from:
                 raise ValidationError(
-                    _("The ending date must not be prior to the starting date.")
+                    self.env._(
+                        "The ending date must not be prior to the starting date."
+                    )
                 )
 
             domain = fy._get_overlapping_domain()
             overlapping_fy = self.search(domain, limit=1)
             if overlapping_fy:
                 raise ValidationError(
-                    _(
-                        "This fiscal year '{fy}' "
-                        "overlaps with '{overlapping_fy}'.\n"
+                    self.env._(
+                        "This fiscal year '%(fy)s' "
+                        "overlaps with '%(overlapping_fy)s'.\n"
                         "Please correct the start and/or end dates "
-                        "of your fiscal years."
-                    ).format(
+                        "of your fiscal years.",
                         fy=fy.display_name,
                         overlapping_fy=overlapping_fy.display_name,
                     )
@@ -64,36 +65,44 @@ class AccountFiscalYear(models.Model):
         """
         self.ensure_one()
         # Compare with other fiscal years defined for this company
-        company_domain = [
-            ("id", "!=", self.id),
-            ("company_id", "=", self.company_id.id),
-        ]
+        company_domain = Domain(
+            [
+                ("id", "not in", self.ids),
+                ("company_id", "=", self.company_id.id),
+            ]
+        )
 
         date_from = self.date_from
         date_to = self.date_to
         # Search fiscal years intersecting with current fiscal year.
         # This fiscal year's `from` is contained in another fiscal year
         # other.from <= fy.from <= other.to
-        intersection_domain_from = [
-            "&",
-            ("date_from", "<=", date_from),
-            ("date_to", ">=", date_from),
-        ]
+        intersection_domain_from = Domain(
+            [
+                "&",
+                ("date_from", "<=", date_from),
+                ("date_to", ">=", date_from),
+            ]
+        )
         # This fiscal year's `to` is contained in another fiscal year
         # other.from <= fy.to <= other.to
-        intersection_domain_to = [
-            "&",
-            ("date_from", "<=", date_to),
-            ("date_to", ">=", date_to),
-        ]
+        intersection_domain_to = Domain(
+            [
+                "&",
+                ("date_from", "<=", date_to),
+                ("date_to", ">=", date_to),
+            ]
+        )
         # This fiscal year completely contains another fiscal year
         # fy.from <= other.from (or other.to) <= fy.to
-        intersection_domain_contain = [
-            "&",
-            ("date_from", ">=", date_from),
-            ("date_from", "<=", date_to),
-        ]
-        intersection_domain = expression.OR(
+        intersection_domain_contain = Domain(
+            [
+                "&",
+                ("date_from", ">=", date_from),
+                ("date_from", "<=", date_to),
+            ]
+        )
+        intersection_domain = Domain.OR(
             [
                 intersection_domain_from,
                 intersection_domain_to,
@@ -101,12 +110,7 @@ class AccountFiscalYear(models.Model):
             ]
         )
 
-        return expression.AND(
-            [
-                company_domain,
-                intersection_domain,
-            ]
-        )
+        return Domain.AND([company_domain, intersection_domain])
 
     @api.model
     def _get_fiscal_year(self, company, date_from, date_to):

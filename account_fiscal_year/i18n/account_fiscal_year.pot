@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,6 +40,7 @@ msgstr ""
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__display_name
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -76,6 +77,7 @@ msgstr ""
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__id
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__id
 msgid "ID"
 msgstr ""
 
@@ -119,6 +121,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
 msgid ""
-"This fiscal year '{fy}' overlaps with '{overlapping_fy}'.\n"
+"This fiscal year '%(fy)s' overlaps with '%(overlapping_fy)s'.\n"
 "Please correct the start and/or end dates of your fiscal years."
 msgstr ""
