@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-03-30 12:22+0000\n"
+"PO-Revision-Date: 2026-06-07 21:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_move_name_sequence
 #: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
@@ -53,7 +53,7 @@ msgstr "Zaporedje vnosa"
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_journal__has_sequence_holes
 msgid "Has Sequence Holes"
-msgstr ""
+msgstr "Vsebuje luknje v zaporedju"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__highest_name
@@ -69,13 +69,13 @@ msgstr "Dnevnik"
 #. module: account_move_name_sequence
 #: model:ir.model,name:account_move_name_sequence.model_account_move
 msgid "Journal Entry"
-msgstr "Dnevniški vnos"
+msgstr "Temeljnica"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_hole
 msgid "Made Sequence Hole"
-msgstr ""
+msgstr "Generirana luknja v zaporedju"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
@@ -107,12 +107,12 @@ msgstr "Zaporedje"
 #. module: account_move_name_sequence
 #: model:account.journal,name:account_move_name_sequence.journal_cash_std_demo
 msgid "Standard Cash Journal Demo"
-msgstr ""
+msgstr "Demo za standardni gotovinski dnevnik"
 
 #. module: account_move_name_sequence
 #: model:account.journal,name:account_move_name_sequence.journal_sale_std_demo
 msgid "Standard Sale Journal Demo"
-msgstr ""
+msgstr "Demo za standardni prodajni dnevnik"
 
 #. module: account_move_name_sequence
 #. odoo-python
@@ -121,6 +121,8 @@ msgid ""
 "The company is not set on sequence '%(sequence)s' configured as credit note "
 "sequence of journal '%(journal)s'."
 msgstr ""
+"Pri zaporedju '%(sequence)s' za dobropise v dnevniku '%(journal)s' ni "
+"nastavljena družba."
 
 #. module: account_move_name_sequence
 #. odoo-python
@@ -129,6 +131,8 @@ msgid ""
 "The company is not set on sequence '%(sequence)s' configured on journal "
 "'%(journal)s'."
 msgstr ""
+"Pri zaporedju '%(sequence)s' nastavljenem v dnevniku '%(journal)s' ni "
+"nastavljena družba."
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence_id
