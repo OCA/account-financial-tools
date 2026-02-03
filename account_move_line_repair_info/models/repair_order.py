@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class RepairOrder(models.Model):
-
     _inherit = "repair.order"
 
     account_move_line_ids = fields.One2many(

@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     def _stock_account_prepare_anglo_saxon_out_lines_vals(self):
@@ -77,11 +76,10 @@ class AccountMove(models.Model):
                                 "repair_order_id": rorder.id,
                             }
                         )
-        return super(AccountMove, self).create(values)
+        return super().create(values)
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = "account.move.line"
 
     repair_order_id = fields.Many2one(

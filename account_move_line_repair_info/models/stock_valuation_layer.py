@@ -5,7 +5,6 @@ from odoo import models
 
 
 class StockValuationLayer(models.Model):
-
     _inherit = "stock.valuation.layer"
 
     def _validate_accounting_entries(self):
