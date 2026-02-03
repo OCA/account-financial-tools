@@ -15,7 +15,7 @@ class AssetAssetReport(models.Model):
         ]
 
     date = fields.Date(readonly=True)
-    depreciation_date = fields.Date(string='Depreciation Date', readonly=True)
+    depreciation_date = fields.Date(readonly=True)
     asset_id = fields.Many2one(
         comodel_name="account.asset",
         string="Asset",
@@ -49,7 +49,6 @@ class AssetAssetReport(models.Model):
         comodel_name="res.company", string="Company", readonly=True
     )
 
-    @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self._cr, "account_asset_report")
         self._cr.execute(
