@@ -95,7 +95,6 @@
     <record model="ir.actions.act_window" id="action_account_asset_report">
         <field name="name">Assets Analysis</field>
         <field name="res_model">account.asset.report</field>
-        <field name="view_type">form</field>
         <field name="view_mode">pivot,graph</field>
         <field name="search_view_id" ref="view_account_asset_report_search" />
         <field name="context">{'search_default_only_active': 1}</field>
@@ -108,10 +107,10 @@
     </record>
 
     <menuitem
-        name="Assets"
+        name="Assets analysis"
         action="action_account_asset_report"
         id="menu_action_account_asset_report"
-        parent="account.menu_finance_reports"
+        parent="account_asset_report_menu"
         sequence="21"
     />
 </odoo>
