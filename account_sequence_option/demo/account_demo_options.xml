@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- Demo Sequences -->
 
     <record id="seq_customer_invoice_1" model="ir.sequence">
@@ -91,5 +90,4 @@
         >[("move_type", "=", "entry"), ("origin_payment_id.payment_type", "=", "outbound")]</field>
         <field name="sequence_id" ref="seq_vendor_payment_1" />
     </record>
-
 </odoo>
