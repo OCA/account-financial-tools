@@ -14,11 +14,24 @@ class TestAccountSequenceOption(common.TransactionCase):
         super().setUpClass()
         cls.AccountMove = cls.env["account.move"]
         cls.AccountMoveLine = cls.env["account.move.line"]
-        cls.partner_id = cls.env.ref("base.res_partner_1")
-        cls.product_id_1 = cls.env.ref("product.product_product_6")
+        cls.partner_id = cls.env["res.partner"].create({"name": "Test Partner"})
+        cls.product_id_1 = cls.env["product.product"].create({"name": "Test Product"})
         cls.account_seq_opt1 = cls.env.ref("account_sequence_option.account_sequence")
         cls.pay_in = cls.env.ref("account.account_payment_method_manual_in")
         cls.pay_out = cls.env.ref("account.account_payment_method_manual_out")
+        # Ensure the journal doesn't lock the entry upon posting to allow
+        # resetting to draft for testing purposes.
+        cls.journal = cls.env["account.journal"].search(
+            [("type", "=", "sale")], limit=1
+        )
+        cls.journal.update(
+            {
+                "restrict_mode_hash_table": False,
+                "suspense_account_id": cls.env["account.account"]
+                .search([("account_type", "=", "asset_current")], limit=1)
+                .id,
+            }
+        )
 
     @classmethod
     def _create_invoice(self, move_type):
@@ -54,7 +67,6 @@ class TestAccountSequenceOption(common.TransactionCase):
         # 1. Customer Invoice
         self.invoice = self._create_invoice("out_invoice")
         self.invoice.action_post()
-        self.invoice._compute_name()
         name = hasattr(self.env["account.journal"], "sequence_id") and "INV" or "CINV"
         self.assertIn(name, self.invoice.name)
         # 2. Vendor Bill
