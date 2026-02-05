@@ -30,11 +30,22 @@ class _OverwritingTranslationImporter(TranslationImporter):
                 if not callable(self.env[mname]._fields[fname].translate):
                     continue
                 for xml_id, langs in xml_ids.items():
-                    src = str(self.env.ref(xml_id).with_context(lang="en_US")[fname])
+                    src_value = self.env.ref(xml_id).with_context(lang="en_US")[fname]
+                    src = str(src_value) if src_value else False
                     for lang, translation in langs.items():
-                        self.model_terms_translations[mname][fname][xml_id][src][
-                            lang
-                        ] = translation
+                        # We should only use model_terms_translations if there is a
+                        # value (src), otherwise the translation of this field will
+                        # not be saved.
+                        # If the data is empty in the database (null), the value will
+                        # be defined directly.
+                        if src:
+                            self.model_terms_translations[mname][fname][xml_id][src][
+                                lang
+                            ] = translation
+                        else:
+                            self.env.ref(xml_id).with_context(lang=lang)[fname] = (
+                                translation
+                            )
 
         return super().save(overwrite=True, force_overwrite=True)
 
