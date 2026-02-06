@@ -124,7 +124,7 @@
             <search>
                 <field name="loan_id" />
                 <field name="partner_id" />
-                <group expand='0' string='Group by...'>
+                <group>
                     <filter
                         string='Loan'
                         name="group_by_loan_id"

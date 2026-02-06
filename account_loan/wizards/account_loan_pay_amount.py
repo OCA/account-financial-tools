@@ -36,6 +36,7 @@ class AccountLoan(models.TransientModel):
                 )
             )
 
+    @api.private
     def new_line_vals(self, sequence):
         return {
             "loan_id": self.loan_id.id,

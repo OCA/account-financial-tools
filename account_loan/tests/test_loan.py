@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
+from unittest.mock import patch
 
 from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
@@ -200,7 +201,9 @@ class TestLoan(BaseCommon):
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
-        self.assertIn(line.move_ids.id, action["domain"][0][2])
+
+        self.assertEqual(list(action["domain"]), [("id", "in", line.move_ids.ids)])
+
         self.assertTrue(line.move_ids)
         self.assertEqual(line.move_ids.state, "posted")
         with self.assertRaises(UserError):
@@ -248,7 +251,7 @@ class TestLoan(BaseCommon):
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
-        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        self.assertEqual(list(action["domain"]), [("id", "in", line.move_ids.ids)])
         self.assertTrue(line.move_ids)
         self.assertEqual(line.move_ids.state, "posted")
         with self.assertRaises(UserError):
@@ -301,7 +304,7 @@ class TestLoan(BaseCommon):
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
-        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        self.assertEqual(list(action["domain"]), [("id", "in", line.move_ids.ids)])
         self.assertTrue(line.move_ids)
         self.assertEqual(line.move_ids.state, "posted")
         pending_principal_amount = loan.pending_principal_amount
@@ -347,7 +350,7 @@ class TestLoan(BaseCommon):
         self.assertFalse(line.move_ids)
         wzd = self.env["account.loan.generate.wizard"].create(
             {
-                "date": fields.date.today() + relativedelta(days=1),
+                "date": fields.Date.today() + relativedelta(days=1),
                 "loan_type": "leasing",
             }
         )
@@ -355,7 +358,7 @@ class TestLoan(BaseCommon):
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
-        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        self.assertEqual(list(action["domain"]), [("id", "in", line.move_ids.ids)])
         self.assertTrue(line.move_ids)
         self.assertEqual(line.move_ids.state, "posted")
         pending_principal_amount = loan.pending_principal_amount
@@ -405,7 +408,7 @@ class TestLoan(BaseCommon):
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
-        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        self.assertEqual(list(action["domain"]), [("id", "in", line.move_ids.ids)])
         self.assertTrue(line.move_ids)
         self.assertEqual(line.move_ids.state, "posted")
         loan.rate = 2
@@ -455,7 +458,7 @@ class TestLoan(BaseCommon):
         self.assertTrue(action)
         self.assertFalse(wzd.run())
         self.assertTrue(line.move_ids)
-        self.assertIn(line.move_ids.id, action["domain"][0][2])
+        self.assertEqual(list(action["domain"]), [("id", "in", line.move_ids.ids)])
         self.assertTrue(line.move_ids)
         self.assertEqual(line.move_ids.state, "posted")
         loan.rate = 2
@@ -504,7 +507,7 @@ class TestLoan(BaseCommon):
             self.env["account.loan.generate.wizard"]
             .create(
                 {
-                    "date": fields.date.today() + relativedelta(days=1),
+                    "date": fields.Date.today() + relativedelta(days=1),
                     "loan_type": "leasing",
                 }
             )
@@ -606,7 +609,7 @@ class TestLoan(BaseCommon):
         self.assertFalse(line.has_invoices)
         self.assertFalse(line.has_moves)
         self.env["account.loan.generate.wizard"].create(
-            {"date": fields.date.today(), "loan_type": "leasing"}
+            {"date": fields.Date.today(), "loan_type": "leasing"}
         ).run()
         self.assertTrue(line.has_invoices)
         self.assertTrue(line.has_moves)
@@ -675,6 +678,70 @@ class TestLoan(BaseCommon):
         loan.button_draft()
         self.assertEqual(loan.state, "draft")
 
+    def test_loan_onchange_rate_posted_warning(self):
+        loan = self.create_loan("fixed-annuity", 10000, 1, 12)
+        self.post(loan)
+        loan.rate = 2.0
+        res = loan._onchange_rate_warning()
+        self.assertTrue(res.get("warning"))
+        self.assertEqual(res["warning"]["title"], "Rate Change")
+
+    def test_loan_fixed_amount_computation(self):
+        """Testing _compute_fixed_amount"""
+        loan = self.create_loan("fixed-annuity-begin", 10000, 1, 12)
+        self.assertNotEqual(loan.fixed_amount, 0.0)
+        with Form(loan) as loan_form:
+            loan_form.loan_type = "interest"
+        self.assertEqual(loan.fixed_amount, 0.0)
+
+    def test_loan_post_without_computed_lines(self):
+        loan = self.create_loan("fixed-annuity", 10000, 1, 12, compute_lines=False)
+        self.assertFalse(loan.line_ids)
+        loan.post()
+        self.assertTrue(loan.line_ids)
+        self.assertEqual(loan.state, "posted")
+
+    def test_loan_compute_posted_no_long_term(self):
+        """Test _compute_posted_lines"""
+        loan = self.create_loan("fixed-annuity", 10000, 1, 12)
+        loan.long_term_loan_account_id = False
+        self.post(loan)
+
+        with patch(
+            "odoo.addons.account_loan.models.account_loan"
+            ".AccountLoan._check_long_term_principal_amount"
+        ) as patch_long_term_comput:
+            loan.compute_lines()
+            patch_long_term_comput.assert_not_called()
+
+    def test_loan_line_compute_rate(self):
+        loan = self.create_loan("fixed-annuity", 10000, 1, 12)
+        previous_interests_amount = loan.interests_amount
+        loan.line_ids[0].rate = 2.0
+        self.assertNotEqual(
+            loan.line_ids[0].interests_amount, previous_interests_amount
+        )
+
+    def test_check_amount_on_posted_load_raise(self):
+        loan = self.create_loan("fixed-annuity", 10000, 1, 12)
+        self.post(loan)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        line.view_process_values()
+        with self.assertRaisesRegex(
+            UserError, "mount cannot be recomputed if moves or invoices exists already"
+        ):
+            line._check_amount()
+
+    def test_creating_acctount_entries_idempotency(self):
+        loan = self.create_loan("fixed-annuity", 10000, 1, 12)
+        self.post(loan)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        line.view_process_values()
+        move_ids_count = len(line.move_ids)
+        # Test idempotency to improve coverage
+        line.view_process_values()
+        self.assertEqual(move_ids_count, len(line.move_ids))
+
     def post(self, loan):
         self.assertFalse(loan.move_ids)
         post = (
@@ -699,7 +766,7 @@ class TestLoan(BaseCommon):
             }
         )
 
-    def create_loan(self, type_loan, amount, rate, periods):
+    def create_loan(self, type_loan, amount, rate, periods, compute_lines=True):
         loan = self.env["account.loan"].create(
             {
                 "journal_id": self.journal.id,
@@ -717,5 +784,6 @@ class TestLoan(BaseCommon):
                 "partner_id": self.partner.id,
             }
         )
-        loan.compute_lines()
+        if compute_lines:
+            loan.compute_lines()
         return loan
