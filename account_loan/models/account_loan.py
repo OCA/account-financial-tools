@@ -9,6 +9,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
+from odoo.fields import Domain
 
 _logger = logging.getLogger(__name__)
 try:
@@ -39,7 +40,7 @@ class AccountLoan(models.Model):
     company_id = fields.Many2one(
         "res.company",
         required=True,
-        default=_default_company,
+        default=lambda self: self._default_company(),
     )
     state = fields.Selection(
         [
@@ -203,9 +204,10 @@ class AccountLoan(models.Model):
         default=True, help="Invoices will be posted automatically"
     )
 
-    _sql_constraints = [
-        ("name_uniq", "unique(name, company_id)", "Loan name must be unique"),
-    ]
+    _unique_name = models.Constraint(
+        "unique(name, company_id)",
+        message="Loan name must be unique",
+    )
 
     @api.onchange("rate")
     def _onchange_rate_warning(self):
@@ -327,10 +329,12 @@ class AccountLoan(models.Model):
     @api.onchange("is_leasing")
     def _onchange_is_leasing(self):
         self.journal_id = self.env["account.journal"].search(
-            [
-                ("company_id", "=", self.company_id.id),
-                ("type", "=", "purchase" if self.is_leasing else "general"),
-            ],
+            Domain(
+                [
+                    ("company_id", "=", self.company_id.id),
+                    ("type", "=", "purchase" if self.is_leasing else "general"),
+                ]
+            ),
             limit=1,
         )
         self.residual_amount = 0.0
@@ -457,7 +461,7 @@ class AccountLoan(models.Model):
         result = self.env["ir.actions.act_window"]._for_xml_id(
             "account.action_move_line_form"
         )
-        result["domain"] = [("loan_id", "=", self.id)]
+        result["domain"] = Domain("loan_id", "=", self.id)
         return result
 
     def view_account_invoices(self):
@@ -465,7 +469,9 @@ class AccountLoan(models.Model):
         result = self.env["ir.actions.act_window"]._for_xml_id(
             "account.action_move_in_invoice_type"
         )
-        result["domain"] = [("loan_id", "=", self.id), ("move_type", "=", "in_invoice")]
+        result["domain"] = Domain(
+            [("loan_id", "=", self.id), ("move_type", "=", "in_invoice")]
+        )
         return result
 
     @api.model
@@ -477,7 +483,7 @@ class AccountLoan(models.Model):
         """
         res = []
         for record in self.search(
-            [("state", "=", "posted"), ("is_leasing", "=", False)]
+            Domain([("state", "=", "posted"), ("is_leasing", "=", False)])
         ):
             lines = record.line_ids.filtered(
                 lambda r: r.date <= date and not r.move_ids
@@ -489,7 +495,7 @@ class AccountLoan(models.Model):
     def _generate_leasing_entries(self, date):
         res = []
         for record in self.search(
-            [("state", "=", "posted"), ("is_leasing", "=", True)]
+            Domain([("state", "=", "posted"), ("is_leasing", "=", True)])
         ):
             res += record.line_ids.filtered(
                 lambda r: r.date <= date and not r.move_ids

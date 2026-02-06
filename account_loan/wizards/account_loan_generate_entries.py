@@ -1,6 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import fields, models
+from odoo.fields import Domain
 
 
 class AccountLoanGenerateWizard(models.TransientModel):
@@ -25,7 +26,7 @@ class AccountLoanGenerateWizard(models.TransientModel):
         )
         if len(created_ids) == 0:
             return
-        result["domain"] = [("id", "in", created_ids)]
+        result["domain"] = Domain("id", "in", created_ids)
         return result
 
     def _run_loan(self):
@@ -35,7 +36,7 @@ class AccountLoanGenerateWizard(models.TransientModel):
         )
         if len(created_ids) == 0:
             return
-        result["domain"] = [("id", "in", created_ids)]
+        result["domain"] = Domain("id", "in", created_ids)
         return result
 
     def run(self):

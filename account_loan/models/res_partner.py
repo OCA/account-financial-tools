@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.fields import Domain
 
 
 class ResPartner(models.Model):
@@ -24,7 +25,7 @@ class ResPartner(models.Model):
             "account_loan.account_loan_action"
         )
         all_child = self.with_context(active_test=False).search(
-            [("id", "child_of", self.ids)]
+            Domain("id", "child_of", self.ids)
         )
-        action["domain"] = [("partner_id", "in", all_child.ids)]
+        action["domain"] = Domain("partner_id", "in", all_child.ids)
         return action

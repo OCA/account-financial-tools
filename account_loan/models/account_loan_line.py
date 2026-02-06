@@ -5,6 +5,7 @@ import logging
 
 from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
+from odoo.fields import Domain
 from odoo.tools import float_is_zero
 
 _logger = logging.getLogger(__name__)
@@ -154,7 +155,7 @@ class AccountLoanLine(models.Model):
     @api.depends("loan_id.name", "sequence")
     def _compute_name(self):
         for record in self:
-            record.name = "%s-%d" % (record.loan_id.name, record.sequence)
+            record.name = f"{record.loan_id.name}-{record.sequence}"
 
     @api.depends("principal_amount", "interests_amount")
     def _compute_payment_amount(self):
@@ -487,7 +488,7 @@ class AccountLoanLine(models.Model):
             "default_loan_line_id": self.id,
             "default_loan_id": self.loan_id.id,
         }
-        result["domain"] = [("loan_line_id", "=", self.id)]
+        result["domain"] = Domain("loan_line_id", "=", self.id)
         if len(self.move_ids) == 1:
             res = self.env.ref("account.view_move_form", False)
             result["views"] = [(res and res.id or False, "form")]
@@ -503,9 +504,7 @@ class AccountLoanLine(models.Model):
             "default_loan_line_id": self.id,
             "default_loan_id": self.loan_id.id,
         }
-        result["domain"] = [
-            ("loan_line_id", "=", self.id),
-        ]
+        result["domain"] = Domain("loan_line_id", "=", self.id)
         if len(self.move_ids) == 1:
             res = self.env.ref("account.view_move_form", False)
             result["views"] = [(res and res.id or False, "form")]

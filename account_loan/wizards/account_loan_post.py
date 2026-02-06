@@ -77,6 +77,7 @@ class AccountLoanPost(models.TransientModel):
             )
         return res
 
+    @api.private
     def move_vals(self):
         return {
             "loan_id": self.loan_id.id,
