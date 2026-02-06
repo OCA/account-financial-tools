@@ -3,7 +3,6 @@
      Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="account_loan_search" model="ir.ui.view">
         <field name="name">account.loan.tree</field>
         <field name="model">account.loan</field>
@@ -215,7 +214,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <chatter/>
+                <chatter />
             </form>
         </field>
     </record>

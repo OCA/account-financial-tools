@@ -2,7 +2,6 @@
 <!-- Copyright 2023 Dixmit
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="res_partner_form_view">
         <field name="name">res.partner.form (in account_loan)</field>
         <field name="model">res.partner</field>
@@ -28,7 +27,4 @@
             </div>
         </field>
     </record>
-
-
-
 </odoo>

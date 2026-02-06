@@ -221,7 +221,7 @@ class AccountLoanLine(models.Model):
         if self.move_ids:
             raise UserError(
                 self.env._(
-                    "Amount cannot be recomputed if moves or invoices exists " "already"
+                    "Amount cannot be recomputed if moves or invoices exists already"
                 )
             )
         if (

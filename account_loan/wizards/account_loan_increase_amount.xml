@@ -2,7 +2,6 @@
 <!-- Copyright 2023 Dixmit
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="account_loan_increase_amount_form_view">
         <field name="name">account.loan.increase.amount.form (in account_loan)</field>
         <field name="model">account.loan.increase.amount</field>
@@ -34,6 +33,4 @@
         <field name="context">{'default_loan_id': active_id}</field>
         <field name="target">new</field>
     </record>
-
-
 </odoo>
