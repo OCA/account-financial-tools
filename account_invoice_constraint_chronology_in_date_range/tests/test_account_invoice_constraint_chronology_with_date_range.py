@@ -26,7 +26,7 @@ class TestAccountInvoiceConstraintChronologyWithDateRange(common.TransactionCase
                 "code": "sale.sequence",
                 "padding": 4,
                 "use_date_range": True,
-                "prefix": "INV/%(range_year)s/%(range_month)s/",
+                "prefix": "INV/%(range_year)s/%(range_day)s/",
                 "number_increment": 1,
                 "date_range_ids": [
                     (
