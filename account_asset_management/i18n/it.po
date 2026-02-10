@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2026-02-10 13:02+0000\n"
+"PO-Revision-Date: 2026-02-10 13:20+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-"
 "tools-8-0/language/it/)\n"
@@ -680,7 +680,7 @@ msgstr "Metodo Ammortamento"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Depreciation Month"
-msgstr ""
+msgstr "Mese ammortamento"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__name
@@ -801,6 +801,10 @@ msgid ""
 "            search bar can also be used to personalize your assets "
 "depreciation reporting."
 msgstr ""
+"Da questo resoconto è possibile avere una panoramica di tutti gli "
+"ammortamenti. \n"
+"            La barra di ricerca può essere utilizzata anche per "
+"personalizzare il resoconto sugli ammortamenti dei beni."
 
 #. module: account_asset_management
 #. odoo-python
@@ -832,12 +836,12 @@ msgstr "Genera resoconto"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__gross_value
 msgid "Gross Amount"
-msgstr ""
+msgstr "Importo lordo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Group By"
-msgstr ""
+msgstr "Raggruppa per"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
@@ -1130,7 +1134,7 @@ msgstr "No"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Not archived"
-msgstr ""
+msgstr "Non archiviato"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__note
@@ -1292,7 +1296,7 @@ msgstr "Pro-rata temporis"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Purchase Month"
-msgstr ""
+msgstr "Mese acquisto"
 
 #. module: account_asset_management
 #. odoo-python
