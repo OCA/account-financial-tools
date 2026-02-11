@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="account_loan_line_tree" model="ir.ui.view">
-        <field name="name">account.loan.line.tree</field>
+        <field name="name">account.loan.line.list</field>
         <field name="model">account.loan.line</field>
         <field name="priority">99</field>
         <field name="arch" type="xml">

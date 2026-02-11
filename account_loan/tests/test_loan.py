@@ -792,6 +792,7 @@ class TestLoan(BaseCommon):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
         eur_currency = self.env.ref("base.EUR")
         usd_currency = self.env.ref("base.USD")
+        eur_currency.active = True
         loan.journal_id.currency_id = eur_currency
         loan.currency_id = eur_currency
         loan.company_id.currency_id = usd_currency
@@ -800,7 +801,7 @@ class TestLoan(BaseCommon):
         for line in loan.line_ids:
             self.assertEqual(line.currency_id, loan.currency_id)
 
-        line = fields.first(loan.line_ids)
+        line = loan.line_ids[0]
         line.view_process_values()
 
         move_lines = line.mapped("move_ids.line_ids")
