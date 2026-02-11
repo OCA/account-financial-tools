@@ -724,6 +724,7 @@ class TestLoan(BaseCommon):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
         eur_currency = self.env.ref("base.EUR")
         usd_currency = self.env.ref("base.USD")
+        eur_currency.active = True
         loan.journal_id.currency_id = eur_currency
         loan.currency_id = eur_currency
         loan.company_id.currency_id = usd_currency
