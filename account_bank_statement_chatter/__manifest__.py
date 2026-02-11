@@ -3,10 +3,10 @@
 
 {
     "name": "Chatter on bank statements",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Invoices & Payments",
     "license": "AGPL-3",
-    "author": "Trey, " "Odoo Community Association (OCA)",
+    "author": "Trey, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": [
         "account_statement_base",
