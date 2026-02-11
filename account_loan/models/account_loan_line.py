@@ -33,9 +33,6 @@ class AccountLoanLine(models.Model):
         store=True,
     )
     partner_id = fields.Many2one("res.partner", related="loan_id.partner_id")
-    is_leasing = fields.Boolean(
-        related="loan_id.is_leasing",
-    )
     journal_id = fields.Many2one(
         "account.journal",
         related="loan_id.journal_id",
@@ -48,8 +45,8 @@ class AccountLoanLine(models.Model):
         "account.account",
         related="loan_id.interest_expenses_account_id",
     )
-    loan_type = fields.Selection(
-        related="loan_id.loan_type",
+    loan_method = fields.Selection(
+        related="loan_id.loan_method",
     )
     loan_state = fields.Selection(
         related="loan_id.state",
@@ -124,7 +121,6 @@ class AccountLoanLine(models.Model):
         inverse_name="loan_line_id",
     )
     has_moves = fields.Boolean(compute="_compute_has_moves")
-    has_invoices = fields.Boolean(compute="_compute_has_invoices")
 
     @api.depends("interests_amount")
     def _compute_rate(self):
@@ -146,11 +142,6 @@ class AccountLoanLine(models.Model):
     def _compute_has_moves(self):
         for record in self:
             record.has_moves = bool(record.move_ids)
-
-    @api.depends("move_ids")
-    def _compute_has_invoices(self):
-        for record in self:
-            record.has_invoices = bool(record.move_ids)
 
     @api.depends("loan_id.name", "sequence")
     def _compute_name(self):
@@ -185,17 +176,17 @@ class AccountLoanLine(models.Model):
                 + self.interests_amount
                 - self.loan_id.residual_amount
             )
-        if self.loan_type == "fixed-principal" and self.loan_id.round_on_end:
+        if self.loan_method == "fixed-principal" and self.loan_id.round_on_end:
             return self.loan_id.fixed_amount + self.interests_amount
-        if self.loan_type == "fixed-principal":
+        if self.loan_method == "fixed-principal":
             return (self.pending_principal_amount - self.loan_id.residual_amount) / (
                 self.loan_id.periods - self.sequence + 1
             ) + self.interests_amount
-        if self.loan_type == "interest":
+        if self.loan_method == "interest":
             return self.interests_amount
-        if self.loan_type == "fixed-annuity" and self.loan_id.round_on_end:
+        if self.loan_method == "fixed-annuity" and self.loan_id.round_on_end:
             return self.loan_id.fixed_amount
-        if self.loan_type == "fixed-annuity":
+        if self.loan_method == "fixed-annuity":
             return self.currency_id.round(
                 -numpy_financial.pmt(
                     self.loan_id._loan_rate() / 100,
@@ -204,9 +195,9 @@ class AccountLoanLine(models.Model):
                     -self.loan_id.residual_amount,
                 )
             )
-        if self.loan_type == "fixed-annuity-begin" and self.loan_id.round_on_end:
+        if self.loan_method == "fixed-annuity-begin" and self.loan_id.round_on_end:
             return self.loan_id.fixed_amount
-        if self.loan_type == "fixed-annuity-begin":
+        if self.loan_method == "fixed-annuity-begin":
             return self.currency_id.round(
                 -numpy_financial.pmt(
                     self.loan_id._loan_rate() / 100,
@@ -228,7 +219,7 @@ class AccountLoanLine(models.Model):
         if (
             self.sequence == self.loan_id.periods
             and self.loan_id.round_on_end
-            and self.loan_type in ["fixed-annuity", "fixed-annuity-begin"]
+            and self.loan_method in ["fixed-annuity", "fixed-annuity-begin"]
         ):
             self.interests_amount = self.currency_id.round(
                 self.loan_id.fixed_amount
@@ -244,7 +235,7 @@ class AccountLoanLine(models.Model):
             self.payment_amount = self._compute_amount()
 
     def _compute_interest(self):
-        if self.loan_type == "fixed-annuity-begin":
+        if self.loan_method == "fixed-annuity-begin":
             return -numpy_financial.ipmt(
                 self.loan_id._loan_rate() / 100,
                 2,
@@ -309,6 +300,9 @@ class AccountLoanLine(models.Model):
     def _move_vals(self, journal=False, account=False):
         self.ensure_one()
         return {
+            "partner_id": self.loan_id.partner_id.with_company(
+                self.loan_id.company_id
+            ).id,
             "loan_line_id": self.id,
             "loan_id": self.loan_id.id,
             "date": self.date,
@@ -321,7 +315,9 @@ class AccountLoanLine(models.Model):
 
     def _add_basic_values(self, vals, account):
         self.ensure_one()
-        partner = self.loan_id.partner_id.with_company(self.loan_id.company_id)
+        partner = self.loan_id.partner_id.commercial_partner_id.with_company(
+            self.loan_id.company_id
+        )
         # Amounts are evaled if > 0 for allowing negative loans to be able to be the
         # donors of the loan
         partner_account = (
@@ -339,7 +335,6 @@ class AccountLoanLine(models.Model):
         vals.append(
             {
                 "account_id": (account and account.id) or partner_account.id,
-                "partner_id": partner.id,
                 "credit": loan_currency_amount if loan_currency_amount > 0 else 0,
                 "debit": -loan_currency_amount if loan_currency_amount < 0 else 0,
                 "currency_id": self.loan_id.currency_id.id,
@@ -430,57 +425,6 @@ class AccountLoanLine(models.Model):
 
         return vals
 
-    def _invoice_vals(self):
-        self.ensure_one()
-        return {
-            "loan_line_id": self.id,
-            "loan_id": self.loan_id.id,
-            "move_type": "in_invoice",
-            "partner_id": self.loan_id.partner_id.id,
-            "invoice_date": self.date,
-            "journal_id": self.loan_id.journal_id.id,
-            "company_id": self.loan_id.company_id.id,
-            "invoice_line_ids": [
-                Command.create(vals) for vals in self._invoice_line_vals()
-            ],
-        }
-
-    def _add_basic_values_invoice_line(self, vals):
-        vals.append(
-            {
-                "product_id": self.loan_id.product_id.id,
-                "name": self.loan_id.product_id.name,
-                "quantity": 1,
-                "price_unit": self.principal_amount,
-                "account_id": self.loan_id.short_term_loan_account_id.id,
-            }
-        )
-        return vals
-
-    def _add_interests_values_invoice_line(self, vals):
-        vals.append(
-            {
-                "product_id": self.loan_id.interests_product_id.id,
-                "name": self.loan_id.interests_product_id.name,
-                "quantity": 1,
-                "price_unit": self.interests_amount,
-                "account_id": self.loan_id.interest_expenses_account_id.id,
-            }
-        )
-        return vals
-
-    def _invoice_line_vals(self):
-        vals = list()
-        vals = self._add_basic_values_invoice_line(vals)
-        vals = self._add_interests_values_invoice_line(vals)
-        return vals
-
-    def _auto_post_moves(self):
-        """
-        Inhertiance hook to conditon posting of moves
-        """
-        return True
-
     def _generate_move(self, journal=False, account=False):
         """
         Computes and post the moves of loans
@@ -496,56 +440,8 @@ class AccountLoanLine(models.Model):
                 move = self.env["account.move"].create(
                     record._move_vals(journal=journal, account=account)
                 )
-                if record._auto_post_moves():
-                    move.action_post()
+                move._post(soft=record.loan_id._soft_post_moves())
                 res.append(move.id)
-        return res
-
-    def _long_term_move_vals(self):
-        return {
-            "loan_line_id": self.id,
-            "loan_id": self.loan_id.id,
-            "date": self.date,
-            "ref": self.name,
-            "journal_id": self.loan_id.long_term_journal_id.id
-            or self.loan_id.journal_id.id,
-            "line_ids": [
-                Command.create(vals) for vals in self._get_long_term_move_line_vals()
-            ],
-        }
-
-    def _generate_invoice(self):
-        """
-        Computes invoices of leases
-        :return: list of account.move generated
-        """
-        res = []
-        for record in self:
-            if not record.move_ids:
-                if record.loan_id.line_ids.filtered(
-                    lambda r, rec=record: r.date < rec.date and not r.move_ids
-                ):
-                    raise UserError(self.env._("Some invoices must be created first"))
-                invoice = self.env["account.move"].create(record._invoice_vals())
-                res.append(invoice.id)
-                for line in invoice.invoice_line_ids:
-                    line.tax_ids = line._get_computed_taxes()
-                invoice.flush_recordset()
-                invoice.filtered(
-                    lambda m: m.currency_id.round(m.amount_total) < 0
-                ).action_switch_move_type()
-                if record.loan_id.post_invoice:
-                    invoice.action_post()
-                if (
-                    record.long_term_loan_account_id
-                    and record.long_term_principal_amount != 0
-                ):
-                    move = self.env["account.move"].create(
-                        record._long_term_move_vals()
-                    )
-                    if record.loan_id.post_invoice:
-                        move.action_post()
-                    res.append(move.id)
         return res
 
     def _get_long_term_move_line_vals(self):
@@ -563,41 +459,23 @@ class AccountLoanLine(models.Model):
         ]
 
     def view_account_values(self):
-        """Shows the invoice if it is a leasing or the move if it is a loan"""
-        self.ensure_one()
-        if self.is_leasing:
-            return self.view_account_invoices()
+        """Shows move if it is a loan"""
         return self.view_account_moves()
+
+    def _generate_account_entry(self):
+        self.ensure_one()
+        self._generate_move()
 
     def view_process_values(self):
         """Computes the annuity and returns the result"""
         self.ensure_one()
-        if self.is_leasing:
-            self._generate_invoice()
-        else:
-            self._generate_move()
+        self._generate_account_entry()
         return self.view_account_values()
 
     def view_account_moves(self):
         self.ensure_one()
         result = self.env["ir.actions.act_window"]._for_xml_id(
             "account.action_move_line_form"
-        )
-        result["context"] = {
-            "default_loan_line_id": self.id,
-            "default_loan_id": self.loan_id.id,
-        }
-        result["domain"] = Domain("loan_line_id", "=", self.id)
-        if len(self.move_ids) == 1:
-            res = self.env.ref("account.view_move_form", False)
-            result["views"] = [(res and res.id or False, "form")]
-            result["res_id"] = self.move_ids.id
-        return result
-
-    def view_account_invoices(self):
-        self.ensure_one()
-        result = self.env["ir.actions.act_window"]._for_xml_id(
-            "account.action_move_out_invoice_type"
         )
         result["context"] = {
             "default_loan_line_id": self.id,

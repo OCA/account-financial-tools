@@ -10,7 +10,6 @@
             <form string="Generate moves">
                 <group>
                     <field name="date" />
-                    <field name="loan_type" />
                 </group>
                 <footer>
                     <button

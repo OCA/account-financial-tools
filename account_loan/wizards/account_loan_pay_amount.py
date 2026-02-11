@@ -47,26 +47,17 @@ class AccountLoan(models.TransientModel):
             "date": self.date,
         }
 
+    def _pre_loan_pay_cheks(self):
+        if self.loan_id.line_ids.filtered(
+            lambda r: r.date < self.date and not r.move_ids
+        ):
+            raise UserError(self.env._("Some moves are not created"))
+        if self.loan_id.line_ids.filtered(lambda r: r.date > self.date and r.move_ids):
+            raise UserError(self.env._("Some future moves already exists"))
+
     def run(self):
         self.ensure_one()
-        if self.loan_id.is_leasing:
-            if self.loan_id.line_ids.filtered(
-                lambda r: r.date <= self.date and not r.move_ids
-            ):
-                raise UserError(self.env._("Some invoices are not created"))
-            if self.loan_id.line_ids.filtered(
-                lambda r: r.date > self.date and r.move_ids
-            ):
-                raise UserError(self.env._("Some future invoices already exists"))
-        else:
-            if self.loan_id.line_ids.filtered(
-                lambda r: r.date < self.date and not r.move_ids
-            ):
-                raise UserError(self.env._("Some moves are not created"))
-            if self.loan_id.line_ids.filtered(
-                lambda r: r.date > self.date and r.move_ids
-            ):
-                raise UserError(self.env._("Some future moves already exists"))
+        self._pre_loan_pay_cheks()
         lines = self.loan_id.line_ids.filtered(lambda r: r.date > self.date).sorted(
             "sequence", reverse=True
         )

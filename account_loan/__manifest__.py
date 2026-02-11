@@ -18,6 +18,7 @@
         "views/account_loan_view.xml",
         "wizards/account_loan_generate_entries_view.xml",
         "views/account_move_view.xml",
+        "views/res_config_settings_view.xml",
         "views/res_partner.xml",
         "views/account_loan_lines_view.xml",
     ],

@@ -10,28 +10,28 @@ class AccountLoanIncreaseAmount(models.TransientModel):
     _description = "Increase the debt of a loan"
 
     @api.model
-    def _default_journal_id(self):
-        loan_id = self.env.context.get("default_loan_id")
-        if loan_id:
-            return self.env["account.loan"].browse(loan_id).journal_id.id
+    def _default_journal(self):
+        # browsing None return an empty recordset
+        loan = self.env["account.loan"].browse(self.env.context.get("default_loan_id"))
+        return loan.journal_id
 
     @api.model
-    def _default_account_id(self):
-        loan_id = self.env.context.get("default_loan_id")
-        if loan_id:
-            loan = self.env["account.loan"].browse(loan_id)
-            if loan.is_leasing:
-                return loan.leased_asset_account_id.id
-            else:
-                return loan.partner_id.with_company(
-                    loan.company_id
-                ).property_account_receivable_id.id
+    def _get_default_account_from_loan(self, loan):
+        return loan.partner_id.with_company(
+            loan.company_id or self.env.company
+        ).property_account_receivable_id.id
+
+    @api.model
+    def _default_account(self):
+        # browsing None return an empty recordset
+        loan = self.env["account.loan"].browse(self.env.context.get("default_loan_id"))
+        return self._get_default_account_from_loan(loan)
 
     journal_id = fields.Many2one(
-        "account.journal", required=True, default=lambda r: r._default_journal_id()
+        "account.journal", required=True, default=lambda r: r._default_journal()
     )
     account_id = fields.Many2one(
-        "account.account", required=True, default=lambda r: r._default_account_id()
+        "account.account", required=True, default=lambda r: r._default_account()
     )
     loan_id = fields.Many2one(
         "account.loan",
@@ -47,6 +47,7 @@ class AccountLoanIncreaseAmount(models.TransientModel):
         string="Amount to reduce from Principal",
     )
 
+    @api.private
     def new_line_vals(self, sequence):
         return {
             "loan_id": self.loan_id.id,
@@ -57,26 +58,17 @@ class AccountLoanIncreaseAmount(models.TransientModel):
             "date": self.date,
         }
 
+    def _pre_loan_increase_check(self):
+        if self.loan_id.line_ids.filtered(
+            lambda r: r.date < self.date and not r.move_ids
+        ):
+            raise UserError(self.env._("Some moves are not created"))
+        if self.loan_id.line_ids.filtered(lambda r: r.date > self.date and r.move_ids):
+            raise UserError(self.env._("Some future moves already exists"))
+
     def run(self):
         self.ensure_one()
-        if self.loan_id.is_leasing:
-            if self.loan_id.line_ids.filtered(
-                lambda r: r.date <= self.date and not r.move_ids
-            ):
-                raise UserError(self.env._("Some invoices are not created"))
-            if self.loan_id.line_ids.filtered(
-                lambda r: r.date > self.date and r.move_ids
-            ):
-                raise UserError(self.env._("Some future invoices already exists"))
-        else:
-            if self.loan_id.line_ids.filtered(
-                lambda r: r.date < self.date and not r.move_ids
-            ):
-                raise UserError(self.env._("Some moves are not created"))
-            if self.loan_id.line_ids.filtered(
-                lambda r: r.date > self.date and r.move_ids
-            ):
-                raise UserError(self.env._("Some future moves already exists"))
+        self._pre_loan_increase_check()
         lines = self.loan_id.line_ids.filtered(lambda r: r.date > self.date).sorted(
             "sequence", reverse=True
         )
