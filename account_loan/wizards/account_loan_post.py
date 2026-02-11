@@ -59,7 +59,6 @@ class AccountLoanPost(models.TransientModel):
                 "partner_id": partner.id,
                 "credit": -loan_currency_amount if loan_currency_amount < 0 else 0,
                 "debit": loan_currency_amount if loan_currency_amount > 0 else 0,
-                "credit": 0,
                 "currency_id": self.loan_id.currency_id.id,
                 "amount_currency": line.pending_principal_amount,
             }
@@ -68,7 +67,7 @@ class AccountLoanPost(models.TransientModel):
             line.long_term_pending_principal_amount
         )
         if diff_amount > 0:
-            loan_currency_diff_amount =  self.loan_id.currency_id._convert(
+            loan_currency_diff_amount = self.loan_id.currency_id._convert(
                 from_amount=diff_amount,
                 to_currency=self.loan_id.company_id.currency_id,
                 company=self.loan_id.company_id,
@@ -78,15 +77,21 @@ class AccountLoanPost(models.TransientModel):
             res.append(
                 {
                     "account_id": self.loan_id.short_term_loan_account_id.id,
-                    "credit": loan_currency_diff_amount if loan_currency_amount > 0 else 0,
-                    "debit": loan_currency_diff_amount if loan_currency_amount < 0 else 0,
+                    "credit": loan_currency_diff_amount
+                    if loan_currency_amount > 0
+                    else 0,
+                    "debit": loan_currency_diff_amount
+                    if loan_currency_amount < 0
+                    else 0,
                     "currency_id": self.loan_id.currency_id.id,
-                    "amount_currency": -1 * diff_amount if loan_currency_amount > 0 else diff_amount,
+                    "amount_currency": -1 * diff_amount
+                    if loan_currency_amount > 0
+                    else diff_amount,
                 }
             )
         diff_amount = abs(line.long_term_pending_principal_amount)
         if diff_amount > 0 and self.loan_id.long_term_loan_account_id:
-            laon_currency_diff_amount = self.loan_id.currency_id._convert(
+            loan_currency_diff_amount = self.loan_id.currency_id._convert(
                 from_amount=diff_amount,
                 to_currency=self.loan_id.company_id.currency_id,
                 company=self.loan_id.company_id,
@@ -96,10 +101,16 @@ class AccountLoanPost(models.TransientModel):
             res.append(
                 {
                     "account_id": self.loan_id.long_term_loan_account_id.id,
-                    "credit": laon_currency_diff_amount if loan_currency_amount > 0 else 0,
-                    "debit": laon_currency_diff_amount if loan_currency_amount < 0 else 0,
+                    "credit": loan_currency_diff_amount
+                    if loan_currency_amount > 0
+                    else 0,
+                    "debit": loan_currency_diff_amount
+                    if loan_currency_amount < 0
+                    else 0,
                     "currency_id": self.loan_id.currency_id.id,
-                    "amount_currency": -1 * line.long_term_pending_principal_amount if loan_currency_amount > 0 else line.long_term_pending_principal_amount
+                    "amount_currency": -1 * line.long_term_pending_principal_amount
+                    if loan_currency_amount > 0
+                    else line.long_term_pending_principal_amount,
                 }
             )
         return res
