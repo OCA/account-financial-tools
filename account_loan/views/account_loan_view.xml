@@ -5,7 +5,7 @@
 <odoo>
 
     <record id="account_loan_search" model="ir.ui.view">
-        <field name="name">account.loan.tree</field>
+        <field name="name">account.loan.list</field>
         <field name="model">account.loan</field>
         <field name="arch" type="xml">
             <search>
@@ -15,7 +15,7 @@
         </field>
     </record>
     <record id="account_loan_tree" model="ir.ui.view">
-        <field name="name">account.loan.tree</field>
+        <field name="name">account.loan.list</field>
         <field name="model">account.loan</field>
         <field name="arch" type="xml">
             <list>
@@ -160,7 +160,7 @@
                         <page string="Items" id="items">
                             <field
                                 name="line_ids"
-                                context="{'tree_view_ref': 'account_loan.account_loan_line_tree'}"
+                                context="{'list_view_ref': 'account_loan.account_loan_line_tree'}"
                                 readonly="state in ['canlcelled', 'closed']"
                             />
                         </page>
@@ -184,7 +184,8 @@
                                     />
                                     <field
                                         name="long_term_journal_id"
-                                        attrs="{'invisible': ['|', ('is_leasing', '=', False), ('long_term_loan_account_id', '=', False)]}"
+                                        invisible="not is_leasing or not long_term_loan_account_id"
+                                        readonly="state != 'draft'"
                                     />
                                     <field
                                         name="interest_expenses_account_id"
