@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
+     Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_loan_generate_wizard_form" model="ir.ui.view">
+        <field name="name">Pay amount</field>
+        <field name="model">account.loan.generate.wizard</field>
+        <field name="inherit_id" ref="account_loan.account_loan_generate_wizard_form" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="loan_type" />
+            </field>
+        </field>
+    </record>
+</odoo>

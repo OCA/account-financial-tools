@@ -8,8 +8,9 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.fields import Domain
+from odoo.tools.misc import str2bool
 
 _logger = logging.getLogger(__name__)
 try:
@@ -21,6 +22,7 @@ except (OSError, ImportError) as err:
 class AccountLoan(models.Model):
     _name = "account.loan"
     _description = "Loan"
+    _check_company_auto = True
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     def _default_company(self):
@@ -41,6 +43,14 @@ class AccountLoan(models.Model):
         "res.company",
         required=True,
         default=lambda self: self._default_company(),
+    )
+    loan_type = fields.Selection(
+        [
+            ("loan", "loan"),
+            ("borrow", "Borrow"),
+        ],
+        default="loan",
+        required=True,
     )
     state = fields.Selection(
         [
@@ -91,7 +101,7 @@ class AccountLoan(models.Model):
         help="Method of computation of the applied rate",
         default="napr",
     )
-    loan_type = fields.Selection(
+    loan_method = fields.Selection(
         [
             ("fixed-annuity", "Fixed Annuity"),
             ("fixed-annuity-begin", "Fixed Annuity Begin"),
@@ -139,17 +149,14 @@ class AccountLoan(models.Model):
     currency_id = fields.Many2one(
         "res.currency", compute="_compute_currency", readonly=False, store=True
     )
-    journal_type = fields.Char(compute="_compute_journal_type")
     journal_id = fields.Many2one(
         "account.journal",
-        domain="[('company_id', '=', company_id),('type', '=', journal_type)]",
+        domain="[('company_id', '=', company_id)]",
+        compute="_compute_journal_id",
+        readonly=False,
+        store=True,
         required=True,
-    )
-    long_term_journal_id = fields.Many2one(
-        "account.journal",
-        domain="[('company_id', '=', company_id),('type', '=', 'general')]",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        check_company=True,
     )
     short_term_loan_account_id = fields.Many2one(
         "account.account",
@@ -171,23 +178,6 @@ class AccountLoan(models.Model):
         help="Account where the interests will be assigned to",
         required=True,
     )
-    is_leasing = fields.Boolean()
-    leased_asset_account_id = fields.Many2one(
-        "account.account",
-        domain="[('company_ids', '=', company_id)]",
-    )
-    product_id = fields.Many2one(
-        "product.product",
-        string="Loan product",
-        help="Product where the amount of the loan will be assigned when the "
-        "invoice is created",
-    )
-    interests_product_id = fields.Many2one(
-        "product.product",
-        string="Interest product",
-        help="Product where the amount of interests will be assigned when the "
-        "invoice is created",
-    )
     move_ids = fields.One2many("account.move", copy=False, inverse_name="loan_id")
     move_count = fields.Integer(compute="_compute_move_count")
     pending_principal_amount = fields.Monetary(
@@ -204,14 +194,62 @@ class AccountLoan(models.Model):
         string="Total interests payed",
         compute="_compute_total_amounts",
     )
-    post_invoice = fields.Boolean(
-        default=True, help="Invoices will be posted automatically"
-    )
 
     _unique_name = models.Constraint(
         "unique(name, company_id)",
         message="Loan name must be unique",
     )
+
+    def _check_laon_type_constrains(self):
+        self.ensure_one()
+        if self.loan_type == "loan" and self.loan_amount < 0:
+            raise ValidationError(
+                self.env._("Loan type must have postive amount or change the type")
+            )
+        if self.loan_type == "borrow" and self.loan_amount > 0:
+            raise ValidationError(
+                self.env._("Borrow type must have negative amount or change the type")
+            )
+
+    @api.model
+    def _soft_post_moves(self):
+        """
+        Inhertiance hook to conditon posting move
+        at move date or right now
+
+        (It's used like this move._post(soft=loan_id._soft_post_moves())
+        """
+        return str2bool(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("account_loan.auto_post_loan_moves_at_date", "false")
+        )
+
+    @api.constrains("loan_amount", "loan_type")
+    def _check_loan_type_constrains(self):
+        for loan in self:
+            loan._check_laon_type_constrains()
+
+    @api.constrains("journal_id", "company_id", "loan_type")
+    def _check_journal_type_allowed(self):
+        for loan in self:
+            if (
+                self.env["account.journal"].search_count(
+                    Domain("id", "=", loan.journal_id.id) & loan._journal_domain()
+                )
+                == 0
+            ):
+                raise ValidationError(
+                    self.env._(
+                        "The current journal %(journal_name)s type: %(journal_type)s "
+                        "(company %(journal_company_name)s) is not allowed for this "
+                        "type %(loan_type)s",
+                        journal_name=loan.journal_id.name,
+                        journal_type=loan.journal_id.type,
+                        journal_company_name=loan.journal_id.company_id.name,
+                        loan_type=loan.loan_type,
+                    )
+                )
 
     @api.onchange("rate")
     def _onchange_rate_warning(self):
@@ -243,6 +281,25 @@ class AccountLoan(models.Model):
             previous_pending_principal = line.pending_principal_amount
             previous_principal_amount = line.principal_amount
 
+    @api.depends("loan_type", "company_id")
+    def _compute_journal_id(self):
+        for loan in self:
+            loan.journal_id = self.env["account.journal"].search(
+                self._journal_domain(), limit=1
+            )
+
+    def _journal_domain(self):
+        self.ensure_one()
+        return (
+            Domain("company_id", "=", self.company_id.id or self.env.company.id)
+            & self._journal_type_domain()
+        )
+
+    def _journal_type_domain(self):
+        if self.loan_type in ("loan", "borrow"):
+            return Domain("type", "=", "general")
+        return Domain([])
+
     @api.depends("move_ids")
     def _compute_move_count(self):
         for item in self:
@@ -267,7 +324,7 @@ class AccountLoan(models.Model):
         :return:
         """
         for record in self:
-            if record.loan_type == "fixed-annuity":
+            if record.loan_method == "fixed-annuity":
                 record.fixed_amount = -record.currency_id.round(
                     numpy_financial.pmt(
                         record._loan_rate() / 100,
@@ -276,7 +333,7 @@ class AccountLoan(models.Model):
                         -record.residual_amount,
                     )
                 )
-            elif record.loan_type == "fixed-annuity-begin":
+            elif record.loan_method == "fixed-annuity-begin":
                 record.fixed_amount = -record.currency_id.round(
                     numpy_financial.pmt(
                         record._loan_rate() / 100,
@@ -286,7 +343,7 @@ class AccountLoan(models.Model):
                         when="begin",
                     )
                 )
-            elif record.loan_type == "fixed-principal":
+            elif record.loan_method == "fixed-principal":
                 record.fixed_amount = record.currency_id.round(
                     (record.fixed_loan_amount - record.residual_amount)
                     / record.fixed_periods
@@ -322,30 +379,8 @@ class AccountLoan(models.Model):
         for rec in self:
             rec.currency_id = rec.journal_id.currency_id or rec.company_id.currency_id
 
-    @api.depends("is_leasing")
-    def _compute_journal_type(self):
-        for record in self:
-            if record.is_leasing:
-                record.journal_type = "purchase"
-            else:
-                record.journal_type = "general"
-
-    @api.onchange("is_leasing")
-    def _onchange_is_leasing(self):
-        self.journal_id = self.env["account.journal"].search(
-            Domain(
-                [
-                    ("company_id", "=", self.company_id.id),
-                    ("type", "=", "purchase" if self.is_leasing else "general"),
-                ]
-            ),
-            limit=1,
-        )
-        self.residual_amount = 0.0
-
     @api.onchange("company_id")
     def _onchange_company(self):
-        self._onchange_is_leasing()
         self.interest_expenses_account_id = self.short_term_loan_account_id = (
             self.long_term_loan_account_id
         ) = False
@@ -360,6 +395,7 @@ class AccountLoan(models.Model):
                 vals["name"] = self._get_default_name(vals)
         return super().create(vals_list)
 
+    @api.private
     def post(self):
         self.ensure_one()
         if not self.start_date:
@@ -468,15 +504,9 @@ class AccountLoan(models.Model):
         result["domain"] = Domain("loan_id", "=", self.id)
         return result
 
-    def view_account_invoices(self):
-        self.ensure_one()
-        result = self.env["ir.actions.act_window"]._for_xml_id(
-            "account.action_move_in_invoice_type"
-        )
-        result["domain"] = Domain(
-            [("loan_id", "=", self.id), ("move_type", "=", "in_invoice")]
-        )
-        return result
+    @api.model
+    def _loan_and_borrow_domain(self):
+        return Domain([])
 
     @api.model
     def _generate_loan_entries(self, date):
@@ -487,21 +517,10 @@ class AccountLoan(models.Model):
         """
         res = []
         for record in self.search(
-            Domain([("state", "=", "posted"), ("is_leasing", "=", False)])
+            Domain("state", "=", "posted") & self._loan_and_borrow_domain()
         ):
             lines = record.line_ids.filtered(
                 lambda r: r.date <= date and not r.move_ids
             )
             res += lines._generate_move()
-        return res
-
-    @api.model
-    def _generate_leasing_entries(self, date):
-        res = []
-        for record in self.search(
-            Domain([("state", "=", "posted"), ("is_leasing", "=", True)])
-        ):
-            res += record.line_ids.filtered(
-                lambda r: r.date <= date and not r.move_ids
-            )._generate_invoice()
         return res

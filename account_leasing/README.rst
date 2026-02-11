@@ -2,9 +2,9 @@
    :target: https://odoo-community.org/get-involved?utm_source=readme
    :alt: Odoo Community Association
 
-=======================
-Account Loan management
-=======================
+===============
+Account Leasing
+===============
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -21,10 +21,10 @@ Account Loan management
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/19.0/account_loan
+    :target: https://github.com/OCA/account-financial-tools/tree/19.0/account_leasing
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-19-0/account-financial-tools-19-0-account_loan
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-19-0/account-financial-tools-19-0-account_leasing
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
     :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=19.0
@@ -32,19 +32,10 @@ Account Loan management
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of accounting to support loans. It
-will create automatically moves or invoices for loans. Moreover, you can
-check the pending amount to be paid and reduce the debt.
-
-It currently supports two kinds of debts:
-
-- | Loans: a standard debt with banks, that only creates account moves.
-  | Loan types info:
-    `APR <https://en.wikipedia.org/wiki/Annual_percentage_rate>`__,
-    `EAR <https://en.wikipedia.org/wiki/Effective_interest_rate>`__,
-    `Real Rate <https://en.wikipedia.org/wiki/Real_interest_rate>`__.
-
-- Leases: a debt with a bank where purchase invoices are necessary
+This module extends the functionality of account loans to manage
+leasing. It will create automatically moves or invoices for loans.
+Moreover, you can check the pending amount to be paid and reduce the
+debt.
 
 **Table of contents**
 
@@ -57,46 +48,23 @@ Usage
 To use this module, you need to:
 
 1. Go to Invoicing / Accounting > Accounting > Loans
-2. Configure a loan selecting the company, loan type, amount, rate and
-   accounts
+2. Configure a leasing selecting the company, loan type, amount, rate
+   and accounts
 3. Post the loan, it will automatically create an account move with the
    expected amounts
-4. Create automatically the account moves / invoices related to loans
-   and leases before a selected date
+4. Create automatically the account moves / invoices related to leases
+   before a selected date
 
-On a posted loan you can:
+On a posted lease you can:
 
 - Create moves or invoices (according to the configuration)
 - Modify rates when needed (only unposted lines will be modified)
-- Reduce or cancel the debt of a loan / lease
+- Reduce or cancel the debt of a lease
 
 |Try me on Runbot|
 
 .. |Try me on Runbot| image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :target: https://runbot.odoo-community.org/runbot/92/12.0
-
-Changelog
-=========
-
-19.0.1.0.0
-----------
-
-In this version we have extract leasing stuff from account_loan and
-create the new module account_leasing, while refactoring following
-change occured:
-
-- remove the ``has_invoices`` computed field on ``account.loan.line``
-  which was exactly the same has ``has_moves`` field
-- rename loan_type into loan_method
-- add loan_type computed store field to easily filter group by loan /
-  borrow / leasing
-- add support to mark future moves as auto_post
-
-16.0.1.0.0
-----------
-
-Due to the changes on 16, we will generate two moves on leasings, one
-for the invoice, and another one for the change from long to short term.
 
 Bug Tracker
 ===========
@@ -104,7 +72,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_loan%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_leasing%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -114,7 +82,7 @@ Credits
 Authors
 -------
 
-* Creu Blanca
+* Pierre Verkest
 
 Contributors
 ------------
@@ -129,6 +97,8 @@ Contributors
 - `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
 
   - Bhavesh Heliconia
+
+- Pierre Verkest <pierre@verkest.fr>
 
 Maintainers
 -----------
@@ -146,11 +116,14 @@ promote its widespread use.
 .. |maintainer-etobella| image:: https://github.com/etobella.png?size=40px
     :target: https://github.com/etobella
     :alt: etobella
+.. |maintainer-petrus-v| image:: https://github.com/petrus-v.png?size=40px
+    :target: https://github.com/petrus-v
+    :alt: petrus-v
 
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-etobella| 
+|maintainer-etobella| |maintainer-petrus-v| 
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/19.0/account_loan>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/19.0/account_leasing>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

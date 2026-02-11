@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="account_loan_line_tree" model="ir.ui.view">
-        <field name="name">account.loan.line.tree</field>
+        <field name="name">account.loan.line.list</field>
         <field name="model">account.loan.line</field>
         <field name="priority">99</field>
         <field name="arch" type="xml">
             <list editable="bottom">
-                <field
-                    name="sequence"
-                    readonly="has_moves or has_invoices"
-                    widget="handle"
-                />
-                <field name="sequence" readonly="has_moves or has_invoices" />
-                <field name="date" readonly="has_moves or has_invoices" />
-                <field name="rate" readonly="has_moves or has_invoices" />
+                <field name="sequence" readonly="has_moves" widget="handle" />
+                <field name="sequence" readonly="has_moves" />
+                <field name="date" readonly="has_moves" />
+                <field name="rate" readonly="has_moves" />
                 <field name="pending_principal_amount" readonly="True" />
                 <field name="payment_amount" sum="Total payments" readonly="True" />
                 <field
                     name="principal_amount"
                     sum="principal_amount"
-                    readonly="has_moves or has_invoices"
+                    readonly="has_moves"
                 />
                 <field
                     name="interests_amount"
                     sum="Total interests"
-                    readonly="has_moves or has_invoices"
+                    readonly="has_moves"
                 />
                 <field
                     name="long_term_pending_principal_amount"
                     column_invisible="not parent.long_term_loan_account_id"
-                    readonly="has_moves or has_invoices"
+                    readonly="has_moves"
                 />
                 <field
                     name="long_term_principal_amount"
                     column_invisible="not parent.long_term_loan_account_id"
-                    readonly="has_moves or has_invoices"
+                    readonly="has_moves"
                 />
                 <field name="long_term_loan_account_id" column_invisible="True" />
                 <field name="loan_state" column_invisible="True" />
-                <field name="is_leasing" column_invisible="True" />
-                <field name="has_invoices" column_invisible="True" />
                 <field name="has_moves" column_invisible="True" />
                 <field name="currency_id" column_invisible="True" />
                 <button
@@ -47,14 +41,14 @@
                     string="Values"
                     type="object"
                     icon="fa-eye"
-                    invisible="not has_moves and not has_invoices"
+                    invisible="not has_moves"
                 />
                 <button
                     name="view_process_values"
                     string="Process"
                     type="object"
                     icon="fa-cogs"
-                    invisible="has_moves or has_invoices or loan_state != 'posted'"
+                    invisible="has_moves or loan_state != 'posted'"
                 />
             </list>
         </field>

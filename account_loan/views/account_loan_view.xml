@@ -4,26 +4,40 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="account_loan_search" model="ir.ui.view">
-        <field name="name">account.loan.tree</field>
+        <field name="name">account.loan.list</field>
         <field name="model">account.loan</field>
         <field name="arch" type="xml">
             <search>
                 <field name="partner_id" />
                 <field name="company_id" groups="base.group_multi_company" />
+                <separator />
+                <filter string="Loan" name="loan" domain="[('loan_type','=','loan')]" />
+                <filter
+                    string="Borrow"
+                    name="borrow"
+                    domain="[('loan_type','=','borrow')]"
+                />
+                <group>
+                    <filter
+                        string="Type"
+                        name='loan_type'
+                        context="{'group_by':'loan_type'}"
+                    />
+                </group>
             </search>
         </field>
     </record>
     <record id="account_loan_tree" model="ir.ui.view">
-        <field name="name">account.loan.tree</field>
+        <field name="name">account.loan.list</field>
         <field name="model">account.loan</field>
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
                 <field name="partner_id" optional="hide" />
                 <field name="company_id" groups="base.group_multi_company" />
-                <field name="is_leasing" />
                 <field name="state" />
                 <field name="rate" optional="hide" />
+                <field name="loan_type" optional="show" />
                 <field name="loan_amount" optional="hide" />
                 <field name="pending_principal_amount" optional="hide" sum="Total" />
                 <field name="periods" optional="hide" />
@@ -77,14 +91,6 @@
                             <field string="Moves" name="move_count" widget="statinfo" />
                         </button>
                         <button
-                            name="view_account_invoices"
-                            class="oe_stat_button"
-                            icon="fa-pencil-square-o"
-                            invisible="state == 'draft' or not is_leasing"
-                            type="object"
-                            string="Invoices"
-                        />
-                        <button
                             name="%(account_loan_pay_amount_action)d"
                             class="oe_stat_button"
                             icon="fa-arrow-down"
@@ -124,6 +130,7 @@
                                 groups="base.group_multi_company"
                             />
                             <field name="loan_type" readonly="state != 'draft'" />
+                            <field name="loan_method" readonly="state != 'draft'" />
                             <field name="loan_amount" readonly="state != 'draft'" />
                         </group>
                         <group>
@@ -140,7 +147,6 @@
                             <field name="method_period" readonly="state != 'draft'" />
                         </group>
                         <group>
-                            <field name="is_leasing" readonly="state != 'draft'" />
                             <field name="round_on_end" readonly="state != 'draft'" />
                             <field
                                 name="payment_on_first_period"
@@ -159,7 +165,7 @@
                         <page string="Items" id="items">
                             <field
                                 name="line_ids"
-                                context="{'tree_view_ref': 'account_loan.account_loan_line_tree'}"
+                                context="{'list_view_ref': 'account_loan.account_loan_line_tree'}"
                                 readonly="state in ['canlcelled', 'closed']"
                             />
                         </page>
@@ -174,16 +180,11 @@
                                         name="short_term_loan_account_id"
                                         readonly="state != 'draft'"
                                     />
-                                    <field name="journal_type" invisible="1" />
                                 </group>
                                 <group>
                                     <field
                                         name="long_term_loan_account_id"
                                         readonly="state != 'draft'"
-                                    />
-                                    <field
-                                        name="long_term_journal_id"
-                                        attrs="{'invisible': ['|', ('is_leasing', '=', False), ('long_term_loan_account_id', '=', False)]}"
                                     />
                                     <field
                                         name="interest_expenses_account_id"
@@ -193,29 +194,6 @@
                                         name="currency_id"
                                         groups="base.group_multi_currency"
                                     />
-                                </group>
-                            </group>
-                        </page>
-                        <page string="Leasing" id="leasing" invisible="not is_leasing">
-                            <group>
-                                <group>
-                                    <field
-                                        name="leased_asset_account_id"
-                                        required="is_leasing"
-                                        readonly="state != 'draft'"
-                                    />
-                                    <field
-                                        name="residual_amount"
-                                        readonly="state != 'draft'"
-                                    />
-                                </group>
-                                <group>
-                                    <field name="product_id" required="is_leasing" />
-                                    <field
-                                        name="interests_product_id"
-                                        required="is_leasing"
-                                    />
-                                    <field name="post_invoice" />
                                 </group>
                             </group>
                         </page>

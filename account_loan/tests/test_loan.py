@@ -7,12 +7,12 @@ from unittest.mock import patch
 from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
 
-from odoo import Command, fields
-from odoo.exceptions import UserError
+from odoo import fields
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests import Form, tagged
 from odoo.tools import mute_logger
 
-from odoo.addons.base.tests.common import BaseCommon
+from odoo.addons.account_loan.tests.common import LoanCommon
 
 _logger = logging.getLogger(__name__)
 try:
@@ -22,63 +22,27 @@ except (OSError, ImportError) as err:
 
 
 @tagged("post_install", "-at_install")
-class TestLoan(BaseCommon):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.company = cls.env.ref("base.main_company")
-        cls.company_02 = cls.env["res.company"].create({"name": "Auxiliar company"})
-        cls.journal = cls.env["account.journal"].create(
-            {
-                "company_id": cls.company.id,
-                "type": "purchase",
-                "name": "Debts",
-                "code": "DBT",
-            }
-        )
-        cls.loan_account = cls.create_account(
-            "DEP",
-            "depreciation",
-            "liability_current",
-        )
-        cls.payable_account = cls.create_account("PAY", "payable", "liability_payable")
-        cls.asset_account = cls.create_account("ASSET", "asset", "liability_payable")
-        cls.interests_account = cls.create_account("FEE", "Fees", "expense")
-        cls.lt_loan_account = cls.create_account(
-            "LTD",
-            "Long term depreciation",
-            "liability_non_current",
-        )
-        cls.partner = cls.env["res.partner"].create({"name": "Bank"})
-        cls.product = cls.env["product.product"].create(
-            {"name": "Payment", "type": "service"}
-        )
-        cls.interests_product = cls.env["product.product"].create(
-            {"name": "Bank fee", "type": "service"}
-        )
+class TestLoan(LoanCommon):
+    def test_constrains_loan_must_have_postive_amount(self):
+        with self.assertRaisesRegex(
+            ValidationError, "Loan type must have postive amount or change the type"
+        ):
+            self.create_loan("fixed-annuity", -4000, 1, 10, loan_type="loan")
 
-    def test_onchange(self):
-        loan = self.env["account.loan"].create(
-            {
-                "name": "LOAN",
-                "company_id": self.company.id,
-                "journal_id": self.journal.id,
-                "loan_type": "fixed-annuity",
-                "loan_amount": 100,
-                "rate": 1,
-                "periods": 2,
-                "short_term_loan_account_id": self.loan_account.id,
-                "interest_expenses_account_id": self.interests_account.id,
-                "product_id": self.product.id,
-                "interests_product_id": self.interests_product.id,
-                "partner_id": self.partner.id,
-            }
-        )
-        loan_form = Form(loan)
-        loan_form.is_leasing = True
-        self.assertNotEqual(loan.journal_id, loan_form.journal_id)
-        loan_form.company_id = self.company_02
-        self.assertFalse(loan_form.interest_expenses_account_id)
+    def test_constrains_borrow_must_have_negative_amount(self):
+        with self.assertRaisesRegex(
+            ValidationError, "Borrow type must have negative amount or change the type"
+        ):
+            self.create_loan("fixed-annuity", 4000, 1, 10, loan_type="borrow")
+
+    def test_journal_type_constrains(self):
+        loan = self.create_loan("fixed-annuity", 4000, 1, 10, loan_type="loan")
+        with self.assertRaisesRegex(
+            ValidationError,
+            r"The current journal Debts type: purchase \(company My Company\) "
+            r"is not allowed for this type loan",
+        ):
+            loan.journal_id = self.journal
 
     def test_partner_loans(self):
         self.assertFalse(self.partner.lended_loan_count)
@@ -162,12 +126,12 @@ class TestLoan(BaseCommon):
         line_1 = loan.line_ids.filtered(lambda r: r.sequence == 1)
         for line in loan.line_ids:
             self.assertAlmostEqual(line_1.payment_amount, line.payment_amount, 2)
-        loan.loan_type = "fixed-principal"
+        loan.loan_method = "fixed-principal"
         loan.compute_lines()
         line_1 = loan.line_ids.filtered(lambda r: r.sequence == 1)
         line_end = loan.line_ids.filtered(lambda r: r.sequence == 60)
         self.assertNotAlmostEqual(line_1.payment_amount, line_end.payment_amount, 2)
-        loan.loan_type = "interest"
+        loan.loan_method = "interest"
         loan.compute_lines()
         line_1 = loan.line_ids.filtered(lambda r: r.sequence == 1)
         line_end = loan.line_ids.filtered(lambda r: r.sequence == 60)
@@ -327,60 +291,6 @@ class TestLoan(BaseCommon):
 
     @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
-    def test_increase_amount_leasing(self):
-        amount = 10000
-        periods = 24
-        loan = self.create_loan("fixed-annuity", amount, 1, periods)
-        self.assertTrue(loan.line_ids)
-        self.assertEqual(len(loan.line_ids), periods)
-        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
-        self.assertAlmostEqual(
-            -numpy_financial.pmt(1 / 100 / 12, 24, 10000), line.payment_amount, 2
-        )
-        self.assertEqual(line.long_term_principal_amount, 0)
-        loan.is_leasing = True
-        loan.long_term_loan_account_id = self.lt_loan_account
-        loan.compute_lines()
-        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
-        self.assertGreater(line.long_term_principal_amount, 0)
-        self.post(loan)
-        self.assertTrue(loan.start_date)
-        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
-        self.assertTrue(line)
-        self.assertFalse(line.move_ids)
-        wzd = self.env["account.loan.generate.wizard"].create(
-            {
-                "date": fields.Date.today() + relativedelta(days=1),
-                "loan_type": "leasing",
-            }
-        )
-        action = wzd.run()
-        self.assertTrue(action)
-        self.assertFalse(wzd.run())
-        self.assertTrue(line.move_ids)
-        self.assertEqual(list(action["domain"]), [("id", "in", line.move_ids.ids)])
-        self.assertTrue(line.move_ids)
-        self.assertEqual(line.move_ids.state, "posted")
-        pending_principal_amount = loan.pending_principal_amount
-        action = (
-            self.env["account.loan.increase.amount"]
-            .with_context(default_loan_id=loan.id)
-            .create(
-                {
-                    "amount": 1000,
-                    "date": line.date,
-                }
-            )
-            .run()
-        )
-        new_move = self.env[action["res_model"]].search(action["domain"])
-        new_move.ensure_one()
-        self.assertFalse(new_move.is_invoice())
-        self.assertEqual(loan, new_move.loan_id)
-        self.assertEqual(loan.pending_principal_amount, pending_principal_amount + 1000)
-
-    @mute_logger("odoo.models.unlink")
-    @freeze_time("2025-01-01")
     def test_fixed_annuity_begin_loan(self):
         amount = 10000
         periods = 24
@@ -480,145 +390,11 @@ class TestLoan(BaseCommon):
             line.view_process_values()
 
     @mute_logger("odoo.models.unlink")
-    @freeze_time("2025-01-01")
-    def test_fixed_principal_loan_leasing(self):
-        amount = 24000
-        periods = 24
-        loan = self.create_loan("fixed-principal", amount, 1, periods)
-        self.partner.property_account_payable_id = self.payable_account
-        self.assertEqual(loan.journal_type, "general")
-        loan.is_leasing = True
-        loan.post_invoice = False
-        self.assertEqual(loan.journal_type, "purchase")
-        loan.long_term_loan_account_id = self.lt_loan_account
-        loan.rate_type = "real"
-        loan.compute_lines()
-        self.assertTrue(loan.line_ids)
-        self.assertEqual(len(loan.line_ids), periods)
-        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
-        self.assertEqual(amount / periods, line.principal_amount)
-        self.assertEqual(amount / periods, line.long_term_principal_amount)
-        self.post(loan)
-        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
-        self.assertTrue(line)
-        self.assertFalse(line.has_invoices)
-        self.assertFalse(line.has_moves)
-        action = (
-            self.env["account.loan.generate.wizard"]
-            .create(
-                {
-                    "date": fields.Date.today() + relativedelta(days=1),
-                    "loan_type": "leasing",
-                }
-            )
-            .run()
-        )
-        self.assertTrue(line.has_invoices)
-        self.assertTrue(line.has_moves)
-        self.assertEqual(
-            line.move_ids, self.env[action["res_model"]].search(action["domain"])
-        )
-        loan.invalidate_recordset()
-        with self.assertRaises(UserError):
-            self.env["account.loan.pay.amount"].create(
-                {
-                    "loan_id": loan.id,
-                    "amount": (amount - amount / periods) / 2,
-                    "fees": 100,
-                    "date": loan.line_ids.filtered(lambda r: r.sequence == 2).date,
-                }
-            ).run()
-        with self.assertRaises(UserError):
-            self.env["account.loan.pay.amount"].create(
-                {
-                    "loan_id": loan.id,
-                    "amount": (amount - amount / periods) / 2,
-                    "fees": 100,
-                    "date": loan.line_ids.filtered(lambda r: r.sequence == 1).date
-                    + relativedelta(months=-1),
-                }
-            ).run()
-        self.assertTrue(line.move_ids)
-        self.assertTrue(line.move_ids.filtered(lambda r: r.is_invoice()))
-        self.assertTrue(line.move_ids.filtered(lambda r: not r.is_invoice()))
-        self.assertTrue(all([m.state == "draft" for m in line.move_ids]))
-        self.assertTrue(line.has_moves)
-        line.move_ids.action_post()
-        self.assertTrue(all([m.state == "posted" for m in line.move_ids]))
-        for move in line.move_ids:
-            self.assertIn(
-                move,
-                self.env["account.move"].search(loan.view_account_moves()["domain"]),
-            )
-        for move in line.move_ids.filtered(lambda r: r.is_invoice()):
-            self.assertIn(
-                move,
-                self.env["account.move"].search(loan.view_account_invoices()["domain"]),
-            )
-        with self.assertRaises(UserError):
-            self.env["account.loan.pay.amount"].create(
-                {
-                    "loan_id": loan.id,
-                    "amount": (amount - amount / periods) / 2,
-                    "fees": 100,
-                    "date": loan.line_ids.filtered(
-                        lambda r: r.sequence == periods
-                    ).date,
-                }
-            ).run()
-        self.env["account.loan.pay.amount"].create(
-            {
-                "loan_id": loan.id,
-                "amount": (amount - amount / periods) / 2,
-                "date": line.date,
-                "fees": 100,
-            }
-        ).run()
-        line = loan.line_ids.filtered(lambda r: r.sequence == 2)
-        self.assertEqual(loan.periods, periods + 1)
-        self.assertAlmostEqual(
-            line.principal_amount, (amount - amount / periods) / 2, 2
-        )
-        line = loan.line_ids.filtered(lambda r: r.sequence == 3)
-        self.assertEqual(amount / periods / 2, line.principal_amount)
-        line = loan.line_ids.filtered(lambda r: r.sequence == 4)
-        with self.assertRaises(UserError):
-            line.view_process_values()
-
-    @mute_logger("odoo.models.unlink")
-    @freeze_time("2025-01-01")
-    def test_fixed_principal_loan_auto_post_leasing(self):
-        amount = 24000
-        periods = 24
-        loan = self.create_loan("fixed-principal", amount, 1, periods)
-        self.partner.property_account_payable_id = self.payable_account
-        self.assertEqual(loan.journal_type, "general")
-        loan.is_leasing = True
-        self.assertEqual(loan.journal_type, "purchase")
-        loan.long_term_loan_account_id = self.lt_loan_account
-        loan.rate_type = "real"
-        loan.compute_lines()
-        self.assertTrue(loan.line_ids)
-        self.assertEqual(len(loan.line_ids), periods)
-        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
-        self.assertEqual(amount / periods, line.principal_amount)
-        self.assertEqual(amount / periods, line.long_term_principal_amount)
-        self.post(loan)
-        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
-        self.assertTrue(line)
-        self.assertFalse(line.has_invoices)
-        self.assertFalse(line.has_moves)
-        self.env["account.loan.generate.wizard"].create(
-            {"date": fields.Date.today(), "loan_type": "leasing"}
-        ).run()
-        self.assertTrue(line.has_invoices)
-        self.assertTrue(line.has_moves)
-
-    @mute_logger("odoo.models.unlink")
     def test_interests_on_end_loan(self):
         amount = 10000
         periods = 10
         loan = self.create_loan("interest", amount, 1, periods)
+        self.assertEqual(loan.loan_type, "loan")
         loan.payment_on_first_period = False
         loan.start_date = fields.Date.today()
         loan.rate_type = "ear"
@@ -647,7 +423,7 @@ class TestLoan(BaseCommon):
 
     def test_negative_loan(self):
         # Check that negatives amounts don't give an error
-        loan = self.create_loan("fixed-annuity", -4000, 1, 10)
+        loan = self.create_loan("fixed-annuity", -4000, 1, 10, loan_type="borrow")
         self.post(loan)
         loan.line_ids[0].view_process_values()
 
@@ -657,7 +433,11 @@ class TestLoan(BaseCommon):
         periods = 10
         loan = self.create_loan("fixed-annuity", amount, 1, periods)
         self.post(loan)
-        with self.assertRaises(UserError):
+        with self.assertRaisesRegex(
+            UserError,
+            "It is only possible to change to draft if the status is "
+            "cancelled or posted and there are no account moves.",
+        ):
             loan.button_draft()
         line = loan.line_ids.filtered(lambda r: r.sequence == 1)
         line.view_process_values()
@@ -671,7 +451,11 @@ class TestLoan(BaseCommon):
         self.assertEqual(pay.amount, line.final_pending_principal_amount)
         pay.run()
         self.assertEqual(loan.state, "cancelled")
-        with self.assertRaises(UserError):
+        with self.assertRaisesRegex(
+            UserError,
+            "It is only possible to change to draft if the status is "
+            "cancelled or posted and there are no account moves.",
+        ):
             loan.button_draft()
         loan.move_ids.button_draft()
         loan.move_ids.unlink()
@@ -691,7 +475,7 @@ class TestLoan(BaseCommon):
         loan = self.create_loan("fixed-annuity-begin", 10000, 1, 12)
         self.assertNotEqual(loan.fixed_amount, 0.0)
         with Form(loan) as loan_form:
-            loan_form.loan_type = "interest"
+            loan_form.loan_method = "interest"
         self.assertEqual(loan.fixed_amount, 0.0)
 
     def test_loan_post_without_computed_lines(self):
@@ -742,56 +526,11 @@ class TestLoan(BaseCommon):
         line.view_process_values()
         self.assertEqual(move_ids_count, len(line.move_ids))
 
-    def post(self, loan):
-        self.assertFalse(loan.move_ids)
-        post = (
-            self.env["account.loan.post"]
-            .with_context(default_loan_id=loan.id)
-            .create({})
-        )
-        post.run()
-        self.assertTrue(loan.move_ids)
-        with self.assertRaises(UserError):
-            post.run()
-
-    @classmethod
-    def create_account(cls, code, name, account_type):
-        return cls.env["account.account"].create(
-            {
-                "company_ids": [Command.set([cls.company.id])],
-                "name": name,
-                "code": code,
-                "account_type": account_type,
-                "reconcile": True,
-            }
-        )
-
-    def create_loan(self, type_loan, amount, rate, periods, compute_lines=True):
-        loan = self.env["account.loan"].create(
-            {
-                "journal_id": self.journal.id,
-                "rate_type": "napr",
-                "loan_type": type_loan,
-                "loan_amount": amount,
-                "payment_on_first_period": True,
-                "rate": rate,
-                "periods": periods,
-                "leased_asset_account_id": self.asset_account.id,
-                "short_term_loan_account_id": self.loan_account.id,
-                "interest_expenses_account_id": self.interests_account.id,
-                "product_id": self.product.id,
-                "interests_product_id": self.interests_product.id,
-                "partner_id": self.partner.id,
-            }
-        )
-        if compute_lines:
-            loan.compute_lines()
-        return loan
-
     def test_change_currency(self):
         loan = self.create_loan("fixed-annuity", 500000, 1, 60)
         eur_currency = self.env.ref("base.EUR")
         usd_currency = self.env.ref("base.USD")
+        eur_currency.active = True
         loan.journal_id.currency_id = eur_currency
         loan.currency_id = eur_currency
         loan.company_id.currency_id = usd_currency
@@ -800,7 +539,7 @@ class TestLoan(BaseCommon):
         for line in loan.line_ids:
             self.assertEqual(line.currency_id, loan.currency_id)
 
-        line = fields.first(loan.line_ids)
+        line = loan.line_ids[0]
         line.view_process_values()
 
         move_lines = line.mapped("move_ids.line_ids")
@@ -814,3 +553,65 @@ class TestLoan(BaseCommon):
         self.assertAlmostEqual(
             move_lines[2].debit, move_lines[2].amount_currency / eur_currency.rate, 2
         )
+
+    def test_post_with_residual_amount(self):
+        loan = self.create_loan("fixed-annuity", 30000, 1, 36, compute_lines=False)
+        loan.residual_amount = 600
+        loan.compute_lines()
+        self.post(loan)
+        self.assertEqual(loan.state, "posted")
+
+    @freeze_time("2025-01-01")
+    def test_force_posted(self):
+        self.env["ir.config_parameter"].set_param(
+            "account_loan.auto_post_loan_moves_at_date", "false"
+        )
+        loan = self.create_loan("fixed-annuity", 30000, 1, 36, compute_lines=False)
+        loan.start_date = "2025-02-01"
+        self.assertFalse(loan.move_ids)
+        post = (
+            self.env["account.loan.post"]
+            .with_context(default_loan_id=loan.id)
+            .create({})
+        )
+        post.run()
+        self.assertTrue(loan.move_ids)
+        for move in loan.move_ids:
+            self.assertEqual(move.state, "posted")
+
+    @freeze_time("2025-01-01")
+    def test_auto_poste(self):
+        self.env["ir.config_parameter"].set_param(
+            "account_loan.auto_post_loan_moves_at_date", "true"
+        )
+        loan = self.create_loan("fixed-annuity", 30000, 1, 36, compute_lines=False)
+        loan.start_date = "2025-02-01"
+        self.assertFalse(loan.move_ids)
+        post = (
+            self.env["account.loan.post"]
+            .with_context(default_loan_id=loan.id)
+            .create({})
+        )
+        post.run()
+        self.assertTrue(loan.move_ids)
+        for move in loan.move_ids:
+            self.assertEqual(move.state, "draft")
+            self.assertEqual(move.auto_post, "at_date")
+
+    def test_loan_post_partner_id(self):
+        """Test that account_loan_post sets partner_id from loan"""
+        contact = self.env["res.partner"].create(
+            {"name": "Test contact", "parent_id": self.partner.id}
+        )
+        loan = self.create_loan(
+            "fixed-annuity", 30000, 1, 36, compute_lines=False, partner=contact
+        )
+        self.post(loan)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        line.view_process_values()
+        self.assertEqual(len(loan.move_ids), 2)
+        self.assertTrue(loan.move_ids.line_ids)
+        for move in loan.move_ids:
+            self.assertEqual(move.partner_id, contact)
+            for line in move.line_ids:
+                self.assertEqual(line.partner_id, self.partner)
