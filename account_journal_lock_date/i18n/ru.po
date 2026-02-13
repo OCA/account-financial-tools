@@ -127,8 +127,8 @@ msgid ""
 "You cannot add/modify entries for the journal '%(journal)s' prior to and "
 "inclusive of the lock date %(journal_date)s"
 msgstr ""
-"Вы не можете добавлять/изменять записи для журнала '%(журнал)s' до даты "
-"блокировки %(дата_журнала)s и включительно."
+"Вы не можете добавлять/изменять записи для журнала '%(journal)s' до даты "
+"блокировки %(journal_date)s и включительно."
 
 #. module: account_journal_lock_date
 #. odoo-python

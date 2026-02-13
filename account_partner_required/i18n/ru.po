@@ -57,7 +57,7 @@ msgid ""
 "Partner policy is set to 'Always' on account '%(account)s' but the partner "
 "is missing on the journal item '%(move_line)s'."
 msgstr ""
-"Для счета '%(счет)s' установлено значение 'Всегда', но партнер отсутствует в"
+"Для счета '%(account)s' установлено значение 'Всегда', но партнер отсутствует в"
 " журнальной статье '%(move_line)s'."
 
 #. module: account_partner_required
@@ -68,8 +68,8 @@ msgid ""
 "Partner policy is set to 'Never' on account '%(account)s' but the journal "
 "item '%(move_line)s' has the partner '%(partner)s'."
 msgstr ""
-"Для счета '%(счет)s' установлено значение 'Никогда', но в элементе журнала "
-"'%(move_line)s' указан партнер '%(партнер)s'."
+"Для счета '%(account)s' установлено значение 'Никогда', но в элементе журнала "
+"'%(move_line)s' указан партнер '%(partner)s'."
 
 #. module: account_partner_required
 #: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy

@@ -95,8 +95,8 @@ msgid ""
 "The MIS Report Period '%(period)s' is attached to MIS Report "
 "'%(period_report)s' and not to the selected MIS Report '%(report)s'."
 msgstr ""
-"Период отчета MIS '%(период)s' привязан к отчету MIS '%(период_отчета)s', а "
-"не к выбранному отчету MIS '%(отчет)s'."
+"Период отчета MIS '%(period)s' привязан к отчету MIS '%(report_period)s', а "
+"не к выбранному отчету MIS '%(report)s'."
 
 #. module: account_dashboard_banner_mis_builder
 #: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_kpi_type

@@ -121,8 +121,8 @@ msgid ""
 "The company is not set on sequence '%(sequence)s' configured as credit note "
 "sequence of journal '%(journal)s'."
 msgstr ""
-"Компания не установлена на последовательность '%(последовательность)s', "
-"настроенную как последовательность кредитных нот журнала '%(журнал)s'."
+"Компания не установлена на последовательность '%(sequence)s', настроенную "
+"как последовательность кредитных нот журнала '%(journal)s'."
 
 #. module: account_move_name_sequence
 #. odoo-python
@@ -131,8 +131,8 @@ msgid ""
 "The company is not set on sequence '%(sequence)s' configured on journal "
 "'%(journal)s'."
 msgstr ""
-"Компания не установлена на последовательность '%(последовательность)s', "
-"настроенную на журнал '%(журнал)s'."
+"Компания не установлена на последовательность '%(sequence)s', настроенную на"
+" журнал '%(journal)s'."
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,help:account_move_name_sequence.field_account_journal__refund_sequence_id

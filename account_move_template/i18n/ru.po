@@ -216,7 +216,7 @@ msgid ""
 "and have a lower sequence than the current line."
 msgstr ""
 "Невозможно вычислить формулу строки с последовательностью %(sequence)s "
-"(formula: %(код)s). Проверьте, что строки, используемые в формуле, "
+"(formula: %(code)s). Проверьте, что строки, используемые в формуле, "
 "действительно существуют и имеют меньшую последовательность, чем текущая "
 "строка."
 
@@ -228,7 +228,7 @@ msgid ""
 "(formula: %(code)s): the syntax of the formula is wrong."
 msgstr ""
 "Невозможно вычислить формулу строки с последовательностью %(sequence)s "
-"(formula: %(код)s): синтаксис формулы неверен."
+"(formula: %(code)s): синтаксис формулы неверен."
 
 #. module: account_move_template
 #. odoo-python
@@ -237,7 +237,7 @@ msgid ""
 "Invalid dictionary: %(exception)s\n"
 "%(msg)s"
 msgstr ""
-"Неверный словарь: %(исключение)s\n"
+"Неверный словарь: %(exception)s\n"
 "%(msg)s"
 
 #. module: account_move_template

@@ -461,8 +461,8 @@ msgid ""
 "There are no received checks in account '%(account)s' in currency "
 "'%(currency)s' that are not already in this check deposit."
 msgstr ""
-"На счете '%(счет)s' нет полученных чеков в валюте '%(валюта)s', которые еще "
-"не находятся в этом чековом депозите."
+"На счете '%(account)s' нет полученных чеков в валюте '%(currency)s', которые"
+" еще не находятся в этом чековом депозите."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount

@@ -508,8 +508,8 @@ msgid ""
 "On %(deposit)s, the cash journal %(cash_journal)s is not in the selected "
 "currency %(currency)s."
 msgstr ""
-"На %(депозит)s, кассовый журнал %(cash_journal)s не в выбранной валюте "
-"%(валюта)s."
+"На %(deposit)s, кассовый журнал %(cash_journal)s не в выбранной валюте "
+"%(currency)s."
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__operation_type

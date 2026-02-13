@@ -104,7 +104,7 @@ msgid ""
 "Line '%(line)s' has account '%(account)s' which is not a payable nor a "
 "receivable account."
 msgstr ""
-"В строке \"%(строка)s\" есть счет \"%(счет)s\", который не является ни "
+"В строке \"%(line)s\" есть счет \"%(account)s\", который не является ни "
 "кредиторской, ни дебиторской задолженностью."
 
 #. module: account_netting
