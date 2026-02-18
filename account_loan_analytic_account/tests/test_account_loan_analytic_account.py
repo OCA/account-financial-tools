@@ -1,6 +1,7 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import fields
 from odoo.tests.common import TransactionCase
 
 
@@ -38,30 +39,25 @@ class TestAccountLoanAnalyticAccount(TransactionCase):
         cls.interests_product = cls.env["product.product"].create(
             {"name": "Bank fee", "type": "service"}
         )
-        cls.env.user.groups_id += cls.env.ref("analytic.group_analytic_accounting")
+        cls.env.user.group_ids += cls.env.ref("analytic.group_analytic_accounting")
 
-        cls.default_plan = cls.env["account.analytic.plan"].create(
-            {"name": "Default", "company_id": False}
-        )
+        cls.default_plan = cls.env["account.analytic.plan"].create({"name": "Default"})
         cls.analytic_account_a = cls.env["account.analytic.account"].create(
             {
                 "name": "analytic_account_a",
                 "plan_id": cls.default_plan.id,
-                "company_id": False,
             }
         )
         cls.analytic_account_b = cls.env["account.analytic.account"].create(
             {
                 "name": "analytic_account_b",
                 "plan_id": cls.default_plan.id,
-                "company_id": False,
             }
         )
         cls.analytic_account_c = cls.env["account.analytic.account"].create(
             {
                 "name": "analytic_account_c",
                 "plan_id": cls.default_plan.id,
-                "company_id": False,
             }
         )
 
@@ -71,7 +67,7 @@ class TestAccountLoanAnalyticAccount(TransactionCase):
     def create_account(cls, code, name, account_type):
         return cls.env["account.account"].create(
             {
-                "company_id": cls.company.id,
+                "company_ids": [fields.Command.set([cls.company.id])],
                 "name": name,
                 "code": code,
                 "account_type": account_type,
