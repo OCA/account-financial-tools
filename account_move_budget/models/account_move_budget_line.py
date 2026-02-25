@@ -1,7 +1,7 @@
 # Copyright 2019 ForgeFlow S.L. (http://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -42,8 +42,7 @@ class AccountMoveBudgetLine(models.Model):
         required=True,
         index=True,
         ondelete="cascade",
-        domain=[("deprecated", "=", False)],
-        default=lambda self: self._context.get("account_id", False),
+        default=lambda self: self.env.context.get("account_id", False),
     )
     date = fields.Date(index=True, required=True)
     analytic_account_id = fields.Many2one(
@@ -51,7 +50,7 @@ class AccountMoveBudgetLine(models.Model):
     )
     company_id = fields.Many2one(
         "res.company",
-        related="account_id.company_id",
+        related="budget_id.company_id",
         string="Company",
         store=True,
         readonly=True,
@@ -67,4 +66,6 @@ class AccountMoveBudgetLine(models.Model):
     def _constraint_date(self):
         for rec in self:
             if rec.budget_id.date_from > rec.date or rec.budget_id.date_to < rec.date:
-                raise ValidationError(_("The date must be within the budget period."))
+                raise ValidationError(
+                    self.env._("The date must be within the budget period.")
+                )
