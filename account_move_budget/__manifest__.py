@@ -7,7 +7,7 @@
     "version": "17.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "https://github.com/OCA/account-financial-tools",
-    "author": "ForgeFlow, " "Odoo Community Association (OCA)",
+    "author": "ForgeFlow, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,

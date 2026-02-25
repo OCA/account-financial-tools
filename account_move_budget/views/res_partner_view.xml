@@ -13,7 +13,7 @@
                     groups="account.group_account_user"
                     icon="fa-usd"
                 >
-                        <field string="Budgets" name="budget_count" widget="statinfo" />
+                    <field string="Budgets" name="budget_count" widget="statinfo" />
                 </button>
             </div>
         </field>
