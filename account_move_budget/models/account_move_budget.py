@@ -2,7 +2,7 @@
 # Copyright 2019 ForgeFlow S.L. (http://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class AccountMoveBudget(models.Model):
@@ -43,14 +43,14 @@ class AccountMoveBudget(models.Model):
         default=lambda self: self.env.company,
     )
 
-    @api.returns("self", lambda value: value.id)
-    def copy(self, default=None):
-        self.ensure_one()
-        if default is None:
-            default = {}
-        if "name" not in default:
-            default["name"] = _("%s (copy)") % self.name
-        return super().copy(default=default)
+    def copy_data(self, default=None):
+        vals_list = super().copy_data(default=default)
+        if default and "name" in default:
+            return vals_list
+        return [
+            dict(vals, name=self.env._("%s (copy)", amb.name))
+            for amb, vals in zip(self, vals_list, strict=False)
+        ]
 
     @api.onchange("date_range_id")
     def _onchange_date_range(self):
