@@ -759,7 +759,72 @@ class AccountAsset(models.Model):
                 last_line,
                 posted_lines,
             )
+        self._redistribute_linear_after_posted()
         return True
+
+    def _redistribute_linear_after_posted(self):
+        """Post-process: redistribute unposted lines for linear assets."""
+        for asset in self:
+            if asset._should_redistribute_linear():
+                asset._redistribute_unposted_linear_lines()
+
+    def _should_redistribute_linear(self):
+        """Return True when post-processing redistribution should apply.
+
+        Conditions:
+        - method is 'linear' (excludes degressive, linear-limit, etc.)
+        - method_time is 'year' or 'number' (excludes 'percentage')
+        - prorata is False (prorata temporis produces intentionally variable
+          amounts for partial first/last periods)
+        - use_leap_years is False (leap years already produce variable amounts)
+        - carry_forward_missed_depreciations is False (carry_forward accumulates
+          amounts in the first non-init line)
+        """
+        self.ensure_one()
+        return (
+            self.method == "linear"
+            and self.method_time in ("year", "number")
+            and not self.prorata
+            and not self.use_leap_years
+            and not self.carry_forward_missed_depreciations
+        )
+
+    def _redistribute_unposted_linear_lines(self):
+        """Redistribute residual value evenly across unposted depreciation lines.
+
+        After compute_depreciation_board, the first unposted line absorbs the full
+        difference between table and actual posted amounts while the remaining lines
+        keep the uniform amount (depreciation_base / method_number). This method
+        spreads the residual value evenly across all unposted lines.
+        """
+        self.ensure_one()
+        currency = self.company_id.currency_id
+        posted_lines = self.depreciation_line_ids.filtered(
+            lambda l: l.type == "depreciate" and (l.move_check or l.init_entry)
+        )
+        unposted_lines = self.depreciation_line_ids.filtered(
+            lambda l: l.type == "depreciate" and not l.move_check and not l.init_entry
+        )
+        if not posted_lines or len(unposted_lines) <= 1:
+            return
+        posted_total = sum(posted_lines.mapped("amount"))
+        residual = currency.round(self.depreciation_base - posted_total)
+        n = len(unposted_lines)
+        uniform_amount = currency.round(residual / n)
+        # Check if redistribution is actually needed
+        current_amounts = unposted_lines.mapped("amount")
+        if all(
+            currency.is_zero(currency.round(amt - uniform_amount))
+            for amt in current_amounts
+        ):
+            return
+        # Distribute evenly, last line absorbs rounding
+        distributed = currency.round(0)
+        sorted_lines = unposted_lines.sorted("line_date")
+        for line in sorted_lines[:-1]:
+            line.amount = uniform_amount
+            distributed += uniform_amount
+        sorted_lines[-1].amount = currency.round(residual - distributed)
 
     def _get_fy_duration(self, fy, option="days"):
         """Returns fiscal year duration.
