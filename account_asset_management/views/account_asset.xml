@@ -55,7 +55,6 @@
                         <h1>
                             <field
                                 name="name"
-                                class="oe_inline"
                                 readonly="state in ['open', 'close', 'removed']"
                             />
                         </h1>
