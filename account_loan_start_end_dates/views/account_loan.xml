@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="account_loan_form_view">
+        <field name="name">account.loan.form (in account_loan_start_end_dates)</field>
+        <field name="model">account.loan</field>
+        <field name="inherit_id" ref="account_loan.account_loan_form" />
+        <field name="arch" type="xml">
+            <field name="method_period" position="after">
+                <field name="advance_payment" readonly="state != 'draft' " />
+            </field>
+        </field>
+    </record>
+</odoo>
