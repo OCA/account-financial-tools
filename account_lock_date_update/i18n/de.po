@@ -169,35 +169,3 @@ msgid "You tried to set %(field)s to %(date)s, but it is in the future."
 msgstr ""
 "Sie haben versucht, %(field)s auf %(date)s zu setzen, dieses Datum liegt "
 "jedoch in der Zukunft."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Zuletzt geändert am"
-
-#~ msgid "Lock Date for Non-Advisers"
-#~ msgstr "Sperrdatum für Nicht-Buchhalter"
-
-#~ msgid ""
-#~ "No users, including Advisers, can edit accounts prior to and inclusive of "
-#~ "this date. Use it for fiscal year locking for example."
-#~ msgstr ""
-#~ "Niemand, Buchhalter eingeschlossen, darf Konten bis einschliesslich "
-#~ "diesem Datum bearbeiten. Verwenden Sie dies z.B. für "
-#~ "Geschäftsjahresabschluss."
-
-#~ msgid ""
-#~ "Only users with the 'Adviser' role can edit accounts prior to and "
-#~ "inclusive of this date. Use it for period locking inside an open fiscal "
-#~ "year, for example."
-#~ msgstr ""
-#~ "Nur mit der Rolle Buchhalter dürfen Konten vor einschliesslich diesem "
-#~ "Datum bearbeiten. Verwenden Sie dies z.B. für Periodensperre im laufenden "
-#~ "Geschäftsjahr."
-
-#~ msgid "Account Update Lock_date"
-#~ msgstr "Kontoänderungs-Sperrdatum"
-
-#~ msgid "Lock Date"
-#~ msgstr "Sperrdatum"
-
-#~ msgid "Update accounting lock dates"
-#~ msgstr "Aktualisiere Kontosperrdaten"

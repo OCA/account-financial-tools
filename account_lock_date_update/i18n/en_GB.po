@@ -156,6 +156,3 @@ msgstr ""
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 msgid "You tried to set %(field)s to %(date)s, but it is in the future."
 msgstr ""
-
-#~ msgid "Last Modified on"
-#~ msgstr "Last Modified on"

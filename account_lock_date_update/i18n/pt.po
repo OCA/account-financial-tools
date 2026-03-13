@@ -156,32 +156,3 @@ msgstr "Não está autorizado a executar esta ação."
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 msgid "You tried to set %(field)s to %(date)s, but it is in the future."
 msgstr ""
-
-#~ msgid "Last Modified on"
-#~ msgstr "Última Modificação Em"
-
-#~ msgid "Lock Date for Non-Advisers"
-#~ msgstr "Data de Bloqueio para Não-Consultores"
-
-#~ msgid ""
-#~ "No users, including Advisers, can edit accounts prior to and inclusive of "
-#~ "this date. Use it for fiscal year locking for example."
-#~ msgstr ""
-#~ "Nenhum utilizador, incluindo os Consultores, pode alterar contas "
-#~ "anteriores a esta data, inclusive. Use-o para bloqueio do ano fiscal, por "
-#~ "exemplo."
-
-#~ msgid ""
-#~ "Only users with the 'Adviser' role can edit accounts prior to and "
-#~ "inclusive of this date. Use it for period locking inside an open fiscal "
-#~ "year, for example."
-#~ msgstr ""
-#~ "Apenas utilizadores com a função 'Consultor' podem alterar contas "
-#~ "anteriores a esta data, inclusive. Use-o para bloqueio de um período "
-#~ "dentro de uma ano fiscal, por exemplo."
-
-#~ msgid "Lock Date"
-#~ msgstr "Data de Bloqueio"
-
-#~ msgid "Update accounting lock dates"
-#~ msgstr "Atualizar data de bloqueio de contas"

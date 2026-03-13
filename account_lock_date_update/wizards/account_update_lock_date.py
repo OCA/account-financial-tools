@@ -1,7 +1,7 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.misc import format_date
 
@@ -50,7 +50,7 @@ class AccountUpdateLockDate(models.TransientModel):
         self.ensure_one()
         has_adviser_group = self.env.user.has_group("account.group_account_manager")
         if not (has_adviser_group or self.env.user._is_admin()):
-            raise UserError(_("You are not allowed to execute this action."))
+            raise UserError(self.env._("You are not allowed to execute this action."))
 
     def execute(self):
         self.ensure_one()
@@ -71,7 +71,7 @@ class AccountUpdateLockDate(models.TransientModel):
         for lock_field in LOCK_DATE_FIELDS:
             if self[lock_field] and self[lock_field] > today:
                 raise UserError(
-                    _(
+                    self.env._(
                         "You tried to set %(field)s to %(date)s, "
                         "but it is in the future.",
                         field=field2string[lock_field],

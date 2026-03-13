@@ -169,6 +169,3 @@ msgid "You tried to set %(field)s to %(date)s, but it is in the future."
 msgstr ""
 "%(field)s alanına %(date)s değeri atamaya çalıştınız, fakat gelecekte bir "
 "tarih."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Son değişiklik"

@@ -166,30 +166,3 @@ msgstr "No esteu autoritzat per executar aquesta acció."
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 msgid "You tried to set %(field)s to %(date)s, but it is in the future."
 msgstr "Heu intentat establir %(field)s a %(date)s, però és en el futur."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Darrera modificació el"
-
-#~ msgid "Lock Date for All Users"
-#~ msgstr "Data de bloqueig per tots els usuaris"
-
-#~ msgid "Lock Date for Non-Advisers"
-#~ msgstr "Data de bloqueig per a no assessors"
-
-#~ msgid ""
-#~ "No users can edit journal entries related to a tax prior and inclusive of "
-#~ "this date."
-#~ msgstr ""
-#~ "Cap usuari pot editar els assentament relacionats amb un impost anterior "
-#~ "i incloent aquesta data."
-
-#~ msgid ""
-#~ "No users, including Advisers, can edit accounts prior to and inclusive of "
-#~ "this date. Use it for fiscal year locking for example."
-#~ msgstr ""
-#~ "Cap usuari, incloent-hi els Assessors, no pot editar comptes en aquesta "
-#~ "data o anterior per aquest diari. Useu-la per bloquejar un any fiscal, "
-#~ "per exemple."
-
-#~ msgid "Account Update Lock_date"
-#~ msgstr "Actualització de la data de bloqueig comptable"

@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,6 +16,11 @@ msgstr ""
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Cancel"
+msgstr ""
+
+#. module: account_lock_date_update
+#: model:ir.model,name:account_lock_date_update.model_res_company
+msgid "Companies"
 msgstr ""
 
 #. module: account_lock_date_update
@@ -35,6 +40,7 @@ msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__display_name
+#: model:ir.model.fields,field_description:account_lock_date_update.field_res_company__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -50,6 +56,7 @@ msgstr ""
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__id
+#: model:ir.model.fields,field_description:account_lock_date_update.field_res_company__id
 msgid "ID"
 msgstr ""
 
@@ -127,6 +134,12 @@ msgstr ""
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__tax_lock_date
 msgid "Tax Return Lock Date"
+msgstr ""
+
+#. module: account_lock_date_update
+#. odoo-python
+#: code:addons/account_lock_date_update/models/res_company.py:0
+msgid "Unreconciled Transactions"
 msgstr ""
 
 #. module: account_lock_date_update
