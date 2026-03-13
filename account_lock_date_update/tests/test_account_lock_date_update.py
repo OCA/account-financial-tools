@@ -22,18 +22,25 @@ class TestAccountLockDateUpdate(TransactionCase):
         )
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.company = cls.env.ref("base.main_company")
-        cls.demo_user = cls.env.ref("base.user_demo")
+        cls.demo_user = cls.env["res.users"].create(
+            {
+                "name": "Test User",
+                "login": "test_user_unique",
+                "email": "test@example.com",
+                "group_ids": [Command.link(cls.env.ref("base.group_user").id)],
+            }
+        )
         cls.adviser_group = cls.env.ref("account.group_account_manager")
 
     def test_01_update_without_access(self):
-        self.demo_user.write({"groups_id": [Command.unlink(self.adviser_group.id)]})
+        self.demo_user.write({"group_ids": [Command.unlink(self.adviser_group.id)]})
         with self.assertRaises(AccessError):
             self.env["account.update.lock_date"].with_user(self.demo_user.id).create(
                 {"company_id": self.company.id}
             )
 
     def test_02_update_with_access(self):
-        self.demo_user.write({"groups_id": [Command.link(self.adviser_group.id)]})
+        self.demo_user.write({"group_ids": [Command.link(self.adviser_group.id)]})
         wizard = (
             self.env["account.update.lock_date"]
             .with_user(self.demo_user.id)
