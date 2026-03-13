@@ -167,6 +167,3 @@ msgstr "Nimate dovoljenj za izvajanje te akcije."
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 msgid "You tried to set %(field)s to %(date)s, but it is in the future."
 msgstr "Poskušali ste nastaviti %(field)s na %(date)s, a to je v prihodnosti."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Zadnjič spremenjeno"
