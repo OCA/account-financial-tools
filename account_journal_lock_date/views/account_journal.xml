@@ -8,7 +8,7 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form" />
         <field name="arch" type="xml">
-            <field name="account_control_ids" position="after">
+            <field name="code" position="after">
                 <field name="fiscalyear_lock_date" />
                 <field name="period_lock_date" />
             </field>
