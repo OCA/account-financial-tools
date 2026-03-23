@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Intercompany Transaction Journal Entries -->
+    <menuitem
+        id="menu_intercompany_transaction"
+        name="Intercompany Transaction"
+        action="action_intercompany_transaction_entries"
+        parent="account.menu_finance_entries"
+        sequence="8"
+    />
+
+    <!-- Intercompany Transaction Config -->
+    <menuitem
+        id="menu_intercompany_transaction_config"
+        name="Intercompany Transaction Config"
+        parent="account.menu_finance_entries"
+        action="action_intercompany_transaction_config"
+        groups="account.group_account_manager"
+        sequence="8"
+    />
+</odoo>

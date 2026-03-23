@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_intercompany_transaction_config_form" model="ir.ui.view">
+        <field name="name">intercompany.transaction.config.form</field>
+        <field name="model">intercompany.transaction.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="From Company">
+                        <group>
+                            <field
+                                name="from_company_id"
+                                required="1"
+                                domain="[('id', '!=', to_company_id)]"
+                                options="{'no_create': True}"
+                                string="Company"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="from_company_debit_account_id"
+                                domain="[('company_ids', '=', from_company_id)]"
+                                options="{'no_create': True}"
+                                string="Debit Account"
+                            />
+                        </group>
+                    </group>
+                    <group string="To Company">
+                        <group>
+                            <field
+                                name="to_company_id"
+                                required="1"
+                                domain="[('id', '!=', from_company_id)]"
+                                options="{'no_create': True}"
+                                string="Company"
+                            />
+                            <field
+                                name="to_company_debit_account_id"
+                                domain="[('company_ids', '=', to_company_id)]"
+                                options="{'no_create': True}"
+                                string="Debit Account"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="to_company_journal_id"
+                                domain="[('company_id', '=', to_company_id), ('type', 'in', ('bank', 'cash'))]"
+                                options="{'no_create': True}"
+                                string="Journal"
+                            />
+                            <field
+                                name="to_company_credit_account_id"
+                                domain="[('company_ids', '=', to_company_id)]"
+                                options="{'no_create': True}"
+                                string="Credit Account"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_intercompany_transaction_config_list" model="ir.ui.view">
+        <field name="name">intercompany.transaction.config.list</field>
+        <field name="model">intercompany.transaction.config</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" expand="1">
+                <field
+                    name="from_company_id"
+                    required="1"
+                    domain="[('id', '!=', to_company_id)]"
+                    readonly="context.get('is_from_company_readonly', False)"
+                    options="{'no_create': True}"
+                    optional="show"
+                />
+                <field
+                    name="from_company_debit_account_id"
+                    domain="[('company_ids', '=', from_company_id)]"
+                    options="{'no_create': True}"
+                    optional="show"
+                />
+                <field
+                    name="to_company_id"
+                    required="1"
+                    domain="[('id', '!=', from_company_id)]"
+                    options="{'no_create': True}"
+                    optional="show"
+                />
+                <field
+                    name="to_company_debit_account_id"
+                    domain="[('company_ids', '=', to_company_id)]"
+                    options="{'no_create': True}"
+                    optional="show"
+                />
+                <field
+                    name="to_company_credit_account_id"
+                    domain="[('company_ids', '=', to_company_id)]"
+                    options="{'no_create': True}"
+                    optional="show"
+                />
+                <field
+                    name="to_company_journal_id"
+                    domain="[('company_id', '=', to_company_id), ('type', 'in', ('bank', 'cash'))]"
+                    options="{'no_create': True}"
+                    optional="show"
+                />
+            </list>
+        </field>
+    </record>
+    <record id="view_intercompany_transaction_config_search" model="ir.ui.view">
+        <field name="name">intercompany.transaction.config.search</field>
+        <field name="model">intercompany.transaction.config</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="from_company_id" />
+                <field name="from_company_debit_account_id" />
+                <field name="to_company_id" />
+                <field name="to_company_debit_account_id" />
+                <field name="to_company_credit_account_id" />
+                <field name="to_company_journal_id" />
+                <group string="Group By">
+                    <filter
+                        name="group_by_from_company"
+                        string="From Company"
+                        context="{'group_by': 'from_company_id'}"
+                    />
+                    <filter
+                        name="group_by_from_company_debit_account"
+                        string="Debit Account(From Company)"
+                        context="{'group_by':'from_company_debit_account_id'}"
+                    />
+                    <separator />
+                    <filter
+                        name="group_by_to_company"
+                        string="To Company"
+                        context="{'group_by':'to_company_id'}"
+                    />
+                    <filter
+                        name="group_by_to_company_debit_account"
+                        string="Debit Account(To Company)"
+                        context="{'group_by':'to_company_debit_account_id'}"
+                    />
+                    <filter
+                        name="group_by_to_company_credit_account"
+                        string="Credit Account(To Company)"
+                        context="{'group_by':'to_company_credit_account_id'}"
+                    />
+                    <filter
+                        name="group_by_to_company_journal"
+                        string="To Company Journal"
+                        context="{'group_by':'to_company_journal_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_intercompany_transaction_config" model="ir.actions.act_window">
+        <field name="name">Intercompany Transaction Config</field>
+        <field name="res_model">intercompany.transaction.config</field>
+        <field name="view_mode">list,form</field>
+        <field
+            name="search_view_id"
+            ref="view_intercompany_transaction_config_search"
+        />
+        <field name="view_id" ref="view_intercompany_transaction_config_list" />
+        <field
+            name="context"
+        >{'search_default_group_by_from_company': 1, 'search_default_group_by_to_company': 2}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Intercompany Transaction Config
+            </p>
+        </field>
+    </record>
+</odoo>
