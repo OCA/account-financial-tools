@@ -49,22 +49,28 @@ To configure this module, you need to:
 
 1. Go to *Invoicing > Configuration > Journals*
 2. Open a Journal and set the 'Lock Date' and the 'Lock Date for
-   Non-Advisers' in the' Advanced Settings' tab of the form view or
-   select several Journals in the list view and click on the action menu
-   'Update journals lock dates' to update those dates for the selected
-   journals at the same time.
+   Non-Advisers' in the' Advanced Settings' tab of the form view. You
+   can also toggle 'Restrict Creation on Lock Dates' to decide whether
+   draft creation is blocked on or before those dates.
+3. Optionally, select several Journals in the list view and click on the
+   action menu 'Update journals lock dates' to update those dates for
+   the selected journals at the same time.
 
 Usage
 =====
 
-If the logged-in user has the access group 'Adviser', he/she will not be
-able to create a journal entry if the 'Lock Date' of the journal is
-greater than or equal to the journal entry.
+When 'Restrict Creation on Lock Dates' is enabled, a logged-in user with
+the access group 'Adviser' will not be able to create or modify a
+journal entry if the 'Lock Date' of the journal is greater than or equal
+to the journal entry date.
 
-If the logged-in user has not the access group 'Adviser', he/she will
-not be able to create a journal entry if the 'Lock Date for
-Non-Advisers' of the journal is greater than or equal to the journal
-entry.
+When 'Restrict Creation on Lock Dates' is enabled and the logged-in user
+does not have the access group 'Adviser', he/she will not be able to
+create or modify a journal entry if the 'Lock Date for Non-Advisers' of
+the journal is greater than or equal to the journal entry date.
+
+Creation checks can be disabled per journal by unticking 'Restrict
+Creation on Lock Dates'.
 
 Known issues / Roadmap
 ======================
@@ -109,6 +115,10 @@ Contributors
 - `Factor Libre <https://www.factorlibre.com>`__:
 
   - Rodrigo Bonilla Martinez <rodrigo.bonilla@factorlibre.com>
+
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+
+  - Bhavesh Heliconia
 
 Maintainers
 -----------
