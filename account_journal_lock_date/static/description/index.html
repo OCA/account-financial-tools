@@ -397,21 +397,26 @@ time.</p>
 <ol class="arabic simple">
 <li>Go to <em>Invoicing &gt; Configuration &gt; Journals</em></li>
 <li>Open a Journal and set the ‘Lock Date’ and the ‘Lock Date for
-Non-Advisers’ in the’ Advanced Settings’ tab of the form view or
-select several Journals in the list view and click on the action menu
-‘Update journals lock dates’ to update those dates for the selected
-journals at the same time.</li>
+Non-Advisers’ in the’ Advanced Settings’ tab of the form view. You
+can also toggle ‘Restrict Creation on Lock Dates’ to decide whether
+draft creation is blocked on or before those dates.</li>
+<li>Optionally, select several Journals in the list view and click on the
+action menu ‘Update journals lock dates’ to update those dates for
+the selected journals at the same time.</li>
 </ol>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
-<p>If the logged-in user has the access group ‘Adviser’, he/she will not be
-able to create a journal entry if the ‘Lock Date’ of the journal is
-greater than or equal to the journal entry.</p>
-<p>If the logged-in user has not the access group ‘Adviser’, he/she will
-not be able to create a journal entry if the ‘Lock Date for
-Non-Advisers’ of the journal is greater than or equal to the journal
-entry.</p>
+<p>When ‘Restrict Creation on Lock Dates’ is enabled, a logged-in user with
+the access group ‘Adviser’ will not be able to create or modify a
+journal entry if the ‘Lock Date’ of the journal is greater than or equal
+to the journal entry date.</p>
+<p>When ‘Restrict Creation on Lock Dates’ is enabled and the logged-in user
+does not have the access group ‘Adviser’, he/she will not be able to
+create or modify a journal entry if the ‘Lock Date for Non-Advisers’ of
+the journal is greater than or equal to the journal entry date.</p>
+<p>Creation checks can be disabled per journal by unticking ‘Restrict
+Creation on Lock Dates’.</p>
 </div>
 <div class="section" id="known-issues-roadmap">
 <h1><a class="toc-backref" href="#toc-entry-3">Known issues / Roadmap</a></h1>
@@ -454,6 +459,10 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </li>
 <li><a class="reference external" href="https://www.factorlibre.com">Factor Libre</a>:<ul>
 <li>Rodrigo Bonilla Martinez &lt;<a class="reference external" href="mailto:rodrigo.bonilla&#64;factorlibre.com">rodrigo.bonilla&#64;factorlibre.com</a>&gt;</li>
+</ul>
+</li>
+<li><a class="reference external" href="https://www.heliconia.io">Heliconia Solutions Pvt. Ltd.</a><ul>
+<li>Bhavesh Heliconia</li>
 </ul>
 </li>
 </ul>

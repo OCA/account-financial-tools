@@ -11,6 +11,7 @@
             <field name="account_control_ids" position="after">
                 <field name="fiscalyear_lock_date" />
                 <field name="period_lock_date" />
+                <field name="lock_date_restrict_creation" />
             </field>
         </field>
     </record>
