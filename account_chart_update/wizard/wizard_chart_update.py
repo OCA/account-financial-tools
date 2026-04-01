@@ -13,7 +13,7 @@
 import logging
 from unittest.mock import patch
 
-from odoo import _, api, fields, models, tools
+from odoo import Command, api, fields, models, tools
 from odoo.tools.translate import TranslationImporter
 
 _logger = logging.getLogger(__name__)
@@ -254,7 +254,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _default_tax_group_field_ids(self):
         return [
-            (4, x.id)
+            Command.link(x.id)
             for x in self.env["ir.model.fields"].search(
                 self._domain_tax_group_field_ids()
                 + self.get_uncheck_fields_domain("account.tax.group"),
@@ -263,7 +263,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _default_tax_field_ids(self):
         return [
-            (4, x.id)
+            Command.link(x.id)
             for x in self.env["ir.model.fields"].search(
                 self._domain_tax_field_ids()
                 + self.get_uncheck_fields_domain("account.tax"),
@@ -272,7 +272,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _default_account_field_ids(self):
         return [
-            (4, x.id)
+            Command.link(x.id)
             for x in self.env["ir.model.fields"].search(
                 self._domain_account_field_ids()
                 + self.get_uncheck_fields_domain("account.account"),
@@ -281,7 +281,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _default_account_group_field_ids(self):
         return [
-            (4, x.id)
+            Command.link(x.id)
             for x in self.env["ir.model.fields"].search(
                 self._domain_account_group_field_ids()
                 + self.get_uncheck_fields_domain("account.group")
@@ -290,7 +290,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _default_fp_field_ids(self):
         return [
-            (4, x.id)
+            Command.link(x.id)
             for x in self.env["ir.model.fields"].search(
                 self._domain_fp_field_ids()
                 + self.get_uncheck_fields_domain("account.fiscal.position")
@@ -427,11 +427,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.write(
             {
                 "state": "init",
-                "tax_group_ids": [(2, r.id, False) for r in self.tax_group_ids],
-                "tax_ids": [(2, r.id, False) for r in self.tax_ids],
-                "account_ids": [(2, r.id, False) for r in self.account_ids],
+                "tax_group_ids": [Command.delete(r.id) for r in self.tax_group_ids],
+                "tax_ids": [Command.delete(r.id) for r in self.tax_ids],
+                "account_ids": [Command.delete(r.id) for r in self.account_ids],
                 "fiscal_position_ids": [
-                    (2, r.id, False) for r in self.fiscal_position_ids
+                    Command.delete(r.id) for r in self.fiscal_position_ids
                 ],
             }
         )
@@ -447,7 +447,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "account.tax": self.update_tax,
             "account.fiscal.position": self.update_fiscal_position,
         }
-        langs = self.env["res.lang"].search([])
+        langs = self.env["res.lang"].search([("active", "=", True)])
         for m_name in model_mapping.keys():
             if not model_mapping[m_name]:
                 continue
@@ -500,10 +500,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             self._update_accounts(t_data["account.account"])
         if self.update_tax_group:
             self._update_tax_groups(t_data["account.tax.group"])
-        if self.update_tax:
-            self._update_taxes(t_data["account.tax"])
         if self.update_fiscal_position:
             self._update_fiscal_positions(t_data["account.fiscal.position"])
+        if self.update_tax:
+            self._update_taxes(t_data["account.tax"])
         # Store new chart in the company
         self.company_id.chart_template = self.chart_template
         # Store the data and go to the next step.
@@ -534,7 +534,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         mail_thread_fields = set(self.env["mail.thread"]._fields)
         specials_mapping = {
             "account.tax.group": mail_thread_fields | {"sequence"},
-            "account.tax": mail_thread_fields | {"children_tax_ids"} | {"sequence"},
+            "account.tax": mail_thread_fields
+            | {
+                "children_tax_ids",
+                "sequence",
+            },
             "account.account": mail_thread_fields
             | {
                 "root_id",
@@ -584,7 +588,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "account.group": self.account_group_field_ids,
             "account.fiscal.position": self.fp_field_ids,
         }
-        langs = self.env["res.lang"].search([])
+        langs = self.env["res.lang"].search([("active", "=", True)])
         # If the fields to be queried are not mapped, use all of them
         # (example: account.tax.repartition.line).
         if real._name not in field_mapping:
@@ -610,11 +614,24 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             # Field ttype conditions
             if field.ttype == "many2many":
                 if isinstance(record_value, str):
-                    real_xml_ids = []
-                    for child_item in real_value:
-                        real_xml_ids.append(child_item.get_external_id()[child_item.id])
-                    real_xml_id = ",".join(real_xml_ids)
-                    if real_xml_id != record_value:
+                    # If any template xmlid can't be resolved we skip the
+                    # check — we can't reliably tell whether the link is
+                    # drifted or just pointing to a record whose xmlid was
+                    # unlinked (tracked separately by `missing_xml_id`).
+                    expected_ids = set()
+                    unresolved = False
+                    for v in record_value.split(","):
+                        if not v:
+                            continue
+                        xml_id = (
+                            f"account.{self.company_id.id}_{v}" if "." not in v else v
+                        )
+                        rec = self.env.ref(xml_id, raise_if_not_found=False)
+                        if rec:
+                            expected_ids.add(rec.id)
+                        else:
+                            unresolved = True
+                    if not unresolved and set(real_value.ids) != expected_ids:
                         result[key] = record_value
                 else:
                     record_value_compare = []
@@ -716,7 +733,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         different_fields = sorted(list(different_fields_set))
         if different_fields:
             result.append(
-                _("Differences in these fields: %s.") % ", ".join(different_fields)
+                self.env._(
+                    "Differences in these fields: %s.", ", ".join(different_fields)
+                )
             )
         return "\n".join(result)
 
@@ -816,7 +835,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         "xml_id": xmlid,
                         "update_chart_wizard_id": self.id,
                         "type": "new",
-                        "notes": _("Name or description not found."),
+                        "notes": self.env._("Name or description not found."),
                     }
                 )
             else:
@@ -824,7 +843,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the tax group for changes
                 notes = self.diff_notes(r_data, tax_group)
                 if self.missing_xml_id(tax_group, xmlid):
-                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
                 if notes:
                     # Tax group to be updated
                     tax_group_vals.append(
@@ -836,8 +855,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             "notes": notes,
                         }
                     )
-        self.tax_group_ids = [(5, 0, 0)] + [
-            (0, 0, tax_group_val) for tax_group_val in tax_group_vals
+        self.tax_group_ids = [Command.clear()] + [
+            Command.create(tax_group_val) for tax_group_val in tax_group_vals
         ]
 
     def _find_taxes(self, t_data):
@@ -855,7 +874,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         "type_tax_use": r_data["type_tax_use"],
                         "update_chart_wizard_id": self.id,
                         "type": "new",
-                        "notes": _("Name or description not found."),
+                        "notes": self.env._("Name or description not found."),
                     }
                 )
             else:
@@ -863,7 +882,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the tax for changes
                 notes = self.diff_notes(r_data, tax)
                 if self.missing_xml_id(tax, xmlid):
-                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
                 if notes:
                     # Tax to be updated
                     tax_vals.append(
@@ -888,10 +907,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     "type_tax_use": tax.type_tax_use,
                     "type": "deleted",
                     "update_tax_id": tax.id,
-                    "notes": _("To deactivate: not in the template"),
+                    "notes": self.env._("To deactivate: not in the template"),
                 }
             )
-        self.tax_ids = [(5, 0, 0)] + [(0, 0, tax_val) for tax_val in tax_vals]
+        self.tax_ids = [Command.clear()] + [
+            Command.create(tax_val) for tax_val in tax_vals
+        ]
 
     def _find_accounts(self, t_data):
         """Load account template data to create/update."""
@@ -905,14 +926,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         "xml_id": xmlid,
                         "update_chart_wizard_id": self.id,
                         "type": "new",
-                        "notes": _("No account found with this code."),
+                        "notes": self.env._("No account found with this code."),
                     }
                 )
             else:
                 # Check the account for changes
                 notes = self.diff_notes(r_data, account)
                 if self.missing_xml_id(account, xmlid):
-                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
                 if notes:
                     # Account to be updated
                     account_vals.append(
@@ -924,7 +945,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             "notes": notes,
                         }
                     )
-        self.account_ids = [(5, 0, 0)] + [(0, 0, a_val) for a_val in account_vals]
+        self.account_ids = [Command.clear()] + [
+            Command.create(a_val) for a_val in account_vals
+        ]
 
     def _find_account_groups(self, t_data):
         """Load account template data to create/update."""
@@ -938,7 +961,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         "xml_id": xmlid,
                         "update_chart_wizard_id": self.id,
                         "type": "new",
-                        "notes": _("No account found with this code."),
+                        "notes": self.env._("No account found with this code."),
                     }
                 )
             else:
@@ -951,11 +974,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     else r_data["code_prefix_start"]
                 )
                 if code_prefix_end != account_group.code_prefix_end:
-                    notes += (notes and "\n" or "") + _(
-                        "Differences in these fields: %s."
-                    ) % code_prefix_end
+                    notes += (notes and "\n" or "") + self.env._(
+                        "Differences in these fields: %s.", code_prefix_end
+                    )
                 if self.missing_xml_id(account_group, xmlid):
-                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
                 if notes:
                     # Account to be updated
                     ag_vals.append(
@@ -967,7 +990,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             "notes": notes,
                         }
                     )
-        self.account_group_ids = [(5, 0, 0)] + [(0, 0, ag_val) for ag_val in ag_vals]
+        self.account_group_ids = [Command.clear()] + [
+            Command.create(ag_val) for ag_val in ag_vals
+        ]
 
     def _find_fiscal_positions(self, t_data):
         """Load fiscal position template data to create/update."""
@@ -981,14 +1006,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         "xml_id": xmlid,
                         "update_chart_wizard_id": self.id,
                         "type": "new",
-                        "notes": _("No fiscal position found with this name."),
+                        "notes": self.env._("No fiscal position found with this name."),
                     }
                 )
             else:
                 # Check the fiscal position for changes
                 notes = self.diff_notes(r_data, fp)
                 if self.missing_xml_id(fp, xmlid):
-                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
                 if notes:
                     # Fiscal position template to be updated
                     fp_vals.append(
@@ -1000,7 +1025,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             "notes": notes,
                         }
                     )
-        self.fiscal_position_ids = [(5, 0, 0)] + [(0, 0, fp_val) for fp_val in fp_vals]
+        self.fiscal_position_ids = [Command.clear()] + [
+            Command.create(fp_val) for fp_val in fp_vals
+        ]
 
     def _load_data(self, model, data):
         """Process similar to the one in chart template _load() method."""
@@ -1011,7 +1038,16 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             delay_account_group_sync=True,
             lang="en_US",
         )
-        created_records = template._load_data({model: data})[model]
+        model_fields = set(self.env[model]._fields)
+        filtered_data = {
+            xml_id: {
+                k: v
+                for k, v in vals.items()
+                if k in model_fields or "@" in k or k == "__translation_module__"
+            }
+            for xml_id, vals in data.items()
+        }
+        created_records = template._load_data({model: filtered_data})[model]
         # Make sure all translation data is indexed by XML ID
         translation_data = {}
         created_xmlids = created_records.get_external_id()
@@ -1031,7 +1067,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             )
         created_records.invalidate_recordset()
         for record in created_records:
-            msg = _(
+            msg = self.env._(
                 (f"Created/updated {record._name} %s."),
                 f"'{record.name}' (ID:{record.id})",
             )
@@ -1064,7 +1100,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             tax = wiz_tax.update_tax_id
             if wiz_tax.type == "deleted":
                 tax.active = False
-                _logger.info(_("Deactivated tax %s."), tax.name)
+                _logger.info(self.env._("Deactivated tax %s."), tax.name)
                 continue
             xml_id = wiz_tax.xml_id
             key = tax.id or xml_id

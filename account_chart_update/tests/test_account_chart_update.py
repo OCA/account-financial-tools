@@ -4,6 +4,7 @@
 
 import logging
 
+from odoo import Command
 from odoo.tests import tagged
 from odoo.tools import mute_logger
 
@@ -103,12 +104,12 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             wizard.account_group_ids.mapped("xml_id"), list(account_group_data.keys())
         )
         # fiscal.position
-        fp_data = self.chart_template_data["fiscal.position"]
+        fp_data = self.chart_template_data["account.fiscal.position"]
         self.assertEqual(len(wizard.fiscal_position_ids), len(fp_data))
-        # generic_coa has no account.fiscal.position.data
         fp_types = wizard.fiscal_position_ids.mapped("type")
-        self.assertNotIn("new", fp_types)
+        self.assertIn("new", fp_types)
         self.assertNotIn("updated", fp_types)
+        self.assertNotIn("deleted", fp_types)
         wizard.action_update_records()
         self.assertEqual(wizard.state, "done")
         self.assertEqual(wizard.new_taxes, len(tax_data))
@@ -239,3 +240,59 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             filter(lambda x: x["installed"], all_chart_templates.values())
         )
         self.assertEqual(len(chart_template_installed), len(only_installed))
+
+    @mute_logger("odoo.models.unlink")
+    def test_06_fiscal_position_ids_and_original_tax_ids(self):
+        """Wizard must diff and update the new account.tax M2M fields that
+        replaced the removed account.fiscal.position.tax model.
+        """
+        # sale_export_tax_template carries both fiscal_position_ids and
+        # original_tax_ids in the generic_coa template.
+        tax = self._get_record_for_xml_id("sale_export_tax_template")
+        expected_fp_ids = set(tax.fiscal_position_ids.ids)
+        expected_original_ids = set(tax.original_tax_ids.ids)
+        self.assertTrue(expected_fp_ids)
+        self.assertTrue(expected_original_ids)
+        # No drift: wizard should not flag the tax as updated.
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        wizard.action_find_records()
+        self.assertFalse(
+            wizard.tax_ids.filtered(lambda r: r.update_tax_id == tax),
+            "Tax matching the template should not be flagged as updated",
+        )
+        wizard.unlink()
+        # Introduce drift on both fields and check detection + restoration.
+        tax.fiscal_position_ids = [Command.clear()]
+        tax.original_tax_ids = [Command.clear()]
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        wizard.action_find_records()
+        wiz_tax = wizard.tax_ids.filtered(lambda r: r.update_tax_id == tax)
+        self.assertEqual(wiz_tax.type, "updated")
+        wizard.action_update_records()
+        tax.invalidate_recordset()
+        self.assertEqual(set(tax.fiscal_position_ids.ids), expected_fp_ids)
+        self.assertEqual(set(tax.original_tax_ids.ids), expected_original_ids)
+
+    def test_07_many2many_string_diff_is_order_independent(self):
+        """Same records in a different order must not be reported as a diff."""
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        tax = self._get_record_for_xml_id("sale_export_tax_template")
+        # Add a second fiscal position so we can test ordering.
+        extra_fp = self._get_record_for_xml_id(
+            "template_generic_domestic_fiscal_position"
+        )
+        tax.fiscal_position_ids = [
+            Command.set((tax.fiscal_position_ids | extra_fp).ids)
+        ]
+        fp_short_xmlids = [
+            fp.get_external_id()[fp.id].split("_", maxsplit=1)[1]
+            for fp in tax.fiscal_position_ids
+        ]
+        self.assertGreater(len(fp_short_xmlids), 1)
+        reversed_value = ",".join(reversed(fp_short_xmlids))
+        result = wizard.diff_fields({"fiscal_position_ids": reversed_value}, tax)
+        self.assertNotIn(
+            "fiscal_position_ids",
+            result,
+            "Reordered m2m values must not be flagged as a diff",
+        )
