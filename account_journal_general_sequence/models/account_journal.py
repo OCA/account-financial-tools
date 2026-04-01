@@ -43,7 +43,7 @@ class AccountJournal(models.Model):
                         ),
                         "code": "account_journal_general_sequence.default",
                         "company_id": one.company_id.id,
-                        "implementation": "no_gap",
+                        "implementation": "standard",
                         "prefix": "%(range_year)s/",
                         "padding": 8,
                         "use_date_range": True,
