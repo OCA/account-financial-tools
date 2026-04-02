@@ -20,20 +20,18 @@ class AccountMoveLine(models.Model):
             if policy == "always" and not line.partner_id:
                 return self.env._(
                     "Partner policy is set to 'Always' on account '%(account)s' but "
-                    "the partner is missing on the journal item '%(move_line)s'."
-                ) % {
-                    "account": line.account_id.display_name,
-                    "move_line": line.display_name,
-                }
+                    "the partner is missing on the journal item '%(move_line)s'.",
+                    account=line.account_id.display_name,
+                    move_line=line.display_name,
+                )
             elif policy == "never" and line.partner_id:
                 return self.env._(
                     "Partner policy is set to 'Never' on account '%(account)s' but "
-                    "the journal item '%(move_line)s' has the partner '%(partner)s'."
-                ) % {
-                    "account": line.account_id.display_name,
-                    "move_line": line.display_name,
-                    "partner": line.partner_id.display_name,
-                }
+                    "the journal item '%(move_line)s' has the partner '%(partner)s'.",
+                    account=line.account_id.display_name,
+                    move_line=line.display_name,
+                    partner=line.partner_id.display_name,
+                )
 
     @api.constrains("partner_id", "account_id", "debit", "credit")
     def _check_partner_required(self):
