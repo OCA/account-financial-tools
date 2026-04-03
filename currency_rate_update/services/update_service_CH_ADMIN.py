@@ -57,7 +57,7 @@ class ChAdminGetter(CurrencyGetterInterface):
         dom = etree.fromstring(rawfile)
         _logger.debug("Admin.ch sent a valid XML file")
         adminch_ns = {
-            'def': 'https://www.backend-rates.ezv.admin.ch/xmldaily'
+            'def': 'https://www.backend-rates.bazg.admin.ch/xmldaily'
         }
         rate_date = dom.xpath(
             '/def:wechselkurse/def:datum/text()',
