@@ -14,7 +14,10 @@
     "author": "ACSONE SA/NV,Akretion,Odoo Community Association (OCA)",
     "maintainers": ["alexis-via"],
     "website": "https://github.com/OCA/account-financial-tools",
-    "depends": ["account"],
+    "depends": [
+        # Odoo Community
+        "account",
+    ],
     "data": ["views/account_account.xml"],
     "installable": True,
     "application": False,
