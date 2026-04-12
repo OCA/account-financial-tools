@@ -25,14 +25,14 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-20 01:10+0100\n"
-"PO-Revision-Date: 2023-09-20 18:12+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-04-12 13:11+0000\n"
+"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_asset_management
 #. odoo-python
@@ -47,7 +47,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_count
 msgid "# of Depreciation Lines"
-msgstr ""
+msgstr "Nº de líneas de amortización"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -55,6 +55,8 @@ msgid ""
 "<span class=\"o_form_label oe_inline\" invisible=\"salvage_type != "
 "'percent'\">%</span>"
 msgstr ""
+"<span class=\"o_form_label oe_inline\" invisible=\"salvage_type != "
+"'percent'\">%</span>"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
@@ -140,13 +142,13 @@ msgstr "Importe ya amortizado"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_value
 msgid "Amount of Depreciation Lines"
-msgstr ""
+msgstr "Número de líneas de amortización"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
 msgid "Analytic Distribution"
-msgstr ""
+msgstr "Distribución analítica"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -312,22 +314,22 @@ msgstr "Activos"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_pivot
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Assets Analysis"
-msgstr ""
+msgstr "Análisis de Activos"
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_report
 msgid "Assets analysis"
-msgstr ""
+msgstr "Análisis de activos"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Assets in draft state"
-msgstr ""
+msgstr "Activos en estado borrador"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Assets in running state"
-msgstr ""
+msgstr "Activos en estado en ejecución"
 
 #. module: account_asset_management
 #. odoo-python
@@ -564,12 +566,12 @@ msgstr "Fecha"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Date of asset purchase"
-msgstr ""
+msgstr "Fecha de compra del activo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Date of depreciation"
-msgstr ""
+msgstr "Fecha de amortización"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger__date_trigger
@@ -661,7 +663,7 @@ msgstr "Tabla de amortización"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_date
 msgid "Depreciation Date"
-msgstr ""
+msgstr "Fecha de Amortización"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -688,7 +690,7 @@ msgstr "Método de amortización"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Depreciation Month"
-msgstr ""
+msgstr "Mes de Amortización"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__name
@@ -713,7 +715,7 @@ msgstr "Nombre mostrado"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__distribution_analytic_account_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__distribution_analytic_account_ids
 msgid "Distribution Analytic Account"
-msgstr ""
+msgstr "Cuenta Analítica de Distribución"
 
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__done
@@ -780,7 +782,7 @@ msgstr "Informe de Activos Financieros"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__fixed
 msgid "Fixed"
-msgstr ""
+msgstr "Fijo"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
@@ -809,6 +811,10 @@ msgid ""
 "            search bar can also be used to personalize your assets "
 "depreciation reporting."
 msgstr ""
+"Desde este informe, puede tener una visión general de todas las "
+"amortizaciones. La\n"
+"barra de búsqueda también se puede utilizar para personalizar los informes "
+"de amortización de activos."
 
 #. module: account_asset_management
 #. odoo-python
@@ -840,12 +846,12 @@ msgstr "Generar informe"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__gross_value
 msgid "Gross Amount"
-msgstr ""
+msgstr "Importe Bruto"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar Por"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
@@ -1135,7 +1141,7 @@ msgstr "No"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Not archived"
-msgstr ""
+msgstr "No archivado"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__note
@@ -1221,7 +1227,7 @@ msgstr "Empresa"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__percent
 msgid "Percentage of Price"
-msgstr ""
+msgstr "Porcentaje del precio"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1269,12 +1275,12 @@ msgstr "Asentado"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__posted_value
 msgid "Posted Amount"
-msgstr ""
+msgstr "Importe contabilizado"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Posted depreciation lines"
-msgstr ""
+msgstr "Líneas de amortización contabilizadas"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__previous_id
@@ -1297,7 +1303,7 @@ msgstr "Tiempo prorrateado"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Purchase Month"
-msgstr ""
+msgstr "Mes de compra"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1436,7 +1442,7 @@ msgstr "Valor de venta"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
 msgid "Salvage Type"
-msgstr ""
+msgstr "Tipo de valor residual"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1655,7 +1661,7 @@ msgstr "Error indeterminado"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__unposted_value
 msgid "Unposted Amount"
-msgstr ""
+msgstr "Importe no contabilizado"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
