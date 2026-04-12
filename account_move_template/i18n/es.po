@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2024-02-08 19:37+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-04-12 13:11+0000\n"
+"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
@@ -44,11 +44,6 @@ msgstr "%s(copia)"
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "&gt;"
 msgstr "&gt;"
-
-#. module: account_move_template
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
-msgid "1250"
-msgstr "1250"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
@@ -181,7 +176,7 @@ msgstr "Nombre mostrado"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__distribution_analytic_account_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__distribution_analytic_account_ids
 msgid "Distribution Analytic Account"
-msgstr ""
+msgstr "Cuenta analítica de distribución"
 
 #. module: account_move_template
 #. odoo-python
@@ -226,8 +221,8 @@ msgid ""
 "Impossible to compute the formula of line with sequence %(sequence)s "
 "(formula: %(code)s): the syntax of the formula is wrong."
 msgstr ""
-"Imposible calcular la fórmula de línea con secuencia %(sequence)s (fórmula: "
-"%(code)s): la sintaxis de la fórmula es incorrecta."
+"Imposible calcular la fórmula de línea con secuencia %(sequence)s (fórmula: %"
+"(code)s): la sintaxis de la fórmula es incorrecta."
 
 #. module: account_move_template
 #. odoo-python
@@ -272,9 +267,11 @@ msgstr "Plantilla de asiento"
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 msgid ""
-"Journal entry created from template <a href=# data-oe-model=account.move."
-"template data-oe-id=%(template_id)d>%(template_name)s</a>."
+"Journal entry created from template <a href=# data-oe-"
+"model=account.move.template data-oe-id=%(template_id)d>%(template_name)s</a>."
 msgstr ""
+"Asiento contable creado desde la plantilla <a href=# data-oe-"
+"model=account.move.template data-oe-id=%(template_id)d>%(template_name)s</a>."
 
 #. module: account_move_template
 #. odoo-python
@@ -516,6 +513,9 @@ msgstr ""
 "Ha eliminado una línea en el asistente. Esto no está permitido: debe o bien "
 "actualizar la plantilla o modificar el asiento que será generado por este "
 "asistente."
+
+#~ msgid "1250"
+#~ msgstr "1250"
 
 #~ msgid "Analytic Distribution Search"
 #~ msgstr "Búsqueda de Distribución Analítica"

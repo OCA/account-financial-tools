@@ -48,11 +48,6 @@ msgid "&gt;"
 msgstr "&gt;"
 
 #. module: account_move_template
-#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
-msgid "1250"
-msgstr "1250"
-
-#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
 msgid "Account"
@@ -276,8 +271,8 @@ msgstr "Шаблон статьи журнала"
 #. odoo-python
 #: code:addons/account_move_template/wizard/account_move_template_run.py:0
 msgid ""
-"Journal entry created from template <a href=# data-oe-model=account.move."
-"template data-oe-id=%(template_id)d>%(template_name)s</a>."
+"Journal entry created from template <a href=# data-oe-"
+"model=account.move.template data-oe-id=%(template_id)d>%(template_name)s</a>."
 msgstr ""
 "Запись в журнале создана из шаблона <a href=# data-oe-"
 "model=account.move.template data-oe-id=%(template_id)d>%(template_name)s</a>."
@@ -521,3 +516,6 @@ msgstr ""
 "Вы удалили строку в мастере. Это недопустимо: вы должны либо обновить "
 "шаблон, либо изменить запись журнала, которая будет сгенерирована этим "
 "мастером."
+
+#~ msgid "1250"
+#~ msgstr "1250"
