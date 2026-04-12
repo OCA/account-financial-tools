@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-08-07 12:10+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-04-12 13:11+0000\n"
+"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_asset_number
 #: model:ir.actions.report,print_report_name:account_asset_number.report_account_asset_number
@@ -66,17 +66,17 @@ msgstr "Código de Barras"
 #. module: account_asset_number
 #: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_height
 msgid "Barcode Height"
-msgstr ""
+msgstr "Alto del código de barras"
 
 #. module: account_asset_number
 #: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_type
 msgid "Barcode Type"
-msgstr ""
+msgstr "Tipo de código de barras"
 
 #. module: account_asset_number
 #: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_width
 msgid "Barcode Width"
-msgstr ""
+msgstr "Ancho del código de barras"
 
 #. module: account_asset_number
 #: model:ir.model,name:account_asset_number.model_report_account_asset_management_asset_report_xls
@@ -86,7 +86,7 @@ msgstr "Generador dinámico de informes de activos en XLS"
 #. module: account_asset_number
 #: model:ir.model.fields,help:account_asset_number.field_account_asset_profile__barcode_height
 msgid "Height (in px) of the barcode or the QR code"
-msgstr ""
+msgstr "Alto (en px) del código de barras o código QR"
 
 #. module: account_asset_number
 #: model:ir.model.fields,help:account_asset_number.field_account_asset__use_sequence
@@ -106,19 +106,19 @@ msgstr "Número"
 #. module: account_asset_number
 #: model:ir.model.fields.selection,name:account_asset_number.selection__account_asset_profile__barcode_type__qr
 msgid "QR"
-msgstr ""
+msgstr "QR"
 
 #. module: account_asset_number
 #: model_terms:ir.ui.view,arch_db:account_asset_number.account_asset_profile_view_form
 msgid "QR/Barcode Configuration"
-msgstr ""
+msgstr "Configuración de QR/código de barras"
 
 #. module: account_asset_number
 #: model_terms:ir.ui.view,arch_db:account_asset_number.report_simple_asset_number
 msgid "QRcode"
-msgstr ""
+msgstr "Código QR"
 
 #. module: account_asset_number
 #: model:ir.model.fields,help:account_asset_number.field_account_asset_profile__barcode_width
 msgid "Width (in px) of the barcode or the QR code"
-msgstr ""
+msgstr "Ancho (en px) del código de barras o código QR"
