@@ -950,6 +950,13 @@ class AccountAsset(models.Model):
 
         return line_dates
 
+    def _get_day_amount(self, depreciation_start_date, depreciation_stop_date):
+        day_amount = 0.0
+        if self.days_calc:
+            days = (depreciation_stop_date - depreciation_start_date).days + 1
+            day_amount = self.depreciation_base / days
+        return day_amount
+
     def _compute_depreciation_amount_per_fiscal_year(
         self, table, line_dates, depreciation_start_date, depreciation_stop_date
     ):
@@ -958,10 +965,9 @@ class AccountAsset(models.Model):
         fy_residual_amount = self.depreciation_base
         i_max = len(table) - 1
         asset_sign = self.depreciation_base >= 0 and 1 or -1
-        day_amount = 0.0
-        if self.days_calc:
-            days = (depreciation_stop_date - depreciation_start_date).days + 1
-            day_amount = self.depreciation_base / days
+        day_amount = self._get_day_amount(
+            depreciation_start_date, depreciation_stop_date
+        )
 
         for i, entry in enumerate(table):
             if self.method_time == "year":
