@@ -1,0 +1,480 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_invoice_writeoff_threshold
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-15 19:28+0000\n"
+"PO-Revision-Date: 2026-04-15 19:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_company__writeoff_income_account_id
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_income_account_id
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+msgid "Account credited when writing off a customer invoice residual."
+msgstr "Cuenta abonada al cancelar el saldo residual de una factura de cliente."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_company__writeoff_expense_account_id
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_expense_account_id
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+msgid "Account debited when writing off a vendor bill residual."
+msgstr "Cuenta cargada al cancelar el saldo residual de una factura de proveedor."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__amount
+msgid "Amount Written Off"
+msgstr "Monto Cancelado"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_wizard_form
+msgid "Cancel"
+msgstr "Cerrar"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__skip
+msgid "Check to exclude this line from the write-off."
+msgstr "Marcar para excluir esta línea de la cancelación de saldo."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model,name:account_invoice_writeoff_threshold.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__company_id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model,name:account_invoice_writeoff_threshold.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_wizard_form
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__create_uid
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__create_uid
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__create_uid
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__create_date
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__create_date
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__create_date
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__currency_id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__currency_id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__currency_id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__writeoff_date
+msgid "Date that will be used for the write-off journal entries."
+msgstr "Fecha que se utilizará en las pólizas de cancelación de saldo."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_log__writeoff_date
+msgid "Date used on the write-off journal entries."
+msgstr "Fecha utilizada en las pólizas de cancelación de saldo."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__display_name
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__display_name
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__display_name
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__display_name
+msgid "Display Name"
+msgstr "Nombre Mostrado"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields.selection,name:account_invoice_writeoff_threshold.selection__account_writeoff_log__state__done
+msgid "Done"
+msgstr "Hecho"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__execution_date
+msgid "Execution Date"
+msgstr "Fecha de Ejecución"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__date_from
+msgid "Filter: only consider moves with date on or after this date."
+msgstr "Filtro: solo considerar movimientos con fecha igual o posterior a esta fecha."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__date_to
+msgid "Filter: only consider moves with date on or before this date."
+msgstr "Filtro: solo considerar movimientos con fecha igual o anterior a esta fecha."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_log__state
+msgid ""
+"In synchronous execution the state moves directly from draft to done. When "
+"using the job queue companion, the state is set to 'in_progress' while jobs "
+"are running and updated to 'done' or 'partial' when all jobs finish."
+msgstr ""
+"En ejecución síncrona el estado pasa directamente de borrador a hecho. Al "
+"usar el módulo de cola de trabajos, el estado se establece en 'en proceso' "
+"mientras corren los trabajos y se actualiza a 'hecho' o 'parcialmente hecho' "
+"cuando todos terminan."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__invoice_id
+msgid "Invoice / Bill"
+msgstr "Factura / Recibo"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_wizard_form
+msgid "Invoice Date Filter"
+msgstr "Filtro por Fecha de Factura"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__date_from
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__date_from
+msgid "Invoice Date From"
+msgstr "Fecha de Factura Desde"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__date_to
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__date_to
+msgid "Invoice Date To"
+msgstr "Fecha de Factura Hasta"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_log_form
+msgid "Journal Entries"
+msgstr "Pólizas"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_company__writeoff_journal_id
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_journal_id
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+msgid "Journal used to post write-off journal entries."
+msgstr "Diario utilizado para registrar las pólizas de cancelación de saldo."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__write_uid
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__write_uid
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__write_uid
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__write_date
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__write_date
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__write_date
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__log_id
+msgid "Log"
+msgstr "Registro"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__invoice_id
+msgid "Move"
+msgstr "Movimiento"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__move_line_id
+msgid "Move Line"
+msgstr "Línea de Movimiento"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__preview_line_ids
+msgid "Moves to Write Off"
+msgstr "Movimientos a Cancelar"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+msgid ""
+"Number of invoices per background job (relevant only when the queue "
+"companion is installed)."
+msgstr ""
+"Número de facturas por trabajo en segundo plano (relevante solo cuando el "
+"módulo de cola de trabajos está instalado)."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_company__writeoff_batch_size
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_batch_size
+msgid ""
+"Number of invoices processed per background job when using the job queue "
+"companion module. Has no effect without that module."
+msgstr ""
+"Número de facturas procesadas por trabajo en segundo plano al usar el módulo "
+"de cola de trabajos. No tiene efecto sin ese módulo."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_log__date_from
+msgid "Only invoices with invoice date on or after this date were considered."
+msgstr "Solo se consideraron facturas con fecha igual o posterior a esta fecha."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_log__date_to
+msgid ""
+"Only invoices with invoice date on or before this date were considered."
+msgstr "Solo se consideraron facturas con fecha igual o anterior a esta fecha."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields.selection,name:account_invoice_writeoff_threshold.selection__account_writeoff_log__state__partial
+msgid "Partially Done"
+msgstr "Parcialmente Hecho"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__partner_id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__partner_id
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields.selection,name:account_invoice_writeoff_threshold.selection__account_writeoff_log__state__draft
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_wizard_form
+msgid "Preview"
+msgstr "Vista Previa"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields.selection,name:account_invoice_writeoff_threshold.selection__account_writeoff_log__state__in_progress
+msgid "Processing"
+msgstr "En Proceso"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__name
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__amount_residual
+msgid "Residual Amount"
+msgstr "Saldo Pendiente"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__threshold_amount
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_company__writeoff_threshold_amount
+#: model:ir.model.fields,help:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_threshold_amount
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+msgid "Residual balances below this amount will be written off automatically."
+msgstr "Los saldos residuales menores a este monto se cancelarán automáticamente."
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__skip
+msgid "Skip"
+msgstr "Omitir"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__state
+msgid "State"
+msgstr "Estado"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_wizard_form
+msgid ""
+"This will create and post journal entries for all listed invoices. Continue?"
+msgstr ""
+"Se crearán y publicarán pólizas para todos los movimientos listados. ¿Desea continuar?"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__threshold_amount
+msgid "Threshold"
+msgstr "Umbral"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__threshold_amount
+msgid "Threshold Used"
+msgstr "Umbral Utilizado"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__total_amount
+msgid "Total Amount"
+msgstr "Monto Total"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__total_amount
+msgid "Total Amount Written Off"
+msgstr "Monto Total Cancelado"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__total_lines
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__total_lines
+msgid "Total Lines"
+msgstr "Total de Líneas"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__move_type
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__move_type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard_line__wizard_id
+msgid "Wizard"
+msgstr "Asistente"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_wizard_form
+msgid "Write Off"
+msgstr "Cancelar Saldo"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_company__writeoff_batch_size
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_batch_size
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+msgid "Write-off Batch Size"
+msgstr "Tamaño de Lote para Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__writeoff_date
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_threshold_wizard__writeoff_date
+msgid "Write-off Date"
+msgstr "Fecha de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log_line__writeoff_move_id
+msgid "Write-off Entry"
+msgstr "Póliza de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#. odoo-python
+#: code:addons/account_invoice_writeoff_threshold/models/account_writeoff_log.py:0
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_company__writeoff_expense_account_id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_expense_account_id
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+#, python-format
+msgid "Write-off Expense Account"
+msgstr "Cuenta de Gastos para Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#. odoo-python
+#: code:addons/account_invoice_writeoff_threshold/models/account_writeoff_log.py:0
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_company__writeoff_income_account_id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_income_account_id
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+#, python-format
+msgid "Write-off Income Account"
+msgstr "Cuenta de Ingresos para Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#. odoo-python
+#: code:addons/account_invoice_writeoff_threshold/models/account_writeoff_log.py:0
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_company__writeoff_journal_id
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_journal_id
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+#, python-format
+msgid "Write-off Journal"
+msgstr "Diario de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#. odoo-python
+#: code:addons/account_invoice_writeoff_threshold/models/account_writeoff_log.py:0
+#, python-format
+msgid "Write-off Journal Entries"
+msgstr "Pólizas de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_log_form
+msgid "Write-off Log"
+msgstr "Registro de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.actions.act_window,name:account_invoice_writeoff_threshold.action_writeoff_log
+#: model:ir.ui.menu,name:account_invoice_writeoff_threshold.menu_writeoff_log
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_log_list
+msgid "Write-off Logs"
+msgstr "Registros de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.actions.act_window,name:account_invoice_writeoff_threshold.action_writeoff_wizard
+#: model:ir.ui.menu,name:account_invoice_writeoff_threshold.menu_writeoff_wizard
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_wizard_form
+msgid "Write-off Small Balances"
+msgstr "Cancelar Saldos Pequeños"
+
+#. module: account_invoice_writeoff_threshold
+#. odoo-python
+#: code:addons/account_invoice_writeoff_threshold/models/account_writeoff_log.py:0
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_company__writeoff_threshold_amount
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_res_config_settings__writeoff_threshold_amount
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.res_config_settings_view_form_writeoff
+#, python-format
+msgid "Write-off Threshold"
+msgstr "Umbral de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model,name:account_invoice_writeoff_threshold.model_account_writeoff_log
+msgid "Write-off Threshold Execution Log"
+msgstr "Registro de Ejecución de Cancelación de Saldos"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model,name:account_invoice_writeoff_threshold.model_account_writeoff_log_line
+msgid "Write-off Threshold Log Line"
+msgstr "Línea de Registro de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model,name:account_invoice_writeoff_threshold.model_account_writeoff_threshold_wizard
+msgid "Write-off Threshold Wizard"
+msgstr "Asistente de Cancelación de Saldos"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model,name:account_invoice_writeoff_threshold.model_account_writeoff_threshold_wizard_line
+msgid "Write-off Threshold Wizard Preview Line"
+msgstr "Línea de Vista Previa del Asistente de Cancelación"
+
+#. module: account_invoice_writeoff_threshold
+#. odoo-python
+#: code:addons/account_invoice_writeoff_threshold/models/account_writeoff_log.py:0
+#, python-format
+msgid ""
+"Write-off configuration is incomplete. Please set the following in Settings:"
+" %s"
+msgstr ""
+"La configuración de cancelación de saldos está incompleta. Configure lo "
+"siguiente en Ajustes: %s"
+
+#. module: account_invoice_writeoff_threshold
+#. odoo-python
+#: code:addons/account_invoice_writeoff_threshold/models/account_writeoff_log.py:0
+#, python-format
+msgid "Write-off: %s"
+msgstr "Cancelación: %s"
+
+#. module: account_invoice_writeoff_threshold
+#: model:ir.model.fields,field_description:account_invoice_writeoff_threshold.field_account_writeoff_log__line_ids
+#: model_terms:ir.ui.view,arch_db:account_invoice_writeoff_threshold.view_writeoff_log_form
+msgid "Written-off Entries"
+msgstr "Registros Cancelados"
