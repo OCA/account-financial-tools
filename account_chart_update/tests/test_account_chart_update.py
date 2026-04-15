@@ -230,7 +230,75 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertEqual(new_account.code, wizard.padded_code(account_data_0["code"]))
         wizard.unlink()
 
-    def test_03_installed_charts(self):
+    def test_03_diff_fields_ignores_whitespace_only_difference(self):
+        """Trailing/leading spaces in translatable fields should not trigger a diff.
+
+        Regression test: the wizard was stripping whitespace from the template
+        value but not from the database value, causing false positives when
+        the stored value had surrounding spaces (e.g. loaded from the chart
+        template originally).
+        """
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        account_data = self.chart_template_data["account.account"]
+        account_xml_id = list(account_data)[0]
+        account = self._get_record_for_xml_id(account_xml_id)
+        original_name = account.name
+        # Simulate a stored value with trailing/leading spaces
+        account.with_context(lang="en_US").name = f"  {original_name}  "
+        # Template values also carry the same surrounding spaces
+        record_values = {"name": f"  {original_name}  "}
+        result = wizard.diff_fields(record_values, account)
+        self.assertNotIn(
+            "name",
+            result,
+            "Whitespace-only difference in translatable field should not be a diff",
+        )
+
+    def test_04_account_group_code_prefix_end_no_false_positive(self):
+        """Account group with code_prefix_end > code_prefix_start should not be flagged.
+
+        Regression test: the wizard's condition for resolving the expected
+        code_prefix_end was inverted — it used the template's end value only
+        when end < start (i.e. the invalid case) and fell back to start
+        otherwise, producing a false diff whenever the group had a genuine
+        range like 643-648.
+        """
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        # Simulate template data for an account group with a range (start != end)
+        t_data = {
+            "test_group_range": {
+                "name": "Test Range Group",
+                "code_prefix_start": "643",
+                "code_prefix_end": "648",
+            },
+        }
+        # Create the real account group in the database with the same range
+        group = self.env["account.group"].create(
+            {
+                "name": "Test Range Group",
+                "code_prefix_start": "643",
+                "code_prefix_end": "648",
+                "company_id": self.company.id,
+            }
+        )
+        # Register the xmlid so _find_record_matching can locate it
+        self.env["ir.model.data"].create(
+            {
+                "name": f"{self.company.id}_test_group_range",
+                "module": "account",
+                "model": "account.group",
+                "res_id": group.id,
+            }
+        )
+        wizard._find_account_groups(t_data)
+        updated = wizard.account_group_ids.filtered(lambda r: r.type == "updated")
+        self.assertFalse(
+            updated,
+            "Account group with matching code_prefix_end "
+            "should not be flagged as updated",
+        )
+
+    def test_05_installed_charts(self):
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         chart_template_installed = wizard._chart_template_selection()
         all_chart_templates = self.env[

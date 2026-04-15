@@ -680,7 +680,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         short_lang = lang.code.split("_")[0]
                         key_lang = f"{key}@{short_lang}"
                     if key_lang in record_values:
-                        real_value_lang = real.with_context(lang=lang.code)[key]
+                        real_value_lang = (
+                            real.with_context(lang=lang.code)[key] or ""
+                        ).strip()
                         record_value_lang = record_values[key_lang].strip()
                         if field.ttype == "html":
                             # Convert HTML to inner content for comparison
@@ -969,8 +971,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 notes = self.diff_notes(r_data, account_group)
                 code_prefix_end = (
                     r_data["code_prefix_end"]
-                    if "code_prefix_end" in r_data
-                    and r_data["code_prefix_end"] < r_data["code_prefix_start"]
+                    if r_data.get("code_prefix_end")
+                    and r_data["code_prefix_end"] >= r_data["code_prefix_start"]
                     else r_data["code_prefix_start"]
                 )
                 if code_prefix_end != account_group.code_prefix_end:
