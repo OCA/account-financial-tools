@@ -110,3 +110,11 @@ class TestMoveReverseReconcile(AccountTestInvoicingCommon):
         self.assertFalse(credit_note_receivable.reconciled)
         self.assertFalse(invoice_receivable.matched_credit_ids.credit_move_id)
         self.assertFalse(credit_note_receivable.matched_debit_ids.debit_move_id)
+
+    def test_journal_settings_apply(self):
+        self.credit_note.button_cancel()
+        journal = self.invoice.journal_id
+        self.assertEqual(journal.reversal_post_automatic_reconcile_default, "reconcile")
+        journal.reversal_post_automatic_reconcile_default = "full_amount_reconcile"
+        credit_note = self.invoice._reverse_moves()
+        self.assertEqual(credit_note.reversal_post_automatic_reconcile, "full_amount_reconcile")

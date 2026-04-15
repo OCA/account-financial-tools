@@ -19,6 +19,7 @@ class AccountMove(models.Model):
         readonly=False,
         required=True,
         precompute=True,
+        copy=False,
         string="Automatic reconciliation on posting of reversal moves",
         help="Defines if the posting of the move must reconcile with its originating "
         "move",
