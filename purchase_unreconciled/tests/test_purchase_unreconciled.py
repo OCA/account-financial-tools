@@ -427,3 +427,57 @@ class TestPurchaseUnreconciled(SingleTransactionCase):
         )
         self.assertEqual(sum(ji_p1.mapped("balance")), 0.0)
         self.assertEqual(sum(ji_p2.mapped("balance")), 0.0)
+
+    def test_09_tolerance_below_threshold(self):
+        """Discrepancy below tolerance auto-reconciles without wizard.
+
+        PO total = 5 * $100 = $500. Invoice at $99/unit -> $5 discrepancy = 1%.
+        With tolerance = 2%, 1% < 2% so button_done reconciles silently.
+        """
+        po = self.po.copy()
+        self.company.purchase_reconcile_tolerance = 2.0
+        po.button_confirm()
+        self._do_picking(po.picking_ids, fields.Datetime.now())
+        po.action_create_invoice()
+        invoice_form = Form(
+            po.invoice_ids.filtered(lambda i: i.move_type == "in_invoice")[0]
+        )
+        invoice_form.invoice_date = datetime.now()
+        with invoice_form.invoice_line_ids.edit(0) as line_form:
+            line_form.price_unit = 99
+        invoice_form.save().action_post()
+        self.assertTrue(po.unreconciled)
+        self.assertEqual(po.unreconciled_exception_msg(), "")
+        po.button_done()
+        po._compute_unreconciled()
+        self.assertFalse(po.unreconciled)
+
+    def test_10_tolerance_above_threshold(self):
+        """Discrepancy above tolerance shows wizard; wizard continue reconciles.
+
+        PO total = 5 * $100 = $500. Invoice at $99/unit -> $5 discrepancy = 1%.
+        With tolerance = 0.5%, 1% >= 0.5% so button_done returns the exceeded
+        wizard. Calling button_continue on the wizard reconciles the PO.
+        """
+        po = self.po.copy()
+        self.company.purchase_reconcile_tolerance = 0.5
+        po.button_confirm()
+        self._do_picking(po.picking_ids, fields.Datetime.now())
+        po.action_create_invoice()
+        invoice_form = Form(
+            po.invoice_ids.filtered(lambda i: i.move_type == "in_invoice")[0]
+        )
+        invoice_form.invoice_date = datetime.now()
+        with invoice_form.invoice_line_ids.edit(0) as line_form:
+            line_form.price_unit = 99
+        invoice_form.save().action_post()
+        self.assertTrue(po.unreconciled)
+        self.assertTrue(po.unreconciled_exception_msg())
+        action = po.button_done()
+        self.assertEqual(action.get("res_model"), "purchase.unreconciled.exceeded.wiz")
+        po._compute_unreconciled()
+        self.assertTrue(po.unreconciled)
+        wiz = self.env["purchase.unreconciled.exceeded.wiz"].browse(action["res_id"])
+        wiz.button_continue()
+        po._compute_unreconciled()
+        self.assertFalse(po.unreconciled)
