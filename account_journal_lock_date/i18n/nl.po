@@ -1,0 +1,156 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_journal_lock_date
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-30 00:47+0000\n"
+"PO-Revision-Date: 2023-11-07 11:40+0000\n"
+"Last-Translator: Thijs van Oers <thijsvanoers@yahoo.com>\n"
+"Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_journal_lock_date
+#: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
+msgid "Cancel"
+msgstr "Annuleer"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__display_name
+msgid "Display Name"
+msgstr "Naam"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_journal
+msgid "Journal"
+msgstr "Dagboek"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_move
+msgid "Journal Entry"
+msgstr "Boeking"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__fiscalyear_lock_date
+msgid "Lock Date"
+msgstr "Blokkeer datum"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__period_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__period_lock_date
+msgid "Lock Date for Non-Advisers"
+msgstr "Blokkeerdatum voor standaard gebruiker"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_update_journal_lock_dates_wizard
+msgid "Mass Update Journal Lock Dates Wizard"
+msgstr "Wizard voor bulk updaten van dagboek blokkeer data"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date for this journal. Use it for fiscal year locking for this journal, "
+"for example."
+msgstr ""
+"Geen enkele gebruiker, inclusief facturatiebeheerders, kan rekeningen voor "
+"en na deze datum voor dit journaal bewerken. Gebruik dit bijvoorbeeld voor "
+"het vergrendelen van het boekjaar voor dit journaal."
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__period_lock_date
+msgid ""
+"Only users with the 'Adviser' role can edit accounts prior to and inclusive "
+"of this date for this journal. Use it for period locking inside an open "
+"fiscal year for this journal, for example."
+msgstr ""
+"Alleen gebruikers met de rol 'Facturatiebeheerder' kunnen rekeningen voor en "
+"na deze datum voor dit journaal bewerken. Gebruik dit bijvoorbeeld voor het "
+"vergrendelen van een periode binnen een open boekjaar voor dit journaal."
+
+#. module: account_journal_lock_date
+#: model_terms:ir.ui.view,arch_db:account_journal_lock_date.update_journal_lock_dates_wizard_view_form
+msgid "Update"
+msgstr "Bijwerken"
+
+#. module: account_journal_lock_date
+#: model:ir.actions.act_window,name:account_journal_lock_date.update_journal_lock_dates_wizard_action
+msgid "Update journals lock dates"
+msgstr "Bijwerken blokkeerdatums dagboeken"
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/wizards/update_journal_lock_dates.py:0
+#, python-format
+msgid "You are not allowed to execute this action."
+msgstr "Je mag deze actie niet uitvoeren."
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s"
+msgstr ""
+"Je kunt geen boekingen toevoegen/wijzigen voor het journaal '%(journal)s' "
+"vóór en inclusief de slotdatum %(journal_date)s"
+
+#. module: account_journal_lock_date
+#. odoo-python
+#: code:addons/account_journal_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot add/modify entries for the journal '%(journal)s' prior to and "
+"inclusive of the lock date %(journal_date)s. Check the Journal settings or "
+"ask someone with the 'Adviser' role"
+msgstr ""
+"Je kunt geen boekingen toevoegen/wijzigen voor het dagboek '%(journal)s' "
+"voorafgaand aan en inclusief de slotdatum %(journal_date)s. Controleer de "
+"dagboek instellingen of vraag dit aan iemand met de rol "
+"'Facturatiebeheerder'."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst gewijzigd op"
+
+#, fuzzy
+#~ msgid "Journal Entries"
+#~ msgstr "Dagboek"
+
+#~ msgid "Account Entry"
+#~ msgstr "Boeking"
