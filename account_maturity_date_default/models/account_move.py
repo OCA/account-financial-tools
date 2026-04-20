@@ -9,10 +9,12 @@ class AccountMove(models.Model):
     def write(self, vals):
         res = super().write(vals)
         if vals.get("date"):
-            self.mapped("line_ids").filtered(
+            lines = self.mapped("line_ids").filtered(
                 lambda x: (
                     not x.date_maturity
                     and x.account_type in {"asset_receivable", "liability_payable"}
                 )
-            ).write({"date_maturity": vals["date"]})
+            )
+            if lines:
+                lines.write({"date_maturity": vals["date"]})
         return res
