@@ -3,7 +3,6 @@
 
 from psycopg2 import IntegrityError
 
-from odoo.exceptions import UserError
 from odoo.fields import Date
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
@@ -56,8 +55,8 @@ class TestAccountFiscalMonth(TransactionCase):
             self.date_range_type.unlink()
 
     def test_01_delete_type_fiscal_month(self):
-        with self.assertRaises(UserError):
-            self.date_range_type_month.unlink()
+        self.date_range_type_month.unlink()
+        self.assertTrue(self.date_range_type_month.exists())
 
     def test_02_search_date_range(self):
         january_2017_1st = Date.from_string("2017-01-01")

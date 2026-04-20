@@ -3,3 +3,5 @@
   (<https://braintec.com>)
 - Carlos Sainz-Pardo \<carlos.sainz@netkia.es\>
   (<https://www.netkia.es>)
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
