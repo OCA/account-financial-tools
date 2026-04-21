@@ -5,15 +5,17 @@
         <field name="model">product.category</field>
         <field name="inherit_id" ref="account.view_category_property_form" />
         <field name="arch" type="xml">
-            <group name="account_property">
+            <group name="account_property" position="inside">
                 <group name="taxes" string="Taxes">
-                    <button
-                        name="update_product_taxes"
-                        class="oe_link"
-                        type="object"
-                        string="-> Apply to Products"
-                        confirm="This will apply to all products in the category"
-                    />
+                    <div class="o_row" colspan="2">
+                        <button
+                            name="update_product_taxes"
+                            class="oe_link"
+                            type="object"
+                            string="-> Apply to Products"
+                            confirm="This will apply to all products in the category"
+                        />
+                    </div>
                     <field name="taxes_id" widget="many2many_tags" />
                     <field
                         name="supplier_taxes_id"

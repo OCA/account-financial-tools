@@ -1,10 +1,12 @@
 # Copyright 2020 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.addons.base.tests.common import BaseCommon
+from odoo import Command
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class ProductCategoryTax(BaseCommon):
+class ProductCategoryTax(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -15,6 +17,19 @@ class ProductCategoryTax(BaseCommon):
         cls.uom_kg = cls.env.ref("uom.product_uom_kgm")
 
         # Create product and related records:
+        tax_group = cls.env["account.tax.group"].search(
+            [("company_id", "=", cls.env.company.id)], limit=1
+        )
+        if not tax_group:
+            tax_group = cls.env["account.tax.group"].create(
+                [
+                    {
+                        "name": "Test Tax Group",
+                        "company_id": cls.env.company.id,
+                    }
+                ]
+            )[0]
+
         cls.tax_sale = cls.tax_model.create(
             [
                 {
@@ -22,6 +37,7 @@ class ProductCategoryTax(BaseCommon):
                     "type_tax_use": "sale",
                     "amount": 21.00,
                     "price_include": True,
+                    "tax_group_id": tax_group.id,
                 }
             ]
         )
@@ -32,6 +48,7 @@ class ProductCategoryTax(BaseCommon):
                     "type_tax_use": "purchase",
                     "amount": 21.00,
                     "price_include": True,
+                    "tax_group_id": tax_group.id,
                 }
             ]
         )
@@ -42,6 +59,7 @@ class ProductCategoryTax(BaseCommon):
                     "type_tax_use": "purchase",
                     "amount": 50.00,
                     "price_include": True,
+                    "tax_group_id": tax_group.id,
                 }
             ]
         )
@@ -52,8 +70,8 @@ class ProductCategoryTax(BaseCommon):
             [
                 {
                     "name": "Super Category",
-                    "taxes_id": [(6, 0, self.tax_sale.ids)],
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase.ids)],
+                    "taxes_id": [Command.set(self.tax_sale.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase.ids)],
                 }
             ]
         )
@@ -71,7 +89,7 @@ class ProductCategoryTax(BaseCommon):
                     "name": "TEST 02",
                     "default_code": "TESTcode2",
                     "list_price": 155.0,
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase2.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase2.ids)],
                 }
             ]
         )
@@ -79,8 +97,8 @@ class ProductCategoryTax(BaseCommon):
             [
                 {
                     "name": "Super Category",
-                    "taxes_id": [(6, 0, self.tax_sale.ids)],
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase.ids)],
+                    "taxes_id": [Command.set(self.tax_sale.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase.ids)],
                 }
             ]
         )
@@ -97,7 +115,7 @@ class ProductCategoryTax(BaseCommon):
                     "name": "TEST 03",
                     "default_code": "TESTcode3",
                     "list_price": 155.0,
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase2.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase2.ids)],
                 }
             ]
         )
@@ -108,7 +126,7 @@ class ProductCategoryTax(BaseCommon):
                     "default_code": "TESTcode3",
                     "list_price": 155.0,
                     "taxes_updeatable_from_category": False,
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase2.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase2.ids)],
                 }
             ]
         )
@@ -116,8 +134,8 @@ class ProductCategoryTax(BaseCommon):
             [
                 {
                     "name": "Super Category",
-                    "taxes_id": [(6, 0, self.tax_sale.ids)],
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase.ids)],
+                    "taxes_id": [Command.set(self.tax_sale.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase.ids)],
                 }
             ]
         )
@@ -133,8 +151,8 @@ class ProductCategoryTax(BaseCommon):
             [
                 {
                     "name": "Super Category",
-                    "taxes_id": [(6, 0, self.tax_sale.ids)],
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase.ids)],
+                    "taxes_id": [Command.set(self.tax_sale.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase.ids)],
                 }
             ]
         )
@@ -151,7 +169,7 @@ class ProductCategoryTax(BaseCommon):
                     "name": "Test Product",
                     "categ_id": category.id,
                     "taxes_id": False,
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase2.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase2.ids)],
                 }
             ]
         )
@@ -164,8 +182,8 @@ class ProductCategoryTax(BaseCommon):
             [
                 {
                     "name": "Super Category",
-                    "taxes_id": [(6, 0, self.tax_sale.ids)],
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase.ids)],
+                    "taxes_id": [Command.set(self.tax_sale.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase.ids)],
                 }
             ]
         )
@@ -182,7 +200,7 @@ class ProductCategoryTax(BaseCommon):
                     "name": "Test Product",
                     "categ_id": category.id,
                     "taxes_id": False,
-                    "supplier_taxes_id": [(6, 0, self.tax_purchase2.ids)],
+                    "supplier_taxes_id": [Command.set(self.tax_purchase2.ids)],
                 }
             ]
         )

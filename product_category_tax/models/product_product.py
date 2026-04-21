@@ -1,7 +1,7 @@
 # Copyright 2022 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, models
+from odoo import Command, api, models
 
 
 class ProductProduct(models.Model):
@@ -17,12 +17,20 @@ class ProductProduct(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        for vals in vals_list:
-            if vals.get("categ_id"):
-                if "taxes_id" not in vals:
-                    categ = self.env["product.category"].browse(vals["categ_id"])
-                    vals["taxes_id"] = [(6, 0, categ.taxes_id.ids)]
-                if "supplier_taxes_id" not in vals:
-                    categ = self.env["product.category"].browse(vals["categ_id"])
-                    vals["supplier_taxes_id"] = [(6, 0, categ.supplier_taxes_id.ids)]
+        categ_ids = [v["categ_id"] for v in vals_list if v.get("categ_id")]
+        if categ_ids:
+            categs = self.env["product.category"].browse(categ_ids)
+            categs.mapped("taxes_id")
+            categs.mapped("supplier_taxes_id")
+            categ_map = {c.id: c for c in categs}
+            for vals in vals_list:
+                categ_id = vals.get("categ_id")
+                if categ_id:
+                    categ = categ_map[categ_id]
+                    if "taxes_id" not in vals:
+                        vals["taxes_id"] = [Command.set(categ.taxes_id.ids)]
+                    if "supplier_taxes_id" not in vals:
+                        vals["supplier_taxes_id"] = [
+                            Command.set(categ.supplier_taxes_id.ids)
+                        ]
         return super().create(vals_list)
