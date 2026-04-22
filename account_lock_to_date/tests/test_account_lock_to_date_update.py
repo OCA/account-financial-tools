@@ -4,66 +4,70 @@
 
 from datetime import datetime
 
+from odoo import Command
 from odoo.exceptions import ValidationError
-from odoo.tests.common import TransactionCase
+from odoo.tests import new_test_user
 from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestAccountLockToDateUpdate(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.company = self.env.ref("base.main_company")
-        self.demo_user = self.env.ref("base.user_demo")
-        self.invoicing_group = self.env.ref("account.group_account_user")
-        self.adviser_group = self.env.ref("account.group_account_manager")
-        self.UpdateLockToDateUpdateObj = self.env[
+
+class TestAccountLockToDateUpdate(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.company = cls.env.ref("base.main_company")
+        cls.demo_user = new_test_user(cls.env, login="demo", groups="base.group_user")
+        cls.invoicing_group = cls.env.ref("account.group_account_user")
+        cls.adviser_group = cls.env.ref("account.group_account_manager")
+        cls.UpdateLockToDateUpdateObj = cls.env[
             "account.update.lock_to_date"
-        ].with_user(self.demo_user)
-        self.AccountObj = self.env["account.account"]
-        self.AccountJournalObj = self.env["account.journal"]
-        self.AccountMoveObj = self.env["account.move"]
-        self.demo_user.write({"groups_id": [(4, self.invoicing_group.id)]})
-        self.bank_journal = self.AccountJournalObj.create(
+        ].with_user(cls.demo_user)
+        cls.AccountObj = cls.env["account.account"]
+        cls.AccountJournalObj = cls.env["account.journal"]
+        cls.AccountMoveObj = cls.env["account.move"]
+        cls.demo_user.write({"group_ids": [(4, cls.invoicing_group.id)]})
+        cls.bank_journal = cls.AccountJournalObj.create(
             {
                 "name": "Bank Journal - BJ",
                 "code": "BJ",
                 "type": "bank",
-                "company_id": self.company.id,
+                "company_id": cls.company.id,
             }
         )
-        self.sale_journal = self.AccountJournalObj.create(
+        cls.sale_journal = cls.AccountJournalObj.create(
             {
                 "name": "Sale Journal - SJ",
                 "code": "SJ",
                 "type": "sale",
-                "company_id": self.company.id,
+                "company_id": cls.company.id,
             }
         )
-        self.purchase_journal = self.AccountJournalObj.create(
+        cls.purchase_journal = cls.AccountJournalObj.create(
             {
                 "name": "Purchase Journal - PJ",
                 "code": "PJ",
                 "type": "purchase",
-                "company_id": self.company.id,
+                "company_id": cls.company.id,
             }
         )
-        self.account_type_recv = "asset_receivable"
-        self.account_type_rev = "income"
+        cls.account_type_recv = "asset_receivable"
+        cls.account_type_rev = "income"
 
-        self.account_recv = self.AccountObj.create(
+        cls.account_recv = cls.AccountObj.create(
             {
                 "code": "RECVDR",
                 "name": "Receivable (test)",
                 "reconcile": True,
-                "account_type": self.account_type_recv,
+                "account_type": cls.account_type_recv,
             }
         )
-        self.account_sale = self.AccountObj.create(
+        cls.account_sale = cls.AccountObj.create(
             {
                 "code": "SALEDR",
                 "name": "Receivable (sale)",
                 "reconcile": True,
-                "account_type": self.account_type_rev,
+                "account_type": cls.account_type_rev,
             }
         )
 
@@ -73,18 +77,14 @@ class TestAccountLockToDateUpdate(TransactionCase):
                 "journal_id": journal.id,
                 "date": date_str,
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "Debit",
                             "debit": 1000,
                             "account_id": self.account_recv.id,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "Credit",
                             "credit": 1000,
@@ -108,7 +108,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
                 "hard_lock_to_date": "2900-01-01",
             }
         )
-        self.demo_user.write({"groups_id": [(3, self.adviser_group.id)]})
+        self.demo_user.write({"group_ids": [(3, self.adviser_group.id)]})
         with self.assertRaises(ValidationError):
             wizard.with_user(self.demo_user.id).execute()
 
@@ -122,7 +122,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
                 "hard_lock_to_date": "2900-02-01",
             }
         )
-        self.demo_user.write({"groups_id": [(4, self.adviser_group.id)]})
+        self.demo_user.write({"group_ids": [(4, self.adviser_group.id)]})
         wizard.with_user(self.demo_user.id).execute()
         self.assertEqual(
             self.company.sale_lock_to_date,

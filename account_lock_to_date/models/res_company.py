@@ -80,17 +80,13 @@ class ResCompany(models.Model):
     @api.depends("hard_lock_to_date")
     def _compute_user_hard_lock_to_date(self):
         for company in self:
+            hard_lock_dates = [
+                c.hard_lock_to_date
+                for c in company.with_context(active_test=False).sudo().parent_ids
+                if c.hard_lock_to_date
+            ]
             company.user_hard_lock_to_date = (
-                min(
-                    c.hard_lock_to_date
-                    for c in company.with_context(active_test=False).sudo().parent_ids
-                    if c.hard_lock_to_date
-                )
-                if any(
-                    c.hard_lock_to_date
-                    for c in company.with_context(active_test=False).sudo().parent_ids
-                )
-                else False
+                min(hard_lock_dates) if hard_lock_dates else False
             )
 
     def _validate_locks(self, values):
@@ -183,26 +179,14 @@ class ResCompany(models.Model):
     def _get_user_fiscal_lock_to_date(self, journal, ignore_exceptions=False):
         self.ensure_one()
         company = self.with_context(ignore_exceptions=ignore_exceptions)
-        lock = (
-            min(company.user_fiscalyear_lock_to_date, company.user_hard_lock_to_date)
-            if company.user_fiscalyear_lock_to_date and company.user_hard_lock_to_date
-            else company.user_fiscalyear_lock_to_date
-            or company.user_hard_lock_to_date
-            or False
-        )
+        locks = [company.user_fiscalyear_lock_to_date, company.user_hard_lock_to_date]
         if journal.type == "sale":
-            lock = (
-                min(company.user_sale_lock_to_date, lock)
-                if company.user_sale_lock_to_date and lock
-                else company.user_sale_lock_to_date or lock or False
-            )
+            locks.append(company.user_sale_lock_to_date)
         elif journal.type == "purchase":
-            lock = (
-                min(company.user_purchase_lock_to_date, lock)
-                if company.user_purchase_lock_to_date and lock
-                else company.user_purchase_lock_to_date or lock or False
-            )
-        return lock
+            locks.append(company.user_purchase_lock_to_date)
+
+        valid_locks = [lock for lock in locks if lock]
+        return min(valid_locks) if valid_locks else False
 
     def _get_violated_soft_lock_to_date(self, soft_lock_to_date_field, date):
         violated_date = None
