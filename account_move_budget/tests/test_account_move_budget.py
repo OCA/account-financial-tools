@@ -1,7 +1,9 @@
 # Copyright 2023 David Jaen <david.jaen.revert@gmail.com>.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from odoo import Command
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import TransactionCase
+from odoo.tests.form import Form
 
 
 class TestAccountMoveBudget(TransactionCase):
@@ -39,8 +41,8 @@ class TestAccountMoveBudget(TransactionCase):
                     "name": "Because I am budgetman!",
                     "login": "budgetman",
                     "groups_id": [
-                        (6, 0, cls.env.user.groups_id.ids),
-                        (4, cls.env.ref("account.group_account_user").id),
+                        Command.set(cls.env.user.groups_id.ids),
+                        Command.link(cls.env.ref("account.group_account_user").id),
                     ],
                 }
             )
