@@ -1,6 +1,6 @@
 # Copyright 2025 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.osv import expression
 
@@ -59,7 +59,7 @@ class AccountLockException(models.Model):
 
     def _search_lock_to_date(self, field, operator, value):
         if operator not in [">", ">="] or not value:
-            raise UserError(_("Operation not supported"))
+            raise UserError(self.env._("Operation not supported"))
         return [
             "&",
             ("lock_date_field", "=", field),

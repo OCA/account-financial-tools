@@ -1,7 +1,7 @@
 # Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import ValidationError
 
 from odoo.addons.account.models.account_move import BYPASS_LOCK_CHECK
@@ -23,7 +23,7 @@ class AccountMove(models.Model):
                 hard=True,
             )
             if violated_lock_to_dates:
-                message = _(
+                message = self.env._(
                     "You cannot add/modify entries posterior to "
                     "and inclusive of: %(lock_date_info)s.",
                     lock_date_info=self.env["res.company"]._format_lock_dates(
