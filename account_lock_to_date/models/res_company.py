@@ -1,7 +1,7 @@
 # Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 SOFT_LOCK_TO_DATE_FIELDS = [
@@ -101,10 +101,12 @@ class ResCompany(models.Model):
                 if not company.hard_lock_to_date:
                     continue
                 if not hard_lock_to_date:
-                    raise ValidationError(_("The Hard Lock Date cannot be removed."))
+                    raise ValidationError(
+                        self.env._("The Hard Lock Date cannot be removed.")
+                    )
                 if hard_lock_to_date > company.hard_lock_to_date:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "A new Hard Lock To Date must be prior "
                             "(or equal) to the previous one."
                         )
@@ -119,7 +121,7 @@ class ResCompany(models.Model):
             )
             if nb_draft_entries:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "There are still unposted entries in the period to date"
                         " you want to hard lock. "
                         "You should either post or delete them."
