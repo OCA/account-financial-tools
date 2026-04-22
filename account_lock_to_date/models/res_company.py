@@ -80,53 +80,36 @@ class ResCompany(models.Model):
     @api.depends("hard_lock_to_date")
     def _compute_user_hard_lock_to_date(self):
         for company in self:
+            hard_lock_dates = [
+                c.hard_lock_to_date
+                for c in company.with_context(active_test=False).sudo().parent_ids
+                if c.hard_lock_to_date
+            ]
             company.user_hard_lock_to_date = (
-                min(
-                    c.hard_lock_to_date
-                    for c in company.with_context(active_test=False).sudo().parent_ids
-                    if c.hard_lock_to_date
-                )
-                if any(
-                    c.hard_lock_to_date
-                    for c in company.with_context(active_test=False).sudo().parent_ids
-                )
-                else False
+                min(hard_lock_dates) if hard_lock_dates else False
             )
 
     def _validate_locks(self, values):
         res = super()._validate_locks(values)
         if "hard_lock_to_date" in values:
             hard_lock_to_date = fields.Date.to_date(values["hard_lock_to_date"])
-            for company in self:
-                if not company.hard_lock_to_date:
-                    continue
-                if not hard_lock_to_date:
-                    raise ValidationError(
-                        self.env._("The Hard Lock Date cannot be removed.")
-                    )
-                if hard_lock_to_date > company.hard_lock_to_date:
+            if hard_lock_to_date:
+                nb_draft_entries = self.env["account.move"].search(
+                    [
+                        ("company_id", "child_of", self.ids),
+                        ("state", "=", "draft"),
+                        ("date", ">=", hard_lock_to_date),
+                    ],
+                    limit=1,
+                )
+                if nb_draft_entries:
                     raise ValidationError(
                         self.env._(
-                            "A new Hard Lock To Date must be prior "
-                            "(or equal) to the previous one."
+                            "There are still unposted entries in the period to date"
+                            " you want to hard lock. "
+                            "You should either post or delete them."
                         )
                     )
-            nb_draft_entries = self.env["account.move"].search(
-                [
-                    ("company_id", "child_of", self.ids),
-                    ("state", "=", "draft"),
-                    ("date", ">=", hard_lock_to_date),
-                ],
-                limit=1,
-            )
-            if nb_draft_entries:
-                raise ValidationError(
-                    self.env._(
-                        "There are still unposted entries in the period to date"
-                        " you want to hard lock. "
-                        "You should either post or delete them."
-                    )
-                )
         self.env["res.company"].invalidate_model(
             fnames=[f"user_{field}" for field in LOCK_TO_DATE_FIELDS if field in values]
         )
@@ -183,26 +166,14 @@ class ResCompany(models.Model):
     def _get_user_fiscal_lock_to_date(self, journal, ignore_exceptions=False):
         self.ensure_one()
         company = self.with_context(ignore_exceptions=ignore_exceptions)
-        lock = (
-            min(company.user_fiscalyear_lock_to_date, company.user_hard_lock_to_date)
-            if company.user_fiscalyear_lock_to_date and company.user_hard_lock_to_date
-            else company.user_fiscalyear_lock_to_date
-            or company.user_hard_lock_to_date
-            or False
-        )
+        locks = [company.user_fiscalyear_lock_to_date, company.user_hard_lock_to_date]
         if journal.type == "sale":
-            lock = (
-                min(company.user_sale_lock_to_date, lock)
-                if company.user_sale_lock_to_date and lock
-                else company.user_sale_lock_to_date or lock or False
-            )
+            locks.append(company.user_sale_lock_to_date)
         elif journal.type == "purchase":
-            lock = (
-                min(company.user_purchase_lock_to_date, lock)
-                if company.user_purchase_lock_to_date and lock
-                else company.user_purchase_lock_to_date or lock or False
-            )
-        return lock
+            locks.append(company.user_purchase_lock_to_date)
+
+        valid_locks = [lock for lock in locks if lock]
+        return min(valid_locks) if valid_locks else False
 
     def _get_violated_soft_lock_to_date(self, soft_lock_to_date_field, date):
         violated_date = None

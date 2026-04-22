@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 from .res_company import SOFT_LOCK_TO_DATE_FIELDS
 
@@ -80,7 +80,7 @@ class AccountLockException(models.Model):
     @api.model
     def _get_active_exceptions_to_domain(self, company, soft_lock_to_date_fields):
         return [
-            *expression.OR(
+            *Domain.OR(
                 [(field, ">", company[field])]
                 for field in soft_lock_to_date_fields
                 if company[field]
