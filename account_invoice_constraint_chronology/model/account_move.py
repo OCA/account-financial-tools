@@ -2,9 +2,9 @@
 # Copyright 2021 CorporateHub (https://corporatehub.eu)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools.misc import format_date
 
 
@@ -23,7 +23,7 @@ class AccountMove(models.Model):
 
     def _get_older_conflicting_invoices_domain(self):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 self._get_conflicting_invoices_domain(),
                 [
@@ -36,16 +36,15 @@ class AccountMove(models.Model):
 
     def _raise_older_conflicting_invoices(self):
         self.ensure_one()
-        raise UserError(
-            _(
-                "Chronology conflict: A conflicting draft invoice dated before "
-                "{date_invoice} exists, please validate it first."
-            ).format(date_invoice=format_date(self.env, self.invoice_date))
+        msg = self.env._(
+            "Chronology conflict: A conflicting draft invoice dated before %s "
+            "exists, please validate it first."
         )
+        raise UserError(msg % (format_date(self.env, self.invoice_date),))
 
     def _get_newer_conflicting_invoices_domain(self):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 self._get_conflicting_invoices_domain(),
                 [("state", "=", "posted"), ("invoice_date", ">", self.invoice_date)],
@@ -54,21 +53,20 @@ class AccountMove(models.Model):
 
     def _raise_newer_conflicting_invoices(self):
         self.ensure_one()
-        raise UserError(
-            _(
-                "Chronology conflict: A conflicting validated invoice dated after "
-                "{date_invoice} exists."
-            ).format(date_invoice=format_date(self.env, self.invoice_date))
+        msg = self.env._(
+            "Chronology conflict: A conflicting validated invoice dated after "
+            "%s exists."
         )
+        raise UserError(msg % (format_date(self.env, self.invoice_date),))
 
     def _get_sequence_order_conflicting_invoices_domain(self):
         self.ensure_one()
         if not self.name or self.name == "/":
-            return expression.FALSE_DOMAIN
+            return Domain.FALSE
         last_sequence = self._get_last_sequence()
         if not last_sequence or self.name > last_sequence:
-            return expression.FALSE_DOMAIN
-        return expression.AND(
+            return Domain.FALSE
+        return Domain.AND(
             [
                 [("name", "=", last_sequence)],
                 self._get_conflicting_invoices_domain(),
@@ -78,44 +76,42 @@ class AccountMove(models.Model):
 
     def _raise_sequence_ordering_conflict(self):
         self.ensure_one()
+        msg = self.env._(
+            "Chronology conflict: An invoice with a higher number %(highest_name)s "
+            "dated before %(date_invoice)s exists."
+        )
         raise UserError(
-            _(
-                "Chronology conflict: An invoice with a higher number {highest_name}"
-                " dated before {date_invoice} exists."
-            ).format(
-                highest_name=self._get_last_sequence(),
-                date_invoice=format_date(self.env, self.invoice_date),
-            )
+            msg
+            % {
+                "highest_name": self._get_last_sequence(),
+                "date_invoice": format_date(self.env, self.invoice_date),
+            }
         )
 
     def _conflicting_inv_after_sequence_before_inv_date_domain(self):
-        return expression.AND(
+        return Domain(
             [
-                (
-                    ("name", ">", self.name),
-                    ("name", "!=", "/"),
-                    ("invoice_date", "<", self.invoice_date),
-                )
+                ("name", ">", self.name),
+                ("name", "!=", "/"),
+                ("invoice_date", "<", self.invoice_date),
             ]
         )
 
     def _conflicting_inv_before_sequence_after_inv_date_domain(self):
-        return expression.AND(
+        return Domain(
             [
-                (
-                    ("name", "<", self.name),
-                    ("name", "!=", "/"),
-                    ("invoice_date", ">", self.invoice_date),
-                )
+                ("name", "<", self.name),
+                ("name", "!=", "/"),
+                ("invoice_date", ">", self.invoice_date),
             ]
         )
 
     def _get_sequence_order_conflicting_previously_validated(self):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 self._get_conflicting_invoices_domain(),
-                expression.OR(
+                Domain.OR(
                     [
                         self._conflicting_inv_after_sequence_before_inv_date_domain(),
                         self._conflicting_inv_before_sequence_after_inv_date_domain(),
@@ -127,7 +123,7 @@ class AccountMove(models.Model):
     def _raise_sequence_order_conflicting_previously_validated(self):
         self.ensure_one()
         before_inv = self.search(
-            expression.AND(
+            Domain.AND(
                 [
                     self._get_conflicting_invoices_domain(),
                     self._conflicting_inv_after_sequence_before_inv_date_domain(),
@@ -136,7 +132,7 @@ class AccountMove(models.Model):
             limit=1,
         )
         after_inv = self.search(
-            expression.AND(
+            Domain.AND(
                 [
                     self._get_conflicting_invoices_domain(),
                     self._conflicting_inv_before_sequence_after_inv_date_domain(),
@@ -148,16 +144,17 @@ class AccountMove(models.Model):
             time = "before"
         else:
             time = "after"
+        msg = self.env._(
+            "Chronology conflict: Invoice %(name)s cannot be %(time)s"
+            " invoice %(inv_name)s."
+        )
         raise UserError(
-            _(
-                "Chronology conflict: Invoice {name} cannot be {time} "
-                "invoice {inv_name}."
-            ).format(
-                name=self.name,
-                time=time,
-                inv_name=after_inv.name if after_inv else before_inv.name,
-                date_invoice=format_date(self.env, self.invoice_date),
-            )
+            msg
+            % {
+                "name": self.name,
+                "time": time,
+                "inv_name": after_inv.name if after_inv else before_inv.name,
+            }
         )
 
     def write(self, vals):

@@ -23,8 +23,8 @@ class TestAccountInvoiceConstraintChronology(BaseCommon):
     def setUpClass(cls):
         super().setUpClass()
         cls.company = cls.env.ref("base.main_company")
-        cls.partner_2 = cls.env.ref("base.res_partner_2")
-        cls.partner_12 = cls.env.ref("base.res_partner_12")
+        cls.partner_2 = cls.env["res.partner"].create({"name": "Partner 2"})
+        cls.partner_12 = cls.env["res.partner"].create({"name": "Partner 12"})
         cls.today = fields.Date.today()
         cls.yesterday = cls.today - timedelta(days=1)
         cls.tomorrow = cls.today + timedelta(days=1)

@@ -12,7 +12,7 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form" />
         <field name="arch" type="xml">
-            <field name="code" position="after">
+            <field name="currency_id" position="before">
                 <field
                     name="check_chronology"
                     invisible="type not in ('sale', 'purchase')"
