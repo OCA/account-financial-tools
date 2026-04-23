@@ -76,7 +76,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     )
     code_digits = fields.Integer()
     update_tax_group = fields.Boolean(
-        string="Update taxe groups",
+        string="Update tax groups",
         default=True,
         help="Existing tax groups are updated. Tax group are searched by name.",
     )

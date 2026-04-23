@@ -20,6 +20,24 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "%(actual)s record(s) → %(expected)s record(s)"
+msgstr ""
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "%(n)s record(s) → differs from template"
+msgstr ""
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "- %(label)s: '%(actual)s' → '%(expected)s'"
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_account_chart_template
 msgid "Account Chart Template"
 msgstr ""
@@ -149,6 +167,12 @@ msgid "Created on"
 msgstr "أنشئ في"
 
 #. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "Deactivated tax %s."
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__deleted_taxes
 msgid "Deactivated taxes"
 msgstr ""
@@ -156,10 +180,12 @@ msgstr ""
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
-msgid "Differences in these fields: %s."
+msgid "Differences in these fields:"
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_account_chart_template__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__display_name
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__display_name
@@ -258,6 +284,8 @@ msgid "Here you can set the matching order."
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_account_chart_template__id
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__id
@@ -343,7 +371,7 @@ msgstr ""
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
-msgid "Missing XML-ID."
+msgid "Missing XML-ID (expected %(expected)s; currently: %(current)s)."
 msgstr ""
 
 #. module: account_chart_update
@@ -626,7 +654,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
-msgid "Update taxe groups"
+msgid "Update tax groups"
 msgstr ""
 
 #. module: account_chart_update
@@ -731,6 +759,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__xml_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__xml_id
 msgid "Xml"
+msgstr ""
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "none"
 msgstr ""
 
 #~ msgid "Last Modified on"
