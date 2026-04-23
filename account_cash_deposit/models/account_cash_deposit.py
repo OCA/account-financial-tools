@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -17,7 +17,7 @@ class AccountCashDeposit(models.Model):
         string="Reference",
         size=64,
         readonly=True,
-        default=lambda self: _("New"),
+        default=lambda self: self.env._("New"),
         copy=False,
     )
     operation_type = fields.Selection(
@@ -130,15 +130,13 @@ class AccountCashDeposit(models.Model):
                     and rec.currency_id != rec.company_id.currency_id
                 ):
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "On %(deposit)s, the cash journal %(cash_journal)s is not "
-                            "in the selected currency %(currency)s."
+                            "in the selected currency %(currency)s.",
+                            deposit=rec.display_name,
+                            cash_journal=rec.cash_journal_id.display_name,
+                            currency=rec.currency_id.name,
                         )
-                        % {
-                            "deposit": rec.display_name,
-                            "cash_journal": rec.cash_journal_id.display_name,
-                            "currency": rec.currency_id.name,
-                        }
                     )
 
     @api.model
@@ -207,21 +205,28 @@ class AccountCashDeposit(models.Model):
             rec.is_reconcile = reconcile
 
     def unlink(self):
+        self._check_state_unlink()
+        return super().unlink()
+
+    def _check_state_unlink(self):
         for rec in self:
             if rec.state != "draft":
                 raise UserError(
-                    _("The %s is not in draft state, so you cannot delete it.")
-                    % rec.display_name
+                    self.env._(
+                        "The %s is not in draft state, so you cannot delete it.",
+                        rec.display_name,
+                    )
                 )
-        return super().unlink()
 
     def backtodraft(self):
         for rec in self:
             if rec.move_id:
                 if rec.is_reconcile:
                     raise UserError(
-                        _("%s has already been credited/debited on the bank account.")
-                        % rec.display_name
+                        self.env._(
+                            "%s has already been credited/debited on the bank account.",
+                            rec.display_name,
+                        )
                     )
                 move = rec.move_id
                 if move.state == "posted":
@@ -232,7 +237,7 @@ class AccountCashDeposit(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get("name", _("New")) == _("New"):
+            if vals.get("name", self.env._("New")) == self.env._("New"):
                 if (
                     vals.get("operation_type") == "order"
                     or self._context.get("default_operation_type") == "order"
@@ -270,7 +275,9 @@ class AccountCashDeposit(models.Model):
         self.ensure_one()
         self.line_ids.filtered(lambda x: x.qty == 0).unlink()
         if raise_if_empty and self.currency_id.is_zero(self.total_amount):
-            raise UserError(_("The total amount of %s is zero.") % self.display_name)
+            raise UserError(
+                self.env._("The total amount of %s is zero.", self.display_name)
+            )
 
     def _prepare_account_move(self, vals):
         self.ensure_one()
@@ -280,7 +287,9 @@ class AccountCashDeposit(models.Model):
             self.total_amount, self.company_id.currency_id, self.company_id, date
         )
         if not self.company_id.transfer_account_id:
-            raise UserError(_("The Inter-Banks Transfer Account is not configured."))
+            raise UserError(
+                self.env._("The Inter-Banks Transfer Account is not configured.")
+            )
         bank_account_id = self.company_id.transfer_account_id.id
 
         cash_debit = cash_credit = bank_debit = bank_credit = 0.0
@@ -405,11 +414,11 @@ class AccountCashDepositLine(models.Model):
                 and line.currency_id != line.cash_unit_id.currency_id
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "You must delete cash lines that are linked to a currency "
-                        "other than %s."
+                        "other than %s.",
+                        line.currency_id.name,
                     )
-                    % line.currency_id.name
                 )
 
     @api.depends("cash_unit_id", "qty")

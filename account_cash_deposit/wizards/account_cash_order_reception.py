@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.misc import format_date
 
@@ -32,10 +32,15 @@ class AccountCashOrderReception(models.TransientModel):
         today = fields.Date.context_today(self)
         if self.date > today:
             raise UserError(
-                _("The Cash Reception Date (%s) is in the future.")
-                % format_date(self.env, self.date)
+                self.env._(
+                    "The Cash Reception Date (%s) is in the future.",
+                    format_date(self.env, self.date),
+                )
             )
         self.order_id.message_post(
-            body=_("Cash reception confirmed on %s.") % format_date(self.env, self.date)
+            body=self.env._(
+                "Cash reception confirmed on %s.",
+                format_date(self.env, self.date),
+            )
         )
         self.order_id.validate(force_date=self.date)

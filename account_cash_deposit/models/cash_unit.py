@@ -4,7 +4,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import format_amount
 
@@ -67,7 +67,9 @@ class CashUnit(models.Model):
         for rec in self:
             if rec.cash_type == "coinroll" and rec.coinroll_qty <= 0:
                 raise ValidationError(
-                    _("For a coin roll, the coin quantity must be strictly positive.")
+                    self.env._(
+                        "For a coin roll, the coin quantity must be strictly positive."
+                    )
                 )
 
     @api.depends("coinroll_qty", "cash_type", "value")
