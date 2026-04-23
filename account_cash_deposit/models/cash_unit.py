@@ -53,14 +53,14 @@ class CashUnit(models.Model):
         "on a new cash deposit or a new cash order or both.",
     )
 
-    _sql_constraints = [
-        (
-            "coinroll_qty_positive",
-            "CHECK(coinroll_qty >= 0)",
-            "The coin quantity must be positive.",
-        ),
-        ("value_positive", "CHECK(value > 0)", "The value must be strictly positive."),
-    ]
+    _coinroll_qty_positive = models.Constraint(
+        "CHECK(coinroll_qty >= 0)",
+        "The coin quantity must be positive.",
+    )
+    _value_positive = models.Constraint(
+        "CHECK(value > 0)",
+        "The value must be strictly positive.",
+    )
 
     @api.constrains("cash_type", "coinroll_qty")
     def _check_cash_unit(self):
@@ -123,12 +123,15 @@ class CashUnit(models.Model):
             rec.display_name = label
 
     @api.model
-    def name_search(self, name="", args=None, operator="ilike", limit=100):
-        if args is None:
-            args = []
+    @api.readonly
+    def name_search(self, name="", domain=None, operator="ilike", limit=100):
+        if domain is None:
+            domain = []
+        else:
+            domain = list(domain)
         if name and operator == "ilike":
             if name.isdigit():
-                recs = self.search([("value", "=", name)] + args, limit=limit)
+                recs = self.search([("value", "=", name)] + domain, limit=limit)
                 if recs:
                     return [(rec.id, rec.display_name) for rec in recs]
             value = False
@@ -137,7 +140,7 @@ class CashUnit(models.Model):
             except ValueError:
                 logger.debug("name %s is not a float. Make pylint happy.", name)
             if value:
-                recs = self.search([("value", "=", value)] + args, limit=limit)
+                recs = self.search([("value", "=", value)] + domain, limit=limit)
                 if recs:
                     return [(rec.id, rec.display_name) for rec in recs]
             lang = self.env["res.lang"]._lang_get(self.env.user.lang)
@@ -149,7 +152,11 @@ class CashUnit(models.Model):
                     except ValueError:
                         logger.debug("name %s is not a float. Make pylint happy.", name)
                     if value:
-                        recs = self.search([("value", "=", value)] + args, limit=limit)
+                        recs = self.search(
+                            [("value", "=", value)] + domain, limit=limit
+                        )
                         if recs:
                             return [(rec.id, rec.display_name) for rec in recs]
-        return super().name_search(name=name, args=args, operator=operator, limit=limit)
+        return super().name_search(
+            name=name, domain=domain, operator=operator, limit=limit
+        )

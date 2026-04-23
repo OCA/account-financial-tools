@@ -4,22 +4,20 @@
 
 from datetime import date, timedelta
 
-from odoo.tests.common import TransactionCase
+from odoo import Command
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestAccountCashDeposit(TransactionCase):
+class TestAccountCashDeposit(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.company = cls.env.ref("base.main_company")
-        cls.currency = cls.company.currency_id
-        cls.cash_journal = cls.env["account.journal"].search(
-            [("type", "=", "cash"), ("company_id", "=", cls.company.id)], limit=1
-        )
-        cls.bank_journal = cls.env["account.journal"].search(
-            [("type", "=", "bank"), ("company_id", "=", cls.company.id)], limit=1
-        )
+        cls.company = cls.company_data["company"]
+        cls.currency = cls.company_data["currency"]
+        cls.cash_journal = cls.company_data["default_journal_cash"]
+        cls.bank_journal = cls.company_data["default_journal_bank"]
         cls.cash_unit_note = cls.env["cash.unit"].search(
             [("currency_id", "=", cls.currency.id), ("cash_type", "=", "note")],
             limit=1,
@@ -107,8 +105,12 @@ class TestAccountCashDeposit(TransactionCase):
                     "bank_journal_id": self.bank_journal.id,
                     "coin_amount": coin_amount,
                     "line_ids": [
-                        (0, 0, {"cash_unit_id": self.cash_unit_note.id, "qty": 3}),
-                        (0, 0, {"cash_unit_id": self.cash_unit_coinroll.id, "qty": 6}),
+                        Command.create(
+                            {"cash_unit_id": self.cash_unit_note.id, "qty": 3}
+                        ),
+                        Command.create(
+                            {"cash_unit_id": self.cash_unit_coinroll.id, "qty": 6}
+                        ),
                     ],
                 }
             )

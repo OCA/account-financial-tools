@@ -23,8 +23,8 @@ class AccountCashOrderReception(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
-        res["order_id"] = self._context.get("active_id")
-        assert self._context.get("active_model") == "account.cash.deposit"
+        res["order_id"] = self.env.context.get("active_id")
+        assert self.env.context.get("active_model") == "account.cash.deposit"
         return res
 
     def run(self):

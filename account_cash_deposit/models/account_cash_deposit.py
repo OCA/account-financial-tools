@@ -105,18 +105,14 @@ class AccountCashDeposit(models.Model):
     )
     notes = fields.Text()
 
-    _sql_constraints = [
-        (
-            "name_company_unique",
-            "unique(company_id, name)",
-            "A cash deposit/order with this reference already exists in this company.",
-        ),
-        (
-            "coin_amount_positive",
-            "CHECK(coin_amount >= 0)",
-            "The loose coin amount must be positive or null.",
-        ),
-    ]
+    _name_company_unique = models.Constraint(
+        "unique(company_id, name)",
+        "A cash deposit/order with this reference already exists in this company.",
+    )
+    _coin_amount_positive = models.Constraint(
+        "CHECK(coin_amount >= 0)",
+        "The loose coin amount must be positive or null.",
+    )
 
     @api.constrains("cash_journal_id", "currency_id")
     def _check_deposit(self):
@@ -240,7 +236,7 @@ class AccountCashDeposit(models.Model):
             if vals.get("name", self.env._("New")) == self.env._("New"):
                 if (
                     vals.get("operation_type") == "order"
-                    or self._context.get("default_operation_type") == "order"
+                    or self.env.context.get("default_operation_type") == "order"
                 ):
                     vals["name"] = (
                         self.env["ir.sequence"]
@@ -396,14 +392,14 @@ class AccountCashDepositLine(models.Model):
     subtotal = fields.Monetary(compute="_compute_subtotal", store=True, precompute=True)
     currency_id = fields.Many2one(related="parent_id.currency_id", store=True)
 
-    _sql_constraints = [
-        ("qty_positive", "CHECK(qty >= 0)", "The quantity must be positive or null."),
-        (
-            "cash_unit_unique",
-            "unique(cash_unit_id, parent_id)",
-            "A line already exists for this cash unit.",
-        ),
-    ]
+    _qty_positive = models.Constraint(
+        "CHECK(qty >= 0)",
+        "The quantity must be positive or null.",
+    )
+    _cash_unit_unique = models.Constraint(
+        "unique(cash_unit_id, parent_id)",
+        "A line already exists for this cash unit.",
+    )
 
     @api.constrains("currency_id", "cash_unit_id")
     def _check_lines(self):

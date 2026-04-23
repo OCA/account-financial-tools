@@ -154,9 +154,10 @@
         </field>
     </record>
     <record id="account_cash_deposit_search" model="ir.ui.view">
+        <field name="name">account.cash.deposit.search</field>
         <field name="model">account.cash.deposit</field>
         <field name="arch" type="xml">
-            <search>
+            <search string="Account Cash Deposit">
                 <field name="name" />
                 <field name="cash_journal_id" domain="[('type', '=', 'cash')]" />
                 <field
@@ -176,7 +177,7 @@
                 <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
                 <separator />
                 <filter name="date" string="Date" date="date" />
-                <group string="Group By" name="groupby">
+                <group>
                     <filter
                         name="date_groupby"
                         string="Date"
