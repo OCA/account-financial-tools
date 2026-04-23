@@ -249,7 +249,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _domain_fp_field_ids(self):
         return self._domain_per_name("account.fiscal.position") + [
-            ("ttype", "!=", "one2many")
+            "|",
+            ("ttype", "!=", "one2many"),
+            ("name", "in", ["account_ids"]),
         ]
 
     def _default_tax_group_field_ids(self):
@@ -460,12 +462,17 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                                     r_data, f_name, lang.code
                                 )
                             )
+                            # Only populate the per-language key when the
+                            # template actually carries a translation for
+                            # this language. Falling back to the English
+                            # value here would cause diff_fields to compare
+                            # the DB's real translation against the English
+                            # source and incorrectly flag user-provided
+                            # translations as drift.
+                            if not field_translation:
+                                continue
                             short_lang = lang.code.split("_")[0]
-                            key_lang = f"{f_name}@{short_lang}"
-                            if field_translation:
-                                r_data[key_lang] = field_translation
-                            else:
-                                r_data[key_lang] = r_data[f_name]
+                            r_data[f"{f_name}@{short_lang}"] = field_translation
         return t_data
 
     def action_find_records(self):
@@ -533,7 +540,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         mail_thread_fields = set(self.env["mail.thread"]._fields)
         specials_mapping = {
-            "account.tax.group": mail_thread_fields | {"sequence"},
+            "account.tax.group": mail_thread_fields | {"sequence", "tax_ids"},
             "account.tax": mail_thread_fields
             | {
                 "children_tax_ids",
@@ -542,8 +549,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "account.account": mail_thread_fields
             | {
                 "root_id",
+                "company_ids",
             },
             "account.group": {"parent_id"},
+            "account.fiscal.position": {"tax_ids"},
         }
         specials = {
             "display_name",
@@ -598,11 +607,16 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         fields_by_key = {x.name: x for x in field_mapping[real._name]}
         to_include = field_mapping[real._name].mapped("name")
         for key in record_values.keys():
+            if key in ignore or key not in to_include:
+                continue
+            field_info = fields_by_key.get(key)
+            # Skip empty scalar templates so unset fields aren't flagged,
+            # but let empty m2m/o2m/boolean values through so that an
+            # explicit "clear links" in the template is detected when the
+            # real record has values.
             if (
-                key in ignore
-                or key not in to_include
-                or key in fields_by_key
-                and fields_by_key.get(key).ttype != "boolean"
+                field_info
+                and field_info.ttype not in ("boolean", "many2many", "one2many")
                 and not record_values.get(key)
             ):
                 continue
@@ -613,6 +627,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 real_value = self.padded_code(real_value)
             # Field ttype conditions
             if field.ttype == "many2many":
+                # Normalize falsy template values (None/False/"") so an
+                # explicit "no links" is compared like an empty string.
+                record_value = record_value or ""
                 if isinstance(record_value, str):
                     # If any template xmlid can't be resolved we skip the
                     # check — we can't reliably tell whether the link is
@@ -620,9 +637,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     # unlinked (tracked separately by `missing_xml_id`).
                     expected_ids = set()
                     unresolved = False
-                    for v in record_value.split(","):
-                        if not v:
-                            continue
+                    for v in filter(None, record_value.split(",")):
                         xml_id = (
                             f"account.{self.company_id.id}_{v}" if "." not in v else v
                         )
@@ -634,10 +649,18 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     if not unresolved and set(real_value.ids) != expected_ids:
                         result[key] = record_value
                 else:
-                    record_value_compare = []
-                    for record_value_item in record_value:
-                        record_value_compare += record_value_item[2]
-                    if record_value_compare.sort() != real_value.ids.sort():
+                    # record_value is an ORM command list. Collect the
+                    # expected record ids from SET (6) and LINK (4)
+                    # commands and compare as an unordered set.
+                    expected_cmd_ids = set()
+                    for cmd in (
+                        c for c in record_value if isinstance(c, list | tuple) and c
+                    ):
+                        if cmd[0] == 6 and len(cmd) >= 3 and isinstance(cmd[2], list):
+                            expected_cmd_ids = set(cmd[2])
+                        elif cmd[0] == 4:
+                            expected_cmd_ids.add(cmd[1])
+                    if expected_cmd_ids != set(real_value.ids):
                         result[key] = record_value
                 continue
             elif field.ttype == "many2one":
@@ -673,25 +696,35 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 continue
             # Define correct value if field is translatable
             if field.translate:
+                en_value = (real.with_context(lang="en_US")[key] or "").strip()
+                if field.ttype == "html":
+                    en_value = tools.mail.html_to_inner_content(en_value)
                 for lang in langs:
                     if lang.code == "en_US":
                         key_lang = key
                     else:
                         short_lang = lang.code.split("_")[0]
                         key_lang = f"{key}@{short_lang}"
-                    if key_lang in record_values:
-                        real_value_lang = (
-                            real.with_context(lang=lang.code)[key] or ""
-                        ).strip()
-                        record_value_lang = record_values[key_lang].strip()
-                        if field.ttype == "html":
-                            # Convert HTML to inner content for comparison
-                            # especially to prevent comparing str with Markup
-                            real_value_lang = tools.mail.html_to_inner_content(
-                                real_value_lang
-                            )
-                        if record_value_lang != real_value_lang:
-                            result[key_lang] = record_value_lang
+                    if key_lang not in record_values:
+                        continue
+                    real_value_lang = (
+                        real.with_context(lang=lang.code)[key] or ""
+                    ).strip()
+                    record_value_lang = record_values[key_lang].strip()
+                    if field.ttype == "html":
+                        # Convert HTML to inner content for comparison
+                        # especially to prevent comparing str with Markup
+                        real_value_lang = tools.mail.html_to_inner_content(
+                            real_value_lang
+                        )
+                    # Skip non-English variants whose actual value is just
+                    # the English fallback: there's no stored translation
+                    # for that language, so the diff would only reflect
+                    # Odoo's read-time fallback, not real drift.
+                    if lang.code != "en_US" and real_value_lang == en_value:
+                        continue
+                    if record_value_lang != real_value_lang:
+                        result[key_lang] = record_value_lang
             elif field.ttype == "html":
                 # Convert HTML to inner content for comparison
                 # especially to prevent comparing str with Markup
@@ -700,6 +733,40 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     result[key] = record_value
             elif record_value != real_value:
                 result[key] = record_value
+        # The template CSV loader drops empty cells from record_values (see
+        # account.chart.template._parse_csv), so an explicit "no tags"
+        # column never reaches us. For tracked m2m/o2m fields that are
+        # absent from the template data, flag drift if the real record
+        # still has links — that's the only way the wizard can report
+        # e.g. an account whose template has tag_ids="" but whose DB
+        # record carries tags.
+        for key, field in fields_by_key.items():
+            if (
+                key in ignore
+                or key in result
+                or key in record_values
+                or field.ttype not in ("many2many", "one2many", "boolean")
+            ):
+                continue
+            # Skip readonly/inverse fields — they're populated automatically
+            # (e.g. `replacing_tax_ids`) and can't be overwritten anyway.
+            orm_field = real._fields.get(key)
+            if not orm_field or orm_field.readonly:
+                continue
+            if field.ttype == "boolean":
+                # Computed booleans (e.g. repartition lines'
+                # `use_in_tax_closing`, derived from account_id/
+                # repartition_type) would otherwise false-positive against
+                # the static default — trust the compute instead.
+                if getattr(orm_field, "compute", None):
+                    continue
+                # When the template is silent on a boolean, the expected
+                # value is the field's default — not a blanket False.
+                expected = real.default_get([key]).get(key, False)
+                if bool(real[key]) != bool(expected):
+                    result[key] = expected
+            elif real[key]:
+                result[key] = ""
         # __translation_module__
         if len(result.keys()) > 0 and not self.env.context.get("skip_translation_keys"):
             if "__translation_module__" in record_values:
@@ -710,36 +777,246 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     @api.model
     def diff_notes(self, record_values, real):
-        """Get notes for humans on why is this record going to be updated.
+        """Get notes for humans on why this record is going to be updated.
 
-        :param openerp.models.Model record_values:
-            Record values values.
-
-        :param openerp.models.Model real:
-            Real record.
-
-        :return str:
-            Notes result.
+        Shows each differing field with a concise "actual → expected" detail
+        so the user can audit the proposed change before accepting it.
         """
-        result = list()
-        different_fields_set = set()
-        for f in (
-            self.with_context(skip_translation_keys=True)
-            .diff_fields(record_values, real)
-            .keys()
+        diff = self.with_context(skip_translation_keys=True).diff_fields(
+            record_values, real
+        )
+        # Collapse translation variants (e.g. name@fr) onto their base field.
+        by_field = {}
+        for key in diff:
+            base = key.split("@", 1)[0] if "@" in key else key
+            by_field.setdefault(base, []).append(key)
+        if not by_field:
+            return ""
+        # Merge the diff result on top of record_values so synthesized
+        # drift (e.g. booleans absent from the template but expected to
+        # match the field's default) renders its real expected value
+        # instead of `bool(None) = False`.
+        effective_values = {**record_values, **diff}
+        lines = [self.env._("Differences in these fields:")]
+        for base in sorted(
+            by_field, key=lambda n: real._fields[n].get_description(self.env)["string"]
         ):
-            field_name = f.split("@")[0] if "@" in f else f
-            different_fields_set.add(
-                real._fields[field_name].get_description(self.env)["string"]
+            field = real._fields[base]
+            label = field.get_description(self.env)["string"]
+            detail = self._diff_note_detail(
+                field, real, effective_values, by_field[base]
             )
-        different_fields = sorted(list(different_fields_set))
-        if different_fields:
-            result.append(
-                self.env._(
-                    "Differences in these fields: %s.", ", ".join(different_fields)
+            lines.append(f"- {label}: {detail}" if detail else f"- {label}")
+        return "\n".join(lines)
+
+    @staticmethod
+    def _diff_note_truncate(value):
+        text = "" if value is None or value is False else str(value)
+        return text if len(text) <= 80 else text[:77] + "…"
+
+    def _diff_note_resolve_xmlid(self, short_or_full):
+        xml_id = (
+            f"account.{self.company_id.id}_{short_or_full}"
+            if "." not in short_or_full
+            else short_or_full
+        )
+        return self.env.ref(xml_id, raise_if_not_found=False)
+
+    @staticmethod
+    def _diff_note_label(rec):
+        """Fallback label for sub-records whose `display_name` is the parent."""
+        if rec._name == "account.fiscal.position.account":
+            return (
+                f"{rec.account_src_id.display_name} "
+                f"→ {rec.account_dest_id.display_name}"
+            )
+        if rec._name == "account.tax.repartition.line":
+            return f"{rec.document_type}/{rec.repartition_type} {rec.factor_percent:g}%"
+        return rec.display_name
+
+    def _diff_note_expected_m2x_names(self, expected_v, comodel_name):
+        """Resolve an m2m/o2m template value (xmlid string or command list)
+        to a sorted list of display names."""
+        names = []
+        if isinstance(expected_v, str):
+            for v in filter(None, expected_v.split(",")):
+                rec = self._diff_note_resolve_xmlid(v)
+                names.append(rec.display_name if rec else v)
+        elif isinstance(expected_v, list | tuple) and comodel_name:
+            Comodel = self.env[comodel_name]
+            for cmd in (
+                c for c in expected_v if isinstance(c, list | tuple) and len(c) >= 3
+            ):
+                if cmd[0] == 6 and isinstance(cmd[2], list):
+                    names = Comodel.browse(cmd[2]).mapped("display_name")
+                    break
+                if cmd[0] == 4:
+                    names.append(Comodel.browse(cmd[1]).display_name)
+        return sorted(names)
+
+    def _diff_note_sub_detail(self, sub_vals, rec, diff_keys):
+        """Render "field actual → expected" parts for a single sub-record."""
+        parts = []
+        for k in diff_keys:
+            sub_field = rec._fields.get(k)
+            actual_v = rec[k] if sub_field else None
+            expected_v = sub_vals.get(k)
+            ttype = sub_field.type if sub_field else None
+            if ttype == "many2one":
+                a_name = actual_v.display_name if actual_v else ""
+                e_rec = (
+                    self._diff_note_resolve_xmlid(expected_v)
+                    if isinstance(expected_v, str)
+                    else None
                 )
+                e_name = e_rec.display_name if e_rec else (expected_v or "")
+                parts.append(f"{k} '{a_name}' → '{e_name}'")
+            elif ttype in ("many2many", "one2many"):
+                a_names = sorted(actual_v.mapped("display_name")) if actual_v else []
+                e_names = self._diff_note_expected_m2x_names(
+                    expected_v, sub_field.comodel_name
+                )
+                a_str = ", ".join(a_names) or "∅"
+                e_str = ", ".join(e_names) or "∅"
+                parts.append(
+                    f"{k} [{self._diff_note_truncate(a_str)}]"
+                    f" → [{self._diff_note_truncate(e_str)}]"
+                )
+            else:
+                parts.append(
+                    f"{k} '{self._diff_note_truncate(actual_v)}'"
+                    f" → '{self._diff_note_truncate(expected_v)}'"
+                )
+        return "; ".join(parts)
+
+    def _diff_note_commands(self, field, actual, expected_raw):
+        """Detail string for an m2m/o2m whose template value is a command list."""
+        actual_count = len(actual)
+        expected_count = 0
+        for cmd in (c for c in expected_raw if isinstance(c, list | tuple) and c):
+            if cmd[0] in (0, 4):  # CREATE / LINK
+                expected_count += 1
+            elif cmd[0] == 6 and len(cmd) >= 3:  # SET
+                expected_count += len(cmd[2])
+        if actual_count != expected_count:
+            return self.env._(
+                "%(actual)s record(s) → %(expected)s record(s)",
+                actual=actual_count,
+                expected=expected_count,
             )
-        return "\n".join(result)
+        sub_diffs = []
+        for idx, cmd in (
+            (i, c)
+            for i, c in enumerate(expected_raw[:actual_count])
+            if isinstance(c, list | tuple) and len(c) >= 3 and isinstance(c[2], dict)
+        ):
+            sub_diff = self.with_context(skip_translation_keys=True).diff_fields(
+                cmd[2], actual[idx]
+            )
+            diff_keys = sorted(k for k in sub_diff if k != "__translation_module__")
+            if diff_keys:
+                detail = self._diff_note_sub_detail(cmd[2], actual[idx], diff_keys)
+                sub_diffs.append(f"#{idx + 1}: {detail}")
+            if len(sub_diffs) >= 3:
+                break
+        if sub_diffs:
+            return "\n    " + "\n    ".join(sub_diffs)
+        return self.env._(
+            "%(n)s record(s) → differs from template",
+            n=actual_count,
+        )
+
+    def _diff_note_m2x(self, field, actual, expected_raw):
+        """Detail string for an m2m/o2m field."""
+        actual_names = (
+            sorted(self._diff_note_label(rec) for rec in actual) if actual else []
+        )
+        if isinstance(expected_raw, str) or not expected_raw:
+            expected_names = self._diff_note_expected_m2x_names(
+                expected_raw, field.comodel_name
+            )
+            actual_str = ", ".join(actual_names) or "∅"
+            expected_str = ", ".join(expected_names) or "∅"
+            return (
+                f"[{self._diff_note_truncate(actual_str)}]"
+                f" → [{self._diff_note_truncate(expected_str)}]"
+            )
+        return self._diff_note_commands(field, actual, expected_raw)
+
+    def _diff_note_m2o(self, field, actual, expected_raw):
+        """Detail string for a many2one field."""
+        actual_name = actual.display_name if actual else ""
+        expected_name = ""
+        if isinstance(expected_raw, str):
+            rec = self._diff_note_resolve_xmlid(expected_raw)
+            expected_name = rec.display_name if rec else expected_raw
+        elif isinstance(expected_raw, int):
+            rec = self.env[field.comodel_name].browse(expected_raw)
+            expected_name = rec.display_name if rec.exists() else str(expected_raw)
+        return (
+            f"'{self._diff_note_truncate(actual_name)}'"
+            f" → '{self._diff_note_truncate(expected_name)}'"
+        )
+
+    def _diff_note_detail(self, field, real, record_values, diff_keys=None):
+        """Return a "actual → expected" string for a differing field.
+
+        `diff_keys` lists the actual keys from the diff for this field (e.g.
+        ["name", "name@fr"]); for translatable fields we use it to render
+        per-language details so the bullet always reads the same-language
+        actual value rather than whatever `env.lang` happened to be.
+        """
+        if field.translate and diff_keys:
+            return self._diff_note_translation_detail(
+                field, real, record_values, diff_keys
+            )
+        actual = real[field.name]
+        expected_raw = record_values.get(field.name)
+        if field.type in ("many2many", "one2many"):
+            return self._diff_note_m2x(field, actual, expected_raw)
+        if field.type == "many2one":
+            return self._diff_note_m2o(field, actual, expected_raw)
+        if field.type == "boolean":
+            return f"{bool(actual)} → {bool(expected_raw)}"
+        return (
+            f"'{self._diff_note_truncate(actual)}'"
+            f" → '{self._diff_note_truncate(expected_raw)}'"
+        )
+
+    def _diff_note_translation_detail(self, field, real, record_values, diff_keys):
+        """Render per-language details for a translatable field whose diff
+        includes translation variants (e.g. `name@fr`).
+
+        Variants are only present in ``diff_keys`` when ``diff_fields``
+        decided the per-language value really drifted, so we can render
+        them directly without re-checking against the English fallback.
+        """
+        active_langs = self.env["res.lang"].search([("active", "=", True)])
+        by_short = {}
+        for lang in active_langs:
+            by_short.setdefault(lang.code.split("_")[0], lang)
+        parts = []
+        for key in sorted(diff_keys):
+            if "@" in key:
+                short = key.split("@", 1)[1]
+                lang = by_short.get(short)
+                lang_code = lang.code if lang else "en_US"
+                lang_label = short
+            else:
+                lang_code = "en_US"
+                lang_label = "en"
+            actual = real.with_context(lang=lang_code)[field.name] or ""
+            expected = record_values.get(key) or ""
+            if field.type == "html":
+                actual = tools.mail.html_to_inner_content(actual) if actual else ""
+                expected = (
+                    tools.mail.html_to_inner_content(expected) if expected else ""
+                )
+            parts.append(
+                f"[{lang_label}] '{self._diff_note_truncate(actual)}'"
+                f" → '{self._diff_note_truncate(expected)}'"
+            )
+        return "; ".join(parts)
 
     def _domain_taxes_to_deactivate(self, found_taxes_ids):
         return [
@@ -802,6 +1079,18 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         )
         return full_xml_id not in record_xml_ids
 
+    def _missing_xml_id_note(self, record, xml_id):
+        """Human-readable note for a missing xml_id, showing expected vs
+        the ones currently attached to the record."""
+        full = f"account.{self.company_id.id}_{xml_id}" if "." not in xml_id else xml_id
+        current = record._get_external_ids().get(record.id, [])
+        current_str = ", ".join(current) or self.env._("none")
+        return self.env._(
+            "Missing XML-ID (expected %(expected)s; currently: %(current)s).",
+            expected=full,
+            current=current_str,
+        )
+
     def recreate_xml_id(self, record, xml_id):
         """Recreate the xml_id if it is different than expected, otherwise
         chart.template won't do it correctly.
@@ -845,7 +1134,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the tax group for changes
                 notes = self.diff_notes(r_data, tax_group)
                 if self.missing_xml_id(tax_group, xmlid):
-                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self._missing_xml_id_note(
+                        tax_group, xmlid
+                    )
                 if notes:
                     # Tax group to be updated
                     tax_group_vals.append(
@@ -884,7 +1175,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the tax for changes
                 notes = self.diff_notes(r_data, tax)
                 if self.missing_xml_id(tax, xmlid):
-                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self._missing_xml_id_note(
+                        tax, xmlid
+                    )
                 if notes:
                     # Tax to be updated
                     tax_vals.append(
@@ -935,7 +1228,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the account for changes
                 notes = self.diff_notes(r_data, account)
                 if self.missing_xml_id(account, xmlid):
-                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self._missing_xml_id_note(
+                        account, xmlid
+                    )
                 if notes:
                     # Account to be updated
                     account_vals.append(
@@ -976,11 +1271,25 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     else r_data["code_prefix_start"]
                 )
                 if code_prefix_end != account_group.code_prefix_end:
-                    notes += (notes and "\n" or "") + self.env._(
-                        "Differences in these fields: %s.", code_prefix_end
+                    label = account_group._fields["code_prefix_end"].get_description(
+                        self.env
+                    )["string"]
+                    line = self.env._(
+                        "- %(label)s: '%(actual)s' → '%(expected)s'",
+                        label=label,
+                        actual=account_group.code_prefix_end or "",
+                        expected=code_prefix_end or "",
                     )
+                    if notes:
+                        # Append under the existing "Differences in these fields:"
+                        # header produced by diff_notes.
+                        notes += f"\n{line}"
+                    else:
+                        notes = self.env._("Differences in these fields:") + f"\n{line}"
                 if self.missing_xml_id(account_group, xmlid):
-                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self._missing_xml_id_note(
+                        account_group, xmlid
+                    )
                 if notes:
                     # Account to be updated
                     ag_vals.append(
@@ -1015,7 +1324,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the fiscal position for changes
                 notes = self.diff_notes(r_data, fp)
                 if self.missing_xml_id(fp, xmlid):
-                    notes += (notes and "\n" or "") + self.env._("Missing XML-ID.")
+                    notes += (notes and "\n" or "") + self._missing_xml_id_note(
+                        fp, xmlid
+                    )
                 if notes:
                     # Fiscal position template to be updated
                     fp_vals.append(

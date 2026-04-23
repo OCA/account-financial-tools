@@ -14,6 +14,24 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "%(actual)s record(s) → %(expected)s record(s)"
+msgstr ""
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "%(n)s record(s) → differs from template"
+msgstr ""
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "- %(label)s: '%(actual)s' → '%(expected)s'"
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_account_chart_template
 msgid "Account Chart Template"
 msgstr ""
@@ -156,7 +174,7 @@ msgstr ""
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
-msgid "Differences in these fields: %s."
+msgid "Differences in these fields:"
 msgstr ""
 
 #. module: account_chart_update
@@ -346,7 +364,7 @@ msgstr ""
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
-msgid "Missing XML-ID."
+msgid "Missing XML-ID (expected %(expected)s; currently: %(current)s)."
 msgstr ""
 
 #. module: account_chart_update
@@ -733,4 +751,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__xml_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__xml_id
 msgid "Xml"
+msgstr ""
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "none"
 msgstr ""
