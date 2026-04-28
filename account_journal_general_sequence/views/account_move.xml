@@ -2,7 +2,6 @@
 <!-- Copyright 2022 Moduon
      License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
 <data>
-
     <record id="view_move_tree" model="ir.ui.view">
         <field name="name">Add move number to tree</field>
         <field name="model">account.move</field>
@@ -38,5 +37,4 @@
             </field>
         </field>
     </record>
-
 </data>
