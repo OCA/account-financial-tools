@@ -3,7 +3,7 @@
 
 from datetime import date
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class AccountMoveRenumberWizard(models.TransientModel):
@@ -73,7 +73,7 @@ class AccountMoveRenumberWizard(models.TransientModel):
             order="date, id",
         )
         if not moves:
-            raise exceptions.UserError(_("No account moves found."))
+            raise exceptions.UserError(self.env._("No account moves found."))
         # Reset sequence
         future_ranges = self.env["ir.sequence.date_range"].search(
             [
