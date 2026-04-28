@@ -12,10 +12,9 @@ ADDON = "account_journal_general_sequence"
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    _sql_constraints = [
-        (
-            "entry_number_unique",
-            "UNIQUE(entry_number, journal_id)",
+    _local_constraints = [
+        models.Constraint(
+            "UNIQUE (entry_number, journal_id)",
             "Entry number must be unique per journal.",
         ),
     ]
