@@ -6,7 +6,7 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, models
+from odoo import api, models
 
 
 class AccountFiscalYear(models.Model):
@@ -14,7 +14,7 @@ class AccountFiscalYear(models.Model):
 
     @api.model
     def cron_auto_create(self):
-        companies = self.env["res.company"].search([])
+        companies = self.env["res.company"].search([("active", "=", True)])
         for company in companies:
             last_fiscal_year = self.search(
                 [("company_id", "=", company.id)], order="date_to desc", limit=1
@@ -37,7 +37,7 @@ class AccountFiscalYear(models.Model):
             [("name", "=", new_name), ("company_id", "=", self.company_id.id)]
         ):
             # the replace process fail to guess a correct unique name
-            new_name = _(
+            new_name = self.env._(
                 "FY %(date_to)s - %(date_from)s",
                 date_to=str(self.date_to),
                 date_from=str(self.date_from),
