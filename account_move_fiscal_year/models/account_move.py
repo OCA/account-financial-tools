@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class AccountMove(models.Model):
@@ -24,7 +24,11 @@ class AccountMove(models.Model):
 
     @api.model
     def _search_date_range_fy(self, operator, value):
-        if operator in ("=", "!=", "in", "not in"):
+        if operator in ("any", "any!"):
+            date_range_domain = value
+        elif operator in ("not any", "not any!"):
+            date_range_domain = ~Domain(value)
+        elif operator in ("=", "!=", "in", "not in"):
             date_range_domain = [("id", operator, value)]
         else:
             date_range_domain = [("name", operator, value)]
@@ -33,7 +37,7 @@ class AccountMove(models.Model):
 
         domain = [("id", "=", -1)]
         for date_range in date_ranges:
-            domain = expression.OR(
+            domain = Domain.OR(
                 [
                     domain,
                     [
