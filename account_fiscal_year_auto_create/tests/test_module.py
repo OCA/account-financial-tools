@@ -2,7 +2,9 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from datetime import date, datetime
+from datetime import date
+
+from odoo import fields
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -18,7 +20,7 @@ class TestFiscalYear(BaseCommon):
             }
         )
 
-        cls.last_year = datetime.now().year - 1
+        cls.last_year = fields.Date.today().year - 1
         cls.last_fiscal_year = cls.AccountFiscalYear.create(
             {
                 "name": f"FY {cls.last_year}",
