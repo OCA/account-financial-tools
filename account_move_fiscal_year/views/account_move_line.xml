@@ -2,7 +2,6 @@
 <!-- Copyright 2017 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="account_move_line_form_view">
         <field name="name">account.move.line.form (in account_move_fiscal_year)</field>
         <field name="model">account.move.line</field>
@@ -23,11 +22,9 @@
         <field name="inherit_id" ref="account.view_account_move_line_filter" />
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
-
             <field name="date" position="after">
                 <field name="date_range_fy_id" />
             </field>
-
         </field>
     </record>
 
@@ -42,5 +39,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
