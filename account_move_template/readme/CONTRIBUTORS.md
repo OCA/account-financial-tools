@@ -21,3 +21,5 @@
 - [Ecosoft](http://ecosoft.co.th):
   - Kitti U. \<<kittiu@ecosoft.co.th>\> (Add context overwrite)
 - Abraham Anes \<<abrahamanes@gmail.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia

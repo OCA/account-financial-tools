@@ -59,9 +59,7 @@ class TestAccountMoveTemplate(TransactionCase):
                     "login": "test_user",
                     "email": "test@oca.com",
                     "groups_id": [
-                        (
-                            6,
-                            0,
+                        Command.set(
                             [
                                 employees_group.id,
                                 account_user_group.id,
@@ -153,9 +151,7 @@ class TestAccountMoveTemplate(TransactionCase):
                     "company_id": self.company.id,
                     "journal_id": self.account_journal_1.id,
                     "template_line_ids": [
-                        (
-                            0,
-                            0,
+                        Command.create(
                             {
                                 "name": "L1",
                                 "sequence": 1,
@@ -166,9 +162,7 @@ class TestAccountMoveTemplate(TransactionCase):
                                 "type": "input",
                             },
                         ),
-                        (
-                            0,
-                            0,
+                        Command.create(
                             {
                                 "name": "L2",
                                 "sequence": 2,

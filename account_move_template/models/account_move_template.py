@@ -32,13 +32,10 @@ class AccountMoveTemplate(models.Model):
     )
     active = fields.Boolean(default=True)
 
-    _sql_constraints = [
-        (
-            "name_company_unique",
-            "unique(name, company_id)",
-            "This name is already used by another template!",
-        )
-    ]
+    _name_company_unique = models.Constraint(
+        "unique(name, company_id)",
+        "This name is already used by another template!",
+    )
 
     def copy(self, default=None):
         self.ensure_one()
@@ -126,7 +123,7 @@ class AccountMoveTemplateLine(models.Model):
         "account.account",
         string="Account",
         required=True,
-        domain="[('company_ids', 'in', company_id), ('deprecated', '=', False)]",
+        domain="[('company_ids', 'in', company_id), ('active', '=', True)]",
         check_company=True,
     )
     partner_id = fields.Many2one(
@@ -176,7 +173,7 @@ class AccountMoveTemplateLine(models.Model):
     opt_account_id = fields.Many2one(
         "account.account",
         string="Account if Negative",
-        domain="[('company_ids', 'in', company_id), ('deprecated', '=', False)]",
+        domain="[('company_ids', 'in', company_id), ('active', '=', True)]",
         check_company=True,
         help="When amount is negative, use this account instead",
     )
@@ -212,13 +209,10 @@ class AccountMoveTemplateLine(models.Model):
             )
             line.analytic_distribution = distribution or line.analytic_distribution
 
-    _sql_constraints = [
-        (
-            "sequence_template_uniq",
-            "unique(template_id, sequence)",
-            "The sequence of the line must be unique per template!",
-        )
-    ]
+    _sequence_template_uniq = models.Constraint(
+        "unique(template_id, sequence)",
+        "The sequence of the line must be unique per template!",
+    )
 
     @api.constrains("type", "python_code")
     def _check_python_code(self):

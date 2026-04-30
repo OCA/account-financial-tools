@@ -255,7 +255,7 @@ Valid dictionary to overwrite template lines:
                 Command.set(line.tax_repartition_line_id.tag_ids.ids)
             ]
         # With overwrite options
-        overwrite = self._context.get("overwrite", {})
+        overwrite = self.env.context.get("overwrite", {})
         move_line_vals = overwrite.get(f"L{line.sequence}", {})
         values.update(move_line_vals)
         # Use optional account, when amount is negative

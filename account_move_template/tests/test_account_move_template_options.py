@@ -194,7 +194,7 @@ class TestAccountMoveTemplateEnhanced(AccountTestInvoicingCommon):
                 ),
             }
         )
-        msg_error = "overwrite are .'partner_id', 'amount', 'name', 'date_maturity'"
+        msg_error = "Valid fields to overwrite are"
         with self.assertRaisesRegex(ValidationError, msg_error):
             wiz.load_lines()
         # Assign only on valid fields, and load_lines again
@@ -324,7 +324,7 @@ class TestAccountMoveTemplateEnhanced(AccountTestInvoicingCommon):
                 "overwrite": str({"L0": {"test": 100}}),
             }
         )
-        msg_error = "overwrite are .'partner_id', 'amount', 'name', 'date_maturity'"
+        msg_error = "Valid fields to overwrite are"
         with self.assertRaisesRegex(ValidationError, msg_error):
             wiz.load_lines()
 
