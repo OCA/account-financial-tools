@@ -3,8 +3,6 @@
     <record id="account_move_template_comp_rule" model="ir.rule">
         <field name="name">Move Template multi-company rule</field>
         <field name="model_id" ref="model_account_move_template" />
-        <field
-            name="domain_force"
-        >[('company_id', 'in', company_ids)]</field>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
 </odoo>

@@ -42,7 +42,12 @@
                                 widget="many2many_tags"
                                 invisible="not tax_ids"
                             />
-                            <field name="move_line_type" widget="badge" decoration-info="move_line_type == 'cr'" decoration-success="move_line_type == 'dr'"/>
+                            <field
+                                name="move_line_type"
+                                widget="badge"
+                                decoration-info="move_line_type == 'cr'"
+                                decoration-success="move_line_type == 'dr'"
+                            />
                             <field name="amount" />
                             <field name="note" />
                             <field name="payment_term_id" />

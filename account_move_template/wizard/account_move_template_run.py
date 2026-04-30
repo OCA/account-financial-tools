@@ -4,7 +4,7 @@ from ast import literal_eval
 
 from markupsafe import Markup
 
-from odoo import Command, _, fields, models
+from odoo import Command, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -117,19 +117,21 @@ Valid dictionary to overwrite template lines:
             assert isinstance(overwrite_vals, dict)
         except (SyntaxError, ValueError, AssertionError) as err:
             raise ValidationError(
-                _("Overwrite value must be a valid python dict")
+                self.env._("Overwrite value must be a valid python dict")
             ) from err
         # First level keys must be L1, L2, ...
         keys = overwrite_vals.keys()
         if list(filter(lambda x: x[:1] != "L" or not x[1:].isdigit(), keys)):
-            raise ValidationError(_("Keys must be line sequence i.e. L1, L2, ..."))
+            raise ValidationError(
+                self.env._("Keys must be line sequence i.e. L1, L2, ...")
+            )
         # Second level keys must be a valid keys
         try:
             if dict(
                 filter(lambda x: set(overwrite_vals[x].keys()) - set(valid_keys), keys)
             ):
                 raise ValidationError(
-                    _("Valid fields to overwrite are %s") % valid_keys
+                    self.env._("Valid fields to overwrite are %s", valid_keys)
                 )
         except ValidationError as e:
             raise e
@@ -141,7 +143,7 @@ Valid dictionary to overwrite template lines:
     }
             """
             raise ValidationError(
-                _(
+                self.env._(
                     "Invalid dictionary: %(exception)s\n%(msg)s",
                     exception=e,
                     msg=msg,
@@ -175,7 +177,7 @@ Valid dictionary to overwrite template lines:
         company_cur = self.company_id.currency_id
         self.template_id.compute_lines(sequence2amount)
         if all([company_cur.is_zero(x) for x in sequence2amount.values()]):
-            raise UserError(_("Debit and credit of all lines are null."))
+            raise UserError(self.env._("Debit and credit of all lines are null."))
         move_vals = self._prepare_move()
         for line in self.template_id.line_ids:
             amount = sequence2amount[line.sequence]
@@ -184,7 +186,7 @@ Valid dictionary to overwrite template lines:
                     Command.create(self._prepare_move_line(line, amount))
                 )
         move = self.env["account.move"].create(move_vals)
-        msg = _(
+        msg = self.env._(
             "Journal entry created from template "
             "<a href=# data-oe-model=account.move.template "
             "data-oe-id=%(template_id)d>%(template_name)s</a>.",
@@ -197,7 +199,7 @@ Valid dictionary to overwrite template lines:
         )
         result.update(
             {
-                "name": _("Entry from template %s") % self.template_id.name,
+                "name": self.env._("Entry from template %s", self.template_id.name),
                 "res_id": move.id,
                 "views": False,
                 "view_id": False,
