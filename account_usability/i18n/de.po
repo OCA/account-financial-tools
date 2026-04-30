@@ -125,8 +125,3 @@ msgstr "Vorlagen"
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
 msgstr "Anglo-amerikanische Buchführung verwenden"
-
-#. module: account
-#: model:ir.ui.menu,name:account.menu_finance
-msgid "Accounting"
-msgstr "Buchhaltung"
