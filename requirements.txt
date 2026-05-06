@@ -1,5 +1,6 @@
 # generated from manifests external_dependencies
 freezegun
 openpyxl>=3.1.0
+openupgradelib
 pandas
 python-dateutil
