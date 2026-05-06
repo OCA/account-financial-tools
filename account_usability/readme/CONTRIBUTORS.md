@@ -5,3 +5,4 @@
 - \[APSL-Nagarro\](<https://apsl.tech>):
   - Antoni Marroig \<<amarroig@apsl.net>\>
 - Rémi - Le Filement \<<https://le-filament.com>\>
+- Michael Tietz (MT Software) \<<mtietz@mt-software.de>\>
