@@ -47,6 +47,7 @@ class TestJournalLockDate(common.AccountTestInvoicingCommon):
         cls.move.action_post()
         # lock journal, set 'Lock Date for Non-Advisers'
         cls.journal.period_lock_date = date.today() + timedelta(days=2)
+        cls.company.user_fiscalyear_lock_date = date.today() + timedelta(days=1)
 
     def test_journal_lock_date(self):
         self.env.user.write(
@@ -179,3 +180,49 @@ class TestJournalLockDate(common.AccountTestInvoicingCommon):
             }
         )
         move2.action_post()
+
+    def test_company_get_user_fiscal_lock_date(self):
+        self.env.user.write(
+            {
+                "group_ids": [
+                    Command.unlink(self.env.ref("base.group_system").id),
+                    Command.unlink(self.env.ref("account.group_account_manager").id),
+                ]
+            }
+        )
+        self.assertFalse(self.env.user.has_group("account.group_account_manager"))
+        lock_date = self.env.company._get_user_fiscal_lock_date(self.journal)
+
+        self.assertEqual(lock_date, self.journal.period_lock_date)
+
+    def test_company_get_user_fiscal_lock_date_use_journal_date(self):
+        self.env.user.write(
+            {
+                "group_ids": [
+                    Command.unlink(self.env.ref("base.group_system").id),
+                    Command.unlink(self.env.ref("account.group_account_manager").id),
+                ]
+            }
+        )
+        self.assertFalse(self.env.user.has_group("account.group_account_manager"))
+        lock_date = self.env.company._get_user_fiscal_lock_date(self.journal)
+
+        self.assertEqual(lock_date, self.journal.period_lock_date)
+
+    def test_company_get_user_fiscal_lock_date_use_journal_fiscal_year_date_manager(
+        self,
+    ):
+        self.journal.fiscalyear_lock_date = date.today()
+        self.assertTrue(self.env.user.has_group("account.group_account_manager"))
+        lock_date = self.env.company._get_user_fiscal_lock_date(self.journal)
+
+        self.assertEqual(lock_date, self.journal.fiscalyear_lock_date)
+
+    def test_company_get_user_fiscal_lock_date_no_journal(self):
+        self.journal.fiscalyear_lock_date = date.today()
+        self.assertTrue(self.env.user.has_group("account.group_account_manager"))
+        lock_date = self.env.company._get_user_fiscal_lock_date(
+            self.env["account.journal"]
+        )
+
+        self.assertEqual(lock_date, self.company.user_fiscalyear_lock_date)
