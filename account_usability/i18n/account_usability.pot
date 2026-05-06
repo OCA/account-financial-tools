@@ -46,6 +46,7 @@ msgid "Account prefixes can determine account groups."
 msgstr ""
 
 #. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_finance
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid "Accounting"
 msgstr ""
@@ -153,9 +154,4 @@ msgstr ""
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
-msgstr ""
-
-#. module: account
-#: model:ir.ui.menu,name:account.menu_finance
-msgid "Accounting"
 msgstr ""

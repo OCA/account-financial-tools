@@ -52,12 +52,12 @@ hidden things that are hidden and available only on EE version.
    Invoicing Settings.
 3) In Odoo CE, the group 'Show Full Accounting Features' is hidden. With
    that module, the group is selectable in the user form view. Also the
-   group "Billing / xxx" are renamed into "Accounting / yyy" to fit with
-   the EE terms.
-4) Rename the main menu 'Billing' into 'Accounting' to fit with EE
+   groups "Invoicing / xxx" are renamed into "Accounting / yyy" to fit
+   with the EE terms.
+4) Rename the main menu 'Invoicing' into 'Accounting' to fit with EE
    naming.
-5) Allow to configure **Fiscalyear Last Day** on accounting
-   configuration page.
+5) Allow to configure **Fiscalyear Last Day** and **Fiscalyear Last
+   Month** fields on accounting configuration page.
 
 **Table of contents**
 
@@ -79,37 +79,46 @@ Development
 
 - account.group_account_invoice
 
-*CE Without that module* -> Complete Name : Invoicing / Billing ->
+*CE Without that module* -> Complete Name : Invoicing / Invoicing ->
 Parent Category : base.module_category_accounting_accounting -> Implies
 : base.group_user
 
-*CE With that module / EE* -> Complete Name: **Accounting** / Billing
+*CE With that module / EE* -> Complete Name: **Accounting** / Invoicing
 
 - account.group_account_readonly
 
 *CE Without that module* -> Complete Name : Technical / Show Accounting
-Features - Readonly -> Parent : base.module_category_hidden -> Implies :
-base.group_user
+Features - Readonly -> Parent Category : base.module_category_hidden ->
+Implies : base.group_user
 
 *CE With that module / EE* -> name: **Accounting / Read-only** -> Parent
-Category: **base.module_category_accounting_accounting**
+Category : **base.module_category_accounting_accounting**
+
+- account.group_account_basic
+
+*CE Without that module* -> Complete Name : Technical / Basic -> Parent
+Category : base.module_category_hidden -> Implies :
+account.group_account_invoice
+
+*CE With that module / EE* -> name: **Accounting / Invoicing & Banks**
+-> Parent Category : **base.module_category_accounting_accounting**
 
 - account.group_account_user
 
 *CE Without that module* -> Complete Name : Technical / Show Full
-Accounting Features -> Parent : base.module_category_hidden -> Implies :
-account.group_account_invoice, account.group_account_readonly
+Accounting Features -> Parent Category : base.module_category_hidden ->
+Implies : account.group_account_basic, account.group_account_readonly
 
 *CE With that module / EE* -> name: **Accounting / Bookkeeper** ->
 Parent Category: **base.module_category_accounting_accounting**
 
 - account.group_account_manager
 
-*CE Without that module* -> Complete Name : Invoicing / Billing
-Administrator -> Parent : base.module_category_accounting_accounting ->
-Implies : account.group_account_invoice
+*CE Without that module* -> Complete Name : Invoicing / Administrator ->
+Parent : base.module_category_accounting_accounting -> Implies :
+account.group_account_invoice
 
-*CE With that module / EE* -> name: **Accounting / Accountant** ->
+*CE With that module / EE* -> name: **Accounting / Administrator** ->
 Implies : **account.group_account_user**
 
 Known issues / Roadmap
@@ -147,6 +156,9 @@ Contributors
 - [APSL-Nagarro](https://apsl.tech):
 
   - Antoni Marroig <amarroig@apsl.net>
+
+- Rémi - Le Filement <https://le-filament.com>
+- Michael Tietz (MT Software) <mtietz@mt-software.de>
 
 Maintainers
 -----------
