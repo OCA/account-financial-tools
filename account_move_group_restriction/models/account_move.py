@@ -29,3 +29,13 @@ class AccountMove(models.Model):
         for move in self:
             groups = move.mapped("line_ids.account_id.security_group_ids")
             move.account_security_group_ids = [Command.set(groups.ids)]
+
+    def _fetch_duplicate_reference(self, matching_states=("draft", "posted")):
+        # Core's scan uses raw SQL that ignores ACLs. Filter unreadable peers
+        # here so `duplicated_ref_ids` never leaks restricted moves.
+        result = super()._fetch_duplicate_reference(matching_states)
+        return {
+            move: readable
+            for move, duplicates in result.items()
+            if (readable := duplicates._filtered_access("read"))
+        }
