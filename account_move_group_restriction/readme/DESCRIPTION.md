@@ -8,5 +8,5 @@ account-based visibility rules.
 
 Note: The groups set on accounts are intended to be additional to the standard
 account.group_account_user, so users still keep basic accounting access. For this
-reason, the module also provides a default group, Accounting / View Restricted Accounts, 
-which implies account.group_account_user.
+reason, the module also provides a default group, View Restricted Accounts, which 
+implies account.group_account_user.

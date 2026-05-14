@@ -4,7 +4,7 @@
 {
     "name": "Account Move Restricted by Account Groups",
     "summary": "Restrict visibility of journal entries by security groups on accounts.",
-    "version": "16.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Accounting",
     "author": "Quartile, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",

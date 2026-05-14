@@ -24,7 +24,7 @@ class TestAccountMoveGroupRestriction(TransactionCase):
                 "email": "basic@example.com",
                 "company_id": cls.company.id,
                 "company_ids": [Command.set([cls.company.id])],
-                "groups_id": [Command.set([cls.group_account_user.id])],
+                "group_ids": [Command.set([cls.group_account_user.id])],
             }
         )
         cls.user_management = Users.create(
@@ -34,7 +34,7 @@ class TestAccountMoveGroupRestriction(TransactionCase):
                 "email": "management@example.com",
                 "company_id": cls.company.id,
                 "company_ids": [Command.set([cls.company.id])],
-                "groups_id": [
+                "group_ids": [
                     Command.set([cls.group_restricted_account_management.id])
                 ],
             }
@@ -44,7 +44,7 @@ class TestAccountMoveGroupRestriction(TransactionCase):
                 "name": "Public Account",
                 "code": "PUB001",
                 "account_type": "asset_current",
-                "company_id": cls.company.id,
+                "company_ids": [Command.set([cls.company.id])],
             }
         )
         cls.account_restricted = cls.env["account.account"].create(
@@ -52,122 +52,136 @@ class TestAccountMoveGroupRestriction(TransactionCase):
                 "name": "Restricted Account",
                 "code": "RES001",
                 "account_type": "asset_current",
-                "company_id": cls.company.id,
+                "company_ids": [Command.set([cls.company.id])],
                 "security_group_ids": [
                     Command.set([cls.group_restricted_account_management.id])
                 ],
             }
         )
-        cls.journal = cls.env["account.journal"].create(
-            {
-                "name": "Miscellaneous",
-                "code": "TEST MISC",
-                "type": "general",
-                "company_id": cls.company.id,
-            }
+        cls.purchase_journal = cls.env["account.journal"].search(
+            [("type", "=", "purchase"), ("company_id", "=", cls.company.id)],
+            limit=1,
         )
-        cls.move_public = cls._create_move(cls.account_public, cls.account_public)
-        cls.move_restricted = cls._create_move(
-            cls.account_restricted, cls.account_restricted
+        cls.vendor = cls.env["res.partner"].create({"name": "Test Vendor"})
+        cls.ref_public = "REF-PUB-001"
+        cls.ref_restricted = "REF-RES-001"
+        cls.ref_mixed = "REF-MIXED-001"
+        # Unique amounts per bill so core's case-2 duplicate scan
+        # ("same partner + amount + date") doesn't match across fixtures.
+        cls.bill_public = cls._create_bill([(cls.account_public, 100)], cls.ref_public)
+        cls.bill_restricted = cls._create_bill(
+            [(cls.account_restricted, 200)], cls.ref_restricted
         )
-        cls.move_mixed = cls._create_move(cls.account_restricted, cls.account_public)
+        cls.bill_mixed = cls._create_bill(
+            [(cls.account_public, 100), (cls.account_restricted, 200)],
+            cls.ref_mixed,
+        )
 
     @classmethod
-    def _create_move(cls, debit_account, credit_account):
+    def _create_bill(cls, lines, ref, user=None):
         Move = cls.env["account.move"]
-        move = Move.create(
+        if user is not None:
+            Move = Move.with_user(user)
+        return Move.create(
             {
-                "move_type": "entry",
-                "journal_id": cls.journal.id,
-                "company_id": cls.company.id,
-                "line_ids": [
+                "move_type": "in_invoice",
+                "partner_id": cls.vendor.id,
+                "journal_id": cls.purchase_journal.id,
+                "invoice_date": "2026-01-01",
+                "ref": ref,
+                "invoice_line_ids": [
                     Command.create(
                         {
-                            "name": "Debit line",
-                            "account_id": debit_account.id,
-                            "debit": 100,
-                            "credit": 0.0,
+                            "name": f"Line {i}",
+                            "account_id": account.id,
+                            "quantity": 1,
+                            "price_unit": price,
+                            "tax_ids": [Command.clear()],
                         }
-                    ),
-                    Command.create(
-                        {
-                            "name": "Credit line",
-                            "account_id": credit_account.id,
-                            "debit": 0.0,
-                            "credit": 100,
-                        }
-                    ),
+                    )
+                    for i, (account, price) in enumerate(lines, 1)
                 ],
             }
         )
-        move.action_post()
-        return move
 
     def test_account_security_group_ids_computed_from_accounts(self):
-        self.assertFalse(self.move_public.account_security_group_ids)
+        self.assertFalse(self.bill_public.account_security_group_ids)
         self.assertEqual(
-            self.move_restricted.account_security_group_ids,
+            self.bill_restricted.account_security_group_ids,
             self.group_restricted_account_management,
         )
         self.assertEqual(
-            self.move_mixed.account_security_group_ids,
+            self.bill_mixed.account_security_group_ids,
             self.group_restricted_account_management,
         )
 
     def test_basic_user_cannot_see_restricted_moves(self):
         Move_basic = self.env["account.move"].with_user(self.user_basic)
-        public_move = Move_basic.search([("id", "=", self.move_public.id)])
-        restricted_move = Move_basic.search([("id", "=", self.move_restricted.id)])
-        mixed_move = Move_basic.search([("id", "=", self.move_mixed.id)])
-        self.assertEqual(
-            public_move,
-            self.move_public,
-            "Basic user should see public move.",
-        )
+        public = Move_basic.search([("id", "=", self.bill_public.id)])
+        restricted = Move_basic.search([("id", "=", self.bill_restricted.id)])
+        mixed = Move_basic.search([("id", "=", self.bill_mixed.id)])
+        self.assertEqual(public, self.bill_public, "Basic user should see public bill.")
+        self.assertFalse(restricted, "Basic user should not see restricted bill.")
         self.assertFalse(
-            restricted_move,
-            "Basic user should not see restricted move.",
-        )
-        self.assertFalse(
-            mixed_move,
-            "Basic user should not see mixed move using restricted account.",
+            mixed, "Basic user should not see bill using restricted account."
         )
 
     def test_management_user_can_see_all_moves(self):
         Move_mgmt = self.env["account.move"].with_user(self.user_management)
-        for move in (self.move_public, self.move_restricted, self.move_mixed):
-            result = Move_mgmt.search([("id", "=", move.id)])
+        for bill in (self.bill_public, self.bill_restricted, self.bill_mixed):
+            result = Move_mgmt.search([("id", "=", bill.id)])
             self.assertEqual(
-                result,
-                move,
-                "Management user should see move %s." % move.id,
+                result, bill, f"Management user should see bill {bill.id}."
             )
 
     def test_basic_user_cannot_see_restricted_move_lines(self):
         Line_basic = self.env["account.move.line"].with_user(self.user_basic)
-        public_lines = Line_basic.search([("move_id", "=", self.move_public.id)])
+        public_lines = Line_basic.search([("move_id", "=", self.bill_public.id)])
         restricted_lines = Line_basic.search(
-            [("move_id", "=", self.move_restricted.id)]
+            [("move_id", "=", self.bill_restricted.id)]
         )
-        mixed_lines = Line_basic.search([("move_id", "=", self.move_mixed.id)])
-        self.assertTrue(
-            public_lines,
-            "Basic user should see lines of unrestricted move.",
-        )
+        mixed_lines = Line_basic.search([("move_id", "=", self.bill_mixed.id)])
+        self.assertTrue(public_lines, "Basic user should see lines of public bill.")
         self.assertFalse(
             restricted_lines,
-            "Basic user should not see lines of restricted move.",
+            "Basic user should not see lines of restricted bill.",
         )
         self.assertFalse(
             mixed_lines,
-            "Basic user should not see lines of mixed restricted move.",
+            "Basic user should not see lines of bill using restricted account.",
         )
 
     def test_management_user_can_see_all_move_lines(self):
         Line_mgmt = self.env["account.move.line"].with_user(self.user_management)
-        for move in (self.move_public, self.move_restricted, self.move_mixed):
-            lines = Line_mgmt.search([("move_id", "=", move.id)])
+        for bill in (self.bill_public, self.bill_restricted, self.bill_mixed):
+            lines = Line_mgmt.search([("move_id", "=", bill.id)])
             self.assertTrue(
-                lines,
-                "Management user should see lines of move %s." % move.id,
+                lines, f"Management user should see lines of bill {bill.id}."
             )
+
+    def test_basic_user_duplicate_ref_does_not_leak(self):
+        """A basic user creating a bill that duplicates a restricted bill
+        must not see the restricted bill exposed via `duplicated_ref_ids`."""
+        bill = self._create_bill(
+            [(self.account_public, 200)],
+            self.ref_restricted,
+            user=self.user_basic,
+        )
+        self.assertFalse(
+            bill.duplicated_ref_ids,
+            "Restricted duplicate must not be exposed via duplicated_ref_ids.",
+        )
+
+    def test_management_user_sees_duplicate_directly(self):
+        """A user who can read the restricted bill sees it via
+        `duplicated_ref_ids`."""
+        bill = self._create_bill(
+            [(self.account_public, 200)],
+            self.ref_restricted,
+            user=self.user_management,
+        )
+        self.assertEqual(
+            bill.duplicated_ref_ids,
+            self.bill_restricted,
+            "Management user should see the restricted bill as a duplicate.",
+        )

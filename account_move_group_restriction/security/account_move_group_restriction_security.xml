@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
+<odoo noupdate="1">
     <record id="group_restricted_account_management" model="res.groups">
-        <field name="name">Accounting / View Restricted Accounts</field>
-        <field name="category_id" ref="base.module_category_accounting_and_finance" />
+        <field name="name">View Restricted Accounts</field>
         <field
             name="implied_ids"
             eval="[Command.link(ref('account.group_account_user'))]"
@@ -15,7 +14,7 @@
         <field name="domain_force">
             ['|',
                 ('move_id.account_security_group_ids', '=', False),
-                ('move_id.account_security_group_ids', 'in', user.groups_id.ids)
+                ('move_id.account_security_group_ids', 'in', user.all_group_ids.ids)
             ]
         </field>
         <field name="perm_read" eval="True" />
@@ -30,7 +29,7 @@
         <field name="domain_force">
             ['|',
                 ('account_security_group_ids', '=', False),
-                ('account_security_group_ids', 'in', user.groups_id.ids)
+                ('account_security_group_ids', 'in', user.all_group_ids.ids)
             ]
         </field>
         <field name="perm_read" eval="True" />
