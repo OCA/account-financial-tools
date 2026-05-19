@@ -8,10 +8,7 @@
         />
         <field name="arch" type="xml">
             <field name="value_residual" position="after">
-                <field
-                    name="low_value"
-                    invisible="not low_value"
-                />
+                <field name="low_value" invisible="not low_value" />
             </field>
         </field>
     </record>
