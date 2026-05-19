@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="account_asset_transfer_view_form" model="ir.ui.view">
         <field name="name">account.asset.transfer.form</field>
         <field name="model">account.asset.transfer</field>
@@ -95,5 +94,4 @@ if records:
     action = records.transfer()
         </field>
     </record>
-
 </odoo>
