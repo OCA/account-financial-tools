@@ -67,8 +67,8 @@ class AccountAsset(models.Model):
         self.ensure_one()
         moves = self.account_move_line_ids.mapped("move_id")
         assets = self.env["account.asset"]
-        asset_from = self._context.get("asset_from")
-        asset_to = self._context.get("asset_to")
+        asset_from = self.env.context.get("asset_from")
+        asset_to = self.env.context.get("asset_to")
         for move in moves:
             # Source Assets, we check from move that create this asset
             if (
@@ -100,6 +100,6 @@ class AccountAsset(models.Model):
             "res_model": "account.asset",
             "view_id": False,
             "type": "ir.actions.act_window",
-            "context": self._context,
+            "context": self.env.context,
             "domain": [("id", "in", assets.ids)],
         }
