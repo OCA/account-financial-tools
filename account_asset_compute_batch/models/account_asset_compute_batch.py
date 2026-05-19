@@ -167,9 +167,10 @@ class AssetComputeBatch(models.Model):
                 exc_info()[0]
                 tb = "".join(format_exception(*exc_info()))
                 batch_ref = ", ".join(batches.mapped("name"))
-                error_msg = self.env._(
+                msg = self.env._(
                     "Error while processing batches %(batch_ref)s: \n\n%(tb)s"
-                ) % {"batch_ref": batch_ref, "tb": tb}
+                )
+                error_msg = msg % {"batch_ref": batch_ref, "tb": tb}
                 _logger.error("%s, %s", self._name, error_msg)
 
 

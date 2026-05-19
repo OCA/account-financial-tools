@@ -21,10 +21,7 @@
                             invisible="not use_batch"
                             required="use_batch"
                         />
-                        <field
-                            name="delay_compute"
-                            invisible="not use_batch"
-                        />
+                        <field name="delay_compute" invisible="not use_batch" />
                     </group>
                     <group>
                         <field
