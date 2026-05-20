@@ -398,8 +398,7 @@ class AccountAsset(models.Model):
         if self.depreciation_line_ids.filtered("move_id"):
             raise UserError(
                 self.env._(
-                    "You cannot change the profile of an asset "
-                    "with accounting entries."
+                    "You cannot change the profile of an asset with accounting entries."
                 )
             )
 
@@ -906,9 +905,8 @@ class AccountAsset(models.Model):
             else:
                 return year_amount_degressive
         else:
-            raise UserError(
-                self.env._("Illegal value %s in asset.method.") % self.method
-            )
+            msg = self.env._("Illegal value %s in asset.method.")
+            raise UserError(msg % self.method)
 
     def _compute_line_dates(self, table, start_date, stop_date):
         """
@@ -1212,12 +1210,14 @@ class AccountAsset(models.Model):
                 asset_ref = depreciation.asset_id.name
                 if depreciation.asset_id.code:
                     asset_ref = f"[{depreciation.asset_id.code}] {asset_ref}"
-                error_log += self.env._(
-                    "\nError while processing asset '{ref}': {exception}"
-                ).format(ref=asset_ref, exception=str(e))
-                error_msg = self.env._(
-                    "Error while processing asset '{ref}': \n\n{tb}"
-                ).format(ref=asset_ref, tb=tb)
+                msg_log = self.env._(
+                    "\nError while processing asset '%(ref)s': %(exception)s"
+                )
+                error_log += msg_log % {"ref": asset_ref, "exception": str(e)}
+                msg_err = self.env._(
+                    "Error while processing asset '%(ref)s': \n\n%(tb)s"
+                )
+                error_msg = msg_err % {"ref": asset_ref, "tb": tb}
                 _logger.error("%s, %s", self._name, error_msg)
 
         if check_triggers and recomputes:

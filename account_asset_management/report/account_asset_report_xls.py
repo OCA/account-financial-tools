@@ -394,12 +394,11 @@ class AssetReportXlsx(models.AbstractModel):
                 children = children.sorted(lambda r: r.code or r.name)
                 for child in children:
                     if child in groups:
-                        raise UserError(
-                            self.env._(
-                                "Inconsistent reporting structure."
-                                "\nPlease correct Asset Group '{group}' (id {id})"
-                            ).format(group=child.name, id=child.id)
+                        msg = self.env._(
+                            "Inconsistent reporting structure."
+                            "\nPlease correct Asset Group '%(group)s' (id %(id)s)"
                         )
+                        raise UserError(msg % {"group": child.name, "id": child.id})
                     groups.extend(_child_get(child))
                 return groups
 
@@ -537,13 +536,11 @@ class AssetReportXlsx(models.AbstractModel):
 
         wl = ws_params["wanted_list"]
         if "account" not in wl:
-            raise UserError(
-                self.env._(
-                    "The 'account' field is a mandatory entry of the "
-                    "'_xls_%s_fields' list !"
-                )
-                % report
+            msg = self.env._(
+                "The 'account' field is a mandatory entry of the "
+                "'_xls_%s_fields' list !"
             )
+            raise UserError(msg % report)
 
         self._set_column_width(ws, ws_params)
 
