@@ -50,8 +50,8 @@ class AssetAssetReport(models.Model):
     )
 
     def init(self):
-        tools.drop_view_if_exists(self._cr, "account_asset_report")
-        self._cr.execute(
+        tools.drop_view_if_exists(self.env.cr, "account_asset_report")
+        self.env.cr.execute(
             """
             CREATE OR REPLACE VIEW account_asset_report AS (
                 select

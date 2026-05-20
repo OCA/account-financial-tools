@@ -195,7 +195,8 @@ class AccountAssetLine(models.Model):
                         )
         return super().write(vals)
 
-    def unlink(self):
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_restricted(self):
         for dl in self:
             if dl.type == "create" and dl.amount:
                 raise UserError(
@@ -210,6 +211,9 @@ class AccountAssetLine(models.Model):
                         "an associated accounting entry."
                     )
                 )
+
+    def unlink(self):
+        for dl in self:
             previous = dl.previous_id
             next_line = dl.asset_id.depreciation_line_ids.filtered(
                 lambda line, dl=dl: line.previous_id == dl and line not in self
@@ -310,7 +314,7 @@ class AccountAssetLine(models.Model):
     def unlink_move(self):
         for line in self:
             if line.asset_id.profile_id.allow_reversal:
-                context = dict(self._context or {})
+                context = dict(self.env.context)
                 context.update(
                     {
                         "active_model": self._name,

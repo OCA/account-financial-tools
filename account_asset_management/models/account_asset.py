@@ -456,7 +456,8 @@ class AccountAsset(models.Model):
             if self.env.context.get("create_asset_from_move_line"):
                 asset_line.move_id = self.env.context["move_id"]
 
-    def unlink(self):
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_restricted_asset(self):
         for asset in self:
             if asset.state != "draft":
                 raise UserError(
@@ -471,6 +472,8 @@ class AccountAsset(models.Model):
                         "posted depreciation lines."
                     )
                 )
+
+    def unlink(self):
         # update accounting entries linked to lines of type 'create'
         amls = self.with_context(allow_asset_removal=True).mapped(
             "account_move_line_ids"

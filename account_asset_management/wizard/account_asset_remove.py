@@ -39,28 +39,24 @@ class AccountAssetRemove(models.TransientModel):
     account_sale_id = fields.Many2one(
         comodel_name="account.account",
         string="Asset Sale Account",
-        domain=[("deprecated", "=", False)],
         check_company=True,
         default=lambda self: self._default_account_sale_id(),
     )
     account_plus_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Plus-Value Account",
-        domain=[("deprecated", "=", False)],
         check_company=True,
         default=lambda self: self._default_account_plus_value_id(),
     )
     account_min_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Min-Value Account",
-        domain=[("deprecated", "=", False)],
         check_company=True,
         default=lambda self: self._default_account_min_value_id(),
     )
     account_residual_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Residual Value Account",
-        domain=[("deprecated", "=", False)],
         check_company=True,
         default=lambda self: self._default_account_residual_value_id(),
     )
@@ -188,9 +184,7 @@ class AccountAssetRemove(models.TransientModel):
 
         if self.date_remove < last_date:
             raise UserError(
-                self.env._(
-                    "The removal date must be after " "the last depreciation date."
-                )
+                self.env._("The removal date must be after the last depreciation date.")
             )
 
         line_name = asset._get_depreciation_entry_name(len(dlines) + 1)

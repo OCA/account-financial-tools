@@ -43,7 +43,6 @@
                     name="only_active"
                     domain="[('asset_id.active', '=', True)]"
                 />
-                <separator />
                 <filter
                     string="Posted"
                     name="posted"
@@ -58,7 +57,7 @@
                     filter_domain="[('partner_id','child_of', self)]"
                 />
                 <field name="company_id" groups="base.group_multi_company" />
-                <group expand="1" string="Group By">
+                <group>
                     <filter
                         string="Asset"
                         name="asset"
@@ -75,7 +74,6 @@
                         context="{'group_by':'company_id'}"
                         groups="base.group_multi_company"
                     />
-                    <separator />
                     <filter
                         string="Purchase Month"
                         name="purchase_month"
@@ -99,7 +97,7 @@
         <field name="search_view_id" ref="view_account_asset_report_search" />
         <field name="context">{'search_default_only_active': 1}</field>
         <field name="help" type="html">
-          <p>
+            <p>
             From this report, you can have an overview on all depreciations. The
             search bar can also be used to personalize your assets depreciation reporting.
           </p>
