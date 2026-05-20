@@ -21,6 +21,9 @@
         "views/res_partner.xml",
         "views/account_loan_lines_view.xml",
     ],
+    "demo": [
+        "demo/loan_demo.xml",
+    ],
     "installable": True,
     "maintainers": ["etobella"],
     "external_dependencies": {
