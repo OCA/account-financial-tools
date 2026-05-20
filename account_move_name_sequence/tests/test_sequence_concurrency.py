@@ -1,4 +1,6 @@
+import faulthandler
 import logging
+import sys
 import threading
 import time
 from unittest.mock import patch
@@ -11,6 +13,144 @@ from odoo.modules.registry import DummyRLock, Registry
 from odoo.tests import Form, TransactionCase, tagged
 
 _logger = logging.getLogger(__name__)
+
+
+def _emit_diag(label, kind, payload):
+    """Write a diagnostic line directly to stderr.
+
+    Goes around the logging system so CI log filters / loggers can't
+    swallow the output — every line is prefixed with a stable marker
+    grepable in the CI build log.
+    """
+    sys.stderr.write(f"[CONCURRENCY-DIAG][{label}][{kind}] {payload}\n")
+    sys.stderr.flush()
+
+
+def _dump_dirty_state(label, envs):
+    """Dump per-env dirty field / id state.
+
+    The cache lives in env.transaction; reading it from another thread is
+    safe because it's just in-process dict/set data and we're only
+    inspecting, not mutating it.
+    """
+    for env_name, env in envs:
+        try:
+            dirty = env.transaction.field_dirty
+        except Exception as exc:
+            _emit_diag(label, "dirty_failed", f"{env_name}: {exc}")
+            continue
+        if not dirty:
+            _emit_diag(label, "dirty_state", f"{env_name}: <empty>")
+            continue
+        for field, ids in dirty.items():
+            _emit_diag(
+                label,
+                "dirty_state",
+                f"{env_name}: {field.model_name}.{field.name} ids={list(ids)}",
+            )
+
+
+def _dump_concurrency_diagnostics(registry, label, envs=()):
+    """Snapshot PG activity + lock state and dump all Python thread stacks.
+
+    Called from a watchdog Timer thread when a concurrency test is taking
+    too long to complete — gives CI logs enough state to pinpoint who is
+    waiting on whom when there's no SQL exception to point at.
+
+    Uses a *direct* psycopg2 connection so it can't deadlock on Odoo's
+    own connection pool / registry locks.
+    """
+    _emit_diag(label, "begin", "=" * 40)
+    _dump_dirty_state(label, envs)
+    conn = None
+    try:
+        from odoo import sql_db
+
+        conn_info = sql_db.connection_info_for(registry.db_name)[1]
+        conn = psycopg2.connect(connect_timeout=5, **conn_info)
+        conn.autocommit = True
+        cr = conn.cursor()
+        cr.execute(
+            """
+            SELECT pid, state, wait_event_type, wait_event,
+                   xact_start, query_start, LEFT(query, 400) AS query
+            FROM pg_stat_activity
+            WHERE datname = current_database() AND pid != pg_backend_pid()
+            ORDER BY pid
+            """
+        )
+        for row in cr.fetchall():
+            _emit_diag(label, "pg_stat_activity", row)
+        cr.execute(
+            """
+            SELECT pid, locktype, relation::regclass::text AS relation,
+                   mode, granted, transactionid::text AS xid,
+                   virtualtransaction AS vxid
+            FROM pg_locks
+            WHERE database = (
+                SELECT oid FROM pg_database WHERE datname = current_database()
+            ) AND locktype <> 'virtualxid'
+            ORDER BY granted, pid, locktype
+            """
+        )
+        for row in cr.fetchall():
+            _emit_diag(label, "pg_locks", row)
+        # blocked / blocker pairs — the most actionable single query
+        cr.execute(
+            """
+            SELECT blocked.pid AS blocked_pid,
+                   blocked.query AS blocked_query,
+                   blocking.pid AS blocking_pid,
+                   blocking.query AS blocking_query,
+                   blocking.state AS blocking_state,
+                   blocking.xact_start AS blocking_xact_start
+            FROM pg_stat_activity AS blocked
+            JOIN pg_stat_activity AS blocking
+              ON blocking.pid = ANY(pg_blocking_pids(blocked.pid))
+            WHERE blocked.datname = current_database()
+            """
+        )
+        for row in cr.fetchall():
+            _emit_diag(label, "blocking_pair", row)
+        # Cancel any backend belonging to one of the test envs that is
+        # blocked waiting on a lock — this unblocks the hung test by
+        # letting psycopg raise QueryCanceledError on the stuck UPDATE,
+        # so the CI run fails with a real exception instead of hanging
+        # until the job-level timeout kills the whole worker.
+        env_pids = {}
+        for env_name, env in envs:
+            try:
+                env_pids[env.cr._cnx.info.backend_pid] = env_name
+            except Exception:
+                continue
+        cr.execute(
+            """
+            SELECT pid, state, wait_event_type
+            FROM pg_stat_activity
+            WHERE datname = current_database()
+              AND state = 'active'
+              AND wait_event_type = 'Lock'
+            """
+        )
+        for pid, state, wait_event_type in cr.fetchall():
+            if pid in env_pids:
+                _emit_diag(
+                    label,
+                    "cancelling",
+                    f"{env_pids[pid]} pid={pid} state={state} wait={wait_event_type}",
+                )
+                cr.execute("SELECT pg_cancel_backend(%s)", (pid,))
+    except Exception as exc:
+        _emit_diag(label, "pg_query_failed", exc)
+    finally:
+        if conn is not None:
+            try:
+                conn.close()
+            except Exception as close_exc:
+                _emit_diag(label, "diag_conn_close_failed", close_exc)
+    _emit_diag(label, "python_stacks", "(faulthandler output follows)")
+    faulthandler.dump_traceback(file=sys.stderr, all_threads=True)
+    _emit_diag(label, "end", "=" * 40)
 
 
 class ThreadRaiseJoin(threading.Thread):
@@ -315,7 +455,58 @@ class TestSequenceConcurrency(TransactionCase):
         # Edit something in "last move"
         invoice.write({"write_uid": self.env0.uid})
         self.env0.flush_all()
-        self._create_invoice_form(self.env1)
+        # CI hang debugger: if env1's create-and-post takes too long (test
+        # has a 10s statement_timeout, so anything past ~20s is a Python-
+        # level wait), snapshot PG activity/locks and dump all thread
+        # stacks so the failing build has actionable state in its log.
+        # Faulthandler additionally prints stacks at the deadline.
+        watchdog_label = "test_sequence_concurrency_20_editing_last_invoice"
+        envs = (("env0", self.env0), ("env1", self.env1))
+        _emit_diag(watchdog_label, "pre_env1_dirty", "before env1 invoice creation")
+        _dump_dirty_state(watchdog_label, envs)
+        # Patch _flush so every time it pops a dirty set we log it,
+        # tagged by cursor identity. That lets us see what env1's _post
+        # actually wants to write before the SQL goes out.
+        from odoo.orm import models as _orm_models
+
+        cr_to_label = {id(env.cr): name for name, env in envs}
+        original_flush = _orm_models.BaseModel._flush
+
+        def _flush_traced(self):
+            cr_label = cr_to_label.get(id(self.env.cr), "other")
+            dirty = self.env._field_dirty
+            entries = [
+                f"{field.model_name}.{field.name} ids={list(ids)[:10]}"
+                for field, ids in dirty.items()
+                if ids
+            ]
+            if entries:
+                _emit_diag(
+                    watchdog_label,
+                    "flush_dirty",
+                    f"cr={cr_label} | " + " | ".join(entries),
+                )
+            return original_flush(self)
+
+        flush_patcher = patch.object(_orm_models.BaseModel, "_flush", _flush_traced)
+        flush_patcher.start()
+        faulthandler.dump_traceback_later(
+            timeout=30, repeat=True, file=sys.stderr, exit=False
+        )
+        watchdog = threading.Timer(
+            25.0,
+            _dump_concurrency_diagnostics,
+            args=(self.registry, watchdog_label),
+            kwargs={"envs": envs},
+        )
+        watchdog.daemon = True
+        watchdog.start()
+        try:
+            self._create_invoice_form(self.env1)
+        finally:
+            watchdog.cancel()
+            faulthandler.cancel_dump_traceback_later()
+            flush_patcher.stop()
         self._commit_crs(self.env0, self.env1)
 
     def test_sequence_concurrency_30_editing_last_payment(self):

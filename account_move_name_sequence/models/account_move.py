@@ -92,8 +92,6 @@ class AccountMove(models.Model):
             move.name = name
         # Force compute of sequence_prefix and sequence_number
         self._compute_split_sequence()
-        # Force compute of fields depending on name
-        self._inverse_name()
 
     # We must by-pass this constraint of sequence.mixin
     def _constrains_date_sequence(self):
