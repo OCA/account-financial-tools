@@ -29,3 +29,25 @@ class AccountAccount(models.Model):
                         "must be equal to the account."
                     )
                 )
+
+    def _get_asset_profile_for_company(self, company=None):
+        """Return the asset profile for ``company``, walking ``parent_id`` if unset.
+
+        ``asset_profile_id`` is ``company_dependent``: Odoo's SQL fallback chain
+        is ``COALESCE(col->company_id, ir.default)`` — it does *not* walk
+        ``res.company.parent_id``. In an Odoo 18+ branches setup, a child
+        company with no own entry on a shared account would resolve to
+        ``ir.default`` instead of inheriting the parent's choice. This helper
+        restores the expected inheritance for branch hierarchies.
+        """
+        self.ensure_one()
+        company = company or self.env.company
+        seen = set()
+        current = company
+        while current and current.id not in seen:
+            seen.add(current.id)
+            profile = self.with_company(current).asset_profile_id
+            if profile:
+                return profile
+            current = current.parent_id
+        return self.env["account.asset.profile"]

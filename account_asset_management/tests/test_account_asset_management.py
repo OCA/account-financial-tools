@@ -981,3 +981,77 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_branch_company_inherits_parent_asset_profile(self):
+        """Child company inherits parent's asset_profile_id on a shared account.
+
+        Regression test for pedrobaeza's review concern on
+        OCA/account-financial-tools#2160: company_dependent SQL fallback uses
+        ir.default, not parent_id walking, so without the
+        _get_asset_profile_for_company helper a child company with no own
+        entry would see no profile on a shared account where the parent had
+        one set.
+        """
+        parent = self.company_data["company"]
+        child = self.env["res.company"].create(
+            {"name": "Branch Co", "parent_id": parent.id}
+        )
+        profile = self.ict3Y
+        account = profile.account_asset_id
+
+        # Parent gets the profile on the account (already True from fixtures;
+        # write again under explicit company context for clarity).
+        account.with_company(parent).asset_profile_id = profile
+
+        # Sanity: parent's direct read returns the profile.
+        self.assertEqual(account.with_company(parent).asset_profile_id, profile)
+        # Child's direct read is empty — the bug condition pedrobaeza flagged.
+        self.assertFalse(account.with_company(child).asset_profile_id)
+        # Helper walks parent_id and returns the inherited profile.
+        self.assertEqual(account._get_asset_profile_for_company(child), profile)
+        # The move-line compute uses the helper: a draft miscellaneous
+        # entry in the child company picks up the inherited profile when
+        # the asset account is set on a line. Build a misc move directly
+        # (no vendor bill validation noise) to isolate the compute path.
+        misc_journal = self.env["account.journal"].search(
+            [("type", "=", "general"), ("company_id", "=", child.id)],
+            limit=1,
+        )
+        if not misc_journal:
+            misc_journal = (
+                self.env["account.journal"]
+                .with_company(child)
+                .create(
+                    {
+                        "name": "Misc Branch",
+                        "code": "MISCB",
+                        "type": "general",
+                        "company_id": child.id,
+                    }
+                )
+            )
+        misc_move = (
+            self.env["account.move"]
+            .with_company(child)
+            .with_context(check_move_validity=False)
+            .create(
+                {
+                    "move_type": "entry",
+                    "company_id": child.id,
+                    "journal_id": misc_journal.id,
+                    "date": fields.Date.context_today(self.env.user),
+                    "line_ids": [
+                        Command.create(
+                            {
+                                "name": "branch asset line",
+                                "account_id": account.id,
+                                "debit": 1000.0,
+                                "credit": 0.0,
+                            }
+                        ),
+                    ],
+                }
+            )
+        )
+        aml = misc_move.line_ids.filtered(lambda line: line.account_id == account)
+        self.assertEqual(aml.asset_profile_id, profile)
