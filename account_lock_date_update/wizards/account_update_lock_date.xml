@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_update_lock_date_form_view" model="ir.ui.view">
+        <field
+            name="name"
+        >account.update.lock_date.form (in account_lock_date_update)</field>
+        <field name="model">account.update.lock_date</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group id="soft_lock_dates" string="Reversible Lock Dates">
+                        <field name="company_id" invisible="1" />
+                        <field name="sale_lock_date" options="{'warn_future': true}" />
+                        <field
+                            name="purchase_lock_date"
+                            options="{'warn_future': true}"
+                        />
+                        <field name="tax_lock_date" options="{'warn_future': true}" />
+                        <field
+                            name="fiscalyear_lock_date"
+                            options="{'warn_future': true}"
+                        />
+                    </group>
+                    <group id="hard_lock_dates" string="Irreversible Lock Date">
+                        <field name="hard_lock_date" options="{'warn_future': true}" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        string="Update"
+                        name="execute"
+                        type="object"
+                        class="btn-primary"
+                        groups="account.group_account_manager"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="account_update_lock_date_act_window" model="ir.actions.act_window">
+        <field name="name">Lock Dates</field>
+        <field name="res_model">account.update.lock_date</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="account_update_lock_date_menu" model="ir.ui.menu">
+        <field name="name">Lock Dates</field>
+        <field name="parent_id" ref="account.menu_finance_entries" />
+        <field name="action" ref="account_update_lock_date_act_window" />
+        <field name="sequence" eval="70" />
+    </record>
+</odoo>
