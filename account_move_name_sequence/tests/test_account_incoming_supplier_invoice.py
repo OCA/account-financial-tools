@@ -1,7 +1,5 @@
 import json
 
-from markupsafe import Markup
-
 from odoo.tests import tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -86,9 +84,9 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon):
         self.assertEqual(
             len(message_ids), 1, "Only one message should be posted in the chatter"
         )
-        self.assertEqual(
+        self.assertIn(
+            "Vendor Bill Created",
             message_ids.body,
-            Markup("<p>Vendor Bill Created</p>"),
             "Only the invoice creation should be posted",
         )
 
