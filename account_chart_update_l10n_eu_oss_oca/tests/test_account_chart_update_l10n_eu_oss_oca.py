@@ -27,8 +27,8 @@ class TestOSSCoA(AccountTestInvoicingCommon):
                     (4, cls.company.id),
                 ],
                 "company_id": cls.company.id,
-                "groups_id": [
-                    (6, 0, cls.env.user.groups_id.ids),
+                "group_ids": [
+                    (6, 0, cls.env.user.group_ids.ids),
                     (4, cls.env.ref("account.group_account_user").id),
                     (4, cls.env.ref("account.group_account_invoice").id),
                     (4, cls.env.ref("base.group_multi_company").id),
