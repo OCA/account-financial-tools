@@ -78,3 +78,7 @@ class TestAssetLowValue(AccountTestInvoicingCommon):
         self.assertIn(asset, low_value_assets)
         normal_assets = self.asset_model.search([("low_value", "!=", True)])
         self.assertNotIn(asset, normal_assets)
+        non_low_assets = self.asset_model.search([("low_value", "=", False)])
+        self.assertNotIn(asset, non_low_assets)
+        mixed_assets = self.asset_model.search([("low_value", "!=", False)])
+        self.assertIn(asset, mixed_assets)

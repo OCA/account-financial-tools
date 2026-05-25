@@ -29,17 +29,23 @@ class AccountAsset(models.Model):
 
     @api.model
     def _search_low_value(self, operator, value):
-        if operator == "=":
+        if operator not in ("=", "!="):
+            raise NotImplementedError(
+                self.env._("Operator %s not supported for low_value search.", operator)
+            )
+        # XOR: ("=", True) and ("!=", False) → match low-value assets;
+        # ("=", False) and ("!=", True) → match non-low-value assets.
+        match_low = bool(value) == (operator == "=")
+        if match_low:
             return [
                 ("profile_id.account_asset_id.account_type", "=", "expense"),
                 ("method_number", "=", 0),
             ]
-        if operator == "!=":
-            return [
-                "|",
-                ("profile_id.account_asset_id.account_type", "!=", "expense"),
-                ("method_number", "!=", 0),
-            ]
+        return [
+            "|",
+            ("profile_id.account_asset_id.account_type", "!=", "expense"),
+            ("method_number", "!=", 0),
+        ]
 
     def _compute_depreciation(self):
         res = super()._compute_depreciation()
