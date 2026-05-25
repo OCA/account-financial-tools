@@ -4,8 +4,11 @@
 import time
 
 from freezegun import freeze_time
+from psycopg2.errors import UniqueViolation
 
+from odoo.exceptions import ValidationError
 from odoo.tests import Form, tagged
+from odoo.tools.misc import mute_logger
 
 from odoo.addons.account_asset_management.tests.test_account_asset_management import (
     TestAssetManagement,
@@ -158,3 +161,33 @@ class TestAssetComputeBatch(TestAssetManagement):
         batch._autocompute_draft_batches()
         self.assertEqual(batch.state, "computed")
         self.assertEqual(batch.depre_amount, 2500)
+
+    def test_05_name_unique_constraint(self):
+        """The models.Constraint on (name) rejects duplicates.
+
+        Regression test for the 19.0 migration that replaced _sql_constraints
+        with the models.Constraint class attribute API.
+        """
+        Batch = self.env["account.asset.compute.batch"]
+        Batch.create({"name": "Batch Unique 2026", "date_end": "2026-12-31"})
+        with mute_logger("odoo.sql_db"), self.assertRaises(UniqueViolation):
+            with self.env.cr.savepoint():
+                Batch.create({"name": "Batch Unique 2026", "date_end": "2026-12-31"})
+
+    def test_06_unlink_guard_non_draft(self):
+        """@api.ondelete guard: only draft batches can be unlinked.
+
+        Regression test for the 19.0 migration that replaced an `unlink()`
+        override with an `@api.ondelete(at_uninstall=False)` constraint.
+        """
+        Batch = self.env["account.asset.compute.batch"]
+        draft_batch = Batch.create({"name": "Draft Batch", "date_end": "2026-12-31"})
+        non_draft_batch = Batch.create(
+            {"name": "Computed Batch", "date_end": "2026-12-31"}
+        )
+        non_draft_batch.state = "computed"
+        # Draft batch unlinks cleanly.
+        draft_batch.unlink()
+        # Non-draft batch raises.
+        with self.assertRaises(ValidationError):
+            non_draft_batch.unlink()
