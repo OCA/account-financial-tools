@@ -40,9 +40,9 @@ class AccountMove(models.Model):
         raise UserError(
             self.env._(
                 "Chronology conflict: A conflicting draft invoice dated before "
-                "%s exists, please validate it first."
+                "%s exists, please validate it first.",
+                format_date(self.env, self.invoice_date),
             )
-            % format_date(self.env, self.invoice_date)
         )
 
     def _get_newer_conflicting_invoices_domain(self):
@@ -59,9 +59,9 @@ class AccountMove(models.Model):
         raise UserError(
             self.env._(
                 "Chronology conflict: A conflicting validated invoice dated after "
-                "%s exists."
+                "%s exists.",
+                format_date(self.env, self.invoice_date),
             )
-            % format_date(self.env, self.invoice_date)
         )
 
     def _get_sequence_order_conflicting_invoices_domain(self):
@@ -83,12 +83,10 @@ class AccountMove(models.Model):
         self.ensure_one()
         raise UserError(
             self.env._(
-                "Chronology conflict: An invoice with a higher number %s"
-                " dated before %s exists."
-            )
-            % (
-                self._get_last_sequence(),
-                format_date(self.env, self.invoice_date),
+                "Chronology conflict: An invoice with a higher number %(highest_name)s"
+                " dated before %(date_invoice)s exists.",
+                highest_name=self._get_last_sequence(),
+                date_invoice=format_date(self.env, self.invoice_date),
             )
         )
 
@@ -153,11 +151,12 @@ class AccountMove(models.Model):
         else:
             time = "after"
         raise UserError(
-            self.env._("Chronology conflict: Invoice %s cannot be %s invoice %s.")
-            % (
-                self.name,
-                time,
-                after_inv.name if after_inv else before_inv.name,
+            self.env._(
+                "Chronology conflict: Invoice %(name)s cannot be %(time)s "
+                "invoice %(inv_name)s.",
+                name=self.name,
+                time=time,
+                inv_name=after_inv.name if after_inv else before_inv.name,
             )
         )
 
