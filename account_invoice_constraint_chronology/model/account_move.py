@@ -4,7 +4,7 @@
 
 from odoo import _, models
 from odoo.exceptions import UserError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools.misc import format_date
 
 
@@ -23,7 +23,7 @@ class AccountMove(models.Model):
 
     def _get_older_conflicting_invoices_domain(self):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 self._get_conflicting_invoices_domain(),
                 [
@@ -45,7 +45,7 @@ class AccountMove(models.Model):
 
     def _get_newer_conflicting_invoices_domain(self):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 self._get_conflicting_invoices_domain(),
                 [("state", "=", "posted"), ("invoice_date", ">", self.invoice_date)],
@@ -68,7 +68,7 @@ class AccountMove(models.Model):
         last_sequence = self._get_last_sequence()
         if not last_sequence or self.name > last_sequence:
             return expression.FALSE_DOMAIN
-        return expression.AND(
+        return Domain.AND(
             [
                 [("name", "=", last_sequence)],
                 self._get_conflicting_invoices_domain(),
@@ -89,7 +89,7 @@ class AccountMove(models.Model):
         )
 
     def _conflicting_inv_after_sequence_before_inv_date_domain(self):
-        return expression.AND(
+        return Domain.AND(
             [
                 (
                     ("name", ">", self.name),
@@ -100,7 +100,7 @@ class AccountMove(models.Model):
         )
 
     def _conflicting_inv_before_sequence_after_inv_date_domain(self):
-        return expression.AND(
+        return Domain.AND(
             [
                 (
                     ("name", "<", self.name),
@@ -112,10 +112,10 @@ class AccountMove(models.Model):
 
     def _get_sequence_order_conflicting_previously_validated(self):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 self._get_conflicting_invoices_domain(),
-                expression.OR(
+                Domain.OR(
                     [
                         self._conflicting_inv_after_sequence_before_inv_date_domain(),
                         self._conflicting_inv_before_sequence_after_inv_date_domain(),
@@ -127,7 +127,7 @@ class AccountMove(models.Model):
     def _raise_sequence_order_conflicting_previously_validated(self):
         self.ensure_one()
         before_inv = self.search(
-            expression.AND(
+            Domain.AND(
                 [
                     self._get_conflicting_invoices_domain(),
                     self._conflicting_inv_after_sequence_before_inv_date_domain(),
@@ -136,7 +136,7 @@ class AccountMove(models.Model):
             limit=1,
         )
         after_inv = self.search(
-            expression.AND(
+            Domain.AND(
                 [
                     self._get_conflicting_invoices_domain(),
                     self._conflicting_inv_before_sequence_after_inv_date_domain(),
