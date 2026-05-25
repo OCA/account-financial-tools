@@ -2,9 +2,10 @@
 # Copyright 2021 CorporateHub (https://corporatehub.eu)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
 from odoo.fields import Domain
+from odoo.osv import expression
 from odoo.tools.misc import format_date
 
 
@@ -37,10 +38,11 @@ class AccountMove(models.Model):
     def _raise_older_conflicting_invoices(self):
         self.ensure_one()
         raise UserError(
-            _(
+            self.env._(
                 "Chronology conflict: A conflicting draft invoice dated before "
-                "{date_invoice} exists, please validate it first."
-            ).format(date_invoice=format_date(self.env, self.invoice_date))
+                "%s exists, please validate it first."
+            )
+            % format_date(self.env, self.invoice_date)
         )
 
     def _get_newer_conflicting_invoices_domain(self):
@@ -55,10 +57,11 @@ class AccountMove(models.Model):
     def _raise_newer_conflicting_invoices(self):
         self.ensure_one()
         raise UserError(
-            _(
+            self.env._(
                 "Chronology conflict: A conflicting validated invoice dated after "
-                "{date_invoice} exists."
-            ).format(date_invoice=format_date(self.env, self.invoice_date))
+                "%s exists."
+            )
+            % format_date(self.env, self.invoice_date)
         )
 
     def _get_sequence_order_conflicting_invoices_domain(self):
@@ -79,12 +82,13 @@ class AccountMove(models.Model):
     def _raise_sequence_ordering_conflict(self):
         self.ensure_one()
         raise UserError(
-            _(
-                "Chronology conflict: An invoice with a higher number {highest_name}"
-                " dated before {date_invoice} exists."
-            ).format(
-                highest_name=self._get_last_sequence(),
-                date_invoice=format_date(self.env, self.invoice_date),
+            self.env._(
+                "Chronology conflict: An invoice with a higher number %s"
+                " dated before %s exists."
+            )
+            % (
+                self._get_last_sequence(),
+                format_date(self.env, self.invoice_date),
             )
         )
 
@@ -149,14 +153,11 @@ class AccountMove(models.Model):
         else:
             time = "after"
         raise UserError(
-            _(
-                "Chronology conflict: Invoice {name} cannot be {time} "
-                "invoice {inv_name}."
-            ).format(
-                name=self.name,
-                time=time,
-                inv_name=after_inv.name if after_inv else before_inv.name,
-                date_invoice=format_date(self.env, self.invoice_date),
+            self.env._("Chronology conflict: Invoice %s cannot be %s invoice %s.")
+            % (
+                self.name,
+                time,
+                after_inv.name if after_inv else before_inv.name,
             )
         )
 
