@@ -6,25 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-16 21:35+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-05-26 13:46+0000\n"
+"Last-Translator: CoralNetkia <coral.rodriguez@netkia.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_journal_restrict_mode
 #: model:ir.model.fields,field_description:account_journal_restrict_mode.field_account_journal__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: account_journal_restrict_mode
 #: model:ir.model.fields,field_description:account_journal_restrict_mode.field_account_journal__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_journal_restrict_mode
 #: model:ir.model.fields,help:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
@@ -33,6 +33,10 @@ msgid ""
 "sequence from the entry back to the last hashed entry. The hash can also be "
 "performed on demand by the Secure Entries wizard."
 msgstr ""
+"Si está marcado, cuando se publica un asiento, aplicamos retroactivamente el "
+"hash a todos los movimientos en la secuencia desde el asiento hasta el "
+"último asiento con hash. El hash también puede realizarse bajo demanda "
+"mediante el asistente de Asientos Seguros."
 
 #. module: account_journal_restrict_mode
 #: model:ir.model,name:account_journal_restrict_mode.model_account_journal
@@ -48,7 +52,7 @@ msgstr "El diario %s debe tener Activado el Bloqueo de Asientos."
 #. module: account_journal_restrict_mode
 #: model:ir.model.fields,field_description:account_journal_restrict_mode.field_account_journal__restrict_mode_hash_table
 msgid "Secure Posted Entries with Hash"
-msgstr ""
+msgstr "Asegurar asientos publicados con hash"
 
 #~ msgid ""
 #~ "If ticked, the accounting entry or invoice receives a hash as soon as it "
