@@ -1,10 +1,10 @@
 # Copyright 2023 David Jaen <david.jaen.revert@gmail.com>.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.exceptions import ValidationError
-from odoo.tests.common import BaseCommon, Form
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestAccountMoveBudget(BaseCommon):
+class TestAccountMoveBudget(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
