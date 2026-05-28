@@ -8,7 +8,7 @@
             <field name="statement_line_id" position="after">
                 <field
                     name="asset_profile_id"
-                    domain="[('company_id','=', parent.company_id)]"
+                    domain="[('company_id', 'parent_of', parent.company_id)]"
                 />
                 <field name="asset_id" />
             </field>
