@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-01 09:36+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,23 +15,24 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_move_line_tax_editable
 #: model:ir.model.fields,help:account_move_line_tax_editable.field_account_move_line__tax_line_id
 msgid "Indicates that this journal item is a tax line"
-msgstr ""
+msgstr "Označuje, da gre pri tej postavki za davčno vrstico"
 
 #. module: account_move_line_tax_editable
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__is_tax_editable
 msgid "Is tax data editable?"
-msgstr ""
+msgstr "Se lahko davčne podatke ureja?"
 
 #. module: account_move_line_tax_editable
 #: model:ir.model,name:account_move_line_tax_editable.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Dnevniška postavka"
 
 #. module: account_move_line_tax_editable
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__tax_line_id
 msgid "Originator Tax"
-msgstr ""
+msgstr "Izvorni davek"
