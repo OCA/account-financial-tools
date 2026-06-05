@@ -183,7 +183,7 @@
                                     name="compute_depreciation_board"
                                     string="Compute"
                                     icon="fa-gears"
-                                    invisible="state in ['close', 'removed']"
+                                    invisible="state != 'draft'"
                                 />
                             </div>
                             <field
