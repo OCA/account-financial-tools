@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-25 11:46+0000\n"
-"PO-Revision-Date: 2026-02-01 08:09+0000\n"
+"PO-Revision-Date: 2026-06-24 05:31+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -26,61 +26,63 @@ msgid ""
 "'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or "
 "'')"
 msgstr ""
+"'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or "
+"'')"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Bank Account Number to Credit:</b>"
-msgstr ""
+msgstr "<b>Številka bančnega računa za polog:</b>"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Check Currency:</b>"
-msgstr ""
+msgstr "<b>Valuta čeka:</b>"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Date:</b>"
-msgstr ""
+msgstr "<b>Datum:</b>"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Number of checks:</b>"
-msgstr ""
+msgstr "<b>Št. čekov:</b>"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Total:</b>"
-msgstr ""
+msgstr "<b>Skupaj:</b>"
 
 #. module: account_check_deposit
 #: model:ir.model.constraint,message:account_check_deposit.constraint_account_check_deposit_name_company_unique
 msgid "A check deposit with this reference already exists in this company."
-msgstr ""
+msgstr "Polog čeka s tem sklicem za to družbo že obstaja."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Potrebno ukrepanje"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Aktivnosti"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Dekoracija izjeme"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Stanje aktivnosti"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Ikona tipa aktivnosti"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -90,12 +92,12 @@ msgstr "Znesek"
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Are you sure you want to go back to draft?"
-msgstr ""
+msgstr "Ste prepričani, da želite vrniti v osnutek?"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Št. priponk"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
@@ -140,7 +142,7 @@ msgstr "Čekovni depozit št."
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
 msgid "Check Journal"
-msgstr ""
+msgstr "Dnevnik čekov"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
@@ -193,7 +195,7 @@ msgstr "Dolžnik"
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 msgid "Deposit '%s' has already been credited on the bank account."
-msgstr ""
+msgstr "Polog '%s' je že bil nakazan na bančni račun."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
@@ -221,24 +223,24 @@ msgstr "Osnutek"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Sledilci"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Sledilci (partnerji)"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Font awesome ikona, npr. fa-tasks"
 
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Get All Received Checks"
-msgstr ""
+msgstr "Prikaži vse prejete čeke"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
@@ -248,7 +250,7 @@ msgstr "Združi po"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Vsebuje sporočilo"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__id
@@ -258,27 +260,29 @@ msgstr "ID"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Ikona"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Ikona za prikaz izjem pri aktivnostih."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Če je označeno, nova sporočila zahtevajo vašo pozornost."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
+"Kadar je označeno, pomeni, da je pri nekaterih sporočilih prišlo do napake "
+"pri dostavi."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__in_hand_check_account_id
 msgid "In Hand Check Account"
-msgstr ""
+msgstr "Konto za unovčene čeke"
 
 #. module: account_check_deposit
 #. odoo-python
@@ -288,11 +292,13 @@ msgid ""
 "must configure an Outstanding Receipts Account for the payment method "
 "'Manual (inbound)'."
 msgstr ""
+"V nastavitvah dnevnika '%s' morate na zavihku 'Prejeta plačila' nastaviti "
+"konto za neporavnane prejemke za način plačila 'Ročno (vhodno)'."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Je sledilec"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
@@ -302,12 +308,12 @@ msgstr "Temeljnica"
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Dnevniška postavka"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_uid
 msgid "Last Updated by"
-msgstr "Zadnjič posodobil"
+msgstr "Zadnji posodobil"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_date
@@ -327,23 +333,23 @@ msgstr "Seznam čekov:"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Napaka ob dostavi sporočila"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Sporočila"
 
 #. module: account_check_deposit
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 msgid "Missing 'Internal Transfer' account on the company '%s'."
-msgstr ""
+msgstr "V družbi '%s' manjka konto 'Interni transfer'."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Rok mojih aktivnosti"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__name
@@ -354,27 +360,27 @@ msgstr "Naziv"
 #. odoo-python
 #: code:addons/account_check_deposit/models/account_check_deposit.py:0
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Rok naslednje aktivnosti"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Povzetek naslednje aktivnosti"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Tip naslednje aktivnosti"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Število ukrepov"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_count
@@ -384,22 +390,22 @@ msgstr "Število čekov"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Število napak"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Število sporočil, ki zahtevajo ukrepanje"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Število sporočil, ki niso bila pravilno dostavljena"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Print"
-msgstr ""
+msgstr "Natisni"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
@@ -409,7 +415,7 @@ msgstr "Sklic"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Odgovorni uporabnik"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__state
@@ -424,6 +430,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Status glede na aktivnosti\n"
+"Prekoračeno: rok izvedbe je že prekoračen\n"
+"Danes: Datum aktivnosti je današnji dan\n"
+"Planirano: Bodoče aktivnosti."
 
 #. module: account_check_deposit
 #. odoo-python
@@ -432,6 +442,8 @@ msgid ""
 "The check with amount %(amount)s and reference '%(ref)s' is in currency "
 "%(check_currency)s but the deposit is in currency %(deposit_currency)s."
 msgstr ""
+"Ček z zneskom %(amount)s in sklicem '%(ref)s' je v valuti %(check_currency)"
+"s, vplačilo pa je v valuti %(deposit_currency)s."
 
 #. module: account_check_deposit
 #. odoo-python
@@ -449,6 +461,8 @@ msgid ""
 "There are no received checks in account '%(account)s' in currency "
 "'%(currency)s' that are not already in this check deposit."
 msgstr ""
+"Na kontu '%(account)s' v valuti '%(currency)s' ni prejetih čekov, ki še niso "
+"vključeni v to vplačilo čekov."
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount
@@ -458,22 +472,22 @@ msgstr "Skupni znesek"
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tip izjeme pri aktivnosti na zapisu."
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Validate"
-msgstr "Overi"
+msgstr "Potrdi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Sporočila spletne strani"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Kronologija komunikacij spletne strani"
 
 #~ msgid "Account Check Deposit"
 #~ msgstr "Konto čekovnih depozitov"
