@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2026-05-31 06:46+0000\n"
+"PO-Revision-Date: 2026-06-07 11:37+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
 "tools-8-0/language/sl/)\n"
@@ -919,7 +919,7 @@ msgstr "Postavke"
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__write_uid
 msgid "Last Updated by"
-msgstr "Zadnjič posodobil"
+msgstr "Zadnji posodobil"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_date
