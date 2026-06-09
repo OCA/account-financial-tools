@@ -12,24 +12,24 @@
             <t t-foreach="Object.entries(state.banner)" t-as="cell_entry" t-key="cell_entry[0]">
                 <t t-set="cell_data" t-value="cell_entry[1]"/>
 
-                <t t-set="clickable_style" t-value="cell_data.clickable ? 'cursor: pointer;' : 'cursor: default;'"/>
+                <t t-set="clickable_style" t-value="cell_data.action ? 'cursor: pointer;' : 'cursor: default;'"/>
 
                 <div id="cell_banner_ok"
                      t-if="!cell_data.warn"
-                     t-attf-class="o_arrow_button flex-grow-1 d-flex flex-column p-1 text-center #{cell_data.clickable ? 'o_clickable text-decoration-none' : ''}"
+                     t-attf-class="o_arrow_button flex-grow-1 d-flex flex-column p-1 text-center #{cell_data.action ? 'o_clickable text-decoration-none' : ''}"
                      t-att-data-tooltip="cell_data['tooltip']"
                      t-att-style="clickable_style"
-                     t-on-click="() => cell_data.clickable &amp;&amp; this.env.services.action.doAction(cell_data.action)">
+                     t-on-click="() => cell_data.action &amp;&amp; this.env.services.action.doAction(cell_data.action)">
                     <strong class="mx-2" t-out="cell_data['label']"/>
                     <span t-out="cell_data['value']" class="h2 m-0 text-primary"/>
                 </div>
 
                 <div id="cell_banner_warn"
                      t-if="cell_data.warn"
-                     t-attf-class="o_arrow_button flex-grow-1 d-flex flex-column p-1 text-center alert alert-warning #{cell_data.clickable ? 'o_clickable text-decoration-none' : ''}"
+                     t-attf-class="o_arrow_button flex-grow-1 d-flex flex-column p-1 text-center alert alert-warning #{cell_data.action ? 'o_clickable text-decoration-none' : ''}"
                      t-att-data-tooltip="cell_data['tooltip']"
                      t-att-style="clickable_style"
-                     t-on-click="() => cell_data.clickable &amp;&amp; this.env.services.action.doAction(cell_data.action)">
+                     t-on-click="() => cell_data.action &amp;&amp; this.env.services.action.doAction(cell_data.action)">
                     <strong class="mx-2" t-out="cell_data['label']"/>
                     <span t-out="cell_data['value']" class="h2 m-0 text-primary"/>
                 </div>
