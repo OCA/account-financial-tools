@@ -8,7 +8,6 @@
 # and Odoo would re-create the cells when the module is reloaded
 def create_default_account_dashboard_cells(env):
     vals_list = [
-        {"cell_type": "hard_lock_date", "sequence": 10, "warn": True},
         {"cell_type": "income_fiscalyear", "sequence": 20},
         {"cell_type": "customer_overdue", "sequence": 30},
         {"cell_type": "customer_debt", "sequence": 40},

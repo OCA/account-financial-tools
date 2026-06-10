@@ -28,10 +28,7 @@ class TestAccountDashboardBanner(TransactionCase):
             "customer_overdue",
             "supplier_debt",
             "tax_lock_date",
-            "sale_lock_date",
-            "purchase_lock_date",
             "fiscalyear_lock_date",
-            "hard_lock_date",
         ]:
             if cell_type not in existing_cell_types:
                 to_create_vals.append({"cell_type": cell_type})

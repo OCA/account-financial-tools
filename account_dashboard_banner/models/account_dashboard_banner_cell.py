@@ -28,10 +28,7 @@ class AccountDashboardBannerCell(models.Model):
             ("supplier_debt", "Supplier Debt"),
             # for lock dates, the key matches exactly the field name on res.company
             ("tax_lock_date", "Tax Return Lock Date"),
-            ("sale_lock_date", "Sales Lock Date"),
-            ("purchase_lock_date", "Purchase Lock Date"),
             ("fiscalyear_lock_date", "Global Lock Date"),
-            ("hard_lock_date", "Hard Lock Date"),
         ],
         required=True,
     )
@@ -92,10 +89,7 @@ class AccountDashboardBannerCell(models.Model):
     def _default_warn_lock_date_days(self, cell_type):
         defaultmap = {
             "tax_lock_date": 61,  # 2 months
-            "sale_lock_date": 35,  # 1 month + a few days
-            "purchase_lock_date": 61,
             "fiscalyear_lock_date": 61,  # 2 months
-            "hard_lock_date": 520,  # FY final closing, 1 year + 5 months
         }
         return defaultmap.get(cell_type)
 
@@ -123,10 +117,7 @@ class AccountDashboardBannerCell(models.Model):
     def _prepare_speedy(self, company):
         lock_date_fields = [
             "tax_lock_date",
-            "sale_lock_date",
-            "purchase_lock_date",
             "fiscalyear_lock_date",
-            "hard_lock_date",
         ]
         speedy = {
             "cell_type2label": dict(
@@ -173,8 +164,9 @@ class AccountDashboardBannerCell(models.Model):
     def _prepare_cell_data_supplier_debt(self, company, speedy):
         accounts = (
             self.env["res.partner"]
-            ._fields["property_account_payable_id"]
-            .get_company_dependent_fallback(self.env["res.partner"])
+            .with_company(company)
+            .new({})
+            .property_account_payable_id
         )
         return (accounts, -1, False, False, False)
 
@@ -182,7 +174,7 @@ class AccountDashboardBannerCell(models.Model):
         cell_type = self.cell_type
         accounts = self.env["account.account"].search(
             [
-                ("company_ids", "in", [company.id]),
+                ("company_id", "=", company.id),
                 ("account_type", "in", ("income", "income_other")),
             ]
         )
@@ -211,8 +203,9 @@ class AccountDashboardBannerCell(models.Model):
     def _prepare_cell_data_customer_debt(self, company, speedy):
         accounts = (
             self.env["res.partner"]
-            ._fields["property_account_receivable_id"]
-            .get_company_dependent_fallback(self.env["res.partner"])
+            .with_company(company)
+            .new({})
+            .property_account_receivable_id
         )
         if (
             hasattr(company, "account_default_pos_receivable_account_id")
@@ -240,7 +233,7 @@ class AccountDashboardBannerCell(models.Model):
         """Inherit this method to change the computation of a cell type"""
         self.ensure_one()
         cell_type = self.cell_type
-        value = raw_value = tooltip = warn = False
+        value = raw_value = tooltip = warn = action = False
         if cell_type.endswith("lock_date"):
             raw_value = company[cell_type]
             value = raw_value and format_date(self.env, raw_value)
@@ -291,6 +284,13 @@ class AccountDashboardBannerCell(models.Model):
                 tooltip = tooltip_src.format(
                     account_codes=", ".join(accounts.mapped("code"))
                 )
+            if cell_type == "customer_overdue":
+                action = self.env["ir.actions.actions"]._for_xml_id(
+                    "account.action_move_out_invoice_type"
+                )
+                action[
+                    "context"
+                ] = "{'search_default_out_invoice': 1, 'search_default_late': 1}"
         res = {
             "cell_type": cell_type,
             "label": self.custom_label or speedy["cell_type2label"][cell_type],
@@ -298,6 +298,7 @@ class AccountDashboardBannerCell(models.Model):
             "value": value or _("None"),
             "tooltip": self.custom_tooltip or tooltip,
             "warn": warn,
+            "action": action,
         }
         return res
 

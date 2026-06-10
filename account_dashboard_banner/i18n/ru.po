@@ -117,11 +117,6 @@ msgid "Global Lock Date"
 msgstr "Дата глобальной блокировки"
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__hard_lock_date
-msgid "Hard Lock Date"
-msgstr "Дата жесткой блокировки"
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__id
 msgid "ID"
 msgstr "ID"
@@ -173,11 +168,6 @@ msgstr ""
 "(%(warn_min)s) должно быть меньше максимального (%(warn_max)s)."
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__purchase_lock_date
-msgid "Purchase Lock Date"
-msgstr "Дата блокировки покупки"
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
 msgid "Quarter-to-date Income"
 msgstr "Доход за квартал"
@@ -190,11 +180,6 @@ msgid ""
 msgstr ""
 "Остаточная сумма по счету (счетам) {account_codes} с датой погашения в "
 "прошлом."
-
-#. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
-msgid "Sales Lock Date"
-msgstr "Дата блокировки продаж"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__sequence

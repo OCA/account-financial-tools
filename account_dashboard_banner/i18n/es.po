@@ -116,11 +116,6 @@ msgid "Global Lock Date"
 msgstr "Fecha de bloqueo global"
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__hard_lock_date
-msgid "Hard Lock Date"
-msgstr "Fecha de bloqueo estricto"
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__id
 msgid "ID"
 msgstr "ID"
@@ -172,11 +167,6 @@ msgstr ""
 "(%(warn_min)s) debe ser inferior al máximo (%(warn_max)s)."
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__purchase_lock_date
-msgid "Purchase Lock Date"
-msgstr "Fecha de bloqueo de compra"
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
 msgid "Quarter-to-date Income"
 msgstr "Ingresos del trimestre hasta la fecha"
@@ -189,11 +179,6 @@ msgid ""
 msgstr ""
 "Importe residual de la(s) cuenta(s) {account_codes} con fecha de vencimiento "
 "en el pasado."
-
-#. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
-msgid "Sales Lock Date"
-msgstr "Fecha de bloqueo de ventas"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__sequence

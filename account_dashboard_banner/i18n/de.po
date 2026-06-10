@@ -116,11 +116,6 @@ msgid "Global Lock Date"
 msgstr "Globales Sperrdatum"
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__hard_lock_date
-msgid "Hard Lock Date"
-msgstr "Hartes Sperrdatum"
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__id
 msgid "ID"
 msgstr "ID"
@@ -172,11 +167,6 @@ msgstr ""
 "(warn_min)s) unter dem Maximum (%(warn_max)s) liegen."
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__purchase_lock_date
-msgid "Purchase Lock Date"
-msgstr "Einkauf Sperrdatum"
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
 msgid "Quarter-to-date Income"
 msgstr "Einnahmen seit Quartalsbeginn"
@@ -189,11 +179,6 @@ msgid ""
 msgstr ""
 "Restbetrag der Konten {account_codes} mit Fälligkeitsdatum in der "
 "Vergangenheit."
-
-#. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
-msgid "Sales Lock Date"
-msgstr "Verkauf Sperrdatum"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__sequence

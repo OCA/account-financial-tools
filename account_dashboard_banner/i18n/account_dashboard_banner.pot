@@ -113,11 +113,6 @@ msgid "Global Lock Date"
 msgstr ""
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__hard_lock_date
-msgid "Hard Lock Date"
-msgstr ""
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__id
 msgid "ID"
 msgstr ""
@@ -167,11 +162,6 @@ msgid ""
 msgstr ""
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__purchase_lock_date
-msgid "Purchase Lock Date"
-msgstr ""
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
 msgid "Quarter-to-date Income"
 msgstr ""
@@ -181,11 +171,6 @@ msgstr ""
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid ""
 "Residual amount of account(s) {account_codes} with due date in the past."
-msgstr ""
-
-#. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
-msgid "Sales Lock Date"
 msgstr ""
 
 #. module: account_dashboard_banner

@@ -116,11 +116,6 @@ msgid "Global Lock Date"
 msgstr "Data blocco globale"
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__hard_lock_date
-msgid "Hard Lock Date"
-msgstr "Data blocco elevato"
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__id
 msgid "ID"
 msgstr "ID"
@@ -172,11 +167,6 @@ msgstr ""
 "deve essere inferiore al massimo (%(warn_max)s)."
 
 #. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__purchase_lock_date
-msgid "Purchase Lock Date"
-msgstr "Data blocco acquisti"
-
-#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
 msgid "Quarter-to-date Income"
 msgstr "Ricavi trimestrali attuali"
@@ -187,11 +177,6 @@ msgstr "Ricavi trimestrali attuali"
 msgid ""
 "Residual amount of account(s) {account_codes} with due date in the past."
 msgstr "Valore residuo dei conti {account_codes} con data scadenza nel passato."
-
-#. module: account_dashboard_banner
-#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
-msgid "Sales Lock Date"
-msgstr "Data blocco vendite"
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__sequence
