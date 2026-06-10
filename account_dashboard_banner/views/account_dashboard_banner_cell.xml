@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2025 Akretion France (https://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+    <record id="account_dashboard_banner_cell_form" model="ir.ui.view">
+        <field name="model">account.dashboard.banner.cell</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="main">
+                    <group name="main-left">
+                            <field name="cell_type"/>
+                            <field name="warn_type_show" invisible="1"/>
+                            <field name="warn"/>
+                        <label for="warn_lock_date_days" string="Warn if lock date is older than" invisible="not warn or cell_type not in ('tax_lock_date', 'sale_lock_date', 'purchase_lock_date', 'fiscalyear_lock_date', 'hard_lock_date')"/>
+                        <div name="warn_lock_date_days" invisible="not warn or cell_type not in ('tax_lock_date', 'sale_lock_date', 'purchase_lock_date', 'fiscalyear_lock_date', 'hard_lock_date')">
+                            <field name="warn_lock_date_days" class="oe_inline"/> days
+                        </div>
+                        <field name="warn_type" invisible="not warn_type_show" required="warn_type_show" string="Warn If"/>
+                        <field name="warn_min" invisible="not warn_type_show or warn_type == 'above'"/>
+                        <field name="warn_max" invisible="not warn_type_show or warn_type == 'under'"/>
+                    </group>
+                    <group name="main-right">
+                        <field name="custom_label" string="Custom Label (optional)" />
+                        <field name="custom_tooltip" string="Custom Tooltip (optional)"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_dashboard_banner_cell_list" model="ir.ui.view">
+        <field name="model">account.dashboard.banner.cell</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="cell_type"/>
+                <field name="warn" optional="show"/>
+                <field name="custom_label" string="Custom Label (optional)" optional="show"/>
+                <field name="custom_tooltip" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="account_dashboard_banner_cell_action" model="ir.actions.act_window">
+        <field name="name">Dashboard Banner Cells</field>
+        <field name="res_model">account.dashboard.banner.cell</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="account_dashboard_config" name="Dashboard" parent="account.menu_finance_configuration" sequence="200"/>
+
+    <menuitem id="account_dashboard_banner_cell_menu" action="account_dashboard_banner_cell_action" sequence="10" parent="account_dashboard_config"/>
+
+</odoo>

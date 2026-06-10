@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2025 Akretion France (https://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<templates xml:space="preserve">
+
+<t t-name="account_dashboard_banner.AccountDashboardBannerRenderer" t-inherit="account.DashboardKanbanRenderer" t-inherit-mode="primary">
+    <xpath expr="//div[hasclass('o_kanban_renderer')]" position="before">
+        <div class="d-none d-md-flex position-sticky start-0 d-flex o_form_statusbar" id="dashboard_banner">
+            <t t-foreach="Object.entries(state.banner)" t-as="cell_entry" t-key="cell_entry[0]">
+                <t t-set="cell_data" t-value="cell_entry[1]"/>
+                <div id="cell_banner_ok" t-if="!cell_data.warn" t-attf-class="o_arrow_button flex-grow-1 d-flex flex-column p-1 text-center" t-att-data-tooltip="cell_data['tooltip']">
+                    <strong class="mx-2" t-out="cell_data['label']"/>
+                    <span t-out="cell_data['value']" class="h2 m-0 text-primary"/>
+                </div>
+                <div id="cell_banner_warn"  t-if="cell_data.warn" t-attf-class="o_arrow_button flex-grow-1 d-flex flex-column p-1 text-center alert alert-warning" t-att-data-tooltip="cell_data['tooltip']">
+                    <strong class="mx-2" t-out="cell_data['label']"/>
+                    <span t-out="cell_data['value']" class="h2 m-0 text-primary"/>
+                </div>
+            </t>
+        </div>
+    </xpath>
+</t>
+
+</templates>
