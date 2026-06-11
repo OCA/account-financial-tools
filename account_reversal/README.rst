@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ================
 Account Reversal
 ================
@@ -17,28 +13,29 @@ Account Reversal
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/16.0/account_reversal
+    :target: https://github.com/OCA/account-financial-tools/tree/18.0/account_reversal
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-16-0/account-financial-tools-16-0-account_reversal
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-18-0/account-financial-tools-18-0-account_reversal
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-financial-tools&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module improves the current Odoo implementation of accounting entries
-reversal process by:
+This module improves the current Odoo implementation of accounting
+entries reversal process by:
 
-* adding a checkbox and filter "to be reversed" on account moves,
-* allowing to add a reversal reason on journal items (the reason on journal entry
-  already exists in core),
-* making the reversal reason field visible when reversing all types of entries.
+- adding a checkbox and filter "to be reversed" on account moves,
+- allowing to add a reversal reason on journal items (the reason on
+  journal entry already exists in core),
+- making the reversal reason field visible when reversing all types of
+  entries.
 
 **Table of contents**
 
@@ -48,20 +45,26 @@ reversal process by:
 Usage
 =====
 
-* To mark journal entries as 'To Be Reversed':
+- To mark journal entries as 'To Be Reversed':
 
-    #. Go to Accounting > Accounting > Journals > Journal Entries
-    #. In the journal entry, go to 'Other Info' tab and check the 'To Be Reversed' field.
+     1. Go to Accounting > Accounting > Journals > Journal Entries
+     2. In the journal entry, go to 'Other Info' tab and check the 'To
+        Be Reversed' field.
 
-.. image:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_reversal/static/description/move_form.png
+|image|
 
-* In order to allow tracking entries that must be reversed for any reason:
+- In order to allow tracking entries that must be reversed for any
+  reason:
 
-    #. Go To Accounting > Accounting > Journals > Journal Entries to be Reversed
+     1. Go To Accounting > Accounting > Journals > Journal Entries to be
+        Reversed
 
-* The Reverse wizard with both reasons looks like:
+- The Reverse wizard with both reasons looks like:
 
-.. image:: https://raw.githubusercontent.com/OCA/account-financial-tools/16.0/account_reversal/static/description/reversal.png
+|image1|
+
+.. |image| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_reversal/static/description/form.png
+.. |image1| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_reversal/static/description/wizard.png
 
 Bug Tracker
 ===========
@@ -69,7 +72,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_reversal%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_reversal%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -77,7 +80,7 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Akretion
 * Camptocamp
@@ -85,20 +88,21 @@ Authors
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Alexis de Lattre (Akretion)
-* Guewen Baconnier (Camptocamp)
-* Nicolas Bessi (Camptocamp)
-* Torvald Bringsvor (Bringsvor Consulting)
-* Sandy Carter (Savoir-faire Linux)
-* Stéphane Bidoul (ACSONE)
-* Antonio Espinosa (Tecnativa)
-* Bhavesh Odedra <bodedra@opensourceintegrators.com>
-* Denis Roussel <denis.roussel@acsone.eu>
+- Alexis de Lattre (Akretion)
+- Guewen Baconnier (Camptocamp)
+- Nicolas Bessi (Camptocamp)
+- Torvald Bringsvor (Bringsvor Consulting)
+- Sandy Carter (Savoir-faire Linux)
+- Stéphane Bidoul (ACSONE)
+- Antonio Espinosa (Tecnativa)
+- Bhavesh Odedra <bodedra@opensourceintegrators.com>
+- Denis Roussel <denis.roussel@acsone.eu>
+- Fahmi Yasser <fahmiyasser03@gmail.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -110,6 +114,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/16.0/account_reversal>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/18.0/account_reversal>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

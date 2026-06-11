@@ -81,11 +81,10 @@ class TestAccountReversal(TransactionCase):
     def _move_str(self, move):
         return "".join(
             [
-                "%.2f%.2f%s"
-                % (
+                "{:.2f}{:.2f}{}".format(
                     x.debit,
                     x.credit,
-                    x.account_id == self.account_sale and ":SALE_" or ":CUSTOMER_",
+                    ":SALE_" if x.account_id == self.account_sale else ":CUSTOMER_",
                 )
                 for x in move.line_ids.sorted(key=lambda r: r.account_id.id)
             ]
@@ -120,7 +119,6 @@ class TestAccountReversal(TransactionCase):
         self.assertFalse(move.to_be_reversed)
 
     def test_reverse_huge_move(self):
-
         move = self._create_move()
 
         for x in range(1, 100):
@@ -178,8 +176,8 @@ class TestAccountReversal(TransactionCase):
         self.assertFalse(account_move.to_be_reversed)
         with self.assertRaises(MoveAlreadyReversedValidationError), self.cr.savepoint():
             account_move.to_be_reversed = True
-        # Cancelled reverse moves are not taken into account in reversal_id and the constraint
-        # on to_be_reversed.
+        # Cancelled reverse moves are not taken into account in reversal_id
+        # and the constraint on to_be_reversed.
         reversed_account_move.button_cancel()
         self.assertFalse(account_move.reversal_id)
         account_move.to_be_reversed = True

@@ -1,10 +1,7 @@
-# Copyright 2023 ACSONE SA/NV
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models
 
 
 class AccountMoveReversal(models.TransientModel):
-
     _inherit = "account.move.reversal"
 
     line_reason = fields.Char(
@@ -13,8 +10,8 @@ class AccountMoveReversal(models.TransientModel):
         "item. (NOTE: a space and a colon added after the prefix)."
     )
 
-    def reverse_moves(self):
-        res = super().reverse_moves()
+    def reverse_moves(self, is_modify=False):
+        res = super().reverse_moves(is_modify)
         if self.line_reason:
             for line in self.new_move_ids.line_ids:
                 if line.name:
