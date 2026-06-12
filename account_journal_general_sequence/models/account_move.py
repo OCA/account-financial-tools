@@ -64,7 +64,7 @@ class AccountMove(models.Model):
             lambda one: (one.date or "", one.name or "", one.id or 0)
         ):
             chosen_map[move.id] = move.journal_id.entry_number_sequence_id._next(
-                move.date
+                fields.Datetime.to_datetime(move.date)
             )
         # Write all the new numbers in the chosen moves
         for move_id, new_number in chosen_map.items():
