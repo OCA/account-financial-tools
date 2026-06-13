@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2026-06-07 11:37+0000\n"
+"PO-Revision-Date: 2026-06-13 09:21+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -24,19 +24,19 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "%(actual)s record(s) → %(expected)s record(s)"
-msgstr ""
+msgstr "%(actual)s record(s) → %(expected)s record(s)"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "%(n)s record(s) → differs from template"
-msgstr ""
+msgstr "%(n)s record(s) → drugačni kot v predlogi"
 
 #. module: account_chart_update
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "- %(label)s: '%(actual)s' → '%(expected)s'"
-msgstr ""
+msgstr "- %(label)s: '%(actual)s' → '%(expected)s'"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_account_chart_template
@@ -182,7 +182,7 @@ msgstr "Deaktivirani davki"
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "Differences in these fields:"
-msgstr ""
+msgstr "Razlike v teh poljih:"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_account_chart_template__display_name
@@ -386,7 +386,7 @@ msgstr "Sporočila in napake"
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "Missing XML-ID (expected %(expected)s; currently: %(current)s)."
-msgstr ""
+msgstr "Manjkajoč XML-ID (expected %(expected)s; currently: %(current)s)."
 
 #. module: account_chart_update
 #. odoo-python
@@ -783,7 +783,7 @@ msgstr "Xml"
 #. odoo-python
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
 msgid "none"
-msgstr ""
+msgstr "brez"
 
 #~ msgid "Differences in these fields: %s."
 #~ msgstr "Razlike v naslednjih poljih: %s."
