@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2026-06-08 06:22+0000\n"
+"PO-Revision-Date: 2026-06-13 12:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
 "tools-8-0/language/sl/)\n"
@@ -912,7 +912,7 @@ msgstr "Dnevnik"
 #: code:addons/account_asset_management/models/account_asset.py:0
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Entries"
-msgstr "Dnevniški vnosi"
+msgstr "Temeljnice"
 
 #. module: account_asset_management
 #. odoo-python
