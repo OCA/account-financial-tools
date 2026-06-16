@@ -19,8 +19,12 @@ class TestAccountMoveFromEPDCommon(AccountTestInvoicingCommon):
         super().setUpClass()
         cls.journal_misc = cls.company_data["default_journal_misc"]
         # Ensure the company has EPD write-off accounts configured.
-        cls.epd_loss_account = cls.company_data["company"].account_journal_early_pay_discount_loss_account_id
-        cls.epd_gain_account = cls.company_data["company"].account_journal_early_pay_discount_gain_account_id
+        cls.epd_loss_account = cls.company_data[
+            "company"
+        ].account_journal_early_pay_discount_loss_account_id
+        cls.epd_gain_account = cls.company_data[
+            "company"
+        ].account_journal_early_pay_discount_gain_account_id
 
         cls.payment_term_epd = cls.env["account.payment.term"].create(
             {
@@ -59,13 +63,19 @@ class TestAccountMoveFromEPDCommon(AccountTestInvoicingCommon):
             "move_type": move_type,
             "partner_id": cls.partner_a.id,
             "invoice_date": fields.Date.today(),
-            "invoice_line_ids": [(0, 0, {
-                "product_id": line_spec[0].id,
-                "quantity": line_spec[1],
-                "price_unit": line_spec[2],
-                "tax_ids": line_spec[3],
-            }) for line_spec in lines_spec],
-            
+            "invoice_line_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": line_spec[0].id,
+                        "quantity": line_spec[1],
+                        "price_unit": line_spec[2],
+                        "tax_ids": line_spec[3],
+                    },
+                )
+                for line_spec in lines_spec
+            ],
         }
         if extra_values:
             values.update(extra_values)
@@ -78,7 +88,8 @@ class TestAccountMoveFromEPDCommon(AccountTestInvoicingCommon):
     def _reconcile(cls, moves_list):
         # Reconcile the credit note against the invoice's receivable/payable lines.
         rec_pay_lines = sum(*moves_list).line_ids.filtered(
-            lambda li: li.account_id.account_type in ("asset_receivable", "liability_payable")
+            lambda li: li.account_id.account_type
+            in ("asset_receivable", "liability_payable")
             and not li.reconciled
         )
         rec_pay_lines.reconcile()

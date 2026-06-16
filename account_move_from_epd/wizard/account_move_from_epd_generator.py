@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from markupsafe import Markup
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -51,7 +51,7 @@ class AccountMoveFromEPDGenerator(models.Model):
         payment_term = invoice.invoice_payment_term_id
         if not payment_term.early_discount:
             raise UserError(
-                _(
+                self.env._(
                     "The payment term of %(invoice)s does not have an early "
                     "payment discount configured.",
                     invoice=invoice.name,
@@ -63,7 +63,7 @@ class AccountMoveFromEPDGenerator(models.Model):
         )
         if not payment_term_line:
             raise UserError(
-                _(
+                self.env._(
                     "No payment-term line found on invoice %(invoice)s.",
                     invoice=invoice.name,
                 )
@@ -101,7 +101,7 @@ class AccountMoveFromEPDGenerator(models.Model):
 
         if not epd_line_vals_list:
             raise UserError(
-                _(
+                self.env._(
                     "Could not compute EPD lines for invoice %(invoice)s.",
                     invoice=invoice.name,
                 )

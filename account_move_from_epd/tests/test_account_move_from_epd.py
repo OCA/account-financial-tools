@@ -135,7 +135,7 @@ class TestAccountMoveFromEPDMulticurrency(TestAccountMoveFromEPDCommon):
                 "currency_id": cls.eur.id,
             },
         )
-        
+
         # Capture EPD amounts from the stored payment-term line so assertions
         # are independent of rate-rounding implementation details.
         ptl = cls.invoice.line_ids.filtered(
@@ -147,7 +147,11 @@ class TestAccountMoveFromEPDMulticurrency(TestAccountMoveFromEPDCommon):
         cls.expected_epd_balance = abs(ptl.balance - ptl.discount_balance)
 
         # Partial credit note: 200 EUR
-        cls.refund = cls._create_invoice("out_refund", [(cls.product_b, 1, 200, [])], extra_values={"currency_id": cls.eur.id})
+        cls.refund = cls._create_invoice(
+            "out_refund",
+            [(cls.product_b, 1, 200, [])],
+            extra_values={"currency_id": cls.eur.id},
+        )
         # Reconcile the credit note against the invoice's receivable lines.
         cls._reconcile([cls.invoice, cls.refund])
 
@@ -308,9 +312,12 @@ class TestAccountMoveFromEPDMulticurrencyWithTax(TestAccountMoveFromEPDCommon):
         cls.invoice = cls._create_invoice(
             "out_invoice",
             [(cls.product_a, 2, 1000, [(6, 0, cls.tax_sale_a.ids)])],
-            extra_values={"invoice_payment_term_id": cls.payment_term_epd.id, "currency_id": cls.eur.id,},
+            extra_values={
+                "invoice_payment_term_id": cls.payment_term_epd.id,
+                "currency_id": cls.eur.id,
+            },
         )
-        
+
         ptl = cls.invoice.line_ids.filtered(
             lambda li: li.display_type == "payment_term"
         )
