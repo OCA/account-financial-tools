@@ -144,7 +144,9 @@ class AccountMoveFromEPDGenerator(models.Model):
         (epd_receivable_line | invoice_open_lines).reconcile()
 
         invoice.message_post(
-            body=Markup(self.env._("Early payment discount was materialized in %(link)s"))
+            body=Markup(
+                self.env._("Early payment discount was materialized in %(link)s")
+            )
             % {"link": epd_move._get_html_link()}
         )
 
