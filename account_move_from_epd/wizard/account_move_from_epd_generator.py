@@ -123,7 +123,7 @@ class AccountMoveFromEPDGenerator(models.Model):
                 "move_type": "entry",
                 "journal_id": self.epd_move_journal_id.id,
                 "date": self.epd_move_date,
-                "ref": _("EPD - %(invoice)s", invoice=invoice.name),
+                "ref": self.env._("EPD - %(invoice)s", invoice=invoice.name),
                 "partner_id": partner.id,
                 "line_ids": (
                     [(0, 0, v) for v in epd_line_vals_list]
@@ -144,7 +144,7 @@ class AccountMoveFromEPDGenerator(models.Model):
         (epd_receivable_line | invoice_open_lines).reconcile()
 
         invoice.message_post(
-            body=Markup(_("Early payment discount was materialized in %(link)s"))
+            body=Markup(self.env._("Early payment discount was materialized in %(link)s"))
             % {"link": epd_move._get_html_link()}
         )
 
