@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class AccountClearancePlanLine(models.TransientModel):
@@ -12,7 +12,7 @@ class AccountClearancePlanLine(models.TransientModel):
     name = fields.Char(
         string="Label",
         required=True,
-        default=lambda self: self.env.user.company_id.clearance_plan_move_line_name,
+        default=lambda self: self.env.company.clearance_plan_move_line_name,
     )
     clearance_plan_id = fields.Many2one(
         comodel_name="account.clearance.plan", required=True
@@ -24,7 +24,7 @@ class AccountClearancePlanLine(models.TransientModel):
     def _check_positive_amount(self):
         for rec in self:
             if rec.amount < 0:
-                raise Warning(_("Amounts should all be positive."))
+                raise ValidationError(_("Amounts should all be positive."))
 
 
 class AccountClearancePlan(models.TransientModel):
@@ -47,14 +47,12 @@ class AccountClearancePlan(models.TransientModel):
         help="Internal note of the new journal entry that will be generated.",
     )
     amount_to_allocate = fields.Float(string="Total Amount to Allocate", readonly=True)
-    amount_unallocated = fields.Float(
-        string="Amount Unallocated", compute="_compute_amount_unallocated"
-    )
+    amount_unallocated = fields.Float(compute="_compute_amount_unallocated")
     clearance_plan_line_ids = fields.One2many(
         comodel_name="account.clearance.plan.line", inverse_name="clearance_plan_id"
     )
 
-    @api.onchange("clearance_plan_line_ids")
+    @api.depends("clearance_plan_line_ids.amount", "amount_to_allocate")
     def _compute_amount_unallocated(self):
         for rec in self:
             rec.amount_unallocated = rec.amount_to_allocate - sum(
@@ -63,13 +61,13 @@ class AccountClearancePlan(models.TransientModel):
 
     def _get_move_lines_from_context(self):
         active_model = self._context.get("active_model")
-        if active_model == "account.invoice":
+        if active_model == "account.move":
             move_line_ids = []
-            for invoice in self.env["account.invoice"].browse(
+            for move in self.env["account.move"].browse(
                 self._context.get("active_ids")
             ):
-                move_line_ids += invoice._get_open_move_lines_ids()
-        elif not self._context.get("active_model") == "account.move.line":
+                move_line_ids += move._get_open_move_lines_ids()
+        elif active_model != "account.move.line":
             raise UserError(
                 _(
                     "Programming error: wizard action executed with 'active_model' "
@@ -82,8 +80,8 @@ class AccountClearancePlan(models.TransientModel):
         return self.env["account.move.line"].browse(move_line_ids)
 
     @api.model
-    def default_get(self, fields):
-        rec = super().default_get(fields)
+    def default_get(self, fields_list):
+        rec = super().default_get(fields_list)
 
         move_lines = self._get_move_lines_from_context()
         account_id = move_lines.mapped("account_id")
@@ -94,8 +92,8 @@ class AccountClearancePlan(models.TransientModel):
         # Check all move lines are from same account
         if len(account_id.ids) != 1:
             raise UserError(_("Please select items from exactly one account."))
-        # Check account is of type type is 'receivable' or 'payable'
-        if account_id.user_type_id.type not in ("receivable", "payable"):
+        # Check account is of type 'receivable' or 'payable'
+        if account_id.account_type not in ("asset_receivable", "liability_payable"):
             raise UserError(
                 _(
                     "Please select items from an account "
@@ -105,7 +103,7 @@ class AccountClearancePlan(models.TransientModel):
 
         rec.update(
             {
-                "journal_id": self.env.user.company_id.clearance_plan_journal_id.id,
+                "journal_id": self.env.company.clearance_plan_journal_id.id,
                 "amount_to_allocate": abs(sum(move_lines.mapped("amount_residual"))),
                 "move_line_ids": move_lines.ids,
             }
@@ -116,15 +114,20 @@ class AccountClearancePlan(models.TransientModel):
     def _create_reverse_amount_residual_lines(self, move):
         new_lines = self.env["account.move.line"]
         for line in self.move_line_ids:
-            new_line = line.with_context(check_move_validity=False).copy(
-                default={
+            vals = line.copy_data()[0]
+            vals.update(
+                {
                     "move_id": move.id,
-                    "debit": abs(line.amount_residual) if line.credit > 0 else 0,
-                    "credit": abs(line.amount_residual) if line.debit > 0 else 0,
-                    "invoice_id": False,
+                    "balance": -line.amount_residual,
+                    "amount_currency": -line.amount_residual_currency,
+                    "name": _("Clearance Plan: ") + (vals.get("name") or ""),
                 }
             )
-            new_line.write({"name": (_("Clearance Plan: ") + new_line.name)})
+            new_line = (
+                self.env["account.move.line"]
+                .with_context(check_move_validity=False)
+                .create(vals)
+            )
             new_lines |= new_line
         return new_lines
 
@@ -154,6 +157,7 @@ class AccountClearancePlan(models.TransientModel):
 
         move = self.env["account.move"].create(
             {
+                "move_type": "entry",
                 "journal_id": self.journal_id.id,
                 "ref": self.move_ref,
                 "narration": self.move_narration,
@@ -162,8 +166,6 @@ class AccountClearancePlan(models.TransientModel):
         reversed_lines = self._create_reverse_amount_residual_lines(move)
         self._create_clearance_move_lines(move)
 
-        # Assert balance once all mv_line created
-        move.assert_balanced()
         move.action_post()
         (self.move_line_ids | reversed_lines).reconcile()
 
