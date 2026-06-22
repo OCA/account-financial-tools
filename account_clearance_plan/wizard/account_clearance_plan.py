@@ -31,6 +31,8 @@ class AccountClearancePlan(models.TransientModel):
     _name = "account.clearance.plan"
     _description = "Clearance Plan"
 
+    account_id = fields.Many2one("account.account", readonly=True)
+    partner_id = fields.Many2one("res.partner", readonly=True)
     move_line_ids = fields.Many2many("account.move.line", readonly=True)
     journal_id = fields.Many2one(
         string="Journal",
@@ -50,6 +52,10 @@ class AccountClearancePlan(models.TransientModel):
     amount_unallocated = fields.Float(compute="_compute_amount_unallocated")
     clearance_plan_line_ids = fields.One2many(
         comodel_name="account.clearance.plan.line", inverse_name="clearance_plan_id"
+    )
+    mode = fields.Selection(
+        [("receivable", "Receivable"), ("payable", "Payable")],
+        help="Receivable if we clear customers debts, payable if own debts.",
     )
 
     @api.depends("clearance_plan_line_ids.amount", "amount_to_allocate")
@@ -85,9 +91,11 @@ class AccountClearancePlan(models.TransientModel):
 
         move_lines = self._get_move_lines_from_context()
         account_id = move_lines.mapped("account_id")
+        partner_id = move_lines.mapped("partner_id")
+        total_amount_residual = sum(move_lines.mapped("amount_residual"))
 
         # Check all move lines are from same partner
-        if len(move_lines.mapped("partner_id").ids) != 1:
+        if len(partner_id.ids) != 1:
             raise UserError(_("Please select items from exactly one partner."))
         # Check all move lines are from same account
         if len(account_id.ids) != 1:
@@ -104,8 +112,11 @@ class AccountClearancePlan(models.TransientModel):
         rec.update(
             {
                 "journal_id": self.env.company.clearance_plan_journal_id.id,
-                "amount_to_allocate": abs(sum(move_lines.mapped("amount_residual"))),
+                "amount_to_allocate": abs(total_amount_residual),
+                "mode": "receivable" if total_amount_residual > 0 else "payable",
                 "move_line_ids": move_lines.ids,
+                "account_id": account_id.id,
+                "partner_id": partner_id.id,
             }
         )
 
@@ -131,38 +142,39 @@ class AccountClearancePlan(models.TransientModel):
             new_lines |= new_line
         return new_lines
 
+    def _get_move_line_vals(self, move, line):
+        return {
+            "move_id": move.id,
+            "debit": line.amount if self.mode == "receivable" else 0,
+            "credit": line.amount if self.mode == "payable" else 0,
+            "date_maturity": line.date_maturity,
+            "name": line.name,
+            "account_id": self.account_id.id,
+            "partner_id": self.partner_id.id,
+        }
+
     def _create_clearance_move_lines(self, move):
-        account_id = self.move_line_ids.mapped("account_id")
-        partner_id = self.move_line_ids.mapped("partner_id")
-        negative_amount_residual = sum(move.line_ids.mapped("amount_residual")) < 0
+        self.ensure_one()
         for line in self.clearance_plan_line_ids:
             self.env["account.move.line"].with_context(
                 check_move_validity=False
-            ).create(
-                {
-                    "move_id": move.id,
-                    "debit": line.amount if negative_amount_residual else 0,
-                    "credit": line.amount if not negative_amount_residual else 0,
-                    "date_maturity": line.date_maturity,
-                    "name": line.name,
-                    "account_id": account_id.id,
-                    "partner_id": partner_id.id,
-                }
-            )
+            ).create(self._get_move_line_vals(move, line))
+
+    def _get_move_vals(self):
+        return {
+            "move_type": "entry",
+            "journal_id": self.journal_id.id,
+            "ref": self.move_ref,
+            "narration": self.move_narration,
+            "partner_id": self.partner_id.id,
+        }
 
     def confirm_plan(self):
         self.ensure_one()
         if self.amount_unallocated != 0:
             raise UserError(_("%s still to allocate.") % self.amount_unallocated)
 
-        move = self.env["account.move"].create(
-            {
-                "move_type": "entry",
-                "journal_id": self.journal_id.id,
-                "ref": self.move_ref,
-                "narration": self.move_narration,
-            }
-        )
+        move = self.env["account.move"].create(self._get_move_vals())
         reversed_lines = self._create_reverse_amount_residual_lines(move)
         self._create_clearance_move_lines(move)
 
