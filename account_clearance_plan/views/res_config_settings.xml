@@ -20,7 +20,7 @@
                             <div class="row">
                                 <label for="clearance_plan_journal_id" class="col-md-5 o_light_label"/>
                                 <field name="clearance_plan_journal_id"/>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
                   </div>

@@ -25,8 +25,8 @@
                     </page>
                 </notebook>
                 <footer>
-                    <button name="confirm_plan" string="Confirm" type="object" class="btn-primary"/> 
-                    <button string="Cancel" class="btn-default" special="cancel"/>   
+                    <button name="confirm_plan" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
                 </footer>
             </form>
         </field>

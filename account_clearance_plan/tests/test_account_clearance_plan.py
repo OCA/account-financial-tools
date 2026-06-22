@@ -1,15 +1,15 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase, Form
-from odoo.exceptions import ValidationError
-
 from datetime import datetime, timedelta
+
+from odoo.exceptions import ValidationError
+from odoo.tests.common import Form, TransactionCase
 
 
 class TestAccountClearancePlan(TransactionCase):
     def setUp(self):
-        super(TestAccountClearancePlan, self).setUp()
+        super().setUp()
         self.company = self.env.ref("base.main_company")
         self.partner = self.env["res.partner"].create({"name": "Test"})
         self.account_type_receivable = self.env["account.account.type"].create(

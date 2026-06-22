@@ -1,7 +1,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -12,8 +12,7 @@ class AccountClearancePlanLine(models.TransientModel):
     name = fields.Char(
         string="Label",
         required=True,
-        default=lambda self:
-            self.env.user.company_id.clearance_plan_move_line_name,
+        default=lambda self: self.env.user.company_id.clearance_plan_move_line_name,
     )
     clearance_plan_id = fields.Many2one(
         comodel_name="account.clearance.plan", required=True
