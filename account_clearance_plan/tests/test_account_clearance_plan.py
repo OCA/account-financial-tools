@@ -1,99 +1,64 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
+from odoo import Command, fields
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form, tagged
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestAccountClearancePlan(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.company = self.env.ref("base.main_company")
-        self.partner = self.env["res.partner"].create({"name": "Test"})
-        self.account_type_receivable = self.env["account.account.type"].create(
-            {"name": "Test Receivable", "type": "receivable"}
-        )
-        self.account_type_regular = self.env["account.account.type"].create(
-            {"name": "Test Regular", "type": "other"}
-        )
-        self.account_receivable = self.env["account.account"].create(
+@tagged("post_install", "-at_install")
+class TestAccountClearancePlan(AccountTestInvoicingCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.general_journal = cls.company_data["default_journal_misc"]
+        cls.cash_journal = cls.company_data["default_journal_cash"]
+        cls.company_data["company"].clearance_plan_journal_id = cls.general_journal
+        cls.invoice = cls.env["account.move"].create(
             {
-                "name": "Test Receivable",
-                "code": "TEST_AR",
-                "user_type_id": self.account_type_receivable.id,
-                "reconcile": True,
+                "move_type": "out_invoice",
+                "partner_id": cls.partner_a.id,
+                "journal_id": cls.company_data["default_journal_sale"].id,
+                "invoice_line_ids": [
+                    Command.create(
+                        {
+                            "name": "Line",
+                            "price_unit": 1000.0,
+                            "quantity": 1,
+                            "tax_ids": False,
+                        }
+                    )
+                ],
             }
         )
-        self.account_income = self.env["account.account"].create(
+        cls.invoice.action_post()
+        cls.env["account.payment.register"].with_context(
+            active_model="account.move",
+            active_ids=[cls.invoice.id],
+        ).create(
             {
-                "name": "Test Income",
-                "code": "TEST_IN",
-                "user_type_id": self.account_type_regular.id,
-                "reconcile": False,
+                "amount": 200.0,
+                "journal_id": cls.cash_journal.id,
             }
-        )
-        self.sale_journal = self.env["account.journal"].search(
-            [("type", "=", "sale"), ("company_id", "=", self.company.id)]
-        )[0]
-        self.cash_journal = self.env["account.journal"].search(
-            [("type", "=", "cash"), ("company_id", "=", self.company.id)]
-        )[0]
-        self.general_journal = self.env["account.journal"].search(
-            [("type", "=", "general"), ("company_id", "=", self.company.id)]
-        )[0]
-        self.company.clearance_plan_journal_id = self.general_journal
-        self.payment_method_manual_in = self.env.ref(
-            "account.account_payment_method_manual_in"
-        )
-        self.invoice_line = self.env["account.invoice.line"].create(
-            {
-                "name": "Line",
-                "price_unit": 1000.0,
-                "account_id": self.account_income.id,
-                "quantity": 1,
-            }
-        )
-        self.invoice = self.env["account.invoice"].create(
-            {
-                "name": "Test Customer Invoice",
-                "journal_id": self.sale_journal.id,
-                "partner_id": self.partner.id,
-                "account_id": self.account_receivable.id,
-                "invoice_line_ids": [(4, self.invoice_line.id)],
-            }
-        )
-        self.invoice.action_invoice_open()
-        self.invoice_ctx = {
-            "active_model": "account.invoice",
-            "active_ids": [self.invoice.id],
+        ).action_create_payments()
+        cls.invoice_ctx = {
+            "active_model": "account.move",
+            "active_ids": [cls.invoice.id],
         }
-        self.register_payments = (
-            self.env["account.register.payments"]
-            .with_context(self.invoice_ctx)
-            .create(
-                {
-                    "payment_date": datetime.now().strftime("%Y-%m-%d"),
-                    "payment_method_id": self.payment_method_manual_in.id,
-                    "journal_id": self.cash_journal.id,
-                    "amount": 200.0,
-                }
-            )
-        )
-        self.register_payments.create_payments()
 
     def create_and_fill_wizard(self):
         clearance_plan_wizard = Form(
-            self.env["account.clearance.plan"].with_context(self.invoice_ctx)
+            self.env["account.clearance.plan"].with_context(**self.invoice_ctx)
         )
         i = 1
         while i <= 4:
             with clearance_plan_wizard.clearance_plan_line_ids.new() as line:
                 line.amount = 200.0
-                line.date_maturity = (datetime.now() + timedelta(days=30 * i)).strftime(
-                    "%Y-%m-%d"
-                )
+                line.date_maturity = fields.Date.today() + timedelta(days=30 * i)
             i += 1
         return clearance_plan_wizard
 
@@ -107,7 +72,7 @@ class TestAccountClearancePlan(TransactionCase):
         clearance_plan_wizard = self.create_and_fill_wizard()
         with clearance_plan_wizard.clearance_plan_line_ids.new() as line:
             line.amount = -200.0
-            line.date_maturity = datetime.now().strftime("%Y-%m-%d")
+            line.date_maturity = fields.Date.today()
         with self.assertRaises(ValidationError):
             clearance_plan_wizard.save()
 
@@ -119,15 +84,18 @@ class TestAccountClearancePlan(TransactionCase):
         for line in clearance_plan.clearance_plan_line_ids:
             self.assertTrue(
                 move.line_ids.filtered(
-                    lambda l: l.debit == line.amount
-                    and l.date_maturity == line.date_maturity
+                    lambda move_line, clearance_line=line: move_line.debit
+                    == clearance_line.amount
+                    and move_line.date_maturity == clearance_line.date_maturity
                 )
             )
-        for line in self.invoice.move_id.line_ids.filtered(
-            lambda l: l.account_id == self.invoice.account_id
+        for line in self.invoice.line_ids.filtered(
+            lambda move_line: move_line.account_id.account_type
+            in ("asset_receivable", "liability_payable")
         ):
             self.assertTrue(line.reconciled)
             for reconciled_line in line.full_reconcile_id.reconciled_line_ids.filtered(
-                lambda l: l.credit == line.debit
+                lambda reconciled_line, move_line=line: reconciled_line.credit
+                == move_line.debit
             ):
                 self.assertEqual(reconciled_line.move_id.id, move.id)

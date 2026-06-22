@@ -6,12 +6,13 @@
     "summary": """
         This addon allows to define clearance plans
         in order to reorganize debts (own and customers' ones).""",
-    "version": "12.0.1.0.1",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
     "data": [
+        "security/ir_model_access.xml",
         "views/res_config_settings.xml",
         "wizard/account_clearance_plan_wizard.xml",
     ],
