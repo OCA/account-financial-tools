@@ -754,15 +754,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             if not orm_field or orm_field.readonly:
                 continue
             if field.ttype == "boolean":
-                # Computed booleans (e.g. repartition lines'
-                # `use_in_tax_closing`, derived from account_id/
-                # repartition_type) would otherwise false-positive against
-                # the static default — trust the compute instead.
+                # If the Boolean field is computed, create a new pseudo-record
+                # and compute its value
                 if getattr(orm_field, "compute", None):
-                    continue
-                # When the template is silent on a boolean, the expected
-                # value is the field's default — not a blanket False.
-                expected = real.default_get([key]).get(key, False)
+                    expected_record = real.new(real.read()[0])
+                    getattr(expected_record, orm_field.compute)()
+                    expected = expected_record[key]
+                else:
+                    expected = real.default_get([key]).get(key, False)
                 if bool(real[key]) != bool(expected):
                     result[key] = expected
             elif real[key]:
