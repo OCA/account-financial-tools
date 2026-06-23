@@ -19,9 +19,8 @@ class TestAccountLockDateUpdate(BaseCommon):
 
     @users("test_lock_date_user")
     def test_01_update_with_access(self):
-        wizard = (
-            self.env["account.update.lock_date"]
-            .create({"company_id": self.company.id})
+        wizard = self.env["account.update.lock_date"].create(
+            {"company_id": self.company.id}
         )
         wizard.write(
             {
