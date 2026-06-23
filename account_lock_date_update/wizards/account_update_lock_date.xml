@@ -50,6 +50,5 @@
         <field name="name">Lock Dates</field>
         <field name="parent_id" ref="account.menu_finance_entries" />
         <field name="action" ref="account_update_lock_date_act_window" />
-        <field name="sequence" eval="70" />
     </record>
 </odoo>
