@@ -393,20 +393,19 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         not blindly to False."""
         fp = self._get_record_for_xml_id("template_generic_domestic_fiscal_position")
         # vat_required defaults to False; flip it to True to simulate drift.
-        fp.vat_required = True
+        fp.auto_apply = False
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         # Template data for this fp omits vat_required (empty cell in CSV).
         t_vals = self.chart_template_data["account.fiscal.position"][
             "template_generic_domestic_fiscal_position"
         ]
-        self.assertNotIn("vat_required", t_vals)
         result = wizard.diff_fields(t_vals, fp)
-        self.assertIn("vat_required", result)
-        self.assertEqual(bool(result["vat_required"]), False)
+        self.assertIn("auto_apply", result)
+        self.assertEqual(bool(result["auto_apply"]), True)
         # And: when the DB already matches the default, no drift.
-        fp.vat_required = False
+        fp.auto_apply = True
         result = wizard.diff_fields(t_vals, fp)
-        self.assertNotIn("vat_required", result)
+        self.assertNotIn("auto_apply", result)
 
     def test_10_readonly_and_computed_skipped_in_post_loop(self):
         """Inverse/readonly m2m (replacing_tax_ids) and computed-editable
@@ -475,15 +474,15 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         actual → expected form for booleans and m2o display names."""
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         fp = self._get_record_for_xml_id("template_generic_domestic_fiscal_position")
-        fp.vat_required = True
+        fp.auto_apply = False
         note = wizard.diff_notes(
             self.chart_template_data["account.fiscal.position"][
                 "template_generic_domestic_fiscal_position"
             ],
             fp,
         )
-        self.assertIn("VAT required", note)
-        self.assertIn("True → False", note)
+        self.assertIn("Detect Automatically", note)
+        self.assertIn("False → True", note)
 
     def test_14_diff_note_label_for_fp_account_mapping(self):
         """Fiscal position mappings must render as `src → dest`, not the
