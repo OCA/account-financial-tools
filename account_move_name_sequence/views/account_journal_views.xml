@@ -41,6 +41,12 @@
                     }"
                 />
             </field>
+            <xpath expr="//field[@name='inbound_payment_method_line_ids']/list/field[@name='payment_account_id']" position="after">
+                <field name="sequence_id" />
+            </xpath>
+            <xpath expr="//field[@name='outbound_payment_method_line_ids']/list/field[@name='payment_account_id']" position="after">
+                <field name="sequence_id" />
+            </xpath>
         </field>
     </record>
 

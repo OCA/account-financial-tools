@@ -24,6 +24,22 @@ class AccountMove(models.Model):
         ),
     ]
 
+    def _get_sequence_for_move(self):
+        self.ensure_one()
+        if (
+            self.move_type in ("out_refund", "in_refund")
+            and self.journal_id.type in ("sale", "purchase")
+            and self.journal_id.refund_sequence
+            and self.journal_id.refund_sequence_id
+        ):
+            return self.journal_id.refund_sequence_id
+        if (
+            self.origin_payment_id
+            and self.origin_payment_id.payment_method_line_id.sequence_id
+        ):
+            return self.origin_payment_id.payment_method_line_id.sequence_id
+        return self.journal_id.sequence_id
+
     @api.depends("name")
     def _compute_split_sequence(self):
         """
@@ -40,20 +56,12 @@ class AccountMove(models.Model):
             and move.move_type
             and move.restrict_mode_hash_table
         )
-        # Handle moves grouped by journal / move_type and year
-        for (journal, move_type, year), grouped_moves in moves.grouped(
-            lambda m: (m.journal_id, m.move_type, m.date.year)
+        # Handle moves grouped by sequence and year
+        for (sequence, year), grouped_moves in moves.grouped(
+            lambda m: (m._get_sequence_for_move(), m.date.year)
         ).items():
-            # Get the correct sequence in case there is a specific
-            # one for refund configured on journal
-            if (
-                move_type in ["in_refund", "out_refund"]
-                and journal.refund_sequence
-                and journal.refund_sequence_id
-            ):
-                sequence = journal.refund_sequence_id
-            else:
-                sequence = journal.sequence_id
+            if not sequence:
+                continue
             # Retrieve prefix and suffix to extract number
             prefix, suffix = sequence._get_prefix_suffix(
                 date=f"{year}-01-01", date_range=f"{year}-01-01"
@@ -66,7 +74,12 @@ class AccountMove(models.Model):
                     move.name[len(prefix) : len(move.name) - len(suffix)]
                 )
 
-    @api.depends("state", "journal_id", "date")
+    @api.depends(
+        "state",
+        "journal_id",
+        "date",
+        "origin_payment_id.payment_method_line_id.sequence_id",
+    )
     def _compute_name_by_sequence(self):
         for move in self:
             name = move.name or "/"
@@ -77,21 +90,13 @@ class AccountMove(models.Model):
                 move.state == "posted"
                 and (not move.name or move.name == "/")
                 and move.journal_id
-                and move.journal_id.sequence_id
             ):
-                if (
-                    move.move_type in ("out_refund", "in_refund")
-                    and move.journal_id.type in ("sale", "purchase")
-                    and move.journal_id.refund_sequence
-                    and move.journal_id.refund_sequence_id
-                ):
-                    seq = move.journal_id.refund_sequence_id
-                else:
-                    seq = move.journal_id.sequence_id
-                # next_by_id(date) only applies on ir.sequence.date_range selection
-                # => we use with_context(ir_sequence_date=date).next_by_id()
-                # which applies on ir.sequence.date_range selection AND prefix
-                name = seq.with_context(ir_sequence_date=move.date).next_by_id()
+                seq = move._get_sequence_for_move()
+                if seq:
+                    # next_by_id(date) only applies on ir.sequence.date_range selection
+                    # => we use with_context(ir_sequence_date=date).next_by_id()
+                    # which applies on ir.sequence.date_range selection AND prefix
+                    name = seq.with_context(ir_sequence_date=move.date).next_by_id()
             move.name = name
         # Force compute of sequence_prefix and sequence_number
         self._compute_split_sequence()
@@ -104,7 +109,8 @@ class AccountMove(models.Model):
 
     def _is_end_of_seq_chain(self):
         invoices_no_gap_sequences = self.filtered(
-            lambda inv: inv.journal_id.sequence_id.implementation == "no_gap"
+            lambda inv: inv._get_sequence_for_move()
+            and inv._get_sequence_for_move().implementation == "no_gap"
         )
         invoices_other_sequences = self - invoices_no_gap_sequences
         if not invoices_other_sequences and invoices_no_gap_sequences:

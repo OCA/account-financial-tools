@@ -94,6 +94,40 @@ class TestAccountMoveNameSequence(TransactionCase):
             )
         ]
 
+        # Setup PML sequences for inbound/outbound payment tests
+        # using the demo cash journal
+        cls.cash_journal = cls.env.ref(
+            "account_move_name_sequence.journal_cash_std_demo"
+        )
+        cls.inbound_pml = cls.env["account.payment.method.line"].search(
+            [
+                ("journal_id", "=", cls.cash_journal.id),
+                ("payment_type", "=", "inbound"),
+            ],
+            limit=1,
+        )
+        cls.outbound_pml = cls.env["account.payment.method.line"].search(
+            [
+                ("journal_id", "=", cls.cash_journal.id),
+                ("payment_type", "=", "outbound"),
+            ],
+            limit=1,
+        )
+        seq_vals = {
+            "implementation": "no_gap",
+            "use_date_range": True,
+            "padding": 4,
+            "company_id": cls.company.id,
+        }
+        cls.inbound_pml_seq = cls.env["ir.sequence"].create(
+            {"name": "Inbound PML Seq", "prefix": "IN/%(range_year)s/", **seq_vals}
+        )
+        cls.outbound_pml_seq = cls.env["ir.sequence"].create(
+            {"name": "Outbound PML Seq", "prefix": "OUT/%(range_year)s/", **seq_vals}
+        )
+        cls.inbound_pml.write({"sequence_id": cls.inbound_pml_seq.id})
+        cls.outbound_pml.write({"sequence_id": cls.outbound_pml_seq.id})
+
     def test_seq_creation(self):
         self.assertTrue(self.misc_journal.sequence_id)
         seq = self.misc_journal.sequence_id
@@ -386,3 +420,35 @@ class TestAccountMoveNameSequence(TransactionCase):
         )
         with self.assertRaisesRegex(UserError, error_msg):
             invoice._unlink_forbid_parts_of_chain()
+
+    def test_inbound_payment_method_line_sequence(self):
+        with Form(
+            self.env["account.payment"].with_context(
+                default_payment_type="inbound",
+                default_partner_type="customer",
+                default_move_journal_types=("bank", "cash"),
+            )
+        ) as pay_form:
+            pay_form.partner_id = self.partner
+            pay_form.amount = 100.0
+            pay_form.journal_id = self.cash_journal
+        payment = pay_form.save()
+        payment.action_post()
+        year = fields.Date.today().year
+        self.assertEqual(payment.move_id.name, f"IN/{year}/0001")
+
+    def test_outbound_payment_method_line_sequence(self):
+        with Form(
+            self.env["account.payment"].with_context(
+                default_payment_type="outbound",
+                default_partner_type="customer",
+                default_move_journal_types=("bank", "cash"),
+            )
+        ) as pay_form:
+            pay_form.partner_id = self.partner
+            pay_form.amount = 50.0
+            pay_form.journal_id = self.cash_journal
+        payment = pay_form.save()
+        payment.action_post()
+        year = fields.Date.today().year
+        self.assertEqual(payment.move_id.name, f"OUT/{year}/0001")
