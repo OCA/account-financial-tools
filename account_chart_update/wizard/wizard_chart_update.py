@@ -717,12 +717,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         real_value_lang = tools.mail.html_to_inner_content(
                             real_value_lang
                         )
-                    # Skip non-English variants whose actual value is just
-                    # the English fallback: there's no stored translation
-                    # for that language, so the diff would only reflect
-                    # Odoo's read-time fallback, not real drift.
-                    if lang.code != "en_US" and real_value_lang == en_value:
-                        continue
                     if record_value_lang != real_value_lang:
                         result[key_lang] = record_value_lang
             elif field.ttype == "html":

@@ -1003,10 +1003,12 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertIn("False → True", note)
         self.assertNotIn("False → False", note)
 
-    def test_28a_no_drift_when_only_missing_translation_would_differ(self):
-        """A template translation for a language the DB never had stored
-        must not be flagged as drift — it's a translation the user never
-        created, not drift in a translation they did."""
+    def test_28a_missing_translation_flagged_when_template_has_it(self):
+        """Flag missing translations.
+
+        A template translation for a language the DB never had stored
+        must be flagged as drift so the wizard can create it.
+        """
         self.env["res.lang"]._activate_lang("fr_FR")
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         account_data = self.chart_template_data["account.account"]
@@ -1018,19 +1020,25 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             "name@fr": "Compte attendu",
         }
         diff = wizard.diff_fields(record_values, account)
-        self.assertNotIn(
+        self.assertIn(
             "name@fr",
             diff,
-            "Missing-translation case must not produce a drift entry",
+            "Missing translation must be flagged when the template carries"
+            " a translation the DB never stored.",
         )
         note = wizard.diff_notes(record_values, account)
-        self.assertNotIn("[fr]", note)
-        self.assertNotIn("Compte attendu", note)
+        self.assertIn("[fr]", note)
+        self.assertIn("Compte attendu", note)
 
-    def test_28c_english_drift_does_not_drag_in_missing_translation(self):
-        """When English drifts and a non-English template translation
-        exists but the DB never stored that language, the missing-language
-        line must not appear in the rendered note."""
+    def test_28c_english_drift_and_missing_translation_both_flagged(self):
+        """Flag English drift and non-English missing.
+
+        When English drifts and a non-English template translation
+        exists but the DB never stored that language, both drifts must
+        appear: the English one (real value differs from template) and the
+        missing-translation one (template carries a translation the DB
+        never stored).
+        """
         self.env["res.lang"]._activate_lang("nl_NL")
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         account_data = self.chart_template_data["account.account"]
@@ -1043,12 +1051,12 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         }
         diff = wizard.diff_fields(record_values, account)
         self.assertIn("name", diff)
-        self.assertNotIn("name@nl", diff)
+        self.assertIn("name@nl", diff)
         note = wizard.diff_notes(record_values, account)
         self.assertIn("Undistributed Profits/Losses", note)
         self.assertIn("Profit or Loss Appropriation", note)
-        self.assertNotIn("[nl]", note)
-        self.assertNotIn("Resultaatverwerking", note)
+        self.assertIn("[nl]", note)
+        self.assertIn("Resultaatverwerking", note)
 
     def test_28b_diff_note_translation_html_field_strips_tags(self):
         """`_diff_note_translation_detail` must strip HTML tags from both
@@ -1099,3 +1107,40 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertIn("Expected EN", note)
         self.assertIn("Drift FR", note)
         self.assertIn("Expected FR", note)
+
+    def test_30_missing_html_translation_detected_when_template_has_it(self):
+        """Flag missing translations of HTML translatable fields.
+
+        When the template carries a translation for a language but the DB
+        record has no stored translation for it (Odoo falls back to the
+        English value at read time), the wizard must detect it and propose
+        the template's translation.
+        """
+        self.env["res.lang"]._activate_lang("fr_FR")
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        fp = self._get_record_for_xml_id("template_generic_domestic_fiscal_position")
+        # Simulate the DB having only the English value stored: Odoo's
+        # read-time fallback will return the English text for fr_FR too.
+        english_note = "<p>English legal note</p>"
+        fp.with_context(lang="en_US").note = english_note
+        # Wipe the French translation so the fallback kicks in.
+        fp.with_context(lang="fr_FR").note = ""
+        fp.invalidate_recordset(["note"])
+        # Use synthetic record_values so the diff only reflects the note
+        # field and is not polluted by unrelated template drift. Include
+        # the boolean field that the post-loop synthesizes for absent keys.
+        record_values = {
+            "note": english_note,
+            "note@fr": "<p>Note légale attendue</p>",
+            "auto_apply": fp.auto_apply,
+        }
+        diff = wizard.diff_fields(record_values, fp)
+        self.assertIn(
+            "note@fr",
+            diff,
+            "Missing translation must be flagged when the template carries"
+            " a translation the DB never stored.",
+        )
+        note = wizard.diff_notes(record_values, fp)
+        self.assertIn("[fr]", note)
+        self.assertIn("Note légale attendue", note)
