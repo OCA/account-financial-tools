@@ -368,6 +368,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         self.assertEqual(invoice.name, "/", "name based on journal instead of sequence")
         invoice.action_post()
         self.assertIn("TB2CSEQ/", invoice.name, "name was not based on sequence")
+        self.assertEqual(invoice.payment_reference, invoice.name)
 
     def test_is_end_of_seq_chain(self):
         self.env.user.group_ids -= self.env.ref("account.group_account_manager")
