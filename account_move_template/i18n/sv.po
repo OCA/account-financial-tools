@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2024-06-05 10:38+0000\n"
-"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
+"PO-Revision-Date: 2026-07-01 14:46+0000\n"
+"Last-Translator: Laura V <laura.valls@forgeflow.com>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
@@ -176,7 +176,7 @@ msgstr "Visa namn"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__distribution_analytic_account_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__distribution_analytic_account_ids
 msgid "Distribution Analytic Account"
-msgstr ""
+msgstr "Analytiskt fördelningskonto"
 
 #. module: account_move_template
 #. odoo-python
@@ -270,6 +270,8 @@ msgid ""
 "Journal entry created from template <a href=# data-oe-"
 "model=account.move.template data-oe-id=%(template_id)d>%(template_name)s</a>."
 msgstr ""
+"Journalpost skapad från mall <a href=# data-oe-model=account.move.template "
+"data-oe-id=%(template_id)d>%(template_name)s</a>."
 
 #. module: account_move_template
 #. odoo-python
@@ -349,9 +351,8 @@ msgstr "Ursprungsmoms"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
-#, fuzzy
 msgid "Override Partner"
-msgstr "Företag"
+msgstr "Åsidosätt partner"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__overwrite
