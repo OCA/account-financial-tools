@@ -82,11 +82,8 @@ class AccountAssetRemove(models.TransientModel):
         res = super().default_get(fields_list)
         assert self.env.context.get("active_model") == "account.asset"
         asset = self.env["account.asset"].browse(self.env.context.get("active_id"))
-        country_code = asset.company_id.country_id.code or False
-        if country_code in self._residual_value_regime_countries():
-            res["posting_regime"] = "residual_value"
-        else:
-            res["posting_regime"] = "gain_loss_on_sale"
+        regime = self._get_default_posting_regime(asset.company_id)
+        res["posting_regime"] = regime
         sale_vals = self._get_sale(asset)
         residual_value_account_id = asset.profile_id.account_residual_value_id.id
         res.update(
@@ -127,6 +124,15 @@ class AccountAssetRemove(models.TransientModel):
     @api.model
     def _residual_value_regime_countries(self):
         return ["FR"]
+
+    @api.model
+    def _get_default_posting_regime(self, company):
+        country_code = company.country_id.code or False
+        if country_code in self._residual_value_regime_countries():
+            regime = "residual_value"
+        else:
+            regime = "gain_loss_on_sale"
+        return regime
 
     def remove(self):
         self.ensure_one()
