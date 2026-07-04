@@ -197,7 +197,8 @@ class AccountMoveLine(models.Model):
     @api.onchange("asset_profile_id")
     def _onchange_asset_profile_id(self):
         if (
-            self.asset_profile_id.account_asset_id
+            self.move_id.move_type == "in_invoice"
+            and self.asset_profile_id.account_asset_id
             and self.asset_profile_id.account_asset_id != self.account_id
         ):
             self.account_id = self.asset_profile_id.account_asset_id
