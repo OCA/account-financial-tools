@@ -1,6 +1,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class AccountAsset(models.Model):
@@ -25,6 +26,6 @@ class AccountAsset(models.Model):
         for asset in self:
             lot = asset.stock_lot_id
             if lot.product_id.tracking == "serial" and len(lot.asset_ids) > 1:
-                raise exceptions.UserError(
-                    _("A serial number can't be linked to multiple assets")
+                raise UserError(
+                    self.env._("A serial number can't be linked to multiple assets")
                 )
