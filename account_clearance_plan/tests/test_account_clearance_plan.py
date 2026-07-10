@@ -100,3 +100,17 @@ class TestAccountClearancePlan(AccountTestInvoicingCommon):
                 == move_line.debit
             ):
                 self.assertEqual(reconciled_line.move_id.id, move.id)
+
+    def test_onchange_clearance_plan_recurrence(self):
+        clearance_plan_wizard = self.create_and_fill_wizard()
+        self.assertTrue(clearance_plan_wizard.clearance_plan_line_ids)
+        for _i in range(len(clearance_plan_wizard.clearance_plan_line_ids)):
+            clearance_plan_wizard.clearance_plan_line_ids.remove(0)
+        self.assertFalse(clearance_plan_wizard.clearance_plan_line_ids)
+        clearance_plan_wizard.recurrence_type = "months"
+        clearance_plan_wizard.recurrent_clearance_amount = 100
+        clearance_plan_wizard.recurrence_number = 10
+        self.assertFalse(clearance_plan_wizard.clearance_plan_line_ids)
+        clearance_plan_wizard.clearance_plan_start_date = fields.Date.today()
+        self.assertTrue(clearance_plan_wizard.clearance_plan_line_ids)
+        self.assertEqual(clearance_plan_wizard.amount_unallocated, 0)

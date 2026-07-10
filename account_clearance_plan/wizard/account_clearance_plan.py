@@ -1,6 +1,8 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -57,6 +59,12 @@ class AccountClearancePlan(models.TransientModel):
         [("receivable", "Receivable"), ("payable", "Payable")],
         help="Receivable if we clear customers debts, payable if own debts.",
     )
+    recurrent_clearance_amount = fields.Float()
+    recurrence_type = fields.Selection(
+        selection=[("months", "Month(s)"), ("years", "Year(s)")], default="months"
+    )
+    recurrence_number = fields.Integer()
+    clearance_plan_start_date = fields.Date(string="", required=False)
 
     @api.depends("clearance_plan_line_ids.amount", "amount_to_allocate")
     def _compute_amount_unallocated(self):
@@ -64,6 +72,61 @@ class AccountClearancePlan(models.TransientModel):
             rec.amount_unallocated = rec.amount_to_allocate - sum(
                 rec.clearance_plan_line_ids.mapped("amount")
             )
+
+    def _prepare_clearance_plan_recurrence_line(self, amount, date):
+        model_line = self.env["account.clearance.plan.line"]
+        default_values = model_line.default_get(list(model_line.fields_get()))
+        default_values.update(
+            {
+                "amount": amount,
+                "clearance_plan_id": self.id,
+                "date_maturity": date,
+            }
+        )
+        return default_values
+
+    @api.onchange(
+        "recurrent_clearance_amount",
+        "recurrence_type",
+        "recurrence_number",
+        "clearance_plan_start_date",
+    )
+    def onchange_clearance_plan_recurrence(self):
+        self.ensure_one()
+        if (
+            self.recurrence_number
+            and self.recurrent_clearance_amount
+            and self.recurrence_type
+            and self.clearance_plan_start_date
+        ):
+            self.clearance_plan_line_ids = False
+            amount_to_allocate = self.amount_to_allocate
+            delta = relativedelta(**{self.recurrence_type: 1})
+            date = self.clearance_plan_start_date
+            line_model = self.env["account.clearance.plan.line"]
+            recurrence = 0
+            while (
+                amount_to_allocate >= self.recurrent_clearance_amount
+                and recurrence < self.recurrence_number
+            ):
+                line = line_model.new(
+                    self._prepare_clearance_plan_recurrence_line(
+                        self.recurrent_clearance_amount, date
+                    )
+                )
+                self.clearance_plan_line_ids |= line
+                date += delta
+                recurrence += 1
+                amount_to_allocate -= self.recurrent_clearance_amount
+            if amount_to_allocate > 0:
+                if len(self.clearance_plan_line_ids) < self.recurrence_number:
+                    self.clearance_plan_line_ids |= line_model.new(
+                        self._prepare_clearance_plan_recurrence_line(
+                            amount_to_allocate, date
+                        )
+                    )
+                else:
+                    line.amount += amount_to_allocate
 
     def _get_move_lines_from_context(self):
         active_model = self._context.get("active_model")
