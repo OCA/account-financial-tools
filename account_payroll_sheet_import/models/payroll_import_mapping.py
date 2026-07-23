@@ -1,7 +1,7 @@
 # Copyright 2025 (APSL - Nagarro) Bernat Obrador
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class PayrollImportMapping(models.Model):
@@ -35,7 +35,7 @@ class PayrollImportMappingLine(models.Model):
     column_name = fields.Char("Excel Column Name", required=True)
     account_id = fields.Many2one("account.account", string="Account", required=True)
     move_type = fields.Selection(
-        [("debit", _("Debit")), ("credit", _("Credit"))], required=True
+        [("debit", ("Debit")), ("credit", ("Credit"))], required=True
     )
     company_id = fields.Many2one(
         "res.company",

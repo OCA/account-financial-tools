@@ -14,14 +14,12 @@ class TestPayrollImport(TransactionCase):
             {
                 "name": "Test Account",
                 "code": "2241",
-                "company_id": cls.env.company.id,
             }
         )
         cls.credit_account = cls.env["account.account"].create(
             {
                 "name": "Credit Account",
                 "code": "2242",
-                "company_id": cls.env.company.id,
             }
         )
 
