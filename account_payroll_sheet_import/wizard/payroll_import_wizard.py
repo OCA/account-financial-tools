@@ -70,16 +70,19 @@ class PayrollImportWizard(models.TransientModel):
         if missing_columns:
             raise ValidationError(
                 _(
-                    "The following mapped Excel columns are missing from the uploaded file:\n- %s"
+                    "The following mapped Excel columns are missing "
+                    "from the uploaded file:\n- %(columns)s",
+                    columns="\n- ".join(missing_columns),
                 )
-                % "\n- ".join(missing_columns)
             )
+
         if self.mapping_id.id_column not in df.columns:
             raise ValidationError(
                 _(
-                    "The VAT/ID column '%(column)s' specified in the mapping is missing from the uploaded file."
+                    "The VAT/ID column '%(column)s' specified in the mapping "
+                    "is missing from the uploaded file.",
+                    column=self.mapping_id.id_column,
                 )
-                % {"column": self.mapping_id.id_column}
             )
 
     def build_move_lines(self, df, account_map):
