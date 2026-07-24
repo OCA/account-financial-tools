@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,7 +34,6 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "Balance mismatch for employee %(employee)s (%(vat)s):\n"
 "  Total Debit: %(debit).2f / Total Credit: %(credit).2f\n"
@@ -85,18 +84,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_payroll_sheet_import
-#. odoo-python
-#: code:addons/account_payroll_sheet_import/models/payroll_import_mapping.py:0
 #: model:ir.model.fields.selection,name:account_payroll_sheet_import.selection__payroll_import_mapping_line__move_type__credit
-#, python-format
 msgid "Credit"
 msgstr ""
 
 #. module: account_payroll_sheet_import
-#. odoo-python
-#: code:addons/account_payroll_sheet_import/models/payroll_import_mapping.py:0
 #: model:ir.model.fields.selection,name:account_payroll_sheet_import.selection__payroll_import_mapping_line__move_type__debit
-#, python-format
 msgid "Debit"
 msgstr ""
 
@@ -210,14 +203,12 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "No valid data found in the file."
 msgstr ""
 
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "Only Excel files are supported."
 msgstr ""
 
@@ -257,14 +248,12 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "Please upload a file."
 msgstr ""
 
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "The VAT/ID column '%(column)s' specified in the mapping is missing from the "
 "uploaded file."
@@ -273,8 +262,7 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "The following mapped Excel columns are missing from the uploaded file:\n"
-"- %s"
+"- %(columns)s"
 msgstr ""
