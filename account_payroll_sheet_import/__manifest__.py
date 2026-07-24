@@ -1,7 +1,7 @@
 {
     "name": "Payroll Sheet Importer",
     "summary": "Import payroll from sheet files and generate journal entries",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Accounting",
     "author": "APSL-Nagarro, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",

@@ -7,8 +7,9 @@ from collections import defaultdict
 
 import pandas as pd
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 
 
 class PayrollImportWizard(models.TransientModel):
@@ -32,7 +33,13 @@ class PayrollImportWizard(models.TransientModel):
     def get_partner(self, vat):
         """Searches for employee by VAT and return the asociated partner."""
         employee = self.env["hr.employee"].search(
-            ["|", ("identification_id", "=", vat), ("passport_id", "=", vat)], limit=1
+            Domain.OR(
+                [
+                    Domain("identification_id", "=", vat),
+                    Domain("passport_id", "=", vat),
+                ]
+            ),
+            limit=1,
         )
         return employee.work_contact_id if employee else None
 
@@ -51,25 +58,23 @@ class PayrollImportWizard(models.TransientModel):
         line_table = "\n".join(line_rows)
 
         raise ValidationError(
-            _(
+            self.env._(
                 "Balance mismatch for employee %(employee)s (%(vat)s):\n"
                 "  Total Debit: %(debit).2f / Total Credit: %(credit).2f\n\n"
-                "%(lines)s"
+                "%(lines)s",
+                employee=partner.name,
+                vat=vat,
+                debit=total_debit,
+                credit=total_credit,
+                lines=line_table,
             )
-            % {
-                "employee": partner.name,
-                "vat": vat,
-                "debit": total_debit,
-                "credit": total_credit,
-                "lines": line_table,
-            }
         )
 
     def check_columns(self, df, account_map):
         missing_columns = [col for col in account_map if col not in df.columns]
         if missing_columns:
             raise ValidationError(
-                _(
+                self.env._(
                     "The following mapped Excel columns are missing "
                     "from the uploaded file:\n- %(columns)s",
                     columns="\n- ".join(missing_columns),
@@ -78,7 +83,7 @@ class PayrollImportWizard(models.TransientModel):
 
         if self.mapping_id.id_column not in df.columns:
             raise ValidationError(
-                _(
+                self.env._(
                     "The VAT/ID column '%(column)s' specified in the mapping "
                     "is missing from the uploaded file.",
                     column=self.mapping_id.id_column,
@@ -154,10 +159,10 @@ class PayrollImportWizard(models.TransientModel):
 
     def action_import_payroll(self):
         if not self.file:
-            raise ValidationError(_("Please upload a file."))
+            raise ValidationError(self.env._("Please upload a file."))
 
         if not self.filename.endswith((".xlsx", ".xls")):
-            raise ValidationError(_("Only Excel files are supported."))
+            raise ValidationError(self.env._("Only Excel files are supported."))
 
         data = base64.b64decode(self.file)
         df = df = pd.read_excel(io.BytesIO(data))
@@ -175,7 +180,7 @@ class PayrollImportWizard(models.TransientModel):
                 "context": {"default_missing_ids": "\n".join(not_found)},
             }
         if not move_lines:
-            raise ValidationError(_("No valid data found in the file."))
+            raise ValidationError(self.env._("No valid data found in the file."))
 
         move = self.env["account.move"].create(
             {
