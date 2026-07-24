@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_payroll_mapping_line_tree" model="ir.ui.view">
         <field name="name">payroll.import.mapping.line.tree</field>
         <field name="model">payroll.import.mapping.line</field>
@@ -73,7 +72,6 @@
         sequence="100"
     />
 
-
     <menuitem
         id="menu_payroll_mapping_line"
         name="Payroll Mapping Lines"
@@ -81,5 +79,4 @@
         action="action_payroll_mapping_line"
         sequence="101"
     />
-
 </odoo>
