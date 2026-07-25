@@ -38,14 +38,14 @@ hidden things that are hidden and available only on EE version.
 1) This module adds all missing menu entries and views for the
    **Account** module.
 
-   - Bank Statements
-   - Cash Registers
-   - Account Tags
-   - Account Groups
-   - Chart of Account Templates
-   - Account Templates
-   - Tax Templates
-   - Fiscal Position Templates
+   -  Bank Statements
+   -  Cash Registers
+   -  Account Tags
+   -  Account Groups
+   -  Chart of Account Templates
+   -  Account Templates
+   -  Tax Templates
+   -  Fiscal Position Templates
 
 2) This module also enables the option to enable or disable Anglo-Saxon
    accounting in the Chart of Account Template form view and in the
@@ -56,6 +56,8 @@ hidden things that are hidden and available only on EE version.
    the EE terms.
 4) Rename the main menu 'Billing' into 'Accounting' to fit with EE
    naming.
+5) Allow to configure **Fiscalyear Last Day** on accounting
+   configuration page.
 
 **Table of contents**
 
@@ -67,7 +69,7 @@ Development
 
 **Detailled Module Category Changes (ir.module.category)**
 
-- base.module_category_accounting_accounting
+-  base.module_category_accounting_accounting
 
 *CE Without that module* -> Complete Name : Invoicing
 
@@ -75,7 +77,7 @@ Development
 
 **Detailled Groups Changes (res.groups)**
 
-- account.group_account_invoice
+-  account.group_account_invoice
 
 *CE Without that module* -> Complete Name : Invoicing / Billing ->
 Parent Category : base.module_category_accounting_accounting -> Implies
@@ -83,7 +85,7 @@ Parent Category : base.module_category_accounting_accounting -> Implies
 
 *CE With that module / EE* -> Complete Name: **Accounting** / Billing
 
-- account.group_account_readonly
+-  account.group_account_readonly
 
 *CE Without that module* -> Complete Name : Technical / Show Accounting
 Features - Readonly -> Parent : base.module_category_hidden -> Implies :
@@ -92,7 +94,7 @@ base.group_user
 *CE With that module / EE* -> name: **Accounting / Read-only** -> Parent
 Category: **base.module_category_accounting_accounting**
 
-- account.group_account_user
+-  account.group_account_user
 
 *CE Without that module* -> Complete Name : Technical / Show Full
 Accounting Features -> Parent : base.module_category_hidden -> Implies :
@@ -101,7 +103,7 @@ account.group_account_invoice, account.group_account_readonly
 *CE With that module / EE* -> name: **Accounting / Bookkeeper** ->
 Parent Category: **base.module_category_accounting_accounting**
 
-- account.group_account_manager
+-  account.group_account_manager
 
 *CE Without that module* -> Complete Name : Invoicing / Billing
 Administrator -> Parent : base.module_category_accounting_accounting ->
@@ -113,8 +115,8 @@ Implies : **account.group_account_user**
 Known issues / Roadmap
 ======================
 
-- Add a form view for the model ``account.bank.statement`` as Odoo SA
-  privatized in EE the form view in V16.0.
+-  Add a form view for the model ``account.bank.statement`` as Odoo SA
+   privatized in EE the form view in V16.0.
 
 Bug Tracker
 ===========
@@ -138,13 +140,13 @@ Authors
 Contributors
 ------------
 
-- Sylvain LE GAL <https://twitter.com/legalsylvain>
-- Raf Ven <raf.ven@dynapps.be>
-- Alexis de Lattre <alexis.delattre@akretion.com>
-- Álvaro Trius <alvaro.trius@forgeflow.com>
-- [APSL-Nagarro](https://apsl.tech):
+-  Sylvain LE GAL <https://twitter.com/legalsylvain>
+-  Raf Ven <raf.ven@dynapps.be>
+-  Alexis de Lattre <alexis.delattre@akretion.com>
+-  Álvaro Trius <alvaro.trius@forgeflow.com>
+-  [APSL-Nagarro](https://apsl.tech):
 
-  - Antoni Marroig <amarroig@apsl.net>
+   -  Antoni Marroig <amarroig@apsl.net>
 
 Maintainers
 -----------

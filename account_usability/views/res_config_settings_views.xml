@@ -21,6 +21,13 @@
                     </setting>
                 </block>
             </app>
+            <block id="accounting_reports">
+                <setting id="fiscalyear_last_day" string="Fiscal Year Last Day">
+                    <field name="fiscalyear_last_day" class="oe_inline" />
+                    <field name="fiscalyear_last_month" />
+                </setting>
+                <setting id="fiscalyear_last_month" />
+            </block>
         </field>
     </record>
 </odoo>

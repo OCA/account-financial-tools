@@ -15,3 +15,10 @@ class ResConfigSettings(models.TransientModel):
             "invoiced to a final customer."
         ),
     )
+    fiscalyear_last_day = fields.Integer(
+        related="company_id.fiscalyear_last_day", readonly=False
+    )
+
+    fiscalyear_last_month = fields.Selection(
+        related="company_id.fiscalyear_last_month", readonly=False
+    )

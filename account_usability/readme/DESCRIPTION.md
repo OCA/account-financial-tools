@@ -20,3 +20,4 @@ hidden things that are hidden and available only on EE version.
     to fit with the EE terms.
 4)  Rename the main menu 'Billing' into 'Accounting' to fit with EE
     naming.
+5) Allow to configure **Fiscalyear Last Day** on accounting configuration page.
