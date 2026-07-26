@@ -96,6 +96,21 @@ msgid "Display Name"
 msgstr "Prikazani naziv"
 
 #. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
+msgid "Fiscal Year Last Day"
+msgstr ""
+
+#. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_day
+msgid "Fiscalyear Last Day"
+msgstr ""
+
+#. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_month
+msgid "Fiscalyear Last Month"
+msgstr ""
+
+#. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
 msgid "Group"
 msgstr "Skupina"

@@ -49,6 +49,11 @@ msgid "Account prefixes can determine account groups."
 msgstr ""
 
 #. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
+msgid "Accounting"
+msgstr ""
+
+#. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_group_form
@@ -81,24 +86,50 @@ msgid "Config Settings"
 msgstr "Paramètres"
 
 #. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_account_account__display_name
+#: model:ir.model.fields,field_description:account_usability.field_account_account_tag__display_name
+#: model:ir.model.fields,field_description:account_usability.field_account_group__display_name
+#: model:ir.model.fields,field_description:account_usability.field_account_tax_group__display_name
+#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_usability
+#: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
+msgid "Fiscal Year Last Day"
+msgstr ""
+
+#. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_day
+msgid "Fiscalyear Last Day"
+msgstr ""
+
+#. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_month
+msgid "Fiscalyear Last Month"
+msgstr ""
+
+#. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
 msgid "Group"
 msgstr ""
 
 #. module: account_usability
+#: model:ir.model.fields,field_description:account_usability.field_account_account__id
+#: model:ir.model.fields,field_description:account_usability.field_account_account_tag__id
+#: model:ir.model.fields,field_description:account_usability.field_account_group__id
+#: model:ir.model.fields,field_description:account_usability.field_account_tax_group__id
+#: model:ir.model.fields,field_description:account_usability.field_res_config_settings__id
+msgid "ID"
+msgstr ""
+
+#. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid ""
-"Record the cost of a good as an expense when this good is\n"
-"                                invoiced to a final customer (instead of "
-"recording the cost as soon\n"
-"                                as the product is received in stock)."
+"Record the cost of a good as an expense when this good is invoiced to a "
+"final customer (instead of recording the cost as soon as the product is "
+"received in stock)."
 msgstr ""
-"Enregistre le coût d'une marchandise comme une dépense quand cette "
-"marchandise est\n"
-"                                                  facturée au client final "
-"(au lieu d'enregistrer le coût dès que\n"
-"                                                  le produit est reçu en "
-"stock)."
 
 #. module: account_usability
 #: model:ir.model.fields,help:account_usability.field_res_config_settings__anglo_saxon_accounting
@@ -128,6 +159,19 @@ msgstr "Modèles"
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__anglo_saxon_accounting
 msgid "Use anglo-saxon accounting"
 msgstr "Utiliser la comptabilité anglo-saxonne"
+
+#~ msgid ""
+#~ "Record the cost of a good as an expense when this good is\n"
+#~ "                                invoiced to a final customer (instead of "
+#~ "recording the cost as soon\n"
+#~ "                                as the product is received in stock)."
+#~ msgstr ""
+#~ "Enregistre le coût d'une marchandise comme une dépense quand cette "
+#~ "marchandise est\n"
+#~ "                                                  facturée au client "
+#~ "final (au lieu d'enregistrer le coût dès que\n"
+#~ "                                                  le produit est reçu en "
+#~ "stock)."
 
 #~ msgid "Account Template"
 #~ msgstr "Modèle de compte"
