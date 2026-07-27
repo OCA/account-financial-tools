@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-04-30 10:45+0000\n"
-"Last-Translator: Sergio Zanchetta <primes2h@gmail.com>\n"
+"PO-Revision-Date: 2026-07-27 10:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "I prefissi del conto determinano i gruppi del conto."
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid "Accounting"
-msgstr ""
+msgstr "Contabilità"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
@@ -92,22 +92,22 @@ msgstr "Impostazioni configurazione"
 #: model:ir.model.fields,field_description:account_usability.field_account_tax_group__display_name
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid "Fiscal Year Last Day"
-msgstr ""
+msgstr "Ultimo giorno anno fiscale"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_day
 msgid "Fiscalyear Last Day"
-msgstr ""
+msgstr "Ultimo giorno anno fiscale"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_month
 msgid "Fiscalyear Last Month"
-msgstr ""
+msgstr "Ultimo mese anno fiscale"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
@@ -121,7 +121,7 @@ msgstr "Gruppo"
 #: model:ir.model.fields,field_description:account_usability.field_account_tax_group__id
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
@@ -130,6 +130,9 @@ msgid ""
 "final customer (instead of recording the cost as soon as the product is "
 "received in stock)."
 msgstr ""
+"Registra il costo di un bene come una spesa quando tale bene è fatturato al "
+"cliente finale (invece di registrare il costo appena il prodotto è ricevuto "
+"in magazzino)."
 
 #. module: account_usability
 #: model:ir.model.fields,help:account_usability.field_res_config_settings__anglo_saxon_accounting
