@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-26 08:04+0000\n"
+"PO-Revision-Date: 2026-08-07 15:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -98,17 +98,17 @@ msgstr "Prikazani naziv"
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid "Fiscal Year Last Day"
-msgstr ""
+msgstr "Zadnji dan fiskalnega leta"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_day
 msgid "Fiscalyear Last Day"
-msgstr ""
+msgstr "Zadnji dan fiskalnega leta"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_month
 msgid "Fiscalyear Last Month"
-msgstr ""
+msgstr "Zadnji mesec fiskalnega leta"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
