@@ -4,7 +4,7 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import date_utils
 from odoo.tools.misc import format_amount, format_date
@@ -56,13 +56,10 @@ class AccountDashboardBannerCell(models.Model):
         default="under",
     )
 
-    _sql_constraints = [
-        (
-            "warn_lock_date_days_positive",
-            "CHECK(warn_lock_date_days >= 0)",
-            "Warn if lock date is older than N days must be positive or null.",
-        )
-    ]
+    _check_warn_lock_date_days = models.Constraint(
+        "check(warn_lock_date_days >= 0)",
+        "Warn if lock date is older than N days must be positive or null.",
+    )
 
     @api.constrains("warn_min", "warn_max", "warn_type", "warn", "cell_type")
     def _check_warn_config(self):
@@ -78,7 +75,7 @@ class AccountDashboardBannerCell(models.Model):
                     self.fields_get("cell_type", "selection")["cell_type"]["selection"]
                 )
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "On cell '%(cell_type)s' with warning enabled, "
                         "the minimum (%(warn_min)s) must be under "
                         "the maximum (%(warn_max)s).",
@@ -145,7 +142,7 @@ class AccountDashboardBannerCell(models.Model):
         # The order in this list will be the display order in the banner
         # In fact, it's not a list but a dict. I tried to make it work by returning
         # a list but it seems OWL only accepts dicts (I always get errors on lists)
-        cells = self.search([])
+        cells = self.search([])  # pylint: disable=no-search-all
         speedy = cells._prepare_speedy(company)
         res = {}
         seq = 0
@@ -202,7 +199,7 @@ class AccountDashboardBannerCell(models.Model):
                 day=1, month=month_start_quarter
             )
         specific_domain = [("date", ">=", start_date)]
-        specific_tooltip = _(
+        specific_tooltip = self.env._(
             "Balance of account(s) {account_codes} since %s.",
             format_date(self.env, start_date),
         )
@@ -231,7 +228,7 @@ class AccountDashboardBannerCell(models.Model):
         ) = self._prepare_cell_data_customer_debt(company, speedy)
         specific_domain = [("date_maturity", "<", speedy["today"])]
         specific_aggregate = "amount_residual:sum"
-        specific_tooltip = _(
+        specific_tooltip = self.env._(
             "Residual amount of account(s) {account_codes} with due date in the past."
         )
         return (accounts, sign, specific_domain, specific_aggregate, specific_tooltip)
@@ -289,7 +286,7 @@ class AccountDashboardBannerCell(models.Model):
                 assert sign in (1, -1)
                 raw_value = rg_res and rg_res[0][0] * sign or 0
                 value = format_amount(self.env, raw_value, company.currency_id)
-                tooltip_src = specific_tooltip or _(
+                tooltip_src = specific_tooltip or self.env._(
                     "Balance of account(s) {account_codes}."
                 )
                 tooltip = tooltip_src.format(
@@ -306,7 +303,7 @@ class AccountDashboardBannerCell(models.Model):
             "cell_type": cell_type,
             "label": self.custom_label or speedy["cell_type2label"][cell_type],
             "raw_value": raw_value,
-            "value": value or _("None"),
+            "value": value or self.env._("None"),
             "tooltip": self.custom_tooltip or tooltip,
             "warn": warn,
             "action": action,

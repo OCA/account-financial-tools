@@ -23,7 +23,10 @@ export class DashboardKanbanRendererBanner extends DashboardKanbanRenderer {
         this.orm = useService("orm");
 
         onWillStart(async () => {
-            this.state.banner = await this.orm.call("account.dashboard.banner.cell", "get_banner_data");
+            this.state.banner = await this.orm.call(
+                "account.dashboard.banner.cell",
+                "get_banner_data"
+            );
         });
     }
 }
@@ -33,4 +36,6 @@ export const accountDashboardKanbanBanner = {
     Renderer: DashboardKanbanRendererBanner,
 };
 
-registry.category("views").add("account_dashboard_kanban_banner", accountDashboardKanbanBanner);
+registry
+    .category("views")
+    .add("account_dashboard_kanban_banner", accountDashboardKanbanBanner);
