@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-08-17 11:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_missing_partner_wizard
@@ -21,16 +23,21 @@ msgid ""
 "          The following employees could not be identified.\n"
 "          Please create them and ensure their Identification Nº or Passport is set correctly."
 msgstr ""
+"<i class=\"fa fa-exclamation-triangle text-warning\" aria-hidden=\"true\" "
+"style=\"margin-right: 8px;\"/>\n"
+"          Non è stato possibile identificare i seguenti dipendenti.\n"
+"          Si prega di crearli e assicurarsi che il loro numero di "
+"identificazione o passaporto sia impostato correttamente."
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_missing_partner_wizard
 msgid "<strong>ID Numbers:</strong>"
-msgstr ""
+msgstr "<strong>Numeri ID:</strong>"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__account_id
 msgid "Account"
-msgstr ""
+msgstr "Conto"
 
 #. module: account_payroll_sheet_import
 #. odoo-python
@@ -42,32 +49,36 @@ msgid ""
 "\n"
 "%(lines)s"
 msgstr ""
+"Disallineamento del saldo per il dipendente %(employee)s (%(vat)s):\n"
+"  Totale addebito: %(debit).2f / Totale accredito: %(credit).2f\n"
+"\n"
+"%(lines)s"
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_payroll_import_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_missing_partner_wizard
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__mapping_id
 msgid "Column Mapping"
-msgstr ""
+msgstr "Mappatura colonna"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping__mapping_line_ids
 msgid "Column Mappings"
-msgstr ""
+msgstr "Mappature colonna"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping__company_id
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__company_id
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_missing_partner_wizard__create_uid
@@ -75,7 +86,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__create_uid
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_missing_partner_wizard__create_date
@@ -83,7 +94,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__create_date
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: account_payroll_sheet_import
 #. odoo-python
@@ -91,7 +102,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_payroll_sheet_import.selection__payroll_import_mapping_line__move_type__credit
 #, python-format
 msgid "Credit"
-msgstr ""
+msgstr "Credito"
 
 #. module: account_payroll_sheet_import
 #. odoo-python
@@ -99,7 +110,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_payroll_sheet_import.selection__payroll_import_mapping_line__move_type__debit
 #, python-format
 msgid "Debit"
-msgstr ""
+msgstr "Debito"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_missing_partner_wizard__display_name
@@ -107,22 +118,22 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__display_name
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__column_name
 msgid "Excel Column Name"
-msgstr ""
+msgstr "Nome colonna Excel"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__file
 msgid "Excel File"
-msgstr ""
+msgstr "File Excel"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__filename
 msgid "Filename"
-msgstr ""
+msgstr "Nome file"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_missing_partner_wizard__id
@@ -130,29 +141,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__id
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping__id_column
 msgid "ID Column"
-msgstr ""
+msgstr "Colonna ID"
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_payroll_import_form
 msgid "Import"
-msgstr ""
+msgstr "Importa"
 
 #. module: account_payroll_sheet_import
 #: model:ir.actions.act_window,name:account_payroll_sheet_import.action_payroll_import
 #: model:ir.ui.menu,name:account_payroll_sheet_import.menu_payroll_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_payroll_import_form
 msgid "Import Payroll"
-msgstr ""
+msgstr "Imposta busta paga"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Registro"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_missing_partner_wizard__write_uid
@@ -160,7 +171,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__write_uid
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_missing_partner_wizard__write_date
@@ -168,37 +179,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__write_date
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping__name
 msgid "Mapping Name"
-msgstr ""
+msgstr "Mappatura nome"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model,name:account_payroll_sheet_import.model_payroll_import_mapping_line
 msgid "Mapping of Excel columns to accounting accounts"
-msgstr ""
+msgstr "Mappatura delle colonne Excel nei conti di contabilità"
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_missing_partner_wizard
 msgid "Missing Contacts"
-msgstr ""
+msgstr "Contatti mancanti"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model,name:account_payroll_sheet_import.model_missing_partner_wizard
 msgid "Missing Employees from Payroll Import"
-msgstr ""
+msgstr "Dipendenti mancanti da impostazione busta paga"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_missing_partner_wizard__missing_ids
 msgid "Missing IDs"
-msgstr ""
+msgstr "ID mancanti"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__move_type
 msgid "Move Type"
-msgstr ""
+msgstr "Tipo movimento"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model.fields,help:account_payroll_sheet_import.field_payroll_import_mapping__id_column
@@ -207,60 +218,64 @@ msgid ""
 "        VAT/ID/Pasport numbers to map with the contact.\n"
 "        It uses the identification_id or passport_id field of the employee."
 msgstr ""
+"Nome della colonna nel file Excel che contiene\n"
+"        I numeri di partita IVA/carta d'identità/passaporto da associare al "
+"contatto.\n"
+"        Utilizza il campo identification_id o passport_id del dipendente."
 
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
 #, python-format
 msgid "No valid data found in the file."
-msgstr ""
+msgstr "Nessuna data valida trovata nel file."
 
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
 #, python-format
 msgid "Only Excel files are supported."
-msgstr ""
+msgstr "Sono supportati solo file Excel."
 
 #. module: account_payroll_sheet_import
 #: model:ir.model,name:account_payroll_sheet_import.model_payroll_import_wizard
 msgid "Payroll Excel Importer"
-msgstr ""
+msgstr "Importatore Excel buste paga"
 
 #. module: account_payroll_sheet_import
 #: model:ir.ui.menu,name:account_payroll_sheet_import.menu_payroll_import_root
 msgid "Payroll Import"
-msgstr ""
+msgstr "Importazione buste paga"
 
 #. module: account_payroll_sheet_import
 #: model:ir.model,name:account_payroll_sheet_import.model_payroll_import_mapping
 msgid "Payroll Import Mapping"
-msgstr ""
+msgstr "Mappatura importazione busta paga"
 
 #. module: account_payroll_sheet_import
 #: model:ir.actions.act_window,name:account_payroll_sheet_import.action_payroll_mapping
 #: model:ir.ui.menu,name:account_payroll_sheet_import.menu_payroll_mapping
 #: model:ir.ui.menu,name:account_payroll_sheet_import.menu_payroll_root
 msgid "Payroll Mapping"
-msgstr ""
+msgstr "Mappatura busta paga"
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_payroll_mapping_form
 msgid "Payroll Mapping Line"
-msgstr ""
+msgstr "Riga mappatura busta paga"
 
 #. module: account_payroll_sheet_import
 #: model:ir.actions.act_window,name:account_payroll_sheet_import.action_payroll_mapping_line
 #: model:ir.ui.menu,name:account_payroll_sheet_import.menu_payroll_mapping_line
 msgid "Payroll Mapping Lines"
-msgstr ""
+msgstr "Righe mappatura busta paga"
 
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
 #, python-format
 msgid "Please upload a file."
-msgstr ""
+msgstr "Caricare un file."
 
 #. module: account_payroll_sheet_import
 #. odoo-python
@@ -270,6 +285,8 @@ msgid ""
 "The VAT/ID column '%(column)s' specified in the mapping is missing from the "
 "uploaded file."
 msgstr ""
+"La colonna P.IVA/Documento identità '%(column)s' indicata nella mappatura "
+"non è presente nel file caricato."
 
 #. module: account_payroll_sheet_import
 #. odoo-python
@@ -279,3 +296,5 @@ msgid ""
 "The following mapped Excel columns are missing from the uploaded file:\n"
 "- %s"
 msgstr ""
+"Le seguenti colonne di mappatura Excel mancano nel file caricato:\n"
+"- %s"
