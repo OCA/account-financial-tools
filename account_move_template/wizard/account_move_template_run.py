@@ -168,8 +168,10 @@ Valid dictionary to overwrite template lines:
     def generate_move(self):
         self.ensure_one()
         sequence2amount = {}
+        sequence2analytic = {}
         for wizard_line in self.line_ids:
             sequence2amount[wizard_line.sequence] = wizard_line.amount
+            sequence2analytic[wizard_line.sequence] = wizard_line.analytic_distribution
         company_cur = self.company_id.currency_id
         self.template_id.compute_lines(sequence2amount)
         if all([company_cur.is_zero(x) for x in sequence2amount.values()]):
@@ -179,7 +181,11 @@ Valid dictionary to overwrite template lines:
             amount = sequence2amount[line.sequence]
             if not company_cur.is_zero(amount):
                 move_vals["line_ids"].append(
-                    Command.create(self._prepare_move_line(line, amount))
+                    Command.create(
+                        self._prepare_move_line(
+                            line, amount, sequence2analytic.get(line.sequence)
+                        )
+                    )
                 )
         move = self.env["account.move"].create(move_vals)
         result = self.env["ir.actions.actions"]._for_xml_id(
@@ -207,7 +213,7 @@ Valid dictionary to overwrite template lines:
         }
         return move_vals
 
-    def _prepare_move_line(self, line, amount):
+    def _prepare_move_line(self, line, amount, analytic_distribution=None):
         date_maturity = False
         if line.payment_term_id:
             date_maturity = max(
@@ -225,7 +231,8 @@ Valid dictionary to overwrite template lines:
             "partner_id": self.partner_id.id or line.partner_id.id,
             "date_maturity": date_maturity or self.date,
             "tax_repartition_line_id": line.tax_repartition_line_id.id or False,
-            "analytic_distribution": line.analytic_distribution,
+            "analytic_distribution": analytic_distribution
+            or line.analytic_distribution,
         }
         if line.tax_ids:
             values["tax_ids"] = [Command.set(line.tax_ids.ids)]
