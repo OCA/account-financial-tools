@@ -9,13 +9,11 @@
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account.view_move_line_form" />
         <field name="arch" type="xml">
-            <field name="statement_line_id" position="after">
-                <field
-                    name="check_deposit_id"
-                    readonly="True"
-                    invisible="not check_deposit_id"
-                />
-            </field>
+            <xpath expr="//page[@name='page_accounting_documents']" position="inside">
+                <group readonly="1" invisible="not check_deposit_id">
+                    <field name="check_deposit_id" />
+                </group>
+            </xpath>
         </field>
     </record>
 </odoo>
