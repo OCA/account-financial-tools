@@ -18,8 +18,7 @@ class AccountAsset(models.Model):
     @api.depends("stock_lot_id")
     def _compute_product_id(self):
         for asset in self:
-            if asset.stock_lot_id:
-                asset.product_id = asset.stock_lot_id.product_id.id
+            asset.product_id = asset.stock_lot_id.product_id
 
     @api.constrains("stock_lot_id")
     def _check_unique_asset(self):
