@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -196,6 +196,7 @@ msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -234,17 +235,13 @@ msgid "Get All Received Checks"
 msgstr ""
 
 #. module: account_check_deposit
-#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
-msgid "Group By"
-msgstr ""
-
-#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__has_message
 msgid "Has Message"
 msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__id
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__id
 msgid "ID"
 msgstr ""
 
