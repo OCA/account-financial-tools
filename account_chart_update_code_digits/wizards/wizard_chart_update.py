@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0)
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -16,11 +16,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _onchage_chart_template(self):
         res = super()._onchage_chart_template()
         self.code_digits = self.company_id.account_code_digits or self.code_digits
-        return res
-
-    def _update_accounts(self, t_data):
-        res = super()._update_accounts(t_data)
-        self.company_id.account_code_digits = self.code_digits
         return res
 
     @api.model
@@ -47,7 +42,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         )
         if failed_accounts:
             account_names = ", ".join(failed_accounts.mapped("display_name"))
-            msg = _(
+            msg = self.env._(
                 "The following accounts could not be automatically updated to "
                 "%(digits)s digits because they are not created by the chart "
                 "of accounts template. Please update them manually: %(accounts)s",

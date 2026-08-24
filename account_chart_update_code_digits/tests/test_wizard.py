@@ -29,3 +29,21 @@ class AccountChartUpdateWizardTest(TestAccountChartUpdateCommon):
         # Verify that code_digits is 10 when opening
         wizard2._onchage_chart_template()
         self.assertEqual(wizard2.code_digits, 10)
+
+    def test_account_not_in_template_warning(self):
+        """Accounts not created by the template are reported in the log."""
+        account = self.env["account.account"].create(
+            {
+                "name": "Manual account",
+                "code": "700001",
+                "account_type": "asset_current",
+                "company_ids": [self.company.id],
+            }
+        )
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        wizard.code_digits = 10
+        wizard.action_find_records()
+        wizard.action_update_records()
+        self.assertEqual(self.company.account_code_digits, 10)
+        self.assertIn(account.display_name, wizard.log)
+        self.assertEqual(len(account.with_company(self.company).code), 6)
