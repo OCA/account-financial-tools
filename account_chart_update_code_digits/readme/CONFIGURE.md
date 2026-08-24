@@ -1,4 +1,4 @@
-No configuration is needed. By default, the lenght of the account codes is set from chart template.
+No configuration is needed. By default, the length of the account codes is set from chart template.
 If the chart template has no length, then “6” is set.
 
 To change the account code length:
