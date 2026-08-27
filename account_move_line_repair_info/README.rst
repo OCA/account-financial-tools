@@ -71,6 +71,7 @@ Contributors
 ------------
 
 - Christopher Ormaza <chris.ormaza@forgeflow.com>
+- Jasmin Solanki <jasmin.solanki@forgeflow.com>
 
 Maintainers
 -----------
