@@ -1,0 +1,393 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_budget
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-09-11 09:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: account_move_budget
+#. odoo-python
+#: code:addons/account_move_budget/models/account_move_budget.py:0
+#, python-format
+msgid "%s (copy)"
+msgstr "%s (copia)"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__account_id
+msgid "Account"
+msgstr "Conto"
+
+#. module: account_move_budget
+#: model:ir.model,name:account_move_budget.model_account_move_budget
+msgid "Account Move Budget"
+msgstr "Budget movimento conto"
+
+#. module: account_move_budget
+#: model:ir.model,name:account_move_budget.model_account_move_budget_line
+msgid "Account Move Budget Line"
+msgstr "Riga budget movimento conto"
+
+#. module: account_move_budget
+#: model:ir.actions.act_window,name:account_move_budget.account_move_budget_act_window
+#: model:ir.ui.menu,name:account_move_budget.account_move_budget_menu
+msgid "Account Move Budgets"
+msgstr "Budget movimento conto"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_needaction
+msgid "Action Needed"
+msgstr "Azione richiesta"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_ids
+msgid "Activities"
+msgstr "Attività"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decorazione eccezione attività"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_state
+msgid "Activity State"
+msgstr "Stato attività"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icona tipo attività"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__analytic_account_id
+msgid "Analytic Account"
+msgstr "Conto analitico"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteggio allegati"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__balance
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__budget_id
+msgid "Budget"
+msgstr "Budget"
+
+#. module: account_move_budget
+#: model:ir.actions.act_window,name:account_move_budget.account_move_budget_line_act_window
+msgid "Budget Items"
+msgstr "Voci del budget"
+
+#. module: account_move_budget
+#: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
+msgid "Budget Lines"
+msgstr "Righe budget"
+
+#. module: account_move_budget
+#: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: account_move_budget
+#: model:ir.model.fields.selection,name:account_move_budget.selection__account_move_budget__state__cancelled
+msgid "Cancelled"
+msgstr "Annullato"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__company_id
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__company_currency_id
+msgid "Company Currency"
+msgstr "Valuta aziendale"
+
+#. module: account_move_budget
+#: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
+msgid "Confirm"
+msgstr "Conferma"
+
+#. module: account_move_budget
+#: model:ir.model.fields.selection,name:account_move_budget.selection__account_move_budget__state__confirmed
+msgid "Confirmed"
+msgstr "Confermato"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__create_uid
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__create_date
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__credit
+msgid "Credit"
+msgstr "Credito"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__date
+msgid "Date"
+msgstr "Data"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__date_range_id
+msgid "Date range"
+msgstr "Intervallo date"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__debit
+msgid "Debit"
+msgstr "Debito"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__description
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__display_name
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: account_move_budget
+#: model:ir.model.fields.selection,name:account_move_budget.selection__account_move_budget__state__draft
+msgid "Draft"
+msgstr "Bozza"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_follower_ids
+msgid "Followers"
+msgstr "Seguito da"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguito da (partner)"
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icona Font Awesome es. fa-tasks"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__date_from
+msgid "From Date"
+msgstr "Dalla data"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__has_message
+msgid "Has Message"
+msgstr "Ha un messaggio"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__id
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_exception_icon
+msgid "Icon"
+msgstr "Icona"
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icona per indicare un'attività eccezione."
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_is_follower
+msgid "Is Follower"
+msgstr "Segue"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__name
+msgid "Label"
+msgstr "Etichetta"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__write_uid
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__write_date
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__line_ids
+msgid "Line"
+msgstr "Riga"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_error
+msgid "Message Delivery error"
+msgstr "Errore di consegna messaggio"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_ids
+msgid "Messages"
+msgstr "Messaggi"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Scadenza mia attività"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__name
+#: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
+msgid "Name"
+msgstr "Nome"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Scadenza prossima attività"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_summary
+msgid "Next Activity Summary"
+msgstr "Riepilogo prossima attività"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo prossima attività"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Numero di azioni"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero di errori"
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Numero di messaggi che richiedono un'azione"
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Numero di messaggi con errore di consegna"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_user_id
+msgid "Responsible User"
+msgstr "Utente responsabile"
+
+#. module: account_move_budget
+#: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
+msgid "Set draft"
+msgstr "Imposta a bozza"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__state
+msgid "State"
+msgstr "Stato"
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Stato in base alle attività\n"
+"Scaduto: la data richiesta è trascorsa\n"
+"Oggi: la data attività è oggi\n"
+"Pianificato: attività future."
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget_line__balance
+msgid ""
+"Technical field holding the debit - credit in order to open meaningful graph "
+"views from reports"
+msgstr ""
+"Campo tecnico che contiene il debito - credito in modo da aprire una chiara "
+"vista grafica dai resoconti"
+
+#. module: account_move_budget
+#. odoo-python
+#: code:addons/account_move_budget/models/account_move_budget_line.py:0
+#, python-format
+msgid "The date must be within the budget period."
+msgstr "La data deve essere interna al periodo di budget."
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__date_to
+msgid "To Date"
+msgstr "Alla data"
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo di attività eccezione sul record."
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget_line__company_currency_id
+msgid "Utility field to express amount currency"
+msgstr "Campo utilità per esprimere la valuta del valore"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__website_message_ids
+msgid "Website Messages"
+msgstr "Messaggi sito web"
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__website_message_ids
+msgid "Website communication history"
+msgstr "Cronologia comunicazioni sito web"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Allegato principale"
