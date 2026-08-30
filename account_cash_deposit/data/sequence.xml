@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+    <record id="account_cash_deposit_sequence" model="ir.sequence">
+        <field name="name">Account Cash Deposit</field>
+        <field name="code">account.cash.deposit</field>
+        <field name="prefix">CASH-DEP-</field>
+        <field name="padding">3</field>
+        <field name="company_id" eval="False" />
+    </record>
+    <record id="account_cash_order_sequence" model="ir.sequence">
+        <field name="name">Account Cash Order</field>
+        <field name="code">account.cash.order</field>
+        <field name="prefix">CASH-ORDER-</field>
+        <field name="padding">3</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>
