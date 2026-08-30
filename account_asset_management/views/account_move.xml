@@ -28,6 +28,7 @@
             >
                 <field
                     name="asset_profile_id"
+                    domain="[('company_id', 'parent_of', parent.company_id)]"
                     column_invisible="parent.move_type not in ('in_invoice', 'in_refund')"
                     optional="show"
                     groups="account.group_account_invoice"
@@ -45,6 +46,7 @@
             >
                 <field
                     name="asset_profile_id"
+                    domain="[('company_id', 'parent_of', parent.company_id)]"
                     invisible="parent.move_type not in ('in_invoice', 'in_refund')"
                 />
                 <field
@@ -59,7 +61,7 @@
             >
                 <field
                     name="asset_profile_id"
-                    domain="[('company_id','=', parent.company_id)]"
+                    domain="[('company_id', 'parent_of', parent.company_id)]"
                     optional="hide"
                     groups="account.group_account_invoice"
                 />

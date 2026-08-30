@@ -1,5 +1,6 @@
 # Copyright 2009-2018 Noviat
 # Copyright 2021 Tecnativa - João Marques
+# Copyright 2026 Imaro Tech - Ignacio R. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -223,6 +224,7 @@ class AccountAssetLine(models.Model):
             "date": depreciation_date,
             "ref": f"{asset.name} - {self.name}",
             "journal_id": asset.profile_id.journal_id.id,
+            "company_id": asset.company_id.id,
         }
         return move_data
 
@@ -263,17 +265,32 @@ class AccountAssetLine(models.Model):
             asset = line.asset_id
             depreciation_date = line.line_date
             am_vals = line._setup_move_data(depreciation_date)
-            move = self.env["account.move"].with_context(**ctx).create(am_vals)
+            move = (
+                self.env["account.move"]
+                .with_company(asset.company_id)
+                .with_context(**ctx)
+                .create(am_vals)
+            )
             depr_acc = asset.profile_id.account_depreciation_id
             exp_acc = asset.profile_id.account_expense_depreciation_id
             aml_d_vals = line._setup_move_line_data(
                 depreciation_date, depr_acc, "depreciation", move
             )
-            self.env["account.move.line"].with_context(**ctx).create(aml_d_vals)
+            (
+                self.env["account.move.line"]
+                .with_company(asset.company_id)
+                .with_context(**ctx)
+                .create(aml_d_vals)
+            )
             aml_e_vals = line._setup_move_line_data(
                 depreciation_date, exp_acc, "expense", move
             )
-            self.env["account.move.line"].with_context(**ctx).create(aml_e_vals)
+            (
+                self.env["account.move.line"]
+                .with_company(asset.company_id)
+                .with_context(**ctx)
+                .create(aml_e_vals)
+            )
             move.action_post()
             line.with_context(allow_asset_line_update=True).write({"move_id": move.id})
             created_move_ids.append(move.id)

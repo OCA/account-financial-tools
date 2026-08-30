@@ -1,6 +1,7 @@
 # Copyright 2009-2020 Noviat
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2026 Imaro Tech - Ignacio R. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -12,6 +13,7 @@ class AccountAssetGroup(models.Model):
     _order = "code, name"
     _parent_store = True
     _check_company_auto = True
+    _check_company_domain = models.check_company_domain_parent_of
     _rec_names_search = ["code", "name"]
 
     name = fields.Char(size=64, required=True, index=True)
