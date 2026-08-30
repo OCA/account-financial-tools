@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_writeoff_log_form" model="ir.ui.view">
+        <field name="name">account.writeoff.log.form</field>
+        <field name="model">account.writeoff.log</field>
+        <field name="arch" type="xml">
+            <form string="Write-off Log" create="false" edit="false">
+                <header>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,in_progress,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_writeoff_moves"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            invisible="total_lines == 0"
+                        >
+                            <field
+                                name="total_lines"
+                                widget="statinfo"
+                                string="Journal Entries"
+                            />
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="execution_date" />
+                            <field name="writeoff_date" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="threshold_amount" />
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="total_amount" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Written-off Entries">
+                            <field name="line_ids">
+                                <tree>
+                                    <field name="invoice_id" />
+                                    <field name="partner_id" />
+                                    <field name="move_type" />
+                                    <field name="amount" />
+                                    <field name="writeoff_move_id" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_writeoff_log_list" model="ir.ui.view">
+        <field name="name">account.writeoff.log.list</field>
+        <field name="model">account.writeoff.log</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false">
+                <field name="name" />
+                <field name="execution_date" />
+                <field name="writeoff_date" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state == 'done'"
+                    decoration-warning="state == 'in_progress'"
+                    decoration-danger="state == 'partial'"
+                    decoration-muted="state == 'draft'"
+                />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="threshold_amount" />
+                <field name="total_lines" />
+                <field name="total_amount" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_writeoff_log" model="ir.actions.act_window">
+        <field name="name">Write-off Logs</field>
+        <field name="res_model">account.writeoff.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_writeoff_log"
+        name="Write-off Logs"
+        parent="account.menu_finance_entries"
+        action="action_writeoff_log"
+        sequence="99"
+        groups="account.group_account_manager"
+    />
+</odoo>
