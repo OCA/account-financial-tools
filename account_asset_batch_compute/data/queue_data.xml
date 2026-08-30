@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record model="queue.job.channel" id="channel_account_asset_batch_compute">
+        <field name="name">account_asset_batch_compute</field>
+        <field name="parent_id" ref="queue_job.channel_root" />
+    </record>
+    <record id="job_function_account_asset_compute_entries" model="queue.job.function">
+        <field name="model_id" ref="account_asset_management.model_account_asset" />
+        <field name="method">_compute_entries</field>
+        <field name="channel_id" ref="channel_account_asset_batch_compute" />
+    </record>
+    <record
+        id="job_function_account_asset_compute_asset_compute"
+        model="queue.job.function"
+    >
+        <field
+            name="model_id"
+            ref="account_asset_management.model_account_asset_compute"
+        />
+        <field name="method">asset_compute</field>
+        <field name="channel_id" ref="channel_account_asset_batch_compute" />
+    </record>
+</odoo>
