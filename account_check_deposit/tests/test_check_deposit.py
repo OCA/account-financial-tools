@@ -54,13 +54,15 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
                 ],
             }
         )
-        cls.company_data["default_journal_bank"].bank_account_id = cls.env[
-            "res.partner.bank"
-        ].create(
-            {
-                "acc_number": cls.iban_acc_number,
-                "partner_id": cls.company.partner_id.id,
-            }
+        cls.company_data["default_journal_bank"].sudo().bank_account_id = (
+            cls.env["res.partner.bank"]
+            .sudo()
+            .create(
+                {
+                    "acc_number": cls.iban_acc_number,
+                    "partner_id": cls.company.partner_id.id,
+                }
+            )
         )
 
     def create_invoice(self, amount=100):
