@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="demo_asset" model="account.asset">
+        <field name="name">Demo Laptop</field>
+        <field name="code">DEMO-ASSET-001</field>
+        <field name="purchase_value">1500.00</field>
+        <field name="profile_id" ref="demo_asset_profile" />
+        <field name="date_start">2025-01-01</field>
+    </record>
+    <function
+        model="account.asset"
+        name="compute_depreciation_board"
+        eval="[ref('demo_asset')]"
+    />
+    <function
+        model="account.asset"
+        name="validate"
+        eval="[ref('demo_asset')]"
+    />
+    <record id="demo_vehicle_asset" model="account.asset">
+        <field name="name">Demo Delivery Van</field>
+        <field name="code">DEMO-ASSET-002</field>
+        <field name="purchase_value">24000.00</field>
+        <field name="salvage_value">2000.00</field>
+        <field name="profile_id" ref="demo_vehicle_profile" />
+        <field name="date_start">2025-02-01</field>
+    </record>
+    <function
+        model="account.asset"
+        name="compute_depreciation_board"
+        eval="[ref('demo_vehicle_asset')]"
+    />
+    <function
+        model="account.asset"
+        name="validate"
+        eval="[ref('demo_vehicle_asset')]"
+    />
+    <function
+        model="ir.cron"
+        name="method_direct_trigger"
+        eval="[ref('ir_cron_assets_generator')]"
+    />
+    <record id="demo_asset_removal" model="account.asset.remove">
+        <field name="date_remove">2025-12-31</field>
+        <field name="posting_regime">residual_value</field>
+        <field name="account_residual_value_id" ref="demo_income_account" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <function
+        model="account.asset.remove"
+        name="remove"
+        eval="[ref('demo_asset_removal')]"
+        context="{'active_id': ref('demo_asset'), 'early_removal': True}"
+    />
+</odoo>
