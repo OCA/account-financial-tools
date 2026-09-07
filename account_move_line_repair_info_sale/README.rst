@@ -2,9 +2,9 @@
    :target: https://odoo-community.org/get-involved?utm_source=readme
    :alt: Odoo Community Association
 
-=============================
-Account Move Line Repair Info
-=============================
+==================================
+Account Move Line Repair Info Sale
+==================================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -67,6 +67,7 @@ Contributors
 ------------
 
 - Christopher Ormaza <chris.ormaza@forgeflow.com>
+- Jasmin Solanki <jasmin.solanki@forgeflow.com>
 
 Maintainers
 -----------
