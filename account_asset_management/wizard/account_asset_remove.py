@@ -183,8 +183,16 @@ class AccountAssetRemove(models.TransientModel):
         else:
             create_dl = asset_line_obj.search(
                 [("asset_id", "=", asset.id), ("type", "=", "create")]
-            )[0]
-            last_date = create_dl.line_date
+            )
+            if create_dl:
+                last_date = create_dl[0].line_date
+            else:
+                raise UserError(
+                    self.env._(
+                        "There are no depreciation lines for this asset. "
+                        "Please compute the depreciation board first."
+                    )
+                )
 
         if self.date_remove < last_date:
             raise UserError(
