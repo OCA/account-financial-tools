@@ -64,7 +64,9 @@ class TestAssetLowValue(AccountTestInvoicingCommon):
         self.assertEqual(asset.value_residual, 0)
         self.assertEqual(asset.state, "open")
         asset.remove()
-        remove_model = self.env["account.asset.remove"].with_context(active_id=asset.id)
+        remove_model = self.env["account.asset.remove"].with_context(
+            active_id=asset.id, active_model="account.asset"
+        )
         with Form(remove_model) as f:
             f.posting_regime = "residual_value"
         remove = f.save()
