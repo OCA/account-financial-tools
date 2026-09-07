@@ -1,0 +1,148 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_partner_required
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2023-11-03 14:36+0000\n"
+"Last-Translator: Alexis de Lattre <alexis@via.ecp.fr>\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_account
+msgid "Account"
+msgstr "Compte"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__always
+msgid "Always"
+msgstr "Toujours"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__never
+msgid "Never"
+msgstr "Jamais"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__optional
+msgid "Optional"
+msgstr "Optionnel"
+
+#. module: account_partner_required
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account__partner_policy
+#: model_terms:ir.ui.view,arch_db:account_partner_required.view_account_search
+msgid "Partner Policy"
+msgstr "Politique des partenaires"
+
+#. module: account_partner_required
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
+#, python-format
+msgid ""
+"Partner policy is set to 'Always' on account '%(account)s' but the partner "
+"is missing on the journal item '%(move_line)s'."
+msgstr ""
+"La politique des partenaires est définie sur \"Toujours\" pour le compte "
+"\"%(account)s\", mais le partenaire est absent de l'écriture comptable "
+"\"%(move_line)s\"."
+
+#. module: account_partner_required
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
+#, python-format
+msgid ""
+"Partner policy is set to 'Never' on account '%(account)s' but the journal "
+"item '%(move_line)s' has the partner '%(partner)s'."
+msgstr ""
+
+#. module: account_partner_required
+#: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
+msgid ""
+"Set the policy for the partner field:\n"
+"if you select 'Optional', the accountant is free to put a partner on journal "
+"items with this account ;\n"
+"if you select 'Always', the accountant will get an error message if there is "
+"no partner ;\n"
+"if you select 'Never', the accountant will get an error message if a partner "
+"is present."
+msgstr ""
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Never' on account '%(account)s' but the journal "
+#~ "item '%(move_line)s' has a partner '%(partner)s'."
+#~ msgstr ""
+#~ "La politique des partenaires est définie sur \"Jamais\" pour le compte "
+#~ "\"%(account)s\", mais l'écriture comptable \"%(move_line)s\" a un "
+#~ "partenaire \"%(partner)s\"."
+
+#~ msgid ""
+#~ "Set the policy for the partner field:\n"
+#~ "if you select 'Optional', the accountant is free to put a partner on an "
+#~ "account move line with this account ;\n"
+#~ "if you select 'Always', the accountant will get an error message if there "
+#~ "is no partner ;\n"
+#~ "if you select 'Never', the accountant will get an error message if a "
+#~ "partner is present."
+#~ msgstr ""
+#~ "Définit la politique pour le champ partenaire :\n"
+#~ "si vous sélectionnez \"Optionnel\", le comptable est libre de mettre un "
+#~ "partenaire sur une écriture comptable avec ce compte ;\n"
+#~ "si vous sélectionnez \"Toujours\", le comptable aura un message d'erreur "
+#~ "s'il n'y a pas de partenaire ;\n"
+#~ "si vous sélectionnez \"Jamais\", le comptable aura un message d'erreur si "
+#~ "un partenaire est présent."
+
+#~ msgid "Account Type"
+#~ msgstr "Type de compte"
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Always' with account '%s' but the partner is "
+#~ "missing in the account move line with label '%s'."
+#~ msgstr ""
+#~ "La stratégie de partenaire est définie sur « Toujours » avec le "
+#~ "compte'%s', mais le partenaire est manquant dans la ligne avec le libellé "
+#~ "'%s'."
+
+#, python-format
+#~ msgid ""
+#~ "Partner policy is set to 'Never' with account '%s' but the account move "
+#~ "line with label '%s' has a partner '%s'."
+#~ msgstr ""
+#~ "La stratégie de partenaire est définie sur « Jamais » avec le compte "
+#~ "'%s', mais la ligne de déplacement de compte avec le libellé '%s' a un "
+#~ "partenaire '%s'."
+
+#~ msgid "Policy for Partner Field"
+#~ msgstr "Politique pour le champ partenaire"
+
+#~ msgid ""
+#~ "Set the policy for the partner field : if you select 'Optional', the "
+#~ "accountant is free to put a partner on an account move line with this "
+#~ "type of account ; if you select 'Always', the accountant will get an "
+#~ "error message if there is no partner ; if you select 'Never', the "
+#~ "accountant will get an error message if a partner is present."
+#~ msgstr ""
+#~ "Définir la politique du champ partenaire : si vous sélectionnez "
+#~ "'Facultatif', le comptable est libre de mettre un partenaire sur une "
+#~ "ligne de déplacement de compte avec ce type de compte ; si vous "
+#~ "sélectionnez 'Toujours', le comptable recevra un message d'erreur s'il "
+#~ "n'y a pas d'associé ; si vous sélectionnez 'Jamais', le comptable recevra "
+#~ "un message d'erreur si un partenaire est présent."
