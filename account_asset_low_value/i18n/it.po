@@ -1,0 +1,67 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_low_value
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-12-16 12:43+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: account_asset_low_value
+#: model:ir.model,name:account_asset_low_value.model_account_asset
+msgid "Asset"
+msgstr "Cespite"
+
+#. module: account_asset_low_value
+#: model_terms:ir.ui.view,arch_db:account_asset_low_value.asset_low_value_remove_form
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: account_asset_low_value
+#: model:ir.model.fields,field_description:account_asset_low_value.field_account_asset__low_value
+#: model_terms:ir.ui.view,arch_db:account_asset_low_value.account_asset_view_search
+msgid "Low Value Asset"
+msgstr "Cespite a basso valore"
+
+#. module: account_asset_low_value
+#: model:ir.model.fields,help:account_asset_low_value.field_account_asset__low_value
+msgid ""
+"Low-Value Asset (LVA) is true when the asset profile set\n"
+"1. Asset Account = Expense (low value asset)\n"
+"2. Number of Years = 0 years\n"
+"In essense, the low value asset is not really and asset but an expense tracked as asset, as such, it has no residual value. And when removed, only status is changed (no accounting entry)."
+msgstr ""
+"Cespite a basso valore (LVA) è vero quando il profilo del bene è impostato "
+"su:\n"
+"1. Conto del cespite = Spesa (cespite di basso valore)\n"
+"2. Numero di anni = 0 anni\n"
+"In sostanza, il cespite a basso valore non è un vero cespite, ma una spesa "
+"registrata come cespite, pertanto non ha alcun valore residuo. E quando "
+"viene rimosso, ne cambia solo lo stato (nessuna registrazione contabile)."
+
+#. module: account_asset_low_value
+#: model_terms:ir.ui.view,arch_db:account_asset_low_value.account_asset_view_search
+msgid "Normal Asset"
+msgstr "Cespite normale"
+
+#. module: account_asset_low_value
+#: model:ir.model,name:account_asset_low_value.model_account_asset_remove
+#: model_terms:ir.ui.view,arch_db:account_asset_low_value.asset_low_value_remove_form
+msgid "Remove Asset"
+msgstr "Rimuovi cespite"
+
+#. module: account_asset_low_value
+#. odoo-python
+#: code:addons/account_asset_low_value/models/account_asset.py:0
+#, python-format
+msgid "Remove Low Value Asset"
+msgstr "Rimuovi cespite a basso valore"
