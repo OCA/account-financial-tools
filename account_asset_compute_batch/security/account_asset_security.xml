@@ -1,0 +1,10 @@
+<odoo noupdate="1">
+    <record id="account_asset_compute_batch_multi_company_rule" model="ir.rule">
+        <field name="name">Asset Compute Batch multi-company</field>
+        <field name="model_id" ref="model_account_asset_compute_batch" />
+        <field eval="True" name="global" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
