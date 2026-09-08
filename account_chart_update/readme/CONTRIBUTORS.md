@@ -3,6 +3,7 @@
   - Ernesto Tejeda
   - Víctor Martínez
   - Carlos Lopez
+  - Carlos Dauden
 - Jacques-Etienne Baudoux \<<je@bcim.be>\>
 - Sylvain Van Hoof \<<sylvain@okia.be>\>
 - Nacho Muñoz \<<nacmuro@gmail.com>\>
