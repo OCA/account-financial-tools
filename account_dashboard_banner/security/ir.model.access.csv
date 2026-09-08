@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_dashboard_banner_cell_manager,Full access on account.dashboard.banner.cell,model_account_dashboard_banner_cell,account.group_account_manager,1,1,1,1
+access_account_dashboard_banner_cell_user,Read access on account.dashboard.banner.cell,model_account_dashboard_banner_cell,account.group_account_user,1,0,0,0
+access_account_dashboard_banner_cell_auditor,Read access on account.dashboard.banner.cell,model_account_dashboard_banner_cell,account.group_account_readonly,1,0,0,0

@@ -1,0 +1,3 @@
+- Alexis de Lattre \<<alexis.delattre@akretion.com>\>
+- CIT-Services \<<cit-services.eu>\>
+  - Prayag \<<prayag.k@cit-services.eu>\>
