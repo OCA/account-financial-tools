@@ -24,7 +24,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_account_tag_code](account_account_tag_code/) | 19.0.1.0.0 |  | Add a code field to the accounts tags
 [account_asset_force_account](account_asset_force_account/) | 19.0.1.0.0 | <a href='https://github.com/BernatObrador'><img src='https://github.com/BernatObrador.png' width='32' height='32' style='border-radius:50%;' alt='BernatObrador'/></a> | Asset Force Account
-[account_asset_management](account_asset_management/) | 19.0.1.0.2 |  | Assets Management
+[account_asset_management](account_asset_management/) | 19.0.1.0.3 |  | Assets Management
 [account_chart_update](account_chart_update/) | 19.0.1.2.0 |  | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 19.0.1.0.0 |  | Manage deposit of checks to the bank
 [account_fiscal_position_allowed_journal](account_fiscal_position_allowed_journal/) | 19.0.1.0.0 | <a href='https://github.com/ThomasBinsfeld'><img src='https://github.com/ThomasBinsfeld.png' width='32' height='32' style='border-radius:50%;' alt='ThomasBinsfeld'/></a> | Allow defining allowed journals on fiscal positions. Related invoices can only use one of the allowed journals on the fiscal position.
