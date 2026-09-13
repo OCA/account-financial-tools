@@ -20,3 +20,5 @@
   - Miquel Raïch \<<miquel.raich@forgeflow.com>\>
 - [Sygel](https://www.sygel.es):
   - Manuel Regidor \<<manuel.regidor@sygel.es>\>
+- [NuoBiT](https://www.nuobit.com):
+  - Deniz Gallo  <dgallo@nuobit.com>
