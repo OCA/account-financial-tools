@@ -1,0 +1,1 @@
+No specific configuration is required. The dashboard inherits the standard journals and applies its logic automatically when accessed via the "Accounting Dashboard" menu.
