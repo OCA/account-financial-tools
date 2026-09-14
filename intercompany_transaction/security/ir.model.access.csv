@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_intercompany_transaction_config_intercompany_finance_manager_role,access.intercompany.transaction.config.intercompany.finance.manager.role,model_intercompany_transaction_config,account.group_account_manager,1,1,1,1
+access_intercompany_transaction_config_internal_user,access.intercompany.transaction.config.internal.user,model_intercompany_transaction_config,base.group_user,1,0,0,0
