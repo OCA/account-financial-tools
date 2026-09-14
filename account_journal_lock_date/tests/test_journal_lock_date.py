@@ -171,3 +171,77 @@ class TestJournalLockDate(common.AccountTestInvoicingCommon):
             }
         )
         move2.action_post()
+
+    def test_journal_lock_date_restrict_creation(self):
+        """Test the new 'Restrict Creation on Lock Dates' feature."""
+        # Set lock dates in the future
+        lock_date = date.today() + timedelta(days=5)
+        self.journal.write(
+            {
+                "period_lock_date": lock_date,
+                "fiscalyear_lock_date": lock_date,
+            }
+        )
+
+        # 1. With restriction disabled (default), creation should be allowed
+        self.journal.lock_date_restrict_creation = False
+        move = self.account_move_obj.create(
+            {
+                "date": date.today(),
+                "journal_id": self.journal.id,
+                "line_ids": [
+                    Command.create(
+                        {"account_id": self.account.id, "credit": 100.0, "name": "c"}
+                    ),
+                    Command.create(
+                        {"account_id": self.account2.id, "debit": 100.0, "name": "d"}
+                    ),
+                ],
+            }
+        )
+        self.assertTrue(move.id)
+
+        # 2. With restriction enabled, creation <= lock date should be blocked
+        self.journal.lock_date_restrict_creation = True
+        with self.assertRaisesRegex(
+            UserError, ".*prior to and inclusive of the lock date.*"
+        ):
+            self.account_move_obj.create(
+                {
+                    "date": date.today(),
+                    "journal_id": self.journal.id,
+                    "line_ids": [
+                        Command.create(
+                            {
+                                "account_id": self.account.id,
+                                "credit": 100.0,
+                                "name": "c",
+                            }
+                        ),
+                        Command.create(
+                            {
+                                "account_id": self.account2.id,
+                                "debit": 100.0,
+                                "name": "d",
+                            }
+                        ),
+                    ],
+                }
+            )
+
+        # 3. With restriction enabled, creation > lock date should be allowed
+        move_ok = self.account_move_obj.create(
+            {
+                "date": lock_date + timedelta(days=1),
+                "journal_id": self.journal.id,
+                "line_ids": [
+                    Command.create(
+                        {"account_id": self.account.id, "credit": 100.0, "name": "c"}
+                    ),
+                    Command.create(
+                        {"account_id": self.account2.id, "debit": 100.0, "name": "d"}
+                    ),
+                ],
+            }
+        )
+        self.assertTrue(move_ok.id)
