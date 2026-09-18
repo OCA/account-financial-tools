@@ -149,5 +149,7 @@ msgstr "Anglo-amerikanische Buchführung verwenden"
 #~ "(anstatt die Kosten zu erfassen, sobald\n"
 #~ "                                das Produkt im Lager eingeht)."
 
-#~ msgid "Accounting"
-#~ msgstr "Buchhaltung"
+#. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_finance
+msgid "Accounting"
+msgstr "Buchhaltung"
