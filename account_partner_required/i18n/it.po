@@ -1,0 +1,92 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_partner_required
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"PO-Revision-Date: 2024-02-22 11:38+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_account
+msgid "Account"
+msgstr "Conto"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__always
+msgid "Always"
+msgstr "Sempre"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_move_line
+msgid "Journal Item"
+msgstr "Movimento contabile"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__never
+msgid "Never"
+msgstr "Mai"
+
+#. module: account_partner_required
+#: model:ir.model.fields.selection,name:account_partner_required.selection__account_account__partner_policy__optional
+msgid "Optional"
+msgstr "Opzionale"
+
+#. module: account_partner_required
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account__partner_policy
+#: model_terms:ir.ui.view,arch_db:account_partner_required.view_account_search
+msgid "Partner Policy"
+msgstr "Politica partner"
+
+#. module: account_partner_required
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
+#, python-format
+msgid ""
+"Partner policy is set to 'Always' on account '%(account)s' but the partner "
+"is missing on the journal item '%(move_line)s'."
+msgstr ""
+"La politica del partner è impostata a 'Sempre' sul conto '%(account)s' ma il "
+"partner manca nel movimento contabile '%(move_line)s'."
+
+#. module: account_partner_required
+#. odoo-python
+#: code:addons/account_partner_required/models/account_move_line.py:0
+#, python-format
+msgid ""
+"Partner policy is set to 'Never' on account '%(account)s' but the journal "
+"item '%(move_line)s' has the partner '%(partner)s'."
+msgstr ""
+"La politica del partner è impostata a 'Mai' sul conto '%(account)s' ma il "
+"movimento contabile '%(move_line)s' ha il partner '%(partner)s'."
+
+#. module: account_partner_required
+#: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
+msgid ""
+"Set the policy for the partner field:\n"
+"if you select 'Optional', the accountant is free to put a partner on journal "
+"items with this account ;\n"
+"if you select 'Always', the accountant will get an error message if there is "
+"no partner ;\n"
+"if you select 'Never', the accountant will get an error message if a partner "
+"is present."
+msgstr ""
+"Impostare la politica per il campo partner:\n"
+"se si seleziona 'Opzionale', il contabile è libero di inserire un partner "
+"nel movimento contabile con questo conto;\n"
+"se si seleziona 'Sempre', il contabile riceverà un messaggio di errore se "
+"non c'è il partner;\n"
+"se si seleziona 'Mai', il contabile riceverà un messaggio di errore se c'è "
+"il partner."
