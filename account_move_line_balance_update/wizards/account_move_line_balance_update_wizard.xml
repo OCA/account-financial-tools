@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_move_line_balance_update_wizard_form" model="ir.ui.view">
+        <field name="name">account.move.line.balance.update.wizard.form</field>
+        <field name="model">account.move.line.balance.update.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Modify Balance">
+                <group>
+                    <field name="currency_id" invisible="1" />
+                    <field name="line_currency_id" invisible="1" />
+                    <field name="has_foreign_currency" invisible="1" />
+                    <field name="line_id" />
+                    <field name="current_balance" invisible="has_foreign_currency" />
+                    <field
+                        name="current_amount_currency"
+                        invisible="not has_foreign_currency"
+                    />
+                    <field name="counterpart_line_id" />
+                    <field
+                        name="counterpart_current_balance"
+                        invisible="has_foreign_currency"
+                    />
+                    <field
+                        name="counterpart_current_amount_currency"
+                        invisible="not has_foreign_currency"
+                    />
+                    <field
+                        name="new_balance"
+                        invisible="has_foreign_currency"
+                        required="not has_foreign_currency"
+                    />
+                    <field
+                        name="new_amount_currency"
+                        invisible="not has_foreign_currency"
+                        required="has_foreign_currency"
+                    />
+                </group>
+                <footer>
+                    <button
+                        name="action_apply"
+                        string="Apply"
+                        type="object"
+                        default_focus="1"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel" class="btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
