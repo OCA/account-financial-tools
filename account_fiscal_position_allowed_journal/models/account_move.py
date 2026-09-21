@@ -3,7 +3,6 @@
 
 from odoo import api, models
 from odoo.exceptions import UserError
-from odoo.fields import Domain
 
 
 class AccountMove(models.Model):
@@ -11,9 +10,7 @@ class AccountMove(models.Model):
 
     def _get_fiscal_position_journal_domain(self):
         self.ensure_one()
-        return Domain(
-            "id", "in", self.fiscal_position_id.sudo().allowed_journal_ids.ids
-        )
+        return [("id", "in", self.fiscal_position_id.sudo().allowed_journal_ids.ids)]
 
     @api.depends("fiscal_position_id")
     def _compute_suitable_journal_ids(self):
