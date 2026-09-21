@@ -1,4 +1,5 @@
-To use this module, you need to be a Billing Administrator and go to:
+To use this module, you need the **Accounting/Invoicing Administrator** role
+(`account.group_account_manager`) and go to:
 
-- Invoicing -\> Accounting -\> Lock Dates
-- Change values and click on **Update** button
+- Invoicing \-> Accounting \-> Lock Dates
+- Change values and click on the **Update** button
