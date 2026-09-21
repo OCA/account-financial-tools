@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="name">account.journal.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <group name="group_edi_config" position="after">
+                <group string="Reconciliation of reversal moves on posting" name="reversal_reconciliation">
+                    <field name="reversal_post_automatic_reconcile_default" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
