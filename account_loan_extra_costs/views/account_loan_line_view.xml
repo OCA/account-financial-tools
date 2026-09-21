@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 INVITU
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="account_loan_line_tree_extra_costs" model="ir.ui.view">
+        <field name="name">account.loan.line.tree.extra.costs</field>
+        <field name="model">account.loan.line</field>
+        <field name="inherit_id" ref="account_loan.account_loan_line_tree" />
+        <field name="arch" type="xml">
+            <field name="interests_amount" position="after">
+                <field
+                    name="extra_cost_amount"
+                    sum="Total extra costs"
+                    readonly="has_moves or has_invoices"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="account_loan_lines_view_extra_costs" model="ir.ui.view">
+        <field name="name">account.loan.lines.view.extra.costs</field>
+        <field name="model">account.loan.line</field>
+        <field name="inherit_id" ref="account_loan.account_loan_lines_view" />
+        <field name="arch" type="xml">
+            <field name="interests_amount" position="after">
+                <field name="extra_cost_amount" optional="show" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
