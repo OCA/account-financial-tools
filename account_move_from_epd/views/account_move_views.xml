@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Camptocamp SA
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl) -->
+<odoo>
+    <record id="view_move_form_epd_button" model="ir.ui.view">
+        <field name="name">account.move.form.epd_button</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <!-- Place the button next to the "Credit Note" button so it is
+                 visible in the same header context for posted invoices/bills. -->
+            <xpath
+                expr="//button[@name='action_reverse']"
+                position="after"
+            >
+                <button
+                    name="%(account_move_from_epd.action_account_move_from_epd_generator)d"
+                    string="Generate EPD Entry"
+                    type="action"
+                    groups="account.group_account_invoice"
+                    invisible="not display_generate_epd_move"
+                />
+            </xpath>
+
+            <!-- Warning when the EPD move exists but is no longer reconciled. -->
+            <xpath expr="//sheet" position="before">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="not generated_epd_move_not_reconciled"
+                >
+                    Warning: the generated EPD entry&#160;<field
+                        name="generated_epd_move_id"
+                        readonly="1"
+                        class="alert-link d-inline-block"
+                        nolabel="1"
+                    />&#160;is no longer reconciled with this invoice.
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

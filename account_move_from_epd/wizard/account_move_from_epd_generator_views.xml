@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Camptocamp SA
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl) -->
+<odoo>
+    <record id="view_account_move_from_epd_generator_form" model="ir.ui.view">
+        <field name="name">account.move.from_epd.generator.form</field>
+        <field name="model">account.move.from_epd.generator</field>
+        <field name="arch" type="xml">
+            <form string="Generate Early Payment Discount Entry">
+                <group>
+                    <group>
+                        <field name="epd_move_journal_id"
+                            options="{'no_create': True, 'no_open': True}" />
+                        <field name="epd_move_date" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_generate"
+                            string="Generate Entry"
+                            type="object"
+                            class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_move_from_epd_generator" model="ir.actions.act_window">
+        <field name="name">Generate Early Payment Discount Entry</field>
+        <field name="res_model">account.move.from_epd.generator</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_account_move_from_epd_generator_form" />
+        <field name="target">new</field>
+    </record>
+</odoo>
