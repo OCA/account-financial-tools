@@ -350,3 +350,46 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertFalse(spread.display_create_all_moves)
         self.assertTrue(spread.display_recompute_buttons)
         self.assertTrue(spread.display_move_line_auto_post)
+
+    def test_15_check_analytic_distribution(self):
+        analytic_plan = self.env["account.analytic.plan"].create(
+            {
+                "name": "Test Analytic Plan",
+            }
+        )
+        self.env["account.analytic.applicability"].create(
+            {
+                "business_domain": "general",
+                "account_prefix": "7",
+                "applicability": "mandatory",
+                "analytic_plan_id": analytic_plan.id,
+            }
+        )
+        analytic_account = self.env["account.analytic.account"].create(
+            {
+                "name": "Test Analytic Account",
+                "code": "TAA",
+                "plan_id": analytic_plan.id,
+                "root_plan_id": analytic_plan.id,
+            }
+        )
+
+        with self.assertRaises(ValidationError):
+            self.env["account.spread"].create(
+                {
+                    "name": "test",
+                    "invoice_type": "out_invoice",
+                    "debit_account_id": self.debit_account.id,
+                    "credit_account_id": self.credit_account.id,
+                }
+            )
+
+        self.env["account.spread"].create(
+            {
+                "name": "test",
+                "invoice_type": "out_invoice",
+                "debit_account_id": self.debit_account.id,
+                "credit_account_id": self.credit_account.id,
+                "analytic_distribution": {str(analytic_account.id): 100},
+            }
+        )
