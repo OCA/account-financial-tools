@@ -1,0 +1,708 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_cash_deposit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-02-13 12:01+0000\n"
+"Last-Translator: Administrator <alexzub@tut.by>\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+msgid "%s has already been credited/debited on the bank account."
+msgstr "%s уже были зачислены/списаны с банковского счета."
+
+#. module: account_cash_deposit
+#: model:ir.actions.report,print_report_name:account_cash_deposit.report_account_cash_deposit
+msgid ""
+"'%s%s' % (object.display_name.replace(' ', '_'), object.state == 'draft' and"
+" '-draft' or '')"
+msgstr ""
+"'%s%s' % (object.display_name.replace(' ', '_'), object.state == 'draft' и '-"
+"draft' или '')"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Currency:</strong>"
+msgstr "<strong>Валюта:</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Дата:</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Loose Coins:</strong>"
+msgstr "<strong>Бесплатные монеты:</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Order Date:</strong>"
+msgstr "<strong>Дата заказа:</strong>"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "<strong>Total:</strong>"
+msgstr "<strong>Всего:</strong>"
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_name_company_unique
+msgid ""
+"A cash deposit/order with this reference already exists in this company."
+msgstr "Денежный вклад/заказ с таким артикулом уже существует в этой компании."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_line_cash_unit_unique
+msgid "A line already exists for this cash unit."
+msgstr "Для этой денежной единицы уже существует строка."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_needaction
+msgid "Action Needed"
+msgstr "Необходимые действия"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__active
+msgid "Active"
+msgstr "Активный"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_ids
+msgid "Activities"
+msgstr "Деятельность"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Деятельность Исключение Украшение"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_state
+msgid "Activity State"
+msgstr "Состояние активности"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Значок типа деятельности"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.cash_unit_form
+msgid "Archived"
+msgstr "Архивировано"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_attachment_count
+msgid "Attachment Count"
+msgstr "Счетчик вложений"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__auto_create
+msgid "Auto Create"
+msgstr "Автосоздание"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Back to Draft"
+msgstr "Назад к черновику"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__bank_journal_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Bank Account"
+msgstr "Банковский счет"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank Account Number to Credit:"
+msgstr "Номер банковского счета для зачисления:"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank Account Number to Debit:"
+msgstr "Номер банковского счета для списания:"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Bank:"
+msgstr "Банк:"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__both
+msgid "Both"
+msgstr "Оба"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_order_reception_form
+msgid "Cancel"
+msgstr "Отмена"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__cash_journal_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Cash Box"
+msgstr "Денежный ящик"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__operation_type__deposit
+msgid "Cash Deposit"
+msgstr "Депозит наличными"
+
+#. module: account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_account_cash_deposit_line
+msgid "Cash Deposit Lines"
+msgstr "Линии денежных вкладов"
+
+#. module: account_cash_deposit
+#: model:ir.actions.report,name:account_cash_deposit.report_account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_account_cash_deposit
+msgid "Cash Deposit/Order"
+msgstr "Наличный депозит/заказ"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_deposit_action
+#: model:ir.ui.menu,name:account_cash_deposit.account_cash_deposit_menu
+msgid "Cash Deposits"
+msgstr "Денежные депозиты"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__order_id
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__operation_type__order
+msgid "Cash Order"
+msgstr "Кассовый ордер"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_order_reception_action
+#: model:ir.model,name:account_cash_deposit.model_account_cash_order_reception
+msgid "Cash Order Reception"
+msgstr "Прием кассовых ордеров"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.account_cash_order_action
+#: model:ir.ui.menu,name:account_cash_deposit.account_cash_order_menu
+msgid "Cash Orders"
+msgstr "Кассовые ордера"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Cash Received"
+msgstr "Полученные денежные средства"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__date
+msgid "Cash Reception Date"
+msgstr "Дата получения наличных"
+
+#. module: account_cash_deposit
+#: model:ir.actions.act_window,name:account_cash_deposit.cash_unit_action
+#: model:ir.model,name:account_cash_deposit.model_cash_unit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__cash_unit_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Cash Unit"
+msgstr "Денежная единица"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_res_currency__cash_unit_ids
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.view_currency_form
+msgid "Cash Units"
+msgstr "Денежные единицы"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/wizards/account_cash_order_reception.py:0
+msgid "Cash reception confirmed on %s."
+msgstr "Получение наличных подтверждено на %s."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__coin
+msgid "Coin"
+msgstr "Монета"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__coinroll_qty
+msgid "Coin Quantity"
+msgstr "Количество монет"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__coinroll
+msgid "Coin Roll"
+msgstr "Монетный рулон"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__company_id
+msgid "Company"
+msgstr "Компания"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_order_reception_form
+msgid "Confirm Cash Reception"
+msgstr "Подтвердите получение наличных"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Confirm Order"
+msgstr "Подтвердить заказ"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__confirmed
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Confirmed"
+msgstr "Подтверждено"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__create_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__create_uid
+msgid "Created by"
+msgstr "Создано пользователем"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__create_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__create_date
+msgid "Created on"
+msgstr "Дата создания"
+
+#. module: account_cash_deposit
+#: model:ir.model,name:account_cash_deposit.model_res_currency
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__currency_id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__currency_id
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__date
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Date"
+msgstr "Дата"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__deposit
+msgid "Deposit"
+msgstr "Депозит"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__display_name
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__display_name
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__done
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Done"
+msgstr "Выполнено"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__account_cash_deposit__state__draft
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Draft"
+msgstr "Черновик"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_follower_ids
+msgid "Followers"
+msgstr "Последователи"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Последователи (партнеры)"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Потрясающая иконка со шрифтом, например, fa-tasks"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/cash_unit.py:0
+msgid "For a coin roll, the coin quantity must be strictly positive."
+msgstr "При бросании монеты количество монет должно быть строго положительным."
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "Group By"
+msgstr "Группировать по"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__has_message
+msgid "Has Message"
+msgstr "Имеет сообщение"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__id
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_exception_icon
+msgid "Icon"
+msgstr "Икона"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Значок, указывающий на активность исключения."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+"Если флажок установлен, значит, новые сообщения требуют вашего внимания."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+"Если флажок установлен, некоторые сообщения будут содержать ошибку доставки."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__auto_create
+msgid ""
+"If set, a line for this cash unit will be created by default on a new cash "
+"deposit or a new cash order or both."
+msgstr ""
+"Если установлено, строка для этой денежной единицы будет создаваться по "
+"умолчанию при новом денежном вкладе, новом кассовом ордере или и том, и "
+"другом."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__coin_amount
+msgid ""
+"If your bank has a coin counting machine, enter the total amount of coins "
+"counted by the machine instead of creating a line for each type of coin."
+msgstr ""
+"Если в вашем банке есть автомат для подсчета монет, введите общее количество "
+"монет, подсчитанных автоматом, вместо того чтобы создавать строку для "
+"каждого типа монет."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_is_follower
+msgid "Is Follower"
+msgstr "Является последователем"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__move_id
+msgid "Journal Entry"
+msgstr "Проводка"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__write_uid
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__write_uid
+msgid "Last Updated by"
+msgstr "Последнее изменение"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__write_date
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__write_date
+msgid "Last Updated on"
+msgstr "Дата последнего изменения"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__line_ids
+msgid "Lines"
+msgstr "Линии"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__coin_amount
+msgid "Loose Coin Amount"
+msgstr "Сумма разменной монеты"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_error
+msgid "Message Delivery error"
+msgstr "Ошибка доставки сообщения"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_ids
+msgid "Messages"
+msgstr "Сообщения"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Крайний срок моей деятельности"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+msgid "New"
+msgstr "Новый"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Следующая деятельность Крайний срок"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_summary
+msgid "Next Activity Summary"
+msgstr "Следующее резюме деятельности"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_type_id
+msgid "Next Activity Type"
+msgstr "Следующий вид деятельности"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__cash_type__note
+msgid "Note"
+msgstr "Примечание"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__notes
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Notes"
+msgstr "Примечания"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Количество действий"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__message_has_error_counter
+msgid "Number of errors"
+msgstr "Количество ошибок"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Количество сообщений, требующих принятия мер"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Количество сообщений с ошибкой доставки"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+msgid ""
+"On %(deposit)s, the cash journal %(cash_journal)s is not in the selected "
+"currency %(currency)s."
+msgstr ""
+"На %(deposit)s, кассовый журнал %(cash_journal)s не в выбранной валюте %"
+"(currency)s."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__operation_type
+msgid "Operation Type"
+msgstr "Тип операции"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields.selection,name:account_cash_deposit.selection__cash_unit__auto_create__order
+msgid "Order"
+msgstr "Заказать"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__order_date
+msgid "Order Date"
+msgstr "Дата заказа"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__parent_id
+msgid "Parent"
+msgstr "Родитель"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Print"
+msgstr "Печать"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__qty
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Quantity"
+msgstr "Количество"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__is_reconcile
+msgid "Reconciled"
+msgstr "Сверено"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__name
+msgid "Reference"
+msgstr "Ссылка"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__activity_user_id
+msgid "Responsible User"
+msgstr "Ответственный пользователь"
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
+msgid "State"
+msgstr "Состояние"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__state
+msgid "Status"
+msgstr "Статус"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Статус в зависимости от деятельности\n"
+"Просрочено: Срок выполнения уже прошел\n"
+"Сегодня: Дата выполнения сегодня\n"
+"Запланировано: Будущие действия."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__subtotal
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
+msgid "Subtotal"
+msgstr "Промежуточный итог"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+msgid "The %s is not in draft state, so you cannot delete it."
+msgstr ""
+"Сообщение %s не находится в состоянии черновика, поэтому вы не можете его "
+"удалить."
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/wizards/account_cash_order_reception.py:0
+msgid "The Cash Reception Date (%s) is in the future."
+msgstr "Дата получения наличных (%s) находится в будущем."
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+msgid "The Inter-Banks Transfer Account is not configured."
+msgstr "Счет межбанковских переводов не настроен."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_coinroll_qty_positive
+msgid "The coin quantity must be positive."
+msgstr "Количество монет должно быть положительным."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_coin_amount_positive
+msgid "The loose coin amount must be positive or null."
+msgstr "Сумма свободных монет должна быть положительной или нулевой."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_account_cash_deposit_line_qty_positive
+msgid "The quantity must be positive or null."
+msgstr "Количество должно быть положительным или нулевым."
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+msgid "The total amount of %s is zero."
+msgstr "Общая сумма %s равна нулю."
+
+#. module: account_cash_deposit
+#: model:ir.model.constraint,message:account_cash_deposit.constraint_cash_unit_value_positive
+msgid "The value must be strictly positive."
+msgstr "Значение должно быть строго положительным."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__cash_type
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__coinroll_qty
+msgid "This field should never be modified."
+msgstr "Это поле никогда не должно быть изменено."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_cash_unit__value
+msgid ""
+"This field should never be modified. For a coin roll, you must enter the "
+"value of the coin."
+msgstr ""
+"Это поле не должно изменяться. Для броска монеты необходимо ввести ее "
+"стоимость."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__total_amount
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_order_reception__total_amount
+msgid "Total Amount"
+msgstr "Общая сумма"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__total_value
+msgid "Total Value"
+msgstr "Общая стоимость"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit_line__tree_order
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__tree_order
+msgid "Tree Order"
+msgstr "Заказ деревьев"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__cash_type
+msgid "Type"
+msgstr "Тип"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Тип активности исключения в записи."
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__date
+msgid "Used as date for the journal entry."
+msgstr "Используется в качестве даты для записи в журнале."
+
+#. module: account_cash_deposit
+#: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_form
+msgid "Validate"
+msgstr "Проверить"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__value
+msgid "Value"
+msgstr "Значение"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__website_message_ids
+msgid "Website Messages"
+msgstr "Сообщения сайта"
+
+#. module: account_cash_deposit
+#: model:ir.model.fields,help:account_cash_deposit.field_account_cash_deposit__website_message_ids
+msgid "Website communication history"
+msgstr "История общения на сайте"
+
+#. module: account_cash_deposit
+#. odoo-python
+#: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
+msgid ""
+"You must delete cash lines that are linked to a currency other than %s."
+msgstr "Вы должны удалить кассовые линии, привязанные к валюте, отличной от %s."
