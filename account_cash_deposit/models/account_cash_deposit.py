@@ -264,7 +264,7 @@ class AccountCashDeposit(models.Model):
             ]
         )
         for rec in self:
-            res.append((rec.id, " ".join([type2label[self.operation_type], self.name])))
+            res.append((rec.id, " ".join([type2label[rec.operation_type], rec.name])))
         return res
 
     def confirm_order(self):
