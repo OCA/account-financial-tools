@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2026-02-01 11:09+0000\n"
+"PO-Revision-Date: 2026-09-24 17:16+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
 "tools-8-0/language/sl/)\n"
@@ -444,7 +444,7 @@ msgstr "Kreiraj vknjižbo"
 #: code:addons/account_asset_management/wizard/wizard_asset_compute.py:65
 #, python-format
 msgid "Created Asset Moves"
-msgstr "Kreirane vknjižbe osnovnega sredstva"
+msgstr "Ustvarjene vknjižbe osnovnega sredstva"
 
 #. module: account_asset_management
 #: field:account.asset.asset,create_uid:0
