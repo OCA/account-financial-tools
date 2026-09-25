@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
+     Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_loan_search" model="ir.ui.view">
+        <field name="name">account.loan.list</field>
+        <field name="model">account.loan</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <separator />
+                <filter string="Loan" name="loan" domain="[('loan_type','=','loan')]" />
+                <filter
+                    string="Borrow"
+                    name="borrow"
+                    domain="[('loan_type','=','borrow')]"
+                />
+                <group>
+                    <filter
+                        string="Type"
+                        name='loan_type'
+                        context="{'group_by':'loan_type'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="account_loan_tree" model="ir.ui.view">
+        <field name="name">account.loan.list</field>
+        <field name="model">account.loan</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="partner_id" optional="hide" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="state" />
+                <field name="rate" optional="hide" />
+                <field name="loan_type" optional="show" />
+                <field name="loan_amount" optional="hide" />
+                <field name="pending_principal_amount" optional="hide" sum="Total" />
+                <field name="periods" optional="hide" />
+                <field name="start_date" optional="hide" />
+            </list>
+        </field>
+    </record>
+    <record id="account_loan_pivot" model="ir.ui.view">
+        <field name="name">account.loan.pivot</field>
+        <field name="model">account.loan</field>
+        <field name="arch" type="xml">
+            <pivot string="Loans pivot">
+                <field name="name" type="row" />
+                <field name="loan_amount" type="measure" />
+            </pivot>
+        </field>
+    </record>
+    <record id="account_loan_form" model="ir.ui.view">
+        <field name="name">account.loan.form</field>
+        <field name="model">account.loan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compute_lines" type="object" string="Compute items" />
+                    <button
+                        name="%(account_loan_post_action)d"
+                        invisible="state != 'draft'"
+                        class="oe_highlight"
+                        type="action"
+                        string="Post"
+                        groups="account.group_account_manager"
+                    />
+                    <button
+                        name="button_draft"
+                        invisible="state not in ('posted', 'cancelled') or move_count != 0"
+                        type="object"
+                        string="Reset to draft"
+                        groups="account.group_account_manager"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                            name="view_account_moves"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            invisible="state == 'draft'"
+                            type="object"
+                        >
+                            <field string="Moves" name="move_count" widget="statinfo" />
+                        </button>
+                        <button
+                            name="%(account_loan_pay_amount_action)d"
+                            class="oe_stat_button"
+                            icon="fa-arrow-down"
+                            invisible="state != 'posted'"
+                            type="action"
+                            groups="account.group_account_manager"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Deduct</span>
+                                <span class="o_stat_text">Debt</span>
+                            </div>
+                        </button>
+                        <button
+                            name="%(account_loan_increase_amount_act_window)d"
+                            class="oe_stat_button"
+                            icon="fa-arrow-up"
+                            invisible="state != 'posted'"
+                            type="action"
+                            groups="account.group_account_manager"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Increase</span>
+                                <span class="o_stat_text">Debt</span>
+                            </div>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" readonly="state != 'draft'" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="company_id" invisible="1" />
+                            <field
+                                name="company_id"
+                                options="{'no_create': True}"
+                                readonly="state != 'draft'"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="loan_type" readonly="state != 'draft'" />
+                            <field name="loan_method" readonly="state != 'draft'" />
+                            <field name="loan_amount" readonly="state != 'draft'" />
+                        </group>
+                        <group>
+                            <field name="rate_type" readonly="state != 'draft'" />
+                            <field name="rate" />
+                            <field name="rate_period" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="state != 'draft'" />
+                            <field name="start_date" readonly="state != 'draft'" />
+                            <field name="periods" readonly="state != 'draft'" />
+                            <field name="method_period" readonly="state != 'draft'" />
+                        </group>
+                        <group>
+                            <field name="round_on_end" readonly="state != 'draft'" />
+                            <field
+                                name="payment_on_first_period"
+                                readonly="state != 'draft'"
+                            />
+                        </group>
+                    </group>
+                    <group invisible="state == 'draft'">
+                        <group>
+                            <field name="pending_principal_amount" />
+                            <field name="payment_amount" />
+                            <field name="interests_amount" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Items" id="items">
+                            <field
+                                name="line_ids"
+                                context="{'list_view_ref': 'account_loan.account_loan_line_tree'}"
+                                readonly="state in ['canlcelled', 'closed']"
+                            />
+                        </page>
+                        <page string="Accounts" id="accounting">
+                            <group>
+                                <group>
+                                    <field
+                                        name="journal_id"
+                                        readonly="state != 'draft'"
+                                    />
+                                    <field
+                                        name="short_term_loan_account_id"
+                                        readonly="state != 'draft'"
+                                    />
+                                </group>
+                                <group>
+                                    <field
+                                        name="long_term_loan_account_id"
+                                        readonly="state != 'draft'"
+                                    />
+                                    <field
+                                        name="interest_expenses_account_id"
+                                        readonly="state != 'draft'"
+                                    />
+                                    <field
+                                        name="currency_id"
+                                        groups="base.group_multi_currency"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="account_loan_action" model="ir.actions.act_window">
+        <field name="name">Loans</field>
+        <field name="res_model">account.loan</field>
+        <field name="view_mode">list,form,pivot</field>
+    </record>
+
+    <menuitem
+        id="loan_menu"
+        name="Loans"
+        parent="account.menu_finance_entries"
+        sequence="75"
+    />
+
+    <menuitem
+        id="account_loan_menu"
+        parent="loan_menu"
+        sequence="10"
+        name="Loans"
+        action="account_loan_action"
+    />
+</odoo>

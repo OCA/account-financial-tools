@@ -1,0 +1,11 @@
+{
+  "pull_requests": {
+    "orphaned_commits": "(auto) Nothing to port from PR #",
+    "OCA/account-financial-tools#1721": "migration source pr",
+    "OCA/account-financial-tools#1737": "Already ported",
+    "OCA/account-financial-tools#1750": "Already ported",
+    "OCA/account-financial-tools#1760": "Already ported",
+    "OCA/account-financial-tools#1816": "Already ported",
+    "OCA/account-financial-tools#1952": "Already ported"
+  }
+}
