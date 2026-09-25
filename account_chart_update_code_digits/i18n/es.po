@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_chart_update_code_digits
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-13 10:11+0000\n"
+"PO-Revision-Date: 2026-01-13 10:15+0100\n"
+"Last-Translator: Joel Estrada Castellano <joel@moduon.team>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. module: account_chart_update_code_digits
+#: model:ir.model.fields,field_description:account_chart_update_code_digits.field_res_company__account_code_digits
+msgid "Account Code Digits"
+msgstr "Dígitos del código de las cuentas contables"
+
+#. module: account_chart_update_code_digits
+#: model:ir.model.fields,field_description:account_chart_update_code_digits.field_wizard_update_charts_accounts__code_digits
+msgid "Code Digits"
+msgstr "Dígitos del código de las cuentas contables"
+
+#. module: account_chart_update_code_digits
+#: model:ir.model,name:account_chart_update_code_digits.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: account_chart_update_code_digits
+#. odoo-python
+#: code:addons/account_chart_update_code_digits/wizards/wizard_chart_update.py:0
+msgid ""
+"The following accounts could not be automatically updated to "
+"%(digits)s digits because they are not created by the chart "
+"of accounts template. Please update them manually: %(accounts)s"
+msgstr ""
+"Las siguientes cuentas no se han podido actualizar automáticamente a "
+"%(digits)s dígitos porque no están creados en la plantilla "
+"del plan contable. Por favor, actualícelas manualmente: %(accounts)s"
+
+#. module: account_chart_update_code_digits
+#: model:ir.model,name:account_chart_update_code_digits.model_wizard_update_charts_accounts
+msgid "Wizard Update Charts Accounts"
+msgstr "Wizard Actualización Plan de Cuentas"
