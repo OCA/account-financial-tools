@@ -1,0 +1,269 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_dashboard_banner
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-02-13 12:01+0000\n"
+"Last-Translator: Administrator <alexzub@tut.by>\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__above
+msgid "Above Maximum"
+msgstr "Выше максимума"
+
+#. module: account_dashboard_banner
+#: model:ir.model,name:account_dashboard_banner.model_account_dashboard_banner_cell
+msgid "Accounting Dashboard Banner Cell"
+msgstr "Приборная панель бухгалтерского учета Баннерная ячейка"
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "Balance of account(s) {account_codes} since %s."
+msgstr "Остаток на счете(ах) {account_codes} с %s."
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "Balance of account(s) {account_codes}."
+msgstr "Остаток по счету (счетам) {account_codes}."
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__inside
+msgid "Between Minimum and Maximum"
+msgstr "Между минимумом и максимумом"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__cell_type
+msgid "Cell Type"
+msgstr "Тип ячейки"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__create_uid
+msgid "Created by"
+msgstr "Создано пользователем"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__create_date
+msgid "Created on"
+msgstr "Дата создания"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__custom_label
+msgid "Custom Label"
+msgstr "Пользовательская этикетка"
+
+#. module: account_dashboard_banner
+#: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
+#: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_list
+msgid "Custom Label (optional)"
+msgstr "Пользовательская этикетка (опционально)"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__custom_tooltip
+msgid "Custom Tooltip"
+msgstr "Пользовательская всплывающая подсказка"
+
+#. module: account_dashboard_banner
+#: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
+msgid "Custom Tooltip (optional)"
+msgstr "Пользовательская всплывающая подсказка (необязательно)"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__customer_debt
+msgid "Customer Debt"
+msgstr "Задолженность клиентов"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__customer_overdue
+msgid "Customer Overdue"
+msgstr "Просрочка клиента"
+
+#. module: account_dashboard_banner
+#: model:ir.ui.menu,name:account_dashboard_banner.account_dashboard_config
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#. module: account_dashboard_banner
+#: model:ir.actions.act_window,name:account_dashboard_banner.account_dashboard_banner_cell_action
+#: model:ir.ui.menu,name:account_dashboard_banner.account_dashboard_banner_cell_menu
+msgid "Dashboard Banner Cells"
+msgstr "Ячейки баннера приборной панели"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__display_name
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_fiscalyear
+msgid "Fiscal Year-to-date Income"
+msgstr "Доходы за финансовый год"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__fiscalyear_lock_date
+msgid "Global Lock Date"
+msgstr "Дата глобальной блокировки"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__hard_lock_date
+msgid "Hard Lock Date"
+msgstr "Дата жесткой блокировки"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__write_uid
+msgid "Last Updated by"
+msgstr "Последнее изменение"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__write_date
+msgid "Last Updated on"
+msgstr "Дата последнего изменения"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__liquidity
+msgid "Liquidity"
+msgstr "Ликвидность"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_max
+msgid "Maximum"
+msgstr "Максимальный"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_min
+msgid "Minimum"
+msgstr "Минимум"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_month
+msgid "Month-to-date Income"
+msgstr "Доход за месяц"
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid "None"
+msgstr "Нет"
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid ""
+"On cell '%(cell_type)s' with warning enabled, the minimum (%(warn_min)s) "
+"must be under the maximum (%(warn_max)s)."
+msgstr ""
+"Для ячейки '%(cell_type)s' с включенным предупреждением минимальное значение "
+"(%(warn_min)s) должно быть меньше максимального (%(warn_max)s)."
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__purchase_lock_date
+msgid "Purchase Lock Date"
+msgstr "Дата блокировки покупки"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_quarter
+msgid "Quarter-to-date Income"
+msgstr "Доход за квартал"
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid ""
+"Residual amount of account(s) {account_codes} with due date in the past."
+msgstr ""
+"Остаточная сумма по счету (счетам) {account_codes} с датой погашения в "
+"прошлом."
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
+msgid "Sales Lock Date"
+msgstr "Дата блокировки продаж"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__sequence
+msgid "Sequence"
+msgstr "Последовательность"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__supplier_debt
+msgid "Supplier Debt"
+msgstr "Задолженность перед поставщиками"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__tax_lock_date
+msgid "Tax Return Lock Date"
+msgstr "Дата блокировки налоговой декларации"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__under
+msgid "Under Minimum"
+msgstr "Под минимумом"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__outside
+msgid "Under Minimum or Above Maximum"
+msgstr "Ниже минимума или выше максимума"
+
+#. module: account_dashboard_banner
+#: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
+msgid "Warn If"
+msgstr "Предупреждайте, если"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_lock_date_days
+msgid "Warn Lock Date Days"
+msgstr "Дни блокировки предупреждения"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_type
+msgid "Warn Type"
+msgstr "Тип предупреждения"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_type_show
+msgid "Warn Type Show"
+msgstr "Тип предупреждения Показать"
+
+#. module: account_dashboard_banner
+#: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
+msgid "Warn if lock date is older than"
+msgstr "Предупреждение, если дата блокировки старше"
+
+#. module: account_dashboard_banner
+#: model:ir.model.constraint,message:account_dashboard_banner.constraint_account_dashboard_banner_cell_warn_lock_date_days_positive
+msgid "Warn if lock date is older than N days must be positive or null."
+msgstr ""
+"Предупреждение, если дата блокировки старше N дней, должно быть "
+"положительным или нулевым."
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn
+msgid "Warning"
+msgstr "Внимание"
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_year
+msgid "Year-to-date Income"
+msgstr "Доход за год"
+
+#. module: account_dashboard_banner
+#: model_terms:ir.ui.view,arch_db:account_dashboard_banner.account_dashboard_banner_cell_form
+msgid "days"
+msgstr "дней"
