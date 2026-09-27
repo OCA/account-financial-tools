@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_writeoff_wizard_form" model="ir.ui.view">
+        <field name="name">account.writeoff.threshold.wizard.form</field>
+        <field name="model">account.writeoff.threshold.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Write-off Small Balances">
+                <sheet>
+                    <group>
+                        <group string="Configuration">
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_open': True}"
+                            />
+                            <field name="threshold_amount" />
+                            <field name="writeoff_date" />
+                        </group>
+                        <group string="Invoice Date Filter">
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field
+                                name="total_lines"
+                                invisible="not preview_line_ids"
+                            />
+                            <field
+                                name="total_amount"
+                                invisible="not preview_line_ids"
+                            />
+                        </group>
+                    </group>
+                    <notebook invisible="not preview_line_ids">
+                        <page string="Preview">
+                            <field name="preview_line_ids">
+                                <tree editable="bottom">
+                                    <field name="skip" />
+                                    <field
+                                        name="invoice_id"
+                                        options="{'no_open': True}"
+                                    />
+                                    <field
+                                        name="partner_id"
+                                        options="{'no_open': True}"
+                                    />
+                                    <field name="move_type" />
+                                    <field
+                                        name="amount_residual"
+                                        decoration-muted="skip"
+                                    />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_preview"
+                        string="Preview"
+                        type="object"
+                        class="btn-primary"
+                        invisible="preview_line_ids"
+                    />
+                    <button
+                        name="action_confirm"
+                        string="Write Off"
+                        type="object"
+                        class="btn-primary"
+                        invisible="not preview_line_ids"
+                        confirm="This will create and post journal entries for all listed invoices. Continue?"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_writeoff_wizard" model="ir.actions.act_window">
+        <field name="name">Write-off Small Balances</field>
+        <field name="res_model">account.writeoff.threshold.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_writeoff_wizard"
+        name="Write-off Small Balances"
+        parent="account.menu_finance_entries"
+        action="action_writeoff_wizard"
+        sequence="98"
+        groups="account.group_account_manager"
+    />
+</odoo>
