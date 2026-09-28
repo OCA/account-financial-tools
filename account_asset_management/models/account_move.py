@@ -88,6 +88,8 @@ class AccountMove(models.Model):
 
     def action_post(self):
         ret_val = super().action_post()
+        if self.env.get("skip_asset_creation_on_post"):
+            return ret_val
         for move in self:
             for aml in move.line_ids.filtered(
                 lambda line: line.asset_profile_id and not line.tax_line_id
