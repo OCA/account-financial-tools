@@ -1,0 +1,124 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_number
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-02-13 12:01+0000\n"
+"Last-Translator: Administrator <alexzub@tut.by>\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: account_asset_number
+#: model:ir.actions.report,print_report_name:account_asset_number.report_account_asset_number
+msgid "'Asset Number - %s' % (object.name)"
+msgstr "'Номер актива - %s' % (имя объекта)"
+
+#. module: account_asset_number
+#: model_terms:ir.ui.view,arch_db:account_asset_number.report_simple_asset_number
+msgid "<span class=\"text-muted\">No number available</span>"
+msgstr "<span class=\"text-muted\">Нет номера</span>."
+
+#. module: account_asset_number
+#: model:ir.model,name:account_asset_number.model_account_asset
+msgid "Asset"
+msgstr "Актив"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset__number
+msgid "Asset Number"
+msgstr "Номер актива"
+
+#. module: account_asset_number
+#: model:ir.actions.report,name:account_asset_number.report_account_asset_number
+msgid "Asset Number (PDF)"
+msgstr "Номер актива (PDF)"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__sequence_id
+msgid "Asset Number Sequence"
+msgstr "Последовательность номеров активов"
+
+#. module: account_asset_number
+#: model:ir.model,name:account_asset_number.model_account_asset_profile
+msgid "Asset profile"
+msgstr "Профиль активов"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset__use_sequence
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__use_sequence
+msgid "Auto Asset Number by Sequence"
+msgstr "Автоматический номер актива по последовательности"
+
+#. module: account_asset_number
+#: model:ir.model.fields.selection,name:account_asset_number.selection__account_asset_profile__barcode_type__barcode
+#: model_terms:ir.ui.view,arch_db:account_asset_number.report_simple_asset_number
+msgid "Barcode"
+msgstr "Штрих-код"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_height
+msgid "Barcode Height"
+msgstr "Высота штрих-кода"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_type
+msgid "Barcode Type"
+msgstr "Тип штрих-кода"
+
+#. module: account_asset_number
+#: model:ir.model.fields,field_description:account_asset_number.field_account_asset_profile__barcode_width
+msgid "Barcode Width"
+msgstr "Ширина штрих-кода"
+
+#. module: account_asset_number
+#: model:ir.model,name:account_asset_number.model_report_account_asset_management_asset_report_xls
+msgid "Dynamic XLS asset report generator"
+msgstr "Генератор динамических отчетов по активам в формате XLS"
+
+#. module: account_asset_number
+#: model:ir.model.fields,help:account_asset_number.field_account_asset_profile__barcode_height
+msgid "Height (in px) of the barcode or the QR code"
+msgstr "Высота (в пикселях) штрихкода или QR-кода"
+
+#. module: account_asset_number
+#: model:ir.model.fields,help:account_asset_number.field_account_asset__use_sequence
+#: model:ir.model.fields,help:account_asset_number.field_account_asset_profile__use_sequence
+msgid "If check, asset number auto run by sequence."
+msgstr ""
+"Если установить флажок, номер актива будет автоматически выполняться по "
+"порядку."
+
+#. module: account_asset_number
+#. odoo-python
+#: code:addons/account_asset_number/report/account_asset_report_xls.py:0
+msgid "Number"
+msgstr "Число"
+
+#. module: account_asset_number
+#: model:ir.model.fields.selection,name:account_asset_number.selection__account_asset_profile__barcode_type__qr
+msgid "QR"
+msgstr "QR"
+
+#. module: account_asset_number
+#: model_terms:ir.ui.view,arch_db:account_asset_number.account_asset_profile_view_form
+msgid "QR/Barcode Configuration"
+msgstr "Конфигурация QR/штрих-кода"
+
+#. module: account_asset_number
+#: model_terms:ir.ui.view,arch_db:account_asset_number.report_simple_asset_number
+msgid "QRcode"
+msgstr "QRcode"
+
+#. module: account_asset_number
+#: model:ir.model.fields,help:account_asset_number.field_account_asset_profile__barcode_width
+msgid "Width (in px) of the barcode or the QR code"
+msgstr "Ширина (в пикселях) штрихкода или QR-кода"

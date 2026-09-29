@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_asset_profile_view_form" model="ir.ui.view">
+        <field name="name">account.asset.profile.form</field>
+        <field name="model">account.asset.profile</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_profile_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group/group[last()]" position="after">
+                <group string="QR/Barcode Configuration">
+                    <field name="barcode_type" required="use_sequence" />
+                    <field name="barcode_width" required="use_sequence" />
+                    <field
+                        name="barcode_height"
+                        required="use_sequence"
+                        invisible="barcode_type == 'qr'"
+                    />
+                    <field name="use_sequence" />
+                    <field
+                        name="sequence_id"
+                        required="use_sequence"
+                        invisible="not use_sequence"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
