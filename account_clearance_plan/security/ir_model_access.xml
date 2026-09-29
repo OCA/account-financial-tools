@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="access_account_clearance_plan" model="ir.model.access">
+        <field name="name">access_account_clearance_plan</field>
+        <field name="model_id" ref="account_clearance_plan.model_account_clearance_plan"/>
+        <field name="group_id" ref="account.group_account_manager"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="access_account_clearance_plan_line" model="ir.model.access">
+        <field name="name">access_account_clearance_plan_line</field>
+        <field name="model_id" ref="account_clearance_plan.model_account_clearance_plan_line"/>
+        <field name="group_id" ref="account.group_account_manager"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+</odoo>
