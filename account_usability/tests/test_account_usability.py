@@ -35,3 +35,11 @@ class TestAccountUsability(TransactionCase):
         self.account_1.tag_ids = [Command.clear()]
         accounts = self.env["account.account"].search([("tag_id", "=", self.tag.id)])
         self.assertFalse(accounts)
+
+    def test_tag_id_follows_tag_side(self):
+        # Linking the account from the tag form (account_ids) must update
+        # the m2o as well.
+        self.tag.account_ids = [Command.link(self.account_2.id)]
+        self.assertEqual(self.account_2.tag_id, self.tag)
+        accounts = self.env["account.account"].search([("tag_id", "=", self.tag.id)])
+        self.assertEqual(accounts, self.account_2)
