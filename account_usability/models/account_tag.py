@@ -7,6 +7,8 @@ from odoo import fields, models
 class AccountAccountTag(models.Model):
     _inherit = "account.account.tag"
 
+    # Inverse helper for the core account.account tag_ids m2m, whose
+    # reverse side is not editable from the tag form.
     account_ids = fields.Many2many(
         comodel_name="account.account",
         relation="account_account_account_tag",
