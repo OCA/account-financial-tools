@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <app name="account" position="attributes">
+                <attribute name="string">Accounting</attribute>
+            </app>
+            <app name="account" position="inside">
+                <block
+                    title="Anglo-Saxon Accounting"
+                    name="anglo_saxon_setting_container"
+                >
+                    <setting
+                        string="Anglo-Saxon Accounting"
+                        id="anglo_saxon"
+                        help="Record the cost of a good as an expense when this good is invoiced to a final customer (instead of recording the cost as soon as the product is received in stock)."
+                    >
+                        <field name="anglo_saxon_accounting" />
+                    </setting>
+                </block>
+            </app>
+            <block id="accounting_reports">
+                <setting id="fiscalyear_last_day" string="Fiscal Year Last Day">
+                    <field name="fiscalyear_last_day" class="oe_inline" />
+                    <field name="fiscalyear_last_month" />
+                </setting>
+                <setting id="fiscalyear_last_month" />
+            </block>
+        </field>
+    </record>
+</odoo>
