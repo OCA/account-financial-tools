@@ -4,6 +4,7 @@
 
 import time
 from datetime import date, timedelta
+from unittest.mock import patch
 
 from freezegun import freeze_time
 
@@ -303,11 +304,25 @@ class TestAccountInvoiceConstraintChronology(BaseCommon):
         self.invoice_1_a_15.button_cancel()
         self.invoice_1_a_15.button_draft()
         self.invoice_1_a_15.invoice_date = after_10_days - timedelta(days=1)
-        with self.assertRaisesRegex(
-            UserError,
-            (
-                f"Chronology conflict: Invoice {self.invoice_1_a_15.name} cannot be "
-                f"before invoice {self.invoice_1_a_10.name}."
+        with (
+            patch(
+                "odoo.addons.account_invoice_constraint_chronology.model."
+                "account_move._",
+                side_effect=lambda source: {
+                    "Chronology conflict: Invoice {name} cannot be before "
+                    "invoice {inv_name}.": (
+                        "Translated chronology conflict: Invoice {name} "
+                        "cannot precede invoice {inv_name}."
+                    ),
+                }.get(source, source),
+            ),
+            self.assertRaisesRegex(
+                UserError,
+                (
+                    "Translated chronology conflict: Invoice "
+                    f"{self.invoice_1_a_15.name} cannot precede "
+                    f"invoice {self.invoice_1_a_10.name}."
+                ),
             ),
         ):
             self.invoice_1_a_15.action_post()
@@ -318,11 +333,25 @@ class TestAccountInvoiceConstraintChronology(BaseCommon):
         self.invoice_1_a_15.button_cancel()
         self.invoice_1_a_15.button_draft()
         self.invoice_1_a_15.invoice_date = after_20_days + timedelta(days=1)
-        with self.assertRaisesRegex(
-            UserError,
-            (
-                f"Chronology conflict: Invoice {self.invoice_1_a_15.name} cannot be"
-                f" after invoice {self.invoice_1_a_20.name}."
+        with (
+            patch(
+                "odoo.addons.account_invoice_constraint_chronology.model."
+                "account_move._",
+                side_effect=lambda source: {
+                    "Chronology conflict: Invoice {name} cannot be after "
+                    "invoice {inv_name}.": (
+                        "Translated chronology conflict: Invoice {name} "
+                        "cannot follow invoice {inv_name}."
+                    ),
+                }.get(source, source),
+            ),
+            self.assertRaisesRegex(
+                UserError,
+                (
+                    "Translated chronology conflict: Invoice "
+                    f"{self.invoice_1_a_15.name} cannot follow "
+                    f"invoice {self.invoice_1_a_20.name}."
+                ),
             ),
         ):
             self.invoice_1_a_15.action_post()

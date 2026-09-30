@@ -145,18 +145,19 @@ class AccountMove(models.Model):
             limit=1,
         )
         if after_inv:
-            time = "before"
-        else:
-            time = "after"
-        raise UserError(
-            _(
-                "Chronology conflict: Invoice {name} cannot be {time} "
+            message = _(
+                "Chronology conflict: Invoice {name} cannot be before "
                 "invoice {inv_name}."
-            ).format(
+            )
+        else:
+            message = _(
+                "Chronology conflict: Invoice {name} cannot be after "
+                "invoice {inv_name}."
+            )
+        raise UserError(
+            message.format(
                 name=self.name,
-                time=time,
                 inv_name=after_inv.name if after_inv else before_inv.name,
-                date_invoice=format_date(self.env, self.invoice_date),
             )
         )
 
