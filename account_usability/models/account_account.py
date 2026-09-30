@@ -1,61 +1,33 @@
+# Copyright 2018 FOREST AND BIOMASS ROMANIA SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from odoo import api, fields, models
 
 
-class Account(models.Model):
+class AccountAccount(models.Model):
     _inherit = "account.account"
 
-    group_id = fields.Many2one(search="_search_group_id")
+    # Plain stored m2o mirror of the core tag_ids m2m (whose inverse is
+    # not searchable), maintained by create/write below, so that accounts
+    # remain searchable and groupable by tag from the account side, like
+    # the account group search this module provided before Odoo 20.0.
+    tag_id = fields.Many2one(
+        comodel_name="account.account.tag",
+        index="btree",
+    )
 
-    def _search_group_id(self, operator, value):
-        if operator not in ("in", "=", "any"):
-            raise NotImplementedError
-
-        # Browse groups because value can be an odoo.tools.query.Query
-        if operator == "any" and isinstance(value, fields.Domain):
-            groups = self.env["account.group"].search(value)
-        else:
-            groups = self.env["account.group"].browse(value)
-
-        if not groups:
-            return [("id", "=", 0)]
-
-        query = """
-            SELECT
-                a.id
-            FROM
-                account_account a
-            JOIN
-                account_group g
-                ON g.code_prefix_start <= LEFT(
-                    (a.code_store::json ->> %(company_id)s),
-                    char_length(g.code_prefix_start)
-                )
-                AND g.code_prefix_end >= LEFT(
-                    (a.code_store::json ->> %(company_id)s),
-                    char_length(g.code_prefix_end)
-                )
-                AND g.company_id = %(company_id)s
-            WHERE g.id IN %(group_ids)s
-        """
-        self.env.cr.execute(
-            query,
-            {
-                "group_ids": tuple(groups.ids),
-                "company_id": str(self.env.company.root_id.id),
-            },
-        )
-        account_ids = [row[0] for row in self.env.cr.fetchall()]
-        return [("id", "in", account_ids)]
+    def _sync_tag_id_values(self):
+        for account in self:
+            account.tag_id = account.tag_ids[:1]
 
     @api.model_create_multi
     def create(self, vals_list):
-        res = super().create(vals_list)
-        res.mapped("group_id").invalidate_recordset()
-        return res
+        accounts = super().create(vals_list)
+        accounts._sync_tag_id_values()
+        return accounts
 
     def write(self, vals):
-        groups = self.mapped("group_id")
         res = super().write(vals)
-        if "code" in vals:
-            (self.mapped("group_id") | groups).invalidate_recordset()
+        if "tag_ids" in vals:
+            self._sync_tag_id_values()
         return res

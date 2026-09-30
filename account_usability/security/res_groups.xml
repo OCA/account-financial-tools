@@ -23,7 +23,6 @@
 
     <record id="account.group_account_readonly" model="res.groups">
         <field name="name">Read-only</field>
-        <field name="privilege_id" ref="account.res_groups_privilege_accounting" />
     </record>
 
     <!-- Level 2: account.group_account_invoice
@@ -48,7 +47,6 @@
 -->
     <record id="account.group_account_user" model="res.groups">
         <field name="name">Bookkeeper</field>
-        <field name="privilege_id" ref="account.res_groups_privilege_accounting" />
     </record>
 
     <!-- Level 4:
