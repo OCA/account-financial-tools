@@ -6,7 +6,6 @@ hidden things that are hidden and available only on EE version.
     - Bank Statements
     - Cash Registers
     - Account Tags
-    - Account Groups
     - Chart of Account Templates
     - Account Templates
     - Tax Templates
