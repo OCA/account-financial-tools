@@ -42,6 +42,9 @@
                                 <field name="update_tax" />
                                 <field name="update_fiscal_position" />
                             </group>
+                            <group string="Other options">
+                                <field name="continue_on_errors" />
+                            </group>
                         </group>
                         <div>
                             <h5>
@@ -105,6 +108,12 @@
                                 name="page_fields_taxes"
                                 invisible="not update_tax"
                             >
+                                <group string="Repartition lines">
+                                    <field
+                                        name="update_tax_repartition_line_account"
+                                    />
+                                    <field name="update_tax_repartition_line_tags" />
+                                </group>
                                 <field
                                     name="tax_field_ids"
                                     widget="many2many_checkboxes"

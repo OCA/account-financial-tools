@@ -3,10 +3,15 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
+from contextlib import contextmanager
+from unittest.mock import patch
 
+from odoo import Command
+from odoo.exceptions import UserError
 from odoo.tests import tagged
 from odoo.tools import mute_logger
 
+from odoo.addons.account.models.chart_template import AccountChartTemplate
 from odoo.addons.account_chart_update.tests.common import TestAccountChartUpdateCommon
 
 _logger = logging.getLogger(__name__)
@@ -19,6 +24,52 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         return self.env.ref(f"account.{self.company.id}_{xml_id}").with_company(
             self.company
         )
+
+    def _get_taxes_only_wizard_vals(self, **extra):
+        """Wizard values restricted to taxes, to keep the checks focused."""
+        vals = dict(
+            self.wizard_vals,
+            update_account=False,
+            update_account_group=False,
+            update_tax_group=False,
+            update_fiscal_position=False,
+        )
+        vals.update(extra)
+        return vals
+
+    def _get_tax_xml_id_with_repartition_account(self):
+        """XML-ID of a template tax whose repartition lines carry an account."""
+        return next(
+            xml_id
+            for xml_id, values in self.chart_template_data["account.tax"].items()
+            if any(
+                line[2].get("account_id")
+                for line in values.get("repartition_line_ids", [])
+            )
+        )
+
+    @contextmanager
+    def _template_data_with(self, extra):
+        """Complete the data the chart template exposes with ``extra``.
+
+        The generic chart of accounts has neither grouped taxes nor tags on its
+        repartition lines, so there is no way of exercising those from the real
+        data. The template is a pure data provider in this Odoo version, so it
+        is completed here the same way ``account`` tests its own loader.
+        """
+        data = self.env["account.chart.template"]._get_chart_template_data(
+            "generic_coa"
+        )
+        for model, records in extra.items():
+            for xml_id, values in records.items():
+                data[model][xml_id].update(values)
+        with patch.object(
+            AccountChartTemplate,
+            "_get_chart_template_data",
+            side_effect=lambda self, template_code: data,
+            autospec=True,
+        ):
+            yield data
 
     @mute_logger("odoo.models.unlink")
     def test_01_chart_update(self):
@@ -239,3 +290,156 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             filter(lambda x: x["installed"], all_chart_templates.values())
         )
         self.assertEqual(len(chart_template_installed), len(only_installed))
+
+    def test_04_continue_on_errors(self):
+        """A reference that cannot be resolved must not pass unnoticed.
+
+        The loader of this Odoo version drops the field it could not resolve
+        and only writes a warning to the log, so the wizard would otherwise
+        report a successful update of a tax that lost its accounts.
+        """
+        tax = self._get_record_for_xml_id(
+            self._get_tax_xml_id_with_repartition_account()
+        )
+        repartition = tax.repartition_line_ids.filtered(lambda x: x.account_id)
+        account = repartition.account_id
+        # Leave the account without XML-ID, so the template can no longer point
+        # at it, and make the tax differ from the template so it is updated.
+        self._get_model_data(account).unlink()
+        repartition.account_id = False
+        wizard = self.wizard_obj.with_company(self.company).create(
+            self._get_taxes_only_wizard_vals()
+        )
+        wizard.action_find_records()
+        self.assertEqual(wizard.tax_ids.update_tax_id, tax)
+        with self.assertRaises(UserError) as error:
+            wizard.action_update_records()
+        self.assertIn("tax_received", str(error.exception))
+        # Asking to continue applies what can be applied and keeps the log
+        wizard.continue_on_errors = True
+        wizard.action_update_records()
+        self.assertEqual(wizard.state, "done")
+        self.assertIn("tax_received", wizard.log)
+        self.assertFalse(tax.repartition_line_ids.account_id)
+
+    def test_05_tax_repartition_line_account(self):
+        """The account set by hand on a repartition line can be preserved."""
+        tax = self._get_record_for_xml_id(
+            self._get_tax_xml_id_with_repartition_account()
+        )
+        repartition = tax.repartition_line_ids.filtered(lambda x: x.account_id)[0]
+        template_account = repartition.account_id
+        custom_account = self.env["account.account"].search(
+            [
+                ("company_ids", "in", self.company.ids),
+                ("id", "!=", template_account.id),
+            ],
+            limit=1,
+        )
+        repartition.account_id = custom_account
+        # Excluded: the difference is not even reported
+        wizard = self.wizard_obj.with_company(self.company).create(
+            self._get_taxes_only_wizard_vals(update_tax_repartition_line_account=False)
+        )
+        wizard.action_find_records()
+        self.assertFalse(wizard.tax_ids)
+        wizard.unlink()
+        # Included (the default): the account of the template is restored,
+        # updating the existing line instead of replacing the whole set
+        wizard = self.wizard_obj.with_company(self.company).create(
+            self._get_taxes_only_wizard_vals()
+        )
+        wizard.action_find_records()
+        self.assertEqual(wizard.tax_ids.update_tax_id, tax)
+        wizard.action_update_records()
+        self.assertEqual(repartition.account_id, template_account)
+        self.assertIn(repartition, tax.repartition_line_ids)
+
+    def test_06_tax_repartition_line_tags(self):
+        """The tags set by hand on a repartition line can be preserved."""
+        tag_vals = {"applicability": "taxes", "country_id": self.company.country_id.id}
+        template_tag = self.env["account.account.tag"].create(
+            dict(tag_vals, name="Template tag")
+        )
+        custom_tag = self.env["account.account.tag"].create(
+            dict(tag_vals, name="Custom tag")
+        )
+        tax_xml_id = self._get_tax_xml_id_with_repartition_account()
+        tax = self._get_record_for_xml_id(tax_xml_id)
+        tax.repartition_line_ids[0].tag_ids = custom_tag
+        template_lines = self.chart_template_data["account.tax"][tax_xml_id][
+            "repartition_line_ids"
+        ]
+        extra = {
+            "account.tax": {
+                tax_xml_id: {
+                    "repartition_line_ids": [
+                        Command.create(
+                            dict(line[2], tag_ids=[Command.set(template_tag.ids)])
+                        )
+                        for line in template_lines
+                    ]
+                }
+            }
+        }
+        with self._template_data_with(extra):
+            # Excluded: the difference is not even reported
+            wizard = self.wizard_obj.with_company(self.company).create(
+                self._get_taxes_only_wizard_vals(update_tax_repartition_line_tags=False)
+            )
+            wizard.action_find_records()
+            self.assertFalse(wizard.tax_ids)
+            wizard.unlink()
+            # Included (the default): the tags of the template are applied
+            wizard = self.wizard_obj.with_company(self.company).create(
+                self._get_taxes_only_wizard_vals()
+            )
+            wizard.action_find_records()
+            self.assertEqual(wizard.tax_ids.update_tax_id, tax)
+            wizard.action_update_records()
+        self.assertEqual(tax.repartition_line_ids.tag_ids, template_tag)
+
+    def test_07_check_consistency_children_taxes(self):
+        """A grouped tax cannot be created without the taxes it groups."""
+        extra = {
+            "account.tax": {
+                "test_child_tax": {
+                    "name": "Test child tax",
+                    "amount": 5,
+                    "type_tax_use": "sale",
+                },
+                "test_group_tax": {
+                    "name": "Test group tax",
+                    "amount": 0,
+                    "amount_type": "group",
+                    "type_tax_use": "sale",
+                    "children_tax_ids": "test_child_tax",
+                },
+            }
+        }
+        with self._template_data_with(extra):
+            wizard = self.wizard_obj.with_company(self.company).create(
+                self._get_taxes_only_wizard_vals()
+            )
+            wizard.action_find_records()
+            new_taxes = wizard.tax_ids.filtered(lambda x: x.type == "new")
+            self.assertEqual(
+                set(new_taxes.mapped("xml_id")), {"test_child_tax", "test_group_tax"}
+            )
+            # Excluding the child from the selection is rejected, naming the
+            # parent, before anything is written
+            new_taxes.filtered(lambda x: x.xml_id == "test_child_tax").unlink()
+            with self.assertRaises(UserError) as error:
+                wizard.action_update_records()
+            self.assertIn("test_group_tax", str(error.exception))
+            # Keeping both, the grouped tax is created with its children
+            wizard.unlink()
+            wizard = self.wizard_obj.with_company(self.company).create(
+                self._get_taxes_only_wizard_vals()
+            )
+            wizard.action_find_records()
+            wizard.action_update_records()
+        group_tax = self._get_record_for_xml_id("test_group_tax")
+        self.assertEqual(
+            group_tax.children_tax_ids, self._get_record_for_xml_id("test_child_tax")
+        )
