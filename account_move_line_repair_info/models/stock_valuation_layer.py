@@ -10,7 +10,8 @@ class StockValuationLayer(models.Model):
 
     def _validate_accounting_entries(self):
         res = super()._validate_accounting_entries()
-        for svl in self:
+        # sudo: billing users may not have access to repairs
+        for svl in self.sudo():
             if svl.stock_move_id.repair_id:
                 current_move = svl.account_move_id
                 if current_move:

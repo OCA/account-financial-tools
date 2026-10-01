@@ -22,6 +22,8 @@ class AccountMove(models.Model):
                 lambda il: il.product_id.id == vals["product_id"]
                 and il.quantity == vals["quantity"]
             )
+            # sudo: billing users may not have access to repair fees
+            repair_line = repair_line.sudo()
             repair_order = repair_line.repair_fee_ids.mapped("repair_id")
             if len(repair_order) == 1:
                 res[i].update(
@@ -40,9 +42,10 @@ class AccountMove(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        rline_model = self.env["repair.line"]
-        fline_model = self.env["repair.fee"]
-        rorder_model = self.env["repair.order"]
+        # sudo: same reason as above
+        rline_model = self.env["repair.line"].sudo()
+        fline_model = self.env["repair.fee"].sudo()
+        rorder_model = self.env["repair.order"].sudo()
         for val in values:
             for invoice_line_ids in val.get("invoice_line_ids", []):
                 line_val = invoice_line_ids[2]
