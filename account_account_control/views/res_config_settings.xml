@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="res_config_settings_view_form" model="ir.ui.view">
+    <field name="name">res.config.settings.form (in account_account_control)</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="account.res_config_settings_view_form" />
+    <field name="arch" type="xml">
+      <block id="default_accounts" position="after">
+        <block title="Chart of Accounts" id="account_account_control_settings">
+          <setting
+            id="lock_used_account_code"
+            help="Forbid changing the code of an account used in posted journal entries"
+          >
+            <field name="lock_used_account_code" />
+          </setting>
+          <setting
+            id="check_account_name_unique"
+            help="Prevent two accounts from having the same label"
+          >
+            <field name="check_account_name_unique" />
+          </setting>
+          <setting
+            id="require_account_modification_reason"
+            help="Require a reason to modify an account"
+          >
+            <field name="require_account_modification_reason" />
+          </setting>
+        </block>
+      </block>
+    </field>
+  </record>
+</odoo>
