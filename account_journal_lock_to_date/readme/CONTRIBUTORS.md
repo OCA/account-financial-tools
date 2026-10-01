@@ -1,0 +1,2 @@
+- [ACSONE](https://acsone.eu):
+  - Samir Guesmi <samir.guesmi@acsone.eu>
