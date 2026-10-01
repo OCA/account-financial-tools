@@ -12,7 +12,7 @@ from traceback import format_exception
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -482,11 +482,37 @@ class AccountAsset(models.Model):
                 name = " - ".join([asset.code, name])
             asset.display_name = name
 
+    def _check_analytic_distribution(self):
+        self.ensure_one()
+        account = self.profile_id.account_expense_depreciation_id
+
+        if not account:
+            return
+
+        try:
+            self.with_context(
+                validate_analytic=True,
+            )._validate_distribution(
+                company_id=self.company_id.id,
+                account=account.id,
+                business_domain="general",
+            )
+        except ValidationError as error:
+            raise ValidationError(
+                _(
+                    "Mandatory analytic distribution for account "
+                    "%(account)s\n"
+                    "Please check the analytic distribution.",
+                    account=account.code,
+                )
+            ) from error
+
     def validate(self):
         for asset in self:
             if asset.currency_id.is_zero(asset.value_residual):
                 asset.state = "close"
             else:
+                asset._check_analytic_distribution()
                 asset.state = "open"
                 if not asset.depreciation_line_ids.filtered(
                     lambda line: line.type != "create"
