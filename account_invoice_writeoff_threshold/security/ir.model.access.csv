@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_writeoff_log_manager,account.writeoff.log manager,model_account_writeoff_log,account.group_account_manager,1,1,1,1
+access_writeoff_log_user,account.writeoff.log user,model_account_writeoff_log,account.group_account_user,1,0,0,0
+access_writeoff_log_line_manager,account.writeoff.log.line manager,model_account_writeoff_log_line,account.group_account_manager,1,1,1,1
+access_writeoff_log_line_user,account.writeoff.log.line user,model_account_writeoff_log_line,account.group_account_user,1,0,0,0
+access_writeoff_wizard_manager,account.writeoff.threshold.wizard manager,model_account_writeoff_threshold_wizard,account.group_account_manager,1,1,1,1
+access_writeoff_wizard_line_manager,account.writeoff.threshold.wizard.line manager,model_account_writeoff_threshold_wizard_line,account.group_account_manager,1,1,1,1

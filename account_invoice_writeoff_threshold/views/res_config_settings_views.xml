@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_writeoff" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.writeoff.threshold</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='account']" position="inside">
+                <block title="Write-off Threshold" id="writeoff_threshold">
+                    <setting
+                        string="Write-off Threshold"
+                        help="Residual balances below this amount will be written off automatically."
+                    >
+                        <field name="writeoff_threshold_amount" />
+                    </setting>
+                    <setting
+                        string="Write-off Income Account"
+                        help="Account credited when writing off a customer invoice residual."
+                    >
+                        <field name="writeoff_income_account_id" />
+                    </setting>
+                    <setting
+                        string="Write-off Expense Account"
+                        help="Account debited when writing off a vendor bill residual."
+                    >
+                        <field name="writeoff_expense_account_id" />
+                    </setting>
+                    <setting
+                        string="Write-off Journal"
+                        help="Journal used to post write-off journal entries."
+                    >
+                        <field name="writeoff_journal_id" />
+                    </setting>
+                    <setting
+                        string="Write-off Batch Size"
+                        help="Number of invoices per background job (relevant only when the queue companion is installed)."
+                    >
+                        <field name="writeoff_batch_size" />
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

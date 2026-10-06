@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="seq_account_writeoff_log" model="ir.sequence">
+        <field name="name">Write-off Log</field>
+        <field name="code">account.writeoff.log</field>
+        <field name="prefix">WOL/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>
