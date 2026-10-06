@@ -3,7 +3,6 @@
 
 from odoo import api, models
 from odoo.exceptions import UserError
-from odoo.fields import Domain
 
 
 class AccountMove(models.Model):
@@ -11,9 +10,7 @@ class AccountMove(models.Model):
 
     def _get_fiscal_position_journal_domain(self):
         self.ensure_one()
-        return Domain(
-            "id", "in", self.fiscal_position_id.sudo().allowed_journal_ids.ids
-        )
+        return [("id", "in", self.fiscal_position_id.sudo().allowed_journal_ids.ids)]
 
     @api.depends("fiscal_position_id")
     def _compute_suitable_journal_ids(self):
@@ -27,14 +24,26 @@ class AccountMove(models.Model):
             )
         return res
 
-    @api.depends("fiscal_position_id")
     def _compute_journal_id(self):
+        # No depends on fiscal_position_id here: core computes fiscal_position_id
+        # from company_id, and company_id from journal_id, so the dependency
+        # closes a cycle. The cycle reorders the precomputed fields of
+        # account.move at create, date is computed before journal_id and
+        # _get_accounting_date() reads the sequence of an unset journal, which
+        # moves the date of a vendor bill to the end of the period. The onchange
+        # below covers the interactive case.
         res = super()._compute_journal_id()
         for rec in self:
             if not rec.fiscal_position_id.sudo().allowed_journal_ids:
                 continue
             rec.journal_id = rec._search_default_journal()
         return res
+
+    @api.onchange("fiscal_position_id")
+    def _onchange_fiscal_position_id_journal(self):
+        for rec in self:
+            if rec.fiscal_position_id.sudo().allowed_journal_ids:
+                rec.journal_id = rec._search_default_journal()
 
     def _search_default_journal(self):
         res = super()._search_default_journal()
