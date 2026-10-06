@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0). -->
+<odoo>
+    <record id="account_tag_ebitda_taxes" model="account.account.tag">
+        <field name="name">EBITDA / Taxes</field>
+    </record>
+
+    <record id="account_tag_ebitda_int_exp" model="account.account.tag">
+        <field name="name">EBITDA / Interest Expense</field>
+    </record>
+
+    <record id="account_tag_ebitda_int_inc" model="account.account.tag">
+        <field name="name">EBITDA / Interest Income</field>
+    </record>
+
+    <record id="account_tag_ebitda_exc_exp" model="account.account.tag">
+        <field name="name">EBITDA / Exceptional Expense (Below EBITDA)</field>
+    </record>
+
+    <record id="account_tag_ebitda_exc_inc" model="account.account.tag">
+        <field name="name">EBITDA / Exceptional Income (Below EBITDA)</field>
+    </record>
+
+    <record id="account_tag_ebitda_norm_exp" model="account.account.tag">
+        <field name="name">EBITDA / Normalization Expense (Adjustments)</field>
+    </record>
+
+    <record id="account_tag_ebitda_norm_inc" model="account.account.tag">
+        <field name="name">EBITDA / Normalization Income (Adjustments)</field>
+    </record>
+
+    <!-- M&A SPECIFIC ADJUSTMENTS -->
+    <record id="account_tag_ebitda_ma_salary" model="account.account.tag">
+        <field name="name">EBITDA / M&amp;A Adj: Owner Salary</field>
+    </record>
+
+    <record id="account_tag_ebitda_ma_rent" model="account.account.tag">
+        <field name="name">EBITDA / M&amp;A Adj: Related Rent</field>
+    </record>
+
+    <record id="account_tag_ebitda_ma_personal" model="account.account.tag">
+        <field name="name">EBITDA / M&amp;A Adj: Personal Expenses</field>
+    </record>
+
+    <record id="account_tag_ebitda_debt" model="account.account.tag">
+        <field name="name">EBITDA / Financial Debt</field>
+    </record>
+
+    <!-- FREE CASH FLOW BRIDGE -->
+    <record id="account_tag_ebitda_capex" model="account.account.tag">
+        <field name="name">EBITDA / CAPEX (Fixed Asset Additions)</field>
+    </record>
+
+    <record id="account_tag_ebitda_wc" model="account.account.tag">
+        <field name="name">EBITDA / Working Capital</field>
+    </record>
+</odoo>

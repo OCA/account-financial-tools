@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0). -->
+<odoo>
+    <!-- ================= METHOD 1: BOTTOM-UP ================= -->
+    <record id="mis_report_ebitda_bottom_up" model="mis.report">
+        <field name="name">EBITDA (Bottom-up)</field>
+        <field
+            name="description"
+        >Starts from Net Profit and adds Taxes, Interest, Depreciation, and Exceptional items.</field>
+    </record>
+
+    <record id="mis_kpi_m1_net_profit" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_bottom_up" />
+        <field name="name">NET</field>
+        <field name="description">Net Profit</field>
+        <field
+            name="expression"
+        >-balp[('account_type', 'in', ('income', 'income_other', 'expense', 'expense_direct_cost', 'expense_depreciation'))]</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="mis_kpi_m1_taxes" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_bottom_up" />
+        <field name="name">TAXES</field>
+        <field name="description">Taxes</field>
+        <field name="expression">balp[('tag_ids.name', '=', 'EBITDA / Taxes')]</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="mis_kpi_m1_int_exp" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_bottom_up" />
+        <field name="name">INT_EXP</field>
+        <field name="description">Interest Expense</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / Interest Expense')]</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="mis_kpi_m1_int_inc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_bottom_up" />
+        <field name="name">INT_INC</field>
+        <field name="description">Interest Income</field>
+        <field
+            name="expression"
+        >-balp[('tag_ids.name', '=', 'EBITDA / Interest Income')]</field>
+        <field name="sequence">35</field>
+    </record>
+
+    <record id="mis_kpi_m1_exc_exp" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_bottom_up" />
+        <field name="name">EXC_EXP</field>
+        <field name="description">Exceptional Expenses</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / Exceptional Expense (Below EBITDA)')]</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="mis_kpi_m1_exc_inc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_bottom_up" />
+        <field name="name">EXC_INC</field>
+        <field name="description">Exceptional Income</field>
+        <field
+            name="expression"
+        >-balp[('tag_ids.name', '=', 'EBITDA / Exceptional Income (Below EBITDA)')]</field>
+        <field name="sequence">45</field>
+    </record>
+
+    <record id="mis_kpi_m1_da" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_bottom_up" />
+        <field name="name">DA</field>
+        <field name="description">Depreciation &amp; Amortization</field>
+        <field
+            name="expression"
+        >balp[('account_type', '=', 'expense_depreciation')]</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="mis_kpi_m1_ebitda" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_bottom_up" />
+        <field name="name">EBITDA</field>
+        <field name="description">EBITDA</field>
+        <field
+            name="expression"
+        >NET + TAXES + INT_EXP - INT_INC + EXC_EXP - EXC_INC + DA</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <!-- ================= METHOD 2: TOP-DOWN ================= -->
+    <!-- Skipping the simple top down as we merge its logic into Professional below,
+             but we keep it as requested -->
+    <record id="mis_report_ebitda_top_down" model="mis.report">
+        <field name="name">EBITDA (Top-down)</field>
+        <field
+            name="description"
+        >Starts from Total Revenue and subtracts COGS and Operating Expenses.</field>
+    </record>
+
+    <record id="mis_kpi_m2_int_inc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">INT_INC</field>
+        <field name="description">Interest Income</field>
+        <field
+            name="expression"
+        >-balp[('tag_ids.name', '=', 'EBITDA / Interest Income')]</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <record id="mis_kpi_m2_exc_inc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">EXC_INC</field>
+        <field name="description">Exceptional Income</field>
+        <field
+            name="expression"
+        >-balp[('tag_ids.name', '=', 'EBITDA / Exceptional Income (Below EBITDA)')]</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <record id="mis_kpi_m2_revenue" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">REV</field>
+        <field name="description">Operating Revenue</field>
+        <field
+            name="expression"
+        >-balp[('account_type', 'in', ('income', 'income_other'))] - INT_INC - EXC_INC</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="mis_kpi_m2_cogs" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">COGS</field>
+        <field name="description">COGS (Cost of Goods Sold)</field>
+        <field
+            name="expression"
+        >balp[('account_type', '=', 'expense_direct_cost')]</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="mis_kpi_m2_taxes" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">TAXES</field>
+        <field name="description">Taxes</field>
+        <field name="expression">balp[('tag_ids.name', '=', 'EBITDA / Taxes')]</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="mis_kpi_m2_int_exp" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">INT_EXP</field>
+        <field name="description">Interest Expense</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / Interest Expense')]</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="mis_kpi_m2_exc_exp" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">EXC_EXP</field>
+        <field name="description">Exceptional Expenses</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / Exceptional Expense (Below EBITDA)')]</field>
+        <field name="sequence">45</field>
+    </record>
+
+    <record id="mis_kpi_m2_opex" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">OPEX</field>
+        <field name="description">Operating Expenses (excl. D&amp;A)</field>
+        <field
+            name="expression"
+        >balp[('account_type', '=', 'expense')] - TAXES - INT_EXP - EXC_EXP</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="mis_kpi_m2_ebitda" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_top_down" />
+        <field name="name">EBITDA</field>
+        <field name="description">EBITDA</field>
+        <field name="expression">REV - COGS - OPEX</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <!-- ================= PROFESSIONAL & ADJUSTED ================= -->
+    <record id="mis_report_ebitda_pro" model="mis.report">
+        <field name="name">EBITDA (Professional &amp; Adjusted)</field>
+        <field
+            name="description"
+        >Includes Analytical Breakdown readiness, Adjusted EBITDA, Margin, and Debt Ratio.</field>
+    </record>
+
+    <record id="mis_kpi_pro_int_inc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">INT_INC</field>
+        <field name="description">Interest Income</field>
+        <field
+            name="expression"
+        >-balp[('tag_ids.name', '=', 'EBITDA / Interest Income')]</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <record id="mis_kpi_pro_exc_inc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">EXC_INC</field>
+        <field name="description">Exceptional Income</field>
+        <field
+            name="expression"
+        >-balp[('tag_ids.name', '=', 'EBITDA / Exceptional Income (Below EBITDA)')]</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <record id="mis_kpi_pro_revenue" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">REV</field>
+        <field name="description">Operating Revenue</field>
+        <field
+            name="expression"
+        >-balp[('account_type', 'in', ('income', 'income_other'))] - INT_INC - EXC_INC</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="mis_kpi_pro_cogs" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">COGS</field>
+        <field name="description">COGS (Cost of Goods Sold)</field>
+        <field
+            name="expression"
+        >balp[('account_type', '=', 'expense_direct_cost')]</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="mis_kpi_pro_taxes" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">TAXES</field>
+        <field name="description">Corporate Taxes</field>
+        <field name="expression">balp[('tag_ids.name', '=', 'EBITDA / Taxes')]</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="mis_kpi_pro_int_exp" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">INT_EXP</field>
+        <field name="description">Interest Expense</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / Interest Expense')]</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="mis_kpi_pro_exc_exp" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">EXC_EXP</field>
+        <field name="description">Exceptional Expenses</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / Exceptional Expense (Below EBITDA)')]</field>
+        <field name="sequence">45</field>
+    </record>
+
+    <record id="mis_kpi_pro_opex" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">OPEX</field>
+        <field name="description">Operating Expenses (excl. D&amp;A)</field>
+        <field
+            name="expression"
+        >balp[('account_type', '=', 'expense')] - TAXES - INT_EXP - EXC_EXP</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="mis_kpi_pro_ebitda" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">EBITDA</field>
+        <field name="description">EBITDA</field>
+        <field name="expression">REV - COGS - OPEX</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="mis_kpi_pro_margin" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">MARGIN</field>
+        <field name="description">EBITDA Margin (%)</field>
+        <field name="expression">REV and (EBITDA / REV) * 100 or 0.0</field>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="mis_kpi_pro_sep1" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">SEP1</field>
+        <field name="description">--- NORMALIZATION ADJUSTMENTS ---</field>
+        <field name="expression">0</field>
+        <field name="sequence">80</field>
+    </record>
+
+    <record id="mis_kpi_pro_norm_inc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">NORM_INC</field>
+        <field name="description">(-) Normalization Income</field>
+        <field
+            name="expression"
+        >-balp[('tag_ids.name', '=', 'EBITDA / Normalization Income (Adjustments)')]</field>
+        <field name="sequence">81</field>
+    </record>
+
+    <record id="mis_kpi_pro_norm_exp" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">NORM_EXP</field>
+        <field name="description">(+) Normalization Expenses</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / Normalization Expense (Adjustments)')]</field>
+        <field name="sequence">82</field>
+    </record>
+
+    <!-- M&A ADJUSTMENTS -->
+    <record id="mis_kpi_pro_ma_salary" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">MA_SALARY</field>
+        <field name="description">(+/-) M&amp;A Adj: Owner Salary</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / M&amp;A Adj: Owner Salary')]</field>
+        <field name="sequence">83</field>
+    </record>
+
+    <record id="mis_kpi_pro_ma_rent" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">MA_RENT</field>
+        <field name="description">(+/-) M&amp;A Adj: Related Rent</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / M&amp;A Adj: Related Rent')]</field>
+        <field name="sequence">84</field>
+    </record>
+
+    <record id="mis_kpi_pro_ma_personal" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">MA_PERSONAL</field>
+        <field name="description">(+) M&amp;A Adj: Personal Expenses</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / M&amp;A Adj: Personal Expenses')]</field>
+        <field name="sequence">85</field>
+    </record>
+
+    <record id="mis_kpi_pro_adj_ebitda" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">ADJ_EBITDA</field>
+        <field name="description">ADJUSTED EBITDA (M&amp;A Ready)</field>
+        <field
+            name="expression"
+        >EBITDA - NORM_INC + NORM_EXP + MA_SALARY + MA_RENT + MA_PERSONAL</field>
+        <field name="sequence">110</field>
+    </record>
+
+    <record id="mis_kpi_pro_adj_margin" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">ADJ_MARGIN</field>
+        <field name="description">Adjusted EBITDA Margin (%)</field>
+        <field name="expression">REV and (ADJ_EBITDA / REV) * 100 or 0.0</field>
+        <field name="sequence">120</field>
+    </record>
+
+    <record id="mis_kpi_pro_sep2" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">SEP2</field>
+        <field name="description">--- DERIVED METRICS ---</field>
+        <field name="expression">0</field>
+        <field name="sequence">130</field>
+    </record>
+
+    <record id="mis_kpi_pro_debt" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">DEBT</field>
+        <field name="description">Net Financial Debt</field>
+        <field
+            name="expression"
+        >-bal[('tag_ids.name', '=', 'EBITDA / Financial Debt')]</field>
+        <field name="sequence">140</field>
+    </record>
+
+    <record id="mis_kpi_pro_debt_ratio" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">DEBT_RATIO</field>
+        <field name="description">Debt / EBITDA Ratio (Years)</field>
+        <field name="expression">ADJ_EBITDA and (DEBT / ADJ_EBITDA) or 0.0</field>
+        <field name="sequence">150</field>
+    </record>
+
+    <record id="mis_kpi_pro_sep3" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">SEP3</field>
+        <field name="description">--- FREE CASH FLOW BRIDGE ---</field>
+        <field name="expression">0</field>
+        <field name="sequence">160</field>
+    </record>
+
+    <record id="mis_kpi_pro_wc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">DELTA_WC</field>
+        <field name="description">(-/+) Working Capital Variation</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / Working Capital')]</field>
+        <field name="sequence">170</field>
+    </record>
+
+    <record id="mis_kpi_pro_capex" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">CAPEX</field>
+        <field name="description">(-) CAPEX (Fixed Asset Additions)</field>
+        <field
+            name="expression"
+        >balp[('tag_ids.name', '=', 'EBITDA / CAPEX (Fixed Asset Additions)')]</field>
+        <field name="sequence">180</field>
+    </record>
+
+    <record id="mis_kpi_pro_fcf" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_ebitda_pro" />
+        <field name="name">FCF</field>
+        <field name="description">FREE CASH FLOW (FCF)</field>
+        <!-- FCF = ADJ_EBITDA - TAXES - INT_EXP - DELTA_WC - CAPEX -->
+        <field name="expression">ADJ_EBITDA - TAXES - INT_EXP + DELTA_WC - CAPEX</field>
+        <field name="sequence">190</field>
+    </record>
+</odoo>
