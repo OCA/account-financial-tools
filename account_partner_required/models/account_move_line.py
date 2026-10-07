@@ -35,7 +35,15 @@ class AccountMoveLine(models.Model):
 
     @api.constrains("partner_id", "account_id", "debit", "credit")
     def _check_partner_required(self):
+        if self.env.context.get("skip_account_partner_required_check"):
+            return
         for line in self:
             message = line._check_partner_required_msg()
             if message:
                 raise ValidationError(message)
+
+    def reconcile(self):
+        return super(
+            AccountMoveLine,
+            self.with_context(skip_account_partner_required_check=True),
+        ).reconcile()
