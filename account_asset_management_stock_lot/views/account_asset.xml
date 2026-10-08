@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="account_asset_view_form">
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//group[.//field[@name='profile_id']]" position="inside">
+                <group>
+                    <field name="product_id" invisible="not stock_lot_id" />
+                    <field name="stock_lot_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_asset_view_tree_inherit">
+        <field name="name">account.asset.tree.inherit</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_tree"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="product_id" optional="show" />
+                <field name="stock_lot_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="account_asset_view_search_inherit">
+        <field name="name">account.asset.search.inherit</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_search"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="product_id" />
+                <field name="stock_lot_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
