@@ -23,18 +23,28 @@ class AccountMove(models.Model):
 
     @api.depends("posted_before", "state", "journal_id", "date")
     def _compute_name(self):
-        options = self.env["ir.sequence.option.line"].get_model_options(self._name)
+        seq_option = self.env["ir.sequence.option.line"]
+        options = seq_option.sudo().search(
+            [("use_sequence_option", "=", True), ("model", "=", self._name)], limit=1
+        )
         # On post, get the sequence option
         if options:
-            for rec in self.filtered(
-                lambda l: l.name in (False, "/") and l.state == "posted"
-            ):
-                sequence = self.env["ir.sequence.option.line"].get_sequence(
-                    rec, options=options
-                )
-                if sequence:
-                    rec.name = sequence.next_by_id(sequence_date=rec.date)
-                    rec.sequence_option = True
+            options_per_company = {}
+            with self.env.protecting([self._fields["sequence_option"]], self):
+                for rec in self.filtered(
+                    lambda l: l.name in (False, "/") and l.state == "posted"
+                ):
+                    company = rec.company_id or self.env.company
+                    if company.id not in options_per_company:
+                        options_per_company[company.id] = seq_option.get_model_options(
+                            self._name, company=company
+                        )
+                    sequence = seq_option.get_sequence(
+                        rec, options=options_per_company[company.id]
+                    )
+                    if sequence:
+                        rec.name = sequence.next_by_id(sequence_date=rec.date)
+                        rec.sequence_option = True
 
         # Call super()
         res = super()._compute_name()
