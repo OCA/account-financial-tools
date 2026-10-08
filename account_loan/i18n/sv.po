@@ -1,0 +1,1083 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_loan
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-30 02:39+0000\n"
+"PO-Revision-Date: 2024-02-27 12:34+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
+"Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid ""
+"<span class=\"o_stat_text\">Deduct</span>\n"
+"                                <span class=\"o_stat_text\">Debt</span>"
+msgstr ""
+"<span class=\"o_stat_text\">Avdrag</span>\n"
+"                                <span class=\"o_stat_text\">Skuld</span>"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid ""
+"<span class=\"o_stat_text\">Increase</span>\n"
+"                                <span class=\"o_stat_text\">Debt</span>"
+msgstr ""
+"<span class=\"o_stat_text\">Ökning</span>\n"
+"                                <span class=\"o_stat_text\">Skuld</span>"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.res_partner_form_view
+msgid "<span class=\"o_stat_text\">Loans</span>"
+msgstr "<span class=\"o_stat_text\">Lån</span>"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__account_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__account_id
+msgid "Account"
+msgstr "Konto"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__date
+msgid "Account Date"
+msgstr "Konto Datum"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__long_term_loan_account_id
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__long_term_loan_account_id
+msgid "Account that will contain the pending amount on Long term"
+msgstr "Konto som kommer att innehålla det utestående beloppet på lång sikt"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__short_term_loan_account_id
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__short_term_loan_account_id
+msgid "Account that will contain the pending amount on short term"
+msgstr "Konto som innehåller det utestående beloppet på kort sikt"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__interest_expenses_account_id
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__interest_expenses_account_id
+msgid "Account where the interests will be assigned to"
+msgstr "Konto där intressena kommer att tilldelas"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Accounts"
+msgstr "Konton"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_needaction
+msgid "Action Needed"
+msgstr "Åtgärd krävs"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_ids
+msgid "Activities"
+msgstr "Aktivitet"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Aktivitet Undantag Dekoration"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_state
+msgid "Activity State"
+msgstr "Aktivitetsstatus"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Ikon för aktivitetstyp"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
+#, python-format
+msgid "Amount cannot be bigger than debt"
+msgstr "Beloppet kan inte vara större än skulden"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
+#: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
+#, python-format
+msgid "Amount cannot be less than zero"
+msgstr "Beloppet får inte vara mindre än noll"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan_line.py:0
+#, python-format
+msgid "Amount cannot be recomputed if moves or invoices exists already"
+msgstr ""
+"Beloppet kan inte beräknas på nytt om dragningar eller fakturor redan finns"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__interests_amount
+msgid "Amount of the payment that will be assigned to interests"
+msgstr "Beloppet av betalning som kommer att tilldelas räntor"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__principal_amount
+msgid "Amount of the payment that will reduce the pending loan amount"
+msgstr ""
+"Belopp av betalningen som kommer att minska det utestående lånebeloppet"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__long_term_principal_amount
+msgid "Amount that will reduce the pending loan amount on long term"
+msgstr "Belopp som kommer att minska det utestående lånebeloppet på lång sikt"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__amount
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__amount
+msgid "Amount to reduce from Principal"
+msgstr "Belopp att minska från Kapitalbelopp"
+
+#. module: account_loan
+#: model:ir.model,name:account_loan.model_account_loan_line
+msgid "Annuity"
+msgstr "Annuitet"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_attachment_count
+msgid "Attachment Count"
+msgstr "Antal bilagor"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__fees
+msgid "Bank fees"
+msgstr "Bankavgifter"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_generate_wizard_form
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_increase_amount_form_view
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
+msgid "Cancel"
+msgstr "Avbryt"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__cancel_loan
+msgid "Cancel Loan"
+msgstr "Avbryt lån"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__state__cancelled
+msgid "Cancelled"
+msgstr "Avbokad"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_generate_wizard__date
+msgid ""
+"Choose the period for which you want to automatically post the depreciation "
+"lines of running assets"
+msgstr ""
+"Välj den period för vilken du automatiskt vill bokföra avskrivningsraderna "
+"för rörelsetillgångar"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__state__closed
+msgid "Closed"
+msgstr "Stängt"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__company_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__company_id
+msgid "Company"
+msgstr "Bolag"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__partner_id
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__partner_id
+msgid "Company or individual that lends the money at an interest rate."
+msgstr "Företag eller person som lånar ut pengar mot en ränta."
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Compute items"
+msgstr "Beräkna poster"
+
+#. module: account_loan
+#: model:ir.model,name:account_loan.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__create_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__create_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__create_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__create_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__create_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__create_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__create_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__create_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__create_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__create_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__currency_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__currency_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__currency_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__rate
+msgid "Currently applied rate"
+msgstr "Nuvarande tillämpad ränta"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__date
+msgid "Date"
+msgstr "Datum"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__date
+msgid "Date when the payment will be accounted"
+msgstr "Datum då betalningen kommer att redovisas"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__display_name
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__display_name
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__display_name
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__display_name
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__display_name
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__display_name
+msgid "Display Name"
+msgstr "Visa namn"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__state__draft
+msgid "Draft"
+msgstr "Preliminär"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__rate_type__ear
+msgid "EAR"
+msgstr "EAR"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_lines_view
+msgid "Edit"
+msgstr "Redigera"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__final_pending_principal_amount
+msgid "Final Pending Principal Amount"
+msgstr "Slutligt utestående kapitalbelopp"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__fixed_amount
+msgid "Fixed Amount"
+msgstr "Fast belopp"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__loan_type__fixed-annuity
+msgid "Fixed Annuity"
+msgstr "Fast annuitet"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__loan_type__fixed-annuity-begin
+msgid "Fixed Annuity Begin"
+msgstr "Fast annuitet Början"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__fixed_loan_amount
+msgid "Fixed Loan Amount"
+msgstr "Fast lånebelopp"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__fixed_periods
+msgid "Fixed Periods"
+msgstr "Fasta perioder"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__loan_type__fixed-principal
+msgid "Fixed Principal"
+msgstr "Fast huvudstol"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_follower_ids
+msgid "Followers"
+msgstr "Följare"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Följare (kontkter)"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Font awesome-ikon, t.ex. fa-tasks"
+
+#. module: account_loan
+#: model:ir.ui.menu,name:account_loan.account_loan_generate_wizard_menu
+msgid "Generate Loan Entries"
+msgstr "Skapa låneposter"
+
+#. module: account_loan
+#: model:ir.actions.act_window,name:account_loan.account_loan_generate_wizard_action
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_generate_wizard_form
+msgid "Generate moves"
+msgstr "Skapa rörelser"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.view_account_loan_lines_search
+msgid "Group by..."
+msgstr "Gruppera efter..."
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__has_invoices
+msgid "Has Invoices"
+msgstr "Har fakturor"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__has_message
+msgid "Has Message"
+msgstr "Har meddelande"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__has_moves
+msgid "Has Moves"
+msgstr "Har rört sig"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_res_partner__lended_loan_count
+#: model:ir.model.fields,help:account_loan.field_res_users__lended_loan_count
+msgid "How many Loans this partner lended to us ?"
+msgstr "Hur många lån har denna kontakt lånat ut till oss?"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_exception_icon
+msgid "Icon"
+msgstr "Ikon"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Ikon för att indikera en undantagsaktivitet."
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Om markerat, kräver nya meddelanden din uppmärksamhet."
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Om markerat får vissa meddelanden ett leveransfel."
+
+#. module: account_loan
+#: model:ir.actions.act_window,name:account_loan.account_loan_increase_amount_act_window
+msgid "Increase Amount"
+msgstr "Ökning belopp"
+
+#. module: account_loan
+#: model:ir.model,name:account_loan.model_account_loan_increase_amount
+msgid "Increase the debt of a loan"
+msgstr "Öka skulden på ett lån"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__interests_product_id
+msgid "Interest product"
+msgstr "Räntebärande produkt"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__interests_amount
+msgid "Interests Amount"
+msgstr "Räntebelopp"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__interest_expenses_account_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__interest_expenses_account_id
+msgid "Interests account"
+msgstr "Räntekonto"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Invoices"
+msgstr "Fakturor"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__post_invoice
+msgid "Invoices will be posted automatically"
+msgstr "Fakturor bokförs automatiskt"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_is_follower
+msgid "Is Follower"
+msgstr "Är följare"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__is_leasing
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__is_leasing
+msgid "Is Leasing"
+msgstr "Är leasing"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan.py:0
+#, python-format
+msgid ""
+"It is only possible to change to draft if the status is cancelled or posted "
+"and there are no account moves."
+msgstr ""
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Items"
+msgstr "Föremål"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__journal_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__journal_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__journal_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__journal_id
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_loan
+#: model:ir.model,name:account_loan.model_account_move
+msgid "Journal Entry"
+msgstr "Journalanteckning"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__journal_type
+msgid "Journal Type"
+msgstr "Journaltyp"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__write_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__write_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__write_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__write_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__write_uid
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__write_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__write_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__write_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__write_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__write_date
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__leased_asset_account_id
+msgid "Leased Asset Account"
+msgstr "Konto för leasade tillgångar"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Leasing"
+msgstr "Leasing"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan_generate_wizard__loan_type__leasing
+msgid "Leasings"
+msgstr "Leasingavtal"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_res_partner__lended_loan_ids
+#: model:ir.model.fields,field_description:account_loan.field_res_users__lended_loan_ids
+msgid "Lended Loan"
+msgstr "Utlånat lån"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_res_partner__lended_loan_count
+#: model:ir.model.fields,field_description:account_loan.field_res_users__lended_loan_count
+msgid "Lended Loan Count"
+msgstr "Utlånat Lån Antal"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__partner_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__partner_id
+msgid "Lender"
+msgstr "Långivare"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__line_ids
+msgid "Line"
+msgstr "Linje"
+
+#. module: account_loan
+#: model:ir.model,name:account_loan.model_account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_bank_statement_line__loan_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_increase_amount__loan_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__loan_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__loan_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post__loan_id
+#: model:ir.model.fields,field_description:account_loan.field_account_move__loan_id
+#: model:ir.model.fields,field_description:account_loan.field_account_payment__loan_id
+#: model_terms:ir.ui.view,arch_db:account_loan.view_account_loan_lines_search
+msgid "Loan"
+msgstr "Lån"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__loan_amount
+msgid "Loan Amount"
+msgstr "Lånebelopp"
+
+#. module: account_loan
+#: model:ir.actions.act_window,name:account_loan.account_loan_lines_action
+#: model:ir.ui.menu,name:account_loan.account_loan_lines_menu
+msgid "Loan Items"
+msgstr "Låneposter"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_bank_statement_line__loan_line_id
+#: model:ir.model.fields,field_description:account_loan.field_account_move__loan_line_id
+#: model:ir.model.fields,field_description:account_loan.field_account_payment__loan_line_id
+msgid "Loan Line"
+msgstr "Låneram"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__loan_type
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard__loan_type
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__loan_type
+msgid "Loan Type"
+msgstr "Typ av lån"
+
+#. module: account_loan
+#: model:ir.model,name:account_loan.model_account_loan_generate_wizard
+msgid "Loan generate wizard"
+msgstr "Guide för att skapa lån"
+
+#. module: account_loan
+#: model:ir.model.constraint,message:account_loan.constraint_account_loan_name_uniq
+msgid "Loan name must be unique"
+msgstr "Lånets namn måste vara unikt"
+
+#. module: account_loan
+#: model:ir.model,name:account_loan.model_account_loan_pay_amount
+msgid "Loan pay amount"
+msgstr "Lån betala belopp"
+
+#. module: account_loan
+#: model:ir.model,name:account_loan.model_account_loan_post
+msgid "Loan post"
+msgstr "Lånepost"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__product_id
+msgid "Loan product"
+msgstr "Låneprodukt"
+
+#. module: account_loan
+#: model:ir.actions.act_window,name:account_loan.account_loan_action
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan_generate_wizard__loan_type__loan
+#: model:ir.ui.menu,name:account_loan.account_loan_menu
+#: model:ir.ui.menu,name:account_loan.loan_menu
+msgid "Loans"
+msgstr "Lån"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__long_term_pending_principal_amount
+msgid "Long Term Pending Principal Amount"
+msgstr "Långfristiga lån Kapitalbelopp"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__long_term_principal_amount
+msgid "Long Term Principal Amount"
+msgstr "Långfristiga kapitalbelopp"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__long_term_loan_account_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__long_term_loan_account_id
+msgid "Long term account"
+msgstr "Långsiktigt konto"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_has_error
+msgid "Message Delivery error"
+msgstr "Fel vid leverans av meddelande"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_ids
+msgid "Messages"
+msgstr "Meddelanden"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__rate_type
+msgid "Method of computation of the applied rate"
+msgstr "Metod för beräkning av den tillämpade räntan"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__loan_type
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__loan_type
+msgid "Method of computation of the period annuity"
+msgstr "Metod för beräkning av periodisk annuitet"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__move_ids
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__move_ids
+msgid "Move"
+msgstr "Flytta"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__move_count
+msgid "Move Count"
+msgstr ""
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Moves"
+msgstr "Rörelser"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Min tidsfrist för aktiviteter"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__name
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__name
+msgid "Name"
+msgstr "Namn"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Tidsfrist för nästa aktivitet"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_summary
+msgid "Next Activity Summary"
+msgstr "Sammanfattning av nästa aktivitet"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_type_id
+msgid "Next Activity Type"
+msgstr "Nästa typ av aktivitet"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__rate_type__napr
+msgid "Nominal APR"
+msgstr "Nominell APR"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Antal åtgärder"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__message_has_error_counter
+msgid "Number of errors"
+msgstr "Antal fel"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Antal meddelanden som kräver åtgärd"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Antal meddelanden med leveransfel"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__periods
+msgid "Number of periods that the loan will last"
+msgstr "Antal perioder som lånet kommer att löpa"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__loan_type__interest
+msgid "Only interest"
+msgstr "Endast ränta"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_post.py:0
+#, python-format
+msgid "Only loans in draft state can be posted"
+msgstr "Endast lån i utkaststatus kan bokföras"
+
+#. module: account_loan
+#: model:ir.actions.act_window,name:account_loan.account_loan_pay_amount_action
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
+msgid "Pay amount"
+msgstr "Betala belopp"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__payment_amount
+msgid "Payment Amount"
+msgstr "Betalningsbelopp"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__payment_on_first_period
+msgid "Payment On First Period"
+msgstr "Betalning under första perioden"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__pending_principal_amount
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__pending_principal_amount
+msgid "Pending Principal Amount"
+msgstr "Pågående kapitalbelopp"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__final_pending_principal_amount
+msgid "Pending amount of the loan after the payment"
+msgstr "Lånets utestående belopp efter betalning"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__pending_principal_amount
+msgid "Pending amount of the loan before the payment"
+msgstr "Lånets utestående belopp före betalning"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__long_term_pending_principal_amount
+msgid ""
+"Pending amount of the loan before the payment that will not be payed in, at "
+"least, 12 months"
+msgstr ""
+"Lånets utestående belopp före betalning som inte kommer att betalas inom "
+"minst 12 månader"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__method_period
+msgid "Period Length"
+msgstr "Period Längd"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__periods
+msgid "Periods"
+msgstr "Perioder"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Post"
+msgstr "Post"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__post_invoice
+msgid "Post Invoice"
+msgstr "Bokför faktura"
+
+#. module: account_loan
+#: model:ir.actions.act_window,name:account_loan.account_loan_post_action
+msgid "Post loan"
+msgstr "Bokför lån"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__state__posted
+msgid "Posted"
+msgstr "Bokförd"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__principal_amount
+msgid "Principal Amount"
+msgstr "Kapitalbelopp"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
+msgid "Process"
+msgstr "Process"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__interests_product_id
+msgid ""
+"Product where the amount of interests will be assigned when the invoice is "
+"created"
+msgstr "Produkt där räntebeloppet kommer att tilldelas när fakturan skapas"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__product_id
+msgid ""
+"Product where the amount of the loan will be assigned when the invoice is "
+"created"
+msgstr "Produkt där lånebeloppet kommer att tilldelas när fakturan skapas"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__rate
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__rate
+msgid "Rate"
+msgstr "Ränta"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan.py:0
+#, python-format
+msgid "Rate Change"
+msgstr ""
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__rate_period
+msgid "Rate Period"
+msgstr "Ränteperiod"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__rate_type
+msgid "Rate Type"
+msgstr "Typ av ränta"
+
+#. module: account_loan
+#: model:ir.model.fields.selection,name:account_loan.selection__account_loan__rate_type__real
+msgid "Real rate"
+msgstr "Realränta"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__rate_period
+msgid "Real rate that will be applied on each period"
+msgstr "Realränta som kommer att tillämpas på varje period"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
+msgid "Reset to draft"
+msgstr ""
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__residual_amount
+msgid "Residual Amount"
+msgstr "Återstående belopp"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__residual_amount
+msgid ""
+"Residual amount of the lease that must be payed on the end in order to "
+"acquire the asset"
+msgstr ""
+"Restvärde av leasingavtalet som måste betalas vid leasingavtalets slut för "
+"att förvärva tillgången"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_user_id
+msgid "Responsible User"
+msgstr "Ansvarig användare"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__round_on_end
+msgid "Round On End"
+msgstr "Runda på slutet"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_generate_wizard_form
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_increase_amount_form_view
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_post_form
+msgid "Run"
+msgstr "Kör"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__sequence
+msgid "Sequence"
+msgstr "Sekvens"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__short_term_loan_account_id
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__short_term_loan_account_id
+msgid "Short term account"
+msgstr "Kortfristigt konto"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
+#: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
+#, python-format
+msgid "Some future invoices already exists"
+msgstr "Vissa framtida fakturor finns redan"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
+#: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
+#, python-format
+msgid "Some future moves already exists"
+msgstr "Vissa framtida drag finns redan"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
+#: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
+#, python-format
+msgid "Some invoices are not created"
+msgstr "Vissa fakturor skapas inte"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan_line.py:0
+#, python-format
+msgid "Some invoices must be created first"
+msgstr "Vissa fakturor måste skapas först"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_increase_amount.py:0
+#: code:addons/account_loan/wizards/account_loan_pay_amount.py:0
+#, python-format
+msgid "Some moves are not created"
+msgstr "Vissa rörelser skapas inte"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan_line.py:0
+#, python-format
+msgid "Some moves must be created first"
+msgstr "Vissa rörelser måste skapas först"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__start_date
+msgid "Start Date"
+msgstr "Startdatum"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__start_date
+msgid "Start of the moves"
+msgstr "Start av rörelserna"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__state
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_line__loan_state
+msgid "State"
+msgstr "Stat"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__method_period
+msgid "State here the time between 2 depreciations, in months"
+msgstr "Ange här tiden mellan 2 deprecieringar, i månader"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Status baserad på aktiviteter\n"
+"Försenad: Förfallodatumet har redan passerats\n"
+"Idag: Aktivitetsdatum är idag\n"
+"Planerad: Framtida aktiviteter."
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/wizards/account_loan_post.py:0
+#, python-format
+msgid "The total principal amount does not match the loan amount."
+msgstr ""
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_line__payment_amount
+msgid "Total amount that will be payed (Annuity)"
+msgstr "Totalt belopp som kommer att betalas ut (Annuitet)"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
+msgid "Total interests"
+msgstr "Summa andelar"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__interests_amount
+msgid "Total interests payed"
+msgstr "Summa betalda räntor"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__payment_amount
+msgid "Total payed amount"
+msgstr "Totalt utbetalt belopp"
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
+msgid "Total payments"
+msgstr "Totala betalningar"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Typ av undantagsaktivitet som registreras."
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
+msgid "Values"
+msgstr "Värden"
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan__website_message_ids
+msgid "Website Messages"
+msgstr "Meddelanden från webbplatsen"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__website_message_ids
+msgid "Website communication history"
+msgstr "Historik för kommunikation på webbplatsen"
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__round_on_end
+msgid ""
+"When checked, the differences will be applied on the last period, if it is "
+"unchecked, the annuity will be recalculated on each period."
+msgstr ""
+"Om den är markerad kommer skillnaderna att tillämpas på den sista perioden, "
+"om den inte är markerad kommer annuiteten att beräknas på nytt för varje "
+"period."
+
+#. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan__payment_on_first_period
+msgid "When checked, the first payment will be on start date"
+msgstr "Vid kontroll kommer den första betalningen att vara på startdatum"
+
+#. module: account_loan
+#. odoo-python
+#: code:addons/account_loan/models/account_loan.py:0
+#, python-format
+msgid ""
+"You have modified the interest rate. Click the Compute items button to "
+"update the lines. Please note that if you have manually edited these lines, "
+"those changes will be lost upon computation."
+msgstr ""
+
+#. module: account_loan
+#: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
+msgid "principal_amount"
+msgstr ""
+
+#~ msgid "Sequence must be unique in a loan"
+#~ msgstr "Sekvensen måste vara unik i ett lån"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Senast redigerad"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Huvudanslutning"
+
+#~ msgid "or"
+#~ msgstr "eller"
