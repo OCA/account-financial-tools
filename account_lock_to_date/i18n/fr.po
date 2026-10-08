@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-09 20:44+0000\n"
-"Last-Translator: Valaeys Stéphane <svalaeys@fiefmanage.ch>\n"
+"PO-Revision-Date: 2026-10-08 13:46+0000\n"
+"Last-Translator: williamphilippin-droid <william.philippin@acsone.eu>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_account_update_lock_to_date
@@ -113,6 +113,9 @@ msgid ""
 "Only users with the 'Adviser' role can edit accounts after and inclusive of "
 "this date. Use it for period locking inside an open fiscal year, for example."
 msgstr ""
+"Seuls les utilisateurs ayant le rôle « Conseiller » peuvent modifier les "
+"écritures à partir de cette date. Utilisez cette option, par exemple, pour "
+"verrouiller une période au sein d’un exercice fiscal encore ouvert."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_res_company__period_lock_to_date
@@ -120,12 +123,17 @@ msgid ""
 "Only users with the 'Adviser' role can edit accounts after this date. Use it "
 "for period locking inside an open fiscal year, for example."
 msgstr ""
+"Seuls les utilisateurs ayant le rôle « Conseiller » peuvent modifier les "
+"écritures après cette date. Utilisez cette option, par exemple, pour "
+"verrouiller une période au sein d’un exercice fiscal encore ouvert."
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid "The lock date for advisors is irreversible and can't be removed."
 msgstr ""
+"La date de verrouillage pour les conseillers est irréversible et ne peut pas "
+"être supprimée."
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/res_company.py:0
@@ -134,6 +142,8 @@ msgid ""
 "The new lock to date for advisors must be set after the previous lock to "
 "date."
 msgstr ""
+"La nouvelle date de verrouillage pour les conseillers doit être postérieure "
+"à la date de verrouillage précédente."
 
 #. module: account_lock_to_date
 #: code:addons/account_lock_to_date/models/res_company.py:0
@@ -142,6 +152,9 @@ msgid ""
 "There are still unposted entries in the period to date you want to lock. You "
 "should either post or delete them."
 msgstr ""
+"Il reste des écritures non comptabilisées dans la période jusqu’à la date "
+"que vous souhaitez verrouiller. Vous devez soit les comptabiliser, soit les "
+"supprimer."
 
 #. module: account_lock_to_date
 #: model_terms:ir.ui.view,arch_db:account_lock_to_date.account_update_lock_to_date_form_view
@@ -200,5 +213,5 @@ msgid ""
 "lock date for advisors is set at or after the last day of the next month."
 msgstr ""
 "Vous ne pouvez pas verrouiller une période qui n'est pas encore finie. "
-"Veuille vous assurer que la date pour les conseillers est après le dernier "
+"Veuillez vous assurer que la date pour les conseillers est après le dernier "
 "jour du mois prochain."
