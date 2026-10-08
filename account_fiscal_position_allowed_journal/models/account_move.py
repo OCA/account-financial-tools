@@ -27,14 +27,23 @@ class AccountMove(models.Model):
             )
         return res
 
-    @api.depends("fiscal_position_id")
     def _compute_journal_id(self):
+        # No @api.depends("fiscal_position_id"): fiscal_position_id depends on
+        # company_id, which depends on journal_id. The cycle changes the order of
+        # the precomputed fields and moves the date of a vendor bill to the end of
+        # the period. The onchange below covers a change made on the form.
         res = super()._compute_journal_id()
         for rec in self:
             if not rec.fiscal_position_id.sudo().allowed_journal_ids:
                 continue
             rec.journal_id = rec._search_default_journal()
         return res
+
+    @api.onchange("fiscal_position_id")
+    def _onchange_fiscal_position_id_journal(self):
+        for rec in self:
+            if rec.fiscal_position_id.sudo().allowed_journal_ids:
+                rec.journal_id = rec._search_default_journal()
 
     def _search_default_journal(self):
         res = super()._search_default_journal()
