@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Le Filament (https://le-filament.com)
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <data noupdate="1">
+	    <record id="ir_cron_check_vies" model="ir.cron">
+		<field name="name">Partner: Validate VAT with EU VIES</field>
+		<field name="interval_number">1</field>
+		<field name="interval_type">days</field>
+		<field name="nextcall" eval="(DateTime.now().replace(hour=2, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')" />
+		<field name="model_id" ref="base.model_res_partner"/>
+		<field name="code">model._cron_check_vies()</field>
+		<field name="state">code</field>
+		<field name="active" eval="False" />
+	    </record>
+	    <record id="ir_cron_clear_vat" model="ir.cron">
+		<field name="name">Partner: Replace VAT by "/" on partners with invalid VAT (according to EU VIES validation)</field>
+		<field name="interval_number">1</field>
+		<field name="interval_type">days</field>
+		<field name="nextcall" eval="(DateTime.now().replace(hour=4, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')" />
+		<field name="model_id" ref="base.model_res_partner"/>
+		<field name="code">model._cron_clear_vat()</field>
+		<field name="state">code</field>
+		<field name="active" eval="False" />
+	    </record>
+    </data>
+    <data noupdate="0">
+	    <!-- Disable IAP cron -->
+	    <record id="base_vat.vies_iap_check_update" model="ir.cron">
+		<field name="active" eval="False"/>
+	    </record>
+    </data>
+</odoo>

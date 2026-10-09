@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Le Filament (https://le-filament.com)
+     License LGPL-3.0 (https://www.gnu.org/licenses/agpl) -->
+
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.partner.vat.manual.check.vies</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_vat.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='vies_service_setting']//field[@name='vat_check_vies']" position="after">
+                <div class="content-group mt16" invisible="not vat_check_vies">
+                    <label for="vies_vat_api" string="VIES API" class="o_light_label"/>
+                    <field name="vies_vat_api"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
