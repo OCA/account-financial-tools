@@ -16,9 +16,9 @@ hidden things that are hidden and available only on EE version.
     Invoicing Settings.
 3)  In Odoo CE, the group 'Show Full Accounting Features' is hidden.
     With that module, the group is selectable in the user form view.
-    Also the group "Billing / xxx" are renamed into "Accounting / yyy"
+    Also the groups "Invoicing / xxx" are renamed into "Accounting / yyy"
     to fit with the EE terms.
-4)  Rename the main menu 'Billing' into 'Accounting' to fit with EE
+4)  Rename the main menu 'Invoicing' into 'Accounting' to fit with EE
     naming.
-5) Allow to configure **Fiscalyear Last Day** and **Fiscalyear Last Month**
+5)  Allow to configure **Fiscalyear Last Day** and **Fiscalyear Last Month**
    fields on accounting configuration page.
