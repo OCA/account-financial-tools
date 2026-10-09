@@ -3,5 +3,6 @@ freezegun
 numpy-financial<=1.0.0
 numpy>=1.15
 openpyxl>=3.1.0
+openupgradelib
 pandas
 python-dateutil
