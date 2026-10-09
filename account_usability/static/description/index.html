@@ -428,33 +428,41 @@ configuration page.</li>
 <ul class="simple">
 <li>account.group_account_invoice</li>
 </ul>
-<p><em>CE Without that module</em> -&gt; Complete Name : Invoicing / Billing -&gt;
+<p><em>CE Without that module</em> -&gt; Complete Name : Invoicing / Invoicing -&gt;
 Parent Category : base.module_category_accounting_accounting -&gt; Implies
 : base.group_user</p>
-<p><em>CE With that module / EE</em> -&gt; Complete Name: <strong>Accounting</strong> / Billing</p>
+<p><em>CE With that module / EE</em> -&gt; Complete Name: <strong>Accounting</strong> / Invoicing</p>
 <ul class="simple">
 <li>account.group_account_readonly</li>
 </ul>
 <p><em>CE Without that module</em> -&gt; Complete Name : Technical / Show Accounting
-Features - Readonly -&gt; Parent : base.module_category_hidden -&gt; Implies :
-base.group_user</p>
+Features - Readonly -&gt; Parent Category : base.module_category_hidden -&gt;
+Implies : base.group_user</p>
 <p><em>CE With that module / EE</em> -&gt; name: <strong>Accounting / Read-only</strong> -&gt; Parent
-Category: <strong>base.module_category_accounting_accounting</strong></p>
+Category : <strong>base.module_category_accounting_accounting</strong></p>
+<ul class="simple">
+<li>account.group_account_basic</li>
+</ul>
+<p><em>CE Without that module</em> -&gt; Complete Name : Technical / Basic -&gt; Parent
+Category : base.module_category_hidden -&gt; Implies :
+account.group_account_invoice</p>
+<p><em>CE With that module / EE</em> -&gt; name: <strong>Accounting / Invoicing &amp; Banks</strong>
+-&gt; Parent Category : <strong>base.module_category_accounting_accounting</strong></p>
 <ul class="simple">
 <li>account.group_account_user</li>
 </ul>
 <p><em>CE Without that module</em> -&gt; Complete Name : Technical / Show Full
-Accounting Features -&gt; Parent : base.module_category_hidden -&gt; Implies :
-account.group_account_invoice, account.group_account_readonly</p>
+Accounting Features -&gt; Parent Category : base.module_category_hidden -&gt;
+Implies : account.group_account_basic, account.group_account_readonly</p>
 <p><em>CE With that module / EE</em> -&gt; name: <strong>Accounting / Bookkeeper</strong> -&gt;
 Parent Category: <strong>base.module_category_accounting_accounting</strong></p>
 <ul class="simple">
 <li>account.group_account_manager</li>
 </ul>
-<p><em>CE Without that module</em> -&gt; Complete Name : Invoicing / Billing
-Administrator -&gt; Parent : base.module_category_accounting_accounting -&gt;
-Implies : account.group_account_invoice</p>
-<p><em>CE With that module / EE</em> -&gt; name: <strong>Accounting / Accountant</strong> -&gt;
+<p><em>CE Without that module</em> -&gt; Complete Name : Invoicing / Administrator -&gt;
+Parent : base.module_category_accounting_accounting -&gt; Implies :
+account.group_account_invoice</p>
+<p><em>CE With that module / EE</em> -&gt; name: <strong>Accounting / Administrator</strong> -&gt;
 Implies : <strong>account.group_account_user</strong></p>
 </div>
 <div class="section" id="known-issues-roadmap">
@@ -492,6 +500,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <li>Antoni Marroig &lt;<a class="reference external" href="mailto:amarroig&#64;apsl.net">amarroig&#64;apsl.net</a>&gt;</li>
 </ul>
 </li>
+<li>Rémi - Le Filement &lt;<a class="reference external" href="https://le-filament.com">https://le-filament.com</a>&gt;</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
