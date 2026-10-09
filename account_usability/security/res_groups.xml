@@ -6,12 +6,14 @@
 -->
 <odoo>
     <!-- Change groups to fit with EE configuration
-    Note: The inheritance mechanism is :
-    group_account_readonly ⬂
-    group_account_invoice  ⇨ group_account_user ⇨ group_account_manager
+	    Note: The inheritance mechanism is :
+
+    group_account_invoice ⇨ group_account_basic ⬂
+                         group_account_readonly ⇨ group_account_user ⇨ group_account_manager
+
 -->
 
-    <!-- Level 1:
+    <!-- Level 1: account.group_account_readonly
     Name:  Show Accounting Features - Readonly -> Read-only
     Parent:
         Before: Technical (base.module_category_hidden)
@@ -37,13 +39,27 @@
         No Change.
 -->
 
-    <!-- Level 3:
+    <!-- Level 3: account.group_account_basic
+    Name: Basic -> Invoicing & Banks
+    Parent:
+        Before: Technical (base.module_category_hidden)
+        After: Accounting (base.module_category_accounting_accounting)
+    Implied Groups:
+        Before: account.group_account_invoice
+        No Change.
+-->
+    <record id="account.group_account_basic" model="res.groups">
+        <field name="name">Invoicing &amp; Banks</field>
+        <field name="category_id" ref="base.module_category_accounting_accounting" />
+    </record>
+
+    <!-- Level 4: account.group_account_user
     Name: Show Full Accounting Features -> Bookkeeper
     Parent:
         Before: Technical (base.module_category_hidden)
         After: Accounting (base.module_category_accounting_accounting)
     Implied Groups:
-        Before: account.group_account_invoice + account.group_account_readonly
+        Before: account.group_account_basic + account.group_account_readonly
         No Change.
 -->
     <record id="account.group_account_user" model="res.groups">
@@ -51,14 +67,13 @@
         <field name="category_id" ref="base.module_category_accounting_accounting" />
     </record>
 
-    <!-- Level 4:
-    Name: Billing Administrator -> Accountant
+    <!-- Level 5: account.group_account_manager
+    Name: Administrator
     Implied Groups :
-        Before: account.group_account_invoice + base.group_private_addresses
-        After: account.group_account_user + base.group_private_addresses
+        Before: account.group_account_invoice
+        After: account.group_account_user
 -->
     <record id="account.group_account_manager" model="res.groups">
-        <field name="name">Accountant</field>
         <field
             name="implied_ids"
             eval="[
