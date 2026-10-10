@@ -130,3 +130,19 @@ class TestAccountFiscalPositionAllowedJournal(AccountTestInvoicingCommon):
         self.assertEqual(
             invoice.journal_id, self.fiscal_position_01.allowed_journal_ids[0]
         )
+
+    def test_vendor_bill_date(self):
+        """
+        Data:
+            - No fiscal position on the vendor bill
+        Test case:
+            - Create a vendor bill dated on the first day of a month
+        Expected result:
+            - The accounting date stays on the invoice date
+        """
+        invoice_date = fields.Date.from_string("2019-01-01")
+        bill = self.init_invoice(
+            "in_invoice", invoice_date=invoice_date, products=self.product_01
+        )
+        self.assertFalse(bill.fiscal_position_id)
+        self.assertEqual(bill.date, invoice_date)
