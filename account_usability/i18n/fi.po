@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-12 14:46+0000\n"
+"Last-Translator: Jussi Lehto <jussi.lehto@cetmix.com>\n"
 "Language-Team: none\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_account
@@ -39,7 +41,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_usability.account_account_tag_action
 #: model:ir.ui.menu,name:account_usability.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "Tilien tunnisteet"
 
 #. module: account_usability
 #: model:ir.model.fields,help:account_usability.field_account_account__group_id
