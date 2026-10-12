@@ -135,6 +135,34 @@ class TestAccountMoveNameSequence(TransactionCase):
         move.action_post()
         self.assertEqual(move.name, move_name)
 
+    def test_manual_move_name(self):
+        """The user can manually set the entry number on a draft move."""
+        move = self.env["account.move"].create(
+            {
+                "date": self.date,
+                "journal_id": self.misc_journal.id,
+                "line_ids": self.lines,
+            }
+        )
+        self.assertEqual(move.name, "/")
+        move.name = "ADLM/MANUAL/0001"
+        self.assertEqual(move.name, "ADLM/MANUAL/0001")
+        move.action_post()
+        self.assertEqual(move.name, "ADLM/MANUAL/0001")
+
+    def test_manual_move_name_form(self):
+        """The entry number field is editable on a draft move in the form view."""
+        move = self.env["account.move"].create(
+            {
+                "date": self.date,
+                "journal_id": self.misc_journal.id,
+                "line_ids": self.lines,
+            }
+        )
+        with Form(move) as move_form:
+            move_form.name = "ADLM/MANUAL/0002"
+        self.assertEqual(move.name, "ADLM/MANUAL/0002")
+
     def test_prefix_move_name_use_move_date(self):
         seq = self.misc_journal.sequence_id
         seq.prefix = "TEST-%(year)s-%(month)s-"

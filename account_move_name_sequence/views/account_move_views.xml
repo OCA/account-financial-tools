@@ -17,11 +17,11 @@
                 expr="//div[hasclass('oe_title')]//field[@name='name']"
                 position="attributes"
             >
-                <attribute name="invisible">name == '/'</attribute>
-                <attribute name="readonly">1</attribute>
+                <attribute name="invisible">0</attribute>
+                <attribute name="readonly">state != 'draft'</attribute>
             </xpath>
             <xpath expr="//div[hasclass('oe_title')]//h1//span" position="attributes">
-                <attribute name="invisible">state != 'draft' or name != '/'</attribute>
+                <attribute name="invisible">1</attribute>
             </xpath>
         </field>
     </record>
