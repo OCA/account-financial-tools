@@ -6,7 +6,7 @@
         <field eval="True" name="global" />
         <field
             name="domain_force"
-        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        >['|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]</field>
     </record>
     <record id="account_asset_multi_company_rule" model="ir.rule">
         <field name="name">Account Asset multi-company</field>
@@ -22,6 +22,6 @@
         <field eval="True" name="global" />
         <field
             name="domain_force"
-        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        >['|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]</field>
     </record>
 </odoo>

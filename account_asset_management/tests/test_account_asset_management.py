@@ -1,6 +1,7 @@
 # Copyright (c) 2014 ACSONE SA/NV (acsone.eu).
 # Copyright 2009-2018 Noviat
 # Copyright 2021 Tecnativa - João Marques
+# Copyright 2026 Imaro Tech - Ignacio R. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -1058,3 +1059,240 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_branch_asset_from_invoice_and_depreciation(self):
+        """Branch assets can use parent-company profiles and post in branch."""
+        branch = self.env["res.company"].create(
+            {
+                "name": "Branch Company",
+                "parent_id": self.company_data["company"].id,
+            }
+        )
+        branch_purchase_journal = self.company_data["default_journal_purchase"].copy(
+            {
+                "name": "Branch Purchases",
+                "code": "BRP22",
+                "company_id": branch.id,
+            }
+        )
+        self.partner.with_company(branch).write(
+            {
+                "property_account_payable_id": self.company_data[
+                    "default_account_payable"
+                ].id,
+                "property_account_receivable_id": self.company_data[
+                    "default_account_receivable"
+                ].id,
+            }
+        )
+        asset_profile = self.asset_profile_model.create(
+            {
+                "name": "Branch profile",
+                "company_id": self.company_data["company"].id,
+                "account_asset_id": self.company_data["default_account_assets"].id,
+                "account_depreciation_id": self.company_data[
+                    "default_account_assets"
+                ].id,
+                "account_expense_depreciation_id": self.company_data[
+                    "default_account_expense"
+                ].id,
+                "journal_id": self.company_data["default_journal_purchase"].id,
+            }
+        )
+        all_assets = self.asset_model.search([])
+        invoice = (
+            self.env["account.move"]
+            .with_company(branch)
+            .with_context(check_move_validity=False)
+            .create(
+                {
+                    "move_type": "in_invoice",
+                    "company_id": branch.id,
+                    "journal_id": branch_purchase_journal.id,
+                    "partner_id": self.partner.id,
+                    "invoice_date": fields.Date.context_today(self.env.user),
+                    "invoice_payment_term_id": self.env.ref(
+                        "account.account_payment_term_immediate"
+                    ).id,
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "name": "Branch asset line",
+                                "product_id": self.product.id,
+                                "account_id": self.company_data[
+                                    "default_account_expense"
+                                ].id,
+                                "quantity": 1,
+                                "price_unit": 500.0,
+                                "tax_ids": [Command.clear()],
+                                "asset_profile_id": asset_profile.id,
+                            }
+                        )
+                    ],
+                }
+            )
+        )
+        invoice.action_post()
+        new_assets = self.asset_model.search([]) - all_assets
+        self.assertEqual(len(new_assets), 1)
+        asset = new_assets[0]
+        self.assertEqual(asset.company_id, branch)
+        self.assertEqual(asset.profile_id, asset_profile)
+        asset.compute_depreciation_board()
+        asset.validate()
+        asset.depreciation_line_ids[1].create_move()
+        move = asset.depreciation_line_ids[1].move_id
+        self.assertEqual(move.company_id, branch)
+        self.assertTrue(all(line.company_id == branch for line in move.line_ids))
+
+    def test_23_branch_asset_removal_with_parent_accounts(self):
+        """Branch removals can use parent-company accounts and post in branch."""
+        branch = self.env["res.company"].create(
+            {
+                "name": "Branch Company Removal",
+                "parent_id": self.company_data["company"].id,
+            }
+        )
+        branch_purchase_journal = self.company_data["default_journal_purchase"].copy(
+            {
+                "name": "Branch Purchases Removal",
+                "code": "BRP23",
+                "company_id": branch.id,
+            }
+        )
+        self.partner.with_company(branch).write(
+            {
+                "property_account_payable_id": self.company_data[
+                    "default_account_payable"
+                ].id,
+                "property_account_receivable_id": self.company_data[
+                    "default_account_receivable"
+                ].id,
+            }
+        )
+        asset_profile = self.asset_profile_model.create(
+            {
+                "name": "Branch profile removal",
+                "company_id": self.company_data["company"].id,
+                "account_asset_id": self.company_data["default_account_assets"].id,
+                "account_depreciation_id": self.company_data[
+                    "default_account_assets"
+                ].id,
+                "account_expense_depreciation_id": self.company_data[
+                    "default_account_expense"
+                ].id,
+                "journal_id": self.company_data["default_journal_purchase"].id,
+            }
+        )
+        all_assets = self.asset_model.search([])
+        invoice = (
+            self.env["account.move"]
+            .with_company(branch)
+            .with_context(check_move_validity=False)
+            .create(
+                {
+                    "move_type": "in_invoice",
+                    "company_id": branch.id,
+                    "journal_id": branch_purchase_journal.id,
+                    "partner_id": self.partner.id,
+                    "invoice_date": fields.Date.context_today(self.env.user),
+                    "invoice_payment_term_id": self.env.ref(
+                        "account.account_payment_term_immediate"
+                    ).id,
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "name": "Branch removal asset line",
+                                "product_id": self.product.id,
+                                "account_id": self.company_data[
+                                    "default_account_expense"
+                                ].id,
+                                "quantity": 1,
+                                "price_unit": 500.0,
+                                "tax_ids": [Command.clear()],
+                                "asset_profile_id": asset_profile.id,
+                            }
+                        )
+                    ],
+                }
+            )
+        )
+        invoice.action_post()
+        asset = (self.asset_model.search([]) - all_assets)[0]
+        asset.validate()
+        wiz = self.remove_model.with_context(active_id=asset.id).create(
+            {
+                "date_remove": time.strftime("%Y-%m-%d"),
+                "sale_value": 0.0,
+                "posting_regime": "gain_loss_on_sale",
+                "company_id": branch.id,
+                "account_plus_value_id": self.company_data[
+                    "default_account_revenue"
+                ].id,
+                "account_min_value_id": self.company_data["default_account_expense"].id,
+            }
+        )
+        wiz.remove()
+        move = asset.depreciation_line_ids.filtered(
+            lambda line: line.type == "remove"
+        ).move_id
+        self.assertTrue(move)
+        self.assertEqual(move.company_id, branch)
+        self.assertTrue(all(line.company_id == branch for line in move.line_ids))
+
+    def test_24_branch_can_use_parent_groups_without_parent_selected(self):
+        """Branch contexts can see parent groups and profiles without selecting parent."""
+        branch = self.env["res.company"].create(
+            {
+                "name": "Branch Company Groups",
+                "parent_id": self.company_data["company"].id,
+            }
+        )
+        parent_group = self.env["account.asset.group"].create(
+            {
+                "name": "Parent Asset Group",
+                "company_id": self.company_data["company"].id,
+            }
+        )
+        parent_profile = self.asset_profile_model.create(
+            {
+                "name": "Parent Branch-Aware Profile",
+                "company_id": self.company_data["company"].id,
+                "account_asset_id": self.company_data["default_account_assets"].id,
+                "account_depreciation_id": self.company_data[
+                    "default_account_assets"
+                ].id,
+                "account_expense_depreciation_id": self.company_data[
+                    "default_account_expense"
+                ].id,
+                "journal_id": self.company_data["default_journal_purchase"].id,
+                "group_ids": [Command.link(parent_group.id)],
+            }
+        )
+        branch_env = self.env(
+            context={**self.env.context, "allowed_company_ids": [branch.id]}
+        )
+        visible_groups = branch_env["account.asset.group"].search(
+            [("id", "=", parent_group.id)]
+        )
+        visible_profiles = branch_env["account.asset.profile"].search(
+            [("id", "=", parent_profile.id)]
+        )
+        self.assertEqual(visible_groups, parent_group)
+        self.assertEqual(visible_profiles, parent_profile)
+        branch_profile = self.asset_profile_model.with_company(branch).create(
+            {
+                "name": "Branch profile with parent group",
+                "company_id": branch.id,
+                "account_asset_id": self.company_data["default_account_assets"].id,
+                "account_depreciation_id": self.company_data[
+                    "default_account_assets"
+                ].id,
+                "account_expense_depreciation_id": self.company_data[
+                    "default_account_expense"
+                ].id,
+                "journal_id": self.company_data["default_journal_purchase"].id,
+                "group_ids": [Command.link(parent_group.id)],
+            }
+        )
+        self.assertEqual(branch_profile.group_ids, parent_group)
