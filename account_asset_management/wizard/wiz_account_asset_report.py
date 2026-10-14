@@ -13,7 +13,6 @@ class WizAccountAssetReport(models.TransientModel):
 
     asset_group_id = fields.Many2one(
         comodel_name="account.asset.group",
-        string="Asset Group",
         default=lambda self: self._default_asset_group_id(),
     )
     date_from = fields.Date(string="Start Date", required=True)
@@ -21,7 +20,6 @@ class WizAccountAssetReport(models.TransientModel):
     draft = fields.Boolean(string="Include draft assets")
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         default=lambda self: self._default_company_id(),
     )

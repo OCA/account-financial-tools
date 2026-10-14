@@ -1,0 +1,22 @@
+id,name,model_id,group_id/id,operation,domain
+access_account_asset_profile_invoice,account.asset.profile,account.asset.profile,account.group_account_invoice,r,
+access_account_asset_profile_user,account.asset.profile,account.asset.profile,account.group_account_user,r,
+access_account_asset_profile_manager,account.asset.profile,account.asset.profile,account.group_account_manager,crud,
+access_account_asset_invoice,account.asset,account.asset,account.group_account_invoice,crud,
+access_account_asset_user,account.asset,account.asset,account.group_account_user,crud,
+access_account_asset_manager,account.asset,account.asset,account.group_account_manager,crud,
+access_account_asset_line_invoice,account.asset.line,account.asset.line,account.group_account_invoice,crud,
+access_account_asset_line_user,account.asset.line,account.asset.line,account.group_account_user,crud,
+access_account_asset_line_manager,account.asset.line,account.asset.line,account.group_account_manager,crud,
+access_account_asset_recompute_trigger_user,account.asset.recompute.trigger,account.asset.recompute.trigger,account.group_account_user,crud,
+access_account_asset_recompute_trigger_manager,account.asset.recompute.trigger,account.asset.recompute.trigger,account.group_account_manager,crud,
+access_account_asset_group_invoice,account.asset.group,account.asset.group,account.group_account_invoice,r,
+access_account_asset_group_user,account.asset.group,account.asset.group,account.group_account_user,r,
+access_account_asset_group_manager,account.asset.group,account.asset.group,account.group_account_manager,crud,
+access_account_asset_remove_user,account.asset.remove,account.asset.remove,account.group_account_user,crud,
+access_account_asset_compute_user,account.asset.compute,account.asset.compute,account.group_account_user,crud,
+access_wiz_account_asset_report,wiz.account.asset.report,wiz.account.asset.report,account.group_account_readonly,cru,
+access_wiz_asset_move_reverse_user,wiz.asset.move.reverse,wiz.asset.move.reverse,account.group_account_user,crud,
+account_asset_profile_multi_company_rule,Account Asset Profile multi-company,account.asset.profile,,crud,"[('company_id', 'in', company_ids)]"
+account_asset_multi_company_rule,Account Asset multi-company,account.asset,,crud,"[('company_id', 'in', company_ids)]"
+account_asset_group_multi_company_rule,Account Asset Group multi-company,account.asset.group,,crud,"[('company_id', 'in', company_ids)]"

@@ -5,7 +5,6 @@
 
 import calendar
 import time
-from datetime import date, datetime
 
 from odoo import Command, fields
 from odoo.exceptions import UserError
@@ -305,7 +304,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         asset.compute_depreciation_board()
         asset.invalidate_recordset()
-        if calendar.isleap(date.today().year):
+        if calendar.isleap(fields.Date.today().year):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[1].amount, 46.44, places=2
             )
@@ -318,7 +317,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, 55.55, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[5].amount, 55.55, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[6].amount, 55.55, places=2)
-        if calendar.isleap(date.today().year):
+        if calendar.isleap(fields.Date.today().year):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[-1].amount, 9.11, places=2
             )
@@ -336,7 +335,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 "profile_id": self.car5y.id,
                 "purchase_value": 3333,
                 "salvage_value": 0,
-                "date_start": f"{datetime.now().year - 1}-07-07",
+                "date_start": f"{fields.Date.today().year - 1}-07-07",
                 "method_time": "year",
                 "method_number": 5,
                 "method_period": "month",
@@ -348,7 +347,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             {
                 "asset_id": asset.id,
                 "amount": 325.08,
-                "line_date": f"{datetime.now().year - 1}-12-31",
+                "line_date": f"{fields.Date.today().year - 1}-12-31",
                 "type": "depreciate",
                 "init_entry": True,
             }
@@ -360,7 +359,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertAlmostEqual(asset.value_depreciated, 325.08, places=2)
         # check computed values in the depreciation board
         self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55, places=2)
-        if calendar.isleap(date.today().year - 1):
+        if calendar.isleap(fields.Date.today().year - 1):
             # for leap years the first year depreciation amount of 325.08
             # is too high and hence a correction is applied to the next
             # entry of the table
@@ -411,7 +410,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         # check the depreciated value is the initial value
         self.assertAlmostEqual(asset.value_depreciated, 279.44, places=2)
         # check computed values in the depreciation board
-        if calendar.isleap(date.today().year):
+        if calendar.isleap(fields.Date.today().year):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[2].amount, 44.75, places=2
             )
@@ -420,7 +419,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
                 asset.depreciation_line_ids[2].amount, 45.64, places=2
             )
         self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55, places=2)
-        if calendar.isleap(date.today().year):
+        if calendar.isleap(fields.Date.today().year):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[-1].amount, 9.11, places=2
             )

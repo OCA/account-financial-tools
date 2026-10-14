@@ -25,12 +25,12 @@ class DummyFy:
 
 class AccountAsset(models.Model):
     _name = "account.asset"
-    _inherit = ["mail.thread", "mail.activity.mixin", "analytic.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin", "analytic.mixin"]  # noqa: RUF012
     _description = "Asset"
     _order = "date_start desc, code, name"
     _check_company_auto = True
     _check_company_domain = models.check_company_domain_parent_of
-    _rec_names_search = ["code", "name"]
+    _rec_names_search = ["code", "name"]  # noqa: RUF012
 
     account_move_line_ids = fields.One2many(
         comodel_name="account.move.line",
@@ -131,7 +131,6 @@ class AccountAsset(models.Model):
     active = fields.Boolean(default=True)
     partner_id = fields.Many2one(
         comodel_name="res.partner",
-        string="Partner",
     )
     method = fields.Selection(
         selection=lambda self: self.env["account.asset.profile"]._selection_method(),
@@ -235,7 +234,6 @@ class AccountAsset(models.Model):
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         readonly=True,
         default=lambda self: self._default_company_id(),
@@ -490,7 +488,7 @@ class AccountAsset(models.Model):
         for asset in self:
             name = asset.name
             if asset.code:
-                name = " - ".join([asset.code, name])
+                name = f"{asset.code} - {name}"
             asset.display_name = name
 
     def validate(self):
@@ -830,7 +828,7 @@ class AccountAsset(models.Model):
                     months=self.method_number, days=-1
                 )
             elif self.method_period == "quarter":
-                m = [x for x in [3, 6, 9, 12] if x >= depreciation_start_date.month][0]
+                m = next(x for x in [3, 6, 9, 12] if x >= depreciation_start_date.month)
                 first_line_date = depreciation_start_date + relativedelta(
                     month=m, day=31
                 )
@@ -930,7 +928,7 @@ class AccountAsset(models.Model):
         if self.method_period == "month":
             line_date = start_date + relativedelta(day=31)
         if self.method_period == "quarter":
-            m = [x for x in [3, 6, 9, 12] if x >= start_date.month][0]
+            m = next(x for x in [3, 6, 9, 12] if x >= start_date.month)
             line_date = start_date + relativedelta(month=m, day=31)
         elif self.method_period == "year":
             line_date = table[0]["date_stop"]
@@ -1106,15 +1104,16 @@ class AccountAsset(models.Model):
             # was compensated in the first FY depreciation line.
             # The code has now been simplified with compensation
             # always in last FT depreciation line.
-            if self.method_time == "year" and not entry.get("day_amount"):
-                if not currency.is_zero(fy_amount_check - fy_amount):
-                    diff = fy_amount_check - fy_amount
-                    amount = amount - diff
-                    remaining_value += diff
-                    lines[-1].update(
-                        {"amount": amount, "remaining_value": remaining_value}
-                    )
-                    depreciated_value -= diff
+            if (
+                self.method_time == "year"
+                and not entry.get("day_amount")
+                and not currency.is_zero(fy_amount_check - fy_amount)
+            ):
+                diff = fy_amount_check - fy_amount
+                amount = amount - diff
+                remaining_value += diff
+                lines[-1].update({"amount": amount, "remaining_value": remaining_value})
+                depreciated_value -= diff
 
             if not lines:
                 table.pop(i)
@@ -1211,7 +1210,7 @@ class AccountAsset(models.Model):
             try:
                 with self.env.cr.savepoint():
                     result += depreciation.create_move()
-            except Exception:
+            except Exception:  # noqa: BLE001 (one asset must not stop the batch)
                 e = exc_info()[1]
                 tb = "".join(format_exception(*exc_info()))
                 asset_ref = depreciation.asset_id.name
