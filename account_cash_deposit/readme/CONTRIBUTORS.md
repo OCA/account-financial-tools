@@ -1,0 +1,3 @@
+- Alexis de Lattre \<<alexis.delattre@akretion.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
