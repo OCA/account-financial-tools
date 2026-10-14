@@ -1,7 +1,7 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.misc import format_date
 
@@ -42,4 +42,12 @@ class AccountMove(models.Model):
                         journal_date=lock_date,
                     )
                 raise UserError(message)
+        return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super().create(vals_list)
+        res.filtered(
+            lambda x: x.journal_id.lock_date_restrict_creation
+        )._check_fiscal_lock_dates()
         return res
