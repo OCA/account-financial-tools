@@ -16,7 +16,6 @@ class AccountAssetLine(models.Model):
     name = fields.Char(string="Depreciation Name", size=64, readonly=True)
     asset_id = fields.Many2one(
         comodel_name="account.asset",
-        string="Asset",
         required=True,
         ondelete="cascade",
         check_company=True,

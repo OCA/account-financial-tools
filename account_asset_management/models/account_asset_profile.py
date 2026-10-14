@@ -51,13 +51,11 @@ class AccountAssetProfile(models.Model):
     journal_id = fields.Many2one(
         comodel_name="account.journal",
         domain="[('type', '=', 'general'), ('company_id', '=', company_id)]",
-        string="Journal",
         check_company=True,
         required=True,
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         default=lambda self: self._default_company_id(),
     )
@@ -230,9 +228,12 @@ class AccountAssetProfile(models.Model):
         return profile_ids
 
     def write(self, vals):
-        if vals.get("method_time"):
-            if vals["method_time"] != "year" and not vals.get("prorata"):
-                vals["prorata"] = True
+        if (
+            vals.get("method_time")
+            and vals["method_time"] != "year"
+            and not vals.get("prorata")
+        ):
+            vals["prorata"] = True
         res = super().write(vals)
         # TODO last profile in self is defined as default on the related
         # account. must be improved.

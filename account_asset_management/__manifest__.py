@@ -5,7 +5,7 @@
 
 {
     "name": "Assets Management",
-    "version": "19.0.1.0.4",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["account", "report_xlsx_helper"],
     "excludes": ["account_asset"],
@@ -15,8 +15,7 @@
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting & Finance",
     "data": [
-        "security/account_asset_security.xml",
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "wizard/account_asset_compute.xml",
         "wizard/account_asset_remove.xml",
         "views/account_account.xml",

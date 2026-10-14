@@ -47,7 +47,7 @@
                             string="Journal Entries"
                             type="object"
                             class="oe_stat_button"
-                            icon="fa-bars"
+                            icon="menu"
                         />
                     </div>
                     <div class="oe_title">
@@ -182,7 +182,7 @@
                                     type="object"
                                     name="compute_depreciation_board"
                                     string="Compute"
-                                    icon="fa-gears"
+                                    icon="calculate"
                                     invisible="state != 'draft'"
                                 />
                             </div>
@@ -208,21 +208,21 @@
                                     <field name="currency_id" column_invisible="1" />
                                     <button
                                         name="create_move"
-                                        icon="fa-cog"
+                                        icon="settings"
                                         string="Create Move"
                                         type="object"
                                         invisible="init_entry or move_check or parent_state != 'open'"
                                     />
                                     <button
                                         name="open_move"
-                                        icon="fa-folder-open-o"
+                                        icon="folder_open"
                                         string="View Move"
                                         type="object"
                                         invisible="not move_check"
                                     />
                                     <button
                                         name="unlink_move"
-                                        icon="fa-times"
+                                        icon="close"
                                         string="Delete/Reverse Move"
                                         type="object"
                                         confirm="Are you sure ?"

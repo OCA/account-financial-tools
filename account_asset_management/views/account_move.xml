@@ -10,7 +10,7 @@
                     name="action_view_assets"
                     type="object"
                     class="oe_stat_button"
-                    icon="fa-cube"
+                    icon="inventory_2"
                     invisible="asset_count == 0"
                     groups="account.group_account_invoice"
                 >
