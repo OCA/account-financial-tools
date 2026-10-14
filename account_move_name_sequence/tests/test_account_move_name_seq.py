@@ -8,10 +8,12 @@ from datetime import datetime
 from unittest.mock import patch
 
 from freezegun import freeze_time
+from psycopg2.errors import UniqueViolation
 
 from odoo import Command, fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import Form, TransactionCase, tagged
+from odoo.tools import mute_logger
 
 
 @tagged("post_install", "-at_install")
@@ -135,20 +137,34 @@ class TestAccountMoveNameSequence(TransactionCase):
         move.action_post()
         self.assertEqual(move.name, move_name)
 
+    def _create_out_invoice(self):
+        product = self.env["product.product"].create({"name": "Product"})
+        with Form(
+            self.env["account.move"].with_context(default_move_type="out_invoice")
+        ) as invoice_form:
+            invoice_form.invoice_date = fields.Date.today()
+            invoice_form.partner_id = self.partner
+            with invoice_form.invoice_line_ids.new() as line_form:
+                line_form.product_id = product
+            invoice = invoice_form.save()
+            self.assertEqual(invoice.name, "/")
+        return invoice
+
     def test_manual_move_name(self):
-        """The user can manually set the entry number on a draft move."""
-        move = self.env["account.move"].create(
-            {
-                "date": self.date,
-                "journal_id": self.misc_journal.id,
-                "line_ids": self.lines,
-            }
-        )
-        self.assertEqual(move.name, "/")
-        move.name = "ADLM/MANUAL/0001"
-        self.assertEqual(move.name, "ADLM/MANUAL/0001")
-        move.action_post()
-        self.assertEqual(move.name, "ADLM/MANUAL/0001")
+        invoice = self._create_out_invoice()
+        invoice.journal_id = self.sales_journal
+        self.assertEqual(invoice.name, "/", "name based on journal instead of sequence")
+        invoice.action_post()
+        self.assertIn("TB2CSEQ/", invoice.name, "name was not based on sequence")
+
+        invoice_conflicting = self._create_out_invoice()
+        invoice_conflicting.journal_id = invoice.journal_id
+        self.assertEqual(invoice_conflicting.name, "/")
+        invoice_conflicting.name = invoice.name
+        self.assertEqual(invoice_conflicting.name, invoice.name)
+        # Posting the move with the conflicting manual name is rejected
+        with mute_logger("odoo.sql_db"), self.assertRaises(UniqueViolation):
+            invoice_conflicting.action_post()
 
     def test_manual_move_name_form(self):
         """The entry number field is editable on a draft move in the form view."""
@@ -382,16 +398,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         self.assertTrue(self.env["account.move"]._constrains_date_sequence())
 
     def test_prefix_move_name_journal_onchange(self):
-        product = self.env["product.product"].create({"name": "Product"})
-        with Form(
-            self.env["account.move"].with_context(default_move_type="out_invoice")
-        ) as invoice_form:
-            invoice_form.invoice_date = fields.Date.today()
-            invoice_form.partner_id = self.partner
-            with invoice_form.invoice_line_ids.new() as line_form:
-                line_form.product_id = product
-            invoice = invoice_form.save()
-            self.assertEqual(invoice.name, "/")
+        invoice = self._create_out_invoice()
         invoice.journal_id = self.sales_journal
         self.assertEqual(invoice.name, "/", "name based on journal instead of sequence")
         invoice.action_post()
