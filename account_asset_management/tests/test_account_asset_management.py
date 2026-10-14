@@ -874,11 +874,9 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         wiz = Form(
             self.env["wiz.asset.move.reverse"].with_context(
-                **{
-                    "active_model": depreciation_line._name,
-                    "active_id": depreciation_line.id,
-                    "active_ids": [depreciation_line.id],
-                }
+                active_model=depreciation_line._name,
+                active_id=depreciation_line.id,
+                active_ids=[depreciation_line.id],
             )
         )
         reverse_wizard = wiz.save()
@@ -1020,8 +1018,9 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         self.assertEqual(len(aml_sale), 1)
         aml_depre = account_move_remove.line_ids.filtered(
-            lambda x: x.account_id == self.car5y.account_depreciation_id
-            and x.debit == 1000
+            lambda x: (
+                x.account_id == self.car5y.account_depreciation_id and x.debit == 1000
+            )
         )
         self.assertEqual(len(aml_depre), 1)
         aml_asset = account_move_remove.line_ids.filtered(

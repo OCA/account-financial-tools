@@ -296,8 +296,10 @@ class AccountAsset(models.Model):
     def _compute_depreciation(self):
         for asset in self:
             lines = asset.depreciation_line_ids.filtered(
-                lambda line: line.type in ("depreciate", "remove")
-                and (line.init_entry or line.move_check)
+                lambda line: (
+                    line.type in ("depreciate", "remove")
+                    and (line.init_entry or line.move_check)
+                )
             )
             value_depreciated = sum(line.amount for line in lines)
             residual = asset.depreciation_base - value_depreciated
@@ -386,10 +388,12 @@ class AccountAsset(models.Model):
     @api.constrains("date_start", "method_end", "method_number", "method_time")
     def _check_dates(self):
         if self.filtered(
-            lambda a: a.method_time == "year"
-            and not a.method_number
-            and a.method_end
-            and a.method_end <= a.date_start
+            lambda a: (
+                a.method_time == "year"
+                and not a.method_number
+                and a.method_end
+                and a.method_end <= a.date_start
+            )
         ):
             raise UserError(self.env._("The Start Date must precede the Ending Date."))
 
