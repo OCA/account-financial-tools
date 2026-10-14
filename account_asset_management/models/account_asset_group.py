@@ -13,7 +13,7 @@ class AccountAssetGroup(models.Model):
     _parent_store = True
     _check_company_auto = True
     _check_company_domain = models.check_company_domain_parent_of
-    _rec_names_search = ["code", "name"]
+    _rec_names_search = ["code", "name"]  # noqa: RUF012
 
     name = fields.Char(size=64, required=True, index=True)
     code = fields.Char(index=True)

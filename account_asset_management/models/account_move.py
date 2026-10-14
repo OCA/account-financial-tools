@@ -216,15 +216,18 @@ class AccountMoveLine(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             move = self.env["account.move"].browse(vals.get("move_id"))
-            if not move.is_sale_document():
-                if vals.get("asset_id") and not self.env.context.get("allow_asset"):
-                    raise UserError(
-                        self.env._(
-                            "You are not allowed to link "
-                            "an accounting entry to an asset."
-                            "\nYou should generate such entries from the asset."
-                        )
+            if (
+                not move.is_sale_document()
+                and vals.get("asset_id")
+                and not self.env.context.get("allow_asset")
+            ):
+                raise UserError(
+                    self.env._(
+                        "You are not allowed to link "
+                        "an accounting entry to an asset."
+                        "\nYou should generate such entries from the asset."
                     )
+                )
         records = super().create(vals_list)
         for record in records:
             record._expand_asset_line()

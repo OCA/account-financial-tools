@@ -706,8 +706,8 @@ class AssetReportXlsx(models.AbstractModel):
             default_format=FORMATS["format_theader_yellow_left"],
         )
 
-        for k in error_dict:
-            if error_dict[k]:
+        for k, assets in error_dict.items():
+            if assets:
                 if k == "no_table":
                     reason = self.env._("Missing depreciation table")
                 elif k == "dups":
@@ -716,6 +716,6 @@ class AssetReportXlsx(models.AbstractModel):
                     reason = self.env._("Undetermined error")
                 row_pos += 1
                 err_msg = self.env._("Assets to be corrected") + ": "
-                err_msg += ", ".join(error_dict[k].mapped("display_name"))
+                err_msg += ", ".join(assets.mapped("display_name"))
                 err_msg += " - " + self.env._("Reason") + ": " + reason
                 ws.write_string(row_pos, 0, err_msg, FORMATS["format_left_bold"])

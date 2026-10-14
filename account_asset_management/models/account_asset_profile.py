@@ -230,9 +230,12 @@ class AccountAssetProfile(models.Model):
         return profile_ids
 
     def write(self, vals):
-        if vals.get("method_time"):
-            if vals["method_time"] != "year" and not vals.get("prorata"):
-                vals["prorata"] = True
+        if (
+            vals.get("method_time")
+            and vals["method_time"] != "year"
+            and not vals.get("prorata")
+        ):
+            vals["prorata"] = True
         res = super().write(vals)
         # TODO last profile in self is defined as default on the related
         # account. must be improved.
