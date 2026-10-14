@@ -111,6 +111,30 @@ class TestAccountLockToDateUpdate(TransactionCase):
             datetime.strptime("2900-02-01", DEFAULT_SERVER_DATE_FORMAT).date(),
         )
 
+    def test_02b_update_to_later_date_succeeds(self):
+        """We test that updating the fiscalyear_lock_to_date to a LATER
+        date than the current one succeeds (this was the bug: the old
+        code incorrectly rejected later dates instead of earlier ones)."""
+        self.company.fiscalyear_lock_to_date = "2900-01-01"
+        wizard = self.create_account_lock_date_update()
+        wizard.write({"fiscalyear_lock_to_date": "2900-02-01"})
+        self.demo_user.write({"groups_id": [(4, self.adviser_group.id)]})
+        wizard.with_user(self.demo_user.id).execute()
+        self.assertEqual(
+            self.company.fiscalyear_lock_to_date,
+            datetime.strptime("2900-02-01", DEFAULT_SERVER_DATE_FORMAT).date(),
+        )
+
+    def test_02c_update_to_earlier_date_fails(self):
+        """We test that updating the fiscalyear_lock_to_date to an
+        EARLIER date than the current one is rejected."""
+        self.company.fiscalyear_lock_to_date = "2900-02-01"
+        wizard = self.create_account_lock_date_update()
+        wizard.write({"fiscalyear_lock_to_date": "2900-01-01"})
+        self.demo_user.write({"groups_id": [(4, self.adviser_group.id)]})
+        with self.assertRaises(ValidationError):
+            wizard.with_user(self.demo_user.id).execute()
+
     def test_03_create_move_outside_period(self):
         """We test that we cannot create journal entries after the
         locked date"""
