@@ -8,7 +8,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 try:
@@ -67,6 +67,10 @@ class AccountLoan(models.Model):
         default=1,
         help="State here the time between 2 depreciations, in months",
         required=True,
+    )
+    is_long_term = fields.Boolean(
+        string="Is Long Term?",
+        compute="_compute_is_long_term",
     )
     start_date = fields.Date(
         help="Start of the moves",
@@ -206,6 +210,35 @@ class AccountLoan(models.Model):
     _sql_constraints = [
         ("name_uniq", "unique(name, company_id)", "Loan name must be unique"),
     ]
+
+    @api.constrains("long_term_loan_account_id", "short_term_loan_account_id")
+    def _check_different_loan_accounts(self):
+        """
+        Ensure long-term and short-term loan accounts are not the same.
+        """
+        for record in self:
+            if record.long_term_loan_account_id == record.short_term_loan_account_id:
+                raise ValidationError(
+                    _("Long-term and short-term loan accounts must be different.")
+                )
+
+    @api.depends("periods", "method_period")
+    def _compute_is_long_term(self):
+        """
+        Compute whether the loan is long-term based on total duration in months.
+        """
+        for record in self:
+            total_months = record.periods * record.method_period
+            record.is_long_term = total_months > 12
+
+    @api.onchange("is_long_term")
+    def _onchange_clear_long_term_account(self):
+        """
+        Automatically clear the long-term account if the loan is not long-term.
+        """
+        for record in self:
+            if not record.is_long_term:
+                record.long_term_loan_account_id = False
 
     @api.onchange("rate")
     def _onchange_rate_warning(self):
