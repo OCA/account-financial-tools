@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 INVITU
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <!-- Extra costs attached to DEMO-LOAN-01 (classic bank loan) -->
+    <record id="demo_loan_fixed_annuity_application_fee" model="account.loan.extra.cost">
+        <field name="loan_id" ref="account_loan.demo_loan_fixed_annuity" />
+        <field name="name">Application fee</field>
+        <field name="payment_type">upfront</field>
+        <field name="calculation_method">fixed</field>
+        <field name="amount">500.0</field>
+        <field name="account_id" ref="account.1_expense_finance" />
+    </record>
+
+    <record id="demo_loan_fixed_annuity_insurance" model="account.loan.extra.cost">
+        <field name="loan_id" ref="account_loan.demo_loan_fixed_annuity" />
+        <field name="name">Borrower insurance</field>
+        <field name="payment_type">periodic</field>
+        <field name="calculation_method">rate_initial_capital</field>
+        <field name="rate">0.36</field>
+        <field name="account_id" ref="account.1_expense_finance" />
+    </record>
+
+    <!-- Extra cost attached to DEMO-LEASE-01 (leasing) -->
+    <record id="demo_loan_leasing_insurance" model="account.loan.extra.cost">
+        <field name="loan_id" ref="account_loan.demo_loan_leasing" />
+        <field name="name">Equipment insurance</field>
+        <field name="payment_type">periodic</field>
+        <field name="calculation_method">fixed</field>
+        <field name="amount">25.0</field>
+        <field name="account_id" ref="account.1_expense_finance" />
+    </record>
+
+</odoo>
