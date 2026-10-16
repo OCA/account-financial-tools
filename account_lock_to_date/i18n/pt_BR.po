@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-10-16 01:07+0000\n"
+"PO-Revision-Date: 2026-10-16 01:09+0000\n"
 "Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
@@ -80,13 +80,13 @@ msgstr "Última atualização em"
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__fiscalyear_lock_to_date
 msgid "Lock To Date"
-msgstr "Data limite"
+msgstr "Data limite para todos os usuários"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__period_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__period_lock_to_date
 msgid "Lock To Date for Non-Advisers"
-msgstr "Data limite para não conselheiros"
+msgstr "Data limite para não assessores"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
@@ -94,7 +94,7 @@ msgid ""
 "No users, including Advisers, can edit accounts after and inclusive of this "
 "date. Use it for fiscal year locking for example."
 msgstr ""
-"Nenhum usuário, nem mesmo os conselheiros, pode editar contas nesta data ou "
+"Nenhum usuário, nem mesmo os assessores, pode editar contas nesta data ou "
 "depois dela. Use, por exemplo, para bloquear o exercício."
 
 #. module: account_lock_to_date
@@ -103,7 +103,7 @@ msgid ""
 "No users, including Advisers, can edit accounts after this date. Use it for "
 "fiscal year locking for example."
 msgstr ""
-"Nenhum usuário, nem mesmo os conselheiros, pode editar contas depois desta "
+"Nenhum usuário, nem mesmo os assessores, pode editar contas depois desta "
 "data. Use, por exemplo, para bloquear o exercício."
 
 #. module: account_lock_to_date
@@ -113,7 +113,7 @@ msgid ""
 "this date. Use it for period locking inside an open fiscal year, for "
 "example."
 msgstr ""
-"Somente usuários com o papel 'Conselheiro' podem editar contas nesta data ou "
+"Somente usuários com o papel 'Assessor' podem editar contas nesta data ou "
 "depois dela. Use, por exemplo, para bloquear um período dentro de um "
 "exercício aberto."
 
@@ -123,7 +123,7 @@ msgid ""
 "Only users with the 'Adviser' role can edit accounts after this date. Use it"
 " for period locking inside an open fiscal year, for example."
 msgstr ""
-"Somente usuários com o papel 'Conselheiro' podem editar contas depois desta "
+"Somente usuários com o papel 'Assessor' podem editar contas depois desta "
 "data. Use, por exemplo, para bloquear um período dentro de um exercício "
 "aberto."
 
@@ -132,7 +132,7 @@ msgstr ""
 #: code:addons/account_lock_to_date/models/res_company.py:0
 #, python-format
 msgid "The lock date for advisors is irreversible and can't be removed."
-msgstr "A data limite dos conselheiros é irreversível e não pode ser removida."
+msgstr "A data limite dos assessores é irreversível e não pode ser removida."
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -142,8 +142,7 @@ msgid ""
 "The new lock to date for advisors must be set after the previous lock to "
 "date."
 msgstr ""
-"A nova data limite dos conselheiros deve ser posterior à data limite "
-"anterior."
+"A nova data limite dos assessores deve ser posterior à data limite anterior."
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -192,8 +191,7 @@ msgid ""
 "Check the company settings or ask someone with the 'Adviser' role"
 msgstr ""
 "Não é possível incluir/alterar lançamentos na data limite %s ou depois dela. "
-"Verifique as configurações da empresa ou peça a alguém com o papel "
-"'Conselheiro'"
+"Verifique as configurações da empresa ou peça a alguém com o papel 'Assessor'"
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -203,9 +201,9 @@ msgid ""
 "You cannot define stricter conditions on advisors than on users. Please make"
 " sure that the lock date on advisor is set after the lock date for users."
 msgstr ""
-"Não é possível definir condições mais restritivas para os conselheiros do "
-"que para os usuários. Verifique se a data limite dos conselheiros é "
-"posterior à data limite dos usuários."
+"Não é possível definir condições mais restritivas para os assessores do que "
+"para os usuários. Verifique se a data limite dos assessores é posterior à "
+"data limite dos usuários."
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -216,5 +214,4 @@ msgid ""
 " lock date for advisors is set at or after the last day of the next month."
 msgstr ""
 "Não é possível bloquear um período que ainda não terminou. Verifique se a "
-"data limite dos conselheiros é igual ou posterior ao último dia do próximo "
-"mês."
+"data limite dos assessores é igual ou posterior ao último dia do próximo mês."
