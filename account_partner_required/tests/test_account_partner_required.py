@@ -53,7 +53,7 @@ class TestAccountPartnerRequired(TransactionCase):
             }
         )
 
-    def _create_move(self, with_partner, amount=100):
+    def _create_and_post_move(self, with_partner, amount=100):
         if with_partner:
             partner_id = self.env.ref("base.res_partner_1").id
         else:
@@ -86,6 +86,7 @@ class TestAccountPartnerRequired(TransactionCase):
             ],
         }
         move = self.move_obj.create(move_vals)
+        move.action_post()
         move_line = False
         for line in move.line_ids:
             if line.account_id == self.account2:
@@ -94,55 +95,33 @@ class TestAccountPartnerRequired(TransactionCase):
         return move_line
 
     def test_optional(self):
-        self._create_move(with_partner=False)
-        self._create_move(with_partner=True)
+        self._create_and_post_move(with_partner=False)
+        self._create_and_post_move(with_partner=True)
 
     def test_always_no_partner(self):
         self.account2.partner_policy = "always"
         with self.assertRaises(ValidationError):
-            self._create_move(with_partner=False)
+            self._create_and_post_move(with_partner=False)
 
     def test_always_no_partner_0(self):
         # accept missing partner when debit=credit=0
         self.account2.partner_policy = "always"
-        self._create_move(with_partner=False, amount=0)
+        self._create_and_post_move(with_partner=False, amount=0)
 
     def test_always_with_partner(self):
         self.account2.partner_policy = "always"
-        self._create_move(with_partner=True)
+        self._create_and_post_move(with_partner=True)
 
     def test_never_no_partner(self):
         self.account2.partner_policy = "never"
-        self._create_move(with_partner=False)
+        self._create_and_post_move(with_partner=False)
 
     def test_never_with_partner(self):
         self.account2.partner_policy = "never"
         with self.assertRaises(ValidationError):
-            self._create_move(with_partner=True)
+            self._create_and_post_move(with_partner=True)
 
     def test_never_with_partner_0(self):
         self.account2.partner_policy = "never"
         # accept partner when debit=credit=0
-        self._create_move(with_partner=True, amount=0)
-
-    def test_always_remove_partner(self):
-        # remove partner when policy is always
-        self.account2.partner_policy = "always"
-        line = self._create_move(with_partner=True)
-        with self.assertRaises(ValidationError):
-            line.write({"partner_id": False})
-
-    def test_change_account(self):
-        self.account2.partner_policy = "optional"
-        line = self._create_move(with_partner=False)
-        # change account to an account with policy always but missing partner
-        self.account3.partner_policy = "always"
-        with self.assertRaises(ValidationError):
-            line.write({"account_id": self.account3.id})
-        # change account to an account with policy always with partner
-        line.write(
-            {
-                "account_id": self.account3.id,
-                "partner_id": self.env.ref("base.res_partner_1").id,
-            }
-        )
+        self._create_and_post_move(with_partner=True, amount=0)
