@@ -28,7 +28,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
-"PO-Revision-Date: 2026-10-16 01:29+0000\n"
+"PO-Revision-Date: 2026-10-16 01:30+0000\n"
 "Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
 "financial-tools-8-0/language/pt_BR/)\n"
@@ -524,7 +524,7 @@ msgstr "Calcular bem"
 #: model:ir.model,name:account_asset_management.model_account_asset_compute
 #: model:ir.ui.menu,name:account_asset_management.account_asset_compute_menu
 msgid "Compute Assets"
-msgstr "Calcular bens"
+msgstr "Calcular depreciação"
 
 #. module: account_asset_management
 #. odoo-python
