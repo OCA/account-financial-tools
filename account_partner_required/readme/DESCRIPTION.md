@@ -8,6 +8,7 @@ You have the choice between 3 policies:
 
 This module is useful to enforce a partner on account move lines on
 customer and supplier accounts.
+The checks *always* and *never* are done when *posting* the account move.
 
 This module is very similar to the module *account_analytic_required*
 available in the OCA project

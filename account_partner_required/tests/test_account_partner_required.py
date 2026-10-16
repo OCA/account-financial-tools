@@ -1,4 +1,3 @@
-from odoo import Command
 from odoo.exceptions import ValidationError
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
@@ -18,57 +17,73 @@ class TestAccountPartnerRequired(TransactionCase):
             }
         )
 
-        cls.partner = cls.env["res.partner"].create(
-            {
-                "name": "Test Partner",
-            }
-        )
+    def _create_and_post_move(self, with_partner, amount=100):
+        if with_partner:
+            partner_id = self.env.ref("base.res_partner_1").id
+        else:
+            partner_id = False
+        move_vals = {
+            "company_id": self.company_id,
+            "journal_id": self.sale_journal.id,
+            "line_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "name": "/",
+                        "debit": 0,
+                        "credit": amount,
+                        "account_id": self.account1.id,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "name": "/",
+                        "debit": amount,
+                        "credit": 0,
+                        "account_id": self.account2.id,
+                        "partner_id": partner_id,
+                    },
+                ),
+            ],
+        }
+        move = self.move_obj.create(move_vals)
+        move.action_post()
+        move_line = False
+        for line in move.line_ids:
+            if line.account_id == self.account2:
+                move_line = line
+                break
+        return move_line
 
-    def _create_account_move(self, partner, account):
-        account = self.env["account.move"].create(
-            {
-                "partner_id": partner.id if partner else False,
-                "line_ids": [
-                    Command.create(
-                        {
-                            "account_id": account.id,
-                            "debit": 500.0,
-                        }
-                    ),
-                    Command.create(
-                        {
-                            "account_id": account.id,
-                            "credit": 500.0,
-                        }
-                    ),
-                ],
-            }
-        )
-        account.action_post()
-        return account
-
-    def test_partner_policy_never(self):
-        """Partner must NOT be set"""
-        self.account.partner_policy = "never"
+    def test_optional(self):
+        self._create_and_post_move(with_partner=False)
+        self._create_and_post_move(with_partner=True)
 
         with self.assertRaises(ValidationError):
-            self._create_account_move(self.partner, self.account)
+            self._create_and_post_move(with_partner=False)
 
-    def test_partner_policy_always(self):
-        """Partner MUST be set"""
-        self.account.partner_policy = "always"
+    def test_always_no_partner_0(self):
+        # accept missing partner when debit=credit=0
+        self.account2.partner_policy = "always"
+        self._create_and_post_move(with_partner=False, amount=0)
 
+    def test_always_with_partner(self):
+        self.account2.partner_policy = "always"
+        self._create_and_post_move(with_partner=True)
+
+    def test_never_no_partner(self):
+        self.account2.partner_policy = "never"
+        self._create_and_post_move(with_partner=False)
+
+    def test_never_with_partner(self):
+        self.account2.partner_policy = "never"
         with self.assertRaises(ValidationError):
-            self._create_account_move(False, self.account)
+            self._create_and_post_move(with_partner=True)
 
-    def test_partner_policy_optional(self):
-        """Partner is optional (no error expected)"""
-        self.account.partner_policy = "optional"
-
-        # With partner
-        account_with_partner = self._create_account_move(self.partner, self.account)
-        self.assertTrue(account_with_partner)
-
-        # Without partner
-        account_without_partner = self._create_account_move(False, self.account)
-        self.assertTrue(account_without_partner)
+    def test_never_with_partner_0(self):
+        self.account2.partner_policy = "never"
+        # accept partner when debit=credit=0
+        self._create_and_post_move(with_partner=True, amount=0)
