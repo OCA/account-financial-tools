@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2014-2022 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  The licence is in the file __manifest__.py
+-->
+<odoo>
+    <record id="report_account_check_deposit" model="ir.actions.report">
+        <field name="name">Check Deposit</field>
+        <field name="model">account.check.deposit</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_check_deposit.report_checkdeposit</field>
+        <field name="report_file">account_check_deposit.report_checkdeposit</field>
+        <field
+            name="print_report_name"
+        >'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or '')</field>
+        <field name="binding_model_id" ref="model_account_check_deposit" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
