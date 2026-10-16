@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-11 00:39+0000\n"
-"PO-Revision-Date: 2017-05-11 00:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2026-10-16 00:54+0000\n"
+"Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move
@@ -32,17 +33,17 @@ msgstr "Cancelar"
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_to_be_reversed
 msgid "Check this box if your entry has to be reversed at the end of period."
-msgstr ""
+msgstr "Marque esta opção se o lançamento deve ser estornado no fim do período."
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Create reversal journal entries"
-msgstr ""
+msgstr "Criar lançamentos de estorno"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move_reverse
 msgid "Create reversal of account moves"
-msgstr ""
+msgstr "Criar estorno de lançamentos de diário"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_create_uid
@@ -65,6 +66,8 @@ msgid ""
 "Enter the date of the reversal account entries. By default, Odoo proposes "
 "the same date of the move to reverse."
 msgstr ""
+"Informe a data dos lançamentos de estorno. Por padrão, o Odoo sugere a mesma "
+"data do lançamento a estornar."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
@@ -72,11 +75,13 @@ msgid ""
 "Enter the journal of the reversal account entries. If empty, Odoo uses the "
 "same journal of the move to reverse."
 msgstr ""
+"Informe o diário dos lançamentos de estorno. Se vazio, o Odoo usa o mesmo "
+"diário do lançamento a estornar."
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_move_prefix
 msgid "Entries Ref. Prefix"
-msgstr ""
+msgstr "Prefixo da ref. dos lançamentos"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_id
@@ -86,14 +91,14 @@ msgstr "Identificação"
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_line_prefix
 msgid "Items Name Prefix"
-msgstr ""
+msgstr "Prefixo do nome dos itens"
 
 #. module: account_reversal
 #: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
 #: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
 msgid "Journal Entries to be Reversed"
-msgstr ""
+msgstr "Lançamentos de diário a estornar"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse___last_update
@@ -113,7 +118,7 @@ msgstr "Última atualização em"
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
 msgid "Mark this if you want to reconcile items of both moves."
-msgstr ""
+msgstr "Marque esta opção para conciliar os itens dos dois lançamentos."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
@@ -122,6 +127,9 @@ msgid ""
 "items. If empty, Odoo uses the same name of the move line to reverse. (NOTE: "
 "A space is added after the prefix)."
 msgstr ""
+"Prefixo que será adicionado ao 'Nome' dos itens dos lançamentos de estorno. "
+"Se vazio, o Odoo usa o mesmo nome do item de diário a estornar. (OBS.: um "
+"espaço é adicionado após o prefixo)."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_move_prefix
@@ -130,6 +138,9 @@ msgid ""
 "empty, Odoo uses the Ref of the move to reverse. (NOTE: A space is added "
 "after the prefix)."
 msgstr ""
+"Prefixo que será adicionado à 'Ref' dos lançamentos de estorno. Se vazio, o "
+"Odoo usa a Ref do lançamento a estornar. (OBS.: um espaço é adicionado após "
+"o prefixo)."
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_reconcile
@@ -139,28 +150,28 @@ msgstr "Reconciliar"
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_date
 msgid "Reversal Date"
-msgstr ""
+msgstr "Data do estorno"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_5678
 msgid "Reversal Entry"
-msgstr ""
+msgstr "Lançamento de estorno"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_journal_id
 msgid "Reversal Journal"
-msgstr ""
+msgstr "Diário de estorno"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Reverse Entries"
-msgstr ""
+msgstr "Estornar lançamentos"
 
 #. module: account_reversal
 #: code:addons/account_reversal/wizard/account_move_reverse.py:58
 #, python-format
 msgid "Reverse moves"
-msgstr ""
+msgstr "Estornar lançamentos"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
@@ -168,18 +179,20 @@ msgid ""
 "This will create reversal for all selected entries whether checked 'to be "
 "reversed' or not."
 msgstr ""
+"Isso vai criar o estorno de todos os lançamentos selecionados, estejam "
+"marcados como 'a estornar' ou não."
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_to_be_reversed
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
 msgid "To Be Reversed"
-msgstr ""
+msgstr "A estornar"
 
 #. module: account_reversal
 #: code:addons/account_reversal/models/account_move.py:56
 #, python-format
 msgid "Wrong company Journal is '%s' but we have '%s'"
-msgstr ""
+msgstr "Empresa incorreta: o diário é '%s', mas temos '%s'"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
