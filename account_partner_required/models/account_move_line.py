@@ -4,8 +4,7 @@
 # @author Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import api, models
-from odoo.exceptions import ValidationError
+from odoo import models
 
 
 class AccountMoveLine(models.Model):
@@ -14,7 +13,9 @@ class AccountMoveLine(models.Model):
     def _check_partner_required_msg(self):
         comp_cur = self.company_id.currency_id
         for line in self:
-            if comp_cur.is_zero(line.debit) and comp_cur.is_zero(line.credit):
+            if line.display_type in ("line_section", "line_note") or comp_cur.is_zero(
+                line.balance
+            ):
                 continue
             policy = line.account_id.get_partner_policy()
             if policy == "always" and not line.partner_id:
@@ -34,10 +35,3 @@ class AccountMoveLine(models.Model):
                     "move_line": line.display_name,
                     "partner": line.partner_id.display_name,
                 }
-
-    @api.constrains("partner_id", "account_id", "debit", "credit")
-    def _check_partner_required(self):
-        for line in self:
-            message = line._check_partner_required_msg()
-            if message:
-                raise ValidationError(message)
