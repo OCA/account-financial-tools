@@ -50,6 +50,11 @@ msgid "Account prefixes can determine account groups."
 msgstr "Префиксы учетных записей могут определять группы учетных записей."
 
 #. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_finance
+msgid "Accounting"
+msgstr ""
+
+#. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_usability.field_account_group__account_ids
 #: model_terms:ir.ui.view,arch_db:account_usability.view_account_group_form
@@ -100,6 +105,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
 msgid "Group"
 msgstr "Группа"
+
+#. module: account_usability
+#: model:ir.model,name:account_usability.model_base_language_install
+msgid "Install Language"
+msgstr ""
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
