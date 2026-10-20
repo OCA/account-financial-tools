@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="clearance_plan_wizard" model="ir.ui.view">
+        <field name="name">Clearance Plan</field>
+        <field name="model">account.clearance.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="journal_id"/>
+                    <field name="move_ref"/>
+                    <field name="move_narration"/>
+                    <field name="amount_to_allocate"/>
+                    <field name="amount_unallocated"/>
+                </group>
+                <notebook>
+                    <page string="Clearance Plan Board">
+                        <field name="clearance_plan_line_ids">
+                            <list editable="bottom">
+                                <field name="name"/>
+                                <field name="date_maturity"/>
+                                <field name="amount"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="confirm_plan" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--Add to account.move.line action-->
+    <record id="act_move_line_clearance_plan_wizard" model="ir.actions.act_window">
+        <field name="name">Clearance Plan</field>
+        <field name="res_model">account.clearance.plan</field>
+        <field name="view_mode">form</field>
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move_line"/>
+        <field name="binding_view_types">list</field>
+    </record>
+
+    <!--Add to account.move (invoice) action-->
+    <record id="act_invoice_clearance_plan_wizard" model="ir.actions.act_window">
+        <field name="name">Clearance Plan</field>
+        <field name="res_model">account.clearance.plan</field>
+        <field name="view_mode">form</field>
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_view_types">list</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="clearance_plan_form_wizard">
+        <field name="name">
+            account.clearance.plan.form (in account_clearance_plan_bank_payment)
+        </field>
+        <field name="model">account.clearance.plan</field>
+        <field name="inherit_id" ref="account_clearance_plan.clearance_plan_wizard"/>
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field name="partner_id" invisible="1"/>
+                <field name="payment_mode_filter_type_domain" invisible="1"/>
+                <field
+                    name="payment_mode_id"
+                    domain="[('payment_type', '=', payment_mode_filter_type_domain)]"
+                    options="{'no_create': True, 'no_open': True}"
+                />
+                <field name="mandate_required" invisible="1"/>
+                <field
+                    name="mandate_id"
+                    invisible="not mandate_required"
+                    required="mandate_required"
+                    options="{'no_create': True, 'no_open': True}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
