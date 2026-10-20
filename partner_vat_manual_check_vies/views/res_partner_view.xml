@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Le Filament (https://le-filament.com)
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_partner_vat_manual_check_form" model="ir.ui.view">
+        <field name="name">view.partner.vat.manual.check.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_vat.view_partner_base_vat_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='vat_vies_container']" position="inside">
+                <span class="fa fa-check text-muted me-1" aria-label="validated" help="VAT validated by EU VIES service" invisible="parent_id or not request_vies_validation or not vies_valid or not vies_vat_to_check" />
+                <span class="fa fa-question text-muted me-1" aria-label="validation failed" help="VAT validation by EU VIES service failed" invisible="parent_id or vies_invalid or vies_valid or not request_vies_validation or not vies_vat_to_check" />
+                <span class="fa fa-ban text-muted me-1" aria-label="not validated" help="VAT invalid according to EU VIES service" invisible="parent_id or not vies_invalid" />
+                <button string="Clear invalid VAT" name="action_clear_vat" type="object" class="oe_highlight" invisible="parent_id or not vies_invalid"/>
+                <button string="Validate with VIES" name="action_check_vies" type="object" class="oe_highlight" invisible="parent_id or not request_vies_validation or vies_valid or vies_invalid or not vies_vat_to_check"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
