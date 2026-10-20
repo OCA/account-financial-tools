@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="view_account_form" model="ir.ui.view">
+    <field name="name">account.account.form</field>
+    <field name="model">account.account</field>
+    <field name="inherit_id" ref="account.view_account_form" />
+    <field name="arch" type="xml">
+      <form position="attributes">
+        <attribute name="js_class">account_account_control_form</attribute>
+      </form>
+      <field name="code" position="before">
+        <field name="is_code_locked" invisible="1" />
+        <field name="is_modification_reason_required" invisible="1" />
+      </field>
+      <field name="code" position="attributes">
+        <attribute name="readonly">is_code_locked</attribute>
+      </field>
+      <field name="company_ids" position="after">
+        <field name="modification_reason_id" invisible="not modification_reason_id" />
+      </field>
+    </field>
+  </record>
+  <record id="view_account_list" model="ir.ui.view">
+    <field name="name">account.account.list</field>
+    <field name="model">account.account</field>
+    <field name="inherit_id" ref="account.view_account_list" />
+    <field name="arch" type="xml">
+      <list position="attributes">
+        <attribute name="js_class">account_account_control_list</attribute>
+      </list>
+      <field name="code" position="before">
+        <field name="is_code_locked" column_invisible="1" />
+        <field name="is_modification_reason_required" column_invisible="1" />
+      </field>
+      <field name="code" position="attributes">
+        <attribute name="readonly">is_code_locked</attribute>
+      </field>
+    </field>
+  </record>
+</odoo>
