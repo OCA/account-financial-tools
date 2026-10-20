@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_line_repair_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-06-24 18:38+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_move_line_repair_info
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_repair_order__account_move_line_ids
+msgid "Journal Entries"
+msgstr "Registrazioni contabili"
+
+#. module: account_move_line_repair_info
+#: model:ir.model,name:account_move_line_repair_info.model_account_move
+msgid "Journal Entry"
+msgstr "Registrazione contabile"
+
+#. module: account_move_line_repair_info
+#: model:ir.model,name:account_move_line_repair_info.model_account_move_line
+msgid "Journal Item"
+msgstr "Movimento contabile"
+
+#. module: account_move_line_repair_info
+#: model:ir.model,name:account_move_line_repair_info.model_repair_order
+#: model:ir.model.fields,field_description:account_move_line_repair_info.field_account_move_line__repair_order_id
+#: model_terms:ir.ui.view,arch_db:account_move_line_repair_info.view_account_move_line_filter
+msgid "Repair Order"
+msgstr "Ordine di riparazione"
+
+#. module: account_move_line_repair_info
+#: model:res.groups,name:account_move_line_repair_info.group_account_move_repair_order_info
+msgid "Repair Order info in Journal Items"
+msgstr "Informazioni ordine di riparazione nei movimenti contabili"
+
+#. module: account_move_line_repair_info
+#: model:ir.model,name:account_move_line_repair_info.model_stock_valuation_layer
+msgid "Stock Valuation Layer"
+msgstr "Livello valutazione magazzino"
