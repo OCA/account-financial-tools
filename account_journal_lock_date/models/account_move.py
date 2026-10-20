@@ -1,7 +1,6 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import date
 
 from odoo import models
 from odoo.exceptions import UserError
@@ -16,18 +15,12 @@ class AccountMove(models.Model):
         if self.env.context.get("bypass_journal_lock_date"):
             return res
 
-        date_min = date.min
         is_manager = self.env.user.has_group("account.group_account_manager")
         for move in self:
-            if is_manager:
-                lock_date = move.journal_id.fiscalyear_lock_date or date_min
-            else:
-                lock_date = max(
-                    move.journal_id.period_lock_date or date_min,
-                    move.journal_id.fiscalyear_lock_date or date_min,
+            if move.date <= move.journal_id.user_journal_lock_date:
+                formatted_lock_date = format_date(
+                    self.env, move.journal_id.user_journal_lock_date
                 )
-            if move.date <= lock_date:
-                formatted_lock_date = format_date(self.env, lock_date)
                 if is_manager:
                     message = self.env._(
                         "You cannot add/modify entries for the journal '%(journal)s' "
