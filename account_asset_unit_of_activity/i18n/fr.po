@@ -1,0 +1,136 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_unit_of_activity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-14 13:21+0000\n"
+"PO-Revision-Date: 2026-10-14 13:21+0000\n"
+"Last-Translator: Florian da Costa <florian.dacosta@akretion.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+"X-Generator: Poedit 3.4\n"
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/models/account_asset.py:0
+msgid "Add Asset Unit of activity"
+msgstr "Ajouter une unité d'œuvre"
+
+#. module: account_asset_unit_of_activity
+#: model_terms:ir.ui.view,arch_db:account_asset_unit_of_activity.account_asset_view_form
+msgid "Add Unit of Activity"
+msgstr "Ajouter une unité d'œuvre"
+
+#. module: account_asset_unit_of_activity
+#: model_terms:ir.ui.view,arch_db:account_asset_unit_of_activity.account_asset_view_form
+msgid "Add a line of usage for this Asset"
+msgstr "Ajouter une ligne d'utilisation pour cette immobilisation"
+
+#. module: account_asset_unit_of_activity
+#: model:ir.model,name:account_asset_unit_of_activity.model_account_asset_unit_of_activity
+msgid "Add a unit of activity on an asset"
+msgstr "Ajouter une unité d'œuvre sur une immobilisation"
+
+#. module: account_asset_unit_of_activity
+#: model_terms:ir.ui.view,arch_db:account_asset_unit_of_activity.account_asset_unit_of_activity_view_form
+msgid "Add a usage"
+msgstr "Ajouter une utilisation"
+
+#. module: account_asset_unit_of_activity
+#: model:ir.model.fields,field_description:account_asset_unit_of_activity.field_account_asset_unit_of_activity__auto_create_asset_move
+msgid "Create move automatically"
+msgstr "Créer la pièce comptable automatiquement"
+
+#. module: account_asset_unit_of_activity
+#: model:ir.model.fields,field_description:account_asset_unit_of_activity.field_account_asset__has_depreciation_accounting_entry
+msgid "Has Depreciation Accounting Entry"
+msgstr "A une pièce comptable d'amortissement"
+
+#. module: account_asset_unit_of_activity
+#: model:ir.model.fields,help:account_asset_unit_of_activity.field_account_asset_unit_of_activity__auto_create_asset_move
+msgid ""
+"If the other asset lines all have a move created, the move associated to "
+"this asset line will be created automatically."
+msgstr ""
+"Si toutes les autres lignes d'immobilisation ont déjà une pièce comptable, "
+"celle associée à cette ligne sera créée automatiquement."
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/models/account_asset.py:0
+msgid "Number of usage can't be negative."
+msgstr "Le nombre d'utilisation ne peut pas être négatif."
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/models/account_asset.py:0
+msgid "Number of usage can't be null."
+msgstr "Le nombre d'utilisation ne peut pas être nul."
+
+#. module: account_asset_unit_of_activity
+#: model:ir.model.fields,field_description:account_asset_unit_of_activity.field_account_asset__remaining_usage
+msgid "Remaining Usage"
+msgstr "Utilisations restantes"
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/wizard/account_asset_unit_of_activity.py:0
+msgid ""
+"The asset is fully depreciated.\n"
+"You can't add a depreciation line."
+msgstr ""
+"L'immobilisation est totalement amortie.\n"
+"Vous ne pouvez pas ajouter de ligne d'amortissement."
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/wizard/account_asset_unit_of_activity.py:0
+msgid "The date can't be before the asset start date."
+msgstr "La date ne peut pas être antérieure à la date de début de l'immobilisation."
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/wizard/account_asset_unit_of_activity.py:0
+msgid ""
+"The date is before the last asset line.\n"
+"Please enter usages in chronological order."
+msgstr ""
+"La date est antérieure à la dernière ligne d'immobilisation.\n"
+"Veuillez saisir les utilisations dans l'ordre chronologique."
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/wizard/account_asset_unit_of_activity.py:0
+msgid "The number of remaining asset usages is exceeded."
+msgstr "Le nombre d'utilisations restantes est dépassé."
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/wizard/account_asset_unit_of_activity.py:0
+msgid "The quantity can't be negative."
+msgstr "La quantité ne peut pas être négative."
+
+#. module: account_asset_unit_of_activity
+#: model:ir.model.fields,field_description:account_asset_unit_of_activity.field_account_asset__total_number_of_use
+#: model:ir.model.fields,field_description:account_asset_unit_of_activity.field_account_asset_profile__total_number_of_use
+msgid "Total Number Of Use"
+msgstr "Nombre total d'utilisation"
+
+#. module: account_asset_unit_of_activity
+#: model_terms:ir.ui.view,arch_db:account_asset_unit_of_activity.account_asset_view_form
+msgid "Total Quantity"
+msgstr "Quantité totale"
+
+#. module: account_asset_unit_of_activity
+#. odoo-python
+#: code:addons/account_asset_unit_of_activity/models/account_asset_profile.py:0
+#: model_terms:ir.ui.view,arch_db:account_asset_unit_of_activity.account_asset_unit_of_activity_view_form
+msgid "Unit of Activity"
+msgstr "Unité d'œuvre"
