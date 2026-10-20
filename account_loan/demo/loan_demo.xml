@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Demo products used by the leasing demo loan -->
+    <record id="demo_leasing_product" model="product.product">
+        <field name="name">Demo Leased Asset</field>
+        <field name="type">consu</field>
+    </record>
+    <record id="demo_leasing_interests_product" model="product.product">
+        <field name="name">Demo Leasing Interests</field>
+        <field name="type">service</field>
+    </record>
+
+    <!-- Demo loan 1: classic bank loan, fixed annuity, 100 000 / 60 months -->
+    <record id="demo_loan_fixed_annuity" model="account.loan">
+        <field name="name">DEMO-LOAN-01</field>
+        <field name="partner_id" ref="base.res_partner_12" />
+        <field name="loan_type">fixed-annuity</field>
+        <field name="rate_type">napr</field>
+        <field name="loan_amount">100000.0</field>
+        <field name="rate">5.0</field>
+        <field name="periods">60</field>
+        <field name="method_period">1</field>
+        <field name="payment_on_first_period" eval="True" />
+        <field name="journal_id" ref="account.1_general" />
+        <field name="short_term_loan_account_id" ref="account.1_current_liabilities" />
+        <field name="interest_expenses_account_id" ref="account.1_expense_finance" />
+    </record>
+
+    <!-- Demo loan 2: leasing, fixed principal, 24 000 / 36 months -->
+    <record id="demo_loan_leasing" model="account.loan">
+        <field name="name">DEMO-LEASE-01</field>
+        <field name="partner_id" ref="base.res_partner_2" />
+        <field name="is_leasing" eval="True" />
+        <field name="loan_type">fixed-principal</field>
+        <field name="rate_type">real</field>
+        <field name="loan_amount">24000.0</field>
+        <field name="rate">3.5</field>
+        <field name="periods">36</field>
+        <field name="method_period">1</field>
+        <field name="payment_on_first_period" eval="True" />
+        <field name="post_invoice" eval="False" />
+        <field name="journal_id" ref="account.1_purchase" />
+        <field name="short_term_loan_account_id" ref="account.1_current_liabilities" />
+        <field name="interest_expenses_account_id" ref="account.1_expense_finance" />
+        <field name="leased_asset_account_id" ref="account.1_fixed_assets" />
+        <field name="product_id" ref="demo_leasing_product" />
+        <field name="interests_product_id" ref="demo_leasing_interests_product" />
+    </record>
+</odoo>
