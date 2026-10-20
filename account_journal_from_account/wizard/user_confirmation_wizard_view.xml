@@ -1,0 +1,30 @@
+<odoo>
+    <record id="view_user_confirmation_wizard_form" model="ir.ui.view">
+        <field name="name">user.confirmation.wizard.form</field>
+        <field name="model">user.confirmation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="User Confirmation">
+                <group>
+                    <field name="message" readonly="1" nolabel="1" widget="html" />
+                </group>
+                <footer>
+                    <button
+                        name="action_confirm"
+                        string="Ok"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button name="action_cancel" string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_user_confirmation_wizard" model="ir.actions.act_window">
+        <field name="name">Confirmation</field>
+        <field name="res_model">user.confirmation.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_user_confirmation_wizard_form" />
+        <field name="target">new</field>
+    </record>
+</odoo>
