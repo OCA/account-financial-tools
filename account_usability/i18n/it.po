@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-07-27 11:46+0000\n"
+"PO-Revision-Date: 2026-10-21 15:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -51,7 +51,7 @@ msgstr "I prefissi del conto determinano i gruppi del conto."
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_finance
 msgid "Accounting"
-msgstr ""
+msgstr "Contabilità"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
@@ -108,7 +108,7 @@ msgstr "Gruppo"
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_base_language_install
 msgid "Install Language"
-msgstr ""
+msgstr "Installa lingua"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
