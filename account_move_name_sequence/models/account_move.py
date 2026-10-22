@@ -11,9 +11,9 @@ class AccountMove(models.Model):
     # highest_name is not needed any more
     # -> compute=False to improve perf
     highest_name = fields.Char(compute=False)
-    # made_sequence_hole is not relevant anymore (since based on sequence_prefix/number)
-    # -> compute=False to improve perf and to avoid displaying warning
-    made_sequence_hole = fields.Boolean(compute=False)
+    # made_sequence_gap is only maintained on hashed journals (see
+    # _update_sequence_made_gap), so a copy must not inherit it
+    made_sequence_gap = fields.Boolean(copy=False)
 
     _name_state_diagonal = models.Constraint(
         "CHECK(COALESCE(name, '') NOT IN ('/', '') OR state!='posted')",
@@ -94,6 +94,19 @@ class AccountMove(models.Model):
             move.name = name
         # Force compute of sequence_prefix and sequence_number
         self._compute_split_sequence()
+
+    def _update_sequence_made_gap(self, invalidate_current=False):
+        """
+        Inherit default function from Odoo account module
+        If no sequence_number and sequence_prefix is defined on move
+        (= when we are using this module that would be only on non-hashed journal)
+        made_sequence_gap cannot be computed and is therefore set to False
+        """
+        moves = self.filtered("journal_id.restrict_mode_hash_table")
+        (self - moves).sudo().filtered("made_sequence_gap").made_sequence_gap = False
+        return super(AccountMove, moves)._update_sequence_made_gap(
+            invalidate_current=invalidate_current
+        )
 
     # We must by-pass this constraint of sequence.mixin
     def _constrains_date_sequence(self):

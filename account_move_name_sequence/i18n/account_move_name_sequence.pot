@@ -78,9 +78,9 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: account_move_name_sequence
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_hole
-#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_hole
-msgid "Made Sequence Hole"
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_gap
+#: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_gap
+msgid "Made Sequence Gap"
 msgstr ""
 
 #. module: account_move_name_sequence
