@@ -5,7 +5,7 @@
 {
     "name": "Account Fiscal Year",
     "summary": "Create Account Fiscal Year",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "development_status": "Production/Stable",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools",
@@ -16,7 +16,7 @@
         "account",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "security/account_fiscal_year_rule.xml",
         "views/account_fiscal_year_views.xml",
         "views/res_company_views.xml",
