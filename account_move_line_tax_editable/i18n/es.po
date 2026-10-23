@@ -35,12 +35,3 @@ msgstr "Apunte contable"
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__tax_line_id
 msgid "Originator Tax"
 msgstr "Impuesto origen"
-
-#~ msgid "Display Name"
-#~ msgstr "Nombre mostrado"
-
-#~ msgid "ID"
-#~ msgstr "Identificación"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Modificado el"

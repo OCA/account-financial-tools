@@ -21,6 +21,9 @@
                 <attribute name="column_invisible">False</attribute>
                 <attribute name="readonly">not is_tax_editable</attribute>
                 <attribute name="optional">hide</attribute>
+                <attribute
+                    name="domain"
+                >[('type_tax_use', '=?', parent.invoice_filter_type_domain), ('company_id', 'parent_of', parent.company_id)]</attribute>
             </xpath>
             <xpath
                 expr="//field[@name='line_ids']/list/field[@name='tax_ids']"
