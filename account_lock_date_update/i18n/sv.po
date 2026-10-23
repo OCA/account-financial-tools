@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2024-02-27 12:34+0000\n"
+"PO-Revision-Date: 2026-10-23 10:46+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
@@ -65,6 +65,8 @@ msgid ""
 "Impossible to edit/create journal entries prior to and inclusive of this "
 "date. Subject to exceptions."
 msgstr ""
+"Det är inte möjligt att redigera eller skapa verifikationer för detta datum "
+"eller tidigare. Undantag kan förekomma."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__hard_lock_date
@@ -72,6 +74,9 @@ msgid ""
 "Impossible to edit/create journal entries prior to and inclusive of this "
 "date. This lock date is irreversible and does not allow any exception."
 msgstr ""
+"Det är inte möjligt att redigera eller skapa verifikationer för detta datum "
+"eller tidigare datum. Denna låsningsdag är oåterkallelig och medger inga "
+"undantag."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__tax_lock_date
@@ -79,6 +84,8 @@ msgid ""
 "Impossible to edit/create journal entries related to a tax prior and "
 "inclusive of this date. Subject to exceptions."
 msgstr ""
+"Det är inte möjligt att redigera eller skapa verifikationer som rör en "
+"period före eller inklusive detta datum. Undantag kan förekomma."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__purchase_lock_date
@@ -86,6 +93,8 @@ msgid ""
 "Impossible to edit/create purchase journal entries prior to and inclusive of "
 "this date. Subject to exceptions."
 msgstr ""
+"Det är inte möjligt att redigera eller skapa inköpsverifikationer före eller "
+"på detta datum. Undantag kan förekomma."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__sale_lock_date
@@ -93,6 +102,8 @@ msgid ""
 "Impossible to edit/create sale journal entries prior to and inclusive of "
 "this date. Subject to exceptions."
 msgstr ""
+"Det är inte möjligt att redigera eller skapa verifikationer för försäljning "
+"före eller på detta datum. Undantag kan förekomma."
 
 #. module: account_lock_date_update
 #: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
