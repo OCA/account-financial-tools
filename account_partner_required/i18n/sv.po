@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2024-02-27 12:34+0000\n"
+"PO-Revision-Date: 2026-10-23 10:46+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/OCA-account-financial-"
 "tools-8-0/language/sv/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account
@@ -59,7 +59,7 @@ msgid ""
 "is missing on the journal item '%(move_line)s'."
 msgstr ""
 "Partnerpolicy är inställd på \"Alltid\" på konto \"%(account)s\" men "
-"partnern saknas på journalposten \"%(move_line)s\"."
+"partnern saknas på verifikatet \"%(move_line)s\"."
 
 #. module: account_partner_required
 #. odoo-python
@@ -70,7 +70,7 @@ msgid ""
 "item '%(move_line)s' has the partner '%(partner)s'."
 msgstr ""
 "Partnerpolicy är inställd på \"Aldrig\" på konto \"%(account)s\" men "
-"journalposten \"%(move_line)s\" har partnern \"%(partner)s\"."
+"verifikatet \"%(move_line)s\" har partnern \"%(partner)s\"."
 
 #. module: account_partner_required
 #: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
@@ -84,8 +84,8 @@ msgid ""
 "is present."
 msgstr ""
 "Ange policy för partnerfältet:\n"
-"Om du väljer \"Valfritt\", kan revisorn sätta en partner på journalposter "
-"med detta konto ;\n"
+"Om du väljer \"Valfritt\", kan revisorn sätta en partner på verifikat med "
+"detta konto ;\n"
 "Om du väljer \"Alltid\" kommer revisorn att få ett felmeddelande om det inte "
 "finns någon partner;\n"
 "Om du väljer \"Aldrig\" kommer revisorn att få ett felmeddelande om det "
