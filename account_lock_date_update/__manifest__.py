@@ -3,17 +3,15 @@
 
 {
     "name": "Account Lock Date Update",
-    "summary": """
-        Allow an Account adviser to update locking date without having
-        access to all technical settings""",
-    "version": "19.0.1.0.0",
+    "summary": "Update accounting lock dates without access to technical settings",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "installable": True,
     "depends": ["account"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "wizards/account_update_lock_date.xml",
     ],
 }

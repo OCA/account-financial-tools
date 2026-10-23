@@ -10,13 +10,13 @@ class ResCompany(models.Model):
     def _get_unreconciled_statement_lines_redirect_action(
         self, unreconciled_statement_lines
     ):
-        # In Odoo 19 the core builds this redirect action on
+        # In Odoo 20 the core builds this redirect action on
         # account.bank.statement.line, but:
         #   1. the action dict has no "views" key, so the JS _preprocessAction
         #      crashes on `action.views.map(...)` (the action is passed as a raw
         #      dict to doAction() through the RedirectWarning);
         #   2. account.bank.statement.line has no standalone list/form view in
-        #      v19 (it _inherits account.move), so even a fixed action would
+        #      v20 (it _inherits account.move), so even a fixed action would
         #      land on an auto-generated, unusable view.
         # We therefore redirect to the underlying account.move records, reusing
         # the very views the core already uses for its "Draft Entries"
