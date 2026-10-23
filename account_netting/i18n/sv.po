@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2024-02-27 08:09+0000\n"
+"PO-Revision-Date: 2026-10-23 10:46+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_netting
 #. odoo-python
@@ -80,12 +80,12 @@ msgstr "ID"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
 msgid "Journal"
-msgstr "Journal"
+msgstr "Verifikat"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
 msgid "Journal Items to Compensate"
-msgstr "Journalposter att kompensera"
+msgstr "Verifikat att kompensera"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
@@ -144,8 +144,8 @@ msgid ""
 "account '%s', so you should use the 'Reconcile' function instead."
 msgstr ""
 "Funktionen 'Kompensera' är avsedd för att balansera transaktioner på olika "
-"konton för samma partner. De valda journalposterna har samma konto '%s', så "
-"du bör använda funktionen 'Avstäm' istället."
+"konton för samma partner. De valda verifikaten har samma konto '%s', så du "
+"bör använda funktionen 'Avstäm' istället."
 
 #. module: account_netting
 #. odoo-python
@@ -155,8 +155,8 @@ msgid ""
 "The selected journal items have different partners: %s. All the selected "
 "journal items must have the same partner."
 msgstr ""
-"De valda journalposterna har olika kontakter: %s. Alla valda journalposter "
-"måste ha samma kontakt."
+"De valda verifikaten har olika kontakter: %s. Alla valda verifikat måste ha "
+"samma kontakt."
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -165,7 +165,7 @@ msgid ""
 "the receivable/payable accounts selected, and reconcile each other, letting "
 "this balance in the partner."
 msgstr ""
-"Denna operation kommer att generera en journalpost vars rader är "
+"Denna operation kommer att generera ett verifikat vars rader är "
 "motsvarigheter till de valda fordrings-/betalningskontona och stämma av "
 "varandra, så att detta balanseras i kontakten."
 
@@ -189,7 +189,7 @@ msgstr "Guide för att generera kontoflyttningar för nettning"
 #: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "You should select at least 2 journal items."
-msgstr "Du bör välja minst 2 journalrader."
+msgstr "Du bör välja minst 2 verifikatsrader."
 
 #~ msgid "Last Modified on"
 #~ msgstr "Senast redigerad"
