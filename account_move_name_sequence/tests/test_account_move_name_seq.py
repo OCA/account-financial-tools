@@ -370,6 +370,29 @@ class TestAccountMoveNameSequence(TransactionCase):
         self.assertIn("TB2CSEQ/", invoice.name, "name was not based on sequence")
         self.assertEqual(invoice.payment_reference, invoice.name)
 
+    def test_made_sequence_gap_not_hashed_journal(self):
+        in_invoice = self.env["account.move"].create(
+            {
+                "journal_id": self.purchase_journal.id,
+                "invoice_date": self.date,
+                "partner_id": self.partner.id,
+                "move_type": "in_invoice",
+                "invoice_line_ids": self.invoice_line,
+            }
+        )
+        in_invoice.action_post()
+        self.assertFalse(in_invoice.made_sequence_gap)
+        # Flag left by a migration on an existing move
+        in_invoice.made_sequence_gap = True
+        in_invoice_copy = in_invoice.copy({"invoice_date": self.date})
+        in_invoice_copy.action_post()
+        self.assertFalse(in_invoice_copy.made_sequence_gap)
+        in_refund = in_invoice._reverse_moves([{"invoice_date": self.date}])
+        in_refund.action_post()
+        self.assertFalse(in_refund.made_sequence_gap)
+        in_invoice._update_sequence_made_gap()
+        self.assertFalse(in_invoice.made_sequence_gap)
+
     def test_is_end_of_seq_chain(self):
         self.env.user.group_ids -= self.env.ref("account.group_account_manager")
         invoice = self.env["account.move"].create(
