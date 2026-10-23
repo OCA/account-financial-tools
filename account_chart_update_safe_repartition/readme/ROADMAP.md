@@ -1,0 +1,2 @@
+- Does not rewrite ``account_id`` on historical ``account.move.line`` rows.
+- Unmatched repartition lines referenced by posted entries are kept and logged.
