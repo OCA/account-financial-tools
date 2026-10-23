@@ -1,6 +1,6 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests import tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -11,16 +11,6 @@ class TestAccountMoveLineTaxEditable(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
         refund_repartitions = cls.company_data[
             "default_tax_sale"
         ].refund_repartition_line_ids
@@ -37,9 +27,7 @@ class TestAccountMoveLineTaxEditable(AccountTestInvoicingCommon):
                 "move_type": "entry",
                 "date": fields.Date.from_string("2016-01-01"),
                 "line_ids": [
-                    (
-                        0,
-                        None,
+                    Command.create(
                         {
                             "name": "revenue line 1",
                             "account_id": cls.account_revenue.id,
@@ -47,9 +35,7 @@ class TestAccountMoveLineTaxEditable(AccountTestInvoicingCommon):
                             "credit": 0.0,
                         },
                     ),
-                    (
-                        0,
-                        None,
+                    Command.create(
                         {
                             "name": "revenue line 2",
                             "account_id": cls.account_revenue.id,
@@ -58,9 +44,7 @@ class TestAccountMoveLineTaxEditable(AccountTestInvoicingCommon):
                             "tax_ids": [(6, 0, cls.tax_sale.ids)],
                         },
                     ),
-                    (
-                        0,
-                        None,
+                    Command.create(
                         {
                             "name": "tax line",
                             "account_id": cls.account_tax_sale.id,
@@ -69,9 +53,7 @@ class TestAccountMoveLineTaxEditable(AccountTestInvoicingCommon):
                             "tax_repartition_line_id": tax_repartition_line.id,
                         },
                     ),
-                    (
-                        0,
-                        None,
+                    Command.create(
                         {
                             "name": "counterpart line",
                             "account_id": cls.account_expense.id,
