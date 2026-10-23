@@ -64,9 +64,9 @@ class AccountUpdateLockDate(models.TransientModel):
                 ["field_description", "name"],
             )
         )
-        field2string = dict(
-            (field["name"], field["field_description"]) for field in fields_sr
-        )
+        field2string = {
+            field["name"]: field["field_description"] for field in fields_sr
+        }
         vals = {}
         for lock_field in LOCK_DATE_FIELDS:
             if self[lock_field] and self[lock_field] > today:
