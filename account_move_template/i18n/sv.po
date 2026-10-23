@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2024-06-05 10:38+0000\n"
+"PO-Revision-Date: 2026-10-23 10:46+0000\n"
 "Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
@@ -245,23 +245,23 @@ msgstr "Är en återbetalning?"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__journal_id
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal"
-msgstr "Journal"
+msgstr "Verifikat"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
 msgid "Journal Entry Template"
-msgstr "Verifikatmall"
+msgstr "Verifikatsmall"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_menu
 msgid "Journal Entry Templates"
-msgstr "Verifikatmallar"
+msgstr "Verifikatsmallar"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "Journal Item Template"
-msgstr "Verifikatradsmall"
+msgstr "Verifikatsradsmall"
 
 #. module: account_move_template
 #. odoo-python
@@ -270,6 +270,8 @@ msgid ""
 "Journal entry created from template <a href=# data-oe-"
 "model=account.move.template data-oe-id=%(template_id)d>%(template_name)s</a>."
 msgstr ""
+"Verifikat skapat utifrån mallen <a href=# data-oe-"
+"model=account.move.template data-oe-id=%(template_id)d>%(template_name)s</a>."
 
 #. module: account_move_template
 #. odoo-python
@@ -444,7 +446,7 @@ msgstr "Typ"
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__payment_term_id
 msgid "Used to compute the due date of the journal item."
-msgstr "Används för att beräkna journalradens förfallodag."
+msgstr "Används för att beräkna verifikatets förfallodag."
 
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
