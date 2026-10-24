@@ -1,0 +1,1124 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_spread_cost_revenue
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-02-13 12:01+0000\n"
+"Last-Translator: Administrator <alexzub@tut.by>\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid ""
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not is_credit_account_deprecated\">\n"
+"                                  This account in deprecated! The reconciliation will be NOT possible.\n"
+"                            </span>"
+msgstr ""
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
+"is_credit_account_deprecated\">\n"
+"                                  Этот счет является устаревшим! Сверка "
+"будет невозможна.\n"
+"                            </span>"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid ""
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not is_debit_account_deprecated\">\n"
+"                                  This account in deprecated! The reconciliation will be NOT possible.\n"
+"                            </span>"
+msgstr ""
+"<span class=\"help-block text-danger\" colspan=\"2\" invisible=\"not "
+"is_debit_account_deprecated\">\n"
+"                                  Этот счет является устаревшим! Сверка "
+"будет невозможна.\n"
+"                            </span>"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
+"                                      The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the invoice line.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      The Expense account in the vendor bill line.<br/>Usually the same account of the vendor bill line.\n"
+"                                </span>"
+msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      Балансовый счет, используемый для "
+"разнесения.<br/> Этот счет является аналогом счета в строке счета-фактуры.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      Счет расходов в строке счета "
+"поставщика.<br/>Обычно тот же счет, что и в строке счета поставщика.\n"
+"                                </span>"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
+"                                      The Balance Sheet account.<br/>This is the account in the invoice line.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      The Expense account used for the spreading.<br/>This account is the counterpart of the account of the vendor bill line.\n"
+"                                </span>"
+msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      Балансовый счет.<br/>Это счет в строке "
+"счета-фактуры.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      Счет расходов, используемый для "
+"распределения.<br/> Этот счет является аналогом счета строки счета "
+"поставщика.\n"
+"                                </span>"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
+"                                      The Revenue account in the invoice line.<br/>Usually the same account of the invoice line.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the vendor bill line.\n"
+"                                </span>"
+msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      Счет выручки в строке счета-"
+"фактуры.<br/>Обычно тот же счет, что и в строке счета-фактуры.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      Балансовый счет, используемый для "
+"разнесения.<br/> Этот счет является аналогом счета в строке счета "
+"поставщика.\n"
+"                                </span>"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['out_invoice','in_refund']\">\n"
+"                                      The Revenue account used for the spreading.<br/>This account is the counterpart of the account of the invoice line.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      The Balance Sheet account.<br/>This is the account in the vendor bill line.\n"
+"                                </span>"
+msgstr ""
+"<span class=\"help-block\" colspan=\"2\" invisible=\"invoice_type not in "
+"['out_invoice','in_refund']\">\n"
+"                                      Счет выручки, используемый для "
+"разнесения.<br/> Этот счет является аналогом счета строки счета-фактуры.\n"
+"                                </span>\n"
+"                                <span class=\"help-block\" colspan=\"2\" "
+"invisible=\"invoice_type not in ['in_invoice','out_refund']\">\n"
+"                                      Балансовый счет.<br/>Это счет в строке "
+"счета поставщика.\n"
+"                                </span>"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__account_id
+msgid "Account"
+msgstr "Счет"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model,name:account_spread_cost_revenue.model_account_spread
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
+msgid "Account Spread"
+msgstr "Спред по счету"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model,name:account_spread_cost_revenue.model_account_spread_invoice_line_link_wizard
+msgid "Account Spread Invoice Line Link Wizard"
+msgstr "Мастер создания ссылок на строки счетов-фактур"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model,name:account_spread_cost_revenue.model_account_spread_line
+msgid "Account Spread Lines"
+msgstr "Линии спреда счета"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model,name:account_spread_cost_revenue.model_account_spread_template
+msgid "Account Spread Template"
+msgstr "Шаблон для разнесения счетов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_needaction
+msgid "Action Needed"
+msgstr "Требуется действие"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__active
+msgid "Active"
+msgstr "Активный"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__all_posted
+msgid "All Posted"
+msgstr "Все Опубликовано"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__allow_spread_planning
+msgid "Allow Spread Planning"
+msgstr "Разрешить планирование разброса"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__amount
+msgid "Amount"
+msgstr "Сумма"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__analytic_distribution
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__analytic_distribution
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_distribution
+msgid "Analytic Distribution"
+msgstr "Аналитическое распределение"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__analytic_precision
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__analytic_precision
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_precision
+msgid "Analytic Precision"
+msgstr "Точность аналитики"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_search
+msgid "Archived"
+msgstr "В архиве"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_attachment_count
+msgid "Attachment Count"
+msgstr "Количество вложений"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__auto_spread_ids
+msgid "Auto Spread On"
+msgstr "Автоматический разброс"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__auto_spread
+msgid "Auto assign template on invoice validate"
+msgstr "Автоматическое назначение шаблона при подтверждении счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model,name:account_spread_cost_revenue.model_account_spread_template_auto
+msgid "Auto create spread, based on product/account/analytic"
+msgstr "Автоматическое создание спреда на основе продукта/аккаунта/аналитики"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__auto_archive_spread
+msgid "Auto-archive spread"
+msgstr "Распространение автоархива"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__move_line_auto_post
+msgid "Auto-post lines"
+msgstr "Строки автопостинга"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__force_move_auto_post
+msgid "Auto-post spread lines"
+msgstr "Автоматическое размещение линий разброса"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_template
+msgid ""
+"Automatically use this spread template on invoice validation for invoice "
+"lines using below product and/or account and/or analytic,"
+msgstr ""
+"Автоматически используйте этот шаблон спреда при проверке счетов-фактур для "
+"строк счетов-фактур, использующих нижеуказанный продукт и/или счет и/или "
+"аналитику,"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__spread_account_id
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Balance sheet account / Spread account"
+msgstr "Балансовый счет / Счет спреда"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__days_calc
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__days_calc
+msgid "Calculate by days"
+msgstr "Рассчитать по дням"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_invoice_line_link_wizard
+msgid "Cancel"
+msgstr "Отмена"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "Cannot delete spread(s) that are linked to an invoice line."
+msgstr "Невозможно удалить спреды, связанные со строкой счета-фактуры."
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "Cannot delete spread(s): there are posted Journal Entries."
+msgstr "Невозможно удалить спред(ы): есть опубликованные записи в журнале."
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
+msgid "Cannot reconcile entries that are already reconciled:\n"
+msgstr "Невозможно выровнять записи, которые уже выровнены:\n"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "Cannot unlink invoice lines if the invoice is validated"
+msgstr ""
+"Невозможно отсоединить строки счета-фактуры, если счет-фактура подтвержден"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model,name:account_spread_cost_revenue.model_res_company
+msgid "Companies"
+msgstr "Компании"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__company_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__company_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__company_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__company_id
+msgid "Company"
+msgstr "Компания"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_invoice_line_link_wizard
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#. module: account_spread_cost_revenue
+#: model:ir.actions.server,name:account_spread_cost_revenue.ir_cron_spread_create_entries_ir_actions_server
+msgid "Cost/revenue Spread: Create Entries"
+msgstr "Разброс затрат и доходов: Создание записей"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Create All Moves"
+msgstr "Создать все движения"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Create Move"
+msgstr "Создать движение"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
+msgid "Create from spread template"
+msgstr "Создание из шаблона разброса"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
+msgid "Create new spread board"
+msgstr "Создайте новую доску разброса"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__create_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__create_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__create_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__create_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__create_uid
+msgid "Created by"
+msgstr "Создано пользователем"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread_line.py:0
+msgid "Created move(s) "
+msgstr "Созданный ход (ы) "
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__create_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__create_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__create_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__create_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__create_date
+msgid "Created on"
+msgstr "Дата создания"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__credit_account_id
+msgid "Credit Account"
+msgstr "Кредитный счет"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__currency_id
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__spread_type__sale
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_invoice_line_link_wizard__spread_type__sale
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_template__spread_type__sale
+msgid "Customer"
+msgstr "Клиент"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__invoice_type__out_refund
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_invoice_line_link_wizard__invoice_type__out_refund
+msgid "Customer Credit Note"
+msgstr "Кредитная нота клиента"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__invoice_type__out_invoice
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_invoice_line_link_wizard__invoice_type__out_invoice
+msgid "Customer Invoice"
+msgstr "Счет-фактура клиента"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__date
+msgid "Date"
+msgstr "Дата"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__debit_account_id
+msgid "Debit Account"
+msgstr "Дебет счета"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
+msgid "Default Spread Accounts"
+msgstr "Счета спреда по умолчанию"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
+msgid "Default Spread Journals"
+msgstr "Журналы спредов по умолчанию"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__period_number
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template__period_number
+msgid "Define the number of spread lines"
+msgstr "Определите количество линий разброса"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Delete Move"
+msgstr "Удалить перемещение"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread_line.py:0
+msgid "Deleted move %s"
+msgstr "Удаленное перемещение %s"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__name
+msgid "Description"
+msgstr "Описание"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Details"
+msgstr "Подробности"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company__allow_spread_planning
+msgid ""
+"Disable this option if you do not want to allow the spreading before the "
+"invoice is validated."
+msgstr ""
+"Отключите этот параметр, если вы не хотите разрешать распространение до "
+"проверки счета-фактуры."
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__display_move_line_auto_post
+msgid "Display Button Auto-post lines"
+msgstr "Кнопка отображения строк автопостинга"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__display_create_all_moves
+msgid "Display Create All Moves"
+msgstr "Отображение Создать все перемещения"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__display_name
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__display_name
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__display_name
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__display_name
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__display_name
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__display_recompute_buttons
+msgid "Display Recompute Buttons"
+msgstr "Кнопки пересчета дисплея"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr "Аналитический счет распределения"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company__auto_archive_spread
+msgid ""
+"Enable this option if you want the cron job to automatically archive the "
+"spreads when all lines are posted."
+msgstr ""
+"Включите этот параметр, если вы хотите, чтобы задание cron автоматически "
+"архивировало спреды, когда все линии будут опубликованы."
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company__force_move_auto_post
+msgid ""
+"Enable this option if you want to post automatically the accounting moves of"
+" all the spreads."
+msgstr ""
+"Включите эту опцию, если вы хотите автоматически публиковать бухгалтерские "
+"движения всех спредов."
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__estimated_amount
+msgid "Estimated Amount"
+msgstr "Сметная сумма"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__default_spread_expense_account_id
+msgid "Expense Spread Account"
+msgstr "Счет разнесения расходов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__default_spread_expense_journal_id
+msgid "Expense Spread Journal"
+msgstr "Журнал учета расходов"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Expense account"
+msgstr "Счет расходов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__exp_rev_account_id
+msgid "Expense/Revenue Account"
+msgstr "Счет расходов/доходов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__exp_rev_account_id
+msgid "Expense/revenue account"
+msgstr "Счет расходов/доходов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_follower_ids
+msgid "Followers"
+msgstr "Подписчики"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Подписчики (контрагенты)"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__has_message
+msgid "Has Message"
+msgstr "Есть сообщение"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Если отмечено, новые сообщения требуют вашего внимания."
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template__auto_spread
+msgid ""
+"If checked, provide option to auto create spread during invoice validation, "
+"based on product/account/analytic in invoice line."
+msgstr ""
+"Если флажок установлен, предоставляется возможность автоматического создания "
+"спреда при проверке счета-фактуры на основе продукта/счета/аналитики в "
+"строке счета-фактуры."
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Если отмечено, некоторые сообщения имеют ошибку доставки."
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "Invoice"
+msgstr "Счет"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__invoice_line_id
+msgid "Invoice Line"
+msgstr "Строка счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__invoice_line_ids
+msgid "Invoice Lines"
+msgstr "Строки счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__invoice_type
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__invoice_type
+msgid "Invoice Type"
+msgstr "Тип счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__use_invoice_line_account
+msgid "Invoice account as spread account"
+msgstr "Счет-фактура в качестве счета спреда"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__invoice_line_id
+msgid "Invoice line"
+msgstr "Строка счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_credit_account_deprecated
+msgid "Is Credit Account Deprecated"
+msgstr "Является ли кредитный счет устаревшим"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__is_debit_account_deprecated
+msgid "Is Debit Account Deprecated"
+msgstr "Дебетуется ли дебетовый счет"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_is_follower
+msgid "Is Follower"
+msgstr "Является подписчиком"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__journal_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__spread_journal_id
+msgid "Journal"
+msgstr "Журнал"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread_line.py:0
+#: model:ir.model,name:account_spread_cost_revenue.model_account_move
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__invoice_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__invoice_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__move_id
+msgid "Journal Entry"
+msgstr "Проводка"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model,name:account_spread_cost_revenue.model_account_move_line
+msgid "Journal Item"
+msgstr "Элемент журнала"
+
+#. module: account_spread_cost_revenue
+#: model:ir.actions.act_window,name:account_spread_cost_revenue.action_account_moves_all_spread
+msgid "Journal Items"
+msgstr "Элементы журнала"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__write_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__write_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__write_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__write_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__write_uid
+msgid "Last Updated by"
+msgstr "Последнее изменение"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__write_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__write_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__write_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__write_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__write_date
+msgid "Last Updated on"
+msgstr "Дата последнего изменения"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
+msgid "Link Invoice Line with Spread Board"
+msgstr "Свяжите строку счета-фактуры с электронной доской"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
+msgid "Link to existing spread board"
+msgstr "Ссылка на существующую доску объявлений"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_move_line__spread_check__linked
+msgid "Linked"
+msgstr "Ссылка"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_invoice_spread
+msgid "Linked to spread board"
+msgstr "Ссылка на доску объявлений"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_has_error
+msgid "Message Delivery error"
+msgstr "Ошибка доставки сообщения"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_ids
+msgid "Messages"
+msgstr "Сообщения"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__period_type__month
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_template__period_type__month
+msgid "Month"
+msgstr "Месяц"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
+msgid "Move line: %(line_id)s (%(line_name)s), account code: %(account_code)s\n"
+msgstr ""
+"Переместить линию: %(line_id)s (%(line_name)s), код счета: %(account_code)s\n"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__name
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__name
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__name
+msgid "Name"
+msgstr "Название"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
+msgid "New Spread Board"
+msgstr "Новая доска объявлений"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_invoice_spread
+msgid "Not linked to any spread board"
+msgstr "Не связан ни с одной доской распространения"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Количество действий"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__period_number
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__period_number
+msgid "Number of Repetitions"
+msgstr "Количество повторов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_has_error_counter
+msgid "Number of errors"
+msgstr "Количество ошибок"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Количество сообщений, требующих действий"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Количество сообщений с ошибкой доставки"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__exp_rev_account_id
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template__exp_rev_account_id
+msgid "Optional account to overwrite the existing expense/revenue account"
+msgstr "Дополнительный счет для перезаписи существующего счета расходов/доходов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__period_type
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__period_type
+msgid "Period Type"
+msgstr "Тип периода"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__period_type
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template__period_type
+msgid "Period length for the entries"
+msgstr "Продолжительность периода для записей"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread_template.py:0
+msgid "Please select product and/or account on auto spread options"
+msgstr "Пожалуйста, выберите продукт и/или счет в опциях автоматического спреда"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__posted_amount
+msgid "Posted Amount"
+msgstr "Опубликованная сумма"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Posted entries"
+msgstr "Размещенные записи"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__product_id
+msgid "Product"
+msgstr "Товар"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__period_type__quarter
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_template__period_type__quarter
+msgid "Quarter"
+msgstr "Квартал"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Recalculate entire spread"
+msgstr "Пересчитать весь спред"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Recalculate unposted lines"
+msgstr "Пересчет нераспределенных линий"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__default_spread_revenue_account_id
+msgid "Revenue Spread Account"
+msgstr "Счет разнесения доходов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__default_spread_revenue_journal_id
+msgid "Revenue Spread Journal"
+msgstr "Журнал разнесения доходов"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Revenue account"
+msgstr "Счет доходов"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
+msgid "Some entries are not from the same account:\n"
+msgstr "Некоторые записи не относятся к одному и тому же счету:\n"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__spread_id
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_search
+msgid "Spread"
+msgstr "Распределение"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__spread_action_type
+msgid "Spread Action Type"
+msgstr "Тип действия спреда"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__spread_account_id
+msgid "Spread Balance Sheet Account"
+msgstr "Счет баланса в спреде"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_move_line__spread_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__spread_id
+msgid "Spread Board"
+msgstr "Таблица распределения"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Spread Board Name"
+msgstr "Название доски спреда"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_move_line__spread_check
+msgid "Spread Check"
+msgstr "Проверка спреда"
+
+#. module: account_spread_cost_revenue
+#: model:ir.actions.act_window,name:account_spread_cost_revenue.action_account_spread_form
+#: model:ir.ui.menu,name:account_spread_cost_revenue.menu_action_account_spread_form
+msgid "Spread Costs/Revenues"
+msgstr "Разброс расходов/доходов"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
+#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:0
+msgid "Spread Details"
+msgstr "Подробнее"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__spread_invoice_type_domain_ids
+msgid "Spread Invoice Type Domain"
+msgstr "Тип счета-фактуры Домен"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__spread_journal_id
+msgid "Spread Journal"
+msgstr "Распространенный журнал"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__line_ids
+msgid "Spread Lines"
+msgstr "Линии спреда"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__template_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__template_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__template_id
+msgid "Spread Template"
+msgstr "Шаблон спреда"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_template
+msgid "Spread Template Name"
+msgstr "Название шаблона спреда"
+
+#. module: account_spread_cost_revenue
+#: model:ir.actions.act_window,name:account_spread_cost_revenue.action_account_spread_template_form
+#: model:ir.ui.menu,name:account_spread_cost_revenue.menu_action_account_spread_template_form
+msgid "Spread Templates"
+msgstr "Шаблоны спредов"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__spread_type
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__spread_type
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__spread_type
+msgid "Spread Type"
+msgstr "Тип спреда"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Spread lines"
+msgstr "Линии спреда"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "Spread table '%s' created."
+msgstr "Создана таблица '%s'."
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__spread_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__start_date
+msgid "Start Date"
+msgstr "Дата начала"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__suitable_journal_ids
+msgid "Suitable Journal"
+msgstr "Подходящий журнал"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__spread_type__purchase
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_invoice_line_link_wizard__spread_type__purchase
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_template__spread_type__purchase
+msgid "Supplier"
+msgstr "Поставщик"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "The Invoice Type does not correspond to the Invoice"
+msgstr "Тип счета-фактуры не соответствует счету-фактуре"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "The Journal is not consistent with the account moves."
+msgstr "Журнал не соответствует движениям по счету."
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid ""
+"The Spread Template (Purchases) is not compatible with selected invoice type"
+msgstr "Шаблон спреда (Покупки) не совместим с выбранным типом счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid ""
+"The Spread Template (Sales) is not compatible with selected invoice type"
+msgstr "Шаблон спреда (Продажи) не совместим с выбранным типом счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
+msgid ""
+"The account of the invoice line does not correspond to the Balance Sheet "
+"(credit account) of the spread"
+msgstr ""
+"Счет строки счета-фактуры не соответствует балансу (кредитному счету) спреда"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
+msgid ""
+"The account of the invoice line does not correspond to the Balance Sheet "
+"(debit account) of the spread"
+msgstr ""
+"Счет строки счета-фактуры не соответствует балансу (дебету счета) спреда"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread_line.py:0
+msgid ""
+"This spread line is already linked to a journal entry! Please post or delete"
+" it."
+msgstr ""
+"Эта линия спреда уже связана с записью в журнале! Пожалуйста, опубликуйте "
+"или удалите ее."
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "This will delete the move. Are you sure ?"
+msgstr "Это приведет к удалению перемещения. Вы уверены?"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_move_line.py:0
+msgid ""
+"Too many auto spread templates (%(len_template)s) matched with the invoice "
+"line, %(line_name)s"
+msgstr ""
+"Слишком много шаблонов авторазброса (%(len_template)s), сопоставленных со "
+"строкой счета-фактуры, %(line_name)s"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Total"
+msgstr "Итого"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__total_amount
+msgid "Total Amount"
+msgstr "Общая сумма"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_move_line__spread_check__unavailable
+msgid "Unavailable"
+msgstr "Недоступно"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Undo spread"
+msgstr "Отменить распространение"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "Unlink Invoice Line"
+msgstr "Отвязать строку счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_move_line__spread_check__unlinked
+msgid "Unlinked"
+msgstr "Несвязанный"
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "Unlinked '%(spread_link)s' (invoice line %(inv_line)s)."
+msgstr "Несвязанный '%(spread_link)s' (строка счета-фактуры %(inv_line)s)."
+
+#. module: account_spread_cost_revenue
+#. odoo-python
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:0
+msgid "Unlinked invoice line '%(spread_line_name)s' (view %(inv_link)s)."
+msgstr ""
+"Несвязанная строка счета-фактуры '%(spread_line_name)s' (вид %(inv_link)s)."
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__unposted_amount
+msgid "Unposted Amount"
+msgstr "Непродвинутая сумма"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__unspread_amount
+msgid "Unspread Amount"
+msgstr "Нераспространенная сумма"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__use_invoice_line_account
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__use_invoice_line_account
+msgid "Use Invoice Line Account"
+msgstr "Использовать счет строки счета-фактуры"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__use_invoice_line_account
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template__use_invoice_line_account
+msgid ""
+"Use invoice line's account as Balance sheet / spread account.\n"
+"In this case, user need to select expense/revenue account too."
+msgstr ""
+"Используйте счет строки счета-фактуры в качестве счета баланса / спреда.\n"
+"В этом случае пользователю также необходимо выбрать счет расходов/доходов."
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__days_calc
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template__days_calc
+msgid "Use number of days to calculate amount"
+msgstr "Используйте количество дней для расчета суммы"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__invoice_type__in_invoice
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_invoice_line_link_wizard__invoice_type__in_invoice
+msgid "Vendor Bill"
+msgstr "Счет поставщика"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__invoice_type__in_refund
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_invoice_line_link_wizard__invoice_type__in_refund
+msgid "Vendor Credit Note"
+msgstr "Кредитное авизо поставщика"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "View Move"
+msgstr "Посмотреть движение"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__website_message_ids
+msgid "Website Messages"
+msgstr "Сообщения с сайта"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__website_message_ids
+msgid "Website communication history"
+msgstr "История коммуникации с сайта"
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread__period_type__year
+#: model:ir.model.fields.selection,name:account_spread_cost_revenue.selection__account_spread_template__period_type__year
+msgid "Year"
+msgstr "Год"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
+msgid "e.g. One year offices cleaning contract"
+msgstr "Например, годовой контракт на уборку офисов"
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_template
+msgid "e.g. Template cleaning contract"
+msgstr "Например, шаблонный контракт на уборку"
