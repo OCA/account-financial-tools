@@ -4,8 +4,7 @@
         <field name="model">account.spread.template</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                </header>
+                <header />
                 <sheet>
                     <div class="oe_title">
                         <label for="name" string="Spread Template Name" />
@@ -32,7 +31,7 @@
                             <field name="use_invoice_line_account" />
                             <field
                                 name="spread_account_id"
-                                domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
+                                domain="[('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                                 options="{'no_create': True}"
                                 required="not use_invoice_line_account"
                                 invisible="use_invoice_line_account"
@@ -41,7 +40,6 @@
                                 name="exp_rev_account_id"
                                 invisible="not use_invoice_line_account"
                                 required="use_invoice_line_account"
-                                domain="[('deprecated', '=', False)]"
                                 options="{'no_create': True}"
                             />
                             <field name="spread_journal_id" widget="selection" />

@@ -248,7 +248,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
     def test_03_link_invoice_line_with_spread_sheet(self):
         self.env.user.write(
             {
-                "groups_id": [
+                "group_ids": [
                     (4, self.env.ref("analytic.group_analytic_accounting").id),
                 ],
             }

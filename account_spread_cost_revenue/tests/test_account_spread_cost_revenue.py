@@ -148,7 +148,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertTrue(self.env.company.default_spread_revenue_journal_id)
         self.assertTrue(self.env.company.default_spread_expense_journal_id)
 
-        self.env.user.groups_id += self.env.ref("base.group_multi_company")
+        self.env.user.group_ids += self.env.ref("base.group_multi_company")
 
         spread_form = Form(self.env["account.spread"])
         spread_form.name = "test"
@@ -175,7 +175,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         spread_form.company_id = self.env.company
         spread = spread_form.save()
         self.assertEqual(spread.debit_account_id, self.account_revenue)
-        self.assertFalse(spread.is_debit_account_deprecated)
+        self.assertFalse(spread.is_debit_account_archived)
         self.assertEqual(spread.journal_id, self.sales_journal)
         self.assertEqual(spread.spread_type, "sale")
 
@@ -183,7 +183,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         spread_form.invoice_type = "in_invoice"
         spread = spread_form.save()
         self.assertEqual(spread.credit_account_id, self.account_payable)
-        self.assertFalse(spread.is_credit_account_deprecated)
+        self.assertFalse(spread.is_credit_account_archived)
         self.assertEqual(spread.journal_id, self.expenses_journal)
         self.assertEqual(spread.spread_type, "purchase")
 

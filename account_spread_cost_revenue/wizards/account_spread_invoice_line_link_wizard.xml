@@ -40,14 +40,13 @@
                             name="spread_account_id"
                             invisible="spread_action_type != 'new'"
                             required="spread_action_type ==  'new'"
-                            domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
+                            domain="[('account_type', 'not in', ('asset_cash','liability_credit_card')), ('internal_group', '!=', 'off_balance')]"
                             options="{'no_create': True}"
                         />
                         <field
                             name="exp_rev_account_id"
                             invisible="not use_invoice_line_account or spread_action_type != 'new'"
                             required="use_invoice_line_account"
-                            domain="[('deprecated', '=', False)]"
                             options="{'no_create': True}"
                         />
                         <field

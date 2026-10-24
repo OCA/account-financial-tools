@@ -1,7 +1,7 @@
 # Copyright 2016-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -37,7 +37,7 @@ class AccountMoveLine(models.Model):
 
         if self.spread_id:
             return {
-                "name": _("Spread Details"),
+                "name": self.env._("Spread Details"),
                 "view_mode": "form",
                 "res_model": "account.spread",
                 "type": "ir.actions.act_window",
@@ -55,7 +55,7 @@ class AccountMoveLine(models.Model):
             allow_spread_planning=self.move_id.company_id.allow_spread_planning,
         )
         return {
-            "name": _("Link Invoice Line with Spread Board"),
+            "name": self.env._("Link Invoice Line with Spread Board"),
             "view_mode": "form",
             "res_model": "account.spread.invoice.line.link.wizard",
             "type": "ir.actions.act_window",
@@ -71,7 +71,7 @@ class AccountMoveLine(models.Model):
             elif line.move_id.move_type in ("out_invoice", "in_refund"):
                 if line.account_id != line.spread_id.debit_account_id:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "The account of the invoice line does not correspond "
                             "to the Balance Sheet (debit account) of the spread"
                         )
@@ -79,7 +79,7 @@ class AccountMoveLine(models.Model):
             elif line.move_id.move_type in ("in_invoice", "out_refund"):
                 if line.account_id != line.spread_id.credit_account_id:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "The account of the invoice line does not correspond "
                             "to the Balance Sheet (credit account) of the spread"
                         )
@@ -97,11 +97,11 @@ class AccountMoveLine(models.Model):
     def _check_spread_reconcile_validity(self):
         # Improve error messages of standard Odoo
         reconciled_lines = self.filtered(lambda x: x.reconciled)
-        msg_line = _(
+        msg_line = self.env._(
             "Move line: %(line_id)s (%(line_name)s), account code: %(account_code)s\n"
         )
         if reconciled_lines:
-            msg = _("Cannot reconcile entries that are already reconciled:\n")
+            msg = self.env._("Cannot reconcile entries that are already reconciled:\n")
             for line in reconciled_lines:
                 msg += msg_line % {
                     "line_id": line.id,
@@ -110,7 +110,7 @@ class AccountMoveLine(models.Model):
                 }
             raise ValidationError(msg)
         if len(self.mapped("account_id").ids) > 1:
-            msg = _("Some entries are not from the same account:\n")
+            msg = self.env._("Some entries are not from the same account:\n")
             for line in self:
                 msg += msg_line % {
                     "line_id": line.id,
@@ -159,12 +159,13 @@ class AccountMoveLine(models.Model):
                 continue
             elif len(template) > 1:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Too many auto spread templates (%(len_template)s) "
                         "matched with the "
-                        "invoice line, %(line_name)s"
+                        "invoice line, %(line_name)s",
+                        len_template=len(template),
+                        line_name=line.display_name,
                     )
-                    % {"len_template": len(template), "line_name": line.display_name}
                 )
             # Found auto spread template for this invoice line, create it
             wizard = self.env["account.spread.invoice.line.link.wizard"].new(
