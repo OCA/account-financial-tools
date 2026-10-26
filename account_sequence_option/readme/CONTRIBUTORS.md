@@ -1,0 +1,4 @@
+- Kitti U. \<<kittiu@ecosoft.co.th>\>
+- [Sygel](https://www.sygel.es):
+  - Ángel García de la Chica Herrera
+- Grall f. \<<fgr@apik.cloud>\>
