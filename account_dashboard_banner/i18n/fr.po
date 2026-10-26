@@ -60,6 +60,12 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: account_dashboard_banner
+#. odoo-javascript
+#: code:addons/account_dashboard_banner/static/src/views/account_dashboard_kanban_banner.xml:0
+msgid "Currency"
+msgstr "Devise"
+
+#. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__custom_label
 msgid "Custom Label"
 msgstr "Libellé personnalisé"
@@ -226,11 +232,11 @@ msgstr "Date de verrouillage de la déclaration de TVA"
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid ""
-"Total of the selected companies, converted into the currency of the current "
-"company at today's rate."
+"Total of the selected companies in %(currency)s: the amounts of the companies "
+"in another currency are converted at the latest known rate."
 msgstr ""
-"Total des sociétés sélectionnées, converti dans la devise de la société "
-"active au taux du jour."
+"Total des sociétés sélectionnées en %(currency)s : les montants des sociétés "
+"d'une autre devise sont convertis au dernier taux connu."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__under

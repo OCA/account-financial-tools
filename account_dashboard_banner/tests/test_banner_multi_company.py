@@ -55,13 +55,15 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
             "out_invoice", amounts=[300.0], taxes=[], post=True, company=cls.company_eur
         )
 
-    def _banner(self, companies):
+    def _banner(self, companies, currency=None):
         cell_obj = self.env["account.dashboard.banner.cell"].with_context(
             allowed_company_ids=companies.ids
         )
         return {
             cell_data["cell_type"]: cell_data
-            for cell_data in cell_obj.get_banner_data().values()
+            for cell_data in cell_obj.get_banner_data(
+                currency_id=currency and currency.id
+            ).values()
         }
 
     def test_single_company_unchanged(self):
@@ -125,7 +127,7 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         self.assertEqual(
             debt["value"], format_amount(self.env, 720.0, self.company_a.currency_id)
         )
-        self.assertIn("today's rate", debt["tooltip"])
+        self.assertIn("latest known rate", debt["tooltip"])
         # each company keeps its own currency on its line
         company2value = {d["company_id"]: d["value"] for d in debt["details"]}
         self.assertEqual(
@@ -212,3 +214,60 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         self.assertEqual(debt["raw_value"], alone["raw_value"])
         self.assertEqual(debt["tooltip"], alone["tooltip"])
         self.assertEqual(len(debt["details"]), 2)
+
+    def test_banner_currencies(self):
+        cell_obj = self.env["account.dashboard.banner.cell"]
+        usd = self.company_a.currency_id
+        eur = self.company_eur.currency_id
+        # one currency: nothing to choose
+        res = cell_obj.with_context(
+            allowed_company_ids=[self.company_a.id, self.company_b.id]
+        ).get_banner_currencies()
+        self.assertEqual(res, [{"id": usd.id, "name": usd.name}])
+        # several currencies: the one of the current company first
+        res = cell_obj.with_context(
+            allowed_company_ids=[self.company_eur.id, self.company_a.id]
+        ).get_banner_currencies()
+        self.assertEqual([cur["id"] for cur in res], [eur.id, usd.id])
+        res = cell_obj.with_context(
+            allowed_company_ids=[self.company_a.id, self.company_eur.id]
+        ).get_banner_currencies()
+        self.assertEqual([cur["id"] for cur in res], [usd.id, eur.id])
+
+    def test_total_in_the_chosen_currency(self):
+        eur = self.company_eur.currency_id
+        self.env["res.currency.rate"].create(
+            {
+                "name": fields.Date.context_today(self.env.user),
+                "rate": 0.5,
+                "currency_id": eur.id,
+                "company_id": self.company_a.id,
+            }
+        )
+        companies = self.company_a | self.company_b | self.company_eur
+        debt = self._banner(companies, currency=eur)["customer_debt"]
+        # 300 EUR taken as is + 120 USD at 0.5 EUR per USD = 360 EUR
+        self.assertAlmostEqual(debt["raw_value"], 360.0)
+        self.assertEqual(debt["value"], format_amount(self.env, 360.0, eur))
+        self.assertIn("EUR", debt["tooltip"])
+
+    def test_currency_outside_the_companies_refused(self):
+        gbp = self.env.ref("base.GBP")
+        gbp.active = True
+        self.env["res.currency.rate"].create(
+            {
+                "name": fields.Date.context_today(self.env.user),
+                "rate": 0.5,
+                "currency_id": gbp.id,
+                "company_id": self.company_a.id,
+            }
+        )
+        debt = self._banner(self.company_a | self.company_b, currency=gbp)[
+            "customer_debt"
+        ]
+        # GBP is the currency of none of the selected companies: USD, the
+        # currency of the current company, is used instead
+        self.assertAlmostEqual(debt["raw_value"], 120.0)
+        self.assertEqual(
+            debt["value"], format_amount(self.env, 120.0, self.company_a.currency_id)
+        )

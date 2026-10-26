@@ -115,23 +115,42 @@ class AccountDashboardBannerCell(models.Model):
             cell.warn_lock_date_days = warn_lock_date_days
 
     @api.model
-    def get_banner_data(self):
-        """This is the method called by the JS code that displays the banner"""
+    def get_banner_data(self, currency_id=None):
+        """This is the method called by the JS code that displays the banner.
+
+        With several companies selected, currency_id is the currency of the
+        totals, chosen in the banner among get_banner_currencies().
+        """
         companies = self.env.companies
         if len(companies) > 1:
-            return self._prepare_banner_data_multi_company(companies)
+            return self._prepare_banner_data_multi_company(companies, currency_id)
         company = self.env.company
         return self._prepare_banner_data(company)
 
     @api.model
-    def _prepare_banner_data_multi_company(self, companies):
+    def get_banner_currencies(self):
+        """Currencies of the selected companies, the one of the current company
+        first: when there are several, the banner offers to choose the currency
+        of its totals among them."""
+        currencies = (
+            self.env.company.currency_id | self.env.companies.currency_id.sorted("name")
+        )
+        return [{"id": currency.id, "name": currency.name} for currency in currencies]
+
+    @api.model
+    def _prepare_banner_data_multi_company(self, companies, currency_id=None):
         """Banner when several companies are selected in the company switcher.
 
         Each cell is computed for each company as if that company were the only
         one selected (with_company: the default receivable and payable accounts
         depend on the current company), then the results are merged cell by cell.
+        The totals are in the currency currency_id when it is the currency of one
+        of the companies, otherwise in the currency of the current company.
         """
         companies = companies.sorted()
+        currency = self.env.company.currency_id
+        if currency_id and currency_id in companies.currency_id.ids:
+            currency = self.env["res.currency"].browse(currency_id)
         cells = self.search([])
         company2speedy = {
             company: cells.with_company(company)._prepare_speedy(company)
@@ -149,7 +168,7 @@ class AccountDashboardBannerCell(models.Model):
                 )
                 company_cell._update_cell_warn(cell_data)
                 company2cell_data[company] = cell_data
-            res[seq] = cell._merge_cell_data(company2cell_data)
+            res[seq] = cell._merge_cell_data(company2cell_data, currency)
         return res
 
     @api.model
@@ -168,16 +187,17 @@ class AccountDashboardBannerCell(models.Model):
             "supplier_debt",
         ]
 
-    def _merge_cell_data(self, company2cell_data):
+    def _merge_cell_data(self, company2cell_data, currency):
         """Merge the data of a cell computed for several companies.
 
         Lock dates are set per company: the value is the oldest lock date, up to
         which all the companies are locked (none if a company has no lock date).
-        Amounts are converted into the currency of the current company at
-        today's rate and summed. Other cell types (added by other modules) keep
-        the value of the current company. The cell warns if it warns for one of
-        the companies. The value of each company, in its own currency, is kept in
-        'details', in the order of the companies.
+        Amounts are summed in the given currency: the amount of a company in
+        that currency is taken as is, the others are converted at the latest
+        rate known by the current company. Other cell types (added by other
+        modules) keep the value of the current company. The cell warns if it
+        warns for one of the companies. The value of each company, in its own
+        currency, is kept in 'details', in the order of the companies.
         """
         self.ensure_one()
         company_cell_data = list(company2cell_data.items())
@@ -192,12 +212,10 @@ class AccountDashboardBannerCell(models.Model):
                 "companies are locked."
             )
         elif self.cell_type in self._get_amount_cell_types():
-            company = self.env.company
-            currency = company.currency_id
             today = fields.Date.context_today(self)
             amounts = [
                 cell_company.currency_id._convert(
-                    cell_data["raw_value"], currency, company, today
+                    cell_data["raw_value"], currency, self.env.company, today
                 )
                 for cell_company, cell_data in company_cell_data
                 if cell_data["raw_value"] is not False  # False: nothing computed
@@ -205,8 +223,10 @@ class AccountDashboardBannerCell(models.Model):
             raw_value = currency.round(sum(amounts)) if amounts else False
             value = amounts and format_amount(self.env, raw_value, currency)
             multi_tooltip = _(
-                "Total of the selected companies, converted into the currency "
-                "of the current company at today's rate."
+                "Total of the selected companies in %(currency)s: the amounts of "
+                "the companies in another currency are converted at the latest "
+                "known rate.",
+                currency=currency.name,
             )
         else:
             current = company2cell_data.get(self.env.company, res)

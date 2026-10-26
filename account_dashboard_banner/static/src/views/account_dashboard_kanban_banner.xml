@@ -9,6 +9,14 @@
 <t t-name="account_dashboard_banner.AccountDashboardBannerRenderer" t-inherit="account.DashboardKanbanRenderer" t-inherit-mode="primary">
     <xpath expr="//div[hasclass('o_kanban_renderer')]" position="before">
         <div class="d-none d-md-flex position-sticky start-0 o_form_statusbar" id="dashboard_banner">
+            <!-- Several currencies among the selected companies: currency of the totals -->
+            <div t-if="state.bannerCurrencies and state.bannerCurrencies.length > 1" class="d-flex align-items-center flex-shrink-0 px-2">
+                <select class="form-select form-select-sm w-auto o_dashboard_banner_currency" title="Currency" aria-label="Currency" t-on-change="onBannerCurrencyChange">
+                    <t t-foreach="state.bannerCurrencies" t-as="currency" t-key="currency.id">
+                        <option t-att-value="currency.id" t-att-selected="currency.id === state.bannerCurrencyId" t-out="currency.name"/>
+                    </t>
+                </select>
+            </div>
             <t t-foreach="Object.entries(state.banner)" t-as="cell_entry" t-key="cell_entry[0]">
                 <t t-set="cell_data" t-value="cell_entry[1]"/>
 
@@ -43,7 +51,7 @@
 <!-- Several companies selected: the value of each company, under the merged value -->
 <t t-name="account_dashboard_banner.AccountDashboardBannerCellDetails">
     <t t-foreach="cell_data.details or []" t-as="detail" t-key="detail.company_id">
-        <small t-attf-class="mx-2 text-nowrap #{detail.warn ? 'fw-bold' : 'text-muted'}">
+        <small t-attf-class="mx-2 #{detail.warn ? 'fw-bold' : 'text-muted'}">
             <t t-out="detail.company"/>: <t t-out="detail.value"/>
         </small>
     </t>
