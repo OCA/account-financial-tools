@@ -25,6 +25,8 @@ export class DashboardKanbanRendererBanner extends DashboardKanbanRenderer {
     setup() {
         super.setup();
         this.orm = useService("orm");
+        // Only the answer to the latest request is shown (currency changed quickly)
+        this.bannerRequestId = 0;
 
         onWillStart(async () => {
             const currencies = await this.orm.call("account.dashboard.banner.cell", "get_banner_currencies");
@@ -37,9 +39,13 @@ export class DashboardKanbanRendererBanner extends DashboardKanbanRenderer {
     }
 
     async loadBanner() {
-        this.state.banner = await this.orm.call("account.dashboard.banner.cell", "get_banner_data", [], {
+        const requestId = ++this.bannerRequestId;
+        const banner = await this.orm.call("account.dashboard.banner.cell", "get_banner_data", [], {
             currency_id: this.state.bannerCurrencyId,
         });
+        if (requestId === this.bannerRequestId) {
+            this.state.banner = banner;
+        }
     }
 
     async onBannerCurrencyChange(ev) {
