@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta
 from odoo import fields
 from odoo.tests import tagged
 from odoo.tools.misc import format_amount, format_date
+from odoo.tools.safe_eval import safe_eval
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
@@ -77,8 +78,6 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
             allowed_company_ids=self.company_b.ids
         ).get_banner_data()
         self.assertEqual(res, expected)
-        for cell_data in res.values():
-            self.assertNotIn("details", cell_data)
 
     def test_same_currency_total(self):
         banner = self._banner(self.company_a | self.company_b)
@@ -87,14 +86,9 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         self.assertEqual(
             debt["value"], format_amount(self.env, 120.0, self.company_a.currency_id)
         )
+        # one total, no line per company
+        self.assertNotIn("details", debt)
         # each company computed as if it were alone, its own receivable account
-        self.assertEqual(
-            [(d["company_id"], d["value"]) for d in debt["details"]],
-            [
-                (company.id, self._banner(company)["customer_debt"]["value"])
-                for company in (self.company_a | self.company_b).sorted()
-            ],
-        )
         self.assertEqual(
             self._banner(self.company_b)["customer_debt"]["raw_value"], 20.0
         )
@@ -128,12 +122,6 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
             debt["value"], format_amount(self.env, 720.0, self.company_a.currency_id)
         )
         self.assertIn("latest known rate", debt["tooltip"])
-        # each company keeps its own currency on its line
-        company2value = {d["company_id"]: d["value"] for d in debt["details"]}
-        self.assertEqual(
-            company2value[self.company_eur.id], format_amount(self.env, 300.0, eur)
-        )
-        self.assertEqual(len(debt["details"]), 3)
 
     def test_total_in_the_currency_of_the_current_company(self):
         usd = self.company_a.currency_id
@@ -157,10 +145,6 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         debt = banner["customer_debt"]
         self.assertAlmostEqual(debt["raw_value"], 350.0)
         self.assertEqual(debt["value"], format_amount(self.env, 350.0, eur))
-        company2value = {d["company_id"]: d["value"] for d in debt["details"]}
-        self.assertEqual(
-            company2value[self.company_a.id], format_amount(self.env, 100.0, usd)
-        )
 
     def test_lock_dates_per_company(self):
         recent = fields.Date.context_today(self.env.user) - relativedelta(days=10)
@@ -171,12 +155,9 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         self.assertEqual(lock["raw_value"], old)
         self.assertEqual(lock["value"], format_date(self.env, old))
         self.assertIn("per company", lock["tooltip"])
-        # only company B is late: the cell warns and so does its line, not A's
+        # only company B is late: the cell warns
         self.assertTrue(lock["warn"])
-        company2warn = {d["company_id"]: d["warn"] for d in lock["details"]}
-        self.assertEqual(
-            company2warn, {self.company_a.id: False, self.company_b.id: True}
-        )
+        self.assertFalse(self._banner(self.company_a)["fiscalyear_lock_date"]["warn"])
         self.company_b.fiscalyear_lock_date = recent
         lock = self._banner(self.company_a | self.company_b)["fiscalyear_lock_date"]
         self.assertEqual(lock["raw_value"], recent)
@@ -192,10 +173,7 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         # the total (120) is above the minimum (50) but company B (20) is not
         debt = self._banner(self.company_a | self.company_b)["customer_debt"]
         self.assertTrue(debt["warn"])
-        company2warn = {d["company_id"]: d["warn"] for d in debt["details"]}
-        self.assertEqual(
-            company2warn, {self.company_a.id: False, self.company_b.id: True}
-        )
+        self.assertFalse(self._banner(self.company_a)["customer_debt"]["warn"])
 
     def test_custom_tooltip_kept(self):
         overdue = self._banner(self.company_a | self.company_b)["customer_overdue"]
@@ -213,7 +191,6 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         self.assertEqual(debt["value"], alone["value"])
         self.assertEqual(debt["raw_value"], alone["raw_value"])
         self.assertEqual(debt["tooltip"], alone["tooltip"])
-        self.assertEqual(len(debt["details"]), 2)
 
     def test_banner_currencies(self):
         cell_obj = self.env["account.dashboard.banner.cell"]
@@ -271,3 +248,20 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         self.assertEqual(
             debt["value"], format_amount(self.env, 120.0, self.company_a.currency_id)
         )
+
+    def test_hidden_cell_not_in_banner(self):
+        self.cell_lock.active = False
+        for companies in (self.company_a, self.company_a | self.company_b):
+            banner = self._banner(companies)
+            self.assertNotIn("fiscalyear_lock_date", banner)
+            self.assertIn("customer_debt", banner)
+        # still listed in the configuration, to be displayed again
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "account_dashboard_banner.account_dashboard_banner_cell_action"
+        )
+        cells = self.env["account.dashboard.banner.cell"].with_context(
+            **safe_eval(action["context"])
+        )
+        self.assertIn(self.cell_lock, cells.search([]))
+        self.cell_lock.active = True
+        self.assertIn("fiscalyear_lock_date", self._banner(self.company_a))

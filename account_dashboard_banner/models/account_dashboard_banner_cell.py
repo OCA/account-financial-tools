@@ -16,6 +16,11 @@ class AccountDashboardBannerCell(models.Model):
     _order = "sequence, id"
 
     sequence = fields.Integer()
+    active = fields.Boolean(
+        string="Displayed",
+        default=True,
+        help="Uncheck to hide the cell from the banner, without deleting it.",
+    )
     cell_type = fields.Selection(
         [
             ("income_fiscalyear", "Fiscal Year-to-date Income"),
@@ -196,8 +201,7 @@ class AccountDashboardBannerCell(models.Model):
         that currency is taken as is, the others are converted at the latest
         rate known by the current company. Other cell types (added by other
         modules) keep the value of the current company. The cell warns if it
-        warns for one of the companies. The value of each company, in its own
-        currency, is kept in 'details', in the order of the companies.
+        warns for one of the companies.
         """
         self.ensure_one()
         company_cell_data = list(company2cell_data.items())
@@ -249,15 +253,6 @@ class AccountDashboardBannerCell(models.Model):
                 "value": value or _("None"),
                 "tooltip": tooltip,
                 "warn": any(cell_data["warn"] for __, cell_data in company_cell_data),
-                "details": [
-                    {
-                        "company_id": company.id,
-                        "company": company.name,
-                        "value": cell_data["value"],
-                        "warn": cell_data["warn"],
-                    }
-                    for company, cell_data in company_cell_data
-                ],
             }
         )
         return res

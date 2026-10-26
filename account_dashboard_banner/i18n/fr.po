@@ -113,6 +113,11 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__active
+msgid "Displayed"
+msgstr "Affichée"
+
+#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_fiscalyear
 msgid "Fiscal Year-to-date Income"
 msgstr "Revenus depuis le début de l'exercice comptable"
@@ -237,6 +242,11 @@ msgid ""
 msgstr ""
 "Total des sociétés sélectionnées en %(currency)s : les montants des sociétés "
 "d'une autre devise sont convertis au dernier taux connu."
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,help:account_dashboard_banner.field_account_dashboard_banner_cell__active
+msgid "Uncheck to hide the cell from the banner, without deleting it."
+msgstr "Décocher pour masquer la cellule du bandeau, sans la supprimer."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__under
