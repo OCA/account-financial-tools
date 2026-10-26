@@ -31,13 +31,13 @@ msgstr "Cellule du bandeau du tableau de bord de la comptabilité"
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid "Balance of account(s) {account_codes} since %s."
-msgstr ""
+msgstr "Solde du/des compte(s) {account_codes} depuis le %s."
 
 #. module: account_dashboard_banner
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid "Balance of account(s) {account_codes}."
-msgstr ""
+msgstr "Solde du/des compte(s) {account_codes}."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__inside
@@ -142,6 +142,17 @@ msgid "Liquidity"
 msgstr "Liquidités"
 
 #. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid ""
+"Lock dates are set per company. With several companies, the date shown is "
+"the oldest one: up to it, all the selected companies are locked."
+msgstr ""
+"Les dates de verrouillage sont propres à chaque société. Avec plusieurs "
+"sociétés, la date affichée est la plus ancienne : jusqu'à elle, toutes les "
+"sociétés sélectionnées sont verrouillées."
+
+#. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__warn_max
 msgid "Maximum"
 msgstr "Maximum"
@@ -188,6 +199,8 @@ msgstr "Revenus depuis le début du trimestre"
 msgid ""
 "Residual amount of account(s) {account_codes} with due date in the past."
 msgstr ""
+"Montant restant dû du/des compte(s) {account_codes} dont l'échéance est "
+"passée."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__sale_lock_date
@@ -208,6 +221,16 @@ msgstr "Dette fournisseur"
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__tax_lock_date
 msgid "Tax Return Lock Date"
 msgstr "Date de verrouillage de la déclaration de TVA"
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid ""
+"Total of the selected companies, converted into the currency of the current "
+"company at today's rate."
+msgstr ""
+"Total des sociétés sélectionnées, converti dans la devise de la société "
+"active au taux du jour."
 
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__warn_type__under

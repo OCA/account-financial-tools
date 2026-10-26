@@ -22,6 +22,7 @@
                      t-on-click="() => cell_data.action &amp;&amp; this.env.services.action.doAction(cell_data.action)">
                     <strong class="mx-2" t-out="cell_data['label']"/>
                     <span t-out="cell_data['value']" class="h2 m-0 text-primary"/>
+                    <t t-call="account_dashboard_banner.AccountDashboardBannerCellDetails"/>
                 </div>
 
                 <div id="cell_banner_warn"
@@ -32,10 +33,20 @@
                      t-on-click="() => cell_data.action &amp;&amp; this.env.services.action.doAction(cell_data.action)">
                     <strong class="mx-2" t-out="cell_data['label']"/>
                     <span t-out="cell_data['value']" class="h2 m-0 text-primary"/>
+                    <t t-call="account_dashboard_banner.AccountDashboardBannerCellDetails"/>
                 </div>
             </t>
         </div>
     </xpath>
+</t>
+
+<!-- Several companies selected: the value of each company, under the merged value -->
+<t t-name="account_dashboard_banner.AccountDashboardBannerCellDetails">
+    <t t-foreach="cell_data.details or []" t-as="detail" t-key="detail.company_id">
+        <small t-attf-class="mx-2 text-nowrap #{detail.warn ? 'fw-bold' : 'text-muted'}">
+            <t t-out="detail.company"/>: <t t-out="detail.value"/>
+        </small>
+    </t>
 </t>
 
 </templates>

@@ -117,8 +117,106 @@ class AccountDashboardBannerCell(models.Model):
     @api.model
     def get_banner_data(self):
         """This is the method called by the JS code that displays the banner"""
+        companies = self.env.companies
+        if len(companies) > 1:
+            return self._prepare_banner_data_multi_company(companies)
         company = self.env.company
         return self._prepare_banner_data(company)
+
+    @api.model
+    def _prepare_banner_data_multi_company(self, companies):
+        """Banner when several companies are selected in the company switcher.
+
+        Each cell is computed for each company as if that company were the only
+        one selected (with_company: the default receivable and payable accounts
+        depend on the current company), then the results are merged cell by cell.
+        """
+        companies = companies.sorted()
+        cells = self.search([])
+        company2speedy = {
+            company: cells.with_company(company)._prepare_speedy(company)
+            for company in companies
+        }
+        res = {}
+        seq = 0
+        for cell in cells:
+            seq += 1
+            company2cell_data = {}
+            for company in companies:
+                company_cell = cell.with_company(company)
+                cell_data = company_cell._prepare_cell_data(
+                    company, company2speedy[company]
+                )
+                company_cell._update_cell_warn(cell_data)
+                company2cell_data[company] = cell_data
+            res[seq] = cell._merge_cell_data(company2cell_data)
+        return res
+
+    def _merge_cell_data(self, company2cell_data):
+        """Merge the data of a cell computed for several companies.
+
+        Lock dates are set per company: the value is the oldest lock date, up to
+        which all the companies are locked (none if a company has no lock date).
+        Amounts are converted into the currency of the current company at
+        today's rate and summed. The cell warns if it warns for one of the
+        companies. The value of each company, in its own currency, is kept in
+        'details', in the order of the companies.
+        """
+        self.ensure_one()
+        company_cell_data = list(company2cell_data.items())
+        res = dict(company_cell_data[0][1])
+        if self.cell_type.endswith("lock_date"):
+            lock_dates = [cell_data["raw_value"] for __, cell_data in company_cell_data]
+            raw_value = all(lock_dates) and min(lock_dates)
+            value = raw_value and format_date(self.env, raw_value)
+            multi_tooltip = _(
+                "Lock dates are set per company. With several companies, "
+                "the date shown is the oldest one: up to it, all the selected "
+                "companies are locked."
+            )
+        else:
+            company = self.env.company
+            currency = company.currency_id
+            today = fields.Date.context_today(self)
+            amounts = [
+                cell_company.currency_id._convert(
+                    cell_data["raw_value"], currency, company, today
+                )
+                for cell_company, cell_data in company_cell_data
+                if cell_data["raw_value"] is not False  # False: nothing computed
+            ]
+            raw_value = currency.round(sum(amounts)) if amounts else False
+            value = amounts and format_amount(self.env, raw_value, currency)
+            multi_tooltip = _(
+                "Total of the selected companies, converted into the currency "
+                "of the current company at today's rate."
+            )
+        tooltip = self.custom_tooltip
+        if not tooltip:
+            company_tooltips = {
+                cell_data["tooltip"] for __, cell_data in company_cell_data
+            }
+            tooltip = multi_tooltip
+            if len(company_tooltips) == 1 and company_tooltips != {False}:
+                tooltip = f"{company_tooltips.pop()} {multi_tooltip}"
+        res.update(
+            {
+                "raw_value": raw_value,
+                "value": value or _("None"),
+                "tooltip": tooltip,
+                "warn": any(cell_data["warn"] for __, cell_data in company_cell_data),
+                "details": [
+                    {
+                        "company_id": company.id,
+                        "company": company.name,
+                        "value": cell_data["value"],
+                        "warn": cell_data["warn"],
+                    }
+                    for company, cell_data in company_cell_data
+                ],
+            }
+        )
+        return res
 
     def _prepare_speedy(self, company):
         lock_date_fields = [
