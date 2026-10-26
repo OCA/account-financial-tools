@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ========================
 Account Dashboard Banner
 ========================
@@ -17,7 +13,7 @@ Account Dashboard Banner
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
@@ -101,6 +97,19 @@ Enjoy the accounting dashboard with the banner at the top:
 
 |Accounting dashboard with banner|
 
+When several companies are selected in the company switcher, each cell
+shows one total for the selected companies. When they have several
+currencies, a selector in the banner chooses the currency of the totals
+(the one of the current company by default, the choice is kept by the
+browser): the amount of a company in that currency is taken as is, the
+others are converted at the latest known rate. Lock dates are set per
+company: a lock date cell shows the oldest lock date of the selected
+companies, up to which all of them are locked.
+
+A cell can be hidden from the banner without deleting it: uncheck
+*Displayed* in *Accounting > Configuration > Dashboard > Dashboard
+Banner Cells*.
+
 .. |Accounting dashboard with banner| image:: https://raw.githubusercontent.com/OCA/account-financial-tools/18.0/account_dashboard_banner/static/description/account_dashboard_banner.png
 
 Bug Tracker
@@ -125,6 +134,7 @@ Contributors
 ------------
 
 - Alexis de Lattre <alexis.delattre@akretion.com>
+- Claude Perrin <klodr@users.noreply.github.com>
 
 Maintainers
 -----------
