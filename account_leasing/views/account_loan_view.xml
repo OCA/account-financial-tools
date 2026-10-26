@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
+     Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_loan_search" model="ir.ui.view">
+        <field name="name">account.loan.list</field>
+        <field name="model">account.loan</field>
+        <field name="inherit_id" ref="account_loan.account_loan_search" />
+        <field name="arch" type="xml">
+            <filter name="borrow" position="after">
+                <filter
+                    string="Leasing"
+                    name="leasing"
+                    domain="[('loan_type','=','leasing')]"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="account_loan_form" model="ir.ui.view">
+        <field name="name">account.loan.form</field>
+        <field name="model">account.loan</field>
+        <field name="inherit_id" ref="account_loan.account_loan_form" />
+        <field name="arch" type="xml">
+            <button name="view_account_moves" position="after">
+                <button
+                    name="view_account_invoices"
+                    class="oe_stat_button"
+                    icon="fa-pencil-square-o"
+                    invisible="state == 'draft' or loan_type != 'leasing'"
+                    type="object"
+                    string="Invoices"
+                />
+            </button>
+            <notebook position="inside">
+                <page string="Leasing" id="leasing" invisible="loan_type != 'leasing'">
+                    <group>
+                        <group>
+                            <field
+                                name="long_term_journal_id"
+                                invisible="not long_term_loan_account_id"
+                                readonly="state != 'draft'"
+                            />
+                            <field
+                                name="leased_asset_account_id"
+                                required="loan_type == 'leasing'"
+                                readonly="state != 'draft'"
+                            />
+                            <field name="residual_amount" readonly="state != 'draft'" />
+                        </group>
+                        <group>
+                            <field
+                                name="product_id"
+                                required="loan_type == 'leasing'"
+                            />
+                            <field
+                                name="interests_product_id"
+                                required="loan_type == 'leasing'"
+                            />
+                            <field name="post_invoice" />
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="account_loan_action" model="ir.actions.act_window">
+        <field name="name">Loans</field>
+        <field name="res_model">account.loan</field>
+        <field name="view_mode">list,form,pivot</field>
+    </record>
+
+    <menuitem
+        id="loan_menu"
+        name="Loans"
+        parent="account.menu_finance_entries"
+        sequence="75"
+    />
+
+    <menuitem
+        id="account_loan_menu"
+        parent="loan_menu"
+        sequence="10"
+        name="Loans"
+        action="account_loan_action"
+    />
+</odoo>
