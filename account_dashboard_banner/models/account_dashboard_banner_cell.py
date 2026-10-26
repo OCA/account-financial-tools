@@ -152,14 +152,31 @@ class AccountDashboardBannerCell(models.Model):
             res[seq] = cell._merge_cell_data(company2cell_data)
         return res
 
+    @api.model
+    def _get_amount_cell_types(self):
+        """Cell types whose raw value is an amount in the currency of the company.
+        With several companies, these amounts are converted and summed. Inherit
+        to add a cell type."""
+        return [
+            "income_fiscalyear",
+            "income_year",
+            "income_quarter",
+            "income_month",
+            "liquidity",
+            "customer_debt",
+            "customer_overdue",
+            "supplier_debt",
+        ]
+
     def _merge_cell_data(self, company2cell_data):
         """Merge the data of a cell computed for several companies.
 
         Lock dates are set per company: the value is the oldest lock date, up to
         which all the companies are locked (none if a company has no lock date).
         Amounts are converted into the currency of the current company at
-        today's rate and summed. The cell warns if it warns for one of the
-        companies. The value of each company, in its own currency, is kept in
+        today's rate and summed. Other cell types (added by other modules) keep
+        the value of the current company. The cell warns if it warns for one of
+        the companies. The value of each company, in its own currency, is kept in
         'details', in the order of the companies.
         """
         self.ensure_one()
@@ -174,7 +191,7 @@ class AccountDashboardBannerCell(models.Model):
                 "the date shown is the oldest one: up to it, all the selected "
                 "companies are locked."
             )
-        else:
+        elif self.cell_type in self._get_amount_cell_types():
             company = self.env.company
             currency = company.currency_id
             today = fields.Date.context_today(self)
@@ -191,8 +208,15 @@ class AccountDashboardBannerCell(models.Model):
                 "Total of the selected companies, converted into the currency "
                 "of the current company at today's rate."
             )
+        else:
+            current = company2cell_data.get(self.env.company, res)
+            raw_value = current["raw_value"]
+            value = current["value"]
+            multi_tooltip = False
         tooltip = self.custom_tooltip
-        if not tooltip:
+        if not tooltip and not multi_tooltip:
+            tooltip = current["tooltip"]
+        elif not tooltip:
             company_tooltips = {
                 cell_data["tooltip"] for __, cell_data in company_cell_data
             }

@@ -1,6 +1,8 @@
 # Copyright 2026 Altixia (https://altixia.com/)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from unittest.mock import patch
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
@@ -198,3 +200,15 @@ class TestAccountDashboardBannerMultiCompany(AccountTestInvoicingCommon):
         self.assertEqual(overdue["tooltip"], "TEST custom tooltip")
         debt = self._banner(self.company_a | self.company_b)["customer_debt"]
         self.assertIn("converted", debt["tooltip"])
+
+    def test_other_cell_types_keep_the_current_company_value(self):
+        # a cell type added by another module (e.g. a MIS Builder KPI) is not an
+        # amount of the module: never converted nor summed
+        cell_class = type(self.env["account.dashboard.banner.cell"])
+        with patch.object(cell_class, "_get_amount_cell_types", return_value=[]):
+            debt = self._banner(self.company_eur | self.company_a)["customer_debt"]
+        alone = self._banner(self.company_eur)["customer_debt"]
+        self.assertEqual(debt["value"], alone["value"])
+        self.assertEqual(debt["raw_value"], alone["raw_value"])
+        self.assertEqual(debt["tooltip"], alone["tooltip"])
+        self.assertEqual(len(debt["details"]), 2)
