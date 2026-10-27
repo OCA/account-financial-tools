@@ -2,6 +2,7 @@
 # Copyright 2020 Tecnativa - Pedro M. Baeza
 
 from odoo import fields, models, tools
+from odoo.tools.misc import clean_context
 
 
 class AssetAssetReport(models.Model):
@@ -43,6 +44,12 @@ class AssetAssetReport(models.Model):
     posted_value = fields.Float(string="Posted Amount", readonly=True)
     unposted_value = fields.Float(string="Unposted Amount", readonly=True)
     company_id = fields.Many2one(comodel_name="res.company", readonly=True)
+
+    def action_open_asset(self):
+        self.ensure_one()
+        return self.asset_id._get_records_action(
+            context=clean_context(self.env.context)
+        )
 
     def init(self):
         tools.drop_view_if_exists(self.env.cr, "account_asset_report")
