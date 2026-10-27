@@ -131,3 +131,10 @@ class TestAssetForwardPorts(AccountTestInvoicingCommon):
         create_line = asset.depreciation_line_ids.filtered(lambda x: x.type == "create")
         self.assertEqual(len(create_line), 1)
         self.assertAlmostEqual(create_line.amount, 1000)
+
+    def test_skip_asset_creation_on_post(self):
+        all_assets = self.asset_model.search([])
+        self.invoice.invoice_line_ids[0].asset_profile_id = self.car5y
+        self.invoice.with_context(skip_asset_creation_on_post=True).action_post()
+        self.assertEqual(self.invoice.state, "posted")
+        self.assertFalse(self.asset_model.search([]) - all_assets)
