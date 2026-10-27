@@ -81,7 +81,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
     def _create_user(self, login, groups, company):
         """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.with_context(**{"no_reset_password": True}).create(
+        user = self.res_users_model.with_context(no_reset_password=True).create(
             {
                 "name": "Test User",
                 "login": login,
@@ -176,7 +176,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             self.assertEqual(
                 balance,
                 expected_balance,
-                f"Balance is not {str(expected_balance)} for Purchase "
+                f"Balance is not {expected_balance!s} for Purchase "
                 f"Line {purchase_line.name}.",
             )
 
@@ -238,15 +238,17 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
     def test_display_name(self):
         purchase = self._create_purchase([(self.product, 1)])
         po_line = purchase.order_line[0]
-        name_get = po_line.with_context(**{"po_line_info": True}).read(["display_name"])
+        name_get = po_line.with_context(po_line_info=True).read(["display_name"])
         name_get = [(po_line.id, name_get[0]["display_name"])]
         self.assertEqual(
             name_get,
             [
                 (
                     po_line.id,
-                    f"[{po_line.order_id.name}] {po_line.name} "
-                    f"({po_line.order_id.state})",
+                    (
+                        f"[{po_line.order_id.name}] {po_line.name} "
+                        f"({po_line.order_id.state})"
+                    ),
                 )
             ],
         )
