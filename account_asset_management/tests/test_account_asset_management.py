@@ -1060,3 +1060,23 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_asset_report_open_asset(self):
+        """Opening a line of the assets analysis report shows its asset."""
+        asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": 1000,
+                "date_start": time.strftime("%Y-01-01"),
+            }
+        )
+        asset.compute_depreciation_board()
+        self.env.flush_all()
+        report_lines = self.env["account.asset.report"].search(
+            [("asset_id", "=", asset.id)]
+        )
+        self.assertTrue(report_lines)
+        action = report_lines[0].action_open_asset()
+        self.assertEqual(action["res_model"], "account.asset")
+        self.assertEqual(action["res_id"], asset.id)
