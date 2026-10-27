@@ -58,7 +58,7 @@
                     filter_domain="[('partner_id','child_of', self)]"
                 />
                 <field name="company_id" groups="base.group_multi_company" />
-                <group expand="1" string="Group By">
+                <group>
                     <filter
                         string="Asset"
                         name="asset"
@@ -99,7 +99,7 @@
         <field name="search_view_id" ref="view_account_asset_report_search" />
         <field name="context">{'search_default_only_active': 1}</field>
         <field name="help" type="html">
-          <p>
+            <p>
             From this report, you can have an overview on all depreciations. The
             search bar can also be used to personalize your assets depreciation reporting.
           </p>
