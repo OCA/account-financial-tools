@@ -139,7 +139,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 "name": product.name,
                 "product_id": product.id,
                 "product_qty": qty,
-                "product_uom_id": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "price_unit": 500,
                 "date_planned": fields.Datetime.now(),
             }
@@ -255,6 +255,17 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         name_get_no_ctx = po_line.read(["display_name"])
         name_get_no_ctx = [(po_line.id, name_get_no_ctx[0]["display_name"])]
         self.assertEqual(name_get_no_ctx, [(po_line.id, po_line.name)])
+        po_line.name = False
+        self.product.default_code = "TEST-REF"
+        for formatted in (False, True):
+            with self.subTest(formatted_display_name=formatted):
+                self.assertEqual(
+                    po_line.with_context(
+                        po_line_info=True, formatted_display_name=formatted
+                    ).display_name,
+                    f"[{purchase.name}] [TEST-REF] {self.product.name} "
+                    f"({purchase.state})",
+                )
 
     def test_group_by_purchase_line_display_name(self):
         purchase = self._create_purchase([(self.product, 1)])

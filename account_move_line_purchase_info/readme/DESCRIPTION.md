@@ -21,3 +21,9 @@ What is dropped:
   valuation and by the price differences, since those entries are no
   longer created by Odoo.
 - The link to the journal entries from the purchase order.
+
+In Odoo 20 the description of a purchase order line only holds the
+vendor purchase description of the product, so it is often empty. When
+that happens, the purchase order line shown on the journal items (and
+in the group by) uses the product name instead, e.g.
+`[P00025] [FURN_001] Large Cabinet (purchase)`.
