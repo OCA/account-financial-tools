@@ -108,6 +108,40 @@ class TestAccountDeactivationDate(AccountTestInvoicingCommon):
         with self.assertRaisesRegex(UserError, "deprecated"):
             move.action_post()
 
+    @freeze_time("2026-06-15")
+    def test_batch_post_keeps_bypass_on_valid_move(self):
+        """A legacy deprecated move must not drop the bypass of a valid one.
+
+        ``assertRaises`` catches the error without rolling the cursor back, so
+        the valid move stays posted here. A real request rolls both back.
+        """
+        valid_account = self.copy_account(
+            self.account, {"deactivation_date": "2026-06-01"}
+        )
+        self.env.cr.execute(
+            "UPDATE account_account SET deprecated = TRUE WHERE id = %s",
+            [self.account.id],
+        )
+        self.account.invalidate_recordset(["deprecated"])
+        valid_move = self.env["account.move"].create(
+            {
+                "move_type": "entry",
+                "date": "2026-05-31",
+                "journal_id": self.journal.id,
+                "line_ids": [
+                    Command.create({"account_id": valid_account.id, "debit": 100.0}),
+                    Command.create(
+                        {"account_id": self.counterpart.id, "credit": 100.0}
+                    ),
+                ],
+            }
+        )
+        legacy_move = self._create_move("2026-05-31")
+        with self.assertRaisesRegex(UserError, "deprecated"):
+            (valid_move | legacy_move).action_post()
+        self.assertEqual(valid_move.state, "posted")
+        self.assertEqual(legacy_move.state, "draft")
+
     def test_cron_deprecates_due_accounts(self):
         with freeze_time("2026-06-15"):
             self.account.deactivation_date = "2026-06-20"
