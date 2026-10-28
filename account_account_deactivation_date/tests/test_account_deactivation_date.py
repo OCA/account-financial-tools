@@ -202,7 +202,9 @@ class TestAccountDeactivationDate(AccountTestInvoicingCommon):
     @freeze_time("2026-06-15")
     def test_onchange_updates_deprecated(self):
         with Form(self.account) as account_form:
-            account_form.deactivation_date = date(2026, 6, 1)
+            with self.assertLogs("odoo.tests.form.onchange", level="WARNING") as logs:
+                account_form.deactivation_date = date(2026, 6, 1)
+            self.assertIn("Past deactivation date", logs.output[0])
             self.assertTrue(account_form.deprecated)
             account_form.deactivation_date = date(2026, 7, 1)
             self.assertFalse(account_form.deprecated)
