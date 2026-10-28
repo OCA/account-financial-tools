@@ -254,9 +254,9 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                     "from the invoice to the credit note.",
                 )
 
-    def test_04_stock_lines(self):
-        """The sale order line is set on all the stock valuation lines
-        of each sale order line, also when they are validated together.
+    def test_04_cogs_and_stock_lines(self):
+        """The sale order line is set on the stock valuation and COGS lines
+        of each sale order line, also when they are invoiced together.
         """
         product2 = self._create_product()
         sale = self._create_sale([(self.product, 1), (product2, 2)])
@@ -266,11 +266,20 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         for move in picking.move_ids:
             move.write({"quantity": move.product_uom_qty, "picked": True})
         picking.button_validate()
+        sale._create_invoices()
+        invoice = sale.invoice_ids
+        invoice._post()
         for so_line in sale.order_line:
             with self.subTest(product=so_line.product_id.name):
                 stock_amls = so_line.move_ids.account_move_id.line_ids.filtered(
                     lambda aml, sol=so_line: aml.product_id == sol.product_id
                 )
+                cogs_amls = invoice.line_ids.filtered(
+                    lambda aml, sol=so_line: (
+                        aml.display_type == "cogs" and aml.product_id == sol.product_id
+                    )
+                )
                 self.assertEqual(len(stock_amls), 2)
-                self.assertEqual(stock_amls.sale_line_id, so_line)
-                self.assertEqual(stock_amls.sale_order_id, sale)
+                self.assertEqual(len(cogs_amls), 2)
+                self.assertEqual((stock_amls | cogs_amls).sale_line_id, so_line)
+                self.assertEqual((stock_amls | cogs_amls).sale_order_id, sale)

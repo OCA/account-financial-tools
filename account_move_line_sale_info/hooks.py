@@ -39,22 +39,10 @@ def post_init_hook(env):
     # FOR cost of goods sold lines
     env.cr.execute(
         """
-        UPDATE account_move_line aml SET sale_line_id = inv.sale_line_id
-        FROM account_move_line inv
-        WHERE aml.display_type = 'cogs'
-        AND inv.move_id = aml.move_id
-        AND inv.display_type = 'product'
-        AND inv.product_id = aml.product_id
-        AND inv.quantity = aml.quantity
-        AND inv.sale_line_id IS NOT NULL
-        AND NOT EXISTS (
-            SELECT 1 FROM account_move_line inv2
-            WHERE inv2.move_id = inv.move_id
-            AND inv2.display_type = 'product'
-            AND inv2.product_id = inv.product_id
-            AND inv2.quantity = inv.quantity
-            AND inv2.id != inv.id
-        );
+        UPDATE account_move_line aml SET sale_line_id = origin.sale_line_id
+        FROM account_move_line origin
+        WHERE aml.cogs_origin_id = origin.id
+        AND origin.sale_line_id IS NOT NULL;
     """
     )
 
