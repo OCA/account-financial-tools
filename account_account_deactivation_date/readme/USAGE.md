@@ -3,7 +3,9 @@
    journal item of the account, and the account must not be used in a tax distribution.
 3. When the date is today or in the past, the account is deprecated right away. When it
    is in the future, the account is deprecated by the daily scheduled action once the
-   date is reached.
+   date is reached. The date is the effective accounting date, not the day the change
+   is saved. A date before today is allowed and deprecates the account immediately;
+   the form warns that the effect applies to accounting dates before today.
 
 To reactivate an account, clear its deactivation date.
 

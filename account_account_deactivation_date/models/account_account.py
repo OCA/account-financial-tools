@@ -16,9 +16,10 @@ class AccountAccount(models.Model):
     deactivation_date = fields.Date(
         tracking=True,
         copy=False,
-        help="From this date on, journal entries can no longer use the "
-        "account and, once the date is reached, the account is deprecated. "
-        "Entries dated before it remain valid.",
+        help="Effective accounting date from which the account can no longer "
+        "be used. It is not the day the change is saved. Once the date is "
+        "today or in the past, the account is deprecated. Entries dated "
+        "before it remain valid.",
     )
 
     @api.model
@@ -54,10 +55,27 @@ class AccountAccount(models.Model):
 
     @api.onchange("deactivation_date")
     def _onchange_deactivation_date(self):
+        warning = False
+        today = fields.Date.context_today(self)
         for account in self:
             account.deprecated = self._is_deactivation_date_reached(
                 account.deactivation_date
             )
+            if account.deactivation_date and account.deactivation_date < today:
+                warning = True
+        if not warning:
+            return
+        return {
+            "warning": {
+                "title": _("Past deactivation date"),
+                "message": _(
+                    "This date is in the past. The account is deprecated "
+                    "immediately. Journal entries dated on or after this date "
+                    "are rejected, including dates before today. The date is "
+                    "the effective accounting date, not the day of this change."
+                ),
+            }
+        }
 
     @api.constrains("deactivation_date")
     def _check_deactivation_date(self):

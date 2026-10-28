@@ -210,6 +210,23 @@ class TestAccountDeactivationDate(AccountTestInvoicingCommon):
         self.assertFalse(self.account.deprecated)
 
     @freeze_time("2026-06-15")
+    def test_onchange_warns_only_for_a_past_date(self):
+        self.account.deactivation_date = "2026-06-01"
+        result = self.account._onchange_deactivation_date()
+        self.assertTrue(self.account.deprecated)
+        self.assertIn("warning", result)
+
+        self.account.deactivation_date = "2026-06-15"
+        result = self.account._onchange_deactivation_date()
+        self.assertTrue(self.account.deprecated)
+        self.assertFalse(result)
+
+        self.account.deactivation_date = "2026-07-01"
+        result = self.account._onchange_deactivation_date()
+        self.assertFalse(self.account.deprecated)
+        self.assertFalse(result)
+
+    @freeze_time("2026-06-15")
     def test_date_before_posted_entries_rejected(self):
         self._create_move("2026-06-10").action_post()
         with self.assertRaisesRegex(ValidationError, "last posted journal item"):
