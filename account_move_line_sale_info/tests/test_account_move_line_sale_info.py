@@ -62,7 +62,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
     def _create_user(self, login, groups, company):
         """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.with_context(**{"no_reset_password": True}).create(
+        user = self.res_users_model.with_context(no_reset_password=True).create(
             {
                 "name": "Test User",
                 "login": login,
@@ -155,8 +155,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
             self.assertEqual(
                 balance,
                 expected_balance,
-                f"Balance is not {str(expected_balance)} "
-                f"for sale Line {sale_line.name}.",
+                f"Balance is not {expected_balance!s} for sale Line {sale_line.name}.",
             )
 
     def move_reversal_wiz(self, move):
@@ -215,13 +214,13 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
     def test_02_name_get(self):
         sale = self._create_sale([(self.product, 1)])
         so_line = sale.order_line[0]
-        name_get = so_line.with_context(**{"so_line_info": True}).display_name
+        name_get = so_line.with_context(so_line_info=True).display_name
         self.assertEqual(
             name_get,
             f"[{so_line.order_id.name}] {so_line.product_id.name} - "
             f"({so_line.order_id.state})",
         )
-        name_get_no_ctx = so_line.with_context(**{}).display_name
+        name_get_no_ctx = so_line.with_context().display_name
         self.assertEqual(
             name_get_no_ctx,
             f"{so_line.order_id.name} - {so_line.product_id.name} "

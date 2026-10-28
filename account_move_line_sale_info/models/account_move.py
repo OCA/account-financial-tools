@@ -12,8 +12,10 @@ class AccountMove(models.Model):
         for i, vals in enumerate(res):
             am = self.env["account.move"].browse(vals["move_id"])
             sale_line_id = am.invoice_line_ids.filtered(
-                lambda il, vs=vals: il.product_id.id == vs["product_id"]
-                and il.quantity == vs["quantity"]
+                lambda il, vs=vals: (
+                    il.product_id.id == vs["product_id"]
+                    and il.quantity == vs["quantity"]
+                )
             ).mapped("sale_line_ids")
             if sale_line_id and len(sale_line_id) == 1:
                 res[i]["sale_line_id"] = sale_line_id.id
