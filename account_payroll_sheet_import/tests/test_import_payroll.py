@@ -223,3 +223,50 @@ class TestPayrollImport(TransactionCase):
             wizard.action_import_payroll()
 
         self.assertIn("Balance mismatch for employee", str(e.exception))
+
+    def test_import_with_other_partner_id(self):
+        file_data = self._load_file("test_payroll_1.xlsx")
+        other_partner = self.env["res.partner"].create(
+            {
+                "name": "Other Partner",
+            }
+        )
+
+        self.mapping_line.other_partner_id = other_partner.id
+
+        mapping = self.env["payroll.import.mapping"].create(
+            {
+                "name": "Mapping Other Partner ID",
+                "journal_id": self.journal.id,
+                "id_column": "VAT",
+                "mapping_line_ids": [
+                    (6, 0, [self.mapping_line.id, self.mapping_line_credit.id])
+                ],
+                "company_id": self.env.company.id,
+            }
+        )
+
+        wizard = self.env["payroll.import.wizard"].create(
+            {
+                "file": file_data,
+                "filename": "test_payroll_1.xlsx",
+                "mapping_id": mapping.id,
+            }
+        )
+
+        action = wizard.action_import_payroll()
+        move = self.env["account.move"].browse(action["res_id"])
+
+        other_partner_move_lines = move.line_ids.filtered(
+            lambda line: line.partner_id == other_partner
+        )
+        self.assertTrue(other_partner_move_lines)
+        self.assertEqual(len(other_partner_move_lines), 1)
+        self.assertEqual(other_partner_move_lines[0].debit, 10000.0)
+
+        employee_lines = move.line_ids.filtered(
+            lambda line: line.partner_id == self.employee.work_contact_id
+        )
+        self.assertTrue(employee_lines)
+        self.assertEqual(len(employee_lines), 1)
+        self.assertEqual(employee_lines[0].credit, 10000.0)

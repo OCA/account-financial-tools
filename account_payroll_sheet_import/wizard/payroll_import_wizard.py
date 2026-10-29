@@ -19,7 +19,9 @@ class PayrollImportWizard(models.TransientModel):
     file = fields.Binary("Excel File", required=True)
     filename = fields.Char()
     mapping_id = fields.Many2one(
-        "payroll.import.mapping", string="Column Mapping", required=True
+        "payroll.import.mapping",
+        string="Column Mapping",
+        required=True,
     )
 
     def get_account_map(self):
@@ -27,7 +29,9 @@ class PayrollImportWizard(models.TransientModel):
         account_map = defaultdict(list)
         for line in self.mapping_id.mapping_line_ids:
             if line.company_id == self.mapping_id.company_id:
-                account_map[line.column_name].append((line.account_id, line.move_type))
+                account_map[line.column_name].append(
+                    (line.account_id, line.move_type, line.other_partner_id)
+                )
         return account_map
 
     def get_partner(self, vat):
@@ -116,7 +120,7 @@ class PayrollImportWizard(models.TransientModel):
                 if not amount:
                     continue
 
-                for account, move_type in account_map[col_name]:
+                for account, move_type, other_partner_id in account_map[col_name]:
                     effective_move_type = (
                         "debit"
                         if (move_type == "debit" and amount > 0)
@@ -131,7 +135,9 @@ class PayrollImportWizard(models.TransientModel):
                             {
                                 "name": col_name,
                                 "account_id": account.id,
-                                "partner_id": partner.id,
+                                "partner_id": partner.id
+                                if not other_partner_id
+                                else other_partner_id.id,
                                 "debit": (
                                     abs(amount) if effective_move_type == "debit" else 0
                                 ),

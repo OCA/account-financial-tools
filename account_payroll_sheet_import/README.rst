@@ -100,6 +100,13 @@ Creating a Column Mapping
    - Mapping lines: Excel column → account → move type (debit/credit).
      Ex: "NET SALARY", 230000, credit
 
+     - **Other Partner (optional):** set this field on a mapping line to
+       use a specific partner instead of the partner associated with the
+       employee. If left empty, the employee’s partner is used. Example:
+       for private health insurance paid by the company, select the
+       insurance provider as **Other Partner** so that the corresponding
+       journal item is assigned to the provider instead of the employee.
+
 3. Save the mapping for future use.
 
 Import
