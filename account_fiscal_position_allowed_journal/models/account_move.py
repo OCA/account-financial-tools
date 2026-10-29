@@ -19,7 +19,7 @@ class AccountMove(models.Model):
     def _compute_suitable_journal_ids(self):
         res = super()._compute_suitable_journal_ids()
         for rec in self:
-            if not rec.fiscal_position_id:
+            if not rec.fiscal_position_id.sudo().allowed_journal_ids:
                 continue
             journal_domain = rec._get_fiscal_position_journal_domain()
             rec.suitable_journal_ids = rec.suitable_journal_ids.filtered_domain(
@@ -42,8 +42,12 @@ class AccountMove(models.Model):
     @api.onchange("fiscal_position_id")
     def _onchange_fiscal_position_id_journal(self):
         for rec in self:
-            if rec.fiscal_position_id.sudo().allowed_journal_ids:
+            fiscal_position = rec.fiscal_position_id
+            if fiscal_position.sudo().allowed_journal_ids:
                 rec.journal_id = rec._search_default_journal()
+                # The new journal recomputes the company and, through it, the
+                # fiscal position from the partner: keep the one just chosen.
+                rec.fiscal_position_id = fiscal_position
 
     def _search_default_journal(self):
         res = super()._search_default_journal()

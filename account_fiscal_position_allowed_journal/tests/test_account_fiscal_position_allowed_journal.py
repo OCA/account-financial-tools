@@ -146,3 +146,44 @@ class TestAccountFiscalPositionAllowedJournal(AccountTestInvoicingCommon):
         )
         self.assertFalse(bill.fiscal_position_id)
         self.assertEqual(bill.date, invoice_date)
+
+    def test_no_allowed_journal_keeps_all_journals(self):
+        """
+        Data:
+            - A draft invoice with a fiscal position without allowed journals
+        Expected result:
+            - The invoice can use any sale journal, as without fiscal position
+        """
+        sale_journals = self.journal_model.search(
+            [("type", "=", "sale"), ("company_id", "=", self.invoice_01.company_id.id)]
+        )
+        self.assertEqual(self.invoice_01.suitable_journal_ids, sale_journals)
+
+    def test_manual_fiscal_position_is_kept(self):
+        """
+        Data:
+            - A partner whose fiscal position allows journal 01
+            - Another fiscal position allowing only journal 02
+        Test case:
+            - On a new invoice for the partner, choose the other fiscal position
+        Expected result:
+            - The journal moves to journal 02 and the chosen fiscal position
+              stays, instead of going back to the partner's one
+        """
+        self.fiscal_position_01.allowed_journal_ids = [(6, 0, self.journal_01.ids)]
+        self.partner_01.property_account_position_id = self.fiscal_position_01
+        fiscal_position_02 = self.fiscal_position_model.create(
+            {
+                "name": "Fiscal position 02",
+                "allowed_journal_ids": [(6, 0, self.journal_02.ids)],
+            }
+        )
+        move_form = Form(
+            self.env["account.move"].with_context(default_move_type="out_invoice")
+        )
+        move_form.partner_id = self.partner_01
+        self.assertEqual(move_form.fiscal_position_id, self.fiscal_position_01)
+        self.assertEqual(move_form.journal_id, self.journal_01)
+        move_form.fiscal_position_id = fiscal_position_02
+        self.assertEqual(move_form.fiscal_position_id, fiscal_position_02)
+        self.assertEqual(move_form.journal_id, self.journal_02)
