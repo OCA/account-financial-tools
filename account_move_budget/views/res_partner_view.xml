@@ -11,7 +11,7 @@
                     name="action_view_budget"
                     type="object"
                     groups="account.group_account_user"
-                    icon="fa-usd"
+                    icon="payments"
                 >
                     <field string="Budgets" name="budget_count" widget="statinfo" />
                 </button>

@@ -8,7 +8,7 @@ from odoo import api, fields, models
 class AccountMoveBudget(models.Model):
     _name = "account.move.budget"
     _description = "Account Move Budget"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ("mail.thread", "mail.activity.mixin")
 
     name = fields.Char(
         required=True,
@@ -39,7 +39,6 @@ class AccountMoveBudget(models.Model):
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         default=lambda self: self.env.company,
     )
 
@@ -62,12 +61,11 @@ class AccountMoveBudget(models.Model):
     @api.onchange("date_from", "date_to")
     def _onchange_dates(self):
         for rec in self:
-            if rec.date_range_id:
-                if (
-                    rec.date_from != rec.date_range_id.date_start
-                    or rec.date_to != rec.date_range_id.date_end
-                ):
-                    rec.date_range_id = False
+            if rec.date_range_id and (
+                rec.date_from != rec.date_range_id.date_start
+                or rec.date_to != rec.date_range_id.date_end
+            ):
+                rec.date_range_id = False
 
     def action_draft(self):
         for rec in self:

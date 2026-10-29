@@ -36,7 +36,7 @@
                             name="%(account_move_budget_line_act_window)d"
                             type="action"
                             class="oe_stat_button"
-                            icon="fa-bars"
+                            icon="menu"
                             string="Budget Lines"
                         />
                     </div>

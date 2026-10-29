@@ -12,7 +12,6 @@ class AccountMoveBudgetLine(models.Model):
 
     budget_id = fields.Many2one(
         comodel_name="account.move.budget",
-        string="Budget",
         required=True,
         ondelete="cascade",
         index=True,
@@ -38,24 +37,20 @@ class AccountMoveBudgetLine(models.Model):
     )
     account_id = fields.Many2one(
         "account.account",
-        string="Account",
         required=True,
         index=True,
         ondelete="cascade",
         default=lambda self: self.env.context.get("account_id", False),
     )
     date = fields.Date(index=True, required=True)
-    analytic_account_id = fields.Many2one(
-        "account.analytic.account", string="Analytic Account"
-    )
+    analytic_account_id = fields.Many2one("account.analytic.account")
     company_id = fields.Many2one(
         "res.company",
         related="budget_id.company_id",
-        string="Company",
         store=True,
         readonly=True,
     )
-    partner_id = fields.Many2one("res.partner", string="Partner", ondelete="restrict")
+    partner_id = fields.Many2one("res.partner", ondelete="restrict")
 
     @api.depends("debit", "credit")
     def _compute_store_balance(self):
