@@ -1,0 +1,87 @@
+# Translation template for Odoo Server.
+# This file contains the translation of the following modules:
+# * account_journal_user_preference
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: account_journal_user_preference
+#: model_terms:ir.ui.view,arch_db:account_journal_user_preference.view_users_form_journal_preferences
+msgid "Personalization"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_res_users__preferred_journal_ids
+#: model_terms:ir.ui.view,arch_db:account_journal_user_preference.view_users_form_journal_preferences
+msgid "Preferred Journals"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_res_users__use_preferred_journals
+msgid "Prioritize Preferred Journals"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,help:account_journal_user_preference.field_res_users__use_preferred_journals
+msgid "Prioritize configured journals when searching for a journal."
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model,name:account_journal_user_preference.model_account_journal_user_preferred
+msgid "User Preferred Journal"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__user_id
+msgid "User"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.constraint,message:account_journal_user_preference.constraint_account_journal_user_preferred_user_journal_unique
+msgid "A journal can only appear once in a user's preferences."
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_journal_user_preference
+#: model:ir.model.fields,field_description:account_journal_user_preference.field_account_journal_user_preferred__id
+msgid "ID"
+msgstr ""

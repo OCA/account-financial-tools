@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_users_form_journal_preferences" model="ir.ui.view">
+        <field name="name">res.users.preferences.journals</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='preferences_page']" position="after">
+                <page
+                    name="personalization"
+                    string="Personalization"
+                    groups="account.group_account_invoice,account.group_account_readonly"
+                >
+                    <group string="Preferred Journals" col="2">
+                        <div colspan="2" class="d-flex align-items-center gap-2 mb-3">
+                            <field
+                                name="use_preferred_journals"
+                                nolabel="1"
+                                readonly="0"
+                                class="oe_inline"
+                            />
+                            <label for="use_preferred_journals" class="mb-0" />
+                        </div>
+                        <field
+                            name="preferred_journal_ids"
+                            nolabel="1"
+                            colspan="2"
+                            readonly="not use_preferred_journals"
+                        >
+                            <list editable="bottom">
+                                <field name="sequence" widget="handle" />
+                                <field
+                                    name="journal_id"
+                                    options="{'no_create': True}"
+                                />
+                            </list>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
