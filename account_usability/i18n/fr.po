@@ -50,6 +50,7 @@ msgid "Account prefixes can determine account groups."
 msgstr ""
 
 #. module: account_usability
+#: model:ir.ui.menu,name:account_usability.menu_finance
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid "Accounting"
 msgstr ""
@@ -91,6 +92,7 @@ msgstr "Configuration"
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__display_name
 #: model:ir.model.fields,field_description:account_usability.field_account_group__display_name
 #: model:ir.model.fields,field_description:account_usability.field_account_tax_group__display_name
+#: model:ir.model.fields,field_description:account_usability.field_base_language_install__display_name
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr ""
@@ -120,8 +122,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__id
 #: model:ir.model.fields,field_description:account_usability.field_account_group__id
 #: model:ir.model.fields,field_description:account_usability.field_account_tax_group__id
+#: model:ir.model.fields,field_description:account_usability.field_base_language_install__id
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__id
 msgid "ID"
+msgstr ""
+
+#. module: account_usability
+#: model:ir.model,name:account_usability.model_base_language_install
+msgid "Install Language"
 msgstr ""
 
 #. module: account_usability
