@@ -459,7 +459,15 @@ update the identifiers accordingly.</p>
 <li>Target journal.</li>
 <li>Name of the column containing employee VAT/ID/Pasport.</li>
 <li>Mapping lines: Excel column → account → move type (debit/credit).
-Ex: “NET SALARY”, 230000, credit</li>
+Ex: “NET SALARY”, 230000, credit<ul>
+<li><strong>Other Partner (optional):</strong> set this field on a mapping line to
+use a specific partner instead of the partner associated with the
+employee. If left empty, the employee’s partner is used. Example:
+for private health insurance paid by the company, select the
+insurance provider as <strong>Other Partner</strong> so that the corresponding
+journal item is assigned to the provider instead of the employee.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Save the mapping for future use.</li>
