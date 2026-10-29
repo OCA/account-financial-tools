@@ -50,3 +50,4 @@ class PayrollImportMappingLine(models.Model):
         help="""If set, will use this partner for the
         accounting entry instead of the employee.""",
     )
+    sequence = fields.Integer(default=10)
