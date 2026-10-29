@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record model="ir.rule" id="rule_account_move_budget_company">
+        <field name="name">Account Move Budget Multi-Company</field>
+        <field name="model_id" ref="account_move_budget.model_account_move_budget" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="rule_account_move_budget_line_company">
+        <field name="name">Account Move Budget Line Multi-Company</field>
+        <field
+            name="model_id"
+            ref="account_move_budget.model_account_move_budget_line"
+        />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
