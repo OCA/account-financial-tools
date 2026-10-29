@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2019 ForgeFlow S.L. (http://www.forgeflow.com)
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -22,7 +22,7 @@
             </list>
         </field>
     </record>
-    <record model="ir.actions.act_window" id="account_move_budget_line_act_window">
+    <record id="account_move_budget_line_act_window" model="ir.actions.act_window">
         <field name="name">Budget Items</field>
         <field name="res_model">account.move.budget.line</field>
         <field name="view_mode">list</field>

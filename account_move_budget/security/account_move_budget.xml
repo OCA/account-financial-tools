@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
-    <record model="ir.rule" id="rule_account_move_budget_company">
+    <record id="rule_account_move_budget_company" model="ir.rule">
         <field name="name">Account Move Budget Multi-Company</field>
         <field name="model_id" ref="account_move_budget.model_account_move_budget" />
         <field
@@ -8,7 +8,7 @@
         >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
     </record>
 
-    <record model="ir.rule" id="rule_account_move_budget_line_company">
+    <record id="rule_account_move_budget_line_company" model="ir.rule">
         <field name="name">Account Move Budget Line Multi-Company</field>
         <field
             name="model_id"
