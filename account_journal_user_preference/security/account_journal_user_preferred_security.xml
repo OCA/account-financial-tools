@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_journal_user_preferred_own" model="ir.rule">
+        <field name="name">Users manage their own journal preferences</field>
+        <field name="model_id" ref="model_account_journal_user_preferred"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+    </record>
+</odoo>
