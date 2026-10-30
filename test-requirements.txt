@@ -1,0 +1,1 @@
+odoo-addon-product_category_product_link @ git+https://github.com/OCA/product-attribute.git@refs/pull/2083/head#subdirectory=product_category_product_link
