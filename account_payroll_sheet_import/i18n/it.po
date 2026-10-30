@@ -19,9 +19,11 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_missing_partner_wizard
 msgid ""
-"<i class=\"fa fa-exclamation-triangle text-warning\" aria-hidden=\"true\" style=\"margin-right: 8px;\"/>\n"
+"<i class=\"fa fa-exclamation-triangle text-warning\" aria-hidden=\"true\" "
+"style=\"margin-right: 8px;\"/>\n"
 "          The following employees could not be identified.\n"
-"          Please create them and ensure their Identification Nº or Passport is set correctly."
+"          Please create them and ensure their Identification Nº or Passport "
+"is set correctly."
 msgstr ""
 "<i class=\"fa fa-exclamation-triangle text-warning\" aria-hidden=\"true\" "
 "style=\"margin-right: 8px;\"/>\n"
@@ -42,7 +44,6 @@ msgstr "Conto"
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "Balance mismatch for employee %(employee)s (%(vat)s):\n"
 "  Total Debit: %(debit).2f / Total Credit: %(credit).2f\n"
@@ -97,18 +98,12 @@ msgid "Created on"
 msgstr "Creato il"
 
 #. module: account_payroll_sheet_import
-#. odoo-python
-#: code:addons/account_payroll_sheet_import/models/payroll_import_mapping.py:0
 #: model:ir.model.fields.selection,name:account_payroll_sheet_import.selection__payroll_import_mapping_line__move_type__credit
-#, python-format
 msgid "Credit"
 msgstr "Credito"
 
 #. module: account_payroll_sheet_import
-#. odoo-python
-#: code:addons/account_payroll_sheet_import/models/payroll_import_mapping.py:0
 #: model:ir.model.fields.selection,name:account_payroll_sheet_import.selection__payroll_import_mapping_line__move_type__debit
-#, python-format
 msgid "Debit"
 msgstr "Debito"
 
@@ -147,6 +142,13 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping__id_column
 msgid "ID Column"
 msgstr "Colonna ID"
+
+#. module: account_payroll_sheet_import
+#: model:ir.model.fields,help:account_payroll_sheet_import.field_payroll_import_mapping_line__other_partner_id
+msgid ""
+"If set, will use this partner for the\n"
+"        accounting entry instead of the employee."
+msgstr ""
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_payroll_import_form
@@ -226,16 +228,19 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "No valid data found in the file."
 msgstr "Nessuna data valida trovata nel file."
 
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "Only Excel files are supported."
 msgstr "Sono supportati solo file Excel."
+
+#. module: account_payroll_sheet_import
+#: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__other_partner_id
+msgid "Other Partner"
+msgstr ""
 
 #. module: account_payroll_sheet_import
 #: model:ir.model,name:account_payroll_sheet_import.model_payroll_import_wizard
@@ -273,14 +278,17 @@ msgstr "Righe mappatura busta paga"
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "Please upload a file."
 msgstr "Caricare un file."
 
 #. module: account_payroll_sheet_import
+#: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "The VAT/ID column '%(column)s' specified in the mapping is missing from the "
 "uploaded file."
@@ -291,10 +299,15 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "The following mapped Excel columns are missing from the uploaded file:\n"
-"- %s"
+"- %(columns)s"
 msgstr ""
-"Le seguenti colonne di mappatura Excel mancano nel file caricato:\n"
-"- %s"
+
+#, python-format
+#~ msgid ""
+#~ "The following mapped Excel columns are missing from the uploaded file:\n"
+#~ "- %s"
+#~ msgstr ""
+#~ "Le seguenti colonne di mappatura Excel mancano nel file caricato:\n"
+#~ "- %s"
