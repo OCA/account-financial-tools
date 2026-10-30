@@ -706,6 +706,14 @@ class TestLoan(BaseCommon):
         loan.button_draft()
         self.assertEqual(loan.state, "draft")
 
+    def test_post_leasing_with_residual_amount(self):
+        loan = self.create_loan("fixed-annuity", 30000, 1, 36)
+        loan.is_leasing = True
+        loan.residual_amount = 600
+        loan.compute_lines()
+        self.post(loan)
+        self.assertEqual(loan.state, "posted")
+
     def post(self, loan):
         self.assertFalse(loan.move_ids)
         post = (
