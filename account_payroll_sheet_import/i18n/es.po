@@ -44,7 +44,6 @@ msgstr "Cuenta"
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "Balance mismatch for employee %(employee)s (%(vat)s):\n"
 "  Total Debit: %(debit).2f / Total Credit: %(credit).2f\n"
@@ -99,18 +98,12 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: account_payroll_sheet_import
-#. odoo-python
-#: code:addons/account_payroll_sheet_import/models/payroll_import_mapping.py:0
 #: model:ir.model.fields.selection,name:account_payroll_sheet_import.selection__payroll_import_mapping_line__move_type__credit
-#, python-format
 msgid "Credit"
 msgstr "Crédito"
 
 #. module: account_payroll_sheet_import
-#. odoo-python
-#: code:addons/account_payroll_sheet_import/models/payroll_import_mapping.py:0
 #: model:ir.model.fields.selection,name:account_payroll_sheet_import.selection__payroll_import_mapping_line__move_type__debit
-#, python-format
 msgid "Debit"
 msgstr "Débito"
 
@@ -149,6 +142,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping__id_column
 msgid "ID Column"
 msgstr "Columna del ID"
+
+#. module: account_payroll_sheet_import
+#: model:ir.model.fields,help:account_payroll_sheet_import.field_payroll_import_mapping_line__other_partner_id
+msgid ""
+"If set, will use this partner for the\n"
+"        accounting entry instead of the employee."
+msgstr ""
 
 #. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_payroll_import_form
@@ -227,16 +227,19 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "No valid data found in the file."
 msgstr "No se encontraron datos válidos en el archivo."
 
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "Only Excel files are supported."
 msgstr "Solo se admiten archivos Excel."
+
+#. module: account_payroll_sheet_import
+#: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__other_partner_id
+msgid "Other Partner"
+msgstr ""
 
 #. module: account_payroll_sheet_import
 #: model:ir.model,name:account_payroll_sheet_import.model_payroll_import_wizard
@@ -274,14 +277,17 @@ msgstr "Líneas de mapeo de nómina"
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid "Please upload a file."
 msgstr "Por favor, sube un archivo"
 
 #. module: account_payroll_sheet_import
+#: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "The VAT/ID column '%(column)s' specified in the mapping is missing from the "
 "uploaded file."
@@ -292,11 +298,16 @@ msgstr ""
 #. module: account_payroll_sheet_import
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
-#, python-format
 msgid ""
 "The following mapped Excel columns are missing from the uploaded file:\n"
-"- %s"
+"- %(columns)s"
 msgstr ""
-"Las siguientes columnas de Excel definidas en el mapeo no se encuentran en "
-"el archivo cargado:\n"
-"- %s"
+
+#, python-format
+#~ msgid ""
+#~ "The following mapped Excel columns are missing from the uploaded file:\n"
+#~ "- %s"
+#~ msgstr ""
+#~ "Las siguientes columnas de Excel definidas en el mapeo no se encuentran "
+#~ "en el archivo cargado:\n"
+#~ "- %s"
