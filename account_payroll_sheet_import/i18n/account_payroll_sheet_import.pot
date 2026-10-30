@@ -130,6 +130,13 @@ msgid "ID Column"
 msgstr ""
 
 #. module: account_payroll_sheet_import
+#: model:ir.model.fields,help:account_payroll_sheet_import.field_payroll_import_mapping_line__other_partner_id
+msgid ""
+"If set, will use this partner for the\n"
+"        accounting entry instead of the employee."
+msgstr ""
+
+#. module: account_payroll_sheet_import
 #: model_terms:ir.ui.view,arch_db:account_payroll_sheet_import.view_payroll_import_form
 msgid "Import"
 msgstr ""
@@ -213,6 +220,11 @@ msgid "Only Excel files are supported."
 msgstr ""
 
 #. module: account_payroll_sheet_import
+#: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__other_partner_id
+msgid "Other Partner"
+msgstr ""
+
+#. module: account_payroll_sheet_import
 #: model:ir.model,name:account_payroll_sheet_import.model_payroll_import_wizard
 msgid "Payroll Excel Importer"
 msgstr ""
@@ -249,6 +261,11 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_payroll_sheet_import/wizard/payroll_import_wizard.py:0
 msgid "Please upload a file."
+msgstr ""
+
+#. module: account_payroll_sheet_import
+#: model:ir.model.fields,field_description:account_payroll_sheet_import.field_payroll_import_mapping_line__sequence
+msgid "Sequence"
 msgstr ""
 
 #. module: account_payroll_sheet_import
