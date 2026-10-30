@@ -43,3 +43,11 @@ class PayrollImportMappingLine(models.Model):
         default=lambda self: self.env.company,
         required=True,
     )
+
+    other_partner_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Other Partner",
+        help="""If set, will use this partner for the
+        accounting entry instead of the employee.""",
+    )
+    sequence = fields.Integer(default=10)

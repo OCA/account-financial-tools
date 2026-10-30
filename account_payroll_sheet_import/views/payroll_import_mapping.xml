@@ -35,6 +35,7 @@
                     <field name="id_column" />
                     <field name="mapping_line_ids">
                         <list>
+                            <field name="sequence" widget="handle" />
                             <field name="column_name" />
                             <field name="account_id" />
                             <field name="move_type" />
