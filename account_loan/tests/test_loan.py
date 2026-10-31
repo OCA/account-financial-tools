@@ -274,6 +274,14 @@ class TestLoan(BaseCommon):
                 default_loan_id=loan.id
             ).create({"amount": -100, "fees": 100, "date": line.date}).run()
 
+    @freeze_time("2025-01-01")
+    def test_wizard_default_date(self):
+        # The wizards propose today's date, not the day the server was started
+        loan = self.create_loan("fixed-annuity", 10000, 1, 24)
+        for model in ("account.loan.pay.amount", "account.loan.increase.amount"):
+            wizard = Form(self.env[model].with_context(default_loan_id=loan.id))
+            self.assertEqual(fields.Date.to_string(wizard.date), "2025-01-01")
+
     @mute_logger("odoo.models.unlink")
     @freeze_time("2025-01-01")
     def test_increase_amount_loan(self):
