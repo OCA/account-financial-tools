@@ -41,7 +41,7 @@ class AccountLoanIncreaseAmount(models.TransientModel):
     currency_id = fields.Many2one(
         "res.currency", related="loan_id.currency_id", readonly=True
     )
-    date = fields.Date(required=True, default=fields.Date.today())
+    date = fields.Date(required=True, default=fields.Date.context_today)
     amount = fields.Monetary(
         currency_field="currency_id",
         string="Amount to reduce from Principal",
