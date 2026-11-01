@@ -13,7 +13,7 @@ class AccountUpdateLockToDate(models.TransientModel):
         comodel_name="res.company",
         string="Company",
         required=True,
-        default=lambda self: self.env.user.company_id,
+        default=lambda self: self.env.company,
     )
     sale_lock_to_date = fields.Date(
         string="Sales Lock To Date",
@@ -37,7 +37,7 @@ class AccountUpdateLockToDate(models.TransientModel):
     @api.model
     def default_get(self, field_list):
         res = super().default_get(field_list)
-        company = self.env.user.company_id
+        company = self.env.company
         res.update(
             {
                 "company_id": company.id,
