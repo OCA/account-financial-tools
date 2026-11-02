@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2016 Jairo Llopis - Tecnativa
+     Copyright 2025 Víctor Martínez - Tecnativa
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">Open Account Chart Update Wizard 2</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <button name="reload_template" position="attributes">
+                <attribute name="string">Reload for new elements</attribute>
+            </button>
+            <button name="reload_template" position="after">
+                <button
+                    name="%(action_wizard_update_chart)d"
+                    type="action"
+                    string="Update chart of accounts"
+                    class="btn-secondary ps-2 mt-3 w-100"
+                    icon="refresh"
+                    context="{'default_company_id': company_id}"
+                    invisible="not has_chart_of_accounts"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>
