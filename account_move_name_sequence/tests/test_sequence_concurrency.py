@@ -9,8 +9,9 @@ import psycopg2
 
 from odoo import SUPERUSER_ID, api, fields, tools
 from odoo.fields import Domain
-from odoo.modules.registry import DummyRLock, Registry
+from odoo.modules.registry import Registry
 from odoo.tests import Form, TransactionCase, tagged
+from odoo.tests.common import DummyRLock
 
 _logger = logging.getLogger(__name__)
 
@@ -36,7 +37,7 @@ def _dump_dirty_state(label, envs):
     for env_name, env in envs:
         try:
             dirty = env.transaction.field_dirty
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001
             _emit_diag(label, "dirty_failed", f"{env_name}: {exc}")
             continue
         if not dirty:
@@ -121,7 +122,7 @@ def _dump_concurrency_diagnostics(registry, label, envs=()):
         for env_name, env in envs:
             try:
                 env_pids[env.cr._cnx.info.backend_pid] = env_name
-            except Exception:
+            except Exception:  # noqa: BLE001, S112
                 continue
         cr.execute(
             """
@@ -140,13 +141,13 @@ def _dump_concurrency_diagnostics(registry, label, envs=()):
                     f"{env_pids[pid]} pid={pid} state={state} wait={wait_event_type}",
                 )
                 cr.execute("SELECT pg_cancel_backend(%s)", (pid,))
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001
         _emit_diag(label, "pg_query_failed", exc)
     finally:
         if conn is not None:
             try:
                 conn.close()
-            except Exception as close_exc:
+            except Exception as close_exc:  # noqa: BLE001
                 _emit_diag(label, "diag_conn_close_failed", close_exc)
     _emit_diag(label, "python_stacks", "(faulthandler output follows)")
     faulthandler.dump_traceback(file=sys.stderr, all_threads=True)
@@ -160,7 +161,7 @@ class ThreadRaiseJoin(threading.Thread):
         self.exc = None
         try:
             return super().run(*args, **kwargs)
-        except BaseException as e:
+        except BaseException as e:  # noqa: BLE001
             self.exc = e
 
     def join(self, *args, **kwargs):
@@ -291,7 +292,7 @@ class TestSequenceConcurrency(TransactionCase):
                     ]
                 )
                 journals.unlink()
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 _logger.warning("Failed to delete journals: %s", e)
 
             try:
@@ -302,7 +303,7 @@ class TestSequenceConcurrency(TransactionCase):
                     ]
                 )
                 sequences.unlink()
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 _logger.warning("Failed to delete sequences: %s", e)
 
             try:
@@ -313,7 +314,7 @@ class TestSequenceConcurrency(TransactionCase):
                     ]
                 )
                 partners.unlink()
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 _logger.warning("Failed to delete partners: %s", e)
 
             try:
@@ -323,7 +324,7 @@ class TestSequenceConcurrency(TransactionCase):
                     ]
                 )
                 product.unlink()
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 _logger.warning("Failed to delete products: %s", e)
             env.cr.commit()
 
@@ -331,7 +332,7 @@ class TestSequenceConcurrency(TransactionCase):
             if not cr.closed:
                 try:
                     cr.close()
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001
                     _logger.warning("Failed to close cursor: %s", e)
 
     def _commit_crs(self, *envs):

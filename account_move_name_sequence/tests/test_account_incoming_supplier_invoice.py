@@ -13,7 +13,7 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.env["ir.config_parameter"].sudo().set_param(
+        cls.env["ir.config_parameter"].sudo().set_str(
             "mail.catchall.domain", "test-company.odoo.com"
         )
 

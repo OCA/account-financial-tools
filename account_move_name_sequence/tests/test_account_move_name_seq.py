@@ -4,7 +4,6 @@
 # @author: Francisco Luna <fluna@vauxoo.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from datetime import datetime
 from unittest.mock import patch
 
 from freezegun import freeze_time
@@ -64,7 +63,7 @@ class TestAccountMoveNameSequence(TransactionCase):
         )
         cls.account1 = cls.accounts[0]
         cls.account2 = cls.accounts[1]
-        cls.date = datetime.now()
+        cls.date = fields.Datetime.now()
         cls.purchase_journal2 = cls.purchase_journal.copy()
 
         cls.journals = (
