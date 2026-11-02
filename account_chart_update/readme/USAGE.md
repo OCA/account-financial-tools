@@ -6,3 +6,7 @@ updates.
 It will display all the objects to be created / updated / deactivated
 with some information about the detected differences, and allow the user
 to exclude records individually.
+
+In Odoo 20, updating accounts also includes the inactive accounts used to
+group the chart of accounts and their parent relationships. Grouping account
+codes are kept as defined in the template, without padding them with zeros.

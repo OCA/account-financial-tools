@@ -9,6 +9,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 @tagged("-at_install", "post_install")
 class TestAccountChartUpdateCommon(BaseCommon):
+    _test_user_groups = None
+
     def _get_model_data(self, record):
         return self.env["ir.model.data"].search(
             [("model", "=", record._name), ("res_id", "=", record.id)]

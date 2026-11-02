@@ -36,7 +36,6 @@
                     <page string="General options" name="page_general_options">
                         <group>
                             <group string="Update records?">
-                                <field name="update_account_group" />
                                 <field name="update_account" />
                                 <field name="update_tax_group" />
                                 <field name="update_tax" />
@@ -58,7 +57,7 @@
                     </page>
                     <page
                         string="Field options"
-                        invisible="not update_account_group and not update_account and not update_tax_group and not update_tax and not update_fiscal_position"
+                        invisible="not update_account and not update_tax_group and not update_tax and not update_fiscal_position"
                     >
                         <h3>
                             <p>
@@ -67,17 +66,6 @@
                         </p>
                         </h3>
                         <notebook>
-                            <page
-                                string="Account groups"
-                                name="page_fields_account_groups"
-                                invisible="not update_account_group"
-                            >
-                                <field
-                                    name="account_group_field_ids"
-                                    widget="many2many_checkboxes"
-                                    context="{'account_chart_update': True}"
-                                />
-                            </page>
                             <page
                                 string="Accounts"
                                 name="page_fields_accounts"
@@ -126,27 +114,12 @@
                     </page>
                     <page
                         string="Matching"
-                        invisible="not update_account_group and not update_account and not update_tax_group and not update_tax and not update_fiscal_position"
+                        invisible="not update_account and not update_tax_group and not update_tax and not update_fiscal_position"
                     >
                         <h3>
                             <p>Here you can set the matching order.</p>
                         </h3>
                         <notebook>
-                            <page
-                                string="Account groups"
-                                name="page_matching_account_groups"
-                                invisible="not update_account_group"
-                            >
-                                <field name="account_group_matching_ids">
-                                    <list create="false" edit="false">
-                                        <field name="sequence" widget="handle" />
-                                        <field name="matching_value" />
-                                    </list>
-                                    <form>
-                                        <field name="matching_value" readonly="1" />
-                                    </form>
-                                </field>
-                            </page>
                             <page
                                 string="Accounts"
                                 name="page_matching_accounts"
@@ -213,39 +186,6 @@
                 <div invisible="state!='ready'">
                     <h3>Records to create/update</h3>
                     <notebook>
-                        <page
-                            string="Account groups"
-                            invisible="not update_account_group"
-                        >
-                            <field name="account_group_ids" nolabel="1">
-                                <list
-                                    create="false"
-                                    edit="false"
-                                    decoration-danger="type=='updated'"
-                                >
-                                    <field
-                                        name="update_account_group_id"
-                                        invisible="not update_account_group_id"
-                                    />
-                                    <field name="xml_id" optional="hide" />
-                                    <field name="notes" />
-                                    <field name="type" />
-                                </list>
-                                <form edit="false">
-                                    <group col="2">
-                                        <group>
-                                            <field name="xml_id" />
-                                            <field name="type" readonly="1" />
-                                            <field name="notes" />
-                                        </group>
-                                        <group>
-                                            <field name="update_chart_wizard_id" />
-                                            <field name="update_account_group_id" />
-                                        </group>
-                                    </group>
-                                </form>
-                            </field>
-                        </page>
                         <page string="Accounts" invisible="not update_account">
                             <field name="account_ids" nolabel="1">
                                 <list
@@ -255,6 +195,7 @@
                                 >
                                     <field
                                         name="update_account_id"
+                                        context="{'active_test': False}"
                                         invisible="not update_account_id"
                                     />
                                     <field name="xml_id" optional="hide" />
@@ -270,7 +211,10 @@
                                         </group>
                                         <group>
                                             <field name="update_chart_wizard_id" />
-                                            <field name="update_account_id" />
+                                            <field
+                                                name="update_account_id"
+                                                context="{'active_test': False}"
+                                            />
                                         </group>
                                     </group>
                                 </form>
@@ -379,7 +323,6 @@
                     <field name="log" colspan="4" nolabel="1" />
                     <group colspan="4">
                         <separator colspan="4" string="Summary of created objects" />
-                        <field name="new_account_groups" />
                         <field name="new_accounts" />
                         <field name="new_tax_groups" />
                         <field name="new_taxes" />
@@ -387,7 +330,6 @@
                     </group>
                     <group colspan="4">
                         <separator colspan="4" string="Summary of updated objects" />
-                        <field name="updated_account_groups" />
                         <field name="updated_accounts" />
                         <field name="updated_tax_groups" />
                         <field name="updated_taxes" />

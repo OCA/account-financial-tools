@@ -8,12 +8,14 @@
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # Copyright 2020 Noviat - Luc De Meyer
 # Copyright 2024-2025 Tecnativa - Víctor Martínez
+# Copyright 2026 Tecnativa - Adasat Torres
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
 from unittest.mock import patch
 
-from odoo import Command, api, fields, models, tools
+from odoo import Command, api, fields, models
+from odoo.tools.mail import html_to_inner_content
 from odoo.tools.translate import TranslationImporter
 
 _logger = logging.getLogger(__name__)
@@ -66,7 +68,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         default=lambda self: self.env.user.company_id.id,
     )
@@ -88,13 +89,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     update_account = fields.Boolean(
         string="Update accounts",
         default=True,
-        help="Existing accounts are updated. Accounts are searched by code.",
-    )
-    update_account_group = fields.Boolean(
-        string="Update account groups",
-        default=True,
-        help="Existing account groups are updated. "
-        "Account groups are searched by prefix_code_start.",
+        help="Existing accounts, including inactive grouping accounts and their "
+        "hierarchy, are updated. Accounts are searched by code.",
     )
     update_fiscal_position = fields.Boolean(
         string="Update fiscal positions",
@@ -117,11 +113,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         inverse_name="update_chart_wizard_id",
         string="Accounts",
     )
-    account_group_ids = fields.One2many(
-        comodel_name="wizard.update.charts.accounts.account.group",
-        inverse_name="update_chart_wizard_id",
-        string="Account Groups",
-    )
     fiscal_position_ids = fields.One2many(
         comodel_name="wizard.update.charts.accounts.fiscal.position",
         inverse_name="update_chart_wizard_id",
@@ -130,7 +121,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     new_tax_groups = fields.Integer(compute="_compute_new_tax_group_count")
     new_taxes = fields.Integer(compute="_compute_new_taxes_count")
     new_accounts = fields.Integer(compute="_compute_new_accounts_count")
-    new_account_groups = fields.Integer(compute="_compute_new_account_groups_count")
     rejected_new_account_number = fields.Integer()
     new_fps = fields.Integer(
         string="New fiscal positions", compute="_compute_new_fps_count"
@@ -139,9 +129,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     updated_taxes = fields.Integer(compute="_compute_updated_taxes_count")
     rejected_updated_account_number = fields.Integer()
     updated_accounts = fields.Integer(compute="_compute_updated_accounts_count")
-    updated_account_groups = fields.Integer(
-        compute="_compute_updated_account_groups_count"
-    )
     updated_fps = fields.Integer(
         string="Updated fiscal positions", compute="_compute_updated_fps_count"
     )
@@ -170,13 +157,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         domain=lambda self: self._domain_account_field_ids(),
         default=lambda self: self._default_account_field_ids(),
     )
-    account_group_field_ids = fields.Many2many(
-        comodel_name="ir.model.fields",
-        relation="wizard_update_charts_account_group_fields_rel",
-        string="Account groups fields",
-        domain=lambda self: self._domain_account_group_field_ids(),
-        default=lambda self: self._default_account_group_field_ids(),
-    )
     fp_field_ids = fields.Many2many(
         comodel_name="ir.model.fields",
         relation="wizard_update_charts_fp_fields_rel",
@@ -201,12 +181,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         inverse_name="update_chart_wizard_id",
         string="Accounts matching",
         default=lambda self: self._default_account_matching_ids(),
-    )
-    account_group_matching_ids = fields.One2many(
-        comodel_name="wizard.account.group.matching",
-        inverse_name="update_chart_wizard_id",
-        string="Account groups matching",
-        default=lambda self: self._default_account_group_matching_ids(),
     )
     fp_matching_ids = fields.One2many(
         comodel_name="wizard.fp.matching",
@@ -244,9 +218,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _domain_account_field_ids(self):
         return self._domain_per_name("account.account") + [("ttype", "!=", "one2many")]
 
-    def _domain_account_group_field_ids(self):
-        return self._domain_per_name("account.group") + [("ttype", "!=", "one2many")]
-
     def _domain_fp_field_ids(self):
         return self._domain_per_name("account.fiscal.position") + [
             "|",
@@ -281,15 +252,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             )
         ]
 
-    def _default_account_group_field_ids(self):
-        return [
-            Command.link(x.id)
-            for x in self.env["ir.model.fields"].search(
-                self._domain_account_group_field_ids()
-                + self.get_uncheck_fields_domain("account.group")
-            )
-        ]
-
     def _default_fp_field_ids(self):
         return [
             Command.link(x.id)
@@ -304,7 +266,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         for seq, opt in enumerate(ordered_opts, 1):
             vals.append((0, False, {"sequence": seq, "matching_value": opt}))
         all_options = self.env[model_name]._get_matching_selection()
-        all_options = map(lambda x: x[0], all_options)
+        all_options = (option[0] for option in all_options)
         all_options = list(set(all_options) - set(ordered_opts))
 
         for seq, opt in enumerate(all_options, len(ordered_opts) + 1):
@@ -326,10 +288,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _default_account_matching_ids(self):
         ordered_opts = ["xml_id", "code", "name"]
         return self._get_matching_ids("wizard.account.matching", ordered_opts)
-
-    def _default_account_group_matching_ids(self):
-        ordered_opts = ["xml_id", "code_prefix_start"]
-        return self._get_matching_ids("wizard.account.group.matching", ordered_opts)
 
     def _chart_template_selection(self):
         return (
@@ -355,12 +313,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             - self.rejected_new_account_number
         )
 
-    @api.depends("account_group_ids")
-    def _compute_new_account_groups_count(self):
-        self.new_account_groups = len(
-            self.account_group_ids.filtered(lambda x: x.type == "new")
-        )
-
     @api.depends("fiscal_position_ids")
     def _compute_new_fps_count(self):
         self.new_fps = len(self.fiscal_position_ids.filtered(lambda x: x.type == "new"))
@@ -380,12 +332,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.updated_accounts = (
             len(self.account_ids.filtered(lambda x: x.type == "updated"))
             - self.rejected_updated_account_number
-        )
-
-    @api.depends("account_group_ids")
-    def _compute_updated_account_groups_count(self):
-        self.updated_account_groups = len(
-            self.account_group_ids.filtered(lambda x: x.type == "updated")
         )
 
     @api.depends("fiscal_position_ids")
@@ -442,18 +388,21 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _get_chart_template_data(self):
         chart_template_model = self.env["account.chart.template"]
         t_data = chart_template_model._get_chart_template_data(self.chart_template)
+        # Empty CSV cells are omitted by the template parser. Keep an explicit
+        # empty parent so moving an account to the root is detected as well.
+        for account_data in t_data["account.account"].values():
+            account_data.setdefault("parent_id", False)
         model_mapping = {
-            "account.group": self.update_account_group,
             "account.account": self.update_account,
             "account.tax.group": self.update_tax_group,
             "account.tax": self.update_tax,
             "account.fiscal.position": self.update_fiscal_position,
         }
         langs = self.env["res.lang"].search([("active", "=", True)])
-        for m_name in model_mapping:
-            if not model_mapping[m_name]:
+        for m_name, update_model in model_mapping.items():
+            if not update_model:
                 continue
-            for _xmlid, r_data in t_data[m_name].items():
+            for r_data in t_data[m_name].values():
                 if "__translation_module__" in r_data:
                     for f_name in list(r_data["__translation_module__"].keys()):
                         for lang in langs:
@@ -477,11 +426,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def action_find_records(self):
         """Searchs for records to update/create and shows them."""
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
         t_data = self._get_chart_template_data()
         # Search for, and load, the records to create/update.
-        if self.update_account_group:
-            self._find_account_groups(t_data["account.group"])
         if self.update_account:
             self._find_accounts(t_data["account.account"])
         if self.update_tax_group:
@@ -501,8 +448,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.log = False
         t_data = self._get_chart_template_data()
         # Create or update the records.
-        if self.update_account_group:
-            self._update_account_groups(t_data["account.group"])
         if self.update_account:
             self._update_accounts(t_data["account.account"])
         if self.update_tax_group:
@@ -518,20 +463,18 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         return self._reopen()
 
     @api.model
-    @tools.ormcache("code")
-    def padded_code(self, code):
+    @api.ormcache("code", "active", "self.code_digits")
+    def padded_code(self, code, active=True):
         """Return a right-zero-padded code with the chosen digits.
-        Similar to what is done in the _pre_load_data() method of chart.template
+        Inactive grouping accounts keep their original codes, matching the
+        normalization in chart.template's _pre_load_data().
         """
-        if isinstance(code, str):
+        if isinstance(code, str) and active:
             return code.ljust(self.code_digits, "0")
-        _logger.info(
-            "padded_code received a non-string value: %s. Returning it as is.", code
-        )
         return code
 
     @api.model
-    @tools.ormcache("name")
+    @api.ormcache("name")
     def fields_to_ignore(self, name):
         """Get fields that will not be used when checking differences.
 
@@ -551,7 +494,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 "root_id",
                 "company_ids",
             },
-            "account.group": {"parent_id"},
             "account.fiscal.position": {"tax_ids"},
         }
         specials = {
@@ -589,12 +531,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         :return dict:
             Fields that are different in both records, and the expected value.
         """
-        result = dict()
+        result = {}
         ignore = self.fields_to_ignore(real._name)
         field_mapping = {
             "account.tax": self.tax_field_ids,
             "account.account": self.account_field_ids,
-            "account.group": self.account_group_field_ids,
             "account.fiscal.position": self.fp_field_ids,
         }
         langs = self.env["res.lang"].search([("active", "=", True)])
@@ -606,7 +547,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             )
         fields_by_key = {x.name: x for x in field_mapping[real._name]}
         to_include = field_mapping[real._name].mapped("name")
-        for key in record_values.keys():
+        for key in record_values:
             if key in ignore or key not in to_include:
                 continue
             field = fields_by_key[key]
@@ -618,14 +559,17 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             if (
                 field.ttype not in ("boolean", "many2many", "one2many", "integer")
                 and not record_value
+                and not (real._name == "account.account" and key == "parent_id")
             ):
                 continue
             real_value = real[key]
             if field.ttype == "integer":
                 record_value = int(record_value)
             if real._name == "account.account" and key == "code":
-                record_value = self.padded_code(record_value)
-                real_value = self.padded_code(real_value)
+                record_value = self.padded_code(
+                    record_value, record_values.get("active", True)
+                )
+                real_value = self.padded_code(real_value, real.active)
             # Field ttype conditions
             if field.ttype == "many2many":
                 # Normalize falsy template values (None/False/"") so an
@@ -665,6 +609,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         result[key] = record_value
                 continue
             elif field.ttype == "many2one":
+                if not record_value:
+                    if real_value:
+                        result[key] = False
+                    continue
                 if isinstance(record_value, int):
                     if record_value != real_value.id:
                         result[key] = record_value
@@ -699,7 +647,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             if field.translate:
                 en_value = (real.with_context(lang="en_US")[key] or "").strip()
                 if field.ttype == "html":
-                    en_value = tools.mail.html_to_inner_content(en_value)
+                    en_value = html_to_inner_content(en_value)
                 for lang in langs:
                     if lang.code == "en_US":
                         key_lang = key
@@ -715,15 +663,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     if field.ttype == "html":
                         # Convert HTML to inner content for comparison
                         # especially to prevent comparing str with Markup
-                        real_value_lang = tools.mail.html_to_inner_content(
-                            real_value_lang
-                        )
+                        real_value_lang = html_to_inner_content(real_value_lang)
                     if record_value_lang != real_value_lang:
                         result[key_lang] = record_value_lang
             elif field.ttype == "html":
                 # Convert HTML to inner content for comparison
                 # especially to prevent comparing str with Markup
-                real_value = tools.mail.html_to_inner_content(real_value)
+                real_value = html_to_inner_content(real_value)
                 if record_value != real_value:
                     result[key] = record_value
             elif record_value != real_value:
@@ -762,11 +708,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             elif real[key]:
                 result[key] = ""
         # __translation_module__
-        if len(result.keys()) > 0 and not self.env.context.get("skip_translation_keys"):
-            if "__translation_module__" in record_values:
-                result["__translation_module__"] = record_values[
-                    "__translation_module__"
-                ]
+        if (
+            result
+            and not self.env.context.get("skip_translation_keys")
+            and "__translation_module__" in record_values
+        ):
+            result["__translation_module__"] = record_values["__translation_module__"]
         return result
 
     @api.model
@@ -1002,10 +949,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             actual = real.with_context(lang=lang_code)[field.name] or ""
             expected = record_values.get(key) or ""
             if field.type == "html":
-                actual = tools.mail.html_to_inner_content(actual) if actual else ""
-                expected = (
-                    tools.mail.html_to_inner_content(expected) if expected else ""
-                )
+                actual = html_to_inner_content(actual) if actual else ""
+                expected = html_to_inner_content(expected) if expected else ""
             parts.append(
                 f"[{lang_label}] '{self._diff_note_truncate(actual)}'"
                 f" → '{self._diff_note_truncate(expected)}'"
@@ -1021,14 +966,15 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _find_record_matching(self, model_name, xmlid, data):
         mapped_fields = {
-            "account.group": self.account_group_matching_ids,
             "account.account": self.account_matching_ids,
             "account.tax.group": self.tax_group_matching_ids,
             "account.tax": self.tax_matching_ids,
             "account.fiscal.position": self.fp_matching_ids,
         }
         company = self.company_id
-        model = self.env[model_name]
+        model = self.env[model_name].with_company(company)
+        if model_name == "account.account":
+            model = model.with_context(active_test=False)
         company_domain = []
         if "company_id" in model._fields:
             company_domain = [("company_id", "=", company.id)]
@@ -1050,7 +996,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 f_value = data[f_name]
                 # Fix code from account.account
                 if model_name == "account.account" and f_name == "code":
-                    f_value = self.padded_code(f_value)
+                    f_value = self.padded_code(f_value, data.get("active", True))
                 # Prepare domain
                 domain = [(f_name, "=", f_value)] + company_domain
                 if model_name == "account.tax" and f_name != "type_tax_use":
@@ -1240,65 +1186,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             Command.create(a_val) for a_val in account_vals
         ]
 
-    def _find_account_groups(self, t_data):
-        """Load account template data to create/update."""
-        ag_vals = []
-        for xmlid, r_data in t_data.items():
-            account_group = self._find_record_matching("account.group", xmlid, r_data)
-            if not account_group:
-                # Account to be created
-                ag_vals.append(
-                    {
-                        "xml_id": xmlid,
-                        "update_chart_wizard_id": self.id,
-                        "type": "new",
-                        "notes": self.env._("No account found with this code."),
-                    }
-                )
-            else:
-                # Check the account for changes
-                notes = self.diff_notes(r_data, account_group)
-                code_prefix_end = (
-                    r_data["code_prefix_end"]
-                    if r_data.get("code_prefix_end")
-                    and r_data["code_prefix_end"] >= r_data["code_prefix_start"]
-                    else r_data["code_prefix_start"]
-                )
-                if code_prefix_end != account_group.code_prefix_end:
-                    label = account_group._fields["code_prefix_end"].get_description(
-                        self.env
-                    )["string"]
-                    line = self.env._(
-                        "- %(label)s: '%(actual)s' → '%(expected)s'",
-                        label=label,
-                        actual=account_group.code_prefix_end or "",
-                        expected=code_prefix_end or "",
-                    )
-                    if notes:
-                        # Append under the existing "Differences in these fields:"
-                        # header produced by diff_notes.
-                        notes += f"\n{line}"
-                    else:
-                        notes = self.env._("Differences in these fields:") + f"\n{line}"
-                if self.missing_xml_id(account_group, xmlid):
-                    notes += (notes and "\n" or "") + self._missing_xml_id_note(
-                        account_group, xmlid
-                    )
-                if notes:
-                    # Account to be updated
-                    ag_vals.append(
-                        {
-                            "xml_id": xmlid,
-                            "update_chart_wizard_id": self.id,
-                            "type": "updated",
-                            "update_account_group_id": account_group.id,
-                            "notes": notes,
-                        }
-                    )
-        self.account_group_ids = [Command.clear()] + [
-            Command.create(ag_val) for ag_val in ag_vals
-        ]
-
     def _find_fiscal_positions(self, t_data):
         """Load fiscal position template data to create/update."""
         fp_vals = []
@@ -1342,7 +1229,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             default_company_id=self.company_id.id,
             allowed_company_ids=[self.company_id.id],
             tracking_disable=True,
-            delay_account_group_sync=True,
             lang="en_US",
         )
         model_fields = set(self.env[model]._fields)
@@ -1451,29 +1337,16 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             xml_id = wiz_account.xml_id
             key = account.id or xml_id
             t_data_item = t_data[xml_id]
-            data_item = t_data_item if wiz_account.type == "new" else {}
+            data_item = t_data_item.copy() if wiz_account.type == "new" else {}
             if wiz_account.type == "updated":
                 self.recreate_xml_id(account, xml_id)
                 data_item = self.diff_fields(t_data_item, account)
             else:
-                data_item["code"] = self.padded_code(data_item["code"])
+                data_item["code"] = self.padded_code(
+                    data_item.get("code"), data_item.get("active", True)
+                )
             data[key] = data_item
         self._load_data("account.account", data)
-
-    def _update_account_groups(self, t_data):
-        """Process account groups templates to create/update."""
-        data = {}
-        for wiz_ag in self.account_group_ids:
-            ag = wiz_ag.update_account_group_id
-            xml_id = wiz_ag.xml_id
-            key = ag.id or xml_id
-            t_data_item = t_data[xml_id]
-            data_item = t_data_item if wiz_ag.type == "new" else {}
-            if wiz_ag.type == "updated":
-                self.recreate_xml_id(ag, xml_id)
-                data_item = self.diff_fields(t_data_item, ag)
-            data[key] = data_item
-        self._load_data("account.group", data)
 
     def _update_fiscal_positions(self, t_data):
         """Process fiscal position templates to create/update."""
@@ -1580,32 +1453,6 @@ class WizardUpdateChartsAccountsAccount(models.TransientModel):
     notes = fields.Text(readonly=True)
 
 
-class WizardUpdateChartsAccountsAccountGroup(models.TransientModel):
-    _name = "wizard.update.charts.accounts.account.group"
-    _description = (
-        "Account group that needs to be updated (new or updated in the template)."
-    )
-
-    xml_id = fields.Char()
-    update_chart_wizard_id = fields.Many2one(
-        comodel_name="wizard.update.charts.accounts",
-        string="Update chart wizard",
-        required=True,
-        ondelete="cascade",
-    )
-    type = fields.Selection(
-        selection=[("new", "New account group"), ("updated", "Updated accoung group")],
-        readonly=False,
-    )
-    update_account_group_id = fields.Many2one(
-        comodel_name="account.group",
-        string="Account group to update",
-        required=False,
-        ondelete="set null",
-    )
-    notes = fields.Text(readonly=True)
-
-
 class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
     _name = "wizard.update.charts.accounts.fiscal.position"
     _description = (
@@ -1702,15 +1549,4 @@ class WizardFpMatching(models.TransientModel):
     def _get_matching_selection(self):
         vals = super()._get_matching_selection()
         vals += self._selection_from_files("account.fiscal.position", ["name"])
-        return vals
-
-
-class WizardAccountGroupMatching(models.TransientModel):
-    _name = "wizard.account.group.matching"
-    _description = "Wizard Account Group Matching"
-    _inherit = "wizard.matching"
-
-    def _get_matching_selection(self):
-        vals = super()._get_matching_selection()
-        vals += self._selection_from_files("account.group", ["code_prefix_start"])
         return vals
