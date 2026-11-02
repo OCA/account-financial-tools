@@ -450,7 +450,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "account.fiscal.position": self.update_fiscal_position,
         }
         langs = self.env["res.lang"].search([("active", "=", True)])
-        for m_name in model_mapping.keys():
+        for m_name in model_mapping:
             if not model_mapping[m_name]:
                 continue
             for _xmlid, r_data in t_data[m_name].items():
