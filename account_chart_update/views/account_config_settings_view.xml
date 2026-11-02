@@ -17,7 +17,7 @@
                     type="action"
                     string="Update chart of accounts"
                     class="btn-secondary ps-2 mt-3 w-100"
-                    icon="fa-refresh"
+                    icon="refresh"
                     context="{'default_company_id': company_id}"
                     invisible="not has_chart_of_accounts"
                 />

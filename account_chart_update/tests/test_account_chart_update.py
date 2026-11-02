@@ -1,5 +1,6 @@
 # Copyright 2023 Tecnativa - Pedro M. Baeza
 # Copyright 2024 Tecnativa - Víctor Martínez
+# Copyright 2026 Tecnativa - Adasat Torres
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -64,18 +65,21 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         IrDefault = self.env["ir.default"]
         IrDefault.discard_records(journals)
         journals.unlink()
-        accounts = self.env["account.account"].search(domain_account)
+        accounts = (
+            self.env["account.account"]
+            .with_context(active_test=False)
+            .search(domain_account)
+        )
         IrDefault.discard_records(accounts)
         accounts.unlink()
         self.env["account.fiscal.position"].search(domain).unlink()
-        self.env["account.group"].search(domain).unlink()
         wizard.unlink()
         # Now do the real one for detecting additions
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         wizard.action_find_records()
         # account.tax data
         tax_data = self.chart_template_data["account.tax"]
-        tax_data_key_0 = list(tax_data)[0]
+        tax_data_key_0 = next(iter(tax_data))
         tax_data_0 = tax_data[tax_data_key_0]
         self.assertEqual(len(wizard.tax_ids), len(tax_data))
         tax_types = wizard.tax_ids.mapped("type")
@@ -85,7 +89,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertEqual(wizard.tax_ids.mapped("xml_id"), list(tax_data.keys()))
         # account.account data
         account_data = self.chart_template_data["account.account"]
-        account_data_key_0 = list(account_data)[0]
+        account_data_key_0 = next(iter(account_data))
         account_data_0 = account_data[account_data_key_0]
         self.assertEqual(len(wizard.account_ids), len(account_data))
         account_types = wizard.account_ids.mapped("type")
@@ -93,16 +97,6 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.assertNotIn("updated", account_types)
         self.assertNotIn("deleted", account_types)
         self.assertEqual(wizard.account_ids.mapped("xml_id"), list(account_data.keys()))
-        # account.group data
-        account_group_data = self.chart_template_data["account.group"]
-        self.assertEqual(len(wizard.account_group_ids), len(account_group_data))
-        account_group_types = wizard.account_group_ids.mapped("type")
-        # generic_coa has no account.group data
-        self.assertNotIn("new", account_group_types)
-        self.assertNotIn("updated", account_group_types)
-        self.assertEqual(
-            wizard.account_group_ids.mapped("xml_id"), list(account_group_data.keys())
-        )
         # fiscal.position
         fp_data = self.chart_template_data["account.fiscal.position"]
         self.assertEqual(len(wizard.fiscal_position_ids), len(fp_data))
@@ -177,11 +171,11 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         # Test XML-ID matching + recreate
         # account.tax data
         tax_data = self.chart_template_data["account.tax"]
-        tax_data_key_0 = list(tax_data)[0]
+        tax_data_key_0 = next(iter(tax_data))
         tax_data_0 = tax_data[tax_data_key_0]
         # account.account data
         account_data = self.chart_template_data["account.account"]
-        account_data_key_0 = list(account_data)[0]
+        account_data_key_0 = next(iter(account_data))
         account_data_0 = account_data[account_data_key_0]
         new_tax = self._get_record_for_xml_id(tax_data_key_0)
         new_tax.name = "Test 1 tax name changed"
@@ -196,8 +190,6 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         wizard.action_update_records()
         self.assertEqual(wizard.updated_taxes, 1)
         self.assertEqual(wizard.updated_accounts, 1)
-        self.assertEqual(wizard.new_account_groups, 0)
-        self.assertEqual(wizard.updated_account_groups, 0)
         self.assertEqual(wizard.updated_fps, 0)
         self.assertEqual(wizard.deleted_taxes, 0)
         self.assertEqual(new_tax.name, tax_data_0["name"])
@@ -240,7 +232,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         """
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         account_data = self.chart_template_data["account.account"]
-        account_xml_id = list(account_data)[0]
+        account_xml_id = next(iter(account_data))
         account = self._get_record_for_xml_id(account_xml_id)
         original_name = account.name
         # Simulate a stored value with trailing/leading spaces
@@ -252,50 +244,6 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
             "name",
             result,
             "Whitespace-only difference in translatable field should not be a diff",
-        )
-
-    def test_04_account_group_code_prefix_end_no_false_positive(self):
-        """Account group with code_prefix_end > code_prefix_start should not be flagged.
-
-        Regression test: the wizard's condition for resolving the expected
-        code_prefix_end was inverted — it used the template's end value only
-        when end < start (i.e. the invalid case) and fell back to start
-        otherwise, producing a false diff whenever the group had a genuine
-        range like 643-648.
-        """
-        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
-        # Simulate template data for an account group with a range (start != end)
-        t_data = {
-            "test_group_range": {
-                "name": "Test Range Group",
-                "code_prefix_start": "643",
-                "code_prefix_end": "648",
-            },
-        }
-        # Create the real account group in the database with the same range
-        group = self.env["account.group"].create(
-            {
-                "name": "Test Range Group",
-                "code_prefix_start": "643",
-                "code_prefix_end": "648",
-                "company_id": self.company.id,
-            }
-        )
-        # Register the xmlid so _find_record_matching can locate it
-        self.env["ir.model.data"].create(
-            {
-                "name": f"{self.company.id}_test_group_range",
-                "module": "account",
-                "model": "account.group",
-                "res_id": group.id,
-            }
-        )
-        wizard._find_account_groups(t_data)
-        updated = wizard.account_group_ids.filtered(lambda r: r.type == "updated")
-        self.assertFalse(
-            updated,
-            "Account group with matching code_prefix_end "
-            "should not be flagged as updated",
         )
 
     def test_05_installed_charts(self):
@@ -371,7 +319,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         tag_ids after update.
         """
         account = self._get_record_for_xml_id(
-            list(self.chart_template_data["account.account"])[0]
+            next(iter(self.chart_template_data["account.account"]))
         )
         tag = self.env["account.account.tag"].create(
             {"name": "Wizard test tag", "applicability": "accounts"}
@@ -381,7 +329,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         result = wizard.diff_fields(
             self.chart_template_data["account.account"][
-                list(self.chart_template_data["account.account"])[0]
+                next(iter(self.chart_template_data["account.account"]))
             ],
             account,
         )
@@ -490,7 +438,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         fp = self._get_record_for_xml_id("template_generic_domestic_fiscal_position")
         account_data = self.chart_template_data["account.account"]
-        src = self._get_record_for_xml_id(list(account_data)[0])
+        src = self._get_record_for_xml_id(next(iter(account_data)))
         dest = self._get_record_for_xml_id(list(account_data)[1])
         fp.account_ids = [
             Command.create({"account_src_id": src.id, "account_dest_id": dest.id})
@@ -556,7 +504,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         # fp.account branch
         fp = self._get_record_for_xml_id("template_generic_domestic_fiscal_position")
         account_data = self.chart_template_data["account.account"]
-        src = self._get_record_for_xml_id(list(account_data)[0])
+        src = self._get_record_for_xml_id(next(iter(account_data)))
         dest = self._get_record_for_xml_id(list(account_data)[1])
         fp.account_ids = [
             Command.create({"account_src_id": src.id, "account_dest_id": dest.id})
@@ -604,11 +552,9 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         )
         self.assertEqual(names, sorted([tag_a.display_name, tag_b.display_name]))
         # xmlid string — short form gets the company prefix applied
-        fp_xmlids = ",".join(
-            [
-                "template_generic_domestic_fiscal_position",
-                "template_generic_export_fiscal_position",
-            ]
+        fp_xmlids = (
+            "template_generic_domestic_fiscal_position,"
+            "template_generic_export_fiscal_position"
         )
         names = wizard._diff_note_expected_m2x_names(
             fp_xmlids, "account.fiscal.position"
@@ -630,7 +576,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         )
         # m2o path: expected_v is an xmlid string
         new_account = self._get_record_for_xml_id(
-            list(self.chart_template_data["account.account"])[0]
+            next(iter(self.chart_template_data["account.account"]))
         )
         model_data = self.env["ir.model.data"].search(
             [("model", "=", "account.account"), ("res_id", "=", new_account.id)]
@@ -777,110 +723,6 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         result = wizard._diff_note_commands(field, actual, template_lines)
         self.assertEqual(result.count("#"), 3)
 
-    def test_23_account_group_code_prefix_end_drift_note(self):
-        """When the template's code_prefix_end differs from the DB, the
-        wizard must append a per-field bullet with the actual/expected
-        values under the "Differences in these fields:" header."""
-        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
-        t_data = {
-            "test_group_end_drift": {
-                "name": "End Drift Group",
-                "code_prefix_start": "643",
-                "code_prefix_end": "648",
-            },
-        }
-        group = self.env["account.group"].create(
-            {
-                "name": "End Drift Group",
-                "code_prefix_start": "643",
-                # Same as start — template expects "648".
-                "code_prefix_end": "643",
-                "company_id": self.company.id,
-            }
-        )
-        self.env["ir.model.data"].create(
-            {
-                "name": f"{self.company.id}_test_group_end_drift",
-                "module": "account",
-                "model": "account.group",
-                "res_id": group.id,
-            }
-        )
-        wizard._find_account_groups(t_data)
-        updated = wizard.account_group_ids.filtered(lambda r: r.type == "updated")
-        self.assertEqual(len(updated), 1)
-        label = group._fields["code_prefix_end"].get_description(self.env)["string"]
-        self.assertIn("Differences in these fields:", updated.notes)
-        self.assertIn(f"- {label}: '643' → '648'", updated.notes)
-
-    def test_24_account_group_code_prefix_end_drift_without_header(self):
-        """When `diff_notes` returns no drift (template omits
-        `code_prefix_end`, so the main loop skips it) but the local
-        `code_prefix_end` normalization still disagrees with the DB, the
-        renderer must prepend the "Differences in these fields:" header
-        itself."""
-        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
-        # Template omits code_prefix_end entirely → normalizes to
-        # code_prefix_start ("700"); DB has "750".
-        t_data = {
-            "test_group_end_only": {
-                "name": "End Only Group",
-                "code_prefix_start": "700",
-            },
-        }
-        group = self.env["account.group"].create(
-            {
-                "name": "End Only Group",
-                "code_prefix_start": "700",
-                "code_prefix_end": "750",
-                "company_id": self.company.id,
-            }
-        )
-        self.env["ir.model.data"].create(
-            {
-                "name": f"{self.company.id}_test_group_end_only",
-                "module": "account",
-                "model": "account.group",
-                "res_id": group.id,
-            }
-        )
-        wizard._find_account_groups(t_data)
-        updated = wizard.account_group_ids.filtered(lambda r: r.type == "updated")
-        self.assertEqual(len(updated), 1)
-        # The header must be emitted locally (diff_notes returned empty).
-        self.assertTrue(updated.notes.startswith("Differences in these fields:"))
-        self.assertIn("'750' → '700'", updated.notes)
-
-    def test_25_account_group_missing_xml_id(self):
-        """A matched-but-xmlid-less account group must be flagged as
-        "updated" with the `Missing XML-ID` note, and the note must be
-        appended (not overwriting) when another drift already produced
-        a header."""
-        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
-        # Template says the group should be xmlid `test_group_missing`, and
-        # the DB has a matching record but with no xml_id at all.
-        t_data = {
-            "test_group_missing": {
-                "name": "Missing XmlId Group",
-                "code_prefix_start": "810",
-                "code_prefix_end": "819",
-            },
-        }
-        self.env["account.group"].create(
-            {
-                "name": "Missing XmlId Group",
-                # code_prefix_end drifted so diff_notes also produces a header.
-                "code_prefix_start": "810",
-                "code_prefix_end": "810",
-                "company_id": self.company.id,
-            }
-        )
-        wizard._find_account_groups(t_data)
-        updated = wizard.account_group_ids.filtered(lambda r: r.type == "updated")
-        self.assertEqual(len(updated), 1)
-        self.assertIn("Missing XML-ID", updated.notes)
-        self.assertIn(f"account.{self.company.id}_test_group_missing", updated.notes)
-
     def test_26_tax_group_missing_xml_id(self):
         """A tax group matched by a non-xmlid field must be flagged as
         "updated" with the `Missing XML-ID` note from
@@ -935,7 +777,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.env["res.lang"]._activate_lang("fr_FR")
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         account_data = self.chart_template_data["account.account"]
-        account_xml_id = list(account_data)[0]
+        account_xml_id = next(iter(account_data))
         account = self._get_record_for_xml_id(account_xml_id)
         # English value stays in sync; only French diverges.
         english_name = account.with_context(lang="en_US").name
@@ -994,9 +836,9 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         expected value — not `False` from `bool(None)`."""
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         account_data = self.chart_template_data["account.account"]
-        account = self._get_record_for_xml_id(list(account_data)[0])
+        account = self._get_record_for_xml_id(next(iter(account_data)))
         account.active = False
-        record_values = dict(account_data[list(account_data)[0]])
+        record_values = dict(account_data[next(iter(account_data))])
         record_values.pop("active", None)
         note = wizard.diff_notes(record_values, account)
         self.assertIn("Active", note)
@@ -1012,7 +854,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.env["res.lang"]._activate_lang("fr_FR")
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         account_data = self.chart_template_data["account.account"]
-        account = self._get_record_for_xml_id(list(account_data)[0])
+        account = self._get_record_for_xml_id(next(iter(account_data)))
         english_name = account.with_context(lang="en_US").name
         # No French translation set on the DB record.
         record_values = {
@@ -1042,7 +884,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.env["res.lang"]._activate_lang("nl_NL")
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         account_data = self.chart_template_data["account.account"]
-        account = self._get_record_for_xml_id(list(account_data)[0])
+        account = self._get_record_for_xml_id(next(iter(account_data)))
         # English drifts; no Dutch translation has ever been stored.
         account.with_context(lang="en_US").name = "Undistributed Profits/Losses"
         record_values = {
@@ -1092,7 +934,7 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         self.env["res.lang"]._activate_lang("fr_FR")
         wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
         account_data = self.chart_template_data["account.account"]
-        account_xml_id = list(account_data)[0]
+        account_xml_id = next(iter(account_data))
         account = self._get_record_for_xml_id(account_xml_id)
         account.with_context(lang="en_US").name = "Drift EN"
         account.with_context(lang="fr_FR").name = "Drift FR"
@@ -1144,3 +986,108 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         note = wizard.diff_notes(record_values, fp)
         self.assertIn("[fr]", note)
         self.assertIn("Note légale attendue", note)
+
+    def test_grouping_accounts_creation(self):
+        """Inactive parents and active children share the account update flow."""
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        # Put the child first: the chart loader must defer the parent relation.
+        data = {
+            "test_hierarchy_child": {
+                "name": "Hierarchy child",
+                "code": "9871",
+                "account_type": "expense",
+                "parent_id": "test_hierarchy_parent",
+            },
+            "test_hierarchy_parent": {
+                "name": "Hierarchy parent",
+                "code": "987",
+                "account_type": "expense",
+                "active": False,
+            },
+        }
+        wizard._find_accounts(data)
+        self.assertEqual(wizard.new_accounts, 2)
+        wizard._update_accounts(data)
+        parent = self._get_record_for_xml_id("test_hierarchy_parent")
+        child = self._get_record_for_xml_id("test_hierarchy_child")
+        self.assertFalse(parent.active)
+        self.assertEqual(parent.code, "987")
+        self.assertEqual(child.code, "987100")
+        self.assertEqual(child.parent_id, parent)
+        wizard._find_accounts(data)
+        self.assertFalse(wizard.account_ids)
+
+    def test_grouping_account_matching_without_xmlid(self):
+        """Match an inactive parent by its unpadded code without duplicating it."""
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        parent = (
+            self.env["account.account"]
+            .with_company(self.company)
+            .create(
+                {
+                    "name": "Old grouping name",
+                    "code": "986",
+                    "account_type": "expense",
+                    "active": False,
+                    "company_ids": [Command.set(self.company.ids)],
+                }
+            )
+        )
+        data = {
+            "test_existing_grouping": {
+                "name": "Updated grouping name",
+                "code": "986",
+                "account_type": "expense",
+                "active": False,
+            }
+        }
+        wizard._find_accounts(data)
+        self.assertEqual(wizard.account_ids.update_account_id, parent)
+        self.assertEqual(wizard.account_ids.type, "updated")
+        wizard._update_accounts(data)
+        self.assertEqual(self._get_record_for_xml_id("test_existing_grouping"), parent)
+        self.assertEqual(parent.name, "Updated grouping name")
+        self.assertEqual(parent.code, "986")
+        self.assertFalse(parent.active)
+        wizard._find_accounts(data)
+        self.assertFalse(wizard.account_ids)
+
+    def test_account_parent_update_and_clear(self):
+        """Detect and apply a changed or explicitly cleared parent account."""
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        parent = (
+            self.env["account.account"]
+            .with_company(self.company)
+            .create(
+                {
+                    "name": "New parent",
+                    "code": "985",
+                    "account_type": "expense",
+                    "active": False,
+                    "company_ids": [Command.set(self.company.ids)],
+                }
+            )
+        )
+        self.env["ir.model.data"].create(
+            {
+                "module": "account",
+                "name": f"{self.company.id}_test_new_parent",
+                "model": "account.account",
+                "res_id": parent.id,
+            }
+        )
+        xmlid = next(iter(self.chart_template_data["account.account"]))
+        account = self._get_record_for_xml_id(xmlid)
+        values = {"parent_id": "test_new_parent"}
+        wizard._find_accounts({xmlid: values})
+        self.assertEqual(wizard.account_ids.update_account_id, account)
+        self.assertIn("parent_id", wizard.diff_fields(values, account))
+        wizard._update_accounts({xmlid: values})
+        self.assertEqual(account.parent_id, parent)
+        wizard._find_accounts({xmlid: values})
+        self.assertFalse(wizard.account_ids)
+        values = {"parent_id": False}
+        wizard._find_accounts({xmlid: values})
+        self.assertEqual(wizard.account_ids.update_account_id, account)
+        wizard._update_accounts({xmlid: values})
+        self.assertFalse(account.parent_id)
