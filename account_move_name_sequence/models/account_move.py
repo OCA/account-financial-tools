@@ -136,7 +136,7 @@ class AccountMove(models.Model):
 
     @api.onchange("journal_id")
     def _onchange_journal_id(self):
-        if not self.quick_edit_mode:
+        if not self.document_sequence_editable:
             self.name = "/"
             self._compute_name_by_sequence()
 
