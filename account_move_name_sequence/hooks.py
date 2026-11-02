@@ -32,4 +32,3 @@ def create_journal_sequences(env):
             rseq_vals.update(journal._prepare_sequence_current_moves(refund=True))
             vals["refund_sequence_id"] = env["ir.sequence"].create(rseq_vals).id
         journal.write(vals)
-    return

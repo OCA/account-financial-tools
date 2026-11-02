@@ -31,11 +31,13 @@ class AccountMove(models.Model):
         computing hash since Odoo v18.0
         """
         moves = self.filtered(
-            lambda move: move.name
-            and move.name != "/"
-            and move.journal_id
-            and move.move_type
-            and move.restrict_mode_hash_table
+            lambda move: (
+                move.name
+                and move.name != "/"
+                and move.journal_id
+                and move.move_type
+                and move.restrict_mode_hash_table
+            )
         )
         # Handle moves grouped by journal / move_type and year
         for (journal, move_type, year), grouped_moves in moves.grouped(

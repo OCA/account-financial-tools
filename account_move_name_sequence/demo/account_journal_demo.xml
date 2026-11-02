@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="journal_sale_std_demo" model="account.journal">
         <field name="name">Standard Sale Journal Demo</field>
