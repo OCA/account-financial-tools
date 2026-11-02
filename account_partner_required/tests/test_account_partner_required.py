@@ -15,6 +15,7 @@ class TestAccountPartnerRequired(TransactionCase):
                 "code": "ACC01",
                 "name": "Test Account",
                 "account_type": "expense",
+                "reconcile": True,
             }
         )
 
@@ -72,3 +73,14 @@ class TestAccountPartnerRequired(TransactionCase):
         # Without partner
         account_without_partner = self._create_account_move(False, self.account)
         self.assertTrue(account_without_partner)
+
+    def test_reconcile_lines_without_partner_succeeds_when_account_policy_is_always(
+        self,
+    ):
+        self.account.partner_policy = "optional"
+        move_1 = self._create_account_move(False, self.account)
+        move_2 = self._create_account_move(False, self.account)
+        lines = move_1.line_ids[0] + move_2.line_ids[1]
+        self.account.partner_policy = "always"
+        lines.reconcile()
+        self.assertTrue(all(lines.mapped("reconciled")))
