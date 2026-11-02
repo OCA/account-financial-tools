@@ -14,7 +14,6 @@
     "maintainers": ["legalsylvain"],
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
-    "external_dependencies": {"python": ["openupgradelib"]},
     "data": [
         "data/ir_module_category.xml",
         "security/res_groups.xml",

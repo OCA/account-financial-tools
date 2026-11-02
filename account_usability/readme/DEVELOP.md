@@ -10,35 +10,44 @@
 
 - account.group_account_invoice
 
-*CE Without that module* -\> Complete Name : Invoicing / Billing -\>
+*CE Without that module* -\> Complete Name : Invoicing / Invoicing -\>
 Parent Category : base.module_category_accounting_accounting -\> Implies
 : base.group_user
 
-*CE With that module / EE* -\> Complete Name: **Accounting** / Billing
+*CE With that module / EE* -\> Complete Name: **Accounting** / Invoicing
 
 - account.group_account_readonly
 
 *CE Without that module* -\> Complete Name : Technical / Show Accounting
-Features - Readonly -\> Parent : base.module_category_hidden -\> Implies
-: base.group_user
+Features - Readonly -\> Parent Category : base.module_category_hidden -\>
+Implies : base.group_user
 
 *CE With that module / EE* -\> name: **Accounting / Read-only** -\>
-Parent Category: **base.module_category_accounting_accounting**
+Parent Category : **base.module_category_accounting_accounting**
+
+- account.group_account_basic
+
+*CE Without that module* -\> Complete Name : Technical / Basic -\>
+Parent Category : base.module_category_hidden -\> Implies
+: account.group_account_invoice
+
+*CE With that module / EE* -\> name: **Accounting / Invoicing & Banks**
+-\> Parent Category : **base.module_category_accounting_accounting**
 
 - account.group_account_user
 
 *CE Without that module* -\> Complete Name : Technical / Show Full
-Accounting Features -\> Parent : base.module_category_hidden -\> Implies
-: account.group_account_invoice, account.group_account_readonly
+Accounting Features -\> Parent Category : base.module_category_hidden -\>
+Implies : account.group_account_basic, account.group_account_readonly
 
 *CE With that module / EE* -\> name: **Accounting / Bookkeeper** -\>
 Parent Category: **base.module_category_accounting_accounting**
 
 - account.group_account_manager
 
-*CE Without that module* -\> Complete Name : Invoicing / Billing
-Administrator -\> Parent : base.module_category_accounting_accounting
+*CE Without that module* -\> Complete Name : Invoicing / Administrator
+-\> Parent : base.module_category_accounting_accounting
 -\> Implies : account.group_account_invoice
 
-*CE With that module / EE* -\> name: **Accounting / Accountant** -\>
+*CE With that module / EE* -\> name: **Accounting / Administrator** -\>
 Implies : **account.group_account_user**
