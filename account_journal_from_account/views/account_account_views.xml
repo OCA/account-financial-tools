@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_account_list_inherit">
+        <field name="name">account.account.list.inherit</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reconcile']" position="before">
+                <button
+                    type="object"
+                    name="action_create_journal"
+                    string="Create Journal"
+                    class="float-end btn-secondary"
+                    invisible="account_type != 'asset_cash'"
+                    groups="account.group_account_manager"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_form_inherit" model="ir.ui.view">
+        <field name="name">account.account.form.inherit</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button
+                        type="object"
+                        name="action_create_journal"
+                        string="Create Journal"
+                        class="oe_highlight"
+                        invisible="account_type != 'asset_cash'"
+                        groups="account.group_account_manager"
+                    />
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
