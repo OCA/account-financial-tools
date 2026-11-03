@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
-from datetime import date, timedelta
+from datetime import timedelta
 
 from freezegun import freeze_time
 
@@ -17,8 +17,11 @@ from odoo.addons.base.tests.common import BaseCommon
 # in order to avoid a raise caused by the sequence mixin we must ensure
 # that all dates are in the same year, hence we freeze the date
 # in the middle of the year
-@freeze_time(f"{date.today().year}-07-01")
+@freeze_time(f"{fields.Date.today().year}-07-01")
 class TestAccountInvoiceConstraintChronology(BaseCommon):
+    # The test user must be able to post and read invoices and journals
+    _test_user_groups = ("base.group_user", "account.group_account_manager")
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -257,19 +260,19 @@ class TestAccountInvoiceConstraintChronology(BaseCommon):
         demo_invoice_5.button_draft()
         demo_invoice_followup.button_draft()
         demo_invoice_1.write(
-            {"name": False, "invoice_date": date.today().replace(day=1)}
+            {"name": False, "invoice_date": fields.Date.today().replace(day=1)}
         )
         demo_invoice_2.write(
-            {"name": False, "invoice_date": date.today().replace(day=1)}
+            {"name": False, "invoice_date": fields.Date.today().replace(day=1)}
         )
         demo_invoice_3.write(
-            {"name": False, "invoice_date": date.today().replace(day=1)}
+            {"name": False, "invoice_date": fields.Date.today().replace(day=1)}
         )
         demo_invoice_5.write(
-            {"name": False, "invoice_date": date.today().replace(day=1)}
+            {"name": False, "invoice_date": fields.Date.today().replace(day=1)}
         )
         demo_invoice_followup.write(
-            {"name": False, "invoice_date": date.today().replace(day=1)}
+            {"name": False, "invoice_date": fields.Date.today().replace(day=1)}
         )
         after_5_days = self.today + timedelta(days=5)
         after_10_days = self.today + timedelta(days=10)
