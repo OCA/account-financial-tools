@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="account_loan_extra_cost_multi_company_rule" model="ir.rule">
+        <field name="name">Account loan extra cost multi-company</field>
+        <field ref="model_account_loan_extra_cost" name="model_id" />
+        <field eval="True" name="global" />
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+</odoo>
