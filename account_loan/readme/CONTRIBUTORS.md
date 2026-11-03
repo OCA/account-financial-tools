@@ -1,0 +1,7 @@
+- Enric Tobella \<<etobella@creublanca.es>\>
+- Bhavesh Odedra \<<bodedra@opensourceintegrators.com>\>
+- Alberto Martín Cortada \<<alberto.martin@guadaltech.es>\>
+- [Tecnativa](https://www.tecnativa.com):
+  - Juan Carlos Oñate
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
