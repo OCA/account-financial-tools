@@ -9,7 +9,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form" />
         <field name="arch" type="xml">
-            <div role="alert" position="after">
+            <xpath expr="//sheet" position="before">
                 <div
                     class="alert alert-warning"
                     role="alert"
@@ -20,7 +20,7 @@
                     <field name="property_account_position_id" readonly="1" />
                 </em> that require to know the VAT number of the partner.
                 </div>
-            </div>
+            </xpath>
         </field>
     </record>
 </odoo>

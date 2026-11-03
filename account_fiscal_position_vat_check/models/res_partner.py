@@ -12,12 +12,12 @@ class ResPartner(models.Model):
         compute="_compute_show_warning_vat_required"
     )
 
-    @api.depends("property_account_position_id", "vat")
+    @api.depends("property_account_position_id", "has_vat")
     @api.depends_context("company")
     def _compute_show_warning_vat_required(self):
         for partner in self:
             show = False
             fp = partner.property_account_position_id
-            if fp and fp.vat_required and not partner.vat:
+            if fp and fp.vat_required and not partner.has_vat:
                 show = True
             partner.show_warning_vat_required = show

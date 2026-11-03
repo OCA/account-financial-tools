@@ -16,7 +16,7 @@ class AccountMove(models.Model):
             if (
                 move.move_type in ("out_invoice", "out_refund")
                 and move.fiscal_position_id.vat_required
-                and not move.commercial_partner_id.vat
+                and not move.commercial_partner_id.has_vat
             ):
                 raise UserError(
                     self.env._(
