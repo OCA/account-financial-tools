@@ -43,10 +43,10 @@ class AccountMoveRenumberWizard(models.TransientModel):
         """Get default sequence if it exists."""
         return self.env["ir.sequence"].search(
             [
-                "&",
                 ("code", "=", "account_journal_general_sequence.default"),
-                ("company_id", "in", self.env.companies.ids),
-            ]
+                ("company_id", "=", self.env.company.id),
+            ],
+            limit=1,
         )
 
     @api.model

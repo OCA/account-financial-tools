@@ -79,7 +79,10 @@ class RenumberCase(AccountTestInvoicingCommon):
                 self.company_data["company"]
             )
         )
-        self.assertEqual(len(wiz_f.available_sequence_ids), 1)
+        # Odoo 20.0 keeps all the user companies in the environment, so both
+        # companies' sequences are available. The default is the current one.
+        self.assertIn(wiz_f.sequence_id, wiz_f.available_sequence_ids)
+        self.assertEqual(wiz_f.sequence_id.company_id, self.company_t1)
         wiz = wiz_f.save()
         wiz.action_renumber()
         self.assertGreater(new_invoice.entry_number, old_invoice.entry_number)
