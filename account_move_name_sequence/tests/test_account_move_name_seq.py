@@ -393,6 +393,46 @@ class TestAccountMoveNameSequence(TransactionCase):
         in_invoice._update_sequence_made_gap()
         self.assertFalse(in_invoice.made_sequence_gap)
 
+    def _create_out_invoice(self, **vals):
+        return self.env["account.move"].create(
+            {
+                "move_type": "out_invoice",
+                "journal_id": self.sales_journal.id,
+                "partner_id": self.partner.id,
+                "invoice_date": self.date,
+                "invoice_line_ids": self.invoice_line,
+                **vals,
+            }
+        )
+
+    def test_payment_reference_follows_journal_reference_model(self):
+        self.partner.ref = "4242"
+        self.sales_journal.write(
+            {"invoice_reference_model": "odoo", "invoice_reference_type": "partner"}
+        )
+        invoice = self._create_out_invoice()
+        invoice.action_post()
+        self.assertEqual(invoice.payment_reference, "CUST/4242")
+        term_line = invoice.line_ids.filtered(
+            lambda line: line.display_type == "payment_term"
+        )
+        self.assertEqual(term_line.name, "CUST/4242")
+
+        self.sales_journal.write(
+            {"invoice_reference_model": "euro", "invoice_reference_type": "invoice"}
+        )
+        invoice = self._create_out_invoice()
+        invoice.action_post()
+        self.assertEqual(
+            invoice.payment_reference, invoice._get_invoice_reference_euro_invoice()
+        )
+        self.assertTrue(invoice.payment_reference.startswith("RF"))
+
+    def test_payment_reference_not_overwritten(self):
+        invoice = self._create_out_invoice(payment_reference="MY-REF")
+        invoice.action_post()
+        self.assertEqual(invoice.payment_reference, "MY-REF")
+
     def test_is_end_of_seq_chain(self):
         self.env.user.group_ids -= self.env.ref("account.group_account_manager")
         invoice = self.env["account.move"].create(
