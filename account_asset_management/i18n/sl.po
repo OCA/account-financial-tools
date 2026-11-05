@@ -35,10 +35,13 @@ msgstr ""
 #: code:addons/account_asset_management/models/account_asset.py:0
 msgid ""
 "\n"
-"Error while processing asset '{ref}': {exception}"
+"Error while processing asset '%(ref)s': %(exception)s"
 msgstr ""
-"\n"
-"Napaka pri obdelavi sredstva '{ref}': {exception}"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_count
+msgid "# of Depreciation Lines"
+msgstr "# amortizacijskih postavk"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -129,6 +132,11 @@ msgid "Amount Already Depreciated"
 msgstr "Že amortizirani znesek"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_value
+msgid "Amount of Depreciation Lines"
+msgstr "Vrednost amortizacijskih postavk"
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
 msgid "Analytic Distribution"
@@ -161,7 +169,9 @@ msgstr "Ste prepričani?"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Asset"
 msgstr "Osnovno sredstvo"
 
@@ -219,6 +229,7 @@ msgstr "Naziv osnovnega sredstva"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Asset Profile"
 msgstr "Profil sredstva"
 
@@ -266,6 +277,7 @@ msgstr "Naziv sredstva mora biti naveden v oznaki vrstice."
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__asset_profile_id
 msgid "Asset profile"
 msgstr "Profil sredstva"
 
@@ -286,6 +298,31 @@ msgstr "Sprožilci preračuna tabele sredstva"
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_config_assets
 msgid "Assets"
 msgstr "Osnovna sredstva"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.action_account_asset_report
+#: model:ir.model,name:account_asset_management.model_account_asset_report
+#: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_graph
+#: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_pivot
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_list
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Assets Analysis"
+msgstr "Analize osnovnih sredstvev"
+
+#. module: account_asset_management
+#: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_report
+msgid "Assets analysis"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Assets in draft state"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Assets in running state"
+msgstr ""
 
 #. module: account_asset_management
 #. odoo-python
@@ -402,7 +439,9 @@ msgstr "Koda"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__company_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Company"
 msgstr "Družba"
 
@@ -512,8 +551,19 @@ msgstr "Ustvarjeno"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__date_end
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__date
 msgid "Date"
 msgstr "Datum"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Date of asset purchase"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Date of depreciation"
+msgstr "Datum amortizacije"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger__date_trigger
@@ -601,6 +651,11 @@ msgid "Depreciation Board"
 msgstr "Amortizacijska tabela"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_date
+msgid "Depreciation Date"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Depreciation Dates"
@@ -623,11 +678,17 @@ msgid "Depreciation Method"
 msgstr "Metoda obračuna amortizacije"
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Depreciation Month"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__name
 msgid "Depreciation Name"
 msgstr "Ime amortizacije"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__display_name
@@ -635,6 +696,10 @@ msgstr "Ime amortizacije"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__display_name
 msgid "Display Name"
@@ -654,6 +719,7 @@ msgstr "Opravljeno"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__draft
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Draft"
 msgstr "Osnutek"
 
@@ -687,13 +753,10 @@ msgstr "Vnosi"
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 msgid ""
-"Error while processing asset '{ref}': \n"
+"Error while processing asset '%(ref)s': \n"
 "\n"
-"{tb}"
+"%(tb)s"
 msgstr ""
-"Napaka pri obdelavi sredstva '{ref}': \n"
-"\n"
-"{tb}"
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
@@ -733,6 +796,14 @@ msgid "Force accounting date"
 msgstr "Vsili knjigovodski datum"
 
 #. module: account_asset_management
+#: model_terms:ir.actions.act_window,help:account_asset_management.action_account_asset_report
+msgid ""
+"From this report, you can have an overview on all depreciations. The\n"
+"            search bar can also be used to personalize your assets "
+"depreciation reporting."
+msgstr ""
+
+#. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 msgid "Gain/Loss on Sale"
@@ -760,6 +831,11 @@ msgid "Generate Report"
 msgstr "Ustvari poročilo"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__gross_value
+msgid "Gross Amount"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
 msgid "Has Message"
 msgstr "Vsebuje sporočilo"
@@ -775,6 +851,7 @@ msgid "History"
 msgstr "Zgodovina"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__id
@@ -782,6 +859,10 @@ msgstr "Zgodovina"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_asset_management.field_report_account_asset_management_asset_report_xls__id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__id
 #: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__id
 msgid "ID"
@@ -872,10 +953,8 @@ msgstr "Vključno osnutki sredstev"
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 msgid ""
 "Inconsistent reporting structure.\n"
-"Please correct Asset Group '{group}' (id {id})"
+"Please correct Asset Group '%(group)s' (id %(id)s)"
 msgstr ""
-"Neskladna struktura poročanja.\n"
-"Popravite skupino sredstev '{group}' (id {id})"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
@@ -1043,6 +1122,11 @@ msgid "No"
 msgstr "Ne"
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Not archived"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__note
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__note
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__note
@@ -1119,6 +1203,7 @@ msgstr "Nadrejena pot"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__partner_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__partner_id
 msgid "Partner"
 msgstr "Partner"
 
@@ -1165,8 +1250,20 @@ msgstr "Konto pridobljene vrednosti"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__move_check
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__move_check
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Posted"
 msgstr "Knjiženo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__posted_value
+msgid "Posted Amount"
+msgstr "Knjižen znesek"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Posted depreciation lines"
+msgstr "Knjižene amortizacijske postavke"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__previous_id
@@ -1185,6 +1282,11 @@ msgstr "Profil"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__prorata
 msgid "Prorata Temporis"
 msgstr "Prorata Temporis"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Purchase Month"
+msgstr ""
 
 #. module: account_asset_management
 #. odoo-python
@@ -1311,6 +1413,7 @@ msgstr "Storniraj knjiženo temeljnico amortizacije"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__open
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Running"
 msgstr "Se izvaja"
 
@@ -1375,6 +1478,7 @@ msgstr "Status osnovnega sredstva"
 #. odoo-python
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__state
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Status"
 msgstr "Status"
@@ -1501,6 +1605,11 @@ msgid "Tot. Depreciation"
 msgstr "Skup. amortizacija"
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_list
+msgid "Total"
+msgstr ""
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Total Days"
 msgstr "Skupaj dni"
@@ -1531,6 +1640,11 @@ msgstr "Tip izjeme pri aktivnosti na zapisu."
 #: code:addons/account_asset_management/report/account_asset_report_xls.py:0
 msgid "Undetermined error"
 msgstr "Nedoločena napaka"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__unposted_value
+msgid "Unposted Amount"
+msgstr "Neknjižen znesek"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
@@ -1662,7 +1776,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset.py:0
 msgid "You cannot change the profile of an asset with accounting entries."
-msgstr "Profila sredstva, ki vsebuje knjigovodske vnose, ne morete spreminjati."
+msgstr ""
+"Profila sredstva, ki vsebuje knjigovodske vnose, ne morete spreminjati."
 
 #. module: account_asset_management
 #. odoo-python
@@ -1722,6 +1837,77 @@ msgstr ""
 "Ročno dodajte amortizacijske postavke z amortizacijami prejšnjih fiskalnih "
 "let, če je začetni datum amortizacije drugačen od datuma, na katerega se "
 "knjigovodski vnosi ustvarjajo."
+
+#. module: account_asset_management
+#. odoo-python
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+msgid "degr-limit"
+msgstr ""
+
+#. module: account_asset_management
+#. odoo-python
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+msgid "degr-linear"
+msgstr ""
+
+#. module: account_asset_management
+#. odoo-python
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+msgid "degressive"
+msgstr ""
+
+#. module: account_asset_management
+#. odoo-python
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
+msgid "gain_loss_on_sale"
+msgstr ""
+
+#. module: account_asset_management
+#. odoo-python
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+msgid "linear-limit"
+msgstr ""
+
+#. module: account_asset_management
+#. odoo-python
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+msgid "number"
+msgstr ""
+
+#. module: account_asset_management
+#. odoo-python
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+msgid "quarter"
+msgstr ""
+
+#. module: account_asset_management
+#. odoo-python
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
+msgid "year"
+msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "Error while processing asset '{ref}': {exception}"
+#~ msgstr ""
+#~ "\n"
+#~ "Napaka pri obdelavi sredstva '{ref}': {exception}"
+
+#~ msgid ""
+#~ "Error while processing asset '{ref}': \n"
+#~ "\n"
+#~ "{tb}"
+#~ msgstr ""
+#~ "Napaka pri obdelavi sredstva '{ref}': \n"
+#~ "\n"
+#~ "{tb}"
+
+#~ msgid ""
+#~ "Inconsistent reporting structure.\n"
+#~ "Please correct Asset Group '{group}' (id {id})"
+#~ msgstr ""
+#~ "Neskladna struktura poročanja.\n"
+#~ "Popravite skupino sredstev '{group}' (id {id})"
 
 #~ msgid "Account Asset"
 #~ msgstr "Konto osnovnega sredstva"
@@ -1872,9 +2058,6 @@ msgstr ""
 #~ msgid "Parent Right"
 #~ msgstr "Desno nadrejeno"
 
-#~ msgid "# of Depreciation Lines"
-#~ msgstr "# amortizacijskih postavk"
-
 #~ msgid ""
 #~ "<p>\n"
 #~ "          From this report, you can have an overview on all "
@@ -1892,9 +2075,6 @@ msgstr ""
 #~ "          tako, da prilagodite analizo svojim potrebam;\n"
 #~ "        </p>\n"
 #~ "      "
-
-#~ msgid "Amount of Depreciation Lines"
-#~ msgstr "Vrednost amortizacijskih postavk"
 
 #~ msgid ""
 #~ "Asset '%s' contains unposted lines prior to the selected period.\n"
@@ -1927,9 +2107,6 @@ msgstr ""
 #~ msgid "Asset history"
 #~ msgstr "Zgodovina osnovnega sredstva"
 
-#~ msgid "Assets Analysis"
-#~ msgstr "Analize osnovnih sredstvev"
-
 #~ msgid "Assets in Running state"
 #~ msgstr "Sredstva v stanju 'v teku'"
 
@@ -1945,9 +2122,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Izberi obdobje za katero želiš avtomatsko knjiženje amortizacijskih "
 #~ "postavk osnovnih sredstev"
-
-#~ msgid "Date of depreciation"
-#~ msgstr "Datum amortizacije"
 
 #~ msgid "Ending date"
 #~ msgstr "Datum zaključka"
@@ -1985,17 +2159,8 @@ msgstr ""
 #~ msgid "Period"
 #~ msgstr "Obdobje"
 
-#~ msgid "Posted Amount"
-#~ msgstr "Knjižen znesek"
-
-#~ msgid "Posted depreciation lines"
-#~ msgstr "Knjižene amortizacijske postavke"
-
 #~ msgid "Programming Error!"
 #~ msgstr "Programska napaka!"
-
-#~ msgid "Unposted Amount"
-#~ msgstr "Neknjižen znesek"
 
 #~ msgid "User"
 #~ msgstr "Uporabnik"
