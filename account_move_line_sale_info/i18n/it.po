@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_line_sale_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-03-12 10:35+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_move_line_sale_info
+#: model:ir.model,name:account_move_line_sale_info.model_account_move
+msgid "Journal Entry"
+msgstr "Registrazione contabile"
+
+#. module: account_move_line_sale_info
+#: model:ir.model,name:account_move_line_sale_info.model_account_move_line
+msgid "Journal Item"
+msgstr "Movimento contabile"
+
+#. module: account_move_line_sale_info
+#: model_terms:ir.ui.view,arch_db:account_move_line_sale_info.view_account_move_line_filter
+msgid "Sale Order"
+msgstr "Ordine di vendita"
+
+#. module: account_move_line_sale_info
+#: model:ir.model.fields,field_description:account_move_line_sale_info.field_account_move_line__sale_line_id
+#: model_terms:ir.ui.view,arch_db:account_move_line_sale_info.view_account_move_line_filter
+msgid "Sale Order Line"
+msgstr "Riga ordine di vendita"
+
+#. module: account_move_line_sale_info
+#: model:res.groups,name:account_move_line_sale_info.group_account_move_sale_info
+msgid "Sale info in Journal Items"
+msgstr "Informazioni vendita nei movimenti contabili"
+
+#. module: account_move_line_sale_info
+#: model:ir.model.fields,field_description:account_move_line_sale_info.field_account_move_line__sale_order_id
+msgid "Sales Order"
+msgstr "Ordine di vendita"
+
+#. module: account_move_line_sale_info
+#: model:ir.model,name:account_move_line_sale_info.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Riga ordine di vendita"
+
+#. module: account_move_line_sale_info
+#: model:ir.model,name:account_move_line_sale_info.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento di magazzino"
