@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_update_multi_chart_show_code_digits" model="ir.ui.view">
+        <field name="name">Show code_digits in chart update wizard</field>
+        <field name="model">wizard.update.charts.accounts</field>
+        <field name="inherit_id" ref="account_chart_update.view_update_multi_chart" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code_digits']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
