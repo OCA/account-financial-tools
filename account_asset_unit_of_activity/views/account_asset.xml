@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_asset_view_form" model="ir.ui.view">
+        <field name="name">account.asset.form</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//group[@id='header_left_group']/field[@name='move_line_check']"
+                position="after"
+            >
+                <field name="has_depreciation_accounting_entry" invisible="1" />
+            </xpath>
+            <!-- The depreciation dates are not used for unit of activity assets -->
+            <xpath expr="//field[@name='method_time']/parent::group" position="attributes">
+                <attribute name="invisible">method == 'unit-activity'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='method_progress_factor']" position="attributes">
+                <attribute
+                    name="invisible"
+                >method in ['linear', 'linear-limit', 'unit-activity']</attribute>
+            </xpath>
+            <xpath expr="//field[@name='prorata']" position="attributes">
+                <attribute name="invisible">method == 'unit-activity'</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='carry_forward_missed_depreciations']"
+                position="attributes"
+            >
+                <attribute name="invisible">method == 'unit-activity'</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='carry_forward_missed_depreciations']"
+                position="after"
+            >
+                <field
+                    name="total_number_of_use"
+                    invisible="method != 'unit-activity'"
+                    readonly="has_depreciation_accounting_entry or state != 'draft'"
+                />
+                <field
+                    name="remaining_usage"
+                    readonly="1"
+                    invisible="method != 'unit-activity'"
+                />
+            </xpath>
+            <xpath
+                expr="//button[@name='compute_depreciation_board']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >state != 'draft' or method == 'unit-activity'</attribute>
+            </xpath>
+            <xpath
+                expr="//button[@name='compute_depreciation_board']"
+                position="after"
+            >
+                <button
+                    name="add_unit_of_activity"
+                    string="Add Unit of Activity"
+                    help="Add a line of usage for this Asset"
+                    icon="fa-plus"
+                    class="oe_highlight"
+                    type="object"
+                    invisible="method != 'unit-activity' or remaining_usage == 0"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='depreciation_line_ids']/list/field[@name='line_date']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >not move_check and not init_entry and parent.method != 'unit-activity'</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='depreciation_line_ids']/list/field[@name='line_days']"
+                position="attributes"
+            >
+                <attribute
+                    name="column_invisible"
+                >parent.method == 'unit-activity'</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='depreciation_line_ids']/list/field[@name='line_days']"
+                position="after"
+            >
+                <field
+                    name="quantity"
+                    sum="Total Quantity"
+                    column_invisible="parent.method != 'unit-activity'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_asset_unit_of_activity_view_form" model="ir.ui.view">
+        <field name="name">account.asset.unit.of.activity.form</field>
+        <field name="model">account.asset.unit.of.activity</field>
+        <field name="arch" type="xml">
+            <form string="Unit of Activity">
+                <group>
+                    <field name="quantity" />
+                    <field name="date" />
+                    <field name="auto_create_asset_move" />
+                </group>
+                <footer>
+                    <button
+                        name="add_usage"
+                        string="Add a usage"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
