@@ -86,3 +86,26 @@ class TestAssetManagementXls(AccountTestInvoicingCommon):
             active_model=self.xls_report._name, **self.report_action["context"]
         )
         model.create_xlsx_report(self.xls_report.ids, data=self.report_action["data"])
+
+    def test_02_xls_several_assets_without_depreciation_table(self):
+        """Report several assets in error (no depreciation table) at once"""
+        laptop = self.env["account.asset"].search([("code", "=", "PI00101")])
+        for code in ("PI00102", "PI00103"):
+            self.env["account.asset"].create(
+                {
+                    "state": "draft",
+                    "method_time": "year",
+                    "method_number": 3,
+                    "method_period": "year",
+                    "name": code,
+                    "code": code,
+                    "purchase_value": 1500.0,
+                    "profile_id": laptop.profile_id.id,
+                    "date_start": time.strftime("%Y-01-01"),
+                }
+            )
+        self.xls_report.draft = True
+        model = self.env["report.%s" % self.report_action["report_name"]].with_context(
+            active_model=self.xls_report._name, **self.report_action["context"]
+        )
+        model.create_xlsx_report(self.xls_report.ids, data=self.report_action["data"])
