@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_account_form_group_ids" model="ir.ui.view">
+        <field name="name">account.account.form.group.ids</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='group_id']" position="after">
+                <field
+                    name="security_group_ids"
+                    widget="many2many_tags"
+                    options="{'no_create_edit': True}"
+                    placeholder="If empty, visible to all accounting users"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
