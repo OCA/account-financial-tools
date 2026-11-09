@@ -14,7 +14,6 @@ class AccountMoveLine(models.Model):
 
     check_deposit_id = fields.Many2one(
         comodel_name="account.check.deposit",
-        string="Check Deposit",
         copy=False,
         check_company=True,
     )

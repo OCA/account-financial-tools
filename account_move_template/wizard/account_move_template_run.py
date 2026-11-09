@@ -31,7 +31,7 @@ class AccountMoveTemplateRun(models.TransientModel):
         domain=["|", ("parent_id", "=", False), ("is_company", "=", True)],
     )
     date = fields.Date(required=True, default=fields.Date.context_today)
-    journal_id = fields.Many2one("account.journal", string="Journal", readonly=True)
+    journal_id = fields.Many2one("account.journal", readonly=True)
     ref = fields.Char(string="Reference")
     line_ids = fields.One2many(
         "account.move.template.line.run", "wizard_id", string="Lines"
@@ -290,7 +290,7 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     tax_line_id = fields.Many2one(
         "account.tax", string="Originator Tax", ondelete="restrict", readonly=True
     )
-    partner_id = fields.Many2one("res.partner", readonly=True, string="Partner")
+    partner_id = fields.Many2one("res.partner", readonly=True)
     payment_term_id = fields.Many2one(
         "account.payment.term", string="Payment Terms", readonly=True
     )
@@ -305,6 +305,5 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     is_refund = fields.Boolean(string="Is a refund?", readonly=True)
     tax_repartition_line_id = fields.Many2one(
         "account.tax.repartition.line",
-        string="Tax Repartition Line",
         readonly=True,
     )

@@ -25,7 +25,6 @@ class AccountMoveRenumberWizard(models.TransientModel):
     )
     sequence_id = fields.Many2one(
         comodel_name="ir.sequence",
-        string="Sequence",
         required=True,
         default=lambda self: self._default_entry_number_sequence(),
         domain="[('id', 'in', available_sequence_ids)]",
