@@ -1,0 +1,2 @@
+odoo-addon-base_sequence_option @ git+https://github.com/OCA/server-tools.git@refs/pull/3514/head#subdirectory=base_sequence_option
+odoo-addon-account_sequence_option @ git+https://github.com/OCA/account-financial-tools.git@refs/pull/2215/head#subdirectory=account_sequence_option
