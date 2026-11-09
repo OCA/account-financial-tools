@@ -19,7 +19,6 @@ class AssetAssetReport(models.Model):
     depreciation_date = fields.Date(readonly=True)
     asset_id = fields.Many2one(
         comodel_name="account.asset",
-        string="Asset",
         readonly=True,
     )
     asset_profile_id = fields.Many2one(
@@ -27,9 +26,7 @@ class AssetAssetReport(models.Model):
         string="Asset profile",
         readonly=True,
     )
-    partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", readonly=True
-    )
+    partner_id = fields.Many2one(comodel_name="res.partner", readonly=True)
     state = fields.Selection(
         selection=lambda self: self._selection_state(),
         string="Status",
@@ -46,9 +43,7 @@ class AssetAssetReport(models.Model):
     gross_value = fields.Float(string="Gross Amount", readonly=True)
     posted_value = fields.Float(string="Posted Amount", readonly=True)
     unposted_value = fields.Float(string="Unposted Amount", readonly=True)
-    company_id = fields.Many2one(
-        comodel_name="res.company", string="Company", readonly=True
-    )
+    company_id = fields.Many2one(comodel_name="res.company", readonly=True)
 
     def action_open_asset(self):
         self.ensure_one()

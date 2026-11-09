@@ -51,13 +51,11 @@ class AccountAssetProfile(models.Model):
     journal_id = fields.Many2one(
         comodel_name="account.journal",
         domain="[('type', '=', 'general'), ('company_id', '=', company_id)]",
-        string="Journal",
         check_company=True,
         required=True,
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         default=lambda self: self._default_company_id(),
     )
