@@ -14,14 +14,12 @@ class AccountMoveTemplate(models.Model):
     name = fields.Char(required=True)
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         required=True,
         ondelete="cascade",
         default=lambda self: self.env.company,
     )
     journal_id = fields.Many2one(
         "account.journal",
-        string="Journal",
         required=True,
         check_company=True,
         domain="[('company_id', '=', company_id)]",
@@ -121,14 +119,12 @@ class AccountMoveTemplateLine(models.Model):
     sequence = fields.Integer(required=True)
     account_id = fields.Many2one(
         "account.account",
-        string="Account",
         required=True,
         domain="[('company_ids', 'in', company_id), ('active', '=', True)]",
         check_company=True,
     )
     partner_id = fields.Many2one(
         "res.partner",
-        string="Partner",
         domain=["|", ("parent_id", "=", False), ("is_company", "=", True)],
     )
     tax_ids = fields.Many2many("account.tax", string="Taxes", check_company=True)
@@ -166,7 +162,6 @@ class AccountMoveTemplateLine(models.Model):
     )
     tax_repartition_line_id = fields.Many2one(
         "account.tax.repartition.line",
-        string="Tax Repartition Line",
         compute="_compute_tax_repartition_line_id",
         store=True,
     )
