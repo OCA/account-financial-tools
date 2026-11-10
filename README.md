@@ -24,14 +24,14 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_account_tag_code](account_account_tag_code/) | 19.0.1.0.0 |  | Add a code field to the accounts tags
 [account_asset_force_account](account_asset_force_account/) | 19.0.1.0.0 | <a href='https://github.com/BernatObrador'><img src='https://github.com/BernatObrador.png' width='32' height='32' style='border-radius:50%;' alt='BernatObrador'/></a> | Asset Force Account
-[account_asset_management](account_asset_management/) | 19.0.1.0.4 |  | Assets Management
-[account_chart_update](account_chart_update/) | 19.0.1.2.0 |  | Wizard to update a company's account chart from a template
-[account_check_deposit](account_check_deposit/) | 19.0.1.0.0 |  | Manage deposit of checks to the bank
+[account_asset_management](account_asset_management/) | 19.0.1.0.5 |  | Assets Management
+[account_chart_update](account_chart_update/) | 19.0.1.2.1 |  | Wizard to update a company's account chart from a template
+[account_check_deposit](account_check_deposit/) | 19.0.1.0.1 |  | Manage deposit of checks to the bank
 [account_fiscal_position_allowed_journal](account_fiscal_position_allowed_journal/) | 19.0.1.0.0 | <a href='https://github.com/ThomasBinsfeld'><img src='https://github.com/ThomasBinsfeld.png' width='32' height='32' style='border-radius:50%;' alt='ThomasBinsfeld'/></a> | Allow defining allowed journals on fiscal positions. Related invoices can only use one of the allowed journals on the fiscal position.
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 19.0.1.0.1 |  | Check VAT on invoice validation
-[account_fiscal_year](account_fiscal_year/) | 19.0.1.0.0 | <a href='https://github.com/eLBati'><img src='https://github.com/eLBati.png' width='32' height='32' style='border-radius:50%;' alt='eLBati'/></a> | Create Account Fiscal Year
+[account_fiscal_year](account_fiscal_year/) | 19.0.1.0.1 | <a href='https://github.com/eLBati'><img src='https://github.com/eLBati.png' width='32' height='32' style='border-radius:50%;' alt='eLBati'/></a> | Create Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 19.0.1.0.1 |  | Account Invoice Constraint Chronology
-[account_journal_general_sequence](account_journal_general_sequence/) | 19.0.1.0.3 | <a href='https://github.com/yajo'><img src='https://github.com/yajo.png' width='32' height='32' style='border-radius:50%;' alt='yajo'/></a> | Add configurable sequence to account moves, per journal
+[account_journal_general_sequence](account_journal_general_sequence/) | 19.0.1.0.4 | <a href='https://github.com/yajo'><img src='https://github.com/yajo.png' width='32' height='32' style='border-radius:50%;' alt='yajo'/></a> | Add configurable sequence to account moves, per journal
 [account_journal_lock_date](account_journal_lock_date/) | 19.0.1.0.0 |  | Lock each journal independently
 [account_journal_restrict_mode](account_journal_restrict_mode/) | 19.0.1.0.0 |  | Lock All Posted Entries of Journals.
 [account_lock_date_update](account_lock_date_update/) | 19.0.1.0.0 |  | Allow an Account adviser to update locking date without having access to all technical settings
@@ -39,11 +39,11 @@ addon | version | maintainers | summary
 [account_move_name_sequence](account_move_name_sequence/) | 19.0.1.0.5 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> <a href='https://github.com/moylop260'><img src='https://github.com/moylop260.png' width='32' height='32' style='border-radius:50%;' alt='moylop260'/></a> <a href='https://github.com/luisg123v'><img src='https://github.com/luisg123v.png' width='32' height='32' style='border-radius:50%;' alt='luisg123v'/></a> | Generate journal entry number from sequence
 [account_move_post_date_user](account_move_post_date_user/) | 19.0.1.0.0 | <a href='https://github.com/JordiMForgeFlow'><img src='https://github.com/JordiMForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='JordiMForgeFlow'/></a> | Trace journal entry posting date and user.
 [account_move_print](account_move_print/) | 19.0.1.0.0 | <a href='https://github.com/JordiBForgeFlow'><img src='https://github.com/JordiBForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='JordiBForgeFlow'/></a> | Adds the option to print Journal Entries
-[account_move_template](account_move_template/) | 19.0.1.0.0 |  | Templates for recurring Journal Entries
+[account_move_template](account_move_template/) | 19.0.1.0.1 |  | Templates for recurring Journal Entries
 [account_move_total_by_account_internal_group](account_move_total_by_account_internal_group/) | 19.0.1.0.0 |  | Adds Totals by Account Internal Group in Journal Entries
 [account_netting](account_netting/) | 19.0.1.0.0 |  | Compensate AR/AP accounts from the same partner
 [account_partner_required](account_partner_required/) | 19.0.1.0.0 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Adds an option 'partner policy' on accounts
-[account_payroll_sheet_import](account_payroll_sheet_import/) | 19.0.1.0.1 | <a href='https://github.com/BernatObrador'><img src='https://github.com/BernatObrador.png' width='32' height='32' style='border-radius:50%;' alt='BernatObrador'/></a> | Import payroll from sheet files and generate journal entries
+[account_payroll_sheet_import](account_payroll_sheet_import/) | 19.0.1.0.2 | <a href='https://github.com/BernatObrador'><img src='https://github.com/BernatObrador.png' width='32' height='32' style='border-radius:50%;' alt='BernatObrador'/></a> | Import payroll from sheet files and generate journal entries
 [account_usability](account_usability/) | 19.0.1.1.0 | <a href='https://github.com/legalsylvain'><img src='https://github.com/legalsylvain.png' width='32' height='32' style='border-radius:50%;' alt='legalsylvain'/></a> | Adds missing menu entries for Account module and adds the option to enable Saxon Accounting
 
 [//]: # (end addons)
