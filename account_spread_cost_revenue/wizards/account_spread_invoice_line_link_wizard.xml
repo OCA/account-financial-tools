@@ -18,10 +18,10 @@
                     </group>
                     <group>
                         <field name="spread_action_type" widget="radio" />
+                        <field name="spread_invoice_type_domain_ids" invisible="1" />
                         <field
                             name="spread_id"
                             attrs="{'invisible': [('spread_action_type', '!=', 'link')],'required': [('spread_action_type', '=', 'link')]}"
-                            domain="[('invoice_type', '=', invoice_type)]"
                             options="{'no_create': True}"
                         />
                         <field

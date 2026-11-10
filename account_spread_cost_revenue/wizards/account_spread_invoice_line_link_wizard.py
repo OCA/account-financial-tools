@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
@@ -140,6 +141,11 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         self.ensure_one()
 
         if self.spread_action_type == "link":
+            if self.spread_id.invoice_line_ids - self.invoice_line_id:
+                raise UserError(
+                    _("The spread board %s is already linked to another invoice line.")
+                    % self.spread_id.display_name
+                )
             if not self.invoice_line_id.spread_id:
                 self.invoice_line_id.spread_id = self.spread_id
 
