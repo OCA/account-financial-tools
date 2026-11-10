@@ -839,3 +839,20 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         wizard1.spread_id = self.spread
         wizard1.confirm()
         self.assertEqual(self.spread.total_amount, bill_line.balance)
+
+    def test_17_link_spread_already_linked(self):
+        self.vendor_bill_line.spread_id = self.spread
+        other_bill = self.create_account_invoice("in_invoice")
+        other_line = other_bill.invoice_line_ids[0]
+        Wizard = self.env["account.spread.invoice.line.link.wizard"]
+        wizard = Wizard.with_context(
+            default_invoice_line_id=other_line.id,
+            default_company_id=self.env.company.id,
+            allow_spread_planning=True,
+        ).create({})
+        self.assertNotIn(self.spread, wizard.spread_invoice_type_domain_ids)
+        wizard.spread_id = self.spread
+        with self.assertRaises(UserError):
+            wizard.confirm()
+        self.assertFalse(other_line.spread_id)
+        self.assertEqual(self.spread.invoice_line_ids, self.vendor_bill_line)
