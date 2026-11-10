@@ -185,14 +185,12 @@ class AccountMoveLine(models.Model):
 
     asset_profile_id = fields.Many2one(
         comodel_name="account.asset.profile",
-        string="Asset Profile",
         compute="_compute_asset_profile",
         store=True,
         readonly=False,
     )
     asset_id = fields.Many2one(
         comodel_name="account.asset",
-        string="Asset",
         ondelete="restrict",
         check_company=True,
         copy=False,
