@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_account_deactivation_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: account_account_deactivation_date
+#: model:ir.model.fields,help:account_account_deactivation_date.field_account_account__deactivation_date
+msgid ""
+"Effective accounting date from which the account can no longer be used. It "
+"is not the day the change is saved. Once the date is today or in the past, "
+"the account is deprecated. Entries dated before it remain valid."
+msgstr ""
+"Data contábil efetiva a partir da qual a conta não pode mais ser usada. Não "
+"é o dia em que a alteração foi gravada. Quando a data é hoje ou passada, a "
+"conta fica obsoleta. Lançamentos com data anterior continuam válidos."
+
+#. module: account_account_deactivation_date
+#. odoo-python
+#: code:addons/account_account_deactivation_date/models/account_account.py:0
+msgid "Past deactivation date"
+msgstr "Data de inativação no passado"
+
+#. module: account_account_deactivation_date
+#. odoo-python
+#: code:addons/account_account_deactivation_date/models/account_account.py:0
+msgid ""
+"This date is in the past. The account is deprecated immediately. Journal "
+"entries dated on or after this date are rejected, including dates before "
+"today. The date is the effective accounting date, not the day of this "
+"change."
+msgstr ""
+"Esta data está no passado. A conta fica obsoleta imediatamente. Lançamentos "
+"com data contábil igual ou posterior a ela são recusados, inclusive datas "
+"anteriores a hoje. A data é a data contábil efetiva, não o dia desta "
+"alteração."

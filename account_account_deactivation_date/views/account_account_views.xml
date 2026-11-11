@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_account_form" model="ir.ui.view">
+        <field name="name">account.account.form (deactivation date)</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form" />
+        <field name="arch" type="xml">
+            <field name="deprecated" position="attributes">
+                <attribute name="readonly">deactivation_date</attribute>
+            </field>
+            <field name="deprecated" position="after">
+                <field name="deactivation_date" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_list" model="ir.ui.view">
+        <field name="name">account.account.list (deactivation date)</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list" />
+        <field name="arch" type="xml">
+            <field name="allowed_journal_ids" position="after">
+                <field name="deactivation_date" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_search" model="ir.ui.view">
+        <field name="name">account.account.search (deactivation date)</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_search" />
+        <field name="arch" type="xml">
+            <filter name="activeacc" position="after">
+                <filter
+                    string="Inactive Account"
+                    name="inactiveacc"
+                    domain="[('deprecated', '=', True)]"
+                />
+                <filter
+                    string="Scheduled Deactivation"
+                    name="scheduled_deactivation"
+                    domain="[('deactivation_date', '&gt;', context_today().strftime('%Y-%m-%d'))]"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
