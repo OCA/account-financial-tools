@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="intercompany_transaction_entry_creation_mail_template"
+        model="mail.template"
+    >
+        <field name="name">Intercompany Transaction Entry Creation</field>
+        <field name="model_id" ref="account.model_account_move" />
+        <field
+            name="email_from"
+        >{{ ctx.get('email_from', (object.user_id.email_formatted or object.company_id.email_formatted or user.email_formatted)) }}</field>
+        <field name="partner_to">{{ ctx.get('email_to_partner_ids', '') }}</field>
+        <field
+            name="subject"
+        >Intercompany Transaction Entry Creation({{ ctx.get('from_company_name', '') }} -> {{ ctx.get('to_company_name', '') }})</field>
+        <field name="lang">{{ user.lang }}</field>
+        <field
+            name="description"
+        >Sent to manager users on 'Intercompany Transaction' entry creation</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p
+                    style="margin: 0px; padding: 0px; font-size: 13px; line-height: 1.5; font-family: Arial, sans-serif;"
+                >
+                    <t
+                    t-set="from_company_name"
+                    t-value="ctx.get('from_company_name', '')"
+                />
+                    Dear User,
+                    <br /><br />
+                    Intercompany Transaction Entry
+                    (<strong>
+                    <t t-out="from_company_name" />
+                </strong> -> <strong>
+                    <t t-out="ctx.get('to_company_name', '')" />
+                </strong>)
+                    has been generated:
+                    <a
+                    t-att-href="object.get_record_url(ctx.get('to_move_id'), object.env.ref('intercompany_transaction.action_intercompany_transaction_entries').id)"
+                    t-att-target="_blank"
+                >Click here to view entry</a>
+                    <br /><br />
+                    If you've any queries, kindly contact concerned person.
+                    <br /><br />
+                    Regards,<br />
+                    <t t-out="from_company_name" />
+                </p>
+            </div>
+        </field>
+        <field name="report_template_ids" eval="[]" />
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <record
+        id="intercompany_transaction_entry_cancellation_mail_template"
+        model="mail.template"
+    >
+        <field name="name">Intercompany Transaction Entry Cancellation</field>
+        <field name="model_id" ref="account.model_account_move" />
+        <field
+            name="email_from"
+        >{{ ctx.get('email_from', (object.user_id.email_formatted or object.company_id.email_formatted or user.email_formatted)) }}</field>
+        <field name="partner_to">{{ ctx.get('email_to_partner_ids', '') }}</field>
+        <field
+            name="subject"
+        >Intercompany Transaction Entry Cancellation({{ ctx.get('from_company_name', '') }} -> {{ ctx.get('to_company_name', '') }})</field>
+        <field name="lang">{{ user.lang }}</field>
+        <field
+            name="description"
+        >Sent to manager users on 'Intercompany Transaction' entry cancellation</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p
+                    style="margin: 0px; padding: 0px; font-size: 13px; line-height: 1.5; font-family: Arial, sans-serif;"
+                >
+                    <t
+                    t-set="from_company_name"
+                    t-value="ctx.get('from_company_name', '')"
+                />
+                    Dear User,
+                    <br /><br />
+                    Intercompany Transaction Entry
+                    (<strong>
+                    <t t-out="from_company_name" />
+                </strong> -> <strong>
+                    <t t-out="ctx.get('to_company_name', '')" />
+                </strong>) has been cancelled:
+                    <a
+                    t-att-href="object.get_record_url(ctx.get('to_move_id', ''), object.env.ref('intercompany_transaction.action_intercompany_transaction_entries').id)"
+                    t-att-target="_blank"
+                >Click here to view entry</a>
+                    <br /><br />
+                    If you've any queries, kindly contact concerned person.
+                    <br /><br />
+                    Regards,<br />
+                    <t t-out="from_company_name" />
+                </p>
+            </div>
+        </field>
+        <field name="report_template_ids" eval="[]" />
+        <field name="auto_delete" eval="True" />
+    </record>
+</odoo>
