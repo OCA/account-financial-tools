@@ -141,7 +141,9 @@ class AccountMove(models.Model):
     def _post(self, soft=True):
         self.flush_recordset()
         res = super()._post(soft=soft)
-        self._set_payment_reference_from_move_name_if_needed()
+        # Since `name` is now computed, _inverse_name is not triggered and thus
+        # the payment reference is not recomputed, so we do it explicitly here
+        self.filtered("journal_id.sequence_id")._compute_payment_reference()
         return res
 
     @api.depends()
@@ -151,14 +153,3 @@ class AccountMove(models.Model):
         like when creating entry from email.
         """
         return self._compute_name_by_sequence()
-
-    def _set_payment_reference_from_move_name_if_needed(self):
-        for move in self:
-            if (
-                not move.payment_reference
-                and move.journal_id.sequence_id
-                and move.state == "posted"
-                and move.move_type == "out_invoice"
-                and move.name
-            ):
-                move.payment_reference = move.name
