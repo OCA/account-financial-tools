@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_update_multi_chart" model="ir.ui.view">
+        <field name="name">Update Chart of Accounts from a Chart Template</field>
+        <field name="model">wizard.update.charts.accounts</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field
+                        name="state"
+                        select="2"
+                        widget="statusbar"
+                        statusbar_visible="init,ready,done"
+                        statusbar_colors='{"ready":"blue","done":"blue"}'
+                    />
+                </header>
+                <div invisible="state!='init'">
+                    <h3>
+                        <p>
+                            <center>
+                            This wizard will update your accounts, taxes and
+                            fiscal positions according to the selected chart
+                            template
+                        </center>
+                        </p>
+                    </h3>
+                </div>
+                <group string="Chart of Accounts" invisible="state!='init'">
+                    <field name="company_id" domain="[('parent_id', '=', False)]" />
+                    <field name="code_digits" invisible="1" />
+                    <field name="chart_template" required="1" />
+                </group>
+                <notebook invisible="state!='init'">
+                    <page string="General options" name="page_general_options">
+                        <group>
+                            <group string="Update records?">
+                                <field name="update_account" />
+                                <field name="update_tax_group" />
+                                <field name="update_tax" />
+                                <field name="update_fiscal_position" />
+                            </group>
+                        </group>
+                        <div>
+                            <h5>
+                                <p>
+                                If you leave these options set, the wizard will
+                                not just create new records, but also update
+                                records with changes (i.e. different tax amount)
+                            </p>
+                                <p>
+                                Note: Only the changed fields are updated.
+                            </p>
+                            </h5>
+                        </div>
+                    </page>
+                    <page
+                        string="Field options"
+                        invisible="not update_account and not update_tax_group and not update_tax and not update_fiscal_position"
+                    >
+                        <h3>
+                            <p>
+                            Here you can select the fields you want to check if
+                            they have been updated in the templates.
+                        </p>
+                        </h3>
+                        <notebook>
+                            <page
+                                string="Accounts"
+                                name="page_fields_accounts"
+                                invisible="not update_account"
+                            >
+                                <field
+                                    name="account_field_ids"
+                                    widget="many2many_checkboxes"
+                                    context="{'account_chart_update': True}"
+                                />
+                            </page>
+                            <page
+                                string="Tax Group"
+                                name="page_fields_tax_groups"
+                                invisible="not update_tax_group"
+                            >
+                                <field
+                                    name="tax_group_field_ids"
+                                    widget="many2many_checkboxes"
+                                    context="{'account_chart_update': True}"
+                                />
+                            </page>
+                            <page
+                                string="Taxes"
+                                name="page_fields_taxes"
+                                invisible="not update_tax"
+                            >
+                                <field
+                                    name="tax_field_ids"
+                                    widget="many2many_checkboxes"
+                                    context="{'account_chart_update': True}"
+                                />
+                            </page>
+                            <page
+                                string="Fiscal positions"
+                                name="page_fields_fps"
+                                invisible="not update_fiscal_position"
+                            >
+                                <field
+                                    name="fp_field_ids"
+                                    widget="many2many_checkboxes"
+                                    context="{'account_chart_update': True}"
+                                />
+                            </page>
+                        </notebook>
+                    </page>
+                    <page
+                        string="Matching"
+                        invisible="not update_account and not update_tax_group and not update_tax and not update_fiscal_position"
+                    >
+                        <h3>
+                            <p>Here you can set the matching order.</p>
+                        </h3>
+                        <notebook>
+                            <page
+                                string="Accounts"
+                                name="page_matching_accounts"
+                                invisible="not update_account"
+                            >
+                                <field name="account_matching_ids">
+                                    <list create="false" edit="false">
+                                        <field name="sequence" widget="handle" />
+                                        <field name="matching_value" />
+                                    </list>
+                                    <form>
+                                        <field name="matching_value" readonly="1" />
+                                    </form>
+                                </field>
+                            </page>
+                            <page
+                                string="Tax groups"
+                                name="page_matching_tax_groups"
+                                invisible="not update_tax_group"
+                            >
+                                <field name="tax_group_matching_ids">
+                                    <list create="false" edit="false">
+                                        <field name="sequence" widget="handle" />
+                                        <field name="matching_value" />
+                                    </list>
+                                    <form>
+                                        <field name="matching_value" readonly="1" />
+                                    </form>
+                                </field>
+                            </page>
+                            <page
+                                string="Taxes"
+                                name="page_matching_taxes"
+                                invisible="not update_tax"
+                            >
+                                <field name="tax_matching_ids">
+                                    <list create="false" edit="false">
+                                        <field name="sequence" widget="handle" />
+                                        <field name="matching_value" />
+                                    </list>
+                                    <form>
+                                        <field name="matching_value" readonly="1" />
+                                    </form>
+                                </field>
+                            </page>
+                            <page
+                                string="Fiscal positions"
+                                name="page_matching_fps"
+                                invisible="not update_fiscal_position"
+                            >
+                                <field name="fp_matching_ids">
+                                    <list create="false" edit="false">
+                                        <field name="sequence" widget="handle" />
+                                        <field name="matching_value" />
+                                    </list>
+                                    <form>
+                                        <field name="matching_value" readonly="1" />
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </page>
+                </notebook>
+                <div invisible="state!='ready'">
+                    <h3>Records to create/update</h3>
+                    <notebook>
+                        <page string="Accounts" invisible="not update_account">
+                            <field name="account_ids" nolabel="1">
+                                <list
+                                    create="false"
+                                    edit="false"
+                                    decoration-danger="type=='updated'"
+                                >
+                                    <field
+                                        name="update_account_id"
+                                        context="{'active_test': False}"
+                                        invisible="not update_account_id"
+                                    />
+                                    <field name="xml_id" optional="hide" />
+                                    <field name="notes" />
+                                    <field name="type" />
+                                </list>
+                                <form edit="false">
+                                    <group col="2">
+                                        <group>
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field
+                                                name="update_account_id"
+                                                context="{'active_test': False}"
+                                            />
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Tax groups" invisible="not update_tax_group">
+                            <field name="tax_group_ids" nolabel="1">
+                                <list
+                                    create="false"
+                                    edit="false"
+                                    decoration-danger="type=='updated'"
+                                >
+                                    <field
+                                        name="update_tax_group_id"
+                                        invisible="not update_tax_group_id"
+                                    />
+                                    <field name="xml_id" optional="hide" />
+                                    <field name="notes" />
+                                    <field name="type" />
+                                </list>
+                                <form edit="false">
+                                    <group col="2">
+                                        <group>
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field name="update_tax_group_id" />
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Taxes" invisible="not update_tax">
+                            <field name="tax_ids" nolabel="1">
+                                <list
+                                    create="false"
+                                    edit="false"
+                                    decoration-danger="type=='updated'"
+                                >
+                                    <field
+                                        name="update_tax_id"
+                                        invisible="not update_tax_id"
+                                    />
+                                    <field name="xml_id" optional="hide" />
+                                    <field name="type_tax_use" />
+                                    <field name="notes" />
+                                    <field name="type" />
+                                </list>
+                                <form edit="false">
+                                    <group col="2">
+                                        <group>
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field name="type_tax_use" />
+                                            <field name="update_tax_id" />
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page
+                            string="Fiscal positions"
+                            invisible="not update_fiscal_position"
+                        >
+                            <field name="fiscal_position_ids" nolabel="1">
+                                <list
+                                    name="fiscal_positions"
+                                    create="false"
+                                    edit="false"
+                                    decoration-danger="type=='updated'"
+                                >
+                                    <field
+                                        name="update_fiscal_position_id"
+                                        invisible="not update_fiscal_position_id"
+                                    />
+                                    <field name="xml_id" optional="hide" />
+                                    <field name="notes" />
+                                    <field name="type" />
+                                </list>
+                                <form edit="false">
+                                    <group col="2">
+                                        <group>
+                                            <field name="xml_id" />
+                                            <field name="type" readonly="1" />
+                                            <field name="notes" />
+                                        </group>
+                                        <group>
+                                            <field name="update_chart_wizard_id" />
+                                            <field name="update_fiscal_position_id" />
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </div>
+                <group col="4" colspan="4" invisible="state!='done'">
+                    <separator colspan="4" string="Log" />
+                    <field name="log" colspan="4" nolabel="1" />
+                    <group colspan="4">
+                        <separator colspan="4" string="Summary of created objects" />
+                        <field name="new_accounts" />
+                        <field name="new_tax_groups" />
+                        <field name="new_taxes" />
+                        <field name="new_fps" />
+                    </group>
+                    <group colspan="4">
+                        <separator colspan="4" string="Summary of updated objects" />
+                        <field name="updated_accounts" />
+                        <field name="updated_tax_groups" />
+                        <field name="updated_taxes" />
+                        <field name="deleted_taxes" />
+                        <field name="updated_fps" />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="action_find_records"
+                        string="Next"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state!='init'"
+                    />
+                    <button
+                        name="action_init"
+                        string="Previous"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state!='ready'"
+                    />
+                    <button
+                        name="action_update_records"
+                        string="Create/Update"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state!='ready'"
+                    />
+                    <button special="cancel" string="Close" class="btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_wizard_update_chart" model="ir.actions.act_window">
+        <field name="name">Update chart of accounts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.update.charts.accounts</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
