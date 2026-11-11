@@ -487,7 +487,7 @@ class AssetReportXlsx(models.AbstractModel):
             group_entry["_depreciation_base"] += asset.depreciation_base
             group_entry["_salvage_value"] += asset.salvage_value
             dls_all = asset.depreciation_line_ids.filtered(
-                lambda r: r.type == "depreciate"
+                lambda r: r.type in ("depreciate", "remove")
             )
             dls_all = dls_all.sorted(key=lambda r: r.line_date)
             if not dls_all and asset.method_number:
@@ -505,16 +505,12 @@ class AssetReportXlsx(models.AbstractModel):
             # period_end_value
             dls = dls_all.filtered(lambda r: r.line_date <= wiz.date_to)
             if dls:
-                value_depreciated = dls[-1].depreciated_value + dls[-1].amount
+                asset_entry["_period_end_value"] = dls[-1].remaining_value
             else:
-                value_depreciated = 0.0
-            asset_entry["_period_end_value"] = (
-                asset.depreciation_base - value_depreciated
-            )
+                asset_entry["_period_end_value"] = asset.depreciation_base
             group_entry["_period_end_value"] += asset_entry["_period_end_value"]
 
             asset_entries.append(asset_entry)
-
         todos = []
         for g in group.child_ids:
             if _has_assets(g, group_val[g]):
