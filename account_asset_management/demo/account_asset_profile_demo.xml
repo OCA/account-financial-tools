@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="demo_asset_profile" model="account.asset.profile">
+        <field name="name">Demo Hardware</field>
+        <field name="account_asset_id" ref="demo_asset_account" />
+        <field name="account_depreciation_id" ref="demo_depreciation_account" />
+        <field
+            name="account_expense_depreciation_id"
+            ref="demo_depreciation_expense_account"
+        />
+        <field name="journal_id" ref="demo_asset_journal" />
+        <field name="method">linear</field>
+        <field name="method_time">year</field>
+        <field name="method_number">3</field>
+        <field name="method_period">year</field>
+        <field name="prorata" eval="True"/>
+    </record>
+    <record id="demo_vehicle_profile" model="account.asset.profile">
+        <field name="name">Demo Vehicles</field>
+        <field name="account_asset_id" ref="demo_asset_account" />
+        <field name="account_depreciation_id" ref="demo_depreciation_account" />
+        <field
+            name="account_expense_depreciation_id"
+            ref="demo_depreciation_expense_account"
+        />
+        <field name="journal_id" ref="demo_asset_journal" />
+        <field name="method">linear</field>
+        <field name="method_time">year</field>
+        <field name="method_number">5</field>
+        <field name="method_period">year</field>
+        <field name="prorata" eval="True"/>
+    </record>
+</odoo>

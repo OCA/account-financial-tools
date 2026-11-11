@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="demo_asset_account" model="account.account">
+        <field name="name">Demo Fixed Assets</field>
+        <field name="code">150000</field>
+        <field name="account_type">asset_fixed</field>
+        <field name="company_ids" eval="[Command.link(ref('base.main_company'))]" />
+    </record>
+    <record id="demo_depreciation_account" model="account.account">
+        <field name="name">Demo Accumulated Depreciation</field>
+        <field name="code">150001</field>
+        <field name="account_type">asset_fixed</field>
+        <field name="company_ids" eval="[Command.link(ref('base.main_company'))]" />
+    </record>
+    <record id="demo_depreciation_expense_account" model="account.account">
+        <field name="name">Demo Depreciation Expense</field>
+        <field name="code">681000</field>
+        <field name="account_type">expense_depreciation</field>
+        <field name="company_ids" eval="[Command.link(ref('base.main_company'))]" />
+    </record>
+    <record id="demo_income_account" model="account.account">
+        <field name="name">Demo Income from Assets</field>
+        <field name="code">451000</field>
+        <field name="account_type">income_other</field>
+        <field name="company_ids" eval="[Command.link(ref('base.main_company'))]" />
+    </record>
+</odoo>
