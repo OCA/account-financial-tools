@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-oca-account-financial-tools"
-version = "20.0.20261021.0"
+version = "20.0.20261111.0"
 dependencies = [
+    "odoo-addon-account_move_line_tax_editable==20.0.*",
     "odoo-addon-account_usability==20.0.*",
 ]
 classifiers=[
