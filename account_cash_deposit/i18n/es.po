@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-04-12 13:11+0000\n"
-"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
+"PO-Revision-Date: 2026-11-11 12:46+0000\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr ""
 #. module: account_cash_deposit
 #: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
 msgid "<strong>Currency:</strong>"
-msgstr "<strong>Divisa:</strong>"
+msgstr "<strong>Moneda:</strong>"
 
 #. module: account_cash_deposit
 #: model_terms:ir.ui.view,arch_db:account_cash_deposit.report_cashdeposit
@@ -285,7 +285,7 @@ msgstr "Creado el"
 #: model:ir.model.fields,field_description:account_cash_deposit.field_cash_unit__currency_id
 #: model_terms:ir.ui.view,arch_db:account_cash_deposit.account_cash_deposit_search
 msgid "Currency"
-msgstr "Divisa"
+msgstr "Moneda"
 
 #. module: account_cash_deposit
 #: model:ir.model.fields,field_description:account_cash_deposit.field_account_cash_deposit__date
@@ -702,7 +702,7 @@ msgstr "Historial de la comunicación en la página web"
 #: code:addons/account_cash_deposit/models/account_cash_deposit.py:0
 msgid "You must delete cash lines that are linked to a currency other than %s."
 msgstr ""
-"Debe eliminar las líneas de caja que estén vinculadas a una divisa distinta "
+"Debe eliminar las líneas de caja que estén vinculadas a una moneda distinta "
 "de %s."
 
 #~ msgid "SMS Delivery error"
