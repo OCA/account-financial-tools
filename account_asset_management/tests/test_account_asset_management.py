@@ -1060,3 +1060,23 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_unlink_analytic_account_used_on_asset(self):
+        """An analytic account used by an asset can not be deleted: the asset
+        distribution is a JSON field, so no foreign key protects it."""
+        asset = self.asset_model.create(
+            {
+                "name": "test asset analytic",
+                "profile_id": self.ict3Y.id,
+                "purchase_value": 1500,
+                "date_start": time.strftime("%Y-07-07"),
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "year",
+                "analytic_distribution": {str(self.analytic_account.id): 100.0},
+            }
+        )
+        self.assertTrue(asset.analytic_distribution)
+        with self.assertRaises(UserError):
+            self.analytic_account.unlink()
+        self.assertTrue(self.analytic_account.exists())
