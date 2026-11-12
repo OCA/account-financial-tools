@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_loan_line_tree" model="ir.ui.view">
+        <field name="name">account.loan.line.list</field>
+        <field name="model">account.loan.line</field>
+        <field name="priority">99</field>
+        <field name="inherit_id" ref="account_loan.account_loan_line_tree" />
+        <field name="arch" type="xml">
+            <field name="loan_state" position="after">
+                <field name="loan_type" column_invisible="True" />
+            </field>
+        </field>
+    </record>
+</odoo>
