@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Copyright 2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+    <record id="account_fiscal_year_rule" model="ir.access">
+        <field name="name">Fiscal Year multi-company</field>
+        <field name="model_id" ref="model_account_fiscal_year" />
+        <field name="operation">crud</field>
+        <field
+            name="domain"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
