@@ -193,7 +193,8 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                     spread_account_id = self.invoice_line_id.account_id.id
 
                 spread_vals = self.template_id._prepare_spread_from_template(
-                    spread_account_id=spread_account_id
+                    spread_account_id=spread_account_id,
+                    invoice_type=self.invoice_type,
                 )
                 date_invoice = self.invoice_id.invoice_date
                 date_invoice = date_invoice or self.template_id.start_date
@@ -204,7 +205,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                     f"({spread_vals['name']} { self.invoice_line_id.name})"
                 )
 
-                if spread_vals["invoice_type"] == "out_invoice":
+                if spread_vals["invoice_type"] in ("out_invoice", "in_refund"):
                     spread_vals["credit_account_id"] = account.id
                 else:
                     spread_vals["debit_account_id"] = account.id
