@@ -10,8 +10,14 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <group id="company" groups="base.group_multi_company">
+                        <field
+                            name="company_id"
+                            domain="[('id', 'in', allowed_company_ids)]"
+                            options="{'no_create': True, 'no_open': True}"
+                        />
+                    </group>
                     <group id="soft_lock_dates" string="Reversible Lock Dates">
-                        <field name="company_id" invisible="1" />
                         <field name="sale_lock_date" options="{'warn_future': true}" />
                         <field
                             name="purchase_lock_date"
