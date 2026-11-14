@@ -215,7 +215,7 @@ class AccountSpread(models.Model):
     @api.depends("unposted_amount")
     def _compute_all_posted(self):
         for spread in self:
-            rounding = self.currency_id.rounding
+            rounding = spread.currency_id.rounding
             unposted = spread.unposted_amount
             spread.all_posted = float_is_zero(unposted, precision_rounding=rounding)
 
