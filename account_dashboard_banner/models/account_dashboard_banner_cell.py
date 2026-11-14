@@ -16,6 +16,11 @@ class AccountDashboardBannerCell(models.Model):
     _order = "sequence, id"
 
     sequence = fields.Integer()
+    active = fields.Boolean(
+        string="Displayed",
+        default=True,
+        help="Uncheck to hide the cell from the banner, without deleting it.",
+    )
     cell_type = fields.Selection(
         [
             ("income_fiscalyear", "Fiscal Year-to-date Income"),
@@ -115,10 +120,142 @@ class AccountDashboardBannerCell(models.Model):
             cell.warn_lock_date_days = warn_lock_date_days
 
     @api.model
-    def get_banner_data(self):
-        """This is the method called by the JS code that displays the banner"""
+    def get_banner_data(self, currency_id=None):
+        """This is the method called by the JS code that displays the banner.
+
+        With several companies selected, currency_id is the currency of the
+        totals, chosen in the banner among get_banner_currencies().
+        """
+        companies = self.env.companies
+        if len(companies) > 1:
+            return self._prepare_banner_data_multi_company(companies, currency_id)
         company = self.env.company
         return self._prepare_banner_data(company)
+
+    @api.model
+    def get_banner_currencies(self):
+        """Currencies of the selected companies, the one of the current company
+        first: when there are several, the banner offers to choose the currency
+        of its totals among them."""
+        currencies = (
+            self.env.company.currency_id | self.env.companies.currency_id.sorted("name")
+        )
+        return [{"id": currency.id, "name": currency.name} for currency in currencies]
+
+    @api.model
+    def _prepare_banner_data_multi_company(self, companies, currency_id=None):
+        """Banner when several companies are selected in the company switcher.
+
+        Each cell is computed for each company as if that company were the only
+        one selected (with_company: the default receivable and payable accounts
+        depend on the current company), then the results are merged cell by cell.
+        The totals are in the currency currency_id when it is the currency of one
+        of the companies, otherwise in the currency of the current company.
+        """
+        companies = companies.sorted()
+        currency = self.env.company.currency_id
+        if currency_id and currency_id in companies.currency_id.ids:
+            currency = self.env["res.currency"].browse(currency_id)
+        cells = self.search([])
+        company2speedy = {
+            company: cells.with_company(company)._prepare_speedy(company)
+            for company in companies
+        }
+        res = {}
+        seq = 0
+        for cell in cells:
+            seq += 1
+            company2cell_data = {}
+            for company in companies:
+                company_cell = cell.with_company(company)
+                cell_data = company_cell._prepare_cell_data(
+                    company, company2speedy[company]
+                )
+                company_cell._update_cell_warn(cell_data)
+                company2cell_data[company] = cell_data
+            res[seq] = cell._merge_cell_data(company2cell_data, currency)
+        return res
+
+    @api.model
+    def _get_amount_cell_types(self):
+        """Cell types whose raw value is an amount in the currency of the company.
+        With several companies, these amounts are converted and summed. Inherit
+        to add a cell type."""
+        return [
+            "income_fiscalyear",
+            "income_year",
+            "income_quarter",
+            "income_month",
+            "liquidity",
+            "customer_debt",
+            "customer_overdue",
+            "supplier_debt",
+        ]
+
+    def _merge_cell_data(self, company2cell_data, currency):
+        """Merge the data of a cell computed for several companies.
+
+        Lock dates are set per company: the value is the oldest lock date, up to
+        which all the companies are locked (none if a company has no lock date).
+        Amounts are summed in the given currency: the amount of a company in
+        that currency is taken as is, the others are converted at the latest
+        rate known by the current company. Other cell types (added by other
+        modules) keep the value of the current company. The cell warns if it
+        warns for one of the companies.
+        """
+        self.ensure_one()
+        company_cell_data = list(company2cell_data.items())
+        res = dict(company_cell_data[0][1])
+        if self.cell_type.endswith("lock_date"):
+            lock_dates = [cell_data["raw_value"] for __, cell_data in company_cell_data]
+            raw_value = all(lock_dates) and min(lock_dates)
+            value = raw_value and format_date(self.env, raw_value)
+            multi_tooltip = _(
+                "Lock dates are set per company. With several companies, "
+                "the date shown is the oldest one: up to it, all the selected "
+                "companies are locked."
+            )
+        elif self.cell_type in self._get_amount_cell_types():
+            today = fields.Date.context_today(self)
+            amounts = [
+                cell_company.currency_id._convert(
+                    cell_data["raw_value"], currency, self.env.company, today
+                )
+                for cell_company, cell_data in company_cell_data
+                if cell_data["raw_value"] is not False  # False: nothing computed
+            ]
+            raw_value = currency.round(sum(amounts)) if amounts else False
+            value = amounts and format_amount(self.env, raw_value, currency)
+            multi_tooltip = _(
+                "Total of the selected companies in %(currency)s: the amounts of "
+                "the companies in another currency are converted at the latest "
+                "known rate.",
+                currency=currency.name,
+            )
+        else:
+            current = company2cell_data.get(self.env.company, res)
+            raw_value = current["raw_value"]
+            value = current["value"]
+            multi_tooltip = False
+        tooltip = self.custom_tooltip
+        if not tooltip and not multi_tooltip:
+            tooltip = current["tooltip"]
+        elif not tooltip:
+            company_tooltips = {
+                cell_data["tooltip"] for __, cell_data in company_cell_data
+            }
+            tooltip = multi_tooltip
+            if len(company_tooltips) == 1 and company_tooltips != {False}:
+                tooltip = f"{company_tooltips.pop()} {multi_tooltip}"
+        res.update(
+            {
+                "raw_value": raw_value,
+                "value": value or _("None"),
+                "tooltip": tooltip,
+                "warn": any(cell_data["warn"] for __, cell_data in company_cell_data),
+            }
+        )
+        return res
 
     def _prepare_speedy(self, company):
         lock_date_fields = [
