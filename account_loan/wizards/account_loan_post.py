@@ -89,7 +89,10 @@ class AccountLoanPost(models.TransientModel):
     def run(self):
         self.ensure_one()
         if self.loan_id.line_ids:
-            total_principal = sum(self.loan_id.line_ids.mapped("principal_amount"))
+            total_principal = (
+                sum(self.loan_id.line_ids.mapped("principal_amount"))
+                + self.loan_id.residual_amount
+            )
             if (
                 float_compare(
                     self.loan_id.loan_amount, total_principal, precision_digits=2
