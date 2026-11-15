@@ -181,7 +181,10 @@
                                     <field
                                         name="long_term_loan_account_id"
                                         readonly="state != 'draft'"
+                                        invisible="not is_long_term"
+                                        required="is_long_term"
                                     />
+                                    <field name="is_long_term" invisible="1" />
                                     <field
                                         name="interest_expenses_account_id"
                                         readonly="state != 'draft'"
