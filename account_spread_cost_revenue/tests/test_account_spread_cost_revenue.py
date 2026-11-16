@@ -3,6 +3,7 @@
 
 import datetime
 
+from freezegun import freeze_time
 from psycopg2.errors import NotNullViolation
 
 from odoo.exceptions import ValidationError
@@ -103,6 +104,13 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertFalse(spread.display_create_all_moves)
         self.assertTrue(spread.display_recompute_buttons)
         self.assertTrue(spread.display_move_line_auto_post)
+
+    def test_01_spread_date_default_current_year(self):
+        # The default start date is January 1st of the current year, not of
+        # the year the server was started
+        with freeze_time("2030-06-15"):
+            spread_form = Form(self.env["account.spread"])
+        self.assertEqual(spread_form.spread_date, datetime.date(2030, 1, 1))
 
     def test_02_config_defaults(self):
         self.assertFalse(self.env.company.default_spread_revenue_account_id)

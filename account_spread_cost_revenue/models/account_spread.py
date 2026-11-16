@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import calendar
-import time
 
 from dateutil.relativedelta import relativedelta
 from markupsafe import Markup
@@ -91,7 +90,9 @@ class AccountSpread(models.Model):
         "account.spread.line", "spread_id", string="Spread Lines"
     )
     spread_date = fields.Date(
-        string="Start Date", default=time.strftime("%Y-01-01"), required=True
+        string="Start Date",
+        default=lambda self: fields.Date.context_today(self).replace(month=1, day=1),
+        required=True,
     )
     journal_id = fields.Many2one(
         "account.journal",
