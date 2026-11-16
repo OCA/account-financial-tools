@@ -20,7 +20,7 @@ class AccountLoan(models.TransientModel):
     cancel_loan = fields.Boolean(
         default=False,
     )
-    date = fields.Date(required=True, default=fields.Date.today())
+    date = fields.Date(required=True, default=fields.Date.context_today)
     amount = fields.Monetary(
         currency_field="currency_id",
         string="Amount to reduce from Principal",
