@@ -39,7 +39,7 @@
                                     style="display: block; margin: 0 auto;"
                                 />
                             </t>
-                                <span t-field="asset.number" />
+                            <span t-field="asset.number" />
                         </t>
                         <t t-else="">
                             <span class="text-muted">No number available</span>
