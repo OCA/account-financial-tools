@@ -25,7 +25,6 @@ class AccountMoveRenumberWizard(models.TransientModel):
     )
     sequence_id = fields.Many2one(
         comodel_name="ir.sequence",
-        string="Sequence",
         required=True,
         default=lambda self: self._default_entry_number_sequence(),
         domain="[('id', 'in', available_sequence_ids)]",
@@ -36,17 +35,18 @@ class AccountMoveRenumberWizard(models.TransientModel):
     @api.model
     def _default_starting_date(self):
         """Start by default on day 1 of current year."""
-        return date(date.today().year, 1, 1)
+        today = fields.Date.context_today(self)
+        return date(today.year, 1, 1)
 
     @api.model
     def _default_entry_number_sequence(self):
         """Get default sequence if it exists."""
         return self.env["ir.sequence"].search(
             [
-                "&",
                 ("code", "=", "account_journal_general_sequence.default"),
-                ("company_id", "in", self.env.companies.ids),
-            ]
+                ("company_id", "=", self.env.company.id),
+            ],
+            limit=1,
         )
 
     @api.model
