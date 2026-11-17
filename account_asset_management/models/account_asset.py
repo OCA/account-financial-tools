@@ -1021,7 +1021,8 @@ class AccountAsset(models.Model):
                 }
             )
             if self.method_time == "year":
-                fy_residual_amount -= fy_amount
+                # rounding keeps float drift out of the next year's rate
+                fy_residual_amount = currency.round(fy_residual_amount - fy_amount)
                 if currency.is_zero(fy_residual_amount):
                     break
         if table:
