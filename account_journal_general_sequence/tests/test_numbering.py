@@ -1,6 +1,7 @@
 # Copyright 2022 Moduon
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from freezegun import freeze_time
+from psycopg2 import IntegrityError
 
 from odoo import fields
 from odoo.tests import Form, new_test_user, tagged, users
@@ -79,8 +80,16 @@ class RenumberCase(AccountTestInvoicingCommon):
                 self.company_data["company"]
             )
         )
-        self.assertEqual(len(wiz_f.available_sequence_ids), 1)
         wiz = wiz_f.save()
+        # All the active companies' sequences are available, but the default
+        # one belongs to the current company
+        self.assertEqual(
+            wiz.available_sequence_ids.company_id, self.company_t1 + self.company_t2
+        )
+        self.assertEqual(
+            wiz.sequence_id,
+            self.company_data["default_journal_sale"].entry_number_sequence_id,
+        )
         wiz.action_renumber()
         self.assertGreater(new_invoice.entry_number, old_invoice.entry_number)
         # Add opening move
@@ -136,3 +145,15 @@ class RenumberCase(AccountTestInvoicingCommon):
         # Each company has a different sequence, so the entry number should be the same
         self.assertEqual(invoice1.entry_number, "2022/00000001")
         self.assertEqual(invoice2.entry_number, "2022/00000001")
+
+    @users("test_invoicer")
+    def test_entry_number_unique_per_journal(self):
+        invoice1 = self.init_invoice(
+            "out_invoice", products=self.product_a, invoice_date=self.today, post=True
+        )
+        invoice2 = self.init_invoice(
+            "out_invoice", products=self.product_a, invoice_date=self.today, post=True
+        )
+        with mute_logger("odoo.sql_db"), self.assertRaises(IntegrityError):
+            invoice2.entry_number = invoice1.entry_number
+            invoice2.flush_recordset(["entry_number"])

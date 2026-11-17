@@ -7,8 +7,8 @@ To see journal entry numbers:
 Note that:
 
 - You can use that new field in quick searches.
-- You can see it also in *Invoicing \> Accounting \> Transactions \>
-  Journal Items*.
+- You can see it also in *Invoicing \> Review \> Control \> Journal
+  Items*.
 
 To renumber journal entries:
 
