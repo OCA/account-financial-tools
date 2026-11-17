@@ -1,0 +1,798 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_chart_update
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-01 03:44+0000\n"
+"PO-Revision-Date: 2026-06-10 14:42+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "%(actual)s record(s) → %(expected)s record(s)"
+msgstr "record %(actual)s → record %(expected)s"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "%(n)s record(s) → differs from template"
+msgstr "record %(n)s → è diverso dal modello"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "- %(label)s: '%(actual)s' → '%(expected)s'"
+msgstr "- %(label)s: '%(actual)s' → '%(expected)s'"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_account_chart_template
+msgid "Account Chart Template"
+msgstr "Modello foglio conto"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_ids
+msgid "Account Groups"
+msgstr "Gruppi contabili"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
+msgid "Account fields"
+msgstr "Campi contabili"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account_group
+msgid ""
+"Account group that needs to be updated (new or updated in the template)."
+msgstr ""
+"Gruppo contabile che deve essere aggiornato (nuovo o aggiornato nel modello)."
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_account_group_id
+msgid "Account group to update"
+msgstr "Gruppo contabile da aggiornare"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Account groups"
+msgstr "Gruppi contabili"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_field_ids
+msgid "Account groups fields"
+msgstr "Campi gruppi contabili"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_group_matching_ids
+msgid "Account groups matching"
+msgstr "Corrispondenza gruppi contabili"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
+msgid "Account that needs to be updated (new or updated in the template)."
+msgstr "Conto che deve essere aggiornato (nuovo o aggiornato nel modello)."
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_account_id
+msgid "Account to update"
+msgstr "Conto da aggiornare"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_ids
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Accounts"
+msgstr "Conti"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
+msgid "Accounts matching"
+msgstr "Corrispondenza conti"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template
+msgid "Chart Template"
+msgstr "Modello piano dei conti"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Chart of Accounts"
+msgstr "Piano dei conti"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Close"
+msgstr "Chiudi"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
+msgid "Code Digits"
+msgstr "Cifre codice"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__init
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Create/Update"
+msgstr "Crea/aggiorna"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__create_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__create_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "Deactivated tax %s."
+msgstr "Imposta %s disattivata."
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__deleted_taxes
+msgid "Deactivated taxes"
+msgstr "Imposte disattivate"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "Differences in these fields:"
+msgstr "Differenze in questi campi:"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_account_chart_template__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__display_name
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: account_chart_update
+#: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account_group
+msgid ""
+"Existing account groups are updated. Account groups are searched by "
+"prefix_code_start."
+msgstr ""
+"I gruppi conto esistenti sono aggiornati. I gruppi conto sono cercati per "
+"prefix_code_start."
+
+#. module: account_chart_update
+#: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account
+msgid "Existing accounts are updated. Accounts are searched by code."
+msgstr "I conti esistenti sono aggiornati. I conti sono cercati per codice."
+
+#. module: account_chart_update
+#: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
+msgid ""
+"Existing fiscal positions are updated. Fiscal positions are searched by name."
+msgstr ""
+"Le posizioni fiscali sono aggiornate. Le posizioni fiscali sono cercate per "
+"nome."
+
+#. module: account_chart_update
+#: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
+msgid "Existing tax groups are updated. Tax group are searched by name."
+msgstr ""
+"I gruppi imposte esistenti sono aggiornati. Il gruppo imposte è cercato per "
+"nome."
+
+#. module: account_chart_update
+#: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_tax
+msgid "Existing taxes are updated. Taxes are searched by name."
+msgstr "Le imposte sono aggiornate. Le imposte sono cercate per nome."
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Field options"
+msgstr "Opzioni campo"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_ir_model_fields
+msgid "Fields"
+msgstr "Campi"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_field_ids
+msgid "Fiscal position fields"
+msgstr "Campi posizione fiscale"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
+msgid ""
+"Fiscal position that needs to be updated (new or updated in the template)."
+msgstr ""
+"Posizione fiscale che richiede di essere aggiornata (nuova o aggiornata nel "
+"modello)."
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__update_fiscal_position_id
+msgid "Fiscal position to update"
+msgstr "Posizione fiscale da aggiornare"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fiscal_position_ids
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Fiscal positions"
+msgstr "Posizioni fiscali"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_matching_ids
+msgid "Fiscal positions matching"
+msgstr "Corrispondenze posizioni fiscali"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "General options"
+msgstr "Opzioni generali"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid ""
+"Here you can select the fields you want to check if\n"
+"                            they have been updated in the templates."
+msgstr ""
+"Qui si possono selezionare i campo che si vogliono\n"
+"                            controllare se sono stati aggiornati nel modello."
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Here you can set the matching order."
+msgstr "Qui si può impostare l'ordine corrispondente."
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_account_chart_template__id
+#: model:ir.model.fields,field_description:account_chart_update.field_ir_model_fields__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid ""
+"If you leave these options set, the wizard will\n"
+"                                not just create new records, but also "
+"update\n"
+"                                records with changes (i.e. different tax "
+"amount)"
+msgstr ""
+"Se si lascia impostata questa opzione, la procedura guidata\n"
+"                                non creerà solo nuovi record, ma aggiornerà "
+"anche\n"
+"                                i record con modifiche(cioè valori imposte "
+"differenti)"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__write_uid
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__write_date
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Log"
+msgstr "Log"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Matching"
+msgstr "Corrispondenza"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__matching_value
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__matching_value
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__matching_value
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__matching_value
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__matching_value
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__matching_value
+msgid "Matching Value"
+msgstr "Valore corrispondenza"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__log
+msgid "Messages and Errors"
+msgstr "Messaggi ed errori"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "Missing XML-ID (expected %(expected)s; currently: %(current)s)."
+msgstr "XML-ID mancante (atteso %(expected)s; attuale: %(current)s)."
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "Name or description not found."
+msgstr "Nome o descrizione non trovati."
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_account_groups
+msgid "New Account Groups"
+msgstr "Nuovi gruppi contabilità"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_accounts
+msgid "New Accounts"
+msgstr "Nuovi conti"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_tax_groups
+msgid "New Tax Groups"
+msgstr "Nuovi gruppi imposte"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_taxes
+msgid "New Taxes"
+msgstr "Nuove imposte"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__new
+msgid "New account"
+msgstr "Nuovo conto"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__new
+msgid "New account group"
+msgstr "Nuovo gruppo conto"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__new
+msgid "New fiscal position"
+msgstr "Nuova posizione fiscale"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__new_fps
+msgid "New fiscal positions"
+msgstr "Nuova posizione fiscale"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__new
+msgid "New tax"
+msgstr "Nuova imposta"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax_group__type__new
+msgid "New tax group"
+msgstr "Nuovo gruppo imposte"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Next"
+msgstr "Successivo"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "No account found with this code."
+msgstr "Nessun conto trovato con questo codice."
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "No fiscal position found with this name."
+msgstr "Nessuna posizione fiscale trovata con questo nome."
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Note: Only the changed fields are updated."
+msgstr "Nota: solo i campi modificati vengono aggiornati."
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__notes
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__notes
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__notes
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__notes
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__notes
+msgid "Notes"
+msgstr "Note"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Previous"
+msgstr "Precedente"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Records to create/update"
+msgstr "Record da creare/aggiornare"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__rejected_new_account_number
+msgid "Rejected New Account Number"
+msgstr "Numero nuovo conto respinto"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__rejected_updated_account_number
+msgid "Rejected Updated Account Number"
+msgstr "Numero conto aggiornato respinto"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
+msgid "Reload for new elements"
+msgstr "Ricarica per nuovi elementi"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__ready
+msgid "Select records to update"
+msgstr "Selezionare record da aggiornare"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__sequence
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__sequence
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__sequence
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__sequence
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__sequence
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__state
+msgid "Status"
+msgstr "Stato"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Summary of created objects"
+msgstr "Riepilogo degli oggetti creati"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Summary of updated objects"
+msgstr "Riepilogo degli oggetti aggiornati"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Tax Group"
+msgstr "Gruppo imposte"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_field_ids
+msgid "Tax fields"
+msgstr "Campi imposta"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_matching_ids
+msgid "Tax goups matching"
+msgstr "Gruppi imposte corrispondenti"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_field_ids
+msgid "Tax group fields"
+msgstr "Campi gruppo imposte"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_group
+msgid "Tax group that needs to be updated (new or updated in the template)."
+msgstr ""
+"Gruppo imposte che richiede l'aggiornamento (nuovo o aggiornato nel modello)."
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__update_tax_group_id
+msgid "Tax group to update"
+msgstr "Gruppo imposte sa aggiornare"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Tax groups"
+msgstr "Gruppi imposte"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
+msgid "Tax that needs to be updated (new or updated in the template)."
+msgstr "Imposta che deve essere aggiornata (nuova o aggiornata nel modello)."
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__deleted
+msgid "Tax to deactivate"
+msgstr "Imposta da disattivare"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_tax_id
+msgid "Tax to update"
+msgstr "Imposta da aggiornare"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_group_ids
+msgid "Taxe Groups"
+msgstr "Gruppi imposte"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_ids
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Taxes"
+msgstr "Imposte"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__tax_matching_ids
+msgid "Taxes matching"
+msgstr "Corrispondenza imposte"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid ""
+"This wizard will update your accounts, taxes and\n"
+"                            fiscal positions according to the selected "
+"chart\n"
+"                            template"
+msgstr ""
+"Questa procedura guidata aggiornerà i conti, le imposte e\n"
+"                            le posizioni fiscali in accordo con il modello "
+"del piano dei conti\n"
+"                            selezionato"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "To deactivate: not in the template"
+msgstr "Da disattivare: non nel modello"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__type
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__type
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__type
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
+msgid "Type Tax Use"
+msgstr "Tipo utilizzo imposta"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account_group
+msgid "Update account groups"
+msgstr "Aggiorna gruppi conti"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_account
+msgid "Update accounts"
+msgstr "Aggiorna conti"
+
+#. module: account_chart_update
+#: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
+#: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
+msgid "Update chart of accounts"
+msgstr "Aggiorna piano dei conti"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_group_matching__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_fp_matching__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_matching__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_group_matching__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_tax_matching__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__update_chart_wizard_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__update_chart_wizard_id
+msgid "Update chart wizard"
+msgstr "Procedura guidata aggiornamento piano dei conti"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
+msgid "Update fiscal positions"
+msgstr "Aggiorna posizioni fiscali"
+
+#. module: account_chart_update
+#: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Update records?"
+msgstr "Aggiornare i record?"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax_group
+msgid "Update tax groups"
+msgstr "Aggiorna gruppi imposte"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__update_tax
+msgid "Update taxes"
+msgstr "Aggiorna imposte"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_account_groups
+msgid "Updated Account Groups"
+msgstr "Aggiorna gruppi contabilità"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_accounts
+msgid "Updated Accounts"
+msgstr "Aggiorna conti"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_tax_groups
+msgid "Updated Tax Groups"
+msgstr "Gruppi imposte aggiornati"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_taxes
+msgid "Updated Taxes"
+msgstr "Aggiorna imposte"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account_group__type__updated
+msgid "Updated accoung group"
+msgstr "Gruppo conto aggiornato"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_account__type__updated
+msgid "Updated account"
+msgstr "Conto aggiornato"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_fiscal_position__type__updated
+msgid "Updated fiscal position"
+msgstr "Posizione fiscale aggiornata"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_fps
+msgid "Updated fiscal positions"
+msgstr "Posizioni fiscali aggiornate"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax__type__updated
+msgid "Updated tax"
+msgstr "Imposta aggiornata"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts_tax_group__type__updated
+msgid "Updated tax group"
+msgstr "Gruppo imposte aggiornato"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_account_group_matching
+msgid "Wizard Account Group Matching"
+msgstr "Procedura guidata corrispondenza gruppo contabilità"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_account_matching
+msgid "Wizard Account Matching"
+msgstr "Procedura guidata corrispondenza conto"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_fp_matching
+msgid "Wizard Fiscal Position Matching"
+msgstr "Procedura guidata corrispondenza posizione fiscale"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_matching
+msgid "Wizard Matching"
+msgstr "Procedura guidata corrispondenza"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_tax_group_matching
+msgid "Wizard Tax Group Matching"
+msgstr "Procedura guidata corrispondenza gruppo imposte"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_tax_matching
+msgid "Wizard Tax Matching"
+msgstr "Procedura guidata corrispondenza imposta"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
+msgid "Wizard Update Charts Accounts"
+msgstr "Procedura guidata aggiornamento piano dei conti"
+
+#. module: account_chart_update
+#: model:ir.model.fields.selection,name:account_chart_update.selection__wizard_update_charts_accounts__state__done
+msgid "Wizard completed"
+msgstr "Procedura guidata completata"
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__xml_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_group__xml_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position__xml_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax__xml_id
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_group__xml_id
+msgid "Xml"
+msgstr "XML"
+
+#. module: account_chart_update
+#. odoo-python
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+msgid "none"
+msgstr "nessuno"
+
+#~ msgid "Differences in these fields: %s."
+#~ msgstr "Differenze in questo campo: %s."
+
+#~ msgid "Missing XML-ID."
+#~ msgstr "XML-ID mancante."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
