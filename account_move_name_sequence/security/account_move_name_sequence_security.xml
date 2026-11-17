@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Copyright 2021 Akretion France (http://www.akretion.com/)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <!-- Remove rights on account.resequence.wizard -->
+    <record id="account.access_account_resequence" model="ir.access">
+        <field name="active" eval="False" />
+    </record>
+</odoo>
