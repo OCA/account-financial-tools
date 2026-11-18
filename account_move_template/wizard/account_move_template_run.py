@@ -95,7 +95,7 @@ Valid dictionary to overwrite template lines:
         # Overwrite self.line_ids to show overwrite values
         self._overwrite_line(overwrite_vals)
         # Pass context furtner to generate_move function, only readonly field
-        for key in overwrite_vals.keys():
+        for key in overwrite_vals:
             overwrite_vals[key].pop("amount", None)
         result["context"] = dict(result.get("context", {}), overwrite=overwrite_vals)
         return result
@@ -133,8 +133,8 @@ Valid dictionary to overwrite template lines:
                 raise ValidationError(
                     self.env._("Valid fields to overwrite are %s", valid_keys)
                 )
-        except ValidationError as e:
-            raise e
+        except ValidationError:
+            raise
         except Exception as e:
             msg = """
     valid_dict = {
@@ -154,9 +154,7 @@ Valid dictionary to overwrite template lines:
     def _safe_vals(self, model, vals):
         obj = self.env[model]
         copy_vals = vals.copy()
-        invalid_keys = list(
-            set(list(vals.keys())) - set(list(dict(obj._fields).keys()))
-        )
+        invalid_keys = list(set(vals) - set(obj._fields))
         for key in invalid_keys:
             copy_vals.pop(key)
         return copy_vals
@@ -176,7 +174,7 @@ Valid dictionary to overwrite template lines:
             sequence2amount[wizard_line.sequence] = wizard_line.amount
         company_cur = self.company_id.currency_id
         self.template_id.compute_lines(sequence2amount)
-        if all([company_cur.is_zero(x) for x in sequence2amount.values()]):
+        if all(company_cur.is_zero(x) for x in sequence2amount.values()):
             raise UserError(self.env._("Debit and credit of all lines are null."))
         move_vals = self._prepare_move()
         for line in self.template_id.line_ids:
