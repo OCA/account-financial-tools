@@ -58,7 +58,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
             "res.partner.bank"
         ].create(
             {
-                "acc_number": cls.iban_acc_number,
+                "account_number": cls.iban_acc_number,
                 "partner_id": cls.company.partner_id.id,
             }
         )
@@ -116,7 +116,7 @@ class TestAccountCheckDeposit(AccountTestInvoicingCommon):
         )
         payment = register_payments._create_payments()
         self.assertAlmostEqual(payment.amount, 300)
-        self.assertEqual(payment.state, "paid")
+        self.assertEqual(payment.state, "reconciled")
         check_deposit = self.create_check_deposit()
         self.assertEqual(
             check_deposit.in_hand_check_account_id, self.received_check_account

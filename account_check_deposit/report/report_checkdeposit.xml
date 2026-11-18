@@ -14,19 +14,13 @@
                         <h3>Bank:</h3>
                         <p>
                             <span
-                                t-field="o.bank_journal_id.bank_account_id.bank_id.name"
+                                t-field="o.bank_journal_id.bank_account_id.bank_name"
                             />
                             <br />
-                            <span
-                                t-field="o.bank_journal_id.bank_account_id.bank_id.street"
-                            />
+                            <span t-field="o.bank_journal_id.bank_account_id.street" />
                             <br />
-                            <span
-                                t-field="o.bank_journal_id.bank_account_id.bank_id.zip"
-                            />
-                            <span
-                                t-field="o.bank_journal_id.bank_account_id.bank_id.city"
-                            />
+                            <span t-field="o.bank_journal_id.bank_account_id.zip" />
+                            <span t-field="o.bank_journal_id.bank_account_id.city" />
                         </p>
                         <h3>Beneficiary:</h3>
                         <div
@@ -36,7 +30,7 @@
                         <p>
                             <b>Bank Account Number to Credit:</b>
                             <span
-                                t-field="o.bank_journal_id.bank_account_id.acc_number"
+                                t-field="o.bank_journal_id.bank_account_id.account_number"
                             />
                         </p>
                         <p>

@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_account_check_deposit_account_check_deposit_group_manager,account_check_deposit_account_check_deposit_group_manager,account.check.deposit,account.group_account_invoice,crud,
+access_account_check_deposit_audit,Read-only access on account.check.deposit to auditor,account.check.deposit,account.group_account_readonly,r,
+check_deposit_comp_rule,Check Deposit multi-company,account.check.deposit,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
