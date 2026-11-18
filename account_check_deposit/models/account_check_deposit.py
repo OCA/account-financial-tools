@@ -225,12 +225,13 @@ class AccountCheckDeposit(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            self_comp = self
             if "company_id" in vals:
-                self = self.with_company(vals["company_id"])
-            if vals.get("name", self.env._("New")) == self.env._("New"):
-                vals["name"] = self.env["ir.sequence"].next_by_code(
+                self_comp = self.with_company(vals["company_id"])
+            if vals.get("name", self_comp.env._("New")) == self_comp.env._("New"):
+                vals["name"] = self_comp.env["ir.sequence"].next_by_code(
                     "account.check.deposit", vals.get("deposit_date")
-                ) or self.env._("New")
+                ) or self_comp.env._("New")
         return super().create(vals_list)
 
     def _prepare_move_vals(self):
@@ -301,8 +302,9 @@ class AccountCheckDeposit(models.Model):
             move = am_obj.create(deposit._prepare_move_vals())
             move.action_post()
             lines_to_rec = deposit.check_payment_ids + move.line_ids.filtered(
-                lambda x, deposit=deposit: x.account_id
-                == deposit.in_hand_check_account_id
+                lambda x, deposit=deposit: (
+                    x.account_id == deposit.in_hand_check_account_id
+                )
             )
             lines_to_rec.reconcile()
             deposit.write({"state": "done", "move_id": move.id})

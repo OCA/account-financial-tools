@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
   Copyright (C) 2012-2022 Akretion France (http://www.akretion.com/)
   @author: Benoît GUILLOT <benoit.guillot@akretion.com>
@@ -212,8 +212,8 @@
         <field name="view_mode">list,form,pivot</field>
     </record>
     <menuitem
-        action="action_check_deposit_tree"
         id="menu_check_deposit_tree"
+        action="action_check_deposit_tree"
         parent="account.menu_finance_receivables"
         sequence="20"
     />
