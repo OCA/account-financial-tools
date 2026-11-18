@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_account_move_template_user,Full access on account.move.template to accountant grp,account.move.template,account.group_account_user,crud,
+access_account_move_template_line_user,Full access on account.move.template.line to accountant grp,account.move.template.line,account.group_account_user,crud,
+access_account_move_template_run_user,Full access on account.move.template.run to accountant grp,account.move.template.run,account.group_account_user,crud,
+access_account_move_template_line_run_user,Full access on account.move.template.line.run to accountant grp,account.move.template.line.run,account.group_account_user,crud,
+account_move_template_comp_rule,Move Template multi-company rule,account.move.template,,crud,"[('company_id', 'in', company_ids)]"
