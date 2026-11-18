@@ -3,12 +3,11 @@
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from datetime import datetime
+from datetime import datetime, timezone
 
-import odoo.tests.common as common
 from odoo import Command
 from odoo.exceptions import UserError
-from odoo.tests import tagged
+from odoo.tests import common, tagged
 
 
 @tagged("post_install", "-at_install")
@@ -118,7 +117,7 @@ class TestAccountNetting(common.TransactionCase):
             ],
         }
         if move_type in ("in_invoice", "in_refund"):
-            vals["invoice_date"] = datetime.now()
+            vals["invoice_date"] = datetime.now(tz=timezone.utc)
         move = self.env["account.move"].create(vals)
         return move
 
