@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_journal_entry_document">
         <t t-call="web.external_layout">
@@ -8,11 +8,11 @@
                     <span t-field="o.name" />
                 </h2>
                 <div id="informations" class="row mb-4">
-                    <div class="col" t-if="o.date" name="date">
+                    <div t-if="o.date" class="col" name="date">
                         <strong>Accounting Date:</strong>
                         <div t-field="o.date" />
                     </div>
-                    <div class="col" t-if="o.ref" name="ref">
+                    <div t-if="o.ref" class="col" name="ref">
                         <strong>Reference:</strong>
                         <div t-field="o.ref" />
                     </div>
@@ -20,11 +20,11 @@
                         <strong>Company :</strong>
                         <div t-field="o.company_id.name" />
                     </div>
-                    <div class="col" t-if="o.journal_id" name="journal">
+                    <div t-if="o.journal_id" class="col" name="journal">
                         <strong>Journal</strong>
                         <div t-field="o.journal_id.name" />
                     </div>
-                    <div class="col" t-if="o.partner_id" name="customer">
+                    <div t-if="o.partner_id" class="col" name="customer">
                         <strong>Partner</strong>
                         <div t-field="o.partner_id.name" />
                     </div>
@@ -86,34 +86,34 @@
                                         >
                                             <t t-if="line.currency_id">
                                                 <span
-                                                    t-esc="line.amount_currency"
+                                                    t-out="line.amount_currency"
                                                     t-options='{"widget": "monetary", "display_currency": line.currency_id}'
                                                 />
                                             </t>
                                         </td>
                                         <td name='tb_debit'>
                                             <span
-                                                t-esc="line.debit"
+                                                t-out="line.debit"
                                                 t-options='{"widget": "monetary", "display_currency": line.company_currency_id}'
                                             />
                                         </td>
                                         <td name='tb_credit'>
                                             <span
-                                                t-esc="line.credit"
+                                                t-out="line.credit"
                                                 t-options='{"widget": "monetary", "display_currency": line.company_currency_id}'
                                             />
                                         </td>
                                         <td name='tb_originator_tax'>
                                             <span
                                                 class="text-nowrap"
-                                                t-esc="line.tax_line_id.name"
+                                                t-out="line.tax_line_id.name"
                                             />
                                         </td>
                                         <td
                                             t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
                                         >
                                             <span
-                                                t-raw="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"
+                                                t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"
                                                 id="line_tax_ids"
                                             />
                                         </td>
@@ -136,13 +136,13 @@
                                     />
                                     <td name='tf_debit'>
                                         <span
-                                            t-esc="total_debit"
+                                            t-out="total_debit"
                                             t-options='{"widget": "monetary", "display_currency": o.company_currency_id}'
                                         />
                                     </td>
                                     <td name='tf_credit'>
                                         <span
-                                            t-esc="total_credit"
+                                            t-out="total_credit"
                                             t-options='{"widget": "monetary", "display_currency": o.company_currency_id}'
                                         />
                                     </td>
