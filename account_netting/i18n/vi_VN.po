@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_netting
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-03 03:46+0000\n"
+"PO-Revision-Date: 2017-12-03 03:46+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Vietnamese (Viet Nam) (https://www.transifex.com/oca/"
+"teams/23907/vi_VN/)\n"
+"Language: vi_VN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "AR/AP netting"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance
+msgid "Balance"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance_type
+msgid "Balance Type"
+msgstr ""
+
+#. module: account_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid "Compensate"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_uid
+msgid "Created by"
+msgstr "Tạo bởi"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_date
+msgid "Created on"
+msgstr "Tạo vào"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__company_currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
+msgid "Journal Items to Compensate"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid ""
+"Line '%(line)s' has account '%(account)s' which is not a payable nor a "
+"receivable account."
+msgstr ""
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "Line '%s' doesn't have a partner."
+msgstr ""
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "Line '%s' is already reconciled."
+msgstr ""
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "Line '%s' is not posted."
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid ""
+"The 'Compensate' function is intended to balance operations on different "
+"accounts for the same partner. The selected journal items have the same "
+"account '%s', so you should use the 'Reconcile' function instead."
+msgstr ""
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid ""
+"The selected journal items have different partners: %s. All the selected "
+"journal items must have the same partner."
+msgstr ""
+
+#. module: account_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid ""
+"This operation will generate a journal entry whose lines are counterpart of "
+"the receivable/payable accounts selected, and reconcile each other, letting "
+"this balance in the partner."
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
+msgid "To pay"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
+msgid "To receive"
+msgstr ""
+
+#. module: account_netting
+#: model:ir.model,name:account_netting.model_account_move_make_netting
+msgid "Wizard to generate account moves for netting"
+msgstr ""
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "You should select at least 2 journal items."
+msgstr ""

@@ -1,0 +1,245 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_netting
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-03 03:46+0000\n"
+"PO-Revision-Date: 2023-11-06 05:32+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
+"teams/23907/es_AR/)\n"
+"Language: es_AR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "AR/AP netting"
+msgstr "Compensación AR/AP"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance_type
+msgid "Balance Type"
+msgstr "Tipo de Saldo"
+
+#. module: account_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: account_netting
+#: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid "Compensate"
+msgstr "Compensar"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__company_currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
+msgid "Journal Items to Compensate"
+msgstr "Apuntes Contables a Compensar"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización realizada por"
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid ""
+"Line '%(line)s' has account '%(account)s' which is not a payable nor a "
+"receivable account."
+msgstr ""
+"La linea %(line)s tiene como cuenta %(account)s la cual no es una cuenta a "
+"pagar o a cobrar."
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "Line '%s' doesn't have a partner."
+msgstr "La linea '%s' no tiene un contacto."
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "Line '%s' is already reconciled."
+msgstr "La línea '%s' ya está conciliada."
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "Line '%s' is not posted."
+msgstr "La línea '%s' no está publicada."
+
+#. module: account_netting
+#: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__partner_id
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid ""
+"The 'Compensate' function is intended to balance operations on different "
+"accounts for the same partner. The selected journal items have the same "
+"account '%s', so you should use the 'Reconcile' function instead."
+msgstr ""
+"La función 'Compensar' tiene como objetivo equilibrar operaciones en "
+"diferentes cuentas para el mismo contacto. Los apuntes contables "
+"seleccionados tienen la misma cuenta '%s', por lo que debería utilizar la "
+"función 'Conciliar' en su lugar."
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid ""
+"The selected journal items have different partners: %s. All the selected "
+"journal items must have the same partner."
+msgstr ""
+"Los apuntes contables seleccionados tiene diferentes contactos: %s. Todos "
+"los apuntes contables deben tener el mismo contacto."
+
+#. module: account_netting
+#: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
+msgid ""
+"This operation will generate a journal entry whose lines are counterpart of "
+"the receivable/payable accounts selected, and reconcile each other, letting "
+"this balance in the partner."
+msgstr ""
+"Esta operación generará un asiento contable cuyas líneas son contrapartida "
+"de las cuentas por cobrar/pagar seleccionadas, y se conciliarán entre sí, "
+"dejando este saldo en el contacto."
+
+#. module: account_netting
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
+msgid "To pay"
+msgstr "A pagar"
+
+#. module: account_netting
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
+msgid "To receive"
+msgstr "A cobrar"
+
+#. module: account_netting
+#: model:ir.model,name:account_netting.model_account_move_make_netting
+msgid "Wizard to generate account moves for netting"
+msgstr "Asistente para generar movimientos contables para compensación"
+
+#. module: account_netting
+#. odoo-python
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
+#, python-format
+msgid "You should select at least 2 journal items."
+msgstr "Debería seleccionar al menos 2 apuntes contables."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
+
+#, python-format
+#~ msgid "All entries must have a receivable or payable account"
+#~ msgstr "Todos los asientos deben tener una cuenta a cobrar o a pagar"
+
+#, python-format
+#~ msgid "All entries mustn't been reconciled"
+#~ msgstr "No se deben conciliar todos los asientos"
+
+#, python-format
+#~ msgid ""
+#~ "All entries should have a partner and the partner must be the same for "
+#~ "all."
+#~ msgstr ""
+#~ "Todos los asientos deben tener un contacto y el contacto debe ser el "
+#~ "mismo para todos."
+
+#~ msgid "Compensate entries"
+#~ msgstr "Compensar asientos"
+
+#~ msgid "Move Line"
+#~ msgstr "Línea de Movimiento"
+
+#, python-format
+#~ msgid ""
+#~ "The 'Compensate' function is intended to balance operations on different "
+#~ "accounts for the same partner.\n"
+#~ "In this case all selected entries belong to the same account.\n"
+#~ " Please use the 'Reconcile' function."
+#~ msgstr ""
+#~ "La función 'Compensar' está destinada a cuadrar operaciones en diferentes "
+#~ "cuentas para el mismo contacto.\n"
+#~ "En este caso, todos los asientos seleccionados pertenecen a la misma "
+#~ "cuenta.\n"
+#~ " Utilice la función 'Conciliar'."
+
+#~ msgid ""
+#~ "This operation will generate account entries that are counterpart of the "
+#~ "receivable/payable accounts selected, and reconcile each other, letting "
+#~ "this balance in the partner."
+#~ msgstr ""
+#~ "Esta operación generará asientos en cuenta que son contrapartida de las "
+#~ "cuentas por cobrar/por pagar seleccionadas, y se concilian entre sí, "
+#~ "dejando este saldo en el contacto."
+
+#, python-format
+#~ msgid "You should compensate at least 2 journal entries."
+#~ msgstr "Debe compensar al menos dos asientos contables."
