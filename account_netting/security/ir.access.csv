@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_account_move_make_netting,Full access on account.move.make.netting to accountant grp,account.move.make.netting,account.group_account_user,crud,
+access_account_move_make_netting_manager,Full access on account.move.make.netting to accountant manager grp,account.move.make.netting,account.group_account_manager,crud,
