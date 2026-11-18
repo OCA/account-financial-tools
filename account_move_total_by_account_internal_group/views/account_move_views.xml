@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="view_account_move_user_type_tree" model="ir.ui.view">
         <field name="name">account.move.user.type.tree</field>
