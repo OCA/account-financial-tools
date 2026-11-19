@@ -6,59 +6,63 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "Language: pt_BR\n"
+"PO-Revision-Date: 2026-11-19 11:46+0000\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: account_lock_to_date
 #. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
 msgid "A new Hard Lock To Date must be prior (or equal) to the previous one."
 msgstr ""
+"Uma nova data de travamento rígido a partir de deve ser anterior (ou igual) "
+"à anterior."
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_account_lock_exception
 msgid "Account Lock Exception"
-msgstr ""
+msgstr "Exceção de data de travamento"
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_account_update_lock_to_date
 msgid "Account Update Lock_to_date"
-msgstr ""
+msgstr "Atualização das datas de travamento a partir de"
 
 #. module: account_lock_to_date
 #: model_terms:ir.ui.view,arch_db:account_lock_to_date.account_update_lock_to_date_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empresas"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__company_id
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome exibido"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_lock_exception__fiscalyear_lock_to_date
@@ -66,12 +70,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__fiscalyear_lock_to_date
 #: model:ir.model.fields.selection,name:account_lock_to_date.selection__account_lock_exception__lock_date_field__fiscalyear_lock_to_date
 msgid "Global Lock To Date"
-msgstr ""
+msgstr "Travamento geral a partir de"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__hard_lock_to_date
 msgid "Hard Lock To Date"
-msgstr ""
+msgstr "Travamento rígido a partir de"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__id
@@ -81,33 +85,33 @@ msgstr ""
 #. module: account_lock_to_date
 #: model:ir.model,name:account_lock_to_date.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Lançamento de diário"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última atualização por"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última atualização em"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__hard_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_res_company__hard_lock_to_date
 msgid "Like the \"Global Lock Date\", but no exceptions are possible."
-msgstr ""
+msgstr "Como a \"Data de travamento geral\", mas sem exceção possível."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_lock_exception__lock_date_field
 msgid "Lock Date Field"
-msgstr ""
+msgstr "Campo de data de travamento"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_update_lock_to_date__hard_lock_to_date
 msgid "Lock To Date"
-msgstr ""
+msgstr "Travamento rígido a partir de"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__fiscalyear_lock_to_date
@@ -116,12 +120,14 @@ msgid ""
 "No users can edit accounts posterior to this date. Use it for fiscal year "
 "locking for example."
 msgstr ""
+"Nenhum usuário pode editar lançamentos a partir desta data, inclusive. Use "
+"para travar o exercício seguinte, por exemplo."
 
 #. module: account_lock_to_date
 #. odoo-python
 #: code:addons/account_lock_to_date/models/account_lock_exception.py:0
 msgid "Operation not supported"
-msgstr ""
+msgstr "Operação não suportada"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__purchase_lock_to_date
@@ -130,6 +136,8 @@ msgid ""
 "Prevents creation and modification of entries in purchase journals posterior"
 " to the defined date inclusive."
 msgstr ""
+"Impede criar e modificar lançamentos dos diários de compra a partir da data "
+"definida, inclusive."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_update_lock_to_date__sale_lock_to_date
@@ -138,6 +146,8 @@ msgid ""
 "Prevents creation and modification of entries in sales journals posterior to"
 " the defined date inclusive."
 msgstr ""
+"Impede criar e modificar lançamentos dos diários de venda a partir da data "
+"definida, inclusive."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_lock_exception__purchase_lock_to_date
@@ -145,7 +155,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__purchase_lock_to_date
 #: model:ir.model.fields.selection,name:account_lock_to_date.selection__account_lock_exception__lock_date_field__purchase_lock_to_date
 msgid "Purchase Lock To Date"
-msgstr ""
+msgstr "Travamento de compras a partir de"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_account_lock_exception__sale_lock_to_date
@@ -153,18 +163,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__sale_lock_to_date
 #: model:ir.model.fields.selection,name:account_lock_to_date.selection__account_lock_exception__lock_date_field__sale_lock_to_date
 msgid "Sales Lock To Date"
-msgstr ""
+msgstr "Travamento de vendas a partir de"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_lock_exception__lock_date_field
 msgid "Technical field identifying the changed lock date"
-msgstr ""
+msgstr "Campo técnico que identifica a data de travamento alterada"
 
 #. module: account_lock_to_date
 #. odoo-python
 #: code:addons/account_lock_to_date/models/res_company.py:0
 msgid "The Hard Lock Date cannot be removed."
-msgstr ""
+msgstr "A data de travamento rígido não pode ser removida."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_lock_exception__fiscalyear_lock_to_date
@@ -172,6 +182,8 @@ msgid ""
 "The date the Global Lock To Date is set to by this exception. If the lock to"
 " date is not changed it is set to False."
 msgstr ""
+"Data para a qual esta exceção altera o travamento geral a partir de. Se a "
+"data não mudar, fica em branco."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_lock_exception__purchase_lock_to_date
@@ -179,6 +191,8 @@ msgid ""
 "The date the Purchase Lock To Date is set to by this exception. If the lock "
 "to date is not changed it is set to False."
 msgstr ""
+"Data para a qual esta exceção altera o travamento de compras a partir de. Se "
+"a data não mudar, fica em branco."
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,help:account_lock_to_date.field_account_lock_exception__sale_lock_to_date
@@ -186,6 +200,8 @@ msgid ""
 "The date the Sale Lock To Date is set to by this exception. If the lock to "
 "date is not changed it is set to False."
 msgstr ""
+"Data para a qual esta exceção altera o travamento de vendas a partir de. Se "
+"a data não mudar, fica em branco."
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -194,43 +210,45 @@ msgid ""
 "There are still unposted entries in the period to date you want to hard "
 "lock. You should either post or delete them."
 msgstr ""
+"Ainda há lançamentos não lançados no período que você quer travar de forma "
+"rígida. Lance ou exclua esses lançamentos."
 
 #. module: account_lock_to_date
 #: model_terms:ir.ui.view,arch_db:account_lock_to_date.account_update_lock_to_date_form_view
 msgid "Update"
-msgstr ""
+msgstr "Atualizar"
 
 #. module: account_lock_to_date
 #: model:ir.actions.act_window,name:account_lock_to_date.account_update_lock_to_date_act_window
 #: model:ir.ui.menu,name:account_lock_to_date.account_update_lock_to_date_menu
 msgid "Update accounting lock to dates"
-msgstr ""
+msgstr "Atualizar datas de travamento a partir de"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__user_fiscalyear_lock_to_date
 msgid "User Fiscalyear Lock To Date"
-msgstr ""
+msgstr "Travamento do exercício a partir de, do usuário"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__user_hard_lock_to_date
 msgid "User Hard Lock To Date"
-msgstr ""
+msgstr "Travamento rígido a partir de, do usuário"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__user_purchase_lock_to_date
 msgid "User Purchase Lock To Date"
-msgstr ""
+msgstr "Travamento de compras a partir de, do usuário"
 
 #. module: account_lock_to_date
 #: model:ir.model.fields,field_description:account_lock_to_date.field_res_company__user_sale_lock_to_date
 msgid "User Sale Lock To Date"
-msgstr ""
+msgstr "Travamento de vendas a partir de, do usuário"
 
 #. module: account_lock_to_date
 #. odoo-python
 #: code:addons/account_lock_to_date/wizards/account_update_lock_to_date.py:0
 msgid "You are not allowed to execute this action."
-msgstr ""
+msgstr "Você não tem permissão para executar esta ação."
 
 #. module: account_lock_to_date
 #. odoo-python
@@ -239,3 +257,5 @@ msgid ""
 "You cannot add/modify entries posterior to and inclusive of: "
 "%(lock_date_info)s."
 msgstr ""
+"Não é possível adicionar nem modificar lançamentos a partir de: %"
+"(lock_date_info)s, inclusive."
