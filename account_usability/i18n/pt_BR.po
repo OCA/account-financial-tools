@@ -6,20 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-09-15 13:42+0000\n"
-"Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
+"PO-Revision-Date: 2026-11-19 09:27+0000\n"
+"Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Conta"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_account_group
@@ -46,12 +46,12 @@ msgstr "Marcadores Conta"
 #. module: account_usability
 #: model:ir.model.fields,help:account_usability.field_account_account__group_id
 msgid "Account prefixes can determine account groups."
-msgstr ""
+msgstr "Prefixos de conta podem determinar grupos de contas."
 
 #. module: account_usability
 #: model:ir.ui.menu,name:account_usability.menu_finance
 msgid "Accounting"
-msgstr ""
+msgstr "Contabilidade"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account_tag__account_ids
@@ -88,27 +88,27 @@ msgstr "Configurações"
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
 msgid "Fiscal Year Last Day"
-msgstr ""
+msgstr "Último dia do exercício fiscal"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_day
 msgid "Fiscalyear Last Day"
-msgstr ""
+msgstr "Último dia do exercício fiscal"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_res_config_settings__fiscalyear_last_month
 msgid "Fiscalyear Last Month"
-msgstr ""
+msgstr "Último mês do exercício fiscal"
 
 #. module: account_usability
 #: model:ir.model.fields,field_description:account_usability.field_account_account__group_id
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 #. module: account_usability
 #: model:ir.model,name:account_usability.model_base_language_install
 msgid "Install Language"
-msgstr ""
+msgstr "Instalar idioma"
 
 #. module: account_usability
 #: model_terms:ir.ui.view,arch_db:account_usability.res_config_settings_view_form
@@ -118,6 +118,8 @@ msgid ""
 "recording the cost as soon                         as the product is "
 "received in stock)."
 msgstr ""
+"Lança o custo do produto como despesa quando ele é faturado ao cliente final "
+"(em vez de lançar o custo assim que o produto é recebido em estoque)."
 
 #. module: account_usability
 #: model:ir.model.fields,help:account_usability.field_res_config_settings__anglo_saxon_accounting
