@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-07 21:46+0000\n"
+"PO-Revision-Date: 2026-11-19 14:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: account_move_name_sequence
 #: model:ir.model.constraint,message:account_move_name_sequence.constraint_account_move_name_state_diagonal
@@ -89,7 +89,7 @@ msgstr "Temeljnica"
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__made_sequence_gap
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_move__made_sequence_gap
 msgid "Made Sequence Gap"
-msgstr ""
+msgstr "Generirana vrzel v zaporedju"
 
 #. module: account_move_name_sequence
 #: model:ir.model.fields,field_description:account_move_name_sequence.field_account_bank_statement_line__name
