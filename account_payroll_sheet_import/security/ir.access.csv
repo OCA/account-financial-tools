@@ -1,0 +1,7 @@
+id,name,model_id,group_id/id,operation,domain
+access_payroll_importer,payroll.importer,payroll.import.wizard,account.group_account_user,crud,
+access_payroll_import_mapping_line,payroll.import.mapping.line,payroll.import.mapping.line,account.group_account_user,crud,
+access_payroll_import_mapping,payroll.import.mapping,payroll.import.mapping,account.group_account_user,crud,
+access_missing_partner_wizard,missing.partner.wizard,missing.partner.wizard,account.group_account_user,cru,
+payroll_import_mapping_multi,payroll import mapping multi-company,payroll.import.mapping,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+payroll_import_mapping_line_multi,payroll import mapping line multi-company,payroll.import.mapping.line,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
