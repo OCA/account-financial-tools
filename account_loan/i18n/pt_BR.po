@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2026-11-19 09:27+0000\n"
+"PO-Revision-Date: 2026-11-19 11:46+0000\n"
 "Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
 "23907/pt_BR/)\n"
@@ -456,8 +456,8 @@ msgid ""
 "It is only possible to change to draft if the status is cancelled or posted "
 "and there are no account moves."
 msgstr ""
-"Só é possível voltar para rascunho se a situação for cancelado ou lançado e "
-"não houver lançamentos contábeis."
+"Só é possível voltar para provisório se a situação for cancelado ou lançado "
+"e não houver lançamentos contábeis."
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -866,7 +866,7 @@ msgstr "Taxa real que será aplicada em cada período"
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Reset to draft"
-msgstr "Voltar para rascunho"
+msgstr "Voltar para provisório"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__residual_amount
