@@ -171,7 +171,7 @@ class PayrollImportWizard(models.TransientModel):
             raise ValidationError(self.env._("Only Excel files are supported."))
 
         data = base64.b64decode(self.file)
-        df = df = pd.read_excel(io.BytesIO(data))
+        df = pd.read_excel(io.BytesIO(data))
 
         account_map = self.get_account_map()
         self.check_columns(df, account_map)
