@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2026-11-12 05:46+0000\n"
+"PO-Revision-Date: 2026-11-19 14:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
 "tools-8-0/language/sl/)\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: account_asset_management
 #. odoo-python
@@ -37,6 +37,8 @@ msgid ""
 "\n"
 "Error while processing asset '%(ref)s': %(exception)s"
 msgstr ""
+"\n"
+"Napaka pri obdelavi sredstva '%(ref)s': %(exception)s"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_count
@@ -312,17 +314,17 @@ msgstr "Analize osnovnih sredstvev"
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_report
 msgid "Assets analysis"
-msgstr ""
+msgstr "Analiza osnovnih sredstev"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Assets in draft state"
-msgstr ""
+msgstr "Sredstva v osnutku"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Assets in running state"
-msgstr ""
+msgstr "Sredstva v stanju 'v teku'"
 
 #. module: account_asset_management
 #. odoo-python
@@ -558,7 +560,7 @@ msgstr "Datum"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Date of asset purchase"
-msgstr ""
+msgstr "Datum nabave sredstva"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
@@ -653,7 +655,7 @@ msgstr "Amortizacijska tabela"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_date
 msgid "Depreciation Date"
-msgstr ""
+msgstr "Datum amortizacije"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
@@ -680,7 +682,7 @@ msgstr "Metoda obračuna amortizacije"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Depreciation Month"
-msgstr ""
+msgstr "Mesec amortizacije"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__name
@@ -757,6 +759,9 @@ msgid ""
 "\n"
 "%(tb)s"
 msgstr ""
+"Napaka pri obdelavi sredstva '%(ref)s': \n"
+"\n"
+"%(tb)s"
 
 #. module: account_asset_management
 #: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
@@ -802,6 +807,9 @@ msgid ""
 "            search bar can also be used to personalize your assets "
 "depreciation reporting."
 msgstr ""
+"V tem poročilu si lahko ogledate pregled vseh amortizacij.\n"
+"            Iskalno polje lahko uporabite tudi za prilagoditev poročila o "
+"amortizaciji sredstev."
 
 #. module: account_asset_management
 #. odoo-python
@@ -833,7 +841,7 @@ msgstr "Ustvari poročilo"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__gross_value
 msgid "Gross Amount"
-msgstr ""
+msgstr "Bruto znesek"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
@@ -955,6 +963,8 @@ msgid ""
 "Inconsistent reporting structure.\n"
 "Please correct Asset Group '%(group)s' (id %(id)s)"
 msgstr ""
+"Neskladna struktura poročanja.\n"
+"Popravite skupino sredstev '%(group)s' (id %(id)s)"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
@@ -1124,7 +1134,7 @@ msgstr "Ne"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Not archived"
-msgstr ""
+msgstr "Ne arhivirano"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__note
@@ -1286,7 +1296,7 @@ msgstr "Prorata Temporis"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
 msgid "Purchase Month"
-msgstr ""
+msgstr "Mesec nabave"
 
 #. module: account_asset_management
 #. odoo-python
@@ -1607,7 +1617,7 @@ msgstr "Skup. amortizacija"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_list
 msgid "Total"
-msgstr ""
+msgstr "Skupaj"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1842,49 +1852,49 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 msgid "degr-limit"
-msgstr ""
+msgstr "degr-limit"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 msgid "degr-linear"
-msgstr ""
+msgstr "degr-linear"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 msgid "degressive"
-msgstr ""
+msgstr "degresivno"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 msgid "gain_loss_on_sale"
-msgstr ""
+msgstr "gain_loss_on_sale"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 msgid "linear-limit"
-msgstr ""
+msgstr "linear-limit"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 msgid "number"
-msgstr ""
+msgstr "številka"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 msgid "quarter"
-msgstr ""
+msgstr "četrtletje"
 
 #. module: account_asset_management
 #. odoo-python
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 msgid "year"
-msgstr ""
+msgstr "leto"
 
 #~ msgid ""
 #~ "\n"
