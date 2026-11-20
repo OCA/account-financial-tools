@@ -31,7 +31,12 @@ class AccountMove(models.Model):
     def _compute_journal_id(self):
         res = super()._compute_journal_id()
         for rec in self:
-            if not rec.fiscal_position_id.sudo().allowed_journal_ids:
+            allowed_journals = rec.fiscal_position_id.sudo().allowed_journal_ids
+            if (
+                not rec.is_invoice(include_receipts=True)
+                or not allowed_journals
+                or rec.journal_id in allowed_journals
+            ):
                 continue
             rec.journal_id = rec._search_default_journal()
         return res

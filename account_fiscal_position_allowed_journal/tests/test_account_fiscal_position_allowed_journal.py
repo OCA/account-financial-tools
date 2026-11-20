@@ -1,7 +1,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.exceptions import UserError
 from odoo.tests import Form, tagged
 
@@ -130,3 +130,36 @@ class TestAccountFiscalPositionAllowedJournal(AccountTestInvoicingCommon):
         self.assertEqual(
             invoice.journal_id, self.fiscal_position_01.allowed_journal_ids[0]
         )
+
+    def test_05(self):
+        """
+        Data:
+            - The fiscal position has allowed journals, none of them is a bank one
+            - A partner with this fiscal position
+            - A bank journal that is not the first bank journal by sequence
+        Test case:
+            - Set the partner on a bank statement line of this bank journal
+        Expected result:
+            - The statement line keeps its bank journal
+        """
+        self.fiscal_position_01.allowed_journal_ids = [Command.set(self.journal_01.ids)]
+        self.partner_01.property_account_position_id = self.fiscal_position_01
+        self.company_data["default_journal_bank"].sequence = 1
+        bank_journal = self.journal_model.create(
+            {
+                "name": "Test bank journal",
+                "code": "TBNK",
+                "type": "bank",
+                "sequence": 99,
+            }
+        )
+        st_line = self.env["account.bank.statement.line"].create(
+            {
+                "journal_id": bank_journal.id,
+                "payment_ref": "Test statement line",
+                "amount": 100.0,
+            }
+        )
+        st_line.partner_id = self.partner_01
+        self.assertEqual(st_line.move_id.fiscal_position_id, self.fiscal_position_01)
+        self.assertEqual(st_line.journal_id, bank_journal)
