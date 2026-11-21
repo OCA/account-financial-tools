@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_invoice_report_search" model="ir.ui.view">
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id" ref="account.view_account_invoice_report_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/filter[@name='user']" position="after">
+                <filter
+                    string="Cost Center"
+                    name="cost_center"
+                    context="{'group_by':'cost_center_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
