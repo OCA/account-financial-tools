@@ -19,7 +19,7 @@ class AccountAsset(models.Model):
         string="Depreciation Account",
         domain="[('deprecated', '=', False), ('company_ids', '=', company_id)]",
         help="The account used to record depreciation for the asset.",
-        required=True,
+        required=False,
     )
 
     account_expense_depreciation_id = fields.Many2one(
@@ -27,7 +27,7 @@ class AccountAsset(models.Model):
         string="Depreciation Expense Account",
         domain="[('deprecated', '=', False), ('company_ids', '=', company_id)]",
         help="The account used to record the expense of the depreciation.",
-        required=True,
+        required=False,
     )
 
     @api.onchange("profile_id")
