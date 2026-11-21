@@ -1,0 +1,20 @@
+<odoo>
+    <record id="inherit_res_company_form_entries" model="ir.ui.view">
+        <field name="name">res.company.form.entries</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr='//notebook/page[last()]' position='after'>
+                <page
+                    name='intercompany_payment'
+                    string='Intercompany Payment Configuration'
+                >
+                    <field
+                        name="intercompany_transaction_config_ids"
+                        context="{'default_from_company_id': id, 'is_from_company_readonly': True}"
+                    />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
