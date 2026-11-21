@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Akretion France (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
+-->
+<odoo noupdate="1">
+    <record id="cash_deposit_rule" model="ir.rule">
+        <field name="name">Cash Deposit multi-company</field>
+        <field name="model_id" ref="model_account_cash_deposit" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
