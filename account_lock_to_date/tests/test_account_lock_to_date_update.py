@@ -2,17 +2,18 @@
 # Copyright 2023 Simone Rubino - Aion Tech
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from datetime import datetime
-
 from odoo import Command, fields
 from odoo.exceptions import ValidationError
 from odoo.tests import new_test_user
-from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 
 from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestAccountLockToDateUpdate(BaseCommon):
+    # Keep running the tests as the setup user: since 20.0, BaseCommon runs
+    # them as a plain internal user by default.
+    _test_user_groups = None
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -126,19 +127,19 @@ class TestAccountLockToDateUpdate(BaseCommon):
         wizard.with_user(self.demo_user.id).execute()
         self.assertEqual(
             self.company.sale_lock_to_date,
-            datetime.strptime("2900-01-01", DEFAULT_SERVER_DATE_FORMAT).date(),
+            fields.Date.to_date("2900-01-01"),
         )
         self.assertEqual(
             self.company.purchase_lock_to_date,
-            datetime.strptime("2900-01-01", DEFAULT_SERVER_DATE_FORMAT).date(),
+            fields.Date.to_date("2900-01-01"),
         )
         self.assertEqual(
             self.company.fiscalyear_lock_to_date,
-            datetime.strptime("2900-02-01", DEFAULT_SERVER_DATE_FORMAT).date(),
+            fields.Date.to_date("2900-02-01"),
         )
         self.assertEqual(
             self.company.hard_lock_to_date,
-            datetime.strptime("2900-02-01", DEFAULT_SERVER_DATE_FORMAT).date(),
+            fields.Date.to_date("2900-02-01"),
         )
 
     def test_03_create_purchase_move_outside_period(self):
