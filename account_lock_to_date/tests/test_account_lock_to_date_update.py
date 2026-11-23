@@ -3,9 +3,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import Command, fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests import new_test_user
 
+from odoo.addons.account.models.account_move import BYPASS_LOCK_CHECK
 from odoo.addons.base.tests.common import BaseCommon
 
 
@@ -201,3 +202,129 @@ class TestAccountLockToDateUpdate(BaseCommon):
         move = self.create_account_move("2900-01-15", self.bank_journal)
         move.with_user(self.demo_user.id).action_post()
         self.assertEqual(move.state, "posted")
+
+    def _create_lock_to_date_exception(self, user, lock_date):
+        return self.env["account.lock_exception"].create(
+            {
+                "company_id": self.company.id,
+                "user_id": user.id,
+                "reason": "Test",
+                "lock_date_field": "fiscalyear_lock_to_date",
+                "lock_date": lock_date,
+            }
+        )
+
+    def test_08_lock_to_date_exception_for_user(self):
+        """An exception lets its user post after the lock to date, not the others."""
+        self.company.fiscalyear_lock_to_date = "2900-01-01"
+        self._create_lock_to_date_exception(self.demo_user, "2900-03-01")
+        self.assertEqual(
+            self.company.with_user(self.demo_user).user_fiscalyear_lock_to_date,
+            fields.Date.to_date("2900-03-01"),
+        )
+        self.assertEqual(
+            self.company.user_fiscalyear_lock_to_date,
+            fields.Date.to_date("2900-01-01"),
+        )
+        move = self.create_account_move("2900-02-01", self.bank_journal)
+        move.with_user(self.demo_user).action_post()
+        self.assertEqual(move.state, "posted")
+        other_move = self.create_account_move("2900-02-01", self.bank_journal)
+        with self.assertRaises(ValidationError):
+            other_move.action_post()
+        late_move = self.create_account_move("2900-03-15", self.bank_journal)
+        with self.assertRaises(ValidationError):
+            late_move.with_user(self.demo_user).action_post()
+
+    def test_09_lock_to_date_exception_search_and_recreate(self):
+        """Search on the lock to date fields of the exceptions, and recreate
+        the active exceptions when the company lock to date changes."""
+        self.company.fiscalyear_lock_to_date = "2900-01-01"
+        exception = self._create_lock_to_date_exception(self.demo_user, "2900-03-01")
+        Exception = self.env["account.lock_exception"]
+        self.assertIn(
+            exception,
+            Exception.search([("fiscalyear_lock_to_date", ">", "2900-02-01")]),
+        )
+        self.assertNotIn(
+            exception, Exception.search([("sale_lock_to_date", ">", "2900-02-01")])
+        )
+        self.assertNotIn(
+            exception,
+            Exception.search([("purchase_lock_to_date", ">=", "2900-02-01")]),
+        )
+        with self.assertRaises(UserError):
+            Exception.search([("fiscalyear_lock_to_date", "<", "2900-02-01")])
+        self.company.fiscalyear_lock_to_date = "2900-01-15"
+        self.assertEqual(exception.state, "revoked")
+        new_exception = Exception.search(
+            [
+                ("company_id", "=", self.company.id),
+                ("state", "=", "active"),
+                ("lock_date_field", "=", "fiscalyear_lock_to_date"),
+            ]
+        )
+        self.assertEqual(len(new_exception), 1)
+        self.assertEqual(
+            new_exception.company_lock_date, fields.Date.to_date("2900-01-15")
+        )
+
+    def test_10_draft_and_cancel_after_lock_to_date(self):
+        """Posted entries after the lock to date can be neither reset to draft
+        nor cancelled, unless the lock check is bypassed."""
+        move = self.create_account_move("2900-02-01", self.sale_journal)
+        move.action_post()
+        self.company.sale_lock_to_date = "2900-01-01"
+        with self.assertRaises(ValidationError):
+            move.button_draft()
+        with self.assertRaises(ValidationError):
+            move.button_cancel()
+        move.with_context(bypass_lock_check=BYPASS_LOCK_CHECK).button_draft()
+        self.assertEqual(move.state, "draft")
+
+    def test_11_user_fiscal_lock_to_date_per_journal(self):
+        """The fiscal lock to date of a journal is the earliest applicable one."""
+        self.company.write(
+            {
+                "sale_lock_to_date": "2900-01-01",
+                "purchase_lock_to_date": "2900-02-01",
+                "fiscalyear_lock_to_date": "2900-03-01",
+                "hard_lock_to_date": "2900-04-01",
+            }
+        )
+        get_lock = self.company._get_user_fiscal_lock_to_date
+        self.assertEqual(get_lock(self.sale_journal), fields.Date.to_date("2900-01-01"))
+        self.assertEqual(
+            get_lock(self.purchase_journal), fields.Date.to_date("2900-02-01")
+        )
+        self.assertEqual(get_lock(self.bank_journal), fields.Date.to_date("2900-03-01"))
+        self.company.write(
+            {
+                "sale_lock_to_date": False,
+                "purchase_lock_to_date": False,
+                "fiscalyear_lock_to_date": False,
+                "hard_lock_to_date": False,
+            }
+        )
+        self.assertFalse(get_lock(self.bank_journal))
+
+    def test_12_lock_to_date_violations(self):
+        """Violations of the hard lock to date, and no violation without date."""
+        self.company.hard_lock_to_date = "2900-01-01"
+        self.assertFalse(self.company._get_lock_to_date_violations(False))
+        self.assertFalse(
+            self.company._get_lock_to_date_violations(fields.Date.to_date("2800-01-01"))
+        )
+        violations = self.company._get_lock_to_date_violations(
+            fields.Date.to_date("2900-01-01")
+        )
+        self.assertEqual(
+            violations, [(fields.Date.to_date("2900-01-01"), "hard_lock_date")]
+        )
+        self.assertFalse(
+            self.company._get_lock_to_date_violations(
+                fields.Date.to_date("2900-01-01"), hard=False
+            )
+        )
+        self.company.hard_lock_to_date = False
+        self.assertFalse(self.company.hard_lock_to_date)
