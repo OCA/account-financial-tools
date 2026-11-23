@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+access_account_update_lock_to_date,Full access on account.update.lock_to_date,account.update.lock_to_date,account.group_account_invoice,crud,
