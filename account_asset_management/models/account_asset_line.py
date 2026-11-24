@@ -153,9 +153,11 @@ class AccountAssetLine(models.Model):
                 )
             elif vals.get("init_entry"):
                 check = asset_lines.filtered(
-                    lambda line, line_date=line_date: line.move_check
-                    and line.type == "depreciate"
-                    and line.line_date <= line_date
+                    lambda line, line_date=line_date: (
+                        line.move_check
+                        and line.type == "depreciate"
+                        and line.line_date <= line_date
+                    )
                 )
                 if check:
                     raise UserError(
@@ -168,9 +170,11 @@ class AccountAssetLine(models.Model):
             elif vals.get("line_date"):
                 if dl.type == "create":
                     check = asset_lines.filtered(
-                        lambda line: line.type != "create"
-                        and (line.init_entry or line.move_check)
-                        and line.line_date < fields.Date.to_date(vals["line_date"])
+                        lambda line: (
+                            line.type != "create"
+                            and (line.init_entry or line.move_check)
+                            and line.line_date < fields.Date.to_date(vals["line_date"])
+                        )
                     )
                     if check:
                         raise UserError(
@@ -181,9 +185,11 @@ class AccountAssetLine(models.Model):
                         )
                 else:
                     check = asset_lines.filtered(
-                        lambda al, dl=dl: al != dl
-                        and (al.init_entry or al.move_check)
-                        and al.line_date > fields.Date.to_date(vals["line_date"])
+                        lambda al, dl=dl: (
+                            al != dl
+                            and (al.init_entry or al.move_check)
+                            and al.line_date > fields.Date.to_date(vals["line_date"])
+                        )
                     )
                     if check:
                         raise UserError(
