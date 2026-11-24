@@ -1,0 +1,97 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_dashboard_banner_mis_builder
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: fi\n"
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model,name:account_dashboard_banner_mis_builder.model_account_dashboard_banner_cell
+msgid "Accounting Dashboard Banner Cell"
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__cell_type
+msgid "Cell Type"
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_kpi_num_display_currency
+msgid "Display Currency"
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#. odoo-python
+#: code:addons/account_dashboard_banner_mis_builder/models/account_dashboard_banner_cell.py:0
+msgid "Expression: %(kpi_expression)s."
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model.fields.selection,name:account_dashboard_banner_mis_builder.selection__account_dashboard_banner_cell__cell_type__mis_builder
+msgid "MIS Builder KPI"
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#. odoo-python
+#: code:addons/account_dashboard_banner_mis_builder/models/account_dashboard_banner_cell.py:0
+msgid "MIS Builder KPI: %(kpi)s. From %(date_from)s to %(date_to)s."
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_instance_id
+msgid "MIS Report"
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_kpi_id
+msgid "MIS Report KPI"
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_instance_period_id
+msgid "MIS Report Period"
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_id
+msgid "MIS Report Template"
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#. odoo-python
+#: code:addons/account_dashboard_banner_mis_builder/models/account_dashboard_banner_cell.py:0
+msgid ""
+"On MIS Builder cells, you must configure a MIS Report, a related KPI and a "
+"related Period."
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#. odoo-python
+#: code:addons/account_dashboard_banner_mis_builder/models/account_dashboard_banner_cell.py:0
+msgid ""
+"The MIS Report KPI '%(kpi)s' is attached to MIS Report Template "
+"'%(kpi_report)s' whereas the MIS Report '%(instance)s' is attached to MIS "
+"Report Template '%(instance_report)s'."
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#. odoo-python
+#: code:addons/account_dashboard_banner_mis_builder/models/account_dashboard_banner_cell.py:0
+msgid ""
+"The MIS Report Period '%(period)s' is attached to MIS Report "
+"'%(period_report)s' and not to the selected MIS Report '%(report)s'."
+msgstr ""
+
+#. module: account_dashboard_banner_mis_builder
+#: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_kpi_type
+msgid "Value type"
+msgstr ""
