@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ========================
 Account Partner Required
 ========================
@@ -13,7 +17,7 @@ Account Partner Required
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
@@ -38,6 +42,7 @@ You have the choice between 3 policies:
 
 This module is useful to enforce a partner on account move lines on
 customer and supplier accounts.
+The checks *always* and *never* are done when *posting* the account move.
 
 This module is very similar to the module *account_analytic_required* available in the OCA project `account-analytic <https://github.com/OCA/account-analytic>`_.
 
@@ -85,6 +90,7 @@ Contributors
 * Stéphane Bidoul <stephane.bidoul@acsone.eu>
 * Alexis de Lattre <alexis.delattre@akretion.com>
 * Raf Ven <raf.ven@dynapps.be>
+* Arnaud Layec <arnaud.layec@akretion.com>
 
 Maintainers
 ~~~~~~~~~~~
