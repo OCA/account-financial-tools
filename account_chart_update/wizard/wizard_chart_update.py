@@ -11,12 +11,35 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
+import threading
 from unittest.mock import patch
 
-from odoo import _, api, fields, models, tools
+from odoo import Command, _, api, fields, models, tools
+from odoo.exceptions import UserError
 from odoo.tools.translate import TranslationImporter
 
 _logger = logging.getLogger(__name__)
+
+# Logger of the core chart template loader. It is the only place where a
+# reference that could not be resolved is reported: `_load_data()` just drops
+# the offending field from the values and carries on, so the wizard has to
+# watch it to know that an update was only partially applied.
+CHART_TEMPLATE_LOGGER = "odoo.addons.account.models.chart_template"
+
+
+class _LoadErrorHandler(logging.Handler):
+    """Collect the problems the core chart template loader only logs."""
+
+    def __init__(self):
+        super().__init__(level=logging.WARNING)
+        self.thread = threading.get_ident()
+        self.messages = []
+
+    def emit(self, record):
+        # The logger is global to the process, so the records of the requests
+        # running at the same time must not be attributed to this wizard.
+        if record.thread == self.thread:
+            self.messages.append(record.getMessage())
 
 
 # HACK https://github.com/odoo/odoo/pull/234333
@@ -85,6 +108,18 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         default=True,
         help="Existing taxes are updated. Taxes are searched by name.",
     )
+    update_tax_repartition_line_account = fields.Boolean(
+        string="Update tax accounts",
+        default=True,
+        help="Update the account of the existing tax repartition lines. Uncheck "
+        "it to keep the accounts that were set manually on them.",
+    )
+    update_tax_repartition_line_tags = fields.Boolean(
+        string="Update tax tags",
+        default=True,
+        help="Update the tags of the existing tax repartition lines. Uncheck it "
+        "to keep the tags that were set manually on them.",
+    )
     update_account = fields.Boolean(
         string="Update accounts",
         default=True,
@@ -101,6 +136,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         default=True,
         help="Existing fiscal positions are updated. Fiscal positions are "
         "searched by name.",
+    )
+    continue_on_errors = fields.Boolean(
+        default=False,
+        help="If set, the wizard applies the changes it can and reports the "
+        "problems found in the log, instead of aborting the whole update.",
     )
     tax_group_ids = fields.One2many(
         comodel_name="wizard.update.charts.accounts.tax.group",
@@ -487,23 +527,118 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.state = "ready"
         return self._reopen()
 
+    def _get_record_from_xml_id(self, xml_id):
+        """Get the record a template XML-ID points to in the wizard company."""
+        full_xml_id = (
+            f"account.{self.company_id.id}_{xml_id}" if "." not in xml_id else xml_id
+        )
+        return self.env.ref(full_xml_id, raise_if_not_found=False)
+
+    @api.model
+    def _get_template_children_xml_ids(self, record_values):
+        """Get the XML-IDs of the taxes a template tax is made of."""
+        children = record_values.get("children_tax_ids")
+        if not isinstance(children, str):
+            # Values that are already dereferenced hold database ids, so the
+            # records they point to necessarily exist.
+            return []
+        return [x for x in children.split(",") if x]
+
+    def _check_consistency(self, t_data):
+        """Assure the operations are consistent before performing them.
+
+        A tax that groups other taxes references them by XML-ID. When those
+        children are neither going to be created nor present already, the core
+        loader fails while dereferencing them, so the operation is rejected
+        here with an explicit message instead. It usually means that the
+        children were matched against existing taxes and the parent one was
+        not, or that the user removed them from the selection.
+        """
+        taxes_to_create = self.tax_ids.filtered(lambda x: x.type == "new")
+        xml_ids_to_create = set(taxes_to_create.mapped("xml_id"))
+        for wiz_tax in taxes_to_create:
+            children = self._get_template_children_xml_ids(
+                t_data.get(wiz_tax.xml_id, {})
+            )
+            missing = [
+                child
+                for child in children
+                if child not in xml_ids_to_create
+                and not self._get_record_from_xml_id(child)
+            ]
+            if missing:
+                raise UserError(
+                    _(
+                        "The tax %(tax)s groups other taxes (%(children)s) that "
+                        "neither exist nor are going to be created. Please "
+                        "select them too, or the tax would be created empty.",
+                        tax=wiz_tax.xml_id,
+                        children=", ".join(missing),
+                    )
+                )
+
+    def _update_model_records(self, model, method, t_data):
+        """Apply the changes of one model, collecting the problems found.
+
+        The core loader reports most of them without raising: a reference that
+        cannot be resolved is only written to the log and the offending field
+        is dropped, which would otherwise leave the user with a completed
+        wizard and a partially updated chart. Anything else is raised as a
+        plain exception, and is caught here so that the remaining models can
+        still be processed when the user asked to continue on errors.
+
+        :return list: the problems found, as messages for the wizard log.
+        """
+        handler = _LoadErrorHandler()
+        logger = logging.getLogger(CHART_TEMPLATE_LOGGER)
+        logger.addHandler(handler)
+        errors = []
+        try:
+            with self.env.cr.savepoint():
+                method(t_data)
+        except Exception as error:
+            _logger.exception("Error updating %s records.", model)
+            errors.append(
+                _(
+                    "Error updating %(model)s: %(error)s",
+                    model=model,
+                    error=error,
+                )
+            )
+            # The savepoint rollback leaves values in the cache that were never
+            # written, so they must not be reused by the remaining models.
+            self.env.invalidate_all(flush=False)
+        finally:
+            logger.removeHandler(handler)
+        return handler.messages + errors
+
     def action_update_records(self):
         """Action that creates/updates/deletes the selected elements."""
         self.rejected_new_account_number = 0
         self.rejected_updated_account_number = 0
         self.log = False
         t_data = self._get_chart_template_data()
+        self._check_consistency(t_data["account.tax"])
         # Create or update the records.
-        if self.update_account_group:
-            self._update_account_groups(t_data["account.group"])
-        if self.update_account:
-            self._update_accounts(t_data["account.account"])
-        if self.update_tax_group:
-            self._update_tax_groups(t_data["account.tax.group"])
-        if self.update_tax:
-            self._update_taxes(t_data["account.tax"])
-        if self.update_fiscal_position:
-            self._update_fiscal_positions(t_data["account.fiscal.position"])
+        errors = []
+        for model, enabled, method in (
+            ("account.group", self.update_account_group, self._update_account_groups),
+            ("account.account", self.update_account, self._update_accounts),
+            ("account.tax.group", self.update_tax_group, self._update_tax_groups),
+            ("account.tax", self.update_tax, self._update_taxes),
+            (
+                "account.fiscal.position",
+                self.update_fiscal_position,
+                self._update_fiscal_positions,
+            ),
+        ):
+            if not enabled:
+                continue
+            errors += self._update_model_records(model, method, t_data[model])
+        if errors:
+            self.log = "\n".join(filter(None, [self.log] + errors))
+            if not self.continue_on_errors:
+                raise UserError(_("One or more errors detected!\n\n%s") % self.log)
         # Store new chart in the company
         self.company_id.chart_template = self.chart_template
         # Store the data and go to the next step.
@@ -620,7 +755,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     record_value_compare = []
                     for record_value_item in record_value:
                         record_value_compare += record_value_item[2]
-                    if record_value_compare.sort() != real_value.ids.sort():
+                    if sorted(record_value_compare) != sorted(real_value.ids):
                         result[key] = record_value
                 continue
             elif field.ttype == "many2one":
@@ -638,6 +773,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     result[key] = record_value
                 continue
             elif field.ttype == "one2many":
+                if key == "repartition_line_ids" and all(
+                    x[0] == Command.CREATE for x in record_value
+                ):
+                    line_diff = self._diff_repartition_lines(record_value, real_value)
+                    if line_diff:
+                        result[key] = line_diff
+                    continue
                 if len(record_value) != len(real_value):
                     result[key] = [(5, 0, 0)] + record_value
                 else:
@@ -688,6 +830,94 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     "__translation_module__"
                 ]
         return result
+
+    @api.model
+    def _repartition_line_key(self, document_type, repartition_type):
+        """Natural key used to pair template repartition lines with real ones.
+
+        The document type and the repartition type identify the role a line
+        plays inside the tax, which is a far safer pairing criteria than its
+        position in the list. Taxes splitting a repartition among several lines
+        of the same kind (i.e. 50%/50%) still produce duplicated keys, and
+        those are paired in order.
+        """
+        return (document_type, repartition_type)
+
+    def _pair_repartition_lines(self, record_value, real_value):
+        """Pair every template repartition line with the real one it updates.
+
+        :return tuple: the ``(values, real line)`` pairs in template order, with
+            an empty recordset when the line has no counterpart, plus the real
+            lines that were not paired with any template line.
+        """
+        pending = list(real_value)
+        pairs = []
+        for command in record_value:
+            values = command[2]
+            key = self._repartition_line_key(
+                values.get("document_type"), values.get("repartition_type")
+            )
+            match = next(
+                (
+                    line
+                    for line in pending
+                    if self._repartition_line_key(
+                        line.document_type, line.repartition_type
+                    )
+                    == key
+                ),
+                self.env["account.tax.repartition.line"],
+            )
+            if match:
+                pending.remove(match)
+            pairs.append((values, match))
+        return pairs, pending
+
+    def _prepare_repartition_line_values(self, values, line):
+        """Get the values to recreate a repartition line from the template.
+
+        The fields the user excluded from the update keep the value of the
+        existing line, so that rewriting the whole set does not discard them.
+        """
+        values = dict(values)
+        if line:
+            if not self.update_tax_repartition_line_account:
+                values["account_id"] = line.account_id.id
+            if not self.update_tax_repartition_line_tags:
+                values["tag_ids"] = [Command.set(line.tag_ids.ids)]
+        return values
+
+    def _diff_repartition_lines(self, record_value, real_value):
+        """Get the commands needed to align the repartition lines of a tax.
+
+        These are handled apart from the generic one2many comparison because
+        the user can choose not to propagate the account
+        (``update_tax_repartition_line_account``) or the tags
+        (``update_tax_repartition_line_tags``) of the template, keeping the
+        ones set manually on the existing lines. Replacing the whole set, as
+        the generic comparison does, would destroy them.
+        """
+        pairs, unpaired = self._pair_repartition_lines(record_value, real_value)
+        if unpaired or not all(line for _values, line in pairs):
+            # The template and the tax do not describe the same set of lines,
+            # so there is no safe way of updating them one by one: rewrite them
+            # all, but carrying over the values the user chose to preserve.
+            return [Command.clear()] + [
+                Command.create(self._prepare_repartition_line_values(values, line))
+                for values, line in pairs
+            ]
+        commands = []
+        for values, line in pairs:
+            line_diff = self.with_context(skip_translation_keys=True).diff_fields(
+                values, line
+            )
+            if not self.update_tax_repartition_line_account:
+                line_diff.pop("account_id", None)
+            if not self.update_tax_repartition_line_tags:
+                line_diff.pop("tag_ids", None)
+            if line_diff:
+                commands.append(Command.update(line.id, line_diff))
+        return commands
 
     @api.model
     def diff_notes(self, record_values, real):
