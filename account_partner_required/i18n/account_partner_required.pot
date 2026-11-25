@@ -24,6 +24,11 @@ msgid "Always"
 msgstr ""
 
 #. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move_line
 msgid "Journal Item"
 msgstr ""
