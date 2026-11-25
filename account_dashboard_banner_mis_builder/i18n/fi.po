@@ -6,50 +6,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"Last-Translator: painkin <pasi.inkinen@iodo.fi>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Language: fi\n"
+"PO-Revision-Date: 2026-11-25 09:46+0000\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: account_dashboard_banner_mis_builder
 #: model:ir.model,name:account_dashboard_banner_mis_builder.model_account_dashboard_banner_cell
 msgid "Accounting Dashboard Banner Cell"
-msgstr ""
+msgstr "Kirjanpidon koontinäytön bannerisolu"
 
 #. module: account_dashboard_banner_mis_builder
 #: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__cell_type
 msgid "Cell Type"
-msgstr ""
+msgstr "Solutyyppi"
 
 #. module: account_dashboard_banner_mis_builder
 #: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_kpi_num_display_currency
 msgid "Display Currency"
-msgstr ""
+msgstr "Näytettävä valuutta"
 
 #. module: account_dashboard_banner_mis_builder
 #. odoo-python
 #: code:addons/account_dashboard_banner_mis_builder/models/account_dashboard_banner_cell.py:0
 msgid "Expression: %(kpi_expression)s."
-msgstr ""
+msgstr "Lauseke: %(kpi_expression)."
 
 #. module: account_dashboard_banner_mis_builder
 #: model:ir.model.fields.selection,name:account_dashboard_banner_mis_builder.selection__account_dashboard_banner_cell__cell_type__mis_builder
 msgid "MIS Builder KPI"
-msgstr ""
+msgstr "MIS Builder KPI"
 
 #. module: account_dashboard_banner_mis_builder
 #. odoo-python
 #: code:addons/account_dashboard_banner_mis_builder/models/account_dashboard_banner_cell.py:0
 msgid "MIS Builder KPI: %(kpi)s. From %(date_from)s to %(date_to)s."
-msgstr ""
+msgstr "MIS Builder KPI: %(kpi). Aikavälillä %(date_from)s – %(date_to)."
 
 #. module: account_dashboard_banner_mis_builder
 #: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_instance_id
 msgid "MIS Report"
-msgstr ""
+msgstr "MIS raportti"
 
 #. module: account_dashboard_banner_mis_builder
 #: model:ir.model.fields,field_description:account_dashboard_banner_mis_builder.field_account_dashboard_banner_cell__mis_report_kpi_id
