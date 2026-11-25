@@ -549,7 +549,11 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         asset.compute_depreciation_board()
         asset.validate()
-        wiz_ctx = {"active_id": asset.id, "early_removal": True}
+        wiz_ctx = {
+            "active_id": asset.id,
+            "early_removal": True,
+            "active_model": "account.asset",
+        }
         wiz = self.remove_model.with_context(**wiz_ctx).create(
             {
                 "date_remove": "2019-01-31",
@@ -995,7 +999,7 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         self.assertNotIn("early_removal", action["context"])
         wizard_form = Form(
             self.remove_model.with_context(
-                **action["context"],
+                **action["context"], active_model="account.asset"
             )
         )
         wizard_form.posting_regime = "gain_loss_on_sale"
