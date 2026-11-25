@@ -1,0 +1,184 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_journal_general_sequence
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-06-26 08:08+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
+"Language-Team: none\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: account_journal_general_sequence
+#. odoo-python
+#: code:addons/account_journal_general_sequence/models/account_journal.py:0
+msgid "Account entry default numbering (%s)"
+msgstr "Privzeto številčenje vknjižb (%s)"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__entry_number_sequence_id
+msgid "Account entry number sequence"
+msgstr "Zaporedje številčenja vknjižb"
+
+#. module: account_journal_general_sequence
+#: model:ir.model,name:account_journal_general_sequence.model_account_move_renumber_wizard
+msgid "Account move entry renumbering wizard"
+msgstr "Čarovnik za preštevilčenje vknjižb"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_bank_statement_line__entry_number
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move__entry_number
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_line__entry_number
+msgid "Automatic numbering, based on journal configuration."
+msgstr "Samodejno številčenje glede na nastavitve dnevnika."
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__available_sequence_ids
+msgid "Available sequences"
+msgstr "Zaporedja na voljo"
+
+#. module: account_journal_general_sequence
+#: model_terms:ir.ui.view,arch_db:account_journal_general_sequence.account_move_renumber_wizard_view_form
+msgid "Cancel"
+msgstr "Prekliči"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__create_uid
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__create_date
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__display_name
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__display_name
+msgid "Display Name"
+msgstr "Prikazani naziv"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_bank_statement_line__entry_number
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move__entry_number
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line__entry_number
+msgid "Entry Number"
+msgstr "Številka vnosa"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__id
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move__id
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_journal_general_sequence
+#: model_terms:ir.ui.view,arch_db:account_journal_general_sequence.account_move_renumber_wizard_view_form
+msgid ""
+"If you have already filed and legalized your journals with the competent "
+"authority, this action could change it. Continue?"
+msgstr ""
+"Če ste svoje poslovne knjige že predložili pristojnemu organu in jih "
+"legalizirali, bi jih to lahko spremenilo. Želite nadaljevati?"
+
+#. module: account_journal_general_sequence
+#: model:ir.model,name:account_journal_general_sequence.model_account_journal
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: account_journal_general_sequence
+#: model:ir.model,name:account_journal_general_sequence.model_account_move
+msgid "Journal Entry"
+msgstr "Temeljnica"
+
+#. module: account_journal_general_sequence
+#: model:ir.model,name:account_journal_general_sequence.model_account_move_line
+msgid "Journal Item"
+msgstr "Dnevniška postavka"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__write_date
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: account_journal_general_sequence
+#. odoo-python
+#: code:addons/account_journal_general_sequence/wizards/account_move_renumber_wizard.py:0
+msgid "No account moves found."
+msgstr "Ni najdenih vnosov."
+
+#. module: account_journal_general_sequence
+#: model_terms:ir.ui.view,arch_db:account_journal_general_sequence.account_move_renumber_wizard_view_form
+msgid "Renumber"
+msgstr "Preštevilči"
+
+#. module: account_journal_general_sequence
+#: model_terms:ir.ui.view,arch_db:account_journal_general_sequence.account_move_renumber_wizard_view_form
+msgid "Renumber account entry numbers"
+msgstr "Preštevilči številke vnosov"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_renumber_wizard__starting_date
+msgid "Renumber account moves starting this day."
+msgstr "Od tega dne naprej preštevilčite vknjižbe."
+
+#. module: account_journal_general_sequence
+#: model:ir.actions.act_window,name:account_journal_general_sequence.account_move_renumber_wizard_action
+#: model:ir.ui.menu,name:account_journal_general_sequence.account_move_renumber_wizard_menu
+msgid "Renumber journal entries"
+msgstr "Preštevilči temeljnice"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_renumber_wizard__starting_number
+msgid "Reset sequence to this number before starting."
+msgstr "Pred začetkom ponastavi zaporedje na to številko."
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__sequence_id
+msgid "Sequence"
+msgstr "Zaporedje"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_journal__entry_number_sequence_id_name
+msgid "Sequence Code"
+msgstr "Koda zaporedja"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_move_renumber_wizard__sequence_id
+msgid ""
+"Sequence to use for renumbering. Affects all journals that use this "
+"sequence."
+msgstr ""
+"Zaporedje, ki se uporablja za preštevilčenje. Vpliva na vse dnevnike, ki "
+"uporabljajo to zaporedje."
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,help:account_journal_general_sequence.field_account_journal__entry_number_sequence_id
+msgid "Sequence used for account entry numbering."
+msgstr "Zaporedje, ki se uporablja za številčenje knjiženj."
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__starting_date
+msgid "Starting Date"
+msgstr "Začetni datum"
+
+#. module: account_journal_general_sequence
+#: model:ir.model.fields,field_description:account_journal_general_sequence.field_account_move_renumber_wizard__starting_number
+msgid "Starting Number"
+msgstr "Začetna številka"
