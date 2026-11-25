@@ -7,6 +7,12 @@ from odoo import fields, models
 class AccountJournal(models.Model):
     _inherit = "account.journal"
 
+    lock_date_restrict_creation = fields.Boolean(
+        string="Restrict Creation on Lock Dates",
+        default=False,
+        help="When enabled, draft journal entries cannot be created "
+        "on or before the lock dates for this journal.",
+    )
     fiscalyear_lock_date = fields.Date(
         string="Lock Date",
         help="No users, including Advisers, can edit accounts prior "
