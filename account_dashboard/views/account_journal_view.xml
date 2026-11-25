@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_journal_dashboard_kanban_view_inherit" model="ir.ui.view">
+        <field name="name">Accounting Dashboard</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//t[@t-name='JournalBodyGraph']" position="attributes">
+                <attribute name="invisible">context.get('account_dashboard')</attribute>
+            </xpath>
+            <xpath expr="//t[@t-name='JournalBodySalePurchase']" position="attributes">
+                <attribute name="invisible">context.get('account_dashboard')</attribute>
+            </xpath>
+            <xpath
+                expr="//div[@t-if=&quot;journal_type == 'sale'&quot;]"
+                position="after"
+            >
+                <div t-if="journal_type == 'purchase'">
+                    <widget
+                        name="account_file_uploader"
+                        title="Upload Bills"
+                        btnClass="file_upload_kanban_action_a"
+                    />
+                </div>
+            </xpath>
+            <xpath
+                expr="//button[@name='import_account_statement']"
+                position="attributes"
+            >
+                <attribute name="invisible">context.get('account_dashboard')</attribute>
+            </xpath>
+            <xpath expr="//div[@t-att-title='dashboard.title']" position="after">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button
+                        type="action"
+                        t-if="dashboard.is_show_reconcile_button and dashboard.number_to_reconcile > 0"
+                        name="%(account_reconcile_oca.action_bank_statement_line_reconcile)s"
+                        class="btn btn-primary"
+                    >
+                        Rec
+                        <t t-esc="dashboard.number_to_reconcile" />
+                        Items
+                    </button>
+                    <t
+                        t-if="context.account_dashboard and (
+                        dashboard.nb_lines_bank_account_balance > 0
+                        or (dashboard.has_at_least_one_statement and dashboard.account_balance != dashboard.last_balance)
+                        or dashboard.nb_lines_outstanding_pay_account_balance > 0
+                        or dashboard.nb_misc_operations > 0)"
+                    >
+                        <div class="dropdown">
+                            <button
+                                class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                name="action_dropdown"
+                            >
+                                Balance Details
+                            </button>
+                            <ul
+                                class="dropdown-menu"
+                                role="menu"
+                                style="min-width: 350px; white-space: normal;"
+                            >
+                                <li>
+                                    <div
+                                        id="dashboard_bank_cash_right"
+                                        class="col-auto"
+                                        name="kanban_primary_right"
+                                    >
+                                        <div
+                                            class="row"
+                                            t-if="dashboard.nb_lines_bank_account_balance > 0"
+                                        >
+                                            <div
+                                                id="dashboard_bank_cash_balance"
+                                                class="col overflow-hidden text-start"
+                                            >
+                                                <span>Balance</span>
+                                            </div>
+                                            <div class="col-auto text-end">
+                                                <span dir="ltr">
+                                                    <t
+                                                        t-out="dashboard.account_balance"
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <t
+                                            t-if="dashboard.has_at_least_one_statement and dashboard.account_balance != dashboard.last_balance"
+                                        >
+                                            <div class="row" name="latest_statement">
+                                                <div
+                                                    class="col overflow-hidden text-start"
+                                                >
+                                                    <span
+                                                        title="Latest Statement"
+                                                    >Last Statement</span>
+                                                </div>
+                                                <div class="col-auto text-end">
+                                                    <span dir="ltr">
+                                                        <t
+                                                            t-out="dashboard.last_balance"
+                                                        />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </t>
+                                        <div
+                                            class="row"
+                                            t-if="dashboard.nb_lines_outstanding_pay_account_balance > 0"
+                                        >
+                                            <div
+                                                id="dashboard_bank_cash_outstanding_balance"
+                                                class="col overflow-hidden text-start"
+                                            >
+                                                <a
+                                                    type="action"
+                                                    name="%(account.action_account_all_payments)d"
+                                                    context="{'search_default_unmatched': True, 'search_default_journal_id': id, 'search_default_state_posted': True, }"
+                                                >
+                                                    Payments
+                                                </a>
+                                            </div>
+                                            <div class="col-auto text-end">
+                                                <span>
+                                                    <t
+                                                        t-out="dashboard.outstanding_pay_account_balance"
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="row"
+                                            t-if="dashboard.nb_misc_operations > 0"
+                                            groups="account.group_account_readonly"
+                                        >
+                                            <div
+                                                id="dashboard_bank_cash_misc_total"
+                                                class="col text-start"
+                                            >
+                                                <a
+                                                    type="object"
+                                                    name="open_bank_difference_action"
+                                                    t-att-class="dashboard.misc_class"
+                                                >Misc. Operations
+                                                </a>
+                                            </div>
+                                            <div class="col-auto text-end">
+                                                <span dir="ltr">
+                                                    <t
+                                                        t-out="dashboard.misc_operations_balance"
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <t t-call="JournalChecks" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <div name="bank_cash_buttons" class="d-flex gap-1">
+                                        <t
+                                            t-set="bank_requires_setup"
+                                            t-value="!record.bank_account_id.raw_value and ['undefined', 'online_sync'].includes(dashboard.bank_statements_source)"
+                                        />
+                                        <button
+                                            t-if="journal_type == 'bank' and bank_requires_setup"
+                                            name="action_configure_bank_journal"
+                                            type="object"
+                                            class="btn btn-primary"
+                                            groups="account.group_account_basic"
+                                        >Bank Setup
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </t>
+                </div>
+            </xpath>
+
+            <xpath expr="//t[@name='empty_journal_helper']" position="attributes">
+                <attribute name="invisible">context.get('account_dashboard')</attribute>
+            </xpath>
+
+            <xpath
+                expr="//t[@t-name='JournalBodyBankCash']//div[@id='dashboard_bank_cash_right']"
+                position="attributes"
+            >
+                <attribute name="invisible">context.get('account_dashboard')</attribute>
+            </xpath>
+
+            <xpath
+                expr="//t[@t-name='JournalBodyBankCash']//div[@id='dashboard_bank_cash_left']"
+                position="attributes"
+            >
+                <attribute name="invisible">context.get('account_dashboard')</attribute>
+            </xpath>
+
+            <xpath
+                expr="//kanban/templates//div[@id='dashboard_bank_cash_left']//button[@name='%(account_reconcile_oca.action_bank_statement_line_reconcile)s']"
+                position="attributes"
+            >
+                <attribute name="invisible">context.get('account_dashboard')</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record
+        id="open_account_journal_dashboard_kanban_inherit"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Accounting Dashboard</field>
+        <field name="res_model">account.journal</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" ref="account_journal_dashboard_kanban_view_inherit" />
+        <field name="usage">menu</field>
+        <field
+            name="context"
+        >{'search_default_dashboard':1, 'account_dashboard':True}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_neutral_face">
+                This is the accounting dashboard
+            </p>
+            <p>
+                If you have not installed a chart of account, please install one first.<br
+            />
+               <a
+                class="btn-link"
+                type="action"
+                name="%(account.open_account_charts_modules)d"
+                tabindex="-1"
+            >Browse available countries.</a>
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_board_journal_dashboard"
+        name="Accounting Dashboard"
+        parent="account.menu_finance"
+        action="account_dashboard.open_account_journal_dashboard_kanban_inherit"
+        groups="account.group_account_basic"
+        sequence="1"
+    />
+</odoo>
