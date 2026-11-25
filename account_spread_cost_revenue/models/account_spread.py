@@ -504,7 +504,12 @@ class AccountSpread(models.Model):
         spread_lines = self.mapped("line_ids").filtered("move_id")
         spread_lines.unlink_move()
         self.compute_spread_board()
-        self.env["account.spread.line"]._create_entries()
+        # Only create the moves of this spread, not the ones of all the spreads
+        self.line_ids.filtered(
+            lambda l: l.date <= fields.Date.today() and not l.move_id
+        ).create_and_reconcile_moves()
+        if self.all_posted and self.company_id.auto_archive_spread:
+            self.active = False
 
     def action_undo_spread(self):
         """Undo spreading: Remove all created moves"""
