@@ -46,10 +46,20 @@ class AccountUpdateLockDate(models.TransientModel):
         res["company_id"] = company.id
         return res
 
+    @api.onchange("company_id")
+    def _onchange_company_id(self):
+        # The wizard writes all the lock dates on validation: when the company
+        # changes, show its own lock dates, never keep those of the previous one.
+        for lock_field in LOCK_DATE_FIELDS:
+            self[lock_field] = self.company_id[lock_field]
+
     def _check_execute_allowed(self):
         self.ensure_one()
         has_adviser_group = self.env.user.has_group("account.group_account_manager")
         if not (has_adviser_group or self.env.user._is_admin()):
+            raise UserError(_("You are not allowed to execute this action."))
+        # the lock dates are written with sudo: only on a company of the user
+        if self.company_id not in self.env.user.company_ids:
             raise UserError(_("You are not allowed to execute this action."))
 
     def execute(self):
