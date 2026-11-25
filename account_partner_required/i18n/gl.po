@@ -27,6 +27,11 @@ msgid "Always"
 msgstr "Sempre"
 
 #. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move_line
 msgid "Journal Item"
 msgstr "Artigo Diario"
@@ -73,9 +78,12 @@ msgstr ""
 #: model:ir.model.fields,help:account_partner_required.field_account_account__partner_policy
 msgid ""
 "Set the policy for the partner field:\n"
-"if you select 'Optional', the accountant is free to put a partner on journal items with this account ;\n"
-"if you select 'Always', the accountant will get an error message if there is no partner ;\n"
-"if you select 'Never', the accountant will get an error message if a partner is present."
+"if you select 'Optional', the accountant is free to put a partner on journal "
+"items with this account ;\n"
+"if you select 'Always', the accountant will get an error message if there is "
+"no partner ;\n"
+"if you select 'Never', the accountant will get an error message if a partner "
+"is present."
 msgstr ""
 "Estableza a política para o campo socio:\n"
 "se selecciona 'Opcional', o contable é libre de poñer un socio nas partidas "
