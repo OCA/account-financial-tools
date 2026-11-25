@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_asset_profile_view_form" model="ir.ui.view">
+        <field name="name">account.asset.profile.form</field>
+        <field name="model">account.asset.profile</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_profile_view_form"
+        />
+        <field name="arch" type="xml">
+            <!-- The depreciation dates are not used for unit of activity assets -->
+            <xpath expr="//field[@name='method_time']/parent::group" position="attributes">
+                <attribute name="invisible">method == 'unit-activity'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='method_progress_factor']" position="attributes">
+                <attribute
+                    name="invisible"
+                >method in ['linear', 'linear-limit', 'unit-activity']</attribute>
+            </xpath>
+            <xpath expr="//field[@name='prorata']" position="attributes">
+                <attribute name="invisible">method == 'unit-activity'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='open_asset']" position="after">
+                <field
+                    name="total_number_of_use"
+                    invisible="method != 'unit-activity'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
