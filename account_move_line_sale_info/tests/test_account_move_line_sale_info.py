@@ -261,3 +261,35 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
                     "sale Order line has not been copied "
                     "from the invoice to the credit note.",
                 )
+
+    def test_04_same_product_same_quantity_collision(self):
+        """Regression: when two invoice lines share the same product_id and
+        quantity (e.g. a credit note with a refund line + a free replacement
+        line both at qty=-1), the previous product_id + quantity heuristic
+        with a ``len == 1`` guard silently skipped sale_line_id propagation
+        on the generated COGS lines. Resolving via ``cogs_origin_id``
+        correctly attributes each COGS leg to its own originating invoice
+        line.
+        """
+        self.company.anglo_saxon_accounting = True
+        sale = self._create_sale([(self.product, 1), (self.product, 1)])
+        sale.action_confirm()
+        for picking in sale.picking_ids:
+            picking.move_ids.write({"quantity": 1.0, "picked": True})
+            picking.button_validate()
+        sale._create_invoices()
+        invoice = sale.invoice_ids[0]
+        invoice._post()
+
+        cogs = invoice.line_ids.filtered(lambda line: line.display_type == "cogs")
+        self.assertEqual(
+            len(cogs), 4, "Two invoice lines should produce two COGS pairs"
+        )
+        for cogs_line in cogs:
+            self.assertIn(cogs_line.sale_line_id, sale.order_line)
+            self.assertEqual(
+                cogs_line.sale_line_id,
+                cogs_line.cogs_origin_id.sale_line_id,
+                "COGS sale_line_id should match its originating invoice "
+                "line's sale_line_id",
+            )

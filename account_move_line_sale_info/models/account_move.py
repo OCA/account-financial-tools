@@ -8,15 +8,26 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     def _stock_account_prepare_anglo_saxon_out_lines_vals(self):
+        # Resolve each COGS val dict back to its originating invoice line via
+        # the ``cogs_origin_id`` FK written by core stock_account. This
+        # replaces a product_id + quantity heuristic that silently dropped
+        # propagation whenever two invoice lines on the same document shared
+        # the same product and quantity -- e.g. credit notes with a refund
+        # line and a free replacement line both at qty=-1.
         res = super()._stock_account_prepare_anglo_saxon_out_lines_vals()
-        for i, vals in enumerate(res):
-            am = self.env["account.move"].browse(vals["move_id"])
-            sale_line_id = am.invoice_line_ids.filtered(
-                lambda il, vs=vals: il.product_id.id == vs["product_id"]
-                and il.quantity == vs["quantity"]
-            ).mapped("sale_line_ids")
-            if sale_line_id and len(sale_line_id) == 1:
-                res[i]["sale_line_id"] = sale_line_id.id
+        origin_ids = {
+            vals["cogs_origin_id"] for vals in res if vals.get("cogs_origin_id")
+        }
+        if not origin_ids:
+            return res
+        origins = self.env["account.move.line"].browse(origin_ids)
+        sale_line_by_origin = {
+            line.id: line.sale_line_id.id for line in origins if line.sale_line_id
+        }
+        for vals in res:
+            sol_id = sale_line_by_origin.get(vals.get("cogs_origin_id"))
+            if sol_id:
+                vals["sale_line_id"] = sol_id
         return res
 
 
