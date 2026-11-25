@@ -1,4 +1,5 @@
 # Copyright 2009-2018 Noviat
+# Copyright 2026 Imaro Tech - Ignacio R. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -9,6 +10,7 @@ class AccountAssetProfile(models.Model):
     _name = "account.asset.profile"
     _inherit = "analytic.mixin"
     _check_company_auto = True
+    _check_company_domain = models.check_company_domain_parent_of
     _description = "Asset profile"
     _order = "name"
 

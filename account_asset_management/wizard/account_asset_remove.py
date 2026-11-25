@@ -1,5 +1,6 @@
 # Copyright 2009-2018 Noviat
 # Copyright 2021 Tecnativa - João Marques
+# Copyright 2026 Imaro Tech - Ignacio R. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -41,25 +42,25 @@ class AccountAssetRemove(models.TransientModel):
     account_sale_id = fields.Many2one(
         comodel_name="account.account",
         string="Asset Sale Account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain="[('deprecated', '=', False), ('company_id', 'parent_of', company_id)]",
         default=lambda self: self._default_account_sale_id(),
     )
     account_plus_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Plus-Value Account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain="[('deprecated', '=', False), ('company_id', 'parent_of', company_id)]",
         default=lambda self: self._default_account_plus_value_id(),
     )
     account_min_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Min-Value Account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain="[('deprecated', '=', False), ('company_id', 'parent_of', company_id)]",
         default=lambda self: self._default_account_min_value_id(),
     )
     account_residual_value_id = fields.Many2one(
         comodel_name="account.account",
         string="Residual Value Account",
-        domain="[('deprecated', '=', False), ('company_id', '=', company_id)]",
+        domain="[('deprecated', '=', False), ('company_id', 'parent_of', company_id)]",
         default=lambda self: self._default_account_residual_value_id(),
     )
     posting_regime = fields.Selection(
@@ -202,8 +203,9 @@ class AccountAssetRemove(models.TransientModel):
             "ref": line_name,
             "journal_id": journal_id,
             "narration": self.note,
+            "company_id": asset.company_id.id,
         }
-        move = self.env["account.move"].create(move_vals)
+        move = self.env["account.move"].with_company(asset.company_id).create(move_vals)
 
         # create asset line
         asset_line_vals = {
@@ -219,7 +221,9 @@ class AccountAssetRemove(models.TransientModel):
 
         # create move lines
         move_lines = self._get_removal_data(asset, residual_value)
-        move.with_context(allow_asset=True).write({"line_ids": move_lines})
+        move.with_company(asset.company_id).with_context(allow_asset=True).write(
+            {"line_ids": move_lines}
+        )
 
         return {
             "name": _("Asset '%s' Removal Journal Entry") % asset_ref,
