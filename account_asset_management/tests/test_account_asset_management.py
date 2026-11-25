@@ -8,7 +8,7 @@ import time
 from datetime import date, datetime
 
 from odoo import Command, fields
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests import tagged
 from odoo.tests.common import Form
 
@@ -1058,3 +1058,45 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_check_analytic_distribution(self):
+        analytic_plan = self.env["account.analytic.plan"].create(
+            {
+                "name": "Test Analytic Plan",
+            }
+        )
+        self.env["account.analytic.applicability"].create(
+            {
+                "business_domain": "general",
+                "account_prefix": "6",
+                "applicability": "mandatory",
+                "analytic_plan_id": analytic_plan.id,
+            }
+        )
+        analytic_account = self.env["account.analytic.account"].create(
+            {
+                "name": "Test Analytic Account",
+                "code": "TAA",
+                "plan_id": analytic_plan.id,
+                "root_plan_id": analytic_plan.id,
+            }
+        )
+        self.car5y.account_expense_depreciation_id = self.env["account.account"].create(
+            {
+                "name": "Depreciation Expense",
+                "code": "600",
+            }
+        )
+        self.asset = self.asset_model.create(
+            {
+                "name": "test asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": 1000,
+                "date_start": time.strftime("%Y-07-07"),
+            }
+        )
+        with self.assertRaises(ValidationError):
+            self.asset.validate()
+
+        self.asset.analytic_distribution = {str(analytic_account.id): 100}
+        self.asset.validate()
