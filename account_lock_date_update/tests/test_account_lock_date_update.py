@@ -32,6 +32,21 @@ class TestAccountLockDateUpdate(TransactionCase):
                 {"company_id": self.company.id}
             )
 
+    def test_menu_only_for_advisers(self):
+        menu = self.env.ref("account_lock_date_update.account_update_lock_date_menu")
+        Menu = self.env["ir.ui.menu"]
+        self.demo_user.write(
+            {
+                "groups_id": [
+                    Command.unlink(self.adviser_group.id),
+                    Command.link(self.env.ref("account.group_account_readonly").id),
+                ]
+            }
+        )
+        self.assertNotIn(menu.id, Menu.with_user(self.demo_user)._visible_menu_ids())
+        self.demo_user.write({"groups_id": [Command.link(self.adviser_group.id)]})
+        self.assertIn(menu.id, Menu.with_user(self.demo_user)._visible_menu_ids())
+
     def test_02_update_with_access(self):
         self.demo_user.write({"groups_id": [Command.link(self.adviser_group.id)]})
         wizard = (
