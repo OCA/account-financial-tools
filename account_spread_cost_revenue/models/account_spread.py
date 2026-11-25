@@ -321,6 +321,43 @@ class AccountSpread(models.Model):
                 )
                 raise ValidationError(err_msg)
 
+    @api.constrains(
+        "analytic_distribution",
+        "debit_account_id",
+        "credit_account_id",
+        "company_id",
+    )
+    def _check_analytic_distribution(self):
+        """
+        Ensures that the analytic distribution is
+        properly set for the debit and credit accounts.
+        """
+        for spread in self:
+            for account in (
+                spread.debit_account_id,
+                spread.credit_account_id,
+            ):
+                if not account:
+                    continue
+
+                try:
+                    spread.with_context(
+                        validate_analytic=True,
+                    )._validate_distribution(
+                        company_id=spread.company_id.id,
+                        account=account.id,
+                        business_domain="general",
+                    )
+                except ValidationError as error:
+                    raise ValidationError(
+                        _(
+                            "Mandatory analytic distribution for account "
+                            "%(account)s\n"
+                            "Please check the analytic distribution.",
+                            account=account.code,
+                        )
+                    ) from error
+
     def _get_spread_period_duration(self):
         """Converts the selected period_type to number of months."""
         self.ensure_one()
