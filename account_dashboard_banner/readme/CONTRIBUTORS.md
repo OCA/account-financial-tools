@@ -1,1 +1,2 @@
 - Alexis de Lattre \<<alexis.delattre@akretion.com>\>
+- Claude Perrin \<<klodr@users.noreply.github.com>\>

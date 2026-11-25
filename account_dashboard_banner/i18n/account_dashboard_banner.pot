@@ -56,6 +56,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_dashboard_banner
+#. odoo-javascript
+#: code:addons/account_dashboard_banner/static/src/views/account_dashboard_kanban_banner.xml:0
+msgid "Currency"
+msgstr ""
+
+#. module: account_dashboard_banner
 #: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__custom_label
 msgid "Custom Label"
 msgstr ""
@@ -103,6 +109,11 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_dashboard_banner
+#: model:ir.model.fields,field_description:account_dashboard_banner.field_account_dashboard_banner_cell__active
+msgid "Displayed"
+msgstr ""
+
+#. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__income_fiscalyear
 msgid "Fiscal Year-to-date Income"
 msgstr ""
@@ -135,6 +146,14 @@ msgstr ""
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__liquidity
 msgid "Liquidity"
+msgstr ""
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid ""
+"Lock dates are set per company. With several companies, the date shown is "
+"the oldest one: up to it, all the selected companies are locked."
 msgstr ""
 
 #. module: account_dashboard_banner
@@ -201,6 +220,19 @@ msgstr ""
 #. module: account_dashboard_banner
 #: model:ir.model.fields.selection,name:account_dashboard_banner.selection__account_dashboard_banner_cell__cell_type__tax_lock_date
 msgid "Tax Return Lock Date"
+msgstr ""
+
+#. module: account_dashboard_banner
+#. odoo-python
+#: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
+msgid ""
+"Total of the selected companies in %(currency)s: the amounts of the companies "
+"in another currency are converted at the latest known rate."
+msgstr ""
+
+#. module: account_dashboard_banner
+#: model:ir.model.fields,help:account_dashboard_banner.field_account_dashboard_banner_cell__active
+msgid "Uncheck to hide the cell from the banner, without deleting it."
 msgstr ""
 
 #. module: account_dashboard_banner
