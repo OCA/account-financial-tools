@@ -1,0 +1,1 @@
+odoo-addon-account_loan @ git+https://github.com/OCA/account-financial-tools.git@refs/pull/2303/head#subdirectory=account_loan

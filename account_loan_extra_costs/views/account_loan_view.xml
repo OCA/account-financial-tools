@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 INVITU
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="account_loan_form_extra_costs" model="ir.ui.view">
+        <field name="name">account.loan.form.extra.costs</field>
+        <field name="model">account.loan</field>
+        <field name="inherit_id" ref="account_loan.account_loan_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@id='items']" position="after">
+                <page string="Extra Costs" id="extra_costs">
+                    <field
+                        name="extra_cost_ids"
+                        readonly="state in ['cancelled', 'closed']"
+                    >
+                        <list editable="bottom">
+                            <field name="name" />
+                            <field name="payment_type" />
+                            <field name="calculation_method" />
+                            <field name="amount" optional="show" />
+                            <field name="rate" optional="show" />
+                            <field name="account_id" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
