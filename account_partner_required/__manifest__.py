@@ -7,7 +7,7 @@
 
 {
     "name": "Account Partner Required",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Adds an option 'partner policy' on accounts",

@@ -61,7 +61,7 @@ addon | version | maintainers | summary
 [account_move_template](account_move_template/) | 16.0.1.0.3 |  | Templates for recurring Journal Entries
 [account_move_transfer_partner](account_move_transfer_partner/) | 16.0.1.0.0 | <a href='https://github.com/ChrisOForgeFlow'><img src='https://github.com/ChrisOForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='ChrisOForgeFlow'/></a> | Automation to translate amount due from many partners to one partner
 [account_netting](account_netting/) | 16.0.1.0.1 |  | Compensate AR/AP accounts from the same partner
-[account_partner_required](account_partner_required/) | 16.0.1.0.0 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Adds an option 'partner policy' on accounts
+[account_partner_required](account_partner_required/) | 16.0.2.0.0 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Adds an option 'partner policy' on accounts
 [account_reversal](account_reversal/) | 16.0.1.0.0 |  | Account reversal usability improvements
 [account_sequence_option](account_sequence_option/) | 16.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Manage sequence options for account.move, i.e., invoice, bill, entry
 [account_spread_cost_revenue](account_spread_cost_revenue/) | 16.0.1.0.1 |  | Spread costs and revenues over a custom period
