@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="account_asset_compute_view_form">
+        <field
+            name="name"
+        >account.asset.compute (in account_asset_batch_compute)</field>
+        <field name="model">account.asset.compute</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_compute_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="date_end" position="after">
+                <field name="batch_processing" />
+            </field>
+        </field>
+    </record>
+</odoo>
