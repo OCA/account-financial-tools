@@ -31,10 +31,10 @@ Account Journal Lock Date
 Lock each accounting journal independently.
 
 In addition to the lock dates provided by standard Odoo, this module
-provides a 'Lock Date' and a 'Lock Date for Non-Advisers' per journal.
+provides a 'Lock Date' and a 'Lock Date for Non-Accounting Administrators' per journal.
 
 This module also adds a wizard that allows you to update the 'Lock Date'
-and the 'Lock Date for Non-Advisers' for several Journals at the same
+and the 'Lock Date for Non-Accounting Administrators' for several Journals at the same
 time.
 
 **Table of contents**
@@ -49,7 +49,7 @@ To configure this module, you need to:
 
 1. Go to *Invoicing > Configuration > Journals*
 2. Open a Journal and set the 'Lock Date' and the 'Lock Date for
-   Non-Advisers' in the' Advanced Settings' tab of the form view or
+   Non-Accounting Administrators' in the 'Advanced Settings' tab of the form view or
    select several Journals in the list view and click on the action menu
    'Update journals lock dates' to update those dates for the selected
    journals at the same time.
@@ -57,14 +57,14 @@ To configure this module, you need to:
 Usage
 =====
 
-If the logged-in user has the access group 'Adviser', he/she will not be
-able to create a journal entry if the 'Lock Date' of the journal is
-greater than or equal to the journal entry.
+If the logged-in user has the **Accounting/Invoicing Administrator** role
+(``account.group_account_manager``), they will not be able to create a journal entry
+if the 'Lock Date' of the journal is greater than or equal to the journal entry date.
 
-If the logged-in user has not the access group 'Adviser', he/she will
-not be able to create a journal entry if the 'Lock Date for
-Non-Advisers' of the journal is greater than or equal to the journal
-entry.
+If the logged-in user does **not** have the Accounting/Invoicing Administrator role,
+they will not be able to create a journal entry if the 'Lock Date for
+Non-Accounting Administrators' of the journal is greater than or equal to the journal
+entry date.
 
 Known issues / Roadmap
 ======================
