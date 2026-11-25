@@ -28,7 +28,8 @@ Account Lock Date Update
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Allow an Account adviser to update accounting lock dates.
+Allow an Accounting/Invoicing Administrator to update the accounting lock dates
+via a wizard dialog, without requiring System Administrator access.
 
 **Table of contents**
 
@@ -38,10 +39,11 @@ Allow an Account adviser to update accounting lock dates.
 Usage
 =====
 
-To use this module, you need to be a Billing Administrator and go to:
+To use this module, you need the **Accounting/Invoicing Administrator** role
+(``account.group_account_manager``) and go to:
 
 - Invoicing -> Accounting -> Lock Dates
-- Change values and click on **Update** button
+- Change values and click on the **Update** button
 
 Bug Tracker
 ===========
