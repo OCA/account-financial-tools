@@ -479,6 +479,23 @@ class TestComputeSpreadBoard(common.TransactionCase):
             self.assertTrue(line.move_id)
 
     @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
+    def test_10_create_entries_multi_currency(self):
+        currency = (
+            self.env["res.currency"]
+            .with_context(active_test=False)
+            .search([("id", "!=", self.env.company.currency_id.id)], limit=1)
+        )
+        currency.active = True
+        self.spread2.currency_id = currency
+        with lower_logging(25, logging.INFO):
+            (self.spread + self.spread2).compute_spread_board()
+        self.env["account.spread.line"]._create_entries()
+        for line in (self.spread + self.spread2).line_ids:
+            self.assertTrue(line.move_id)
+        self.assertTrue(self.spread.all_posted)
+        self.assertTrue(self.spread2.all_posted)
+
+    @mute_logger("odoo.models", "odoo.sql_db", "odoo.models.unlink")
     def test_11_create_move_sale_invoice(self):
         self.spread2.move_line_auto_post = False
         self.spread2.compute_spread_board()
