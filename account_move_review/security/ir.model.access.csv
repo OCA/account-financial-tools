@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_review_wizard_reviewer,account.move.review.wizard reviewer,model_account_move_review_wizard,account_move_review.group_account_move_reviewer,1,1,1,1

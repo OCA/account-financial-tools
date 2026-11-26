@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_review" model="ir.ui.view">
+        <field name="name">account.move.form.review</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='button_draft']" position="attributes">
+                <attribute name="invisible">not show_reset_to_draft_button or (restrict_draft_to_reviewers and state == 'posted')</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='button_draft']" position="after">
+                <button name="action_mark_reviewed" string="Mark Reviewed" type="object" class="btn-primary" groups="account_move_review.group_account_move_reviewer" invisible="state != 'posted' or review_state == 'reviewed'" data-hotkey="m"/>
+                <button name="action_open_reset_draft_wizard" string="Return for Revision" type="object" groups="account_move_review.group_account_move_reviewer" invisible="not show_reset_to_draft_button or state != 'posted'" data-hotkey="r"/>
+            </xpath>
+            <xpath expr="//group[@id='header_right_group']" position="inside">
+                <field name="restrict_draft_to_reviewers" invisible="1"/>
+                <field name="review_state" widget="badge" decoration-success="review_state == 'reviewed'" decoration-warning="review_state == 'returned'" decoration-muted="review_state == 'not_reviewed'" invisible="state == 'draft' and review_state == 'not_reviewed'"/>
+                <field name="document_type" readonly="state == 'cancel'"/>
+            </xpath>
+            <xpath expr="//group[@id='other_tab_group']" position="inside">
+                <group string="Review" name="review_audit_invoice_group">
+                    <field name="reviewed_by_id" readonly="1"/>
+                    <field name="reviewed_date" readonly="1"/>
+                    <field name="review_notes" readonly="1" invisible="not review_notes"/>
+                </group>
+            </xpath>
+            <xpath expr="//group[@id='other_tab_entry_group']" position="inside">
+                <group string="Review" name="review_audit_entry_group">
+                    <field name="reviewed_by_id" readonly="1"/>
+                    <field name="reviewed_date" readonly="1"/>
+                    <field name="review_notes" readonly="1" invisible="not review_notes"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_tree_review" model="ir.ui.view">
+        <field name="name">account.move.list.review</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="review_state" widget="badge" optional="show" decoration-success="review_state == 'reviewed'" decoration-warning="review_state == 'returned'" decoration-muted="review_state == 'not_reviewed'"/>
+                <field name="document_type" widget="badge" optional="show" decoration-info="document_type == 'documentary'" decoration-warning="document_type == 'non_documentary'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_invoice_tree_review" model="ir.ui.view">
+        <field name="name">account.invoice.list.review</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='status_in_payment']" position="after">
+                <field name="review_state" widget="badge" optional="show" decoration-success="review_state == 'reviewed'" decoration-warning="review_state == 'returned'" decoration-muted="review_state == 'not_reviewed'"/>
+                <field name="document_type" widget="badge" optional="show" decoration-info="document_type == 'documentary'" decoration-warning="document_type == 'non_documentary'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_move_filter_review" model="ir.ui.view">
+        <field name="name">account.move.search.review</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='posted']" position="after">
+                <separator/>
+                <filter name="filter_reviewed" string="Reviewed" domain="[('review_state', '=', 'reviewed')]"/>
+                <filter name="filter_not_reviewed" string="Not Reviewed" domain="[('state', '=', 'posted'), ('review_state', '=', 'not_reviewed')]"/>
+                <filter name="filter_review_returned" string="Returned for Revision" domain="[('review_state', '=', 'returned')]"/>
+                <separator/>
+                <filter name="filter_documentary" string="Documentary" domain="[('document_type', '=', 'documentary')]"/>
+                <filter name="filter_non_documentary" string="Non-Documentary" domain="[('document_type', '=', 'non_documentary')]"/>
+            </xpath>
+            <xpath expr="//filter[@name='status']" position="after">
+                <filter name="group_by_review_state" string="Review Status" domain="[]" context="{'group_by': 'review_state'}"/>
+                <filter name="group_by_document_type" string="Document Type" domain="[]" context="{'group_by': 'document_type'}"/>
+                <filter name="group_by_reviewed_by" string="Reviewed By" domain="[]" context="{'group_by': 'reviewed_by_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter_review" model="ir.ui.view">
+        <field name="name">account.invoice.search.review</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='posted']" position="after">
+                <separator/>
+                <filter name="filter_reviewed" string="Reviewed" domain="[('review_state', '=', 'reviewed')]"/>
+                <filter name="filter_not_reviewed" string="Not Reviewed" domain="[('state', '=', 'posted'), ('review_state', '=', 'not_reviewed')]"/>
+                <filter name="filter_review_returned" string="Returned for Revision" domain="[('review_state', '=', 'returned')]"/>
+                <separator/>
+                <filter name="filter_documentary" string="Documentary" domain="[('document_type', '=', 'documentary')]"/>
+                <filter name="filter_non_documentary" string="Non-Documentary" domain="[('document_type', '=', 'non_documentary')]"/>
+            </xpath>
+            <xpath expr="//filter[@name='status']" position="after">
+                <filter name="group_by_review_state" string="Review Status" domain="[]" context="{'group_by': 'review_state'}"/>
+                <filter name="group_by_document_type" string="Document Type" domain="[]" context="{'group_by': 'document_type'}"/>
+                <filter name="group_by_reviewed_by" string="Reviewed By" domain="[]" context="{'group_by': 'reviewed_by_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_line_tree_review" model="ir.ui.view">
+        <field name="name">account.move.line.list.review</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='credit']" position="after">
+                <field name="move_review_state" widget="badge" optional="show" decoration-success="move_review_state == 'reviewed'" decoration-warning="move_review_state == 'returned'" decoration-muted="move_review_state == 'not_reviewed'"/>
+                <field name="move_document_type" widget="badge" optional="show" decoration-info="move_document_type == 'documentary'" decoration-warning="move_document_type == 'non_documentary'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_move_line_filter_review" model="ir.ui.view">
+        <field name="name">account.move.line.search.review</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='posted']" position="after">
+                <separator/>
+                <filter name="filter_line_reviewed" string="Reviewed" domain="[('move_review_state', '=', 'reviewed')]"/>
+                <filter name="filter_line_not_reviewed" string="Not Reviewed" domain="[('parent_state', '=', 'posted'), ('move_review_state', '=', 'not_reviewed')]"/>
+                <filter name="filter_line_review_returned" string="Returned for Revision" domain="[('move_review_state', '=', 'returned')]"/>
+                <separator/>
+                <filter name="filter_line_documentary" string="Documentary" domain="[('move_document_type', '=', 'documentary')]"/>
+                <filter name="filter_line_non_documentary" string="Non-Documentary" domain="[('move_document_type', '=', 'non_documentary')]"/>
+            </xpath>
+            <xpath expr="//filter[@name='group_by_move']" position="after">
+                <filter name="group_by_move_review_state" string="Review Status" domain="[]" context="{'group_by': 'move_review_state'}"/>
+                <filter name="group_by_move_document_type" string="Document Type" domain="[]" context="{'group_by': 'move_document_type'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_server_mark_moves_reviewed" model="ir.actions.server">
+        <field name="name">Mark Reviewed</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_view_types">list</field>
+        <field name="groups_id" eval="[(4, ref('account_move_review.group_account_move_reviewer'))]"/>
+        <field name="state">code</field>
+        <field name="code">records.action_mark_reviewed()</field>
+    </record>
+</odoo>

@@ -1,0 +1,148 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-26 12:00+0000\n"
+"PO-Revision-Date: 2026-11-26 12:00+0000\n"
+"Last-Translator: Saad Elbahi\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: account_move_review
+msgid "Accounting Entry Review"
+msgstr "مراجعة القيود المحاسبية"
+
+#. module: account_move_review
+msgid "Entry Reviewer"
+msgstr "مراجع القيود"
+
+#. module: account_move_review
+msgid "Review Status"
+msgstr "حالة المراجعة"
+
+#. module: account_move_review
+msgid "Not Reviewed"
+msgstr "لم تتم المراجعة"
+
+#. module: account_move_review
+msgid "Reviewed"
+msgstr "تمت المراجعة"
+
+#. module: account_move_review
+msgid "Returned for Revision"
+msgstr "معاد للتعديل"
+
+#. module: account_move_review
+msgid "Document Type"
+msgstr "نوع المستند"
+
+#. module: account_move_review
+msgid "Documentary"
+msgstr "مستندي"
+
+#. module: account_move_review
+msgid "Non-Documentary"
+msgstr "غير مستندي"
+
+#. module: account_move_review
+msgid "Reviewed By"
+msgstr "المراجع"
+
+#. module: account_move_review
+msgid "Reviewed On"
+msgstr "تاريخ المراجعة"
+
+#. module: account_move_review
+msgid "Review Notes"
+msgstr "ملاحظات المراجعة"
+
+#. module: account_move_review
+msgid "Mark Reviewed"
+msgstr "تمت المراجعة"
+
+#. module: account_move_review
+msgid "Reset to Draft"
+msgstr "إعادة إلى مسودة"
+
+#. module: account_move_review
+msgid "Review"
+msgstr "المراجعة"
+
+#. module: account_move_review
+msgid "Journal Entry"
+msgstr "القيد"
+
+#. module: account_move_review
+msgid "Payment"
+msgstr "الدفعة"
+
+#. module: account_move_review
+msgid "Notify User"
+msgstr "المحاسب"
+
+#. module: account_move_review
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: account_move_review
+msgid "Optional review notes..."
+msgstr "ملاحظات (اختياري)..."
+
+#. module: account_move_review
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: account_move_review
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: account_move_review
+msgid "Only entry reviewers can mark entries as reviewed."
+msgstr "هذه الصلاحية لمراجع القيود فقط."
+
+#. module: account_move_review
+msgid "Only posted entries can be marked as reviewed."
+msgstr "المراجعة متاحة للقيود والفواتير المرحلة فقط."
+
+#. module: account_move_review
+msgid "Only entry reviewers can reset posted entries to draft."
+msgstr "إعادة القيد إلى مسودة متاحة لمراجع القيود فقط."
+
+#. module: account_move_review
+msgid "Only posted entries can be reset via the review wizard."
+msgstr "القيد يجب أن يكون مرحلا لإعادته إلى مسودة."
+
+#. module: account_move_review
+msgid "Only entry reviewers can mark payments as reviewed."
+msgstr "هذه الصلاحية لمراجع القيود فقط."
+
+#. module: account_move_review
+msgid "Only entry reviewers can reset payments to draft."
+msgstr "إعادة الدفعة إلى مسودة متاحة لمراجع القيود فقط."
+
+#. module: account_move_review
+msgid "Only posted entries can be reset to draft."
+msgstr "القيد يجب أن يكون مرحلا لإعادته إلى مسودة."
+
+#. module: account_move_review
+msgid "Entry %(move)s was reset to draft by %(reviewer)s"
+msgstr "تمت إعادة القيد %(move)s إلى مسودة بواسطة %(reviewer)s"
+
+#. module: account_move_review
+msgid "Return for Revision"
+msgstr "إعادة للتعديل"
+
+#. module: account_move_review
+msgid "Restrict Reset to Draft to Reviewers"
+msgstr "حصر إعادة القيد لمسودة على المراجعين"
+
+#. module: account_move_review
+msgid "Entry Review Draft Restriction"
+msgstr "تقييد إعادة القيد إلى مسودة"
+
+#. module: account_move_review
+msgid "Only users in the Entry Reviewer group can reset posted entries and payments to draft."
+msgstr "يمكن فقط لمستخدمي مجموعة مراجع القيود إعادة القيود والدفعات المرحلة إلى مسودة."
