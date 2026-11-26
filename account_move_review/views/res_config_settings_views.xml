@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_review" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.account.move.review</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='audit_trail_setting_container']" position="inside">
+                <setting
+                    id="restrict_move_draft_to_reviewers_setting"
+                    string="Entry Review Draft Restriction"
+                    company_dependent="1"
+                    help="Only users in the Entry Reviewer group can reset posted entries and payments to draft."
+                >
+                    <field name="restrict_move_draft_to_reviewers"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

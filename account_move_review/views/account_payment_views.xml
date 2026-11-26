@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_form_review" model="ir.ui.view">
+        <field name="name">account.payment.form.review</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_draft']" position="attributes">
+                <attribute name="invisible">state in ('draft') or restrict_draft_to_reviewers</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_draft']" position="after">
+                <button name="action_mark_move_reviewed" string="Mark Reviewed" type="object" class="btn-primary" groups="account_move_review.group_account_move_reviewer" invisible="not review_move_posted or move_review_state == 'reviewed'" data-hotkey="m"/>
+                <button name="action_open_reset_draft_wizard" string="Return for Revision" type="object" class="btn btn-secondary" groups="account_move_review.group_account_move_reviewer" invisible="state in ('draft') or (not review_move_posted and not restrict_draft_to_reviewers)" data-hotkey="w"/>
+            </xpath>
+            <xpath expr="//sheet/field[@name='id']" position="after">
+                <field name="restrict_draft_to_reviewers" invisible="1"/>
+                <field name="review_move_posted" invisible="1"/>
+                <field name="move_review_state" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_payment_tree_review" model="ir.ui.view">
+        <field name="name">account.payment.list.review</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="move_review_state" widget="badge" optional="show" decoration-success="move_review_state == 'reviewed'" decoration-warning="move_review_state == 'returned'" decoration-muted="move_review_state == 'not_reviewed'"/>
+                <field name="move_document_type" widget="badge" optional="show" decoration-info="move_document_type == 'documentary'" decoration-warning="move_document_type == 'non_documentary'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_payment_search_review" model="ir.ui.view">
+        <field name="name">account.payment.search.review</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='state_in_process']" position="after">
+                <separator/>
+                <filter name="filter_payment_reviewed" string="Reviewed" domain="[('move_review_state', '=', 'reviewed')]"/>
+                <filter name="filter_payment_not_reviewed" string="Not Reviewed" domain="[('state', '!=', 'draft'), ('move_review_state', '=', 'not_reviewed')]"/>
+                <filter name="filter_payment_review_returned" string="Returned for Revision" domain="[('move_review_state', '=', 'returned')]"/>
+                <separator/>
+                <filter name="filter_payment_documentary" string="Documentary" domain="[('move_document_type', '=', 'documentary')]"/>
+                <filter name="filter_payment_non_documentary" string="Non-Documentary" domain="[('move_document_type', '=', 'non_documentary')]"/>
+            </xpath>
+            <xpath expr="//filter[@name='state']" position="after">
+                <filter name="group_by_move_review_state" string="Review Status" domain="[]" context="{'group_by': 'move_review_state'}"/>
+                <filter name="group_by_move_document_type" string="Document Type" domain="[]" context="{'group_by': 'move_document_type'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

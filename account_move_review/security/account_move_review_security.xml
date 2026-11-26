@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_account_move_review" model="ir.module.category">
+        <field name="name">Accounting Entry Review</field>
+        <field name="sequence">65</field>
+    </record>
+
+    <record id="group_account_move_reviewer" model="res.groups">
+        <field name="name">Entry Reviewer</field>
+        <field name="category_id" ref="module_category_account_move_review"/>
+        <field name="implied_ids" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+</odoo>
