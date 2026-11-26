@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: painkin <pasi.inkinen@iodo.fi>\n"
+"Last-Translator: Jussi Lehto <jussi.lehto@cetmix.com>\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Language: fi\n"
-"PO-Revision-Date: 2026-11-25 09:46+0000\n"
+"PO-Revision-Date: 2026-11-26 00:52+0000\n"
 "X-Generator: Weblate 2026.11.2\n"
 
 #. module: account_dashboard_banner
@@ -30,7 +30,7 @@ msgstr "Kirjanpidon koontinäytön bannerisolu"
 #. odoo-python
 #: code:addons/account_dashboard_banner/models/account_dashboard_banner_cell.py:0
 msgid "Balance of account(s) {account_codes} since %s."
-msgstr "Tilin (tilien) {account_codes) saldo päivämäärästä %s alkaen."
+msgstr "Tili(e)n {account_codes} saldo päivämäärästä %s alkaen."
 
 #. module: account_dashboard_banner
 #. odoo-python
