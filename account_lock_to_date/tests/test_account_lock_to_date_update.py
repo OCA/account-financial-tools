@@ -5,6 +5,7 @@
 from datetime import datetime
 
 from odoo.exceptions import ValidationError
+from odoo.tests import Form
 from odoo.tests.common import TransactionCase
 from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 
@@ -139,6 +140,18 @@ class TestAccountLockToDateUpdate(TransactionCase):
         self.assertEqual(
             self.company.hard_lock_to_date,
             datetime.strptime("2900-02-01", DEFAULT_SERVER_DATE_FORMAT).date(),
+        )
+
+    def test_02_wizard_defaults_to_current_company(self):
+        company_2 = self.env["res.company"].create(
+            {"name": "Company 2", "sale_lock_to_date": "2900-03-01"}
+        )
+        self.demo_user.write({"company_ids": [(4, company_2.id)]})
+        wizard_form = Form(self.UpdateLockToDateUpdateObj.with_company(company_2))
+        self.assertEqual(wizard_form.company_id, company_2)
+        self.assertEqual(
+            wizard_form.sale_lock_to_date,
+            datetime.strptime("2900-03-01", DEFAULT_SERVER_DATE_FORMAT).date(),
         )
 
     def test_03_create_purchase_move_outside_period(self):
