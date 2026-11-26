@@ -589,19 +589,20 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         for key in record_values.keys():
             if key in ignore or key not in to_include:
                 continue
-            field_info = fields_by_key.get(key)
-            # Skip empty scalar templates so unset fields aren't flagged,
-            # but let empty m2m/o2m/boolean values through so that an
-            # explicit "clear links" in the template is detected when the
-            # real record has values.
+            field = fields_by_key[key]
+            record_value = record_values[key]
+            # Skip falsy values for other scalar fields. Keep False for
+            # booleans, empty links for x2many fields, and integer zeros.
+            # CSV integers arrive as strings. Python templates can supply 0
+            # directly. Both are normalized by int() below.
             if (
-                field_info
-                and field_info.ttype not in ("boolean", "many2many", "one2many")
-                and not record_values.get(key)
+                field.ttype not in ("boolean", "many2many", "one2many", "integer")
+                and not record_value
             ):
                 continue
-            field = fields_by_key[key]
-            record_value, real_value = record_values[key], real[key]
+            real_value = real[key]
+            if field.ttype == "integer":
+                record_value = int(record_value)
             if real._name == "account.account" and key == "code":
                 record_value = self.padded_code(record_value)
                 real_value = self.padded_code(real_value)

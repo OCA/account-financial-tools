@@ -409,6 +409,14 @@ class TestAccountChartUpdate(TestAccountChartUpdateCommon):
         result = wizard.diff_fields(t_vals, fp)
         self.assertNotIn("auto_apply", result)
 
+    def test_diff_fields_detects_integer_zero_from_csv(self):
+        fp = self._get_record_for_xml_id("template_generic_domestic_fiscal_position")
+        fp.sequence = 10
+        wizard = self.wizard_obj.with_company(self.company).create(self.wizard_vals)
+        sequence_field = self.env["ir.model.fields"]._get(fp._name, "sequence")
+        wizard.fp_field_ids = [Command.set(sequence_field.ids)]
+        self.assertEqual(wizard.diff_fields({"sequence": "0"}, fp), {"sequence": 0})
+
     def test_10_readonly_and_computed_skipped_in_post_loop(self):
         """Inverse/readonly m2m (replacing_tax_ids) and computed-editable
         (use_in_tax_closing) must not be flagged by the synthetic post-loop."""
