@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="res_config_settings_form_view">
+        <field name="name">res.config.settings.form account_loan</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="priority" eval="50" />
+        <field name="arch" type="xml">
+            <block id="invoicing_settings" position="after">
+                <block title="Loan/Borrow" id="account_loan_settings">
+                    <setting
+                        id="auto_post_laon_moves"
+                        help="If activated: annuity are generated in draft and auto posted at date. Otherwise: annuity are directly posted."
+                    >
+                        <field name="auto_post_loan_moves_at_date" />
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record>
+</odoo>
