@@ -31,4 +31,11 @@
         "wizard/wiz_asset_move_reverse.xml",
         "report/account_asset_report_views.xml",
     ],
+    "demo": [
+        "demo/account_account_demo.xml",
+        "demo/account_journal_demo.xml",
+        "demo/account_asset_profile_demo.xml",
+        "demo/account_asset_demo.xml",
+        "demo/account_move_demo.xml",
+    ],
 }
