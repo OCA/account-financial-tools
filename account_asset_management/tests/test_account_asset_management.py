@@ -1020,8 +1020,9 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         )
         self.assertEqual(len(aml_sale), 1)
         aml_depre = account_move_remove.line_ids.filtered(
-            lambda x: x.account_id == self.car5y.account_depreciation_id
-            and x.debit == 1000
+            lambda x: (
+                x.account_id == self.car5y.account_depreciation_id and x.debit == 1000
+            )
         )
         self.assertEqual(len(aml_depre), 1)
         aml_asset = account_move_remove.line_ids.filtered(
@@ -1060,3 +1061,442 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_negative_linear(self):
+        """Negative linear amounts with annual and daily depreciation."""
+        # Annual depreciation
+        asset = self.asset_model.create(
+            {
+                "name": "Negative linear asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -1000,
+                "salvage_value": 0,
+                "date_start": "2019-01-01",
+                "method": "linear",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "year",
+                "method_progress_factor": 0.40,
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 6)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[5].amount, -200.00, places=2)
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 12, 31))
+        self.assertEqual(asset.depreciation_line_ids[-1].line_date, date(2023, 12, 31))
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -1000, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, 0, places=2
+        )
+
+        # Daily depreciation, including leap-year and ordinary February
+        asset = self.asset_model.create(
+            {
+                "name": "Negative daily linear asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -3333,
+                "salvage_value": 0,
+                "date_start": "2019-07-07",
+                "method": "linear",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "method_progress_factor": 0.40,
+                "prorata": True,
+                "days_calc": True,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 62)
+        # Five years from July 7, 2019 include 1827 depreciation days.
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 7, 31))
+        self.assertEqual(asset.depreciation_line_ids[1].line_days, 25)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -45.61, places=2)
+        self.assertEqual(asset.depreciation_line_ids[2].line_date, date(2019, 8, 31))
+        self.assertEqual(asset.depreciation_line_ids[2].line_days, 31)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -56.55, places=2)
+        self.assertEqual(asset.depreciation_line_ids[8].line_date, date(2020, 2, 29))
+        self.assertEqual(asset.depreciation_line_ids[8].line_days, 29)
+        self.assertAlmostEqual(asset.depreciation_line_ids[8].amount, -52.90, places=2)
+        self.assertEqual(asset.depreciation_line_ids[20].line_date, date(2021, 2, 28))
+        self.assertEqual(asset.depreciation_line_ids[20].line_days, 28)
+        self.assertAlmostEqual(asset.depreciation_line_ids[20].amount, -51.08, places=2)
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -3333, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, 0, places=2
+        )
+        for line in asset.depreciation_line_ids[1:]:
+            self.assertLess(line.amount, 0)
+            self.assertGreaterEqual(line.remaining_value, -3333)
+            self.assertLessEqual(line.remaining_value, 0)
+
+    def test_23_negative_linear_limit(self):
+        """Negative linear-limit amounts with annual and daily depreciation."""
+        # Annual depreciation
+        asset = self.asset_model.create(
+            {
+                "name": "Negative linear-limit asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -1000,
+                "salvage_value": -100,
+                "date_start": "2019-01-01",
+                "method": "linear-limit",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "year",
+                "method_progress_factor": 0.40,
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 6)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[5].amount, -100.00, places=2)
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 12, 31))
+        self.assertEqual(asset.depreciation_line_ids[-1].line_date, date(2023, 12, 31))
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -900, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, -100, places=2
+        )
+
+        # Daily depreciation, including leap-year and ordinary February
+        asset = self.asset_model.create(
+            {
+                "name": "Negative daily linear-limit asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -3333,
+                "salvage_value": 0,
+                "date_start": "2019-07-07",
+                "method": "linear-limit",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "method_progress_factor": 0.40,
+                "prorata": True,
+                "days_calc": True,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 62)
+        # Five years from July 7, 2019 include 1827 depreciation days.
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 7, 31))
+        self.assertEqual(asset.depreciation_line_ids[1].line_days, 25)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -45.61, places=2)
+        self.assertEqual(asset.depreciation_line_ids[2].line_date, date(2019, 8, 31))
+        self.assertEqual(asset.depreciation_line_ids[2].line_days, 31)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -56.55, places=2)
+        self.assertEqual(asset.depreciation_line_ids[8].line_date, date(2020, 2, 29))
+        self.assertEqual(asset.depreciation_line_ids[8].line_days, 29)
+        self.assertAlmostEqual(asset.depreciation_line_ids[8].amount, -52.90, places=2)
+        self.assertEqual(asset.depreciation_line_ids[20].line_date, date(2021, 2, 28))
+        self.assertEqual(asset.depreciation_line_ids[20].line_days, 28)
+        self.assertAlmostEqual(asset.depreciation_line_ids[20].amount, -51.08, places=2)
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -3333, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, 0, places=2
+        )
+        for line in asset.depreciation_line_ids[1:]:
+            self.assertLess(line.amount, 0)
+            self.assertGreaterEqual(line.remaining_value, -3333)
+            self.assertLessEqual(line.remaining_value, 0)
+
+        # Monthly prorata depreciation stops at the negative salvage value.
+        asset = self.asset_model.create(
+            {
+                "name": "Negative monthly linear-limit asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -1000,
+                "salvage_value": -50,
+                "date_start": "2027-07-01",
+                "method": "linear-limit",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "prorata": True,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2027, 7, 31))
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -950, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, -50, places=2
+        )
+        for line in asset.depreciation_line_ids[1:]:
+            self.assertLess(line.amount, 0)
+            self.assertGreaterEqual(line.remaining_value, -1000)
+            self.assertLessEqual(line.remaining_value, -50)
+
+    def test_24_negative_degressive(self):
+        """Negative degressive amounts with annual and daily depreciation."""
+        # Annual depreciation
+        asset = self.asset_model.create(
+            {
+                "name": "Negative degressive asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -1000,
+                "salvage_value": 0,
+                "date_start": "2019-01-01",
+                "method": "degressive",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "year",
+                "method_progress_factor": 0.40,
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 6)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -400.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -240.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, -144.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, -86.40, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[5].amount, -129.60, places=2)
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 12, 31))
+        self.assertEqual(asset.depreciation_line_ids[-1].line_date, date(2023, 12, 31))
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -1000, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, 0, places=2
+        )
+
+        # Daily depreciation, including leap-year and ordinary February
+        asset = self.asset_model.create(
+            {
+                "name": "Negative daily degressive asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -3333,
+                "salvage_value": 0,
+                "date_start": "2019-07-07",
+                "method": "degressive",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "method_progress_factor": 0.40,
+                "prorata": True,
+                "days_calc": True,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 62)
+        # Five years from July 7, 2019 include 1827 depreciation days.
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 7, 31))
+        self.assertEqual(asset.depreciation_line_ids[1].line_days, 25)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -45.61, places=2)
+        self.assertEqual(asset.depreciation_line_ids[2].line_date, date(2019, 8, 31))
+        self.assertEqual(asset.depreciation_line_ids[2].line_days, 31)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -56.55, places=2)
+        self.assertEqual(asset.depreciation_line_ids[8].line_date, date(2020, 2, 29))
+        self.assertEqual(asset.depreciation_line_ids[8].line_days, 29)
+        self.assertAlmostEqual(asset.depreciation_line_ids[8].amount, -52.90, places=2)
+        self.assertEqual(asset.depreciation_line_ids[20].line_date, date(2021, 2, 28))
+        self.assertEqual(asset.depreciation_line_ids[20].line_days, 28)
+        self.assertAlmostEqual(asset.depreciation_line_ids[20].amount, -51.08, places=2)
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -3333, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, 0, places=2
+        )
+        for line in asset.depreciation_line_ids[1:]:
+            self.assertLess(line.amount, 0)
+            self.assertGreaterEqual(line.remaining_value, -3333)
+            self.assertLessEqual(line.remaining_value, 0)
+
+    def test_25_negative_degressive_linear(self):
+        """Negative degr-linear amounts with annual and daily depreciation."""
+        # Annual depreciation
+        asset = self.asset_model.create(
+            {
+                "name": "Negative degr-linear asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -1000,
+                "salvage_value": 0,
+                "date_start": "2019-01-01",
+                "method": "degr-linear",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "year",
+                "method_progress_factor": 0.40,
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 5)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -400.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -240.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, -200.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, -160.00, places=2)
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 12, 31))
+        self.assertEqual(asset.depreciation_line_ids[-1].line_date, date(2022, 12, 31))
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -1000, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, 0, places=2
+        )
+
+        # Daily depreciation, including leap-year and ordinary February
+        asset = self.asset_model.create(
+            {
+                "name": "Negative daily degr-linear asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -3333,
+                "salvage_value": 0,
+                "date_start": "2019-07-07",
+                "method": "degr-linear",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "method_progress_factor": 0.40,
+                "prorata": True,
+                "days_calc": True,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        # Five years from July 7, 2019 include 1827 depreciation days.
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 7, 31))
+        self.assertEqual(asset.depreciation_line_ids[1].line_days, 25)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -45.61, places=2)
+        self.assertEqual(asset.depreciation_line_ids[2].line_date, date(2019, 8, 31))
+        self.assertEqual(asset.depreciation_line_ids[2].line_days, 31)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -56.55, places=2)
+        self.assertEqual(asset.depreciation_line_ids[8].line_date, date(2020, 2, 29))
+        self.assertEqual(asset.depreciation_line_ids[8].line_days, 29)
+        self.assertAlmostEqual(asset.depreciation_line_ids[8].amount, -52.90, places=2)
+        self.assertEqual(asset.depreciation_line_ids[20].line_date, date(2021, 2, 28))
+        self.assertEqual(asset.depreciation_line_ids[20].line_days, 28)
+        self.assertAlmostEqual(asset.depreciation_line_ids[20].amount, -51.08, places=2)
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -3333, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, 0, places=2
+        )
+        for line in asset.depreciation_line_ids[1:]:
+            self.assertLess(line.amount, 0)
+            self.assertGreaterEqual(line.remaining_value, -3333)
+            self.assertLessEqual(line.remaining_value, 0)
+
+    def test_26_negative_degressive_limit(self):
+        """Negative degr-limit amounts with annual and daily depreciation."""
+        # Annual depreciation
+        asset = self.asset_model.create(
+            {
+                "name": "Negative degr-limit asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -1000,
+                "salvage_value": -100,
+                "date_start": "2019-01-01",
+                "method": "degr-limit",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "year",
+                "method_progress_factor": 0.40,
+                "prorata": False,
+                "days_calc": False,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 6)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -400.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -240.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, -144.00, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, -86.40, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[5].amount, -29.60, places=2)
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 12, 31))
+        self.assertEqual(asset.depreciation_line_ids[-1].line_date, date(2023, 12, 31))
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -900, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, -100, places=2
+        )
+
+        # Daily depreciation, including leap-year and ordinary February
+        asset = self.asset_model.create(
+            {
+                "name": "Negative daily degr-limit asset",
+                "profile_id": self.car5y.id,
+                "purchase_value": -3333,
+                "salvage_value": 0,
+                "date_start": "2019-07-07",
+                "method": "degr-limit",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "month",
+                "method_progress_factor": 0.40,
+                "prorata": True,
+                "days_calc": True,
+                "use_leap_years": False,
+            }
+        )
+        asset.compute_depreciation_board()
+        asset.invalidate_recordset()
+        self.assertEqual(len(asset.depreciation_line_ids), 62)
+        # Five years from July 7, 2019 include 1827 depreciation days.
+        self.assertEqual(asset.depreciation_line_ids[1].line_date, date(2019, 7, 31))
+        self.assertEqual(asset.depreciation_line_ids[1].line_days, 25)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, -45.61, places=2)
+        self.assertEqual(asset.depreciation_line_ids[2].line_date, date(2019, 8, 31))
+        self.assertEqual(asset.depreciation_line_ids[2].line_days, 31)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, -56.55, places=2)
+        self.assertEqual(asset.depreciation_line_ids[8].line_date, date(2020, 2, 29))
+        self.assertEqual(asset.depreciation_line_ids[8].line_days, 29)
+        self.assertAlmostEqual(asset.depreciation_line_ids[8].amount, -52.90, places=2)
+        self.assertEqual(asset.depreciation_line_ids[20].line_date, date(2021, 2, 28))
+        self.assertEqual(asset.depreciation_line_ids[20].line_days, 28)
+        self.assertAlmostEqual(asset.depreciation_line_ids[20].amount, -51.08, places=2)
+        self.assertAlmostEqual(
+            sum(asset.depreciation_line_ids[1:].mapped("amount")), -3333, places=2
+        )
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].remaining_value, 0, places=2
+        )
+        for line in asset.depreciation_line_ids[1:]:
+            self.assertLess(line.amount, 0)
+            self.assertGreaterEqual(line.remaining_value, -3333)
+            self.assertLessEqual(line.remaining_value, 0)

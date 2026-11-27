@@ -2,6 +2,7 @@
 - Luc De Meyer (Noviat)
 - Frédéric Clementi (camptocamp)
 - Florian Dacosta (Akretion)
+- François Poizat (Akretion)
 - Stéphane Bidoul (Acsone)
 - Adrien Peiffer (Acsone)
 - Akim Juillerat \<<akim.juillerat@camptocamp.com>\>
