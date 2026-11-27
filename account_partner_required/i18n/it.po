@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2024-02-22 11:38+0000\n"
+"PO-Revision-Date: 2026-11-27 13:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-"
 "tools-8-0/language/it/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account
@@ -32,7 +32,7 @@ msgstr "Sempre"
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Registrazione contabile"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move_line
