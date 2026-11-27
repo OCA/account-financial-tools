@@ -4,6 +4,7 @@
 
 import calendar
 import logging
+import math
 from datetime import date
 from functools import reduce
 from sys import exc_info
@@ -296,8 +297,10 @@ class AccountAsset(models.Model):
     def _compute_depreciation(self):
         for asset in self:
             lines = asset.depreciation_line_ids.filtered(
-                lambda line: line.type in ("depreciate", "remove")
-                and (line.init_entry or line.move_check)
+                lambda line: (
+                    line.type in ("depreciate", "remove")
+                    and (line.init_entry or line.move_check)
+                )
             )
             value_depreciated = sum(line.amount for line in lines)
             residual = asset.depreciation_base - value_depreciated
@@ -386,10 +389,12 @@ class AccountAsset(models.Model):
     @api.constrains("date_start", "method_end", "method_number", "method_time")
     def _check_dates(self):
         if self.filtered(
-            lambda a: a.method_time == "year"
-            and not a.method_number
-            and a.method_end
-            and a.method_end <= a.date_start
+            lambda a: (
+                a.method_time == "year"
+                and not a.method_number
+                and a.method_end
+                and a.method_end <= a.date_start
+            )
         ):
             raise UserError(self.env._("The Start Date must precede the Ending Date."))
 
@@ -398,8 +403,7 @@ class AccountAsset(models.Model):
         if self.depreciation_line_ids.filtered("move_id"):
             raise UserError(
                 self.env._(
-                    "You cannot change the profile of an asset "
-                    "with accounting entries."
+                    "You cannot change the profile of an asset with accounting entries."
                 )
             )
 
@@ -890,7 +894,7 @@ class AccountAsset(models.Model):
         if self.method == "linear":
             return year_amount_linear
         if self.method == "linear-limit":
-            if (residual_amount - year_amount_linear) < self.salvage_value:
+            if abs(residual_amount) - abs(year_amount_linear) < abs(self.salvage_value):
                 return residual_amount - self.salvage_value
             else:
                 return year_amount_linear
@@ -898,12 +902,19 @@ class AccountAsset(models.Model):
         if self.method == "degressive":
             return year_amount_degressive
         if self.method == "degr-linear":
-            if year_amount_linear > year_amount_degressive:
-                return min(year_amount_linear, residual_amount)
+            abs_year_amount_linear = abs(year_amount_linear)
+            abs_year_amount_degressive = abs(year_amount_degressive)
+            abs_residual_amount = abs(residual_amount)
+            sign = math.copysign(1, year_amount_linear)
+
+            if abs_year_amount_linear > abs_year_amount_degressive:
+                return sign * min(abs_year_amount_linear, abs_residual_amount)
             else:
-                return min(year_amount_degressive, residual_amount)
+                return sign * min(abs_year_amount_degressive, abs_residual_amount)
         if self.method == "degr-limit":
-            if (residual_amount - year_amount_degressive) < self.salvage_value:
+            if abs(residual_amount) - abs(year_amount_degressive) < abs(
+                self.salvage_value
+            ):
                 return residual_amount - self.salvage_value
             else:
                 return year_amount_degressive
@@ -1063,7 +1074,7 @@ class AccountAsset(models.Model):
                     break
 
                 if i == 0 and li == 0:
-                    if currency.compare_amounts(entry.get("day_amount"), 0) > 0:
+                    if currency.compare_amounts(entry.get("day_amount"), 0) != 0:
                         amount = line_days * entry.get("day_amount")
                     else:
                         amount = self._get_first_period_amount(
@@ -1071,7 +1082,7 @@ class AccountAsset(models.Model):
                         )
                         amount = currency.round(amount)
                 else:
-                    if currency.compare_amounts(entry.get("day_amount"), 0) > 0:
+                    if currency.compare_amounts(entry.get("day_amount"), 0) != 0:
                         amount = line_days * entry.get("day_amount")
                     else:
                         amount = entry.get("period_amount")
