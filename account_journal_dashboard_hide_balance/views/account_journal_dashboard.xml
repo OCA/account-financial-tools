@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_journal_dashboard_kanban_view" model="ir.ui.view">
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//t[@t-out='dashboard.account_balance']/.." position="replace">
+                <widget name="journal_balance_amount" dashboard_key="account_balance" />
+            </xpath>
+            <xpath expr="//t[@t-out='dashboard.last_balance']/.." position="replace">
+                <widget name="journal_balance_amount" dashboard_key="last_balance" />
+            </xpath>
+            <xpath
+                expr="//t[@t-out='dashboard.outstanding_pay_account_balance']/.."
+                position="replace"
+            >
+                <widget
+                    name="journal_balance_amount"
+                    dashboard_key="outstanding_pay_account_balance"
+                />
+            </xpath>
+            <xpath
+                expr="//t[@t-out='dashboard.misc_operations_balance']/.."
+                position="replace"
+            >
+                <widget
+                    name="journal_balance_amount"
+                    dashboard_key="misc_operations_balance"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

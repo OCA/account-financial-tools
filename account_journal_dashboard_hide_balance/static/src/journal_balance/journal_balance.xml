@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="account_journal_dashboard_hide_balance.JournalBalanceAmount">
+        <MaskedValue value="amount" />
+    </t>
+</templates>
