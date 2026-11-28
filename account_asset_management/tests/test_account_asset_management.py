@@ -1060,3 +1060,36 @@ class TestAssetManagement(AccountTestInvoicingCommon):
             }
         )
         self.assertEqual(asset.salvage_value, 5)
+
+    def test_22_invoice_line_profile_sharing_asset_account(self):
+        """A profile that is not the default one of its asset account is kept
+        when chosen on an invoice line."""
+        asset_account = self.car5y.account_asset_id
+        self.assertEqual(asset_account.asset_profile_id, self.ict3Y)
+        invoice_form = Form(
+            self.env["account.move"].with_context(default_move_type="in_invoice")
+        )
+        invoice_form.partner_id = self.partner
+        invoice_form.invoice_date = fields.Date.context_today(self.env.user)
+        # Line already on the asset account
+        with invoice_form.invoice_line_ids.new() as line_form:
+            line_form.name = "Asset on asset account"
+            line_form.price_unit = 1000.0
+            line_form.account_id = asset_account
+            self.assertEqual(line_form.asset_profile_id, self.ict3Y)
+            line_form.asset_profile_id = self.car5y
+            self.assertEqual(line_form.asset_profile_id, self.car5y)
+        # Line on another account: the profile sets its asset account
+        with invoice_form.invoice_line_ids.new() as line_form:
+            line_form.name = "Asset on expense account"
+            line_form.price_unit = 500.0
+            line_form.account_id = self.company_data["default_account_expense"]
+            line_form.asset_profile_id = self.car5y
+            self.assertEqual(line_form.account_id, asset_account)
+            self.assertEqual(line_form.asset_profile_id, self.car5y)
+        invoice = invoice_form.save()
+        lines = invoice.invoice_line_ids
+        self.assertEqual(lines.asset_profile_id, self.car5y)
+        invoice.action_post()
+        self.assertEqual(len(lines.asset_id), 2)
+        self.assertEqual(lines.asset_id.profile_id, self.car5y)
