@@ -199,10 +199,15 @@ class AccountMoveLine(models.Model):
     @api.depends("account_id", "asset_id")
     def _compute_asset_profile(self):
         for rec in self:
-            if rec.account_id.asset_profile_id and not rec.asset_id:
-                rec.asset_profile_id = rec.account_id.asset_profile_id
-            elif rec.asset_id:
+            if rec.asset_id:
                 rec.asset_profile_id = rec.asset_id.profile_id
+            elif (
+                rec.account_id.asset_profile_id
+                # Keep a profile chosen by the user that uses the line account,
+                # as several profiles may share the same asset account
+                and rec.asset_profile_id.account_asset_id != rec.account_id
+            ):
+                rec.asset_profile_id = rec.account_id.asset_profile_id
 
     @api.onchange("asset_profile_id")
     def _onchange_asset_profile_id(self):
