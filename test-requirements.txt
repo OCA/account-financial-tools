@@ -1,0 +1,1 @@
+odoo-addon-web_widget_masked_value @ git+https://github.com/OCA/web.git@refs/pull/3835/head#subdirectory=web_widget_masked_value
